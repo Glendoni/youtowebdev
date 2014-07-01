@@ -5,8 +5,8 @@ $mortgagelistsql = "SELECT distinct M.provider, M.businessid,M.mortgage_id,M.sta
 DATE_FORMAT(M.start,'%d/%m/%Y') AS startdate
 FROM mortgages M where businessid = '".$business_id."' AND search = 1 order by status ASC, startdate desc
 ";
-$mortgagelistresult=mysqli_query( $con, $mortgagelistsql );
-$mortgagelistcount=mysqli_num_rows( $mortgagelistresult );
+$mortgagelistresult=pg_query( $con, $mortgagelistsql );
+$mortgagelistcount=pg_num_rows( $mortgagelistresult );
 if ( $mortgagelistcount=="0" ) {
   $mortgages .='
   <div class="alert alert-warning alert-dismissable">
@@ -42,7 +42,7 @@ else {
     </table>';
 
 }
-$sectorresult = mysqli_query( $con, $sectorsql );
+$sectorresult = pg_query( $con, $sectorsql );
 {  $mortgages.=' <h5>'.$sectorrow['sector'].'</h5>';}
 $mortgages .='
 

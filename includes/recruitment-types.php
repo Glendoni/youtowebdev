@@ -1,6 +1,6 @@
 <?php
 $rectypesql = "SELECT contract,perm from business where id = '".$business_id."'";
-$rectyperesult=mysqli_query($con,$rectypesql);
+$rectyperesult=pg_query($con,$rectypesql);
 while($rectyperow = mysqli_fetch_array($rectyperesult)) {
  $hascontract = $rectyperow['contract'];
  $hasperm = $rectyperow['perm'];

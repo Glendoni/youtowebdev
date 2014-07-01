@@ -6,7 +6,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>
 <root>';
 $get_articles = "SELECT count(*) as count from meetings";
 
-$articles = mysqli_query($con,$get_articles);
+$articles = pg_query($con,$get_articles);
 
 while ($article = mysqli_fetch_array($articles)){
       

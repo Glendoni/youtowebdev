@@ -2,13 +2,13 @@
 $business_id = $_GET['id'];
 if((($_GET['updatetags'] ==="1") || ($_GET['updaterectypes'] ==="1")) && (!empty($business_id))) {
 $deletesectors = "update sectors S set S.search = 0, S.user = '".$user_id."' where S.businessid = '".$business_id."'";
-mysqli_query($con,$deletesectors);
+pg_query($con,$deletesectors);
 
 
 //UPDATE EMPLOYEES//
 if(($_GET['employees'] > "-1")) {
 $addemployees = "insert into employee_count ( businessid, count) VALUES ('".$business_id."','".$_GET['employees']."')";
-mysqli_query($con,$addemployees);
+pg_query($con,$addemployees);
 }
 else {}
 
@@ -17,7 +17,7 @@ else {}
 foreach($_GET["sector"] as $sectortoupdate) {
  $updatesectors = "insert into sectors (businessid, sector, user) VALUES 
 ('".$business_id."','".$sectortoupdate."','".$user_id."');";
-mysqli_query($con,$updatesectors);
+pg_query($con,$updatesectors);
 }
 if (!empty($_GET['contract'])) {
 $updatecontract = "1";
@@ -44,12 +44,12 @@ else {
 $updatelinkedinid = "NULL";
 }
 $updaterectype = "update business set contract = '".$updatecontract."', perm = '".$updateperm."', web = '".$safe_url."', linkedinid='".$updatelinkedinid."' where id = '".$business_id."'";
-mysqli_query($con,$updaterectype);
+pg_query($con,$updaterectype);
 }
 
 // This first query is just to get the total count of rows
 $sql = "SELECT business.name, DATE_FORMAT(founded,'%d/%m/%Y') AS founded,  business.linkedinid as businesslinkedinid, business.id, web from business where active = '1' and business.id = '$business_id' ";
-$query = mysqli_query($con, $sql);
+$query = pg_query($con, $sql);
 while($row = mysqli_fetch_array($query, MYSQLI_ASSOC)){
 {
 $business_name = $row['name'];
@@ -57,8 +57,8 @@ $business_location = $row['location'];
 $business_founded = $row['founded'];
 $business_web = $row['web'];
 $business_linkedin = $row['businesslinkedinid'];
-$showturnover = mysqli_query($con,"SELECT turnover, type from turnover where businessid = '".$business_id."'  order by added desc limit 1");
-$showturnoverrow_cnt = mysqli_num_rows($showturnover);
+$showturnover = pg_query($con,"SELECT turnover, type from turnover where businessid = '".$business_id."'  order by added desc limit 1");
+$showturnoverrow_cnt = pg_num_rows($showturnover);
 if ($showturnoverrow_cnt ==0) 
 {
 $business_turnover = "£0";
@@ -70,9 +70,9 @@ $business_turnover = "£".number_format($showturnoverrow['turnover']);
 $business_turnover_type = $showturnoverrow['type'];
 }
 }//END OF IF STATEMENT
-$employeecount = mysqli_query($con,"SELECT count
+$employeecount = pg_query($con,"SELECT count
 FROM employee_count where businessid = '".$business_id."' order by date desc limit 1");
-$row_cnt = mysqli_num_rows($employeecount);
+$row_cnt = pg_num_rows($employeecount);
 if ($row_cnt ==0) 
 {
 $business_employees = '
@@ -95,7 +95,7 @@ SELECT COUNT(C.li_id) AS count FROM connections C LEFT JOIN contacts ct
 ON C.li_id=ct.id 
 WHERE ct.companyid = '$business_id'
 ";
-$liconnectionresult=mysqli_query($con,$liconnectionsql);
+$liconnectionresult=pg_query($con,$liconnectionsql);
 
 while($liconnectionrow = mysqli_fetch_array($liconnectionresult)) {
  $liconnections = "<span class='label label-info' >".$liconnectionrow['count']."</span>";
@@ -128,7 +128,7 @@ $business_id.'">'.$business_name.'</a></h3><small>'.$row['address'].' </small>
 </div>
 <div class="col-md-4 centre detailsholder"><small>Sectors</small>';
 $sectorsql = "SELECT S.sector, SL.sector_name FROM sectors S INNER JOIN sector_list SL on S.sector =  SL.sector_id where businessid = '".$business_id."' AND S.search=1";
-$sectorresult = mysqli_query($con,$sectorsql);
+$sectorresult = pg_query($con,$sectorsql);
  $stored = array();
 while($sectorrow = mysqli_fetch_array($sectorresult, MYSQLI_ASSOC))
 
@@ -182,8 +182,8 @@ $list .='<a class="btn btn-sm btn-success sidebutton" disabled="disabled">Alread
 }
 
 $updaterequestsql = "SELECT business_id from update_requests where business_id = '".$business_id."' AND status = 0";
-$updaterequestresult=mysqli_query($con,$updaterequestsql);
-$updaterequestcount=mysqli_num_rows($updaterequestresult);
+$updaterequestresult=pg_query($con,$updaterequestsql);
+$updaterequestcount=pg_num_rows($updaterequestresult);
 if($updaterequestcount=="0"){
 	$list .='<a href="includes/update-request.php?id='.$business_id.'&user='.$user_id.'" class="btn btn-warning btn-sm update sidebutton" target="_blank">Request Update</a>';}
 

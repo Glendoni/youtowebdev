@@ -1,9 +1,16 @@
 <?php
-$con=mysqli_connect("localhost","sonovate_user","OzzyElmo$1","baselist");
-
-// Check connection
-if (mysqli_connect_errno($con))
-  {
-  echo "Failed to connect to MySQL: " . mysqli_connect_error();
-  }
+# This function reads your DATABASE_URL configuration automatically set by Heroku
+# the return value is a string that will work with pg_connect
+function pg_connection_string() {
+  // we will fill this out next
+}
+ 
+# Establish db connection
+$db = pg_connect(pg_connection_string());
+if (!$db) {
+    echo "Database connection error."
+    exit;
+}
+ 
+$result = pg_query($db, "SELECT statement goes here");
 ?>

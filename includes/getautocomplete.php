@@ -6,7 +6,7 @@ include("connection.php");
   $sql="SELECT name,id FROM business where name like '%".$term."%' And active = '1' order by name asc limit 15";
 
  
- $query=mysqli_query($con,$sql);
+ $query=pg_query($con,$sql);
  $json=array();
  
     while($student=mysqli_fetch_array($query)){

@@ -13,7 +13,7 @@ $mypassword = mysqli_real_escape_string($con, $mypassword);
 $encrypted_mypassword = md5($mypassword);
 $sql="SELECT * FROM users WHERE
  username='$myusername' and password='$encrypted_mypassword' and active = '1'";
-$result=mysqli_query($con,$sql);
+$result=pg_query($con,$sql);
 while($row = mysqli_fetch_array($result))
 {
 $user_name = $row['user_name'];
@@ -23,10 +23,10 @@ $user_email = $row['username'];
 //$user_brand = $row['user_brand'];
 $user_manager = $row['user_manager'];
 }
-$count=mysqli_num_rows($result);
+$count=pg_num_rows($result);
 
 if($count==1){
-mysqli_query($con,"UPDATE users SET `user_lastlogin` = now() where username='$myusername'");
+pg_query($con,"UPDATE users SET `user_lastlogin` = now() where username='$myusername'");
 
 // Register $myusername, $mypassword and redirect to file "login_success.php"
 session_start();

@@ -8,9 +8,9 @@ if(! isset($_SESSION['myusername']) ){
 $id = $_GET['id'];
 $endlink = $_GET['link'];
 $addtobasesql = "update business set base = 1 where id = '$id'";
-mysqli_query($con,$addtobasesql);
-$result = mysqli_query($con,"SELECT * from business where id = '$id'");
- while ($row = mysqli_fetch_assoc($result)) {
+pg_query($con,$addtobasesql);
+$result = pg_query($con,"SELECT * from business where id = '$id'");
+ while ($row = pg_fetch_assoc($result)) {
          		 $companyname = $row["name"];
 				 $industry = $row["sector"];
 				 $country = $row["country"];

@@ -115,7 +115,7 @@
 $business_id = $_GET['id'];
 // This first query is just to get the total count of rows
 $sql = "select tag_name from tags where type = 'sector' and active = '1' order by tag_name ASC ";
-$query = mysqli_query($con, $sql);
+$query = pg_query($con, $sql);
 while($row = mysqli_fetch_array($query, MYSQLI_ASSOC)){
 {
 $sector_tag_name = $row['tag_name'];

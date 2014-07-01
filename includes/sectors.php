@@ -1,6 +1,6 @@
 <?php
 $sectorlistsql = "SELECT * from sector_list order by sector_name asc";
-$sectorlistresult=mysqli_query($con,$sectorlistsql);
+$sectorlistresult=pg_query($con,$sectorlistsql);
 while($sectorlistrow = mysqli_fetch_array($sectorlistresult)) {
 if (in_array($sectorlistrow['sector_id'], $stored)){
 $sectorselected ='checked';

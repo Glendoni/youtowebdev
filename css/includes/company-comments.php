@@ -38,7 +38,7 @@ return false;
 <div class="qa-message-list" id="wallmessages">
 <?php
 //$post_id value comes from the POSTS table
-$sql=mysqli_query($con,"SELECT CB.id AS comment_id,CB.user_id, CB.comment, CB.date, U.user_name FROM comments_business AS CB, users AS U 
+$sql=pg_query($con,"SELECT CB.id AS comment_id,CB.user_id, CB.comment, CB.date, U.user_name FROM comments_business AS CB, users AS U 
 WHERE CB.user_id = U.user_id AND CB.business_id = 03901185 order by CB.date desc");
 while($row=mysqli_fetch_array($sql))
 {

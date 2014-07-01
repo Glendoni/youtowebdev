@@ -13,7 +13,7 @@ $user_id=mysql_real_escape_string($user_id);
 $sql = "INSERT INTO comments_business
       (user_id, comment, business_id)
       VALUES('".$user_id."','".$comment."','".$business_id."')";
-	  	mysqli_query($con,$sql);
+	  	pg_query($con,$sql);
 ?>
 
     				<div class="message-item">
@@ -37,5 +37,5 @@ $sql = "INSERT INTO comments_business
                     </div><!--END MESSAGE CONTENT-->
                     
                   
-<?php mysqli_close($con);
+<?php pg_close($con);
 ?>

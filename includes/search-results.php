@@ -2,7 +2,7 @@
 $action = $_GET['action'];$deleteid = $_GET['deleteid'];
 if(($action ==="delete_assigned")) {
 $deleteassigned = "update business B set B.assigned = null where B.id = '".$deleteid."' AND B.assigned = '".$user_id."'";
-mysqli_query($con,$deleteassigned);
+pg_query($con,$deleteassigned);
 echo '<div class="alert alert-info"><span class="glyphicon glyphicon-info-sign"></span> Company Unassigned</div>';}
 
 ?>
@@ -16,10 +16,10 @@ ON B.assigned=U.id
 ".$employeejoin."
 ".$providerjoin."
 where B.active = '1' ".$savedlistsql." ".$listsearchsql." ".$businessidsql." ".$mortgage_endsql." ".$agencyname." ".$turnoversql." ".$employeessql." ".$providersql." ".$company_agesql." ".$sectorsql." ".$searchorder."";
-$query = mysqli_query($con, $sql);
-$row = mysqli_fetch_row($query);
+$query = pg_query($con, $sql);
+$row = pg_fetch_row($query);
 // Here we have the total row count
- $rows =  mysqli_num_rows($query);
+ $rows =  pg_num_rows($query);
 // This is the number of results we want displayed per page
 $page_rows = 30;
 // This tells us the page number of our last page
@@ -45,7 +45,7 @@ $limit = 'LIMIT ' .($pagenum - 1) * $page_rows .',' .$page_rows;
 // This is your query again, it is for grabbing just one page worth of rows by applying $limit
 $sql = $sql." ".$limit;
 
-$query = mysqli_query($con, $sql);
+$query = pg_query($con, $sql);
 // This shows the user what page they are on, and the total number of pages
 $textline1 = "Companies (<b>".number_format($rows)."</b>)";
 $textline2 = "Page <b>$pagenum</b> of <b>$last</b>";
@@ -158,8 +158,8 @@ else
 //END ON BASE
 $business_employees = "<span class=\"label label-warning\">Unknown</span>";
 $showturnoverselect = "SELECT turnover from turnover where businessid = '".$business_id."' order by added desc limit 1";
-$showturnover = mysqli_query($con,"SELECT turnover, type from turnover where businessid = '".$business_id."'  order by added desc limit 1");
-$showturnoverrow_cnt = mysqli_num_rows($showturnover);
+$showturnover = pg_query($con,"SELECT turnover, type from turnover where businessid = '".$business_id."'  order by added desc limit 1");
+$showturnoverrow_cnt = pg_num_rows($showturnover);
 if ($showturnoverrow_cnt ==0) 
 {
 $business_turnover = "£0";
@@ -176,8 +176,8 @@ $business_location = $row['location'];
 $business_linkedin = $row['businesslinkedinid'];
 $employeecountsql = "SELECT count
 FROM employee_count where businessid = '".$business_id."' order by date desc limit 1";
-$employeecount = mysqli_query($con,$employeecountsql);
-$row_cnt = mysqli_num_rows($employeecount);
+$employeecount = pg_query($con,$employeecountsql);
+$row_cnt = pg_num_rows($employeecount);
 if ($row_cnt ==0) 
 {
 $business_employees = "<span class=\"label label-warning\">Unknown</span>";
@@ -196,7 +196,7 @@ SELECT COUNT(C.li_id) AS count FROM connections C LEFT JOIN contacts ct
 ON C.li_id=ct.id 
 WHERE ct.companyid = '$business_linkedin'
 ";
-$liconnectionresult=mysqli_query($con,$liconnectionsql);
+$liconnectionresult=pg_query($con,$liconnectionsql);
 
 while($liconnectionrow = mysqli_fetch_array($liconnectionresult)) {
  $liconnections = "<span class='label label-info' >".$liconnectionrow['count']."</span>";
@@ -224,7 +224,7 @@ $list .='<div class="panel panel-default">
 </div>
 <div class="col-md-4 centre detailsholder"><small>Sectors</small>';
 $sectorsql = "SELECT S.sector, SL.sector_name FROM sectors S INNER JOIN sector_list SL on S.sector =  SL.sector_id where businessid = '".$business_id."' and S.search = 1";
-$sectorresult = mysqli_query($con,$sectorsql);
+$sectorresult = pg_query($con,$sectorsql);
 while($sectorrow = mysqli_fetch_array($sectorresult))
 {  $list.=' <h5>'.$sectorrow['sector_name'].'</h5>';}
  $list .='
@@ -270,8 +270,8 @@ else {
 $list .='<a class="btn btn-sm btn-success sidebutton" disabled="disabled">Already on Base</a>';
 }
 $updaterequestsql = "SELECT business_id from update_requests where business_id = '".$business_id."' AND status = 0";
-$updaterequestresult=mysqli_query($con,$updaterequestsql);
-$updaterequestcount=mysqli_num_rows($updaterequestresult);
+$updaterequestresult=pg_query($con,$updaterequestsql);
+$updaterequestcount=pg_num_rows($updaterequestresult);
 if($updaterequestcount=="0"){
 	$list .='<a href="includes/update-request.php?id='.$business_id.'&user='.$user_id.'" class="btn btn-warning btn-sm update sidebutton" target="_blank">Request Update</a>';}
 
@@ -286,8 +286,8 @@ $mortgagelistsql = "SELECT distinct M.provider, M.businessid,M.mortgage_id,M.sta
 DATE_FORMAT(M.start,'%d/%m/%Y') AS startdate
 FROM mortgages M where businessid = '".$business_id."' AND search = 1 order by status ASC, startdate desc
 ";
-$mortgagelistresult=mysqli_query($con,$mortgagelistsql);
-$mortgagelistcount=mysqli_num_rows($mortgagelistresult);
+$mortgagelistresult=pg_query($con,$mortgagelistsql);
+$mortgagelistcount=pg_num_rows($mortgagelistresult);
 if($mortgagelistcount=="0"){
 $list .='
 <div class="alert alert-warning alert-dismissable">
@@ -322,7 +322,7 @@ $list.='</tbody>
     </table>';
 	
 	}
-$sectorresult = mysqli_query($con,$sectorsql);
+$sectorresult = pg_query($con,$sectorsql);
 {  $list.=' <h5>'.$sectorrow['sector'].'</h5>';}
  $list .='
 
@@ -334,7 +334,7 @@ $sectorresult = mysqli_query($con,$sectorsql);
 </div>';
 }
 // Close your database connection
-mysqli_close($con);
+pg_close($con);
 ?>
 <h2><?php echo $textline1; ?></h2>
 <?php if ($rows===0) {

@@ -3,8 +3,8 @@
 <hr>
 <?php 
  $mysavedlistsql = "SELECT * FROM savedlists where createdby = '".$user_id."' order by created desc";
-$mysavedlistresult=mysqli_query($con,$mysavedlistsql);
-$mysavedlistcount=mysqli_num_rows($mysavedlistresult);
+$mysavedlistresult=pg_query($con,$mysavedlistsql);
+$mysavedlistcount=pg_num_rows($mysavedlistresult);
 if($mysavedlistcount=="0"){
 echo '<div class="alert alert-warning">You have no saved lists</div>';
 
@@ -21,8 +21,8 @@ echo '</ul></div>
 
 <?php 
 $mysharedlistsql = "SELECT * FROM savedlists where createdby <> '".$user_id."' AND shared = 1 order by created desc";
-$mysharedlistresult=mysqli_query($con,$mysharedlistsql);
-$mysharedlistcount=mysqli_num_rows($mysharedlistresult);
+$mysharedlistresult=pg_query($con,$mysharedlistsql);
+$mysharedlistcount=pg_num_rows($mysharedlistresult);
 if($mysharedlistcount=="0"){
 echo '
 <div class="alert alert-info">No lists have been shared with you</div>';
@@ -40,8 +40,8 @@ echo '</ul></div>
 
 <?php 
 $myassignedsql = "SELECT B.name, B.id FROM business B where assigned = '".$user_id."' order by name asc";
-$myassignedresult=mysqli_query($con,$myassignedsql);
-$myassignedcount=mysqli_num_rows($myassignedresult);
+$myassignedresult=pg_query($con,$myassignedsql);
+$myassignedcount=pg_num_rows($myassignedresult);
 if($myassignedcount=="0"){
 echo'';
 }
