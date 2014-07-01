@@ -1,5 +1,5 @@
 {
     "require": {
-        "pgsql": "1.1",
+        "pgsql/pgsql": "1.1",
     }
 }
