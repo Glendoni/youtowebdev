@@ -15,7 +15,7 @@ function user_name($user_id)
 require("connection.php");
 $sql="SELECT user_name FROM users WHERE user_id='$user_id'";
 $result=pg_query($con,$sql);
-while($row = mysqli_fetch_array($result))
+while($row = pg_fetch_array($result))
 {
 echo  $user_name = $row['user_name'];
 }

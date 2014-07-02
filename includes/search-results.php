@@ -96,7 +96,7 @@ $paginationCtrls .= '<li class="disabled"><span>&raquo;</span></li>';
     }
 }
 $list = '';
-while($row = mysqli_fetch_array($query, MYSQLI_ASSOC)){
+while($row = pg_fetch_array($query, MYSQLI_ASSOC)){
 {
 $business_id = $row["id"];
 $business_name = $row['name'];
@@ -166,7 +166,7 @@ $business_turnover = "£0";
 $business_turnover_type = "";
 }
 else {
-while($showturnoverrow = mysqli_fetch_array($showturnover)){
+while($showturnoverrow = pg_fetch_array($showturnover)){
 $business_turnover = "£".number_format($showturnoverrow['turnover']);
 $business_turnover_type = $showturnoverrow['type'];
 
@@ -184,7 +184,7 @@ $business_employees = "<span class=\"label label-warning\">Unknown</span>";
 }
 else
 {
-while($row = mysqli_fetch_array($employeecount))
+while($row = pg_fetch_array($employeecount))
 {
 $business_employees = "<span class='label label-info' >".$row['count']."</span>";
 }
@@ -198,7 +198,7 @@ WHERE ct.companyid = '$business_linkedin'
 ";
 $liconnectionresult=pg_query($con,$liconnectionsql);
 
-while($liconnectionrow = mysqli_fetch_array($liconnectionresult)) {
+while($liconnectionrow = pg_fetch_array($liconnectionresult)) {
  $liconnections = "<span class='label label-info' >".$liconnectionrow['count']."</span>";
 }
 
@@ -225,7 +225,7 @@ $list .='<div class="panel panel-default">
 <div class="col-md-4 centre detailsholder"><small>Sectors</small>';
 $sectorsql = "SELECT S.sector, SL.sector_name FROM sectors S INNER JOIN sector_list SL on S.sector =  SL.sector_id where businessid = '".$business_id."' and S.search = 1";
 $sectorresult = pg_query($con,$sectorsql);
-while($sectorrow = mysqli_fetch_array($sectorresult))
+while($sectorrow = pg_fetch_array($sectorresult))
 {  $list.=' <h5>'.$sectorrow['sector_name'].'</h5>';}
  $list .='
 </div>
@@ -303,7 +303,7 @@ $list .='<table class="table table-hover">
       </thead>
       <tbody>';
 
-while($mortgagelistrow = mysqli_fetch_array($mortgagelistresult)) {
+while($mortgagelistrow = pg_fetch_array($mortgagelistresult)) {
 if ($mortgagelistrow['status']==="Satisfied"){
 $mtrclass = "danger";}
 else {

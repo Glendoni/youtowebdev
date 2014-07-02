@@ -14,7 +14,7 @@ $encrypted_mypassword = md5($mypassword);
 $sql="SELECT * FROM users WHERE
  username='$myusername' and password='$encrypted_mypassword' and active = '1'";
 $result=pg_query($con,$sql);
-while($row = mysqli_fetch_array($result))
+while($row = pg_fetch_array($result))
 {
 $user_name = $row['user_name'];
 $user_id = $row['id'];

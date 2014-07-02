@@ -9,7 +9,7 @@ include("connection.php");
  $query=pg_query($con,$sql);
  $json=array();
  
-    while($student=mysqli_fetch_array($query)){
+    while($student=pg_fetch_array($query)){
          $json[]=array(
 'label'=> $student["name"],
 'value'=> $student["name"],

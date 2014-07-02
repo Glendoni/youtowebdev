@@ -8,7 +8,7 @@ include("connection.php");
   SELECT name from business where name like '%".$term."%' order by name";
  $json=array();
  
-    while($student=mysqli_fetch_array($con,$query)){
+    while($student=pg_fetch_array($con,$query)){
          $json[]=array(
                     'value'=> $student["name"],
                     'label'=>$student["name"]

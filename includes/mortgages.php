@@ -23,7 +23,7 @@ else {
     </thead>
   <tbody>';
 
-  while ( $mortgagelistrow = mysqli_fetch_array( $mortgagelistresult ) ) {
+  while ( $mortgagelistrow = pg_fetch_array( $mortgagelistresult ) ) {
     if ( $mortgagelistrow['status']==="Satisfied" ) {
       $mtrclass = "danger";}
     else {

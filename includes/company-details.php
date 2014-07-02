@@ -50,7 +50,7 @@ pg_query($con,$updaterectype);
 // This first query is just to get the total count of rows
 $sql = "SELECT business.name, DATE_FORMAT(founded,'%d/%m/%Y') AS founded,  business.linkedinid as businesslinkedinid, business.id, web from business where active = '1' and business.id = '$business_id' ";
 $query = pg_query($con, $sql);
-while($row = mysqli_fetch_array($query, MYSQLI_ASSOC)){
+while($row = pg_fetch_array($query, MYSQLI_ASSOC)){
 {
 $business_name = $row['name'];
 $business_location = $row['location'];
@@ -65,7 +65,7 @@ $business_turnover = "£0";
 $business_turnover_type = "";
 }
 else {
-while($showturnoverrow = mysqli_fetch_array($showturnover)){
+while($showturnoverrow = pg_fetch_array($showturnover)){
 $business_turnover = "£".number_format($showturnoverrow['turnover']);
 $business_turnover_type = $showturnoverrow['type'];
 }
@@ -83,7 +83,7 @@ $business_employees = '
 }
 else
 {
-while($row = mysqli_fetch_array($employeecount))
+while($row = pg_fetch_array($employeecount))
 {
 $business_employees = "<span class=\"label label-info\">".$row['count']."</span>";
 }
@@ -97,7 +97,7 @@ WHERE ct.companyid = '$business_id'
 ";
 $liconnectionresult=pg_query($con,$liconnectionsql);
 
-while($liconnectionrow = mysqli_fetch_array($liconnectionresult)) {
+while($liconnectionrow = pg_fetch_array($liconnectionresult)) {
  $liconnections = "<span class='label label-info' >".$liconnectionrow['count']."</span>";
 }
 
@@ -130,7 +130,7 @@ $business_id.'">'.$business_name.'</a></h3><small>'.$row['address'].' </small>
 $sectorsql = "SELECT S.sector, SL.sector_name FROM sectors S INNER JOIN sector_list SL on S.sector =  SL.sector_id where businessid = '".$business_id."' AND S.search=1";
 $sectorresult = pg_query($con,$sectorsql);
  $stored = array();
-while($sectorrow = mysqli_fetch_array($sectorresult, MYSQLI_ASSOC))
+while($sectorrow = pg_fetch_array($sectorresult, MYSQLI_ASSOC))
 
 {
 	$list.=' <h5>'.$sectorrow['sector_name'].'</h5>';

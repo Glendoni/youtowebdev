@@ -14,7 +14,7 @@ echo '<div class="panel panel-default">
 <div class="panel-heading"><h4>Your Saved Lists</h4></div>
 <div class="panel-body">
 <ul class="list-unstyled savedlists">';
-while($mysavedlistrow = mysqli_fetch_array($mysavedlistresult)) {
+while($mysavedlistrow = pg_fetch_array($mysavedlistresult)) {
 echo '<li><a href="'.$mysavedlistrow['criteria'].'">'.$mysavedlistrow['name'].'</a></li>';}
 echo '</ul></div>
 </div>';}?>
@@ -33,7 +33,7 @@ echo '
 <div class="panel-heading"><h4>Lists Shared With You</h4></div>
 <div class="panel-body">
 <ul class="list-unstyled">';
-while($mysharedlistrow = mysqli_fetch_array($mysharedlistresult)) {
+while($mysharedlistrow = pg_fetch_array($mysharedlistresult)) {
 echo '<li><a href="'.$mysharedlistrow['criteria'].'">'.$mysharedlistrow['name'].'</a></li>';}
 echo '</ul></div>
 </div>';}?>
@@ -51,7 +51,7 @@ echo '
 <div class="panel-heading"><h4>Assigned To You</h4></div>
 <div class="panel-body">
 <ul class="list-unstyled">';
-while($myassignedrow = mysqli_fetch_array($myassignedresult)) {
+while($myassignedrow = pg_fetch_array($myassignedresult)) {
 echo '<li><a href="search-results.php?businessid='.$myassignedrow['id'].'">'.$myassignedrow['name'].'</a></li>';}echo '</ul>
 
 <a class="btn btn-danger btn-sm btn-block sidebutton" href="search-results.php?list=1">View List</a>

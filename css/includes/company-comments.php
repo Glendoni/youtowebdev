@@ -40,7 +40,7 @@ return false;
 //$post_id value comes from the POSTS table
 $sql=pg_query($con,"SELECT CB.id AS comment_id,CB.user_id, CB.comment, CB.date, U.user_name FROM comments_business AS CB, users AS U 
 WHERE CB.user_id = U.user_id AND CB.business_id = 03901185 order by CB.date desc");
-while($row=mysqli_fetch_array($sql))
+while($row=pg_fetch_array($sql))
 {
 $name=$row['user_name'];
 $comment=$row['comment'];

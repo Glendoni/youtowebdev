@@ -8,7 +8,7 @@ $get_articles = "SELECT count(*) as count from meetings";
 
 $articles = pg_query($con,$get_articles);
 
-while ($article = mysqli_fetch_array($articles)){
+while ($article = pg_fetch_array($articles)){
       
     echo '
        <item>

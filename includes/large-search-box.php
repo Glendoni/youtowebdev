@@ -95,7 +95,7 @@ else {};
 // This first query is just to get the total count of rows
 $sql = "select sector_name, sector_id from sector_list where sector_in_search_list = '1' order by sector_name asc";
 $query = pg_query($con, $sql);
-while($row = mysqli_fetch_array($query, MYSQLI_ASSOC)){
+while($row = pg_fetch_array($query, MYSQLI_ASSOC)){
 {
 $sector_tag_name = $row['sector_name'];
 $sector_tag_id = $row['sector_id'];
@@ -121,7 +121,7 @@ echo "<option value='".$sector_tag_id."'>".$sector_tag_name."</option>";
 // This first query is just to get the total count of rows
 $sql = "select Distinct provider from mortgages where search = 1 AND status = 'Outstanding' order by provider asc";
 $query = pg_query($con, $sql);
-while($row = mysqli_fetch_array($query, MYSQLI_ASSOC)){
+while($row = pg_fetch_array($query, MYSQLI_ASSOC)){
 {
 $provider_tag_name = $row['provider'];
 if ($provider_tag_name=== $_GET['provider']) {

@@ -37,4 +37,5 @@ if (!pg_num_rows($result)) {
   while ($row = pg_fetch_row($result)) { print("- $row[0]\n"); }
 }
 print "\n";
+exit;
 ?>
