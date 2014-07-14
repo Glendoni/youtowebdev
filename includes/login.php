@@ -8,12 +8,18 @@ $myusername = $_POST['myusername'];
 $mypassword = $_POST['mypassword']; 
 $myusername = stripslashes($myusername);
 $mypassword = stripslashes($mypassword);
-$myusername = mysqli_real_escape_string($con, $myusername);
-$mypassword = mysqli_real_escape_string($con, $mypassword);
+
+$myusername = pg_escape_string($myusername);
+
+$mypassword = pg_escape_string($mypassword);
+
 $encrypted_mypassword = md5($mypassword);
-$sql="SELECT * FROM users WHERE
- username='$myusername' and password='$encrypted_mypassword' and active = '1'";
+// print("SELECT * FROM users WHERE username='$myusername' and password='$encrypted_mypassword' and active = '1'");
+$sql="SELECT * FROM users WHERE username='$myusername' and password='$encrypted_mypassword' and active = '1'";
+
 $result=pg_query($con,$sql);
+
+
 while($row = pg_fetch_array($result))
 {
 $user_name = $row['user_name'];

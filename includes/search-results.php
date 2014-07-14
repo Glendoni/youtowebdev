@@ -1,9 +1,11 @@
+
 <?php
 $action = $_GET['action'];$deleteid = $_GET['deleteid'];
 if(($action ==="delete_assigned")) {
-$deleteassigned = "update business B set B.assigned = null where B.id = '".$deleteid."' AND B.assigned = '".$user_id."'";
-pg_query($con,$deleteassigned);
-echo '<div class="alert alert-info"><span class="glyphicon glyphicon-info-sign"></span> Company Unassigned</div>';}
+  $deleteassigned = "update business B set B.assigned = null where B.id = '".$deleteid."' AND B.assigned = '".$user_id."'";
+  pg_query($con,$deleteassigned);
+  echo '<div class="alert alert-info"><span class="glyphicon glyphicon-info-sign"></span> Company Unassigned</div>';
+}
 
 ?>
 <?php
@@ -16,6 +18,8 @@ ON B.assigned=U.id
 ".$employeejoin."
 ".$providerjoin."
 where B.active = '1' ".$savedlistsql." ".$listsearchsql." ".$businessidsql." ".$mortgage_endsql." ".$agencyname." ".$turnoversql." ".$employeessql." ".$providersql." ".$company_agesql." ".$sectorsql." ".$searchorder."";
+echo $sql;
+exit;
 $query = pg_query($con, $sql);
 $row = pg_fetch_row($query);
 // Here we have the total row count
@@ -96,7 +100,7 @@ $paginationCtrls .= '<li class="disabled"><span>&raquo;</span></li>';
     }
 }
 $list = '';
-while($row = pg_fetch_array($query, MYSQLI_ASSOC)){
+while($row = pg_fetch_assoc($query)){
 {
 $business_id = $row["id"];
 $business_name = $row['name'];

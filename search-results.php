@@ -14,7 +14,7 @@ $businessidsql = "AND B.id = '$businessid'";
 
 $agencyname = htmlspecialchars($agencyname); 
 // changes characters used in html to their equivalents, for example: < to &gt;
-$agencyname = mysql_real_escape_string($agencyname);
+$agencyname = pg_escape_string($agencyname);
 // makes sure nobody uses SQL injection
 $agencyname = "AND B.name LIKE '%".$agencyname."%'";
 //TURNOVER//

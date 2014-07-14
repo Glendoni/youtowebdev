@@ -24,19 +24,21 @@ $mysharedlistsql = "SELECT * FROM savedlists where createdby <> '".$user_id."' A
 $mysharedlistresult=pg_query($con,$mysharedlistsql);
 $mysharedlistcount=pg_num_rows($mysharedlistresult);
 if($mysharedlistcount=="0"){
-echo '
-<div class="alert alert-info">No lists have been shared with you</div>';
+	echo '<div class="alert alert-info">No lists have been shared with you</div>';
 }
 else {
-echo '
-<div class="panel panel-default">
-<div class="panel-heading"><h4>Lists Shared With You</h4></div>
-<div class="panel-body">
-<ul class="list-unstyled">';
-while($mysharedlistrow = pg_fetch_array($mysharedlistresult)) {
-echo '<li><a href="'.$mysharedlistrow['criteria'].'">'.$mysharedlistrow['name'].'</a></li>';}
-echo '</ul></div>
-</div>';}?>
+	echo '
+	<div class="panel panel-default">
+	<div class="panel-heading"><h4>Lists Shared With You</h4></div>
+	<div class="panel-body">
+	<ul class="list-unstyled">';
+		while($mysharedlistrow = pg_fetch_array($mysharedlistresult)) {
+		echo '<li><a href="'.$mysharedlistrow['criteria'].'">'.$mysharedlistrow['name'].'</a></li>';
+		}
+	echo '</ul></div>
+	</div>';
+}
+?>
 		
           
-  	</div>
+</div>

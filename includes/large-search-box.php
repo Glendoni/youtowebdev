@@ -89,28 +89,28 @@ else {};
 <div class='col-sm-12' style="padding-bottom:10px;">
 <select class="form-control" name="sector[]" multiple size="7">
 <option 
-<?php if(empty($_GET["sector"]) || in_array('All', $_GET["sector"])) {
-	echo "selected";};?>>All</option>
+<?php if(empty($_GET["sector"]) || in_array('All', $_GET["sector"])) {echo "selected";};?>
+>All</option>
 <?php
 // This first query is just to get the total count of rows
 $sql = "select sector_name, sector_id from sector_list where sector_in_search_list = '1' order by sector_name asc";
 $query = pg_query($con, $sql);
-while($row = pg_fetch_array($query, MYSQLI_ASSOC)){
-{
-$sector_tag_name = $row['sector_name'];
-$sector_tag_id = $row['sector_id'];
+while($row = pg_fetch_assoc($query)){
 
-if(in_array($sector_tag_id, $_GET["sector"])) {
-    // $sector is selected
+  echo 
+  $sector_tag_name = $row['sector_name'];
+  $sector_tag_id = $row['sector_id'];
 
-$selected = "selected='selected'"; 
-echo "<option value='".$sector_tag_id."' ".$selected.">".$sector_tag_name."</option>";
-}
-else 
-{
-echo "<option value='".$sector_tag_id."'>".$sector_tag_name."</option>";
-}
-}
+  if(in_array($sector_tag_id, $_GET["sector"])) {
+      // $sector is selected
+
+  $selected = "selected='selected'"; 
+  echo "<option value='".$sector_tag_id."' ".$selected.">".$sector_tag_name."</option>";
+  }
+  else 
+  {
+  echo "<option value='".$sector_tag_id."'>".$sector_tag_name."</option>";
+  }
 }
 ?>
 </select>
@@ -121,7 +121,7 @@ echo "<option value='".$sector_tag_id."'>".$sector_tag_name."</option>";
 // This first query is just to get the total count of rows
 $sql = "select Distinct provider from mortgages where search = 1 AND status = 'Outstanding' order by provider asc";
 $query = pg_query($con, $sql);
-while($row = pg_fetch_array($query, MYSQLI_ASSOC)){
+while($row = pg_fetch_assoc($query)){
 {
 $provider_tag_name = $row['provider'];
 if ($provider_tag_name=== $_GET['provider']) {
