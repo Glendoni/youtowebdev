@@ -1,4 +1,4 @@
-baselist
-========
+codeigniter-heroku
+==================
 
-Sonovate's baselist app
+Template project for deploying CodeIgniter to Heroku
