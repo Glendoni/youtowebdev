@@ -1,1 +1,7 @@
-{}
+{
+    "name": "vendor/package",
+    "type": "codeigniter-library",
+    "require": {
+        "compwright/codeigniter-installers": "*"
+    }
+}
