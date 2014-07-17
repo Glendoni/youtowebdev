@@ -1,0 +1,12 @@
+DirectoryIndex index.php
+RewriteEngine on
+
+#AuthUserFile /home/antonio/.htpasswd
+#AuthType Basic
+#AuthName "Please log in"
+#Require valid-user
+
+RewriteCond $1 !^(index\.php|gallery|images|css|js|robots\.txt|favicon\.ico)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ ./index.php/$1 [L,QSA]

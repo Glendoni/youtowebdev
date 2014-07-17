@@ -1,14 +1,17 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
 class Companies extends CI_Controller {
-public function __construct() {
-parent::__construct();
-$this->load->model(‘lat_model’);
+	
+	function __construct() {
+		parent::__construct();
+		$this->load->model('Companies_model');
+	}
+	
+	public function index() {
+		if ($query = $this->Companies_model->get_all()){
+			$data['companies']=$query;
+		}
+		
+		$this->load->view('companies_list', $data);
+	}
 }
-function index () {
-if ($query = $this->lat_model->ambil_data()){
-$data['rowrecord']=$query;
-}
-$this->load->view(‘viewlat’, $data);
-}
-}
-?>
