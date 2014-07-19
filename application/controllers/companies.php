@@ -10,6 +10,17 @@ class Companies extends CI_Controller {
 	public function index() {
 		if ($query = $this->Companies_model->get_all()){
 			$data['companies']=$query;
+			print_r($query);
+			
+		}
+		
+		$this->load->view('companies_list', $data);
+	}
+
+	public function search() {
+
+		if ($query = $this->Companies_model->get_all()){
+			$data['companies']=$query;
 		}
 		
 		$this->load->view('companies_list', $data);
