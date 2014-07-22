@@ -3,7 +3,6 @@
     "type": "codeigniter-library",
     "require": {
         "compwright/codeigniter-installers": "*",
-        "php":"5.5.11",
         "ext-memcached": "*",
         "ext-postgresql":"*",
     }
