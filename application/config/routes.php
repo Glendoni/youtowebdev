@@ -41,7 +41,7 @@
 $route['default_controller'] = "welcome";
 $route['404_override'] = '';
 $route['companies/:any'] = "companies";
-$route['reports/:any'] = "reports";
+
 
 
 /* End of file routes.php */

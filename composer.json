@@ -2,6 +2,9 @@
     "name": "vendor/package",
     "type": "codeigniter-library",
     "require": {
-        "compwright/codeigniter-installers": "*"
+        "compwright/codeigniter-installers": "*",
+        "php":"5.5.11",
+        "ext-memcached": "*",
+        "ext-postgresql":"*",
     }
 }

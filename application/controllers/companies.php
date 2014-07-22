@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Companies extends CI_Controller {
+class Companies extends MY_Controller {
 	
 	function __construct() {
 		parent::__construct();
@@ -11,9 +11,12 @@ class Companies extends CI_Controller {
 		if ($query = $this->Companies_model->get_all()){
 			$data['companies']=$query;
 			print_r($query);
-			
+		}else{
+
+			print('no rows return');
+			$data['companies']=[];
 		}
-		
+		exit;
 		$this->load->view('companies_list', $data);
 	}
 
