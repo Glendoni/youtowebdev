@@ -67,7 +67,8 @@
 <body>
 
 <div id="container">
-	<h1>Companies list/ <?php echo $this->uri->segment(2); ?></h1>
+
+	<h1>Companies list/ <?php $v = ENVIRONMENT; print($v); ?></h1>
 
 	<div id="body">
 		<ul>

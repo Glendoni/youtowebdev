@@ -16,7 +16,7 @@ class Companies extends MY_Controller {
 			print('no rows return');
 			$data['companies']=[];
 		}
-		exit;
+
 		$this->load->view('companies_list', $data);
 	}
 
