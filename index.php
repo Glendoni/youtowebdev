@@ -18,7 +18,7 @@
  * NOTE: If you change these, also change the error_reporting() code below
  *
  */
-if(getenv('ENVIRONMENT')){
+if(getenv('ENVIRONMENT') == 'production'){
 	define('ENVIRONMENT', 'production');
 }else{
 	define('ENVIRONMENT', 'development');

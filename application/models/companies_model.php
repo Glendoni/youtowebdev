@@ -2,9 +2,7 @@
 class Companies_model extends CI_Model {
 	
 	function get_all(){
-		// $query = $this->db->get('companies',10);
-		$query = $this->db->query('Select * from Companies limit 10');
-		
+		$query = $this->db->get('companies',10);	
 		return $query->result();
 	}
 
