@@ -18,11 +18,11 @@
  * NOTE: If you change these, also change the error_reporting() code below
  *
  */
-// if(getenv('ENVIRONMENT') == 'production'){
+if(getenv('ENVIRONMENT') == 'production'){
 	define('ENVIRONMENT', 'production');
-// }else{
-// 	define('ENVIRONMENT', 'development');
-// }
+}else{
+	define('ENVIRONMENT', 'development');
+}
 
 /*
  *---------------------------------------------------------------
