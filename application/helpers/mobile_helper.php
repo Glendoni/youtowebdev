@@ -1,52 +1,6 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php	if ( ! defined('BASEPATH')) exit('No direct script access allowed'); 
 
-class MY_Controller extends CI_Controller {
-	protected $current_user = ""; // Logged in user
-	protected $data = array(); // Data array to be passed to views
-	var $url;
-		
-	public function __construct() {	
-
-		parent::__construct();
-		
-		// Debugging funcionality, set it only when on development 
-		switch (ENVIRONMENT) {
-		case 'development':
-		        $this->output->enable_profiler(TRUE);
-		break;
-		case 'production':
-				$this->output->enable_profiler(TRUE);
-		break;
-
-		default:
-		        // $config['s3_bucket'] = 'mybucket_production';
-		break;
-		}
-
-		// Load User model for all the controllers
-		$this->load->model('Users_model');
-		$this->load->helper('mobile');
-		// var_dump($this->session->all_userdata());
-
-		// try getting logged in user from session
-		if($this->session->userdata('logged_in')) 
-		{
-			$logged_in = $this->session->userdata('logged_in');
-			$this->data['current_user'] = $this->current_user = $this->Users_model->getUser($logged_in['user_id']);
-		}
-		else
-		{
-			//user not in session and segment 1 exist then redirect to login
-			if($this->uri->segment(1)) redirect('/','location');
-		}
-
-		
-		//var_dump($this->session->all_userdata());
-	}
-	
-	
-	// Helper function to validade is user agent is a mobile
-	protected function isMobileBrowser(){
+	 function isMobileBrowser(){
  		if(!isset($_SERVER['HTTP_USER_AGENT'])) return FALSE;
 		$mobile_browser = '0';
  
@@ -101,5 +55,3 @@ class MY_Controller extends CI_Controller {
 		   return FALSE;
 		}
 	}
-
-}

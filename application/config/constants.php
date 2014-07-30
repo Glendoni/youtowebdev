@@ -39,3 +39,11 @@ define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */
+
+/* USER TYPES */
+
+define('USER_ADMIN', 1);
+define('USER_SALES', 2);
+
+
+define('MORTGAGES_OUTSTANDING', 'Outstanding');
