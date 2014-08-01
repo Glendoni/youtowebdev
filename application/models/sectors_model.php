@@ -20,13 +20,13 @@ class Sectors_model extends CI_Model {
 	}
 	
 
-	function get_sector_by_id($id)
+	function get_by_id($id)
 	{
 		$query = $this->db->get_where('sectors',array('id'=>$id));
 		return $query->result();
 	}
 
-	function get_sector_by_name($name)
+	function get_by_name($name)
 	{
 		$query = $this->db->get_where('sectors',array('name'=>$name));
 		return $query->result();

@@ -40,7 +40,7 @@ class Login extends MY_Controller {
 		//Field validation succeeded.  Validate against database
 		//query the database
 		$email = $this->input->post('email');
-		$result = $this->Users_model->getUserLogin($email, $password);
+		$result = $this->Users_model->get_user_login($email, $password);
 		if($result)
 		{
 			$sess_array = array();

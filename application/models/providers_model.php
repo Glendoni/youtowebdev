@@ -18,19 +18,19 @@ class Providers_model extends CI_Model {
 		return $providers_array;
 	}
 
-	function get_sector_by_id($id)
+	function get_by_id($id)
 	{
 		$query = $this->db->get_where('providers',array('id'=>$id));
 		return $query->result();
 	}
 
-	function get_sector_by_name($name)
+	function get_by_name($name)
 	{
 		$query = $this->db->get_where('providers',array('name'=>$name));
 		return $query->result();
 	}
 
-	function get_sector_by_url($url)
+	function get_by_url($url)
 	{
 		$query = $this->db->get_where('providers',array('url'=>$url));
 		return $query->result();

@@ -40,6 +40,8 @@ define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */
 
+define('RESULTS_PER_PAGE',3);
+
 /* USER TYPES */
 
 define('USER_ADMIN', 1);
@@ -47,3 +49,11 @@ define('USER_SALES', 2);
 
 
 define('MORTGAGES_OUTSTANDING', 'Outstanding');
+
+define('TURNOVER_METHOD_f','ESTIMATED');
+define('TURNOVER_METHOD_t','ACTIVE');
+
+// # use it
+// $methods = unserialize (TURNOVER_METHODS);
+define ("TURNOVER_METHODS", serialize (array ('t'=>'ACTUAL', 'f'=>'ESTIMATE')));
+
