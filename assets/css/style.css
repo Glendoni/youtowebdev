@@ -1,0 +1,12 @@
+/*page-results-list */
+.page-results-list .panel-heading {
+	padding: 5px;
+	width: 250px;
+	float: left;
+	border-top-right-radius:0px;
+	border-bottom-right-radius: 3px;
+}
+
+.page-results-list .panel-primary {
+	border-color: #ddd; 
+}

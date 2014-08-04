@@ -1,72 +1,97 @@
-<div class="row">
+<div class="row page-results-list">
+	<h1 class="page-header">Companies<small>(<?php echo $companies_count; ?>)</small></h1>
+	<p >Page <?php echo $current_page_number; ?> of <?php echo $page_total ?></p>
+	<ul class="pager">
+		<?php if($previous_page_number): ?>
+	  	<li class="previous"><a href="?page_num=<?php echo $previous_page_number; ?>">&larr; Previous</a></li>
+	  	<?php else: ?>
+	  	<li class="previous disabled"><a href="#">&larr; Previous</a></li>
+	    <?php endif; ?>
+
+	    <?php if($next_page_number): ?>
+	  	<li class="next"><a href="?page_num=<?php echo $next_page_number; ?>">Next &rarr;</a></li>
+	  	<?php else: ?>
+	  	<li class="next disabled"><a href="#">Next &rarr;</a></li>
+		<?php endif; ?>
+	</ul>
 	<?php foreach ( $companies_chunk as $company): ?>
-<div class="panel panel-default">
-	<div class="panel-body row">
-		<?php if(isset($company->company_assignto)): ?>
-		<div class="col-md-12">
-			<div class="col-md-2 row">
-				<div class="benefits-circle-text">
-					<div class="benefits-circle-inner">
-						<p>Assigned to</p>
-						<h2><?php $names = explode( " ", $company->company_assignto ); echo $names[0][0].$names[1][0]; ?></h2>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-10">
+	<div class="panel <?php if(isset($company->company_assign_to)): ?> panel-primary <?php else: ?> panel-default <?php endif; ?> ">
+		<?php if(isset($company->company_assign_to)): ?>
+		<div class="panel-heading text-center" >
+            Assigned to <?php echo $company->company_assign_to; ?> 
+        </div>
+		<?php endif; ?>
+		<div class="panel-body">
+			<div class="col-md-12">
 				<h3 class="name">
-					<a href="/company/<?php echo $company->id;?>">
+					<a href="companies/company?id=<?php echo $company->id;?>">
 						<?php echo $company->name; ?>
 					</a>
 				</h3>
 				<small><?php echo $company->address; ?> </small>
 			</div>
-		</div>
-		<?php else: ?>
-		<div class="col-md-12">
-			<h3 class="name">
-				<a href="/company/<?php echo $company->id;?>">
-					<?php echo $company->name; ?>
-				</a>
-			</h3>
-			<small><?php echo $company->address; ?> </small>
-		</div>
-		<?php endif; ?>
-		<div class="col-md-3 centre"><small>Turnover</small>
-			<h3 class="details"><strong>£ <?php echo number_format($company->turnover); ?></strong><br>
-				<small><?php $methods = unserialize (TURNOVER_METHODS); echo $methods[$company->turnover_method]?></small></h3>
+			
+			<div class="col-md-12">
+				<hr>
+			</div>
+			
+			<!-- TURNOVER -->
+			<div class="col-md-3 centre"><small>Turnover</small>
+				<h3 class="details">
+					<strong>£ <?php echo number_format($company->turnover); ?></strong>
+					<br>
+					<small><?php $methods = unserialize (TURNOVER_METHODS); echo $methods[$company->turnover_method]?></small>
+				</h3>
 				<small>Founded</small>
 				<h5 class="details"><strong><?php echo $company->eff_from ?></strong></h5>
 			</div>
+
+			<!-- EMPLOYEES -->
 			<div class="col-md-3 centre"><small>Employees</small>
 				<h3 class="details"><?php  echo  ($company->emp_coun)? '<strong><span class="label label-info">'.$company->emp_count.'</span></strong>' : '<span class="label label-warning">Unknown</span>' ?> </h3>
 				<small>LinkedIn Connections</small>
 				<h3 class="details"><strong><span class="label label-info"><?php echo $company->company_connections ?></span> </strong></h3>
 
 			</div>
+
+			<!-- SECTORS -->
 			<div class="col-md-3 centre">
 				<small>Sectors</small> 
-				
 				<?php $company_sectors = explode(",",$company->company_sectors);
 				foreach ($company_sectors as $sector) {
 					echo '<h5>'.$sector.'</h5>';
 				}?>
-				
 			</div>
+
+			<!-- LINKS AND BTN -->
 			<div class="col-md-3">
-				<a class="btn btn-danger btn-sm btn-block" href="<?php echo $company->ddlink ?>" target="_blank">View on Duedil</a>
+				<?php if ($company->ddlink): ?>
+				<a class="btn btn-outline btn-info btn-sm btn-block" href="<?php echo $company->ddlink ?>" target="_blank">View on Duedil</a>
+				<?php endif; ?>
 				<?php if ($company->linkedin_id): ?>
-				<a href="https://www.linkedin.com/company/<?php echo $company->linkedin_id ?>" class="btn linkedinbtn btn-sm base btn-block" target="_blank">View on LinkedIn</a>
+				<a class="btn btn-outline btn-info btn-sm btn-block" href="https://www.linkedin.com/company/<?php echo $company->linkedin_id ?>"  target="_blank">View on LinkedIn</a>
 				<?php endif; ?>
 				<?php if ($company->url): ?>
-				<a href="<?php echo $company->url ?>" class="btn btn-default btn-sm btn-block" target="_blank">Visit Website</a>
+				<a class="btn btn-outline btn-info btn-sm btn-block" href="<?php echo $company->url ?>" target="_blank">Visit Website</a>
 				<?php endif; ?>
-				<!-- <a class="btn btn-sm btn-primary btn-block" disabled="disabled">Assigned to RL(pending)</a>
-				<a href="includes/base-add.php?id=03688086" class="btn btn-success btn-sm base btn-block" target="_blank">Add to Base</a>
-				<a href="includes/update-request.php?id=03688086&amp;user=11" class="btn btn-warning btn-sm update btn-block" target="_blank">Request Update</a>
-				<input type="hidden" name="assign_user_id" value="11">
-				<input type="hidden" name="assign_business_id" value=""> -->
+				<?php if(isset($company->company_assign_to) and !empty($company->company_assign_to)): ?>
+				<a class="btn btn-sm btn-primary btn-block" disabled="disabled"><?php  echo 'Assigned to '.$company->company_assign_to; ?></a>
+				<?php else: ?>
+				<?php 
+				$hidden = array('company_id' => $company->id , 'user_id' => $current_user['id'], 'page_number' => $current_page_number );
+				echo form_open('companies/assignto',array('style' => 'margin-top: 5px;', 'name' => 'assignto', 'class'=>'assign-to-form'),$hidden); ?>
+				<button type="submit" assignto="<?php echo $current_user['name']; ?>" class="btn btn-sm btn-primary btn-block ladda-button" data-style="expand-right" data-size="1">
+			        <span class="ladda-label"> Assign </span>
+			    </button>
+				<?php echo form_close(); ?>
+				<?php endif; ?>
 			</div>
-			<div class="col-md-12"><table class="table table-hover" style="margin-top:10px;">
+			
+			<!-- MORTGAGES -->
+			
+			<div class="col-md-12">
+			<?php if(!empty($company->mortgages)): ?>
+				<table class="table table-hover" style="margin-top:10px;">
 				<thead>
 					<tr>
 						<th class="col-md-7">Provider</th>
@@ -84,8 +109,26 @@
 					<?php endforeach; ?>
 				</tbody>
 				</table>
+				<?php else: ?>
+				<div class="alert alert-info" style="margin-top:10px;">
+	                No mortgage data registered.
+	            </div>
+			<?php endif; ?>
 			</div>
 		</div>
 	</div>
 <?php endforeach; ?>
+<ul class="pager">
+		<?php if($previous_page_number): ?>
+	  	<li class="previous"><a href="?page_num=<?php echo $previous_page_number; ?>">&larr; Previous</a></li>
+	  	<?php else: ?>
+	  	<li class="previous disabled"><a href="#">&larr; Previous</a></li>
+	    <?php endif; ?>
+
+	    <?php if($next_page_number): ?>
+	  	<li class="next"><a href="?page_num=<?php echo $next_page_number; ?>">Next &rarr;</a></li>
+	  	<?php else: ?>
+	  	<li class="next disabled"><a href="#">Next &rarr;</a></li>
+		<?php endif; ?>
+	</ul>
 </div>

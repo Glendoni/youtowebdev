@@ -43,8 +43,44 @@ class MY_Controller extends CI_Controller {
 		
 		//var_dump($this->session->all_userdata());
 	}
+	protected function seve_current_search($post)
+	{
+		$this->session->set_userdata('current_search',$post);
+	}
+	protected function refresh_search_results()
+	{
+		$this->session->set_flashdata('refresh', TRUE);
+	}
+
+	protected function set_message_suceess($message)
+	{
+		$this->session->set_flashdata('message', $message);
+		$this->session->set_flashdata('message_type', 'success');
+	}
+
+	protected function set_message_info($message)
+	{
+		$this->session->set_flashdata('message', $message);
+		$this->session->set_flashdata('message_type', 'info');
+	}
+
+	protected function set_message_warning($message)
+	{
+		$this->session->set_flashdata('message', $message);
+		$this->session->set_flashdata('message_type', 'warning');
+	}
+
+	protected function set_message_error($message)
+	{
+		$this->session->set_flashdata('message', $message);
+		$this->session->set_flashdata('message_type', 'danger');
+	}
 	
-	
+	protected function clear_search_results()
+	{
+		$this->session->unset_userdata('companies');
+		$this->session->unset_userdata('current_search');
+	}
 	// Helper function to validade is user agent is a mobile
 	protected function isMobileBrowser(){
  		if(!isset($_SERVER['HTTP_USER_AGENT'])) return FALSE;

@@ -40,7 +40,7 @@
 
 $route['default_controller'] = "login";
 $route['404_override'] = '';
-$route['companies/:any'] = "companies";
+$route['companies/'] = "companies/";
 
 
 

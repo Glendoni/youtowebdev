@@ -2,15 +2,18 @@
 
 class Companies extends MY_Controller {
 	
-	function __construct() {
+	function __construct() 
+	{
 		parent::__construct();
 		$this->load->model('Companies_model');
 
 	}
 	
-	public function index() {
-		
-		if($this->input->post('submit'))
+	public function index($ajax_refresh = False) 
+	{
+		$search_results_in_session = $this->session->userdata('companies');
+		$refresh_search_results = $this->session->flashdata('refresh');
+		if(($this->input->post('submit') and !$search_results_in_session) and !$refresh_search_results and !$ajax_refresh )
 		{
 			// var_dump($this->input->post());
 			$this->load->library('form_validation');
@@ -28,12 +31,13 @@ class Companies extends MY_Controller {
 
 			if($this->form_validation->run())
 			{	
-				// Result set to session 
-				$result = $this->Companies_model->search_companies($this->input->post(),$page_num);
+				// Result set to session and current search 
+				$this->seve_current_search($this->input->post());
+				$result = $this->Companies_model->search_companies($this->input->post());
 
 				if(empty($result))
 				{
-					$this->session->set_flashdata('message', 'No result found for query');
+					$this->set_message_info('No result found for query');
 					redirect('/dashboard');
 				}
 				else
@@ -42,21 +46,85 @@ class Companies extends MY_Controller {
 				}
 			}
 		}
+		elseif ($refresh_search_results or $ajax_refresh) 
+		{
+			$post = $this->session->userdata('current_search');
+			$result = $this->Companies_model->search_companies($post);
+			if(empty($result))
+			{
+				$this->set_message_info('No result found for query');
+				redirect('/dashboard');
+			}
+			else
+			{
+				$this->session->set_userdata('companies',$result);
+			}
+		}
+		elseif (!$this->input->post('submit') and !$search_results_in_session and !$refresh_search_results) {
+			redirect('/dashboard');
+		}
+
 		
+		$companies_array = $result ? $result->result_object : $search_results_in_session->result_object ;
 		// get companies from recent result or get it from session
-		$companies_array_chunk = $result ? array_chunk($result->result_object, RESULTS_PER_PAGE) : array_chunk($this->session->userdata('companies')->result_object, RESULTS_PER_PAGE);
-		$page_num = $this->input->get('page_num') ? $this->input->get('page_num') -1 : 0;
-		$this->data['hide_side_nav'] = True;
-		$this->data['companies_chunk'] = $companies_array_chunk[$page_num];
+		$companies_array_chunk = array_chunk($companies_array, RESULTS_PER_PAGE);
+		$current_page_number = $this->input->get('page_num') ? $this->input->get('page_num') : 1;
+		// $this->data['hide_side_nav'] = True;
+		$this->data['companies_count'] = count($companies_array);
+		$this->data['page_total'] = round($this->data['companies_count']/RESULTS_PER_PAGE);
+		$this->data['current_page_number'] = $current_page_number;
+		$this->data['next_page_number'] = ($current_page_number+1) <= $this->data['page_total'] ? ($current_page_number+1) : FALSE;
+		$this->data['previous_page_number'] = ($current_page_number-1) >= 0 ? ($current_page_number-1) : FALSE;
+		
+		$this->data['companies_chunk'] = $companies_array_chunk[($current_page_number-1)];
 		$this->data['main_content'] = 'companies/list';
 		$this->load->view('layouts/default_layout', $this->data);
 	}
 
-	public function search() {
 
-		if ($query = $this->Companies_model->get_all()){
-			$data['companies']=$query;
+	public function assignto()
+	{
+		if($this->input->post('company_id') && $this->input->post('user_id'))
+		{
+			$result = $this->Companies_model->assign_company($this->input->post('company_id'),$this->input->post('user_id'));
+			if(!$result['error'])
+			{
+				// Clear search in session 
+				$this->index($ajax_refresh=True);
+				// redirect('/companies?page_num='.$this->input->post('page_number'),'refresh');
+			}
+			else
+			{
+				$this->set_message_error($result['message']);
+				$this->index();
+				// redirect('/companies?page_num='.$this->input->post('page_number'),'refresh');
+			}
 		}
-		$this->load->view('companies_list', $data);
+		return True;
 	}
+
+	public function refreshsearch()
+	{
+		$this->refresh_search_results();
+		redirect('/companies','refresh');	
+	}
+
+	public function company()
+	{
+		if($this->input->get('id'))
+		{
+			$company = $this->Companies_model->get_company_by_id($this->input->get('id'));
+			var_dump($company);
+			die;
+			$this->data['main_content'] = 'companies/company';
+			$this->load->view('layouts/default_layout', $this->data);
+
+		}
+		else
+		{
+			$this->set_message_error('No company id passed.');
+			redirect('/dashboard','refresh');
+		}
+	}
+
 }

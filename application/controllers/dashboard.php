@@ -13,7 +13,8 @@ class Dashboard extends MY_Controller {
 	
 	public function index() 
 	{
-		
+		// Clear search in session 
+		$this->clear_search_results();
 		// Getting all sectors 
 		$sectors_options = $this->Sectors_model->get_all_in_array();
 		// Add options
@@ -23,7 +24,7 @@ class Dashboard extends MY_Controller {
 		// Add options
 		array_unshift($providers_options,'All');
 		
-		$this->data['hide_side_nav'] = True;
+		// $this->data['hide_side_nav'] = True;
 		$this->data['sectors_options'] = $sectors_options;
 		$this->data['sectors_default'] ='0';
 		$this->data['providers_options'] = $providers_options;
