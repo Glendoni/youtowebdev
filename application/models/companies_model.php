@@ -102,6 +102,15 @@ class Companies_model extends CI_Model {
 		return $query->result();
 	}
 
+	function last_updated_companies(){
+		$this->db->select('companies.name,companies.id');
+		$this->db->from('companies');
+		$this->db->where('updated_at >'," (CURRENT_DATE - INTERVAL '30 days') ", FALSE);
+		$this->db->limit(10);
+		$query = $this->db->get();
+		return $query->result();
+	}
+
 	function special_query()
 	{
 		$query = $this->db->query('');

@@ -15,14 +15,14 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="<?php echo asset_url();?>/css/sb-admin-2.css" rel="stylesheet">
-    <link href="<?php echo asset_url();?>/css/style.css" rel="stylesheet">
+    <link href="<?php echo asset_url();?>css/sb-admin-2.css" rel="stylesheet">
+    <link href="<?php echo asset_url();?>css/style.css" rel="stylesheet">
 
     <!-- Timeline CSS -->
-    <link href="<?php echo asset_url();?>/css/plugins/timeline.css" rel="stylesheet">
+    <link href="<?php echo asset_url();?>css/plugins/timeline.css" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
-    <link href="<?php echo asset_url();?>/css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
+    <link href="<?php echo asset_url();?>css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
 
     <!-- Morris Charts CSS -->
     <link rel="stylesheet" href="http://cdn.oesmith.co.uk/morris-0.5.1.css">
@@ -31,7 +31,7 @@
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- BTN animation -->
-    <link href="<?php echo asset_url();?>/css/ladda.min.css" rel="stylesheet">
+    <link href="<?php echo asset_url();?>css/ladda.min.css" rel="stylesheet">
 
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
