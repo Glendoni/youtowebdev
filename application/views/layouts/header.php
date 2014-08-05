@@ -461,6 +461,6 @@
             <?php $msg = $this->session->flashdata('message'); if($msg): ?>
                 <div class="alert alert-<?php echo $this->session->flashdata('message_type'); ?> alert-dismissible" role="alert">
                   <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                  <strong>!</strong> <?php echo $msg ?>
+                    <?php echo $msg ?>
                 </div>
             <?php endif; ?>

@@ -14,6 +14,7 @@
 	  	<li class="next disabled"><a href="#">Next &rarr;</a></li>
 		<?php endif; ?>
 	</ul>
+	
 	<?php foreach ( $companies_chunk as $company): ?>
 	<div class="modal fade" id="editModal<?php echo $company->id; ?>" tabindex="-1" role="dialog" aria-labelledby="Edit <?php echo $company->name; ?>" aria-hidden="true" style="display: none;">
         <div class="modal-dialog">

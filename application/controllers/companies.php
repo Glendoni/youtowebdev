@@ -52,7 +52,7 @@ class Companies extends MY_Controller {
 			$result = $this->Companies_model->search_companies($post);
 			if(empty($result))
 			{
-				$this->set_message_info('No result found for query');
+				$this->set_message_warning('No result found for query. :( ');
 				redirect('/dashboard');
 			}
 			else
@@ -65,7 +65,13 @@ class Companies extends MY_Controller {
 		}
 
 		
-		$companies_array = $result ? $result->result_object : $search_results_in_session->result_object ;
+		$companies_array = $result ? $result->result_object : $search_results_in_session->result_object;
+
+		if(empty($companies_array))
+		{
+			$this->set_message_error('No results return for query.');
+			redirect('/dashboard','refresh');
+		}
 		// get companies from recent result or get it from session
 		$companies_array_chunk = array_chunk($companies_array, RESULTS_PER_PAGE);
 		$current_page_number = $this->input->get('page_num') ? $this->input->get('page_num') : 1;

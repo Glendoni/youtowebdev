@@ -9,11 +9,10 @@ class Dashboard extends MY_Controller {
 		// $this->load->model('Sectors_model');
 		$this->load->model('Providers_model');
 		$this->load->model('Companies_model');
-		
 	}
 	
 	public function index() 
-	{
+	{	
 		// Clear search in session 
 		$this->clear_search_results();
 		// Getting all sectors 
@@ -31,6 +30,7 @@ class Dashboard extends MY_Controller {
 		asort($providers_options);
 		// Add options
 		// array_unshift($providers_options,'All');
+
 		$this->data['last_imported_companies'] = $this->Companies_model->get_last_imported();
 		$this->data['last_updated_companies'] = $this->Companies_model->last_updated_companies();
 		// $this->data['hide_side_nav'] = True;
