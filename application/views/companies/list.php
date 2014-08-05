@@ -14,7 +14,7 @@
 	  	<li class="next disabled"><a href="#">Next &rarr;</a></li>
 		<?php endif; ?>
 	</ul>
-	
+
 	<?php foreach ( $companies_chunk as $company): ?>
 	<div class="modal fade" id="editModal<?php echo $company->id; ?>" tabindex="-1" role="dialog" aria-labelledby="Edit <?php echo $company->name; ?>" aria-hidden="true" style="display: none;">
         <div class="modal-dialog">
@@ -49,11 +49,12 @@
 			                <div class="tag-holder">  
 								<span class="button-checkbox" id="contract">
 							        <button type="button" class="btn btn-default" data-color="primary" id="contract"><i class="state-icon glyphicon glyphicon-unchecked"></i>&nbsp;Contract</button>
-									<input type="checkbox" name="contract" value="1" id="contract" class="hidden">
+									<input type="checkbox" name="contract" value="1" id="contract" class="hidden" <?php echo $tcompany->contract? 'checked': '' ; ?> >
+									
 								</span>
 								<span class="button-checkbox" id="contract">
 									<button type="button" class="btn btn-default" data-color="primary" id="permanent"><i class="state-icon glyphicon glyphicon-unchecked"></i>&nbsp;Permanent</button>
-									<input type="checkbox" name="perm" value="1" id="permanent" class="hidden">
+									<input type="checkbox" name="perm" value="1" id="permanent" class="hidden" <?php echo $tcompany->perm? 'checked': '' ; ?> >
 								</span>
 							</div>
 						</div>

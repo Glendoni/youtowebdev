@@ -189,6 +189,22 @@ class Companies_model extends CI_Model {
 		}
 
 		// Turnover
+		if(empty($post['turnover_from']) && !empty($post['turnover_to']))
+		{
+			$post['turnover_from'] = '0';
+			// $this->db->where('turnovers.turnover >', '0');
+			// $this->db->where('turnovers.turnover <', '100000000');
+			
+		}
+
+		if(empty($post['turnover_to']) && !empty($post['turnover_from']))
+		{
+			$post['turnover_to'] = '100000000';
+			// $this->db->where('turnovers.turnover >', '0');
+			// $this->db->where('turnovers.turnover <', '100000000');
+			
+		}
+
 		if(isset($post['turnover_from']) && (!empty($post['turnover_from'])) ) 
 		{
 			$this->db->where('turnovers.turnover >', $post['turnover_from']);
@@ -199,12 +215,6 @@ class Companies_model extends CI_Model {
 			$this->db->where('turnovers.turnover <', $post['turnover_to']);
 		}
 
-		if(empty($post['turnover_from']) && empty($post['turnover_to']))
-		{
-			$this->db->where('turnovers.turnover >', '0');
-			$this->db->where('turnovers.turnover <', '100000000');
-			
-		}
 
 		// Employees count 
 		
@@ -218,11 +228,11 @@ class Companies_model extends CI_Model {
 			$this->db->where('emp_counts.count <', $post['employees_to']);
 		}
 		
-		if(empty($post['employees_from']) && empty($post['employees_to']))
-		{
-			$this->db->where('emp_counts.count >', '0');
-			$this->db->where('emp_counts.count <', '20000');			
-		}
+		// if(empty($post['employees_from']) && empty($post['employees_to']))
+		// {
+		// 	$this->db->where('emp_counts.count >', '0');
+		// 	$this->db->where('emp_counts.count <', '20000');			
+		// }
 
 		// Company age
 		if(isset($post['company_age_from']) && (!empty($post['company_age_from'])) )
@@ -363,6 +373,8 @@ class Companies_model extends CI_Model {
 		$company = array(
 				'linkedin_id' => $post['linkedin_id']?$post['linkedin_id']:NULL,
 				'url' => $post['url']?$post['url']:NULL,
+				'contract'=>$post['contract']?$post['contract']:NULL,
+				'perm'=>$post['perm']?$post['perm']:NULL,
 				'updated_at' => date('Y-m-d H:i:s')
 			);
 		$this->db->where('id', $post['company_id']);
