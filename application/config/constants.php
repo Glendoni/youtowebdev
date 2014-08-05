@@ -49,6 +49,7 @@ define('USER_SALES', 2);
 
 
 define('MORTGAGES_OUTSTANDING', 'Outstanding');
+define('MORTGAGES_SATISFIED', 'Satisfied');
 
 define('TURNOVER_METHOD_f','ESTIMATED');
 define('TURNOVER_METHOD_t','ACTIVE');

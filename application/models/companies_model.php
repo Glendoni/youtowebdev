@@ -12,12 +12,25 @@ class Companies_model extends CI_Model {
 		$this->db->select('companies.*,addresses.address');
 		$this->db->from('companies');
 		$this->db->join('addresses','addresses.company_id = companies.id','left');
-		$this->db->join('operates','operates.company_id = companies.id','left');
-		$this->db->join('sectors','sectors.id = operates.sector_id');
-		$this->db->where('operates.active', 'True');
+		$this->db->join('operates','operates.company_id = companies.id AND operates.active = True','left');
+		$this->db->join('sectors','sectors.id = operates.sector_id','left');
+		
 		$this->db->where('companies.id', $id);
 		$this->db->where('companies.active', 'True');
 		$this->db->order_by("companies.name", "asc");
+
+
+		// Employee count
+		$this->db->select('(SELECT "count" FROM "emp_counts" WHERE "emp_counts"."company_id" = "companies"."id" ORDER BY "emp_counts"."created_at" DESC LIMIT 1) as emp_count', FALSE, FALSE);
+
+		// Sectors the company is in 
+		$this->db->select("(SELECT string_agg(S.name, ',') FROM sectors S,operates O WHERE O.company_id = companies.id AND S.id = O.sector_id  AND O.active = 'True') as company_sectors", FALSE, FALSE);
+
+		// Linkedin connectioins ( need improvement , can be done once a month to another table)
+		$this->db->select("(SELECT count(*) FROM connections C,employees E WHERE E.company_id = companies.id AND C.employee_id = E.id ) as company_connections", FALSE, FALSE);
+
+		// Assign to
+		$this->db->select("(SELECT Ad.name FROM users Ad WHERE Ad.id = companies.user_id ) as company_assign_to", FALSE, FALSE);
 
 		// Build query 
 		$query = $this->db->get();
@@ -56,18 +69,37 @@ class Companies_model extends CI_Model {
 				$companies->result_object[$key]->company_assign_to = $to_upper;
 			}
 
-			$this->db->select('turnovers.*');
+			$this->db->select('turnovers.turnover');
 			$this->db->from('turnovers');
-			$this->db->where('turnovers.id',$company->id);
+			$this->db->where('turnovers.company_id',$company->id);
+			$this->db->order_by('turnovers.eff_from','desc');
+			$this->db->limit(1);
 			$turnovers = $this->db->get(); 
 			$turnovers_array = $turnovers->result_array();
 
-			$companies->result_object[$key]->turnovers = $turnovers_array;
+			$companies->result_object[$key]->turnover = $turnovers_array[0]['turnover'];
 
 		}
 
-
 		return $companies;
+	}
+
+	function get_last_imported(){
+		$this->db->select('companies.name,companies.id');
+		$this->db->from('companies');
+		$this->db->where('created_at >'," (CURRENT_DATE - INTERVAL '30 days') ", FALSE);
+		$this->db->limit(10);
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	function last_updated_companies(){
+		$this->db->select('companies.name,companies.id');
+		$this->db->from('companies');
+		$this->db->where('updated_at >'," (CURRENT_DATE - INTERVAL '30 days') ", FALSE);
+		$this->db->limit(10);
+		$query = $this->db->get();
+		return $query->result();
 	}
 
 	function special_query()
@@ -83,8 +115,13 @@ class Companies_model extends CI_Model {
 		$this->db->from('companies');
 		$this->db->join('addresses','addresses.company_id = companies.id','left');
 		$this->db->join('emp_counts','emp_counts.company_id = companies.id','left');
+		$this->db->join('mortgages','mortgages.company_id = companies.id','left');
 		$this->db->where('companies.active', 'True');
 		$this->db->order_by("companies.name", "asc");
+
+		$this->db->join('turnovers','turnovers.company_id = companies.id','left');
+		// $this->db->select('turnovers.id as turnover_id');
+		
 		
 		// $this->db->select("( SELECT T.turnover as turnover FROM turnovers T WHERE T.company_id = companies.id ORDER BY T.eff_from DESC  LIMIT 1) as turnover ",FALSE,FALSE);
 		// $this->db->select("( SELECT T.currency as currency FROM turnovers T WHERE T.company_id = companies.id ORDER BY T.eff_from DESC  LIMIT 1) as currency ",FALSE,FALSE);
@@ -94,7 +131,8 @@ class Companies_model extends CI_Model {
 		$this->db->select('(SELECT "count" FROM "emp_counts" WHERE "emp_counts"."company_id" = "companies"."id" ORDER BY "emp_counts"."created_at" DESC LIMIT 1) as emp_count', FALSE, FALSE);
 
 		// Sectors the company is in 
-		$this->db->select("(SELECT string_agg(S.name, ',') FROM sectors S,operates O WHERE O.company_id = companies.id AND S.id = O.sector_id  AND O.active = 'True') as company_sectors", FALSE, FALSE);
+		$this->db->select("(SELECT string_agg(S.name, ',') FROM sectors S,operates O WHERE O.company_id = companies.id AND S.id = O.sector_id  AND O.active = 'True' ) as company_sectors", FALSE, FALSE);
+		$this->db->select("(SELECT array_to_string(array_agg(S.id), ',')  FROM sectors S,operates O WHERE O.company_id = companies.id AND S.id = O.sector_id  AND O.active = 'True'  ) as company_sectors_ids", FALSE, FALSE);
 
 		// Linkedin connectioins ( need improvement , can be done once a month to another table)
 		$this->db->select("(SELECT count(*) FROM connections C,employees E WHERE E.company_id = companies.id AND C.employee_id = E.id ) as company_connections", FALSE, FALSE);
@@ -107,8 +145,32 @@ class Companies_model extends CI_Model {
 
 	
 		// Group by variable to be set during filtering 
-		$group_by = array('companies.id','addresses.id');
-
+		$group_by = array('companies.id',
+							'companies.user_id',	
+							'companies.linkedin_id',
+							'companies.registration',
+							'companies.name',
+							'companies.url',
+							'companies.ddlink',	
+							'companies.contract',	
+							'companies.perm',	
+							'companies.active',
+							'companies.on_base',
+							'companies.eff_from',	
+							'companies.eff_to',	
+							'customer_from',
+							'companies.created_at',	
+							'companies.updated_at',	
+							'address',
+							'turnover',	
+							'currency',
+							'turnover_method',
+							'emp_count',
+							'company_sectors',
+							'company_connections',
+							'company_assign_to'
+							);
+		
 		//FILTER QUERY 
 
 		// Agency name 
@@ -116,53 +178,41 @@ class Companies_model extends CI_Model {
 		{
 			$this->db->like('companies.name', $post['agency_name']); 
 		}
+
 		// Turnover
-		if(isset($post['turnover_from']) || isset($post['turnover_to']))
-		{
-			$this->db->join('turnovers','turnovers.company_id = companies.id','inner');
-			$this->db->select('turnovers.id as turnover_id');
-			array_push($group_by,"turnovers.id");
-			
-		}
 		if(isset($post['turnover_from']) && (!empty($post['turnover_from'])) ) 
 		{
 			$this->db->where('turnovers.turnover >', $post['turnover_from']);
 		}
-		else
-		{
-			$this->db->where('turnovers.turnover >', '0');
-		}
-
+		
 		if(isset($post['turnover_to']) && (!empty($post['turnover_to'])) )
 		{
 			$this->db->where('turnovers.turnover <', $post['turnover_to']);
-		}else{
+		}
+
+		if(empty($post['turnover_from']) && empty($post['turnover_to']))
+		{
+			$this->db->where('turnovers.turnover >', '0');
 			$this->db->where('turnovers.turnover <', '100000000');
+			
 		}
 
 		// Employees count 
-		if(isset($post['employees_from']) || isset($post['employees_to']))
-		{
-			$this->db->join('emp_counts','emp_counts.company_id = companies.id','left');
-			// array_push($group_by,"emp_counts.id");			
-		}
 		
 		if(isset($post['employees_from']) && (!empty($post['employees_from'])) )
 		{
 			$this->db->where('emp_counts.count >', $post['employees_from']);
-		}
-		else
-		{
-			$this->db->where('emp_counts.count >', '0');
-		}
+		}	
 
 		if(isset($post['employees_to']) && (!empty($post['employees_to'])) )
 		{
 			$this->db->where('emp_counts.count <', $post['employees_to']);
 		}
-		else
+		
+		if(empty($post['employees_from']) && empty($post['employees_to']))
 		{
-			$this->db->where('emp_counts.count <', '20000');
+			$this->db->where('emp_counts.count >', '0');
+			$this->db->where('emp_counts.count <', '20000');			
 		}
 
 		// Company age
@@ -174,17 +224,37 @@ class Companies_model extends CI_Model {
 		if(isset($post['company_age_to']) && (!empty($post['company_age_to'])) )
 		{
 			$company_age_to = date("m-d-Y", strtotime("-".$post['company_age_to']." year"));
-			$this->db->where('companies.eff_from <=', $company_age_to);
+			$this->db->where('companies.eff_to <=', $company_age_to);
 		}
 
 		// Sectors
 		if( isset($post['sectors']) && (!in_array("0", $post['sectors'])) )
 		{	
-			$this->db->join('operates','operates.company_id = companies.id','left');
-			$this->db->join('sectors','sectors.id = operates.sector_id');
+			$this->db->join('operates','operates.company_id = companies.id AND operates.active = True','left');
+			$this->db->join('sectors','sectors.id = operates.sector_id','left');
 			$this->db->where_in('operates.sector_id',$post['sectors']);
-			$this->db->where('operates.active', 'True');
 			array_push($group_by,"operates.id"); 
+		}
+
+		// Mortgages
+		if (empty($post['mortgage_from']))
+		{
+			$post['mortgage_from'] = 0;
+		}
+		if (empty($post['mortgage_to']))
+		{
+			$post['mortgage_to'] = 365;
+		}
+		if (!empty($post['mortgage_to']) && !empty($post['mortgage_from']))
+		{
+			
+			$this->db->where('mortgages.stage', MORTGAGES_OUTSTANDING);
+			$mortgage_end_from = $post['mortgage_from'];
+			$mortgage_end_to = $post['mortgage_to'];
+			$mortgage_endsql = "EXTRACT (doy from mortgages.eff_from) - EXTRACT (doy from now()) BETWEEN $mortgage_end_from AND $mortgage_end_to ";
+			$this->db->where($mortgage_endsql,'',FALSE);
+			array_push($group_by,"mortgages.id");
+			$this->db->order_by('(EXTRACT (doy from mortgages.eff_from) - EXTRACT (doy from now()))','asc');
 		}
 
 		// Providers
@@ -195,27 +265,6 @@ class Companies_model extends CI_Model {
 			array_push($group_by,"providers.id"); 
 		}
 
-		if (isset($post['mortgage_from']) && empty($post['mortgage_from']))
-		{
-			$post['mortgage_from'] = 0;
-		}
-		if (empty($post['mortgage_to']) && empty($post['mortgage_to']))
-		{
-			$post['mortgage_to'] = 365;
-		}
-		if (!empty($post['mortgage_to']) && (!empty($post['mortgage_from'])))
-		{
-			$this->db->join('mortgages','mortgages.company_id = companies.id');
-			$this->db->where('mortgages.stage', MORTGAGES_OUTSTANDING);
-			$mortgage_end_from = $post['mortgage_from'];
-			$mortgage_end_to = $post['mortgage_to'];
-			$mortgage_endsql = "EXTRACT (doy from mortgages.eff_from) - EXTRACT (doy from now()) BETWEEN $mortgage_end_from AND $mortgage_end_to ";
-			$this->db->where($mortgage_endsql,'',FALSE);
-			array_push($group_by,"mortgages.id");
-			$this->db->order_by("(doy from mortgages.eff_from) - extract (doy from now())",'asc');
-		}
-
-		
 		// Set order by from variable
 		$this->db->group_by($group_by); 
 		
@@ -224,6 +273,7 @@ class Companies_model extends CI_Model {
 
 		// Run query  
 		$query->result();
+
 
 		// Place query result into variable
 		$companies = $query;
@@ -276,9 +326,50 @@ class Companies_model extends CI_Model {
 	    $report['error'] = $this->db->_error_number();
 	    $report['message'] = $this->db->_error_message();
 	    return $report;
-
 	}
 
+	function clear_company_sectors($id){
+		$this->db->where('company_id', $id);
+		$this->db->update('operates', array('active'=>'False'));
+		return $this->db->affected_rows();
+	}
+
+	function update_details($post)
+	{
+		
+		if($post['turnover'])
+		{
+			$this->db->set('company_id', $post['company_id']);
+			$this->db->set('turnover', $post['turnover']);
+			$this->db->insert('turnovers', $turnover);
+			$turnover_status = $this->db->affected_rows();
+		}
+		else
+		{
+			$turnover_status = 0;
+		}
+		
+
+			
+		$company = array(
+				'linkedin_id' => $post['linkedin_id']?$post['linkedin_id']:NULL,
+				'url' => $post['url']?$post['url']:NULL,
+				'updated_at' => date('Y-m-d H:i:s')
+			);
+		$this->db->where('id', $post['company_id']);
+		$this->db->update('companies', $company);
+
+		$company_status = $this->db->affected_rows();
+		// clear existing sectors to no active 
+		$result = $this->clear_company_sectors($post['company_id']);
+		
+		foreach ($post['sectors'] as $sector_id) {
+			$this->db->set('company_id', $post['company_id']);
+			$this->db->set('sector_id', $sector_id);  
+			$this->db->insert('operates'); 
+		}
+		return $this->db->affected_rows();
+	}
 
 	function insert_entry()
 	{

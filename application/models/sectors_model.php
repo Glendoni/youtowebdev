@@ -10,6 +10,7 @@ class Sectors_model extends CI_Model {
 	function get_all_in_array()
 	{
 		$this->db->select('id, name');
+		$this->db->order_by('name','asc');
 		$query = $this->db->get_where('sectors',array('display'=>'True'));
 
 		foreach($query->result() as $row)

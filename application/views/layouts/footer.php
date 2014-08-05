@@ -27,21 +27,70 @@
 
  	<script type="text/javascript">
  	$( document ).ready(function() {
- 	//  	$(".assign-to-form").submit(function() {
+ 		
+ 		$('.button-checkbox').each(function () {
 
-		//     var url = $(this).attr('action'); // the script where you handle the form input.
-		//     $.ajax({
-		//            type: "POST",
-		//            url: url,
-		//            data: $(this).serialize(), // serializes the form's elements.
-		//            success: function(data)
-		//            {
-		//                alert('success'); // show response from the php script.
-		//            }
-		//          });
+        // Settings
+        var $widget = $(this),
+            $button = $widget.find('button'),
+            $checkbox = $widget.find('input:checkbox'),
+            color = $button.data('color'),
+            settings = {
+                on: {
+                    icon: 'glyphicon glyphicon-check'
+                },
+                off: {
+                    icon: 'glyphicon glyphicon-unchecked'
+                }
+            };
 
-		//     return false; // avoid to execute the actual submit of the form.
-		// });
+        // Event Handlers
+        $button.on('click', function () {
+            $checkbox.prop('checked', !$checkbox.is(':checked'));
+            $checkbox.triggerHandler('change');
+            updateDisplay();
+        });
+        $checkbox.on('change', function () {
+            updateDisplay();
+        });
+
+        // Actions
+        function updateDisplay() {
+            var isChecked = $checkbox.is(':checked');
+
+            // Set the button's state
+            $button.data('state', (isChecked) ? "on" : "off");
+
+            // Set the button's icon
+            $button.find('.state-icon')
+                .removeClass()
+                .addClass('state-icon ' + settings[$button.data('state')].icon);
+
+            // Update the button's color
+            if (isChecked) {
+                $button
+                    .removeClass('btn-default')
+                    .addClass('btn-' + color + ' active');
+            }
+            else {
+                $button
+                    .removeClass('btn-' + color + ' active')
+                    .addClass('btn-default');
+            }
+        }
+
+	        // Initialization
+	        function init() {
+
+	            updateDisplay();
+
+	            // Inject the icon if applicable
+	            if ($button.find('.state-icon').length == 0) {
+	                $button.prepend('<i class="state-icon ' + settings[$button.data('state')].icon + '"></i> ');
+	            }
+	        }
+	        init();
+	    });
 
 		$('.assign-to-form button').click(function(e){
 			var btn = $(this);
@@ -59,6 +108,24 @@
 		 	    
 		 	  })
 		 	.always(function() { textbtn.text('Assigned to '+name );  l.stop(); btn.attr('disabled','disabled'); });
+
+		 	return false;
+		});
+
+		$('.submit_btn').click(function(e){
+			
+			var btn = $(this);
+			var form = btn.closest('form');
+			var url = form.attr('action');
+
+		 	e.preventDefault();
+		 	var l = Ladda.create(this);
+		 	l.start();
+		 	$.post(url, form.serialize(),
+		 	  function(response){
+		 	    
+		 	  })
+		 	.always(function() {  l.stop(); location.reload(); });
 
 		 	return false;
 		});

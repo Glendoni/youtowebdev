@@ -15,6 +15,77 @@
 		<?php endif; ?>
 	</ul>
 	<?php foreach ( $companies_chunk as $company): ?>
+	<div class="modal fade" id="editModal<?php echo $company->id; ?>" tabindex="-1" role="dialog" aria-labelledby="Edit <?php echo $company->name; ?>" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            	<?php $hidden = array('company_id' => $company->id , 'user_id' => $current_user['id'], 'page_number' => $current_page_number,'edit_company'=>'1' );
+					 echo form_open(site_url().'companies/edit', 'name="edit_company" class="edit_company" role="form"',$hidden); ?>
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myModalLabel">Edit <?php echo $company->name; ?></h4>
+                </div>
+                <div class="modal-body">
+						<div class="">
+		                    <div class=" form-group ">
+		                        <label for="turnover" class="control-label">Turnover</label>                            
+		                        <input type="text" name="turnover" value="<?php echo $company->turnover; ?>" id="turnover" maxlength="50" class="form-control">
+		                    </div>
+		                </div>
+		                <div class="">
+		                    <div class=" form-group ">
+		                        <label for="linkedin_id" class="control-label">Linkedin ID</label>                            
+		                        <input type="text" name="linkedin_id" value="<?php echo $company->linkedin_id; ?>" id="linkedin_id" maxlength="50" class="form-control">
+		                    </div>
+		                </div>
+		                <div class="">
+		                    <div class=" form-group ">
+		                        <label for="url" class="control-label">Website</label>                            
+		                        <input type="text" name="url" value="<?php echo $company->url; ?>" id="url" maxlength="50" class="form-control">
+		                    </div>
+		                </div>
+		                <div class="">
+			                <label for="url" class="control-label">Recruitment Type</label>
+			                <div class="tag-holder">  
+								<span class="button-checkbox" id="contract">
+							        <button type="button" class="btn btn-default" data-color="primary" id="contract"><i class="state-icon glyphicon glyphicon-unchecked"></i>&nbsp;Contract</button>
+									<input type="checkbox" name="contract" value="1" id="contract" class="hidden">
+								</span>
+								<span class="button-checkbox" id="contract">
+									<button type="button" class="btn btn-default" data-color="primary" id="permanent"><i class="state-icon glyphicon glyphicon-unchecked"></i>&nbsp;Permanent</button>
+									<input type="checkbox" name="perm" value="1" id="permanent" class="hidden">
+								</span>
+							</div>
+						</div>
+						<div>
+							<label for="url" class="control-label">Sectors</label>
+							<div class="tag-holder">
+
+							<?php 
+							$array_sectors = explode(',', $company->company_sectors_ids);
+							
+							foreach ($sectors_array as $key => $value): ?>
+								<span class="button-checkbox">
+							        <button type="button" class="btn " data-color="primary" >&nbsp;<?php echo $value; ?></button>
+							        <input type="checkbox" name="sectors[]" value="<?php echo $key; ?>" class="hidden" <?php echo in_array($key,$array_sectors)? 'checked': '' ; ?>  />
+							    </span>
+							<?php endforeach ?>
+							</div>
+						</div>
+					
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-block " data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-sm btn-primary btn-block ladda-button submit_btn" data-style="expand-right" data-size="1">
+			        	<span class="ladda-label"> Save changes </span>
+			    	</button>
+                    <!-- <button type="submit" class="btn btn-primary">Save changes</button> -->
+                </div>
+                <?php echo form_close(); ?>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
 	<div class="panel <?php if(isset($company->company_assign_to)): ?> panel-primary <?php else: ?> panel-default <?php endif; ?> ">
 		<?php if(isset($company->company_assign_to)): ?>
 		<div class="panel-heading text-center" >
@@ -23,8 +94,13 @@
 		<?php endif; ?>
 		<div class="panel-body">
 			<div class="col-md-12">
+				<div class="pull-right">
+					<button class="btn btn-outline btn-warning" data-toggle="modal" data-target="#editModal<?php echo $company->id; ?>">
+                        Edit
+                    </button>
+				</div>
 				<h3 class="name">
-					<a href="companies/company?id=<?php echo $company->id;?>">
+					<a href="<?php echo site_url();?>companies/company?id=<?php echo $company->id;?>">
 						<?php echo $company->name; ?>
 					</a>
 				</h3>
@@ -48,7 +124,7 @@
 
 			<!-- EMPLOYEES -->
 			<div class="col-md-3 centre"><small>Employees</small>
-				<h3 class="details"><?php  echo  ($company->emp_coun)? '<strong><span class="label label-info">'.$company->emp_count.'</span></strong>' : '<span class="label label-warning">Unknown</span>' ?> </h3>
+				<h3 class="details"><?php  echo  ($company->emp_count)? '<strong><span class="label label-info">'.$company->emp_count.'</span></strong>' : '<span class="label label-warning">Unknown</span>' ?> </h3>
 				<small>LinkedIn Connections</small>
 				<h3 class="details"><strong><span class="label label-info"><?php echo $company->company_connections ?></span> </strong></h3>
 
@@ -79,7 +155,7 @@
 				<?php else: ?>
 				<?php 
 				$hidden = array('company_id' => $company->id , 'user_id' => $current_user['id'], 'page_number' => $current_page_number );
-				echo form_open('companies/assignto',array('style' => 'margin-top: 5px;', 'name' => 'assignto', 'class'=>'assign-to-form'),$hidden); ?>
+				echo form_open(site_url().'companies/assignto',array('style' => 'margin-top: 5px;', 'name' => 'assignto', 'class'=>'assign-to-form'),$hidden); ?>
 				<button type="submit" assignto="<?php echo $current_user['name']; ?>" class="btn btn-sm btn-primary btn-block ladda-button" data-style="expand-right" data-size="1">
 			        <span class="ladda-label"> Assign </span>
 			    </button>
@@ -101,7 +177,7 @@
 				</thead>
 				<tbody>
 					<?php foreach ($company->mortgages as $mortgage):?>
-					<tr>
+					<tr <?php echo $mortgage['stage']==MORTGAGES_SATISFIED? 'class="danger"' : 'class="success"' ?> >
 						<td class="col-md-7" ><?php echo $mortgage['name']; ?></td>
 						<td class="col-md-3"><?php echo $mortgage['stage']; ?></td>
 						<td class="col-md-2"><?php echo $mortgage['eff_from']; ?></td>

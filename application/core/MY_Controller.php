@@ -24,8 +24,10 @@ class MY_Controller extends CI_Controller {
 		}
 
 		// Load User model for all the controllers
+		$this->load->model('Sectors_model');
 		$this->load->model('Users_model');
 		$this->load->helper('mobile');
+
 		// var_dump($this->session->all_userdata());
 
 		// try getting logged in user from session
@@ -40,6 +42,17 @@ class MY_Controller extends CI_Controller {
 			if($this->uri->segment(1)) redirect('/','location');
 		}
 
+
+		if($this->session->userdata('sectors_array'))
+		{
+			
+		}
+		else
+		{
+			$sectors_array = $this->Sectors_model->get_all_in_array();
+			asort($sectors_array);
+			$this->session->set_userdata('sectors_array',$sectors_array);
+		}
 		
 		//var_dump($this->session->all_userdata());
 	}
