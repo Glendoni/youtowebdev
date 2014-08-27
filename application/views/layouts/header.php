@@ -422,18 +422,16 @@
                                                 </div>
                                             </div>
                                             </div>
-
-                                            <?php echo form_submit('submit', 'Submit', 'class="btn btn-primary btn-block ladda-button"');?>
-                                        <?php echo form_close(); ?>
-                                            
                                         </div>
                                         <div class="panel-footer">
+                                            <input type="submit" class="loading-btn btn btn-primary btn-block " value="Submit" name="submit">
                                             <?php if (validation_errors()): ?>
                                             <div class="alert alert-danger" role="alert">
                                                 <?php echo validation_errors(); ?>
                                             </div>
                                             <?php endif; ?>
                                         </div>
+                                        <?php echo form_close(); ?>
                                     </div>
                                     
                                 </li>

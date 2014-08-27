@@ -130,6 +130,16 @@
 		 	return false;
 		});
 
+        
+          $('.loading-btn').click(function () {
+            var btn = $(this)
+            btn.button('loading')
+            // $.ajax(...).always(function () {
+            //   btn.button('reset')
+            // });
+          });
+
+
  	});
 
 

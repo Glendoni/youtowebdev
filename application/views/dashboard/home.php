@@ -2,6 +2,7 @@
     <div class="row">
         <h1 class="page-header">Dashboard</h1>
         <div class="col-md-4">
+        <?php /*
             <div class="panel panel-default">
                 <div class="panel-heading">
                     Search
@@ -98,21 +99,20 @@
                         </div>
                     </div>
                     </div>
-
-                    <?php echo form_submit('submit', 'Submit', 'class="btn btn-primary btn-block ladda-button"');?>
-                <?php echo form_close(); ?>
-                    
                 </div>
                 <div class="panel-footer">
+                <input type="submit" class="loading-btn btn btn-primary btn-block " value="Submit" name="submit">
                     <?php if (validation_errors()): ?>
                     <div class="alert alert-danger" role="alert">
                         <?php echo validation_errors(); ?>
                     </div>
                     <?php endif; ?>
                 </div>
+                <?php echo form_close(); ?>
             </div>
+            */?>
         </div>
-        
+        <?php /*
         <div class="col-lg-3 col-md-6">
             <div class="panel panel-primary">
                 <div class="panel-heading">
@@ -164,5 +164,5 @@
                 </a>
             </div>
         </div>
-
+        */ ?>
     </div>

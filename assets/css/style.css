@@ -10,3 +10,7 @@
 .page-results-list .panel-primary {
 	border-color: #ddd; 
 }
+
+#main_search > .form-row > .form-group {
+	padding:0px;
+} 

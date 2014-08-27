@@ -17,8 +17,8 @@ class Dashboard extends MY_Controller {
 		$this->clear_search_results();
 		// Getting all sectors 
 		$sectors_options = $this->session->userdata('sectors_array');
-		$sectors_options[0]='All';
 		asort($sectors_options);
+		$sectors_options = array(0=>'All') + $sectors_options;
 		// Add options
 		// var_dump($sectors_options);
 		// array_unshift($sectors_options,'All');
@@ -26,8 +26,8 @@ class Dashboard extends MY_Controller {
 		// die;
 		// Getting all providers
 		$providers_options = $this->Providers_model->get_all_in_array();
-		$providers_options[0]='All';
 		asort($providers_options);
+		$providers_options = array(0=>'All') + $providers_options;
 		// Add options
 		// array_unshift($providers_options,'All');
 

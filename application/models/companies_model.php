@@ -126,7 +126,7 @@ class Companies_model extends CI_Model {
 		$this->db->join('emp_counts','emp_counts.company_id = companies.id','left');
 		$this->db->join('mortgages','mortgages.company_id = companies.id','left');
 		$this->db->where('companies.active', 'True');
-		$this->db->order_by("companies.name", "asc");
+		
 
 		$this->db->join('turnovers','turnovers.company_id = companies.id','left');
 		// $this->db->select('turnovers.id as turnover_id');
@@ -182,42 +182,52 @@ class Companies_model extends CI_Model {
 		
 		//FILTER QUERY 
 
-		// Agency name 
+		// AGENCY NAME
 		if (isset($post['agency_name']) && strlen($post['agency_name'])) 
 		{
 			$this->db->like('companies.name', $post['agency_name']); 
+			$this->db->order_by("companies.name", "asc");
 		}
 
-		// Turnover
-		if(empty($post['turnover_from']) && !empty($post['turnover_to']))
-		{
-			$post['turnover_from'] = '0';
-			// $this->db->where('turnovers.turnover >', '0');
-			// $this->db->where('turnovers.turnover <', '100000000');
-			
-		}
+		// TURNOVER
+			// Defautl values
+			if(empty($post['turnover_from']) && !empty($post['turnover_to']))
+			{
+				$post['turnover_from'] = '0';
+			}
 
-		if(empty($post['turnover_to']) && !empty($post['turnover_from']))
-		{
-			$post['turnover_to'] = '100000000';
-			// $this->db->where('turnovers.turnover >', '0');
-			// $this->db->where('turnovers.turnover <', '100000000');
-			
-		}
-
+			if(empty($post['turnover_to']) && !empty($post['turnover_from']))
+			{
+				$post['turnover_to'] = '100000000';
+			}
+			// set from in query
 		if(isset($post['turnover_from']) && (!empty($post['turnover_from'])) ) 
 		{
 			$this->db->where('turnovers.turnover >', $post['turnover_from']);
 		}
-		
+			// set to in query
 		if(isset($post['turnover_to']) && (!empty($post['turnover_to'])) )
 		{
 			$this->db->where('turnovers.turnover <', $post['turnover_to']);
 		}
+			// order by turnover
+		if(isset($post['turnover_from']) || isset($post['turnover_to'])) )
+		{
+			$this->db->order_by("turnovers.turnover", "asc");
+		}
 
 
-		// Employees count 
-		
+		// EMPLOYEES COUNT
+			// Defautl values
+			if(empty($post['employees_from']) && !empty($post['employees_to']))
+			{
+				$post['employees_from'] = '0';
+			}
+
+			if(empty($post['employees_to']) && !empty($post['employees_from']))
+			{
+				$post['employees_to'] = '1000';
+			}
 		if(isset($post['employees_from']) && (!empty($post['employees_from'])) )
 		{
 			$this->db->where('emp_counts.count >', $post['employees_from']);
@@ -227,14 +237,25 @@ class Companies_model extends CI_Model {
 		{
 			$this->db->where('emp_counts.count <', $post['employees_to']);
 		}
-		
-		// if(empty($post['employees_from']) && empty($post['employees_to']))
-		// {
-		// 	$this->db->where('emp_counts.count >', '0');
-		// 	$this->db->where('emp_counts.count <', '20000');			
-		// }
 
-		// Company age
+		if(isset($post['employees_to']) || isset($post['employees_from'])) )
+		{
+			$this->db->order_by("emp_counts.count", "asc");
+		}
+		
+
+		// COMPANY AGE
+			// Defautl values
+			if(empty($post['company_age_from']) && !empty($post['company_age_to']))
+			{
+				$post['company_age_from'] = '0';
+			}
+
+			if(empty($post['company_age_to']) && !empty($post['company_age_from']))
+			{
+				$post['company_age_to'] = '10';
+			}
+		
 		if(isset($post['company_age_from']) && (!empty($post['company_age_from'])) )
 		{
 			$company_age_from = date("m-d-Y", strtotime("-".$post['company_age_from']." year"));
@@ -245,8 +266,13 @@ class Companies_model extends CI_Model {
 			$company_age_to = date("m-d-Y", strtotime("-".$post['company_age_to']." year"));
 			$this->db->where('companies.eff_to <=', $company_age_to);
 		}
+		if(isset($post['company_age_to']) || isset($post['company_age_from'])) )
+		{
+			$this->db->order_by("companies.eff_from", "asc");
+		}
 
-		// Sectors
+		// SECTORS
+
 		if( isset($post['sectors']) && (!in_array("0", $post['sectors'])) )
 		{	
 			$this->db->join('operates','operates.company_id = companies.id AND operates.active = True','left');
@@ -255,15 +281,18 @@ class Companies_model extends CI_Model {
 			array_push($group_by,"operates.id"); 
 		}
 
-		// Mortgages
-		if (empty($post['mortgage_from']))
-		{
-			$post['mortgage_from'] = 0;
-		}
-		if (empty($post['mortgage_to']))
-		{
-			$post['mortgage_to'] = 365;
-		}
+		// MORTGAGES
+		// Defautl values
+			if(empty($post['mortgage_from']) && !empty($post['mortgage_to']))
+			{
+				$post['mortgage_from'] = 0;
+			}
+
+			if(empty($post['mortgage_to']) && !empty($post['mortgage_from']))
+			{
+				$post['mortgage_to'] = 365;
+			}
+
 		if (!empty($post['mortgage_to']) && !empty($post['mortgage_from']))
 		{
 			
