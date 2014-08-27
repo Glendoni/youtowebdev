@@ -211,7 +211,7 @@ class Companies_model extends CI_Model {
 			$this->db->where('turnovers.turnover <', $post['turnover_to']);
 		}
 			// order by turnover
-		if(isset($post['turnover_from']) || isset($post['turnover_to'])) )
+		if(isset($post['turnover_from']) || isset($post['turnover_to'])) 
 		{
 			$this->db->order_by("turnovers.turnover", "asc");
 		}
@@ -238,7 +238,7 @@ class Companies_model extends CI_Model {
 			$this->db->where('emp_counts.count <', $post['employees_to']);
 		}
 
-		if(isset($post['employees_to']) || isset($post['employees_from'])) )
+		if(isset($post['employees_to']) || isset($post['employees_from'])) 
 		{
 			$this->db->order_by("emp_counts.count", "asc");
 		}
@@ -248,12 +248,12 @@ class Companies_model extends CI_Model {
 			// Defautl values
 			if(empty($post['company_age_from']) && !empty($post['company_age_to']))
 			{
-				$post['company_age_from'] = '0';
+				$post['company_age_from'] = 0;
 			}
 
 			if(empty($post['company_age_to']) && !empty($post['company_age_from']))
 			{
-				$post['company_age_to'] = '10';
+				$post['company_age_to'] = 10;
 			}
 		
 		if(isset($post['company_age_from']) && (!empty($post['company_age_from'])) )
@@ -266,7 +266,7 @@ class Companies_model extends CI_Model {
 			$company_age_to = date("m-d-Y", strtotime("-".$post['company_age_to']." year"));
 			$this->db->where('companies.eff_to <=', $company_age_to);
 		}
-		if(isset($post['company_age_to']) || isset($post['company_age_from'])) )
+		if(isset($post['company_age_to']) || isset($post['company_age_from'])) 
 		{
 			$this->db->order_by("companies.eff_from", "asc");
 		}
@@ -304,6 +304,7 @@ class Companies_model extends CI_Model {
 			array_push($group_by,"mortgages.id");
 			$this->db->order_by('(EXTRACT (doy from mortgages.eff_from) - EXTRACT (doy from now()))','asc');
 		}
+		
 
 		// Providers
 		if(isset($post['providers']) && (!empty($post['providers'])) )
