@@ -213,6 +213,7 @@ class Companies_model extends CI_Model {
 			// order by turnover
 		if(isset($post['turnover_from']) || isset($post['turnover_to'])) 
 		{
+			array_push($group_by,"turnovers.turnover");
 			$this->db->order_by("turnovers.turnover", "asc");
 		}
 
@@ -240,6 +241,7 @@ class Companies_model extends CI_Model {
 
 		if(isset($post['employees_to']) || isset($post['employees_from'])) 
 		{
+			array_push($group_by,"emp_counts.count");
 			$this->db->order_by("emp_counts.count", "asc");
 		}
 		
@@ -268,6 +270,7 @@ class Companies_model extends CI_Model {
 		}
 		if(isset($post['company_age_to']) || isset($post['company_age_from'])) 
 		{
+			array_push($group_by,"companies.eff_from");
 			$this->db->order_by("companies.eff_from", "asc");
 		}
 
@@ -304,7 +307,7 @@ class Companies_model extends CI_Model {
 			array_push($group_by,"mortgages.id");
 			$this->db->order_by('(EXTRACT (doy from mortgages.eff_from) - EXTRACT (doy from now()))','asc');
 		}
-		
+
 
 		// Providers
 		if(isset($post['providers']) && (!empty($post['providers'])) )
