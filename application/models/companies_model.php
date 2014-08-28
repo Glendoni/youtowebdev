@@ -126,8 +126,8 @@ class Companies_model extends CI_Model {
 		$this->db->join('emp_counts','emp_counts.company_id = companies.id','left');
 		$this->db->join('mortgages','mortgages.company_id = companies.id','left');
 		$this->db->where('companies.active', 'True');
-		
-
+		$this->db->order_by("companies.name", "asc");
+		// $this->db->limit(1000);
 		$this->db->join('turnovers','turnovers.company_id = companies.id','left');
 		// $this->db->select('turnovers.id as turnover_id');
 		

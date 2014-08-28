@@ -24,6 +24,8 @@
 
     <script src="<?php echo asset_url();?>/js/ladda.min.js"></script>
 
+    <!-- <script src="<?php echo asset_url();?>/js/pace.min.js"></script> -->
+
 
  	<script type="text/javascript">
  	$( document ).ready(function() {
@@ -92,7 +94,7 @@
 	        init();
 	    });
 
-		$('.assign-to-form button').click(function(e){
+		$('.assign-to-form .ladda-button').click(function(e){
 			var btn = $(this);
 			var form = btn.closest('form');
 			var url = form.attr('action');
@@ -112,20 +114,36 @@
 		 	return false;
 		});
 
+        $('.edit-btn').click(function(e){
+            // $(this).button('loading');
+        });
+
 		$('.submit_btn').click(function(e){
 			
 			var btn = $(this);
 			var form = btn.closest('form');
 			var url = form.attr('action');
+            var edi_btn_id = btn.attr('edit-btn');
+            var edit_btn = $('#'+edi_btn_id);
+            edit_btn.button('loading');
 
 		 	e.preventDefault();
-		 	var l = Ladda.create(this);
-		 	l.start();
+            btn.button('loading');
 		 	$.post(url, form.serialize(),
 		 	  function(response){
 		 	    
 		 	  })
-		 	.always(function() {  l.stop(); location.reload(); });
+		 	.always(function() {  
+                btn.removeClass('btn-primary').addClass('btn-success').text('Saved'); 
+
+                setTimeout(function () {
+                   btn.siblings().trigger('click');
+                   btn.button('reset');
+                   edit_btn.removeClass('disabled').removeAttr('disabled');
+                   btn.removeClass('btn-success').addClass('btn-primary');
+                   location.reload(); 
+                }, 1000);
+            });
 
 		 	return false;
 		});

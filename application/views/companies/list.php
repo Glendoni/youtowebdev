@@ -1,5 +1,5 @@
 <div class="row page-results-list">
-	<h1 class="page-header">Companies<small>(<?php echo $companies_count; ?>)</small></h1>
+	<h1 class="page-header">Companies<small>(<?php echo $companies_count; ?>)</small> <buttom class="btn btn-success pull-right"><span class="glyphicon glyphicon-floppy-save"></span> Save results</buttom></h1>
 	<p >Page <?php echo $current_page_number; ?> of <?php echo $page_total ?></p>
 	<ul class="pager">
 		<?php if($previous_page_number): ?>
@@ -76,10 +76,11 @@
 					
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default btn-block " data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-sm btn-primary btn-block ladda-button submit_btn" data-style="expand-right" data-size="1">
+                	<button type="submit" class="btn btn-sm btn-primary btn-block ladda-button submit_btn" edit-btn="editbtn<?php echo $company->id; ?>" data-style="expand-right" data-size="1">
 			        	<span class="ladda-label"> Save changes </span>
 			    	</button>
+                    <button type="button" class="btn btn-default btn-block " data-dismiss="modal">Close</button>
+                    
                     <!-- <button type="submit" class="btn btn-primary">Save changes</button> -->
                 </div>
                 <?php echo form_close(); ?>
@@ -97,9 +98,10 @@
 		<div class="panel-body">
 			<div class="col-md-12">
 				<div class="pull-right">
-					<button class="btn btn-outline btn-warning" data-toggle="modal" data-target="#editModal<?php echo $company->id; ?>">
-                        Edit
+					<button class="btn btn-warning ladda-button edit-btn" data-toggle="modal" id="editbtn<?php echo $company->id; ?>" data-style="expand-right" data-size="1" data-target="#editModal<?php echo $company->id; ?>">
+                        <span class="ladda-label"> Edit </span>
                     </button>
+                    
 				</div>
 				<h3 class="name">
 					<a href="<?php echo site_url();?>companies/company?id=<?php echo $company->id;?>">

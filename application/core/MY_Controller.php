@@ -55,6 +55,7 @@ class MY_Controller extends CI_Controller {
 		}
 		
 		//var_dump($this->session->all_userdata());
+		// var_dump($this->input->post());
 	}
 	protected function seve_current_search($post)
 	{

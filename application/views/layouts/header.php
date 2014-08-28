@@ -33,6 +33,8 @@
     <!-- BTN animation -->
     <link href="<?php echo asset_url();?>css/ladda.min.css" rel="stylesheet">
 
+    <!-- PAGE LOADING BAR 
+    <link href="<?php echo asset_url();?>css/pace.css" rel="stylesheet">-->
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -332,11 +334,11 @@
                                     <div class="panel panel-default">
                                         <div class="panel-body">
                                             <?php echo form_open('/companies', 'id="main_search" name="main_search" class="" role="form"'); ?>
-                                            <?php if ($this->input->post('main_search')): ?>
-                                            <div class="btn-group ">
-                                              <button type="button" class="btn btn-default btn-success "><span class="glyphicon glyphicon-save"> </span> Save</button>
-                                              <button  type="button" class="btn btn-default btn-danger" onclick="javascript:$('#main_search').trigger('reset');"><span class="glyphicon glyphicon-remove"></span> Clear</button>
-                                            </div>
+                                            <?php echo form_hidden('main_search','1');?>
+                                            <?php if ($_POST['main_search']): ?>
+                                                <a class="btn btn-link pull-right" href="<?php echo site_url();?>">
+                                                    <span class="glyphicon glyphicon-remove"></span> Clear fields
+                                                </a>
                                             <?php endif; ?>
                                             <div class='form-row'>
                                                 <div class="col-md-12 form-group ">
@@ -450,6 +452,11 @@
                             <a class="" href="<?php echo site_url();?>companies/refreshsearch"><i class="fa fa-refresh"></i> Refresh search</a>
                         </li>
                         <?php endif; ?>
+                        <li>
+                            <a href="#"><i class="glyphicon glyphicon-floppy-saved"></i> Saved results<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse">
+                            </ul>
+                        </li>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->

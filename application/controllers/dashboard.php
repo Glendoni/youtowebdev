@@ -20,7 +20,7 @@ class Dashboard extends MY_Controller {
 		asort($sectors_options);
 		$sectors_options = array(0=>'All') + $sectors_options;
 		// Add options
-		// var_dump($sectors_options);
+		
 		// array_unshift($sectors_options,'All');
 		// var_dump($sectors_options);
 		// die;
