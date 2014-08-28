@@ -13,9 +13,12 @@ class Companies extends MY_Controller {
 	{
 		$search_results_in_session = $this->session->userdata('companies');
 		$refresh_search_results = $this->session->flashdata('refresh');
+
 		if($this->input->post('submit') and !$refresh_search_results and !$ajax_refresh )
 		{
-			// var_dump($this->input->post());
+
+			var_dump($this->input->post());
+
 			$this->load->library('form_validation');
 			$this->form_validation->set_rules('agency_name', 'agency_name', 'xss_clean');
 			$this->form_validation->set_rules('turnover_from', 'turnover_from', 'xss_clean');
@@ -33,6 +36,7 @@ class Companies extends MY_Controller {
 			{	
 				// Result set to session and current search 
 				$this->seve_current_search($this->input->post());
+
 				$result = $this->Companies_model->search_companies($this->input->post());
 
 				if(empty($result))
@@ -70,7 +74,7 @@ class Companies extends MY_Controller {
 		if(empty($companies_array))
 		{
 			$this->set_message_error('No results return for query.');
-			redirect('/dashboard','refresh');
+			// redirect('/dashboard','refresh');
 		}
 		// get companies from recent result or get it from session
 		$companies_array_chunk = array_chunk($companies_array, RESULTS_PER_PAGE);
