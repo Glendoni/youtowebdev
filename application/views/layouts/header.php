@@ -332,12 +332,12 @@
                                     <div class="panel panel-default">
                                         <div class="panel-body">
                                             <?php echo form_open('/companies', 'id="main_search" name="main_search" class="" role="form"'); ?>
-                                            
+                                            <?php if ($this->input->post('main_search')): ?>
                                             <div class="btn-group ">
                                               <button type="button" class="btn btn-default btn-success "><span class="glyphicon glyphicon-save"> </span> Save</button>
                                               <button  type="button" class="btn btn-default btn-danger" onclick="javascript:$('#main_search').trigger('reset');"><span class="glyphicon glyphicon-remove"></span> Clear</button>
                                             </div>
-                                            
+                                            <?php endif; ?>
                                             <div class='form-row'>
                                                 <div class="col-md-12 form-group ">
                                                     <?php  echo form_label('Agency Name', 'agency_name', array('class'=>'control-label')); ?>

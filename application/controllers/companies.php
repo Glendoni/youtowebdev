@@ -17,7 +17,7 @@ class Companies extends MY_Controller {
 		if($this->input->post('submit') and !$refresh_search_results and !$ajax_refresh )
 		{
 
-			var_dump($this->input->post());
+			// var_dump($this->input->post());
 
 			$this->load->library('form_validation');
 			$this->form_validation->set_rules('agency_name', 'agency_name', 'xss_clean');
@@ -74,7 +74,7 @@ class Companies extends MY_Controller {
 		if(empty($companies_array))
 		{
 			$this->set_message_error('No results return for query.');
-			// redirect('/dashboard','refresh');
+			redirect('/dashboard','refresh');
 		}
 		// get companies from recent result or get it from session
 		$companies_array_chunk = array_chunk($companies_array, RESULTS_PER_PAGE);
