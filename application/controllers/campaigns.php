@@ -57,6 +57,11 @@ class Campaigns extends MY_Controller {
 		if($this->input->get('id'))
 		{
 			$campaign = $this->Campaigns_model->get_campaign_by_id($this->input->get('id'));
+			
+			$post = unserialize($campaign[0]->criteria);
+			$this->refresh_search_results();
+			$this->session->set_userdata('current_search',$post);
+			redirect('/companies');
 		}
 		else
 		{

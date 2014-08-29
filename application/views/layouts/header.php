@@ -333,7 +333,11 @@
                                 <li>
                                     <div class="panel panel-default">
                                         <div class="panel-body">
-                                            <?php echo form_open('/companies', 'id="main_search" name="main_search" class="" role="form"'); ?>
+                                            <div class="alert alert-warning alert-dismissible" style="display:none;" id="empty_form_error" role="alert">
+                                              <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                              <strong>Warning!</strong> Please enter a value
+                                            </div>
+                                            <?php echo form_open('/companies', 'id="main_search" novalidate="novalidate" name="main_search" class="" role="form"'); ?>
                                             <?php echo form_hidden('main_search','1');?>
                                             <?php if ($_POST['main_search']): ?>
                                                 <a class="btn btn-link pull-right" href="<?php echo site_url();?>">
@@ -451,9 +455,17 @@
                         </li>
                         <?php endif; ?>
                         <li>
-                            <a href="#"><i class="glyphicon glyphicon-floppy-saved"></i> Saved results <span class="fa arrow"></span></a>
+                            <a href="#"><i class="glyphicon glyphicon-floppy-saved"></i> Saved results <span class="badge"><?php echo count($own_campaigns); ?></span><span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level collapse">
                             <?php foreach ($own_campaigns as $campaign):?>
+                                <li><a href="<?php echo site_url();?>campaigns/display/?id=<?php echo $campaign->id; ?>"><?php echo $campaign->name; ?></a></li>
+                            <?php endforeach; ?>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><span class="glyphicon glyphicon-globe"></span> Shared searches <span class="badge"><?php echo count($shared_campaigns); ?></span><span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse">
+                            <?php foreach ($shared_campaigns as $campaign):?>
                                 <li><a href="<?php echo site_url();?>campaigns/display/?id=<?php echo $campaign->id; ?>"><?php echo $campaign->name; ?></a></li>
                             <?php endforeach; ?>
                             </ul>

@@ -11,7 +11,6 @@ class Campaigns_model extends CI_Model {
 		if($user_id) $this->db->where('user_id !=', $user_id);
 		$this->db->order_by("name", "desc"); 
 		$query = $this->db->get();
-
 		return $query->result();
 	}
 

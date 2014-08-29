@@ -25,7 +25,7 @@
     <script src="<?php echo asset_url();?>/js/ladda.min.js"></script>
 
     <!-- <script src="<?php echo asset_url();?>/js/pace.min.js"></script> -->
-
+    <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
 
  	<script type="text/javascript">
  	$( document ).ready(function() {
@@ -114,9 +114,7 @@
 		 	return false;
 		});
 
-        $('.edit-btn').click(function(e){
-            // $(this).button('loading');
-        });
+        
 
 		$('.submit_btn').click(function(e){
 			
@@ -141,7 +139,7 @@
                    btn.button('reset');
                    edit_btn.removeClass('disabled').removeAttr('disabled');
                    btn.removeClass('btn-success').addClass('btn-primary');
-                   location.reload(); 
+                   window.location.href = window.location.href + "?refreshed";
                 }, 1000);
             });
 
@@ -157,9 +155,22 @@
             // });
           });
 
+          // Setup form validation on the #register-form element
+            $( "#main_search" ).submit(function( event ) {        
+                if( $( "#main_search input:blank" ).length < 9 ){
+                    return true;
+                }else{
+                    event.preventDefault();
+                    $('#empty_form_error').show();
+                    $('.loading-btn').button('reset');
+                    return false;
+                }
+            });
+
 
  	});
 
+// { ["main_search"]=> string(1) "1" ["agency_name"]=> string(0) "" ["turnover_from"]=> string(0) "" ["turnover_to"]=> string(0) "" ["employees_from"]=> string(0) "" ["employees_to"]=> string(0) "" ["company_age_from"]=> string(0) "" ["company_age_to"]=> string(0) "" ["sectors"]=> array(1) { [0]=> string(1) "0" } ["providers"]=> string(1) "0" ["mortgage_from"]=> string(0) "" ["mortgage_to"]=> string(0) "" ["submit"]=> string(10) "loading..." } 
 
  	</script>
  <?php if(ENVIRONMENT == 'development'): ?>

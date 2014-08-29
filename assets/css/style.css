@@ -14,3 +14,7 @@
 #main_search > .form-row > .form-group {
 	padding:0px;
 } 
+
+.sidebar ul li a {
+	color:#000;
+}
