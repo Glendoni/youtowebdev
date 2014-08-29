@@ -6,7 +6,6 @@ class Companies extends MY_Controller {
 	{
 		parent::__construct();
 		$this->load->model('Companies_model');
-
 	}
 	
 	public function index($ajax_refresh = False) 

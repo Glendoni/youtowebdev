@@ -24,6 +24,7 @@ class MY_Controller extends CI_Controller {
 		}
 
 		// Load User model for all the controllers
+		$this->load->model('Campaigns_model');
 		$this->load->model('Sectors_model');
 		$this->load->model('Users_model');
 		$this->load->helper('mobile');
@@ -54,19 +55,36 @@ class MY_Controller extends CI_Controller {
 			$this->session->set_userdata('sectors_array',$sectors_array);
 		}
 		
+		// SET ALL SAVED CAMPAIGNS
+		$this->data['shared_campaigns'] = $this->Campaigns_model->get_all_shared_campaigns($this->get_current_user_id());
+		$this->data['own_campaigns'] = $this->Campaigns_model->get_campaigns_for_user($this->get_current_user_id());
+		// var_dump($this->data['own_campaigns']);
 		//var_dump($this->session->all_userdata());
 		// var_dump($this->input->post());
 	}
+
 	protected function seve_current_search($post)
 	{
 		$this->session->set_userdata('current_search',$post);
 	}
+
+	protected function get_current_user_id()
+	{
+		$session = $this->session->userdata('logged_in');
+		return $session['user_id'];
+	}
+
+	protected function get_current_search()
+	{
+		return $this->session->userdata('current_search');
+	}
+
 	protected function refresh_search_results()
 	{
 		$this->session->set_flashdata('refresh', TRUE);
 	}
 
-	protected function set_message_suceess($message)
+	protected function set_message_success($message)
 	{
 		$this->session->set_flashdata('message', $message);
 		$this->session->set_flashdata('message_type', 'success');

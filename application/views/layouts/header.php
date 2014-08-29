@@ -441,9 +441,7 @@
                                         </div>
                                         <?php echo form_close(); ?>
                                     </div>
-                                    
                                 </li>
-                                
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
@@ -453,8 +451,11 @@
                         </li>
                         <?php endif; ?>
                         <li>
-                            <a href="#"><i class="glyphicon glyphicon-floppy-saved"></i> Saved results<span class="fa arrow"></span></a>
+                            <a href="#"><i class="glyphicon glyphicon-floppy-saved"></i> Saved results <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level collapse">
+                            <?php foreach ($own_campaigns as $campaign):?>
+                                <li><a href="<?php echo site_url();?>campaigns/display/?id=<?php echo $campaign->id; ?>"><?php echo $campaign->name; ?></a></li>
+                            <?php endforeach; ?>
                             </ul>
                         </li>
                     </ul>

@@ -1,5 +1,42 @@
 <div class="row page-results-list">
-	<h1 class="page-header">Companies<small>(<?php echo $companies_count; ?>)</small> <buttom class="btn btn-success pull-right"><span class="glyphicon glyphicon-floppy-save"></span> Save results</buttom></h1>
+	<h1 class="page-header">Companies<small>(<?php echo $companies_count; ?>)</small> 
+	
+		<buttom class="btn btn-primary pull-right" data-toggle="modal" data-target="#createcampaign" >
+		<span class="glyphicon glyphicon-floppy-save"></span> Save results</buttom>
+		<div class="modal fade" id="createcampaign" tabindex="-1" role="dialog" aria-labelledby="Create Campaign" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+					<span aria-hidden="true">&times;</span>
+					<span class="sr-only">Close</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Save Results</h4>
+				</div>
+				<?php echo form_open(site_url().'campaigns/create', 'name="create_campaign" class="create_campaign" role="form"'); ?>
+				<div class="modal-body">
+			     	<div class="form-group">
+						<input type="text" name="name" class="form-control" id="name" placeholder="Name">
+				    </div>
+					<div class="btn-group" data-toggle="buttons">
+						<label class="btn btn-primary active">
+							<input type="radio" name="private" id="sharedfalse" checked> private
+						</label>
+						<label class="btn btn-primary">
+							<input type="radio" name="public" id="sharedtrue">  public
+						</label>
+					</div>
+		      	</div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        <button type="submit" class="btn btn-primary">Save changes</button>
+		      </div>
+		      <?php echo form_close(); ?>
+		    </div>
+		  </div>
+		</div>
+	
+	</h1>
 	<p >Page <?php echo $current_page_number; ?> of <?php echo $page_total ?></p>
 	<ul class="pager">
 		<?php if($previous_page_number): ?>
