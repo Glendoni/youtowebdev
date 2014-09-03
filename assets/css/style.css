@@ -28,3 +28,7 @@
 .toggle-btn-group .btn{
 	background: #ccc;
 }
+
+.nav>li>a {
+	color:#000;
+}
