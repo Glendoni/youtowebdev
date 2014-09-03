@@ -29,6 +29,7 @@ class Campaigns extends MY_Controller {
 		{
 			$shared = 'True';
 		}
+		
 		$user_id = $this->get_current_user_id();
 		$current_search = $this->get_current_search();
 

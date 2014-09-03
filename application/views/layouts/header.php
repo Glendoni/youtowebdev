@@ -351,53 +351,64 @@
 
                                                 </div>
                                             </div>
-                                            <div class='form-row'>
+                                             <div class='form-row'>
                                              <div class="col-md-6 form-group"> 
-                                                <?php  echo form_label('Turnover', 'turnover_from', array('class'=>'control-label')); ?>
+                                                <?php  echo form_label('Age ', 'company_age_from', array('class'=>'control-label')); ?>
                                                 <div class="input-group "> 
                                                 <!-- <div class="input-group-addon">From</div> -->
-                                                <?php echo form_input(array('name' => 'turnover_from', 'id' => 'turnover_from', 'maxlength' => '100','class'=>'form-control','placeholder'=>'From'), set_value('turnover_from',''));?>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 form-group"> 
-                                                <?php  echo form_label(' _', 'turnover_to', array('class'=>'control-label','style'=>'color:white;')); ?>
-                                                <div class="input-group" style='margin-left:5px;'> 
-                                                <!-- <div class="input-group-addon">To</div> -->
-                                                <?php echo form_input(array('name' => 'turnover_to', 'id' => 'turnover_to', 'maxlength' => '100','class'=>'form-control','placeholder'=>'To'), set_value('turnover_to',''));?>
-                                                </div>
-                                            </div>
-                                            </div>
-
-                                            <div class='form-row'>
-                                             <div class="col-md-6 form-group"> 
-                                                <?php  echo form_label('Employees', 'employees_from', array('class'=>'control-label')); ?>
-                                                <div class="input-group "> 
-                                                <!-- <div class="input-group-addon">From</div> -->
-                                                <?php echo form_input(array('name' => 'employees_from', 'id' => 'employees_from', 'maxlength' => '100','class'=>'form-control','placeholder'=>'From'), set_value('employees_from',''));?>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 form-group"> 
-                                                <?php  echo form_label(' _', 'employees_to', array('class'=>'control-label','style'=>'color:white;')); ?>
-                                                <div class="input-group" style='margin-left:5px;'> 
-                                                <!-- <div class="input-group-addon">To</div> -->
-                                                <?php echo form_input(array('name' => 'employees_to', 'id' => 'employees_to', 'maxlength' => '100','class'=>'form-control','placeholder'=>'To'), set_value('employees_to',''));?>
-                                                </div>
-                                            </div>
-                                            </div>
-
-                                            <div class='form-row'>
-                                             <div class="col-md-6 form-group"> 
-                                                <?php  echo form_label('Age', 'company_age_from', array('class'=>'control-label')); ?>
-                                                <div class="input-group "> 
-                                                <!-- <div class="input-group-addon">From</div> -->
-                                                <?php echo form_input(array('name' => 'company_age_from', 'id' => 'company_age_from', 'maxlength' => '100','class'=>'form-control','placeholder'=>'From'), set_value('company_age_from',''));?>
+                                                <?php echo form_input(array('name' => 'company_age_from', 'id' => 'company_age_from', 'maxlength' => '100','class'=>'form-control','placeholder'=>'from year'), set_value('company_age_from',''));?>
                                                 </div>
                                             </div>
                                             <div class="col-md-6 form-group"> 
                                                 <?php  echo form_label(' _', 'company_age_to', array('class'=>'control-label','style'=>'color:white;')); ?>
                                                 <div class="input-group" style='margin-left:5px;'> 
                                                 <!-- <div class="input-group-addon">To</div> -->
-                                                <?php echo form_input(array('name' => 'company_age_to', 'id' => 'company_age_to', 'maxlength' => '100','class'=>'form-control','placeholder'=>'To'), set_value('company_age_to',''));?>
+                                                <?php echo form_input(array('name' => 'company_age_to', 'id' => 'company_age_to', 'maxlength' => '100','class'=>'form-control','placeholder'=>'to year'), set_value('company_age_to',''));?>
+                                                </div>
+                                            </div>
+                                            </div>
+
+                                            <div class='form-row'>
+                                             <div class="col-md-6 form-group"> 
+                                                <?php  echo form_label('Turnover (£)', 'turnover_from', array('class'=>'control-label')); ?>
+                                                <div class="input-group "> 
+                                                <!-- <div class="input-group-addon">From</div> -->
+                                                <?php echo form_input(array('name' => 'turnover_from', 'id' => 'turnover_from', 'maxlength' => '100','class'=>'form-control','placeholder'=>'0'), set_value('turnover_from',''));?>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 form-group"> 
+                                                <?php  echo form_label(' _', 'turnover_to', array('class'=>'control-label','style'=>'color:white;')); ?>
+                                                <div class="input-group" style='margin-left:5px;'> 
+                                                <!-- <div class="input-group-addon">To</div> -->
+                                                <?php echo form_input(array('name' => 'turnover_to', 'id' => 'turnover_to', 'maxlength' => '100','class'=>'form-control','placeholder'=>'10000'), set_value('turnover_to',''));?>
+                                                </div>
+                                            </div>
+                                            </div>
+
+                                                                                      
+                                            
+                                             <div class='form-row'>
+                                                <div class="col-md-12 form-group">
+                                                <?php
+                                                echo form_label('Mortgage provider', 'providers');
+                                                echo form_dropdown('providers', $providers_options, $providers_default,'class="form-control"');
+                                                ?>
+                                             </div>
+                                            </div>
+
+                                            <div class='form-row'>
+                                             <div class="col-md-6 form-group"> 
+                                                <?php  echo form_label('Anniversary', 'mortgage_from', array('class'=>'control-label')); ?>
+                                                <div class="input-group "> 
+                                                <!-- <div class="input-group-addon">From</div> -->
+                                                <?php echo form_input(array('name' => 'mortgage_from', 'id' => 'mortgage_from', 'maxlength' => '100','class'=>'form-control','placeholder'=>'0'), set_value('mortgage_from',''));?>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 form-group"> 
+                                                <?php  echo form_label(' _', 'mortgage_to', array('class'=>'control-label','style'=>'color:white;')); ?>
+                                                <div class="input-group" style='margin-left:5px;'> 
+                                                <!-- <div class="input-group-addon">To</div> -->
+                                                <?php echo form_input(array('name' => 'mortgage_to', 'id' => 'mortgage_to', 'maxlength' => '100','class'=>'form-control','placeholder'=>'100'), set_value('mortgage_to',''));?>
                                                 </div>
                                             </div>
                                             </div>
@@ -409,34 +420,25 @@
                                                 ?>
                                                 </div>
                                             </div>
-                                             <div class='form-row'>
-                                                <div class="col-md-12 form-group">
-                                                <?php
-                                                echo form_label('Current provider', 'providers');
-                                                echo form_dropdown('providers', $providers_options, $providers_default,'class="form-control"');
-                                                ?>
-                                             </div>
-                                            </div>
-
                                             <div class='form-row'>
                                              <div class="col-md-6 form-group"> 
-                                                <?php  echo form_label('Anniversary', 'mortgage_from', array('class'=>'control-label')); ?>
+                                                <?php  echo form_label('Employees ', 'employees_from', array('class'=>'control-label')); ?>
                                                 <div class="input-group "> 
                                                 <!-- <div class="input-group-addon">From</div> -->
-                                                <?php echo form_input(array('name' => 'mortgage_from', 'id' => 'mortgage_from', 'maxlength' => '100','class'=>'form-control','placeholder'=>'From'), set_value('mortgage_from',''));?>
+                                                <?php echo form_input(array('name' => 'employees_from', 'id' => 'employees_from', 'maxlength' => '100','class'=>'form-control','placeholder'=>'0'), set_value('employees_from',''));?>
                                                 </div>
                                             </div>
                                             <div class="col-md-6 form-group"> 
-                                                <?php  echo form_label(' _', 'mortgage_to', array('class'=>'control-label','style'=>'color:white;')); ?>
+                                                <?php  echo form_label(' _', 'employees_to', array('class'=>'control-label','style'=>'color:white;')); ?>
                                                 <div class="input-group" style='margin-left:5px;'> 
                                                 <!-- <div class="input-group-addon">To</div> -->
-                                                <?php echo form_input(array('name' => 'mortgage_to', 'id' => 'mortgage_to', 'maxlength' => '100','class'=>'form-control','placeholder'=>'To'), set_value('mortgage_to',''));?>
+                                                <?php echo form_input(array('name' => 'employees_to', 'id' => 'employees_to', 'maxlength' => '100','class'=>'form-control','placeholder'=>'100'), set_value('employees_to',''));?>
                                                 </div>
                                             </div>
                                             </div>
                                         </div>
                                         <div class="panel-footer">
-                                            <input type="submit" class="loading-btn btn btn-primary btn-block " value="Submit" name="submit">
+                                            <input type="submit" class="loading-btn btn btn-primary btn-block " value="Search" name="submit">
                                             <?php if (validation_errors()): ?>
                                             <div class="alert alert-danger" role="alert">
                                                 <?php echo validation_errors(); ?>
@@ -455,7 +457,7 @@
                         </li>
                         <?php endif; ?>
                         <li>
-                            <a href="#"><i class="glyphicon glyphicon-floppy-saved"></i> Saved results <span class="badge"><?php echo count($own_campaigns); ?></span><span class="fa arrow"></span></a>
+                            <a href="#"><i class="glyphicon glyphicon-floppy-saved"></i> Saved searches <span class="badge"><?php echo count($own_campaigns); ?></span><span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level collapse">
                             <?php foreach ($own_campaigns as $campaign):?>
                                 <li><a href="<?php echo site_url();?>campaigns/display/?id=<?php echo $campaign->id; ?>"><?php echo $campaign->name; ?></a></li>

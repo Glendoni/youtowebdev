@@ -30,7 +30,8 @@ class Companies_model extends CI_Model {
 		$this->db->select("(SELECT count(*) FROM connections C,employees E WHERE E.company_id = companies.id AND C.employee_id = E.id ) as company_connections", FALSE, FALSE);
 
 		// Assign to
-		$this->db->select("(SELECT Ad.name FROM users Ad WHERE Ad.id = companies.user_id ) as company_assign_to", FALSE, FALSE);
+		$this->db->select("(SELECT Ad.name FROM users Ad WHERE Ad.id = companies.user_id ) as company_assigned_to", FALSE, FALSE);
+		$this->db->select("(SELECT Ad.id FROM users Ad WHERE Ad.id = companies.user_id ) as company_assigned_to_id", FALSE, FALSE);
 
 		// Build query 
 		$query = $this->db->get();
@@ -59,15 +60,15 @@ class Companies_model extends CI_Model {
 			$companies->result_object[$key]->mortgages = $mortgages2;
 
 			// Check for assign to
-			$assign_to = $company->company_assign_to;
-			if(!empty($assign_to))
-			{
-				$names = explode(" ", $assign_to); 
-				$initials = $names[0][0].$names[1][0];
-				$to_upper = strtoupper($initials);
-				// Set to array
-				$companies->result_object[$key]->company_assign_to = $to_upper;
-			}
+			// $assign_to = $company->company_assigned_to;
+			// if(!empty($assign_to))
+			// {
+			// 	$names = explode(" ", $assign_to); 
+			// 	$initials = $names[0][0].$names[1][0];
+			// 	$to_upper = strtoupper($initials);
+			// 	// Set to array
+			// 	$companies->result_object[$key]->company_assign_to = $to_upper;
+			// }
 
 			$this->db->select('turnovers.turnover');
 			$this->db->from('turnovers');
@@ -111,11 +112,6 @@ class Companies_model extends CI_Model {
 	// 	return $query->result();
 	// }
 
-	function special_query()
-	{
-		$query = $this->db->query('');
-		return $query->result();
-	}
 
 	function search_companies($post,$company_id = False)
 	{
@@ -150,8 +146,8 @@ class Companies_model extends CI_Model {
 		// $this->db->select("(SELECT ARRAY['CM.id', 'CM.name'] FROM campaigns CM,targets TA WHERE TA.company_id = companies.id AND TA.campaign_id = CM.id ) as company_campaigns", FALSE, FALSE);
 
 		// Assign to
-		$this->db->select("(SELECT Ad.name FROM users Ad WHERE Ad.id = companies.user_id ) as company_assign_to", FALSE, FALSE);
-
+		$this->db->select("(SELECT Ad.name FROM users Ad WHERE Ad.id = companies.user_id ) as company_assigned_to", FALSE, FALSE);
+		$this->db->select("(SELECT Ad.id FROM users Ad WHERE Ad.id = companies.user_id ) as company_assigned_to_id", FALSE, FALSE);
 	
 		// Group by variable to be set during filtering 
 		$group_by = array('companies.id',
@@ -177,7 +173,7 @@ class Companies_model extends CI_Model {
 							'emp_count',
 							'company_sectors',
 							'company_connections',
-							'company_assign_to'
+							'company_assigned_to'
 							);
 		
 		//FILTER QUERY 
@@ -250,28 +246,28 @@ class Companies_model extends CI_Model {
 			// Defautl values
 			if(empty($post['company_age_from']) && !empty($post['company_age_to']))
 			{
-				$post['company_age_from'] = 0;
+				$post['company_age_from'] = 1;
 			}
 
 			if(empty($post['company_age_to']) && !empty($post['company_age_from']))
 			{
-				$post['company_age_to'] = 10;
+				$post['company_age_to'] = 4;
 			}
 		
 		if(isset($post['company_age_from']) && (!empty($post['company_age_from'])) )
 		{
 			$company_age_from = date("m-d-Y", strtotime("-".$post['company_age_from']." year"));
-			$this->db->where('companies.eff_from >=', $company_age_from);
+			$this->db->where('companies.eff_from <=', $company_age_from);
 		}
 		if(isset($post['company_age_to']) && (!empty($post['company_age_to'])) )
 		{
 			$company_age_to = date("m-d-Y", strtotime("-".$post['company_age_to']." year"));
-			$this->db->where('companies.eff_to <=', $company_age_to);
+			$this->db->where('companies.eff_from >=', $company_age_to);
 		}
 		if(isset($post['company_age_to']) || isset($post['company_age_from'])) 
 		{
-			array_push($group_by,"companies.eff_from");
-			$this->db->order_by("companies.eff_from", "asc");
+			// array_push($group_by,"companies.eff_from");
+			$this->db->order_by("companies.eff_from", "desc");
 		}
 
 		// SECTORS
@@ -341,6 +337,7 @@ class Companies_model extends CI_Model {
 			$this->db->where('mortgages.company_id',$company->id);
 			$this->db->join('providers','providers.id = mortgages.provider_id','left');
 			$this->db->group_by(array('providers.name', 'mortgages.stage' , 'mortgages.eff_from'));
+			$this->db->order_by('mortgages.stage');
 			$this->db->order_by('mortgages.eff_from');
 			$mortgages = $this->db->get(); 
 
@@ -352,15 +349,15 @@ class Companies_model extends CI_Model {
 			$companies->result_object[$key]->mortgages = $mortgages2;
 
 			// Check for assign to
-			$assign_to = $company->company_assign_to;
-			if(!empty($assign_to))
-			{
-				$names = explode(" ", $assign_to); 
-				$initials = $names[0][0].$names[1][0];
-				$to_upper = strtoupper($initials);
-				// Set to array
-				$companies->result_object[$key]->company_assign_to = $to_upper;
-			}
+			// $assign_to = $company->company_assign_to;
+			// if(!empty($assign_to))
+			// {
+			// 	$names = explode(" ", $assign_to); 
+			// 	$initials = $names[0][0].$names[1][0];
+			// 	$to_upper = strtoupper($initials);
+			// 	// Set to array
+			// 	$companies->result_object[$key]->company_assign_to = $to_upper;
+			// }
 		}
 		
 		return  $companies;
@@ -370,6 +367,20 @@ class Companies_model extends CI_Model {
 	{
 		$data = array(
                'user_id' => $user_id
+            );
+
+		$this->db->update('companies', $data, array('id' => $company_id));
+
+	    $report = array();
+	    $report['error'] = $this->db->_error_number();
+	    $report['message'] = $this->db->_error_message();
+	    return $report;
+	}
+
+	function unassign_company($company_id)
+	{
+		$data = array(
+               'user_id' => NULL
             );
 
 		$this->db->update('companies', $data, array('id' => $company_id));

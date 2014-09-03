@@ -109,7 +109,16 @@
 		 	  function(response){
 		 	    
 		 	  })
-		 	.always(function() { textbtn.text('Assigned to '+name );  l.stop(); btn.attr('disabled','disabled'); });
+		 	.always(function() { 
+                if(typeof name != 'undefined'){
+                        textbtn.text('Assigned to '+name ); 
+                    }else{
+                        textbtn.text('Unassigned');
+                        form.closest('.panel').hide(); 
+                    }  
+                l.stop(); 
+                btn.attr('disabled','disabled'); 
+            });
 
 		 	return false;
 		});

@@ -18,11 +18,11 @@
 			     	<div class="form-group">
 						<input type="text" name="name" class="form-control" id="name" placeholder="Name">
 				    </div>
-					<div class="btn-group" data-toggle="buttons">
-						<label class="btn btn-primary active">
-							<input type="radio" name="private" id="sharedfalse" checked> private
+					<div class="btn-group toggle-btn-group" data-toggle="buttons">
+						<label class="btn  ">
+							<input type="radio" name="private" id="sharedfalse" > private
 						</label>
-						<label class="btn btn-primary">
+						<label class="btn ">
 							<input type="radio" name="public" id="sharedtrue">  public
 						</label>
 					</div>
@@ -126,10 +126,10 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
-	<div class="panel <?php if(isset($company->company_assign_to)): ?> panel-primary <?php else: ?> panel-default <?php endif; ?> ">
-		<?php if(isset($company->company_assign_to)): ?>
+	<div class="panel <?php if(isset($company->company_assigned_to)): ?> panel-primary <?php else: ?> panel-default <?php endif; ?> ">
+		<?php if(isset($company->company_assigned_to)): ?>
 		<div class="panel-heading text-center" >
-            Assigned to <?php echo $company->company_assign_to; ?> 
+            Assigned to <?php echo $company->company_assigned_to; ?> 
         </div>
 		<?php endif; ?>
 		<div class="panel-body">
@@ -191,8 +191,17 @@
 				<?php if ($company->url): ?>
 				<a class="btn btn-outline btn-info btn-sm btn-block" href="<?php echo $company->url ?>" target="_blank">Visit Website</a>
 				<?php endif; ?>
-				<?php if(isset($company->company_assign_to) and !empty($company->company_assign_to)): ?>
-				<a class="btn btn-sm btn-primary btn-block" disabled="disabled"><?php  echo 'Assigned to '.$company->company_assign_to; ?></a>
+				<?php if(isset($company->company_assigned_to) and !empty($company->company_assigned_to)): ?>
+					<?php if($company->company_assigned_to_id == $current_user['id']) : ?>			
+						<?php  $hidden = array('company_id' => $company->id , 'user_id' => $current_user['id'], 'page_number' => $current_page_number );
+						echo form_open('companies/unassign',array('style' => 'margin-top: 5px;', 'name' => 'assignto', 'class'=>'assign-to-form'),$hidden); ?>
+						<button type="submit" class="btn btn-sm btn-primary btn-block ladda-button" data-style="expand-right" data-size="1">
+						    <span class="ladda-label"> Unassign </span>
+						</button>
+						<?php echo form_close(); ?>
+					<?php else: ?>
+						<a class="btn btn-sm btn-primary btn-block" disabled="disabled"><?php  echo 'Assigned to '.$company->company_assigned_to; ?></a>
+					<?php endif; ?>
 				<?php else: ?>
 				<?php 
 				$hidden = array('company_id' => $company->id , 'user_id' => $current_user['id'], 'page_number' => $current_page_number );

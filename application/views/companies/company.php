@@ -1,9 +1,9 @@
 <div class="row page-results-list">
 	<h1 class="page-header"><?php echo $company->name; ?></h1>
-	<div class="panel <?php if(isset($company->company_assign_to)): ?> panel-primary <?php else: ?> panel-default <?php endif; ?> ">
-		<?php if(isset($company->company_assign_to)): ?>
+	<div class="panel <?php if(isset($company->company_assigned_to)): ?> panel-primary <?php else: ?> panel-default <?php endif; ?> ">
+		<?php if(isset($company->company_assigned_to)): ?>
 		<div class="panel-heading text-center" >
-            Assigned to <?php echo $company->company_assign_to; ?> 
+            Assigned to <?php echo $company->company_assigned_to; ?> 
         </div>
 		<?php endif; ?>
 		<div class="panel-body">
@@ -59,8 +59,18 @@
 				<?php if ($company->url): ?>
 				<a class="btn btn-outline btn-info btn-sm btn-block" href="<?php echo $company->url ?>" target="_blank">Visit Website</a>
 				<?php endif; ?>
-				<?php if(isset($company->company_assign_to) and !empty($company->company_assign_to)): ?>
-				<a class="btn btn-sm btn-primary btn-block" disabled="disabled"><?php  echo 'Assigned to '.$company->company_assign_to; ?></a>
+				<?php if(isset($company->company_assigned_to) and !empty($company->company_assigned_to)): ?>
+					<?php echo $company->company_assigned_to_id; echo $current_user['id']; if($company->company_assigned_to_id == $current_user['id']) : ?>			
+						<?php  $hidden = array('company_id' => $company->id , 'user_id' => $current_user['id'], 'page_number' => $current_page_number );
+						echo form_open('companies/unassign',array('style' => 'margin-top: 5px;', 'name' => 'assignto', 'class'=>'assign-to-form'),$hidden); ?>
+						<button type="submit" class="btn btn-sm btn-primary btn-block ladda-button" data-style="expand-right" data-size="1">
+						    <span class="ladda-label"> Unassign </span>
+						</button>
+						<?php echo form_close(); ?>
+					<?php else: ?>
+						<a class="btn btn-sm btn-primary btn-block" disabled="disabled"><?php  echo 'Assigned to '.$company->company_assigned_to; ?></a>
+					<?php endif; ?>
+
 				<?php else: ?>
 				<?php 
 				$hidden = array('company_id' => $company->id , 'user_id' => $current_user['id'], 'page_number' => $current_page_number );
@@ -71,7 +81,7 @@
 				<?php echo form_close(); ?>
 				<?php endif; ?>
 			</div>
-			
+					
 			<!-- MORTGAGES -->
 			
 			<div class="col-md-12">
@@ -86,7 +96,7 @@
 				</thead>
 				<tbody>
 					<?php foreach ($company->mortgages as $mortgage):?>
-					<tr>
+					<tr <?php echo $mortgage['stage']==MORTGAGES_SATISFIED? 'class="danger"' : 'class="success"' ?> >
 						<td class="col-md-7" ><?php echo $mortgage['name']; ?></td>
 						<td class="col-md-3"><?php echo $mortgage['stage']; ?></td>
 						<td class="col-md-2"><?php echo $mortgage['eff_from']; ?></td>

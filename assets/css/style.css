@@ -18,3 +18,13 @@
 .sidebar ul li a {
 	color:#000;
 }
+
+.btn-group.toggle-btn-group > .active {
+	color: #fff !important;
+	background-color: #5cb85c!important;
+	border-color: #4cae4c!important;
+}
+
+.toggle-btn-group .btn{
+	background: #ccc;
+}

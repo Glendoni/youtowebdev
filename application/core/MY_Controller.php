@@ -60,7 +60,7 @@ class MY_Controller extends CI_Controller {
 		$this->data['own_campaigns'] = $this->Campaigns_model->get_campaigns_for_user($this->get_current_user_id());
 		// var_dump($this->data['own_campaigns']);
 		//var_dump($this->session->all_userdata());
-		// var_dump($this->input->post());
+		var_dump($this->input->post());
 	}
 
 	protected function seve_current_search($post)

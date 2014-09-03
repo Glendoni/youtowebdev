@@ -111,6 +111,27 @@ class Companies extends MY_Controller {
 		return True;
 	}
 
+	public function unassign()
+	{
+		if($this->input->post('company_id') && $this->input->post('user_id'))
+		{
+			$result = $this->Companies_model->unassign_company($this->input->post('company_id'));
+			if(!$result['error'])
+			{
+				// Clear search in session 
+				$this->index($ajax_refresh=True);
+				// redirect('/companies?page_num='.$this->input->post('page_number'),'refresh');
+			}
+			else
+			{
+				$this->set_message_error($result['message']);
+				$this->index();
+				// redirect('/companies?page_num='.$this->input->post('page_number'),'refresh');
+			}
+		}
+		return True;
+	}
+
 	public function refreshsearch()
 	{
 		$this->refresh_search_results();
