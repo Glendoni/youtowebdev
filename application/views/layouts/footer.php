@@ -124,7 +124,10 @@
 		});
 
         
+        // reset button on page load
+        $('.submit_btn').button('reset');
 
+        // on click action 
 		$('.submit_btn').click(function(e){
 			
 			var btn = $(this);
@@ -155,26 +158,29 @@
 		 	return false;
 		});
 
-        
-          $('.loading-btn').click(function () {
-            var btn = $(this)
-            btn.button('loading')
-            // $.ajax(...).always(function () {
-            //   btn.button('reset')
-            // });
-          });
+        // reset button on load 
+        $('.loading-btn').button('reset');
 
-          // Setup form validation on the #register-form element
-            $( "#main_search" ).submit(function( event ) {        
-                if( $( "#main_search input:blank" ).length < 9 ){
-                    return true;
-                }else{
-                    event.preventDefault();
-                    $('#empty_form_error').show();
-                    $('.loading-btn').button('reset');
-                    return false;
-                }
-            });
+        // Click function  
+        $('.loading-btn').click(function () {
+        var btn = $(this)
+        btn.button('loading')
+        // $.ajax(...).always(function () {
+        //   btn.button('reset')
+        // });
+        });
+
+        // Setup form validation on the #register-form element
+        $( "#main_search" ).submit(function( event ) {        
+            if( $( "#main_search input:blank" ).length < 9 ){
+                return true;
+            }else{
+                event.preventDefault();
+                $('#empty_form_error').show();
+                $('.loading-btn').button('reset');
+                return false;
+            }
+        });
 
 
  	});

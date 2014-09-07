@@ -5,8 +5,7 @@ class Campaigns extends MY_Controller {
 	function __construct() 
 	{
 		parent::__construct();
-		$this->load->model('Campaigns_model');
-
+		
 	}
 	
 	public function create() 
@@ -48,6 +47,10 @@ class Campaigns extends MY_Controller {
 		return $this->Campaigns_model->get_all_shared_campaigns($user_id);
 	}
 
+	public function get_all_private_campaigns($user_id){
+		return $this->Campaigns_model->get_all_private_campaigns($user_id);
+	}
+	
 	public function get_campaigns_for_user($user_id)
 	{
 		return $this->Campaigns_model->get_campaigns_for_user($user_id);
@@ -58,9 +61,11 @@ class Campaigns extends MY_Controller {
 		if($this->input->get('id'))
 		{
 			$campaign = $this->Campaigns_model->get_campaign_by_id($this->input->get('id'));
-			
 			$post = unserialize($campaign[0]->criteria);
 			$this->refresh_search_results();
+			$this->session->set_userdata('campaign_id',$campaign[0]->id);
+			$this->session->set_userdata('campaign_name',$campaign[0]->name);
+			$this->session->set_userdata('campaign_owner',$campaign[0]->user_id);
 			$this->session->set_userdata('current_search',$post);
 			redirect('/companies');
 		}

@@ -14,11 +14,17 @@ class Campaigns_model extends CI_Model {
 		return $query->result();
 	}
 
-	function get_all_private_campaigns()
+	function get_all_private_campaigns($user_id)
 	{
-		$query = $this->db->get_where('campaigns', array('shared' => 'False'));
+		$this->db->select('name,id');
+		$this->db->from('campaigns');
+		$this->db->where('user_id', $user_id);
+		$this->db->where('shared', 'False');
+		$this->db->order_by("name", "desc"); 
+		$query = $this->db->get();
 		return $query->result();
 	}
+
 
 	function get_campaigns_for_user($user_id)
 	{

@@ -17,6 +17,7 @@ class Companies_model extends CI_Model {
 		
 		$this->db->where('companies.id', $id);
 		$this->db->where('companies.active', 'True');
+		$this->db->group_by('companies.id,addresses.address');
 		$this->db->order_by("companies.name", "asc");
 
 

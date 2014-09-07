@@ -84,7 +84,7 @@ class Companies extends MY_Controller {
 		$this->data['next_page_number'] = ($current_page_number+1) <= $this->data['page_total'] ? ($current_page_number+1) : FALSE;
 		$this->data['previous_page_number'] = ($current_page_number-1) >= 0 ? ($current_page_number-1) : FALSE;
 		$this->data['sectors_array'] = $this->session->userdata('sectors_array');
-		$this->data['companies_chunk'] = $companies_array_chunk[($current_page_number-1)];
+		$this->data['companies'] = $companies_array_chunk[($current_page_number-1)];
 		$this->data['main_content'] = 'companies/list';
 		$this->load->view('layouts/default_layout', $this->data);
 	}
@@ -143,7 +143,7 @@ class Companies extends MY_Controller {
 		if($this->input->get('id'))
 		{
 			$company = $this->Companies_model->get_company_by_id($this->input->get('id'));
-			$this->data['company'] = $company->result_object[0];
+			$this->data['companies'] = $company->result_object;
 			$this->data['main_content'] = 'companies/company';
 			$this->load->view('layouts/default_layout', $this->data);
 		}

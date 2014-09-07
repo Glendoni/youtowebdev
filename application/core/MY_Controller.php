@@ -28,6 +28,7 @@ class MY_Controller extends CI_Controller {
 		$this->load->model('Sectors_model');
 		$this->load->model('Users_model');
 		$this->load->helper('mobile');
+		$this->load->model('Providers_model');
 
 		// var_dump($this->session->all_userdata());
 
@@ -43,21 +44,42 @@ class MY_Controller extends CI_Controller {
 			if($this->uri->segment(1)) redirect('/','location');
 		}
 
-
+        // session data only test for positve
 		if($this->session->userdata('sectors_array'))
-		{
-			
+		{	
+			$sectors_options = $this->session->userdata('sectors_array');
+			$sectors_options = array(0=>'All') + $sectors_options;
 		}
 		else
 		{
-			$sectors_array = $this->Sectors_model->get_all_in_array();
-			asort($sectors_array);
-			$this->session->set_userdata('sectors_array',$sectors_array);
+			$sectors_options = $this->Sectors_model->get_all_in_array();
+			asort($sectors_options);
+			$this->session->set_userdata('sectors_array',$sectors_options);
+			$sectors_options = array(0=>'All') + $sectors_options;
 		}
 		
-		// SET ALL SAVED CAMPAIGNS
-		$this->data['shared_campaigns'] = $this->Campaigns_model->get_all_shared_campaigns($this->get_current_user_id());
-		$this->data['own_campaigns'] = $this->Campaigns_model->get_campaigns_for_user($this->get_current_user_id());
+		if($this->session->userdata('providers_options'))
+		{
+			$providers_options = $this->session->userdata('providers_options');
+			$providers_options = array(0=>'All') + $providers_options;
+		}
+		else
+		{
+			$providers_options = $this->Providers_model->get_all_in_array();
+			asort($providers_options);
+			$this->session->set_userdata('providers_options',$providers_options);
+			$providers_options = array(0=>'All') + $providers_options;
+		}
+		// SET CONSTANTS AND DEFAULTS
+		
+		// Add options
+		$this->data['sectors_options'] = $sectors_options;
+		$this->data['sectors_default'] ='0';
+		$this->data['providers_options'] = $providers_options;
+		$this->data['providers_default'] ='0';
+
+		$this->data['shared_campaigns'] = $this->Campaigns_model->get_all_shared_campaigns();
+		$this->data['private_campaigns'] = $this->Campaigns_model->get_all_private_campaigns($this->get_current_user_id());
 		// var_dump($this->data['own_campaigns']);
 		//var_dump($this->session->all_userdata());
 		// var_dump($this->input->post());

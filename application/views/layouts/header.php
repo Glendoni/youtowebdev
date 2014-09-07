@@ -13,7 +13,7 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-
+    <link rel="icon" type="image/png" href="<?php echo asset_url();?>/images/favicon.png">
     <!-- Custom CSS -->
     <link href="<?php echo asset_url();?>css/sb-admin-2.css" rel="stylesheet">
     <link href="<?php echo asset_url();?>css/style.css" rel="stylesheet">
@@ -53,13 +53,13 @@
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex1-collapse">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">Baselist</a>
+                <a class="navbar-brand" href="/" >Baselist</a>
             </div>
             <!-- Top Menu Items -->
             <?php if (isset($current_user)): ?>
@@ -280,8 +280,8 @@
 
             <?php if(!isset($hide_side_nav)): ?>
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-            <div class="navbar-default sidebar" role="navigation">
-                <div class="sidebar-nav navbar-collapse">
+            <div class="navbar-default sidebar "  role="navigation">
+                <div class="sidebar-nav navbar-collapse" id="navbar-ex1-collapse">
                     <ul class="nav" id="side-menu">
                         <!-- <li class="sidebar-search">
                             <div class="input-group custom-search-form">
@@ -292,10 +292,10 @@
                                 </button>
                             </span>
                             </div>
-                        </li> -->
+                        </li>
                         <li>
                             <a class="active" href="<?php echo site_url();?>"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-                        </li>
+                        </li> -->
             
                         <!-- <li>
                             <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
@@ -328,6 +328,22 @@
                           
                         </li> -->
                         <li>
+                            <a href="#"><i class="glyphicon glyphicon glyphicon-lock"></i> Private searches <span class="badge"><?php echo count($private_campaigns); ?></span><span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse">
+                            <?php foreach ($private_campaigns as $campaign):?>
+                                <li><a href="<?php echo site_url();?>campaigns/display/?id=<?php echo $campaign->id; ?>"><?php echo $campaign->name; ?></a></li>
+                            <?php endforeach; ?>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><span class="glyphicon glyphicon-globe"></span> Shared searches <span class="badge"><?php echo count($shared_campaigns); ?></span><span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse">
+                            <?php foreach ($shared_campaigns as $campaign):?>
+                                <li><a href="<?php echo site_url();?>campaigns/display/?id=<?php echo $campaign->id; ?>"><?php echo $campaign->name; ?></a></li>
+                            <?php endforeach; ?>
+                            </ul>
+                        </li>
+                        <li class="sidebar-search active"> 
                             <a href="#"><i class="fa fa-search fa-fw"></i> Search<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level collapse">
                                 <li>
@@ -335,14 +351,14 @@
                                         <div class="panel-body">
                                             <div class="alert alert-warning alert-dismissible" style="display:none;" id="empty_form_error" role="alert">
                                               <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                              <strong>Warning!</strong> Please enter a value
+                                              <strong>Warning!</strong> Please enter at least one search criteria.
                                             </div>
                                             <?php echo form_open('/companies', 'id="main_search" novalidate="novalidate" name="main_search" class="" role="form"'); ?>
                                             <?php echo form_hidden('main_search','1');?>
                                             <?php if ($_POST['main_search']): ?>
-                                                <a class="btn btn-link pull-right" href="<?php echo site_url();?>">
+                                                <!-- <a class="btn btn-link pull-right" href="<?php echo site_url();?>">
                                                     <span class="glyphicon glyphicon-remove"></span> Clear fields
-                                                </a>
+                                                </a> -->
                                             <?php endif; ?>
                                             <div class='form-row'>
                                                 <div class="col-md-12 form-group ">
@@ -352,43 +368,32 @@
                                                 </div>
                                             </div>
                                              <div class='form-row'>
-                                             <div class="col-md-6 form-group"> 
-                                                <?php  echo form_label('Age ', 'company_age_from', array('class'=>'control-label')); ?>
-                                                <div class="input-group "> 
-                                                <!-- <div class="input-group-addon">From</div> -->
-                                                <?php echo form_input(array('name' => 'company_age_from', 'id' => 'company_age_from', 'maxlength' => '100','class'=>'form-control','placeholder'=>'from year'), set_value('company_age_from',''));?>
+                                             <?php  echo form_label('Age (Years) ', 'company_age_from', array('class'=>'control-label')); ?>
+                                             <div class="form-group"> 
+                                                <div class="col-md-6"> 
+                                                <?php echo form_input(array('name' => 'company_age_from', 'id' => 'company_age_from', 'maxlength' => '100','class'=>'form-control','placeholder'=>'0'), set_value('company_age_from',''));?>
+                                                </div>
+                                                <div class="col-md-6">
+                                                <?php echo form_input(array('name' => 'company_age_to', 'id' => 'company_age_to', 'maxlength' => '100','class'=>'form-control','placeholder'=>'100'), set_value('company_age_to',''));?>    
                                                 </div>
                                             </div>
-                                            <div class="col-md-6 form-group"> 
-                                                <?php  echo form_label(' _', 'company_age_to', array('class'=>'control-label','style'=>'color:white;')); ?>
-                                                <div class="input-group" style='margin-left:5px;'> 
-                                                <!-- <div class="input-group-addon">To</div> -->
-                                                <?php echo form_input(array('name' => 'company_age_to', 'id' => 'company_age_to', 'maxlength' => '100','class'=>'form-control','placeholder'=>'to year'), set_value('company_age_to',''));?>
+                                            
+                                            </div>
+
+                                            <div class='form-row'>
+                                            <?php  echo form_label('Turnover (£)', 'turnover_from', array('class'=>'control-label')); ?>
+                                             <div class="form-group"> 
+                                                <div class="col-md-6"> 
+                                                <?php echo form_input(array('name' => 'turnover_from', 'id' => 'turnover_from', 'maxlength' => '100','class'=>'form-control','placeholder'=>'0'), set_value('turnover_from',''));?>
+                                                </div>
+                                                <div class="col-md-6">
+                                                 <?php echo form_input(array('name' => 'turnover_to', 'id' => 'turnover_to', 'maxlength' => '100','class'=>'form-control','placeholder'=>'10000'), set_value('turnover_to',''));?>   
                                                 </div>
                                             </div>
                                             </div>
 
                                             <div class='form-row'>
-                                             <div class="col-md-6 form-group"> 
-                                                <?php  echo form_label('Turnover (£)', 'turnover_from', array('class'=>'control-label')); ?>
-                                                <div class="input-group "> 
-                                                <!-- <div class="input-group-addon">From</div> -->
-                                                <?php echo form_input(array('name' => 'turnover_from', 'id' => 'turnover_from', 'maxlength' => '100','class'=>'form-control','placeholder'=>'0'), set_value('turnover_from',''));?>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 form-group"> 
-                                                <?php  echo form_label(' _', 'turnover_to', array('class'=>'control-label','style'=>'color:white;')); ?>
-                                                <div class="input-group" style='margin-left:5px;'> 
-                                                <!-- <div class="input-group-addon">To</div> -->
-                                                <?php echo form_input(array('name' => 'turnover_to', 'id' => 'turnover_to', 'maxlength' => '100','class'=>'form-control','placeholder'=>'10000'), set_value('turnover_to',''));?>
-                                                </div>
-                                            </div>
-                                            </div>
-
-                                                                                      
-                                            
-                                             <div class='form-row'>
-                                                <div class="col-md-12 form-group">
+                                                <div class="form-group">
                                                 <?php
                                                 echo form_label('Mortgage provider', 'providers');
                                                 echo form_dropdown('providers', $providers_options, $providers_default,'class="form-control"');
@@ -397,20 +402,17 @@
                                             </div>
 
                                             <div class='form-row'>
-                                             <div class="col-md-6 form-group"> 
-                                                <?php  echo form_label('Anniversary', 'mortgage_from', array('class'=>'control-label')); ?>
-                                                <div class="input-group "> 
-                                                <!-- <div class="input-group-addon">From</div> -->
+                                             <?php  echo form_label('Debenture Expiry (Days)', 'mortgage_from', array('class'=>'control-label')); ?>
+                                             <div class="form-group"> 
+                                                <div class="col-md-6"> 
                                                 <?php echo form_input(array('name' => 'mortgage_from', 'id' => 'mortgage_from', 'maxlength' => '100','class'=>'form-control','placeholder'=>'0'), set_value('mortgage_from',''));?>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-6 form-group"> 
-                                                <?php  echo form_label(' _', 'mortgage_to', array('class'=>'control-label','style'=>'color:white;')); ?>
-                                                <div class="input-group" style='margin-left:5px;'> 
-                                                <!-- <div class="input-group-addon">To</div> -->
+                                                <div class="col-md-6">
                                                 <?php echo form_input(array('name' => 'mortgage_to', 'id' => 'mortgage_to', 'maxlength' => '100','class'=>'form-control','placeholder'=>'100'), set_value('mortgage_to',''));?>
+                                                
                                                 </div>
                                             </div>
+                                            
                                             </div>
                                             <div class='form-row'>
                                                 <div class="col-md-12 form-group">
@@ -421,20 +423,16 @@
                                                 </div>
                                             </div>
                                             <div class='form-row'>
-                                             <div class="col-md-6 form-group"> 
                                                 <?php  echo form_label('Employees ', 'employees_from', array('class'=>'control-label')); ?>
-                                                <div class="input-group "> 
-                                                <!-- <div class="input-group-addon">From</div> -->
-                                                <?php echo form_input(array('name' => 'employees_from', 'id' => 'employees_from', 'maxlength' => '100','class'=>'form-control','placeholder'=>'0'), set_value('employees_from',''));?>
+                                                <div class="form-group"> 
+                                                    <div class="col-md-6"> 
+                                                    <?php echo form_input(array('name' => 'employees_from', 'id' => 'employees_from', 'maxlength' => '100','class'=>'form-control','placeholder'=>'0'), set_value('employees_from',''));?>
+                                                    </div>
+                                                    <div class="col-md-6"> 
+                                                    <?php echo form_input(array('name' => 'employees_to', 'id' => 'employees_to', 'maxlength' => '100','class'=>'form-control','placeholder'=>'100'), set_value('employees_to',''));?>
+                                                    
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-6 form-group"> 
-                                                <?php  echo form_label(' _', 'employees_to', array('class'=>'control-label','style'=>'color:white;')); ?>
-                                                <div class="input-group" style='margin-left:5px;'> 
-                                                <!-- <div class="input-group-addon">To</div> -->
-                                                <?php echo form_input(array('name' => 'employees_to', 'id' => 'employees_to', 'maxlength' => '100','class'=>'form-control','placeholder'=>'100'), set_value('employees_to',''));?>
-                                                </div>
-                                            </div>
                                             </div>
                                         </div>
                                         <div class="panel-footer">
@@ -451,27 +449,8 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                        <?php if($search_results_in_session = $this->session->userdata('companies')): ?>
-                        <li>
-                            <a class="" href="<?php echo site_url();?>companies/refreshsearch"><i class="fa fa-refresh"></i> Refresh search</a>
-                        </li>
-                        <?php endif; ?>
-                        <li>
-                            <a href="#"><i class="glyphicon glyphicon-floppy-saved"></i> Saved searches <span class="badge"><?php echo count($own_campaigns); ?></span><span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level collapse">
-                            <?php foreach ($own_campaigns as $campaign):?>
-                                <li><a href="<?php echo site_url();?>campaigns/display/?id=<?php echo $campaign->id; ?>"><?php echo $campaign->name; ?></a></li>
-                            <?php endforeach; ?>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#"><span class="glyphicon glyphicon-globe"></span> Shared searches <span class="badge"><?php echo count($shared_campaigns); ?></span><span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level collapse">
-                            <?php foreach ($shared_campaigns as $campaign):?>
-                                <li><a href="<?php echo site_url();?>campaigns/display/?id=<?php echo $campaign->id; ?>"><?php echo $campaign->name; ?></a></li>
-                            <?php endforeach; ?>
-                            </ul>
-                        </li>
+                        
+                        
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
