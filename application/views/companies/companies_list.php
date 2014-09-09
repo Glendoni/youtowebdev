@@ -78,7 +78,7 @@
 	<?php endif; ?>
 	<div class="panel-body">
 		<div class="col-md-12">
-			<div class="btn-group pull-right">
+			<div class="btn-group pull-right assign-to-wrapper">
 				<?php if(isset($company->company_assigned_to) and !empty($company->company_assigned_to)): ?>
 					<?php if($company->company_assigned_to_id == $current_user['id']) : ?>			
 						<?php  $hidden = array('company_id' => $company->id , 'user_id' => $current_user['id'], 'page_number' => $current_page_number );
@@ -88,7 +88,7 @@
 						</button>
 						<?php echo form_close(); ?>
 					<?php else: ?>
-						<a class="btn btn-sm btn-primary btn-block" disabled="disabled"><?php  echo 'Assigned to '.$company->company_assigned_to; ?></a>
+						<button class="btn btn-sm btn-primary btn-block" disabled="disabled"><?php  echo 'Assigned to '.$company->company_assigned_to; ?></button>
 					<?php endif; ?>
 				<?php else: ?>
 				<?php 

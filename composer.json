@@ -1,9 +1,10 @@
 {
     "name": "vendor/package",
     "type": "codeigniter-library",
+    "description":"baselist",
+    "license": "MIT",
     "require": {
         "compwright/codeigniter-installers": "*",
-        "php":"~5.5.11",
         "ext-memcached": "*",
         "ext-postgresql":"*"
     }

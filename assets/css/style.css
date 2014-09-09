@@ -58,11 +58,11 @@
 	border-radius: 0px;
 }
 
-.assign-to-form {
+.assign-to-wrapper {
 	position: relative;
 	float: left;
 }
 
-.assign-to-form .btn {
+.assign-to-wrapper .btn {
 	border-radius: 5px 0px 0px 5px;
 }
