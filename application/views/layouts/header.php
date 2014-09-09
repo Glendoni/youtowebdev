@@ -13,7 +13,7 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="icon" type="image/png" href="<?php echo asset_url();?>/images/favicon.png">
+    <link rel="icon" type="image/png" href="<?php echo asset_url();?>/images/favicon.jpg">
     <!-- Custom CSS -->
     <link href="<?php echo asset_url();?>css/sb-admin-2.css" rel="stylesheet">
     <link href="<?php echo asset_url();?>css/style.css" rel="stylesheet">
@@ -331,7 +331,7 @@
                             <a href="#"><i class="glyphicon glyphicon glyphicon-lock"></i> Private searches <span class="badge"><?php echo count($private_campaigns); ?></span><span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level collapse">
                             <?php foreach ($private_campaigns as $campaign):?>
-                                <li><a href="<?php echo site_url();?>campaigns/display/?id=<?php echo $campaign->id; ?>"><?php echo $campaign->name; ?></a></li>
+                                <li class="<?php if($current_campaign_id and $current_campaign_id == $campaign->id) echo 'active' ?>" ><a href="<?php echo site_url();?>campaigns/display/?id=<?php echo $campaign->id; ?>"><?php echo $campaign->name; ?></a></li>
                             <?php endforeach; ?>
                             </ul>
                         </li>
@@ -363,7 +363,7 @@
                                             <div class='form-row'>
                                                 <div class="col-md-12 form-group ">
                                                     <?php  echo form_label('Agency Name', 'agency_name', array('class'=>'control-label')); ?>
-                                                    <?php echo form_input(array('name' => 'agency_name', 'id' => 'agency_name', 'maxlength' => '50','class'=>'col-md-12 form-control'), set_value('agency_name',''));?>
+                                                    <?php echo form_input(array('name' => 'agency_name', 'id' => 'agency_name', 'maxlength' => '50','class'=>'col-md-12 form-control'), set_value('agency_name',$this->input->post('agency_name')));?>
 
                                                 </div>
                                             </div>
@@ -371,10 +371,10 @@
                                              <?php  echo form_label('Age (Years) ', 'company_age_from', array('class'=>'control-label')); ?>
                                              <div class="form-group"> 
                                                 <div class="col-md-6"> 
-                                                <?php echo form_input(array('name' => 'company_age_from', 'id' => 'company_age_from', 'maxlength' => '100','class'=>'form-control','placeholder'=>'0'), set_value('company_age_from',''));?>
+                                                <?php echo form_input(array('name' => 'company_age_from', 'id' => 'company_age_from', 'maxlength' => '100','class'=>'form-control','placeholder'=>''), set_value('company_age_from',$this->input->post('company_age_from')));?>
                                                 </div>
                                                 <div class="col-md-6">
-                                                <?php echo form_input(array('name' => 'company_age_to', 'id' => 'company_age_to', 'maxlength' => '100','class'=>'form-control','placeholder'=>'100'), set_value('company_age_to',''));?>    
+                                                <?php echo form_input(array('name' => 'company_age_to', 'id' => 'company_age_to', 'maxlength' => '100','class'=>'form-control','placeholder'=>''), set_value('company_age_to',$this->input->post('company_age_to')));?>    
                                                 </div>
                                             </div>
                                             
@@ -384,10 +384,10 @@
                                             <?php  echo form_label('Turnover (£)', 'turnover_from', array('class'=>'control-label')); ?>
                                              <div class="form-group"> 
                                                 <div class="col-md-6"> 
-                                                <?php echo form_input(array('name' => 'turnover_from', 'id' => 'turnover_from', 'maxlength' => '100','class'=>'form-control','placeholder'=>'0'), set_value('turnover_from',''));?>
+                                                <?php echo form_input(array('name' => 'turnover_from', 'id' => 'turnover_from', 'maxlength' => '100','class'=>'form-control','placeholder'=>''), set_value('turnover_from',$this->input->post('turnover_from')));?>
                                                 </div>
                                                 <div class="col-md-6">
-                                                 <?php echo form_input(array('name' => 'turnover_to', 'id' => 'turnover_to', 'maxlength' => '100','class'=>'form-control','placeholder'=>'10000'), set_value('turnover_to',''));?>   
+                                                 <?php echo form_input(array('name' => 'turnover_to', 'id' => 'turnover_to', 'maxlength' => '100','class'=>'form-control','placeholder'=>''), set_value('turnover_to',$this->input->post('turnover_to')));?>   
                                                 </div>
                                             </div>
                                             </div>
@@ -396,7 +396,7 @@
                                                 <div class="form-group">
                                                 <?php
                                                 echo form_label('Mortgage provider', 'providers');
-                                                echo form_dropdown('providers', $providers_options, $providers_default,'class="form-control"');
+                                                echo form_dropdown('providers', $providers_options, ($this->input->post('providers')?$this->input->post('providers'):$providers_default) ,'class="form-control"');
                                                 ?>
                                              </div>
                                             </div>
@@ -405,10 +405,10 @@
                                              <?php  echo form_label('Debenture Expiry (Days)', 'mortgage_from', array('class'=>'control-label')); ?>
                                              <div class="form-group"> 
                                                 <div class="col-md-6"> 
-                                                <?php echo form_input(array('name' => 'mortgage_from', 'id' => 'mortgage_from', 'maxlength' => '100','class'=>'form-control','placeholder'=>'0'), set_value('mortgage_from',''));?>
+                                                <?php echo form_input(array('name' => 'mortgage_from', 'id' => 'mortgage_from', 'maxlength' => '100','class'=>'form-control','placeholder'=>''), set_value('mortgage_from',$this->input->post('mortgage_from')));?>
                                                 </div>
                                                 <div class="col-md-6">
-                                                <?php echo form_input(array('name' => 'mortgage_to', 'id' => 'mortgage_to', 'maxlength' => '100','class'=>'form-control','placeholder'=>'100'), set_value('mortgage_to',''));?>
+                                                <?php echo form_input(array('name' => 'mortgage_to', 'id' => 'mortgage_to', 'maxlength' => '100','class'=>'form-control','placeholder'=>''), set_value('mortgage_to',$this->input->post('mortgage_to')));?>
                                                 
                                                 </div>
                                             </div>
@@ -418,7 +418,7 @@
                                                 <div class="col-md-12 form-group">
                                                 <?php 
                                                 echo form_label('Sectors', 'sectors');
-                                                echo form_multiselect('sectors[]', $sectors_options, $sectors_default,'class="form-control"');
+                                                echo form_multiselect('sectors[]', $sectors_options, ($this->input->post('sectors')?$this->input->post('sectors'):$sectors_default),'class="form-control"');
                                                 ?>
                                                 </div>
                                             </div>
@@ -426,10 +426,10 @@
                                                 <?php  echo form_label('Employees ', 'employees_from', array('class'=>'control-label')); ?>
                                                 <div class="form-group"> 
                                                     <div class="col-md-6"> 
-                                                    <?php echo form_input(array('name' => 'employees_from', 'id' => 'employees_from', 'maxlength' => '100','class'=>'form-control','placeholder'=>'0'), set_value('employees_from',''));?>
+                                                    <?php echo form_input(array('name' => 'employees_from', 'id' => 'employees_from', 'maxlength' => '100','class'=>'form-control','placeholder'=>''), set_value('employees_from',$this->input->post('employees_from')));?>
                                                     </div>
                                                     <div class="col-md-6"> 
-                                                    <?php echo form_input(array('name' => 'employees_to', 'id' => 'employees_to', 'maxlength' => '100','class'=>'form-control','placeholder'=>'100'), set_value('employees_to',''));?>
+                                                    <?php echo form_input(array('name' => 'employees_to', 'id' => 'employees_to', 'maxlength' => '100','class'=>'form-control','placeholder'=>''), set_value('employees_to',$this->input->post('employees_to')));?>
                                                     
                                                     </div>
                                                 </div>

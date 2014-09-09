@@ -37,11 +37,15 @@ class Companies extends MY_Controller {
 				$this->seve_current_search($this->input->post());
 
 				$result = $this->Companies_model->search_companies($this->input->post());
+				// if new search clear old data and campaigns from session
+				$this->clear_campaign_from_session();
 
 				if(empty($result))
 				{
-					$this->set_message_info('No result found for query');
-					redirect('/dashboard');
+					$this->set_message_warning('No result found for query.');
+					$this->data['main_content'] = 'dashboard/home';
+					$this->load->view('layouts/default_layout', $this->data);
+					return False;
 				}
 				else
 				{
@@ -55,8 +59,10 @@ class Companies extends MY_Controller {
 			$result = $this->Companies_model->search_companies($post);
 			if(empty($result))
 			{
-				$this->set_message_warning('No result found for query. :( ');
-				redirect('/dashboard');
+				$this->set_message_warning('No result found for query.');
+				$this->data['main_content'] = 'dashboard/home';
+				$this->load->view('layouts/default_layout', $this->data);
+				return False;
 			}
 			else
 			{
@@ -64,7 +70,10 @@ class Companies extends MY_Controller {
 			}
 		}
 		elseif (!$this->input->post('submit') and !$search_results_in_session and !$refresh_search_results) {
-			redirect('/dashboard');
+			$this->set_message_warning('No result found for query.');
+			$this->data['main_content'] = 'dashboard/home';
+			$this->load->view('layouts/default_layout', $this->data);
+			return False;
 		}
 
 		
@@ -72,8 +81,10 @@ class Companies extends MY_Controller {
 
 		if(empty($companies_array))
 		{
-			$this->set_message_error('No results return for query.');
-			redirect('/dashboard','refresh');
+			$this->set_message_warning('No result found for query.');
+			$this->data['main_content'] = 'dashboard/home';
+			$this->load->view('layouts/default_layout', $this->data);
+			return False;
 		}
 		// get companies from recent result or get it from session
 		$companies_array_chunk = array_chunk($companies_array, RESULTS_PER_PAGE);

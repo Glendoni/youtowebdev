@@ -49,3 +49,20 @@
 .sidebar .sidebar-search{
 	padding:0px;	
 }
+
+.campaing_edit_options{
+	padding:6px;
+}
+
+.campaing_edit_options .btn-block {
+	border-radius: 0px;
+}
+
+.assign-to-form {
+	position: relative;
+	float: left;
+}
+
+.assign-to-form .btn {
+	border-radius: 5px 0px 0px 5px;
+}

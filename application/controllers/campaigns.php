@@ -9,7 +9,7 @@ class Campaigns extends MY_Controller {
 	}
 	
 	public function create() 
-	{
+	{	var_dump($this->input->post());
 		if($this->input->post('name'))
 		{
 			$name = $this->input->post('name');
@@ -17,34 +17,36 @@ class Campaigns extends MY_Controller {
 		else
 		{
 			$this->set_message_warning('Missing name for the campaign');
-			redirect('/companies');
+			redirect('/companies','refresh');
 		}
 
-		if($this->input->post('private'))
+		if($this->input->post('public'))
 		{
-			$shared = 'False'; //have to be string to match psql boolean type
+			$shared = 'True'; //have to be string to match psql boolean type
 		}
 		else
 		{
-			$shared = 'True';
+			$shared = 'False';
 		}
 		
 		$user_id = $this->get_current_user_id();
 		$current_search = $this->get_current_search();
 
-		$save_current_search = $this->Campaigns_model->create_from_post($name,$shared,$user_id,$current_search);
+		$new_campaign_id = $this->Campaigns_model->create_from_post($name,$shared,$user_id,$current_search);
 		
-		if($save_current_search)
+		if($new_campaign_id)
 		{
-			$this->set_message_success('Campaign '.$name.' saved ');
+			$this->session->set_userdata('campaign_id',$new_campaign_id);
+			$this->session->set_userdata('campaign_name',$name);
+			$this->session->set_userdata('campaign_owner',$user_id);
+			$this->session->set_userdata('campaign_shared',filter_var($shared, FILTER_VALIDATE_BOOLEAN));
+			$this->set_message_success('Campaign saved!');
 		}
-		redirect('/companies');
-		// $this->data['main_content'] = 'campaigns/list';
-		// $this->load->view('layouts/default_layout', $this->data);
+		redirect('/companies','refresh');
 	}
 
-	public function get_all_shared_campaigns($user_id=False){
-		return $this->Campaigns_model->get_all_shared_campaigns($user_id);
+	public function get_all_shared_campaigns(){
+		return $this->Campaigns_model->get_all_shared_campaigns();
 	}
 
 	public function get_all_private_campaigns($user_id){
@@ -66,6 +68,7 @@ class Campaigns extends MY_Controller {
 			$this->session->set_userdata('campaign_id',$campaign[0]->id);
 			$this->session->set_userdata('campaign_name',$campaign[0]->name);
 			$this->session->set_userdata('campaign_owner',$campaign[0]->user_id);
+			$this->session->set_userdata('campaign_shared',$campaign[0]->shared);
 			$this->session->set_userdata('current_search',$post);
 			redirect('/companies');
 		}
@@ -73,6 +76,36 @@ class Campaigns extends MY_Controller {
 		{
 			// id missing 
 		}
+	}
+
+	public function edit()
+	{	
+		if($this->input->post('campaign_id') == FALSE) return False;
+
+		if($this->input->post('make_private')!== FALSE)
+		{
+			$result = $this->Campaigns_model->update_campaign_make_private($this->input->post('campaign_id'),$this->get_current_user_id());
+			if($result == True)
+			{
+				$this->session->set_userdata('campaign_shared',False);
+			}
+		}elseif ( ($this->input->post('make_public') !== FALSE ) ) {
+			
+			$result = $this->Campaigns_model->update_campaign_make_public($this->input->post('campaign_id'),$this->get_current_user_id());
+
+			if($result == True)
+			{	
+				$this->session->set_userdata('campaign_shared',True);
+			}
+		}elseif ($this->input->post('delete')!== FALSE) {
+			$result = $this->Campaigns_model->delete_campaign($this->input->post('campaign_id'),$this->get_current_user_id());
+			if($result == True)
+			{
+				$this->clear_campaign_from_session();
+			}
+		}
+
+		redirect('/companies');
 	}
 	
 

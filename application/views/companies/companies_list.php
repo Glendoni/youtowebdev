@@ -27,6 +27,7 @@
                         <input type="text" name="url" value="<?php echo $company->url; ?>" id="url" maxlength="50" class="form-control">
                     </div>
                 </div>
+                <hr>
                 <div class="">
 	                <label for="url" class="control-label">Recruitment Type</label>
 	                <div class="tag-holder">  
@@ -41,6 +42,7 @@
 						</span>
 					</div>
 				</div>
+				<hr>
 				<div>
 					<label for="url" class="control-label">Sectors</label>
 					<div class="tag-holder">
@@ -59,9 +61,7 @@
             <div class="modal-footer">
             	<button type="submit" class="btn btn-sm btn-primary btn-block ladda-button submit_btn" edit-btn="editbtn<?php echo $company->id; ?>" data-style="expand-right" data-size="1">
 		        	<span class="ladda-label"> Save changes </span>
-		    	</button>
-                <button type="button" class="btn btn-default btn-block " data-dismiss="modal">Close</button>
-                
+		    	</button>                
                 <!-- <button type="submit" class="btn btn-primary">Save changes</button> -->
             </div>
             <?php echo form_close(); ?>
@@ -78,7 +78,27 @@
 	<?php endif; ?>
 	<div class="panel-body">
 		<div class="col-md-12">
-			<div class="pull-right">
+			<div class="btn-group pull-right">
+				<?php if(isset($company->company_assigned_to) and !empty($company->company_assigned_to)): ?>
+					<?php if($company->company_assigned_to_id == $current_user['id']) : ?>			
+						<?php  $hidden = array('company_id' => $company->id , 'user_id' => $current_user['id'], 'page_number' => $current_page_number );
+						echo form_open('companies/unassign',array('name' => 'assignto', 'class'=>'assign-to-form'),$hidden); ?>
+						<button type="submit" class="btn  btn-primary  ladda-button" data-style="expand-right" data-size="1">
+						    <span class="ladda-label"> Unassign from me </span>
+						</button>
+						<?php echo form_close(); ?>
+					<?php else: ?>
+						<a class="btn btn-sm btn-primary btn-block" disabled="disabled"><?php  echo 'Assigned to '.$company->company_assigned_to; ?></a>
+					<?php endif; ?>
+				<?php else: ?>
+				<?php 
+				$hidden = array('company_id' => $company->id , 'user_id' => $current_user['id'], 'page_number' => $current_page_number );
+				echo form_open(site_url().'companies/assignto',array('name' => 'assignto', 'class'=>'assign-to-form'),$hidden); ?>
+				<button type="submit" assignto="<?php echo $current_user['name']; ?>" class="btn  btn-primary  ladda-button" data-style="expand-right" data-size="1">
+			        <span class="ladda-label"> Assign to me </span>
+			    </button>
+				<?php echo form_close(); ?>
+				<?php endif; ?>
 				<button class="btn btn-warning ladda-button edit-btn" data-toggle="modal" id="editbtn<?php echo $company->id; ?>" data-style="expand-right" data-size="1" data-target="#editModal<?php echo $company->id; ?>">
                     <span class="ladda-label"> Edit </span>
                 </button>
@@ -88,6 +108,9 @@
 				<a href="<?php echo site_url();?>companies/company?id=<?php echo $company->id;?>">
 					<?php echo $company->name; ?>
 				</a>
+				<?php if ($company->url): ?>
+				<a class="btn btn-link" href="<?php echo $company->url ?>" target="_blank"><?php echo $company->url ?></a>
+				<?php endif; ?>
 			</h3>
 			<small><?php echo $company->address; ?> </small>
 		</div>
@@ -97,13 +120,14 @@
 		</div>
 		
 		<!-- TURNOVER -->
-		<div class="col-md-3 centre"><small>Turnover</small>
+		<div class="col-md-3 centre">
+		<small>Turnover</small>
 			<h3 class="details">
 				<strong>£ <?php echo number_format($company->turnover); ?></strong>
 				<br>
 				<small><?php $methods = unserialize (TURNOVER_METHODS); echo $methods[$company->turnover_method]?></small>
 			</h3>
-			<small>Founded</small>
+			<h5>Founded</h5>
 			<h5 class="details"><strong><?php echo $company->eff_from ?></strong></h5>
 		</div>
 
@@ -127,34 +151,13 @@
 		<!-- LINKS AND BTN -->
 		<div class="col-md-3">
 			<?php if ($company->ddlink): ?>
-			<a class="btn btn-outline btn-info btn-sm btn-block" href="<?php echo $company->ddlink ?>" target="_blank">View on Duedil</a>
+			<a class="btn btn-outline btn-info btn-sm btn-block" href="<?php echo $company->ddlink ?>" target="_blank">Duedil</a>
 			<?php endif; ?>
 			<?php if ($company->linkedin_id): ?>
-			<a class="btn btn-outline btn-info btn-sm btn-block" href="https://www.linkedin.com/company/<?php echo $company->linkedin_id ?>"  target="_blank">View on LinkedIn</a>
+			<a class="btn btn-outline btn-info btn-sm btn-block" href="https://www.linkedin.com/company/<?php echo $company->linkedin_id ?>"  target="_blank">LinkedIn</a>
 			<?php endif; ?>
-			<?php if ($company->url): ?>
-			<a class="btn btn-outline btn-info btn-sm btn-block" href="<?php echo $company->url ?>" target="_blank">Visit Website</a>
-			<?php endif; ?>
-			<?php if(isset($company->company_assigned_to) and !empty($company->company_assigned_to)): ?>
-				<?php if($company->company_assigned_to_id == $current_user['id']) : ?>			
-					<?php  $hidden = array('company_id' => $company->id , 'user_id' => $current_user['id'], 'page_number' => $current_page_number );
-					echo form_open('companies/unassign',array('style' => 'margin-top: 5px;', 'name' => 'assignto', 'class'=>'assign-to-form'),$hidden); ?>
-					<button type="submit" class="btn btn-sm btn-primary btn-block ladda-button" data-style="expand-right" data-size="1">
-					    <span class="ladda-label"> Unassign </span>
-					</button>
-					<?php echo form_close(); ?>
-				<?php else: ?>
-					<a class="btn btn-sm btn-primary btn-block" disabled="disabled"><?php  echo 'Assigned to '.$company->company_assigned_to; ?></a>
-				<?php endif; ?>
-			<?php else: ?>
-			<?php 
-			$hidden = array('company_id' => $company->id , 'user_id' => $current_user['id'], 'page_number' => $current_page_number );
-			echo form_open(site_url().'companies/assignto',array('style' => 'margin-top: 5px;', 'name' => 'assignto', 'class'=>'assign-to-form'),$hidden); ?>
-			<button type="submit" assignto="<?php echo $current_user['name']; ?>" class="btn btn-sm btn-primary btn-block ladda-button" data-style="expand-right" data-size="1">
-		        <span class="ladda-label"> Assign </span>
-		    </button>
-			<?php echo form_close(); ?>
-			<?php endif; ?>
+			
+			
 		</div>
 			
 			<!-- MORTGAGES -->

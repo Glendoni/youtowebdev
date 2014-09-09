@@ -1,12 +1,46 @@
 <div class="row page-results-list">
-	<h1 class="page-header">Companies<small>(<?php echo $companies_count; ?>)</small> 
-	<div class="btn-group pull-right">
-	    <buttom class="btn btn-success " data-toggle="modal" data-target="#createcampaign" ><span class="glyphicon glyphicon-floppy-save"></span> Save results</buttom>
-	    <?php if($search_results_in_session = $this->session->userdata('companies')): ?>
-		<a type="button" class="btn btn-primary" href="<?php echo site_url();?>companies/refreshsearch"><i class="fa fa-refresh"></i> Refresh results</a>
-		<?php endif; ?>
-	  <button type="button" class="btn btn-default">Right</button>
-	</div>
+
+	<h1 class="page-header">Companies<small> <?php echo $companies_count; ?> </small> 
+	
+	<?php if($current_campaign_name && $current_campaign_owner_id && $current_campaign_id): ?>
+		<div class="btn-group pull-right">
+			<button type="button" class="btn btn-default "><?php echo $current_campaign_name;?></button>
+			<?php if($current_campaign_editable): ?>
+				<button type="button" class="btn btn-default btn-info dropdown-toggle" data-toggle="dropdown">
+				edit <span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu campaing_edit_options" role="menu">
+				<?php echo form_open(site_url().'campaigns/edit', 'name="edit_campaign" role="form"'); echo form_hidden('campaign_id', $current_campaign_id); ?>
+					<?php if($current_campaign_is_shared == False): ?>
+						<li><button type="" class="btn btn-default btn-sm  btn-block disabled " name="" >is Private</button></li>
+					<li><button type="submit" class="btn btn-warning btn-sm  btn-block" name="make_public" >Make public</button></li>
+					
+					<?php else: ?>
+					<li><button type="" class="btn btn-default  btn-sm  btn-block disabled " name="" >is Public</button></li>
+					<li><button type="submit" class="btn btn-warning btn-success btn-sm  btn-block" name="make_private" >Make private</button></li>
+					<?php endif; ?>
+					<li class="divider"></li>
+					<li><button type="submit" class="btn btn-danger btn-sm btn-block" name="delete" >Delete</button></li>
+				<?php echo form_close(); ?>
+				</ul>
+				
+			<?php endif; ?>
+		</div>
+	<?php else: ?>
+		<div class="btn-group pull-right">
+			<buttom class="btn btn-success " data-toggle="modal" data-target="#createcampaign" >
+				<span class="glyphicon glyphicon-floppy-save"></span> Save results
+			</buttom>
+			<?php if($search_results_in_session = $this->session->userdata('companies')): ?>
+				<a type="button" class="btn btn-primary" href="<?php echo site_url();?>companies/refreshsearch">
+					<i class="fa fa-refresh"></i> Refresh results
+				</a>
+			<?php endif; ?>
+			
+		</div>
+	<?php endif; ?>
+	    
+	
 
 	<!-- <div class="btn-group btn-group-justified">
 		<?php if($search_results_in_session = $this->session->userdata('companies')): ?>
@@ -39,16 +73,15 @@
 						<input type="text" name="name" class="form-control" id="name" placeholder="Name">
 				    </div>
 					<div class="btn-group toggle-btn-group" data-toggle="buttons">
-						<label class="btn  ">
+						<label class="btn  active">
 							<input type="radio" name="private" id="sharedfalse" > private
 						</label>
-						<label class="btn active">
+						<label class="btn ">
 							<input type="radio" name="public" id="sharedtrue">  public
 						</label>
 					</div>
 		      	</div>
 		      <div class="modal-footer">
-		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 		        <button type="submit" class="btn btn-primary">Save changes</button>
 		      </div>
 		      <?php echo form_close(); ?>

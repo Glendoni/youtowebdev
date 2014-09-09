@@ -113,8 +113,12 @@ class Companies_model extends CI_Model {
 	// 	return $query->result();
 	// }
 
+	function search_companies_sql($post)
+	{
+		// pending
+	}
 
-	function search_companies($post,$company_id = False)
+	function search_companies($post)
 	{
 		// Select query
 		$this->db->select('companies.*,addresses.address,turnovers.turnover,turnovers.currency,turnovers.method as turnover_method');
@@ -333,7 +337,7 @@ class Companies_model extends CI_Model {
 		// Populate mortgages for each company as array and make the assign to initials.
 		foreach ($companies->result_object as $key => $company) {
 			// Select fields 
-			$this->db->select("to_char(mortgages.eff_from, 'DD/Mon/YYYY') AS eff_from , providers.name, mortgages.stage ",FALSE);
+			$this->db->select("to_char(mortgages.eff_from, 'dd/mm/yy') AS eff_from , providers.name, mortgages.stage ",FALSE);
 			$this->db->from('mortgages');
 			$this->db->where('mortgages.company_id',$company->id);
 			$this->db->join('providers','providers.id = mortgages.provider_id','left');
