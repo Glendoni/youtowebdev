@@ -10,13 +10,13 @@ class Companies extends MY_Controller {
 	
 	public function index($ajax_refresh = False) 
 	{
-
-		$search_results_in_session = $this->session->userdata('companies');
+		$session_result = $this->session->userdata('companies');
+		$search_results_in_session = unserialize($session_result);
 		$refresh_search_results = $this->session->flashdata('refresh');
 
 		if($this->input->post('submit') and !$refresh_search_results and !$ajax_refresh )
 		{ 
-
+			
 			$this->clear_campaign_from_session();
 
 			$this->load->library('form_validation');
@@ -31,6 +31,7 @@ class Companies extends MY_Controller {
 			$this->form_validation->set_rules('providers', 'providers', 'xss_clean');
 			$this->form_validation->set_rules('mortgage_from', 'anniversary_from', 'xss_clean');
 			$this->form_validation->set_rules('mortgage_to', 'anniversary_to', 'xss_clean');
+			$this->form_validation->set_rules('assigned', 'assigned', 'xss_clean');
 
 			if($this->form_validation->run())
 			{	
@@ -44,7 +45,7 @@ class Companies extends MY_Controller {
 				// print_r($companies_json);
 				// print "</pre>";
 				// die;
-				
+
 				$companies_array = array();
 				foreach ($companies_json as $company) {
 					$mapped_companies_array = array();
@@ -129,7 +130,9 @@ class Companies extends MY_Controller {
 			}
 			else
 			{
-				$this->session->set_userdata('companies',$result);
+				$session_result = serialize($result);
+				$this->session->set_userdata('companies',$session_result);
+				
 			}
 		}
 		elseif (!$this->input->post('submit') and !$search_results_in_session and !$refresh_search_results) {
@@ -140,7 +143,7 @@ class Companies extends MY_Controller {
 		}
 
 		
-		$companies_array = $result ? $result : $search_results_in_session->result_object;
+		$companies_array = $result ? $result : $search_results_in_session;
 		
 		if(empty($companies_array))
 		{

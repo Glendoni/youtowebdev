@@ -1,5 +1,5 @@
 <div class="row page-results-list">
-	<nav class="navbar navbar-default" role="navigation">
+	<nav class="navbar navbar-default companies-list-header" role="navigation">
 	  <div class="container-fluid">
 	    <!-- Collect the nav links, forms, and other content for toggling -->
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -7,7 +7,7 @@
 	      <?php if($current_campaign_name && $current_campaign_owner_id && $current_campaign_id): ?>
 	      	<li><p class="navbar-text"><?php if($current_campaign_is_shared == False): ?><span class="label label-danger">Private</span><?php else: ?> <span class="label label-success">Shared</span> <?php endif;?>  <?php echo $current_campaign_name ?> <small>| <?php echo $companies_count; ?></small></p></li>
 	      <?php else: ?> 
-	      	<li><p class="navbar-text">Companies <small>| <?php echo $companies_count; ?></small></p></li>
+	      	<li><p class="navbar-text">Companies | <strong><?php echo $companies_count; ?></strong></p></li>
 	      <?php endif; ?>
 	        
 	      </ul>

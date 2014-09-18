@@ -11,6 +11,10 @@
 	border-color: #ddd; 
 }
 
+.page-results-list .companies-list-header {
+	border-top-right-radius:0px;
+	border-top-left-radius: 0px;
+}
 
 #main_search > .form-row > .form-group , #main_search .col-md-6 {
 	padding:0px;
@@ -46,10 +50,14 @@
 	font-weight: bold;
 }
 
-.sidebar .sidebar-search{
+.sidebar .sidebar-search  {
 	padding:0px;	
 }
-
+.sidebar  .panel{
+	border: 0px; 
+	border-radius: 0px;
+	border-bottom: 1px solid #ddd;
+}
 .campaing_edit_options{
 	padding:6px;
 }
@@ -87,4 +95,10 @@
 .assign-to-wrapper .btn {
 	border-radius: 5px 0px 0px 5px;
 }
+
+.nav-second-level > li{
+	border-top: 1px solid #ddd;
+	background: #fff;
+}
+
 

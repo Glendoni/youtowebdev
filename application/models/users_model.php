@@ -3,23 +3,37 @@ class Users_model extends CI_Model {
 	
 
 	// GETS
-
+	public function get_users_for_select() 
+	{	
+		$this->db->select('id, name');
+		$this->db->where('active', 'True');
+		$query = $this->db->get('users');
+		$users[0] = ' ';
+		foreach ($query->result_array() as $row)
+		{
+			$users[$row['id']] = $row['name'];		  
+		}
+		return $users;
+	}
 	// returns a user for a given id
 	public function get_user($id) 
 	{
-		$query = $this->db->get_where('users', array('id' => $id), 1);
+		$limit = 1;
+		$query = $this->db->get_where('users', array('id' => $id), $limit);
 		return $query->row_array();
 	}
 	
 	public function get_user_by_email($email)
-	{
-		$query = $this->db->get_where('users', array('email' => $email), 1);
+	{	
+		$limit = 1;
+		$query = $this->db->get_where('users', array('email' => $email), $limit);
 		return $query->result();
 	}
 	
 	public function get_user_login($email,$password)
-	{
-		$query = $this->db->get_where('users', array('email' => $email,'password'=>md5($password)), 1);
+	{	
+		$limit = 1;
+		$query = $this->db->get_where('users', array('email' => $email,'password'=>md5($password)), $limit);
 		return $query->result();
 	}
 

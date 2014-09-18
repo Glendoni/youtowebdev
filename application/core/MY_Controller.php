@@ -36,10 +36,8 @@ class MY_Controller extends CI_Controller {
 		// try getting logged in user from session
 		if($this->session->userdata('logged_in')) 
 		{
-			
 			$logged_in = $this->session->userdata('logged_in');
-			$this->data['current_user'] = $this->Users_model->get_user($logged_in['user_id']);
-			
+			$this->data['current_user'] = $this->Users_model->get_user($logged_in['user_id']);	
 		}
 		else
 		{
@@ -52,42 +50,48 @@ class MY_Controller extends CI_Controller {
 		if($this->session->userdata('sectors_array'))
 		{	
 			$sectors_options = $this->session->userdata('sectors_array');
-			$sectors_options = array(0=>'All') + $sectors_options;
 		}
 		else
 		{
 			$sectors_options = $this->Sectors_model->get_all_in_array();
 			asort($sectors_options);
 			$this->session->set_userdata('sectors_array',$sectors_options);
-			$sectors_options = array(0=>'All') + $sectors_options;
 		}
 		
 		if($this->session->userdata('providers_options'))
 		{
 			$providers_options = $this->session->userdata('providers_options');
-			$providers_options = array(0=>'All') + $providers_options;
 		}
 		else
 		{
 			$providers_options = $this->Providers_model->get_all_in_array();
 			asort($providers_options);
 			$this->session->set_userdata('providers_options',$providers_options);
-			$providers_options = array(0=>'All') + $providers_options;
 		}
-
-		// if($this->session->userdata('system_users'))
-		// {
-		// 	$system_users = $this->Users_model->get_sys
-		// }
-		// else
-		// {
-
-		// }
+ 		
+ 		// $this->session->unset_userdata('system_users');
+		if($this->session->userdata('system_users'))
+		{
+			$system_users = $this->session->userdata('system_users');
+		}
+		else
+		{
+			$system_users = $this->Users_model->get_users_for_select();
+			$this->session->set_userdata('system_users',$system_users);
+		}
 		// SET CONSTANTS AND DEFAULTS
 		
 		// Add options
+		$this->data['system_users'] = $system_users;
+		$this->data['assigned_default'] = '0';
+
+		$sectors_options = array(0=>'All') + $sectors_options;
+		$sectors_options = array(-1=>'No sectors') + $sectors_options;
 		$this->data['sectors_options'] = $sectors_options;
 		$this->data['sectors_default'] ='0';
+		
+		$providers_options = array(0=>'All') + $providers_options;
+		$providers_options = array(-1=>'No providers') + $providers_options;
 		$this->data['providers_options'] = $providers_options;
 		$this->data['providers_default'] ='0';
 

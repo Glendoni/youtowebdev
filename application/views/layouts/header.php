@@ -283,8 +283,8 @@
             <?php if(!isset($hide_side_nav)): ?>
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="navbar-default sidebar "  role="navigation">
-                <div class="sidebar-nav navbar-collapse" id="navbar-ex1-collapse">
-                    <ul class="nav" id="side-menu">
+                <div class="sidebar-nav " id="navbar-ex1-collapse">
+                    <ul class="nav" id="">
                         <!-- <li class="sidebar-search">
                             <div class="input-group custom-search-form">
                                 <input type="text" class="form-control" placeholder="Search...">
@@ -300,7 +300,7 @@
                         </li> -->
             
                         <!-- <li>
-                            <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown</a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="#">Second Level Item</a>
@@ -309,7 +309,7 @@
                                     <a href="#">Second Level Item</a>
                                 </li>
                                 <li>
-                                    <a href="#">Third Level <span class="fa arrow"></span></a>
+                                    <a href="#">Third Level </a>
                                     <ul class="nav nav-third-level">
                                         <li>
                                             <a href="#">Third Level Item</a>
@@ -329,32 +329,17 @@
                             </ul>
                           
                         </li> -->
-                        <li>
-                            <a href="#"><i class="glyphicon glyphicon glyphicon-lock"></i> Private searches <span class="badge"><?php echo count($private_campaigns); ?></span><span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level collapse">
-                            <?php foreach ($private_campaigns as $campaign):?>
-                                <li class="<?php if($current_campaign_id and $current_campaign_id == $campaign->id) echo 'active' ?>" ><a href="<?php echo site_url();?>campaigns/display/?id=<?php echo $campaign->id; ?>"><?php echo $campaign->name; ?></a></li>
-                            <?php endforeach; ?>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#"><span class="glyphicon glyphicon-globe"></span> Shared searches <span class="badge"><?php echo count($shared_campaigns); ?></span><span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level collapse">
-                            <?php foreach ($shared_campaigns as $campaign):?>
-                                <li><a href="<?php echo site_url();?>campaigns/display/?id=<?php echo $campaign->id; ?>"><?php echo $campaign->name; ?></a></li>
-                            <?php endforeach; ?>
-                            </ul>
-                        </li>
-                        <li class="sidebar-search active"> 
-                            <a href="#"><i class="fa fa-search fa-fw"></i> Search<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level collapse">
-                                <li>
-                                    <div class="panel panel-default">
-                                        <div class="panel-body">
-                                            <div class="alert alert-warning alert-dismissible" style="display:none;" id="empty_form_error" role="alert">
-                                              <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                              <strong>Warning!</strong> Please enter at least one search criteria.
-                                            </div>
+                        
+                        <li class="sidebar-search ">
+                            <div class="panel panel-default search">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"><i class="fa fa-search fa-fw"></i> Search</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="alert alert-warning alert-dismissible" style="display:none;" id="empty_form_error" role="alert">
+                                      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                      <strong>Warning!</strong> Please enter at least one search criteria.
+                                    </div>
                                             <?php echo form_open(site_url().'companies', 'id="main_search" novalidate="novalidate" name="main_search" class="" role="form"'); ?>
                                             <?php echo form_hidden('main_search','1');?>
                                             <?php if ($_POST['main_search']): ?>
@@ -397,13 +382,14 @@
                                             <div class='form-row'>
                                                 <div class="form-group">
                                                 <?php
-                                                echo form_label('Mortgage provider', 'providers');
+                                                echo form_label('Mortgage Provider', 'providers');
                                                 echo form_dropdown('providers', $providers_options, ($this->input->post('providers')?$this->input->post('providers'):$providers_default) ,'class="form-control"');
                                                 ?>
-                                             </div>
+                                                
+                                                </div>
                                             </div>
 
-                                            <div class='form-row'>
+                                            <!-- <div class='form-row'>
                                              <?php  echo form_label('Debenture Expiry (Days)', 'mortgage_from', array('class'=>'control-label')); ?>
                                              <div class="form-group"> 
                                                 <div class="col-md-6"> 
@@ -415,7 +401,7 @@
                                                 </div>
                                             </div>
                                             
-                                            </div>
+                                            </div> -->
                                             <div class='form-row'>
                                                 <div class="col-md-12 form-group">
                                                 <?php 
@@ -436,6 +422,14 @@
                                                     </div>
                                                 </div>
                                             </div> -->
+                                            <div class="form-row">
+                                                <div class="col-md-12 form-group">
+                                                    <?php
+                                                    echo form_label('Assigned', 'assigned');
+                                                    echo form_dropdown('assigned', $system_users, ($this->input->post('assigned')?$this->input->post('assigned'):$assigned_default) ,'class="form-control"');
+                                                    ?>
+                                                 </div> 
+                                            </div>
                                         </div>
                                         <div class="panel-footer">
                                             <input type="submit" class="loading-btn btn btn-primary btn-block " value="Search" name="submit">
@@ -446,10 +440,41 @@
                                             <?php endif; ?>
                                         </div>
                                         <?php echo form_close(); ?>
-                                    </div>
-                                </li>
-                            </ul>
+                            </div> 
+
+                            
+                            
                             <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="glyphicon glyphicon glyphicon-lock"></i> Private searches <span class="badge pull-right"><?php echo count($private_campaigns); ?></span></h3>
+                            </div>
+                            <div class="panel-body">
+                                <ul class="nav nav-second-level ">
+                                <?php foreach ($private_campaigns as $campaign):?>
+                                    <li class="<?php if($current_campaign_id and $current_campaign_id == $campaign->id) echo 'active' ?>" ><a href="<?php echo site_url();?>campaigns/display/?id=<?php echo $campaign->id; ?>"><?php echo $campaign->name; ?></a></li>
+                                <?php endforeach; ?>
+                                </ul>
+                            </div>
+                        </div>
+                        </li>
+                        <li>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">
+                                    <span class="glyphicon glyphicon-globe"></span> Shared searches <span class="badge pull-right"><?php echo count($shared_campaigns); ?></span>
+                                </h3>    
+                            </div>
+                          <div class="panel-body">
+                            <ul class="nav nav-second-level ">
+                            <?php foreach ($shared_campaigns as $campaign):?>
+                                <li><a href="<?php echo site_url();?>campaigns/display/?id=<?php echo $campaign->id; ?>"><?php echo $campaign->name; ?></a></li>
+                            <?php endforeach; ?>
+                            </ul>
+                          </div>
+                        </div>
                         </li>
                         
                         

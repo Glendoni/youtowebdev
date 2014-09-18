@@ -9,7 +9,7 @@ class Campaigns extends MY_Controller {
 	}
 	
 	public function create() 
-	{	var_dump($this->input->post());
+	{	
 		if($this->input->post('name'))
 		{
 			$name = $this->input->post('name');

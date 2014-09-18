@@ -122,30 +122,20 @@ class Companies_model extends CI_Model {
 		}
 
 		// COMPANY AGE
-			// Defautl values
-			if(empty($post['company_age_from']) && !empty($post['company_age_to']))
-			{
-				$post['company_age_from'] = 1;
-			}
-
-			if(empty($post['company_age_to']) && !empty($post['company_age_from']))
-			{
-				$post['company_age_to'] = 4;
-			}
 		
-		if(isset($post['company_age_from']) && (!empty($post['company_age_from'])) )
+		if($post['company_age_from'] >= 0  )
 		{
 			$company_age_from = date("m-d-Y", strtotime("-".$post['company_age_from']." year"));
 			
 		}
-		if(isset($post['company_age_to']) && (!empty($post['company_age_to'])) )
+		if(!empty($post['company_age_to'])  )
 		{
 			$company_age_to = date("m-d-Y", strtotime("-".$post['company_age_to']." year"));
 			
 		}
 		if(isset($company_age_from) && isset($company_age_to)) 
 		{
-			$company_age_sql = 'select id from companies  where companies.eff_from between \''.$company_age_to.'\'  and \''.$company_age_from.'\' ';
+			$company_age_sql = 'select id from companies  where companies.eff_from between \''.$company_age_to.'\'  and  \''.$company_age_from.'\' ';
 		}
 		
 
@@ -163,24 +153,45 @@ class Companies_model extends CI_Model {
 		// }
 
 		// MORTGAGE
-		if (!empty($post['mortgage_to']) && !empty($post['mortgage_from']))
-		{
-			$mortgage_sql = 'select company_id  from mortgages where mortgages.stage = \''.MORTGAGES_OUTSTANDING.'\' and EXTRACT (doy from mortgages.eff_from) - EXTRACT (doy from now()) BETWEEN '.$post['mortgage_from'].' AND '.$post['mortgage_to'].'  ';
-		}
+		// if (!empty($post['mortgage_to']) && !empty($post['mortgage_from']))
+		// {
+		// 	$mortgage_sql = 'select company_id  from mortgages where mortgages.stage = \''.MORTGAGES_OUTSTANDING.'\' and EXTRACT (doy from mortgages.eff_from) - EXTRACT (doy from now()) BETWEEN '.$post['mortgage_from'].' AND '.$post['mortgage_to'].'  ';
+		// }
 
 		// SECTORS
 
 		if( isset($post['sectors']) && (!in_array("0", $post['sectors'])) )
 		{	
-			$sectors_sql = 'select operates.company_id from operates where operates.active = True and operates.sector_id in ('.implode(', ', $post['sectors']).')';
+			if ($post['sectors'] < 0)
+			{
+				$sectors_sql = 'select operates.company_id from operates where operates.active = True and operates.sector_id = NULL ';
+			}
+			else
+			{
+				$sectors_sql = 'select operates.company_id from operates where operates.active = True and operates.sector_id in ('.implode(', ', $post['sectors']).')';
+			}
+			
 		}
 
 		// Providers
 		if(isset($post['providers']) && (!empty($post['providers'])) )
 		{
-			$providers_sql = 'select mortgages.company_id "company_id" from providers join mortgages on  providers.id = mortgages.provider_id	where providers.id = '.$post['providers'];
+			if($post['providers'] < 0)
+			{
+				$providers_sql = 'select mortgages.company_id "company_id" from providers join mortgages on  providers.id = mortgages.provider_id	where  providers.id = NULL';
+			}
+			else
+			{
+				$providers_sql = 'select mortgages.company_id "company_id" from providers join mortgages on  providers.id = mortgages.provider_id	where providers.id = '.$post['providers'];
+			}
+			
 		}
 
+		// assigned
+		if(isset($post['assigned']) && (!empty($post['assigned'])) && ($post['assigned'] !== '0'))
+		{	
+			$assigned_sql = 'select id from companies where user_id = '.$post['assigned'].'';
+		}
 
 		// -- Data to Display a Company's details
 		
@@ -217,7 +228,7 @@ select C.id,
 	   C.updated_by,-- f17
 	   C.registration -- f18
    
--- from (select * from COMPANIES where id = 51794) C
+
 from COMPANIES C';
 
 if(isset($company_name_sql)) $sql = $sql. ' JOIN ( '.$company_name_sql.' ) name ON C.id = name.id ';
@@ -226,6 +237,7 @@ if(isset($turnover_sql)) $sql = $sql.' JOIN ( '.$turnover_sql.' ) turnovers ON C
 if(isset($mortgage_sql)) $sql = $sql.' JOIN ( '.$mortgage_sql.' ) mortgages ON C.id = mortgages.company_id';
 if(isset($sectors_sql)) $sql = $sql.' JOIN ( '.$sectors_sql.' ) sectors ON C.id = sectors.company_id';
 if(isset($providers_sql)) $sql = $sql.' JOIN ( '.$providers_sql.' ) sectors ON C.id = sectors.company_id';
+if(isset($assigned_sql)) $sql = $sql.' JOIN ( '.$assigned_sql.' ) assigned ON C.id = assigned.id';
 
 $sql = $sql.' LEFT JOIN 
 (-- TT1 
@@ -299,6 +311,9 @@ from MORTGAGES M
   
 JOIN PROVIDERS P
 ON M.provider_id = P.id 
+
+order by 1, 4, 5 desc
+
 )   T
 
 group by T."company id"
