@@ -27,19 +27,23 @@ class MY_Controller extends CI_Controller {
 		$this->load->model('Campaigns_model');
 		$this->load->model('Sectors_model');
 		$this->load->model('Users_model');
-		$this->load->helper('mobile');
 		$this->load->model('Providers_model');
-
-		// var_dump($this->session->all_userdata());
-
+		$this->load->model('Actions_model');
+		// $this->load->helper('mobile');
+		
+		 // var_dump($this->session->all_userdata());
+		
 		// try getting logged in user from session
 		if($this->session->userdata('logged_in')) 
 		{
+			
 			$logged_in = $this->session->userdata('logged_in');
-			$this->data['current_user'] = $this->current_user = $this->Users_model->get_user($logged_in['user_id']);
+			$this->data['current_user'] = $this->Users_model->get_user($logged_in['user_id']);
+			
 		}
 		else
 		{
+			
 			//user not in session and segment 1 exist then redirect to login
 			if($this->uri->segment(1)) redirect('/','location');
 		}
@@ -93,7 +97,7 @@ class MY_Controller extends CI_Controller {
 		// var_dump($this->input->post());
 
 	}
-	protected function clear_campaign_from_session($post)
+	protected function clear_campaign_from_session()
 	{
 		$this->session->unset_userdata('campaign_name');
 		$this->session->unset_userdata('campaign_owner');

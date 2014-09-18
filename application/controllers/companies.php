@@ -10,13 +10,14 @@ class Companies extends MY_Controller {
 	
 	public function index($ajax_refresh = False) 
 	{
+
 		$search_results_in_session = $this->session->userdata('companies');
 		$refresh_search_results = $this->session->flashdata('refresh');
 
 		if($this->input->post('submit') and !$refresh_search_results and !$ajax_refresh )
-		{
+		{ 
 
-			// var_dump($this->input->post());
+			$this->clear_campaign_from_session();
 
 			$this->load->library('form_validation');
 			$this->form_validation->set_rules('agency_name', 'agency_name', 'xss_clean');
@@ -36,7 +37,65 @@ class Companies extends MY_Controller {
 				// Result set to session and current search 
 				$this->seve_current_search($this->input->post());
 
-				$result = $this->Companies_model->search_companies($this->input->post());
+				$result = $this->Companies_model->search_companies_sql($this->input->post());
+				
+				$companies_json = json_decode($result[0]['json_agg']);
+				// print "<pre>";
+				// print_r($companies_json);
+				// print "</pre>";
+				// die;
+				
+				$companies_array = array();
+				foreach ($companies_json as $company) {
+					$mapped_companies_array = array();
+					if($company->company->f1->f1)$mapped_companies_array['id'] = $company->company->f1->f1;
+					if($company->company->f1->f2)$mapped_companies_array['name'] = $company->company->f1->f2;
+					if($company->company->f1->f3)$mapped_companies_array['url'] = $company->company->f1->f3;
+					if($company->company->f1->f4)$mapped_companies_array['eff_from'] = $company->company->f1->f4;
+					if($company->company->f1->f5)$mapped_companies_array['ddlink'] = $company->company->f1->f5;
+					if($company->company->f1->f6)$mapped_companies_array['linkedin_id'] = $company->company->f1->f6;
+					if($company->company->f1->f7)$mapped_companies_array['assignedto'] = $company->company->f1->f7;
+					if($company->company->f1->f8)$mapped_companies_array['turnover'] = $company->company->f1->f8;
+					if($company->company->f1->f9)$mapped_companies_array['turnover_method'] = $company->company->f1->f9;
+					if($company->company->f1->f11)$mapped_companies_array['contract'] = (bool)$company->company->f1->f11;
+					if($company->company->f1->f12)$mapped_companies_array['perm'] = (bool)$company->company->f1->f12;
+					if($company->company->f1->f13)$mapped_companies_array['active'] = (bool)$company->company->f1->f13;
+					if($company->company->f1->f14)$mapped_companies_array['created_at'] = $company->company->f1->f14;
+					if($company->company->f1->f15)$mapped_companies_array['updated_at'] = $company->company->f1->f15;
+					if($company->company->f1->f16)$mapped_companies_array['created_by'] = $company->company->f1->f16;
+					if($company->company->f1->f17)$mapped_companies_array['updated_by'] = $company->company->f1->f17;
+					if($company->company->f1->f18)$mapped_companies_array['registration'] = $company->company->f1->f18;
+					
+					// mortgages
+					if($company->company->f1->f10){
+						$sectors_array = array();
+						foreach ($company->company->f1->f10 as $sector) {
+							if(isset($sector->f1) && !empty($sector->f1)) $sectors_array[$sector->f1] = $sector->f2;
+						}
+						
+						if(empty($sectors_array) == False) $mapped_companies_array['sectors'] = $sectors_array;
+					}
+					
+
+					// sectors 
+					if(isset($company->company->f2) && (empty($company->company->f2) == False)){
+						$mortgages_array = array();
+						foreach ($company->company->f2 as $mortgage) {
+							$mortgages = array();
+							$mortgages['id'] = $mortgage->f1;
+							$mortgages['name'] = $mortgage->f2;
+							$mortgages['stage'] = $mortgage->f3;
+							$mortgages['eff_from'] = $mortgage->f4;
+							$mortgages_array[] = $mortgages;
+						}
+						$mapped_companies_array['mortgages'] = $mortgages_array;
+					}
+					$companies_array[]= $mapped_companies_array;
+				}
+				// print "<pre>";
+				// print_r($companies_array);
+				// print "</pre>";
+				$result =  $companies_array;
 				// if new search clear old data and campaigns from session
 				$this->clear_campaign_from_session();
 
@@ -49,13 +108,17 @@ class Companies extends MY_Controller {
 				}
 				else
 				{
-					$this->session->set_userdata('companies',$result);
+					$session_result = serialize($result);
+					$this->session->set_userdata('companies',$session_result);
 				}
 			}
 		}
 		elseif ($refresh_search_results or $ajax_refresh) 
 		{
 			$post = $this->session->userdata('current_search');
+			foreach ($post as $key => $value) {
+				$_POST[$key] = $value;
+			}
 			$result = $this->Companies_model->search_companies($post);
 			if(empty($result))
 			{
@@ -77,8 +140,8 @@ class Companies extends MY_Controller {
 		}
 
 		
-		$companies_array = $result ? $result->result_object : $search_results_in_session->result_object;
-
+		$companies_array = $result ? $result : $search_results_in_session->result_object;
+		
 		if(empty($companies_array))
 		{
 			$this->set_message_warning('No result found for query.');
@@ -96,7 +159,8 @@ class Companies extends MY_Controller {
 		$this->data['previous_page_number'] = ($current_page_number-1) >= 0 ? ($current_page_number-1) : FALSE;
 		$this->data['sectors_array'] = $this->session->userdata('sectors_array');
 		$this->data['companies'] = $companies_array_chunk[($current_page_number-1)];
-		$this->data['main_content'] = 'companies/list';
+
+		$this->data['main_content'] = 'companies/search_results';
 		$this->load->view('layouts/default_layout', $this->data);
 	}
 
@@ -154,6 +218,8 @@ class Companies extends MY_Controller {
 		if($this->input->get('id'))
 		{
 			$company = $this->Companies_model->get_company_by_id($this->input->get('id'));
+			$this->data['action_types'] = $this->Actions_model->get_action_types();
+			$this->data['actions'] = $this->Actions_model->get_actions($this->input->get('id'));
 			$this->data['companies'] = $company->result_object;
 			$this->data['main_content'] = 'companies/company';
 			$this->load->view('layouts/default_layout', $this->data);

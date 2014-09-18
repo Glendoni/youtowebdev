@@ -24,14 +24,22 @@
 
     <script src="<?php echo asset_url();?>/js/ladda.min.js"></script>
 
-    <!-- <script src="<?php echo asset_url();?>/js/pace.min.js"></script> -->
+    <script src="<?php echo asset_url();?>/js/pace.min.js"></script> 
     <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
+    <!-- DATE TIME PICKER -->
+    <script type="text/javascript" src="http://eonasdan.github.io/bootstrap-datetimepicker/scripts/moment.js"></script>
+    <script type="text/javascript" src="https://rawgit.com/Eonasdan/bootstrap-datetimepicker/master/src/js/bootstrap-datetimepicker.js"></script>
+
+
 
  	<script type="text/javascript">
  	$( document ).ready(function() {
- 		
- 		$('.button-checkbox').each(function () {
+ 		// Datetime picker
+         $('#planned_at').datetimepicker();
+         $('#actioned_at').datetimepicker();
+         
 
+ 		$('.button-checkbox').each(function () {
         // Settings
         var $widget = $(this),
             $button = $widget.find('button'),
@@ -181,11 +189,7 @@
                 return false;
             }
         });
-
-
  	});
-
-// { ["main_search"]=> string(1) "1" ["agency_name"]=> string(0) "" ["turnover_from"]=> string(0) "" ["turnover_to"]=> string(0) "" ["employees_from"]=> string(0) "" ["employees_to"]=> string(0) "" ["company_age_from"]=> string(0) "" ["company_age_to"]=> string(0) "" ["sectors"]=> array(1) { [0]=> string(1) "0" } ["providers"]=> string(1) "0" ["mortgage_from"]=> string(0) "" ["mortgage_to"]=> string(0) "" ["submit"]=> string(10) "loading..." } 
 
  	</script>
  <?php if(ENVIRONMENT == 'development'): ?>

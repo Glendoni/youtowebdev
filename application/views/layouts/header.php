@@ -33,8 +33,10 @@
     <!-- BTN animation -->
     <link href="<?php echo asset_url();?>css/ladda.min.css" rel="stylesheet">
 
-    <!-- PAGE LOADING BAR 
-    <link href="<?php echo asset_url();?>css/pace.css" rel="stylesheet">-->
+    <!-- PAGE LOADING BAR -->
+    <link href="<?php echo asset_url();?>css/pace.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="https://rawgit.com/Eonasdan/bootstrap-datetimepicker/master/build/css/bootstrap-datetimepicker.min.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -353,7 +355,7 @@
                                               <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                                               <strong>Warning!</strong> Please enter at least one search criteria.
                                             </div>
-                                            <?php echo form_open('/companies', 'id="main_search" novalidate="novalidate" name="main_search" class="" role="form"'); ?>
+                                            <?php echo form_open(site_url().'companies', 'id="main_search" novalidate="novalidate" name="main_search" class="" role="form"'); ?>
                                             <?php echo form_hidden('main_search','1');?>
                                             <?php if ($_POST['main_search']): ?>
                                                 <!-- <a class="btn btn-link pull-right" href="<?php echo site_url();?>">
@@ -422,7 +424,7 @@
                                                 ?>
                                                 </div>
                                             </div>
-                                            <div class='form-row'>
+                                            <!-- <div class='form-row'>
                                                 <?php  echo form_label('Employees ', 'employees_from', array('class'=>'control-label')); ?>
                                                 <div class="form-group"> 
                                                     <div class="col-md-6"> 
@@ -433,7 +435,7 @@
                                                     
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                         </div>
                                         <div class="panel-footer">
                                             <input type="submit" class="loading-btn btn btn-primary btn-block " value="Search" name="submit">

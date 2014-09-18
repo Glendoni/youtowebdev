@@ -7,8 +7,10 @@ class Companies_model extends CI_Model {
 		return $query->result();
 	}
 
+
 	function get_company_by_id($id)
 	{
+
 		$this->db->select('companies.*,addresses.address');
 		$this->db->from('companies');
 		$this->db->join('addresses','addresses.company_id = companies.id','left');
@@ -104,18 +106,213 @@ class Companies_model extends CI_Model {
 		return $query->result();
 	}
 
-	// function last_updated_companies(){
-	// 	$this->db->select('companies.name,companies.id');
-	// 	$this->db->from('companies');
-	// 	$this->db->where('updated_at >'," (CURRENT_DATE - INTERVAL '30 days') ", FALSE);
-	// 	$this->db->limit(10);
-	// 	$query = $this->db->get();
-	// 	return $query->result();
-	// }
+
+
+
+     // $query = $this->db->query("YOUR QUERY");
 
 	function search_companies_sql($post)
 	{
-		// pending
+	
+		// filter by name
+		if (isset($post['agency_name']) && strlen($post['agency_name'])) 
+		{
+			$company_name_sql = "select id from companies  where name ilike '%".$post['agency_name']."%'"; 
+			
+		}
+
+		// COMPANY AGE
+			// Defautl values
+			if(empty($post['company_age_from']) && !empty($post['company_age_to']))
+			{
+				$post['company_age_from'] = 1;
+			}
+
+			if(empty($post['company_age_to']) && !empty($post['company_age_from']))
+			{
+				$post['company_age_to'] = 4;
+			}
+		
+		if(isset($post['company_age_from']) && (!empty($post['company_age_from'])) )
+		{
+			$company_age_from = date("m-d-Y", strtotime("-".$post['company_age_from']." year"));
+			
+		}
+		if(isset($post['company_age_to']) && (!empty($post['company_age_to'])) )
+		{
+			$company_age_to = date("m-d-Y", strtotime("-".$post['company_age_to']." year"));
+			
+		}
+		if(isset($company_age_from) && isset($company_age_to)) 
+		{
+			$company_age_sql = 'select id from companies  where companies.eff_from between \''.$company_age_to.'\'  and \''.$company_age_from.'\' ';
+		}
+		
+
+		
+		// TURNOVER
+		if( (isset($post['turnover_from']) && !empty($post['turnover_from'])) && (isset($post['turnover_to']) && !empty($post['turnover_to'])) ) 
+		{
+			$turnover_sql = 'select company_id  from turnovers where turnover > '.$post['turnover_from'].'  and turnover < '.$post['turnover_to'].'  ';
+		}
+		
+		// EMP COUNT
+		// if((isset($post['employees_to']) and !empty($post['employees_to'])) and (isset($post['employees_from']) and !empty($post['employees_from'])) ) 
+		// {
+		// 	$emp_count_sql = 'select company_id  from emp_counts where count > '.$post['employees_from'].'  and turnover < '.$post['employees_to'].'  ';
+		// }
+
+		// MORTGAGE
+		if (!empty($post['mortgage_to']) && !empty($post['mortgage_from']))
+		{
+			$mortgage_sql = 'select company_id  from mortgages where mortgages.stage = \''.MORTGAGES_OUTSTANDING.'\' and EXTRACT (doy from mortgages.eff_from) - EXTRACT (doy from now()) BETWEEN '.$post['mortgage_from'].' AND '.$post['mortgage_to'].'  ';
+		}
+
+		// SECTORS
+
+		if( isset($post['sectors']) && (!in_array("0", $post['sectors'])) )
+		{	
+			$sectors_sql = 'select operates.company_id from operates where operates.active = True and operates.sector_id in ('.implode(', ', $post['sectors']).')';
+		}
+
+		// Providers
+		if(isset($post['providers']) && (!empty($post['providers'])) )
+		{
+			$providers_sql = 'select mortgages.company_id "company_id" from providers join mortgages on  providers.id = mortgages.provider_id	where providers.id = '.$post['providers'];
+		}
+
+
+		// -- Data to Display a Company's details
+		
+
+		$sql = 'select json_agg(results)
+from (
+
+select row_to_json((
+       T1."JSON output",
+       T2."JSON output"
+       )) "company"
+from 
+(-- T1
+select C.id,
+       row_to_json((
+       C.id, -- f1
+       C.name, -- f2
+       C.url, -- f3
+	   to_char(C.eff_from, \'DD\Mon\YYYY\'), -- f4
+	   C.ddlink, -- f5
+	   C.linkedin_id, -- f6
+	   U.name, -- f7
+       TT1."turnover", -- f8
+	   TT1."turnover_method",  -- f9
+	   json_agg( 
+	   row_to_json ((
+	   TT2."sector_id", TT2."sector"))))) "JSON output", -- f10
+	   C.contract, -- f11
+	   C.perm, -- f12
+	   C.active, -- f13
+	   C.created_at, -- f14
+	   C.updated_at, -- f15
+	   C.created_by,-- f16
+	   C.updated_by,-- f17
+	   C.registration -- f18
+   
+-- from (select * from COMPANIES where id = 51794) C
+from COMPANIES C';
+
+if(isset($company_name_sql)) $sql = $sql. ' JOIN ( '.$company_name_sql.' ) name ON C.id = name.id ';
+if(isset($company_age_sql)) $sql =  $sql.' JOIN ( '.$company_age_sql.' ) company_age ON C.id = company_age.id ';
+if(isset($turnover_sql)) $sql = $sql.' JOIN ( '.$turnover_sql.' ) turnovers ON C.id = turnovers.company_id';
+if(isset($mortgage_sql)) $sql = $sql.' JOIN ( '.$mortgage_sql.' ) mortgages ON C.id = mortgages.company_id';
+if(isset($sectors_sql)) $sql = $sql.' JOIN ( '.$sectors_sql.' ) sectors ON C.id = sectors.company_id';
+if(isset($providers_sql)) $sql = $sql.' JOIN ( '.$providers_sql.' ) sectors ON C.id = sectors.company_id';
+
+$sql = $sql.' LEFT JOIN 
+(-- TT1 
+select T.company_id "company id",
+       T.turnover "turnover",
+       T.method "turnover_method"       
+from 
+(-- T1
+select id "id",
+       company_id,
+       max(eff_from) OVER (PARTITION BY company_id) "max eff date"
+from TURNOVERS
+)   T1
+  
+JOIN TURNOVERS T
+ON T1.id = T.id
+  
+where T1."max eff date" = T.eff_from
+  
+  
+)   TT1
+ON TT1."company id" = C.id 
+
+LEFT JOIN
+(-- TT2
+select O.company_id "company id",
+       S.id "sector_id",
+       S.name "sector"       
+from OPERATES O
+  
+JOIN SECTORS S
+ON O.sector_id = S.id 
+)   TT2
+ON TT2."company id" = C.id
+
+LEFT JOIN
+USERS U
+ON U.id = C.user_id
+		 
+group by C.id,
+         C.name,
+         C.url,
+	     C.eff_from,
+	     C.ddlink,
+	     C.linkedin_id,
+	     U.name,
+         TT1."turnover",
+	     TT1."turnover_method"
+
+order by C.id 
+
+
+)   T1
+
+LEFT JOIN
+
+(-- T2
+select T."company id",
+       json_agg(
+	   row_to_json(
+	   row (T."mortgage id", T."mortgage provider", T."mortgage stage", T."mortgage start"))) "JSON output"  -- f11
+		 
+from 
+(-- T
+select M.company_id "company id",
+       M.id "mortgage id",
+       P.name "mortgage provider",
+       M.stage "mortgage stage",
+       to_char(M.eff_from, \'DD\Mon\YYYY\')  "mortgage start"
+from MORTGAGES M
+  
+JOIN PROVIDERS P
+ON M.provider_id = P.id 
+)   T
+
+group by T."company id"
+
+order by T."company id"
+
+
+)   T2
+ON T1.id = T2."company id"
+ 
+) results';
+		// print_r($sql);
+		$query = $this->db->query($sql);
+		return $query->result_array();
 	}
 
 	function search_companies($post)

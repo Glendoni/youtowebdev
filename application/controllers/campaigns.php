@@ -70,6 +70,7 @@ class Campaigns extends MY_Controller {
 			$this->session->set_userdata('campaign_owner',$campaign[0]->user_id);
 			$this->session->set_userdata('campaign_shared',$campaign[0]->shared);
 			$this->session->set_userdata('current_search',$post);
+			
 			redirect('/companies');
 		}
 		else

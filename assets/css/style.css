@@ -1,5 +1,5 @@
 /*page-results-list */
-.page-results-list .panel-heading {
+.page-results-list .company .panel-heading {
 	padding: 5px;
 	width: 250px;
 	float: left;
@@ -58,11 +58,27 @@
 	border-radius: 0px;
 }
 
-.assign-to-wrapper {
+.assign-to-wrapper form {
 	position: relative;
 	float: left;
 }
 
-.assign-to-wrapper .btn {
-	border-radius: 5px 0px 0px 5px;
+.assign-to-wrapper .btn-primary {
+	margin-right: 5px;
+}
+
+.navbar-default .navbar-text {
+	color: #000;
+	font-size: 22px;
+	padding: 0px;
+	margin: 0px;
+	line-height: 49px;
+}
+
+.navbar-default .navbar-text small{
+	color: #777;
+}
+
+.label {
+	font-weight: normal;
 }

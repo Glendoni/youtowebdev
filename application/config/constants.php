@@ -56,5 +56,5 @@ define('TURNOVER_METHOD_t','ACTIVE');
 
 // # use it
 // $methods = unserialize (TURNOVER_METHODS);
-define ("TURNOVER_METHODS", serialize (array ('t'=>'ACTUAL', 'f'=>'ESTIMATE')));
+define ("TURNOVER_METHODS", serialize (array ('ACTUAL'=>'ACTUAL', 'ESTIMATE'=>'ESTIMATE')));
 
