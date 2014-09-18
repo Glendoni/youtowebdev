@@ -74,6 +74,15 @@ class MY_Controller extends CI_Controller {
 			$this->session->set_userdata('providers_options',$providers_options);
 			$providers_options = array(0=>'All') + $providers_options;
 		}
+
+		// if($this->session->userdata('system_users'))
+		// {
+		// 	$system_users = $this->Users_model->get_sys
+		// }
+		// else
+		// {
+
+		// }
 		// SET CONSTANTS AND DEFAULTS
 		
 		// Add options

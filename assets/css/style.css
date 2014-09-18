@@ -63,6 +63,7 @@
 	float: left;
 }
 
+
 .assign-to-wrapper .btn-primary {
 	margin-right: 5px;
 }
@@ -82,3 +83,8 @@
 .label {
 	font-weight: normal;
 }
+
+.assign-to-wrapper .btn {
+	border-radius: 5px 0px 0px 5px;
+}
+
