@@ -120,7 +120,7 @@ class Companies extends MY_Controller {
 			foreach ($post as $key => $value) {
 				$_POST[$key] = $value;
 			}
-			$result = $this->Companies_model->search_companies($post);
+			$result = $this->Companies_model->search_companies_sql($post);
 			if(empty($result))
 			{
 				$this->set_message_warning('No result found for query.');
