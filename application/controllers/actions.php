@@ -33,4 +33,38 @@ class Actions extends MY_Controller {
 			die('invalid form');
 		}
 	} 
+
+	public function edit(){
+		if($this->input->post('action_id'))
+		{
+			if($this->input->post('action_do') == 'complete')
+			{
+				$result = $this->Actions_model->set_action_completed($this->input->post('action_id'),$this->input->post('user_id'));
+
+				if($result)
+				{
+					$this->set_message_success('Successfuly completed action');
+				}
+				else
+				{
+					$this->set_message_warning('Error while completing action');
+				}
+				redirect('/dashboard','refresh');
+			}
+			else if($this->input->post('action_do') == 'cancel')
+			{
+				$result = $this->Actions_model->set_action_cancel($this->input->post('action_id'),$this->input->post('user_id'));
+
+				if($result)
+				{
+					$this->set_message_success('Successfuly cancelled action');
+				}
+				else
+				{
+					$this->set_message_warning('Error while canceling action');
+				}
+				redirect('/dashboard','refresh');
+			}
+		}
+	}
 }

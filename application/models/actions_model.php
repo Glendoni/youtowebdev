@@ -13,6 +13,19 @@ class Actions_model extends CI_Model {
 		return $query->result_object();
 	}
 
+	public function get_pending_actions($user_id){
+		$data = array(
+			'user_id' => $user_id,
+			'actioned_at' => NULL,
+			'cancelled_at' => NULL,
+
+			);
+		$this->db->order_by('planned_at','desc');
+		$query = $this->db->get_where('actions', $data);
+		return $query->result_object();
+
+	}
+
 	public function get_action_types_array()
 	{
 
@@ -35,6 +48,23 @@ class Actions_model extends CI_Model {
 	
 
 	// UPDATES
+
+	public function set_action_completed($action_id,$user_id)
+	{
+		$data = array(
+			'actioned_at' => date('Y-m-d H:i:s'),
+			'updated_at' => date('Y-m-d H:i:s'),
+			'updated_by' => $user_id,
+			);
+		$this->db->where('id',$action_id);
+		$this->db->update('actions',$data);
+		if($this->db->affected_rows() !== 1){
+			$this->addError($this->db->_error_message());
+			return False;
+		}else{
+			return True;
+		} 
+	}
 
 	
 
