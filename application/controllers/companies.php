@@ -195,7 +195,6 @@ class Companies extends MY_Controller {
 		// print_r($companies_json);
 		// print_r('</pre>');
 
-		
 		$companies_array = array();
 		foreach ($companies_json as $company) {
 			$mapped_companies_array = array();

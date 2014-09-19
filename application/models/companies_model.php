@@ -141,7 +141,8 @@ class Companies_model extends CI_Model {
 
 		
 		// TURNOVER
-		if( (isset($post['turnover_from']) && !empty($post['turnover_from'])) && (isset($post['turnover_to']) && !empty($post['turnover_to'])) ) 
+		
+		if( (isset($post['turnover_from']) && strlen($post['turnover_from']) > 0) && (strlen($post['turnover_to']) > 0 && isset($post['turnover_to'])) ) 
 		{
 			$turnover_sql = 'select company_id  from turnovers where turnover > '.$post['turnover_from'].'  and turnover < '.$post['turnover_to'].'  ';
 		}
