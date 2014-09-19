@@ -286,7 +286,7 @@
 					 // print_r('<pre>');print_r($action);print_r('</pre>');
 
 					?>
-						  <tr>
+						  <tr <?php echo  ($action->planned_at? 'class="success"':'class="danger"')?>>
 						  	<td><?php echo $system_users[$action->user_id]?></td>
 						  	<td><?php echo $action_types_array[$action->action_type_id]; ?></td>
 						  	<td><?php echo $action->comments;?></td>
