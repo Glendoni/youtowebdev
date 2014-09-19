@@ -7,8 +7,6 @@ class Actions_model extends CI_Model {
 	{
 		$data = array(
 			'company_id' => $company_id,
-			'actioned_at' => NULL,
-			'cancelled_at' => NULL,
 			);
 		$query = $this->db->get_where('actions', $data);
 		return $query->result_object();
@@ -26,18 +24,18 @@ class Actions_model extends CI_Model {
 	
 
 	// INSERTS
-	public function create($company_id,$owner_id,$campaign_id=NULL,$comments=NULL,$planned_at=NULL,$window=False,$action_type_id,$actioned_at=False)
+	public function create($post)
 	{
 		// created_at,updated_at,created_by
 		$data = array(
-			'company_id' => $company_id,
-			'user_id' => $owner_id,
-			'comments'=> $comments,
-			'planned_at'=> ($planned_at? date('Y-m-d H:i:s',strtotime($planned_at)):NULL),
-			'window'=> ($window?:''),
-			'created_by'=> $owner_id,
-			'action_type_id'=> $action_type_id,
-			'actioned_at'=> ($actioned_at?date('Y-m-d H:i:s',strtotime($actioned_at)):NULL),
+			'company_id' => $post['company_id'],
+			'user_id' => $post['user_id'],
+			'comments'=> $post['comment'],
+			'planned_at'=> ($post['planned_at']? date('Y-m-d H:i:s',strtotime($post['planned_at'])):NULL),
+			'window'=> ($post['window']?$post['window']:NULL),
+			'created_by'=> $post['user_id'],
+			'action_type_id'=> $post['action_type'],
+			'actioned_at'=> ($post['actioned_at']?date('Y-m-d H:i:s',strtotime($post['actioned_at'])):date('Y-m-d H:i:s')),
 			);
 		
 		$query = $this->db->insert('actions', $data);

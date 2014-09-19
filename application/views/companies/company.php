@@ -1,4 +1,6 @@
-<?php $company = $companies[0];?>
+<?php  $company = $companies[0]; 
+// print_r('<pre>');print_r($companies[0]);print_r('</pre>');
+?>
 
 <div class="row page-results-list">
 	<h1 class="page-header">
@@ -114,8 +116,8 @@
 	                </button>
 	                
 				</div>
-				<h5>Address</h5>
-				<small><?php echo $company->address; ?> </small>
+				<strong>Address</strong>
+				<p><?php echo $company->address; ?> </p>
 			</div>
 			
 			<div class="col-md-12">
@@ -124,7 +126,7 @@
 			
 			<!-- TURNOVER -->
 			<div class="col-md-3 centre">
-			<small>Turnover</small>
+			<strong>Turnover</strong>
 				<h3 class="details">
 					<strong>£ <?php echo number_format($company->turnover); ?></strong>
 					<br>
@@ -135,7 +137,7 @@
 			</div>
 
 			<!-- EMPLOYEES -->
-			<div class="col-md-3 centre"><small>Employees</small>
+			<div class="col-md-3 centre"><strong>Employees</strong>
 				<h3 class="details"><?php  echo  ($company->emp_count)? '<strong><span class="label label-info">'.$company->emp_count.'</span></strong>' : '<span class="label label-warning">Unknown</span>' ?> </h3>
 				<!-- <small>LinkedIn Connections</small>
 				<h3 class="details"><strong><span class="label label-info"><?php echo $company->company_connections ?></span> </strong></h3> -->
@@ -143,7 +145,7 @@
 
 			<!-- SECTORS -->
 			<div class="col-md-3 centre">
-				<small>Sectors</small> 
+				<strong>Sectors</strong>
 				<?php $company_sectors = explode(",",$company->company_sectors);
 				foreach ($company_sectors as $sector) {
 					echo '<h5>'.$sector.'</h5>';
@@ -189,14 +191,17 @@
 			</div>
 		</div>
 	</div>
-	<div class="panel panel-success">
-		<div class="panel-heading">
-			<h3 class="panel-title">Actions</h3>
-		</div>
-		<div class="panel-body">
-  		<?php $hidden = array('company_id' => $company->id , 'user_id' => $current_user['id']);
+
+	<div class="row">
+		<div class="col-md-9">
+		<div class="panel panel-success ">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">Now</h3>
+		  </div>
+		  <div class="panel-body">
+		   <?php $hidden = array('company_id' => $company->id , 'user_id' => $current_user['id']);
 					 echo form_open(site_url().'actions/create', 'name="create" class="form" role="form"',$hidden); ?>
-			<div class="form-group col-md-1">
+			<div class="form-group ">
 				<label>Type</label>
 				<select name="action_type" class="form-control">
 					<?php foreach($action_types as $action ): ?>
@@ -204,43 +209,112 @@
 					<?php endforeach; ?>
 				</select>
 			</div>
-			<div class="form-group col-md-4">
+			<div class="form-group ">
 				<label>Comment</label>
-				<textarea class="form-control" name="comment" rows="6"></textarea>
+				<textarea class="form-control" name="comment" rows="12"></textarea>
 			</div>
-			<div class="col-md-4">
-				<div class="form-group col-md-6" >
-					<label>Planned</label>
-					<input type="text" class="form-control" id="planned_at" data-date-format="YYYY/MM/DD H:m" name="planned_at" placeholder="">
-				</div>
-				
-				<div class="form-group col-md-6" >
-					<label>Actioned</label>
-					<input type="text" class="form-control" id="actioned_at" name="actioned_at" placeholder="">
-				</div>
-
-				<div class="form-group col-md-6 	 window_completition" >
-					<label>Window for completion </label>
-					<input type="text" class="form-control " id="" name="window" placeholder="days">
-				</div>
-			</div>
-			<div class="form-group col-md-2" >
+			<div class="form-group " >
 			<label> </label>
 			<button type="submit" name="save" class="btn btn-success form-control">Save</button>
 			</div>
-
 			<?php echo form_close(); ?>
-			<?php if (count($actions) > 0): ?>
-				<?php foreach ($actions as $action): ?>
+		  </div>
+		</div>
+		</div>
+		<div class="col-md-3">
+			<div class="panel panel-info">
+			  <div class="panel-heading">
+			    <h3 class="panel-title">Follow up</h3>
+			  </div>
+			  <div class="panel-body">
+			   <?php $hidden = array('company_id' => $company->id , 'user_id' => $current_user['id']);
+						 echo form_open(site_url().'actions/create', 'name="create" class="form" role="form"',$hidden); ?>
+				<div class="">
+					<div class="form-group ">
+						<label>Type</label>
+						<select name="action_type" class="form-control">
+							<?php foreach($action_types as $action ): ?>
+							  <option value="<?php echo $action->id; ?>"><?php echo $action->name; ?></option>
+							<?php endforeach; ?>
+						</select>
+					</div>
+					<div class="form-group " >
+						<label>Planned for</label>
+						<input type="text" class="form-control" id="planned_at" data-date-format="YYYY/MM/DD H:m" name="planned_at" placeholder="">
+					</div>
+					<div class="form-group ">
+						<label>Comment</label>
+						<textarea class="form-control" name="comment" rows="6"></textarea>
+					</div>
+					<!-- <div class="form-group " >
+						<label>Actioned</label>
+						<input type="text" class="form-control" id="actioned_at" name="actioned_at" placeholder="">
+					</div> -->
 
-				<?php endforeach ?>
-			<?php else: ?>
-				<div class="col-md-12">
-				<hr>
-					<h4>No actions found for this company</h4>
+					<div class="form-group 	 window_completition" >
+						<label>Window for completion </label>
+						<input type="text" class="form-control " id="" name="window" placeholder="days">
+					</div>
+					<button type="submit" name="save" class="btn btn-primary form-control">Schedule</button>
 				</div>
-			<?php endif; ?>
-	  </div>
+				<?php echo form_close(); ?>
+			  </div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="panel panel-default ">
+			<div class="panel-heading">
+				<h3 class="panel-title">Actions</h3>
+			</div>
+			<div class="panel-body">
+				<?php if (count($actions) > 0): ?>
+					<table class="table">
+						  <tr>
+						  	<th>Created by</th>
+						  	<th>Action type</th>
+						  	<th>Comments</th>
+						  	<th>Actioned at</th>
+						  	<th>Planned at</th>
+						  	<th>Window</th>
+						  	<th>Cancelled at</th>
+						  	<th>Last updated</th>
+						  		
+						  </tr>
+					<?php foreach ($actions as $action): 
+					 print_r('<pre>');print_r($action_types);print_r('</pre>');
+
+					?>
+						  <tr>
+						  	<td><?php echo $system_users[$action['user_id']]?></td>
+						  	<td><?php 
+						  	foreach ($action_types as $type) {
+						  		print_r($action['action_type_id']);
+						  		if($type->id == $action['action_type_id']){
+						  			$action_name = $type->name;
+
+						  		}
+						  	}
+
+						  	echo $action_name; ?></td>
+						  	<td><?php echo $action['comments'];?></td>
+						  	<td><?php echo $action['actioned_at']?></td>
+						  	<td><?php echo $action['planned_at']?></td>
+						  	<td><?php echo $action['window']?></td>
+						  	<td><?php echo $action['cancelled_at']?></td>
+						  	<td><?php echo $action['updated_at']?></td>
+						  </tr>
+					<?php endforeach ?>
+					</table>
+				<?php else: ?>
+					<div class="col-md-12">
+					<hr>
+						<h4>No actions found for this company</h4>
+					</div>
+				<?php endif; ?>
+		  </div>
+		</div>
 	</div>
 </div>
 

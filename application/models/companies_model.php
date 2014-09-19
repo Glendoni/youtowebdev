@@ -28,7 +28,7 @@ class Companies_model extends CI_Model {
 
 		// Sectors the company is in 
 		$this->db->select("(SELECT string_agg(S.name, ',') FROM sectors S,operates O WHERE O.company_id = companies.id AND S.id = O.sector_id  AND O.active = 'True') as company_sectors", FALSE, FALSE);
-
+		$this->db->select("(SELECT array_to_string(array_agg(S.id), ',')  FROM sectors S,operates O WHERE O.company_id = companies.id AND S.id = O.sector_id  AND O.active = 'True'  ) as company_sectors_ids", FALSE, FALSE);
 		// Linkedin connectioins ( need improvement , can be done once a month to another table)
 		$this->db->select("(SELECT count(*) FROM connections C,employees E WHERE E.company_id = companies.id AND C.employee_id = E.id ) as company_connections", FALSE, FALSE);
 
@@ -210,24 +210,28 @@ select C.id,
        C.id, -- f1
        C.name, -- f2
        C.url, -- f3
-	   to_char(C.eff_from, \'DD\Mon\YYYY\'), -- f4
+	   to_char(C.eff_from, \'DD/Mon/YYYY\'), -- f4
 	   C.ddlink, -- f5
 	   C.linkedin_id, -- f6
 	   U.name, -- f7
-       TT1."turnover", -- f8
-	   TT1."turnover_method",  -- f9
+	   U.id , -- f8
+	   A.address, --f9
+	   C.contract, --f10
+	   C.perm, -- f11
+	   C.active, -- f12
+	   C.created_at, -- f13
+	   C.updated_at, -- f14
+	   C.created_by,-- f15
+	   C.updated_by,-- f16
+	   C.registration, -- f17
+       TT1."turnover", -- f18
+	   TT1."turnover_method",  -- f19
+	   EMP.count,--f20
 	   json_agg( 
 	   row_to_json ((
-	   TT2."sector_id", TT2."sector"))))) "JSON output", -- f10
-	   C.contract, -- f11
-	   C.perm, -- f12
-	   C.active, -- f13
-	   C.created_at, -- f14
-	   C.updated_at, -- f15
-	   C.created_by,-- f16
-	   C.updated_by,-- f17
-	   C.registration -- f18
-   
+	   TT2."sector_id", TT2."sector"))))) "JSON output" -- f20
+	   
+
 
 from COMPANIES C';
 
@@ -267,11 +271,23 @@ select O.company_id "company id",
        S.id "sector_id",
        S.name "sector"       
 from OPERATES O
-  
+
 JOIN SECTORS S
-ON O.sector_id = S.id 
+ON O.sector_id = S.id
+where O.active = \'TRUE\'
 )   TT2
 ON TT2."company id" = C.id
+
+
+
+LEFT JOIN 
+(
+	SELECT count,company_id FROM "emp_counts"  ORDER BY "emp_counts"."created_at" DESC limit 1
+) EMP ON EMP.company_id = C.id
+
+LEFT JOIN 
+ADDRESSES A
+ON A.company_id = C.id
 
 LEFT JOIN
 USERS U
@@ -283,9 +299,12 @@ group by C.id,
 	     C.eff_from,
 	     C.ddlink,
 	     C.linkedin_id,
+	     U.id,
 	     U.name,
+	     A.address,
          TT1."turnover",
-	     TT1."turnover_method"
+	     TT1."turnover_method",
+	     EMP.count
 
 order by C.id 
 
@@ -306,7 +325,7 @@ select M.company_id "company id",
        M.id "mortgage id",
        P.name "mortgage provider",
        M.stage "mortgage stage",
-       to_char(M.eff_from, \'DD\Mon\YYYY\')  "mortgage start"
+       to_char(M.eff_from, \'DD/Mon/YYYY\')  "mortgage start"
 from MORTGAGES M
   
 JOIN PROVIDERS P
@@ -327,6 +346,7 @@ ON T1.id = T2."company id"
 ) results';
 		// print_r($sql);
 		$query = $this->db->query($sql);
+
 		return $query->result_array();
 	}
 
@@ -511,7 +531,6 @@ ON T1.id = T2."company id"
 
 		if (!empty($post['mortgage_to']) && !empty($post['mortgage_from']))
 		{
-			
 			$this->db->where('mortgages.stage', MORTGAGES_OUTSTANDING);
 			$mortgage_end_from = $post['mortgage_from'];
 			$mortgage_end_to = $post['mortgage_to'];
@@ -554,8 +573,9 @@ ON T1.id = T2."company id"
 			$this->db->where('mortgages.company_id',$company->id);
 			$this->db->join('providers','providers.id = mortgages.provider_id','left');
 			$this->db->group_by(array('providers.name', 'mortgages.stage' , 'mortgages.eff_from'));
-			$this->db->order_by('mortgages.stage');
-			$this->db->order_by('mortgages.eff_from');
+			$this->db->order_by('mortgages.eff_from','desc');
+			$this->db->order_by('mortgages.stage','asc');
+			
 			$mortgages = $this->db->get(); 
 
 
@@ -565,16 +585,7 @@ ON T1.id = T2."company id"
 			// Place the result array on the current object
 			$companies->result_object[$key]->mortgages = $mortgages2;
 
-			// Check for assign to
-			// $assign_to = $company->company_assign_to;
-			// if(!empty($assign_to))
-			// {
-			// 	$names = explode(" ", $assign_to); 
-			// 	$initials = $names[0][0].$names[1][0];
-			// 	$to_upper = strtoupper($initials);
-			// 	// Set to array
-			// 	$companies->result_object[$key]->company_assign_to = $to_upper;
-			// }
+			
 		}
 		
 		return  $companies;
@@ -644,11 +655,13 @@ ON T1.id = T2."company id"
 		$company_status = $this->db->affected_rows();
 		// clear existing sectors to no active 
 		$result = $this->clear_company_sectors($post['company_id']);
-		
+		print_r($post['sectors']);
 		foreach ($post['sectors'] as $sector_id) {
+			print_r($sector_id);
 			$this->db->set('company_id', $post['company_id']);
 			$this->db->set('sector_id', $sector_id);  
 			$this->db->insert('operates'); 
+			print_r($this->db->affected_rows());
 		}
 		return $this->db->affected_rows();
 	}

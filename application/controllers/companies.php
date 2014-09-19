@@ -38,68 +38,10 @@ class Companies extends MY_Controller {
 				// Result set to session and current search 
 				$this->seve_current_search($this->input->post());
 
-				$result = $this->Companies_model->search_companies_sql($this->input->post());
+				$raw_search_results = $this->Companies_model->search_companies_sql($this->input->post());
 				
-				$companies_json = json_decode($result[0]['json_agg']);
-				// print "<pre>";
-				// print_r($companies_json);
-				// print "</pre>";
-				// die;
-
-				$companies_array = array();
-				foreach ($companies_json as $company) {
-					$mapped_companies_array = array();
-					if($company->company->f1->f1)$mapped_companies_array['id'] = $company->company->f1->f1;
-					if($company->company->f1->f2)$mapped_companies_array['name'] = $company->company->f1->f2;
-					if($company->company->f1->f3)$mapped_companies_array['url'] = $company->company->f1->f3;
-					if($company->company->f1->f4)$mapped_companies_array['eff_from'] = $company->company->f1->f4;
-					if($company->company->f1->f5)$mapped_companies_array['ddlink'] = $company->company->f1->f5;
-					if($company->company->f1->f6)$mapped_companies_array['linkedin_id'] = $company->company->f1->f6;
-					if($company->company->f1->f7)$mapped_companies_array['assignedto'] = $company->company->f1->f7;
-					if($company->company->f1->f8)$mapped_companies_array['turnover'] = $company->company->f1->f8;
-					if($company->company->f1->f9)$mapped_companies_array['turnover_method'] = $company->company->f1->f9;
-					if($company->company->f1->f11)$mapped_companies_array['contract'] = (bool)$company->company->f1->f11;
-					if($company->company->f1->f12)$mapped_companies_array['perm'] = (bool)$company->company->f1->f12;
-					if($company->company->f1->f13)$mapped_companies_array['active'] = (bool)$company->company->f1->f13;
-					if($company->company->f1->f14)$mapped_companies_array['created_at'] = $company->company->f1->f14;
-					if($company->company->f1->f15)$mapped_companies_array['updated_at'] = $company->company->f1->f15;
-					if($company->company->f1->f16)$mapped_companies_array['created_by'] = $company->company->f1->f16;
-					if($company->company->f1->f17)$mapped_companies_array['updated_by'] = $company->company->f1->f17;
-					if($company->company->f1->f18)$mapped_companies_array['registration'] = $company->company->f1->f18;
-					
-					// mortgages
-					if($company->company->f1->f10){
-						$sectors_array = array();
-						foreach ($company->company->f1->f10 as $sector) {
-							if(isset($sector->f1) && !empty($sector->f1)) $sectors_array[$sector->f1] = $sector->f2;
-						}
-						
-						if(empty($sectors_array) == False) $mapped_companies_array['sectors'] = $sectors_array;
-					}
-					
-
-					// sectors 
-					if(isset($company->company->f2) && (empty($company->company->f2) == False)){
-						$mortgages_array = array();
-						foreach ($company->company->f2 as $mortgage) {
-							$mortgages = array();
-							$mortgages['id'] = $mortgage->f1;
-							$mortgages['name'] = $mortgage->f2;
-							$mortgages['stage'] = $mortgage->f3;
-							$mortgages['eff_from'] = $mortgage->f4;
-							$mortgages_array[] = $mortgages;
-						}
-						$mapped_companies_array['mortgages'] = $mortgages_array;
-					}
-					$companies_array[]= $mapped_companies_array;
-				}
-				// print "<pre>";
-				// print_r($companies_array);
-				// print "</pre>";
-				$result =  $companies_array;
-				// if new search clear old data and campaigns from session
-				$this->clear_campaign_from_session();
-
+				$result = $this->process_search_result($raw_search_results);
+				
 				if(empty($result))
 				{
 					$this->set_message_warning('No result found for query.');
@@ -120,7 +62,8 @@ class Companies extends MY_Controller {
 			foreach ($post as $key => $value) {
 				$_POST[$key] = $value;
 			}
-			$result = $this->Companies_model->search_companies_sql($post);
+			$raw_search_results = $this->Companies_model->search_companies_sql($post);
+			$result = $this->process_search_result($raw_search_results);
 			if(empty($result))
 			{
 				$this->set_message_warning('No result found for query.');
@@ -210,12 +153,7 @@ class Companies extends MY_Controller {
 		return True;
 	}
 
-	public function refreshsearch()
-	{
-		$this->refresh_search_results();
-		redirect('/companies','refresh');	
-	}
-
+	
 	public function company()
 	{
 		if($this->input->get('id'))
@@ -224,6 +162,7 @@ class Companies extends MY_Controller {
 			$this->data['action_types'] = $this->Actions_model->get_action_types();
 			$this->data['actions'] = $this->Actions_model->get_actions($this->input->get('id'));
 			$this->data['companies'] = $company->result_object;
+			$this->data['sectors_array'] = $this->session->userdata('sectors_array');
 			$this->data['main_content'] = 'companies/company';
 			$this->load->view('layouts/default_layout', $this->data);
 		}
@@ -238,9 +177,75 @@ class Companies extends MY_Controller {
 	{
 		if($this->input->post('edit_company'))
 		{
+			// We need to clean the post and validate the post fields *pending*
+
 			$result = $this->Companies_model->update_details($this->input->post());
-			$this->refreshsearch();
+			if($result > 0){
+				$this->refresh_search_results();
+				redirect('/companies','refresh');
+			}
+			
 		}
+	}
+
+	private function process_search_result($raw_search_results){
+		$companies_json = json_decode($raw_search_results[0]['json_agg']);
+		// print_r('<pre>');
+		// print_r($companies_json);
+		// print_r('</pre>');
+
+		
+		$companies_array = array();
+		foreach ($companies_json as $company) {
+			$mapped_companies_array = array();
+			if($company->company->f1->f1)$mapped_companies_array['id'] = $company->company->f1->f1;
+			if($company->company->f1->f2)$mapped_companies_array['name'] = $company->company->f1->f2;
+			if($company->company->f1->f3)$mapped_companies_array['url'] = $company->company->f1->f3;
+			if($company->company->f1->f4)$mapped_companies_array['eff_from'] = $company->company->f1->f4;
+			if($company->company->f1->f5)$mapped_companies_array['ddlink'] = $company->company->f1->f5;
+			if($company->company->f1->f6)$mapped_companies_array['linkedin_id'] = $company->company->f1->f6;
+			if($company->company->f1->f7)$mapped_companies_array['assigned_to_name'] = $company->company->f1->f7;
+			if($company->company->f1->f8)$mapped_companies_array['assigned_to_id'] = $company->company->f1->f8;
+			if($company->company->f1->f9)$mapped_companies_array['address'] = $company->company->f1->f9;
+			if($company->company->f1->f10)$mapped_companies_array['contract'] = $company->company->f1->f10;
+			if($company->company->f1->f11)$mapped_companies_array['perm'] = $company->company->f1->f11;
+			if($company->company->f1->f12)$mapped_companies_array['active'] = (bool)$company->company->f1->f12;
+			if($company->company->f1->f13)$mapped_companies_array['created_at'] = (bool)$company->company->f1->f13;
+			if($company->company->f1->f14)$mapped_companies_array['updated_at'] = (bool)$company->company->f1->f14;
+			if($company->company->f1->f15)$mapped_companies_array['created_by'] = $company->company->f1->f15;
+			if($company->company->f1->f16)$mapped_companies_array['updated_by'] = $company->company->f1->f16;
+			if($company->company->f1->f17)$mapped_companies_array['registration'] = $company->company->f1->f17;
+			if($company->company->f1->f18)$mapped_companies_array['turnover'] = $company->company->f1->f18;
+			if($company->company->f1->f19)$mapped_companies_array['turnover_method'] = $company->company->f1->f19;
+			if($company->company->f1->f20)$mapped_companies_array['emp_count'] = $company->company->f1->f20;
+			
+			// sectors
+
+			if(!empty($company->company->f1->f21)){
+				$sectors_array = array();
+				foreach ($company->company->f1->f21 as $sector) {
+					if(isset($sector->f1) && !empty($sector->f1)) 
+						$sectors_array[$sector->f1] = $sector->f2;
+				}
+				if(!empty($sectors_array)) $mapped_companies_array['sectors'] = $sectors_array;
+			}
+			
+			// mortgages 
+			if(isset($company->company->f2) && (empty($company->company->f2) == False)){
+				$mortgages_array = array();
+				foreach ($company->company->f2 as $mortgage) {
+					$mortgages = array();
+					$mortgages['id'] = $mortgage->f1;
+					$mortgages['name'] = $mortgage->f2;
+					$mortgages['stage'] = $mortgage->f3;
+					$mortgages['eff_from'] = $mortgage->f4;
+					$mortgages_array[] = $mortgages;
+				}
+				$mapped_companies_array['mortgages'] = $mortgages_array;
+			}
+			$companies_array[]= $mapped_companies_array;
+		}
+		return $companies_array;
 	}
 
 }

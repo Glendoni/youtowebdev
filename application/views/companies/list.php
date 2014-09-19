@@ -1,4 +1,4 @@
-<?php foreach ( $companies as $company): ?>
+<?php foreach ( $companies as $company):  ?>
 <div class="modal fade" id="editModal<?php echo $company['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="Edit <?php echo $company['name']; ?>" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -69,17 +69,17 @@
     </div>
     <!-- /.modal-dialog -->
 </div>
-<div class="panel <?php if(isset($company['assignedto'])): ?> panel-primary <?php else: ?> panel-default <?php endif; ?> company">
-	<?php if(isset($company['assignedto'])): ?>
+<div class="panel <?php if(isset($company['assigned_to_name'])): ?> panel-primary <?php else: ?> panel-default <?php endif; ?> company">
+	<?php if(isset($company['assigned_to_name'])): ?>
 	<div class="panel-heading text-center" >
-        Assigned to <?php echo $company['assignedto']; ?> 
+        Assigned to <?php echo $company['assigned_to_name']; ?> 
     </div>
 	<?php endif; ?>
 	<div class="panel-body">
 		<div class="col-md-12">
 			<div class="pull-right assign-to-wrapper">
-				<?php if(isset($company['assignedto']) and !empty($company['assignedto'])): ?>
-					<?php if($company['assignedto'] == $current_user['id']) : ?>			
+				<?php if(isset($company['assigned_to_name']) and !empty($company['assigned_to_name'])): ?>
+					<?php if($company['assigned_to_id'] == $current_user['id']) : ?>			
 						<?php  $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'], 'page_number' => $current_page_number );
 						echo form_open('companies/unassign',array('name' => 'assignto', 'class'=>'assign-to-form'),$hidden); ?>
 						<button type="submit" class="btn  btn-primary  ladda-button" data-style="expand-right" data-size="1">
@@ -87,7 +87,7 @@
 						</button>
 						<?php echo form_close(); ?>
 					<?php else: ?>
-						<button class="btn  btn-primary " disabled="disabled"><?php  echo 'Assigned to '.$company['assignedto']; ?></button>
+						<button class="btn  btn-primary " disabled="disabled"><?php  echo 'Assigned to '.$company['assigned_to_name']; ?></button>
 					<?php endif; ?>
 				<?php else: ?>
 				<?php 
@@ -131,7 +131,7 @@
 		</div>
 
 		<!-- EMPLOYEES -->
-		<div class="col-md-3 centre"><small>Employees</small>
+		<div class="col-md-3 centre"><strong>Employees</strong>
 			<h3 class="details"><?php  echo  ($company['emp_count'])? '<strong><span class="label label-info">'.$company['emp_count'].'</span></strong>' : '<span class="label label-warning">Unknown</span>' ?> </h3>
 			<!-- <small>LinkedIn Connections</small>
 			<h3 class="details"><strong><span class="label label-info"><?php echo $company->company_connections ?></span> </strong></h3> -->

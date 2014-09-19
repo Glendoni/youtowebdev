@@ -3,10 +3,9 @@
 class Actions extends MY_Controller {
 
 	public function create(){
-		
+		print_r('<pre>');print_r($this->input->post());print_r('</pre>');
 		if($this->input->post('company_id'))
-		{
-			
+		{	
 			$this->load->library('form_validation');
 			$this->form_validation->set_rules('action_type', 'action_type', 'xss_clean');
 			$this->form_validation->set_rules('comment', 'comment', 'xss_clean');
@@ -19,7 +18,7 @@ class Actions extends MY_Controller {
 
 			if($this->form_validation->run())
 			{	
-				$result = $this->Actions_model->create($this->input->post('company_id'),$this->input->post('user_id'),False,$this->input->post('comment'),$this->input->post('planned_at'),$this->input->post('window'),$this->input->post('action_type'),$this->input->post('actioned_at'));
+				$result = $this->Actions_model->create($this->input->post());
 				
 				if(empty($result))
 				{
@@ -28,10 +27,10 @@ class Actions extends MY_Controller {
 				}
 				else
 				{
-					die('created');
+					redirect('companies/company?id='.$this->input->post('company_id'),'location');
 				}
 			}
-			die('missing');
+			die('invalid form');
 		}
 	} 
 }

@@ -122,7 +122,7 @@
                         textbtn.text('Assigned to '+name ); 
                     }else{
                         textbtn.text('Unassigned');
-                        form.closest('.panel').hide(); 
+                        form.closest('.panel').children('.panel-heading').hide();
                     }  
                 l.stop(); 
                 btn.attr('disabled','disabled'); 
@@ -159,7 +159,8 @@
                    btn.button('reset');
                    edit_btn.removeClass('disabled').removeAttr('disabled');
                    btn.removeClass('btn-success').addClass('btn-primary');
-                   window.location.href = window.location.href + "?refreshed";
+                   // window.location.href = window.location.href + "?refreshed";
+                   location.reload(true);
                 }, 1000);
             });
 
