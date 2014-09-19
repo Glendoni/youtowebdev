@@ -160,6 +160,7 @@ class Companies extends MY_Controller {
 		{
 			$company = $this->Companies_model->get_company_by_id($this->input->get('id'));
 			$this->data['action_types'] = $this->Actions_model->get_action_types();
+			$this->data['action_types_array'] = $this->Actions_model->get_action_types_array();
 			$this->data['actions'] = $this->Actions_model->get_actions($this->input->get('id'));
 			$this->data['companies'] = $company->result_object;
 			$this->data['sectors_array'] = $this->session->userdata('sectors_array');

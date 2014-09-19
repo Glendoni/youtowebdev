@@ -283,27 +283,18 @@
 						  		
 						  </tr>
 					<?php foreach ($actions as $action): 
-					 print_r('<pre>');print_r($action_types);print_r('</pre>');
+					 // print_r('<pre>');print_r($action);print_r('</pre>');
 
 					?>
 						  <tr>
-						  	<td><?php echo $system_users[$action['user_id']]?></td>
-						  	<td><?php 
-						  	foreach ($action_types as $type) {
-						  		print_r($action['action_type_id']);
-						  		if($type->id == $action['action_type_id']){
-						  			$action_name = $type->name;
-
-						  		}
-						  	}
-
-						  	echo $action_name; ?></td>
-						  	<td><?php echo $action['comments'];?></td>
-						  	<td><?php echo $action['actioned_at']?></td>
-						  	<td><?php echo $action['planned_at']?></td>
-						  	<td><?php echo $action['window']?></td>
-						  	<td><?php echo $action['cancelled_at']?></td>
-						  	<td><?php echo $action['updated_at']?></td>
+						  	<td><?php echo $system_users[$action->user_id]?></td>
+						  	<td><?php echo $action_types_array[$action->action_type_id]; ?></td>
+						  	<td><?php echo $action->comments;?></td>
+						  	<td><?php echo $action->actioned_at?></td>
+						  	<td><?php echo $action->planned_at?></td>
+						  	<td><?php echo $action->window?></td>
+						  	<td><?php echo $action->cancelled_at?></td>
+						  	<td><?php echo $action->updated_at?></td>
 						  </tr>
 					<?php endforeach ?>
 					</table>

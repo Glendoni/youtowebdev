@@ -82,16 +82,17 @@ class MY_Controller extends CI_Controller {
 		// SET CONSTANTS AND DEFAULTS
 		
 		// Add options
+		$system_users = array(0=>'anyone/nobody') + $system_users;
 		$this->data['system_users'] = $system_users;
 		$this->data['assigned_default'] = '0';
 
 		$sectors_options = array(0=>'All') + $sectors_options;
-		$sectors_options = array(-1=>'No sectors') + $sectors_options;
+		// $sectors_options = array(-1=>'No sectors') + $sectors_options;
 		$this->data['sectors_options'] = $sectors_options;
 		$this->data['sectors_default'] ='0';
 		
 		$providers_options = array(0=>'All') + $providers_options;
-		$providers_options = array(-1=>'No providers') + $providers_options;
+		// $providers_options = array(-1=>'No providers') + $providers_options;
 		$this->data['providers_options'] = $providers_options;
 		$this->data['providers_default'] ='0';
 

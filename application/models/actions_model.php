@@ -8,8 +8,23 @@ class Actions_model extends CI_Model {
 		$data = array(
 			'company_id' => $company_id,
 			);
+		$this->db->order_by('actioned_at','desc');
 		$query = $this->db->get_where('actions', $data);
 		return $query->result_object();
+	}
+
+	public function get_action_types_array()
+	{
+
+		$this->db->select("id,name");
+		$query = $this->db->get('action_types');
+		foreach($query->result() as $row)
+		{
+		  $array[$row->id] = $row->name;
+		} 	
+		return $array;
+
+
 	}
 
 	public function get_action_types()
@@ -35,7 +50,7 @@ class Actions_model extends CI_Model {
 			'window'=> ($post['window']?$post['window']:NULL),
 			'created_by'=> $post['user_id'],
 			'action_type_id'=> $post['action_type'],
-			'actioned_at'=> ($post['actioned_at']?date('Y-m-d H:i:s',strtotime($post['actioned_at'])):date('Y-m-d H:i:s')),
+			'actioned_at'=> (!isset($post['actioned_at']) && !isset($post['planned_at'])?date('Y-m-d H:i:s'):NULL),
 			);
 		
 		$query = $this->db->insert('actions', $data);
