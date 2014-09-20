@@ -99,13 +99,7 @@ class MY_Controller extends CI_Controller {
 		$this->data['shared_campaigns'] = $this->Campaigns_model->get_all_shared_campaigns();
 		$this->data['private_campaigns'] = $this->Campaigns_model->get_all_private_campaigns($this->get_current_user_id());
 
-		// if campaign exist set this variables
-		$this->data['current_campaign_name'] = ($this->session->userdata('campaign_name') ?: FALSE );
-		$this->data['current_campaign_owner_id'] = ($this->session->userdata('campaign_owner') ?: FALSE );
-		$this->data['current_campaign_id'] = ($this->session->userdata('campaign_id') ?: FALSE );
-		$this->data['current_campaign_editable'] = ($this->data['current_campaign_owner_id'] == $this->get_current_user_id() ? TRUE : FALSE ); 
 		
-		$this->data['current_campaign_is_shared'] = ($this->session->userdata('campaign_shared') == FALSE ? TRUE : FALSE );
 		//var_dump($this->session->userdata('campaign_shared'));
 		// var_dump($this->data['own_campaigns']);
 		//var_dump($this->session->all_userdata());

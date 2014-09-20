@@ -5,42 +5,21 @@
         
         </div>
       
-        <div class="">
-            <div class="panel panel-primary">
+        <div class="col-lg-6">
+            <div class="panel panel-default">
                 <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <i class="fa fa-database fa-5x"></i>
-                        </div>
-                        <div class="col-xs-9 text-right">
-                            <div class="huge"><?php echo count($pending_actions)?></div>
-                            <div>Your Calls & Meetings</div>
-                        </div>
-                    </div>
+                  <i class="fa fa-bell fa-fw"></i> Your Calls & Meetings <span class="label label-primary pull-right"><?php echo count($pending_actions)?></span> 
                 </div>
-                <a href="#">
+               
                     <div class="panel-footer">
                         <div class="clearfix"></div>
                         <div clas="list-group">
-                        <!-- <ul>
-                          <li></li>
-                        </ul> -->
-                        <table class="table">
-                          <tr>
-                            <th>Created by</th>
-                            <th>Action type</th>
-                            <th>Comments</th>
-                            <th>Actioned at</th>
-                            <th>Planned at</th>
-                            <th>Window</th>
-                            <th>Cancelled at</th>
-                            <th>Last updated</th>
-                            <th></th>
-                          </tr>
-                            <?php foreach ($pending_actions as $action): 
-                             // print_r('<pre>');print_r($action);print_r('</pre>');
+                        <ul class="list">
+                          <?php foreach ($pending_actions as $action): 
+                              // print_r('<pre>');print_r($action);print_r('</pre>');
+                              // die;
                             ?>
-                                  <tr <?php 
+                                <li <?php 
                                   if($action->cancelled_at)
                                   {
                                     echo 'class="danger"';
@@ -54,33 +33,33 @@
                                     echo 'class="warning"';
                                   }
                                    ?>
-
                                    >
-                                    <td><?php echo $system_users[$action->user_id]?></td>
-                                    <td><?php echo $action_types_array[$action->action_type_id]; ?></td>
-                                    <td><?php echo $action->comments;?></td>
-                                    <td><?php echo $action->actioned_at?></td>
-                                    <td><?php echo $action->planned_at?></td>
-                                    <td><?php echo $action->window?></td>
-                                    <td><?php echo $action->cancelled_at?></td>
-                                    <td><?php echo $action->updated_at?></td>
-                                    <td><?php $hidden = array('action_id' => $action->id , 'user_id' => $current_user['id'], 'action_do' => 'completed' );
-                                     echo form_open(site_url().'actions/edit', 'name="completed_action" class="completed_action inline" role="form"',$hidden); ?>
+                                  <div class="col-md-3"> 
+                                    <a href="<?php echo site_url();?>companies/company?id=<?php echo $action->company_id;?>" > <?php echo $action->company_name;?></a>
+                                  </div>
+                                  <div class="col-md-3">
+                                    <?php echo $action_types_array[$action->action_type_id]; ?>
+                                  </div>
+                                  <div class="col-md-2"> 
+                                    <?php echo date("l jS M ",$action->actioned_at);?> @ <?php echo date("g:i",$action->actioned_at);?>
+                                  </div>
+                                  <div class="col-md-4">
+
+                                    <?php $hidden = array('action_id' => $action->id , 'user_id' => $current_user['id'], 'action_do' => 'completed' );
+                                     echo form_open(site_url().'actions/edit', 'name="completed_action" class="completed_action " style="display:inline-block;" role="form"',$hidden); ?>
                                      <button class="btn btn-success"><i class="fa fa-check fa-lg"></i> Completed</button> 
                                      </form>
 
                                      <?php $hidden = array('action_id' => $action->id , 'user_id' => $current_user['id'] , 'action_do' => 'cancelled' );
-                                     echo form_open(site_url().'actions/edit', 'name="cancel_action" class="cancel_action inline" role="form"',$hidden); ?>
+                                     echo form_open(site_url().'actions/edit', 'name="cancel_action" class="cancel_action inline" style="display:inline-block;" role="form"',$hidden); ?>
                                      <button class="btn btn-danger" ><i class="fa fa-trash-o fa-lg"></i> Delete</button>
                                      </form>
-
-                                     </td>
-                                  </tr>
+                                  </div>
+                                </li>
                             <?php endforeach ?>
-                            </table>
+                        </ul>
                         </div>
                     </div>
-                </a>
             </div>
         </div>
 

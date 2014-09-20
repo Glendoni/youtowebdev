@@ -79,9 +79,9 @@
 .navbar-default .navbar-text {
 	color: #000;
 	font-size: 22px;
-	padding: 0px;
+	padding: 0px 5px;
 	margin: 0px;
-	line-height: 49px;
+	line-height: 48px;
 }
 
 .navbar-default .navbar-text small{

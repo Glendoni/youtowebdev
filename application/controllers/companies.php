@@ -18,7 +18,7 @@ class Companies extends MY_Controller {
 		{ 
 			
 			$this->clear_campaign_from_session();
-			$this->clear_search_results();
+			// $this->clear_search_results();
 
 			$this->load->library('form_validation');
 			$this->form_validation->set_rules('agency_name', 'agency_name', 'xss_clean');
@@ -45,10 +45,8 @@ class Companies extends MY_Controller {
 				
 				if(empty($result))
 				{
-					// $this->set_message_warning('No result found for query.');
-					// $this->data['main_content'] = 'dashboard/home';
-					// $this->load->view('layouts/default_layout', $this->data);
-					// return False;
+					$this->session->unset_userdata('companies');
+					unset($search_results_in_session);
 				}
 				else
 				{
@@ -67,10 +65,8 @@ class Companies extends MY_Controller {
 			$result = $this->process_search_result($raw_search_results);
 			if(empty($result))
 			{
-				// $this->set_message_warning('No result found for query.');
-				// $this->data['main_content'] = 'dashboard/home';
-				// $this->load->view('layouts/default_layout', $this->data);
-				// return False;
+				$this->session->unset_userdata('companies');
+				unset($search_results_in_session);
 			}
 			else
 			{
@@ -80,17 +76,23 @@ class Companies extends MY_Controller {
 			}
 		}
 		elseif (!$this->input->post('submit') and !$search_results_in_session and !$refresh_search_results) {
-			// $this->set_message_warning('No result found for query.');
-			// $this->data['main_content'] = 'dashboard/home';
-			// $this->load->view('layouts/default_layout', $this->data);
-			// return False;
+			$this->session->unset_userdata('companies');
+			unset($search_results_in_session);
 		}
 
 		
 		$companies_array = $result ? $result : $search_results_in_session;
-		
+
+		// if campaign exist set this variables
+		$this->data['current_campaign_name'] = ($this->session->userdata('campaign_name') ?: FALSE );
+		$this->data['current_campaign_owner_id'] = ($this->session->userdata('campaign_owner') ?: FALSE );
+		$this->data['current_campaign_id'] = ($this->session->userdata('campaign_id') ?: FALSE );
+		$this->data['current_campaign_editable'] = ($this->data['current_campaign_owner_id'] == $this->get_current_user_id() ? TRUE : FALSE ); 
+		$this->data['current_campaign_is_shared'] = $this->session->userdata('campaign_shared') ;
+
 		if(empty($companies_array))
 		{
+			$this->session->unset_userdata('companies');
 			$this->data['companies_count'] = 0;
 			$this->data['page_total'] = 0;
 			$this->data['current_page_number'] = 0;
@@ -101,21 +103,23 @@ class Companies extends MY_Controller {
 
 			$this->data['main_content'] = 'companies/search_results';
 			$this->load->view('layouts/default_layout', $this->data);
-		}
-		// get companies from recent result or get it from session
-		$companies_array_chunk = array_chunk($companies_array, RESULTS_PER_PAGE);
-		$current_page_number = $this->input->get('page_num') ? $this->input->get('page_num') : 1;
-		$this->data['companies_count'] = count($companies_array);
-		$pages_count = round(count($companies_array)/RESULTS_PER_PAGE);
-		$this->data['page_total'] = ($pages_count < 1)? 1 : $pages_count;
-		$this->data['current_page_number'] = $current_page_number;
-		$this->data['next_page_number'] = ($current_page_number+1) <= $this->data['page_total'] ? ($current_page_number+1) : FALSE;
-		$this->data['previous_page_number'] = ($current_page_number-1) >= 0 ? ($current_page_number-1) : FALSE;
-		$this->data['sectors_array'] = $this->session->userdata('sectors_array');
-		$this->data['companies'] = $companies_array_chunk[($current_page_number-1)];
+		}else{
+			// get companies from recent result or get it from session
+			$companies_array_chunk = array_chunk($companies_array, RESULTS_PER_PAGE);
+			$current_page_number = $this->input->get('page_num') ? $this->input->get('page_num') : 1;
+			$this->data['companies_count'] = count($companies_array);
+			$pages_count = round(count($companies_array)/RESULTS_PER_PAGE);
+			$this->data['page_total'] = ($pages_count < 1)? 1 : $pages_count;
+			$this->data['current_page_number'] = $current_page_number;
+			$this->data['next_page_number'] = ($current_page_number+1) <= $this->data['page_total'] ? ($current_page_number+1) : FALSE;
+			$this->data['previous_page_number'] = ($current_page_number-1) >= 0 ? ($current_page_number-1) : FALSE;
+			$this->data['sectors_array'] = $this->session->userdata('sectors_array');
+			$this->data['companies'] = $companies_array_chunk[($current_page_number-1)];
 
-		$this->data['main_content'] = 'companies/search_results';
-		$this->load->view('layouts/default_layout', $this->data);
+			$this->data['main_content'] = 'companies/search_results';
+			$this->load->view('layouts/default_layout', $this->data);
+		}
+		
 	}
 
 
@@ -188,12 +192,9 @@ class Companies extends MY_Controller {
 		if($this->input->post('edit_company'))
 		{
 			// We need to clean the post and validate the post fields *pending*
-
 			$result = $this->Companies_model->update_details($this->input->post());
-
 			$this->refresh_search_results();
 			redirect('/companies','refresh');
-			
 			return True;
 		}
 	}

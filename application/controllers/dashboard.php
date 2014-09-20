@@ -18,7 +18,8 @@ class Dashboard extends MY_Controller {
 		// array_unshift($providers_options,'All');
 
 		$this->data['pending_actions'] = $this->Actions_model->get_pending_actions($this->get_current_user_id());
-		// $this->data['pending_actions'] = $this->Actions_model->get_pending_actions($this->get_current_user_id());
+		$this->data['action_types_array'] = $this->Actions_model->get_action_types_array();
+		
 		// $this->data['compl'] = $this->Companies_model->last_updated_companies();
 		// $this->data['hide_side_nav'] = True;
 		

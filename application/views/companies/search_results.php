@@ -2,38 +2,43 @@
 	<nav class="navbar navbar-default companies-list-header" role="navigation">
 	  <div class="container-fluid">
 	    <!-- Collect the nav links, forms, and other content for toggling -->
-	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	    <div class="">
 	      <ul class="nav navbar-nav">
-	      <?php if($current_campaign_name && $current_campaign_owner_id && $current_campaign_id ): ?>
-	      	<li><p class="navbar-text"><?php if($current_campaign_is_shared == False): ?><span class="label label-danger">Private</span><?php else: ?> <span class="label label-success">Shared</span> <?php endif;?>  <?php echo $current_campaign_name ?> <small>| <?php echo $companies_count; ?></small></p></li>
-	      <?php else: ?> 
-	      	<li><p class="navbar-text">Companies | <strong><?php echo $companies_count; ?></strong></p></li>
-	      <?php endif; ?>
-	        
+	      	<li><p class="navbar-text"><strong><?php echo $companies_count; ?></strong> Companies </p></li>        
 	      </ul>
 	      
 	      <ul class="nav navbar-nav navbar-right">
 	      <?php if(($companies_count > 0)): ?>
 	      	<?php if($current_campaign_name && $current_campaign_owner_id && $current_campaign_id ): ?>
-				<?php if($current_campaign_editable): ?>
-				<li class="dropdown">
-				<a href="#" class="dropdown-toggle " data-toggle="dropdown">edit <span class="caret"></span></a>
-				<ul class="dropdown-menu campaing_edit_options" role="menu">
-				<?php echo form_open(site_url().'campaigns/edit', 'name="edit_campaign" role="form"'); echo form_hidden('campaign_id', $current_campaign_id); ?>
-					<?php if($current_campaign_is_shared == False): ?>
-					<li><button type="submit" class="btn btn-warning btn-sm  btn-block" name="make_public" >Make public</button></li>
-					<?php else: ?>
-					<li><button type="submit" class="btn btn-warning btn-success btn-sm  btn-block" name="make_private" >Make private</button></li>
-					<?php endif; ?>
-					<li class="divider"></li>
-					<li><button type="submit" class="btn btn-danger btn-sm btn-block" name="delete" >Delete</button></li>
-				<?php echo form_close(); ?>
-				</ul>
-				</li>
-				<?php else: ?>
-				<h4><?php echo $current_campaign_name;?></h4>	
-				<?php endif; ?>
-			
+	      		<li><span class="navbar-text"> <?php echo $current_campaign_name; ?> </span></li>
+			<li class="dropdown">
+				<span class="navbar-text">
+				<div class="btn-group">
+				    <?php if($current_campaign_is_shared == False): ?>
+				    	<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+						Private
+					<?php else: ?> 
+						<button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+						Shared
+					<?php endif;?>  
+					<?php if($current_campaign_editable): ?><span class="caret"></span><?php endif; ?>
+				  		</button>
+				  <?php if($current_campaign_editable): ?>
+				  	<ul class="dropdown-menu campaing_edit_options" role="menu">
+					<?php echo form_open(site_url().'campaigns/edit', 'name="edit_campaign" role="form"'); echo form_hidden('campaign_id', $current_campaign_id); ?>
+						<?php if($current_campaign_is_shared == False): ?>
+						<li><button type="submit" class="btn btn-warning btn-sm  btn-block" name="make_public" >Make public</button></li>
+						<?php else: ?>
+						<li><button type="submit" class="btn btn-warning btn-success btn-sm  btn-block" name="make_private" >Make private</button></li>
+						<?php endif; ?>
+						<li class="divider"></li>
+						<li><button type="submit" class="btn btn-danger btn-sm btn-block" name="delete" >Delete</button></li>
+					<?php echo form_close(); ?>
+					</ul>
+				  <?php endif; ?>
+				</div>
+				</span>
+			</li>			
 			<?php else: ?>
 			<li>
 			<?php echo form_open(site_url().'campaigns/create', 'name="create_campaign" class="create_campaign navbar-form navbar-left" role="form"'); ?>
@@ -57,6 +62,7 @@
 	    </div><!-- /.navbar-collapse -->
 	  </div><!-- /.container-fluid -->
 	</nav>
+	
 	
 	<p>Page <?php echo $current_page_number; ?> of <?php echo $page_total ?></p>
 	<ul class="pager">
