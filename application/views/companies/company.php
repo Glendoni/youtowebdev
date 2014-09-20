@@ -196,7 +196,7 @@
 		<div class="col-md-9">
 		<div class="panel panel-success ">
 		  <div class="panel-heading">
-		    <h3 class="panel-title">Now</h3>
+		    <h3 class="panel-title">Done</h3>
 		  </div>
 		  <div class="panel-body">
 		   <?php $hidden = array('company_id' => $company->id , 'user_id' => $current_user['id']);
@@ -204,13 +204,13 @@
 			<div class="form-group ">
 				<label>Type</label>
 				<select name="action_type" class="form-control">
-					<?php foreach($action_types as $action ): ?>
+					<?php foreach($action_types_done as $action ): ?>
 					  <option value="<?php echo $action->id; ?>"><?php echo $action->name; ?></option>
 					<?php endforeach; ?>
 				</select>
 			</div>
 			<div class="form-group ">
-				<label>Comment</label>
+				<label>Outcome</label>
 				<textarea class="form-control" name="comment" rows="12"></textarea>
 			</div>
 			<div class="form-group " >
@@ -233,7 +233,7 @@
 					<div class="form-group ">
 						<label>Type</label>
 						<select name="action_type" class="form-control">
-							<?php foreach($action_types as $action ): ?>
+							<?php foreach($action_types_planned as $action ): ?>
 							  <option value="<?php echo $action->id; ?>"><?php echo $action->name; ?></option>
 							<?php endforeach; ?>
 						</select>
@@ -243,7 +243,7 @@
 						<input type="text" class="form-control" id="planned_at" data-date-format="YYYY/MM/DD H:m" name="planned_at" placeholder="">
 					</div>
 					<div class="form-group ">
-						<label>Comment</label>
+						<label>Note</label>
 						<textarea class="form-control" name="comment" rows="6"></textarea>
 					</div>
 					<!-- <div class="form-group " >
@@ -251,10 +251,10 @@
 						<input type="text" class="form-control" id="actioned_at" name="actioned_at" placeholder="">
 					</div> -->
 
-					<div class="form-group 	 window_completition" >
+					<!-- <div class="form-group 	 window_completition" >
 						<label>Window for completion </label>
 						<input type="text" class="form-control " id="" name="window" placeholder="days">
-					</div>
+					</div> -->
 					<button type="submit" name="save" class="btn btn-primary form-control">Schedule</button>
 				</div>
 				<?php echo form_close(); ?>
@@ -277,7 +277,7 @@
 						  	<th>Comments</th>
 						  	<th>Actioned at</th>
 						  	<th>Planned at</th>
-						  	<th>Window</th>
+						  	<!-- <th>Window</th> -->
 						  	<th>Cancelled at</th>
 						  	<th>Last updated</th>
 						  		
@@ -292,7 +292,7 @@
 						  	<td><?php echo $action->comments;?></td>
 						  	<td><?php echo $action->actioned_at?></td>
 						  	<td><?php echo $action->planned_at?></td>
-						  	<td><?php echo $action->window?></td>
+						  	<!-- <td><?php echo $action->window?></td> -->
 						  	<td><?php echo $action->cancelled_at?></td>
 						  	<td><?php echo $action->updated_at?></td>
 						  </tr>

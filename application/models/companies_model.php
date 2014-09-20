@@ -241,7 +241,7 @@ if(isset($company_age_sql)) $sql =  $sql.' JOIN ( '.$company_age_sql.' ) company
 if(isset($turnover_sql)) $sql = $sql.' JOIN ( '.$turnover_sql.' ) turnovers ON C.id = turnovers.company_id';
 if(isset($mortgage_sql)) $sql = $sql.' JOIN ( '.$mortgage_sql.' ) mortgages ON C.id = mortgages.company_id';
 if(isset($sectors_sql)) $sql = $sql.' JOIN ( '.$sectors_sql.' ) sectors ON C.id = sectors.company_id';
-if(isset($providers_sql)) $sql = $sql.' JOIN ( '.$providers_sql.' ) sectors ON C.id = sectors.company_id';
+if(isset($providers_sql)) $sql = $sql.' JOIN ( '.$providers_sql.' ) providers ON C.id = providers.company_id';
 if(isset($assigned_sql)) $sql = $sql.' JOIN ( '.$assigned_sql.' ) assigned ON C.id = assigned.id';
 
 $sql = $sql.' LEFT JOIN 
@@ -642,7 +642,7 @@ ON T1.id = T2."company id"
 		}
 		
 
-			
+		
 		$company = array(
 				'linkedin_id' => $post['linkedin_id']?$post['linkedin_id']:NULL,
 				'url' => $post['url']?$post['url']:NULL,
@@ -650,19 +650,18 @@ ON T1.id = T2."company id"
 				'perm'=>$post['perm']?$post['perm']:NULL,
 				'updated_at' => date('Y-m-d H:i:s')
 			);
+
 		$this->db->where('id', $post['company_id']);
 		$this->db->update('companies', $company);
 
 		$company_status = $this->db->affected_rows();
 		// clear existing sectors to no active 
 		$result = $this->clear_company_sectors($post['company_id']);
-		print_r($post['sectors']);
+		
 		foreach ($post['sectors'] as $sector_id) {
-			print_r($sector_id);
 			$this->db->set('company_id', $post['company_id']);
 			$this->db->set('sector_id', $sector_id);  
 			$this->db->insert('operates'); 
-			print_r($this->db->affected_rows());
 		}
 		return $this->db->affected_rows();
 	}
@@ -672,7 +671,6 @@ ON T1.id = T2."company id"
         $this->title   = $_POST['title']; // please read the below note
         $this->content = $_POST['content'];
         $this->date    = time();
-
         $this->db->insert('entries', $this);
     }
 }

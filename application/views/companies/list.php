@@ -1,3 +1,8 @@
+
+<?php if(empty($companies)): ?>
+	<div class="alert alert-warning">No companies found</div>
+<?php else: ?>
+
 <?php foreach ( $companies as $company):  ?>
 <div class="modal fade" id="editModal<?php echo $company['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="Edit <?php echo $company['name']; ?>" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
@@ -56,12 +61,15 @@
 					<?php endforeach ?>
 					</div>
 				</div>
+				<div class="modal-loading-display text-center " id="loading-display-<?php echo $company['id']; ?>">
+					<button class="btn btn-default btn-lg" ><i class="fa fa-refresh fa-spin"></i></button>
+				</div>
 			</div>
             <div class="modal-footer">
-            	<button type="submit" class="btn btn-sm btn-primary btn-block ladda-button submit_btn" edit-btn="editbtn<?php echo $company['id']; ?>" data-style="expand-right" data-size="1">
+            	<button type="submit" class="btn btn-sm btn-primary btn-block ladda-button submit_btn" edit-btn="editbtn<?php echo $company['id']; ?>" loading-display="loading-display-<?php echo $company['id']; ?>" data-style="expand-right" data-size="1">
 		        	<span class="ladda-label"> Save changes </span>
 		    	</button>                
-                <!-- <button type="submit" class="btn btn-primary">Save changes</button> -->
+                
             </div>
             <?php echo form_close(); ?>
         </div>
@@ -190,3 +198,4 @@
 		</div>
 	</div>
 <?php endforeach; ?>
+<?php endif; ?>

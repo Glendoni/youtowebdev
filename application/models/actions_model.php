@@ -40,9 +40,15 @@ class Actions_model extends CI_Model {
 
 	}
 
-	public function get_action_types()
+	public function get_action_types_done()
 	{
-		$query = $this->db->get('action_types');
+		$query = $this->db->get_where('action_types',array('type'=>'Done'));
+		return $query->result_object();
+	}
+
+	public function get_action_types_planned()
+	{	
+		$query = $this->db->get_where('action_types',array('type'=>'Planned'));
 		return $query->result_object();
 	}
 	
@@ -73,14 +79,15 @@ class Actions_model extends CI_Model {
 	{
 		// created_at,updated_at,created_by
 		$data = array(
-			'company_id' => $post['company_id'],
-			'user_id' => $post['user_id'],
-			'comments'=> $post['comment'],
-			'planned_at'=> ($post['planned_at']? date('Y-m-d H:i:s',strtotime($post['planned_at'])):NULL),
-			'window'=> ($post['window']?$post['window']:NULL),
-			'created_by'=> $post['user_id'],
+			'company_id' 	=> $post['company_id'],
+			'user_id' 		=> $post['user_id'],
+			'comments'		=> $post['comment'],
+			'planned_at'	=> ($post['planned_at']? date('Y-m-d H:i:s',strtotime($post['planned_at'])):NULL),
+			'window'		=> ($post['window']?$post['window']:NULL),
+			'created_by'	=> $post['user_id'],
 			'action_type_id'=> $post['action_type'],
-			'actioned_at'=> (!isset($post['actioned_at']) && !isset($post['planned_at'])?date('Y-m-d H:i:s'):NULL),
+			'actioned_at'	=> (!isset($post['actioned_at']) && !isset($post['planned_at'])?date('Y-m-d H:i:s'):NULL),
+			'created_at' 	=> date('Y-m-d H:i:s'),
 			);
 		
 		$query = $this->db->insert('actions', $data);

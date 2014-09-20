@@ -4,7 +4,7 @@
 	    <!-- Collect the nav links, forms, and other content for toggling -->
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	      <ul class="nav navbar-nav">
-	      <?php if($current_campaign_name && $current_campaign_owner_id && $current_campaign_id): ?>
+	      <?php if($current_campaign_name && $current_campaign_owner_id && $current_campaign_id ): ?>
 	      	<li><p class="navbar-text"><?php if($current_campaign_is_shared == False): ?><span class="label label-danger">Private</span><?php else: ?> <span class="label label-success">Shared</span> <?php endif;?>  <?php echo $current_campaign_name ?> <small>| <?php echo $companies_count; ?></small></p></li>
 	      <?php else: ?> 
 	      	<li><p class="navbar-text">Companies | <strong><?php echo $companies_count; ?></strong></p></li>
@@ -13,7 +13,8 @@
 	      </ul>
 	      
 	      <ul class="nav navbar-nav navbar-right">
-	      	<?php if($current_campaign_name && $current_campaign_owner_id && $current_campaign_id): ?>
+	      <?php if(($companies_count > 0)): ?>
+	      	<?php if($current_campaign_name && $current_campaign_owner_id && $current_campaign_id ): ?>
 				<?php if($current_campaign_editable): ?>
 				<li class="dropdown">
 				<a href="#" class="dropdown-toggle " data-toggle="dropdown">edit <span class="caret"></span></a>
@@ -50,6 +51,7 @@
 			    <button type="submit" class="btn btn-primary">Save</button>
 			  <?php echo form_close(); ?>
 			</li>
+			<?php endif; ?>
 		<?php endif; ?>
 	      </ul>
 	    </div><!-- /.navbar-collapse -->
@@ -60,14 +62,10 @@
 	<ul class="pager">
 		<?php if($previous_page_number): ?>
 	  	<li class="previous"><a href="?page_num=<?php echo $previous_page_number; ?>">&larr; Previous</a></li>
-	  	<?php else: ?>
-	  	<li class="previous disabled"><a href="#">&larr; Previous</a></li>
 	    <?php endif; ?>
 
 	    <?php if($next_page_number): ?>
 	  	<li class="next"><a href="?page_num=<?php echo $next_page_number; ?>">Next &rarr;</a></li>
-	  	<?php else: ?>
-	  	<li class="next disabled"><a href="#">Next &rarr;</a></li>
 		<?php endif; ?>
 	</ul>
 
@@ -80,14 +78,10 @@
 	<ul class="pager">
 		<?php if($previous_page_number): ?>
 	  	<li class="previous"><a href="?page_num=<?php echo $previous_page_number; ?>">&larr; Previous</a></li>
-	  	<?php else: ?>
-	  	<li class="previous disabled"><a href="#">&larr; Previous</a></li>
 	    <?php endif; ?>
 
 	    <?php if($next_page_number): ?>
 	  	<li class="next"><a href="?page_num=<?php echo $next_page_number; ?>">Next &rarr;</a></li>
-	  	<?php else: ?>
-	  	<li class="next disabled"><a href="#">Next &rarr;</a></li>
 		<?php endif; ?>
 	</ul>
 </div>

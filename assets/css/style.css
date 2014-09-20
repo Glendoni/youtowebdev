@@ -101,4 +101,10 @@
 	background: #fff;
 }
 
+.modal-loading-display{
+	position: fixed;top: 16px;background: #222;background: rgba(0, 0, 0, .7);width: 95%;height: 85%;border-radius: 6px;display: none;
+}
 
+.modal-loading-display > button{
+	position:relative;top:45%;
+}
