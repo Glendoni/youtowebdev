@@ -104,7 +104,7 @@ class MY_Controller extends CI_Controller {
 		$this->data['current_campaign_owner_id'] = ($this->session->userdata('campaign_owner') ?: FALSE );
 		$this->data['current_campaign_id'] = ($this->session->userdata('campaign_id') ?: FALSE );
 		$this->data['current_campaign_editable'] = ($this->data['current_campaign_owner_id'] == $this->get_current_user_id() ? TRUE : FALSE ); 
-		print_r($this->session->userdata('campaign_shared'));
+		
 		$this->data['current_campaign_is_shared'] = ($this->session->userdata('campaign_shared') == FALSE ? TRUE : FALSE );
 		//var_dump($this->session->userdata('campaign_shared'));
 		// var_dump($this->data['own_campaigns']);
