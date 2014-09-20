@@ -170,12 +170,13 @@ class Companies extends MY_Controller {
 	{
 		if($this->input->get('id'))
 		{
-			$company = $this->Companies_model->get_company_by_id($this->input->get('id'));
+			$raw_search_results = $this->Companies_model->search_companies_sql($post,$this->input->get('id'));
+			$company = $this->process_search_result($raw_search_results);
 			$this->data['action_types_done'] = $this->Actions_model->get_action_types_done();
 			$this->data['action_types_planned'] = $this->Actions_model->get_action_types_planned();
 			$this->data['action_types_array'] = $this->Actions_model->get_action_types_array();
 			$this->data['actions'] = $this->Actions_model->get_actions($this->input->get('id'));
-			$this->data['companies'] = $company->result_object;
+			$this->data['companies'] = $company;
 			$this->data['sectors_array'] = $this->session->userdata('sectors_array');
 			$this->data['main_content'] = 'companies/company';
 			$this->load->view('layouts/default_layout', $this->data);

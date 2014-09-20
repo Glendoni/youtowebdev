@@ -128,7 +128,7 @@
 		
 		<!-- TURNOVER -->
 		<div class="col-md-3 centre">
-		<small>Turnover</small>
+		<strong>Turnover</strong>
 			<h3 class="details">
 				<strong>£ <?php echo number_format($company['turnover']); ?></strong>
 				<br>
@@ -148,7 +148,7 @@
 
 		<!-- SECTORS -->
 		<div class="col-md-3 centre">
-			<small>Sectors</small> 
+			<strong>Sectors</strong> 
 			<?php 
 			foreach ($company['sectors'] as $key => $name) {
 				echo '<h5>'.$name.'</h5>';

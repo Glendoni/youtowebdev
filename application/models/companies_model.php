@@ -111,7 +111,7 @@ class Companies_model extends CI_Model {
 
      // $query = $this->db->query("YOUR QUERY");
 
-	function search_companies_sql($post)
+	function search_companies_sql($post,$company_id = False)
 	{
 	
 		// filter by name
@@ -243,7 +243,7 @@ if(isset($mortgage_sql)) $sql = $sql.' JOIN ( '.$mortgage_sql.' ) mortgages ON C
 if(isset($sectors_sql)) $sql = $sql.' JOIN ( '.$sectors_sql.' ) sectors ON C.id = sectors.company_id';
 if(isset($providers_sql)) $sql = $sql.' JOIN ( '.$providers_sql.' ) providers ON C.id = providers.company_id';
 if(isset($assigned_sql)) $sql = $sql.' JOIN ( '.$assigned_sql.' ) assigned ON C.id = assigned.id';
-
+if(isset($company_id) && $company_id !== False) $sql = $sql.' JOIN ( select id from companies where id = '.$company_id.' ) company ON C.id = company.id';
 $sql = $sql.' LEFT JOIN 
 (-- TT1 
 select T.company_id "company id",

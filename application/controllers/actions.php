@@ -3,7 +3,7 @@
 class Actions extends MY_Controller {
 
 	public function create(){
-		// print_r('<pre>');print_r($this->input->post());print_r('</pre>');
+		 // print_r('<pre>');print_r($this->input->post());print_r('</pre>');
 		if($this->input->post('company_id'))
 		{	
 			$this->load->library('form_validation');
