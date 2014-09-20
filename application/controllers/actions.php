@@ -37,13 +37,13 @@ class Actions extends MY_Controller {
 	public function edit(){
 		if($this->input->post('action_id'))
 		{
-			if($this->input->post('action_do') == 'complete')
+			if($this->input->post('action_do') == 'completed')
 			{
-				$result = $this->Actions_model->set_action_completed($this->input->post('action_id'),$this->input->post('user_id'));
+				$result = $this->Actions_model->set_action_state($this->input->post('action_id'),$this->input->post('user_id'),'completed');
 
 				if($result)
 				{
-					$this->set_message_success('Successfuly completed action');
+					$this->set_message_success('Action set to completed.');
 				}
 				else
 				{
@@ -51,13 +51,13 @@ class Actions extends MY_Controller {
 				}
 				redirect('/dashboard','refresh');
 			}
-			else if($this->input->post('action_do') == 'cancel')
-			{
-				$result = $this->Actions_model->set_action_cancel($this->input->post('action_id'),$this->input->post('user_id'));
-
+			else if($this->input->post('action_do') == 'cancelled')
+			{	
+				$result = $this->Actions_model->set_action_state($this->input->post('action_id'),$this->input->post('user_id'),'cancelled');
+				print_r($result);
 				if($result)
 				{
-					$this->set_message_success('Successfuly cancelled action');
+					$this->set_message_success('Action set to cancelled.');
 				}
 				else
 				{

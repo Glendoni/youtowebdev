@@ -47,14 +47,14 @@
                                     <td><?php echo $action->window?></td>
                                     <td><?php echo $action->cancelled_at?></td>
                                     <td><?php echo $action->updated_at?></td>
-                                    <td><?php $hidden = array('action_id' => $action->id , 'user_id' => $current_user['id'], 'action_do' => 'complete' );
+                                    <td><?php $hidden = array('action_id' => $action->id , 'user_id' => $current_user['id'], 'action_do' => 'completed' );
                                      echo form_open(site_url().'actions/edit', 'name="completed_action" class="completed_action inline" role="form"',$hidden); ?>
-                                     <button class="btn btn-success">Completed</button> 
+                                     <button class="btn btn-success"><i class="fa fa-check fa-lg"></i> Completed</button> 
                                      </form>
 
-                                     <?php $hidden = array('action_id' => $action->id , 'user_id' => $current_user['id'] , 'action_do' => 'cancel' );
+                                     <?php $hidden = array('action_id' => $action->id , 'user_id' => $current_user['id'] , 'action_do' => 'cancelled' );
                                      echo form_open(site_url().'actions/edit', 'name="cancel_action" class="cancel_action inline" role="form"',$hidden); ?>
-                                     <button class="btn btn-danger">Cancel</button>
+                                     <button class="btn btn-danger" ><i class="fa fa-trash-o fa-lg"></i> Delete</button>
                                      </form>
 
                                      </td>

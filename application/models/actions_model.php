@@ -55,13 +55,26 @@ class Actions_model extends CI_Model {
 
 	// UPDATES
 
-	public function set_action_completed($action_id,$user_id)
+	public function set_action_state($action_id,$user_id,$state)
 	{
-		$data = array(
+		if($state == 'completed')
+		{
+			$data = array(
 			'actioned_at' => date('Y-m-d H:i:s'),
 			'updated_at' => date('Y-m-d H:i:s'),
 			'updated_by' => $user_id,
 			);
+		}
+
+		if($state == 'cancelled')
+		{
+			$data = array(
+			'cancelled_at' => date('Y-m-d H:i:s'),
+			'updated_at' => date('Y-m-d H:i:s'),
+			'updated_by' => $user_id,
+			);
+		}
+
 		$this->db->where('id',$action_id);
 		$this->db->update('actions',$data);
 		if($this->db->affected_rows() !== 1){
