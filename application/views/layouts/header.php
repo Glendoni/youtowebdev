@@ -389,6 +389,7 @@
                                             </div>
                                         </div>
                                         <div class="panel-footer">
+                                        
                                             <input type="submit" class="loading-btn btn btn-primary btn-block " value="Search" name="submit">
                                             <?php if (validation_errors()): ?>
                                             <div class="alert alert-danger" role="alert">

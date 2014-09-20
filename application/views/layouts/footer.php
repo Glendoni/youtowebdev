@@ -35,11 +35,11 @@
  	<script type="text/javascript">
  	$( document ).ready(function() {
  		// Datetime picker
-         $('#planned_at').datetimepicker();
-         $('#actioned_at').datetimepicker();
+        $('#planned_at').datetimepicker();
+        $('#actioned_at').datetimepicker();
          
 
- 		$('.button-checkbox').each(function () {
+    	$('.button-checkbox').each(function () {
         // Settings
         var $widget = $(this),
             $button = $widget.find('button'),
@@ -64,137 +64,164 @@
             updateDisplay();
         });
 
-        // Actions
-        function updateDisplay() {
-            var isChecked = $checkbox.is(':checked');
+    });
 
-            // Set the button's state
-            $button.data('state', (isChecked) ? "on" : "off");
+    // Actions
+    function updateDisplay() {
+        var isChecked = $checkbox.is(':checked');
 
-            // Set the button's icon
-            $button.find('.state-icon')
-                .removeClass()
-                .addClass('state-icon ' + settings[$button.data('state')].icon);
+        // Set the button's state
+        $button.data('state', (isChecked) ? "on" : "off");
 
-            // Update the button's color
-            if (isChecked) {
-                $button
-                    .removeClass('btn-default')
-                    .addClass('btn-' + color + ' active');
-            }
-            else {
-                $button
-                    .removeClass('btn-' + color + ' active')
-                    .addClass('btn-default');
-            }
+        // Set the button's icon
+        $button.find('.state-icon')
+            .removeClass()
+            .addClass('state-icon ' + settings[$button.data('state')].icon);
+
+        // Update the button's color
+        if (isChecked) {
+            $button
+                .removeClass('btn-default')
+                .addClass('btn-' + color + ' active');
         }
+        else {
+            $button
+                .removeClass('btn-' + color + ' active')
+                .addClass('btn-default');
+        }
+    }
 
-	        // Initialization
-	        function init() {
+    // Initialization
+    function init() {
 
-	            updateDisplay();
+        updateDisplay();
 
-	            // Inject the icon if applicable
-	            if ($button.find('.state-icon').length == 0) {
-	                $button.prepend('<i class="state-icon ' + settings[$button.data('state')].icon + '"></i> ');
-	            }
-	        }
-	        init();
-	    });
+        // Inject the icon if applicable
+        if ($button.find('.state-icon').length == 0) {
+            $button.prepend('<i class="state-icon ' + settings[$button.data('state')].icon + '"></i> ');
+        }
+    }
+    
+    init();
 
-		$('.assign-to-form .ladda-button').click(function(e){
-			var btn = $(this);
-			var form = btn.closest('form');
-			var url = form.attr('action');
+	$('.assign-to-form .ladda-button').click(function(e){
+		var btn = $(this);
+		var form = btn.closest('form');
+		var url = form.attr('action');
 
-			var textbtn = btn.find('span.ladda-label');
-			var name = btn.attr('assignto');
+		var textbtn = btn.find('span.ladda-label');
+		var name = btn.attr('assignto');
 
-		 	e.preventDefault();
-		 	var l = Ladda.create(this);
-		 	l.start();
-		 	$.post(url, form.serialize(),
-		 	  function(response){
-		 	    
-		 	  })
-		 	.always(function() { 
-                if(typeof name != 'undefined'){
-                        textbtn.text('Assigned to '+name ); 
-                    }else{
-                        textbtn.text('Unassigned');
-                        form.closest('.panel').children('.panel-heading').hide();
-                    }  
-                l.stop(); 
-                btn.attr('disabled','disabled'); 
-            });
-
-		 	return false;
-		});
-
-        
-        // reset button on page load
-        $('.submit_btn').button('reset');
-
-        // on click action 
-		$('.submit_btn').click(function(e){
-			
-			var btn = $(this);
-			var form = btn.closest('form');
-			var url = form.attr('action');
-            // var edi_btn_id = btn.attr('edit-btn');
-            // var edit_btn = $('#'+edi_btn_id);
-            // edit_btn.button('loading');
-            var loading_display_id = btn.attr('loading-display');
-            var loading_display = $('#'+loading_display_id);
-            loading_display.show();
-
-		 	e.preventDefault();
-            btn.button('loading');
-		 	$.post(url, form.serialize(),
-		 	  function(response){
-		 	    btn.removeClass('btn-primary').addClass('btn-success').text('Saving...'); 
-                location.reload(true);
-		 	  })
-		 	.always(function() {  
-                
-                // btn.button('loading');
-                // setTimeout(function () {
-                //    // btn.siblings().trigger('click');
-                //    // btn.button('reset');
-                //    edit_btn.removeClass('disabled').removeAttr('disabled');
-                //    btn.removeClass('btn-success').addClass('btn-primary');
-                //    // window.location.href = window.location.href + "?refreshed";
-                //    location.reload(true);
-                // }, 1000);
-            });
-
-		 	return true;
-		});
-
-        // reset button on load 
-        $('.loading-btn').button('reset');
-
-        // Click function  
-        $('.loading-btn').click(function () {
-        var btn = $(this)
-        btn.button('loading')
-        // $.ajax(...).always(function () {
-        //   btn.button('reset')
-        // });
+	 	e.preventDefault();
+	 	var l = Ladda.create(this);
+	 	l.start();
+	 	$.post(url, form.serialize(),
+	 	  function(response){
+	 	    
+	 	  })
+	 	.always(function() { 
+            if(typeof name != 'undefined'){
+                    textbtn.text('Assigned to '+name ); 
+                }else{
+                    textbtn.text('Unassigned');
+                    form.closest('.panel').children('.panel-heading').hide();
+                }  
+            l.stop(); 
+            btn.attr('disabled','disabled'); 
         });
 
-        // Setup form validation on the #register-form element
-        // $( "#main_search" ).submit(function( event ) {        
-        //     if( $( "#main_search input:blank" ).length < 9 ){
-        //         return true;
-        //     }else{
-        //         event.preventDefault();
-        //         $('#empty_form_error').show();
-        //         $('.loading-btn').button('reset');
-        //         return false;
-        //     }
-        // });
+	 	return false;
+	});
+
+        
+    // reset button on page load
+    $('.submit_btn').button('reset');
+
+    // on click action 
+	$('.submit_btn').click(function(e){
+		
+		var btn = $(this);
+		var form = btn.closest('form');
+		var url = form.attr('action');
+        // var edi_btn_id = btn.attr('edit-btn');
+        // var edit_btn = $('#'+edi_btn_id);
+        // edit_btn.button('loading');
+        var loading_display_id = btn.attr('loading-display');
+        var loading_display = $('#'+loading_display_id);
+        loading_display.show();
+
+	 	e.preventDefault();
+        btn.button('loading');
+	 	$.post(url, form.serialize(),
+	 	  function(response){
+	 	    btn.removeClass('btn-primary').addClass('btn-success').text('Saving...'); 
+            location.reload(true);
+	 	  })
+	 	.always(function() {  
+            
+            // btn.button('loading');
+            // setTimeout(function () {
+            //    // btn.siblings().trigger('click');
+            //    // btn.button('reset');
+            //    edit_btn.removeClass('disabled').removeAttr('disabled');
+            //    btn.removeClass('btn-success').addClass('btn-primary');
+            //    // window.location.href = window.location.href + "?refreshed";
+            //    location.reload(true);
+            // }, 1000);
+        });
+
+	 	return true;
+	});
+
+    // reset button on load 
+    $('.loading-btn').button('reset');
+
+    // Click function  
+    $('.loading-btn').click(function () {
+    var btn = $(this)
+    btn.button('loading')
+    // $.ajax(...).always(function () {
+    //   btn.button('reset')
+    // });
+    });
+
+    // Setup form validation on the #register-form element
+    // $( "#main_search" ).submit(function( event ) {        
+    //     if( $( "#main_search input:blank" ).length < 9 ){
+    //         return true;
+    //     }else{
+    //         event.preventDefault();
+    //         $('#empty_form_error').show();
+    //         $('.loading-btn').button('reset');
+    //         return false;
+    //     }
+    // });
+
+
  	});
+
+        function validateActionForm(form){
+            $(form).siblings().hide();
+            var outcome_box_id = $(form).attr('outcome-box');
+            var outcome_box = $('#'+outcome_box_id);
+            console.log(outcome_box.find('textarea').val());
+            if(!outcome_box.find('textarea').val())
+            {
+                outcome_box.show('slow');
+                outcome_box.children('textarea').focus();
+                outcome_box.children('button').click(function() {
+                    $(form).submit();
+                });
+                return false;
+            }
+            else
+            {
+                $(form).find('input[name="outcome"]').val(outcome_box.find('textarea').val());
+                return true;
+            }
+            
+            
+        }
 
  	</script>
  <?php if(ENVIRONMENT == 'development'): ?>

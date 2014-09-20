@@ -108,3 +108,19 @@
 .modal-loading-display > button{
 	position:relative;top:45%;
 }
+
+.list-group-item {
+	border:0px;
+	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+}
+
+.list-group-item:first-child{
+	border-top-left-radius: 0px; 
+   border-top-right-radius: 0px; 
+}
+.list-group-item:last-child {
+	margin-bottom: 0;
+	border-bottom-right-radius: 0px;
+	border-bottom-left-radius: 0px;
+}
