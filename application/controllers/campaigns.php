@@ -36,10 +36,11 @@ class Campaigns extends MY_Controller {
 		
 		if($new_campaign_id)
 		{
-			$this->session->set_userdata('campaign_id',$new_campaign_id);
-			$this->session->set_userdata('campaign_name',$name);
-			$this->session->set_userdata('campaign_owner',$user_id);
-			$this->session->set_userdata('campaign_shared',filter_var($shared, FILTER_VALIDATE_BOOLEAN));
+			$new_campaign = $this->Campaigns_model->get_campaign_by_id($new_campaign_id);
+			$this->session->set_userdata('campaign_id',$new_campaign[0]->id);
+			$this->session->set_userdata('campaign_name',$new_campaign[0]->name);
+			$this->session->set_userdata('campaign_owner',$new_campaign[0]->user_id);
+			$this->session->set_userdata('campaign_shared',(bool)$new_campaign[0]->shared);
 			$this->set_message_success('Campaign saved!');
 		}
 		redirect('/companies','refresh');

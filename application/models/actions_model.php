@@ -8,7 +8,7 @@ class Actions_model extends CI_Model {
 		$data = array(
 			'company_id' => $company_id,
 			);
-		$this->db->order_by('actioned_at','desc');
+		$this->db->order_by('cancelled_at desc,planned_at asc');
 		$query = $this->db->get_where('actions', $data);
 		return $query->result_object();
 	}
@@ -20,7 +20,8 @@ class Actions_model extends CI_Model {
 			'cancelled_at' => NULL,
 
 			);
-		$this->db->order_by('planned_at','desc');
+	
+		$this->db->order_by('cancelled_at desc,planned_at asc');
 		$query = $this->db->get_where('actions', $data);
 		return $query->result_object();
 

@@ -14,7 +14,7 @@
                         </div>
                         <div class="col-xs-9 text-right">
                             <div class="huge"><?php echo count($pending_actions)?></div>
-                            <div>Pending actions</div>
+                            <div>Your Calls & Meetings</div>
                         </div>
                     </div>
                 </div>
@@ -22,6 +22,9 @@
                     <div class="panel-footer">
                         <div class="clearfix"></div>
                         <div clas="list-group">
+                        <!-- <ul>
+                          <li></li>
+                        </ul> -->
                         <table class="table">
                           <tr>
                             <th>Created by</th>
@@ -36,9 +39,23 @@
                           </tr>
                             <?php foreach ($pending_actions as $action): 
                              // print_r('<pre>');print_r($action);print_r('</pre>');
-
                             ?>
-                                  <tr <?php echo  ($action->planned_at? 'class="success"':'class="danger"')?>>
+                                  <tr <?php 
+                                  if($action->cancelled_at)
+                                  {
+                                    echo 'class="danger"';
+                                  }
+                                  elseif($action->planned_at)
+                                  {
+                                    echo 'class="success"';
+                                  }
+                                  elseif($action->actioned_at)
+                                  {
+                                    echo 'class="warning"';
+                                  }
+                                   ?>
+
+                                   >
                                     <td><?php echo $system_users[$action->user_id]?></td>
                                     <td><?php echo $action_types_array[$action->action_type_id]; ?></td>
                                     <td><?php echo $action->comments;?></td>

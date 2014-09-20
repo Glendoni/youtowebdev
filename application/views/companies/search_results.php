@@ -38,7 +38,7 @@
 			<li>
 			<?php echo form_open(site_url().'campaigns/create', 'name="create_campaign" class="create_campaign navbar-form navbar-left" role="form"'); ?>
 			 	<div class="form-group">
-					<input type="text" name="name" class="form-control" id="name" placeholder="Save search">
+					<input type="text" name="name" class="form-control" id="name" placeholder="">
 			    </div>
 				<div class="btn-group toggle-btn-group" data-toggle="buttons">
 					<label class="btn  active">
@@ -48,7 +48,7 @@
 						<input type="radio" name="public" id="sharedtrue">  public
 					</label>
 				</div>
-			    <button type="submit" class="btn btn-primary">Save</button>
+			    <button type="submit" class="btn btn-primary">Save search</button>
 			  <?php echo form_close(); ?>
 			</li>
 			<?php endif; ?>

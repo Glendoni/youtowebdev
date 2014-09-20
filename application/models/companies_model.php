@@ -183,7 +183,7 @@ class Companies_model extends CI_Model {
 			}
 			else
 			{
-				$providers_sql = 'select mortgages.company_id "company_id" from providers join mortgages on  providers.id = mortgages.provider_id	where providers.id = '.$post['providers'];
+				$providers_sql = 'select mortgages.company_id "company_id" from providers join mortgages on  providers.id = mortgages.provider_id	where mortgages.stage = \''.MORTGAGES_OUTSTANDING.'\' and providers.id = '.$post['providers'];
 			}
 			
 		}

@@ -286,7 +286,21 @@
 					 // print_r('<pre>');print_r($action);print_r('</pre>');
 
 					?>
-						  <tr <?php echo  ($action->planned_at? 'class="success"':'class="danger"')?>>
+						  <tr <?php 
+						  		if($action->cancelled_at)
+                                  {
+                                    echo 'class="danger"';
+                                  }
+                                  elseif($action->planned_at)
+                                  {
+                                    echo 'class="success"';
+                                  }
+                                  elseif($action->actioned_at)
+                                  {
+                                    echo 'class="warning"';
+                                  }
+						  		?>
+						  	>
 						  	<td><?php echo $system_users[$action->user_id]?></td>
 						  	<td><?php echo $action_types_array[$action->action_type_id]; ?></td>
 						  	<td><?php echo $action->comments;?></td>
