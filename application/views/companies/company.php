@@ -283,8 +283,8 @@
 						  	<th>Created by</th>
 						  	<th>Action type</th>
 						  	<th>Comments</th>
-						  	<th>Actioned date</th>
 						  	<th>Planned date</th>
+						  	<th>Actioned date</th>
 						  	<!-- <th>Window</th> -->
 						  	<th>Cancelled date</th>
 						  	<th>Last updated</th>
@@ -312,8 +312,8 @@
 						  	<td><?php echo $system_users[$action->user_id]?></td>
 						  	<td><?php echo $action_types_array[$action->action_type_id]; ?></td>
 						  	<td><?php echo $action->comments;?></td>
-						  	<td><?php echo $action->actioned_at?></td>
 						  	<td><?php echo $action->planned_at?></td>
+						  	<td><?php echo $action->actioned_at?></td>
 						  	<!-- <td><?php echo $action->window?></td> -->
 						  	<td><?php echo $action->cancelled_at?></td>
 						  	<td><?php echo $action->updated_at?></td>
