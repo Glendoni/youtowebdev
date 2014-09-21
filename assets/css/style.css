@@ -124,3 +124,9 @@
 	border-bottom-right-radius: 0px;
 	border-bottom-left-radius: 0px;
 }
+
+.list-group-item.delayed {
+	color: #a94442;
+	background-color: #f2dede;
+	border-color: #ebccd1;
+}

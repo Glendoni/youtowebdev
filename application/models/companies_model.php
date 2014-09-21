@@ -7,6 +7,10 @@ class Companies_model extends CI_Model {
 		return $query->result();
 	}
 
+	// function get_companies_per_sector(){
+	// 	$sql = 'Select count(*) FROM sectors S,operates O WHERE O.company_id = companies.id AND S.id = O.sector_id  AND O.active = 'True' '
+	// }
+
 
 	function get_company_by_id($id)
 	{
