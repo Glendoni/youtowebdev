@@ -283,10 +283,10 @@
 						  	<th>Created by</th>
 						  	<th>Action type</th>
 						  	<th>Comments</th>
-						  	<th>Actioned at</th>
-						  	<th>Planned at</th>
+						  	<th>Actioned date</th>
+						  	<th>Planned date</th>
 						  	<!-- <th>Window</th> -->
-						  	<th>Cancelled at</th>
+						  	<th>Cancelled date</th>
 						  	<th>Last updated</th>
 						  		
 						  </tr>
