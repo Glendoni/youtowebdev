@@ -15,7 +15,7 @@ class MY_Controller extends CI_Controller {
 		        $this->output->enable_profiler(TRUE);
 		break;
 		case 'production':
-				$this->output->enable_profiler(TRUE);
+				$this->output->enable_profiler(FALSE);
 		break;
 
 		default:
