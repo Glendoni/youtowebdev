@@ -116,7 +116,7 @@
 					<?php echo $company['name']; ?>
 				</a>
 				<?php if ($company['url']): ?>
-				<a class="btn btn-link" href="<?php echo $company['url'] ?>" target="_blank"><?php echo $company['url'] ?></a>
+				<a class="btn btn-link" href="<?php $parsed = parse_url($company['url']); if (empty($parsed['scheme'])) { $company['url'] = 'http://' . ltrim($company['url'], '/'); echo $company['url'];}else{ echo $company['url']; } ?>" target="_blank"><?php echo $company['url'] ?></a>
 				<?php endif; ?>
 			</h3>
 			<small><?php echo $company['address']; ?> </small>

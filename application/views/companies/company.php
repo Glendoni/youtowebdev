@@ -8,7 +8,7 @@
 	<?php echo $company['name']; ?>
 
 	<?php if ($company['url']): ?>
-	<a class="btn btn-link" href="<?php echo $company['url'] ?>" target="_blank"><?php echo $company['url'] ?></a>
+	<a class="btn btn-link" href="<?php $parsed = parse_url($company['url']); if (empty($parsed['scheme'])) { $company['url'] = 'http://' . ltrim($company['url'], '/'); echo $company['url'];}else{ echo $company['url']; } ?>" target="_blank"><?php echo $company['url'] ?></a>
 	<?php endif; ?>
 	</h2>
 	<div class="modal fade" id="editModal<?php echo $company['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="Edit <?php echo $company['name']; ?>" aria-hidden="true" style="display: none;">
