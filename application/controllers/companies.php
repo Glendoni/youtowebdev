@@ -87,8 +87,9 @@ class Companies extends MY_Controller {
 		$this->data['current_campaign_name'] = ($this->session->userdata('campaign_name') ?: FALSE );
 		$this->data['current_campaign_owner_id'] = ($this->session->userdata('campaign_owner') ?: FALSE );
 		$this->data['current_campaign_id'] = ($this->session->userdata('campaign_id') ?: FALSE );
-		$this->data['current_campaign_editable'] = ($this->data['current_campaign_owner_id'] == $this->get_current_user_id() ? TRUE : FALSE ); 
-		$this->data['current_campaign_is_shared'] = $this->session->userdata('campaign_shared') ;
+		$this->data['current_campaign_editable'] = ($this->data['current_campaign_owner_id'] == $this->get_current_user_id() ? TRUE : FALSE );
+		
+		$this->data['current_campaign_is_shared'] = $this->session->userdata('campaign_shared') == 'f'? FALSE : TRUE; 
 
 		if(empty($companies_array))
 		{
