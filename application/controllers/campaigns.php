@@ -90,7 +90,7 @@ class Campaigns extends MY_Controller {
 			$result = $this->Campaigns_model->update_campaign_make_private($this->input->post('campaign_id'),$this->get_current_user_id());
 			if($result == True)
 			{
-				$this->session->set_userdata('campaign_shared',False);
+				$this->session->set_userdata('campaign_shared','f');
 			}
 		}elseif ( ($this->input->post('make_public') !== FALSE ) ) {
 			
@@ -98,7 +98,7 @@ class Campaigns extends MY_Controller {
 
 			if($result == True)
 			{	
-				$this->session->set_userdata('campaign_shared',True);
+				$this->session->set_userdata('campaign_shared','t');
 			}
 		}elseif ($this->input->post('delete')!== FALSE) {
 			$result = $this->Campaigns_model->delete_campaign($this->input->post('campaign_id'),$this->get_current_user_id());
