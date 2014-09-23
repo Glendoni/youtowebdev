@@ -18,6 +18,8 @@
  * NOTE: If you change these, also change the error_reporting() code below
  *
  */
+date_default_timezone_set('Europe/London');
+
 if(getenv('ENVIRONMENT')){
 	define('ENVIRONMENT', getenv('ENVIRONMENT'));
 }else{
@@ -38,8 +40,8 @@ if (defined('ENVIRONMENT'))
 	switch (ENVIRONMENT)
 	{
 		case 'development':
-			// error_reporting(E_ALL);
-			error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
+			error_reporting(E_ALL);
+			// error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
 		break;
 	
 		case 'staging':
