@@ -38,8 +38,9 @@ class Actions extends MY_Controller {
 		if($this->input->post('action_id'))
 		{
 			if($this->input->post('action_do') == 'completed')
-			{
-				$result = $this->Actions_model->set_action_state($this->input->post('action_id'),$this->input->post('user_id'),'completed');
+			{   
+				$outcome = $this->input->post('outcome');
+				$result = $this->Actions_model->set_action_state($this->input->post('action_id'),$this->input->post('user_id'),'completed',$outcome);
 
 				if($result)
 				{
@@ -53,7 +54,8 @@ class Actions extends MY_Controller {
 			}
 			else if($this->input->post('action_do') == 'cancelled')
 			{	
-				$result = $this->Actions_model->set_action_state($this->input->post('action_id'),$this->input->post('user_id'),'cancelled');
+				$outcome = $this->input->post('outcome');
+				$result = $this->Actions_model->set_action_state($this->input->post('action_id'),$this->input->post('user_id'),'cancelled',$outcome);
 				print_r($result);
 				if($result)
 				{

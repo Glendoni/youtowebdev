@@ -25,7 +25,7 @@
     <link href="<?php echo asset_url();?>css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
 
     <!-- Morris Charts CSS -->
-    <link rel="stylesheet" href="http://cdn.oesmith.co.uk/morris-0.5.1.css">
+    <link rel="stylesheet" href="https://cdn.oesmith.co.uk/morris-0.5.1.css">
 
     <!-- Custom Fonts -->
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -300,9 +300,13 @@
                                             <?php echo form_open(site_url().'companies', 'id="main_search" novalidate="novalidate" name="main_search" class="" role="form"'); ?>
                                             <?php echo form_hidden('main_search','1');?>
                                             <?php if ($_POST['main_search']): ?>
-                                                <!-- <a class="btn btn-link pull-right" href="<?php echo site_url();?>">
-                                                    <span class="glyphicon glyphicon-remove"></span> Clear fields
-                                                </a> -->
+                                            <div class='form-row'>
+                                                <div class="col-md-12 form-group ">
+                                                    <a class="btn btn-link pull-right" href="<?php echo site_url();?>">
+                                                        <span class="glyphicon glyphicon-remove"></span> Clear fields
+                                                    </a>
+                                                </div>
+                                            </div>
                                             <?php endif; ?>
                                             <div class='form-row'>
                                                 <div class="col-md-12 form-group ">

@@ -57,11 +57,12 @@ class Actions_model extends CI_Model {
 
 	// UPDATES
 
-	public function set_action_state($action_id,$user_id,$state)
+	public function set_action_state($action_id,$user_id,$state,$outcome)
 	{
 		if($state == 'completed')
 		{
 			$data = array(
+			'outcome' => $outcome,
 			'actioned_at' => date('Y-m-d H:i:s'),
 			'updated_at' => date('Y-m-d H:i:s'),
 			'updated_by' => $user_id,
