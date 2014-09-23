@@ -11,7 +11,7 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
 	<!-- Metis Menu Plugin JavaScript -->
-    <script src="<?php echo asset_url();?>/js/plugins/metisMenu/metisMenu.min.js"></script>
+    <script src="<?php echo asset_url();?>js/plugins/metisMenu/metisMenu.min.js"></script>
 
     <!-- Morris Charts JavaScript -->
     
@@ -19,12 +19,12 @@
  	<script src="https://cdn.oesmith.co.uk/morris-0.5.1.min.js"></script>
 
  	<!-- Custom Theme JavaScript -->
-    <script src="<?php echo asset_url();?>/js/sb-admin-2.js"></script>
+    <script src="<?php echo asset_url();?>js/sb-admin-2.js"></script>
 
 
-    <script src="<?php echo asset_url();?>/js/ladda.min.js"></script>
+    <script src="<?php echo asset_url();?>js/ladda.min.js"></script>
 
-    <script src="<?php echo asset_url();?>/js/pace.min.js"></script> 
+    <script src="<?php echo asset_url();?>js/pace.min.js"></script> 
     <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
     <!-- DATE TIME PICKER -->
     <script type="text/javascript" src="https://eonasdan.github.io/bootstrap-datetimepicker/scripts/moment.js"></script>

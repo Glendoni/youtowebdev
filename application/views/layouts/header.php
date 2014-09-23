@@ -13,7 +13,7 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="icon" type="image/png" href="<?php echo asset_url();?>/images/favicon.jpg">
+    <link rel="icon" type="image/png" href="<?php echo asset_url();?>images/favicon.jpg">
     <!-- Custom CSS -->
     <link href="<?php echo asset_url();?>css/sb-admin-2.css" rel="stylesheet">
     <link href="<?php echo asset_url();?>css/style.css" rel="stylesheet">
@@ -25,7 +25,7 @@
     <link href="<?php echo asset_url();?>css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
 
     <!-- Morris Charts CSS -->
-    <link rel="stylesheet" href="https://cdn.oesmith.co.uk/morris-0.5.1.css">
+    <link rel="stylesheet" href="<?php echo asset_url();?>css/morris-5.1.css">
 
     <!-- Custom Fonts -->
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
