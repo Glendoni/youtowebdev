@@ -48,10 +48,10 @@
 $active_group = 'remote';
 $active_record = TRUE;
 
-$db['remote']['hostname'] = 'ec2-54-83-43-49.compute-1.amazonaws.com';
-$db['remote']['username'] = 'pafpgwduawjhjg';
-$db['remote']['password'] = 'CgceaC6SiUqGVL1zzgTt6egPak';
-$db['remote']['database'] = 'dcnitnkm31ke9f';
+$db['remote']['hostname'] = 'ec2-54-246-81-118.eu-west-1.compute.amazonaws.com';
+$db['remote']['username'] = 'abofmtszxcjhpw';
+$db['remote']['password'] = 'olvLynlGPSFZ4M7An5qcSB2IH9';
+$db['remote']['database'] = 'd5sdv93v0gntjm';
 $db['remote']['dbdriver'] = 'postgre';
 $db['remote']['dbprefix'] = '';
 $db['remote']['pconnect'] = TRUE;

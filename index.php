@@ -19,7 +19,7 @@
  *
  */
 if(getenv('ENVIRONMENT')){
-	define('ENVIRONMENT', 'production');
+	define('ENVIRONMENT', getenv('ENVIRONMENT'));
 }else{
 	define('ENVIRONMENT', 'development');
 }
@@ -42,7 +42,7 @@ if (defined('ENVIRONMENT'))
 			error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
 		break;
 	
-		case 'testing':
+		case 'staging':
 		case 'production':
 			error_reporting(0);
 			// error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
