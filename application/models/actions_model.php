@@ -24,6 +24,7 @@ class Actions_model extends CI_Model {
 		$this->db->join('companies', 'companies.id = actions.company_id');
 		$this->db->order_by('cancelled_at desc,planned_at asc');
 		$query = $this->db->get_where('actions', $data);
+		var_dump($query);
 		return $query->result_object();
 
 	}
