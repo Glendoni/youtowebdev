@@ -45,25 +45,29 @@
 | the active record class
 */
 
-$active_group = 'remote';
-$active_record = TRUE;
+// $active_group = 'remote';
+// $active_record = TRUE;
 
-$db['remote']['hostname'] = 'ec2-54-83-43-49.compute-1.amazonaws.com';
-$db['remote']['username'] = 'pafpgwduawjhjg';
-$db['remote']['password'] = 'CgceaC6SiUqGVL1zzgTt6egPak';
-$db['remote']['database'] = 'dcnitnkm31ke9f';
-$db['remote']['dbdriver'] = 'postgre';
-$db['remote']['dbprefix'] = '';
-$db['remote']['pconnect'] = TRUE;
-$db['remote']['db_debug'] = FALSE;
-$db['remote']['cache_on'] = FALSE;
-$db['remote']['cachedir'] = '';
-$db['remote']['char_set'] = 'utf8';
-$db['remote']['dbcollat'] = 'utf8_general_ci';
-$db['remote']['swap_pre'] = '';
-$db['remote']['autoinit'] = TRUE;
-$db['remote']['stricton'] = FALSE;
-$db['remote']['port'] = 5432;
+// $db['remote']['hostname'] = 'ec2-54-83-43-49.compute-1.amazonaws.com';
+// $db['remote']['username'] = 'pafpgwduawjhjg';
+// $db['remote']['password'] = 'CgceaC6SiUqGVL1zzgTt6egPak';
+// $db['remote']['database'] = 'dcnitnkm31ke9f';
+// $db['remote']['dbdriver'] = 'postgre';
+// $db['remote']['dbprefix'] = '';
+// $db['remote']['pconnect'] = TRUE;
+// $db['remote']['db_debug'] = FALSE;
+// $db['remote']['cache_on'] = FALSE;
+// $db['remote']['cachedir'] = '';
+// $db['remote']['char_set'] = 'utf8';
+// $db['remote']['dbcollat'] = 'utf8_general_ci';
+// $db['remote']['swap_pre'] = '';
+// $db['remote']['autoinit'] = TRUE;
+// $db['remote']['stricton'] = FALSE;
+// $db['remote']['port'] = 5432;
+
+$dsn = getenv('DATABASE_URL');
+
+$this->load->database($dsn);
 
 /* End of file database.php */
 /* Location: ./application/config/database.php */
