@@ -7,8 +7,14 @@ class Companies_model extends CI_Model {
 		return $query->result();
 	}
 
+	// function get_companies_per_sector(){
+	// 	$sql = 'Select count(*) FROM sectors S,operates O WHERE O.company_id = companies.id AND S.id = O.sector_id  AND O.active = 'True' '
+	// }
+
+
 	function get_company_by_id($id)
 	{
+
 		$this->db->select('companies.*,addresses.address');
 		$this->db->from('companies');
 		$this->db->join('addresses','addresses.company_id = companies.id','left');
@@ -26,7 +32,7 @@ class Companies_model extends CI_Model {
 
 		// Sectors the company is in 
 		$this->db->select("(SELECT string_agg(S.name, ',') FROM sectors S,operates O WHERE O.company_id = companies.id AND S.id = O.sector_id  AND O.active = 'True') as company_sectors", FALSE, FALSE);
-
+		$this->db->select("(SELECT array_to_string(array_agg(S.id), ',')  FROM sectors S,operates O WHERE O.company_id = companies.id AND S.id = O.sector_id  AND O.active = 'True'  ) as company_sectors_ids", FALSE, FALSE);
 		// Linkedin connectioins ( need improvement , can be done once a month to another table)
 		$this->db->select("(SELECT count(*) FROM connections C,employees E WHERE E.company_id = companies.id AND C.employee_id = E.id ) as company_connections", FALSE, FALSE);
 
@@ -104,18 +110,249 @@ class Companies_model extends CI_Model {
 		return $query->result();
 	}
 
-	// function last_updated_companies(){
-	// 	$this->db->select('companies.name,companies.id');
-	// 	$this->db->from('companies');
-	// 	$this->db->where('updated_at >'," (CURRENT_DATE - INTERVAL '30 days') ", FALSE);
-	// 	$this->db->limit(10);
-	// 	$query = $this->db->get();
-	// 	return $query->result();
-	// }
 
-	function search_companies_sql($post)
+
+
+     // $query = $this->db->query("YOUR QUERY");
+
+	function search_companies_sql($post,$company_id = False)
 	{
-		// pending
+	
+		// filter by name
+		if (isset($post['agency_name']) && strlen($post['agency_name'])) 
+		{
+			$company_name_sql = "select id from companies  where name ilike '%".$post['agency_name']."%'"; 
+			
+		}
+
+		// COMPANY AGE
+		
+		if($post['company_age_from'] >= 0  )
+		{
+			$company_age_from = date("m-d-Y", strtotime("-".$post['company_age_from']." year"));
+			
+		}
+		if(!empty($post['company_age_to'])  )
+		{
+			$company_age_to = date("m-d-Y", strtotime("-".$post['company_age_to']." year"));
+			
+		}
+		if(isset($company_age_from) && isset($company_age_to)) 
+		{
+			$company_age_sql = 'select id from companies  where companies.eff_from between \''.$company_age_to.'\'  and  \''.$company_age_from.'\' ';
+		}
+		
+
+		
+		// TURNOVER
+		
+		if( (isset($post['turnover_from']) && strlen($post['turnover_from']) > 0) && (strlen($post['turnover_to']) > 0 && isset($post['turnover_to'])) ) 
+		{
+			$turnover_sql = 'select company_id  from turnovers where turnover > '.$post['turnover_from'].'  and turnover < '.$post['turnover_to'].'  ';
+		}
+		
+		// EMP COUNT
+		// if((isset($post['employees_to']) and !empty($post['employees_to'])) and (isset($post['employees_from']) and !empty($post['employees_from'])) ) 
+		// {
+		// 	$emp_count_sql = 'select company_id  from emp_counts where count > '.$post['employees_from'].'  and turnover < '.$post['employees_to'].'  ';
+		// }
+
+		// MORTGAGE
+		// if (!empty($post['mortgage_to']) && !empty($post['mortgage_from']))
+		// {
+		// 	$mortgage_sql = 'select company_id  from mortgages where mortgages.stage = \''.MORTGAGES_OUTSTANDING.'\' and EXTRACT (doy from mortgages.eff_from) - EXTRACT (doy from now()) BETWEEN '.$post['mortgage_from'].' AND '.$post['mortgage_to'].'  ';
+		// }
+
+		// SECTORS
+
+		if( isset($post['sectors']) && (!in_array("0", $post['sectors'])) )
+		{	
+			if ($post['sectors'] < 0)
+			{
+				$sectors_sql = 'select operates.company_id from operates where operates.active = True and operates.sector_id = NULL ';
+			}
+			else
+			{
+				$sectors_sql = 'select operates.company_id from operates where operates.active = True and operates.sector_id in ('.implode(', ', $post['sectors']).')';
+			}
+			
+		}
+
+		// Providers
+		if(isset($post['providers']) && (!empty($post['providers'])) )
+		{
+			if($post['providers'] < 0)
+			{
+				$providers_sql = 'select mortgages.company_id "company_id" from providers join mortgages on  providers.id = mortgages.provider_id	where  providers.id = NULL';
+			}
+			else
+			{
+				$providers_sql = 'select mortgages.company_id "company_id" from providers join mortgages on  providers.id = mortgages.provider_id	where mortgages.stage = \''.MORTGAGES_OUTSTANDING.'\' and providers.id = '.$post['providers'];
+			}
+			
+		}
+
+		// assigned
+		if(isset($post['assigned']) && (!empty($post['assigned'])) && ($post['assigned'] !== '0'))
+		{	
+			$assigned_sql = 'select id from companies where user_id = '.$post['assigned'].'';
+		}
+
+		// -- Data to Display a Company's details
+		
+
+		$sql = 'select json_agg(results)
+from (
+
+select row_to_json((
+       T1."JSON output",
+       T2."JSON output"
+       )) "company"
+from 
+(-- T1
+select C.id,
+       row_to_json((
+       C.id, -- f1
+       C.name, -- f2
+       C.url, -- f3
+	   to_char(C.eff_from, \'DD/Mon/YYYY\'), -- f4
+	   C.ddlink, -- f5
+	   C.linkedin_id, -- f6
+	   U.name, -- f7
+	   U.id , -- f8
+	   A.address, --f9
+	   C.contract, --f10
+	   C.perm, -- f11
+	   C.active, -- f12
+	   C.created_at, -- f13
+	   C.updated_at, -- f14
+	   C.created_by,-- f15
+	   C.updated_by,-- f16
+	   C.registration, -- f17
+       TT1."turnover", -- f18
+	   TT1."turnover_method",  -- f19
+	   EMP.count,--f20
+	   json_agg( 
+	   row_to_json ((
+	   TT2."sector_id", TT2."sector"))))) "JSON output" -- f20
+	   
+
+
+from COMPANIES C';
+
+if(isset($company_name_sql)) $sql = $sql. ' JOIN ( '.$company_name_sql.' ) name ON C.id = name.id ';
+if(isset($company_age_sql)) $sql =  $sql.' JOIN ( '.$company_age_sql.' ) company_age ON C.id = company_age.id ';
+if(isset($turnover_sql)) $sql = $sql.' JOIN ( '.$turnover_sql.' ) turnovers ON C.id = turnovers.company_id';
+if(isset($mortgage_sql)) $sql = $sql.' JOIN ( '.$mortgage_sql.' ) mortgages ON C.id = mortgages.company_id';
+if(isset($sectors_sql)) $sql = $sql.' JOIN ( '.$sectors_sql.' ) sectors ON C.id = sectors.company_id';
+if(isset($providers_sql)) $sql = $sql.' JOIN ( '.$providers_sql.' ) providers ON C.id = providers.company_id';
+if(isset($assigned_sql)) $sql = $sql.' JOIN ( '.$assigned_sql.' ) assigned ON C.id = assigned.id';
+if(isset($company_id) && $company_id !== False) $sql = $sql.' JOIN ( select id from companies where id = '.$company_id.' ) company ON C.id = company.id';
+$sql = $sql.' LEFT JOIN 
+(-- TT1 
+select T.company_id "company id",
+       T.turnover "turnover",
+       T.method "turnover_method"       
+from 
+(-- T1
+select id "id",
+       company_id,
+       max(eff_from) OVER (PARTITION BY company_id) "max eff date"
+from TURNOVERS
+)   T1
+  
+JOIN TURNOVERS T
+ON T1.id = T.id
+  
+where T1."max eff date" = T.eff_from
+  
+  
+)   TT1
+ON TT1."company id" = C.id 
+
+LEFT JOIN
+(-- TT2
+select O.company_id "company id",
+       S.id "sector_id",
+       S.name "sector"       
+from OPERATES O
+
+JOIN SECTORS S
+ON O.sector_id = S.id
+where O.active = \'TRUE\'
+)   TT2
+ON TT2."company id" = C.id
+
+
+
+LEFT JOIN 
+(
+	SELECT count,company_id FROM "emp_counts"  ORDER BY "emp_counts"."created_at" DESC limit 1
+) EMP ON EMP.company_id = C.id
+
+LEFT JOIN 
+ADDRESSES A
+ON A.company_id = C.id
+
+LEFT JOIN
+USERS U
+ON U.id = C.user_id
+		 
+group by C.id,
+         C.name,
+         C.url,
+	     C.eff_from,
+	     C.ddlink,
+	     C.linkedin_id,
+	     U.id,
+	     U.name,
+	     A.address,
+         TT1."turnover",
+	     TT1."turnover_method",
+	     EMP.count
+
+order by C.id 
+
+
+)   T1
+
+LEFT JOIN
+
+(-- T2
+select T."company id",
+       json_agg(
+	   row_to_json(
+	   row (T."mortgage id", T."mortgage provider", T."mortgage stage", T."mortgage start"))) "JSON output"  -- f11
+		 
+from 
+(-- T
+select M.company_id "company id",
+       M.id "mortgage id",
+       P.name "mortgage provider",
+       M.stage "mortgage stage",
+       to_char(M.eff_from, \'DD/Mon/YYYY\')  "mortgage start"
+from MORTGAGES M
+  
+JOIN PROVIDERS P
+ON M.provider_id = P.id 
+
+order by 1, 4, 5 desc
+
+)   T
+
+group by T."company id"
+
+order by T."company id"
+
+
+)   T2
+ON T1.id = T2."company id"
+ 
+) results';
+		// print_r($sql);
+		$query = $this->db->query($sql);
+
+		return $query->result_array();
 	}
 
 	function search_companies($post)
@@ -299,7 +536,6 @@ class Companies_model extends CI_Model {
 
 		if (!empty($post['mortgage_to']) && !empty($post['mortgage_from']))
 		{
-			
 			$this->db->where('mortgages.stage', MORTGAGES_OUTSTANDING);
 			$mortgage_end_from = $post['mortgage_from'];
 			$mortgage_end_to = $post['mortgage_to'];
@@ -342,8 +578,9 @@ class Companies_model extends CI_Model {
 			$this->db->where('mortgages.company_id',$company->id);
 			$this->db->join('providers','providers.id = mortgages.provider_id','left');
 			$this->db->group_by(array('providers.name', 'mortgages.stage' , 'mortgages.eff_from'));
-			$this->db->order_by('mortgages.stage');
-			$this->db->order_by('mortgages.eff_from');
+			$this->db->order_by('mortgages.eff_from','desc');
+			$this->db->order_by('mortgages.stage','asc');
+			
 			$mortgages = $this->db->get(); 
 
 
@@ -353,16 +590,7 @@ class Companies_model extends CI_Model {
 			// Place the result array on the current object
 			$companies->result_object[$key]->mortgages = $mortgages2;
 
-			// Check for assign to
-			// $assign_to = $company->company_assign_to;
-			// if(!empty($assign_to))
-			// {
-			// 	$names = explode(" ", $assign_to); 
-			// 	$initials = $names[0][0].$names[1][0];
-			// 	$to_upper = strtoupper($initials);
-			// 	// Set to array
-			// 	$companies->result_object[$key]->company_assign_to = $to_upper;
-			// }
+			
 		}
 		
 		return  $companies;
@@ -418,7 +646,7 @@ class Companies_model extends CI_Model {
 		}
 		
 
-			
+		
 		$company = array(
 				'linkedin_id' => $post['linkedin_id']?$post['linkedin_id']:NULL,
 				'url' => $post['url']?$post['url']:NULL,
@@ -426,6 +654,7 @@ class Companies_model extends CI_Model {
 				'perm'=>$post['perm']?$post['perm']:NULL,
 				'updated_at' => date('Y-m-d H:i:s')
 			);
+
 		$this->db->where('id', $post['company_id']);
 		$this->db->update('companies', $company);
 
@@ -446,7 +675,6 @@ class Companies_model extends CI_Model {
         $this->title   = $_POST['title']; // please read the below note
         $this->content = $_POST['content'];
         $this->date    = time();
-
         $this->db->insert('entries', $this);
     }
 }

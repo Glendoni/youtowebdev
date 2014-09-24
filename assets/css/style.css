@@ -1,5 +1,5 @@
 /*page-results-list */
-.page-results-list .panel-heading {
+.page-results-list .company .panel-heading {
 	padding: 5px;
 	width: 250px;
 	float: left;
@@ -11,6 +11,10 @@
 	border-color: #ddd; 
 }
 
+.page-results-list .companies-list-header {
+	border-top-right-radius:0px;
+	border-top-left-radius: 0px;
+}
 
 #main_search > .form-row > .form-group , #main_search .col-md-6 {
 	padding:0px;
@@ -46,10 +50,14 @@
 	font-weight: bold;
 }
 
-.sidebar .sidebar-search{
+.sidebar .sidebar-search  {
 	padding:0px;	
 }
-
+.sidebar  .panel{
+	border: 0px; 
+	border-radius: 0px;
+	border-bottom: 1px solid #ddd;
+}
 .campaing_edit_options{
 	padding:6px;
 }
@@ -58,13 +66,85 @@
 	border-radius: 0px;
 }
 
-.assign-to-wrapper {
+.assign-to-wrapper form {
 	position: relative;
 	float: left;
 }
 
-.assign-to-wrapper .btn {
+
+.assign-to-wrapper .btn-primary {
+	margin-right: 5px;
+}
+
+.navbar-default .navbar-text {
+	color: #000;
+	font-size: 22px;
+	padding: 0px 5px;
+	margin: 0px;
+	line-height: 48px;
+}
+
+.navbar-default .navbar-text small{
+	color: #777;
+}
+
+.label {
+	font-weight: normal;
+}
+
+ {
 	border-radius: 5px 0px 0px 5px;
 }
 
-<!--NICK CSS-->
+.nav-second-level > li{
+	border-top: 1px solid #ddd;
+	background: #fff;
+}
+
+.modal-loading-display{
+	position: fixed;top: 16px;background: #222;background: rgba(0, 0, 0, .7);width: 95%;height: 85%;border-radius: 6px;display: none;
+}
+
+.modal-loading-display > button{
+	position:relative;top:45%;
+}
+
+.list-group-item {
+	border:0px;
+	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+}
+
+.list-group-item:first-child{
+	border-top-left-radius: 0px; 
+   border-top-right-radius: 0px; 
+}
+.list-group-item:last-child {
+	margin-bottom: 0;
+	border-bottom-right-radius: 0px;
+	border-bottom-left-radius: 0px;
+}
+
+.list-group-item.delayed {
+	color: #a94442;
+	background-color: #f2dede;
+	border-color: #ebccd1;
+}
+
+/*CUSTOM BUTTON CLASSES*/
+.assign-to-form {
+	margin:0;
+}
+.assign-to-wrapper .edit-btn {
+	border-top-left-radius: 0;
+border-bottom-left-radius: 0;
+}
+.assign-to-wrapper .btn-primary {
+	margin:0;
+		border-top-right-radius: 0;
+border-bottom-right-radius: 0;
+}
+a.btn-linkedin {
+	background-color:#0976b4;
+	color:#fff !important;
+}

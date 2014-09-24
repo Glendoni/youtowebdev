@@ -18,11 +18,11 @@
  * NOTE: If you change these, also change the error_reporting() code below
  *
  */
-if(getenv('ENVIRONMENT')){
+//if(getenv('ENVIRONMENT')){
 	define('ENVIRONMENT', 'production');
-}else{
-	define('ENVIRONMENT', 'development');
-}
+//}else{
+//define('ENVIRONMENT', 'development');
+//}
 
 /*
  *---------------------------------------------------------------
@@ -45,6 +45,7 @@ if (defined('ENVIRONMENT'))
 		case 'testing':
 		case 'production':
 			error_reporting(0);
+			// error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
 		break;
 
 		default:

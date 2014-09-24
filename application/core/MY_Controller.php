@@ -15,7 +15,7 @@ class MY_Controller extends CI_Controller {
 		        $this->output->enable_profiler(TRUE);
 		break;
 		case 'production':
-				$this->output->enable_profiler(TRUE);
+				$this->output->enable_profiler(FALSE);
 		break;
 
 		default:
@@ -27,19 +27,21 @@ class MY_Controller extends CI_Controller {
 		$this->load->model('Campaigns_model');
 		$this->load->model('Sectors_model');
 		$this->load->model('Users_model');
-		$this->load->helper('mobile');
 		$this->load->model('Providers_model');
-
-		// var_dump($this->session->all_userdata());
-
+		$this->load->model('Actions_model');
+		// $this->load->helper('mobile');
+		
+		 // var_dump($this->session->all_userdata());
+		
 		// try getting logged in user from session
 		if($this->session->userdata('logged_in')) 
 		{
 			$logged_in = $this->session->userdata('logged_in');
-			$this->data['current_user'] = $this->current_user = $this->Users_model->get_user($logged_in['user_id']);
+			$this->data['current_user'] = $this->Users_model->get_user($logged_in['user_id']);	
 		}
 		else
 		{
+			
 			//user not in session and segment 1 exist then redirect to login
 			if($this->uri->segment(1)) redirect('/','location');
 		}
@@ -48,52 +50,63 @@ class MY_Controller extends CI_Controller {
 		if($this->session->userdata('sectors_array'))
 		{	
 			$sectors_options = $this->session->userdata('sectors_array');
-			$sectors_options = array(0=>'All') + $sectors_options;
 		}
 		else
 		{
 			$sectors_options = $this->Sectors_model->get_all_in_array();
 			asort($sectors_options);
 			$this->session->set_userdata('sectors_array',$sectors_options);
-			$sectors_options = array(0=>'All') + $sectors_options;
 		}
 		
 		if($this->session->userdata('providers_options'))
 		{
 			$providers_options = $this->session->userdata('providers_options');
-			$providers_options = array(0=>'All') + $providers_options;
 		}
 		else
 		{
 			$providers_options = $this->Providers_model->get_all_in_array();
 			asort($providers_options);
 			$this->session->set_userdata('providers_options',$providers_options);
-			$providers_options = array(0=>'All') + $providers_options;
+		}
+ 		
+ 		// $this->session->unset_userdata('system_users');
+		if($this->session->userdata('system_users'))
+		{
+			$system_users = $this->session->userdata('system_users');
+		}
+		else
+		{
+			$system_users = $this->Users_model->get_users_for_select();
+			$this->session->set_userdata('system_users',$system_users);
 		}
 		// SET CONSTANTS AND DEFAULTS
 		
 		// Add options
+		$system_users = array(0=>'All') + $system_users;
+		$this->data['system_users'] = $system_users;
+		$this->data['assigned_default'] = '0';
+
+		$sectors_options = array(0=>'All') + $sectors_options;
+		// $sectors_options = array(-1=>'No sectors') + $sectors_options;
 		$this->data['sectors_options'] = $sectors_options;
 		$this->data['sectors_default'] ='0';
+		
+		$providers_options = array(0=>'All') + $providers_options;
+		// $providers_options = array(-1=>'No providers') + $providers_options;
 		$this->data['providers_options'] = $providers_options;
 		$this->data['providers_default'] ='0';
 
 		$this->data['shared_campaigns'] = $this->Campaigns_model->get_all_shared_campaigns();
 		$this->data['private_campaigns'] = $this->Campaigns_model->get_all_private_campaigns($this->get_current_user_id());
 
-		// if campaign exist set this variables
-		$this->data['current_campaign_name'] = ($this->session->userdata('campaign_name') ?: FALSE );
-		$this->data['current_campaign_owner_id'] = ($this->session->userdata('campaign_owner') ?: FALSE );
-		$this->data['current_campaign_id'] = ($this->session->userdata('campaign_id') ?: FALSE );
-		$this->data['current_campaign_editable'] = ($this->data['current_campaign_owner_id'] == $this->get_current_user_id() ? true : FALSE ); 
-		$this->data['current_campaign_is_shared'] = ($this->session->userdata('campaign_shared') ? True : FALSE );
+		
 		//var_dump($this->session->userdata('campaign_shared'));
 		// var_dump($this->data['own_campaigns']);
 		//var_dump($this->session->all_userdata());
 		// var_dump($this->input->post());
 
 	}
-	protected function clear_campaign_from_session($post)
+	protected function clear_campaign_from_session()
 	{
 		$this->session->unset_userdata('campaign_name');
 		$this->session->unset_userdata('campaign_owner');

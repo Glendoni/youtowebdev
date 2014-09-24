@@ -9,7 +9,7 @@ class Campaigns extends MY_Controller {
 	}
 	
 	public function create() 
-	{	var_dump($this->input->post());
+	{	
 		if($this->input->post('name'))
 		{
 			$name = $this->input->post('name');
@@ -36,10 +36,11 @@ class Campaigns extends MY_Controller {
 		
 		if($new_campaign_id)
 		{
-			$this->session->set_userdata('campaign_id',$new_campaign_id);
-			$this->session->set_userdata('campaign_name',$name);
-			$this->session->set_userdata('campaign_owner',$user_id);
-			$this->session->set_userdata('campaign_shared',filter_var($shared, FILTER_VALIDATE_BOOLEAN));
+			$new_campaign = $this->Campaigns_model->get_campaign_by_id($new_campaign_id);
+			$this->session->set_userdata('campaign_id',$new_campaign[0]->id);
+			$this->session->set_userdata('campaign_name',$new_campaign[0]->name);
+			$this->session->set_userdata('campaign_owner',$new_campaign[0]->user_id);
+			$this->session->set_userdata('campaign_shared',(bool)$new_campaign[0]->shared);
 			$this->set_message_success('Campaign saved!');
 		}
 		redirect('/companies','refresh');
@@ -68,8 +69,9 @@ class Campaigns extends MY_Controller {
 			$this->session->set_userdata('campaign_id',$campaign[0]->id);
 			$this->session->set_userdata('campaign_name',$campaign[0]->name);
 			$this->session->set_userdata('campaign_owner',$campaign[0]->user_id);
-			$this->session->set_userdata('campaign_shared',$campaign[0]->shared);
+			$this->session->set_userdata('campaign_shared',(bool)$campaign[0]->shared);
 			$this->session->set_userdata('current_search',$post);
+			
 			redirect('/companies');
 		}
 		else
