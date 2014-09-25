@@ -19,9 +19,9 @@
  *
  */
 //if(getenv('ENVIRONMENT')){
-	define('ENVIRONMENT', 'production');
+	//define('ENVIRONMENT', 'production');
 //}else{
-//define('ENVIRONMENT', 'development');
+	define('ENVIRONMENT', 'development');
 //}
 
 /*

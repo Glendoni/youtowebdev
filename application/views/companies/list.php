@@ -116,7 +116,7 @@
 					<?php echo $company['name']; ?>
 				</a>
 				<?php if ($company['url']): ?>
-				<a class="btn btn-link" href="<?php echo $company['url'] ?>" target="_blank"><?php echo $company['url'] ?></a>
+				<a class="btn btn-link" href="<?php $parsed = parse_url($company['url']); if (empty($parsed['scheme'])) { $company['url'] = 'http://' . ltrim($company['url'], '/'); echo $company['url'];}else{ echo $company['url']; } ?>" target="_blank"><?php echo $company['url'] ?></a>
 				<?php endif; ?>
 			</h3>
 			<small><?php echo $company['address']; ?> </small>
@@ -161,7 +161,7 @@
 			<a class="btn btn-outline btn-info btn-sm btn-block" href="<?php echo $company['ddlink'] ?>" target="_blank">Duedil</a>
 			<?php endif; ?>
 			<?php if ($company['linkedin_id']): ?>
-			<a class="btn btn-outline btn-info btn-sm btn-block btn-linkedin" href="https://www.linkedin.com/company/<?php echo $company['linkedin_id'] ?>"  target="_blank"><i class="fa fa-linkedin-square"></i> View on LinkedIn</a>
+			<a class="btn btn-outline btn-info btn-sm btn-block" href="https://www.linkedin.com/company/<?php echo $company['linkedin_id'] ?>"  target="_blank">LinkedIn</a>
 			<?php endif; ?>
 			
 			

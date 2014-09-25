@@ -29,7 +29,6 @@ class Actions_model extends CI_Model {
 	}
 	
 public function get_recent_stats(){
-
 $start_date = date('Y-m-d 00:00:00',strtotime('monday this week'));
 $end_date = date('Y-m-d 23:59:59',strtotime('sunday this week'));
 $sql = "select U.name,

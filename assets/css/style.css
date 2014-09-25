@@ -92,7 +92,7 @@
 	font-weight: normal;
 }
 
- {
+.assign-to-wrapper .btn {
 	border-radius: 5px 0px 0px 5px;
 }
 
@@ -129,22 +129,4 @@
 	color: #a94442;
 	background-color: #f2dede;
 	border-color: #ebccd1;
-}
-
-/*CUSTOM BUTTON CLASSES*/
-.assign-to-form {
-	margin:0;
-}
-.assign-to-wrapper .edit-btn {
-	border-top-left-radius: 0;
-border-bottom-left-radius: 0;
-}
-.assign-to-wrapper .btn-primary {
-	margin:0;
-		border-top-right-radius: 0;
-border-bottom-right-radius: 0;
-}
-a.btn-linkedin {
-	background-color:#0976b4;
-	color:#fff !important;
 }
