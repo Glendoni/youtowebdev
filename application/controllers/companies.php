@@ -117,7 +117,7 @@ class Companies extends MY_Controller {
 			$this->data['sectors_array'] = $this->session->userdata('sectors_array');
 			$this->data['companies'] = $companies_array_chunk[($current_page_number-1)];
 
-			
+
 			$this->data['main_content'] = 'companies/search_results';
 			$this->load->view('layouts/default_layout', $this->data);
 		}
@@ -172,7 +172,7 @@ class Companies extends MY_Controller {
 	{
 		if($this->input->get('id'))
 		{
-			$raw_search_results = $this->Companies_model->search_companies_sql($post,$this->input->get('id'));
+			$raw_search_results = $this->Companies_model->search_companies_sql(FALSE,$this->input->get('id'));
 			$company = $this->process_search_result($raw_search_results);
 			$this->data['action_types_done'] = $this->Actions_model->get_action_types_done();
 			$this->data['action_types_planned'] = $this->Actions_model->get_action_types_planned();
