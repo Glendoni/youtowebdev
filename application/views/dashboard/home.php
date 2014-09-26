@@ -131,7 +131,7 @@
           </div>
           <div class="panel panel-default">
               <div class="panel-heading">
-                <i class="fa fa-bell fa-fw"></i> Your Calls & Meetings <span class="label label-primary pull-right"><?php echo count($pending_actions)?><?php echo $user_id;?></span> 
+                <i class="fa fa-bell fa-fw"></i> Your Calls & Meetings <span class="label label-primary pull-right"><?php echo count($pending_actions)?></span> 
               </div>
              
               <div class="panel-body">
@@ -177,10 +177,6 @@
                   </div>
               </div>
           </div>
-<<<<<<< HEAD
-=======
-          
->>>>>>> ddce044887e4ac15f1beb99211e9d7444cde92f4
       </div>
       <!-- <div class="col-lg-4">
         <div class="panel panel-default">
@@ -199,10 +195,5 @@
           </div>
         </div>
     </div> -->
-<<<<<<< HEAD
-  </div>
-=======
   </div>
   
-  
->>>>>>> ddce044887e4ac15f1beb99211e9d7444cde92f4
