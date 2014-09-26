@@ -24,10 +24,12 @@
 
     <script src="<?php echo asset_url();?>js/ladda.min.js"></script>
 
+
     <script src="<?php echo asset_url();?>js/pace.min.js"></script> 
     <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
     <!-- DATE TIME PICKER -->
     <script type="text/javascript" src="https://eonasdan.github.io/bootstrap-datetimepicker/scripts/moment.js"></script>
+
     <script type="text/javascript" src="https://rawgit.com/Eonasdan/bootstrap-datetimepicker/master/src/js/bootstrap-datetimepicker.js"></script>
 
 
