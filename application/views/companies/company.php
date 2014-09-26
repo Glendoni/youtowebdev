@@ -45,8 +45,7 @@
 	                <div class="tag-holder">  
 						<span class="button-checkbox" id="contract">
 					        <button type="button" class="btn btn-default" data-color="primary" id="contract"><i class="state-icon glyphicon glyphicon-unchecked"></i>&nbsp;Contract</button>
-							<input type="checkbox" name="contract" value="1" id="contract" class="hidden" <?php echo isset($company['contract'])? 'checked': '' ; ?> >
-							
+							<input type="checkbox" name="contract" value="1" id="contract" class="hidden" <?php echo isset($company['contract'])? 'checked': '' ; ?> >							
 						</span>
 						<span class="button-checkbox" id="contract">
 							<button type="button" class="btn btn-default" data-color="primary" id="permanent"><i class="state-icon glyphicon glyphicon-unchecked"></i>&nbsp;Permanent</button>
@@ -168,8 +167,6 @@
 			<?php if (isset($company['linkedin_id'])): ?>
 			<a class="btn btn-outline btn-info btn-sm btn-block" href="https://www.linkedin.com/company/<?php echo $company['linkedin_id'] ?>"  target="_blank">LinkedIn</a>
 			<?php endif; ?>
-			
-			
 		</div>
 			
 			<!-- MORTGAGES -->

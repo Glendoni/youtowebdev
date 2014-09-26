@@ -24,12 +24,15 @@
                     <div class=" form-group ">
                         <label for="linkedin_id" class="control-label">Linkedin ID</label>                            
                         <input type="text" name="linkedin_id" value="<?php echo isset($company['linkedin_id'])?$company['linkedin_id']:''; ?>" id="linkedin_id" maxlength="50" class="form-control">
+
                     </div>
                 </div>
                 <div class="">
                     <div class=" form-group ">
                         <label for="url" class="control-label">Website</label>                            
+
                         <input type="text" name="url" value="<?php echo isset($company['url'])?$company['url']:''; ?>" id="url" maxlength="50" class="form-control">
+
                     </div>
                 </div>
                 <hr>
@@ -39,11 +42,14 @@
 						<span class="button-checkbox" id="contract">
 					        <button type="button" class="btn btn-default" data-color="primary" id="contract"><i class="state-icon glyphicon glyphicon-unchecked"></i>&nbsp;Contract</button>
 							<input type="checkbox" name="contract" value="1" id="contract" class="hidden" <?php echo isset($company['contract'])? 'checked': '' ; ?> >
+
 							
 						</span>
 						<span class="button-checkbox" id="contract">
 							<button type="button" class="btn btn-default" data-color="primary" id="permanent"><i class="state-icon glyphicon glyphicon-unchecked"></i>&nbsp;Permanent</button>
+
 							<input type="checkbox" name="perm" value="1" id="permanent" class="hidden" <?php echo isset($company['perm'])? 'checked': '' ; ?> >
+
 						</span>
 					</div>
 				</div>
