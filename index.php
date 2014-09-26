@@ -18,7 +18,7 @@
  * NOTE: If you change these, also change the error_reporting() code below
  *
  */
-date_default_timezone_set('Europe/London');
+date_default_timezone_set("Europe/London");
 
 if(getenv('ENVIRONMENT')){
 	define('ENVIRONMENT', getenv('ENVIRONMENT'));

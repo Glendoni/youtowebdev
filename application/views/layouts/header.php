@@ -416,7 +416,7 @@
                             <div class="panel-body">
                                 <ul class="nav nav-second-level ">
                                 <?php foreach ($private_campaigns as $campaign):?>
-                                    <li class="<?php if($current_campaign_id and $current_campaign_id == $campaign->id) echo 'active' ?>" ><a href="<?php echo site_url();?>campaigns/display/?id=<?php echo $campaign->id; ?>"><?php echo $campaign->name; ?></a></li>
+                                    <li class="<?php if(isset($current_campaign_id) and $current_campaign_id == $campaign->id) echo 'active' ?>" ><a href="<?php echo site_url();?>campaigns/display/?id=<?php echo $campaign->id; ?>"><?php echo $campaign->name; ?></a></li>
                                 <?php endforeach; ?>
                                 </ul>
                             </div>

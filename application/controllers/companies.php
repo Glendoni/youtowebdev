@@ -81,7 +81,7 @@ class Companies extends MY_Controller {
 		}
 
 		
-		$companies_array = $result ? $result : $search_results_in_session;
+		$companies_array = isset($result) ? $result : $search_results_in_session;
 
 		// if campaign exist set this variables
 		$this->data['current_campaign_name'] = ($this->session->userdata('campaign_name') ?: FALSE );
@@ -117,6 +117,7 @@ class Companies extends MY_Controller {
 			$this->data['sectors_array'] = $this->session->userdata('sectors_array');
 			$this->data['companies'] = $companies_array_chunk[($current_page_number-1)];
 
+			
 			$this->data['main_content'] = 'companies/search_results';
 			$this->load->view('layouts/default_layout', $this->data);
 		}
