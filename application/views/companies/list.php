@@ -130,8 +130,8 @@
 		<div class="col-md-3 centre">
 		<strong>Turnover</strong>
 			<h3 class="details">
-				<strong>£ <?php echo number_format($company['turnover']); ?></strong>
-				<br>
+				<strong>£<?php echo number_format (round($company['turnover'],-3));?></strong><br>
+				
 				<small><?php  echo $company['turnover_method']?></small>
 			</h3>
 			<h5>Founded</h5>
