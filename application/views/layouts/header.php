@@ -28,7 +28,7 @@
     <link rel="stylesheet" href="http://cdn.oesmith.co.uk/morris-0.5.1.css">
 
     <!-- Custom Fonts -->
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- BTN animation -->
     <link href="<?php echo asset_url();?>css/ladda.min.css" rel="stylesheet">
@@ -448,7 +448,7 @@
         <div id="page-wrapper">
             <div class="container-fluid">
             <?php $msg = $this->session->flashdata('message'); if($msg): ?>
-                <div class="alert alert-<?php echo $this->session->flashdata('message_type'); ?> alert-dismissible" role="alert">
+                <div class="alert alert-<?php echo $this->session->flashdata('message_type'); ?> alert-dismissible row" role="alert">
                   <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                     <?php echo $msg ?>
                 </div>
