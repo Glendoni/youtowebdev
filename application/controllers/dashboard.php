@@ -12,6 +12,8 @@ class Dashboard extends MY_Controller {
 	{	
 		// Clear search in session 
 		$this->clear_search_results();
+		$this->clear_campaign_from_session();
+		
 		// Getting all sectors 
 
 		// Add options

@@ -183,7 +183,7 @@ class Companies_model extends CI_Model {
 		{
 			if($post['providers'] < 0)
 			{
-				$providers_sql = 'select mortgages.company_id "company_id" from providers join mortgages on  providers.id = mortgages.provider_id	where  providers.id = NULL';
+				$no_providers_sql = 'select distinct(companies.id )from companies left join (select company_id from mortgages where mortgages.stage = \''.MORTGAGES_OUTSTANDING.'\') t on t.company_id = companies.id where t.company_id  is NULL';
 			}
 			else
 			{
@@ -199,7 +199,6 @@ class Companies_model extends CI_Model {
 		}
 
 		// -- Data to Display a Company's details
-		
 
 		$sql = 'select json_agg(results)
 from (
@@ -215,7 +214,7 @@ select C.id,
        C.id, -- f1
        C.name, -- f2
        C.url, -- f3
-	   to_char(C.eff_from, \'DD/Mon/YYYY\'), -- f4
+	   to_char(C.eff_from, \'dd/mm/yyyy\'), -- f4
 	   C.ddlink, -- f5
 	   C.linkedin_id, -- f6
 	   U.name, -- f7
@@ -241,6 +240,7 @@ select C.id,
 from COMPANIES C';
 
 if(isset($company_name_sql)) $sql = $sql. ' JOIN ( '.$company_name_sql.' ) name ON C.id = name.id ';
+if(isset($no_providers_sql)) $sql = $sql. ' JOIN ( '.$no_providers_sql.' ) companies on C.id = companies.id ';
 if(isset($company_age_sql)) $sql =  $sql.' JOIN ( '.$company_age_sql.' ) company_age ON C.id = company_age.id ';
 if(isset($turnover_sql)) $sql = $sql.' JOIN ( '.$turnover_sql.' ) turnovers ON C.id = turnovers.company_id';
 if(isset($mortgage_sql)) $sql = $sql.' JOIN ( '.$mortgage_sql.' ) mortgages ON C.id = mortgages.company_id';
@@ -330,7 +330,7 @@ select M.company_id "company id",
        M.id "mortgage id",
        P.name "mortgage provider",
        M.stage "mortgage stage",
-       to_char(M.eff_from, \'DD/Mon/YYYY\')  "mortgage start"
+       to_char(M.eff_from, \'dd/mm/yyyy\')  "mortgage start"
 from MORTGAGES M
   
 JOIN PROVIDERS P

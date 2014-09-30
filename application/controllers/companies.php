@@ -43,16 +43,16 @@ class Companies extends MY_Controller {
 				
 				$result = $this->process_search_result($raw_search_results);
 				
-				if(empty($result))
-				{
-					$this->session->unset_userdata('companies');
-					unset($search_results_in_session);
-				}
-				else
-				{
-					$session_result = serialize($result);
-					$this->session->set_userdata('companies',$session_result);
-				}
+				// if(empty($result))
+				// {
+				// 	$this->session->unset_userdata('companies');
+				// 	unset($search_results_in_session);
+				// }
+				// else
+				// {
+				// 	$session_result = serialize($result);
+				// 	$this->session->set_userdata('companies',$session_result);
+				// }
 			}
 		}
 		elseif ($refresh_search_results or $ajax_refresh) 
@@ -63,23 +63,32 @@ class Companies extends MY_Controller {
 			}
 			$raw_search_results = $this->Companies_model->search_companies_sql($post);
 			$result = $this->process_search_result($raw_search_results);
-			if(empty($result))
-			{
-				$this->session->unset_userdata('companies');
-				unset($search_results_in_session);
-			}
-			else
-			{
-				$session_result = serialize($result);
-				$this->session->set_userdata('companies',$session_result);
-				
-			}
+			// if(empty($result))
+			// {
+			// 	$this->session->unset_userdata('companies');
+			// 	unset($search_results_in_session);
+			// }
+			// else
+			// {
+			// 	$session_result = serialize($result);
+			// 	$this->session->set_userdata('companies',$session_result);
+			// }
 		}
 		elseif (!$this->input->post('submit') and !$search_results_in_session and !$refresh_search_results) {
 			$this->session->unset_userdata('companies');
 			unset($search_results_in_session);
 		}
 
+		if(empty($result))
+		{
+			$this->session->unset_userdata('companies');
+			unset($search_results_in_session);
+		}
+		else
+		{
+			$session_result = serialize($result);
+			$this->session->set_userdata('companies',$session_result);
+		}
 		
 		$companies_array = isset($result) ? $result : $search_results_in_session;
 

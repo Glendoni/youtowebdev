@@ -27,104 +27,87 @@
                       <div class="tab-pane active" id="this">
                       
                       <div class="row list-group-item">
-                                                <div class="col-md-3 text-center"> 
-                                                 <strong>Name</strong>
-                                                </div>
-                                                <div class="col-md-2 text-center">
-                                                 <strong>Intro Calls</strong>
-                                                </div>
-                                                <div class="col-md-2 text-center"> 
-                                                <strong>Calls</strong>
-                                                </div>
-                                                   <div class="col-md-2 text-center">
-                                                  <strong>Meetings</strong>
-                                                </div>
-                                                <div class="col-md-2 text-center"> 
-                                                <strong>Comments</strong>
+                        <div class="col-md-3 text-center"> 
+                           <strong>Name</strong>
+                        </div>
+                        <div class="col-md-2 text-center">
+                           <strong>Intro Calls</strong>
+                        </div>
+                        <div class="col-md-2 text-center"> 
+                          <strong>Calls</strong>
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <strong>Meetings</strong>
+                        </div>
+                        <div class="col-md-2 text-center"> 
+                          <strong>Comments</strong>
+                        </div>
+                        </div>
+                        <?php foreach ($stats as $stat): ?>
+                          <div class="row list-group-item">
+                            <div class="col-md-3 text-center"> 
+                              <?php echo $stat['name'];?>
+                            </div>
+                            <div class="col-md-2 text-center">
+                              <?php echo $stat['introcall'];?>
+                            </div>
+                            <div class="col-md-2 text-center"> 
+                                <?php echo $stat['callcount'];?>
 
-                                                </div>
-                                              </div>
-                              <?php 
-                    					
-                    					foreach ($stats as $stat): 
-                                             // print_r('<pre>');print_r($count);print_r('</pre>');
-                                            // die;
-                                          ?>
-                                              <div class="row list-group-item">
-                                                <div class="col-md-3 text-center"> 
-                                                  <?php echo $stat['name'];?>
-                                                </div>
-                                                <div class="col-md-2 text-center">
-                                                  <?php echo $stat['introcall'];?>
-                                                </div>
-                                                <div class="col-md-2 text-center"> 
-                                                    <?php echo $stat['callcount'];?>
+                            </div>
+                               <div class="col-md-2 text-center">
+                              <?php echo $stat['meetingcount'];?>
+                            </div>
+                            <div class="col-md-2 text-center"> 
+                                <?php echo $stat['commentcount'];?>
 
-                                                </div>
-                                                   <div class="col-md-2 text-center">
-                                                  <?php echo $stat['meetingcount'];?>
-                                                </div>
-                                                <div class="col-md-2 text-center"> 
-                                                    <?php echo $stat['commentcount'];?>
-
-                                                </div>
-                                              </div>
-                                             
-                                          <?php endforeach ?>
+                            </div>
+                          </div>     
+                      <?php endforeach ?>
                       </div><!--END THIS TAB-->
                       <div class="tab-pane" id="last">
                         <div class="row list-group-item">
-                                                <div class="col-md-3"> 
-                                                 <strong>Name</strong>
-                                                </div>
-                                                <div class="col-md-2 text-center">
-                                                 <strong>Intro Calls</strong>
-                                                </div>
-                                                <div class="col-md-2 text-center"> 
-                    <strong>Calls</strong>
-                                                </div>
-                                                   <div class="col-md-2 text-center">
-                    <strong>Meetings</strong>
-                    </div>
-                                                <div class="col-md-2 text-center"> 
-                                                <strong>Comments</strong>
+                          <div class="col-md-3"> 
+                           <strong>Name</strong>
+                          </div>
+                          <div class="col-md-2 text-center">
+                           <strong>Intro Calls</strong>
+                          </div>
+                          <div class="col-md-2 text-center"> 
+                          <strong>Calls</strong>
+                          </div>
+                          <div class="col-md-2 text-center">
+                          <strong>Meetings</strong>
+                          </div>
+                          <div class="col-md-2 text-center"> 
+                          <strong>Comments</strong>
+                          </div>
+                        </div>
 
-                                                </div>
-                                              </div>
+                       <?php foreach ($lastweekstats as $lastweekstat): ?>
+                          <div class="row list-group-item">
+                            <div class="col-md-3"> 
+                              <?php echo $lastweekstat['name'];?>
+                            </div>
+                            <div class="col-md-2 text-center">
+                              <?php echo $lastweekstat['introcall'];?>
+                            </div>
+                            <div class="col-md-2 text-center"> 
+                                <?php echo $lastweekstat['callcount'];?>
+                            </div>
+                               <div class="col-md-2 text-center">
+                              <?php echo $lastweekstat['meetingcount'];?>
+                            </div>
+                            <div class="col-md-2 text-center"> 
+                                <?php echo $lastweekstat['commentcount'];?>
 
-                       <?php 
-                    					
-                    					foreach ($lastweekstats as $lastweekstat): 
-                                             // print_r('<pre>');print_r($count);print_r('</pre>');
-                                            // die;
-                                          ?>
-                                              <div class="row list-group-item">
-                                                <div class="col-md-3"> 
-                                                  <?php echo $lastweekstat['name'];?>
-                                                </div>
-                                                <div class="col-md-2 text-center">
-                                                  <?php echo $lastweekstat['introcall'];?>
-                                                </div>
-                                                <div class="col-md-2 text-center"> 
-                                                    <?php echo $lastweekstat['callcount'];?>
-                                                </div>
-                                                   <div class="col-md-2 text-center">
-                                                  <?php echo $lastweekstat['meetingcount'];?>
-                                                </div>
-                                                <div class="col-md-2 text-center"> 
-                                                    <?php echo $lastweekstat['commentcount'];?>
-
-                                                </div>
-                                              </div>
-                                             
-                                          <?php endforeach ?>
+                            </div>
+                          </div>
+                         
+                      <?php endforeach ?>
                       
                       </div>
                     </div>
-                    
-                    
-					
-                    
                     <?php endif ?>
                   </div>
               </div>

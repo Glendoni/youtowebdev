@@ -41,12 +41,11 @@ class MY_Controller extends CI_Controller {
 		}
 		else
 		{
-			
 			//user not in session and segment 1 exist then redirect to login
 			if($this->uri->segment(1)) redirect('/','location');
 		}
 
-        // session data only test for positve
+        // session data only test for positve so be careful with the if stataments
 		if($this->session->userdata('sectors_array'))
 		{	
 			$sectors_options = $this->session->userdata('sectors_array');
@@ -81,6 +80,16 @@ class MY_Controller extends CI_Controller {
 		}
 		// SET CONSTANTS AND DEFAULTS
 		
+		// Keep post data on the search , either get it from post or from sessins
+		if($this->session->userdata('current_search') and !$this->input->post('main_search') and ($this->uri->segment(1) !== 'dashboard'))
+		{
+			$post = $this->session->userdata('current_search');
+			foreach ($post as $key => $value) {
+				$_POST[$key] = $value;
+			}
+		}
+		
+
 		// Add options
 		$system_users = array(0=>'anyone/nobody') + $system_users;
 		$this->data['system_users'] = $system_users;
@@ -92,7 +101,7 @@ class MY_Controller extends CI_Controller {
 		$this->data['sectors_default'] ='0';
 		
 		$providers_options = array(0=>'All') + $providers_options;
-		// $providers_options = array(-1=>'No providers') + $providers_options;
+		$providers_options = array(-1=>'No current provider') + $providers_options;
 		$this->data['providers_options'] = $providers_options;
 		$this->data['providers_default'] ='0';
 
