@@ -131,8 +131,7 @@
 		<div class="col-md-3 centre">
 		<strong>Turnover</strong>
 			<h3 class="details">
-				<strong>£ <?php echo number_format($company['turnover']); ?></strong>
-				<br>
+				<strong>£<?php echo number_format (round($company['turnover'],-3));?></strong><br>
 				<small><?php  echo $company['turnover_method']?></small>
 			</h3>
 			<h5>Founded</h5>
@@ -161,11 +160,12 @@
 
 		<!-- LINKS AND BTN -->
 		<div class="col-md-3">
-			<?php if (isset($company['ddlink'])): ?>
-			<a class="btn btn-outline btn-info btn-sm btn-block" href="<?php echo $company['ddlink'] ?>" target="_blank">Duedil</a>
+			<?php if ($company['ddlink']): ?>
+			<a class="btn btn-outline btn-info btn-sm btn-block duedil" href="<?php echo $company['ddlink'] ?>" target="_blank">Duedil</a>
 			<?php endif; ?>
-			<?php if (isset($company['linkedin_id'])): ?>
-			<a class="btn btn-outline btn-info btn-sm btn-block" href="https://www.linkedin.com/company/<?php echo $company['linkedin_id'] ?>"  target="_blank">LinkedIn</a>
+			<?php if ($company['linkedin_id']): ?>
+			<a class="btn btn-outline btn-info btn-sm btn-block linkedin" href="https://www.linkedin.com/company/<?php echo $company['linkedin_id'] ?>"  target="_blank">LinkedIn</a>
+
 			<?php endif; ?>
 		</div>
 			

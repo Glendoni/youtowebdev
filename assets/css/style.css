@@ -130,3 +130,52 @@
 	background-color: #f2dede;
 	border-color: #ebccd1;
 }
+/* BUTTONS */
+.btn.duedil {
+	background-color:#fff;;
+	background-image:url(../images/duedil_logo.png);
+	background-size: auto 20px;
+	background-position:center;
+	background-repeat:no-repeat;
+	text-indent:-9999px;
+	border-color:#333;
+}
+.btn.duedil:hover {
+	background-color:#f7f7f7;
+	border-color:#EE243A;
+}
+
+.btn.linkedin {
+	background-color:#fff;;
+	background-image:url(../images/linkedin.png);
+	background-size: auto 20px;
+	background-position:center;
+	background-repeat:no-repeat;
+	text-indent:-9999px;
+	border-color:#4875B4;
+}
+.btn.linkedin:hover {
+	background-color:#f7f7f7;
+	border-color:#000;
+}
+
+.count_of_results {
+line-height: 30px;
+font-weight: 700;
+}
+
+.pager li>a {
+	border-radius:5px;
+}
+.assign-to-wrapper .btn-primary, .assign-to-wrapper .edit-btn {
+		border-radius:5px;
+}
+
+
+.btn-search-edit {
+margin-top: 10px;
+}
+
+.toggle-btn-group .btn {
+color: #DFDFDF;	
+}

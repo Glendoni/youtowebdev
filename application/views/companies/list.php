@@ -136,9 +136,9 @@
 		<div class="col-md-3 centre">
 		<strong>Turnover</strong>
 			<h3 class="details">
-				<strong>£ <?php echo (isset($company['turnover']))? number_format($company['turnover']):''; ?></strong>
+				<strong>£<?php echo number_format (round($company['turnover'],-3));?></strong>
 				<br>
-				<small><?php  echo (isset($company['turnover_method']))? $company['turnover_method'] : ''; ?></small>
+				<small><?php  echo $company['turnover_method']?></small>
 			</h3>
 			<h5>Founded</h5>
 			<h5 class="details"><strong><?php echo $company['eff_from'] ?></strong></h5>
@@ -166,11 +166,19 @@
 
 		<!-- LINKS AND BTN -->
 		<div class="col-md-3">
+<<<<<<< HEAD
 			<?php if (isset($company['ddlink'])): ?>
 			<a class="btn btn-outline btn-info btn-sm btn-block" href="<?php echo $company['ddlink'] ?>" target="_blank">Duedil</a>
 			<?php endif; ?>
 			<?php if (isset($company['linkedin_id'])): ?>
 			<a class="btn btn-outline btn-info btn-sm btn-block" href="https://www.linkedin.com/company/<?php echo $company['linkedin_id'] ?>"  target="_blank">LinkedIn</a>
+=======
+			<?php if ($company['ddlink']): ?>
+			<a class="btn btn-outline btn-info btn-sm btn-block duedil" href="<?php echo $company['ddlink'] ?>" target="_blank">Duedil</a>
+			<?php endif; ?>
+			<?php if ($company['linkedin_id']): ?>
+			<a class="btn btn-outline btn-info btn-sm btn-block linkedin" href="https://www.linkedin.com/company/<?php echo $company['linkedin_id'] ?>"  target="_blank">LinkedIn</a>
+>>>>>>> 35548c2b0f9f78ede5a5d2725ffa85cb8464a10f
 			<?php endif; ?>
 			
 			
