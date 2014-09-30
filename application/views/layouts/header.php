@@ -25,6 +25,7 @@
     <!-- Morris Charts CSS -->
     <link rel="stylesheet" href="<?php echo asset_url();?>css/morris-5.1.css">
 
+
     <!-- BTN animation -->
     <link href="<?php echo asset_url();?>css/ladda.min.css" rel="stylesheet">
 
@@ -463,7 +464,7 @@
         <div id="page-wrapper">
             <div class="container-fluid">
             <?php $msg = $this->session->flashdata('message'); if($msg): ?>
-                <div class="alert alert-<?php echo $this->session->flashdata('message_type'); ?> alert-dismissible" role="alert">
+                <div class="alert alert-<?php echo $this->session->flashdata('message_type'); ?> alert-dismissible row" role="alert">
                   <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                     <?php echo $msg ?>
                 </div>
