@@ -38,7 +38,7 @@
 						<button type="submit" class="btn btn-warning btn-success btn-sm btn-search-edit" name="make_private" ><i class="fa fa-user"></i> Make Private</button>
 						<?php endif; ?>
                         
-						<button type="submit" class="btn btn-danger btn-sm btn-search-edit" name="delete" ><i class="fa fa-trash"></i> </button>
+						<button type="submit" class="btn btn-danger btn-sm btn-search-edit" name="delete" ><i class="fa fa-trash-o fa-lg"></i> </button>
 					<?php echo form_close(); ?>
 				  <?php endif; ?>
 				</div>
