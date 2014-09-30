@@ -166,22 +166,12 @@
 
 		<!-- LINKS AND BTN -->
 		<div class="col-md-3">
-<<<<<<< HEAD
 			<?php if (isset($company['ddlink'])): ?>
-			<a class="btn btn-outline btn-info btn-sm btn-block" href="<?php echo $company['ddlink'] ?>" target="_blank">Duedil</a>
+			<a class="btn  btn-info btn-sm btn-block duedil" href="<?php echo $company['ddlink'] ?>" target="_blank">Duedil</a>
 			<?php endif; ?>
 			<?php if (isset($company['linkedin_id'])): ?>
-			<a class="btn btn-outline btn-info btn-sm btn-block" href="https://www.linkedin.com/company/<?php echo $company['linkedin_id'] ?>"  target="_blank">LinkedIn</a>
-=======
-			<?php if ($company['ddlink']): ?>
-			<a class="btn btn-outline btn-info btn-sm btn-block duedil" href="<?php echo $company['ddlink'] ?>" target="_blank">Duedil</a>
+			<a class="btn  btn-info btn-sm btn-block linkedin" href="https://www.linkedin.com/company/<?php echo $company['linkedin_id'] ?>"  target="_blank">LinkedIn</a>
 			<?php endif; ?>
-			<?php if ($company['linkedin_id']): ?>
-			<a class="btn btn-outline btn-info btn-sm btn-block linkedin" href="https://www.linkedin.com/company/<?php echo $company['linkedin_id'] ?>"  target="_blank">LinkedIn</a>
->>>>>>> 35548c2b0f9f78ede5a5d2725ffa85cb8464a10f
-			<?php endif; ?>
-			
-			
 		</div>
 			
 			<!-- MORTGAGES -->
