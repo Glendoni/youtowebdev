@@ -167,11 +167,19 @@
 		<!-- LINKS AND BTN -->
 		<div class="col-md-3">
 			<?php if (isset($company['ddlink'])): ?>
+<<<<<<< HEAD
 			<a class="btn  btn-info btn-sm btn-block duedil" href="<?php echo $company['ddlink'] ?>" target="_blank">Duedil</a>
 			<?php endif; ?>
 			<?php if (isset($company['linkedin_id'])): ?>
 			<a class="btn  btn-info btn-sm btn-block linkedin" href="https://www.linkedin.com/company/<?php echo $company['linkedin_id'] ?>"  target="_blank">LinkedIn</a>
 			<?php endif; ?>
+=======
+			<a class="btn btn-outline btn-info btn-sm btn-block duedil" href="<?php echo $company['ddlink'] ?>" target="_blank">Duedil</a>
+			<?php endif; ?>
+			<?php if (isset($company['linkedin_id'])): ?>
+			<a class="btn btn-outline btn-info btn-sm btn-block linkedin" href="https://www.linkedin.com/company/<?php echo $company['linkedin_id'] ?>"  target="_blank">LinkedIn</a>
+			<?php endif; ?>
+>>>>>>> hanks83-master
 		</div>
 			
 			<!-- MORTGAGES -->
