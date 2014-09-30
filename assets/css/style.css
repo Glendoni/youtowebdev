@@ -1,20 +1,4 @@
 /*page-results-list */
-.page-results-list .company .panel-heading {
-	padding: 5px;
-	width: 250px;
-	float: left;
-	border-top-right-radius:0px;
-	border-bottom-right-radius: 3px;
-}
-
-.page-results-list .panel-primary {
-	border-color: #ddd; 
-}
-
-.page-results-list .companies-list-header {
-	border-top-right-radius:0px;
-	border-top-left-radius: 0px;
-}
 
 #main_search > .form-row > .form-group , #main_search .col-md-6 {
 	padding:0px;
