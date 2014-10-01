@@ -16,7 +16,7 @@ class Companies extends MY_Controller {
 
 		if($this->input->post('submit') and !$refresh_search_results and !$ajax_refresh )
 		{ 
-			print 'clearing camp';
+			
 			$this->clear_campaign_from_session();
 			// $this->clear_search_results();
 
