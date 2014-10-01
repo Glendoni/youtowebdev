@@ -100,8 +100,6 @@
 						    <span class="ladda-label"> Unassign from me </span>
 						</button>
 						<?php echo form_close(); ?>
-					<?php else: ?>
-						<button class="btn  btn-primary " disabled="disabled"><?php  echo 'Assigned to '.$company['assigned_to_name']; ?></button>
 					<?php endif; ?>
 				<?php else: ?>
 				<?php 
@@ -136,12 +134,12 @@
 		<div class="col-md-3 centre">
 		<strong>Turnover</strong>
 			<h3 class="details">
-				<strong>£<?php echo number_format (round($company['turnover'],-3));?></strong>
+				<strong>£<?php echo isset($company['turnover'])? number_format (round($company['turnover'],-3)):'';?></strong>
 				<br>
-				<small><?php  echo $company['turnover_method']?></small>
+				<small><?php  echo isset($company['turnover_method'])?$company['turnover_method']:'';?></small>
 			</h3>
 			<h5>Founded</h5>
-			<h5 class="details"><strong><?php echo $company['eff_from'] ?></strong></h5>
+			<h5 class="details"><strong><?php echo isset($company['eff_from'])?$company['eff_from']:''; ?></strong></h5>
 		</div>
 
 		<!-- EMPLOYEES -->
