@@ -42,7 +42,6 @@
 					<?php echo form_close(); ?>
 				  <?php endif; ?>
 				</div>
-				</span>
 					
 			<?php else: ?>
 
@@ -63,7 +62,6 @@
 			  <?php echo form_close(); ?>
 			<?php endif; ?>
 		<?php endif; ?>
-	    </div><!-- /.navbar-collapse -->
 	  </div><!-- /.container-fluid -->
 	</nav>
 
