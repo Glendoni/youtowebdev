@@ -91,7 +91,7 @@
                 
 			</div>
 			<?php if (isset($company['class'])): ?>
-				<h3><span class="label label-info"><?php echo $company['class'] ?></span></h3>
+				<h3><span class="label label-info"><?php echo $companies_classes[$company['class']] ?></span></h3>
 			<?php endif; ?>
 			<h3 class="name">
 				Address

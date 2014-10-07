@@ -49,7 +49,7 @@
 				<?php endif; ?>
 			</h3>
 			<?php if (isset($company['class'])): ?>
-				<span class="label label-info"><?php echo $company['class'] ?></span>
+				<span class="label label-info"><?php echo $companies_classes[$company['class']] ?></span>
 			<?php endif; ?>
 			<small><?php echo $company['address']; ?> </small>
 		</div>
