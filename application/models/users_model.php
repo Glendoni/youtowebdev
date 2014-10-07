@@ -11,9 +11,10 @@ class Users_model extends CI_Model {
 		$users[0] = ' ';
 		foreach ($query->result_array() as $row)
 		{
-			$users[$row['id']] = array('name'=>$row['name'],'image'=>$row['image']);		  
+			$users[$row['id']] = $row['name'];
+			$images[$row['id']] = $row['image'];		  
 		}
-		return $users;
+		return array('users'=>$users,'images'=>$images);
 	}
 	// returns a user for a given id
 	public function get_user($id) 

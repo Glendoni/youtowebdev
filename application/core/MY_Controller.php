@@ -29,6 +29,7 @@ class MY_Controller extends CI_Controller {
 		$this->load->model('Users_model');
 		$this->load->model('Providers_model');
 		$this->load->model('Actions_model');
+		$this->load->model('Companies_model');
 		// $this->load->helper('mobile');
 		
 		 // var_dump($this->session->all_userdata());
@@ -49,6 +50,7 @@ class MY_Controller extends CI_Controller {
 		if($this->session->userdata('sectors_options'))
 		{	
 			$sectors_options = $this->session->userdata('sectors_options');
+
 		}
 		else
 		{
@@ -75,11 +77,13 @@ class MY_Controller extends CI_Controller {
 		if($this->session->userdata('system_users'))
 		{
 			$system_users = $this->session->userdata('system_users');
+			$this->data['system_users_images'] = $this->session->userdata('system_users_images');
 		}
 		else
 		{
 			$system_users = $this->Users_model->get_users_for_select();
-			$this->session->set_userdata('system_users',$system_users);
+			$this->session->set_userdata('system_users',$system_users['users']);
+			$this->session->set_userdata('system_users_images',$system_users['images']);
 		}
 		// SET CONSTANTS AND DEFAULTS
 		
@@ -90,6 +94,15 @@ class MY_Controller extends CI_Controller {
 			foreach ($post as $key => $value) {
 				$_POST[$key] = $value;
 			}
+		}
+		
+		if($this->session->userdata('companies_classes'))
+		{
+			$this->data['companies_classes'] = $this->session->userdata('companies_classes');
+		}else
+		{
+			$companies_classes = $this->Companies_model->get_companies_classes();
+			$this->session->set_userdata('companies_classes',$companies_classes);
 		}
 		
 

@@ -56,7 +56,7 @@
 <div class="panel <?php if(isset($company['assigned_to_name'])): ?> panel-primary <?php else: ?> panel-default <?php endif; ?> company">
 	<?php if(isset($company['assigned_to_name'])): ?>
 	<div class="panel-heading text-center" >
-        <span class="assigned-image-holder" style="max-width:30px; float:left;"><img src="<?php echo asset_url();?>images/profiles/<?php echo isset($system_users[$company['assigned_to_id']]['image'])? $system_users[$action->user_id]['image']:'none' ;?>.jpg" class="img-circle img-responsive" alt="" /></span>
+        <span class="assigned-image-holder" style="max-width:30px; float:left;"><img src="<?php echo asset_url();?>images/profiles/<?php echo isset($system_users_images[$company['assigned_to_id']])? $system_users_images[$company['assigned_to_id']]:'none' ;?>.jpg" class="img-circle img-responsive" alt="" /></span>
         <span style="line-height:28px;">
         Assigned to <?php echo $company['assigned_to_name']; ?> 
         </span>    
@@ -214,7 +214,7 @@
 		</div>
 		<div class="form-group ">
 			<label>Outcome</label>
-			<textarea class="form-control" name="comment" rows="12"></textarea>
+			<textarea class="form-control" name="comment" rows="8"></textarea>
 		</div>
 		<div class="form-group " >
 		<label> </label>
@@ -277,35 +277,33 @@
 					<ul class="list-group">
 					<?php foreach ($actions as $action): 
 					 // print_r('<pre>');print_r($action);print_r('</pre>');
-					 $created_date_formatted = date("l jS F y",strtotime($action->created_at));
-					 $created_date_formatted .= " @ ".date("H:i",strtotime($action->created_at));
-					 $actioned_date_formatted = date("l jS F y",strtotime($action->actioned_at));
-					 $actioned_date_formatted .= " @ ".date("H:i",strtotime($action->actioned_at));
-					 $planned_date_formatted = date("l jS F y",strtotime($action->planned_at));
-					 $planned_date_formatted .= " @ ".date("H:i",strtotime($action->planned_at));
-					 $now = time();
+					 $created_date_formatted = date("l jS F y",strtotime($action->created_at))." @ ".date("H:i",strtotime($action->created_at));
+					 $actioned_date_formatted = date("l jS F y",strtotime($action->actioned_at))." @ ".date("H:i",strtotime($action->actioned_at));
+					 $planned_date_formatted = date("l jS F y",strtotime($action->planned_at))." @ ".date("H:i",strtotime($action->planned_at));
+					 $cancelled_at_formatted = date(" jS F y",strtotime($action->cancelled_at))." @ ".date("H:i",strtotime($action->cancelled_at));
+					 $now = date(time());
 
 					?>
 
                     <li class="list-group-item">
                         <div class="row" style="padding: 15px 0">
                             <div class="col-xs-2 col-md-1">
-                                <img src="<?php echo asset_url();?>images/profiles/<?php echo isset($system_users[$action->user_id]['image'])? $system_users[$action->user_id]['image']: 'none.jpg' ;?>.jpg " class="img-circle img-responsive" alt="" /></div>
+                                <img src="<?php echo asset_url();?>images/profiles/<?php echo isset($system_users_images[$action->user_id])? $system_users_images[$action->user_id]: 'none' ;?>.jpg " class="img-circle img-responsive" alt="" /></div>
                             <div class="col-xs-10 col-md-11">
                                 <div>
                                     <h4 style="margin:0;"><?php echo $action_types_array[$action->action_type_id]; ?> 
                                     <?php if($action->cancelled_at) : ?>
-                                  		<span class="label label-danger" style="font-size:11px; margin-left:10px;">Cancelled</span>
-									<?php elseif(($now > $action->planned_at) && (empty($action->actioned_at))):?>
-                                  		<span class="label label-danger" style="font-size:11px; margin-left:10px;"><b>Overdue</b> - Due on <?php echo $planned_date_formatted ?> </span>
-						  			<?php elseif($action->planned_at):?>
+                                  		<span class="label label-default" style="font-size:11px; margin-left:10px;">Cancelled on <?php echo $cancelled_at_formatted ?></span>
+                                  	<?php elseif(strtotime($action->planned_at) > $now and !isset($action->actioned_at)) : ?>
                                   		<span class="label label-warning" style="font-size:11px; margin-left:10px;">Due on <?php echo $planned_date_formatted ?> </span>
+									<?php elseif(strtotime($action->planned_at) < $now and !isset($action->actioned_at)):?>
+                                  		<span class="label label-danger" style="font-size:11px; margin-left:10px;"><b>Overdue</b> - Due on <?php echo $planned_date_formatted ?> </span>
                                    	<?php elseif($action->actioned_at): ?>
                                    		<span class="label label-success" style="font-size:11px; margin-left:10px;">Completed on <?php echo $actioned_date_formatted ?></span>
 									<?php endif; ?>
 						  			</h4>
                                     <div class="mic-info">
-                                        Created By: <?php echo $system_users[$action->user_id]['name']?> on <?php echo $created_date_formatted?>
+                                        Created By: <?php echo $system_users[$action->user_id]?> on <?php echo $created_date_formatted?>
                                     </div>
                                 </div>
                                 

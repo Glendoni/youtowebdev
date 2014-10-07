@@ -5,7 +5,6 @@ class Companies extends MY_Controller {
 	function __construct() 
 	{
 		parent::__construct();
-		$this->load->model('Companies_model');
 	}
 	
 	public function index($ajax_refresh = False) 
@@ -108,7 +107,6 @@ class Companies extends MY_Controller {
 			$this->data['current_page_number'] = 0;
 			$this->data['next_page_number'] = FALSE;
 			$this->data['previous_page_number'] =  FALSE;
-			$this->data['sectors_options'] = $this->session->userdata('sectors_options');
 			$this->data['companies'] = array();
 
 			$this->data['main_content'] = 'companies/search_results';
@@ -123,8 +121,6 @@ class Companies extends MY_Controller {
 			$this->data['current_page_number'] = $current_page_number;
 			$this->data['next_page_number'] = ($current_page_number+1) <= $this->data['page_total'] ? ($current_page_number+1) : FALSE;
 			$this->data['previous_page_number'] = ($current_page_number-1) >= 0 ? ($current_page_number-1) : FALSE;
-			$this->data['sectors_options'] = $this->session->userdata('sectors_options');
-			$this->data['companies_classes'] = $this->Companies_model->get_companies_classes();
 			$this->data['companies'] = $companies_array_chunk[($current_page_number-1)];
 
 
@@ -189,7 +185,6 @@ class Companies extends MY_Controller {
 			$this->data['action_types_array'] = $this->Actions_model->get_action_types_array();
 			$this->data['actions'] = $this->Actions_model->get_actions($this->input->get('id'));
 			$this->data['companies'] = $company;
-			$this->data['sectors_options'] = $this->session->userdata('sectors_options');
 			$this->data['main_content'] = 'companies/company';
 			$this->load->view('layouts/default_layout', $this->data);
 		}
