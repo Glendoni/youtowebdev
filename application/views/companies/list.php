@@ -86,8 +86,10 @@
 <div class="panel <?php if(isset($company['assigned_to_name'])): ?> panel-primary <?php else: ?> panel-default <?php endif; ?> company">
 	<?php if(isset($company['assigned_to_name'])): ?>
 	<div class="panel-heading text-center" >
+        <span class="assigned-image-holder" style="max-width:30px; float:left;"><img src="<?php echo asset_url();?>images/profiles/<?php echo $company['assigned_to_image']; ?>.jpg" class="img-circle img-responsive" alt="" /></span>
+        <span style="line-height:28px;">
         Assigned to <?php echo $company['assigned_to_name']; ?> 
-    </div>
+        </span>    </div>
 	<?php endif; ?>
 	<div class="panel-body">
 		<div class="col-md-12">
@@ -183,7 +185,7 @@
 					<tr>
 						<th class="col-md-7">Provider</th>
 						<th class="col-md-3">Status</th>
-						<th class="col-md-2">Start Date</th>
+						<th class="col-md-2">Started</th>
 					</tr>
 				</thead>
 				<tbody>

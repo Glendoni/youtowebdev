@@ -1,7 +1,49 @@
 <?php  $company = $companies[0]; 
  // print_r('<pre>');print_r($company);print_r('</pre>');
 ?>
+<style>
+.mic-info { color: #666666;font-size: 11px;margin-top: 5px; }
 
+
+.triangle-isosceles {
+  position:relative;
+  padding:15px;
+  margin:1em 0 3em;
+  color:#000;
+  -webkit-border-radius:5px;
+  -moz-border-radius:5px;
+  border-radius:5px;
+}
+
+/* Variant : for top positioned triangle
+------------------------------------------ */
+
+.triangle-isosceles.top {
+	border:#d1d1d1 1px solid;
+}
+/* creates triangle */
+.triangle-isosceles:after {
+  content:"";
+  position:absolute;
+  bottom:-15px; /* value = - border-top-width - border-bottom-width */
+  left:50px; /* controls horizontal position */
+  border-width:15px 15px 0; /* vary these values to change the angle of the vertex */
+  border-style:solid;
+  border-color:#f3961c transparent;
+  /* reduce the damage in FF3.0 */
+  display:block;
+  width:0;
+}
+.triangle-isosceles.top:after {
+  top:-15px; /* value = - border-top-width - border-bottom-width */
+  left:50px; /* controls horizontal position */
+  bottom:auto;
+  left:auto;
+  border-width:0 15px 15px; /* vary these values to change the angle of the vertex */
+  border-color:#d1d1d1 transparent;
+}
+
+</style>
 <div class="row page-results-list">
 	<h2 class="page-header">
 		
@@ -84,9 +126,12 @@
     <!-- /.modal-dialog -->
 </div>
 <div class="panel <?php if(isset($company['assigned_to_name'])): ?> panel-primary <?php else: ?> panel-default <?php endif; ?> company">
-	<?php if(isset($company['assigned_to_name'])): ?>
+	<?php if(isset($company['assigned_to_image'])): ?>
 	<div class="panel-heading text-center" >
+        <span class="assigned-image-holder" style="max-width:30px; float:left;"><img src="<?php echo asset_url();?>images/profiles/<?php echo $company['assigned_to_image']; ?>.jpg" class="img-circle img-responsive" alt="" /></span>
+        <span style="line-height:28px;">
         Assigned to <?php echo $company['assigned_to_name']; ?> 
+        </span>
     </div>
 	<?php endif; ?>
 	<div class="panel-body">
@@ -178,7 +223,7 @@
 					<tr>
 						<th class="col-md-7">Provider</th>
 						<th class="col-md-3">Status</th>
-						<th class="col-md-2">Start Date</th>
+						<th class="col-md-2">Started</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -232,7 +277,7 @@
 		<div class="col-md-3">
 			<div class="panel panel-info">
 			  <div class="panel-heading">
-			    <h3 class="panel-title">Follow up</h3>
+			    <h3 class="panel-title">Follow Up</h3>
 			  </div>
 			  <div class="panel-body">
 			   <?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id']);
@@ -247,7 +292,7 @@
 						</select>
 					</div>
 					<div class="form-group " >
-						<label>Planned for</label>
+						<label>Planned For</label>
 						<input type="text" class="form-control" id="planned_at" data-date-format="YYYY/MM/DD H:m" name="planned_at" placeholder="">
 					</div>
 					<div class="form-group ">
@@ -271,55 +316,87 @@
 		</div>
 	</div>
 
-	<div class="row">
+	<div class="row1">
 		<div class="panel panel-default ">
 			<div class="panel-heading">
 				<h3 class="panel-title">Actions</h3>
 			</div>
 			<div class="panel-body">
 				<?php if (count($actions) > 0): ?>
-					<table class="table">
-						  <tr>
-						  	<th>Created by</th>
-						  	<th>Action type</th>
-						  	<th>Comments</th>
-						  	<th>Planned date</th>
-						  	<th>Actioned date</th>
-						  	<!-- <th>Window</th> -->
-						  	<th>Cancelled date</th>
-						  	<th>Last updated</th>
-						  		
-						  </tr>
+					<ul class="list-group">
 					<?php foreach ($actions as $action): 
 					 // print_r('<pre>');print_r($action);print_r('</pre>');
 
+ $created_date_formatted = date("l jS F y",strtotime($action->created_at));
+ $created_date_formatted .= " @ ".date("H:i",strtotime($action->created_at));
+ $actioned_date_formatted = date("l jS F y",strtotime($action->actioned_at));
+ $actioned_date_formatted .= " @ ".date("H:i",strtotime($action->actioned_at));
+ $planned_date_formatted = date("l jS F y",strtotime($action->planned_at));
+ $planned_date_formatted .= " @ ".date("H:i",strtotime($action->planned_at));
+ $now = time();
+
 					?>
-						  <tr <?php 
+                    
+                    
+                    
+                    <li class="list-group-item">
+                        <div class="row" style="padding: 15px 0">
+                            <div class="col-xs-2 col-md-1">
+                                <img src="<?php echo asset_url();?>images/profiles/<?php echo $system_users[$action->user_id]['image']?>.jpg" class="img-circle img-responsive" alt="" /></div>
+                            <div class="col-xs-10 col-md-11">
+                                <div>
+                                    <h4 style="margin:0;"><?php echo $action_types_array[$action->action_type_id]; ?> <?php 
 						  		if($action->cancelled_at)
                                   {
-                                    echo 'class="danger"';
+                                    echo '<span class="label label-danger" style="font-size:11px; margin-left:10px;">Cancelled</span>';
                                   }
+								           
+								elseif(($now > $action->planned_at) && (empty($action->actioned_at)))
+                                  {
+                                    echo '<span class="label label-danger" style="font-size:11px; margin-left:10px;"><b>Overdue</b> - Due on ',$planned_date_formatted.'</span>';
+                                  }
+								  
+								  
+								  
                                   elseif($action->planned_at)
                                   {
-                                    echo 'class="success"';
+                                    echo '<span class="label label-warning" style="font-size:11px; margin-left:10px;">Due on ',$planned_date_formatted.'</span>';
                                   }
                                   elseif($action->actioned_at)
                                   {
-                                    echo 'class="warning"';
+                                    echo '<span class="label label-success" style="font-size:11px; margin-left:10px;">Completed on ',$actioned_date_formatted.'</span>';
+
+									
                                   }
+								   
 						  		?>
-						  	>
-						  	<td><?php echo $system_users[$action->user_id]?></td>
-						  	<td><?php echo $action_types_array[$action->action_type_id]; ?></td>
-						  	<td><?php echo $action->comments;?></td>
-						  	<td><?php echo $action->planned_at?></td>
-						  	<td><?php echo $action->actioned_at?></td>
-						  	<!-- <td><?php echo $action->window?></td> -->
-						  	<td><?php echo $action->cancelled_at?></td>
-						  	<td><?php echo $action->updated_at?></td>
-						  </tr>
+						  	</h4>
+                                    <div class="mic-info">
+                                        Created By: <?php echo $system_users[$action->user_id]['name']?> on <?php echo $created_date_formatted?>
+                                    </div>
+                                </div>
+                                
+								<?php if (!empty($action->comments)) {
+									echo '<div class="comment-text speech" style="margin-top: 30px;">
+                                <div class="triangle-isosceles top">
+									'.$action->comments.'
+									</div>
+									</div>';}
+									 ;?>
+                                
+								
+								</div><!--END ACTIONS-->
+                               
+                            </div>
+                        
+                    </li>
+                    
+                    
+						  
+
 					<?php endforeach ?>
-					</table>
+                    </ul>
+				
 				<?php else: ?>
 					<div class="col-md-12">
 					<hr>

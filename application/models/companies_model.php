@@ -38,6 +38,7 @@ class Companies_model extends CI_Model {
 
 		// Assign to
 		$this->db->select("(SELECT Ad.name FROM users Ad WHERE Ad.id = companies.user_id ) as company_assigned_to", FALSE, FALSE);
+		$this->db->select("(SELECT Ad.image FROM users Ad WHERE Ad.id = companies.user_id ) as company_assigned_to_image", FALSE, FALSE);
 		$this->db->select("(SELECT Ad.id FROM users Ad WHERE Ad.id = companies.user_id ) as company_assigned_to_id", FALSE, FALSE);
 
 		// Build query 
@@ -232,6 +233,7 @@ select C.id,
        TT1."turnover", -- f18
 	   TT1."turnover_method",  -- f19
 	   EMP.count,--f20
+	   U.image , -- f21
 	   json_agg( 
 	   row_to_json ((
 	   TT2."sector_id", TT2."sector"))))) "JSON output" -- f20

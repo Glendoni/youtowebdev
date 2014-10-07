@@ -247,6 +247,8 @@ class Companies extends MY_Controller {
 			if($company->company->f1->f5)$mapped_companies_array['ddlink'] = $company->company->f1->f5;
 			if($company->company->f1->f6)$mapped_companies_array['linkedin_id'] = $company->company->f1->f6;
 			if($company->company->f1->f7)$mapped_companies_array['assigned_to_name'] = $company->company->f1->f7;
+						if($company->company->f1->f21)$mapped_companies_array['assigned_to_image'] = $company->company->f1->f21;
+
 			if($company->company->f1->f8)$mapped_companies_array['assigned_to_id'] = $company->company->f1->f8;
 			if($company->company->f1->f9)$mapped_companies_array['address'] = $company->company->f1->f9;
 			if($company->company->f1->f10)$mapped_companies_array['contract'] = $company->company->f1->f10;
