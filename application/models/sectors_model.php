@@ -9,15 +9,23 @@ class Sectors_model extends CI_Model {
 
 	function get_all_in_array()
 	{
-		$this->db->select('id, name');
-		$this->db->order_by('name','asc');
-		$query = $this->db->get_where('sectors',array('display'=>'True'));
+		$sql ='
+		SELECT s.id,s.name,count(O.id)
+		FROM sectors s
+		LEFT JOIN operates O on s.id = O.sector_id
+		WHERE s.display = \'True\'
+		GROUP BY s.id,s.name
+		ORDER BY count desc
+		';
+		
+		$query = $this->db->query($sql);
 
 		foreach($query->result() as $row)
 		{
-		  $sectors_array[$row->id] = $row->name;
+		  $sectors_array[$row->id] = $row->name.' ('.$row->count.')';
+		  $sectors_count_array[$row->id] = $row->count;
 		} 
-		return $sectors_array;
+		return array ('sectors'=>$sectors_array,'sectors_count'=>$sectors_count_array);
 	}
 	
 

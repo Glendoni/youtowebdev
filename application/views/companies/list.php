@@ -3,100 +3,12 @@
 	<div class="alert alert-warning">No companies found</div>
 <?php else: ?>
 
-<?php foreach ( $companies as $company):  ?>
-<div class="modal fade" id="editModal<?php echo $company['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="Edit <?php echo $company['name']; ?>" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog">
-        <div class="modal-content">
-        	<?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'], 'page_number' => $current_page_number,'edit_company'=>'1' );
-				 echo form_open(site_url().'companies/edit', 'name="edit_company" class="edit_company" role="form"',$hidden); ?>
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title" id="myModalLabel">Edit <?php echo $company['name']; ?></h4>
-            </div>
-            <div class="modal-body">
-            	<?php if (isset($company['turnover']) == False ) :?>
-				<div class="">
-                    <div class=" form-group ">
-                        <label for="turnover" class="control-label">Turnover</label>                            
-                        <input type="text" name="turnover" value="" id="turnover" maxlength="50" class="form-control">
-                    </div>
-                </div>
-            	<?php endif; ?>
-            	<?php if (isset($company['emp_count']) == False ):?>
-				<div class="">
-                    <div class=" form-group ">
-                        <label for="emp_count" class="control-label">Employees</label>                            
-                        <input type="text" name="emp_count" value="" id="emp_count" maxlength="50" class="form-control">
-                    </div>
-                </div>
-            	<?php endif; ?>
-                <div class="">
-                    <div class=" form-group ">
-                        <label for="linkedin_id" class="control-label">Linkedin ID</label>                            
-                        <input type="text" name="linkedin_id" value="<?php echo isset($company['linkedin_id'])?$company['linkedin_id']:''; ?>" id="linkedin_id" maxlength="50" class="form-control">
-
-                    </div>
-                </div>
-                <div class="">
-                    <div class=" form-group ">
-                        <label for="url" class="control-label">Website</label>                            
-
-                        <input type="text" name="url" value="<?php echo isset($company['url'])?$company['url']:''; ?>" id="url" maxlength="50" class="form-control">
-
-                    </div>
-                </div>
-                <hr>
-                <div class="">
-	                <label for="url" class="control-label">Recruitment Type</label>
-	                <div class="tag-holder">  
-						<span class="button-checkbox" id="contract">
-					        <button type="button" class="btn btn-default" data-color="primary" id="contract"><i class="state-icon glyphicon glyphicon-unchecked"></i>&nbsp;Contract</button>
-							<input type="checkbox" name="contract" value="1" id="contract" class="hidden" <?php echo isset($company['contract'])? 'checked': '' ; ?> >
-
-							
-						</span>
-						<span class="button-checkbox" id="contract">
-							<button type="button" class="btn btn-default" data-color="primary" id="permanent"><i class="state-icon glyphicon glyphicon-unchecked"></i>&nbsp;Permanent</button>
-
-							<input type="checkbox" name="perm" value="1" id="permanent" class="hidden" <?php echo isset($company['perm'])? 'checked': '' ; ?> >
-
-						</span>
-					</div>
-				</div>
-				<hr>
-				<div>
-					<label for="url" class="control-label">Sectors</label>
-					<div class="tag-holder">
-					<?php 
-						
-					foreach ($sectors_array as $key => $value): ?>
-						<span class="button-checkbox">
-					        <button type="button" class="btn " data-color="primary" >&nbsp;<?php echo $value; ?></button>
-					        <input type="checkbox" name="sectors[]" value="<?php echo $key; ?>" class="hidden" <?php echo isset($company['sectors']) and array_key_exists($key,$company['sectors'])? 'checked': '' ; ?>  />
-					    </span>
-					<?php endforeach ?>
-					</div>
-				</div>
-				<div class="modal-loading-display text-center " id="loading-display-<?php echo $company['id']; ?>">
-					<button class="btn btn-default btn-lg" ><i class="fa fa-refresh fa-spin"></i></button>
-				</div>
-			</div>
-            <div class="modal-footer">
-            	<button type="submit" class="btn btn-sm btn-primary btn-block ladda-button submit_btn" edit-btn="editbtn<?php echo $company['id']; ?>" loading-display="loading-display-<?php echo $company['id']; ?>" data-style="expand-right" data-size="1">
-		        	<span class="ladda-label"> Save changes </span>
-		    	</button>                
-                
-            </div>
-            <?php echo form_close(); ?>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
+<?php  foreach ( $companies as $company):  ?>
+<?php $this->load->view('companies/edit_box.php',array('company'=>$company)); ?>
 <div class="panel <?php if(isset($company['assigned_to_name'])): ?> panel-primary <?php else: ?> panel-default <?php endif; ?> company">
 	<?php if(isset($company['assigned_to_name'])): ?>
 	<div class="panel-heading text-center" >
-        <span class="assigned-image-holder" style="max-width:30px; float:left;"><img src="<?php echo asset_url();?>images/profiles/<?php echo $company['assigned_to_image']; ?>.jpg" class="img-circle img-responsive" alt="" /></span>
+        <span class="assigned-image-holder" style="max-width:30px; float:left;"><img src="<?php echo asset_url();?>images/profiles/<?php echo isset($system_users[$company['assigned_to_id']]['image'])? $system_users[$action->user_id]['image']:'none' ;?>.jpg" class="img-circle img-responsive" alt="" /></span>
         <span style="line-height:28px;">
         Assigned to <?php echo $company['assigned_to_name']; ?> 
         </span>    </div>
@@ -124,8 +36,7 @@
 				<?php endif; ?>
 				<button class="btn btn-warning ladda-button edit-btn" data-toggle="modal" id="editbtn<?php echo $company['id']; ?>" data-style="expand-right" data-size="1" data-target="#editModal<?php echo $company['id']; ?>">
                     <span class="ladda-label"> Edit </span>
-                </button>
-                
+                </button>  
 			</div>
 			<h3 class="name">
 				<a href="<?php echo site_url();?>companies/company?id=<?php echo $company['id'];?>">
@@ -137,6 +48,9 @@
 				</a>
 				<?php endif; ?>
 			</h3>
+			<?php if (isset($company['class'])): ?>
+				<span class="label label-info"><?php echo $company['class'] ?></span>
+			<?php endif; ?>
 			<small><?php echo $company['address']; ?> </small>
 		</div>
 		
@@ -157,11 +71,11 @@
 		</div>
 
 		<!-- EMPLOYEES -->
-		<div class="col-md-3 centre"><strong>Employees</strong>
-			<h3 class="details"><?php  echo  (isset($company['emp_count']))? '<strong><span class="label label-info">'.$company['emp_count'].'</span></strong>' : '' ?> </h3>
-			<!-- <small>LinkedIn Connections</small>
-			<h3 class="details"><strong><span class="label label-info"><?php echo $company->company_connections ?></span> </strong></h3> -->
-
+		<div class="col-md-3 centre">
+			<strong>Employees</strong>
+			<?php if (isset($company['emp_count'])): ?>
+			<h3 class="details"><strong><span class="label label-info"><?php echo $company['emp_count'];?> </span></strong></h3>
+			<?php endif; ?>
 		</div>
 
 		<!-- SECTORS -->
@@ -184,6 +98,7 @@
 			<?php if (isset($company['linkedin_id'])): ?>
 			<a class="btn  btn-info btn-sm btn-block linkedin" href="https://www.linkedin.com/company/<?php echo $company['linkedin_id'] ?>"  target="_blank">LinkedIn</a>
 			<?php endif; ?>
+
 		</div>
 			
 			<!-- MORTGAGES -->

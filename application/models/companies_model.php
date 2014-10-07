@@ -7,9 +7,17 @@ class Companies_model extends CI_Model {
 		return $query->result();
 	}
 
-	// function get_companies_per_sector(){
-	// 	$sql = 'Select count(*) FROM sectors S,operates O WHERE O.company_id = companies.id AND S.id = O.sector_id  AND O.active = 'True' '
-	// }
+	function get_companies_classes()
+	{
+		$arrayNames = array(
+			''=>'',
+			'StartUp' => 'Start Up',
+			'UsingFinance' => 'Using Finance',
+			'LookingToPlaceContractors' => 'Looking to Place Contractors',
+			'SelfFunding' => 'Self-Funding'
+			);
+		return 	$arrayNames;
+	}
 
 
 	function get_company_by_id($id)
@@ -200,160 +208,164 @@ class Companies_model extends CI_Model {
 		}
 
 		// -- Data to Display a Company's details
-
+		// IMPORTANT if you change/add colums on the following query then change the mapping array on the companies controller
 		$sql = 'select json_agg(results)
-from (
+		from (
 
-select row_to_json((
-       T1."JSON output",
-       T2."JSON output"
-       )) "company"
-from 
-(-- T1
-select C.id,
-	   C.name,
-       row_to_json((
-       C.id, -- f1
-       C.name, -- f2
-       C.url, -- f3
-	   to_char(C.eff_from, \'dd/mm/yyyy\'), -- f4
-	   C.ddlink, -- f5
-	   C.linkedin_id, -- f6
-	   U.name, -- f7
-	   U.id , -- f8
-	   A.address, --f9
-	   C.contract, --f10
-	   C.perm, -- f11
-	   C.active, -- f12
-	   C.created_at, -- f13
-	   C.updated_at, -- f14
-	   C.created_by,-- f15
-	   C.updated_by,-- f16
-	   C.registration, -- f17
-       TT1."turnover", -- f18
-	   TT1."turnover_method",  -- f19
-	   EMP.count,--f20
-	   U.image , -- f21
-	   json_agg( 
-	   row_to_json ((
-	   TT2."sector_id", TT2."sector"))))) "JSON output" -- f20
-	   
-
-
-from COMPANIES C';
-
-if(isset($company_name_sql)) $sql = $sql. ' JOIN ( '.$company_name_sql.' ) name ON C.id = name.id ';
-if(isset($no_providers_sql)) $sql = $sql. ' JOIN ( '.$no_providers_sql.' ) companies on C.id = companies.id ';
-if(isset($company_age_sql)) $sql =  $sql.' JOIN ( '.$company_age_sql.' ) company_age ON C.id = company_age.id ';
-if(isset($turnover_sql)) $sql = $sql.' JOIN ( '.$turnover_sql.' ) turnovers ON C.id = turnovers.company_id';
-if(isset($mortgage_sql)) $sql = $sql.' JOIN ( '.$mortgage_sql.' ) mortgages ON C.id = mortgages.company_id';
-if(isset($sectors_sql)) $sql = $sql.' JOIN ( '.$sectors_sql.' ) sectors ON C.id = sectors.company_id';
-if(isset($providers_sql)) $sql = $sql.' JOIN ( '.$providers_sql.' ) providers ON C.id = providers.company_id';
-if(isset($assigned_sql)) $sql = $sql.' JOIN ( '.$assigned_sql.' ) assigned ON C.id = assigned.id';
-if(isset($company_id) && $company_id !== False) $sql = $sql.' JOIN ( select id from companies where id = '.$company_id.' ) company ON C.id = company.id';
-$sql = $sql.' LEFT JOIN 
-(-- TT1 
-select T.company_id "company id",
-       T.turnover "turnover",
-       T.method "turnover_method"       
-from 
-(-- T1
-select id "id",
-       company_id,
-       max(eff_from) OVER (PARTITION BY company_id) "max eff date"
-from TURNOVERS
-)   T1
-  
-JOIN TURNOVERS T
-ON T1.id = T.id
-  
-where T1."max eff date" = T.eff_from
-  
-  
-)   TT1
-ON TT1."company id" = C.id 
-
-LEFT JOIN
-(-- TT2
-select O.company_id "company id",
-       S.id "sector_id",
-       S.name "sector"       
-from OPERATES O
-
-JOIN SECTORS S
-ON O.sector_id = S.id
-where O.active = \'TRUE\'
-)   TT2
-ON TT2."company id" = C.id
+		select row_to_json((
+		       T1."JSON output",
+		       T2."JSON output"
+		       )) "company"
+		from 
+		(-- T1
+		select C.id,
+			   C.name,
+		       row_to_json((
+		       C.id, -- f1
+		       C.name, -- f2
+		       C.url, -- f3
+			   to_char(C.eff_from, \'dd/mm/yyyy\'), -- f4
+			   C.ddlink, -- f5
+			   C.linkedin_id, -- f6
+			   U.name, -- f7
+			   U.id , -- f8
+			   A.address, --f9
+			   C.contract, --f10
+			   C.perm, -- f11
+			   C.active, -- f12
+			   C.created_at, -- f13
+			   C.updated_at, -- f14
+			   C.created_by,-- f15
+			   C.updated_by,-- f16
+			   C.registration, -- f17
+		       TT1."turnover", -- f18
+			   TT1."turnover_method",  -- f19
+			   EMP.count,--f20
+			   U.image , -- f21
+			   C.class, -- f22
+			   A.lat, -- f23
+			   A.lng, -- f24
+			   json_agg( 
+			   row_to_json ((
+			   TT2."sector_id", TT2."sector"))))) "JSON output" -- f25
+			   
 
 
+		from COMPANIES C';
 
-LEFT JOIN 
-(
-	SELECT count,company_id FROM "emp_counts"  ORDER BY "emp_counts"."created_at" DESC limit 1
-) EMP ON EMP.company_id = C.id
+		if(isset($company_name_sql)) $sql = $sql. ' JOIN ( '.$company_name_sql.' ) name ON C.id = name.id ';
+		if(isset($no_providers_sql)) $sql = $sql. ' JOIN ( '.$no_providers_sql.' ) companies on C.id = companies.id ';
+		if(isset($company_age_sql)) $sql =  $sql.' JOIN ( '.$company_age_sql.' ) company_age ON C.id = company_age.id ';
+		if(isset($turnover_sql)) $sql = $sql.' JOIN ( '.$turnover_sql.' ) turnovers ON C.id = turnovers.company_id';
+		if(isset($mortgage_sql)) $sql = $sql.' JOIN ( '.$mortgage_sql.' ) mortgages ON C.id = mortgages.company_id';
+		if(isset($sectors_sql)) $sql = $sql.' JOIN ( '.$sectors_sql.' ) sectors ON C.id = sectors.company_id';
+		if(isset($providers_sql)) $sql = $sql.' JOIN ( '.$providers_sql.' ) providers ON C.id = providers.company_id';
+		if(isset($assigned_sql)) $sql = $sql.' JOIN ( '.$assigned_sql.' ) assigned ON C.id = assigned.id';
+		if(isset($company_id) && $company_id !== False) $sql = $sql.' JOIN ( select id from companies where id = '.$company_id.' ) company ON C.id = company.id';
+		$sql = $sql.' LEFT JOIN 
+		(-- TT1 
+		select T.company_id "company id",
+		       T.turnover "turnover",
+		       T.method "turnover_method"       
+		from 
+		(-- T1
+		select id "id",
+		       company_id,
+		       max(eff_from) OVER (PARTITION BY company_id) "max eff date"
+		from TURNOVERS
+		)   T1
+		  
+		JOIN TURNOVERS T
+		ON T1.id = T.id
+		  
+		where T1."max eff date" = T.eff_from
+		  
+		  
+		)   TT1
+		ON TT1."company id" = C.id 
 
-LEFT JOIN 
-ADDRESSES A
-ON A.company_id = C.id
+		LEFT JOIN
+		(-- TT2
+		select O.company_id "company id",
+		       S.id "sector_id",
+		       S.name "sector"       
+		from OPERATES O
 
-LEFT JOIN
-USERS U
-ON U.id = C.user_id
+		JOIN SECTORS S
+		ON O.sector_id = S.id
+		where O.active = \'TRUE\'
+		)   TT2
+		ON TT2."company id" = C.id
+
+
+
+		LEFT JOIN 
+		(
+			SELECT count,company_id FROM "emp_counts"  ORDER BY "emp_counts"."created_at" DESC limit 1
+		) EMP ON EMP.company_id = C.id
+
+		LEFT JOIN 
+		ADDRESSES A
+		ON A.company_id = C.id
+
+		LEFT JOIN
+		USERS U
+		ON U.id = C.user_id
+				 
+		group by C.id,
+		         C.name,
+		         C.url,
+			     C.eff_from,
+			     C.ddlink,
+			     C.linkedin_id,
+			     U.id,
+			     U.name,
+			     A.address,
+			     A.lat,
+			     A.lng,
+		         TT1."turnover",
+			     TT1."turnover_method",
+			     EMP.count
+
+		order by C.id 
+
+
+		)   T1
+
+		LEFT JOIN
+
+		(-- T2
+		select T."company id",
+		       json_agg(
+			   row_to_json(
+			   row (T."mortgage id", T."mortgage provider", T."mortgage stage", T."mortgage start"))) "JSON output"  -- f11
+				 
+		from 
+		(-- T
+		select M.company_id "company id",
+		       M.id "mortgage id",
+		       P.name "mortgage provider",
+		       M.stage "mortgage stage",
+		       to_char(M.eff_from, \'dd/mm/yyyy\')  "mortgage start"
+		from MORTGAGES M
+		  
+		JOIN PROVIDERS P
+		ON M.provider_id = P.id 
+
+		order by 1, 4, 5 desc
+
+		)   T
+
+		group by T."company id"
+
+		order by T."company id"
+
+		)   T2
+		ON T1.id = T2."company id"
+		-- insert this for sort order  
+		order by lower(T1.name) 
 		 
-group by C.id,
-         C.name,
-         C.url,
-	     C.eff_from,
-	     C.ddlink,
-	     C.linkedin_id,
-	     U.id,
-	     U.name,
-	     A.address,
-         TT1."turnover",
-	     TT1."turnover_method",
-	     EMP.count
-
-order by C.id 
-
-
-)   T1
-
-LEFT JOIN
-
-(-- T2
-select T."company id",
-       json_agg(
-	   row_to_json(
-	   row (T."mortgage id", T."mortgage provider", T."mortgage stage", T."mortgage start"))) "JSON output"  -- f11
-		 
-from 
-(-- T
-select M.company_id "company id",
-       M.id "mortgage id",
-       P.name "mortgage provider",
-       M.stage "mortgage stage",
-       to_char(M.eff_from, \'dd/mm/yyyy\')  "mortgage start"
-from MORTGAGES M
-  
-JOIN PROVIDERS P
-ON M.provider_id = P.id 
-
-order by 1, 4, 5 desc
-
-)   T
-
-group by T."company id"
-
-order by T."company id"
-
-
-)   T2
-ON T1.id = T2."company id"
--- insert this for sort order  
-order by lower(T1.name) 
- 
-) results';
+		) results';
 		// print_r($sql);
 		$query = $this->db->query($sql);
 
@@ -638,7 +650,7 @@ order by lower(T1.name)
 	function update_details($post)
 	{
 		
-		if($post['turnover'])
+		if(isset($post['turnover']) and !empty($post['turnover']))
 		{	
 			// this should only happen when no turnonver exist
 			$turnover = array(
@@ -651,7 +663,7 @@ order by lower(T1.name)
 			$turnover_status = $this->db->affected_rows();
 		}
 		
-		if($post['emp_count'])
+		if(isset($post['emp_count']) and !empty($post['emp_count']))
 		{
 			$emp_count = array(
 				'company_id' => $post['company_id'],
@@ -666,10 +678,11 @@ order by lower(T1.name)
 
 		
 		$company = array(
-				'linkedin_id' => $post['linkedin_id']?$post['linkedin_id']:NULL,
-				'url' => $post['url']?$post['url']:NULL,
-				'contract'=>$post['contract']?$post['contract']:NULL,
-				'perm'=>$post['perm']?$post['perm']:NULL,
+				'linkedin_id' => (isset($post['linkedin_id']) and !empty($post['linkedin_id']))?$post['linkedin_id']:NULL,
+				'url' => isset($post['url'])?$post['url']:NULL,
+				'contract'=>isset($post['contract'])?$post['contract']:NULL,
+				'perm'=>isset($post['perm'])?$post['perm']:NULL,
+				'class'=>isset($post['class'])?$post['class']:NULL,
 				'updated_at' => date('Y-m-d H:i:s')
 			);
 
@@ -677,15 +690,21 @@ order by lower(T1.name)
 		$this->db->update('companies', $company);
 
 		$company_status = $this->db->affected_rows();
+
 		// clear existing sectors to no active 
 		$result = $this->clear_company_sectors($post['company_id']);
-		
-		foreach ($post['sectors'] as $sector_id) {
-			$this->db->set('company_id', $post['company_id']);
-			$this->db->set('sector_id', $sector_id);  
-			$this->db->insert('operates'); 
+
+		if (isset($post['add_sectors']) and !empty($post['add_sectors']))
+		{
+			foreach ($post['add_sectors'] as $sector_id) {
+				$this->db->set('company_id', $post['company_id']);
+				$this->db->set('sector_id', $sector_id);  
+				$this->db->insert('operates'); 
+			}
+			$sectors_status = $this->db->affected_rows();
 		}
-		return $this->db->affected_rows();
+		return true;
+		
 	}
 
 	function insert_entry()

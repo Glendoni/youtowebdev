@@ -2,6 +2,7 @@
     <div class="row">
         <h1 class="page-header">Dashboard</h1>
       <div class="col-lg-12">
+      
       <div class="panel panel-default">
               <div class="panel-heading">
                 <i class="fa fa-bar-chart-o fa-fw"></i> Weekly Stats</span> 
@@ -14,12 +15,10 @@
                     <?php if(empty($stats)) : ?>
                     <p>You have no recent activity.</p>
                     <?php else: ?>
-                    
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs" role="tablist">
                       <li class="active"><a href="#this" role="tab" data-toggle="tab">This Week</a></li>
                       <li><a href="#last" role="tab" data-toggle="tab">Last Week</a></li>
-                      
                     </ul>
 
                     <!-- Tab panes -->

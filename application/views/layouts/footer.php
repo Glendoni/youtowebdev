@@ -5,32 +5,34 @@
     <!-- /#wrapper -->
 
     <!-- jQuery Version 1.11.0 -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="<?php echo asset_url();?>js/bootstrap.min.js"></script>
 
-	<!-- Metis Menu Plugin JavaScript -->
-    <script src="<?php echo asset_url();?>js/plugins/metisMenu/metisMenu.min.js"></script>
+	<!-- Metis Menu Plugin JavaScript 
+    <script type="text/javascript"  src="<?php echo asset_url();?>js/plugins/metisMenu/metisMenu.min.js"></script>-->
 
-    <!-- Morris Charts JavaScript -->
+    <!-- Morris Charts JavaScript 
     
- 	<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
- 	<script src="//cdn.oesmith.co.uk/morris-0.5.1.min.js"></script>
+ 	<script type="text/javascript"  src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+ 	<script type="text/javascript"  src="//cdn.oesmith.co.uk/morris-0.5.1.min.js"></script>-->
 
  	<!-- Custom Theme JavaScript -->
-    <script src="<?php echo asset_url();?>js/sb-admin-2.js"></script>
+    <script type="text/javascript"  src="<?php echo asset_url();?>js/sb-admin-2.js"></script>
 
 
-    <script src="<?php echo asset_url();?>js/ladda.min.js"></script>
+    <script type="text/javascript" src="<?php echo asset_url();?>js/ladda.min.js"></script>
 
 
-    <script src="<?php echo asset_url();?>js/pace.min.js"></script> 
-    <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
+    <script type="text/javascript"  src="<?php echo asset_url();?>js/pace.min.js"></script> 
+
+    <script type="text/javascript"  src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
+    
     <!-- DATE TIME PICKER -->
     <script type="text/javascript" src="https://eonasdan.github.io/bootstrap-datetimepicker/scripts/moment.js"></script>
 
-    <script type="text/javascript" src="https://rawgit.com/Eonasdan/bootstrap-datetimepicker/master/src/js/bootstrap-datetimepicker.js"></script>
+    <script type="text/javascript" src="<?php echo asset_url();?>js/bootstrap-datetimepicker.js"></script>
 
 
 
@@ -154,6 +156,7 @@
         btn.button('loading');
 	 	$.post(url, form.serialize(),
 	 	  function(response){
+            console.log(response);
 	 	    btn.removeClass('btn-primary').addClass('btn-success').text('Saving...'); 
             location.reload(true);
 	 	  })

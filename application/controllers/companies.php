@@ -42,7 +42,7 @@ class Companies extends MY_Controller {
 				$raw_search_results = $this->Companies_model->search_companies_sql($this->input->post());
 				
 				$result = $this->process_search_result($raw_search_results);
-				
+				// var_dump($result);
 				// if(empty($result))
 				// {
 				// 	$this->session->unset_userdata('companies');
@@ -108,7 +108,7 @@ class Companies extends MY_Controller {
 			$this->data['current_page_number'] = 0;
 			$this->data['next_page_number'] = FALSE;
 			$this->data['previous_page_number'] =  FALSE;
-			$this->data['sectors_array'] = $this->session->userdata('sectors_array');
+			$this->data['sectors_options'] = $this->session->userdata('sectors_options');
 			$this->data['companies'] = array();
 
 			$this->data['main_content'] = 'companies/search_results';
@@ -123,7 +123,8 @@ class Companies extends MY_Controller {
 			$this->data['current_page_number'] = $current_page_number;
 			$this->data['next_page_number'] = ($current_page_number+1) <= $this->data['page_total'] ? ($current_page_number+1) : FALSE;
 			$this->data['previous_page_number'] = ($current_page_number-1) >= 0 ? ($current_page_number-1) : FALSE;
-			$this->data['sectors_array'] = $this->session->userdata('sectors_array');
+			$this->data['sectors_options'] = $this->session->userdata('sectors_options');
+			$this->data['companies_classes'] = $this->Companies_model->get_companies_classes();
 			$this->data['companies'] = $companies_array_chunk[($current_page_number-1)];
 
 
@@ -188,7 +189,7 @@ class Companies extends MY_Controller {
 			$this->data['action_types_array'] = $this->Actions_model->get_action_types_array();
 			$this->data['actions'] = $this->Actions_model->get_actions($this->input->get('id'));
 			$this->data['companies'] = $company;
-			$this->data['sectors_array'] = $this->session->userdata('sectors_array');
+			$this->data['sectors_options'] = $this->session->userdata('sectors_options');
 			$this->data['main_content'] = 'companies/company';
 			$this->load->view('layouts/default_layout', $this->data);
 		}
@@ -201,6 +202,7 @@ class Companies extends MY_Controller {
 
 	public function edit()
 	{
+
 		if($this->input->post('edit_company'))
 		{
 			// We need to clean the post and validate the post fields *pending*
@@ -256,7 +258,11 @@ class Companies extends MY_Controller {
 			if($company->company->f1->f5)$mapped_companies_array['ddlink'] = $company->company->f1->f5;
 			if($company->company->f1->f6)$mapped_companies_array['linkedin_id'] = $company->company->f1->f6;
 			if($company->company->f1->f7)$mapped_companies_array['assigned_to_name'] = $company->company->f1->f7;
-						if($company->company->f1->f21)$mapped_companies_array['assigned_to_image'] = $company->company->f1->f21;
+			if($company->company->f1->f21)$mapped_companies_array['assigned_to_image'] = $company->company->f1->f21;
+			if($company->company->f1->f22)$mapped_companies_array['class'] = $company->company->f1->f22;
+			if($company->company->f1->f23)$mapped_companies_array['address_lat'] = $company->company->f1->f23;
+			if($company->company->f1->f24)$mapped_companies_array['address_lng'] = $company->company->f1->f24;
+
 
 			if($company->company->f1->f8)$mapped_companies_array['assigned_to_id'] = $company->company->f1->f8;
 			if($company->company->f1->f9)$mapped_companies_array['address'] = $company->company->f1->f9;
@@ -274,13 +280,13 @@ class Companies extends MY_Controller {
 			
 			// sectors
 
-			if(!empty($company->company->f1->f21)){
-				$sectors_array = array();
-				foreach ($company->company->f1->f21 as $sector) {
+			if(!empty($company->company->f1->f25)){
+				$sectors = array();
+				foreach ($company->company->f1->f25 as $sector) {
 					if(isset($sector->f1) && !empty($sector->f1)) 
-						$sectors_array[$sector->f1] = $sector->f2;
+						$sectors[$sector->f1] = $sector->f2;
 				}
-				if(!empty($sectors_array)) $mapped_companies_array['sectors'] = $sectors_array;
+				if(!empty($sectors)) $mapped_companies_array['sectors'] = $sectors;
 			}
 			
 			// mortgages 

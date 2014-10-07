@@ -46,15 +46,18 @@ class MY_Controller extends CI_Controller {
 		}
 
         // session data only test for positve so be careful with the if stataments
-		if($this->session->userdata('sectors_array'))
+		if($this->session->userdata('sectors_options'))
 		{	
-			$sectors_options = $this->session->userdata('sectors_array');
+			$sectors_options = $this->session->userdata('sectors_options');
 		}
 		else
 		{
-			$sectors_options = $this->Sectors_model->get_all_in_array();
-			asort($sectors_options);
-			$this->session->set_userdata('sectors_array',$sectors_options);
+			$result = $this->Sectors_model->get_all_in_array();
+			$sectors_options = $result['sectors'];
+			$sectors_count = $result['sectors_count'];
+			// asort($sectors_options);
+			$this->session->set_userdata('sectors_count',$sectors_count);
+			$this->session->set_userdata('sectors_options',$sectors_options);
 		}
 		
 		if($this->session->userdata('providers_options'))
