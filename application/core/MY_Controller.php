@@ -91,7 +91,7 @@ class MY_Controller extends CI_Controller {
 		
 
 		// Add options
-		$system_users = array(0=>'anyone/nobody') + $system_users;
+		$system_users = array(0=>'All') + $system_users;
 		$this->data['system_users'] = $system_users;
 		$this->data['assigned_default'] = '0';
 

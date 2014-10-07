@@ -158,7 +158,7 @@ class Actions_model extends CI_Model {
 		$data = array(
 			'company_id' 	=> $post['company_id'],
 			'user_id' 		=> $post['user_id'],
-			'comments'		=> $post['comment'],
+			'comments'		=> ($post['comment']?$post['comment']:NULL),
 			'planned_at'	=> ($post['planned_at']? date('Y-m-d H:i:s',strtotime($post['planned_at'])):NULL),
 			'window'		=> ($post['window']?$post['window']:NULL),
 			'created_by'	=> $post['user_id'],

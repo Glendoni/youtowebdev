@@ -14,12 +14,22 @@
                 <h4 class="modal-title" id="myModalLabel">Edit <?php echo $company['name']; ?></h4>
             </div>
             <div class="modal-body">
-				<!-- <div class="">
+            	<?php if (isset($company['turnover']) == False ) :?>
+				<div class="">
                     <div class=" form-group ">
                         <label for="turnover" class="control-label">Turnover</label>                            
-                        <input type="text" name="turnover" value="<?php echo $company['turnover']; ?>" id="turnover" maxlength="50" class="form-control">
+                        <input type="text" name="turnover" value="" id="turnover" maxlength="50" class="form-control">
                     </div>
-                </div> -->
+                </div>
+            	<?php endif; ?>
+            	<?php if (isset($company['emp_count']) == False ):?>
+				<div class="">
+                    <div class=" form-group ">
+                        <label for="emp_count" class="control-label">Employees</label>                            
+                        <input type="text" name="emp_count" value="" id="emp_count" maxlength="50" class="form-control">
+                    </div>
+                </div>
+            	<?php endif; ?>
                 <div class="">
                     <div class=" form-group ">
                         <label for="linkedin_id" class="control-label">Linkedin ID</label>                            
@@ -120,7 +130,9 @@
 					<?php echo $company['name']; ?>
 				</a>
 				<?php if (isset($company['url'])): ?>
-				<a class="btn btn-link" href="<?php $parsed = parse_url($company['url']); if (empty($parsed['scheme'])) { $company['url'] = 'http://' . ltrim($company['url'], '/'); echo $company['url'];}else{ echo $company['url']; } ?>" target="_blank"><?php echo $company['url'] ?></a>
+				<a class="btn btn-link" href="<?php $parsed = parse_url($company['url']); if (empty($parsed['scheme'])) { echo 'http://' . ltrim($company['url'], '/'); }else{ echo $company['url']; } ?>" target="_blank">
+				<?php echo str_replace("http://"," ",str_replace("www.", "", $company['url']))?>
+				</a>
 				<?php endif; ?>
 			</h3>
 			<small><?php echo $company['address']; ?> </small>

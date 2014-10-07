@@ -21,12 +21,22 @@
                 <h4 class="modal-title" id="myModalLabel">Edit <?php echo isset($company['name'])?$company['name']:'';; ?></h4>
             </div>
             <div class="modal-body">
-				<!-- <div class="">
+				<?php if (isset($company['turnover']) == False ) :?>
+				<div class="">
                     <div class=" form-group ">
                         <label for="turnover" class="control-label">Turnover</label>                            
-                        <input type="text" name="turnover" value="<?php echo $company['turnover']; ?>" id="turnover" maxlength="50" class="form-control">
+                        <input type="text" name="turnover" value="" id="turnover" maxlength="50" class="form-control">
                     </div>
-                </div> -->
+                </div>
+            	<?php endif; ?>
+            	<?php if (isset($company['emp_count']) == False ):?>
+				<div class="">
+                    <div class=" form-group ">
+                        <label for="emp_count" class="control-label">Employees</label>                            
+                        <input type="text" name="emp_count" value="" id="emp_count" maxlength="50" class="form-control">
+                    </div>
+                </div>
+            	<?php endif; ?>
                 <div class="">
                     <div class=" form-group ">
                         <label for="linkedin_id" class="control-label">Linkedin ID</label>                            
@@ -200,7 +210,7 @@
 	</div>
 
 	<div class="row">
-		<div class="col-md-9">
+		<div class="col-md-6">
 		<div class="panel panel-success ">
 		  <div class="panel-heading">
 		    <h3 class="panel-title">Done</h3>
@@ -228,7 +238,7 @@
 		  </div>
 		</div>
 		</div>
-		<div class="col-md-3">
+		<div class="col-md-6">
 			<div class="panel panel-info">
 			  <div class="panel-heading">
 			    <h3 class="panel-title">Follow up</h3>

@@ -210,6 +210,7 @@ select row_to_json((
 from 
 (-- T1
 select C.id,
+	   C.name,
        row_to_json((
        C.id, -- f1
        C.name, -- f2
@@ -347,6 +348,8 @@ order by T."company id"
 
 )   T2
 ON T1.id = T2."company id"
+-- insert this for sort order  
+order by lower(T1.name) 
  
 ) results';
 		// print_r($sql);
@@ -634,15 +637,28 @@ ON T1.id = T2."company id"
 	{
 		
 		if($post['turnover'])
-		{
-			$this->db->set('company_id', $post['company_id']);
-			$this->db->set('turnover', $post['turnover']);
+		{	
+			// this should only happen when no turnonver exist
+			$turnover = array(
+				'company_id' => $post['company_id'],
+				'turnover' => $post['turnover'],
+				'created_by' => $post['user_id'],
+				'created_at' => date('Y-m-d H:i:s')
+				); 
 			$this->db->insert('turnovers', $turnover);
 			$turnover_status = $this->db->affected_rows();
 		}
-		else
+		
+		if($post['emp_count'])
 		{
-			$turnover_status = 0;
+			$emp_count = array(
+				'company_id' => $post['company_id'],
+				'count' => $post['emp_count'],
+				'created_by' => $post['user_id'],
+				'created_at' => date('Y-m-d H:i:s')
+				);
+			$this->db->insert('emp_counts', $emp_count);
+			$emp_counts = $this->db->affected_rows();
 		}
 		
 

@@ -25,24 +25,21 @@
     <!-- Morris Charts CSS -->
     <link rel="stylesheet" href="<?php echo asset_url();?>css/morris-5.1.css">
 
-
     <!-- BTN animation -->
     <link href="<?php echo asset_url();?>css/ladda.min.css" rel="stylesheet">
 
     <!-- PAGE LOADING BAR -->
     <link href="<?php echo asset_url();?>css/pace.css" rel="stylesheet">
 
-    <?php if (defined('ENVIRONMENT') == 'development'): ?>
+    <!-- Bootstrap Core CSS -->
+    <!-- <link href="<?php echo asset_url();?>css/bootstrap.min.css" rel="stylesheet"> -->
+    <!-- Bootstrap Core CSS -->
+    <!-- <link href="<?php echo asset_url();?>css/font-awesome.min.css" rel="stylesheet"> -->
+    
 
     <!-- Bootstrap Core CSS -->
-    <link href="<?php echo asset_url();?>css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Core CSS -->
-    <link href="<?php echo asset_url();?>css/font-awesome.min.css" rel="stylesheet">
-    
-    <?php else: ?>
-    <!-- Bootstrap Core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-    <?php endif; ?>
+
 
     <!-- Custom Fonts -->
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
