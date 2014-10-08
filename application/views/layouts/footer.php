@@ -11,23 +11,25 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
 	<!-- Metis Menu Plugin JavaScript -->
-    <script src="<?php echo asset_url();?>/js/plugins/metisMenu/metisMenu.min.js"></script>
+    <script src="<?php echo asset_url();?>js/plugins/metisMenu/metisMenu.min.js"></script>
 
     <!-- Morris Charts JavaScript -->
     
  	<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
- 	<script src="http://cdn.oesmith.co.uk/morris-0.5.1.min.js"></script>
+ 	<script src="https://cdn.oesmith.co.uk/morris-0.5.1.min.js"></script>
 
  	<!-- Custom Theme JavaScript -->
-    <script src="<?php echo asset_url();?>/js/sb-admin-2.js"></script>
+    <script src="<?php echo asset_url();?>js/sb-admin-2.js"></script>
 
 
-    <script src="<?php echo asset_url();?>/js/ladda.min.js"></script>
+    <script src="<?php echo asset_url();?>js/ladda.min.js"></script>
 
-    <script src="<?php echo asset_url();?>/js/pace.min.js"></script> 
+
+    <script src="<?php echo asset_url();?>js/pace.min.js"></script> 
     <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
     <!-- DATE TIME PICKER -->
-    <script type="text/javascript" src="http://eonasdan.github.io/bootstrap-datetimepicker/scripts/moment.js"></script>
+    <script type="text/javascript" src="https://eonasdan.github.io/bootstrap-datetimepicker/scripts/moment.js"></script>
+
     <script type="text/javascript" src="https://rawgit.com/Eonasdan/bootstrap-datetimepicker/master/src/js/bootstrap-datetimepicker.js"></script>
 
 
@@ -222,7 +224,7 @@
         }
 
  	</script>
- <?php if(ENVIRONMENT == 'development'): ?>
+ <?php if(ENVIRONMENT !== 'production'): ?>
  	<div class="alert alert-warning" role="alert">
  	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>
  	</div>

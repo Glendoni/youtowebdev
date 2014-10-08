@@ -13,7 +13,7 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="icon" type="image/png" href="<?php echo asset_url();?>/images/favicon.jpg">
+    <link rel="icon" type="image/png" href="<?php echo asset_url();?>images/favicon.jpg">
     <!-- Custom CSS -->
     <link href="<?php echo asset_url();?>css/sb-admin-2.css" rel="stylesheet">
     <link href="<?php echo asset_url();?>css/style.css" rel="stylesheet">
@@ -25,10 +25,10 @@
     <link href="<?php echo asset_url();?>css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
 
     <!-- Morris Charts CSS -->
-    <link rel="stylesheet" href="http://cdn.oesmith.co.uk/morris-0.5.1.css">
+    <link rel="stylesheet" href="<?php echo asset_url();?>css/morris-5.1.css">
 
     <!-- Custom Fonts -->
-<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- BTN animation -->
     <link href="<?php echo asset_url();?>css/ladda.min.css" rel="stylesheet">
@@ -299,10 +299,14 @@
                                     </div>
                                             <?php echo form_open(site_url().'companies', 'id="main_search" novalidate="novalidate" name="main_search" class="" role="form"'); ?>
                                             <?php echo form_hidden('main_search','1');?>
-                                            <?php if ($_POST['main_search']): ?>
-                                                <!-- <a class="btn btn-link pull-right" href="<?php echo site_url();?>">
-                                                    <span class="glyphicon glyphicon-remove"></span> Clear fields
-                                                </a> -->
+                                            <?php if (isset($_POST['main_search'])): ?>
+                                            <div class='form-row'>
+                                                <div class="col-md-12 form-group ">
+                                                    <a class="btn btn-link pull-right" href="<?php echo site_url();?>">
+                                                        <span class="glyphicon glyphicon-remove"></span> Clear fields
+                                                    </a>
+                                                </div>
+                                            </div>
                                             <?php endif; ?>
                                             <div class='form-row'>
                                                 <div class="col-md-12 form-group ">
@@ -412,7 +416,9 @@
                             <div class="panel-body">
                                 <ul class="nav nav-second-level ">
                                 <?php foreach ($private_campaigns as $campaign):?>
-                                    <li class="<?php if($current_campaign_id and $current_campaign_id == $campaign->id) echo 'active' ?>" ><a href="<?php echo site_url();?>campaigns/display/?id=<?php echo $campaign->id; ?>"><?php echo $campaign->name; ?></a></li>
+
+                                    <li class="<?php if(isset($current_campaign_id) and $current_campaign_id == $campaign->id) echo 'active' ?>" ><a href="<?php echo site_url();?>campaigns/display/?id=<?php echo $campaign->id; ?>"><?php echo $campaign->name; ?></a></li>
+
                                 <?php endforeach; ?>
                                 </ul>
                             </div>
@@ -448,7 +454,7 @@
         <div id="page-wrapper">
             <div class="container-fluid">
             <?php $msg = $this->session->flashdata('message'); if($msg): ?>
-                <div class="alert alert-<?php echo $this->session->flashdata('message_type'); ?> alert-dismissible row" role="alert">
+                <div class="alert alert-<?php echo $this->session->flashdata('message_type'); ?> alert-dismissible" role="alert">
                   <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                     <?php echo $msg ?>
                 </div>

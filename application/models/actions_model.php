@@ -8,43 +8,48 @@ class Actions_model extends CI_Model {
 		$data = array(
 			'company_id' => $company_id,
 			);
-		$this->db->order_by('cancelled_at desc,planned_at desc');
+		$this->db->order_by('cancelled_at desc,planned_at asc');
 		$query = $this->db->get_where('actions', $data);
 		return $query->result_object();
 	}
 
 	public function get_pending_actions($user_id){
-		$data = array(
-			'actions.user_id' => $user_id,
-			'actioned_at' => NULL,
-			'cancelled_at' => NULL,
-			);
+		// $data = array(
+		// 	'actions.user_id' => $user_id,
+		// 	'actioned_at' => NULL,
+		// 	'cancelled_at' => NULL,
+		// 	);
 		
 		$this->db->select('company_id, actions.id "action_id",comments,planned_at,action_type_id,name "company_name",');
+		$this->db->where('actions.user_id',$user_id);
+		$this->db->where('actioned_at',NULL);
+		$this->db->where('cancelled_at',NULL);
 		$this->db->join('companies', 'companies.id = actions.company_id');
 		$this->db->order_by('cancelled_at desc,planned_at asc');
-		$query = $this->db->get_where('actions', $data);
+		$query = $this->db->get('actions');
+		// var_dump($query);
 		return $query->result_object();
 
 	}
+
 	
-public function get_recent_stats(){
-$start_date = date('Y-m-d 00:00:00',strtotime('monday this week'));
-$end_date = date('Y-m-d 23:59:59',strtotime('sunday this week'));
-$sql = "select U.name,
-    count(*) total,
-	    sum(case when action_type_id = '4' then 1 else 0 end) introcall,
+	public function get_recent_stats(){
+		$start_date = date('Y-m-d 00:00:00',strtotime('monday this week'));
+		$end_date = date('Y-m-d 23:59:59',strtotime('sunday this week'));
+		$sql = "select U.name,
+		    count(*) total,
+			    sum(case when action_type_id = '4' then 1 else 0 end) introcall,
 
-    sum(case when action_type_id = '7' then 1 else 0 end) commentcount,
-    sum(case when action_type_id = '5' OR action_type_id = '5' then 1 else 0 end) callcount,
-    sum(case when action_type_id = '11' then 1 else 0 end) CallBackCount,
-    sum(case when action_type_id = '10' then 1 else 0 end) meetingcount
-from actions A
+		    sum(case when action_type_id = '7' then 1 else 0 end) commentcount,
+		    sum(case when action_type_id = '5' OR action_type_id = '5' then 1 else 0 end) callcount,
+		    sum(case when action_type_id = '11' then 1 else 0 end) CallBackCount,
+		    sum(case when action_type_id = '10' then 1 else 0 end) meetingcount
+		from actions A
 
-INNER JOIN users U
-on A.user_id = U.id
+		INNER JOIN users U
+		on A.user_id = U.id
 
-where actioned_at > '$start_date' AND actioned_at < '$end_date' AND cancelled_at is null group by U.name order by total desc";
+		where actioned_at > '$start_date' AND actioned_at < '$end_date' AND cancelled_at is null group by U.name order by total desc";
 
 		$query = $this->db->query($sql);
 
@@ -53,23 +58,23 @@ where actioned_at > '$start_date' AND actioned_at < '$end_date' AND cancelled_at
 	}
 	
 	public function get_last_week_stats(){
-$start_date_last = date('Y-m-d 00:00:00',strtotime('monday last week'));
-$end_date_last = date('Y-m-d 23:59:59',strtotime('sunday last week'));
-$last_week_sql = "select U.name,
-    count(*) total,
-	    sum(case when action_type_id = '4' then 1 else 0 end) introcall,
+		$start_date_last = date('Y-m-d 00:00:00',strtotime('monday last week'));
+		$end_date_last = date('Y-m-d 23:59:59',strtotime('sunday last week'));
+		$last_week_sql = "select U.name,
+		    count(*) total,
+			    sum(case when action_type_id = '4' then 1 else 0 end) introcall,
 
-    sum(case when action_type_id = '7' then 1 else 0 end) commentcount,
-    sum(case when action_type_id = '5' OR action_type_id = '5' then 1 else 0 end) callcount,
-    sum(case when action_type_id = '11' then 1 else 0 end) CallBackCount,
-    sum(case when action_type_id = '10' then 1 else 0 end) meetingcount
-from actions A
+		    sum(case when action_type_id = '7' then 1 else 0 end) commentcount,
+		    sum(case when action_type_id = '5' OR action_type_id = '5' then 1 else 0 end) callcount,
+		    sum(case when action_type_id = '11' then 1 else 0 end) CallBackCount,
+		    sum(case when action_type_id = '10' then 1 else 0 end) meetingcount
+		from actions A
 
-INNER JOIN users U
-on A.user_id = U.id
+		INNER JOIN users U
+		on A.user_id = U.id
 
-where actioned_at > '$start_date_last' AND actioned_at < '$end_date_last' AND cancelled_at is null
-group by U.name order by total desc";
+		where actioned_at > '$start_date_last' AND actioned_at < '$end_date_last' AND cancelled_at is null
+		group by U.name order by total desc";
 
 		
 		//$this->db->select('company_id, actions.id "action_id",comments,planned_at,action_type_id,name "company_name",');
@@ -80,6 +85,7 @@ group by U.name order by total desc";
 		return $last_week_query->result_array();
 
 	}
+
 
 	public function get_action_types_array()
 	{
@@ -110,11 +116,14 @@ group by U.name order by total desc";
 
 	// UPDATES
 
-	public function set_action_state($action_id,$user_id,$state)
+
+	public function set_action_state($action_id,$user_id,$state,$outcome)
+
 	{
 		if($state == 'completed')
 		{
 			$data = array(
+			'outcome' => $outcome,
 			'actioned_at' => date('Y-m-d H:i:s'),
 			'updated_at' => date('Y-m-d H:i:s'),
 			'updated_by' => $user_id,

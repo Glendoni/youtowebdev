@@ -81,7 +81,7 @@ class Companies extends MY_Controller {
 		}
 
 		
-		$companies_array = $result ? $result : $search_results_in_session;
+		$companies_array = isset($result) ? $result : $search_results_in_session;
 
 		// if campaign exist set this variables
 		$this->data['current_campaign_name'] = ($this->session->userdata('campaign_name') ?: FALSE );
@@ -116,6 +116,7 @@ class Companies extends MY_Controller {
 			$this->data['previous_page_number'] = ($current_page_number-1) >= 0 ? ($current_page_number-1) : FALSE;
 			$this->data['sectors_array'] = $this->session->userdata('sectors_array');
 			$this->data['companies'] = $companies_array_chunk[($current_page_number-1)];
+
 
 			$this->data['main_content'] = 'companies/search_results';
 			$this->load->view('layouts/default_layout', $this->data);
@@ -171,7 +172,7 @@ class Companies extends MY_Controller {
 	{
 		if($this->input->get('id'))
 		{
-			$raw_search_results = $this->Companies_model->search_companies_sql($post,$this->input->get('id'));
+			$raw_search_results = $this->Companies_model->search_companies_sql(FALSE,$this->input->get('id'));
 			$company = $this->process_search_result($raw_search_results);
 			$this->data['action_types_done'] = $this->Actions_model->get_action_types_done();
 			$this->data['action_types_planned'] = $this->Actions_model->get_action_types_planned();
@@ -246,8 +247,6 @@ class Companies extends MY_Controller {
 			if($company->company->f1->f5)$mapped_companies_array['ddlink'] = $company->company->f1->f5;
 			if($company->company->f1->f6)$mapped_companies_array['linkedin_id'] = $company->company->f1->f6;
 			if($company->company->f1->f7)$mapped_companies_array['assigned_to_name'] = $company->company->f1->f7;
-						if($company->company->f1->f21)$mapped_companies_array['assigned_to_image'] = $company->company->f1->f21;
-
 			if($company->company->f1->f8)$mapped_companies_array['assigned_to_id'] = $company->company->f1->f8;
 			if($company->company->f1->f9)$mapped_companies_array['address'] = $company->company->f1->f9;
 			if($company->company->f1->f10)$mapped_companies_array['contract'] = $company->company->f1->f10;

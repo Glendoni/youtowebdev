@@ -23,13 +23,16 @@
                 <div class="">
                     <div class=" form-group ">
                         <label for="linkedin_id" class="control-label">Linkedin ID</label>                            
-                        <input type="text" name="linkedin_id" value="<?php echo $company['linkedin_id']; ?>" id="linkedin_id" maxlength="50" class="form-control">
+                        <input type="text" name="linkedin_id" value="<?php echo isset($company['linkedin_id'])?$company['linkedin_id']:''; ?>" id="linkedin_id" maxlength="50" class="form-control">
+
                     </div>
                 </div>
                 <div class="">
                     <div class=" form-group ">
                         <label for="url" class="control-label">Website</label>                            
-                        <input type="text" name="url" value="<?php echo $company['url']; ?>" id="url" maxlength="50" class="form-control">
+
+                        <input type="text" name="url" value="<?php echo isset($company['url'])?$company['url']:''; ?>" id="url" maxlength="50" class="form-control">
+
                     </div>
                 </div>
                 <hr>
@@ -38,12 +41,15 @@
 	                <div class="tag-holder">  
 						<span class="button-checkbox" id="contract">
 					        <button type="button" class="btn btn-default" data-color="primary" id="contract"><i class="state-icon glyphicon glyphicon-unchecked"></i>&nbsp;Contract</button>
-							<input type="checkbox" name="contract" value="1" id="contract" class="hidden" <?php echo $company['contract']? 'checked': '' ; ?> >
+							<input type="checkbox" name="contract" value="1" id="contract" class="hidden" <?php echo isset($company['contract'])? 'checked': '' ; ?> >
+
 							
 						</span>
 						<span class="button-checkbox" id="contract">
 							<button type="button" class="btn btn-default" data-color="primary" id="permanent"><i class="state-icon glyphicon glyphicon-unchecked"></i>&nbsp;Permanent</button>
-							<input type="checkbox" name="perm" value="1" id="permanent" class="hidden" <?php echo $company['perm']? 'checked': '' ; ?> >
+
+							<input type="checkbox" name="perm" value="1" id="permanent" class="hidden" <?php echo isset($company['perm'])? 'checked': '' ; ?> >
+
 						</span>
 					</div>
 				</div>
@@ -56,7 +62,7 @@
 					foreach ($sectors_array as $key => $value): ?>
 						<span class="button-checkbox">
 					        <button type="button" class="btn " data-color="primary" >&nbsp;<?php echo $value; ?></button>
-					        <input type="checkbox" name="sectors[]" value="<?php echo $key; ?>" class="hidden" <?php echo array_key_exists($key,$company['sectors'])? 'checked': '' ; ?>  />
+					        <input type="checkbox" name="sectors[]" value="<?php echo $key; ?>" class="hidden" <?php echo isset($company['sectors']) and array_key_exists($key,$company['sectors'])? 'checked': '' ; ?>  />
 					    </span>
 					<?php endforeach ?>
 					</div>
@@ -80,10 +86,8 @@
 <div class="panel <?php if(isset($company['assigned_to_name'])): ?> panel-primary <?php else: ?> panel-default <?php endif; ?> company">
 	<?php if(isset($company['assigned_to_name'])): ?>
 	<div class="panel-heading text-center" >
-        <span class="assigned-image-holder" style="max-width:30px; float:left;"><img src="<?php echo asset_url();?>images/profiles/<?php echo $company['assigned_to_image']; ?>.jpg" class="img-circle img-responsive" alt="" /></span>
-        <span style="line-height:28px;">
         Assigned to <?php echo $company['assigned_to_name']; ?> 
-        </span>    </div>
+    </div>
 	<?php endif; ?>
 	<div class="panel-body">
 		<div class="col-md-12">
@@ -117,7 +121,7 @@
 				<a href="<?php echo site_url();?>companies/company?id=<?php echo $company['id'];?>">
 					<?php echo $company['name']; ?>
 				</a>
-				<?php if ($company['url']): ?>
+				<?php if (isset($company['url'])): ?>
 				<a class="btn btn-link" href="<?php $parsed = parse_url($company['url']); if (empty($parsed['scheme'])) { $company['url'] = 'http://' . ltrim($company['url'], '/'); echo $company['url'];}else{ echo $company['url']; } ?>" target="_blank"><?php echo $company['url'] ?></a>
 				<?php endif; ?>
 			</h3>
@@ -132,9 +136,9 @@
 		<div class="col-md-3 centre">
 		<strong>Turnover</strong>
 			<h3 class="details">
-				<strong>£<?php echo number_format (round($company['turnover'],-3));?></strong><br>
-				
-				<small><?php  echo $company['turnover_method']?></small>
+				<strong>£ <?php echo (isset($company['turnover']))? number_format($company['turnover']):''; ?></strong>
+				<br>
+				<small><?php  echo (isset($company['turnover_method']))? $company['turnover_method'] : ''; ?></small>
 			</h3>
 			<h5>Founded</h5>
 			<h5 class="details"><strong><?php echo $company['eff_from'] ?></strong></h5>
@@ -142,7 +146,7 @@
 
 		<!-- EMPLOYEES -->
 		<div class="col-md-3 centre"><strong>Employees</strong>
-			<h3 class="details"><?php  echo  ($company['emp_count'])? '<strong><span class="label label-info">'.$company['emp_count'].'</span></strong>' : '<span class="label label-warning">Unknown</span>' ?> </h3>
+			<h3 class="details"><?php  echo  (isset($company['emp_count']))? '<strong><span class="label label-info">'.$company['emp_count'].'</span></strong>' : '' ?> </h3>
 			<!-- <small>LinkedIn Connections</small>
 			<h3 class="details"><strong><span class="label label-info"><?php echo $company->company_connections ?></span> </strong></h3> -->
 
@@ -152,18 +156,21 @@
 		<div class="col-md-3 centre">
 			<strong>Sectors</strong> 
 			<?php 
-			foreach ($company['sectors'] as $key => $name) {
-				echo '<h5>'.$name.'</h5>';
-			}?>
+			if (isset($company['sectors'])) {
+				foreach ($company['sectors'] as $key => $name) {
+					echo '<h5>'.$name.'</h5>';
+				}
+			}
+			?>
 		</div>
 
 		<!-- LINKS AND BTN -->
 		<div class="col-md-3">
-			<?php if ($company['ddlink']): ?>
-			<a class="btn btn-outline btn-info btn-sm btn-block duedil" href="<?php echo $company['ddlink'] ?>" target="_blank">Duedil</a>
+			<?php if (isset($company['ddlink'])): ?>
+			<a class="btn btn-outline btn-info btn-sm btn-block" href="<?php echo $company['ddlink'] ?>" target="_blank">Duedil</a>
 			<?php endif; ?>
-			<?php if ($company['linkedin_id']): ?>
-			<a class="btn btn-outline btn-info btn-sm btn-block linkedin" href="https://www.linkedin.com/company/<?php echo $company['linkedin_id'] ?>"  target="_blank">LinkedIn</a>
+			<?php if (isset($company['linkedin_id'])): ?>
+			<a class="btn btn-outline btn-info btn-sm btn-block" href="https://www.linkedin.com/company/<?php echo $company['linkedin_id'] ?>"  target="_blank">LinkedIn</a>
 			<?php endif; ?>
 			
 			
@@ -178,7 +185,7 @@
 					<tr>
 						<th class="col-md-7">Provider</th>
 						<th class="col-md-3">Status</th>
-						<th class="col-md-2">Started</th>
+						<th class="col-md-2">Start Date</th>
 					</tr>
 				</thead>
 				<tbody>
