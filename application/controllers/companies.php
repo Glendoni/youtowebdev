@@ -116,7 +116,7 @@ class Companies extends MY_Controller {
 			$companies_array_chunk = array_chunk($companies_array, RESULTS_PER_PAGE);
 			$current_page_number = $this->input->get('page_num') ? $this->input->get('page_num') : 1;
 			$this->data['companies_count'] = count($companies_array);
-			$pages_count = round(count($companies_array)/RESULTS_PER_PAGE);
+			$pages_count = ceil(count($companies_array)/RESULTS_PER_PAGE);
 			$this->data['page_total'] = ($pages_count < 1)? 1 : $pages_count;
 			$this->data['current_page_number'] = $current_page_number;
 			$this->data['next_page_number'] = ($current_page_number+1) <= $this->data['page_total'] ? ($current_page_number+1) : FALSE;
