@@ -5,7 +5,6 @@ class Companies extends MY_Controller {
 	function __construct() 
 	{
 		parent::__construct();
-		$this->load->model('Companies_model');
 	}
 	
 	public function index($ajax_refresh = False) 
@@ -42,17 +41,17 @@ class Companies extends MY_Controller {
 				$raw_search_results = $this->Companies_model->search_companies_sql($this->input->post());
 				
 				$result = $this->process_search_result($raw_search_results);
-				
-				if(empty($result))
-				{
-					$this->session->unset_userdata('companies');
-					unset($search_results_in_session);
-				}
-				else
-				{
-					$session_result = serialize($result);
-					$this->session->set_userdata('companies',$session_result);
-				}
+				// var_dump($result);
+				// if(empty($result))
+				// {
+				// 	$this->session->unset_userdata('companies');
+				// 	unset($search_results_in_session);
+				// }
+				// else
+				// {
+				// 	$session_result = serialize($result);
+				// 	$this->session->set_userdata('companies',$session_result);
+				// }
 			}
 		}
 		elseif ($refresh_search_results or $ajax_refresh) 
@@ -63,23 +62,32 @@ class Companies extends MY_Controller {
 			}
 			$raw_search_results = $this->Companies_model->search_companies_sql($post);
 			$result = $this->process_search_result($raw_search_results);
-			if(empty($result))
-			{
-				$this->session->unset_userdata('companies');
-				unset($search_results_in_session);
-			}
-			else
-			{
-				$session_result = serialize($result);
-				$this->session->set_userdata('companies',$session_result);
-				
-			}
+			// if(empty($result))
+			// {
+			// 	$this->session->unset_userdata('companies');
+			// 	unset($search_results_in_session);
+			// }
+			// else
+			// {
+			// 	$session_result = serialize($result);
+			// 	$this->session->set_userdata('companies',$session_result);
+			// }
 		}
 		elseif (!$this->input->post('submit') and !$search_results_in_session and !$refresh_search_results) {
 			$this->session->unset_userdata('companies');
 			unset($search_results_in_session);
 		}
 
+		if(empty($result))
+		{
+			$this->session->unset_userdata('companies');
+			unset($search_results_in_session);
+		}
+		else
+		{
+			$session_result = serialize($result);
+			$this->session->set_userdata('companies',$session_result);
+		}
 		
 		$companies_array = isset($result) ? $result : $search_results_in_session;
 
@@ -99,7 +107,6 @@ class Companies extends MY_Controller {
 			$this->data['current_page_number'] = 0;
 			$this->data['next_page_number'] = FALSE;
 			$this->data['previous_page_number'] =  FALSE;
-			$this->data['sectors_array'] = $this->session->userdata('sectors_array');
 			$this->data['companies'] = array();
 
 			$this->data['main_content'] = 'companies/search_results';
@@ -109,12 +116,11 @@ class Companies extends MY_Controller {
 			$companies_array_chunk = array_chunk($companies_array, RESULTS_PER_PAGE);
 			$current_page_number = $this->input->get('page_num') ? $this->input->get('page_num') : 1;
 			$this->data['companies_count'] = count($companies_array);
-			$pages_count = round(count($companies_array)/RESULTS_PER_PAGE);
+			$pages_count = ceil(count($companies_array)/RESULTS_PER_PAGE);
 			$this->data['page_total'] = ($pages_count < 1)? 1 : $pages_count;
 			$this->data['current_page_number'] = $current_page_number;
 			$this->data['next_page_number'] = ($current_page_number+1) <= $this->data['page_total'] ? ($current_page_number+1) : FALSE;
 			$this->data['previous_page_number'] = ($current_page_number-1) >= 0 ? ($current_page_number-1) : FALSE;
-			$this->data['sectors_array'] = $this->session->userdata('sectors_array');
 			$this->data['companies'] = $companies_array_chunk[($current_page_number-1)];
 
 
@@ -179,7 +185,6 @@ class Companies extends MY_Controller {
 			$this->data['action_types_array'] = $this->Actions_model->get_action_types_array();
 			$this->data['actions'] = $this->Actions_model->get_actions($this->input->get('id'));
 			$this->data['companies'] = $company;
-			$this->data['sectors_array'] = $this->session->userdata('sectors_array');
 			$this->data['main_content'] = 'companies/company';
 			$this->load->view('layouts/default_layout', $this->data);
 		}
@@ -192,6 +197,7 @@ class Companies extends MY_Controller {
 
 	public function edit()
 	{
+
 		if($this->input->post('edit_company'))
 		{
 			// We need to clean the post and validate the post fields *pending*
@@ -247,6 +253,12 @@ class Companies extends MY_Controller {
 			if($company->company->f1->f5)$mapped_companies_array['ddlink'] = $company->company->f1->f5;
 			if($company->company->f1->f6)$mapped_companies_array['linkedin_id'] = $company->company->f1->f6;
 			if($company->company->f1->f7)$mapped_companies_array['assigned_to_name'] = $company->company->f1->f7;
+			if($company->company->f1->f21)$mapped_companies_array['assigned_to_image'] = $company->company->f1->f21;
+			if($company->company->f1->f22)$mapped_companies_array['class'] = $company->company->f1->f22;
+			if($company->company->f1->f23)$mapped_companies_array['address_lat'] = $company->company->f1->f23;
+			if($company->company->f1->f24)$mapped_companies_array['address_lng'] = $company->company->f1->f24;
+
+
 			if($company->company->f1->f8)$mapped_companies_array['assigned_to_id'] = $company->company->f1->f8;
 			if($company->company->f1->f9)$mapped_companies_array['address'] = $company->company->f1->f9;
 			if($company->company->f1->f10)$mapped_companies_array['contract'] = $company->company->f1->f10;
@@ -263,13 +275,13 @@ class Companies extends MY_Controller {
 			
 			// sectors
 
-			if(!empty($company->company->f1->f21)){
-				$sectors_array = array();
-				foreach ($company->company->f1->f21 as $sector) {
+			if(!empty($company->company->f1->f25)){
+				$sectors = array();
+				foreach ($company->company->f1->f25 as $sector) {
 					if(isset($sector->f1) && !empty($sector->f1)) 
-						$sectors_array[$sector->f1] = $sector->f2;
+						$sectors[$sector->f1] = $sector->f2;
 				}
-				if(!empty($sectors_array)) $mapped_companies_array['sectors'] = $sectors_array;
+				if(!empty($sectors)) $mapped_companies_array['sectors'] = $sectors;
 			}
 			
 			// mortgages 

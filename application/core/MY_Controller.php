@@ -29,6 +29,7 @@ class MY_Controller extends CI_Controller {
 		$this->load->model('Users_model');
 		$this->load->model('Providers_model');
 		$this->load->model('Actions_model');
+		$this->load->model('Companies_model');
 		// $this->load->helper('mobile');
 		
 		 // var_dump($this->session->all_userdata());
@@ -41,21 +42,24 @@ class MY_Controller extends CI_Controller {
 		}
 		else
 		{
-			
 			//user not in session and segment 1 exist then redirect to login
 			if($this->uri->segment(1)) redirect('/','location');
 		}
 
-        // session data only test for positve
-		if($this->session->userdata('sectors_array'))
+        // session data only test for positve so be careful with the if stataments
+		if($this->session->userdata('sectors_options'))
 		{	
-			$sectors_options = $this->session->userdata('sectors_array');
+			$sectors_options = $this->session->userdata('sectors_options');
+
 		}
 		else
 		{
-			$sectors_options = $this->Sectors_model->get_all_in_array();
-			asort($sectors_options);
-			$this->session->set_userdata('sectors_array',$sectors_options);
+			$result = $this->Sectors_model->get_all_in_array();
+			$sectors_options = $result['sectors'];
+			$sectors_count = $result['sectors_count'];
+			// asort($sectors_options);
+			$this->session->set_userdata('sectors_count',$sectors_count);
+			$this->session->set_userdata('sectors_options',$sectors_options);
 		}
 		
 		if($this->session->userdata('providers_options'))
@@ -73,16 +77,37 @@ class MY_Controller extends CI_Controller {
 		if($this->session->userdata('system_users'))
 		{
 			$system_users = $this->session->userdata('system_users');
+			$this->data['system_users_images'] = $this->session->userdata('system_users_images');
 		}
 		else
 		{
 			$system_users = $this->Users_model->get_users_for_select();
-			$this->session->set_userdata('system_users',$system_users);
+			$this->session->set_userdata('system_users',$system_users['users']);
+			$this->session->set_userdata('system_users_images',$system_users['images']);
 		}
 		// SET CONSTANTS AND DEFAULTS
 		
+		// Keep post data on the search , either get it from post or from sessins
+		if($this->session->userdata('current_search') and !$this->input->post('main_search') and ($this->uri->segment(1) !== 'dashboard'))
+		{
+			$post = $this->session->userdata('current_search');
+			foreach ($post as $key => $value) {
+				$_POST[$key] = $value;
+			}
+		}
+		
+		if($this->session->userdata('companies_classes'))
+		{
+			$this->data['companies_classes'] = $this->session->userdata('companies_classes');
+		}else
+		{
+			$companies_classes = $this->Companies_model->get_companies_classes();
+			$this->session->set_userdata('companies_classes',$companies_classes);
+		}
+		
+
 		// Add options
-		$system_users = array(0=>'anyone/nobody') + $system_users;
+		$system_users = array(0=>'All') + $system_users;
 		$this->data['system_users'] = $system_users;
 		$this->data['assigned_default'] = '0';
 
@@ -92,7 +117,7 @@ class MY_Controller extends CI_Controller {
 		$this->data['sectors_default'] ='0';
 		
 		$providers_options = array(0=>'All') + $providers_options;
-		// $providers_options = array(-1=>'No providers') + $providers_options;
+		$providers_options = array(-1=>'No current provider') + $providers_options;
 		$this->data['providers_options'] = $providers_options;
 		$this->data['providers_default'] ='0';
 

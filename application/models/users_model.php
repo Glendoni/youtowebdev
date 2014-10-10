@@ -5,15 +5,16 @@ class Users_model extends CI_Model {
 	// GETS
 	public function get_users_for_select() 
 	{	
-		$this->db->select('id, name');
+		$this->db->select('id, name, image');
 		$this->db->where('active', 'True');
 		$query = $this->db->get('users');
 		$users[0] = ' ';
 		foreach ($query->result_array() as $row)
 		{
-			$users[$row['id']] = $row['name'];		  
+			$users[$row['id']] = $row['name'];
+			$images[$row['id']] = $row['image'];		  
 		}
-		return $users;
+		return array('users'=>$users,'images'=>$images);
 	}
 	// returns a user for a given id
 	public function get_user($id) 

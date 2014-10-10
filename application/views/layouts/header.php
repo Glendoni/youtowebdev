@@ -10,34 +10,42 @@
     <meta name="author" content="">
 
     <title>Baselist</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    
     <link rel="icon" type="image/png" href="<?php echo asset_url();?>images/favicon.jpg">
     <!-- Custom CSS -->
-    <link href="<?php echo asset_url();?>css/sb-admin-2.css" rel="stylesheet">
-    <link href="<?php echo asset_url();?>css/style.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen" href="<?php echo asset_url();?>css/sb-admin-2.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen" href="<?php echo asset_url();?>css/style.css" rel="stylesheet">
 
     <!-- Timeline CSS -->
-    <link href="<?php echo asset_url();?>css/plugins/timeline.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="<?php echo asset_url();?>css/plugins/timeline.css" rel="stylesheet"> -->
 
     <!-- MetisMenu CSS -->
-    <link href="<?php echo asset_url();?>css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="<?php echo asset_url();?>css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet"> -->
 
     <!-- Morris Charts CSS -->
-    <link rel="stylesheet" href="<?php echo asset_url();?>css/morris-5.1.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="<?php echo asset_url();?>css/morris-5.1.css">
+
+    <!-- BTN animation -->
+    <link rel="stylesheet" type="text/css" media="screen" href="<?php echo asset_url();?>css/ladda.min.css" rel="stylesheet">
+
+    <!-- PAGE LOADING BAR -->
+    <link rel="stylesheet" type="text/css" media="screen" href="<?php echo asset_url();?>css/pace.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="<?php echo asset_url();?>css/bootstrap-datetimepicker.css">
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" type="text/css" media="screen" href="<?php echo asset_url();?>css/bootstrap.min.css" rel="stylesheet"> 
+    <!-- Bootstrap Core CSS -->
+    <!-- <link href="<?php echo asset_url();?>css/font-awesome.min.css" rel="stylesheet"> -->
+    
+
+    <!-- Bootstrap Core CSS -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet"> -->
+
 
     <!-- Custom Fonts -->
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-    <!-- BTN animation -->
-    <link href="<?php echo asset_url();?>css/ladda.min.css" rel="stylesheet">
-
-    <!-- PAGE LOADING BAR -->
-    <link href="<?php echo asset_url();?>css/pace.css" rel="stylesheet">
-
-    <link rel="stylesheet" type="text/css" media="screen" href="https://rawgit.com/Eonasdan/bootstrap-datetimepicker/master/build/css/bootstrap-datetimepicker.min.css">
-
+    
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -273,7 +281,7 @@
                         </li> -->
                         <li class="divider"></li>
                         <li>
-                            <a href="login/logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="<?php echo site_url(); ?>login/logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                         </li>
                     </ul>
                 </li>
@@ -454,7 +462,7 @@
         <div id="page-wrapper">
             <div class="container-fluid">
             <?php $msg = $this->session->flashdata('message'); if($msg): ?>
-                <div class="alert alert-<?php echo $this->session->flashdata('message_type'); ?> alert-dismissible" role="alert">
+                <div class="alert alert-<?php echo $this->session->flashdata('message_type'); ?> alert-dismissible row" role="alert">
                   <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                     <?php echo $msg ?>
                 </div>

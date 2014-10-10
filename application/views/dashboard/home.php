@@ -1,7 +1,8 @@
     <!-- /.row -->
     <div class="row">
         <h1 class="page-header">Dashboard</h1>
-      <div class="col-lg-8">
+      <div class="col-lg-12">
+      
       <div class="panel panel-default">
               <div class="panel-heading">
                 <i class="fa fa-bar-chart-o fa-fw"></i> Weekly Stats</span> 
@@ -14,12 +15,10 @@
                     <?php if(empty($stats)) : ?>
                     <p>You have no recent activity.</p>
                     <?php else: ?>
-                    
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs" role="tablist">
                       <li class="active"><a href="#this" role="tab" data-toggle="tab">This Week</a></li>
                       <li><a href="#last" role="tab" data-toggle="tab">Last Week</a></li>
-                      
                     </ul>
 
                     <!-- Tab panes -->
@@ -27,104 +26,87 @@
                       <div class="tab-pane active" id="this">
                       
                       <div class="row list-group-item">
-                                                <div class="col-md-3 text-center"> 
-                                                 <strong>Name</strong>
-                                                </div>
-                                                <div class="col-md-2 text-center">
-                                                 <strong>Intro Calls</strong>
-                                                </div>
-                                                <div class="col-md-2 text-center"> 
-                                                <strong>Calls</strong>
-                                                </div>
-                                                   <div class="col-md-2 text-center">
-                                                  <strong>Meetings</strong>
-                                                </div>
-                                                <div class="col-md-2 text-center"> 
-                                                <strong>Comments</strong>
+                        <div class="col-md-3 text-center"> 
+                           <strong>Name</strong>
+                        </div>
+                        <div class="col-md-2 text-center">
+                           <strong>Intro Calls</strong>
+                        </div>
+                        <div class="col-md-2 text-center"> 
+                          <strong>Calls</strong>
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <strong>Meetings</strong>
+                        </div>
+                        <div class="col-md-2 text-center"> 
+                          <strong>Comments</strong>
+                        </div>
+                        </div>
+                        <?php foreach ($stats as $stat): ?>
+                          <div class="row list-group-item">
+                            <div class="col-md-3 text-center"> 
+                              <?php echo $stat['name'];?>
+                            </div>
+                            <div class="col-md-2 text-center">
+                              <?php echo $stat['introcall'];?>
+                            </div>
+                            <div class="col-md-2 text-center"> 
+                                <?php echo $stat['callcount'];?>
 
-                                                </div>
-                                              </div>
-                              <?php 
-                    					
-                    					foreach ($stats as $stat): 
-                                             // print_r('<pre>');print_r($count);print_r('</pre>');
-                                            // die;
-                                          ?>
-                                              <div class="row list-group-item">
-                                                <div class="col-md-3 text-center"> 
-                                                  <?php echo $stat['name'];?>
-                                                </div>
-                                                <div class="col-md-2 text-center">
-                                                  <?php echo $stat['introcall'];?>
-                                                </div>
-                                                <div class="col-md-2 text-center"> 
-                                                    <?php echo $stat['callcount'];?>
+                            </div>
+                               <div class="col-md-2 text-center">
+                              <?php echo $stat['meetingcount'];?>
+                            </div>
+                            <div class="col-md-2 text-center"> 
+                                <?php echo $stat['commentcount'];?>
 
-                                                </div>
-                                                   <div class="col-md-2 text-center">
-                                                  <?php echo $stat['meetingcount'];?>
-                                                </div>
-                                                <div class="col-md-2 text-center"> 
-                                                    <?php echo $stat['commentcount'];?>
-
-                                                </div>
-                                              </div>
-                                             
-                                          <?php endforeach ?>
+                            </div>
+                          </div>     
+                      <?php endforeach ?>
                       </div><!--END THIS TAB-->
                       <div class="tab-pane" id="last">
                         <div class="row list-group-item">
-                                                <div class="col-md-3"> 
-                                                 <strong>Name</strong>
-                                                </div>
-                                                <div class="col-md-2 text-center">
-                                                 <strong>Intro Calls</strong>
-                                                </div>
-                                                <div class="col-md-2 text-center"> 
-                    <strong>Calls</strong>
-                                                </div>
-                                                   <div class="col-md-2 text-center">
-                    <strong>Meetings</strong>
-                    </div>
-                                                <div class="col-md-2 text-center"> 
-                                                <strong>Comments</strong>
+                          <div class="col-md-3"> 
+                           <strong>Name</strong>
+                          </div>
+                          <div class="col-md-2 text-center">
+                           <strong>Intro Calls</strong>
+                          </div>
+                          <div class="col-md-2 text-center"> 
+                          <strong>Calls</strong>
+                          </div>
+                          <div class="col-md-2 text-center">
+                          <strong>Meetings</strong>
+                          </div>
+                          <div class="col-md-2 text-center"> 
+                          <strong>Comments</strong>
+                          </div>
+                        </div>
 
-                                                </div>
-                                              </div>
+                       <?php foreach ($lastweekstats as $lastweekstat): ?>
+                          <div class="row list-group-item">
+                            <div class="col-md-3"> 
+                              <?php echo $lastweekstat['name'];?>
+                            </div>
+                            <div class="col-md-2 text-center">
+                              <?php echo $lastweekstat['introcall'];?>
+                            </div>
+                            <div class="col-md-2 text-center"> 
+                                <?php echo $lastweekstat['callcount'];?>
+                            </div>
+                               <div class="col-md-2 text-center">
+                              <?php echo $lastweekstat['meetingcount'];?>
+                            </div>
+                            <div class="col-md-2 text-center"> 
+                                <?php echo $lastweekstat['commentcount'];?>
 
-                       <?php 
-                    					
-                    					foreach ($lastweekstats as $lastweekstat): 
-                                             // print_r('<pre>');print_r($count);print_r('</pre>');
-                                            // die;
-                                          ?>
-                                              <div class="row list-group-item">
-                                                <div class="col-md-3"> 
-                                                  <?php echo $lastweekstat['name'];?>
-                                                </div>
-                                                <div class="col-md-2 text-center">
-                                                  <?php echo $lastweekstat['introcall'];?>
-                                                </div>
-                                                <div class="col-md-2 text-center"> 
-                                                    <?php echo $lastweekstat['callcount'];?>
-                                                </div>
-                                                   <div class="col-md-2 text-center">
-                                                  <?php echo $lastweekstat['meetingcount'];?>
-                                                </div>
-                                                <div class="col-md-2 text-center"> 
-                                                    <?php echo $lastweekstat['commentcount'];?>
-
-                                                </div>
-                                              </div>
-                                             
-                                          <?php endforeach ?>
+                            </div>
+                          </div>
+                         
+                      <?php endforeach ?>
                       
                       </div>
                     </div>
-                    
-                    
-					
-                    
                     <?php endif ?>
                   </div>
               </div>
