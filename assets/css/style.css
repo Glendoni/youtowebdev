@@ -163,3 +163,13 @@ margin-top: 10px;
 .toggle-btn-group .btn {
 color: #DFDFDF;	
 }
+
+/*page-results-list */
+#page-wrapper {
+	border-left: none;
+}
+.navbar-default {
+
+border-right: 1px solid #e7e7e7;
+
+}

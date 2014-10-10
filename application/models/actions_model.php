@@ -43,7 +43,7 @@ class Actions_model extends CI_Model {
 		    sum(case when action_type_id = '7' then 1 else 0 end) commentcount,
 		    sum(case when action_type_id = '5' OR action_type_id = '5' then 1 else 0 end) callcount,
 		    sum(case when action_type_id = '11' then 1 else 0 end) CallBackCount,
-		    sum(case when action_type_id = '10' then 1 else 0 end) meetingcount
+		    sum(case when action_type_id = '12' then 1 else 0 end) meetingcount
 		from actions A
 
 		INNER JOIN users U
