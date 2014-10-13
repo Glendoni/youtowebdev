@@ -63,6 +63,7 @@
     </div>
 	<?php endif; ?>
 	<div class="panel-body">
+    	<div class="row">
 		<div class="col-md-12">
 			<div class="pull-right assign-to-wrapper">
 				<?php if(isset($company['assigned_to_name']) and !empty($company['assigned_to_name'])): ?>
@@ -93,15 +94,15 @@
 			<?php if (isset($company['class'])): ?>
 				<h3><span class="label label-info"><?php echo $companies_classes[$company['class']] ?></span></h3>
 			<?php endif; ?>
-			<h3 class="name">
+			<strong>
 				Address
-			</h3>
-			<small><?php echo $company['address']; ?> 
+			</strong>
+			<p style="margin-bottom:0;"><?php echo $company['address']; ?></p>
 			<?php if (isset($company['address_lat']) and isset($company['address_lng'])): ?>
-			<button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#map_<?php echo $company['id']; ?>">
-			  map
-			</button> 
-			</small>
+			<p style="margin-bottom:0;"><button class="btn btn-primary btn-sm" style="padding:0 4px;" data-toggle="modal" data-target="#map_<?php echo $company['id']; ?>">
+			  View on Map
+			</button> </p>
+			
 			
 			<div class="modal fade" id="map_<?php echo $company['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="Map">
 			  <div class="modal-dialog">
@@ -124,18 +125,25 @@
 		</div>
 		
 		<!-- TURNOVER -->
-		<div class="col-md-3 centre">
+		<div class="col-md-2 centre">
 		<strong>Turnover</strong>
-			<h3 class="details">
-				<strong>£<?php echo number_format (round($company['turnover'],-3));?></strong><br>
-				<small><?php  echo $company['turnover_method']?></small>
-			</h3>
-			<h5>Founded</h5>
-			<h5 class="details"><strong><?php echo $company['eff_from'] ?></strong></h5>
+			<p class="details" style="margin-bottom:5px;">
+				£<?php echo isset($company['turnover'])? number_format (round($company['turnover'],-3)):'0';?></p>
+                <h6 style="margin-top:0;"><span class="label label-default" ><?php  echo isset($company['turnover_method'])?$company['turnover_method']:'';?></span></h6>
+                            
+           			
+            </div>
+        <div class="col-md-2 centre">
+        		<strong>Founded</strong>
+
+        <p class="details">
+			<?php echo $company['eff_from'] ?>
+        </p>
 		</div>
+        
 
 		<!-- EMPLOYEES -->
-		<div class="col-md-3 centre">
+		<div class="col-md-2 centre">
 			<strong>Employees</strong>
 			<?php if (isset($company['emp_count'])): ?>
 			<h3 class="details"><strong><span class="label label-info"><?php echo $company['emp_count'];?> </span></strong></h3>
@@ -148,7 +156,7 @@
 			<?php 
 			if(isset($company['sectors'])){
 				foreach ($company['sectors'] as $key => $name) {
-					echo '<h5>'.$name.'</h5>';
+					echo '<p>'.$name.'</p>';
 				}
 			}
 			?>
@@ -164,6 +172,7 @@
 			<?php endif; ?>
 		</div>
 			
+            
 		<!-- MORTGAGES -->
 		
 		<div class="col-md-12">
@@ -193,6 +202,7 @@
 		<?php endif; ?>
 		</div>
 	</div>
+    </div><!--END ROW-->
 </div>
 
 <div class="row">
@@ -214,12 +224,9 @@
 		</div>
 		<div class="form-group ">
 			<label>Outcome</label>
-			<textarea class="form-control" name="comment" rows="8"></textarea>
+			<textarea class="form-control" name="comment" rows="6"></textarea>
 		</div>
-		<div class="form-group " >
-		<label> </label>
 		<button type="submit" name="save" class="btn btn-success form-control">Save</button>
-		</div>
 		<?php echo form_close(); ?>
 	  </div>
 	</div>
@@ -232,7 +239,8 @@
 		  <div class="panel-body">
 		   <?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id']);
 					 echo form_open(site_url().'actions/create', 'name="create" class="form" role="form"',$hidden); ?>
-			<div class="">
+			<div class="row">
+            <div class="col-md-6">
 				<div class="form-group ">
 					<label>Type</label>
 					<select name="action_type" class="form-control">
@@ -241,14 +249,19 @@
 						<?php endforeach; ?>
 					</select>
 				</div>
+                </div>
+                <div class="col-md-6">
 				<div class="form-group " >
 					<label>Planned For</label>
 					<input type="text" class="form-control" id="planned_at" data-date-format="YYYY/MM/DD H:m" name="planned_at" placeholder="">
 				</div>
+                </div>
+                <div class="col-md-12">
 				<div class="form-group ">
 					<label>Note</label>
 					<textarea class="form-control" name="comment" rows="6"></textarea>
 				</div>
+                
 				<!-- <div class="form-group " >
 					<label>Actioned</label>
 					<input type="text" class="form-control" id="actioned_at" name="actioned_at" placeholder="">
@@ -260,6 +273,7 @@
 				</div> -->
 				<button type="submit" name="save" class="btn btn-primary form-control">Schedule</button>
 			</div>
+            </div>
 			<?php echo form_close(); ?>
 		  </div>
 		</div>

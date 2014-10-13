@@ -122,7 +122,7 @@
 	background-position:center;
 	background-repeat:no-repeat;
 	text-indent:-9999px;
-	border-color:#333;
+	border-color:#ddd;
 }
 .btn.duedil:hover {
 	background-color:#f7f7f7;
@@ -136,11 +136,11 @@
 	background-position:center;
 	background-repeat:no-repeat;
 	text-indent:-9999px;
-	border-color:#4875B4;
+	border-color:#ddd;
 }
 .btn.linkedin:hover {
 	background-color:#f7f7f7;
-	border-color:#000;
+	border-color:#0976b4;
 }
 
 .count_of_results {
