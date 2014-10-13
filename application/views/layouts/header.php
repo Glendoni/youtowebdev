@@ -403,8 +403,10 @@
                                                 <div class="col-md-12 form-group">
                                                     <?php
                     echo form_label('Class', 'class');
-                    echo form_dropdown('class', $companies_classes, (isset($company['class'])?$company['class']:'') ,'class="form-control"');
+                    echo form_dropdown('class', $class_options, ($this->input->post('class')?$this->input->post('class'):$class_default) ,'class="form-control"');
+                    
                     ?>
+         
                                                  </div> 
                                             </div>
                                         </div>
