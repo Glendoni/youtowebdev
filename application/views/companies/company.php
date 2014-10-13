@@ -146,7 +146,7 @@
 		<div class="col-md-2 centre">
 			<strong>Employees</strong>
 			<?php if (isset($company['emp_count'])): ?>
-			<h3 class="details"><strong><span class="label label-info"><?php echo $company['emp_count'];?> </span></strong></h3>
+			<p class="details"><?php echo $company['emp_count'];?> </p>
 			<?php endif; ?>
 		</div>
 
