@@ -132,7 +132,7 @@ class MY_Controller extends CI_Controller {
 		$this->data['sectors_search'] = $sectors_search;
 		$this->data['sectors_default'] ='0';
 		
-		$this->data['class_options'] = $class_options;
+		$this->data['class_options'] = array(0=>'All') + $class_options;
 		$this->data['class_default'] ='0';
 		
 		$providers_options = array(0=>'All') + $providers_options;

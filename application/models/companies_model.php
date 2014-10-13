@@ -10,7 +10,6 @@ class Companies_model extends CI_Model {
 	function get_companies_classes()
 	{
 		$arrayNames = array(
-			''=>'',
 			'StartUp' => 'Start Up',
 			'UsingFinance' => 'Using Finance',
 			'LookingToPlaceContractors' => 'Looking to Place Contractors',
