@@ -251,7 +251,7 @@ class Companies_model extends CI_Model {
 		else if (isset($post['assigned']) && (!empty($post['assigned'])) && ($post['assigned'] =='-1'))
 		{
 			$assigned_sql = 'select id from companies where user_id is Null';
-
+		}
 		
 		// segment
 		if(isset($post['class']) && (!empty($post['class'])) && ($post['class'] !== ''))
