@@ -122,7 +122,7 @@
 	background-position:center;
 	background-repeat:no-repeat;
 	text-indent:-9999px;
-	border-color:#333;
+	border-color:#ddd;
 }
 .btn.duedil:hover {
 	background-color:#f7f7f7;
@@ -136,11 +136,11 @@
 	background-position:center;
 	background-repeat:no-repeat;
 	text-indent:-9999px;
-	border-color:#4875B4;
+	border-color:#ddd;
 }
 .btn.linkedin:hover {
 	background-color:#f7f7f7;
-	border-color:#000;
+	border-color:#0976b4;
 }
 
 .count_of_results {
@@ -162,4 +162,19 @@ margin-top: 10px;
 
 .toggle-btn-group .btn {
 color: #DFDFDF;	
+}
+
+#page-wrapper {
+	border-left: none;
+}
+.navbar-default {
+
+border-right: 1px solid #e7e7e7;
+
+}
+.clear-fields{
+	background-color:#FFDCDE !important;
+}
+.clear-fields:hover{
+	background-color:#FFBFBF !important;
 }

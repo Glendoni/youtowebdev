@@ -310,7 +310,7 @@
                                             <?php if (isset($_POST['main_search'])): ?>
                                             <div class='form-row'>
                                                 <div class="col-md-12 form-group ">
-                                                    <a class="btn btn-link pull-right" href="<?php echo site_url();?>">
+                                                    <a class="btn btn-block clear-fields" href="<?php echo site_url();?>">
                                                         <span class="glyphicon glyphicon-remove"></span> Clear fields
                                                     </a>
                                                 </div>
