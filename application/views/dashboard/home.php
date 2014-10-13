@@ -24,6 +24,7 @@
                     <!-- Tab panes -->
                     <div class="tab-content">
                       <div class="tab-pane active" id="this">
+                      <div class="col-md-12">
                       
                       <div class="row list-group-item">
                         <div class="col-md-3 text-center"> 
@@ -63,8 +64,10 @@
                             </div>
                           </div>     
                       <?php endforeach ?>
+                      </div>
                       </div><!--END THIS TAB-->
                       <div class="tab-pane" id="last">
+                      <div class="col-md-12">
                         <div class="row list-group-item">
                           <div class="col-md-3"> 
                            <strong>Name</strong>
@@ -107,6 +110,7 @@
                       
                       </div>
                     </div>
+                    </div>
                     <?php endif ?>
                   </div>
               </div>
@@ -117,6 +121,7 @@
               </div>
              
               <div class="panel-body">
+              <div class="col-md-12">
                   <div class="clearfix"></div>
                   <div clas="list-group">
 
@@ -157,6 +162,7 @@
                       <?php endforeach ?>
                     <?php endif ?>
                   </div>
+              </div>
               </div>
           </div>
       </div>
