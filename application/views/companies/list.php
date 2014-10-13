@@ -14,6 +14,7 @@
         </span>    </div>
 	<?php endif; ?>
 	<div class="panel-body">
+    <div class="row">
 		<div class="col-md-12">
 			<div class="pull-right assign-to-wrapper">
 				<?php if(isset($company['assigned_to_name']) and !empty($company['assigned_to_name'])): ?>
@@ -39,7 +40,7 @@
                 </button>  
 			</div>
 			<h3 class="name">
-				<a href="<?php echo site_url();?>companies/company?id=<?php echo $company['id'];?>">
+				<a href="<?php echo site_url();?>companies/company?id=<?php echo $company['id'];?>" target="_blank">
 					<?php echo $company['name']; ?>
 				</a>
 				<?php if (isset($company['url'])): ?>
@@ -59,19 +60,25 @@
 		</div>
 		
 		<!-- TURNOVER -->
-		<div class="col-md-3 centre">
+		<div class="col-md-2 centre">
 		<strong>Turnover</strong>
-			<h3 class="details">
-				<strong>£<?php echo isset($company['turnover'])? number_format (round($company['turnover'],-3)):'';?></strong>
-				<br>
-				<small><?php  echo isset($company['turnover_method'])?$company['turnover_method']:'';?></small>
-			</h3>
-			<h5>Founded</h5>
-			<h5 class="details"><strong><?php echo isset($company['eff_from'])?$company['eff_from']:''; ?></strong></h5>
+			<p class="details" style="margin-bottom:5px;">
+				£<?php echo isset($company['turnover'])? number_format (round($company['turnover'],-3)):'0';?></p>
+                <h6 style="margin-top:0;"><span class="label label-default" ><?php  echo isset($company['turnover_method'])?$company['turnover_method']:'';?></span></h6>
+                            
+           			
+            </div>
+        <div class="col-md-2 centre">
+        		<strong>Founded</strong>
+
+        <p class="details">
+			<?php echo $company['eff_from'] ?>
+        </p>
 		</div>
+        
 
 		<!-- EMPLOYEES -->
-		<div class="col-md-3 centre">
+		<div class="col-md-2 centre">
 			<strong>Employees</strong>
 			<?php if (isset($company['emp_count'])): ?>
 			<h3 class="details"><strong><span class="label label-info"><?php echo $company['emp_count'];?> </span></strong></h3>
@@ -82,9 +89,9 @@
 		<div class="col-md-3 centre">
 			<strong>Sectors</strong> 
 			<?php 
-			if (isset($company['sectors'])) {
+			if(isset($company['sectors'])){
 				foreach ($company['sectors'] as $key => $name) {
-					echo '<h5>'.$name.'</h5>';
+					echo '<p style="margin-bottom:0;"><span class="glyphicon glyphicon-ok" style="margin-right:5px;color: #5cb85c;border: #5cb85c; font-size:11px;"></span>'.$name.'</p>';
 				}
 			}
 			?>
@@ -98,10 +105,10 @@
 			<?php if (isset($company['linkedin_id'])): ?>
 			<a class="btn  btn-info btn-sm btn-block linkedin" href="https://www.linkedin.com/company/<?php echo $company['linkedin_id'] ?>"  target="_blank">LinkedIn</a>
 			<?php endif; ?>
-
 		</div>
 			
-			<!-- MORTGAGES -->
+            
+		<!-- MORTGAGES -->
 			
 			<div class="col-md-12">
 			<?php if(!empty($company['mortgages'])): ?>
@@ -130,6 +137,7 @@
 			<?php endif; ?>
 			</div>
 		</div>
+        </div>
 	</div>
 <?php endforeach; ?>
 <?php endif; ?>

@@ -34,6 +34,8 @@
 
     <script type="text/javascript" src="<?php echo asset_url();?>js/bootstrap-datetimepicker.js"></script>
 
+<!--FORMAT NUMBERS WITH COMMAS (ADD CLASS NUMBER TO INPUT)-->
+    <script type="text/javascript" src="<?php echo asset_url();?>js/format-numbers.js"></script>
 
 
  	<script type="text/javascript">
