@@ -32,7 +32,7 @@ class MY_Controller extends CI_Controller {
 		$this->load->model('Companies_model');
 		// $this->load->helper('mobile');
 		
-		 // var_dump($this->session->all_userdata());
+		// Place static variables on session below
 		
 		// try getting logged in user from session
 		if($this->session->userdata('logged_in')) 
@@ -47,19 +47,20 @@ class MY_Controller extends CI_Controller {
 		}
 
         // session data only test for positve so be careful with the if stataments
-		if($this->session->userdata('sectors_options'))
+		if($this->session->userdata('sectors_search'))
 		{	
-			$sectors_options = $this->session->userdata('sectors_options');
+			$sectors_search = $this->session->userdata('sectors_search');
+			$sectors_list = $this->session->userdata('sectors_list');
 
 		}
 		else
 		{
-			$result = $this->Sectors_model->get_all_in_array();
-			$sectors_options = $result['sectors'];
-			$sectors_count = $result['sectors_count'];
+			$sectors_search = $this->Sectors_model->get_all_for_search();
+			
+			$sectors_list = $this->Sectors_model->get_all();
 			// asort($sectors_options);
-			$this->session->set_userdata('sectors_count',$sectors_count);
-			$this->session->set_userdata('sectors_options',$sectors_options);
+			$this->session->set_userdata('sectors_list',$sectors_list);
+			$this->session->set_userdata('sectors_search',$sectors_search);
 		}
 		
 		if($this->session->userdata('providers_options'))
@@ -106,14 +107,18 @@ class MY_Controller extends CI_Controller {
 		}
 		
 
-		// Add options
+		// Pass variables to tempalte views 
+
+		// edit box options 
+		$this->data['sectors_list'] = $sectors_list;
+		// Add options 
 		$system_users = array(0=>'All') + $system_users;
 		$this->data['system_users'] = $system_users;
 		$this->data['assigned_default'] = '0';
 
-		$sectors_options = array(0=>'All') + $sectors_options;
+		$sectors_search = array(0=>'All') + $sectors_search;
 		// $sectors_options = array(-1=>'No sectors') + $sectors_options;
-		$this->data['sectors_options'] = $sectors_options;
+		$this->data['sectors_search'] = $sectors_search;
 		$this->data['sectors_default'] ='0';
 		
 		$providers_options = array(0=>'All') + $providers_options;

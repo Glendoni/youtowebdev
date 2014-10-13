@@ -53,7 +53,7 @@
 					<label for="url" class="control-label">Sectors</label>
 					<div class="tag-holder">
 					<?php 	
-					foreach ($sectors_options as $key => $value): ?>
+					foreach ($sectors_list as $key => $value): ?>
 						<span class="button-checkbox">
 					        <button type="button" class="btn " data-color="primary" >&nbsp;<?php echo $value; ?></button>
 					        <input type="checkbox" name="add_sectors[]" value="<?php echo $key; ?>" class="hidden" <?php echo (isset($company['sectors']) and array_key_exists($key,$company['sectors']))? 'checked': '' ; ?>  />

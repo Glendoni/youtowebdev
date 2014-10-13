@@ -3,11 +3,17 @@ class Sectors_model extends CI_Model {
 	
 	function get_all()
 	{
-		$query = $this->db->get_where('sectors',array('display'=>'True'));	
-		return $query->result();
+		$query = $this->db->get_where('sectors');	
+
+		foreach($query->result() as $row)
+		{
+		  $sectors_array[$row->id] = $row->name;
+		} 
+		
+		return $sectors_array;
 	}
 
-	function get_all_in_array()
+	function get_all_for_search()
 	{
 		$sql ='
 		SELECT s.id,s.name,count(O.id)
@@ -23,9 +29,8 @@ class Sectors_model extends CI_Model {
 		foreach($query->result() as $row)
 		{
 		  $sectors_array[$row->id] = $row->name.' ('.$row->count.')';
-		  $sectors_count_array[$row->id] = $row->count;
 		} 
-		return array ('sectors'=>$sectors_array,'sectors_count'=>$sectors_count_array);
+		return $sectors_array;
 	}
 	
 

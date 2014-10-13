@@ -375,7 +375,7 @@
                                                 <div class="col-md-12 form-group">
                                                 <?php 
                                                 echo form_label('Sectors', 'sectors');
-                                                echo form_multiselect('sectors[]', $sectors_options, ($this->input->post('sectors')?$this->input->post('sectors'):$sectors_default),'class="form-control"');
+                                                echo form_multiselect('sectors[]', $sectors_search, ($this->input->post('sectors')?$this->input->post('sectors'):$sectors_default),'class="form-control"');
                                                 ?>
                                                 </div>
                                             </div>
