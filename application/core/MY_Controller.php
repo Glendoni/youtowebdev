@@ -113,7 +113,7 @@ class MY_Controller extends CI_Controller {
 		$this->data['sectors_list'] = $sectors_list;
 		// Add options 
 		$system_users = array(0=>'All') + $system_users;
-		$this->data['system_users'] = $system_users;
+		$this->data['system_users'] = array(-1=>'Not Assigned') + $system_users;
 		$this->data['assigned_default'] = '0';
 
 		$sectors_search = array(0=>'All') + $sectors_search;

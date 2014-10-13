@@ -244,9 +244,13 @@ class Companies_model extends CI_Model {
 		}
 
 		// assigned
-		if(isset($post['assigned']) && (!empty($post['assigned'])) && ($post['assigned'] !== '0'))
+		if(isset($post['assigned']) && (!empty($post['assigned'])) && ($post['assigned'] > 0 ))
 		{	
 			$assigned_sql = 'select id from companies where user_id = '.$post['assigned'].'';
+		}
+		else if (isset($post['assigned']) && (!empty($post['assigned'])) && ($post['assigned'] =='-1'))
+		{
+			$assigned_sql = 'select id from companies where user_id is Null';
 		}
 
 		// -- Data to Display a Company's details
