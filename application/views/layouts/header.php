@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Baselist</title>
+    <title>Baselist <?php if(isset($page_title)) echo '|'.$page_title; ?></title>
     
     <link rel="icon" type="image/png" href="<?php echo asset_url();?>images/favicon.jpg">
     <!-- Custom CSS -->

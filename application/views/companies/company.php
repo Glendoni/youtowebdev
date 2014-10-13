@@ -1,49 +1,4 @@
-<?php  $company = $companies[0]; 
- // print_r('<pre>');print_r($company);print_r('</pre>');
-?>
-<style>
-.mic-info { color: #666666;font-size: 11px;margin-top: 5px; }
-
-
-.triangle-isosceles {
-  position:relative;
-  padding:15px;
-  margin:1em 0 3em;
-  color:#000;
-  -webkit-border-radius:5px;
-  -moz-border-radius:5px;
-  border-radius:5px;
-}
-
-/* Variant : for top positioned triangle
------------------------------------------- */
-
-.triangle-isosceles.top {
-	border:#d1d1d1 1px solid;
-}
-/* creates triangle */
-.triangle-isosceles:after {
-  content:"";
-  position:absolute;
-  bottom:-15px; /* value = - border-top-width - border-bottom-width */
-  left:50px; /* controls horizontal position */
-  border-width:15px 15px 0; /* vary these values to change the angle of the vertex */
-  border-style:solid;
-  border-color:#f3961c transparent;
-  /* reduce the damage in FF3.0 */
-  display:block;
-  width:0;
-}
-.triangle-isosceles.top:after {
-  top:-15px; /* value = - border-top-width - border-bottom-width */
-  left:50px; /* controls horizontal position */
-  bottom:auto;
-  left:auto;
-  border-width:0 15px 15px; /* vary these values to change the angle of the vertex */
-  border-color:#d1d1d1 transparent;
-}
-
-</style>
+<?php  $company = $companies[0]; ?>
 <div class="row page-results-list">
 	<h2 class="page-header">
 	<?php echo $company['name']; ?>
@@ -56,7 +11,9 @@
 <div class="panel <?php if(isset($company['assigned_to_name'])): ?> panel-primary <?php else: ?> panel-default <?php endif; ?> company">
 	<?php if(isset($company['assigned_to_name'])): ?>
 	<div class="panel-heading text-center" >
-        <span class="assigned-image-holder" style="max-width:30px; float:left;"><img src="<?php echo asset_url();?>images/profiles/<?php echo isset($system_users_images[$company['assigned_to_id']])? $system_users_images[$company['assigned_to_id']]:'none' ;?>.jpg" class="img-circle img-responsive" alt="" /></span>
+        <span class="assigned-image-holder" style="max-width:30px; float:left;">
+        	<img src="<?php echo asset_url();?>images/profiles/<?php echo isset($system_users_images[$company['assigned_to_id']])? $system_users_images[$company['assigned_to_id']]:'none' ;?>.jpg" class="img-circle img-responsive" alt="" />
+        </span>
         <span style="line-height:28px;">
         Assigned to <?php echo $company['assigned_to_name']; ?> 
         </span>    

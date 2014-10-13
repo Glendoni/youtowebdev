@@ -156,9 +156,51 @@ class Companies_model extends CI_Model {
 		// TURNOVER
 		
 		if( (isset($post['turnover_from']) && strlen($post['turnover_from']) > 0) && (strlen($post['turnover_to']) > 0 && isset($post['turnover_to'])) ) 
-		{
-			$turnover_sql = 'select company_id  from turnovers where turnover > '.$post['turnover_from'].'  and turnover < '.$post['turnover_to'].'  ';
+		{	
+				if($post['turnover_from'] == 0)
+				{
+					$turnover_sql = 'select T.company_id "company_id",
+									       T.turnover "turnover",
+									       T.method "turnover_method"       
+									from 
+									(-- T1
+									select id "id",
+									       company_id,
+									       max(eff_from) OVER (PARTITION BY company_id) "max eff date"
+									from TURNOVERS
+									)   T1
+									  
+									JOIN TURNOVERS T
+									ON T1.id = T.id
+									  
+									where T1."max eff date" = T.eff_from 
+									and T.turnover = NULL or  T.turnover < '.$post['turnover_to'].'
+			  
+			  						';
+				}
+				else
+				{
+					$turnover_sql = 'select T.company_id "company_id",
+									       T.turnover "turnover",
+									       T.method "turnover_method"       
+									from 
+									(-- T1
+									select id "id",
+									       company_id,
+									       max(eff_from) OVER (PARTITION BY company_id) "max eff date"
+									from TURNOVERS
+									)   T1
+									  
+									JOIN TURNOVERS T
+									ON T1.id = T.id
+									  
+									where T1."max eff date" = T.eff_from 
+									and  T.turnover between '.$post['turnover_from'].'  and '.$post['turnover_to'].'  ';
+				}
+				
 		}
+		
+		
 		
 		// EMP COUNT
 		// if((isset($post['employees_to']) and !empty($post['employees_to'])) and (isset($post['employees_from']) and !empty($post['employees_from'])) ) 

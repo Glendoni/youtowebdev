@@ -11,7 +11,11 @@
 		<div class="col-md-8" style="text-align:right;">
 	      	<?php if(($companies_count > 0)): ?>
 				<?php if($current_campaign_name && $current_campaign_owner_id && $current_campaign_id ): ?>
+				
 				<div class="navbar-text saved-search-text">
+				<span class="assigned-image-holder" >
+		        	<img src="<?php echo asset_url();?>images/profiles/<?php echo isset($system_users_images[$current_campaign_owner_id])? $system_users_images[$current_campaign_owner_id]:'none' ;?>.jpg" class="img-circle img-responsive" alt="" />
+		        </span>
 					<span style="font-weight:300; font-size:16px;">Search:</span>
 					<?php echo $current_campaign_name; ?>
 				</div>
@@ -24,8 +28,6 @@
 					<span style="font-weight:300; font-size:10px;"><i class="fa fa-users"></i> Public Search</span>
 				</div>	
 				<?php endif;?>  
-				<?php if($current_campaign_editable): ?>
-				<?php endif; ?>
 				<?php if($current_campaign_editable): ?>
                 <?php echo form_open(site_url().'campaigns/edit', 'name="edit_campaign" role="form"'); echo form_hidden('campaign_id', $current_campaign_id); ?>
                 <?php if($current_campaign_is_shared == False): ?>

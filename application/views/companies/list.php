@@ -16,43 +16,49 @@
 	<div class="panel-body">
     <div class="row">
 		<div class="col-md-12">
-			<div class="pull-right assign-to-wrapper">
-				<?php if(isset($company['assigned_to_name']) and !empty($company['assigned_to_name'])): ?>
-					<?php if($company['assigned_to_id'] == $current_user['id']) : ?>			
-						<?php  $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'], 'page_number' => $current_page_number );
-						echo form_open('companies/unassign',array('name' => 'assignto', 'class'=>'assign-to-form'),$hidden); ?>
-						<button type="submit" class="btn  btn-primary  ladda-button" data-style="expand-right" data-size="1">
-						    <span class="ladda-label"> Unassign from me </span>
-						</button>
-						<?php echo form_close(); ?>
+			<div class="col-md-9">
+				<h3 class="name">
+					<a href="<?php echo site_url();?>companies/company?id=<?php echo $company['id'];?>" target="_blank">
+						<?php echo $company['name']; ?>
+					</a>
+					<?php if (isset($company['url'])): ?>
+					<a class="btn btn-link" href="<?php $parsed = parse_url($company['url']); if (empty($parsed['scheme'])) { echo 'http://' . ltrim($company['url'], '/'); }else{ echo $company['url']; } ?>" target="_blank">
+					<?php echo str_replace("http://"," ",str_replace("www.", "", $company['url']))?>
+					</a>
 					<?php endif; ?>
-				<?php else: ?>
-				<?php 
-				$hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'], 'page_number' => $current_page_number );
-				echo form_open(site_url().'companies/assignto',array('name' => 'assignto', 'class'=>'assign-to-form'),$hidden); ?>
-				<button type="submit" assignto="<?php echo $current_user['name']; ?>" class="btn  btn-primary  ladda-button" data-style="expand-right" data-size="1">
-			        <span class="ladda-label"> Assign to me </span>
-			    </button>
-				<?php echo form_close(); ?>
-				<?php endif; ?>
-				<button class="btn btn-warning ladda-button edit-btn" data-toggle="modal" id="editbtn<?php echo $company['id']; ?>" data-style="expand-right" data-size="1" data-target="#editModal<?php echo $company['id']; ?>">
-                    <span class="ladda-label"> Edit </span>
-                </button>  
-			</div>
-			<h3 class="name">
-				<a href="<?php echo site_url();?>companies/company?id=<?php echo $company['id'];?>" target="_blank">
-					<?php echo $company['name']; ?>
-				</a>
-				<?php if (isset($company['url'])): ?>
-				<a class="btn btn-link" href="<?php $parsed = parse_url($company['url']); if (empty($parsed['scheme'])) { echo 'http://' . ltrim($company['url'], '/'); }else{ echo $company['url']; } ?>" target="_blank">
-				<?php echo str_replace("http://"," ",str_replace("www.", "", $company['url']))?>
-				</a>
-				<?php endif; ?>
-			</h3>
-			<?php if (isset($company['class'])): ?>
+				</h3>
+				<?php if (isset($company['class'])): ?>
 				<span class="label label-info"><?php echo $companies_classes[$company['class']] ?></span>
-			<?php endif; ?>
-			<small><?php echo $company['address']; ?> </small>
+				<?php endif; ?>
+				<small><?php echo $company['address']; ?> </small>
+			</div>
+			<div class="col-md-3">
+				<div class="assign-to-wrapper ">
+					<button class="btn btn-warning ladda-button edit-btn" data-toggle="modal" id="editbtn<?php echo $company['id']; ?>" data-style="expand-right" data-size="1" data-target="#editModal<?php echo $company['id']; ?>">
+	                    <span class="ladda-label"> Edit </span>
+	                </button> 
+					<?php if(isset($company['assigned_to_name']) and !empty($company['assigned_to_name'])): ?>
+						<?php if($company['assigned_to_id'] == $current_user['id']) : ?>			
+							<?php  $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'], 'page_number' => $current_page_number );
+							echo form_open('companies/unassign',array('name' => 'assignto', 'class'=>'assign-to-form'),$hidden); ?>
+							<button type="submit" class="btn  btn-primary  ladda-button" data-style="expand-right" data-size="1">
+							    <span class="ladda-label"> Unassign from me </span>
+							</button>
+							<?php echo form_close(); ?>
+						<?php endif; ?>
+					<?php else: ?>
+					<?php 
+					$hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'], 'page_number' => $current_page_number );
+					echo form_open(site_url().'companies/assignto',array('name' => 'assignto', 'class'=>'assign-to-form'),$hidden); ?>
+					<button type="submit" assignto="<?php echo $current_user['name']; ?>" class="btn  btn-primary  ladda-button" data-style="expand-right" data-size="1">
+				        <span class="ladda-label"> Assign to me </span>
+				    </button>
+					<?php echo form_close(); ?>
+					<?php endif; ?>
+					 
+				</div>
+			</div>
+			
 		</div>
 		
 		<div class="col-md-12">

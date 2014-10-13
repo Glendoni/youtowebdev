@@ -184,6 +184,7 @@ class Companies extends MY_Controller {
 			$this->data['action_types_planned'] = $this->Actions_model->get_action_types_planned();
 			$this->data['action_types_array'] = $this->Actions_model->get_action_types_array();
 			$this->data['actions'] = $this->Actions_model->get_actions($this->input->get('id'));
+			$this->data['page_title'] = $company[0]['name'];
 			$this->data['companies'] = $company;
 			$this->data['main_content'] = 'companies/company';
 			$this->load->view('layouts/default_layout', $this->data);
@@ -209,39 +210,9 @@ class Companies extends MY_Controller {
 	}
 
 	private function process_search_result($raw_search_results){
-		// print_r('here');
 		// print_r($raw_search_results[0]['json_agg']);
 		
 		$companies_json = json_decode($raw_search_results[0]['json_agg']);
-
-
-		// switch (json_last_error()) {
-  //       case JSON_ERROR_NONE:
-  //           echo ' - No errors';
-  //       break;
-  //       case JSON_ERROR_DEPTH:
-  //           echo ' - Maximum stack depth exceeded';
-  //       break;
-  //       case JSON_ERROR_STATE_MISMATCH:
-  //           echo ' - Underflow or the modes mismatch';
-  //       break;
-  //       case JSON_ERROR_CTRL_CHAR:
-  //           echo ' - Unexpected control character found';
-  //       break;
-  //       case JSON_ERROR_SYNTAX:
-  //           echo ' - Syntax error, malformed JSON';
-  //       break;
-  //       case JSON_ERROR_UTF8:
-  //           echo ' - Malformed UTF-8 characters, possibly incorrectly encoded';
-  //       break;
-  //       default:
-  //           echo ' - Unknown error';
-  //       break;
-  //   }
-		// print_r('after');
-		// print_r('<pre>');
-		// print_r($companies_json);
-		// print_r('</pre>');
 
 		$companies_array = array();
 		foreach ($companies_json as $company) {
