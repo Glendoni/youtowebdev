@@ -22,6 +22,10 @@
 	<div class="panel-body">
     	<div class="row">
 		<div class="col-md-12">
+        <?php if (isset($company['class'])): ?>
+				<span class="label label-info"><?php echo $companies_classes[$company['class']] ?></span>
+                
+			<?php endif; ?>
 			<div class="pull-right assign-to-wrapper">
 				<?php if(isset($company['assigned_to_name']) and !empty($company['assigned_to_name'])): ?>
 					<?php if($company['assigned_to_id'] == $current_user['id']) : ?>			
@@ -48,9 +52,10 @@
                 </button>
                 
 			</div>
-			<?php if (isset($company['class'])): ?>
-				<h3><span class="label label-info"><?php echo $companies_classes[$company['class']] ?></span></h3>
-			<?php endif; ?>
+            </div>
+            
+			
+            <div class="col-md-12">
 			<strong>
 				Address
 			</strong>
@@ -59,6 +64,7 @@
 			<p style="margin-bottom:0;"><button class="btn btn-primary btn-sm" style="padding:0 4px;" data-toggle="modal" data-target="#map_<?php echo $company['id']; ?>">
 			  View on Map
 			</button> </p>
+            </div>
 			
 			
 			<div class="modal fade" id="map_<?php echo $company['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="Map">
@@ -75,7 +81,7 @@
 			  </div><!-- /.modal-dialog -->
 			</div><!-- /.modal -->
 			<?php endif; ?>
-		</div>
+		
 		
 		<div class="col-md-12">
 			<hr>
