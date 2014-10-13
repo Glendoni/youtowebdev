@@ -399,6 +399,14 @@
                                                     ?>
                                                  </div> 
                                             </div>
+                                             <div class="form-row">
+                                                <div class="col-md-12 form-group">
+                                                    <?php
+                    echo form_label('Class', 'class');
+                    echo form_dropdown('class', $companies_classes, (isset($company['class'])?$company['class']:'') ,'class="form-control"');
+                    ?>
+                                                 </div> 
+                                            </div>
                                         </div>
                                         <div class="panel-footer">
                                         
