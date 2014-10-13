@@ -105,6 +105,17 @@ class MY_Controller extends CI_Controller {
 			$this->session->set_userdata('companies_classes',$companies_classes);
 		}
 		
+		if($this->session->userdata('companies_classes'))
+		{
+			$this->data['companies_classes'] = $this->session->userdata('companies_classes');
+			$class_options = $this->session->userdata('companies_classes');
+		}else
+		{
+			$class_options = $this->Companies_model->get_companies_classes();
+			$this->session->set_userdata('companies_classes',$companies_classes);
+			
+		}
+		
 
 		// Add options
 		$system_users = array(0=>'All') + $system_users;
@@ -115,6 +126,9 @@ class MY_Controller extends CI_Controller {
 		// $sectors_options = array(-1=>'No sectors') + $sectors_options;
 		$this->data['sectors_options'] = $sectors_options;
 		$this->data['sectors_default'] ='0';
+		
+		$this->data['class_options'] = $class_options;
+		$this->data['class_default'] ='0';
 		
 		$providers_options = array(0=>'All') + $providers_options;
 		$providers_options = array(-1=>'No current provider') + $providers_options;
