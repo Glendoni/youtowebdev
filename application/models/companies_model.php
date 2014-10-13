@@ -262,6 +262,7 @@ class Companies_model extends CI_Model {
 		(-- T1
 		select C.id,
 			   C.name,
+			   U.id "owner_id",
 		       row_to_json((
 		       C.id, -- f1
 		       C.name, -- f2
@@ -405,7 +406,7 @@ class Companies_model extends CI_Model {
 		)   T2
 		ON T1.id = T2."company id"
 		-- insert this for sort order  
-		order by lower(T1.name) 
+		order by T1.owner_id,lower(T1.name) 
 		 
 		) results';
 		// print_r($sql);
