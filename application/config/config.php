@@ -266,7 +266,7 @@ $config['sess_time_to_update']	= 300;
 |
 */
 $config['cookie_prefix']	= "baselist";
-$config['cookie_domain']	= "baselist.herokuapp.com";
+$config['cookie_domain']	= ".herokuapp.com";
 $config['cookie_path']		= "/";
 $config['cookie_secure']	= FALSE;
 
