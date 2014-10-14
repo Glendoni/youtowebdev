@@ -265,8 +265,8 @@ $config['sess_time_to_update']	= 300;
 | 'cookie_secure' =  Cookies will only be set if a secure HTTPS connection exists.
 |
 */
-$config['cookie_prefix']	= "baselist";
-$config['cookie_domain']	= ".herokuapp.com";
+$config['cookie_prefix']	= "";
+$config['cookie_domain']	= "";
 $config['cookie_path']		= "/";
 $config['cookie_secure']	= FALSE;
 
@@ -296,7 +296,7 @@ $config['global_xss_filtering'] = TRUE;
 $config['csrf_protection'] = FALSE;
 $config['csrf_token_name'] = 'csrf_test_name';
 $config['csrf_cookie_name'] = 'csrf_cookie_name';
-$config['csrf_expire'] = 43200;
+$config['csrf_expire'] = 7200;
 
 /*
 |--------------------------------------------------------------------------
