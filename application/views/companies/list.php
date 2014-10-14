@@ -16,7 +16,7 @@
 	<div class="panel-body">
     <div class="row">
 		<div class="col-md-12">
-			<div class="col-md-9">
+			<div class="col-md-8">
 				<h3 class="name">
 					<a href="<?php echo site_url();?>companies/company?id=<?php echo $company['id'];?>" target="_blank">
 						<?php echo $company['name']; ?>
@@ -27,7 +27,7 @@
 				<?php endif; ?>
 				
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-4">
 				<div class="assign-to-wrapper ">
 					<button class="btn btn-warning ladda-button edit-btn" data-toggle="modal" id="editbtn<?php echo $company['id']; ?>" data-style="expand-right" data-size="1" data-target="#editModal<?php echo $company['id']; ?>">
 	                    <span class="ladda-label"> Edit </span>

@@ -25,11 +25,13 @@
 				Address
 			</strong>
 			<?php if (isset($company['address_lat']) and isset($company['address_lng'])): ?>
-			<p style="margin-bottom:0;"><a class="btn btn-link" style="padding:0 4px;" data-toggle="modal" data-target="#map_<?php echo $company['id']; ?>"><i class="fa fa-map-marker"></i>
-<?php echo $company['address']; ?>			</a> </p>
+			<p style="margin-bottom:0;">
+			<a class="btn btn-link" style="padding:0 4px;" data-toggle="modal" data-target="#map_<?php echo $company['id']; ?>">
+			<i class="fa fa-map-marker"></i>
+			<?php echo $company['address']; ?>
+			</a> 
+			</p>
             
-			
-			
 			<div class="modal fade" id="map_<?php echo $company['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="Map">
 			  <div class="modal-dialog">
 			    <div class="modal-content">
@@ -77,7 +79,10 @@
         </div>
                 <div class="col-md-4">
 
-			<div class="pull-right assign-to-wrapper">
+			<div class=" assign-to-wrapper">
+				<button class="btn btn-warning ladda-button edit-btn" data-toggle="modal" id="editbtn<?php echo $company['id']; ?>" data-style="expand-right" data-size="1" data-target="#editModal<?php echo $company['id']; ?>">
+                    <span class="ladda-label"> Edit </span>
+                </button>
 				<?php if(isset($company['assigned_to_name']) and !empty($company['assigned_to_name'])): ?>
 					<?php if($company['assigned_to_id'] == $current_user['id']) : ?>			
 						<?php  $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id']);
@@ -98,9 +103,7 @@
 			    </button>
 				<?php echo form_close(); ?>
 				<?php endif; ?>
-				<button class="btn btn-warning ladda-button edit-btn" data-toggle="modal" id="editbtn<?php echo $company['id']; ?>" data-style="expand-right" data-size="1" data-target="#editModal<?php echo $company['id']; ?>">
-                    <span class="ladda-label"> Edit </span>
-                </button>
+				
                 
 			</div>
             </div><!--CLOSE COL-MD-4-->
