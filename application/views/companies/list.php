@@ -30,7 +30,7 @@
 				<?php if (isset($company['class'])): ?>
 				<span class="label label-info"><?php echo $companies_classes[$company['class']] ?></span>
 				<?php endif; ?>
-				<small><?php echo $company['address']; ?> </small>
+				
 			</div>
 			<div class="col-md-3">
 				<div class="assign-to-wrapper ">
