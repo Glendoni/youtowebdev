@@ -52,7 +52,7 @@ $config['base_url']	= '';
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'index.php';
+$config['index_page'] = '';
 
 /*
 |--------------------------------------------------------------------------
@@ -155,7 +155,7 @@ $config['subclass_prefix'] = 'MY_';
 | Note: This will NOT disable or override the CodeIgniter-specific
 |	autoloading (application/config/autoload.php)
 */
-$config['composer_autoload'] = FALSE;
+$config['composer_autoload'] = TRUE;
 
 /*
 |--------------------------------------------------------------------------
@@ -345,7 +345,7 @@ $config['encryption_key'] = 'xBD0hSSpu4huZGclrYdJGYoIXSRXflYN';
 $config['sess_driver']			= 'cookie';
 $config['sess_valid_drivers']	= array();
 $config['sess_cookie_name']		= 'ci_session';
-$config['sess_expiration']		= 7200;
+$config['sess_expiration']		= 43200; //12 hours
 $config['sess_expire_on_close']	= FALSE;
 $config['sess_encrypt_cookie']	= FALSE;
 $config['sess_use_database']	= TRUE;
@@ -450,7 +450,7 @@ $config['compress_output'] = FALSE;
 | code less readable.
 |
 */
-$config['minify_output'] = TRUE;
+$config['minify_output'] = FALSE;
 
 /*
 |--------------------------------------------------------------------------
