@@ -40,7 +40,7 @@
 			        <h4 class="modal-title"><?php echo $company['name']; ?></h4>
 			      </div>
 			      <div class="modal-body">
-			        <iframe width="570" height="400" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=<?php echo $company['address']; ?>&center=(<?php echo $company['address_lat']; ?>,<?php echo $company['address_lng']; ?>)&key=AIzaSyAwACBDzfasRIRmwYW0KJ4LyFD4fa4jIPg&zoom=14"></iframe>
+			        <iframe width="570" height="400" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=<?php echo $company['address']; ?>&center=<?php echo $company['address_lat']; ?>,<?php echo $company['address_lng']; ?>&key=AIzaSyAwACBDzfasRIRmwYW0KJ4LyFD4fa4jIPg&zoom=14"></iframe>
 			      </div>
 			    </div><!-- /.modal-content -->
 			  </div><!-- /.modal-dialog -->
