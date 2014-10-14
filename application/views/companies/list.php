@@ -22,10 +22,6 @@
 						<?php echo $company['name']; ?>
 					</a>
 				</h3>
-				<?php if (isset($company['class'])): ?>
-				<span class="label label-info"><?php echo $companies_classes[$company['class']] ?></span>
-				<?php endif; ?>
-				
 			</div>
 			<div class="col-md-4">
 				<div class="assign-to-wrapper ">

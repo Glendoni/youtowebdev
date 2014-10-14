@@ -124,8 +124,7 @@ class Companies_model extends CI_Model {
      // $query = $this->db->query("YOUR QUERY");
 
 	function search_companies_sql($post,$company_id = False)
-	{
-	
+	{	
 		// filter by name
 		if (isset($post['agency_name']) && strlen($post['agency_name'])) 
 		{
@@ -215,7 +214,7 @@ class Companies_model extends CI_Model {
 
 		// SECTORS
 
-		if( isset($post['sectors']) && (!in_array("0", $post['sectors'])) )
+		if( isset($post['sectors']) && !empty($post['sectors']) && $post['sectors'] !== '0' )
 		{	
 			if ($post['sectors'] < 0)
 			{
@@ -223,7 +222,7 @@ class Companies_model extends CI_Model {
 			}
 			else
 			{
-				$sectors_sql = 'select operates.company_id from operates where operates.active = True and operates.sector_id in ('.implode(', ', $post['sectors']).')';
+				$sectors_sql = 'select operates.company_id from operates where operates.active = True and operates.sector_id = '.$post['sectors'].' ';
 			}
 			
 		}

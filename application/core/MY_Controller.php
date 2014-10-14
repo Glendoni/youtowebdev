@@ -8,6 +8,8 @@ class MY_Controller extends CI_Controller {
 	public function __construct() {	
 
 		parent::__construct();
+		set_time_limit(6000); 
+		ini_set("memory_limit", -1);
 		
 		// Debugging funcionality, set it only when on development 
 		switch (ENVIRONMENT) {
