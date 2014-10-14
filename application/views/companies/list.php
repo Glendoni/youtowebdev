@@ -43,18 +43,44 @@
 				<a href="<?php echo site_url();?>companies/company?id=<?php echo $company['id'];?>" target="_blank">
 					<?php echo $company['name']; ?>
 				</a>
-				<?php if (isset($company['url'])): ?>
-				<a class="btn btn-link" href="<?php $parsed = parse_url($company['url']); if (empty($parsed['scheme'])) { echo 'http://' . ltrim($company['url'], '/'); }else{ echo $company['url']; } ?>" target="_blank">
-				<?php echo str_replace("http://"," ",str_replace("www.", "", $company['url']))?>
-				</a>
-				<?php endif; ?>
 			</h3>
-			<?php if (isset($company['class'])): ?>
-				<span class="label label-info"><?php echo $companies_classes[$company['class']] ?></span>
-			<?php endif; ?>
-			<small><?php echo $company['address']; ?> </small>
 		</div>
 		
+        <!--ADDRESS-->
+        <div class="col-md-12">
+			<strong>
+				Address
+			</strong>
+			<p style="margin-bottom:0;"><?php echo $company['address']; ?></p>
+		
+        </div>
+        <!--WEBSITE IF APPLICABLE-->
+        <?php if (isset($company['url'])): ?>
+        <div class="col-md-12" style="margin-top:5px;">
+        <strong>
+				Website
+			</strong>
+				<p style="margin-bottom:0;"><a class="btn btn-link" style="padding:0;" href="<?php $parsed = parse_url($company['url']); if (empty($parsed['scheme'])) { echo 'http://' . ltrim($company['url'], '/'); }else{ echo $company['url']; } ?>" target="_blank"><i class="fa fa-home"></i>
+				<?php echo str_replace("http://"," ",str_replace("www.", "", $company['url']))?>
+				</a></p>
+                </div>
+				<?php endif; ?>
+                
+                <!--SEGMENT IF APPLICABLE-->
+                <?php if (isset($company['class'])): ?>
+                
+                 <div class="col-md-12" style="margin-top:5px;">
+        <strong>
+				Segment
+			</strong>
+				<p style="margin-bottom:0;">				<span class="label label-info"><?php echo $companies_classes[$company['class']] ?></span>
+</p>
+                </div>
+                
+                
+			<?php endif; ?>
+                
+                
 		<div class="col-md-12">
 			<hr>
 		</div>

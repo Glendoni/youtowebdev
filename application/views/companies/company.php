@@ -47,9 +47,7 @@
 <div class="row page-results-list">
 	<h2 class="page-header">
 	<?php echo $company['name']; ?>
-	<?php if (isset($company['url'])): ?>
-	<a class="btn btn-link" href="<?php $parsed = parse_url($company['url']); if (empty($parsed['scheme'])) { $company['url'] = 'http://' . ltrim($company['url'], '/'); echo $company['url'];}else{ echo $company['url']; } ?>" target="_blank"><?php echo $company['url'] ?></a>
-	<?php endif; ?>
+	
 	</h2>
 	<?php $this->load->view('companies/edit_box.php',array('company'=>$company)); ?>
 
@@ -64,11 +62,64 @@
 	<?php endif; ?>
 	<div class="panel-body">
     	<div class="row">
-		<div class="col-md-12">
-        <?php if (isset($company['class'])): ?>
-				<span class="label label-info"><?php echo $companies_classes[$company['class']] ?></span>
+        <div class="col-md-8">
+        
+			<strong>
+				Address
+			</strong>
+			<?php if (isset($company['address_lat']) and isset($company['address_lng'])): ?>
+			<p style="margin-bottom:0;"><a class="btn btn-link" style="padding:0 4px;" data-toggle="modal" data-target="#map_<?php echo $company['id']; ?>"><i class="fa fa-map-marker"></i>
+<?php echo $company['address']; ?>			</a> </p>
+            
+			
+			
+			<div class="modal fade" id="map_<?php echo $company['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="Map">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+			        <h4 class="modal-title"><?php echo $company['name']; ?></h4>
+			      </div>
+			      <div class="modal-body">
+			        <iframe width="500" height="400" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=<?php echo $company['address_lat']; ?>,<?php echo $company['address_lng']; ?>&key=AIzaSyAwACBDzfasRIRmwYW0KJ4LyFD4fa4jIPg&zoom=16"></iframe>
+			      </div>
+			    </div><!-- /.modal-content -->
+			  </div><!-- /.modal-dialog -->
+			</div><!-- /.modal -->
+            					<?php else: ?>
+
+			<p style="margin-bottom:0;"><?php echo $company['address']; ?></p>
+			<?php endif; ?>
+		
+        
+        <?php if (isset($company['url'])): ?>
+        <div style="margin-top:5px;">
+        <strong>
+				Website
+			</strong>
+				<p style="margin-bottom:0;"><a class="btn btn-link" style="padding:0;" href="<?php $parsed = parse_url($company['url']); if (empty($parsed['scheme'])) { echo 'http://' . ltrim($company['url'], '/'); }else{ echo $company['url']; } ?>" target="_blank"><i class="fa fa-home"></i>
+				<?php echo str_replace("http://"," ",str_replace("www.", "", $company['url']))?>
+				</a></p>
+                </div>
+				<?php endif; ?>
+                <!--SEGMENT IF APPLICABLE-->
+                <?php if (isset($company['class'])): ?>
+                
+                 <div style="margin-top:5px;">
+        <strong>
+				Segment
+			</strong>
+				<p style="margin-bottom:0;">				<span class="label label-info"><?php echo $companies_classes[$company['class']] ?></span>
+</p>
+                </div>
+                
                 
 			<?php endif; ?>
+        
+        
+        </div>
+                <div class="col-md-4">
+
 			<div class="pull-right assign-to-wrapper">
 				<?php if(isset($company['assigned_to_name']) and !empty($company['assigned_to_name'])): ?>
 					<?php if($company['assigned_to_id'] == $current_user['id']) : ?>			
@@ -95,36 +146,11 @@
                 </button>
                 
 			</div>
-            </div>
+            </div><!--CLOSE COL-MD-4-->
             
 			
-            <div class="col-md-12">
-			<strong>
-				Address
-			</strong>
-			<p style="margin-bottom:0;"><?php echo $company['address']; ?></p>
-			<?php if (isset($company['address_lat']) and isset($company['address_lng'])): ?>
-			<p style="margin-bottom:0;"><button class="btn btn-primary btn-sm" style="padding:0 4px;" data-toggle="modal" data-target="#map_<?php echo $company['id']; ?>">
-			  View on Map
-			</button> </p>
-            </div>
-			
-			
-			<div class="modal fade" id="map_<?php echo $company['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="Map">
-			  <div class="modal-dialog">
-			    <div class="modal-content">
-			      <div class="modal-header">
-			        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-			        <h4 class="modal-title"><?php echo $company['name']; ?></h4>
-			      </div>
-			      <div class="modal-body">
-			        <iframe width="500" height="400" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=<?php echo $company['address_lat']; ?>,<?php echo $company['address_lng']; ?>&key=AIzaSyAwACBDzfasRIRmwYW0KJ4LyFD4fa4jIPg&zoom=16"></iframe>
-			      </div>
-			    </div><!-- /.modal-content -->
-			  </div><!-- /.modal-dialog -->
-			</div><!-- /.modal -->
-			<?php endif; ?>
-		
+           
+                
 		
 		<div class="col-md-12">
 			<hr>
@@ -162,8 +188,7 @@
 			<?php 
 			if(isset($company['sectors'])){
 				foreach ($company['sectors'] as $key => $name) {
-					echo '<p>'.$name.'</p>';
-				}
+echo '<p style="margin-bottom:0;"><span class="glyphicon glyphicon-ok" style="margin-right:5px;color: #5cb85c;border: #5cb85c; font-size:11px;"></span>'.$name.'</p>';				}
 			}
 			?>
 		</div>
@@ -178,6 +203,12 @@
 			<?php endif; ?>
 		</div>
 			
+            
+           <div class="col-md-12">
+			<hr>
+		</div>
+		
+            
             
 		<!-- MORTGAGES -->
 		
@@ -207,11 +238,11 @@
             </div>
 		<?php endif; ?>
 		</div>
-	</div>
-    </div><!--END ROW-->
-</div>
 
-<div class="row">
+<div class="col-md-12">
+			<hr style="padding-bottom:20px;">
+		</div>
+
 	<div class="col-md-6">
 	<div class="panel panel-success ">
 	  <div class="panel-heading">
