@@ -133,6 +133,7 @@ class Actions_model extends CI_Model {
 		if($state == 'cancelled')
 		{
 			$data = array(
+			'outcome' => $outcome,
 			'cancelled_at' => date('Y-m-d H:i:s'),
 			'updated_at' => date('Y-m-d H:i:s'),
 			'updated_by' => $user_id,

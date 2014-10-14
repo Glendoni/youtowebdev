@@ -185,7 +185,7 @@ border-right: 1px solid #e7e7e7;
 .mic-info { color: #666666;font-size: 11px;margin-top: 5px; }
 
 
-.triangle-isosceles {
+.triangle-isosceles , .comment-text .outcome{
   position:relative;
   padding:15px;
   margin:1em 0 3em;
@@ -198,7 +198,7 @@ border-right: 1px solid #e7e7e7;
 /* Variant : for top positioned triangle
 ------------------------------------------ */
 
-.triangle-isosceles.top {
+.triangle-isosceles {
 	border:#d1d1d1 1px solid;
 }
 /* creates triangle */
@@ -214,7 +214,7 @@ border-right: 1px solid #e7e7e7;
   display:block;
   width:0;
 }
-.triangle-isosceles.top:after {
+.triangle-isosceles:after {
   top:-15px; /* value = - border-top-width - border-bottom-width */
   left:50px; /* controls horizontal position */
   bottom:auto;
@@ -222,10 +222,25 @@ border-right: 1px solid #e7e7e7;
   border-width:0 15px 15px; /* vary these values to change the angle of the vertex */
   border-color:#d1d1d1 transparent;
 }
+
+.comment-text {
+	margin-top:30px;
+}
+
+.comment-text .outcome {
+	border:#d1d1d1 1px solid;
+	padding:15px;
+		
+}
+
 .assigned-image-holder{
 	max-width:30px; float:left;
 }
 
 .saved-search-text .assigned-image-holder {
 	margin-top: 12px;margin-right: 5px;
+}
+
+.panel-default.company{
+	border:0px;
 }

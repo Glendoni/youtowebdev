@@ -50,13 +50,13 @@ class Actions extends MY_Controller {
 				{
 					$this->set_message_warning('Error while completing action');
 				}
-				redirect('/dashboard','refresh');
+				redirect('companies/company?id='.$this->input->post('company_id'),'location');
 			}
 			else if($this->input->post('action_do') == 'cancelled')
 			{	
 				$outcome = $this->input->post('outcome');
 				$result = $this->Actions_model->set_action_state($this->input->post('action_id'),$this->input->post('user_id'),'cancelled',$outcome);
-				print_r($result);
+				
 				if($result)
 				{
 					$this->set_message_success('Action set to cancelled.');
@@ -65,7 +65,7 @@ class Actions extends MY_Controller {
 				{
 					$this->set_message_warning('Error while canceling action');
 				}
-				redirect('/dashboard','refresh');
+				redirect('companies/company?id='.$this->input->post('company_id'),'location');
 			}
 		}
 	}
