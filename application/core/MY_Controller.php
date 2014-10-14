@@ -104,27 +104,18 @@ class MY_Controller extends CI_Controller {
 		
 		if($this->session->userdata('companies_classes'))
 		{
-			$this->data['companies_classes'] = $this->session->userdata('companies_classes');
-		}else
-		{
-			$companies_classes = $this->Companies_model->get_companies_classes();
-			$this->session->set_userdata('companies_classes',$companies_classes);
-		}
-		
-		if($this->session->userdata('companies_classes'))
-		{
-			$this->data['companies_classes'] = $this->session->userdata('companies_classes');
 			$class_options = $this->session->userdata('companies_classes');
 		}else
 		{
 			$class_options = $this->Companies_model->get_companies_classes();
-			$this->session->set_userdata('companies_classes',$companies_classes);
-			
+			$this->session->set_userdata('companies_classes',$class_options);
 		}
+		
+		
 		
 
 		// Pass variables to tempalte views 
-
+		$this->data['companies_classes'] = array(0=>' ') + $class_options;
 		// edit box options 
 		$this->data['sectors_list'] = $sectors_list;
 		// Add options 

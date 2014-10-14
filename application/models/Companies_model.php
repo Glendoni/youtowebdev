@@ -221,8 +221,16 @@ class Companies_model extends CI_Model {
 				$sectors_sql = 'select operates.company_id from operates where operates.active = True and operates.sector_id = NULL ';
 			}
 			else
-			{
-				$sectors_sql = 'select operates.company_id from operates where operates.active = True and operates.sector_id = '.$post['sectors'].' ';
+			{	$sectors = $post['sectors'];
+				if(is_array($sectors))
+				{
+					$sectors_sql = 'select operates.company_id from operates where operates.active = True and operates.sector_id in ('.implode(', ', $post['sectors']).')';
+				}
+				else
+				{
+					$sectors_sql = 'select operates.company_id from operates where operates.active = True and operates.sector_id = '.$post['sectors'].' ';
+				}
+				
 			}
 			
 		}
