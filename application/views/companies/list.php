@@ -32,7 +32,6 @@
 				<?php endif; ?>
 				<small><?php echo $company['address']; ?> </small>
 			</div>
-<<<<<<< HEAD
 			<div class="col-md-3">
 				<div class="assign-to-wrapper ">
 					<button class="btn btn-warning ladda-button edit-btn" data-toggle="modal" id="editbtn<?php echo $company['id']; ?>" data-style="expand-right" data-size="1" data-target="#editModal<?php echo $company['id']; ?>">
@@ -59,14 +58,6 @@
 					 
 				</div>
 			</div>
-			
-=======
-			<h3 class="name">
-				<a href="<?php echo site_url();?>companies/company?id=<?php echo $company['id'];?>" target="_blank">
-					<?php echo $company['name']; ?>
-				</a>
-			</h3>
->>>>>>> af54823e68ec8b92f7ff42c73152bce340afef31
 		</div>
 		
         <!--ADDRESS-->
@@ -91,16 +82,15 @@
                 
                 <!--SEGMENT IF APPLICABLE-->
                 <?php if (isset($company['class'])): ?>
-                
                  <div class="col-md-12" style="margin-top:5px;">
-        <strong>
-				Segment
-			</strong>
-				<p style="margin-bottom:0;">				<span class="label label-info"><?php echo $companies_classes[$company['class']] ?></span>
-</p>
+	        	<strong>
+					Segment
+				</strong>
+				<p style="margin-bottom:0;">				
+				<span class="label label-info"><?php echo $companies_classes[$company['class']] ?>
+				</span>
+				</p>
                 </div>
-                
-                
 			<?php endif; ?>
                 
                 
