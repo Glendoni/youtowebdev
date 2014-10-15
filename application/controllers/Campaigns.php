@@ -43,7 +43,8 @@ class Campaigns extends MY_Controller {
 			$this->session->set_userdata('campaign_shared',(bool)$new_campaign[0]->shared);
 			$this->set_message_success('Campaign saved!');
 		}
-		redirect('/companies','refresh');
+
+		redirect('/companies');
 	}
 
 	public function get_all_shared_campaigns(){
@@ -82,32 +83,34 @@ class Campaigns extends MY_Controller {
 	}
 
 	public function edit()
-	{	
+	{	var_dump($this->input->post());
 		if($this->input->post('campaign_id') == FALSE) return False;
-
-		if($this->input->post('make_private')!== FALSE)
+		
+		if(null !== $this->input->post('make_private'))
 		{
 			$result = $this->Campaigns_model->update_campaign_make_private($this->input->post('campaign_id'),$this->get_current_user_id());
 			if($result == True)
 			{
 				$this->session->set_userdata('campaign_shared','f');
 			}
-		}elseif ( ($this->input->post('make_public') !== FALSE ) ) {
-			
+		}
+		elseif(null !== $this->input->post('make_public')) 
+		{
 			$result = $this->Campaigns_model->update_campaign_make_public($this->input->post('campaign_id'),$this->get_current_user_id());
-
 			if($result == True)
 			{	
 				$this->session->set_userdata('campaign_shared','t');
 			}
-		}elseif ($this->input->post('delete')!== FALSE) {
+		}
+		elseif (null !== $this->input->post('delete')) 
+		{
 			$result = $this->Campaigns_model->delete_campaign($this->input->post('campaign_id'),$this->get_current_user_id());
 			if($result == True)
 			{
 				$this->clear_campaign_from_session();
 			}
 		}
-
+		
 		redirect('/companies');
 	}
 	
