@@ -183,3 +183,10 @@ border-right: 1px solid #e7e7e7;
 .clear-fields:hover{
 	background-color:#FFBFBF !important;
 }
+
+/* Desktops and laptops ----------- */
+@media only screen 
+and (min-width : 768px) {
+.modal-dialog {
+	width: 700px !important;
+}
