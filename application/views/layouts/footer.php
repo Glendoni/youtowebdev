@@ -152,13 +152,13 @@
         // edit_btn.button('loading');
         var loading_display_id = btn.attr('loading-display');
         var loading_display = $('#'+loading_display_id);
-        loading_display.show();
+        loading_display.attr('style','display:block;');
 
 	 	e.preventDefault();
         btn.button('loading');
 	 	$.post(url, form.serialize(),
 	 	  function(response){
-            console.log(response);
+            // console.log(response);
 	 	    btn.removeClass('btn-primary').addClass('btn-success').text('Saving...'); 
             location.reload(true);
 	 	  })

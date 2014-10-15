@@ -18,12 +18,17 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                <div class=" form-group ">
+                    <div class=" form-group ">
                         <label for="url" class="control-label">Website</label>                            
                         <input type="text" name="url" value="<?php echo isset($company['url'])?$company['url']:''; ?>" id="url" maxlength="50" class="form-control">
                     </div>
+                </div>
+                <div class="col-md-6">
+                    <div class=" form-group ">
+                        <label for="phone" class="control-label">Phone</label>                            
+                        <input type="text" name="phone" value="<?php echo isset($company['phone'])?$company['phone']:''; ?>" id="url" maxlength="50" class="form-control">
                     </div>
-       
+                </div>
 				<?php if (isset($company['turnover']) == False ) :?>
                 <div class="col-md-6">
                     <div class=" form-group ">
@@ -31,7 +36,6 @@
                         <input type="text" name="turnover" value="" id="turnover" maxlength="50" class="form-control">
                     </div>
                 </div>
-        
             	<?php endif; ?>
             	<?php if (isset($company['emp_count']) == False ):?>
                 <div class="col-md-6">
@@ -75,8 +79,8 @@
 					</div>
 				</div>
 				</div>
-				<div class="modal-loading-display text-center " id="loading-display-<?php echo $company['id']; ?>">
-					<button class="btn btn-default btn-lg" ><i class="fa fa-refresh fa-spin"></i></button>
+				<div class="modal-loading-display text-center " id="loading-display-<?php echo $company['id']; ?>" style="display:none;">
+					<span class="btn btn-default btn-lg" ><i class="fa fa-refresh fa-spin"></i></span>
 				</div>
 			</div>
             <div class="modal-footer">

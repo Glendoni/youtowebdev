@@ -222,6 +222,7 @@ class Companies extends MY_Controller {
 			if($company->company->f1->f22)$mapped_companies_array['class'] = $company->company->f1->f22;
 			if($company->company->f1->f23)$mapped_companies_array['address_lat'] = $company->company->f1->f23;
 			if($company->company->f1->f24)$mapped_companies_array['address_lng'] = $company->company->f1->f24;
+			if($company->company->f1->f26)$mapped_companies_array['phone'] = $company->company->f1->f26;
 
 
 			if($company->company->f1->f8)$mapped_companies_array['assigned_to_id'] = $company->company->f1->f8;

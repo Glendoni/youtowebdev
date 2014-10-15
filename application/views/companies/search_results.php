@@ -1,4 +1,4 @@
-<div class="row page-results-list">
+`<div class="row page-results-list">
 	<nav class="navbar navbar-default companies-list-header" role="navigation">
 	  <div class="container-fluid">
 	    <!-- Collect the nav links, forms, and other content for toggling -->

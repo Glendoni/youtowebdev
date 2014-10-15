@@ -307,7 +307,8 @@ class Companies_model extends CI_Model {
 			   A.lng, -- f24
 			   json_agg( 
 			   row_to_json ((
-			   TT2."sector_id", TT2."sector"))))) "JSON output" -- f25
+			   TT2."sector_id", TT2."sector"))),-- f25
+			   C.phone)) "JSON output" 
 			   
 
 
@@ -742,6 +743,7 @@ class Companies_model extends CI_Model {
 
 		
 		$company = array(
+				'phone' => isset($post['phone'])?$post['phone']:NULL,
 				'linkedin_id' => (isset($post['linkedin_id']) and !empty($post['linkedin_id']))?$post['linkedin_id']:NULL,
 				'url' => isset($post['url'])?$post['url']:NULL,
 				'contract'=>isset($post['contract'])?$post['contract']:NULL,
