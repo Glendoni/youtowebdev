@@ -345,20 +345,19 @@ echo '<p style="margin-bottom:0;"><span class="glyphicon glyphicon-ok" style="ma
 										<?php echo $action->comments ?>
                                         
                                         <?php if (!empty($action->outcome)):?>
-									<table style="width:100%"><tr>
-									<td style="width:45%"><hr/></td>
-									<td style="width:10%;vertical-align:middle; text-align: center; font-size:9px; color: #eee;">Call Comments</td>
-									<td style="width:45%"><hr/></td>
-									</tr></table>
+											<table style="width:100%">
+											<tr>
+											<td style="width:45%"><hr/></td>
+											<td style="width:10%;vertical-align:middle; text-align: center; font-size:9px; color: #eee;">Call Comments</td>
+											<td style="width:45%"><hr/></td>
+											</tr>
+											</table>
 											<?php echo $action->outcome ?>
-								<?php else: ?>
-									<!-- <div class="comment-text col-md-1" style="margin-top: 55px;text-align: center;"><i class="fa fa-comments fa-2x"></i></div> -->
-									<div class="comment-text pull-right col-md-5" id="action_outcome_box_<?php echo $action->id ?>" style="display:none;">
-									
+										<?php endif; ?>
+									</div>
+									<div class="comment-text pull-right col-md-12" id="action_outcome_box_<?php echo $action->id ?>" style="display:none;">
 									<textarea class="form-control" name="outcome" placeholder="Outcome" rows="3" style="margin-bottom:5px;"></textarea>
 									<button class="btn btn-primary pull-right"><i class="fa fa-check fa-lg"></i> Send</button>
-									</div>
-								<?php endif; ?>
 									</div>
 								</div>
 								<?php endif; ?>
