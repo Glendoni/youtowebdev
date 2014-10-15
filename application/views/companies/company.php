@@ -339,16 +339,17 @@ echo '<p style="margin-bottom:0;"><span class="glyphicon glyphicon-ok" style="ma
                                     </div>
                                 </div>
                                 
-								<?php if (!empty($action->comments)):?>
-								<div class="row comment-text speech col-md-12" >
+								
+								<div class="comment-text speech col-md-12" >
 	                                <div class="triangle-isosceles top">
-										<?php echo $action->comments ?>
+										
+										<?php echo isset($action->comments)? $action->comments:''; ?>
                                         
                                         <?php if (!empty($action->outcome)):?>
 											<table style="width:100%">
 											<tr>
 											<td style="width:45%"><hr/></td>
-											<td style="width:10%;vertical-align:middle; text-align: center; font-size:9px; color: #eee;">Call Comments</td>
+											<td style="width:10%;vertical-align:middle; text-align: center; font-size:11px; color: #222;"><span class="glyphicon glyphicon-chevron-down"></span> Outcome <span class="glyphicon glyphicon-chevron-down"></span></td>
 											<td style="width:45%"><hr/></td>
 											</tr>
 											</table>
@@ -357,14 +358,10 @@ echo '<p style="margin-bottom:0;"><span class="glyphicon glyphicon-ok" style="ma
 									</div>
 									
 								</div>
-								<?php endif; ?>
+								
 								<div class="col-md-12" id="action_outcome_box_<?php echo $action->id ?>" style="display:none;">
-								<table style="width:100%"><tr>
-								<td style="width:40%"><hr/></td>
-								<td style="width:20%;vertical-align:middle; text-align: center; font-size:9px;">Outcome Comments</td>
-								<td style="width:40%"><hr/></td>
-								</tr></table>
-								<textarea class="form-control" name="outcome" placeholder="Add action outcome" rows="3" style="margin-bottom:5px; border:none;"></textarea>
+								<hr>
+								<textarea class="form-control" name="outcome" placeholder="Add action outcome" rows="3" style="margin-bottom:5px;"></textarea>
 								<button class="btn btn-primary btn-block"><i class="fa fa-check fa-lg"></i> Send</button>
 
 								</div>
