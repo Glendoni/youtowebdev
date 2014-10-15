@@ -44,6 +44,8 @@
 }
 
 </style>
+
+<?php  $company = $companies[0]; ?>
 <div class="row page-results-list">
 	<h2 class="page-header">
 	<?php echo $company['name']; ?>
@@ -54,7 +56,9 @@
 <div class="panel <?php if(isset($company['assigned_to_name'])): ?> panel-primary <?php else: ?> panel-default <?php endif; ?> company">
 	<?php if(isset($company['assigned_to_name'])): ?>
 	<div class="panel-heading text-center" >
-        <span class="assigned-image-holder" style="max-width:30px; float:left;"><img src="<?php echo asset_url();?>images/profiles/<?php echo isset($system_users_images[$company['assigned_to_id']])? $system_users_images[$company['assigned_to_id']]:'none' ;?>.jpg" class="img-circle img-responsive" alt="" /></span>
+        <span class="assigned-image-holder" style="max-width:30px; float:left;">
+        	<img src="<?php echo asset_url();?>images/profiles/<?php echo isset($system_users_images[$company['assigned_to_id']])? $system_users_images[$company['assigned_to_id']]:'none' ;?>.jpg" class="img-circle img-responsive" alt="" />
+        </span>
         <span style="line-height:28px;">
         Assigned to <?php echo $company['assigned_to_name']; ?> 
         </span>    
@@ -68,11 +72,13 @@
 				Address
 			</strong>
 			<?php if (isset($company['address_lat']) and isset($company['address_lng'])): ?>
-			<p style="margin-bottom:0;"><a class="btn btn-link" style="padding:0 4px;" data-toggle="modal" data-target="#map_<?php echo $company['id']; ?>"><i class="fa fa-map-marker"></i>
-<?php echo $company['address']; ?>			</a> </p>
+			<p style="margin-bottom:0;">
+			<a class="btn btn-link" style="padding:0 4px;" data-toggle="modal" data-target="#map_<?php echo $company['id']; ?>">
+			<i class="fa fa-map-marker"></i>
+			<?php echo $company['address']; ?>
+			</a> 
+			</p>
             
-			
-			
 			<div class="modal fade" id="map_<?php echo $company['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="Map">
 			  <div class="modal-dialog">
 			    <div class="modal-content">
@@ -81,7 +87,7 @@
 			        <h4 class="modal-title"><?php echo $company['name']; ?></h4>
 			      </div>
 			      <div class="modal-body">
-			        <iframe width="500" height="400" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=<?php echo $company['address_lat']; ?>,<?php echo $company['address_lng']; ?>&key=AIzaSyAwACBDzfasRIRmwYW0KJ4LyFD4fa4jIPg&zoom=16"></iframe>
+			        <iframe width="570" height="400" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=<?php echo urlencode($company['address']); ?>&center=<?php echo $company['address_lat']; ?>,<?php echo $company['address_lng']; ?>&key=AIzaSyAwACBDzfasRIRmwYW0KJ4LyFD4fa4jIPg&zoom=14"></iframe>
 			      </div>
 			    </div><!-- /.modal-content -->
 			  </div><!-- /.modal-dialog -->
@@ -109,7 +115,8 @@
         <strong>
 				Segment
 			</strong>
-				<p style="margin-bottom:0;">				<span class="label label-info"><?php echo $companies_classes[$company['class']] ?></span>
+				<p style="margin-bottom:0;">				
+				<span class="label label-info"><?php echo $companies_classes[$company['class']] ?></span>
 </p>
                 </div>
                 
@@ -120,7 +127,10 @@
         </div>
                 <div class="col-md-4">
 
-			<div class="pull-right assign-to-wrapper">
+			<div class=" assign-to-wrapper">
+				<button class="btn btn-warning ladda-button edit-btn" data-toggle="modal" id="editbtn<?php echo $company['id']; ?>" data-style="expand-right" data-size="1" data-target="#editModal<?php echo $company['id']; ?>">
+                    <span class="ladda-label"> Edit </span>
+                </button>
 				<?php if(isset($company['assigned_to_name']) and !empty($company['assigned_to_name'])): ?>
 					<?php if($company['assigned_to_id'] == $current_user['id']) : ?>			
 						<?php  $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id']);
@@ -141,9 +151,7 @@
 			    </button>
 				<?php echo form_close(); ?>
 				<?php endif; ?>
-				<button class="btn btn-warning ladda-button edit-btn" data-toggle="modal" id="editbtn<?php echo $company['id']; ?>" data-style="expand-right" data-size="1" data-target="#editModal<?php echo $company['id']; ?>">
-                    <span class="ladda-label"> Edit </span>
-                </button>
+				
                 
 			</div>
             </div><!--CLOSE COL-MD-4-->
@@ -188,7 +196,7 @@
 			<?php 
 			if(isset($company['sectors'])){
 				foreach ($company['sectors'] as $key => $name) {
-echo '<p style="margin-bottom:0;">'.$name.'</p>';				}
+echo '<p style="margin-bottom:0;"><span class="glyphicon glyphicon-ok" style="margin-right:5px;color: #5cb85c;border: #5cb85c; font-size:11px;"></span>'.$name.'</p>';				}
 			}
 			?>
 		</div>
@@ -347,11 +355,31 @@ echo '<p style="margin-bottom:0;">'.$name.'</p>';				}
                                   		<span class="label label-default" style="font-size:11px; margin-left:10px;">Cancelled on <?php echo $cancelled_at_formatted ?></span>
                                   	<?php elseif(strtotime($action->planned_at) > $now and !isset($action->actioned_at)) : ?>
                                   		<span class="label label-warning" style="font-size:11px; margin-left:10px;">Due on <?php echo $planned_date_formatted ?> </span>
+                                  		<?php $hidden = array('action_id' => $action->id , 'user_id' => $current_user['id'] , 'action_do' => 'cancelled','outcome' => '' ,'company_id' => $company['id']);
+					                    echo form_open(site_url().'actions/edit', 'name="cancel_action"  class="cancel_action pull-right" style="margin-left:5px;" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action->id.'" role="form"',$hidden); ?>
+					                    <button class="btn btn-danger" ><i class="fa fa-trash-o fa-lg"></i> </button>
+					                    <?php echo form_close(); ?>
+
+                                  		<?php $hidden = array('action_id' => $action->id , 'user_id' => $current_user['id'], 'action_do' => 'completed', 'outcome' => '' ,'company_id' => $company['id']);
+					               		echo form_open(site_url().'actions/edit', 'name="completed_action"  class="completed_action pull-right" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action->id.'" style="display:inline-block;" role="form"',$hidden); ?>
+					                    <button class="btn btn-success"><i class="fa fa-check fa-lg"></i> </button> 
+					                    <?php echo form_close(); ?>
 									<?php elseif(strtotime($action->planned_at) < $now and !isset($action->actioned_at)):?>
                                   		<span class="label label-danger" style="font-size:11px; margin-left:10px;"><b>Overdue</b> - Due on <?php echo $planned_date_formatted ?> </span>
+                                  		<?php $hidden = array('action_id' => $action->id , 'user_id' => $current_user['id'] , 'action_do' => 'cancelled','outcome' => '' ,'company_id' => $company['id'] );
+					                    echo form_open(site_url().'actions/edit', 'name="cancel_action"  class="cancel_action pull-right" style="margin-left:5px;" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action->id.'" role="form"',$hidden); ?>
+					                    <button class="btn btn-danger" ><i class="fa fa-trash-o fa-lg"></i> </button>
+					                    <?php echo form_close(); ?>
+
+                                  		<?php $hidden = array('action_id' => $action->id , 'user_id' => $current_user['id'], 'action_do' => 'completed', 'outcome' => '' ,'company_id' => $company['id']);
+					               		echo form_open(site_url().'actions/edit', 'name="completed_action"  class="completed_action pull-right" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action->id.'" style="display:inline-block;" role="form"',$hidden); ?>
+					                    <button class="btn btn-success"><i class="fa fa-check fa-lg"></i> </button> 
+					                    <?php echo form_close(); ?>
+					                    
                                    	<?php elseif($action->actioned_at): ?>
-                                   		<span class="label label-success" style="font-size:11px; margin-left:10px;">Completed on <?php echo $actioned_date_formatted ?></span>
+                                   		<span class="label label-success pull-right" style="font-size:11px; margin-left:10px;">Completed on <?php echo $actioned_date_formatted ?></span>
 									<?php endif; ?>
+
 						  			</h4>
                                     <div class="mic-info">
                                         Created By: <?php echo $system_users[$action->user_id]?> on <?php echo $created_date_formatted?>
@@ -359,14 +387,32 @@ echo '<p style="margin-bottom:0;">'.$name.'</p>';				}
                                 </div>
                                 
 								<?php if (!empty($action->comments)):?>
-								<div class="comment-text speech" style="margin-top: 30px;">
-                                <div class="triangle-isosceles top">
-									<?php echo $action->comments ?>
-								</div>
+								
+								<div class="row comment-text speech col-md-12" >
+	                                <div class="triangle-isosceles top">
+										<?php echo $action->comments ?>
+                                        
+                                        <?php if (!empty($action->outcome)):?>
+									<table style="width:100%"><tr>
+<td style="width:45%"><hr/></td>
+<td style="width:10%;vertical-align:middle; text-align: center; font-size:9px; color: #eee;">Call Comments</td>
+<td style="width:45%"><hr/></td>
+</tr></table>
+											<?php echo $action->outcome ?>
+								<?php else: ?>
+									<!-- <div class="comment-text col-md-1" style="margin-top: 55px;text-align: center;"><i class="fa fa-comments fa-2x"></i></div> -->
+									<div class="comment-text pull-right col-md-5" id="action_outcome_box_<?php echo $action->id ?>" style="display:none;">
+									
+									<textarea class="form-control" name="outcome" placeholder="Outcome" rows="3" style="margin-bottom:5px;"></textarea>
+									<button class="btn btn-primary pull-right"><i class="fa fa-check fa-lg"></i> Send</button>
+									</div>
+								<?php endif; ?>
+									</div>
 								</div>
 								<?php endif; ?>
+								
 								</div><!--END ACTIONS-->   
-                            </div> 
+                            </div>
                     </li>
                     <?php endforeach ?>
                     </ul>
@@ -381,4 +427,3 @@ echo '<p style="margin-bottom:0;">'.$name.'</p>';				}
 	</div>
 </div>
 </div>
-
