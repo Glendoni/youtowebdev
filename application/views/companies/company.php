@@ -355,18 +355,19 @@ echo '<p style="margin-bottom:0;"><span class="glyphicon glyphicon-ok" style="ma
 											<?php echo $action->outcome ?>
 										<?php endif; ?>
 									</div>
-									<div class="" id="action_outcome_box_<?php echo $action->id ?>" style="display:none;">
-									<table style="width:100%"><tr>
-									<td style="width:40%"><hr/></td>
-									<td style="width:20%;vertical-align:middle; text-align: center; font-size:9px;">Outcome Comments</td>
-									<td style="width:40%"><hr/></td>
-									</tr></table>
-									<textarea class="form-control" name="outcome" placeholder="Add action outcome" rows="3" style="margin-bottom:5px; border:none;"></textarea>
-									<button class="btn btn-primary btn-block"><i class="fa fa-check fa-lg"></i> Send</button>
-
-									</div>
+									
 								</div>
 								<?php endif; ?>
+								<div class="col-md-12" id="action_outcome_box_<?php echo $action->id ?>" style="display:none;">
+								<table style="width:100%"><tr>
+								<td style="width:40%"><hr/></td>
+								<td style="width:20%;vertical-align:middle; text-align: center; font-size:9px;">Outcome Comments</td>
+								<td style="width:40%"><hr/></td>
+								</tr></table>
+								<textarea class="form-control" name="outcome" placeholder="Add action outcome" rows="3" style="margin-bottom:5px; border:none;"></textarea>
+								<button class="btn btn-primary btn-block"><i class="fa fa-check fa-lg"></i> Send</button>
+
+								</div>
 								</div><!--END ACTIONS-->   
                             </div>
                     </li>
