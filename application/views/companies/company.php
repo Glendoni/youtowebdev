@@ -330,7 +330,7 @@ echo '<p style="margin-bottom:0;"><span class="glyphicon glyphicon-ok" style="ma
 					                    <?php echo form_close(); ?>
 					                    
                                    	<?php elseif($action->actioned_at): ?>
-                                   		<span class="label label-success" style="font-size:11px; margin-left:10px;">Completed on <?php echo $actioned_date_formatted ?></span>
+                                   		<span class="label label-success pull-right" style="font-size:11px; margin-left:10px;">Completed on <?php echo $actioned_date_formatted ?></span>
 									<?php endif; ?>
 
 						  			</h4>
@@ -340,20 +340,17 @@ echo '<p style="margin-bottom:0;"><span class="glyphicon glyphicon-ok" style="ma
                                 </div>
                                 
 								<?php if (!empty($action->comments)):?>
-								
-								<div class="comment-text speech col-md-5" >
+								<div class="row comment-text speech col-md-12" >
 	                                <div class="triangle-isosceles top">
 										<?php echo $action->comments ?>
-									</div>
-								</div>
-								<?php endif; ?>
-								<?php if (!empty($action->outcome)):?>
-									<div class="comment-text col-md-1" style="margin-top: 55px;text-align: center;"><i class="fa fa-comments fa-2x"></i></div>
-									<div class="comment-text speech col-md-5" >
-		                                <div class="outcome">
+                                        
+                                        <?php if (!empty($action->outcome)):?>
+									<table style="width:100%"><tr>
+									<td style="width:45%"><hr/></td>
+									<td style="width:10%;vertical-align:middle; text-align: center; font-size:9px; color: #eee;">Call Comments</td>
+									<td style="width:45%"><hr/></td>
+									</tr></table>
 											<?php echo $action->outcome ?>
-										</div>
-									</div>
 								<?php else: ?>
 									<!-- <div class="comment-text col-md-1" style="margin-top: 55px;text-align: center;"><i class="fa fa-comments fa-2x"></i></div> -->
 									<div class="comment-text pull-right col-md-5" id="action_outcome_box_<?php echo $action->id ?>" style="display:none;">
@@ -361,6 +358,9 @@ echo '<p style="margin-bottom:0;"><span class="glyphicon glyphicon-ok" style="ma
 									<textarea class="form-control" name="outcome" placeholder="Outcome" rows="3" style="margin-bottom:5px;"></textarea>
 									<button class="btn btn-primary pull-right"><i class="fa fa-check fa-lg"></i> Send</button>
 									</div>
+								<?php endif; ?>
+									</div>
+								</div>
 								<?php endif; ?>
 								</div><!--END ACTIONS-->   
                             </div>
@@ -378,4 +378,3 @@ echo '<p style="margin-bottom:0;"><span class="glyphicon glyphicon-ok" style="ma
 	</div>
 </div>
 </div>
-
