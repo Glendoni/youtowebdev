@@ -343,7 +343,7 @@ echo '<p style="margin-bottom:0;"><span class="glyphicon glyphicon-ok" style="ma
 								<div class="comment-text speech col-md-12" >
 	                                <div class="triangle-isosceles top">
 										
-										<?php echo isset($action->comments)? $action->comments:''; ?>
+										<?php echo isset($action->comments)? $action->comments:'No comments'; ?>
                                         
                                         <?php if (!empty($action->outcome)):?>
 											<table style="width:100%">
