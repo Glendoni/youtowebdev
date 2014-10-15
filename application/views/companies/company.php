@@ -20,18 +20,15 @@
 	<div class="panel-body">
     	<div class="row">
         <div class="col-md-8">
-        
 			<strong>
 				Address
 			</strong>
-			<?php if (isset($company['address_lat']) and isset($company['address_lng'])): ?>
 			<p style="margin-bottom:0;">
-			<a class="btn btn-link" style="padding:0 4px;" data-toggle="modal" data-target="#map_<?php echo $company['id']; ?>">
 			<i class="fa fa-map-marker"></i>
-			<?php echo $company['address']; ?>
-			</a> 
+			<a class="btn btn-link" style="padding-left:0px;" data-toggle="modal" data-target="#map_<?php echo $company['id']; ?>">
+				<?php echo $company['address']; ?>
+			</a>
 			</p>
-            
 			<div class="modal fade" id="map_<?php echo $company['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="Map">
 			  <div class="modal-dialog">
 			    <div class="modal-content">
@@ -40,16 +37,11 @@
 			        <h4 class="modal-title"><?php echo $company['name']; ?></h4>
 			      </div>
 			      <div class="modal-body">
-			        <iframe width="570" height="400" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=<?php echo urlencode($company['address']); ?>&center=<?php echo $company['address_lat']; ?>,<?php echo $company['address_lng']; ?>&key=AIzaSyAwACBDzfasRIRmwYW0KJ4LyFD4fa4jIPg&zoom=14"></iframe>
+			        <iframe width="670" height="400" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=<?php echo urlencode($company['address']); ?>&<?php if (isset($company['address_lat']) and  isset($company['address_lng'])): ?>center=<?php echo $company['address_lat']; ?>,<?php echo $company['address_lng']; ?>&<?php endif; ?>key=AIzaSyAwACBDzfasRIRmwYW0KJ4LyFD4fa4jIPg&zoom=10"></iframe>
 			      </div>
 			    </div><!-- /.modal-content -->
 			  </div><!-- /.modal-dialog -->
 			</div><!-- /.modal -->
-            					<?php else: ?>
-
-			<p style="margin-bottom:0;"><?php echo $company['address']; ?></p>
-			<?php endif; ?>
-		
         
         <?php if (isset($company['url'])): ?>
         <div style="margin-top:5px;">

@@ -15,73 +15,84 @@
 	<?php endif; ?>
 	<div class="panel-body">
     <div class="row">
-			<div class="col-md-8">
-				<h3 class="name">
-					<a href="<?php echo site_url();?>companies/company?id=<?php echo $company['id'];?>" target="_blank">
-						<?php echo $company['name']; ?>
-					</a>
-				</h3>
-			</div>
-			<div class="col-md-4">
-				<div class="assign-to-wrapper ">
-					<button class="btn btn-warning ladda-button edit-btn" data-toggle="modal" id="editbtn<?php echo $company['id']; ?>" data-style="expand-right" data-size="1" data-target="#editModal<?php echo $company['id']; ?>">
-	                    <span class="ladda-label"> Edit </span>
-	                </button> 
-					<?php if(isset($company['assigned_to_name']) and !empty($company['assigned_to_name'])): ?>
-						<?php if($company['assigned_to_id'] == $current_user['id']) : ?>			
-							<?php  $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'], 'page_number' => $current_page_number );
-							echo form_open('companies/unassign',array('name' => 'assignto', 'class'=>'assign-to-form'),$hidden); ?>
-							<button type="submit" class="btn  btn-primary  ladda-button" data-style="expand-right" data-size="1">
-							    <span class="ladda-label"> Unassign from me </span>
-							</button>
-							<?php echo form_close(); ?>
-						<?php endif; ?>
-					<?php else: ?>
-					<?php 
-					$hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'], 'page_number' => $current_page_number );
-					echo form_open(site_url().'companies/assignto',array('name' => 'assignto', 'class'=>'assign-to-form'),$hidden); ?>
-					<button type="submit" assignto="<?php echo $current_user['name']; ?>" class="btn  btn-primary  ladda-button" data-style="expand-right" data-size="1">
-				        <span class="ladda-label"> Assign to me </span>
-				    </button>
-					<?php echo form_close(); ?>
-					<?php endif; ?>
-					 
-				</div>
+		<div class="col-md-8">
+			<h3 class="name" style="margin-top: 0px;margin-bottom: 10px;">
+				<a href="<?php echo site_url();?>companies/company?id=<?php echo $company['id'];?>" target="_blank">
+					<?php echo $company['name']; ?>
+				</a>
+			</h3>
+			<?php if (isset($company['class'])): ?>				
+			<h4>
+				<span class="label label-info"><?php echo $companies_classes[$company['class']] ?></span>
+			</h4>
+			<?php endif; ?>
 		</div>
-		
+		<div class="col-md-4">
+			<div class="assign-to-wrapper ">
+				<button class="btn btn-warning ladda-button edit-btn" data-toggle="modal" id="editbtn<?php echo $company['id']; ?>" data-style="expand-right" data-size="1" data-target="#editModal<?php echo $company['id']; ?>">
+                    <span class="ladda-label"> Edit </span>
+                </button> 
+				<?php if(isset($company['assigned_to_name']) and !empty($company['assigned_to_name'])): ?>
+					<?php if($company['assigned_to_id'] == $current_user['id']) : ?>			
+						<?php  $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'], 'page_number' => $current_page_number );
+						echo form_open('companies/unassign',array('name' => 'assignto', 'class'=>'assign-to-form'),$hidden); ?>
+						<button type="submit" class="btn  btn-primary  ladda-button" data-style="expand-right" data-size="1">
+						    <span class="ladda-label"> Unassign from me </span>
+						</button>
+						<?php echo form_close(); ?>
+					<?php endif; ?>
+				<?php else: ?>
+				<?php 
+				$hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'], 'page_number' => $current_page_number );
+				echo form_open(site_url().'companies/assignto',array('name' => 'assignto', 'class'=>'assign-to-form'),$hidden); ?>
+				<button type="submit" assignto="<?php echo $current_user['name']; ?>" class="btn  btn-primary  ladda-button" data-style="expand-right" data-size="1">
+			        <span class="ladda-label"> Assign to me </span>
+			    </button>
+				<?php echo form_close(); ?>
+				<?php endif; ?>
+			</div>
+		</div>
+		</div>
+		<div class="row">
         <!--ADDRESS-->
         <div class="col-md-12">
-			<strong>
-				Address
-			</strong>
-			<p style="margin-bottom:0;"><?php echo $company['address']; ?></p>
-		
-        </div>
-        <!--WEBSITE IF APPLICABLE-->
-        <?php if (isset($company['url'])): ?>
-        <div class="col-md-12" style="margin-top:5px;">
-        <strong>
-			Website
-		</strong>
-		<p style="margin-bottom:0;"><a class="btn btn-link" style="padding:0;" href="<?php $parsed = parse_url($company['url']); if (empty($parsed['scheme'])) { echo 'http://' . ltrim($company['url'], '/'); }else{ echo $company['url']; } ?>" target="_blank"><i class="fa fa-home"></i>
-		<?php echo str_replace("http://"," ",str_replace("www.", "", $company['url']))?>
-		</a></p>
-        </div>
-		<?php endif; ?>
-                
-        <!--SEGMENT IF APPLICABLE-->
-        <?php if (isset($company['class'])): ?>
-         <div class="col-md-12" style="margin-top:5px;">
-    	<strong>
-			Segment
-		</strong>
-		<p style="margin-bottom:0;">				
-		<span class="label label-info"><?php echo $companies_classes[$company['class']] ?>
-		</span>
-		</p>
-        </div>
-		<?php endif; ?>
-                
+        	<p style="display:inline;">
+			<i class="fa fa-map-marker"></i>
+			<a class="btn btn-link" style="padding-left:0px;" data-toggle="modal" data-target="#map_<?php echo $company['id']; ?>">
+				<?php echo $company['address']; ?>
+			</a>
+			</p>
+			<div class="modal fade" id="map_<?php echo $company['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="Map">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+			        <h4 class="modal-title"><?php echo $company['name']; ?></h4>
+			      </div>
+			      <div class="modal-body">
+			        <iframe width="670" height="400" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=<?php echo urlencode($company['address']); ?>&<?php if (isset($company['address_lat']) and  isset($company['address_lng'])): ?>center=<?php echo $company['address_lat']; ?>,<?php echo $company['address_lng']; ?>&<?php endif; ?>key=AIzaSyAwACBDzfasRIRmwYW0KJ4LyFD4fa4jIPg&zoom=10"></iframe>
+			      </div>
+			    </div><!-- /.modal-content -->
+			  </div><!-- /.modal-dialog -->
+			</div><!-- /.modal -->
+			<?php if (isset($company['phone'])): ?>
+			<p style="display:inline;">
+				<i class="fa fa-phone-square"></i> 
+				<a class="btn btn-link" style="padding-left:0px;" href="tel:<?php echo $company['phone']; ?>">
+				<?php echo $company['phone']; ?>
+				</a> 
+			</p>
+        	<?php endif; ?>
+        	<!--WEBSITE IF APPLICABLE-->
+	        <?php if (isset($company['url'])): ?>
+			<p style="display:inline;">
+			<i class="fa fa-globe"></i>
+			<a class="btn btn-link" style="padding-left:0px;" href="<?php $parsed = parse_url($company['url']); if (empty($parsed['scheme'])) { echo 'http://' . ltrim($company['url'], '/'); }else{ echo $company['url']; } ?>" target="_blank">
+			<?php echo str_replace("http://"," ",str_replace("www.", "", $company['url']))?>
+			</a>
+			</p>
+			<?php endif; ?>
+        </div>              
                 
 		<div class="col-md-12">
 			<hr>
@@ -89,22 +100,20 @@
 		
 		<!-- TURNOVER -->
 		<div class="col-md-2 centre">
-		<strong>Turnover</strong>
+			<strong>Turnover</strong>
 			<p class="details" style="margin-bottom:5px;">
-				£<?php echo isset($company['turnover'])? number_format (round($company['turnover'],-3)):'0';?></p>
-                <h6 style="margin-top:0;"><span class="label label-default" ><?php  echo isset($company['turnover_method'])?$company['turnover_method']:'';?></span></h6>
-                            
-           			
-            </div>
+				£<?php echo isset($company['turnover'])? number_format (round($company['turnover'],-3)):'0';?>
+			</p>
+            <h6 style="margin-top:0;">
+            	<span class="label label-default" ><?php  echo isset($company['turnover_method'])?$company['turnover_method']:'';?></span>
+            </h6>	
+        </div>
         <div class="col-md-2 centre">
-        		<strong>Founded</strong>
-
-        <p class="details">
-			<?php echo $company['eff_from'] ?>
-        </p>
+        	<strong>Founded</strong>
+			<p class="details">
+				<?php echo $company['eff_from'] ?>
+			</p>
 		</div>
-        
-
 		<!-- EMPLOYEES -->
 		<div class="col-md-2 centre">
 			<strong>Employees</strong>

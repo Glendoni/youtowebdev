@@ -740,7 +740,7 @@ class Companies_model extends CI_Model {
 			$emp_counts = $this->db->affected_rows();
 		}
 		
-
+		
 		
 		$company = array(
 				'phone' => isset($post['phone'])?$post['phone']:NULL,
@@ -748,7 +748,7 @@ class Companies_model extends CI_Model {
 				'url' => isset($post['url'])?$post['url']:NULL,
 				'contract'=>isset($post['contract'])?$post['contract']:NULL,
 				'perm'=>isset($post['perm'])?$post['perm']:NULL,
-				'class'=>isset($post['class'])?$post['class']:NULL,
+				'class'=>isset($post['company_class'])?$post['company_class']:NULL,
 				'updated_at' => date('Y-m-d H:i:s')
 			);
 

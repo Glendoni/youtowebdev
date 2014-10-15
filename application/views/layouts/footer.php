@@ -158,7 +158,7 @@
         btn.button('loading');
 	 	$.post(url, form.serialize(),
 	 	  function(response){
-            // console.log(response);
+            console.log(response);
 	 	    btn.removeClass('btn-primary').addClass('btn-success').text('Saving...'); 
             location.reload(true);
 	 	  })
