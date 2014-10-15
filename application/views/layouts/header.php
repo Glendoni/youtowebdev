@@ -449,10 +449,10 @@
                                     <span class="glyphicon glyphicon-globe"></span> Shared searches <span class="badge pull-right"><?php echo count($shared_campaigns); ?></span>
                                 </h3>    
                             </div>
-                          <div class="panel-body">
+                          <div class="panel-body" style="padding:0;">
                             <ul class="nav nav-second-level ">
                             <?php foreach ($shared_campaigns as $campaign):?>
-                                <li><a href="<?php echo site_url();?>campaigns/display/?id=<?php echo $campaign->id; ?>"><?php echo $campaign->name; ?></a></li>
+                                <li><i class="toggle-accordion"></i><a href="<?php echo site_url();?>campaigns/display/?id=<?php echo $campaign->id; ?>"><?php echo $campaign->name; ?></a></li>
                             <?php endforeach; ?>
                             </ul>
                           </div>

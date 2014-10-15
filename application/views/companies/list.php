@@ -121,7 +121,7 @@
 			<?php 
 			if(isset($company['sectors'])){
 				foreach ($company['sectors'] as $key => $name) {
-					echo '<p style="margin-bottom:0;"><span class="glyphicon glyphicon-ok" style="margin-right:5px;color: #5cb85c;border: #5cb85c; font-size:11px;"></span>'.$name.'</p>';
+					echo '<p style="margin-bottom:0;">'.$name.'</p>';
 				}
 			}
 			?>
