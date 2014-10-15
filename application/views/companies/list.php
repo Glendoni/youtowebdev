@@ -15,7 +15,6 @@
 	<?php endif; ?>
 	<div class="panel-body">
     <div class="row">
-		<div class="col-md-12">
 			<div class="col-md-8">
 				<h3 class="name">
 					<a href="<?php echo site_url();?>companies/company?id=<?php echo $company['id'];?>" target="_blank">
@@ -48,7 +47,6 @@
 					<?php endif; ?>
 					 
 				</div>
-			</div>
 		</div>
 		
         <!--ADDRESS-->
