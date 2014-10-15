@@ -362,7 +362,7 @@ echo '<p style="margin-bottom:0;">'.$name.'</p>';				}
 									<td style="width:40%"><hr/></td>
 									</tr></table>
 									<textarea class="form-control" name="outcome" placeholder="Add Outcome Comments Here" rows="3" style="margin-bottom:5px; border:none;"></textarea>
-									<button class="btn btn-primary pull-right"><i class="fa fa-check fa-lg"></i> Send</button>
+									<button class="btn btn-primary btn-block"><i class="fa fa-check fa-lg"></i> Send</button>
 									</div>
 								<?php endif; ?>
 									</div>
