@@ -42,32 +42,52 @@
 			    </div><!-- /.modal-content -->
 			  </div><!-- /.modal-dialog -->
 			</div><!-- /.modal -->
-        
+        <div class="row col-md-6" style="margin-top:10px;">
+        <strong>Phone Number</strong>
+        <p style="margin-bottom:0;">
         <?php if (isset($company['url'])): ?>
-        <div style="margin-top:5px;">
-        <strong>
-				Website
-			</strong>
-				<p style="margin-bottom:0;"><a class="btn btn-link" style="padding:0;" href="<?php $parsed = parse_url($company['url']); if (empty($parsed['scheme'])) { echo 'http://' . ltrim($company['url'], '/'); }else{ echo $company['url']; } ?>" target="_blank"><i class="fa fa-home"></i>
+        <?php echo $company['phone']; ?>
+				
+                
+				<?php else: ?>
+				-
+                <?php endif; ?>
+                </p>
+				</div>
+        		<div class="row col-md-6" style="margin-top:10px;">
+        		<strong>Website</strong>
+        		<p style="margin-bottom:0;">
+				<?php if (isset($company['url'])): ?>
+				<a class="btn btn-link" style="padding:0;" href="<?php $parsed = parse_url($company['url']); if (empty($parsed['scheme'])) { echo 'http://' . ltrim($company['url'], '/'); }else{ echo $company['url']; } ?>" target="_blank"><i class="fa fa-home"></i>
 				<?php echo str_replace("http://"," ",str_replace("www.", "", $company['url']))?>
-				</a></p>
-                </div>
-				<?php endif; ?>
+				</a>
+				<?php else: ?>
+				-
+                <?php endif; ?>
+                </p>
+				</div>
+                 <div class="row col-md-6" style="margin-top:10px;">
+					<strong>Segment</strong>
+					<p style="margin-bottom:0;">	
                 <!--SEGMENT IF APPLICABLE-->
                 <?php if (isset($company['class'])): ?>
-                
-                 <div style="margin-top:5px;">
-        <strong>
-				Segment
-			</strong>
-				<p style="margin-bottom:0;">				
 				<span class="label label-info"><?php echo $companies_classes[$company['class']] ?></span>
-</p>
-                </div>
-                
-                
-			<?php endif; ?>
-        
+				<?php else: ?>
+				-
+                <?php endif; ?>
+            </p>
+			</div>
+			<div class="row col-md-6" style="margin-top:10px;">
+			<strong>Company Number</strong>
+			<p style="margin-bottom:0;">	
+			 <!--COMPANY NUMBER IF APPLICABLE-->
+                <?php if (isset($company['registration'])): ?>
+				<?php echo $company['registration']; ?>
+				<?php else: ?>
+				-
+                <?php endif; ?>
+         	</p>
+        	</div>
         
         </div>
                 <div class="col-md-4">
