@@ -48,7 +48,7 @@
         <div class="row col-md-6" style="margin-top:10px;">
         <strong>Phone Number</strong>
         <p style="margin-bottom:0;">
-        <?php if (isset($company['url'])): ?>
+        <?php if (isset($company['phone'])): ?>
         <?php echo $company['phone']; ?>
 				
                 
