@@ -450,9 +450,21 @@
                                 </h3>    
                             </div>
                           <div class="panel-body" style="padding:0;">
-                            <ul class="nav nav-second-level ">
+                            <ul class="list-group">
                             <?php foreach ($shared_campaigns as $campaign):?>
-                                <li><i class="toggle-accordion"></i><a href="<?php echo site_url();?>campaigns/display/?id=<?php echo $campaign->id; ?>"><?php echo $campaign->name; ?></a></li>
+                                <li class="list-group-item load-saved-search">
+                                <a href="<?php echo site_url();?>campaigns/display/?id=<?php echo $campaign->id; ?>" class="load-saved-search">
+                        <div class="col-xs-3 col-sm-3">
+                            <img src="<?php echo asset_url();?>images/profiles/<?php echo $campaign->image; ?>.jpg" alt="<?php echo $campaign->searchcreatedby; ?>" class="img-responsive img-circle" />
+                        </div>
+                        <div class="col-xs-9 col-sm-9">
+                            <span class="name"><?php echo $campaign->name; ?></span><br/>
+                            <small><strong>By:</strong> <span class="text-muted"><?php echo $campaign->searchcreatedby; ?></span></small>
+                            
+                        </div>
+                        <div class="clearfix"></div>
+                        </a>
+                    </li>
                             <?php endforeach; ?>
                             </ul>
                           </div>
