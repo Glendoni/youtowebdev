@@ -340,10 +340,10 @@
                                             <?php  echo form_label('Turnover (£)', 'turnover_from', array('class'=>'control-label')); ?>
                                              <div class="form-group"> 
                                                 <div class="col-md-6"> 
-                                                <?php echo form_input(array('name' => 'turnover_from', 'id' => 'turnover_from', 'maxlength' => '100','class'=>'form-control','placeholder'=>''), set_value('turnover_from',$this->input->post('turnover_from')));?>
+                                                <?php echo form_input(array('name' => 'turnover_from', 'id' => 'turnover_from', 'maxlength' => '100','class'=>'form-control number','placeholder'=>''), set_value('turnover_from',$this->input->post('turnover_from')));?>
                                                 </div>
                                                 <div class="col-md-6">
-                                                 <?php echo form_input(array('name' => 'turnover_to', 'id' => 'turnover_to', 'maxlength' => '100','class'=>'form-control','placeholder'=>''), set_value('turnover_to',$this->input->post('turnover_to')));?>   
+                                                 <?php echo form_input(array('name' => 'turnover_to', 'id' => 'turnover_to', 'maxlength' => '100','class'=>'form-control number','placeholder'=>''), set_value('turnover_to',$this->input->post('turnover_to')));?>   
                                                 </div>
                                             </div>
                                             </div>
