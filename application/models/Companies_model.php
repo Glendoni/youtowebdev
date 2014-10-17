@@ -19,6 +19,20 @@ class Companies_model extends CI_Model {
 	}
 
 
+	function get_companies_pipeline()
+	{
+		$arrayNamesPipeline = array(
+			'Prospect' => 'Prospect',
+			'Intent' => 'Intent',
+			'Qualified' => 'Qualified',
+			'Quote' => 'Quote',
+			'Unsuitable' => 'Unsuitable',
+			'OnHold' => 'On Hold'
+						);
+		return 	$arrayNamesPipeline;
+	}
+
+
 	function get_company_by_id($id)
 	{
 
@@ -308,7 +322,7 @@ class Companies_model extends CI_Model {
 			   json_agg( 
 			   row_to_json ((
 			   TT2."sector_id", TT2."sector"))),-- f25
-			   C.phone)) "JSON output" 
+			   C.phone, C.pipeline)) "JSON output" 
 			   
 
 
@@ -749,6 +763,7 @@ class Companies_model extends CI_Model {
 				'contract'=>isset($post['contract'])?$post['contract']:NULL,
 				'perm'=>isset($post['perm'])?$post['perm']:NULL,
 				'class'=>isset($post['company_class'])?$post['company_class']:NULL,
+				'pipeline'=>isset($post['company_pipeline'])?$post['company_pipeline']:NULL,
 				'updated_at' => date('Y-m-d H:i:s')
 			);
 

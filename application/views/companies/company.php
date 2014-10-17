@@ -1,11 +1,14 @@
 <?php  $company = $companies[0]; ?>
 <div class="row page-results-list">
-	<h2 class="page-header">
+<div class="top-info-holder">
+	<h2 class="company-header">
 	<?php echo $company['name']; ?>
-	
 	</h2>
-	<?php $this->load->view('companies/edit_box.php',array('company'=>$company)); ?>
+	<span class="label pipeline-label label-<?php echo str_replace(' ', '', $companies_pipeline[$company['pipeline']]); ?>"><?php echo $companies_pipeline[$company['pipeline']] ?></span>
 
+
+	<?php $this->load->view('companies/edit_box.php',array('company'=>$company)); ?>
+</div>
 <div class="panel <?php if(isset($company['assigned_to_name'])): ?> panel-primary <?php else: ?> panel-default <?php endif; ?> company">
 	<?php if(isset($company['assigned_to_name'])): ?>
 	<div class="panel-heading text-center" >
@@ -71,7 +74,8 @@
 					<p style="margin-bottom:0;">	
                 <!--SEGMENT IF APPLICABLE-->
                 <?php if (isset($company['class'])): ?>
-				<span class="label label-info"><?php echo $companies_classes[$company['class']] ?></span>
+				<span class="label label-info"><?php echo $companies_classes[$company['class']] ?></span>	
+
 				<?php else: ?>
 				-
                 <?php endif; ?>

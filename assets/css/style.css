@@ -254,6 +254,37 @@ border-right: 1px solid #e7e7e7;
 	margin-top: 12px;margin-right: 5px;
 }
 
+.company-header {
+	margin-bottom: 0;
+	padding-bottom: 0;
+	border-bottom: none;
+}
+
+.top-info-holder {
+	margin-bottom: 20px;
+}
+
+/* LABELS */
+.label-OnHold {
+	background-color: #f0ad4e;
+}
+.label-Prospect {
+	background-color: #999;
+}
+.label-Intent {
+	background-color: #46A0D4;
+}
+.label-Qualified {
+	background-color: #59B200;
+}
+.label-Quote {
+	background-color: #993366;
+}
+.label-Unsuitable {
+	background-color: #B80000 ;
+}
+
+
 /* Desktops and laptops ----------- */
 @media only screen and (min-width : 768px) {
 	.modal-dialog {

@@ -238,6 +238,8 @@ class Companies extends MY_Controller {
 			if($company->company->f1->f18)$mapped_companies_array['turnover'] = $company->company->f1->f18;
 			if($company->company->f1->f19)$mapped_companies_array['turnover_method'] = $company->company->f1->f19;
 			if($company->company->f1->f20)$mapped_companies_array['emp_count'] = $company->company->f1->f20;
+			if($company->company->f1->f27)$mapped_companies_array['pipeline'] = $company->company->f1->f27;
+
 			
 			// sectors
 
