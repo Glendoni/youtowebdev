@@ -743,12 +743,12 @@ class Companies_model extends CI_Model {
 		
 		
 		$company = array(
-				'phone' => isset($post['phone'])?$post['phone']:NULL,
+				'phone' => !empty($post['phone'])?$post['phone']:NULL,
 				'linkedin_id' => (isset($post['linkedin_id']) and !empty($post['linkedin_id']))?$post['linkedin_id']:NULL,
 				'url' => isset($post['url'])?$post['url']:NULL,
 				'contract'=>isset($post['contract'])?$post['contract']:NULL,
 				'perm'=>isset($post['perm'])?$post['perm']:NULL,
-				'class'=>isset($post['company_class'])?$post['company_class']:NULL,
+				'class'=>!empty($post['company_class'])?$post['company_class']:NULL,
 				'updated_at' => date('Y-m-d H:i:s')
 			);
 
