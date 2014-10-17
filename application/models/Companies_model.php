@@ -12,7 +12,7 @@ class Companies_model extends CI_Model {
 		$arrayNames = array(
 			'StartUp' => 'Start Up',
 			'UsingFinance' => 'Using Finance',
-			'LookingToPlaceContractors' => 'Looking to Place Contractors',
+			'LookingToPlaceContractors' => 'Perm - Looking to Place Contractors',
 			'SelfFunding' => 'Self-Funding'
 			);
 		return 	$arrayNames;
@@ -25,9 +25,10 @@ class Companies_model extends CI_Model {
 			'Prospect' => 'Prospect',
 			'Intent' => 'Intent',
 			'Qualified' => 'Qualified',
-			'Quote' => 'Quote',
+			'Proposal' => 'Proposal',
+			'Customer' => 'Customer',
 			'Unsuitable' => 'Unsuitable',
-			'OnHold' => 'On Hold'
+			'Lost' => 'Lost'
 						);
 		return 	$arrayNamesPipeline;
 	}
