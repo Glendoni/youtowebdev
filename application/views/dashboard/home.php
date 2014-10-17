@@ -135,7 +135,7 @@
                       ?>
                           <div class="row list-group-item <?php if( strtotime($action->planned_at) < strtotime('today')  ) { echo ' delayed';} ?> ">
                             <div class="col-md-3"> 
-                              <a href="<?php echo site_url();?>companies/company?id=<?php echo $action->company_id;?>" > <?php echo $action->company_name;?></a>
+                              <a href="<?php echo site_url();?>companies/company?id=<?php echo $action->company_id;?>" target="_blank"> <?php echo $action->company_name;?></a>
                             </div>
                             <div class="col-md-2">
                               <?php echo $action_types_array[$action->action_type_id]; ?>
