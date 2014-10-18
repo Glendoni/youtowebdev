@@ -4,6 +4,8 @@ class MY_Controller extends CI_Controller {
 	protected $current_user = ""; // Logged in user
 	protected $data = array(); // Data array to be passed to views
 	var $url;
+
+	  
 		
 	public function __construct() {	
 
@@ -35,6 +37,7 @@ class MY_Controller extends CI_Controller {
 		$this->load->model('Providers_model');
 		$this->load->model('Actions_model');
 		$this->load->model('Companies_model');
+		$this->load->model('Autocomplete_model');
 		// $this->load->helper('mobile');
 		
 		// Place static variables on session below
