@@ -1,4 +1,3 @@
-codeigniter-heroku
-==================
+Baselist-heroku==================
 
-Template project for deploying CodeIgniter to Heroku
+Template project for deploying Baelist with CodeIgniter to Heroku
