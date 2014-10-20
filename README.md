@@ -1,3 +1,3 @@
 Baselist-heroku==================
 
-Template project for deploying Baelist with CodeIgniter to Heroku
+Template project for deploying Baselist with CodeIgniter to Heroku
