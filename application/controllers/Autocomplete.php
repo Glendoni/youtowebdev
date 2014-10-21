@@ -11,9 +11,10 @@ class Autocomplete extends MY_Controller {
     public function autocomplete() {
         $search_data = $this->input->post("search_data");
         $query = $this->Autocomplete_model->get_autocomplete($search_data);
-
+        echo "<ul class='autocomplete-holder'>";
         foreach ($query->result() as $row):
-            echo "<li><a href='" . base_url() . "companies/company?id=" . $row->id . "'>" . $row->name . "</a></li>";
+            echo "<a href='" . base_url() . "companies/company?id=" . $row->id . "'><li class='autocomplete-item'>" . $row->name . "</li></a>";
         endforeach;
+        echo "</ul>";
     }
 }
