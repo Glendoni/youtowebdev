@@ -55,6 +55,8 @@ class Companies extends MY_Controller {
 					$session_result = serialize($result);
 					$this->session->set_userdata('companies',$session_result);
 				}
+			}else{
+				$this->set_message_error(validation_errors());
 			}
 		}
 		elseif ($refresh_search_results or $ajax_refresh) 
@@ -122,6 +124,69 @@ class Companies extends MY_Controller {
 		
 	}
 
+	public function _valid_name(){
+		$result_name = $this->Companies_model->get_company_by_name($this->input->post('name'));
+	
+		if(empty($result_name)){
+			return TRUE;
+		}else{
+			$this->form_validation->set_message('_valid_name', 'Company already in database with that name');
+			return FALSE;
+		}
+	}
+
+	public function _valid_registration(){
+		if($this->input->post('registration')){
+			$result_registration = $this->Companies_model->get_company_by_registration($this->input->post('registration'));
+			if(!empty($result_registration)){
+				$this->form_validation->set_message('_valid_registration', 'Company already in database with that registration');
+				return FALSE;
+			}
+		}
+		return TRUE;
+	}
+
+
+	public function create_company(){
+		if($this->input->post('create_company_form')){
+			$this->load->library('form_validation');
+			$this->form_validation->set_rules('linkedin_id', 'linkedin id', 'xss_clean');
+			$this->form_validation->set_rules('registration', 'registration', 'xss_clean|callback__valid_registration');
+			$this->form_validation->set_rules('name', 'name', 'xss_clean|required|callback__valid_name');
+			$this->form_validation->set_rules('url', 'url', 'xss_clean');
+			$this->form_validation->set_rules('ddlink', 'ddlink', 'xss_clean');
+			$this->form_validation->set_rules('contract', 'contract', 'xss_clean');
+			$this->form_validation->set_rules('perm', 'perm', 'xss_clean');
+			$this->form_validation->set_rules('phone', 'phone', 'xss_clean');
+			$this->form_validation->set_rules('company_class', 'company_class', 'xss_clean');
+
+			// address
+			$this->form_validation->set_rules('country_id', 'country_id', 'xss_clean|required');
+			$this->form_validation->set_rules('address', 'address', 'xss_clean|required');
+			$this->form_validation->set_rules('lat', 'latitude', 'xss_clean');
+			$this->form_validation->set_rules('lng', 'longitude', 'xss_clean');
+			$this->form_validation->set_rules('type', 'type', 'xss_clean');
+
+			if($this->form_validation->run())
+			{
+				$result = $this->Companies_model->create_company($this->input->post());
+				if($result == TRUE) {
+					$this->set_message_success('New company successfully created');
+					redirect('/companies/create_company','location');
+				}else{
+					$this->set_message_error('Error in the database while creating company');
+					redirect('/companies/create_company','location');
+				}
+			}
+		}
+		
+		$this->data['country_options'] = $this->Companies_model->get_countries_options();
+		$this->data['hide_side_nav'] = True;
+		$this->data['main_content'] = 'companies/create_company';
+		$this->load->view('layouts/single_page_layout', $this->data);
+		
+
+	}
 
 	public function assignto()
 	{

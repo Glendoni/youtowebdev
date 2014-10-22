@@ -8,10 +8,13 @@
 <div class="panel <?php if(isset($company['assigned_to_name'])): ?> panel-primary <?php else: ?> panel-default <?php endif; ?> company">
 	<?php if(isset($company['assigned_to_name'])): ?>
 	<div class="panel-heading text-center" >
-        <span class="assigned-image-holder" style="max-width:30px; float:left;"><img src="<?php echo asset_url();?>images/profiles/<?php echo isset($system_users[$company['assigned_to_id']]['image'])? $system_users[$action->user_id]['image']:'none' ;?>.jpg" class="img-circle img-responsive" alt="" /></span>
+        <span class="assigned-image-holder" style="max-width:30px; float:left;">
+        	<img src="<?php echo asset_url();?>images/profiles/<?php echo isset($system_users_images[$company['assigned_to_id']])? $system_users_images[$company['assigned_to_id']]:'none' ;?>.jpg" class="img-circle img-responsive" alt="" />
+        </span>
         <span style="line-height:28px;">
         Assigned to <?php echo $company['assigned_to_name']; ?> 
-        </span>    </div>
+        </span>    
+    </div>
 	<?php endif; ?>
 	<div class="panel-body">
     <div class="row">
@@ -59,7 +62,7 @@
         	<p style="display:inline;">
 			<i class="fa fa-map-marker"></i>
 			<a class="btn btn-link" style="padding-left:0px;" data-toggle="modal" data-target="#map_<?php echo $company['id']; ?>">
-				<?php echo $company['address']; ?>
+				<?php echo isset($company['address'])?$company['address']:''; ?>
 			</a>
 			</p>
 			<div class="modal fade" id="map_<?php echo $company['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="Map">
@@ -111,7 +114,7 @@
         <div class="col-md-2 centre">
         	<strong>Founded</strong>
 			<p class="details">
-				<?php echo $company['eff_from'] ?>
+				<?php echo isset($company['eff_from'])?$company['eff_from']:''; ?>
 			</p>
 		</div>
 		<!-- EMPLOYEES -->

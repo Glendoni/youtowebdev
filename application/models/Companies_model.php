@@ -7,6 +7,18 @@ class Companies_model extends CI_Model {
 		return $query->result();
 	}
 
+	function get_company_by_name($name)
+	{
+		$query = $this->db->get_where('companies',array('name'=>$name));	
+		return $query->result();
+	}
+
+	function get_company_by_registration($registration)
+	{
+		$query = $this->db->get_where('companies',array('registration'=>$registration));	
+		return $query->result();
+	}
+
 	function get_companies_classes()
 	{
 		$arrayNames = array(
@@ -681,7 +693,8 @@ class Companies_model extends CI_Model {
 	function assign_company($company_id,$user_id)
 	{
 		$data = array(
-               'user_id' => $user_id
+               'user_id' => $user_id,
+               'assign_date' => date('Y-m-d H:i:s')
             );
 
 		$this->db->update('companies', $data, array('id' => $company_id));
@@ -773,11 +786,54 @@ class Companies_model extends CI_Model {
 		
 	}
 
+	function create_company($post){
+		$company = array(
+			'name' => $post['name'],
+			'registration' => isset($post['registration'])?$post['registration']:NULL,
+			'ddlink' => isset($post['ddlink'])?$post['ddlink']:NULL,
+			'phone' => isset($post['phone'])?$post['phone']:NULL,
+			'linkedin_id' => (isset($post['linkedin_id']) and !empty($post['linkedin_id']))?$post['linkedin_id']:NULL,
+			'url' => isset($post['url'])?$post['url']:NULL,
+			'contract'=>isset($post['contract'])?$post['contract']:NULL,
+			'perm'=>isset($post['perm'])?$post['perm']:NULL,
+			'class'=>isset($post['company_class'])?$post['company_class']:NULL,
+			'eff_from'=> date('Y-m-d H:i:s')
+		);
+		$this->db->insert('companies', $company);
+		$new_company_id = $this->db->insert_id(); 
+		if($new_company_id){
+			// address
+			$address = array(
+				'company_id' => $new_company_id,
+				'country_id' => $post['country_id'],
+				'address' => $post['address'],
+				'lat' => isset($post['lat'])?$post['lat']:NULL,
+				'lng' => isset($post['lng'])?$post['lng']:NULL,
+				'type' => isset($post['type'])?$post['type']:NULL,
+				);
+			$this->db->insert('addresses', $address);
+			$new_company_address_id = $this->db->insert_id(); 
+		}
+		if($new_company_id and $new_company_address_id) return TRUE;
+		return FALSE;
+	}
+
 	function insert_entry()
 	{
         $this->title   = $_POST['title']; // please read the below note
         $this->content = $_POST['content'];
         $this->date    = time();
         $this->db->insert('entries', $this);
+    }
+
+    // should be here but let's just use this model for the countries bit
+    function get_countries_options(){
+    	$this->db->select('id,name');
+    	$query = $this->db->get('countries');	
+		foreach($query->result() as $row)
+		{
+		  $array[$row->id] = $row->name;
+		} 	
+		return $array;
     }
 }

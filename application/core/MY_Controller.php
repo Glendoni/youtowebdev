@@ -37,7 +37,7 @@ class MY_Controller extends CI_Controller {
 		$this->load->model('Companies_model');
 		// $this->load->helper('mobile');
 		
-		// Place static variables on session below
+		// loging checking and redirect
 		
 		// try getting logged in user from session
 		if($this->session->userdata('logged_in')) 

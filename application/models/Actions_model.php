@@ -13,13 +13,7 @@ class Actions_model extends CI_Model {
 		return $query->result_object();
 	}
 
-	public function get_pending_actions($user_id){
-		// $data = array(
-		// 	'actions.user_id' => $user_id,
-		// 	'actioned_at' => NULL,
-		// 	'cancelled_at' => NULL,
-		// 	);
-		
+	public function get_pending_actions($user_id){		
 		$this->db->select('company_id, actions.id "action_id",comments,planned_at,action_type_id,name "company_name",');
 		$this->db->where('actions.user_id',$user_id);
 		$this->db->where('actioned_at',NULL);

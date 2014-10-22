@@ -202,7 +202,7 @@ echo '<p style="margin-bottom:0;"><span class="glyphicon glyphicon-ok" style="ma
 	    <h3 class="panel-title">Done</h3>
 	  </div>
 	  <div class="panel-body">
-	   <?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id']);
+	   <?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'],'done'=>'1');
 				 echo form_open(site_url().'actions/create', 'name="create" class="form" role="form"',$hidden); ?>
 		<div class="form-group ">
 			<label>Type</label>
@@ -227,7 +227,7 @@ echo '<p style="margin-bottom:0;"><span class="glyphicon glyphicon-ok" style="ma
 		    <h3 class="panel-title">Follow Up</h3>
 		  </div>
 		  <div class="panel-body">
-		   <?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id']);
+		   <?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'],'follow_up'=>'1');
 					 echo form_open(site_url().'actions/create', 'name="create" class="form" role="form"',$hidden); ?>
 			<div class="row">
             <div class="col-md-6">

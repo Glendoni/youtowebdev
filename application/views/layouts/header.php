@@ -12,9 +12,7 @@
     <title> <?php echo (isset($page_title))? $page_title: 'Baselist'; ?></title>
     
     <link rel="icon" type="image/png" href="<?php echo asset_url();?>images/favicon.jpg">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" type="text/css" media="screen" href="<?php echo asset_url();?>css/sb-admin-2.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" media="screen" href="<?php echo asset_url();?>css/style.css" rel="stylesheet">
+    
 
     <!-- Timeline CSS -->
     <!-- <link rel="stylesheet" type="text/css" media="screen" href="<?php echo asset_url();?>css/plugins/timeline.css" rel="stylesheet"> -->
@@ -22,6 +20,15 @@
     <!-- MetisMenu CSS -->
     <!-- <link rel="stylesheet" type="text/css" media="screen" href="<?php echo asset_url();?>css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet"> -->
 
+
+    <link rel="stylesheet" type="text/css" media="screen" href="<?php echo asset_url();?>css/bootstrap-datetimepicker.css">
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" type="text/css" media="screen" href="<?php echo asset_url();?>css/bootstrap.min.css" rel="stylesheet"> 
+    <!-- Bootstrap Core CSS -->
+    <!-- <link href="<?php echo asset_url();?>css/font-awesome.min.css" rel="stylesheet"> -->
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" media="screen" href="<?php echo asset_url();?>css/sb-admin-2.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen" href="<?php echo asset_url();?>css/style.css" rel="stylesheet">
     <!-- Morris Charts CSS -->
     <link rel="stylesheet" type="text/css" media="screen" href="<?php echo asset_url();?>css/morris-5.1.css">
 
@@ -30,13 +37,6 @@
 
     <!-- PAGE LOADING BAR -->
     <link rel="stylesheet" type="text/css" media="screen" href="<?php echo asset_url();?>css/pace.css" rel="stylesheet">
-
-    <link rel="stylesheet" type="text/css" media="screen" href="<?php echo asset_url();?>css/bootstrap-datetimepicker.css">
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" type="text/css" media="screen" href="<?php echo asset_url();?>css/bootstrap.min.css" rel="stylesheet"> 
-    <!-- Bootstrap Core CSS -->
-    <!-- <link href="<?php echo asset_url();?>css/font-awesome.min.css" rel="stylesheet"> -->
-    
 
     <!-- Bootstrap Core CSS -->
     <!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet"> -->
@@ -267,8 +267,14 @@
                     </ul>
                     
                 </li> -->
+                <?php if ($current_user['permission'] == 'admin'): ?>
+                <li>
+                    <a href="<?php echo base_url(); ?>companies/create_company" ><i class="fa fa-plus-circle"></i> add company</a>
+                </li>
+                <?php endif; ?>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?php echo $current_user['name'] ?> <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="fa fa-user"></i> <?php echo $current_user['name'] ?> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <!-- <li>
                             <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
@@ -468,12 +474,3 @@
             <!-- /.navbar-collapse -->
             <?php endif; ?>
         </nav>
-
-        <div id="page-wrapper">
-            <div class="container-fluid">
-            <?php $msg = $this->session->flashdata('message'); if($msg): ?>
-                <div class="alert alert-<?php echo $this->session->flashdata('message_type'); ?> alert-dismissible row" role="alert">
-                  <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <?php echo $msg ?>
-                </div>
-            <?php endif; ?>
