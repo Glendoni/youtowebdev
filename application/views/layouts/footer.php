@@ -33,6 +33,62 @@
 <!--FORMAT NUMBERS WITH COMMAS (ADD CLASS NUMBER TO INPUT)-->
     <script type="text/javascript" src="<?php echo asset_url();?>js/format-numbers.js"></script>
 
+<!--AUTO COMPLETE-->
+
+<script type="text/javascript">
+        function ajaxSearch() {
+            var input_data = $('#agency_name').val();
+            if (input_data.length < 1) {
+                $('#suggestions').hide();
+                $('#agency_name').removeClass('autocomplete-live');
+            } else {
+
+                var post_data = {
+                    'search_data': input_data,
+                    '<?php echo $this->security->get_csrf_token_name(); ?>': '<?php echo $this->security->get_csrf_hash(); ?>'
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "<?php echo base_url(); ?>autocomplete/autocomplete/",
+                    data: post_data,
+                    success: function(data) {
+                        // return success
+                        if (data.length >= 0) {
+                            $('#suggestions').show();
+                            $('#autoSuggestionsList').addClass('auto_list');
+                            $('#autoSuggestionsList').html(data);
+                            $('#agency_name').addClass('autocomplete-live');
+
+
+                        }
+                    }
+                });
+
+            }
+        }
+</script>
+
+ <script type="text/javascript">
+$(document).ready(function(){
+$("#agency_name").autocomplete({
+source:'includes/getautocomplete.php',
+minLength:1,
+response: function(event, ui) {
+// ui.content is the array that's about to be sent to the response callback.
+if (ui.content.length === 0) {
+$("#empty-message").html("<a type='button' class='btn btn-info btn-xs btn-block' href='add_company.php'>No Results Found<br><b>Click To Add</b></button>");
+} else {
+$("#empty-message").empty();
+}
+},
+select: function( event, ui ) { 
+window.location.href = ui.item.link;
+}
+});
+});
+</script>
+
 
  	<script type="text/javascript">
  	$( document ).ready(function() {

@@ -254,6 +254,86 @@ border-right: 1px solid #e7e7e7;
 	margin-top: 12px;margin-right: 5px;
 }
 
+.company-header {
+	margin-bottom: 0;
+	padding-bottom: 0;
+	border-bottom: none;
+}
+
+.top-info-holder {
+	margin-bottom: 20px;
+}
+
+/* LABELS */
+.label-OnHold {
+	background-color: #f0ad4e;
+}
+.label-Prospect {
+	background-color: #999;
+}
+.label-Intent {
+	background-color: #46A0D4;
+}
+.label-Qualified {
+	background-color: #59B200;
+}
+.label-SignUp {
+	background-color: #00B285;
+}
+.label-Proposal {
+	background-color: #993366;
+}
+.label-Unsuitable {
+	background-color: #B80000 ;
+}
+.label-Lost {
+	background-color: #8C4600 ;
+}
+.autocomplete-live {
+		  -webkit-border-radius:5px 5px 0  0 !important;
+  -moz-border-radius:5px 5px 0  0 !important;
+  border-radius:5px 5px 0  0 !important;
+}
+
+#autoSuggestionsList {
+	position: relative;
+	clear: both;
+}
+
+ul.autocomplete-holder {
+	list-style-type: none;
+	padding-left: 0;
+	-webkit-border-radius:0  0 5px 5px !important;
+	-moz-border-radius:0  0 5px 5px !important;
+  	border-radius:0  0 5px 5px !important;
+  	background-color: #F6F6F6;
+  	border: 1px #A5B0B1 solid;
+  	border-top: none;
+  	position: absolute;
+  	width: 100%;
+}
+li.autocomplete-item:first-child { 
+
+}
+li.autocomplete-item { 
+	font-size: 12px;
+	padding: 10px 5px;
+}
+/* SAVED LISTS */
+li.autocomplete-item:hover {
+	background-color: #428bca;
+	color: #fff;
+	text-decoration: none;
+}
+a li.autocomplete-item:hover {
+	text-decoration: none;
+}
+
+/* SAVED LISTS */
+.load-saved-search:hover {
+	background-color: #DEFFE2;
+}
+
 /* Desktops and laptops ----------- */
 @media only screen and (min-width : 768px) {
 	.modal-dialog {

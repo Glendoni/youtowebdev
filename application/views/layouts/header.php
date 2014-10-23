@@ -322,12 +322,17 @@
                                                 </div>
                                             </div>
                                             <?php endif; ?>
-                                            <div class='form-row'>
-                                                <div class="col-md-12 form-group ">
-                                                    <?php  echo form_label('Agency Name', 'agency_name', array('class'=>'control-label')); ?>
-                                                    <?php echo form_input(array('name' => 'agency_name', 'id' => 'agency_name', 'maxlength' => '50','class'=>'col-md-12 form-control'), set_value('agency_name',$this->input->post('agency_name')));?>
 
-                                                </div>
+
+                                            <div class='form-row'>
+                                            <div class="col-md-12 form-group ">
+                                                    <?php  echo form_label('Agency Name', 'agency_name', array('class'=>'control-label')); ?>
+                                                    <input name="agency_name" id="agency_name" type="text" onkeyup="ajaxSearch();" class="col-md-12 form-control" autocomplete="off" value=<?php echo $this->input->post('agency_name');?> >
+                                            <div id="suggestions">
+                                            <div id="autoSuggestionsList">  
+                                            </div>
+                                            </div>
+                                            </div>
                                             </div>
                                              <div class='form-row'>
                                              <?php  echo form_label('Age (Years) ', 'company_age_from', array('class'=>'control-label')); ?>
@@ -346,10 +351,10 @@
                                             <?php  echo form_label('Turnover (£)', 'turnover_from', array('class'=>'control-label')); ?>
                                              <div class="form-group"> 
                                                 <div class="col-md-6"> 
-                                                <?php echo form_input(array('name' => 'turnover_from', 'id' => 'turnover_from', 'maxlength' => '100','class'=>'form-control','placeholder'=>''), set_value('turnover_from',$this->input->post('turnover_from')));?>
+                                                <?php echo form_input(array('name' => 'turnover_from', 'id' => 'turnover_from', 'maxlength' => '100','class'=>'form-control number','placeholder'=>''), set_value('turnover_from',$this->input->post('turnover_from')));?>
                                                 </div>
                                                 <div class="col-md-6">
-                                                 <?php echo form_input(array('name' => 'turnover_to', 'id' => 'turnover_to', 'maxlength' => '100','class'=>'form-control','placeholder'=>''), set_value('turnover_to',$this->input->post('turnover_to')));?>   
+                                                 <?php echo form_input(array('name' => 'turnover_to', 'id' => 'turnover_to', 'maxlength' => '100','class'=>'form-control number','placeholder'=>''), set_value('turnover_to',$this->input->post('turnover_to')));?>   
                                                 </div>
                                             </div>
                                             </div>
@@ -456,9 +461,21 @@
                                 </h3>    
                             </div>
                           <div class="panel-body" style="padding:0;">
-                            <ul class="nav nav-second-level ">
+                            <ul class="list-group">
                             <?php foreach ($shared_campaigns as $campaign):?>
-                                <li><i class="toggle-accordion"></i><a href="<?php echo site_url();?>campaigns/display/?id=<?php echo $campaign->id; ?>"><?php echo $campaign->name; ?></a></li>
+                                <li class="list-group-item load-saved-search">
+                                <a href="<?php echo site_url();?>campaigns/display/?id=<?php echo $campaign->id; ?>" class="load-saved-search">
+                        <div class="col-xs-3 col-sm-3">
+                            <img src="<?php echo asset_url();?>images/profiles/<?php echo $campaign->image; ?>.jpg" alt="<?php echo $campaign->searchcreatedby; ?>" class="img-responsive img-circle" />
+                        </div>
+                        <div class="col-xs-9 col-sm-9">
+                            <span class="name"><?php echo $campaign->name; ?></span><br/>
+                            <small><strong>By:</strong> <span class="text-muted"><?php echo $campaign->searchcreatedby; ?></span></small>
+                            
+                        </div>
+                        <div class="clearfix"></div>
+                        </a>
+                    </li>
                             <?php endforeach; ?>
                             </ul>
                           </div>

@@ -5,11 +5,13 @@ class Campaigns_model extends CI_Model {
 	// GETS
 	function get_all_shared_campaigns()
 	{
-		$this->db->select('name,id,user_id');
-		$this->db->from('campaigns');
+		$this->db->select('c.name,c.id,c.user_id,u.name as searchcreatedby,u.image');
+		$this->db->from('campaigns c');
+		$this->db->join('users u', 'c.user_id = u.id');
+
 		$this->db->where('shared', 'True');
-		$this->db->order_by("name", "desc");
-		$this->db->where("(eff_to IS NULL OR eff_to > '".date('Y-m-d')."')",null, false); 
+		$this->db->order_by("c.name", "DESC");
+		$this->db->where("(c.eff_to IS NULL OR c.eff_to > '".date('Y-m-d')."')",null, false); 
 		$query = $this->db->get();
 		return $query->result();
 	}
