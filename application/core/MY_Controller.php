@@ -4,6 +4,8 @@ class MY_Controller extends CI_Controller {
 	protected $current_user = ""; // Logged in user
 	protected $data = array(); // Data array to be passed to views
 	var $url;
+
+	  
 		
 	public function __construct() {	
 
@@ -35,6 +37,7 @@ class MY_Controller extends CI_Controller {
 		$this->load->model('Providers_model');
 		$this->load->model('Actions_model');
 		$this->load->model('Companies_model');
+		$this->load->model('Autocomplete_model');
 		// $this->load->helper('mobile');
 		
 		// loging checking and redirect
@@ -110,12 +113,24 @@ class MY_Controller extends CI_Controller {
 			$class_options = $this->Companies_model->get_companies_classes();
 			$this->session->set_userdata('companies_classes',$class_options);
 		}
-		
-		
-		
+
+		if($this->session->userdata('companies_pipeline'))
+		{
+			$pipeline_options = $this->session->userdata('companies_pipeline');
+		}else
+		{
+			$pipeline_options = $this->Companies_model->get_companies_pipeline();
+			$this->session->set_userdata('companies_pipeline',$pipeline_options);
+		}
+	
+
 
 		// Pass variables to tempalte views 
 		$this->data['companies_classes'] = array(0=>' ') + $class_options;
+		
+		$this->data['companies_pipeline'] =  $pipeline_options;
+
+		// Pipeline
 		// edit box options 
 		$this->data['sectors_list'] = $sectors_list;
 		// Add options 
@@ -130,6 +145,7 @@ class MY_Controller extends CI_Controller {
 		
 		$this->data['class_options'] = array(0=>'All') + $class_options;
 		$this->data['class_default'] ='0';
+
 		
 		$providers_options = array(0=>'All') + $providers_options;
 		$providers_options = array(-1=>'No current provider') + $providers_options;

@@ -24,10 +24,25 @@ class Companies_model extends CI_Model {
 		$arrayNames = array(
 			'StartUp' => 'Start Up',
 			'UsingFinance' => 'Using Finance',
-			'LookingToPlaceContractors' => 'Looking to Place Contractors',
+			'LookingToPlaceContractors' => 'Perm - Looking to Place Contractors',
 			'SelfFunding' => 'Self-Funding'
 			);
 		return 	$arrayNames;
+	}
+
+
+	function get_companies_pipeline()
+	{
+		$arrayNamesPipeline = array(
+			'Prospect' => 'Prospect',
+			'Intent' => 'Intent',
+			'Qualified' => 'Qualified',
+			'Proposal' => 'Proposal',
+			'Customer' => 'Customer',
+			'Unsuitable' => 'Unsuitable',
+			'Lost' => 'Lost'
+						);
+		return 	$arrayNamesPipeline;
 	}
 
 
@@ -164,8 +179,21 @@ class Companies_model extends CI_Model {
 
 		
 		// TURNOVER
+
+		//REMOVE COMMA ETC FROM TURNOVER
+
+  $turnover_from = preg_replace('/[^0-9]/','',$post['turnover_from']);
+  $turnover_to = preg_replace('/[^0-9]/','',$post['turnover_to']);
+
+
+			if(empty($turnover_to) && !empty($turnover_from))
+			{
+				$turnover_to = '100000000';
+			}
+	
+
 		
-		if( (isset($post['turnover_from']) && strlen($post['turnover_from']) > 0) && (strlen($post['turnover_to']) > 0 && isset($post['turnover_to'])) ) 
+		if( (isset($turnover_from) && strlen($turnover_from) > 0) && (strlen($turnover_to) > 0 && isset($turnover_to)) ) 
 		{	
 				if($post['turnover_from'] == 0)
 				{
@@ -184,7 +212,7 @@ class Companies_model extends CI_Model {
 									ON T1.id = T.id
 									  
 									where T1."max eff date" = T.eff_from 
-									and T.turnover = NULL or  T.turnover < '.$post['turnover_to'].'
+									and T.turnover = NULL or  T.turnover < '.$turnover_to.'
 			  
 			  						';
 				}
@@ -205,7 +233,7 @@ class Companies_model extends CI_Model {
 									ON T1.id = T.id
 									  
 									where T1."max eff date" = T.eff_from 
-									and  T.turnover between '.$post['turnover_from'].'  and '.$post['turnover_to'].'  ';
+									and  T.turnover between '.$turnover_from.'  and '.$turnover_to.'  ';
 				}
 				
 		}
@@ -320,7 +348,7 @@ class Companies_model extends CI_Model {
 			   json_agg( 
 			   row_to_json ((
 			   TT2."sector_id", TT2."sector"))),-- f25
-			   C.phone)) "JSON output" 
+			   C.phone, C.pipeline)) "JSON output" 
 			   
 
 
@@ -523,27 +551,27 @@ class Companies_model extends CI_Model {
 
 		// TURNOVER
 			// Defautl values
-			if(empty($post['turnover_from']) && !empty($post['turnover_to']))
+			if(empty($turnover_from) && !empty($turnover_to))
 			{
-				$post['turnover_from'] = '0';
+				$turnover_from = '0';
 			}
 
-			if(empty($post['turnover_to']) && !empty($post['turnover_from']))
+			if(empty($turnover_to) && !empty($turnover_from))
 			{
-				$post['turnover_to'] = '100000000';
+				$turnover_to = '100000000';
 			}
 			// set from in query
-		if(isset($post['turnover_from']) && (!empty($post['turnover_from'])) ) 
+		if(isset($turnover_from) && (!empty($turnover_from)) ) 
 		{
-			$this->db->where('turnovers.turnover >', $post['turnover_from']);
+			$this->db->where('turnovers.turnover >', $turnover_from);
 		}
 			// set to in query
-		if(isset($post['turnover_to']) && (!empty($post['turnover_to'])) )
+		if(isset($turnover_to) && (!empty($turnover_to)) )
 		{
-			$this->db->where('turnovers.turnover <', $post['turnover_to']);
+			$this->db->where('turnovers.turnover <', $turnover_to);
 		}
 			// order by turnover
-		if(isset($post['turnover_from']) || isset($post['turnover_to'])) 
+		if(isset($turnover_from) || isset($turnover_to)) 
 		{
 			array_push($group_by,"turnovers.turnover");
 			$this->db->order_by("turnovers.turnover", "asc");
@@ -762,6 +790,7 @@ class Companies_model extends CI_Model {
 				'contract'=>isset($post['contract'])?$post['contract']:NULL,
 				'perm'=>isset($post['perm'])?$post['perm']:NULL,
 				'class'=>!empty($post['company_class'])?$post['company_class']:NULL,
+				'pipeline'=>isset($post['company_pipeline'])?$post['company_pipeline']:NULL,
 				'updated_at' => date('Y-m-d H:i:s')
 			);
 
