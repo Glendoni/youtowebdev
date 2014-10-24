@@ -1,5 +1,5 @@
 <div class="row ">
-<div  class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+<div  class="mainbox ">
 <h2 class="page-header">
 Create company
 </h2>

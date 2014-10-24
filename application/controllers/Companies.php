@@ -243,8 +243,9 @@ class Companies extends MY_Controller {
 			$this->data['actions'] = $this->Actions_model->get_actions($this->input->get('id'));
 			$this->data['page_title'] = $company[0]['name'];
 			$this->data['companies'] = $company;
+			$this->data['hide_side_nav'] = True;
 			$this->data['main_content'] = 'companies/company';
-			$this->load->view('layouts/default_layout', $this->data);
+			$this->load->view('layouts/single_page_layout', $this->data);
 		}
 		else
 		{
