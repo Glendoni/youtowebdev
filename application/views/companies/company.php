@@ -4,8 +4,9 @@
 	<h2 class="company-header">
 	<?php echo $company['name']; ?>
 	</h2>
+	<?php if (isset($company['pipeline'])): ?>
 	<span class="label pipeline-label label-<?php echo str_replace(' ', '', $companies_pipeline[$company['pipeline']]); ?>"><?php echo $companies_pipeline[$company['pipeline']] ?></span>
-
+	<?php endif; ?>
 
 	<?php $this->load->view('companies/edit_box.php',array('company'=>$company)); ?>
 </div>
@@ -48,38 +49,31 @@
         <div class="row col-md-6" style="margin-top:10px;">
         <strong>Phone Number</strong>
         <p style="margin-bottom:0;">
-        <?php if (isset($company['phone'])): ?>
-        <?php echo $company['phone']; ?>
-				
-                
-				<?php else: ?>
-				-
-                <?php endif; ?>
-                </p>
-				</div>
-        		<div class="row col-md-6" style="margin-top:10px;">
-        		<strong>Website</strong>
-        		<p style="margin-bottom:0;">
-				<?php if (isset($company['url'])): ?>
-				<a class="btn btn-link" style="padding:0;" href="<?php $parsed = parse_url($company['url']); if (empty($parsed['scheme'])) { echo 'http://' . ltrim($company['url'], '/'); }else{ echo $company['url']; } ?>" target="_blank"><i class="fa fa-home"></i>
-				<?php echo str_replace("http://"," ",str_replace("www.", "", $company['url']))?>
-				</a>
-				<?php else: ?>
-				-
-                <?php endif; ?>
-                </p>
-				</div>
-                 <div class="row col-md-6" style="margin-top:10px;">
-					<strong>Segment</strong>
-					<p style="margin-bottom:0;">	
-                <!--SEGMENT IF APPLICABLE-->
-                <?php if (isset($company['class'])): ?>
-				<span class="label label-info"><?php echo $companies_classes[$company['class']] ?></span>	
-
-				<?php else: ?>
-				-
-                <?php endif; ?>
+        	<?php echo isset($company['phone'])?$company['phone']:'-'; ?>                
             </p>
+			</div>
+    		<div class="row col-md-6" style="margin-top:10px;">
+    		<strong>Website</strong>
+    		<p style="margin-bottom:0;">
+			<?php if (isset($company['url'])): ?>
+			<a class="btn btn-link" style="padding:0;" href="<?php $parsed = parse_url($company['url']); if (empty($parsed['scheme'])) { echo 'http://' . ltrim($company['url'], '/'); }else{ echo $company['url']; } ?>" target="_blank"><i class="fa fa-home"></i>
+			<?php echo str_replace("http://"," ",str_replace("www.", "", $company['url']))?>
+			</a>
+			<?php else: ?>
+			-
+            <?php endif; ?>
+            </p>
+			</div>
+             <div class="row col-md-6" style="margin-top:10px;">
+				<strong>Segment</strong>
+				<p style="margin-bottom:0;">	
+		            <!--SEGMENT IF APPLICABLE-->
+		            <?php if (isset($company['class'])): ?>
+						<span class="label label-info"><?php echo $companies_classes[$company['class']] ?></span>	
+					<?php else: ?>
+						-
+		            <?php endif; ?>
+	            </p>
 			</div>
 			<div class="row col-md-6" style="margin-top:10px;">
 			<strong>Company Number</strong>
@@ -162,12 +156,15 @@
 		<!-- SECTORS -->
 		<div class="col-md-3 centre">
 			<strong>Sectors</strong> 
-			<?php 
-			if(isset($company['sectors'])){
-				foreach ($company['sectors'] as $key => $name) {
-echo '<p style="margin-bottom:0;"><span class="glyphicon glyphicon-ok" style="margin-right:5px;color: #5cb85c;border: #5cb85c; font-size:11px;"></span>'.$name.'</p>';				}
-			}
-			?>
+			<?php if(isset($company['sectors'])): ?>
+				<?php foreach ($company['sectors'] as $key => $name): ?>
+				<p style="margin-bottom:0;">
+				<span class="glyphicon glyphicon-ok" style="margin-right:5px;color: #5cb85c;border: #5cb85c; font-size:11px;">
+					<?php echo $name;?>
+				</span>
+				</p>
+				<?php endforeach; ?>
+			<?php endif; ?>
 		</div>
 
 		<!-- LINKS AND BTN -->
@@ -216,7 +213,7 @@ echo '<p style="margin-bottom:0;"><span class="glyphicon glyphicon-ok" style="ma
 		<?php endif; ?>
 		</div>
 
-<div class="col-md-12">
+		<div class="col-md-12">
 			<hr style="padding-bottom:20px;">
 		</div>
 
@@ -275,16 +272,6 @@ echo '<p style="margin-bottom:0;"><span class="glyphicon glyphicon-ok" style="ma
 					<label>Note</label>
 					<textarea class="form-control" name="comment" rows="6"></textarea>
 				</div>
-                
-				<!-- <div class="form-group " >
-					<label>Actioned</label>
-					<input type="text" class="form-control" id="actioned_at" name="actioned_at" placeholder="">
-				</div> -->
-
-				<!-- <div class="form-group 	 window_completition" >
-					<label>Window for completion </label>
-					<input type="text" class="form-control " id="" name="window" placeholder="days">
-				</div> -->
 				<button type="submit" name="save" class="btn btn-primary form-control">Schedule</button>
 			</div>
             </div>

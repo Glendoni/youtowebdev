@@ -362,10 +362,7 @@ class Companies_model extends CI_Model {
 		if(isset($sectors_sql)) $sql = $sql.' JOIN ( '.$sectors_sql.' ) sectors ON C.id = sectors.company_id';
 		if(isset($providers_sql)) $sql = $sql.' JOIN ( '.$providers_sql.' ) providers ON C.id = providers.company_id';
 		if(isset($assigned_sql)) $sql = $sql.' JOIN ( '.$assigned_sql.' ) assigned ON C.id = assigned.id';
-		
-				if(isset($class_sql)) $sql = $sql.' JOIN ( '.$class_sql.' ) segment ON C.id = segment.id';
-
-
+		if(isset($class_sql)) $sql = $sql.' JOIN ( '.$class_sql.' ) segment ON C.id = segment.id';
 		if(isset($company_id) && $company_id !== False) $sql = $sql.' JOIN ( select id from companies where id = '.$company_id.' ) company ON C.id = company.id';
 		$sql = $sql.' LEFT JOIN 
 		(-- TT1 
@@ -865,5 +862,18 @@ class Companies_model extends CI_Model {
 		} 	
 		return $array;
     }
+
+
+    function get_autocomplete($search_data) {
+		$query1 = $this->db->query("select name,id from companies where name ilike '".$search_data."%' order by name asc limit 10 ");
+	    if ($query1->num_rows() > 0)
+			{
+			return $query1;
+			}
+		else 
+			{
+			return $this->db->query("select name,id from companies where name ilike '%".$search_data."%' order by name asc limit 5 ");
+			}
+	}
 }
 

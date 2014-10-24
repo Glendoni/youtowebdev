@@ -335,4 +335,15 @@ class Companies extends MY_Controller {
 		return $companies_array;
 	}
 
+	public function autocomplete() {
+        $search_data = $this->input->post("search_data");
+        $query = $this->Companies_model->get_autocomplete($search_data);
+        echo "<ul class='autocomplete-holder'>";
+        foreach ($query->result() as $row):
+            echo "<a href='" . base_url() . "companies/company?id=" . $row->id . "'><li class='autocomplete-item'>" . $row->name . "</li></a>";
+        endforeach;
+        echo "</ul>";
+    }
+
+
 }

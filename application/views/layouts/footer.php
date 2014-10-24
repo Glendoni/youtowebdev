@@ -50,7 +50,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "<?php echo base_url(); ?>autocomplete/autocomplete/",
+                    url: "<?php echo base_url(); ?>companies/autocomplete/",
                     data: post_data,
                     success: function(data) {
                         // return success
@@ -67,30 +67,7 @@
 
             }
         }
-</script>
 
- <script type="text/javascript">
-$(document).ready(function(){
-$("#agency_name").autocomplete({
-source:'includes/getautocomplete.php',
-minLength:1,
-response: function(event, ui) {
-// ui.content is the array that's about to be sent to the response callback.
-if (ui.content.length === 0) {
-$("#empty-message").html("<a type='button' class='btn btn-info btn-xs btn-block' href='add_company.php'>No Results Found<br><b>Click To Add</b></button>");
-} else {
-$("#empty-message").empty();
-}
-},
-select: function( event, ui ) { 
-window.location.href = ui.item.link;
-}
-});
-});
-</script>
-
-
- 	<script type="text/javascript">
  	$( document ).ready(function() {
  		// Datetime picker
         $('#planned_at').datetimepicker();

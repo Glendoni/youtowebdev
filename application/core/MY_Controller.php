@@ -37,7 +37,6 @@ class MY_Controller extends CI_Controller {
 		$this->load->model('Providers_model');
 		$this->load->model('Actions_model');
 		$this->load->model('Companies_model');
-		$this->load->model('Autocomplete_model');
 		// $this->load->helper('mobile');
 		
 		// loging checking and redirect
