@@ -41,7 +41,7 @@ class Companies_model extends CI_Model {
 			'Customer' => 'Customer',
 			'Unsuitable' => 'Unsuitable',
 			'Lost' => 'Lost'
-						);
+			);
 		return 	$arrayNamesPipeline;
 	}
 

@@ -21,7 +21,10 @@
 		<div class="col-md-8">
 			<h3 class="name" style="margin-top: 0px;margin-bottom: 10px;">
 				<a href="<?php echo site_url();?>companies/company?id=<?php echo $company['id'];?>" target="_blank">
-					<?php echo $company['name']; ?>
+					<?php 
+					$words = array( 'Limited', 'LIMITED', 'LTD','ltd','Ltd' );
+					echo str_replace($words, ' ',$company['name']); 
+					?>
 				</a>
 			</h3>
 			<?php if (isset($company['class'])): ?>				

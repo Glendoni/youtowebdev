@@ -2,7 +2,10 @@
 <div class="row page-results-list">
 <div class="top-info-holder">
 	<h2 class="company-header">
-	<?php echo $company['name']; ?>
+	<?php 
+		$words = array( 'Limited', 'LIMITED', 'LTD','ltd','Ltd' );
+		echo str_replace($words, ' ',$company['name']); 
+	?>
 	</h2>
 	<?php if (isset($company['pipeline'])): ?>
 	<span class="label pipeline-label label-<?php echo str_replace(' ', '', $companies_pipeline[$company['pipeline']]); ?>"><?php echo $companies_pipeline[$company['pipeline']] ?></span>
