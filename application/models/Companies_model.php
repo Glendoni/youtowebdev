@@ -454,7 +454,7 @@ class Companies_model extends CI_Model {
 		JOIN PROVIDERS P
 		ON M.provider_id = P.id 
 
-		order by 1, 4, 5 desc
+		order by 1, 4, M.eff_from desc
 
 		)   T
 
