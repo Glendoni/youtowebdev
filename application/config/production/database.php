@@ -45,6 +45,9 @@
 | the active record class
 */
 
+
+
+
 $active_group = 'remote';
 $active_record = TRUE;
 
@@ -64,6 +67,8 @@ $db['remote']['swap_pre'] = '';
 $db['remote']['autoinit'] = TRUE;
 $db['remote']['stricton'] = FALSE;
 $db['remote']['port'] = 5432;
+
+
 
 /* End of file database.php */
 /* Location: ./application/config/database.php */
