@@ -26,7 +26,7 @@ class Contacts_model extends CI_Model {
 	}
 
 
-	function create_contact($name,$email,$phone,$role,$company_id,$created_by)
+	function create_contact($name,$email,$role,$company_id,$created_by,$phone=NULL)
 	{
         $contact->name   = $name; // please read the below note
         $contact->email = $email;

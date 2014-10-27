@@ -14,13 +14,13 @@ class Contacts extends MY_Controller {
 			$this->load->library('form_validation');
 			$this->form_validation->set_rules('name', 'name', 'xss_clean|required');
 			$this->form_validation->set_rules('email', 'email', 'xss_clean|required');
-			$this->form_validation->set_rules('phone', 'phone', 'xss_clean|required');
+			$this->form_validation->set_rules('phone', 'phone', 'xss_clean');
 			$this->form_validation->set_rules('role', 'role', 'xss_clean|required');
 			$this->form_validation->set_rules('company_id', 'company_id', 'xss_clean|required');
 			$this->form_validation->set_rules('user_id', 'user_id', 'xss_clean|required');
 			if($this->form_validation->run())
 			{
-				$rows_affected = $this->Contacts_model->create_contact($this->input->post('name'),$this->input->post('email'),$this->input->post('phone'),$this->input->post('role'),$this->input->post('company_id'),$this->input->post('user_id'));
+				$rows_affected = $this->Contacts_model->create_contact($this->input->post('name'),$this->input->post('email'),$this->input->post('role'),$this->input->post('company_id'),$this->input->post('user_id'),$this->input->post('phone'));
 				if($rows_affected  > 0)
 				{
 					$this->refresh_search_results();

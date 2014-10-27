@@ -190,19 +190,20 @@
 	      </thead>
 	      <tbody>
 	      	<?php foreach ($contacts as $contact): ?>
-			<td><?php echo $contact->name; ?></td>
-			<td><?php echo $contact->email; ?></td>
-			<td><?php echo $contact->phone; ?></td>
-			<td><?php echo $contact->role; ?></td>
-			<td>
-			<span class="assigned-image-holder" style="max-width:30px; float:right;">
-			<img src="<?php echo asset_url();?>images/profiles/<?php echo isset($system_users_images[$contact->created_by])? $system_users_images[$contact->created_by]:'none' ;?>.jpg" class="img-circle img-responsive" alt="" />
-        	</span>
-        	</td>
+	      	<tr>
+				<td><?php echo $contact->role; ?></td>
+				<td><?php echo $contact->name; ?></td>
+				<td><?php echo $contact->email; ?></td>
+				<td><?php echo $contact->phone; ?></td>
+				<td>
+				<span class="assigned-image-holder" style="max-width:30px; float:right;">
+				<img src="<?php echo asset_url();?>images/profiles/<?php echo isset($system_users_images[$contact->created_by])? $system_users_images[$contact->created_by]:'none' ;?>.jpg" class="img-circle img-responsive" alt="" />
+	        	</span>
+	        	</td>
+        	</tr>
 			<?php endforeach; ?>  
 	      </tbody>
 	    </table>
-		
 		</div>
 		<?php endif; ?>
 		<div class="col-md-12">

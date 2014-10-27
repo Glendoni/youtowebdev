@@ -21,7 +21,7 @@
                     <input type="text" name="role" value="" id="role" maxlength="50" class="form-control">
                 </div>
                 <div class=" form-group ">
-                    <label for="phone" class="control-label">Phone *</label>                            
+                    <label for="phone" class="control-label">Phone </label>                            
                     <input type="phone" name="phone" value="" id="phone" maxlength="50" class="form-control">
                 </div>
             </div>
