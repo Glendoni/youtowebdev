@@ -48,22 +48,22 @@
 $active_group = 'remote';
 $active_record = TRUE;
 
-$db['remote']['hostname'] = 'ec2-54-228-195-52.eu-west-1.compute.amazonaws.com';
-$db['remote']['username'] = 'mhcpgrefocjdtf';
-$db['remote']['password'] = 'CZbMFlzImraARQeWme1UM3VFOm';
-$db['remote']['database'] = 'd1bna94a8j95ip';
-$db['remote']['dbdriver'] = 'postgre';
-$db['remote']['dbprefix'] = '';
-$db['remote']['pconnect'] = TRUE;
-$db['remote']['db_debug'] = FALSE;
-$db['remote']['cache_on'] = FALSE;
-$db['remote']['cachedir'] = '';
-$db['remote']['char_set'] = 'utf8';
-$db['remote']['dbcollat'] = 'utf8_general_ci';
-$db['remote']['swap_pre'] = '';
-$db['remote']['autoinit'] = TRUE;
-$db['remote']['stricton'] = FALSE;
-$db['remote']['port'] = 5432;
+// $db['remote']['hostname'] = 'ec2-54-228-195-52.eu-west-1.compute.amazonaws.com';
+// $db['remote']['username'] = 'mhcpgrefocjdtf';
+// $db['remote']['password'] = 'CZbMFlzImraARQeWme1UM3VFOm';
+// $db['remote']['database'] = 'd1bna94a8j95ip';
+// $db['remote']['dbdriver'] = 'postgre';
+// $db['remote']['dbprefix'] = '';
+// $db['remote']['pconnect'] = TRUE;
+// $db['remote']['db_debug'] = FALSE;
+// $db['remote']['cache_on'] = FALSE;
+// $db['remote']['cachedir'] = '';
+// $db['remote']['char_set'] = 'utf8';
+// $db['remote']['dbcollat'] = 'utf8_general_ci';
+// $db['remote']['swap_pre'] = '';
+// $db['remote']['autoinit'] = TRUE;
+// $db['remote']['stricton'] = FALSE;
+// $db['remote']['port'] = 5432;
 
 
 
