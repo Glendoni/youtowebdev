@@ -238,6 +238,11 @@ class Companies extends MY_Controller {
 			$raw_search_results = $this->Companies_model->search_companies_sql(FALSE,$this->input->get('id'));
 			$company = $this->process_search_result($raw_search_results);
 			$this->data['contacts'] = $this->Contacts_model->get_contacts($this->input->get('id'));
+			$option_contacts =  array();
+			foreach ($this->data['contacts'] as $contact) {
+				$option_contacts[$contact->id] = $contact->name;
+			}
+			$this->data['option_contacts'] = $option_contacts;
 			$this->data['action_types_done'] = $this->Actions_model->get_action_types_done();
 			$this->data['action_types_planned'] = $this->Actions_model->get_action_types_planned();
 			$this->data['action_types_array'] = $this->Actions_model->get_action_types_array();
@@ -341,9 +346,10 @@ class Companies extends MY_Controller {
 	public function autocomplete() {
         $search_data = $this->input->post("search_data");
         $query = $this->Companies_model->get_autocomplete($search_data);
+        $words = array( 'Limited', 'LIMITED', 'LTD','ltd','Ltd' );
         echo "<ul class='autocomplete-holder'>";
         foreach ($query->result() as $row):
-            echo "<a href='" . base_url() . "companies/company?id=" . $row->id . "'><li class='autocomplete-item'>" . $row->name . "</li></a>";
+            echo "<a href='" . base_url() . "companies/company?id=" . $row->id . "'><li class='autocomplete-item'>" . str_replace($words, ' ',$row->name). "</li></a>";
         endforeach;
         echo "</ul>";
     }

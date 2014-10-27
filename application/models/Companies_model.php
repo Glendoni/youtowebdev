@@ -744,13 +744,14 @@ class Companies_model extends CI_Model {
 
 	function update_details($post)
 	{
-		
 		if(isset($post['turnover']) and !empty($post['turnover']))
 		{	
 			// this should only happen when no turnonver exist
 			$turnover = array(
 				'company_id' => $post['company_id'],
 				'turnover' => $post['turnover'],
+				'method'=> isset($post['method'])?$post['method']:NULL,
+				'eff_from'=> date('Y-m-d H:i:s'),
 				'created_by' => $post['user_id'],
 				'created_at' => date('Y-m-d H:i:s')
 				); 

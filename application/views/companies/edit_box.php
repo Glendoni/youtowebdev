@@ -40,9 +40,21 @@
                 </div>
 				<?php if (isset($company['turnover']) == False ) :?>
                 <div class="col-md-6">
-                    <div class=" form-group ">
-                        <label for="turnover" class="control-label">Turnover</label>                            
-                        <input type="text" name="turnover" value="" id="turnover" maxlength="50" class="form-control">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class=" form-group ">
+                                <label for="turnover" class="control-label">Turnover</label>                            
+                                <input type="text" name="turnover" value="" id="turnover" maxlength="50" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="turnover" class="control-label">Method</label>   
+                            <select name="method" class="form-control">
+                            <option value=""></option>
+                            <option value="actual">Actual</option>
+                            <option value="projected">Projected</option>
+                        </select>
+                        </div>
                     </div>
                 </div>
             	<?php endif; ?>

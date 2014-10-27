@@ -10,8 +10,10 @@
 	<?php if (isset($company['pipeline'])): ?>
 	<span class="label pipeline-label label-<?php echo str_replace(' ', '', $companies_pipeline[$company['pipeline']]); ?>"><?php echo $companies_pipeline[$company['pipeline']] ?></span>
 	<?php endif; ?>
-
+	<!-- POPUP BOXES -->
 	<?php $this->load->view('companies/edit_box.php',array('company'=>$company)); ?>
+	<?php $this->load->view('companies/create_contact_box.php',array('company'=>$company)); ?>
+	<!-- // POPUP BOXES -->
 </div>
 <div class="panel <?php if(isset($company['assigned_to_name'])): ?> panel-primary <?php else: ?> panel-default <?php endif; ?> company">
 	<?php if(isset($company['assigned_to_name'])): ?>
@@ -201,7 +203,6 @@
 	      </tbody>
 	    </table>
 		
-		
 		</div>
 		<?php endif; ?>
 		<div class="col-md-12">
@@ -214,21 +215,40 @@
 		  </div>
 		  <div class="panel-body">
 		   <?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'],'done'=>'1');
-					 echo form_open(site_url().'actions/create', 'name="create" class="form" role="form"',$hidden); ?>
-			<div class="form-group ">
-				<label>Type</label>
-				<select name="action_type" class="form-control">
-					<?php foreach($action_types_done as $action ): ?>
-					  <option value="<?php echo $action->id; ?>"><?php echo $action->name; ?></option>
-					<?php endforeach; ?>
-				</select>
+			echo form_open(site_url().'actions/create', 'name="create" class="form" role="form"',$hidden); ?>
+			<div class="row">
+			<div class="col-md-6">
+				<div class="form-group ">
+					<label>Type</label>
+					<select name="action_type" class="form-control">
+						<?php foreach($action_types_done as $action ): ?>
+						  <option value="<?php echo $action->id; ?>"><?php echo $action->name; ?></option>
+						<?php endforeach; ?>
+					</select>
+				</div>
 			</div>
-			<div class="form-group ">
-				<label>Outcome</label>
-				<textarea class="form-control" name="comment" rows="6"></textarea>
+			<?php if(isset($contacts) and !empty($contacts)) : ?>
+			<div class="col-md-6">
+				<div class="form-group ">
+					<label>Contact</label>
+					<select name="contact_id" class="form-control">
+						<option value=""></option>
+						<?php foreach($contacts as $contact ): ?>
+						  <option value="<?php echo $contact->id; ?>"><?php echo $contact->name; ?></option>
+						<?php endforeach; ?>
+					</select>
+				</div>
 			</div>
-			<button type="submit" name="save" class="btn btn-success form-control">Save</button>
+			<?php endif; ?>
+			<div class="col-md-12">
+				<div class="form-group ">
+					<label>Outcome</label>
+					<textarea class="form-control" name="comment" rows="6"></textarea>
+				</div>
+				<button type="submit" name="save" class="btn btn-success form-control">Save</button>
+			</div>
 			<?php echo form_close(); ?>
+			</div>
 		  </div>
 		</div>
 		</div>
@@ -252,17 +272,30 @@
 					</div>
 	                </div>
 	                <div class="col-md-6">
-					<div class="form-group " >
-						<label>Planned For</label>
-						<input type="text" class="form-control" id="planned_at" data-date-format="YYYY/MM/DD H:m" name="planned_at" placeholder="">
-					</div>
+						<div class="form-group " >
+							<label>Planned For</label>
+							<input type="text" class="form-control" id="planned_at" data-date-format="YYYY/MM/DD H:m" name="planned_at" placeholder="">
+						</div>
 	                </div>
-	                <div class="col-md-12">
-					<div class="form-group ">
-						<label>Note</label>
-						<textarea class="form-control" name="comment" rows="6"></textarea>
+	                <?php if(isset($contacts) and !empty($contacts)) : ?>
+	                <div class="col-md-6">
+						<div class="form-group ">
+							<label>Contact</label>
+							<select name="contact_id" class="form-control">
+								<option value=""></option>
+								<?php foreach($contacts as $contact ): ?>
+								  <option value="<?php echo $contact->id; ?>"><?php echo $contact->name; ?></option>
+								<?php endforeach; ?>
+							</select>
+						</div>
 					</div>
-					<button type="submit" name="save" class="btn btn-primary form-control">Schedule</button>
+					<?php endif; ?>
+	                <div class="col-md-12">
+						<div class="form-group ">
+							<label>Note</label>
+							<textarea class="form-control" name="comment" rows="6"></textarea>
+						</div>
+						<button type="submit" name="save" class="btn btn-primary form-control">Schedule</button>
 				</div>
 	            </div>
 				<?php echo form_close(); ?>
@@ -325,6 +358,10 @@
                                    	<?php elseif($action->actioned_at): ?>
                                    		<span class="label label-success pull-right" style="font-size:11px; margin-left:10px;">Completed on <?php echo $actioned_date_formatted ?></span>
 									<?php endif; ?>
+									<?php if($action->contact_id):?>
+										<span class="label label-warning pull-right" style="font-size:11px; margin-left:10px;"><i class="fa fa-users"></i> <?php echo $option_contacts[$action->contact_id]; ?></span>
+										
+									<?php endif; ?>
 
 						  			</h4>
                                     <div class="mic-info">
@@ -335,9 +372,7 @@
 								
 								<div class="comment-text speech col-md-12" >
 	                                <div class="triangle-isosceles top">
-										
-										<?php echo isset($action->comments)? $action->comments:'No comments'; ?>
-                                        
+										<?php echo isset($action->comments)? $action->comments:'No comments'; ?>  
                                         <?php if (!empty($action->outcome)):?>
 											<table style="width:100%">
 											<tr>

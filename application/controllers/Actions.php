@@ -23,6 +23,7 @@ class Actions extends MY_Controller {
 			$this->form_validation->set_rules('actioned_at', 'actioned_at', 'xss_clean');
 			$this->form_validation->set_rules('company_id', 'company_id', 'xss_clean|required');
 			$this->form_validation->set_rules('user_id', 'user_id', 'xss_clean|required');
+			$this->form_validation->set_rules('contact_id', 'contact_id', 'xss_clean');
 			if($this->form_validation->run())
 			{	
 				$result = $this->Actions_model->create($this->input->post());
@@ -44,6 +45,7 @@ class Actions extends MY_Controller {
 			$this->form_validation->set_rules('planned_at', 'planned_at', 'required|callback__valid_date');
 			$this->form_validation->set_rules('company_id', 'company_id', 'xss_clean|required');
 			$this->form_validation->set_rules('user_id', 'user_id', 'xss_clean|required');
+			$this->form_validation->set_rules('contact_id', 'contact_id', 'xss_clean');
 
 			if($this->form_validation->run())
 			{
