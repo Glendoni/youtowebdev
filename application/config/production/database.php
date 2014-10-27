@@ -51,10 +51,10 @@
 $active_group = 'remote';
 $active_record = TRUE;
 
-$db['remote']['hostname'] = 'ec2-54-83-43-49.compute-1.amazonaws.com';
-$db['remote']['username'] = 'pafpgwduawjhjg';
-$db['remote']['password'] = 'CgceaC6SiUqGVL1zzgTt6egPak';
-$db['remote']['database'] = 'dcnitnkm31ke9f';
+$db['remote']['hostname'] = 'ec2-184-73-219-162.compute-1.amazonaws.com';
+$db['remote']['username'] = 'uamsnmk9i2in0';
+$db['remote']['password'] = 'p47ul5n2vd9jvsaeui6la197nnr';
+$db['remote']['database'] = 'd7vgng5fag3om9';
 $db['remote']['dbdriver'] = 'postgre';
 $db['remote']['dbprefix'] = '';
 $db['remote']['pconnect'] = TRUE;
@@ -66,7 +66,7 @@ $db['remote']['dbcollat'] = 'utf8_general_ci';
 $db['remote']['swap_pre'] = '';
 $db['remote']['autoinit'] = TRUE;
 $db['remote']['stricton'] = FALSE;
-$db['remote']['port'] = 5432;
+$db['remote']['port'] = 5892;
 
 
 

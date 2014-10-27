@@ -48,8 +48,7 @@
 $active_group = 'remote';
 $active_record = TRUE;
 
-// $db['remote']['hostname'] = 'ec2-54-228-195-52.eu-west-1.compute.amazonaws.com';
-$db['remote']['hostname'] = '';
+$db['remote']['hostname'] = 'ec2-54-228-195-52.eu-west-1.compute.amazonaws.com';
 $db['remote']['username'] = 'mhcpgrefocjdtf';
 $db['remote']['password'] = 'CZbMFlzImraARQeWme1UM3VFOm';
 $db['remote']['database'] = 'd1bna94a8j95ip';
