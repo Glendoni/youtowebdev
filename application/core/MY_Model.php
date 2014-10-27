@@ -15,6 +15,10 @@ class MY_Model extends CI_Model {
 		$this->errors = array();
 		$this->warning = array();
 		$dsn = getenv('DATABASE_URL');
+		echo $dsn;
+		if (!isset($dsn)){
+			echo 'dsn not set';
+		}
 		$this->load->database($dsn);
 	}
 
