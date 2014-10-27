@@ -70,7 +70,6 @@ class Actions extends MY_Controller {
 		{
 			if($this->input->post('action_do') == 'completed')
 			{   
-				var_dump($this->input->post());die;
 				$this->load->library('form_validation');
 				$this->form_validation->set_rules('action_type', 'action_type', 'xss_clean');
 				$this->form_validation->set_rules('comment', 'comment', 'xss_clean');
@@ -83,17 +82,18 @@ class Actions extends MY_Controller {
 
 				if($this->form_validation->run())
 				{
-
-				}
-				$outcome = $this->input->post('outcome');
-				$result = $this->Actions_model->set_action_state($this->input->post('action_id'),$this->input->post('user_id'),'completed',$outcome);
-				if($result)
-				{
-					$this->set_message_success('Action set to completed.');
-				}
-				else
-				{
-					$this->set_message_warning('Error while completing action');
+					$outcome = $this->input->post('outcome');
+					$result = $this->Actions_model->set_action_state($this->input->post('action_id'),$this->input->post('user_id'),'completed',$outcome);
+					if($result)
+					{
+						$this->set_message_success('Action updated successfully.');
+					}
+					else
+					{
+						$this->set_message_warning('Error while updating action');
+					}
+				}else{
+					$this->set_message_error(validation_errors());
 				}
 				redirect('companies/company?id='.$this->input->post('company_id'),'location');
 			}
