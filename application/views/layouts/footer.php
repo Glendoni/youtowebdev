@@ -54,14 +54,12 @@
                     data: post_data,
                     success: function(data) {
                         // return success
-                        if (data.length >= 0) {
-                            $('#suggestions').show();
-                            $('#autoSuggestionsList').addClass('auto_list');
-                            $('#autoSuggestionsList').html(data);
-                            $('#agency_name').addClass('autocomplete-live');
-
-
-                        }
+                        console.log(data.html);
+                        
+                        $('#suggestions').show();
+                        $('#autoSuggestionsList').addClass('auto_list');
+                        $('#autoSuggestionsList').html(data.html);
+                        $('#agency_name').addClass('autocomplete-live');
                     }
                 });
 

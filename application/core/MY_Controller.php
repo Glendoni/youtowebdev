@@ -16,7 +16,7 @@ class MY_Controller extends CI_Controller {
 		// Debugging funcionality, set it only when on development 
 		switch (ENVIRONMENT) {
 		case 'development':
-		        $this->output->enable_profiler(TRUE);
+		        $this->output->enable_profiler(False);
 		break;
 		case 'staging':
 		        $this->output->enable_profiler(TRUE);

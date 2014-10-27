@@ -78,7 +78,6 @@ class Actions extends MY_Controller {
 				$this->form_validation->set_rules('window', 'window', 'xss_clean');
 				$this->form_validation->set_rules('company_id', 'company_id', 'xss_clean');
 				$this->form_validation->set_rules('user_id', 'user_id', 'xss_clean');
-		
 
 				if($this->form_validation->run())
 				{

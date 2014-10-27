@@ -305,7 +305,6 @@ ul.autocomplete-holder {
   	background-color: #F6F6F6;
   	border: 1px #A5B0B1 solid;
   	border-top: none;
-  	position: absolute;
   	width: 100%;
 }
 li.autocomplete-item:first-child { 
