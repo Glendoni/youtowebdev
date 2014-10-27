@@ -75,6 +75,7 @@ class Companies_model extends CI_Model {
 		$this->db->select("(SELECT Ad.image FROM users Ad WHERE Ad.id = companies.user_id ) as company_assigned_to_image", FALSE, FALSE);
 		$this->db->select("(SELECT Ad.id FROM users Ad WHERE Ad.id = companies.user_id ) as company_assigned_to_id", FALSE, FALSE);
 
+
 		// Build query 
 		$query = $this->db->get();
 
@@ -100,17 +101,6 @@ class Companies_model extends CI_Model {
 
 			// Place the result array on the current object
 			$companies->result_object[$key]->mortgages = $mortgages2;
-
-			// Check for assign to
-			// $assign_to = $company->company_assigned_to;
-			// if(!empty($assign_to))
-			// {
-			// 	$names = explode(" ", $assign_to); 
-			// 	$initials = $names[0][0].$names[1][0];
-			// 	$to_upper = strtoupper($initials);
-			// 	// Set to array
-			// 	$companies->result_object[$key]->company_assign_to = $to_upper;
-			// }
 
 			$this->db->select('turnovers.turnover');
 			$this->db->from('turnovers');
@@ -348,7 +338,9 @@ class Companies_model extends CI_Model {
 			   json_agg( 
 			   row_to_json ((
 			   TT2."sector_id", TT2."sector"))),-- f25
-			   C.phone, C.pipeline)) "JSON output" 
+			   C.phone, 
+			   C.pipeline,
+			   CONT.contacts_count)) "JSON output" 
 			   
 
 
@@ -387,6 +379,11 @@ class Companies_model extends CI_Model {
 		ON TT1."company id" = C.id 
 
 		LEFT JOIN
+		(
+			SELECT count(*) as "contacts_count",company_id FROM "contacts" group by contacts.company_id
+		) CONT ON CONT.company_id = C.id
+
+		LEFT JOIN
 		(-- TT2
 		select O.company_id "company id",
 		       S.id "sector_id",
@@ -398,8 +395,6 @@ class Companies_model extends CI_Model {
 		where O.active = \'TRUE\'
 		)   TT2
 		ON TT2."company id" = C.id
-
-
 
 		LEFT JOIN 
 		(
@@ -427,7 +422,8 @@ class Companies_model extends CI_Model {
 			     A.lng,
 		         TT1."turnover",
 			     TT1."turnover_method",
-			     EMP.count
+			     EMP.count,
+			     CONT.contacts_count
 
 		order by C.id 
 
@@ -458,7 +454,7 @@ class Companies_model extends CI_Model {
 
 		)   T
 
-		group by T."company id"
+		group by T."company id"	
 
 		order by T."company id"
 
@@ -723,25 +719,21 @@ class Companies_model extends CI_Model {
             );
 
 		$this->db->update('companies', $data, array('id' => $company_id));
-
-	    $report = array();
-	    $report['error'] = $this->db->_error_number();
-	    $report['message'] = $this->db->_error_message();
-	    return $report;
+	    $rows = $this->db->affected_rows();
+	    return $rows;
 	}
 
 	function unassign_company($company_id)
 	{
 		$data = array(
-               'user_id' => NULL
+               'user_id' => NULL,
+               'assign_date' => date('Y-m-d H:i:s')
             );
 
 		$this->db->update('companies', $data, array('id' => $company_id));
 
-	    $report = array();
-	    $report['error'] = $this->db->_error_number();
-	    $report['message'] = $this->db->_error_message();
-	    return $report;
+	    $rows = $this->db->affected_rows();
+	    return $rows;
 	}
 
 	function clear_company_sectors($id){
@@ -844,6 +836,7 @@ class Companies_model extends CI_Model {
 		return FALSE;
 	}
 
+	// This is an example of inserting 
 	function insert_entry()
 	{
         $this->title   = $_POST['title']; // please read the below note

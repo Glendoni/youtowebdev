@@ -17,7 +17,7 @@
                     ?>
                     </div>
                 </div>
-                    <div class="col-md-6">
+                <div class="col-md-6">
                     <div class=" form-group ">
                     <?php
                     echo form_label('Pipeline', 'company_pipeline');

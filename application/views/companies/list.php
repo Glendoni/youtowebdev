@@ -5,6 +5,7 @@
 
 <?php  foreach ( $companies as $company):  ?>
 <?php $this->load->view('companies/edit_box.php',array('company'=>$company)); ?>
+<?php $this->load->view('companies/create_contact_box.php',array('company'=>$company)); ?>
 <div class="panel <?php if(isset($company['assigned_to_name'])): ?> panel-primary <?php else: ?> panel-default <?php endif; ?> company">
 	<?php if(isset($company['assigned_to_name'])): ?>
 	<div class="panel-heading text-center" >
@@ -34,29 +35,7 @@
 			<?php endif; ?>
 		</div>
 		<div class="col-md-4">
-			<div class="assign-to-wrapper ">
-				<button class="btn btn-warning ladda-button edit-btn" data-toggle="modal" id="editbtn<?php echo $company['id']; ?>" data-style="expand-right" data-size="1" data-target="#editModal<?php echo $company['id']; ?>">
-                    <span class="ladda-label"> Edit </span>
-                </button> 
-				<?php if(isset($company['assigned_to_name']) and !empty($company['assigned_to_name'])): ?>
-					<?php if($company['assigned_to_id'] == $current_user['id']) : ?>			
-						<?php  $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'], 'page_number' => $current_page_number );
-						echo form_open('companies/unassign',array('name' => 'assignto', 'class'=>'assign-to-form'),$hidden); ?>
-						<button type="submit" class="btn  btn-primary  ladda-button" data-style="expand-right" data-size="1">
-						    <span class="ladda-label"> Unassign from me </span>
-						</button>
-						<?php echo form_close(); ?>
-					<?php endif; ?>
-				<?php else: ?>
-				<?php 
-				$hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'], 'page_number' => $current_page_number );
-				echo form_open(site_url().'companies/assignto',array('name' => 'assignto', 'class'=>'assign-to-form'),$hidden); ?>
-				<button type="submit" assignto="<?php echo $current_user['name']; ?>" class="btn  btn-primary  ladda-button" data-style="expand-right" data-size="1">
-			        <span class="ladda-label"> Assign to me </span>
-			    </button>
-				<?php echo form_close(); ?>
-				<?php endif; ?>
-			</div>
+		<?php $this->load->view('companies/actions_box.php',array('company'=>$company)); ?>
 		</div>
 		</div>
 		<div class="row">
@@ -97,6 +76,12 @@
 			<?php echo str_replace("http://"," ",str_replace("www.", "", $company['url']))?>
 			</a>
 			</p>
+			<?php endif; ?>
+
+			<?php if(isset($company['contacts_count'])): ?>
+				<p style="display:inline;">
+				<i class="fa fa-users"></i> <?php echo $company['contacts_count']; ?>
+				</p>
 			<?php endif; ?>
         </div>              
                 

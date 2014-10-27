@@ -192,17 +192,17 @@ class Companies extends MY_Controller {
 	{
 		if($this->input->post('company_id') && $this->input->post('user_id'))
 		{
-			$result = $this->Companies_model->assign_company($this->input->post('company_id'),$this->input->post('user_id'));
-			if(!$result['error'])
+			$rows_affected = $this->Companies_model->assign_company($this->input->post('company_id'),$this->input->post('user_id'));
+			if($rows_affected > 0)
 			{
 				// Clear search in session 
-				$this->index($ajax_refresh=True);
+				$this->refresh_search_results();
 				// redirect('/companies?page_num='.$this->input->post('page_number'),'refresh');
 			}
 			else
 			{
-				$this->set_message_error($result['message']);
-				$this->index();
+				$this->set_message_error('Error while inserting to database');
+				$this->refresh_search_results();
 				// redirect('/companies?page_num='.$this->input->post('page_number'),'refresh');
 			}
 		}
@@ -213,17 +213,17 @@ class Companies extends MY_Controller {
 	{
 		if($this->input->post('company_id') && $this->input->post('user_id'))
 		{
-			$result = $this->Companies_model->unassign_company($this->input->post('company_id'));
-			if(!$result['error'])
+			$rows_affected = $this->Companies_model->unassign_company($this->input->post('company_id'));
+			if($rows_affected > 0)
 			{
 				// Clear search in session 
-				$this->index($ajax_refresh=True);
+				$this->refresh_search_results();
 				// redirect('/companies?page_num='.$this->input->post('page_number'),'refresh');
 			}
 			else
 			{
-				$this->set_message_error($result['message']);
-				$this->index();
+				$this->set_message_error('Error while inserting to database');
+				$this->refresh_search_results();
 				// redirect('/companies?page_num='.$this->input->post('page_number'),'refresh');
 			}
 		}
@@ -237,6 +237,7 @@ class Companies extends MY_Controller {
 		{
 			$raw_search_results = $this->Companies_model->search_companies_sql(FALSE,$this->input->get('id'));
 			$company = $this->process_search_result($raw_search_results);
+			$this->data['contacts'] = $this->Contacts_model->get_contacts($this->input->get('id'));
 			$this->data['action_types_done'] = $this->Actions_model->get_action_types_done();
 			$this->data['action_types_planned'] = $this->Actions_model->get_action_types_planned();
 			$this->data['action_types_array'] = $this->Actions_model->get_action_types_array();
@@ -305,6 +306,7 @@ class Companies extends MY_Controller {
 			if($company->company->f1->f19)$mapped_companies_array['turnover_method'] = $company->company->f1->f19;
 			if($company->company->f1->f20)$mapped_companies_array['emp_count'] = $company->company->f1->f20;
 			if($company->company->f1->f27)$mapped_companies_array['pipeline'] = $company->company->f1->f27;
+			if($company->company->f1->f28)$mapped_companies_array['contacts_count'] = $company->company->f1->f28;
 
 			
 			// sectors

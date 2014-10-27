@@ -57,9 +57,7 @@
 
 
 
-.assign-to-wrapper .btn-primary {
-	margin-right: 5px;
-}
+
 
 .navbar-default .navbar-text {
 	color: #000;
@@ -77,9 +75,6 @@
 	font-weight: normal;
 }
 
-.assign-to-wrapper .btn {
-	border-radius: 5px 0px 0px 5px;
-}
 
 .nav-second-level > li{
 	border-top: 1px solid #ddd;
@@ -167,6 +162,7 @@ font-weight: 700;
 .assign-to-wrapper .btn-primary, .assign-to-wrapper .edit-btn {
 	border-radius:5px;
 	float:right;
+	margin: 0px 3px;
 }
 
 

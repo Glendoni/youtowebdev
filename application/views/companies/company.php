@@ -91,63 +91,25 @@
         	</div>
         
         </div>
-                <div class="col-md-4">
-
-			<div class=" assign-to-wrapper">
-				<button class="btn btn-warning ladda-button edit-btn" data-toggle="modal" id="editbtn<?php echo $company['id']; ?>" data-style="expand-right" data-size="1" data-target="#editModal<?php echo $company['id']; ?>">
-                    <span class="ladda-label"> Edit </span>
-                </button>
-				<?php if(isset($company['assigned_to_name']) and !empty($company['assigned_to_name'])): ?>
-					<?php if($company['assigned_to_id'] == $current_user['id']) : ?>			
-						<?php  $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id']);
-						echo form_open('companies/unassign',array('name' => 'assignto', 'class'=>'assign-to-form'),$hidden); ?>
-						<button type="submit" class="btn  btn-primary  ladda-button" data-style="expand-right" data-size="1">
-						    <span class="ladda-label"> Unassign from me </span>
-						</button>
-						<?php echo form_close(); ?>
-					<?php else: ?>
-						<button class="btn  btn-primary " disabled="disabled"><?php  echo 'Assigned to '.$company['assigned_to_name']; ?></button>
-					<?php endif; ?>
-				<?php else: ?>
-				<?php 
-				$hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'] );
-				echo form_open(site_url().'companies/assignto',array('name' => 'assignto', 'class'=>'assign-to-form'),$hidden); ?>
-				<button type="submit" assignto="<?php echo $current_user['name']; ?>" class="btn  btn-primary  ladda-button" data-style="expand-right" data-size="1">
-			        <span class="ladda-label"> Assign to me </span>
-			    </button>
-				<?php echo form_close(); ?>
-				<?php endif; ?>
-				
-                
-			</div>
-            </div><!--CLOSE COL-MD-4-->
-            
-			
-           
-                
-		
+        <div class="col-md-4">
+			<?php $this->load->view('companies/actions_box.php',array('company'=>$company)); ?>
+        </div><!--CLOSE COL-MD-4-->        
 		<div class="col-md-12">
 			<hr>
 		</div>
-		
 		<!-- TURNOVER -->
 		<div class="col-md-2 centre">
 		<strong>Turnover</strong>
 			<p class="details" style="margin-bottom:5px;">
 				£<?php echo isset($company['turnover'])? number_format (round($company['turnover'],-3)):'0';?></p>
-                <h6 style="margin-top:0;"><span class="label label-default" ><?php  echo isset($company['turnover_method'])?$company['turnover_method']:'';?></span></h6>
-                            
-           			
+                <h6 style="margin-top:0;"><span class="label label-default" ><?php  echo isset($company['turnover_method'])?$company['turnover_method']:'';?></span></h6>		
             </div>
         <div class="col-md-2 centre">
-        		<strong>Founded</strong>
-
+        <strong>Founded</strong>
         <p class="details">
 			<?php echo $company['eff_from'] ?>
         </p>
 		</div>
-        
-
 		<!-- EMPLOYEES -->
 		<div class="col-md-2 centre">
 			<strong>Employees</strong>
@@ -159,15 +121,13 @@
 		<!-- SECTORS -->
 		<div class="col-md-3 centre">
 			<strong>Sectors</strong> 
-			<?php if(isset($company['sectors'])): ?>
-				<?php foreach ($company['sectors'] as $key => $name): ?>
-				<p style="margin-bottom:0;">
-				<span class="glyphicon glyphicon-ok" style="margin-right:5px;color: #5cb85c;border: #5cb85c; font-size:11px;">
-					<?php echo $name;?>
-				</span>
-				</p>
-				<?php endforeach; ?>
-			<?php endif; ?>
+			<?php 
+			if(isset($company['sectors'])){
+				foreach ($company['sectors'] as $key => $name) {
+					echo '<p style="margin-bottom:0;">'.$name.'</p>';
+				}
+			}
+			?>
 		</div>
 
 		<!-- LINKS AND BTN -->
@@ -180,13 +140,9 @@
 			<?php endif; ?>
 		</div>
 			
-            
-           <div class="col-md-12">
+        <div class="col-md-12">
 			<hr>
-		</div>
-		
-            
-            
+		</div>                    
 		<!-- MORTGAGES -->
 		
 		<div class="col-md-12">
@@ -215,73 +171,104 @@
             </div>
 		<?php endif; ?>
 		</div>
-
 		<div class="col-md-12">
 			<hr style="padding-bottom:20px;">
 		</div>
-
-	<div class="col-md-6">
-	<div class="panel panel-success ">
-	  <div class="panel-heading">
-	    <h3 class="panel-title">Done</h3>
-	  </div>
-	  <div class="panel-body">
-	   <?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'],'done'=>'1');
-				 echo form_open(site_url().'actions/create', 'name="create" class="form" role="form"',$hidden); ?>
-		<div class="form-group ">
-			<label>Type</label>
-			<select name="action_type" class="form-control">
-				<?php foreach($action_types_done as $action ): ?>
-				  <option value="<?php echo $action->id; ?>"><?php echo $action->name; ?></option>
-				<?php endforeach; ?>
-			</select>
+		<?php if(isset($contacts) and !empty($contacts)) : ?>
+		<div class="col-md-12">
+		<table class="table ">
+	      <thead>
+	        <tr>
+	          <th>Role</th>
+	          <th>Name</th>
+	          <th>Email</th>
+	          <th>Phone</th>
+	          <th></th>
+	        </tr>
+	      </thead>
+	      <tbody>
+	      	<?php foreach ($contacts as $contact): ?>
+			<td><?php echo $contact->name; ?></td>
+			<td><?php echo $contact->email; ?></td>
+			<td><?php echo $contact->phone; ?></td>
+			<td><?php echo $contact->role; ?></td>
+			<td>
+			<span class="assigned-image-holder" style="max-width:30px; float:right;">
+			<img src="<?php echo asset_url();?>images/profiles/<?php echo isset($system_users_images[$contact->created_by])? $system_users_images[$contact->created_by]:'none' ;?>.jpg" class="img-circle img-responsive" alt="" />
+        	</span>
+        	</td>
+			<?php endforeach; ?>  
+	      </tbody>
+	    </table>
+		
+		
 		</div>
-		<div class="form-group ">
-			<label>Outcome</label>
-			<textarea class="form-control" name="comment" rows="6"></textarea>
+		<?php endif; ?>
+		<div class="col-md-12">
+			<hr style="padding-bottom:20px;">
 		</div>
-		<button type="submit" name="save" class="btn btn-success form-control">Save</button>
-		<?php echo form_close(); ?>
-	  </div>
-	</div>
-	</div>
-	<div class="col-md-6">
-		<div class="panel panel-info">
+		<div class="col-md-6">
+		<div class="panel panel-success ">
 		  <div class="panel-heading">
-		    <h3 class="panel-title">Follow Up</h3>
+		    <h3 class="panel-title">Done</h3>
 		  </div>
 		  <div class="panel-body">
-		   <?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'],'follow_up'=>'1');
+		   <?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'],'done'=>'1');
 					 echo form_open(site_url().'actions/create', 'name="create" class="form" role="form"',$hidden); ?>
-			<div class="row">
-            <div class="col-md-6">
-				<div class="form-group ">
-					<label>Type</label>
-					<select name="action_type" class="form-control">
-						<?php foreach($action_types_planned as $action ): ?>
-						  <option value="<?php echo $action->id; ?>"><?php echo $action->name; ?></option>
-						<?php endforeach; ?>
-					</select>
-				</div>
-                </div>
-                <div class="col-md-6">
-				<div class="form-group " >
-					<label>Planned For</label>
-					<input type="text" class="form-control" id="planned_at" data-date-format="YYYY/MM/DD H:m" name="planned_at" placeholder="">
-				</div>
-                </div>
-                <div class="col-md-12">
-				<div class="form-group ">
-					<label>Note</label>
-					<textarea class="form-control" name="comment" rows="6"></textarea>
-				</div>
-				<button type="submit" name="save" class="btn btn-primary form-control">Schedule</button>
+			<div class="form-group ">
+				<label>Type</label>
+				<select name="action_type" class="form-control">
+					<?php foreach($action_types_done as $action ): ?>
+					  <option value="<?php echo $action->id; ?>"><?php echo $action->name; ?></option>
+					<?php endforeach; ?>
+				</select>
 			</div>
-            </div>
+			<div class="form-group ">
+				<label>Outcome</label>
+				<textarea class="form-control" name="comment" rows="6"></textarea>
+			</div>
+			<button type="submit" name="save" class="btn btn-success form-control">Save</button>
 			<?php echo form_close(); ?>
 		  </div>
 		</div>
-	</div>
+		</div>
+		<div class="col-md-6">
+			<div class="panel panel-info">
+			  <div class="panel-heading">
+			    <h3 class="panel-title">Follow Up</h3>
+			  </div>
+			  <div class="panel-body">
+			   <?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'],'follow_up'=>'1');
+						 echo form_open(site_url().'actions/create', 'name="create" class="form" role="form"',$hidden); ?>
+				<div class="row">
+	            <div class="col-md-6">
+					<div class="form-group ">
+						<label>Type</label>
+						<select name="action_type" class="form-control">
+							<?php foreach($action_types_planned as $action ): ?>
+							  <option value="<?php echo $action->id; ?>"><?php echo $action->name; ?></option>
+							<?php endforeach; ?>
+						</select>
+					</div>
+	                </div>
+	                <div class="col-md-6">
+					<div class="form-group " >
+						<label>Planned For</label>
+						<input type="text" class="form-control" id="planned_at" data-date-format="YYYY/MM/DD H:m" name="planned_at" placeholder="">
+					</div>
+	                </div>
+	                <div class="col-md-12">
+					<div class="form-group ">
+						<label>Note</label>
+						<textarea class="form-control" name="comment" rows="6"></textarea>
+					</div>
+					<button type="submit" name="save" class="btn btn-primary form-control">Schedule</button>
+				</div>
+	            </div>
+				<?php echo form_close(); ?>
+			  </div>
+			</div>
+		</div>
 </div>
 
 <div class="row">
