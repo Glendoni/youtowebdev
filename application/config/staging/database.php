@@ -65,9 +65,7 @@
 // $db['remote']['stricton'] = FALSE;
 // $db['remote']['port'] = 5432;
 
-$dsn = getenv('DATABASE_URL');
 
-$this->load->database($dsn);
 
 /* End of file database.php */
 /* Location: ./application/config/database.php */
