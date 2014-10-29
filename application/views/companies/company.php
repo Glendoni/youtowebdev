@@ -3,8 +3,7 @@
 <div class="top-info-holder">
 	<h2 class="company-header">
 	<?php 
-		$words = array( 'Limited', 'LIMITED', 'LTD','ltd','Ltd' );
-		echo str_replace($words, ' ',$company['name']); 
+		echo $company['name']; 
 	?>
 	</h2>
 	<?php if (isset($company['pipeline'])): ?>

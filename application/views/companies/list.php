@@ -23,7 +23,7 @@
 			<h3 class="name" style="margin-top: 0px;margin-bottom: 10px;">
 				<a href="<?php echo site_url();?>companies/company?id=<?php echo $company['id'];?>" target="_blank">
 					<?php 
-					$words = array( 'Limited', 'LIMITED', 'LTD','ltd','Ltd' );
+					$words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' );
 					echo str_replace($words, ' ',$company['name']); 
 					?>
 				</a>
