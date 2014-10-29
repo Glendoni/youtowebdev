@@ -324,7 +324,7 @@
                                         <div class="col-md-12 form-group ">
                                             <?php  echo form_label('Agency Name', 'agency_name', array('class'=>'control-label')); ?>
                                             <input name="agency_name" id="agency_name" type="text" onkeyup="ajaxSearch();" class="col-md-12 form-control" autocomplete="off" value="<?php echo $this->input->post('agency_name');?>" >
-                                            <div id="suggestions">
+                                            <div id="suggestions"> 
                                                 <div id="autoSuggestionsList">  
                                                 </div>
                                             </div>
