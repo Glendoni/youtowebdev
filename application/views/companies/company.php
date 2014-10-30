@@ -27,7 +27,8 @@
 	<?php endif; ?>
 	<div class="panel-body">
     	<div class="row">
-        <div class="col-md-8">
+    	<div class="col-md-12">
+        <div class="col-md-8 col-sm-6">
 			<strong>
 				Address
 			</strong>
@@ -50,36 +51,24 @@
 			    </div><!-- /.modal-content -->
 			  </div><!-- /.modal-dialog -->
 			</div><!-- /.modal -->
-        <div class="row col-md-6" style="margin-top:10px;">
-        <strong>Phone Number</strong>
-        <p style="margin-bottom:0;">
-        	<?php echo isset($company['phone'])?$company['phone']:'-'; ?>                
-            </p>
-			</div>
-    		<div class="row col-md-6" style="margin-top:10px;">
-    		<strong>Website</strong>
-    		<p style="margin-bottom:0;">
-			<?php if (isset($company['url'])): ?>
-			<a class="btn btn-link" style="padding:0;" href="<?php $parsed = parse_url($company['url']); if (empty($parsed['scheme'])) { echo 'http://' . ltrim($company['url'], '/'); }else{ echo $company['url']; } ?>" target="_blank"><i class="fa fa-home"></i>
-			<?php echo str_replace("http://"," ",str_replace("www.", "", $company['url']))?>
-			</a>
-			<?php else: ?>
-			-
-            <?php endif; ?>
-            </p>
-			</div>
-             <div class="row col-md-6" style="margin-top:10px;">
-				<strong>Segment</strong>
+		</div><!--CLOSE MD-8-->
+		<div class="col-md-4 col-sm-6">
+			<?php $this->load->view('companies/actions_box.php',array('company'=>$company)); ?>
+        </div><!--CLOSE COL-MD-4-->
+        </div><!--CLOSE COL-MD-12-->
+        </div><!--CLOSE ROW-->
+
+
+
+		<div class="row">
+		<div class="col-md-12">
+			<div class="col-md-8 col-sm-4" style="margin-top:10px;">
+    			<strong>Company Name</strong>
 				<p style="margin-bottom:0;">	
-		            <!--SEGMENT IF APPLICABLE-->
-		            <?php if (isset($company['class'])): ?>
-						<span class="label label-info"><?php echo $companies_classes[$company['class']] ?></span>	
-					<?php else: ?>
-						-
-		            <?php endif; ?>
-	            </p>
-			</div>
-			<div class="row col-md-6" style="margin-top:10px;">
+				<?php echo $company['name']; ?>
+         		</p>
+    		</div>
+    		<div class="col-sm-4" style="margin-top:10px;">
 			<strong>Company Number</strong>
 			<p style="margin-bottom:0;">	
 			 <!--COMPANY NUMBER IF APPLICABLE-->
@@ -90,11 +79,43 @@
                 <?php endif; ?>
          	</p>
         	</div>
+        	<div class="col-sm-4" style="margin-top:10px;">
+        		<strong>Phone Number</strong>
+        		<p style="margin-bottom:0;">
+        		<?php echo isset($company['phone'])?$company['phone']:'-'; ?>                
+           		</p>
+			</div>
+    		<div class="col-sm-4" style="margin-top:10px;">
+    			<strong>Website</strong>
+    			<p style="margin-bottom:0;">
+				<?php if (isset($company['url'])): ?>
+				<a class="btn btn-link" style="padding:0;" href="<?php $parsed = parse_url($company['url']); if (empty($parsed['scheme'])) { echo 'http://' . ltrim($company['url'], '/'); }else{ echo $company['url']; } ?>" target="_blank"><i class="fa fa-home"></i>
+				<?php echo str_replace("http://"," ",str_replace("www.", "", $company['url']))?>
+				</a>
+				<?php else: ?>
+				-
+            	<?php endif; ?>
+            	</p>
+			</div>
+        	<div class="col-sm-4" style="margin-top:10px;">
+				<strong>Segment</strong>
+				<p style="margin-bottom:0;">	
+		            <!--SEGMENT IF APPLICABLE-->
+		            <?php if (isset($company['class'])): ?>
+						<span class="label label-info"><?php echo $companies_classes[$company['class']] ?></span>	
+					<?php else: ?>
+						-
+		            <?php endif; ?>
+	            </p>
+			</div>
+			
+        	</div>
+        </div><!--END ROW-->
+      
         
-        </div>
-        <div class="col-md-4">
-			<?php $this->load->view('companies/actions_box.php',array('company'=>$company)); ?>
-        </div><!--CLOSE COL-MD-4-->        
+
+
+
 		<div class="col-md-12">
 			<hr>
 		</div>
@@ -303,6 +324,10 @@
 			</div>
 		</div>
 </div>
+</div>
+
+
+
 
 <div class="row">
 	<div class="col-md-12" >
@@ -407,5 +432,4 @@
 		  </div>
 		</div>
 	</div>
-</div>
 </div>
