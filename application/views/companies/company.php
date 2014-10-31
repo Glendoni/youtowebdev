@@ -232,7 +232,7 @@
 		<div class="col-md-6">
 		<div class="panel panel-success ">
 		  <div class="panel-heading">
-		    <h3 class="panel-title">Done</h3>
+		    <h3 class="panel-title">Completed</h3>
 		  </div>
 		  <div class="panel-body">
 		   <?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'],'done'=>'1');
