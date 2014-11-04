@@ -19,11 +19,11 @@
 	<?php endif; ?>
 	<div class="panel-body">
     <div class="row">
-		<div class="col-md-8">
+		<div class="col-md-7">
 			<h3 class="name" style="margin-top: 0px;margin-bottom: 10px;">
 				<a href="<?php echo site_url();?>companies/company?id=<?php echo $company['id'];?>" target="_blank">
 					<?php 
-					$words = array( 'Limited', 'LIMITED', 'LTD','ltd','Ltd' );
+					$words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' );
 					echo str_replace($words, ' ',$company['name']); 
 					?>
 				</a>
@@ -34,7 +34,7 @@
 			</h4>
 			<?php endif; ?>
 		</div>
-		<div class="col-md-4">
+		<div class="col-md-5">
 		<?php $this->load->view('companies/actions_box.php',array('company'=>$company)); ?>
 		</div>
 		</div>

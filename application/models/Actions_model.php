@@ -8,6 +8,18 @@ class Actions_model extends CI_Model {
 		$data = array(
 			'company_id' => $company_id,
 			);
+		$this->db->where_not_in('action_type_id', 7);
+		$this->db->order_by('actioned_at desc, cancelled_at desc,planned_at desc');
+		$query = $this->db->get_where('actions', $data);
+		return $query->result_object();
+	}
+
+		public function get_comments($company_id)
+	{
+		$data = array(
+			'company_id' => $company_id,
+			);
+		$this->db->where('action_type_id', '7');
 		$this->db->order_by('actioned_at desc, cancelled_at desc,planned_at desc');
 		$query = $this->db->get_where('actions', $data);
 		return $query->result_object();

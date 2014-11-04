@@ -9,15 +9,7 @@
             </div>
             <div class="modal-body">
             <div class="row">
-                <div class="col-md-6">
-                    <div class=" form-group ">
-                    <?php
-                    echo form_label('Class', 'company_class');
-                    echo form_dropdown('company_class', $companies_classes, (isset($company['class'])?$company['class']:'') ,'class="form-control"');
-                    ?>
-                    </div>
-                </div>
-                <div class="col-md-6">
+            <div class="col-md-6">
                     <div class=" form-group ">
                     <?php
                     echo form_label('Pipeline', 'company_pipeline');
@@ -26,6 +18,15 @@
 
                     </div>
                 </div>
+                <div class="col-md-6">
+                    <div class=" form-group ">
+                    <?php
+                    echo form_label('Class', 'company_class');
+                    echo form_dropdown('company_class', $companies_classes, (isset($company['class'])?$company['class']:'') ,'class="form-control"');
+                    ?>
+                    </div>
+                </div>
+                
                 <div class="col-md-6">
                     <div class=" form-group ">
                         <label for="url" class="control-label">Website</label>                            

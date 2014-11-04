@@ -247,6 +247,7 @@ class Companies extends MY_Controller {
 			$this->data['action_types_planned'] = $this->Actions_model->get_action_types_planned();
 			$this->data['action_types_array'] = $this->Actions_model->get_action_types_array();
 			$this->data['actions'] = $this->Actions_model->get_actions($this->input->get('id'));
+			$this->data['comments'] = $this->Actions_model->get_comments($this->input->get('id'));
 			$this->data['page_title'] = $company[0]['name'];
 			$this->data['companies'] = $company;
 			$this->data['hide_side_nav'] = True;
@@ -343,19 +344,7 @@ class Companies extends MY_Controller {
 		return $companies_array;
 	}
 
-	public function autocomplete() {
-        $search_data = $this->input->post("search_data");
-        $query = $this->Companies_model->get_autocomplete($search_data);
-        $words = array( 'Limited', 'LIMITED', 'LTD','ltd','Ltd' );
-        $response = "<ul class='autocomplete-holder'>";
-        foreach ($query->result() as $row):
-            $response= $response."<a href='". base_url() . "companies/company?id=" . $row->id . "'><li class='autocomplete-item'>" . str_replace($words, ' ',$row->name). "</li></a>";
-        endforeach;
-        $response= $response."</ul>";
-
-        $this->output->set_content_type('application/json');
-		$this->output->set_output(json_encode(array('html'=> $response)));
-    }
+	
 
 
 }
