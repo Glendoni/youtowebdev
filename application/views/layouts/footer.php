@@ -55,7 +55,6 @@
                     success: function(data) {
                         // return success
                         console.log(data.html);
-                        
                         $('#suggestions').show();
                         $('#autoSuggestionsList').addClass('auto_list');
                         $('#autoSuggestionsList').html(data.html);
