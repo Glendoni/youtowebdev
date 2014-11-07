@@ -172,14 +172,14 @@ class Companies_model extends CI_Model {
 
 		//REMOVE COMMA ETC FROM TURNOVER
 
-  $turnover_from = preg_replace('/[^0-9]/','',$post['turnover_from']);
-  $turnover_to = preg_replace('/[^0-9]/','',$post['turnover_to']);
+		$turnover_from = preg_replace('/[^0-9]/','',$post['turnover_from']);
+		$turnover_to = preg_replace('/[^0-9]/','',$post['turnover_to']);
 
 
-			if(empty($turnover_to) && !empty($turnover_from))
-			{
-				$turnover_to = '100000000';
-			}
+		if(empty($turnover_to) && !empty($turnover_from))
+		{
+			$turnover_to = '100000000';
+		}
 	
 
 		
