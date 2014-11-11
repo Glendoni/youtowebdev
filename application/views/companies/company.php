@@ -577,33 +577,29 @@
                         			<ul class="chat">
                         				<?php foreach ($comments as $comment):
                         				// print_r('<pre>');print_r($action);print_r('</pre>');
-					 $created_date_formatted = date("d/m/y",strtotime($comment->created_at));
-					?>
-								<li class="left clearfix">
-                                    <span class="chat-img pull-left">
-                                    <img src="<?php echo asset_url();?>images/profiles/<?php echo isset($system_users_images[$action->user_id])? $system_users_images[$action->user_id]: 'none' ;?>.jpg " class="img-circle img-responsive" alt="" width="40px" />
-                                    </span>
-                                    <div class="chat-body clearfix">
-                                        <div class="header">
-                                            <strong class="primary-font"><?php echo $system_users[$action->user_id]?></strong> 
-                                            <small class="pull-right text-muted">
-                                                <i class="fa fa-calendar fa-fw"></i> <?php echo $created_date_formatted?>
-                                            </small>
-                                        </div>
-                                        <p>
-										<?php echo isset($comment->comments)? $comment->comments:'No comments'; ?>  
-                                        </p>
-                                    </div>
-                                </li>
-
-                        			
-
+										 $created_date_formatted = date("d/m/y",strtotime($comment->created_at));
+										?>
+										<li class="left clearfix">
+		                                    <span class="chat-img pull-left">
+		                                    <img src="<?php echo asset_url();?>images/profiles/<?php echo isset($system_users_images[$action->user_id])? $system_users_images[$action->user_id]: 'none' ;?>.jpg " class="img-circle img-responsive" alt="" width="40px" />
+		                                    </span>
+		                                    <div class="chat-body clearfix">
+		                                        <div class="header">
+		                                            <strong class="primary-font"><?php echo $system_users[$action->user_id]?></strong> 
+		                                            <small class="pull-right text-muted">
+		                                                <i class="fa fa-calendar fa-fw"></i> <?php echo $created_date_formatted?>
+		                                            </small>
+		                                        </div>
+		                                        <p>
+												<?php echo isset($comment->comments)? $comment->comments:'No comments'; ?>  
+		                                        </p>
+		                                    </div>
+		                                </li>
                         			<?php endforeach ?>
                         			</ul>
                         		<?php else: ?>
 								No Comments
 								<?php endif; ?>
-
                         </div>
                         <!-- /.panel-body -->
                         <div class="panel-footer">

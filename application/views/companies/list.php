@@ -42,24 +42,11 @@
         <!--ADDRESS-->
         <div class="col-md-12">
         	<p style="display:inline;">
-			<i class="fa fa-map-marker"></i>
-			<a class="btn btn-link" style="padding-left:0px;" data-toggle="modal" data-target="#map_<?php echo $company['id']; ?>">
-				<?php echo isset($company['address'])?$company['address']:''; ?>
-			</a>
+				<i class="fa fa-map-marker"></i>
+				<a class="btn btn-link" target="_blank" style="padding-left:0px;" href="http://maps.google.com/maps?q=<?php echo urlencode($company['address']); ?>&z=17">
+					<?php echo isset($company['address'])?$company['address']:''; ?>
+				</a>
 			</p>
-			<div class="modal fade" id="map_<?php echo $company['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="Map">
-			  <div class="modal-dialog">
-			    <div class="modal-content">
-			      <div class="modal-header">
-			        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-			        <h4 class="modal-title"><?php echo $company['name']; ?></h4>
-			      </div>
-			      <div class="modal-body">
-			        <iframe width="670" height="400" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=<?php echo urlencode($company['address']); ?>&key=AIzaSyAwACBDzfasRIRmwYW0KJ4LyFD4fa4jIPg&zoom=10"></iframe>
-			      </div>
-			    </div><!-- /.modal-content -->
-			  </div><!-- /.modal-dialog -->
-			</div><!-- /.modal -->
 			<?php if (isset($company['phone'])): ?>
 			<p style="display:inline;">
 				<i class="fa fa-phone-square"></i> 

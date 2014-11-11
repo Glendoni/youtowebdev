@@ -13,7 +13,7 @@ class Contacts extends MY_Controller {
 		{
 			$this->load->library('form_validation');
 			$this->form_validation->set_rules('name', 'name', 'xss_clean|required');
-			$this->form_validation->set_rules('email', 'email', 'xss_clean|required');
+			$this->form_validation->set_rules('email', 'email', 'xss_clean');
 			$this->form_validation->set_rules('phone', 'phone', 'xss_clean');
 			$this->form_validation->set_rules('role', 'role', 'xss_clean|required');
 			$this->form_validation->set_rules('company_id', 'company_id', 'xss_clean|required');
@@ -23,11 +23,13 @@ class Contacts extends MY_Controller {
 				$rows_affected = $this->Contacts_model->create_contact($this->input->post('name'),$this->input->post('email'),$this->input->post('role'),$this->input->post('company_id'),$this->input->post('user_id'),$this->input->post('phone'));
 				if($rows_affected  > 0)
 				{
+					$this->output->set_status_header('200');
 					$this->refresh_search_results();
 				}
 				else
 				{
 					$array = array('error'=>'<p>Error while creating contact</p>');
+					$this->output->set_status_header('400');
 					$this->output->set_output(json_encode($array));
 				}
 			}
@@ -35,11 +37,13 @@ class Contacts extends MY_Controller {
 			{
 				
 				$array = array('error'=>validation_errors());
+				$this->output->set_status_header('400');
 				$this->output->set_output(json_encode($array));
 			}
 		}else{
 			
 			$array = array('error'=>'<p>Missing information on form</p>');
+			$this->output->set_status_header('400');
 			$this->output->set_output(json_encode($array));
 		}
 

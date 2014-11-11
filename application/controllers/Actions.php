@@ -33,9 +33,14 @@ class Actions extends MY_Controller {
 				}
 				else
 				{
+					$this->set_message_success('Action successfully inserted');
 					redirect('companies/company?id='.$this->input->post('company_id'),'location');
 				}
+			}else{
+				$this->set_message_error(validation_errors());
+				redirect('companies/company?id='.$this->input->post('company_id'),'location');
 			}
+
 		}elseif($this->input->post('follow_up')){
 			
 			$this->load->library('form_validation');
@@ -55,6 +60,7 @@ class Actions extends MY_Controller {
 				}
 				else
 				{
+					$this->set_message_success('Action successfully inserted');
 					redirect('companies/company?id='.$this->input->post('company_id'),'location');
 				}
 			}else{

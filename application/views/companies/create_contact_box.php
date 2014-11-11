@@ -6,20 +6,22 @@
                 <h4 class="modal-title" id="myModalLabel">Create Contact</h4>
             </div>
             <?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'],'create_contact'=>'1', 'page_number' => (isset($current_page_number))? $current_page_number:'');
-				echo form_open(site_url().'contacts/create_contact',array('name' => 'create_contact', 'class'=>'create_contact','role'=>"form"),$hidden); ?>
+				echo form_open(site_url().'contacts/create_contact',array('onSubmit'=>'return validateContactForm();','name' => 'create_contact', 'class'=>'create_contact','role'=>"form" ),$hidden); ?>
             <div class="modal-body">
+                <div class="alert alert-danger" id="error_box" style="display:none;" role="alert"></div>
                 <div class=" form-group ">
                     <label for="name" class="control-label">Name *</label>                            
                     <input type="text" name="name" value="" id="name" maxlength="50" class="form-control">
                 </div>
                 <div class=" form-group ">
-                    <label for="email" class="control-label">Email *</label>                            
-                    <input type="email" name="email" value="" id="email" maxlength="50" class="form-control">
-                </div>
-                <div class=" form-group ">
                     <label for="role" class="control-label">Role *</label>                            
                     <input type="text" name="role" value="" id="role" maxlength="50" class="form-control">
                 </div>
+                <div class=" form-group ">
+                    <label for="email" class="control-label">Email</label>                            
+                    <input type="email" name="email" value="" id="email" maxlength="50" class="form-control">
+                </div>
+                
                 <div class=" form-group ">
                     <label for="phone" class="control-label">Phone </label>                            
                     <input type="phone" name="phone" value="" id="phone" maxlength="50" class="form-control">

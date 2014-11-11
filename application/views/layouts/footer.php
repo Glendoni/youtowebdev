@@ -36,6 +36,27 @@
 <!--AUTO COMPLETE-->
 
 <script type="text/javascript">
+        // // VALIDATION FOR CONTACT FORM
+        // function validateContactForm(){
+        //     alert('sds');
+        //     return false;
+        //     var url =  form.attr('action');
+            
+        //     $.ajax({
+        //             type: "POST",
+        //             url: url,
+        //             data: form.serialize(),
+        //             success: function(data) {
+        //                 // return success
+        //                 console.log(data.html);
+        //                 alert('sd');
+        //             }
+        //         });
+        //     return false;
+
+        // }
+
+        // AJAX SEARCH AUTOCOMPlETE
         function ajaxSearch() {
             var input_data = $('#agency_name').val();
             if (input_data.length < 1) {
@@ -167,7 +188,8 @@
     // reset button on page load
     $('.submit_btn').button('reset');
 
-    // on click action 
+    // on click action
+    // VALIDATION FOR CONTACT FORM 
 	$('.submit_btn').click(function(e){
 		
 		var btn = $(this);
@@ -183,8 +205,18 @@
 	 	$.post(url, form.serialize(),
 	 	  function(response){
 	 	    btn.removeClass('btn-primary').addClass('btn-success').text('Saving...');
-            location.reload(true); 
 	 	  })
+        .fail(function(response) {
+            var error = jQuery.parseJSON(response.responseText)
+            console.log(error['error']);
+            form.find('#error_box').html(error['error']);
+            form.find('#error_box').show();
+            btn.addClass('btn-primary').removeClass('btn-success').text('Save changes');
+            btn.button('reset');
+        })
+        .success(function(){
+            location.reload(true); 
+        })
 	 	.always(function() {  
             
         });
