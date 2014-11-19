@@ -14,7 +14,7 @@ class Actions_model extends CI_Model {
 		return $query->result_object();
 	}
 
-		public function get_comments($company_id)
+	public function get_comments($company_id)
 	{
 		$data = array(
 			'company_id' => $company_id,

@@ -26,6 +26,14 @@ echo form_open('',$attributes,$hidden);
 	  <input type="text" class="form-control" name="registration" id="Registration" value="<?php echo isset($_POST['registration'])?$_POST['registration']:''; ?>">
 	</div>
 </div>
+
+<div class="form-group">
+	<label class="control-label col-sm-2" for="eff_from">Incorporated date</label>
+	<div class="col-sm-10">
+	  <input type="text" class="form-control" placeholder="Y-m-d" name="eff_from" id="eff_from" value="<?php echo isset($_POST['eff_from'])?$_POST['eff_from']:''; ?>">
+	</div>
+</div>
+
 <div class="form-group">
 	<label class="control-label col-sm-2" for="url">Website:</label>
 	<div class="col-sm-10">

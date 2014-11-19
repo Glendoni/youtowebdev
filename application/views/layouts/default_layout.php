@@ -1,5 +1,5 @@
 <?php $this->load->view('layouts/header'); ?>
-<div id="page-wrapper">
+<div id="<?php if(!isset($hide_side_nav)): ?>page-wrapper<?php endif; ?>">
     <div class="container-fluid">
    	<?php $msg = $this->session->flashdata('message'); $msg_2 = validation_errors(); if($msg or $msg_2): ?>
         <div class="alert alert-<?php echo $this->session->flashdata('message_type'); ?> alert-dismissible row" role="alert">

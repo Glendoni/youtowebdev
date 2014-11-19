@@ -276,15 +276,15 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <i class="fa fa-user"></i> <?php echo $current_user['name'] ?> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
+                        <li>
+                            <a href="<?php echo site_url(); ?>users/profile"><i class="fa fa-fw fa-user"></i> Profile</a>
+                        </li>
                         <!-- <li>
-                            <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
-                        </li>
-                        <li>
                             <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
                         </li> -->
+                        <li>
+                            <a href="<?php echo site_url(); ?>users/settings"><i class="fa fa-fw fa-gear"></i> Settings</a>
+                        </li>
                         <li class="divider"></li>
                         <li>
                             <a href="<?php echo site_url(); ?>login/logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>

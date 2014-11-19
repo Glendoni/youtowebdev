@@ -360,7 +360,7 @@
 					 $now = date(time());
 
 					?>
-					<?php if(strtotime($action->planned_at) > $now and !isset($action->actioned_at) and !isset($action->cancelled_at)) {?> 
+					<?php if(strtotime($action->planned_at) > $now and !isset($action->actioned_at) and !isset($action->cancelled_at)): ?> 
 
                     <li class="list-group-item">
                         <div class="row" style="padding: 15px 0">
@@ -435,7 +435,82 @@
 								</div><!--END ACTIONS-->   
                             </div>
                     </li>
-                <?php  } else {} ?>
+                	<?php else: ?>
+                		 <li class="list-group-item">
+                        <div class="row" style="padding: 15px 0">
+                            <div class="col-xs-2 col-md-1">
+                                <img src="<?php echo asset_url();?>images/profiles/<?php echo isset($system_users_images[$action->user_id])? $system_users_images[$action->user_id]: 'none' ;?>.jpg " class="img-circle img-responsive" alt="" /></div>
+                            <div class="col-xs-10 col-md-11">
+                                <div>
+                                    <h4 style="margin:0;"><?php echo $action_types_array[$action->action_type_id]; ?> 
+                                    <?php if($action->cancelled_at) : ?>
+                                  		<span class="label label-default" style="font-size:11px; margin-left:10px;">Cancelled on <?php echo $cancelled_at_formatted ?></span>
+                                  	<?php elseif(strtotime($action->planned_at) > $now and !isset($action->actioned_at)) : ?>
+                                  		<span class="label label-warning" style="font-size:11px; margin-left:10px;">Due on <?php echo $planned_date_formatted ?> </span>
+                                  		<?php $hidden = array('action_id' => $action->id , 'user_id' => $current_user['id'] , 'action_do' => 'cancelled','outcome' => '' ,'company_id' => $company['id']);
+					                    echo form_open(site_url().'actions/edit', 'name="cancel_action"  class="cancel_action pull-right" style="margin-left:5px;" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action->id.'" role="form"',$hidden); ?>
+					                    <button class="btn btn-danger" ><i class="fa fa-trash-o fa-lg"></i> </button>
+					                    <?php echo form_close(); ?>
+
+                                  		<?php $hidden = array('action_id' => $action->id , 'user_id' => $current_user['id'], 'action_do' => 'completed', 'outcome' => '' ,'company_id' => $company['id']);
+					               		echo form_open(site_url().'actions/edit', 'name="completed_action"  class="completed_action pull-right" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action->id.'" style="display:inline-block;" role="form"',$hidden); ?>
+					                    <button class="btn btn-success"><i class="fa fa-check fa-lg"></i> </button> 
+					                    <?php echo form_close(); ?>
+									<?php elseif(strtotime($action->planned_at) < $now and !isset($action->actioned_at)):?>
+                                  		<span class="label label-danger" style="font-size:11px; margin-left:10px;"><b>Overdue</b> - Due on <?php echo $planned_date_formatted ?> </span>
+                                  		<?php $hidden = array('action_id' => $action->id , 'user_id' => $current_user['id'] , 'action_do' => 'cancelled','outcome' => '' ,'company_id' => $company['id'] );
+					                    echo form_open(site_url().'actions/edit', 'name="cancel_action"  class="cancel_action pull-right" style="margin-left:5px;" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action->id.'" role="form"',$hidden); ?>
+					                    <button class="btn btn-danger" ><i class="fa fa-trash-o fa-lg"></i> </button>
+					                    <?php echo form_close(); ?>
+
+                                  		<?php $hidden = array('action_id' => $action->id , 'user_id' => $current_user['id'], 'action_do' => 'completed', 'outcome' => '' ,'company_id' => $company['id']);
+					               		echo form_open(site_url().'actions/edit', 'name="completed_action"  class="completed_action pull-right" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action->id.'" style="display:inline-block;" role="form"',$hidden); ?>
+					                    <button class="btn btn-success"><i class="fa fa-check fa-lg"></i> </button> 
+					                    <?php echo form_close(); ?>
+					                    
+                                   	<?php elseif($action->actioned_at): ?>
+                                   		<span class="label label-success pull-right" style="font-size:11px; margin-left:10px;">Completed on <?php echo $actioned_date_formatted ?></span>
+									<?php endif; ?>
+									<?php if($action->contact_id):?>
+										<span class="label label-warning pull-right" style="font-size:11px; margin-left:10px;"><i class="fa fa-users"></i> <?php echo $option_contacts[$action->contact_id]; ?></span>
+										
+									<?php endif; ?>
+
+						  			</h4>
+                                    <div class="mic-info">
+                                        Created By: <?php echo $system_users[$action->user_id]?> on <?php echo $created_date_formatted?>
+                                    </div>
+                                </div>
+                                
+								
+								<div class="row comment-text speech col-md-12" >
+	                                <div class="triangle-isosceles top">
+										<?php echo isset($action->comments)? $action->comments:'No comments'; ?>  
+                                        <?php if (!empty($action->outcome)):?>
+											<table style="width:100%">
+											<tr>
+											<td style="width:45%"><hr/></td>
+											<td style="width:10%;vertical-align:middle; text-align: center; font-size:11px; color: #222;"><span class="glyphicon glyphicon-chevron-down"></span> Outcome <span class="glyphicon glyphicon-chevron-down"></span></td>
+											<td style="width:45%"><hr/></td>
+											</tr>
+											</table>
+											<?php echo $action->outcome ?>
+										<?php endif; ?>
+									</div>
+									
+								</div>
+								
+								<div class="col-md-12" id="action_outcome_box_<?php echo $action->id ?>" style="display:none;">
+								<hr>
+								<textarea class="form-control" name="outcome" placeholder="Add action outcome" rows="3" style="margin-bottom:5px;"></textarea>
+								<button class="btn btn-primary btn-block"><i class="fa fa-check fa-lg"></i> Send</button>
+
+								</div>
+								</div><!--END ACTIONS-->   
+                            </div>
+                    </li>
+                	<?php endif; ?>
+
 
                     <?php endforeach ?>
                     </ul>

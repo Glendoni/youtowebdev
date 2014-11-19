@@ -159,6 +159,7 @@ class Companies extends MY_Controller {
 			$this->form_validation->set_rules('perm', 'perm', 'xss_clean');
 			$this->form_validation->set_rules('phone', 'phone', 'xss_clean');
 			$this->form_validation->set_rules('company_class', 'company_class', 'xss_clean');
+			$this->form_validation->set_rules('eff_from','eff_from','xss_clean');
 
 			// address
 			$this->form_validation->set_rules('country_id', 'country_id', 'xss_clean|required');
@@ -177,6 +178,9 @@ class Companies extends MY_Controller {
 					$this->set_message_error('Error in the database while creating company');
 					redirect('/companies/create_company','location');
 				}
+			}else{
+				$this->set_message_error(validation_errors());
+				redirect('/companies/create_company','location');
 			}
 		}
 		
@@ -350,7 +354,7 @@ class Companies extends MY_Controller {
         $words = array( 'Limited', 'LIMITED', 'LTD','ltd','Ltd' );
         $response = "<ul class='autocomplete-holder'>";
         foreach ($query->result() as $row):
-            $response= $response."<a href='". base_url() . "companies/company?id=" . $row->id . "'><li class='autocomplete-item'>" . str_replace($words, ' ',$row->name). "</li></a>";
+            $response= $response."<a target='_blank' href='". base_url() . "companies/company?id=" . $row->id . "'><li class='autocomplete-item'>" . str_replace($words, ' ',$row->name). "</li></a>";
         endforeach;
         $response= $response."</ul>";
         $this->output->set_content_type('application/json');

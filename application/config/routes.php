@@ -78,6 +78,7 @@ $route['default_controller'] = "login";
 $route['404_override'] = '';
 $route['companies/'] = "companies/";
 $route['campaigns/'] = "campaigns/";
+$route['users/'] = "users/";
 $route['translate_uri_dashes'] = FALSE;
 
 /* End of file routes.php */

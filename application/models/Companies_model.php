@@ -776,11 +776,11 @@ class Companies_model extends CI_Model {
 		$company = array(
 				'phone' => !empty($post['phone'])?$post['phone']:NULL,
 				'linkedin_id' => (isset($post['linkedin_id']) and !empty($post['linkedin_id']))?$post['linkedin_id']:NULL,
-				'url' => isset($post['url'])?$post['url']:NULL,
-				'contract'=>isset($post['contract'])?$post['contract']:NULL,
-				'perm'=>isset($post['perm'])?$post['perm']:NULL,
+				'url' => !empty($post['url'])?$post['url']:NULL,
+				'contract'=>!empty($post['contract'])?$post['contract']:NULL,
+				'perm'=>!empty($post['perm'])?$post['perm']:NULL,
 				'class'=>!empty($post['company_class'])?$post['company_class']:NULL,
-				'pipeline'=>isset($post['company_pipeline'])?$post['company_pipeline']:NULL,
+				'pipeline'=>!empty($post['company_pipeline'])?$post['company_pipeline']:NULL,
 				'updated_at' => date('Y-m-d H:i:s')
 			);
 
@@ -808,15 +808,15 @@ class Companies_model extends CI_Model {
 	function create_company($post){
 		$company = array(
 			'name' => $post['name'],
-			'registration' => isset($post['registration'])?$post['registration']:NULL,
-			'ddlink' => isset($post['ddlink'])?$post['ddlink']:NULL,
-			'phone' => isset($post['phone'])?$post['phone']:NULL,
-			'linkedin_id' => (isset($post['linkedin_id']) and !empty($post['linkedin_id']))?$post['linkedin_id']:NULL,
-			'url' => isset($post['url'])?$post['url']:NULL,
-			'contract'=>isset($post['contract'])?$post['contract']:NULL,
-			'perm'=>isset($post['perm'])?$post['perm']:NULL,
-			'class'=>isset($post['company_class'])?$post['company_class']:NULL,
-			'eff_from'=> date('Y-m-d H:i:s')
+			'registration' => !empty($post['registration'])?$post['registration']:NULL,
+			'ddlink' => !empty($post['ddlink'])?$post['ddlink']:NULL,
+			'phone' => !empty($post['phone'])?$post['phone']:NULL,
+			'linkedin_id' => (!empty($post['linkedin_id']) and !empty($post['linkedin_id']))?$post['linkedin_id']:NULL,
+			'url' => !empty($post['url'])?$post['url']:NULL,
+			'contract'=>!empty($post['contract'])?$post['contract']:NULL,
+			'perm'=>!empty($post['perm'])?$post['perm']:NULL,
+			'class'=>!empty($post['company_class'])?$post['company_class']:NULL,
+			'eff_from'=> !empty($post['eff_from'])?date("Y-m-d", strtotime($post['eff_from'])):date('Y-m-d H:i:s'),
 		);
 		$this->db->insert('companies', $company);
 		$new_company_id = $this->db->insert_id(); 
@@ -826,9 +826,9 @@ class Companies_model extends CI_Model {
 				'company_id' => $new_company_id,
 				'country_id' => $post['country_id'],
 				'address' => $post['address'],
-				'lat' => isset($post['lat'])?$post['lat']:NULL,
-				'lng' => isset($post['lng'])?$post['lng']:NULL,
-				'type' => isset($post['type'])?$post['type']:NULL,
+				'lat' => !empty($post['lat'])?$post['lat']:NULL,
+				'lng' => !empty($post['lng'])?$post['lng']:NULL,
+				'type' => !empty($post['type'])?$post['type']:NULL,
 				);
 			$this->db->insert('addresses', $address);
 			$new_company_address_id = $this->db->insert_id(); 

@@ -39,7 +39,7 @@
                         <input type="text" name="phone" value="<?php echo isset($company['phone'])?$company['phone']:''; ?>" id="url" maxlength="50" class="form-control">
                     </div>
                 </div>
-				<?php if (isset($company['turnover']) == False ) :?>
+				
                 <div class="col-md-6">
                     <div class="row">
                         <div class="col-md-6">
@@ -58,7 +58,7 @@
                         </div>
                     </div>
                 </div>
-            	<?php endif; ?>
+            	
             	<?php if (isset($company['emp_count']) == False ):?>
                 <div class="col-md-6">
                     <div class=" form-group ">

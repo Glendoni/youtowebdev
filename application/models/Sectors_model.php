@@ -3,6 +3,7 @@ class Sectors_model extends CI_Model {
 	
 	function get_all()
 	{
+		$this->db->order_by("name", "asc");
 		$query = $this->db->get_where('sectors');	
 
 		foreach($query->result() as $row)
@@ -21,7 +22,7 @@ class Sectors_model extends CI_Model {
 		LEFT JOIN operates O on s.id = O.sector_id
 		WHERE s.display = \'True\'
 		GROUP BY s.id,s.name
-		ORDER BY count desc
+		ORDER BY count,s.name desc
 		';
 		
 		$query = $this->db->query($sql);
