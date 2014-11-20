@@ -454,7 +454,7 @@
                                 <li class="list-group-item load-saved-search">
                                     <a href="<?php echo site_url();?>campaigns/display/?id=<?php echo $campaign->id; ?>" class="load-saved-search">
                                     <div class="col-xs-3 col-sm-3">
-                                        <img src="<?php echo asset_url();?>images/profiles/<?php echo $campaign->image; ?>.jpg" alt="<?php echo $campaign->searchcreatedby; ?>" class="img-responsive img-circle" />
+                                        <img src="<?php echo asset_url();?>images/profiles/<?php echo $campaign->image; ?>" alt="<?php echo $campaign->searchcreatedby; ?>" class="img-responsive img-circle" style="height:35px;width:35px;"/>
                                     </div>
                                     <div class="col-xs-9 col-sm-9">
                                         <span class="name"><?php echo $campaign->name; ?></span><br/>

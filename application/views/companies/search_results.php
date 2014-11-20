@@ -14,7 +14,7 @@
 				
 				<div class="navbar-text saved-search-text">
 				<span class="assigned-image-holder" >
-		        	<img src="<?php echo asset_url();?>images/profiles/<?php echo isset($system_users_images[$current_campaign_owner_id])? $system_users_images[$current_campaign_owner_id]:'none' ;?>.jpg" class="img-circle img-responsive" alt="" />
+		        	<img style="height:30px;width:30px;" src="<?php echo asset_url();?>images/profiles/<?php echo isset($system_users_images[$current_campaign_owner_id])? $system_users_images[$current_campaign_owner_id]:'none.jpg' ;?>" class="img-circle img-responsive"  alt="" />
 		        </span>
 					<span style="font-weight:300; font-size:16px;">Search:</span>
 					<?php echo $current_campaign_name; ?>

@@ -39,4 +39,22 @@ class Contacts_model extends CI_Model {
         $rows = $this->db->affected_rows();
 	    return $rows;
     }
+
+    function update($post){
+    	$contact->name   = $post['name']; // please read the below note
+        $contact->role = $post['role'];
+        $contact->email = $post['email'];
+        $contact->phone = $post['phone'];
+        $contact->updated_by = $user_id;
+        $contact->updated_at = date('Y-m-d H:i:s');
+			
+        $this->db->where('id', $post['contact_id']);
+		$this->db->update('contacts',$contact);
+        if($this->db->affected_rows() !== 1){
+			$this->addError($this->db->_error_message());
+			return False;
+		}else{
+			return True;
+		} 
+    }
 }

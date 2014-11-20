@@ -16,13 +16,12 @@
 </div>
 <div class="panel <?php if(isset($company['assigned_to_name'])): ?> panel-primary <?php else: ?> panel-default <?php endif; ?> company">
 	<?php if(isset($company['assigned_to_name'])): ?>
-	<div class="panel-heading text-center" >
-        <span class="assigned-image-holder" style="max-width:30px; float:left;">
-        	<img src="<?php echo asset_url();?>images/profiles/<?php echo isset($system_users_images[$company['assigned_to_id']])? $system_users_images[$company['assigned_to_id']]:'none' ;?>.jpg" class="img-circle img-responsive" alt="" />
-        </span>
-        <span style="line-height:28px;">
-        Assigned to <?php echo $company['assigned_to_name']; ?> 
-        </span>    
+
+	<div class="panel-heading profile-heading text-center">
+        <span class="assigned-image-holder">
+          <img src="<?php echo asset_url();?>images/profiles/<?php echo isset($system_users_images[$company['assigned_to_id']])? $system_users_images[$company['assigned_to_id']]:'none.jpg' ;?>" class="img-circle profile-image" alt="" />
+	   </span>
+        <h3>Assigned to <?php echo $company['assigned_to_name']; ?></h3>
     </div>
 	<?php endif; ?>
 	<div class="panel-body">
@@ -211,15 +210,15 @@
 	      <tbody>
 	      	<?php foreach ($contacts as $contact): ?>
 	      	<tr>
-				<td><?php echo $contact->role; ?></td>
-				<td><?php echo $contact->name; ?></td>
+				<td><?php echo ucfirst($contact->role); ?></td>
+				<td><?php echo ucfirst($contact->name); ?></td>
 				<td><?php echo $contact->email; ?></td>
 				<td><?php echo $contact->phone; ?></td>
 				<td>
-				<span class="assigned-image-holder" style="max-width:30px; float:right;">
-				<img src="<?php echo asset_url();?>images/profiles/<?php echo isset($system_users_images[$contact->created_by])? $system_users_images[$contact->created_by]:'none' ;?>.jpg" class="img-circle img-responsive" alt="" />
-	        	</span>
-	        	</td>
+		      	<div class=" pull-right ">
+	            <?php $this->load->view('companies/action_box_contacts.php',array('contact'=>$contact)); ?>
+	            </div>
+	            </td>
         	</tr>
 			<?php endforeach; ?>  
 	      </tbody>
@@ -317,7 +316,7 @@
 							<textarea class="form-control" name="comment" rows="6"></textarea>
 						</div>
 						<button type="submit" name="save" class="btn btn-primary form-control">Schedule</button>
-				</div>
+					</div>
 	            </div>
 				<?php echo form_close(); ?>
 			  </div>
@@ -325,9 +324,6 @@
 		</div>
 </div>
 </div>
-
-
-
 
 <div class="row">
 	<div class="col-md-8" >
@@ -338,353 +334,290 @@
 			</div>
 			<div class="panel-body">
 
-    <div class="row">
-        <div class="col-sm-12 col-md-12">
-            <!-- Nav tabs -->
-            <ul class="nav nav-tabs">
-                <li class="active"><a href="#outstanding" data-toggle="tab"><i class="fa fa-cogs"></i> Outstanding</a></li>
-                <li><a href="#completed" data-toggle="tab"><i class="fa fa-check"></i>
-                    Completed</a></li>
-            </ul>
-            <!-- Tab panes -->
-            <div class="tab-content">
-                <div class="tab-pane fade in active" id="outstanding">
-                   <?php if (count($actions) > 0): ?>
-					<ul class="list-group">
-					<?php foreach ($actions as $action): 
-					 // print_r('<pre>');print_r($action);print_r('</pre>');
-					 $created_date_formatted = date("l jS F y",strtotime($action->created_at))." @ ".date("H:i",strtotime($action->created_at));
-					 $actioned_date_formatted = date("l jS F y",strtotime($action->actioned_at))." @ ".date("H:i",strtotime($action->actioned_at));
-					 $planned_date_formatted = date("l jS F y",strtotime($action->planned_at))." @ ".date("H:i",strtotime($action->planned_at));
-					 $cancelled_at_formatted = date(" jS F y",strtotime($action->cancelled_at))." @ ".date("H:i",strtotime($action->cancelled_at));
-					 $now = date(time());
+				<div class="row">
+				    <div class="col-sm-12 col-md-12">
+				        <!-- Nav tabs -->
+				        <ul class="nav nav-tabs">
+				            <li class="active"><a href="#outstanding" data-toggle="tab"><i class="fa fa-cogs"></i> Outstanding</a></li>
+				            <li><a href="#completed" data-toggle="tab"><i class="fa fa-check"></i>
+				                Completed</a></li>
+				        </ul>
+				        <!-- Tab panes -->
+				        <div class="tab-content">
+				            <div class="tab-pane fade in active" id="outstanding">
+				               <?php if (count($actions) > 0): ?>
+								<ul class="list-group">
+								<?php foreach ($actions as $action): 
+								 // print_r('<pre>');print_r($action);print_r('</pre>');
+								 $created_date_formatted = date("l jS F y",strtotime($action->created_at))." @ ".date("H:i",strtotime($action->created_at));
+								 $actioned_date_formatted = date("l jS F y",strtotime($action->actioned_at))." @ ".date("H:i",strtotime($action->actioned_at));
+								 $planned_date_formatted = date("l jS F y",strtotime($action->planned_at))." @ ".date("H:i",strtotime($action->planned_at));
+								 $cancelled_at_formatted = date(" jS F y",strtotime($action->cancelled_at))." @ ".date("H:i",strtotime($action->cancelled_at));
+								 $now = date(time());
 
-					?>
-					<?php if(strtotime($action->planned_at) > $now and !isset($action->actioned_at) and !isset($action->cancelled_at)): ?> 
+								?>
+								<?php if(strtotime($action->planned_at) and !isset($action->actioned_at) and !isset($action->cancelled_at)): ?> 
+								<!-- OUTSTANDING -->
+				                <li class="list-group-item">
+				                    <div class="row" style="padding: 15px 0">
+				                        <div class="col-xs-2 col-md-1 ">
+				                        	<div class="profile-heading">
+				                        	<span>
+				                            <img src="<?php echo asset_url();?>images/profiles/<?php echo isset($system_users_images[$action->user_id])? $system_users_images[$action->user_id]: 'none.jpg' ;?> " class="img-circle img-responsive" alt="" /></div>
+				                        	<span>
+				                        	</div>
+				                        	<div class="col-xs-10 col-md-11">
+				                            <div>
+				                                <h4 style="margin:0;"><?php echo $action_types_array[$action->action_type_id]; ?> 
+				                                <?php if($action->cancelled_at) : ?>
+				                              		<span class="label label-default" style="font-size:11px; margin-left:10px;">Cancelled on <?php echo $cancelled_at_formatted ?></span>
+				                              	<?php elseif(strtotime($action->planned_at) > $now and !isset($action->actioned_at)) : ?>
+				                              		<span class="label label-warning" style="font-size:11px; margin-left:10px;">Due on <?php echo $planned_date_formatted ?> </span>
+				                              		<?php $hidden = array('action_id' => $action->id , 'user_id' => $current_user['id'] , 'action_do' => 'cancelled','outcome' => '' ,'company_id' => $company['id']);
+								                    echo form_open(site_url().'actions/edit', 'name="cancel_action"  class="cancel_action pull-right" style="margin-left:5px;" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action->id.'" role="form"',$hidden); ?>
+								                    <button class="btn btn-danger" ><i class="fa fa-trash-o fa-lg"></i> </button>
+								                    <?php echo form_close(); ?>
 
-                    <li class="list-group-item">
-                        <div class="row" style="padding: 15px 0">
-                            <div class="col-xs-2 col-md-1">
-                                <img src="<?php echo asset_url();?>images/profiles/<?php echo isset($system_users_images[$action->user_id])? $system_users_images[$action->user_id]: 'none' ;?>.jpg " class="img-circle img-responsive" alt="" /></div>
-                            <div class="col-xs-10 col-md-11">
-                                <div>
-                                    <h4 style="margin:0;"><?php echo $action_types_array[$action->action_type_id]; ?> 
-                                    <?php if($action->cancelled_at) : ?>
-                                  		<span class="label label-default" style="font-size:11px; margin-left:10px;">Cancelled on <?php echo $cancelled_at_formatted ?></span>
-                                  	<?php elseif(strtotime($action->planned_at) > $now and !isset($action->actioned_at)) : ?>
-                                  		<span class="label label-warning" style="font-size:11px; margin-left:10px;">Due on <?php echo $planned_date_formatted ?> </span>
-                                  		<?php $hidden = array('action_id' => $action->id , 'user_id' => $current_user['id'] , 'action_do' => 'cancelled','outcome' => '' ,'company_id' => $company['id']);
-					                    echo form_open(site_url().'actions/edit', 'name="cancel_action"  class="cancel_action pull-right" style="margin-left:5px;" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action->id.'" role="form"',$hidden); ?>
-					                    <button class="btn btn-danger" ><i class="fa fa-trash-o fa-lg"></i> </button>
-					                    <?php echo form_close(); ?>
+				                              		<?php $hidden = array('action_id' => $action->id , 'user_id' => $current_user['id'], 'action_do' => 'completed', 'outcome' => '' ,'company_id' => $company['id']);
+								               		echo form_open(site_url().'actions/edit', 'name="completed_action"  class="completed_action pull-right" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action->id.'" style="display:inline-block;" role="form"',$hidden); ?>
+								                    <button class="btn btn-success"><i class="fa fa-check fa-lg"></i> </button> 
+								                    <?php echo form_close(); ?>
+												<?php elseif(strtotime($action->planned_at) < $now and !isset($action->actioned_at)):?>
+				                              		<span class="label label-danger" style="font-size:11px; margin-left:10px;"><b>Overdue</b> - Due on <?php echo $planned_date_formatted ?> </span>
+				                              		<?php $hidden = array('action_id' => $action->id , 'user_id' => $current_user['id'] , 'action_do' => 'cancelled','outcome' => '' ,'company_id' => $company['id'] );
+								                    echo form_open(site_url().'actions/edit', 'name="cancel_action"  class="cancel_action pull-right" style="margin-left:5px;" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action->id.'" role="form"',$hidden); ?>
+								                    <button class="btn btn-danger" ><i class="fa fa-trash-o fa-lg"></i> </button>
+								                    <?php echo form_close(); ?>
 
-                                  		<?php $hidden = array('action_id' => $action->id , 'user_id' => $current_user['id'], 'action_do' => 'completed', 'outcome' => '' ,'company_id' => $company['id']);
-					               		echo form_open(site_url().'actions/edit', 'name="completed_action"  class="completed_action pull-right" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action->id.'" style="display:inline-block;" role="form"',$hidden); ?>
-					                    <button class="btn btn-success"><i class="fa fa-check fa-lg"></i> </button> 
-					                    <?php echo form_close(); ?>
-									<?php elseif(strtotime($action->planned_at) < $now and !isset($action->actioned_at)):?>
-                                  		<span class="label label-danger" style="font-size:11px; margin-left:10px;"><b>Overdue</b> - Due on <?php echo $planned_date_formatted ?> </span>
-                                  		<?php $hidden = array('action_id' => $action->id , 'user_id' => $current_user['id'] , 'action_do' => 'cancelled','outcome' => '' ,'company_id' => $company['id'] );
-					                    echo form_open(site_url().'actions/edit', 'name="cancel_action"  class="cancel_action pull-right" style="margin-left:5px;" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action->id.'" role="form"',$hidden); ?>
-					                    <button class="btn btn-danger" ><i class="fa fa-trash-o fa-lg"></i> </button>
-					                    <?php echo form_close(); ?>
+				                              		<?php $hidden = array('action_id' => $action->id , 'user_id' => $current_user['id'], 'action_do' => 'completed', 'outcome' => '' ,'company_id' => $company['id']);
+								               		echo form_open(site_url().'actions/edit', 'name="completed_action"  class="completed_action pull-right" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action->id.'" style="display:inline-block;" role="form"',$hidden); ?>
+								                    <button class="btn btn-success"><i class="fa fa-check fa-lg"></i> </button> 
+								                    <?php echo form_close(); ?>
+								                    
+				                               	<?php elseif($action->actioned_at): ?>
+				                               		<span class="label label-success pull-right" style="font-size:11px; margin-left:10px;">Completed on <?php echo $actioned_date_formatted ?></span>
+												<?php endif; ?>
+												<?php if($action->contact_id):?>
+													<span class="label label-warning pull-right" style="font-size:11px; margin-left:10px;"><i class="fa fa-users"></i> <?php echo $option_contacts[$action->contact_id]; ?></span>
+													
+												<?php endif; ?>
 
-                                  		<?php $hidden = array('action_id' => $action->id , 'user_id' => $current_user['id'], 'action_do' => 'completed', 'outcome' => '' ,'company_id' => $company['id']);
-					               		echo form_open(site_url().'actions/edit', 'name="completed_action"  class="completed_action pull-right" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action->id.'" style="display:inline-block;" role="form"',$hidden); ?>
-					                    <button class="btn btn-success"><i class="fa fa-check fa-lg"></i> </button> 
-					                    <?php echo form_close(); ?>
-					                    
-                                   	<?php elseif($action->actioned_at): ?>
-                                   		<span class="label label-success pull-right" style="font-size:11px; margin-left:10px;">Completed on <?php echo $actioned_date_formatted ?></span>
-									<?php endif; ?>
-									<?php if($action->contact_id):?>
-										<span class="label label-warning pull-right" style="font-size:11px; margin-left:10px;"><i class="fa fa-users"></i> <?php echo $option_contacts[$action->contact_id]; ?></span>
-										
-									<?php endif; ?>
+									  			</h4>
+				                                <div class="mic-info">
+				                                    Created By: <?php echo $system_users[$action->user_id]?> on <?php echo $created_date_formatted?>
+				                                </div>
+				                            </div>
+				                            
+											
+											<div class="row comment-text speech col-md-12" >
+				                                <div class="triangle-isosceles top">
+													<?php echo isset($action->comments)? $action->comments:'No comments'; ?>  
+				                                    <?php if (!empty($action->outcome)):?>
+														<table style="width:100%">
+														<tr>
+														<td style="width:45%"><hr/></td>
+														<td style="width:10%;vertical-align:middle; text-align: center; font-size:11px; color: #222;"><span class="glyphicon glyphicon-chevron-down"></span> Outcome <span class="glyphicon glyphicon-chevron-down"></span></td>
+														<td style="width:45%"><hr/></td>
+														</tr>
+														</table>
+														<?php echo $action->outcome ?>
+													<?php endif; ?>
+												</div>
+												
+											</div>
+											
+											<div class="col-md-12" id="action_outcome_box_<?php echo $action->id ?>" style="display:none;">
+											<hr>
+											<textarea class="form-control" name="outcome" placeholder="Add action outcome" rows="3" style="margin-bottom:5px;"></textarea>
+											<button class="btn btn-primary btn-block"><i class="fa fa-check fa-lg"></i> Send</button>
 
-						  			</h4>
-                                    <div class="mic-info">
-                                        Created By: <?php echo $system_users[$action->user_id]?> on <?php echo $created_date_formatted?>
-                                    </div>
-                                </div>
-                                
-								
-								<div class="row comment-text speech col-md-12" >
-	                                <div class="triangle-isosceles top">
-										<?php echo isset($action->comments)? $action->comments:'No comments'; ?>  
-                                        <?php if (!empty($action->outcome)):?>
-											<table style="width:100%">
-											<tr>
-											<td style="width:45%"><hr/></td>
-											<td style="width:10%;vertical-align:middle; text-align: center; font-size:11px; color: #222;"><span class="glyphicon glyphicon-chevron-down"></span> Outcome <span class="glyphicon glyphicon-chevron-down"></span></td>
-											<td style="width:45%"><hr/></td>
-											</tr>
-											</table>
-											<?php echo $action->outcome ?>
-										<?php endif; ?>
-									</div>
-									
-								</div>
-								
-								<div class="col-md-12" id="action_outcome_box_<?php echo $action->id ?>" style="display:none;">
+											</div>
+											</div><!--END ACTIONS-->   
+				                        </div>
+				                </li>
+				         
+				            	<?php endif; ?>
+
+
+				                <?php endforeach ?>
+				                </ul>
+							<?php else: ?>
+								<div class="col-md-12">
 								<hr>
-								<textarea class="form-control" name="outcome" placeholder="Add action outcome" rows="3" style="margin-bottom:5px;"></textarea>
-								<button class="btn btn-primary btn-block"><i class="fa fa-check fa-lg"></i> Send</button>
-
+									<h4>No actions found for this company</h4>
 								</div>
-								</div><!--END ACTIONS-->   
-                            </div>
-                    </li>
-                	<?php else: ?>
-                		 <li class="list-group-item">
-                        <div class="row" style="padding: 15px 0">
-                            <div class="col-xs-2 col-md-1">
-                                <img src="<?php echo asset_url();?>images/profiles/<?php echo isset($system_users_images[$action->user_id])? $system_users_images[$action->user_id]: 'none' ;?>.jpg " class="img-circle img-responsive" alt="" /></div>
-                            <div class="col-xs-10 col-md-11">
-                                <div>
-                                    <h4 style="margin:0;"><?php echo $action_types_array[$action->action_type_id]; ?> 
-                                    <?php if($action->cancelled_at) : ?>
-                                  		<span class="label label-default" style="font-size:11px; margin-left:10px;">Cancelled on <?php echo $cancelled_at_formatted ?></span>
-                                  	<?php elseif(strtotime($action->planned_at) > $now and !isset($action->actioned_at)) : ?>
-                                  		<span class="label label-warning" style="font-size:11px; margin-left:10px;">Due on <?php echo $planned_date_formatted ?> </span>
-                                  		<?php $hidden = array('action_id' => $action->id , 'user_id' => $current_user['id'] , 'action_do' => 'cancelled','outcome' => '' ,'company_id' => $company['id']);
-					                    echo form_open(site_url().'actions/edit', 'name="cancel_action"  class="cancel_action pull-right" style="margin-left:5px;" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action->id.'" role="form"',$hidden); ?>
-					                    <button class="btn btn-danger" ><i class="fa fa-trash-o fa-lg"></i> </button>
-					                    <?php echo form_close(); ?>
+							<?php endif; ?>
+				            </div>
+				            <div class="tab-pane fade in" id="completed">
+				                <?php if (count($actions) > 0): ?>
+								<ul class="list-group">
+								<?php foreach ($actions as $action): 
+								 // print_r('<pre>');print_r($action);print_r('</pre>');
+								 $created_date_formatted = date("l jS F y",strtotime($action->created_at))." @ ".date("H:i",strtotime($action->created_at));
+								 $actioned_date_formatted = date("l jS F y",strtotime($action->actioned_at))." @ ".date("H:i",strtotime($action->actioned_at));
+								 $planned_date_formatted = date("l jS F y",strtotime($action->planned_at))." @ ".date("H:i",strtotime($action->planned_at));
+								 $cancelled_at_formatted = date(" jS F y",strtotime($action->cancelled_at))." @ ".date("H:i",strtotime($action->cancelled_at));
+								 $now = date(time());
 
-                                  		<?php $hidden = array('action_id' => $action->id , 'user_id' => $current_user['id'], 'action_do' => 'completed', 'outcome' => '' ,'company_id' => $company['id']);
-					               		echo form_open(site_url().'actions/edit', 'name="completed_action"  class="completed_action pull-right" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action->id.'" style="display:inline-block;" role="form"',$hidden); ?>
-					                    <button class="btn btn-success"><i class="fa fa-check fa-lg"></i> </button> 
-					                    <?php echo form_close(); ?>
-									<?php elseif(strtotime($action->planned_at) < $now and !isset($action->actioned_at)):?>
-                                  		<span class="label label-danger" style="font-size:11px; margin-left:10px;"><b>Overdue</b> - Due on <?php echo $planned_date_formatted ?> </span>
-                                  		<?php $hidden = array('action_id' => $action->id , 'user_id' => $current_user['id'] , 'action_do' => 'cancelled','outcome' => '' ,'company_id' => $company['id'] );
-					                    echo form_open(site_url().'actions/edit', 'name="cancel_action"  class="cancel_action pull-right" style="margin-left:5px;" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action->id.'" role="form"',$hidden); ?>
-					                    <button class="btn btn-danger" ><i class="fa fa-trash-o fa-lg"></i> </button>
-					                    <?php echo form_close(); ?>
+								?>
+								<?php if($action->actioned_at || $action->cancelled_at): ?> 
+				                <li class="list-group-item">
+				                    <div class="row" style="padding: 15px 0">
+				                        <div class="col-xs-2 col-md-1">
+				                            <div class="profile-heading">
+				                        	<span>
+				                            <img src="<?php echo asset_url();?>images/profiles/<?php echo isset($system_users_images[$action->user_id])? $system_users_images[$action->user_id]: 'none.jpg' ;?> " class="img-circle img-responsive" alt="" /></div>
+				                        	<span>
+				                        	</div>
+				                        	<div class="col-xs-10 col-md-11">
+				                            <div>
+				                                <h4 style="margin:0;"><?php echo $action_types_array[$action->action_type_id]; ?> 
+				                                <?php if($action->cancelled_at) : ?>
+				                              		<span class="label label-default" style="font-size:11px; margin-left:10px;">Cancelled on <?php echo $cancelled_at_formatted ?></span>
+				                              	<?php elseif(strtotime($action->planned_at) > $now and !isset($action->actioned_at)) : ?>
+				                              		<span class="label label-warning" style="font-size:11px; margin-left:10px;">Due on <?php echo $planned_date_formatted ?> </span>
+				                              		<?php $hidden = array('action_id' => $action->id , 'user_id' => $current_user['id'] , 'action_do' => 'cancelled','outcome' => '' ,'company_id' => $company['id']);
+								                    echo form_open(site_url().'actions/edit', 'name="cancel_action"  class="cancel_action pull-right" style="margin-left:5px;" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action->id.'" role="form"',$hidden); ?>
+								                    <button class="btn btn-danger" ><i class="fa fa-trash-o fa-lg"></i> </button>
+								                    <?php echo form_close(); ?>
 
-                                  		<?php $hidden = array('action_id' => $action->id , 'user_id' => $current_user['id'], 'action_do' => 'completed', 'outcome' => '' ,'company_id' => $company['id']);
-					               		echo form_open(site_url().'actions/edit', 'name="completed_action"  class="completed_action pull-right" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action->id.'" style="display:inline-block;" role="form"',$hidden); ?>
-					                    <button class="btn btn-success"><i class="fa fa-check fa-lg"></i> </button> 
-					                    <?php echo form_close(); ?>
-					                    
-                                   	<?php elseif($action->actioned_at): ?>
-                                   		<span class="label label-success pull-right" style="font-size:11px; margin-left:10px;">Completed on <?php echo $actioned_date_formatted ?></span>
-									<?php endif; ?>
-									<?php if($action->contact_id):?>
-										<span class="label label-warning pull-right" style="font-size:11px; margin-left:10px;"><i class="fa fa-users"></i> <?php echo $option_contacts[$action->contact_id]; ?></span>
-										
-									<?php endif; ?>
+				                              		<?php $hidden = array('action_id' => $action->id , 'user_id' => $current_user['id'], 'action_do' => 'completed', 'outcome' => '' ,'company_id' => $company['id']);
+								               		echo form_open(site_url().'actions/edit', 'name="completed_action"  class="completed_action pull-right" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action->id.'" style="display:inline-block;" role="form"',$hidden); ?>
+								                    <button class="btn btn-success"><i class="fa fa-check fa-lg"></i> </button> 
+								                    <?php echo form_close(); ?>
+												<?php elseif(strtotime($action->planned_at) < $now and !isset($action->actioned_at)):?>
+				                              		<span class="label label-danger" style="font-size:11px; margin-left:10px;"><b>Overdue</b> - Due on <?php echo $planned_date_formatted ?> </span>
+				                              		<?php $hidden = array('action_id' => $action->id , 'user_id' => $current_user['id'] , 'action_do' => 'cancelled','outcome' => '' ,'company_id' => $company['id'] );
+								                    echo form_open(site_url().'actions/edit', 'name="cancel_action"  class="cancel_action pull-right" style="margin-left:5px;" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action->id.'" role="form"',$hidden); ?>
+								                    <button class="btn btn-danger" ><i class="fa fa-trash-o fa-lg"></i> </button>
+								                    <?php echo form_close(); ?>
 
-						  			</h4>
-                                    <div class="mic-info">
-                                        Created By: <?php echo $system_users[$action->user_id]?> on <?php echo $created_date_formatted?>
-                                    </div>
-                                </div>
-                                
-								
-								<div class="row comment-text speech col-md-12" >
-	                                <div class="triangle-isosceles top">
-										<?php echo isset($action->comments)? $action->comments:'No comments'; ?>  
-                                        <?php if (!empty($action->outcome)):?>
-											<table style="width:100%">
-											<tr>
-											<td style="width:45%"><hr/></td>
-											<td style="width:10%;vertical-align:middle; text-align: center; font-size:11px; color: #222;"><span class="glyphicon glyphicon-chevron-down"></span> Outcome <span class="glyphicon glyphicon-chevron-down"></span></td>
-											<td style="width:45%"><hr/></td>
-											</tr>
-											</table>
-											<?php echo $action->outcome ?>
-										<?php endif; ?>
-									</div>
-									
-								</div>
-								
-								<div class="col-md-12" id="action_outcome_box_<?php echo $action->id ?>" style="display:none;">
-								<hr>
-								<textarea class="form-control" name="outcome" placeholder="Add action outcome" rows="3" style="margin-bottom:5px;"></textarea>
-								<button class="btn btn-primary btn-block"><i class="fa fa-check fa-lg"></i> Send</button>
+				                              		<?php $hidden = array('action_id' => $action->id , 'user_id' => $current_user['id'], 'action_do' => 'completed', 'outcome' => '' ,'company_id' => $company['id']);
+								               		echo form_open(site_url().'actions/edit', 'name="completed_action"  class="completed_action pull-right" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action->id.'" style="display:inline-block;" role="form"',$hidden); ?>
+								                    <button class="btn btn-success"><i class="fa fa-check fa-lg"></i> </button> 
+								                    <?php echo form_close(); ?>
+								                    
+				                               	<?php elseif($action->actioned_at): ?>
+				                               		<span class="label label-success pull-right" style="font-size:11px; margin-left:10px;">Completed on <?php echo $actioned_date_formatted ?></span>
+												<?php endif; ?>
+												<?php if($action->contact_id):?>
+													<span class="label label-warning pull-right" style="font-size:11px; margin-left:10px;"><i class="fa fa-users"></i> <?php echo $option_contacts[$action->contact_id]; ?></span>
+													
+												<?php endif; ?>
 
-								</div>
-								</div><!--END ACTIONS-->   
-                            </div>
-                    </li>
-                	<?php endif; ?>
+									  			</h4>
+				                                <div class="mic-info">
+				                                    Created By: <?php echo $system_users[$action->user_id]?> on <?php echo $created_date_formatted?>
+				                                </div>
+				                            </div>
+				                            
+											
+											<div class="comment-text speech col-md-12" >
+				                                <div class="triangle-isosceles top">
+													<?php echo isset($action->comments)? $action->comments:'No comments'; ?>  
+				                                    <?php if (!empty($action->outcome)):?>
+														<table style="width:100%">
+														<tr>
+														<td style="width:45%"><hr/></td>
+														<td style="width:10%;vertical-align:middle; text-align: center; font-size:11px; color: #222;"><span class="glyphicon glyphicon-chevron-down"></span> Outcome <span class="glyphicon glyphicon-chevron-down"></span></td>
+														<td style="width:45%"><hr/></td>
+														</tr>
+														</table>
+														<?php echo $action->outcome ?>
+													<?php endif; ?>
+												</div>
+												
+											</div>
+											
+											<div class="col-md-12" id="action_outcome_box_<?php echo $action->id ?>" style="display:none;">
+											<hr>
+											<textarea class="form-control" name="outcome" placeholder="Add action outcome" rows="3" style="margin-bottom:5px;"></textarea>
+											<button class="btn btn-primary btn-block"><i class="fa fa-check fa-lg"></i> Send</button>
 
+											</div>
+										</div><!--END ACTIONS-->   
+				                    </div>
+				                </li>
+				            <?php endif; ?>
 
-                    <?php endforeach ?>
-                    </ul>
-				<?php else: ?>
-					<div class="col-md-12">
-					<hr>
-						<h4>No actions found for this company</h4>
-					</div>
-				<?php endif; ?>
-                </div>
-                <div class="tab-pane fade in" id="completed">
-                    <?php if (count($actions) > 0): ?>
-					<ul class="list-group">
-					<?php foreach ($actions as $action): 
-					 // print_r('<pre>');print_r($action);print_r('</pre>');
-					 $created_date_formatted = date("l jS F y",strtotime($action->created_at))." @ ".date("H:i",strtotime($action->created_at));
-					 $actioned_date_formatted = date("l jS F y",strtotime($action->actioned_at))." @ ".date("H:i",strtotime($action->actioned_at));
-					 $planned_date_formatted = date("l jS F y",strtotime($action->planned_at))." @ ".date("H:i",strtotime($action->planned_at));
-					 $cancelled_at_formatted = date(" jS F y",strtotime($action->cancelled_at))." @ ".date("H:i",strtotime($action->cancelled_at));
-					 $now = date(time());
-
-					?>
-					<?php if($action->actioned_at) {?> 
-
-                    <li class="list-group-item">
-                        <div class="row" style="padding: 15px 0">
-                            <div class="col-xs-2 col-md-1">
-                                <img src="<?php echo asset_url();?>images/profiles/<?php echo isset($system_users_images[$action->user_id])? $system_users_images[$action->user_id]: 'none' ;?>.jpg " class="img-circle img-responsive" alt="" /></div>
-                            <div class="col-xs-10 col-md-11">
-                                <div>
-                                    <h4 style="margin:0;"><?php echo $action_types_array[$action->action_type_id]; ?> 
-                                    <?php if($action->cancelled_at) : ?>
-                                  		<span class="label label-default" style="font-size:11px; margin-left:10px;">Cancelled on <?php echo $cancelled_at_formatted ?></span>
-                                  	<?php elseif(strtotime($action->planned_at) > $now and !isset($action->actioned_at)) : ?>
-                                  		<span class="label label-warning" style="font-size:11px; margin-left:10px;">Due on <?php echo $planned_date_formatted ?> </span>
-                                  		<?php $hidden = array('action_id' => $action->id , 'user_id' => $current_user['id'] , 'action_do' => 'cancelled','outcome' => '' ,'company_id' => $company['id']);
-					                    echo form_open(site_url().'actions/edit', 'name="cancel_action"  class="cancel_action pull-right" style="margin-left:5px;" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action->id.'" role="form"',$hidden); ?>
-					                    <button class="btn btn-danger" ><i class="fa fa-trash-o fa-lg"></i> </button>
-					                    <?php echo form_close(); ?>
-
-                                  		<?php $hidden = array('action_id' => $action->id , 'user_id' => $current_user['id'], 'action_do' => 'completed', 'outcome' => '' ,'company_id' => $company['id']);
-					               		echo form_open(site_url().'actions/edit', 'name="completed_action"  class="completed_action pull-right" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action->id.'" style="display:inline-block;" role="form"',$hidden); ?>
-					                    <button class="btn btn-success"><i class="fa fa-check fa-lg"></i> </button> 
-					                    <?php echo form_close(); ?>
-									<?php elseif(strtotime($action->planned_at) < $now and !isset($action->actioned_at)):?>
-                                  		<span class="label label-danger" style="font-size:11px; margin-left:10px;"><b>Overdue</b> - Due on <?php echo $planned_date_formatted ?> </span>
-                                  		<?php $hidden = array('action_id' => $action->id , 'user_id' => $current_user['id'] , 'action_do' => 'cancelled','outcome' => '' ,'company_id' => $company['id'] );
-					                    echo form_open(site_url().'actions/edit', 'name="cancel_action"  class="cancel_action pull-right" style="margin-left:5px;" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action->id.'" role="form"',$hidden); ?>
-					                    <button class="btn btn-danger" ><i class="fa fa-trash-o fa-lg"></i> </button>
-					                    <?php echo form_close(); ?>
-
-                                  		<?php $hidden = array('action_id' => $action->id , 'user_id' => $current_user['id'], 'action_do' => 'completed', 'outcome' => '' ,'company_id' => $company['id']);
-					               		echo form_open(site_url().'actions/edit', 'name="completed_action"  class="completed_action pull-right" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action->id.'" style="display:inline-block;" role="form"',$hidden); ?>
-					                    <button class="btn btn-success"><i class="fa fa-check fa-lg"></i> </button> 
-					                    <?php echo form_close(); ?>
-					                    
-                                   	<?php elseif($action->actioned_at): ?>
-                                   		<span class="label label-success pull-right" style="font-size:11px; margin-left:10px;">Completed on <?php echo $actioned_date_formatted ?></span>
-									<?php endif; ?>
-									<?php if($action->contact_id):?>
-										<span class="label label-warning pull-right" style="font-size:11px; margin-left:10px;"><i class="fa fa-users"></i> <?php echo $option_contacts[$action->contact_id]; ?></span>
-										
-									<?php endif; ?>
-
-						  			</h4>
-                                    <div class="mic-info">
-                                        Created By: <?php echo $system_users[$action->user_id]?> on <?php echo $created_date_formatted?>
-                                    </div>
-                                </div>
-                                
-								
-								<div class="comment-text speech col-md-12" >
-	                                <div class="triangle-isosceles top">
-										<?php echo isset($action->comments)? $action->comments:'No comments'; ?>  
-                                        <?php if (!empty($action->outcome)):?>
-											<table style="width:100%">
-											<tr>
-											<td style="width:45%"><hr/></td>
-											<td style="width:10%;vertical-align:middle; text-align: center; font-size:11px; color: #222;"><span class="glyphicon glyphicon-chevron-down"></span> Outcome <span class="glyphicon glyphicon-chevron-down"></span></td>
-											<td style="width:45%"><hr/></td>
-											</tr>
-											</table>
-											<?php echo $action->outcome ?>
-										<?php endif; ?>
-									</div>
-									
-								</div>
-								
-								<div class="col-md-12" id="action_outcome_box_<?php echo $action->id ?>" style="display:none;">
-								<hr>
-								<textarea class="form-control" name="outcome" placeholder="Add action outcome" rows="3" style="margin-bottom:5px;"></textarea>
-								<button class="btn btn-primary btn-block"><i class="fa fa-check fa-lg"></i> Send</button>
-
-								</div>
-								</div><!--END ACTIONS-->   
-                            </div>
-                    </li>
-                <?php  } else {} ?>
-
-                    <?php endforeach ?>
-                    </ul>
-				<?php else: ?>
-					<div class="col-md-12">
-					<hr>
-						<h4>No actions found for this company</h4>
-					</div>
-				<?php endif; ?>
-                </div>
-                <div class="tab-pane fade in" id="messages">
-                    ...</div>
-                <div class="tab-pane fade in" id="settings">
-                    This tab is empty.</div>
-            </div>
-            <!-- Ad -->
-        </div>
-    </div>
-
-<!--END TABS-->
-
-				
-		  </div>
+				            <?php endforeach ?>
+				            </ul>
+							<?php else: ?>
+							<div class="col-md-12">
+							<hr>
+								<h4>No actions found for this company</h4>
+							</div>
+							<?php endif; ?>
+				            </div>
+				            <div class="tab-pane fade in" id="messages">
+				                ...
+				            </div>
+				            <div class="tab-pane fade in" id="settings">
+				                This tab is empty.</div>
+				        </div>
+				        <!-- Ad -->
+				    </div>
+				</div>
+			<!--END TABS-->
+		  	</div>
 		</div>
 	</div>
     
     
     <div class="col-md-4">
-    
-    
-    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title"><i class="fa fa-comments fa-fw"></i> Comments</h3>
-                            <div class="btn-group pull-right">
-                          
-                            </div>
-                        </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                        		<?php if (count($comments) > 0): ?>
-                        			<ul class="chat">
-                        				<?php foreach ($comments as $comment):
-                        				// print_r('<pre>');print_r($action);print_r('</pre>');
-										 $created_date_formatted = date("d/m/y",strtotime($comment->created_at));
-										?>
-										<li class="left clearfix">
-		                                    <span class="chat-img pull-left">
-		                                    <img src="<?php echo asset_url();?>images/profiles/<?php echo isset($system_users_images[$action->user_id])? $system_users_images[$action->user_id]: 'none' ;?>.jpg " class="img-circle img-responsive" alt="" width="40px" />
-		                                    </span>
-		                                    <div class="chat-body clearfix">
-		                                        <div class="header">
-		                                            <strong class="primary-font"><?php echo $system_users[$action->user_id]?></strong> 
-		                                            <small class="pull-right text-muted">
-		                                                <i class="fa fa-calendar fa-fw"></i> <?php echo $created_date_formatted?>
-		                                            </small>
-		                                        </div>
-		                                        <p>
-												<?php echo isset($comment->comments)? $comment->comments:'No comments'; ?>  
-		                                        </p>
-		                                    </div>
-		                                </li>
-                        			<?php endforeach ?>
-                        			</ul>
-                        		<?php else: ?>
-								No Comments
-								<?php endif; ?>
-                        </div>
-                        <!-- /.panel-body -->
-                        <div class="panel-footer">
-                            
-                        </div>
-                        <!-- /.panel-footer -->
-                    </div>
-    
-    
+	    <div class="panel panel-default">
+	        <div class="panel-heading">
+	            <h3 class="panel-title"><i class="fa fa-comments fa-fw"></i> Comments</h3>
+	        </div>
+	        <!-- /.panel-heading -->
+	        <div class="panel-body">
+	        		<?php if (count($comments) > 0): ?>
+	        			<ul class="chat">
+	        				<?php foreach ($comments as $comment):
+	        				// print_r('<pre>');print_r($action);print_r('</pre>');
+							 $created_date_formatted = date("d/m/y",strtotime($comment->created_at));
+							?>
+							<li class="left clearfix">
+								<div class="profile-heading">
+	                            <span class="chat-img pull-left">
+	                            <img src="<?php echo asset_url();?>images/profiles/<?php echo isset($system_users_images[$action->user_id])? $system_users_images[$action->user_id]: 'none.jpg' ;?>" class="img-circle img-responsive" alt="" width="40px" />
+	                            </span>
+	                            </div>
+	                            <div class="chat-body clearfix">
+	                                <div class="header">
+	                                    <strong class="primary-font"><?php echo $system_users[$comment->user_id]?></strong> 
+	                                    <small class="pull-right text-muted">
+	                                        <i class="fa fa-calendar fa-fw"></i> <?php echo $created_date_formatted?>
+	                                    </small>
+	                                </div>
+	                                <p>
+									<?php echo isset($comment->comments)? $comment->comments:'No comments'; ?>  
+	                                </p>
+	                            </div>
+	                        </li>
+	        			<?php endforeach ?>
+	        			</ul>
+	        		<?php else: ?>
+					No Comments
+					<?php endif; ?>
+	        </div>
+	        <!-- /.panel-body -->
+	        <div class="panel-footer">
+		        <?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'],'done'=>'1');
+					echo form_open(site_url().'actions/create', 'name="create" class="" role=""',$hidden); ?>
+		            <div class="input-group">
+		            	<input type="hidden" name="action_type" value="7">
+	                    <input id="btn-input" type="text" class="form-control input-sm" name="comment" placeholder="Type your comments here...">
+	                    <span class="input-group-btn">
+	                        <button class="btn btn-warning btn-sm" id="btn-chat">
+	                            Send
+	                        </button>
+	                    </span>
+	            	</div>
+	            </form>
+	        </div>
+	        <!-- /.panel-footer -->
+	    </div>
     </div>
-	
 </div>
 

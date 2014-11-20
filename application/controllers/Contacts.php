@@ -49,4 +49,43 @@ class Contacts extends MY_Controller {
 
 	}
 
+	public function update(){
+		if($this->input->post('update_contact'))
+		{
+			$this->load->library('form_validation');
+			$this->form_validation->set_rules('name', 'name', 'xss_clean|required');
+			$this->form_validation->set_rules('email', 'email', 'xss_clean');
+			$this->form_validation->set_rules('phone', 'phone', 'xss_clean');
+			$this->form_validation->set_rules('role', 'role', 'xss_clean|required');
+			$this->form_validation->set_rules('company_id', 'company_id', 'xss_clean|required');
+			$this->form_validation->set_rules('contact_id', 'contact_id', 'xss_clean|required');
+			$this->form_validation->set_rules('user_id', 'user_id', 'xss_clean|required');
+			if($this->form_validation->run())
+			{
+				$rows_affected = $this->Contacts_model->update($this->input->post());
+				if($rows_affected)
+				{
+					$this->set_message_success('Contact has been updated.');
+					redirect('/companies/company?id='.$this->input->post('company_id'));
+					// $this->refresh_search_results();
+				}
+				else
+				{
+					$this->set_message_error('Error while updating contact.');
+					redirect('/companies/company?id='.$this->input->post('company_id'));
+				}
+			}
+			else
+			{
+				
+				$this->set_message_error(validation_errors());
+				redirect('/companies/company?id='.$this->input->post('company_id'));
+			}
+		}
+	}
+
+	public function sendEmail(){
+		
+	}
+
 }

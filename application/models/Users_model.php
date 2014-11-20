@@ -40,6 +40,47 @@ class Users_model extends CI_Model {
 
 	// UPDATES
 
+	public function update($data,$user_id,$image_updated=FALSE){
+		$data = array(
+			'name' => $data['name'],
+			'email' => $data['email'],
+			'phone' => !empty($data['phone'])?$data['phone']:Null,
+			'mobile' => !empty($data['mobile'])?$data['mobile']:Null,
+			'linkedin' => !empty($data['linkedin'])?$data['linkedin']:Null,
+			'updated_at' => date('Y-m-d H:i:s'),
+			'updated_by' => $user_id,
+			'image'=> $image_updated?$image_updated:Null,
+			);
+
+		$this->db->where('id', $user_id);
+		$this->db->update('users',$data);
+		if($this->db->affected_rows() !== 1){
+			$this->addError($this->db->_error_message());
+			return False;
+		}else{
+			return True;
+		} 
+	}
+
+	public function update_settings($data,$user_id){
+		$this->load->library('encrypt');
+		$data = array(
+			'gmail_account' => $data['gmail_account'],
+			'gmail_password' => $this->encrypt->encode($data['gmail_password']),
+			'updated_at' => date('Y-m-d H:i:s'),
+			'updated_by' => $user_id,
+			);
+
+		$this->db->where('id', $user_id);
+		$this->db->update('users',$data);
+		if($this->db->affected_rows() !== 1){
+			$this->addError($this->db->_error_message());
+			return False;
+		}else{
+			return True;
+		} 
+	}
+
 
 	// INSERTS
 
@@ -50,6 +91,7 @@ class Users_model extends CI_Model {
 		$data['active'] // True or False
 		$data['type']
 	*/
+
 	public function insert_user($data,$md5 = True)
 	{
 		$user = $this->get_user_by_email($data['email']);
