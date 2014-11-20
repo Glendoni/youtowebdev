@@ -263,7 +263,7 @@
 			<div class="col-md-12">
 				<div class="form-group ">
 					<label>Outcome</label>
-					<textarea class="form-control" name="comment" rows="6"></textarea>
+					<textarea class="form-control" name="comment" rows="6" required></textarea>
 				</div>
 				<button type="submit" name="save" class="btn btn-success form-control">Save</button>
 			</div>
@@ -313,7 +313,7 @@
 	                <div class="col-md-12">
 						<div class="form-group ">
 							<label>Note</label>
-							<textarea class="form-control" name="comment" rows="6"></textarea>
+							<textarea class="form-control" name="comment" rows="6" required></textarea>
 						</div>
 						<button type="submit" name="save" class="btn btn-primary form-control">Schedule</button>
 					</div>
