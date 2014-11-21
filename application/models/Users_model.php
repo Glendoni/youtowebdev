@@ -3,7 +3,7 @@ class Users_model extends CI_Model {
 	
 
 	// GETS
-	public function get_users_for_select() 
+	function get_users_for_select() 
 	{	
 		$this->db->select('id, name, image');
 		$this->db->where('active', 'True');
@@ -17,21 +17,21 @@ class Users_model extends CI_Model {
 		return array('users'=>$users,'images'=>$images);
 	}
 	// returns a user for a given id
-	public function get_user($id) 
+	function get_user($id) 
 	{
 		$limit = 1;
 		$query = $this->db->get_where('users', array('id' => $id), $limit);
 		return $query->row_array();
 	}
 	
-	public function get_user_by_email($email)
+	function get_user_by_email($email)
 	{	
 		$limit = 1;
 		$query = $this->db->get_where('users', array('email' => $email), $limit);
 		return $query->result();
 	}
 	
-	public function get_user_login($email,$password)
+	function get_user_login($email,$password)
 	{	
 		$limit = 1;
 		$query = $this->db->get_where('users', array('email' => $email,'password'=>md5($password)), $limit);
@@ -40,13 +40,14 @@ class Users_model extends CI_Model {
 
 	// UPDATES
 
-	public function update($data,$user_id,$image_updated=FALSE){
+	function update($data,$user_id,$image_updated=FALSE){
 		$data = array(
 			'name' => $data['name'],
 			'email' => $data['email'],
 			'phone' => !empty($data['phone'])?$data['phone']:Null,
 			'mobile' => !empty($data['mobile'])?$data['mobile']:Null,
 			'linkedin' => !empty($data['linkedin'])?$data['linkedin']:Null,
+			'role' => !empty($data['role'])?$data['role']:Null,
 			'updated_at' => date('Y-m-d H:i:s'),
 			'updated_by' => $user_id,
 			'image'=> $image_updated?$image_updated:Null,
@@ -62,7 +63,7 @@ class Users_model extends CI_Model {
 		} 
 	}
 
-	public function update_settings($data,$user_id){
+	function update_settings($data,$user_id){
 		$this->load->library('encrypt');
 		$data = array(
 			'gmail_account' => $data['gmail_account'],
@@ -92,7 +93,7 @@ class Users_model extends CI_Model {
 		$data['type']
 	*/
 
-	public function insert_user($data,$md5 = True)
+	function insert_user($data,$md5 = True)
 	{
 		$user = $this->get_user_by_email($data['email']);
 		if(!$user){ 

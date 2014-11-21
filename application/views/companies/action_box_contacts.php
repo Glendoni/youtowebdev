@@ -1,9 +1,9 @@
 <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#editContact_<?php echo $contact->id; ?>">
     edit 
 </button>
-<!-- <button type="button" class="btn btn-info btn-xs">
+<button type="button" class="btn btn-info btn-xs">
     <i class="fa fa-envelope"></i> send email 
-</button> -->
+</button>
 
 <div class="modal fade" id="editContact_<?php echo $contact->id; ?>" tabindex="-1" role="dialog" aria-labelledby="Edit <?php echo $contact->name; ?>" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">

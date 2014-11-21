@@ -2,6 +2,12 @@
 
 class Users extends MY_Controller {
 
+	function __construct() 
+	{
+		parent::__construct();
+		
+	}
+
 
 	public function profile(){
 		$this->data['hide_side_nav'] = TRUE;
@@ -35,6 +41,7 @@ class Users extends MY_Controller {
 			$this->form_validation->set_rules('name', 'name', 'xss_clean|required');
 			$this->form_validation->set_rules('email', 'email', 'xss_clean|required');
 			$this->form_validation->set_rules('phone', 'phone', 'xss_clean|required');
+			$this->form_validation->set_rules('role', 'role', 'xss_clean|required');
 			$this->form_validation->set_rules('mobile', 'mobile', 'xss_clean');
 			$this->form_validation->set_rules('linkedin', 'linkedin', 'xss_clean');
 			if($this->form_validation->run())
@@ -46,7 +53,7 @@ class Users extends MY_Controller {
 				}
 				else
 				{
-					$this->set_message_success('Profile successfully updated');
+					$this->set_message_success('Profile successfully updated.');
 					redirect('/users/profile');
 				}
 			}else{
@@ -82,7 +89,6 @@ class Users extends MY_Controller {
 				redirect('/users/settings');
 			}
 		}
-
 
 		$this->data['hide_side_nav'] = TRUE;
 		$this->data['main_content'] = 'users/settings';

@@ -2,6 +2,12 @@
 
 class Actions extends MY_Controller {
 
+	function __construct() 
+	{
+		parent::__construct();
+		
+	}
+
 	public function _valid_date(){
 		$now = date('Y-m-d H:i:s',time());
 		$date = date('Y-m-d H:i:s',strtotime($this->input->post('planned_at')));

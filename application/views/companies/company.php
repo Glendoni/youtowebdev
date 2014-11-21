@@ -363,7 +363,7 @@
 				                        <div class="col-xs-2 col-md-1 ">
 				                        	<div class="profile-heading">
 				                        	<span>
-				                            <img src="<?php echo asset_url();?>images/profiles/<?php echo isset($system_users_images[$action->user_id])? $system_users_images[$action->user_id]: 'none.jpg' ;?> " class="img-circle img-responsive" alt="" /></div>
+				                            <img src="<?php echo asset_url();?>images/profiles/<?php echo isset($system_users_images[$action->user_id])? $system_users_images[$action->user_id]: 'none.jpg' ;?> " class="img-circle img-responsive" alt="" />
 				                        	<span>
 				                        	</div>
 				                        	<div class="col-xs-10 col-md-11">
@@ -466,7 +466,7 @@
 				                        <div class="col-xs-2 col-md-1">
 				                            <div class="profile-heading">
 				                        	<span>
-				                            <img src="<?php echo asset_url();?>images/profiles/<?php echo isset($system_users_images[$action->user_id])? $system_users_images[$action->user_id]: 'none.jpg' ;?> " class="img-circle img-responsive" alt="" /></div>
+				                            <img src="<?php echo asset_url();?>images/profiles/<?php echo isset($system_users_images[$action->user_id])? $system_users_images[$action->user_id]: 'none.jpg' ;?> " class="img-circle img-responsive" alt="" />
 				                        	<span>
 				                        	</div>
 				                        	<div class="col-xs-10 col-md-11">

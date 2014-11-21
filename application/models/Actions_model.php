@@ -3,7 +3,7 @@ class Actions_model extends CI_Model {
 	
 
 	// GETS
-	public function get_actions($company_id)
+	function get_actions($company_id)
 	{
 		$data = array(
 			'company_id' => $company_id,
@@ -14,7 +14,7 @@ class Actions_model extends CI_Model {
 		return $query->result_object();
 	}
 
-	public function get_comments($company_id)
+	function get_comments($company_id)
 	{
 		$data = array(
 			'company_id' => $company_id,
@@ -25,7 +25,7 @@ class Actions_model extends CI_Model {
 		return $query->result_object();
 	}
 
-	public function get_pending_actions($user_id){		
+	function get_pending_actions($user_id){		
 		$this->db->select('company_id, actions.id "action_id",comments,planned_at,action_type_id,name "company_name",');
 		$this->db->where('actions.user_id',$user_id);
 		$this->db->where('actioned_at',NULL);
@@ -39,7 +39,7 @@ class Actions_model extends CI_Model {
 	}
 
 	
-	public function get_recent_stats(){
+	function get_recent_stats(){
 		$start_date = date('Y-m-d 00:00:00',strtotime('monday this week'));
 		$end_date = date('Y-m-d 23:59:59',strtotime('sunday this week'));
 		$sql = "select U.name,
@@ -63,7 +63,7 @@ class Actions_model extends CI_Model {
 
 	}
 	
-	public function get_last_week_stats(){
+	function get_last_week_stats(){
 		$start_date_last = date('Y-m-d 00:00:00',strtotime('monday last week'));
 		$end_date_last = date('Y-m-d 23:59:59',strtotime('sunday last week'));
 		$last_week_sql = "select U.name,
@@ -93,7 +93,7 @@ class Actions_model extends CI_Model {
 	}
 
 
-	public function get_action_types_array()
+	function get_action_types_array()
 	{
 
 		$this->db->select("id,name");
@@ -107,13 +107,13 @@ class Actions_model extends CI_Model {
 
 	}
 
-	public function get_action_types_done()
+	function get_action_types_done()
 	{
 		$query = $this->db->get_where('action_types',array('type'=>'Done'));
 		return $query->result_object();
 	}
 
-	public function get_action_types_planned()
+	function get_action_types_planned()
 	{	
 		$query = $this->db->get_where('action_types',array('type'=>'Planned'));
 		return $query->result_object();
@@ -123,7 +123,7 @@ class Actions_model extends CI_Model {
 	// UPDATES
 
 
-	public function set_action_state($action_id,$user_id,$state,$outcome)
+	function set_action_state($action_id,$user_id,$state,$outcome)
 
 	{
 		if($state == 'completed')
@@ -159,7 +159,7 @@ class Actions_model extends CI_Model {
 	
 
 	// INSERTS
-	public function create($post)
+	function create($post)
 	{
 		// created_at,updated_at,created_by
 		$data = array(
@@ -180,7 +180,7 @@ class Actions_model extends CI_Model {
 	}
 	
 	// DELETES
-	public function delete_campaign($id,$user_id)
+	function delete_campaign($id,$user_id)
 	{
 		$data = array(
 			'eff_to' => date('Y-m-d'),

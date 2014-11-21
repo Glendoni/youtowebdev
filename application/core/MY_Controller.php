@@ -41,7 +41,6 @@ class MY_Controller extends CI_Controller {
 		// $this->load->helper('mobile');
 		
 		// loging checking and redirect
-		
 		// try getting logged in user from session
 		if($this->session->userdata('logged_in')) 
 		{
@@ -54,6 +53,28 @@ class MY_Controller extends CI_Controller {
 			if($this->uri->segment(1)) redirect('/','location');
 		}
 
+		// load and pre-populate email library 
+		// if (!class_exists('email')) 
+		// {
+		// 	if(!empty($this->data['current_user']['gmail_account']) and !empty($this->data['current_user']['gmail_password']))
+		// 	{
+		// 		$this->load->library('encrypt');
+		// 		$email_config = Array(
+		// 	        'protocol'  => 'smtp',
+		// 	        'smtp_host' => 'ssl://smtp.googlemail.com',
+		// 	        'smtp_port' => '465',
+		// 	        'smtp_user' => $this->data['current_user']['gmail_account'],
+		// 	        'smtp_pass' => $this->encrypt->decode($this->data['current_user']['gmail_password']),
+		// 	        'mailtype'  => 'html',
+		// 	        'starttls'  => true,
+		// 	        'newline'   => "\r\n"
+		// 	    );
+		//     	$this->load->library('email', $email_config);
+		// 	}else{
+		// 		$this->add_notification('Please add your Gmail account to yours settings.','/users/settings');
+		// 	}
+		    
+		// }
         // session data only test for positve so be careful with the if stataments
 		if($this->session->userdata('sectors_search'))
 		{	
@@ -161,6 +182,14 @@ class MY_Controller extends CI_Controller {
 		//var_dump($this->session->all_userdata());
 		// var_dump($this->input->post());
 
+	}
+
+	protected function add_notification($message,$url)
+	{	
+		$notifications = array();
+		$notifications = $this->session->userdata('notifications');
+		$notifications[] = array('message'=>$message,'url' => $url,'date'=> date('Y-m-d H:i:s'));
+		$this->session->set_userdata('notifications',$notifications);
 	}
 	protected function clear_campaign_from_session()
 	{
