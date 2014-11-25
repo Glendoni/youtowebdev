@@ -43,7 +43,7 @@ class Email_templates extends MY_Controller {
 			$config["overwrite"] = TRUE;
 			$config["remove_spaces"] = TRUE;
 			$config["allowed_types"] = "txt|pdf|doc|docx|jpg|zip|png";
-			
+			$config["max_size"] = 2000;
 			$count = 0;
 			$attachments = array();
 			foreach ($_FILES as $key => $value)   //fieldname is the form field name
