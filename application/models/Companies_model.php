@@ -344,7 +344,7 @@ class Companies_model extends CI_Model {
 			   
 
 
-		from COMPANIES C';
+		from (select * from COMPANIES where eff_to IS NULL) C ';
 
 		if(isset($company_name_sql)) $sql = $sql. ' JOIN ( '.$company_name_sql.' ) name ON C.id = name.id ';
 		if(isset($no_providers_sql)) $sql = $sql. ' JOIN ( '.$no_providers_sql.' ) companies on C.id = companies.id ';
@@ -415,6 +415,17 @@ class Companies_model extends CI_Model {
 			     C.eff_from,
 			     C.ddlink,
 			     C.linkedin_id,
+			     C.contract,
+			     C.perm,
+			     C.active,
+			     C.created_at,
+			     C.updated_at,
+			     C.created_by,
+			     C.updated_by,
+			     C.registration,
+			     C.class,
+			     C.phone,
+			     C.pipeline,	
 			     U.id,
 			     U.name,
 			     A.address,
@@ -859,14 +870,14 @@ class Companies_model extends CI_Model {
 
 
     function get_autocomplete($search_data) {
-		$query1 = $this->db->query("select name,id from companies where name ilike '".$search_data."%' order by name asc limit 10 ");
+		$query1 = $this->db->query("select name,id from companies where eff_to IS NULL and name ilike '".$search_data."%' order by name asc limit 10 ");
 	    if ($query1->num_rows() > 0)
 			{
 			return $query1;
 			}
 		else 
 			{
-			return $this->db->query("select name,id from companies where name ilike '%".$search_data."%' order by name asc limit 5 ");
+			return $this->db->query("select name,id from companies where eff_to IS NULL and name ilike '%".$search_data."%' order by name asc limit 5 ");
 			}
 	}
 }
