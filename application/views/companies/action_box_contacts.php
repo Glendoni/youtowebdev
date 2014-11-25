@@ -5,12 +5,12 @@
     <i class="fa fa-envelope"></i> send email 
 </button>
 
-<div class="modal fade" id="send-email<?php echo $contact->id; ?>" tabindex="-1" role="dialog" aria-labelledby="Send email to <?php echo $contact->name; ?>" aria-hidden="true" style="display: none;">
+<div class="modal fade" id="send-email<?php echo $contact->id; ?>" tabindex="-1" role="dialog" aria-labelledby="Send email to <?php echo ucfirst($contact->first_name).' '.ucfirst($contact->last_name) ?>" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
         <div class="modal-content">
         	<div class="modal-header">
 	        	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-	        	<h4 class="modal-title">Send email to <?php echo ucfirst($contact->name);?></h4>
+	        	<h4 class="modal-title">Send email to <?php echo ucfirst($contact->first_name).' '.ucfirst($contact->last_name);?></h4>
 	      	</div>
 	      	<?php $hidden = array('contact_id' => $contact->id , 'user_id' => $current_user['id'],'send_email'=>'1','company_id'=>$contact->company_id);
 				 echo form_open_multipart(site_url().'email_templates/send_email', 'name="send_email" class="form" role="form"',$hidden); ?>
@@ -71,12 +71,12 @@
 </div>
 
 
-<div class="modal fade" id="editContact_<?php echo $contact->id; ?>" tabindex="-1" role="dialog" aria-labelledby="Edit <?php echo $contact->name; ?>" aria-hidden="true" style="display: none;">
+<div class="modal fade" id="editContact_<?php echo $contact->id; ?>" tabindex="-1" role="dialog" aria-labelledby="Edit <?php echo ucfirst($contact->first_name).' '.ucfirst($contact->last_name) ?>" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
         <div class="modal-content">
         	<div class="modal-header">
 	        	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-	        	<h4 class="modal-title">Edit Contact <?php echo ucfirst($contact->name);?></h4>
+	        	<h4 class="modal-title">Edit Contact <?php echo ucfirst($contact->first_name).' '.ucfirst($contact->last_name);?></h4>
 	      	</div>
 	      	<?php $hidden = array('contact_id' => $contact->id , 'user_id' => $current_user['id'],'update_contact'=>'1','company_id'=>$contact->company_id );
 				 echo form_open(site_url().'contacts/update', 'name="update_contact" class="form" role="form"',$hidden); ?>
@@ -84,16 +84,23 @@
 	      		<div class="row">
 					<div class="col-md-6">
 	                    <div class="form-group">
+	                        <label for="name" class="control-label">First Name*</label>                            
+	                        <input type="text" name="first_name" value="<?php echo isset($contact->first_name)?$contact->first_name:''; ?>" maxlength="50" class="form-control">
+	                    </div>
+	                </div>
+	                <div class="col-md-6">
+	                    <div class="form-group">
+	                        <label for="name" class="control-label">Last Name*</label>                            
+	                        <input type="text" name="last_name" value="<?php echo isset($contact->last_name)?$contact->last_name:''; ?>" maxlength="50" class="form-control">
+	                    </div>
+	                </div>
+	                <div class="col-md-6">
+	                    <div class="form-group">
 	                        <label for="role" class="control-label">Role*</label>                            
 	                        <input type="text" name="role" value="<?php echo isset($contact->role)?$contact->role:''; ?>" maxlength="50" class="form-control">
 	                    </div>
 	                </div>
-					 <div class="col-md-6">
-	                    <div class="form-group">
-	                        <label for="name" class="control-label">Name*</label>                            
-	                        <input type="text" name="name" value="<?php echo isset($contact->name)?$contact->name:''; ?>" maxlength="50" class="form-control">
-	                    </div>
-	                </div>
+
 	                <div class="col-md-6">
 	                    <div class="form-group">
 	                        <label for="email" class="control-label">Email</label>                            

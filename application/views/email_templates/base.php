@@ -156,7 +156,7 @@ span.preheader { display: none !important; }
 <h2 style="color:#293d66;font-size:23px;line-height:26px;font-family:'Open Sans', 'Helvetica Neue', Helvetica, Arial !important;font-weight:100; margin-top:0; padding-top:0px; text-align:center;" >
   Finance for Recruitment Agencies Placing Contractors</h2>
 <?php echo isset($sender_message)?$sender_message:''; ?>
-<p>Regards,</p>
+
 <div style='font-size:12px; line-height:20px; float:left; '>
 <font face='arial, helvetica, sans-serif'>
 <span style='font-size:14px; font-weight:bold;'>

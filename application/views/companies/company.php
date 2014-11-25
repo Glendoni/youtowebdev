@@ -211,7 +211,7 @@
 	      	<?php foreach ($contacts as $contact): ?>
 	      	<tr>
 				<td><?php echo ucfirst($contact->role); ?></td>
-				<td><?php echo ucfirst($contact->name); ?></td>
+				<td><?php echo ucfirst($contact->first_name).' '.ucfirst($contact->last_name); ?></td>
 				<td><?php echo $contact->email; ?></td>
 				<td><?php echo $contact->phone; ?></td>
 				<td>
@@ -254,7 +254,7 @@
 					<select name="contact_id" class="form-control">
 						<option value=""></option>
 						<?php foreach($contacts as $contact ): ?>
-						  <option value="<?php echo $contact->id; ?>"><?php echo $contact->name; ?></option>
+						  <option value="<?php echo $contact->id; ?>"><?php echo ucfirst($contact->first_name).' '.ucfirst($contact->last_name); ?></option>
 						<?php endforeach; ?>
 					</select>
 				</div>
@@ -304,7 +304,7 @@
 							<select name="contact_id" class="form-control">
 								<option value=""></option>
 								<?php foreach($contacts as $contact ): ?>
-								  <option value="<?php echo $contact->id; ?>"><?php echo $contact->name; ?></option>
+								  <option value="<?php echo $contact->id; ?>"><?php echo ucfirst($contact->first_name).' '.ucfirst($contact->last_name) ?></option>
 								<?php endforeach; ?>
 							</select>
 						</div>

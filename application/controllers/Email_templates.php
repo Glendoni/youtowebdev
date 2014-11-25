@@ -82,7 +82,7 @@ class Email_templates extends MY_Controller {
 				
 			$contact = $this->Contacts_model->get_contact_by_id($this->input->post('contact_id'));
 
-			$message = str_replace('{{contact_name}}', $contact->name, $this->input->post('message_'.$this->input->post('template_selector'))); 
+			$message = str_replace('{{contact_first_name}}', $contact->first_name, $this->input->post('message_'.$this->input->post('template_selector'))); 
 			$template = $this->Email_templates_model->get_by_id($this->input->post('template_selector'));
 		
 			if(!empty($this->data['current_user']['gmail_account']) and !empty($this->data['current_user']['gmail_password']))

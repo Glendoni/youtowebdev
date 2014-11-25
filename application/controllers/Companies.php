@@ -246,7 +246,7 @@ class Companies extends MY_Controller {
 			$this->data['contacts'] = $this->Contacts_model->get_contacts($this->input->get('id'));
 			$option_contacts =  array();
 			foreach ($this->data['contacts'] as $contact) {
-				$option_contacts[$contact->id] = $contact->name;
+				$option_contacts[$contact->id] = $contact->first_name.' '.$contact->last_name;
 			}
 			$this->data['option_contacts'] = $option_contacts;
 			$this->data['action_types_done'] = $this->Actions_model->get_action_types_done();

@@ -19,8 +19,8 @@
                   <input type="text" class="form-control" required name="subject" value="<?php echo isset($template->subject)?$template->subject:''  ?>" > 
                 </div>
                 <div class="form-group col-md-12">            
-                <label>Message* <small>Variables: {{contact_name}}</small></label>
-                <textarea rows="4" cols="50" class="form-control" required name="message"><?php echo isset($template->message)?$template->message:'{{contact_name}}';  ?></textarea>
+                <label>Message* <small>Variables: {{contact_first_name}}</small></label>
+                <textarea rows="4" cols="50" class="form-control" required name="message"><?php echo isset($template->message)?$template->message:'{{contact_first_name}}';  ?></textarea>
                 </div>
                 <div class="form-group col-md-12">
                  

@@ -13,9 +13,9 @@ class Contacts_model extends CI_Model {
 		return $query->row();
 	}
 
-	function get_contact_by_name($name)
+	function get_contact_by_name($first_name)
 	{
-		$query = $this->db->get_where('contacts',array('name'=>$name));	
+		$query = $this->db->get_where('contacts',array('first_name'=>$first_name));	
 		return $query->result();
 	}
 
@@ -32,9 +32,10 @@ class Contacts_model extends CI_Model {
 	}
 
 
-	function create_contact($name,$email,$role,$company_id,$created_by,$phone=NULL)
+	function create_contact($first_name,$last_name,$email,$role,$company_id,$created_by,$phone=NULL)
 	{
-        $contact->name   = $name; // please read the below note
+        $contact->first_name = $first_name; // please read the below note
+        $contact->last_name = $last_name;
         $contact->email = $email;
         $contact->phone = $phone;
         $contact->role = $role;
@@ -47,7 +48,8 @@ class Contacts_model extends CI_Model {
     }
 
     function update($post){
-    	$contact->name   = $post['name']; // please read the below note
+    	$contact->first_name   = $post['first_name']; // please read the below note
+    	$contact->last_name = $post['last_name'];
         $contact->role = $post['role'];
         $contact->email = $post['email'];
         $contact->phone = $post['phone'];
