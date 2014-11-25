@@ -9,9 +9,13 @@
 				echo form_open(site_url().'contacts/create_contact',array('onSubmit'=>'return validateContactForm();','name' => 'create_contact', 'class'=>'create_contact','role'=>"form" ),$hidden); ?>
             <div class="modal-body">
                 <div class="alert alert-danger" id="error_box" style="display:none;" role="alert"></div>
-                <div class=" form-group ">
-                    <label for="name" class="control-label">Name *</label>                            
-                    <input type="text" name="name" value="" id="name" maxlength="50" class="form-control">
+                <div class="form-group">
+                    <label for="name" class="control-label">First Name*</label>                            
+                    <input type="text" name="first_name" value="<?php echo isset($contact->first_name)?$contact->first_name:''; ?>" maxlength="50" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="name" class="control-label">Last Name*</label>                            
+                    <input type="text" name="last_name" value="<?php echo isset($contact->last_name)?$contact->last_name:''; ?>" maxlength="50" class="form-control">
                 </div>
                 <div class=" form-group ">
                     <label for="role" class="control-label">Role *</label>                            
