@@ -208,13 +208,11 @@
                    
                 </li> -->
                    <!-- /.dropdown -->
-                <li class="dropdown">
+                 <!--<li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-bell fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-alerts">
-                    <?php foreach ($this->session->userdata('notifications') as $notification): var_dump($notification)?>
-
                         <li>
                             <a href="#">
                                 <div>
@@ -223,23 +221,22 @@
                                 </div>
                             </a>
                         </li>
-                    <?php endforeach; ?>
-                        <!-- <li class="divider"></li>
+                        <li class="divider"></li>
                         <li>
                             <a class="text-center" href="#">
                                 <strong>See All Alerts</strong>
                                 <i class="fa fa-angle-right"></i>
                             </a>
-                        </li> -->
+                        </li> 
                     </ul>
                     
-                </li>
+                </li>-->
                 <?php if ($current_user['permission'] == 'admin'): ?>
                 <li>
                     <a href="<?php echo base_url(); ?>companies/create_company" ><i class="fa fa-plus-circle"></i> add company</a>
                 </li>
                 <li>
-                    <a href="<?php echo base_url(); ?>email_templates/dashboard" ><i class="fa fa-plus-circle"></i> add email template</a>
+                    <a href="<?php echo base_url(); ?>email_templates/" ><i class="fa fa-envelope"></i> email templates</a>
                 </li>
                 <?php endif; ?>
                 <li class="dropdown">

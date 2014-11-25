@@ -1,5 +1,5 @@
 <?php
-class Providers_model extends CI_Model {
+class Providers_model extends MY_Model {
 	
 	function get_all()
 	{

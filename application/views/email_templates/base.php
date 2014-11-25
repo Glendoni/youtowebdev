@@ -155,32 +155,15 @@ span.preheader { display: none !important; }
 <h2 style="color:#293d66;font-size:27px;line-height:36px;font-family:'Open Sans', 'Helvetica Neue', Helvetica, Arial !important;font-weight:600; padding-top:10px; margin-bottom:0px; text-align:center;" >Sonovate</h2>
 <h2 style="color:#293d66;font-size:23px;line-height:26px;font-family:'Open Sans', 'Helvetica Neue', Helvetica, Arial !important;font-weight:100; margin-top:0; padding-top:0px; text-align:center;" >
   Finance for Recruitment Agencies Placing Contractors</h2>
-<p>Hi,</p>
-<p>Thank you for your time today. </p>
-<p>As discussed please do keep us in mind for the future if you look to run any contractors. </p>
-<p>We have been set up specifically for the recruitment industry and we do not structure finance like the current Invoice Discounting or Factoring products out there.</p>
-<p>We understand what is important to recruitment agencies so we have removed the risk, hassle and other barriers associated with running contractors.</p>
-<p>Here are some key reasons why agencies are using Sonovate to assist them in placing contractors.</p>
-<p><strong>Ease of Entry</strong><br />
-  By removing unnecessary barriers to entry Sonovate compliments a permanent offering exceptionally. We understand set-up fees, personal guarantees and long contracts are needless barriers to prospective agencies, which is why Sonovate does not require any of these.</p>
-<p><strong>Cashflow</strong><br />
-  As your contract business grows, so will the pressure on your business’s cashflow and its potential problems. We alleviate the pressure by releasing 100% of your profit the week after a timesheet is approved, paying contractors on your behalf, and securing the money from your clients.</p>
-<p><strong>Technology  Eliminating Contract Administration</strong><br />
-  As a business that has traditionally supplied permanent or executive search services, the prospect of running contractors can be daunting from an administrative point of view. Using Sonovate means you don't need to worry about back-office related headaches. Included in our offering : Flexible finance, credit control, online timesheets, invoicing, candidate payroll &amp; and a cloud based portal to monitor your contract business.</p>
-<p>I have attached the following documents with explain about Sonovate. </p>
-<p>- How Sonovate works<br />
-  - Comparison as to why and how we are different </p>
-<p>Also have a look at our website which has more detail - www.sonovate.com</p>
-<p>Please feel free to email or call if you have any questions. </p>
+<?php echo isset($sender_message)?$sender_message:''; ?>
 <p>Regards,</p>
-<p>Peter</p>
 <div style='font-size:12px; line-height:20px; float:left; '>
 <font face='arial, helvetica, sans-serif'>
 <span style='font-size:14px; font-weight:bold;'>
-Peter O'Donnell
+<?php echo isset($sender_name)?ucfirst($sender_name):'' ?>
 </span>
 <br>
-Business Developer
+<?php echo isset($sender_role)?ucfirst($sender_role):'' ?>
 <span style='margin:0 10px 4px 10px; font-weight:bolder;border-right-width: 3px;border-right-style: solid; border-right-color: #4ba1d2;'>
 </span>
 <b>
@@ -196,7 +179,7 @@ Office
 </div>
 <div style='float:left; width:200px'>
 <font face='arial, helvetica, sans-serif'>
-020 7112 4949
+<?php echo isset($sender_phone)?ucfirst($sender_phone):'' ?>
 </font></div>
 <div style='clear:both;'>
 </div>
@@ -207,12 +190,12 @@ Mobile
 </div>
 <div style='width:200px; float:left;'>
 <font face='arial, helvetica, sans-serif'>
-07767 836 394
+<?php echo isset($sender_mobile)?ucfirst($sender_mobile):'' ?>
 </font>
 </div>
 <div style='clear:both;'>
 </div>
-<div style='border-top: 1px dotted #999999; margin-top:10px; padding-top:10px; font-size:12px;width:330px;'><font face='arial, helvetica, sans-serif'><a href='https://www.linkedin.com/profile/view?id=11629660' target='_blank' style='color:#4875B4; text-decoration:none;'>
+<div style='border-top: 1px dotted #999999; margin-top:10px; padding-top:10px; font-size:12px;width:330px;'><font face='arial, helvetica, sans-serif'><a href='https://www.linkedin.com/pub/<?php echo isset($sender_linkedin)?ucfirst($sender_linkedin):'' ?>' target='_blank' style='color:#4875B4; text-decoration:none;'>
 <span style='vertical-align:top; '><strong>Connect</strong> with me on LinkedIn</span></a></font>
 <br><font face='arial, helvetica, sans-serif'><a href='https://twitter.com/sonovate' target='_blank' style='color:#33CCFF; text-decoration:none;'><span style='vertical-align:top; '><strong>Follow Us</strong> On Twitter</span></a></font></div><img style='margin-top:10px;' src='http://www.sonovate.com/assets/sonovate_logo-feb-2013.png' width='96' height='17'></div></div>        
          </div>

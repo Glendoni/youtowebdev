@@ -238,7 +238,9 @@ class Companies extends MY_Controller {
 	public function company()
 	{
 		if($this->input->get('id'))
-		{
+		{	
+			$this->load->model('Email_templates_model');
+			$this->data['email_templates'] = $this->Email_templates_model->get_all();
 			$raw_search_results = $this->Companies_model->search_companies_sql(FALSE,$this->input->get('id'));
 			$company = $this->process_search_result($raw_search_results);
 			$this->data['contacts'] = $this->Contacts_model->get_contacts($this->input->get('id'));
@@ -254,6 +256,7 @@ class Companies extends MY_Controller {
 			$this->data['comments'] = $this->Actions_model->get_comments($this->input->get('id'));
 			$this->data['page_title'] = $company[0]['name'];
 			$this->data['companies'] = $company;
+			
 			$this->data['hide_side_nav'] = True;
 			$this->data['main_content'] = 'companies/company';
 			$this->load->view('layouts/single_page_layout', $this->data);

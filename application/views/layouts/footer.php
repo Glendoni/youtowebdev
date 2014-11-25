@@ -231,22 +231,12 @@
     $('.loading-btn').click(function () {
     var btn = $(this)
     btn.button('loading')
-    // $.ajax(...).always(function () {
-    //   btn.button('reset')
-    // });
     });
 
-    // Setup form validation on the #register-form element
-    // $( "#main_search" ).submit(function( event ) {        
-    //     if( $( "#main_search input:blank" ).length < 9 ){
-    //         return true;
-    //     }else{
-    //         event.preventDefault();
-    //         $('#empty_form_error').show();
-    //         $('.loading-btn').button('reset');
-    //         return false;
-    //     }
-    // });
+    $('#template_selector').change(function() {
+        $('#template_box .info_box').hide();
+        $('#template_box .template_'+$(this).val()).show();
+    });
 
 
  	});

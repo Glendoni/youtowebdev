@@ -84,39 +84,4 @@ class Contacts extends MY_Controller {
 		}
 	}
 
-	public function sendEmail(){
-
-		if(!empty($this->data['current_user']['gmail_account']) and !empty($this->data['current_user']['gmail_password']))
-		{
-			$this->load->library('encrypt');
-			$email_config = Array(
-		        'protocol'  => 'smtp',
-		        'smtp_host' => 'ssl://smtp.googlemail.com',
-		        'smtp_port' => '465',
-		        'smtp_user' => $this->data['current_user']['gmail_account'],
-		        'smtp_pass' => $this->encrypt->decode($this->data['current_user']['gmail_password']),
-		        'mailtype'  => 'html',
-		        'starttls'  => true,
-		        'newline'   => "\r\n"
-		    );
-	    	$this->load->library('email', $email_config);
-	    	$this->email->from($this->data['current_user']['gmail_account'], $this->data['current_user']['name']);
-		    $this->email->to('antonio@creinntech.com');
-		 
-		    $this->email->subject('Sire Subject');
-		    $data = array( 'message' => "Hello Sir, you've got mail!");
-		    $email = $this->load->view('emails/intro_email', null, TRUE);
-		 
-		    $this->email->message($email);
-		    if (!$this->email->send())
-			    show_error($this->email->print_debugger());
-			else
-			    $this->set_message_success('Your e-mail has been sent!');  
-		    die;
-		}else{
-			$this->set_message_error('Gmail account missing: Please add your Gmail account in the settings section.');
-		}
-		
-	}
-
 }

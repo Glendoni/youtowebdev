@@ -1,5 +1,5 @@
 <?php
-class Sectors_model extends CI_Model {
+class Sectors_model extends MY_Model {
 	
 	function get_all()
 	{

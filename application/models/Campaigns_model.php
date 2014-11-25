@@ -1,5 +1,5 @@
 <?php
-class Campaigns_model extends CI_Model {
+class Campaigns_model extends MY_Model {
 	
 
 	// GETS

@@ -1,5 +1,5 @@
 <?php
-class Mortgages_model extends CI_Model {
+class Mortgages_model extends MY_Model {
 	
 	function get_all()
 	{

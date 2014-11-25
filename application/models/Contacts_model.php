@@ -7,6 +7,12 @@ class Contacts_model extends CI_Model {
 		return $query->result();
 	}
 
+	function get_contact_by_id($id)
+	{
+		$query = $this->db->get_where('contacts',array('id'=>$id));	
+		return $query->row();
+	}
+
 	function get_contact_by_name($name)
 	{
 		$query = $this->db->get_where('contacts',array('name'=>$name));	

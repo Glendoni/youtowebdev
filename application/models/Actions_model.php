@@ -1,5 +1,5 @@
 <?php
-class Actions_model extends CI_Model {
+class Actions_model extends MY_Model {
 	
 
 	// GETS
@@ -165,10 +165,10 @@ class Actions_model extends CI_Model {
 		$data = array(
 			'company_id' 	=> $post['company_id'],
 			'user_id' 		=> $post['user_id'],
-			'comments'		=> ($post['comment']?$post['comment']:NULL),
-			'planned_at'	=> ($post['planned_at']? date('Y-m-d H:i:s',strtotime($post['planned_at'])):NULL),
-			'window'		=> ($post['window']?$post['window']:NULL),
-			'contact_id'    => ($post['contact_id']?$post['contact_id']:NULL),
+			'comments'		=> (isset($post['comment'])?$post['comment']:NULL),
+			'planned_at'	=> (isset($post['planned_at'])? date('Y-m-d H:i:s',strtotime($post['planned_at'])):NULL),
+			'window'		=> (isset($post['window'])?$post['window']:NULL),
+			'contact_id'    => (isset($post['contact_id'])?$post['contact_id']:NULL),
 			'created_by'	=> $post['user_id'],
 			'action_type_id'=> $post['action_type'],
 			'actioned_at'	=> (!isset($post['actioned_at']) && !isset($post['planned_at'])?date('Y-m-d H:i:s'):NULL),

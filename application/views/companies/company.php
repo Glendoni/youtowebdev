@@ -360,7 +360,7 @@
 								<!-- OUTSTANDING -->
 				                <li class="list-group-item">
 				                    <div class="row" style="padding: 15px 0">
-				                        <div class="col-xs-2 col-md-1 ">
+				                        <div class="col-md-12 ">
 				                        	<div class="profile-heading">
 				                        	<span>
 				                            <img src="<?php echo asset_url();?>images/profiles/<?php echo isset($system_users_images[$action->user_id])? $system_users_images[$action->user_id]: 'none.jpg' ;?> " class="img-circle img-responsive" alt="" />
@@ -463,7 +463,7 @@
 								<?php if($action->actioned_at || $action->cancelled_at): ?> 
 				                <li class="list-group-item">
 				                    <div class="row" style="padding: 15px 0">
-				                        <div class="col-xs-2 col-md-1">
+				                        <div class="col-md-12">
 				                            <div class="profile-heading">
 				                        	<span>
 				                            <img src="<?php echo asset_url();?>images/profiles/<?php echo isset($system_users_images[$action->user_id])? $system_users_images[$action->user_id]: 'none.jpg' ;?> " class="img-circle img-responsive" alt="" />
