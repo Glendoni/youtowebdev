@@ -145,7 +145,7 @@ class Email_templates extends MY_Controller {
 			    redirect('/companies/company?id='.$this->input->post('company_id'));
 			}else{
 				$this->set_message_error('Gmail account missing: Please add your Gmail account in the settings section.');
-				// redirect('/companies/company?id='.$this->input->post('company_id'));
+				redirect('/companies/company?id='.$this->input->post('company_id'));
 			}
 		}
 	}
