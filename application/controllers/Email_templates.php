@@ -77,13 +77,15 @@ class Email_templates extends MY_Controller {
 
 	public function send_email(){
 		
-		if($this->input->post('send_email')){
+		$template_selector = $this->input->post('template_selector');
+		$template_message = $this->input->post('message_'.$template_selector);
+		$template_subject = $this->input->post('subject_'.$template_selector);
+		if($this->input->post('send_email') and !empty($template_selector) and  !empty($template_message) and !empty($template_subject)){
 			$attachments = $this->process_upload();	
-				
 			$contact = $this->Contacts_model->get_contact_by_id($this->input->post('contact_id'));
-
-			$message = str_replace('{{contact_first_name}}', $contact->first_name, $this->input->post('message_'.$this->input->post('template_selector'))); 
-			$template = $this->Email_templates_model->get_by_id($this->input->post('template_selector'));
+			$message = str_replace('{{contact_first_name}}', $contact->first_name, $template_message);
+			$subject = $template_subject;
+			$template = $this->Email_templates_model->get_by_id($template_selector);
 		
 			if(!empty($this->data['current_user']['gmail_account']) and !empty($this->data['current_user']['gmail_password']))
 			{
@@ -101,7 +103,7 @@ class Email_templates extends MY_Controller {
 		    	$this->load->library('email', $email_config);
 		    	$this->email->from($this->data['current_user']['gmail_account'], $this->data['current_user']['name']);
 			    $this->email->to($contact->email);
-			    $this->email->subject($template->subject);
+			    $this->email->subject($subject);
 			    $data = array( 
 			    	'sender_message' => nl2br($message),
 			    	'sender_name'=> $this->data['current_user']['name'],
@@ -147,6 +149,9 @@ class Email_templates extends MY_Controller {
 				$this->set_message_error('Gmail account missing: Please add your Gmail account in the settings section.');
 				redirect('/companies/company?id='.$this->input->post('company_id'));
 			}
+		}else{
+			$this->set_message_error('Email not send, information missing on form.');
+			redirect('/companies/company?id='.$this->input->post('company_id'));
 		}
 	}
 

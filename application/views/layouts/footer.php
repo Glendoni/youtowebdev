@@ -233,13 +233,20 @@
     btn.button('loading')
     });
 
-    $('#template_selector').change(function() {
-        $('#template_box .info_box').hide();
-        $('#template_box .template_'+$(this).val()).show();
+    // Email pop up form 
+    $('.template_selector').change(function() {
+        form = $(this).closest("form");
+        form.find(".info_box").hide();
+        form.find(".template_"+$(this).val()).show();
     });
 
 
  	});
+        // Email pop up form 
+        // function validate_form_email(form){
+        //     if(form.)
+        //     return false;
+        // }
 
         function validateActionForm(form){
             $(form).siblings().hide();

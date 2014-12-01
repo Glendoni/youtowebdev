@@ -1,10 +1,11 @@
 <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#editContact_<?php echo $contact->id; ?>">
     edit 
 </button>
+<?php if($contact->email): ?>
 <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#send-email<?php echo $contact->id; ?>">
     <i class="fa fa-envelope"></i> send email 
 </button>
-
+<?php endif;?>
 <div class="modal fade" id="send-email<?php echo $contact->id; ?>" tabindex="-1" role="dialog" aria-labelledby="Send email to <?php echo ucfirst($contact->first_name).' '.ucfirst($contact->last_name) ?>" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -13,27 +14,34 @@
 	        	<h4 class="modal-title">Send email to <?php echo ucfirst($contact->first_name).' '.ucfirst($contact->last_name);?></h4>
 	      	</div>
 	      	<?php $hidden = array('contact_id' => $contact->id , 'user_id' => $current_user['id'],'send_email'=>'1','company_id'=>$contact->company_id);
-				 echo form_open_multipart(site_url().'email_templates/send_email', 'name="send_email" class="form" role="form"',$hidden); ?>
+				 echo form_open_multipart(site_url().'email_templates/send_email', 'name="send_email" onsubmit="return validate_form_email(this);" class="form" role="form"',$hidden); ?>
 	      	<div class="modal-body" id="template_box">
 	      		<div class="row">
 					<div class="col-md-12">
 	                    <div class="form-group">
 	                        <label for="role" class="control-label">Select template:</label>                            
-	                        <select class="form-control" name="template_selector" id="template_selector">
-	                        <option value="0">-</option>
+	                        <select class="form-control template_selector" name="template_selector" required>
+	                        <option value=""></option>
 							  <?php foreach ($email_templates as $email_template): ?>
 							  	<option value="<?php echo $email_template->id?>"><?php echo ucfirst($email_template->name)?></option>
 							  <?php endforeach; ?>	 
 							</select>
 	                    </div>
 	                </div>
-					 <div class="col-md-12">
+	                <div class="col-md-12">
+	                    <div class="form-group">
+	                        <label for="name" class="control-label">Email subject:</label>
+	                        <?php foreach ($email_templates as $email_template): ?>
+                			<input type="text" name="subject_<?php echo $email_template->id; ?>" style="display:none;" class="form-control info_box template_<?php echo $email_template->id; ?>" value="<?php echo $email_template->subject; ?>" >
+						  	<?php endforeach; ?>
+	                    </div>
+	                </div>
+					<div class="col-md-12">
 	                    <div class="form-group">
 	                        <label for="name" class="control-label">Email body:</label>
 	                        <?php foreach ($email_templates as $email_template): ?>
                 			<textarea class="form-control info_box template_<?php echo $email_template->id; ?>" rows="18" cols="50" name="message_<?php echo $email_template->id; ?>" style="display:none;"><?php echo $email_template->message; ?></textarea>
-						  	<?php endforeach; ?>	                            
-	                        
+						  	<?php endforeach; ?>
 	                    </div>
 	                </div>
 	                <div class="col-md-12">
@@ -61,7 +69,7 @@
 	      	</div>
 	      	<div class="modal-footer">
 	        	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	        	<button type="submit" class="btn btn-primary">Save changes</button>
+	        	<button type="submit" class="btn btn-success ">Send Email</button>
 	      	</div>
 	      	<?php echo form_close(); ?>
         </div>
