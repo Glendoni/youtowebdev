@@ -342,6 +342,9 @@ class Companies extends MY_Controller {
 					$mortgages['name'] = $mortgage->f2;
 					$mortgages['stage'] = $mortgage->f3;
 					$mortgages['eff_from'] = $mortgage->f4;
+					$mortgages['eff_to'] = $mortgage->f5;
+					$mortgages['type'] = $mortgage->f6;
+
 					$mortgages_array[] = $mortgages;
 				}
 				$mapped_companies_array['mortgages'] = $mortgages_array;

@@ -171,17 +171,18 @@
 			<table class="table table-hover" style="margin-top:10px;">
 			<thead>
 				<tr>
-					<th class="col-md-7">Provider</th>
-					<th class="col-md-3">Status</th>
-					<th class="col-md-2">Started</th>
+					<th class="col-md-6">Provider</th>
+					<th class="col-md-3" style="text-align:center;">Status</th>
+					<th class="col-md-3" style="text-align:center;">Started</th>
 				</tr>
 			</thead>
 			<tbody>
 				<?php foreach ($company['mortgages'] as $mortgage):?>
 				<tr <?php echo $mortgage['stage']==MORTGAGES_SATISFIED? 'class="danger"' : 'class="success"' ?> >
-					<td class="col-md-7" ><?php echo $mortgage['name']; ?></td>
-					<td class="col-md-3"><?php echo $mortgage['stage']; ?></td>
-					<td class="col-md-2"><?php echo $mortgage['eff_from']; ?></td>
+					<td class="col-md-6" ><?php echo $mortgage['name']; ?><div style="font-size:11px;"><?php echo $mortgage['type']; ?></div></td>
+					<td class="col-md-3" style="text-align:center;"><span class="label label-<?php echo $mortgage['stage']==MORTGAGES_SATISFIED? 'default' : 'success' ?>"><?php echo $mortgage['stage']; ?><?php if(!empty($mortgage['eff_to'])){echo ' on '.$mortgage['eff_to'];} ?></span></td>
+					<td class="col-md-3" style="text-align:center;"><?php echo $mortgage['eff_from']; ?></td>
+
 				</tr>
 				<?php endforeach; ?>
 			</tbody>
