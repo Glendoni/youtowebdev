@@ -344,7 +344,7 @@ class Companies_model extends CI_Model {
 			   
 
 
-		from (select * from COMPANIES where eff_to IS NULL) C ';
+		from (select * from COMPANIES where active = \'TRUE\' and eff_to IS NULL) C ';
 
 		if(isset($company_name_sql)) $sql = $sql. ' JOIN ( '.$company_name_sql.' ) name ON C.id = name.id ';
 		if(isset($no_providers_sql)) $sql = $sql. ' JOIN ( '.$no_providers_sql.' ) companies on C.id = companies.id ';
