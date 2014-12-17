@@ -4,11 +4,11 @@
 	    <!-- Collect the nav links, forms, and other content for toggling -->
 	    <div class="col-md-4">
 	      <ul class="nav navbar-nav">
-	      	<li><p class="navbar-text"><strong><?php echo $companies_count; ?></strong> Companies </p></li>        
+	      	<li><p class="navbar-text"><strong><?php echo number_format($companies_count); ?></strong> Companies </p></li>        
 	      </ul>  
       	</div>
 
-		<div class="col-md-8" style="text-align:right;">
+		<div class="col-md-8">
 	      	<?php if(($companies_count > 0)): ?>
 				<?php if($current_campaign_name && $current_campaign_owner_id && $current_campaign_id ): ?>
 				
@@ -41,6 +41,7 @@
 			</div>	
 			<?php else: ?>
 			<?php echo form_open(site_url().'campaigns/create', 'name="create_campaign" class="create_campaign navbar-form navbar-left" role="form"'); ?>
+			 	
 			 	<div class="form-group">
 					<input type="text" name="name" class="form-control" id="name" placeholder="Enter search name...">
 			    </div>
@@ -56,9 +57,18 @@
 			  <?php echo form_close(); ?>
 			<?php endif; ?>
 		<?php endif; ?>
+		</div>
 	  </div><!-- /.container-fluid -->
 	</nav>
-
+	<?php if ($companies_count > 1000): ?>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="alert alert-danger">
+			This seems a pretty large search.  <b>Try narrowing your criteria.</b>
+			</div>
+		</div>
+	</div>
+	<?php endif; ?>
 	<ul class="pager">
 		<?php if($previous_page_number): ?>
 	  	<li class="previous">

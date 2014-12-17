@@ -10,7 +10,7 @@
 	margin:2px 0px 0px 40px;
 }
 
-#main_search > .form-row > .form-group , #main_search .col-md-6 {
+#main_search > .form-row > .form-group , #main_search .col-md-6, #main_search .col-xs-6 {
 	padding:0px;
 	overflow: hidden;
 } 
