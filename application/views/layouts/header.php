@@ -233,10 +233,10 @@
                 </li>-->
                 <?php if ($current_user['permission'] == 'admin'): ?>
                 <li>
-                    <a href="<?php echo base_url(); ?>companies/create_company" ><i class="fa fa-plus-circle"></i> Add Company</a>
+                    <a href="<?php echo base_url(); ?>companies/create_company" ><i class="fa fa-plus-circle"></i> add company</a>
                 </li>
                 <li>
-                    <a href="<?php echo base_url(); ?>email_templates/" ><i class="fa fa-envelope"></i> Email Templates</a>
+                    <a href="<?php echo base_url(); ?>email_templates/" ><i class="fa fa-envelope"></i> email templates</a>
                 </li>
                 <?php endif; ?>
                 <li class="dropdown">
@@ -300,10 +300,10 @@
                                      <div class='form-row'>
                                          <?php  echo form_label('Age (Years) ', 'company_age_from', array('class'=>'control-label')); ?>
                                          <div class="form-group"> 
-                                            <div class="col-xs-6 col-md-6"> 
+                                            <div class="col-md-6"> 
                                             <?php echo form_input(array('name' => 'company_age_from', 'id' => 'company_age_from', 'maxlength' => '100','class'=>'form-control','placeholder'=>''), set_value('company_age_from',$this->input->post('company_age_from')));?>
                                             </div>
-                                            <div class="col-xs-6 col-md-6">
+                                            <div class="col-md-6">
                                             <?php echo form_input(array('name' => 'company_age_to', 'id' => 'company_age_to', 'maxlength' => '100','class'=>'form-control','placeholder'=>''), set_value('company_age_to',$this->input->post('company_age_to')));?>    
                                             </div>
                                         </div>
@@ -312,10 +312,10 @@
                                     <div class='form-row'>
                                     <?php  echo form_label('Turnover (£)', 'turnover_from', array('class'=>'control-label')); ?>
                                      <div class="form-group"> 
-                                        <div class="col-xs-6 col-md-6"> 
+                                        <div class="col-md-6"> 
                                         <?php echo form_input(array('name' => 'turnover_from', 'id' => 'turnover_from', 'maxlength' => '100','class'=>'form-control number','placeholder'=>''), set_value('turnover_from',$this->input->post('turnover_from')));?>
                                         </div>
-                                        <div class="col-xs-6 col-md-6">
+                                        <div class="col-md-6">
                                          <?php echo form_input(array('name' => 'turnover_to', 'id' => 'turnover_to', 'maxlength' => '100','class'=>'form-control number','placeholder'=>''), set_value('turnover_to',$this->input->post('turnover_to')));?>   
                                         </div>
                                     </div>
