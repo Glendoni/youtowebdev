@@ -27,6 +27,7 @@
     
     <!-- DATE TIME PICKER -->
     <script type="text/javascript" src="https://eonasdan.github.io/bootstrap-datetimepicker/scripts/moment.js"></script>
+    <script type="text/javascript" src="<?php echo asset_url();?>js/moment.js"></script>
 
     <script type="text/javascript" src="<?php echo asset_url();?>js/bootstrap-datetimepicker.js"></script>
 
