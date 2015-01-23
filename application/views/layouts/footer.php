@@ -1,4 +1,4 @@
-    </div>
+       </div>
     <!-- /#wrapper -->
     <!-- jQuery Version 1.11.0 -->
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
@@ -6,15 +6,15 @@
     <!-- Bootstrap Core JavaScript -->
     <script type="text/javascript" src="<?php echo asset_url();?>js/bootstrap.min.js"></script>
 
-	<!-- Metis Menu Plugin JavaScript 
+    <!-- Metis Menu Plugin JavaScript 
     <script type="text/javascript"  src="<?php echo asset_url();?>js/plugins/metisMenu/metisMenu.min.js"></script>-->
 
     <!-- Morris Charts JavaScript 
     
- 	<script type="text/javascript"  src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
- 	<script type="text/javascript"  src="//cdn.oesmith.co.uk/morris-0.5.1.min.js"></script>-->
+    <script type="text/javascript"  src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script type="text/javascript"  src="//cdn.oesmith.co.uk/morris-0.5.1.min.js"></script>-->
 
- 	<!-- Custom Theme JavaScript -->
+    <!-- Custom Theme JavaScript -->
     <script type="text/javascript"  src="<?php echo asset_url();?>js/sb-admin-2.js"></script>
 
 
@@ -26,7 +26,7 @@
     <script type="text/javascript"  src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
     
     <!-- DATE TIME PICKER -->
-    <!-- <script type="text/javascript" src="https://eonasdan.github.io/bootstrap-datetimepicker/scripts/moment.js"></script> -->
+    <script type="text/javascript" src="https://eonasdan.github.io/bootstrap-datetimepicker/scripts/moment.js"></script>
     <script type="text/javascript" src="<?php echo asset_url();?>js/moment.js"></script>
 
     <script type="text/javascript" src="<?php echo asset_url();?>js/bootstrap-datetimepicker.js"></script>
@@ -54,9 +54,7 @@
         //             }
         //         });
         //     return false;
-
         // }
-
         // AJAX SEARCH AUTOCOMPlETE
         function ajaxSearch() {
             var input_data = $('#agency_name').val();
@@ -64,12 +62,10 @@
                 $('#suggestions').hide();
                 $('#agency_name').removeClass('autocomplete-live');
             } else {
-
                 var post_data = {
                     'search_data': input_data,
                     '<?php echo $this->security->get_csrf_token_name(); ?>': '<?php echo $this->security->get_csrf_hash(); ?>'
                 };
-
                 $.ajax({
                     type: "POST",
                     url: "<?php echo base_url(); ?>companies/autocomplete/",
@@ -83,17 +79,14 @@
                         $('#agency_name').addClass('autocomplete-live');
                     }
                 });
-
             }
         }
-
- 	$( document ).ready(function() {
- 		// Datetime picker
+    $( document ).ready(function() {
+        // Datetime picker
         $('#planned_at').datetimepicker();
         $('#actioned_at').datetimepicker();
          
-
-    	$('.button-checkbox').each(function () {
+        $('.button-checkbox').each(function () {
         // Settings
         var $widget = $(this),
             $button = $widget.find('button'),
@@ -107,7 +100,6 @@
                     icon: 'glyphicon glyphicon-unchecked'
                 }
             };
-
         // Event Handlers
         $button.on('click', function () {
             $checkbox.prop('checked', !$checkbox.is(':checked'));
@@ -117,19 +109,15 @@
         $checkbox.on('change', function () {
             updateDisplay();
         });
-
         // Actions
         function updateDisplay() {
             var isChecked = $checkbox.is(':checked');
-
             // Set the button's state
             $button.data('state', (isChecked) ? "on" : "off");
-
             // Set the button's icon
             $button.find('.state-icon')
                 .removeClass()
                 .addClass('state-icon ' + settings[$button.data('state')].icon);
-
             // Update the button's color
             if (isChecked) {
                 $button
@@ -142,36 +130,30 @@
                     .addClass('btn-default');
             }
         }
-
         // Initialization
         function init() {
-
             updateDisplay();
-
             // Inject the icon if applicable
             if ($button.find('.state-icon').length == 0) {
-                $button.prepend('<i class="state-icon ' + settings[$button.data('state')].icon + '"></i> ');
+                $button.prepend('<i class="state-icon ' + settings[$button.data('state')].icon + '"></i> ');
             }
         }
         init();
     });
-
-	$('.assign-to-form .ladda-button').click(function(e){
-		var btn = $(this);
-		var form = btn.closest('form');
-		var url = form.attr('action');
-
-		var textbtn = btn.find('span.ladda-label');
-		var name = btn.attr('assignto');
-
-	 	e.preventDefault();
-	 	var l = Ladda.create(this);
-	 	l.start();
-	 	$.post(url, form.serialize(),
-	 	  function(response){
-	 	    
-	 	  })
-	 	.always(function() { 
+    $('.assign-to-form .ladda-button').click(function(e){
+        var btn = $(this);
+        var form = btn.closest('form');
+        var url = form.attr('action');
+        var textbtn = btn.find('span.ladda-label');
+        var name = btn.attr('assignto');
+        e.preventDefault();
+        var l = Ladda.create(this);
+        l.start();
+        $.post(url, form.serialize(),
+          function(response){
+            
+          })
+        .always(function() { 
             if(typeof name != 'undefined'){
                     textbtn.text('Assigned to '+name ); 
                 }else{
@@ -181,32 +163,27 @@
             l.stop(); 
             btn.attr('disabled','disabled'); 
         });
-
-	 	return false;
-	});
-
+        return false;
+    });
         
     // reset button on page load
     $('.submit_btn').button('reset');
-
     // on click action
     // VALIDATION FOR CONTACT FORM 
-	$('.submit_btn').click(function(e){
-		
-		var btn = $(this);
-		var form = btn.closest('form');
-		var url = form.attr('action');
-
+    $('.submit_btn').click(function(e){
+        
+        var btn = $(this);
+        var form = btn.closest('form');
+        var url = form.attr('action');
         var loading_display_id = btn.attr('loading-display');
         var loading_display = $('#'+loading_display_id);
         loading_display.attr('style','display:block;');
-
-	 	e.preventDefault();
+        e.preventDefault();
         btn.button('loading');
-	 	$.post(url, form.serialize(),
-	 	  function(response){
-	 	    btn.removeClass('btn-primary').addClass('btn-success').text('Saving...');
-	 	  })
+        $.post(url, form.serialize(),
+          function(response){
+            btn.removeClass('btn-primary').addClass('btn-success').text('Saving...');
+          })
         .fail(function(response) {
             var error = jQuery.parseJSON(response.responseText)
             console.log(error['error']);
@@ -218,37 +195,30 @@
         .success(function(){
             location.reload(true); 
         })
-	 	.always(function() {  
+        .always(function() {  
             
         });
-
-	 	return true;
-	});
-
+        return true;
+    });
     // reset button on load 
     $('.loading-btn').button('reset');
-
     // Click function  
     $('.loading-btn').click(function () {
     var btn = $(this)
     btn.button('loading')
     });
-
     // Email pop up form 
     $('.template_selector').change(function() {
         form = $(this).closest("form");
         form.find(".info_box").hide();
         form.find(".template_"+$(this).val()).show();
     });
-
-
- 	});
+    });
         // Email pop up form 
         // function validate_form_email(form){
         //     if(form.)
         //     return false;
         // }
-
         function validateActionForm(form){
             $(form).siblings().hide();
             var outcome_box_id = $(form).attr('outcome-box');
@@ -271,12 +241,11 @@
             
             
         }
-
- 	</script>
+    </script>
  <?php if(ENVIRONMENT !== 'production'): ?>
- 	<div class="alert alert-warning" role="alert">
- 	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>
- 	</div>
+    <div class="alert alert-warning" role="alert">
+    <p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>
+    </div>
  <?php endif; ?>
 </body>
 
