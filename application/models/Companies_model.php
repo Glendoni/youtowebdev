@@ -22,6 +22,7 @@ class Companies_model extends CI_Model {
 	function get_companies_classes()
 	{
 		$arrayNames = array(
+			'PreStartUp' => 'Pre-Start Up',
 			'StartUp' => 'Start Up',
 			'UsingFinance' => 'Using Finance',
 			'LookingToPlaceContractors' => 'Perm - Looking to Place Contractors',

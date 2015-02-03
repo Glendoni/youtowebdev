@@ -102,6 +102,17 @@ class MY_Controller extends CI_Controller {
 			asort($providers_options);
 			$this->session->set_userdata('providers_options',$providers_options);
 		}
+
+		if($this->session->userdata('providers_options_top'))
+		{
+			$providers_options_top = $this->session->userdata('providers_options_top');
+		}
+		else
+		{
+			$providers_options_top = $this->Providers_model->get_top_10_in_array();
+			asort($providers_options_top);
+			$this->session->set_userdata('providers_options_top',$providers_options_top);
+		}
  		
  		// $this->session->unset_userdata('system_users');
 		if($this->session->userdata('system_users'))
@@ -171,10 +182,20 @@ class MY_Controller extends CI_Controller {
 		$this->data['class_default'] ='0';
 
 		
-		$providers_options = array(0=>'All') + $providers_options;
-		$providers_options = array(-1=>'No current provider') + $providers_options;
+
+		//$providers_options = array(-1=>'No current provider') + $providers_options_top + $providers_options;
+		//$providers_options = array(0=>'All') + $providers_options;
+		$providers_options = array(
+			'With / Without Mortgage' => array(
+        	'-1'  => 'No current provider',
+            '0'  => 'All'),
+			'Top 10 Providers' => $providers_options_top,
+      		'All Providers' => $providers_options
+      );
 		$this->data['providers_options'] = $providers_options;
 		$this->data['providers_default'] ='0';
+
+
 
 		$this->data['shared_campaigns'] = $this->Campaigns_model->get_all_shared_campaigns();
 		$this->data['private_campaigns'] = $this->Campaigns_model->get_all_private_campaigns($this->get_current_user_id());

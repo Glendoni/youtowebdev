@@ -9,13 +9,30 @@ class Providers_model extends MY_Model {
 
 	function get_all_in_array()
 	{
+
 		$this->db->select('id, name');
 		$query = $this->db->get_where('providers');
+
 		foreach($query->result() as $row)
 		{
-		  $providers_array[$row->id] = $row->name;
+		  $providers_array[$row->id] = ucwords(strtolower($row->name));
 		} 	
 		return $providers_array;
+	}
+
+	function get_top_10_in_array()
+	{
+		$top10 = array('2686', '2582', '2329', '2744', '2825', '2337', '2960', '2413', '2652', '3000');
+
+		$this->db->select('id, name');
+		$this->db->where_in('id', $top10);
+		$query = $this->db->get_where('providers');
+
+		foreach($query->result() as $row)
+		{
+		  $providers_top10_array[$row->id] = ucwords(strtolower($row->name));
+		} 	
+		return $providers_top10_array;
 	}
 
 	function get_by_id($id)
