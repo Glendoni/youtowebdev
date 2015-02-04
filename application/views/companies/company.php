@@ -19,7 +19,7 @@
 
 	<div class="panel-heading profile-heading text-center">
         <span class="assigned-image-holder">
-          <img src="<?php echo asset_url();?>images/profiles/<?php echo isset($system_users_images[$company['assigned_to_id']])? $system_users_images[$company['assigned_to_id']]:'none.jpg' ;?>" class="img-circle profile-image" alt="" />
+          <img src="<?php echo asset_url();?>images/profiles/<?php echo isset($system_users_images[$company['assigned_to_id']])? $system_users_images[$company['assigned_to_id']]:'none' ;?>.jpg" class="img-circle profile-image" alt="" />
 	   </span>
         <h3>Assigned to <?php echo $company['assigned_to_name']; ?></h3>
     </div>
