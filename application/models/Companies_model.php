@@ -787,7 +787,6 @@ class Companies_model extends CI_Model {
 		}
 		
 		
-		
 		$company = array(
 				'phone' => !empty($post['phone'])?$post['phone']:NULL,
 				'linkedin_id' => (isset($post['linkedin_id']) and !empty($post['linkedin_id']))?$post['linkedin_id']:NULL,
@@ -799,8 +798,30 @@ class Companies_model extends CI_Model {
 				'updated_at' => date('Y-m-d H:i:s')
 			);
 
+		$this->db->select('id,pipeline');
+		$this->db->where('pipeline',$post['company_pipeline']);
+		$this->db->where('id',$post['company_id']);
+    	$query = $this->db->get('companies');
+    	if ($query->num_rows() === 0){
+   		
+		$data = array(
+			'company_id' 	=> $post['company_id'],
+			'user_id' 		=> $post['user_id'],
+			'comments'		=> 'Pipeline changed to '.$post['company_pipeline'],
+			'planned_at'	=> (isset($post['planned_at'])? date('Y-m-d H:i:s',strtotime($post['planned_at'])):NULL),
+			'window'		=> (isset($post['window'])?$post['window']:NULL),
+			'contact_id'    => (isset($post['contact_id'])?$post['contact_id']:NULL),
+			'created_by'	=> $post['user_id'],
+			'action_type_id'=> '17',
+			'actioned_at'	=> (!isset($post['actioned_at']) && !isset($post['planned_at'])?date('Y-m-d H:i:s'):NULL),
+			'created_at' 	=> date('Y-m-d H:i:s'),
+			);
+		
+		$query = $this->db->insert('actions', $data);
+    	}
 		$this->db->where('id', $post['company_id']);
 		$this->db->update('companies', $company);
+		
 
 		$company_status = $this->db->affected_rows();
 
