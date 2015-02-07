@@ -190,7 +190,7 @@
 
           <div class="panel panel-default">
           <div class="panel-heading">
-            <i class="fa fa-search fa-fw"></i> Weekly Stats</span> 
+            <i class="fa fa-search fa-fw"></i> Date Range Search</span> 
           </div>
              
           <div class="panel-body">
