@@ -812,7 +812,7 @@ class Companies_model extends CI_Model {
 			'window'		=> (isset($post['window'])?$post['window']:NULL),
 			'contact_id'    => (isset($post['contact_id'])?$post['contact_id']:NULL),
 			'created_by'	=> $post['user_id'],
-			'action_type_id'=> '17',
+			'action_type_id'=> '19',
 			'actioned_at'	=> (!isset($post['actioned_at']) && !isset($post['planned_at'])?date('Y-m-d H:i:s'):NULL),
 			'created_at' 	=> date('Y-m-d H:i:s'),
 			);

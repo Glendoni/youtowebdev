@@ -43,8 +43,6 @@ class Actions_model extends MY_Model {
 		$start_date = date('Y-m-d 00:00:00',strtotime('monday this week'));
 		$end_date = date('Y-m-d 23:59:59',strtotime('sunday this week'));
 		$sql = "select U.name,
-sum((case when action_type_id = '17' AND company_id not in (select company_id from actions where action_type_id = '17' AND a.created_at < '$start_date') THEN 1 else 0 end)) pipeline,
-				sum(case when (action_type_id = '4' or action_type_id = '5' OR action_type_id = '11' or action_type_id = '12' or action_type_id = '10') AND actioned_at > '$start_date' AND actioned_at < '$end_date' then 1 else 0 end) total,
 				sum(case when action_type_id = '4' AND actioned_at > '$start_date' AND actioned_at < '$end_date' then 1 else 0 end) introcall,
 		    	sum(case when (action_type_id = '5' OR action_type_id = '11') AND actioned_at > '$start_date' AND actioned_at < '$end_date' then 1 else 0 end) callcount,
 		   		sum(case when (action_type_id = '12' or action_type_id = '10' or action_type_id = '9' or action_type_id = '15') AND actioned_at > '$start_date' AND actioned_at < '$end_date' then 1 else 0 end) meetingcount,
@@ -56,37 +54,56 @@ sum((case when action_type_id = '17' AND company_id not in (select company_id fr
 				on A.user_id = U.id
 				LEFT JOIN companies C
 				on A.company_id = C.id
-				where cancelled_at is null group by U.name order by deals desc, total desc, name desc";
+				where cancelled_at is null group by U.name order by deals desc, meetingbooked desc, introcall desc,  name desc";
 		$query = $this->db->query($sql);
 
 		return $query->result_array();
 
 	}
-	
-	function get_last_week_stats(){
-		$start_date_last = date('Y-m-d 00:00:00',strtotime('monday last week'));
-		$end_date_last = date('Y-m-d 23:59:59',strtotime('sunday last week'));
-		$last_week_sql = "select U.name,
-				sum(case when (action_type_id = '4' or action_type_id = '5' OR action_type_id = '11' or action_type_id = '12' or action_type_id = '10') AND actioned_at > '$start_date_last' AND actioned_at < '$end_date_last' then 1 else 0 end) total,
-				sum(case when action_type_id = '4' AND actioned_at > '$start_date_last' AND actioned_at < '$end_date_last' then 1 else 0 end) introcall,
-		    	sum(case when (action_type_id = '5' OR action_type_id = '11') AND actioned_at > '$start_date_last' AND actioned_at < '$end_date_last' then 1 else 0 end) callcount,
-		   		sum(case when (action_type_id = '12' or action_type_id = '10' or action_type_id = '9' or action_type_id = '15') AND actioned_at > '$start_date_last' AND actioned_at < '$end_date_last' then 1 else 0 end) meetingcount,
-		    	sum(case when (action_type_id = '12' or action_type_id = '10' or action_type_id = '9' or action_type_id = '15') AND a.created_at > '$start_date_last' AND a.created_at < '$end_date_last' then 1 else 0 end) meetingbooked
+
+	function get_this_month_stats(){
+		$start_date = date('Y-m-d 00:00:00',strtotime('first day of this month'));
+		$end_date = date('Y-m-d 23:59:59',strtotime('last day of this month'));
+		$sql = "select U.name,
+				sum(case when action_type_id = '4' AND actioned_at > '$start_date' AND actioned_at < '$end_date' then 1 else 0 end) introcall,
+		    	sum(case when (action_type_id = '5' OR action_type_id = '11') AND actioned_at > '$start_date' AND actioned_at < '$end_date' then 1 else 0 end) callcount,
+		   		sum(case when (action_type_id = '12' or action_type_id = '10' or action_type_id = '9' or action_type_id = '15') AND actioned_at > '$start_date' AND actioned_at < '$end_date' then 1 else 0 end) meetingcount,
+		    	sum(case when (action_type_id = '12' or action_type_id = '10' or action_type_id = '9' or action_type_id = '15') AND a.created_at > '$start_date' AND a.created_at < '$end_date' then 1 else 0 end) meetingbooked,
+		    	sum(case when (action_type_id = '16') AND a.created_at > '$start_date' AND a.created_at < '$end_date' then 1 else 0 end) deals,
+		    	sum(case when (action_type_id = '8') AND a.created_at > '$start_date' AND a.created_at < '$end_date' then 1 else 0 end) proposals
 				from actions A
 				INNER JOIN users U
 				on A.user_id = U.id
-				where cancelled_at is null group by U.name order by total desc";
+				LEFT JOIN companies C
+				on A.company_id = C.id
+				where cancelled_at is null group by U.name order by deals desc, meetingbooked desc, introcall desc,  name desc";
+		$query = $this->db->query($sql);
 
-		
-		//$this->db->select('company_id, actions.id "action_id",comments,planned_at,action_type_id,name "company_name",');
-		//$this->db->join('companies', 'companies.id = actions.company_id');
-		//$this->db->order_by('cancelled_at desc,planned_at asc');
-		$last_week_query = $this->db->query($last_week_sql);
-
-		return $last_week_query->result_array();
-
+		return $query->result_array();
 	}
 
+	function get_stats_search(){
+
+		 $start_date = date('Y-m-d 00:00:00',strtotime($_GET['start_date']));
+		 $end_date = date('Y-m-d 00:00:00',strtotime($_GET['end_date']));
+		 $sql = "select U.name,
+				sum(case when action_type_id = '4' AND actioned_at > '$start_date' AND actioned_at < '$end_date' then 1 else 0 end) introcall,
+		    	sum(case when (action_type_id = '5' OR action_type_id = '11') AND actioned_at > '$start_date' AND actioned_at < '$end_date' then 1 else 0 end) callcount,
+		   		sum(case when (action_type_id = '12' or action_type_id = '10' or action_type_id = '9' or action_type_id = '15') AND actioned_at > '$start_date' AND actioned_at < '$end_date' then 1 else 0 end) meetingcount,
+		    	sum(case when (action_type_id = '12' or action_type_id = '10' or action_type_id = '9' or action_type_id = '15') AND a.created_at > '$start_date' AND a.created_at < '$end_date' then 1 else 0 end) meetingbooked,
+		    	sum(case when (action_type_id = '16') AND a.created_at > '$start_date' AND a.created_at < '$end_date' then 1 else 0 end) deals,
+		    	sum(case when (action_type_id = '8') AND a.created_at > '$start_date' AND a.created_at < '$end_date' then 1 else 0 end) proposals
+				from actions A
+				INNER JOIN users U
+				on A.user_id = U.id
+				LEFT JOIN companies C
+				on A.company_id = C.id
+				where cancelled_at is null group by U.name order by deals desc, meetingbooked desc, introcall desc,  name desc";
+		$query = $this->db->query($sql);
+
+		return $query->result_array();
+
+	}
 
 	function get_action_types_array()
 	{

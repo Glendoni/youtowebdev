@@ -1,9 +1,12 @@
     <!-- /.row -->
-    <div class="row">
-      <div class="col-lg-12">
-        <h1 class="page-header">Dashboard</h1>
-      </div>
-      <div class="col-lg-12">
+      <div class="row">
+        <div class="col-lg-12">
+          <h1 class="page-header">Dashboard</h1>
+        </div>
+        <div class="col-lg-12">
+          
+
+
       
       <div class="panel panel-default">
               <div class="panel-heading">
@@ -19,13 +22,16 @@
                     <?php else: ?>
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs" role="tablist">
-                      <li class="active"><a href="#this" role="tab" data-toggle="tab">This Week</a></li>
-                      <li><a href="#last" role="tab" data-toggle="tab">Last Week</a></li>
+                      <li <?php if ($_GET['search'] <> '1'): ?>class="active"<?php endif; ?>><a href="#this" role="tab" data-toggle="tab">This Week</a></li>
+                      <li><a href="#currentmonth" role="tab" data-toggle="tab">This Month</a></li>
+                      <?php if ($_GET['search'] == '1'): ?>
+                      <li <?php if ($_GET['search'] == '1'): ?>class="active"<?php endif; ?>><a href="#searchresults" role="tab" data-toggle="tab">Search Results</a></li>
+                      <?php endif; ?>
                     </ul>
 
                     <!-- Tab panes -->
                     <div class="tab-content">
-                      <div class="tab-pane active" id="this">
+                      <div class="tab-pane <?php if ($_GET['search'] <> '1'): ?>active<?php endif; ?>" id="this">
                       <div class="col-md-12">
 
                       
@@ -34,7 +40,7 @@
                       <div class="col-md-2"> 
                            <strong>Name</strong>
                         </div>
-                         <div class="col-md-1 text-center">
+                         <div class="col-md-2 text-center">
                            <strong>Deals</strong>
                         </div>
                          <div class="col-md-2 text-center">
@@ -46,94 +52,163 @@
                           <div class="col-md-2 text-center"> 
                           <strong>Meetings Attended</strong>
                         </div>
-                        <div class="col-md-2 text-center"> 
-                          <strong>Pipeline Added</strong>
-                        </div>
-                        <div class="col-md-1 text-center">
+                        <div class="col-md-2 text-center">
                            <strong>Pitches</strong>
                         </div>
                         </div>
                         <?php foreach ($stats as $stat): ?>
                           <div class="row list-group-item">
                             <div class="col-md-2"> 
-                              <?php echo $stat['name'];?>
-                            </div>
-                            <div class="col-md-1 text-center">
-                            <span class="badge"><?php echo $stat['deals'];?></span>
-                            
-                            </div>
-                            <div class="col-md-2 text-center"> 
-                                <?php echo $stat['proposals'];?>
-
-                            </div>
-                          
-                            
-                               <div class="col-md-2 text-center">
-                              <?php echo $stat['meetingbooked'];?>
-                            </div>
-                            <div class="col-md-2 text-center"> 
-                                <?php echo $stat['meetingcount'];?>
-
+                            <?php echo $stat['name'];?>
                             </div>
                             <div class="col-md-2 text-center">
-                              <?php echo $stat['pipeline'];?>
+                            <span class="badge"><?php echo $stat['deals'];?></span>
                             </div>
-                              <div class="col-md-1 text-center">
-                              <?php echo $stat['introcall'];?>
+                            <div class="col-md-2 text-center"> 
+                            <?php echo $stat['proposals'];?>
+                            </div>
+                            <div class="col-md-2 text-center">
+                            <?php echo $stat['meetingbooked'];?>
+                            </div>
+                            <div class="col-md-2 text-center"> 
+                            <?php echo $stat['meetingcount'];?>
+                            </div>
+                            <div class="col-md-2 text-center">
+                            <?php echo $stat['introcall'];?>
                             </div>
                           </div>     
                       <?php endforeach ?>
                       </div>
                       </div><!--END THIS TAB-->
-                      <div class="tab-pane" id="last">
+                      <div class="tab-pane" id="currentmonth">
                       <div class="col-md-12">
                         <div class="row list-group-item">
-                          <div class="col-md-2"> 
+                         <div class="col-md-2"> 
                            <strong>Name</strong>
-                          </div>
-                          <div class="col-md-2 text-center">
-                           <strong>Intro Calls</strong>
-                          </div>
-                          <div class="col-md-2 text-center"> 
-                          <strong>Calls</strong>
-                          </div>
-                          <div class="col-md-3 text-center">
+                        </div>
+                         <div class="col-md-2 text-center">
+                           <strong>Deals</strong>
+                        </div>
+                         <div class="col-md-2 text-center">
+                           <strong>Proposals</strong>
+                        </div>
+                        <div class="col-md-2 text-center">
                           <strong>Meetings Booked</strong>
                           </div>
-                          <div class="col-md-3 text-center"> 
+                          <div class="col-md-2 text-center"> 
                           <strong>Meetings Attended</strong>
-                          </div>
                         </div>
-
-                       <?php foreach ($lastweekstats as $lastweekstat): ?>
+                        <div class="col-md-2 text-center">
+                           <strong>Pitches</strong>
+                        </div>
+                        </div>
+                       <?php foreach ($thismonthstats as $thismonthstat): ?>
                           <div class="row list-group-item">
-                            <div class="col-md-2"> 
-                              <?php echo $lastweekstat['name'];?>
-                            </div>
-                            <div class="col-md-2 text-center">
-                              <?php echo $lastweekstat['introcall'];?>
-                            </div>
-                            <div class="col-md-2 text-center"> 
-                                <?php echo $lastweekstat['callcount'];?>
-                            </div>
-                               <div class="col-md-3 text-center">
-                              <?php echo $lastweekstat['meetingbooked'];?>
-                            </div>
-                            <div class="col-md-3 text-center"> 
-                              <?php echo $lastweekstat['meetingcount'];?>
-
-                            </div>
+                          <div class="col-md-2"> 
+                          <?php echo $thismonthstat['name'];?>
+                          </div>
+                          <div class="col-md-2 text-center">
+                          <span class="badge"><?php echo $thismonthstat['deals'];?></span>
+                          </div>
+                          <div class="col-md-2 text-center"> 
+                          <?php echo $thismonthstat['proposals'];?>
+                          </div>
+                          <div class="col-md-2 text-center">
+                          <?php echo $thismonthstat['meetingbooked'];?>
+                          </div>
+                          <div class="col-md-2 text-center"> 
+                          <?php echo $thismonthstat['meetingcount'];?>
+                          </div>
+                        
+                          <div class="col-md-2 text-center">
+                          <?php echo $thismonthstat['introcall'];?>
+                          </div>
                           </div>
                          
                       <?php endforeach ?>
                       
                       </div>
                     </div>
+
+                    <div class="tab-pane <?php if ($_GET['search'] == '1'): ?>active<?php endif; ?>" id="searchresults">
+                      <div class="col-md-12">
+                        <div class="row list-group-item">
+                         <div class="col-md-2"> 
+                           <strong>Name</strong>
+                        </div>
+                         <div class="col-md-2 text-center">
+                           <strong>Deals</strong>
+                        </div>
+                         <div class="col-md-2 text-center">
+                           <strong>Proposals</strong>
+                        </div>
+                        <div class="col-md-2 text-center">
+                          <strong>Meetings Booked</strong>
+                          </div>
+                          <div class="col-md-2 text-center"> 
+                          <strong>Meetings Attended</strong>
+                        </div>
+                        <div class="col-md-2 text-center">
+                           <strong>Pitches</strong>
+                        </div>
+                        </div>
+
+                       <?php foreach ($getstatssearch as $getstatssearch): ?>
+                          <div class="row list-group-item">
+                          <div class="col-md-2"> 
+                          <?php echo $getstatssearch['name'];?>
+                          </div>
+                          <div class="col-md-2 text-center">
+                          <span class="badge"><?php echo $getstatssearch['deals'];?></span>
+                          </div>
+                          <div class="col-md-2 text-center"> 
+                          <?php echo $getstatssearch['proposals'];?>
+                          </div>
+                          <div class="col-md-2 text-center">
+                          <?php echo $getstatssearch['meetingbooked'];?>
+                          </div>
+                          <div class="col-md-2 text-center"> 
+                          <?php echo $getstatssearch['meetingcount'];?>
+                          </div>
+                        
+                          <div class="col-md-2 text-center">
+                          <?php echo $getstatssearch['introcall'];?>
+                          </div>
+                          </div>
+                         
+                      <?php endforeach ?>
+                      
+                      </div>
+                    </div><!--END THIS TAB-->
+
                     </div>
                     <?php endif ?>
                   </div>
               </div>
+
+          </div><!--END PANEL-->
+
+          <div class="panel panel-default">
+          <div class="panel-heading">
+            <i class="fa fa-search fa-fw"></i> Weekly Stats</span> 
           </div>
+             
+          <div class="panel-body">
+            <div class="clearfix"></div>
+            <form class="form-inline" role="form">
+            <div class="form-group">
+            <label for="start-date">Start Date:</label>
+            <input type="text" class="form-control" id="start_date" data-date-format="DD-MM-YYYY" name="start_date" placeholder="" value="<?php echo $_GET['start_date']?>">    </div>
+            <div class="form-group">
+            <label for="end-date">End Date:</label>
+            <input type="text" class="form-control" id="end_date" data-date-format="DD-MM-YYYY" name="end_date" placeholder="" value="<?php echo $_GET['end_date']?>">
+            </div>
+            <input type="hidden" name="search" value="1">
+            <button type="submit" class="btn btn-success">Submit</button>
+            </form>
+          </div>
+        </div><!--END PANEL-->
+
           <div class="panel panel-default">
               <div class="panel-heading">
                 <i class="fa fa-bell fa-fw"></i> Your Calls & Meetings <span class="label label-primary pull-right"><?php echo count($pending_actions)?></span> 
