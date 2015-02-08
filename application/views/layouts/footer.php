@@ -83,6 +83,9 @@
         }
     $( document ).ready(function() {
         // Datetime picker
+        $('#start_date').datetimepicker();
+        $('#end_date').datetimepicker();
+
         $('#planned_at').datetimepicker();
         $('#actioned_at').datetimepicker();
          
