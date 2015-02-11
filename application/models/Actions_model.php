@@ -14,6 +14,44 @@ class Actions_model extends MY_Model {
 		return $query->result_object();
 	}
 
+	function get_actions_outstanding($company_id)
+	{
+		$data = array(
+			'company_id' => $company_id,
+			);
+		$this->db->where('planned_at IS NOT NULL', null);
+		$this->db->where('actioned_at IS NULL', null);
+		$this->db->where('cancelled_at IS NULL', null);
+		$this->db->where_not_in('action_type_id', 7);
+		$this->db->order_by('actioned_at desc, cancelled_at desc,planned_at desc');
+		$query = $this->db->get_where('actions', $data);
+		return $query->result_object();
+	}
+
+	function get_actions_completed($company_id)
+	{
+		$data = array(
+			'company_id' => $company_id,
+			);
+		$this->db->where('actioned_at IS NOT NULL', null);
+		$this->db->where_not_in('action_type_id', 7);
+		$this->db->order_by('actioned_at desc,planned_at desc');
+		$query = $this->db->get_where('actions', $data);
+		return $query->result_object();
+	}
+
+	function get_actions_cancelled($company_id)
+	{
+		$data = array(
+			'company_id' => $company_id,
+			);
+		$this->db->where('cancelled_at IS NOT NULL', null);
+		$this->db->where_not_in('action_type_id', 7);
+		$this->db->order_by('cancelled_at, planned_at desc');
+		$query = $this->db->get_where('actions', $data);
+		return $query->result_object();
+	}
+
 	function get_comments($company_id)
 	{
 		$data = array(
@@ -54,7 +92,7 @@ class Actions_model extends MY_Model {
 				on A.user_id = U.id
 				LEFT JOIN companies C
 				on A.company_id = C.id
-				where cancelled_at is null group by U.name order by deals desc, meetingbooked desc, introcall desc,  name desc";
+				where cancelled_at is null group by U.name order by deals desc,proposals desc,meetingbooked desc, introcall desc, name desc";
 		$query = $this->db->query($sql);
 
 		return $query->result_array();
@@ -121,7 +159,7 @@ class Actions_model extends MY_Model {
 
 	function get_action_types_done()
 	{
-		$ignore = array('17'); //EXCLUDE PIPELINE TRACKING//
+		$ignore = array('19','7'); //EXCLUDE PIPELINE TRACKING AND COMMENT//
 		$data = array(
 			'type' => 'Done',
 			);
