@@ -252,11 +252,11 @@ class Companies extends MY_Controller {
 			$this->data['action_types_done'] = $this->Actions_model->get_action_types_done();
 			$this->data['action_types_planned'] = $this->Actions_model->get_action_types_planned();
 			$this->data['action_types_array'] = $this->Actions_model->get_action_types_array();
-			$this->data['actions'] = $this->Actions_model->get_actions($this->input->get('id'));
+			$this->data['actions_outstanding'] = $this->Actions_model->get_actions_outstanding($this->input->get('id'));
+			$this->data['actions_completed'] = $this->Actions_model->get_actions_completed($this->input->get('id'));
 			$this->data['comments'] = $this->Actions_model->get_comments($this->input->get('id'));
 			$this->data['page_title'] = $company[0]['name'];
 			$this->data['companies'] = $company;
-			
 			$this->data['hide_side_nav'] = True;
 			$this->data['main_content'] = 'companies/company';
 			$this->load->view('layouts/single_page_layout', $this->data);

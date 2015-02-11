@@ -107,9 +107,12 @@
 }
 
 .list-group-item {
-	border:0px;
-	border-top: 1px solid #ddd;
+	margin-bottom: 0;
+	border-top: none;
+	border-left: none;
+	border-right: none;
 	border-bottom: 1px solid #ddd;
+	padding: 15px 0;
 }
 
 .list-group-item:first-child{
@@ -199,7 +202,6 @@ border-right: 1px solid #e7e7e7;
 	background-color:#FFBFBF !important;
 }
 
-<<<<<<< HEAD
 /*ACTION COMMENTS BOX*/
 .mic-info { color: #666666;font-size: 11px;margin-top: 5px; }
 
