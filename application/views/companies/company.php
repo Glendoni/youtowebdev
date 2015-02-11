@@ -33,9 +33,9 @@
 			</strong>
 			<p style="margin-bottom:0;">
 			<i class="fa fa-map-marker"></i>
-			<!--<a class="btn btn-link" style="padding-left:0px;" data-toggle="modal" data-target="#map_<?php echo $company['id']; ?>">
+			<!--<a class="btn btn-link" style="padding-left:0px;" data-toggle="modal" data-target="#map_<?php echo $company['id']; ?>">!-->
 				<?php echo $company['address']; ?>
-			</a>-->
+			<!--</a>-->
 			</p>
 			<!--<div class="modal fade" id="map_<?php echo $company['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="Map">
 			  <div class="modal-dialog">
