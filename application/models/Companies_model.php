@@ -895,8 +895,9 @@ class Companies_model extends CI_Model {
 
 
     function get_autocomplete($search_data) {
-		echo $query1 = $this->db->query("select c.name as name,c.id as id, c.pipeline as pipeline, u.name as assignname from companies c left join users u on u.id = c.user_id where c.eff_to IS NULL and c.active = 'true' and c.name ilike '".$search_data."%' order by c.name asc limit 10 ");
-		 
+		$query1 = $this->db->query("select name,id from companies where eff_to IS NULL and active = 'true' and name ilike '".$search_data."%' order by name asc limit 10 ");
+		 $query2 = $this->db->query("select concat(c.first_name::text,' ', c.last_name::text) as name, company_id as id from contacts c
+where concat(c.first_name::text, ' ', c.last_name::text) ilike '%harriman%' order by name asc limit 10 ");
 
 	    if ($query1->num_rows() > 0)
 			{
@@ -904,12 +905,11 @@ class Companies_model extends CI_Model {
 			}
 		else 
 			{
-			return $this->db->query("select c.name as name,c.id as id, c.pipeline as pipeline, u.name as assignname from companies c left join users u on u.id = c.user_id where c.eff_to IS NULL and c.active = 'true' and c.name ilike '%".$search_data."%' order by c.name asc limit 5 ");
+			return $this->db->query("select name,id from companies where eff_to IS NULL and active = 'true' and name ilike '%".$search_data."%' order by name asc limit 5 ");
 			}
 	}
 	    function get_autocomplete_contact($search_data) {
-		 $query2 = $this->db->query("select concat(c.first_name::text,' ', c.last_name::text) as name, c.company_id as id, a.name as companyname from contacts c left join 
-companies a on c.company_id = a.id
+		 $query2 = $this->db->query("select concat(c.first_name::text,' ', c.last_name::text) as name, company_id as id from contacts c
 where concat(c.first_name::text, ' ', c.last_name::text) ilike '".$search_data."%' order by name asc limit 5 ");
 
 	    if ($query2->num_rows() > 0)
@@ -918,8 +918,7 @@ where concat(c.first_name::text, ' ', c.last_name::text) ilike '".$search_data."
 			}
 		else 
 			{
-			return $this->db->query("select concat(c.first_name::text,' ', c.last_name::text) as name, c.company_id as id, a.name as companyname from contacts c left join 
-companies a on c.company_id = a.id
+			return $this->db->query("select concat(c.first_name::text,' ', c.last_name::text) as name, company_id as id from contacts c
 where concat(c.first_name::text, ' ', c.last_name::text) ilike '%".$search_data."%' order by name asc limit 5 ");
 			}
 	}
