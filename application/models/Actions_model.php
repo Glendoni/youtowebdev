@@ -3,12 +3,13 @@ class Actions_model extends MY_Model {
 	
 
 	// GETS
+
 	function get_actions($company_id)
 	{
 		$data = array(
 			'company_id' => $company_id,
 			);
-		$this->db->where_not_in('action_type_id', 7);
+		$this->db->where_not_in('action_type_id', $category_exclude);
 		$this->db->order_by('actioned_at desc, cancelled_at desc,planned_at desc');
 		$query = $this->db->get_where('actions', $data);
 		return $query->result_object();
@@ -16,13 +17,14 @@ class Actions_model extends MY_Model {
 
 	function get_actions_outstanding($company_id)
 	{
+		$category_exclude = array('7', '20');
 		$data = array(
 			'company_id' => $company_id,
 			);
 		$this->db->where('planned_at IS NOT NULL', null);
 		$this->db->where('actioned_at IS NULL', null);
 		$this->db->where('cancelled_at IS NULL', null);
-		$this->db->where_not_in('action_type_id', 7);
+		$this->db->where_not_in('action_type_id',$category_exclude);
 		$this->db->order_by('actioned_at desc, cancelled_at desc,planned_at desc');
 		$query = $this->db->get_where('actions', $data);
 		return $query->result_object();
@@ -30,11 +32,12 @@ class Actions_model extends MY_Model {
 
 	function get_actions_completed($company_id)
 	{
+		$category_exclude = array('7', '20');
 		$data = array(
 			'company_id' => $company_id,
 			);
 		$this->db->where('actioned_at IS NOT NULL', null);
-		$this->db->where_not_in('action_type_id', 7);
+		$this->db->where_not_in('action_type_id', $category_exclude);
 		$this->db->order_by('actioned_at desc,planned_at desc');
 		$query = $this->db->get_where('actions', $data);
 		return $query->result_object();
@@ -42,12 +45,25 @@ class Actions_model extends MY_Model {
 
 	function get_actions_cancelled($company_id)
 	{
+		$category_exclude = array('7', '20');
 		$data = array(
 			'company_id' => $company_id,
 			);
 		$this->db->where('cancelled_at IS NOT NULL', null);
 		$this->db->where_not_in('action_type_id', 7);
 		$this->db->order_by('cancelled_at, planned_at desc');
+		$query = $this->db->get_where('actions', $data);
+		return $query->result_object();
+	}
+
+	function get_actions_marketing($company_id)
+	{
+		$data = array(
+			'company_id' => $company_id,
+			);
+		$this->db->where('actioned_at IS NOT NULL', null);
+		$this->db->where('action_type_id', '20'); 
+		$this->db->order_by('actioned_at desc,planned_at desc');
 		$query = $this->db->get_where('actions', $data);
 		return $query->result_object();
 	}
@@ -159,7 +175,7 @@ class Actions_model extends MY_Model {
 
 	function get_action_types_done()
 	{
-		$ignore = array('19','7'); //EXCLUDE PIPELINE TRACKING AND COMMENT//
+		$ignore = array('19','7','20'); //EXCLUDE PIPELINE TRACKING, COMMENT AND MARKETING//
 		$data = array(
 			'type' => 'Done',
 			);
