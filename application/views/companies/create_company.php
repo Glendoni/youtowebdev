@@ -79,7 +79,7 @@ echo form_open('',$attributes,$hidden);
 <div class=" form-group ">
     <label for="address" class="control-label col-sm-2">Address</label>
     <div class="col-sm-10">                            
-    	<input type="text" name="address" value="<?php echo isset($_POST['address'])?$_POST['address']:''; ?>" id="address" maxlength="50" class="form-control">
+    	<input type="text" name="address" value="<?php echo isset($_POST['address'])?$_POST['address']:''; ?>" id="address" maxlength="200" class="form-control">
     </div>
 </div>
 <div class=" form-group ">

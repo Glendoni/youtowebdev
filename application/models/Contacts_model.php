@@ -65,4 +65,5 @@ class Contacts_model extends CI_Model {
 			return True;
 		} 
     }
+    
 }

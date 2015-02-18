@@ -22,7 +22,7 @@ class Sectors_model extends MY_Model {
 		LEFT JOIN operates O on s.id = O.sector_id
 		WHERE s.display = \'True\'
 		GROUP BY s.id,s.name
-		ORDER BY count,s.name desc
+		ORDER BY count desc,s.name desc
 		';
 		
 		$query = $this->db->query($sql);

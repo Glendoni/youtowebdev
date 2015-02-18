@@ -254,6 +254,8 @@ class Companies extends MY_Controller {
 			$this->data['action_types_array'] = $this->Actions_model->get_action_types_array();
 			$this->data['actions_outstanding'] = $this->Actions_model->get_actions_outstanding($this->input->get('id'));
 			$this->data['actions_completed'] = $this->Actions_model->get_actions_completed($this->input->get('id'));
+			$this->data['actions_cancelled'] = $this->Actions_model->get_actions_cancelled($this->input->get('id'));
+			$this->data['actions_marketing'] = $this->Actions_model->get_actions_marketing($this->input->get('id'));
 			$this->data['comments'] = $this->Actions_model->get_comments($this->input->get('id'));
 			$this->data['page_title'] = $company[0]['name'];
 			$this->data['companies'] = $company;
@@ -356,17 +358,35 @@ class Companies extends MY_Controller {
 
 	public function autocomplete() {
         $search_data = $this->input->post("search_data");
+                $response = "<ul class='autocomplete-holder'>";
+
         $query = $this->Companies_model->get_autocomplete($search_data);
+        $rowcount = $query->num_rows();
+		if ($rowcount> 0) {
+			$response= $response."<li class='autocomplete-item split-heading'><i class='fa fa-caret-square-o-down'></i> Companies</li>";
+		} else{
+			$response= $response."<li class='autocomplete-item split-heading autocomplete-no-results'><i class='fa fa-times'></i> No Companies Found</li>";
+		}
         $words = array( 'Limited', 'LIMITED', 'LTD','ltd','Ltd' );
-        $response = "<ul class='autocomplete-holder'>";
         foreach ($query->result() as $row):
-            $response= $response."<a target='_blank' href='". base_url() . "companies/company?id=" . $row->id . "'><li class='autocomplete-item'>" . str_replace($words, ' ',$row->name). "</li></a>";
+            $response= $response."<a target='_blank' href='". base_url() . "companies/company?id=" . $row->id . "'><li class='autocomplete-item'><i class='fa fa-building'></i>" . str_replace($words, ' ',$row->name). "</li></a>";
+        endforeach;
+		$query = $this->Companies_model->get_autocomplete_contact($search_data);
+		$rowcount = $query->num_rows();
+		if ($rowcount> 0) {
+			$response= $response."<li class='autocomplete-item split-heading'><i class='fa fa-caret-square-o-down'></i> Contacts</li>";
+		} else{
+			$response= $response."<li class='autocomplete-item split-heading autocomplete-no-results'><i class='fa fa-times'></i> No Contacts Found</li>";
+		}
+ 		foreach ($query->result() as $row):
+            $response= $response."<a target='_blank' href='". base_url() . "companies/company?id=" . $row->id . "#contacts'><li class='autocomplete-item'><i class='fa fa-user'></i>" . str_replace($words, ' ',$row->name). "</li></a>";
         endforeach;
         $response= $response."</ul>";
         $this->output->set_content_type('application/json');
 		$this->output->set_output(json_encode(array('html'=> $response)));
     }
 
+	
 	
 
 

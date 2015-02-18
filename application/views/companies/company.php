@@ -1,5 +1,6 @@
 <?php  $company = $companies[0]; ?>
 <div class="row page-results-list">
+
 <div class="top-info-holder">
 	<h2 class="company-header">
 	<?php 
@@ -165,10 +166,18 @@
 			<hr>
 		</div>                    
 		<!-- MORTGAGES -->
+
+
 		
 		<div class="col-md-12">
-		<?php if(!empty($company['mortgages'])): ?>
-			<table class="table table-hover" style="margin-top:10px;">
+		<div class="panel panel-default">
+<div class="panel-heading">
+<h3 class="panel-title"><i class="fa fa-university"></i> Mortgages</h3>
+</div>
+<!-- /.panel-heading -->
+<div class="panel-body">
+<?php if(!empty($company['mortgages'])): ?>
+			<table class="table table-hover">
 			<thead>
 				<tr>
 					<th class="col-md-6">Provider</th>
@@ -193,13 +202,33 @@
             </div>
 		<?php endif; ?>
 		</div>
-		<?php if(isset($contacts) and !empty($contacts)) : ?>
+		<!-- /.panel-body -->
+		</div>
+		</div>
+
 		<div class="col-md-12">
-		<table class="table ">
+		<div class="panel panel-default">
+		<div class="panel-heading" id="contacts">
+		<i class="fa fa-user"></i> Contacts
+		<div class="pull-right">
+		<div class="btn-group">
+		<button  class="btn btn-success edit-btn btn-xs" data-toggle="modal" id="create_contact_<?php echo $company['id']; ?>"  data-target="#create_contact_<?php echo $company['id']; ?>" >
+        <span class="ladda-label"> <i class="fa fa-plus"></i> Contact </span>
+		</button>
+		</div>
+		</div>
+
+		
+
+		</div>
+		<!-- /.panel-heading -->
+		<div class="panel-body">
+		<?php if(isset($contacts) and !empty($contacts)) : ?>
+		<table class="table table-hover">
 	      <thead>
 	        <tr>
-	          <th>Role</th>
 	          <th>Name</th>
+	          <th>Role</th>
 	          <th>Email</th>
 	          <th>Phone</th>
 	          <th></th>
@@ -208,8 +237,8 @@
 	      <tbody>
 	      	<?php foreach ($contacts as $contact): ?>
 	      	<tr>
-				<td><?php echo ucfirst($contact->role); ?></td>
 				<td><?php echo ucfirst($contact->first_name).' '.ucfirst($contact->last_name); ?></td>
+				<td><?php echo ucfirst($contact->role); ?></td>
 				<td><?php echo $contact->email; ?></td>
 				<td><?php echo $contact->phone; ?></td>
 				<td>
@@ -221,15 +250,20 @@
 			<?php endforeach; ?>  
 	      </tbody>
 	    </table>
-		</div>
+	    <?php else: ?>
+			<div class="alert alert-info" style="margin-top:10px;">
+                No contacts registered.
+            </div>
 		<?php endif; ?>
-		<div class="col-md-12">
-			<hr style="padding-bottom:20px;">
+
+		</div>
+		<!-- /.panel-body -->
+		</div>
 		</div>
 		<div class="col-md-6">
 		<div class="panel panel-success ">
 		  <div class="panel-heading">
-		    <h3 class="panel-title">Completed</h3>
+		    <h3 class="panel-title"><i class="fa fa-check-square-o"></i> Completed</h3>
 		  </div>
 		  <div class="panel-body">
 		   <?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'],'done'=>'1');
@@ -284,7 +318,7 @@
 		<div class="col-md-6">
 			<div class="panel panel-info">
 			  <div class="panel-heading">
-			    <h3 class="panel-title">Follow Up</h3>
+			    <h3 class="panel-title"><i class="fa fa-calendar"></i> Follow Up</h3>
 			  </div>
 			  <div class="panel-body">
 			   <?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'],'follow_up'=>'1');
@@ -331,15 +365,13 @@
 			  </div>
 			</div>
 		</div>
-</div>
-</div>
 
-<div class="row">
-	<div class="col-md-8" >
+
+<div class="">
+	<div class="col-md-12" >
 		<div class="panel panel-default ">
 			<div class="panel-heading">
-			
-				<h3 class="panel-title"><i class="fa fa-tags"></i> Actions</h3>
+				<i class="fa fa-tags"></i> Actions
 			</div>
 			<div class="panel-body">
 
@@ -352,8 +384,15 @@
 				            <?php if (count($actions_cancelled) > 0): ?>
 				            <li><a href="#cancelled" data-toggle="tab"><i class="fa fa-ban"></i> Cancelled <span class="label label-danger">
 				            <?php echo count($actions_cancelled);?></span></a></li>
-				            							        		<?php else: ?>
-					<?php endif; ?>
+							<?php else: ?>
+							<?php endif; ?>
+							<?php if (count($actions_marketing) > 0): ?>
+				            <li><a href="#marketing" data-toggle="tab"><i class="fa fa-paper-plane-o"></i> Marketing <span class="label label-default">
+				            <?php echo count($actions_marketing);?></span></a></li>
+							<?php else: ?>
+							<?php endif; ?>
+				            <li class="pull-right"><a href="#comments" data-toggle="tab"><i class="fa fa-check"></i> Comments</a></li>
+
 
 
 				        </ul>
@@ -600,58 +639,97 @@
 								</div>
 							<?php endif; ?>
 				            </div>
-				            <div class="tab-pane fade in" id="settings">
-				                This tab is empty.</div>
-				        </div>
-				        <!-- Ad -->
-				    </div>
-				</div>
-			<!--END TABS-->
-		  	</div>
-		</div>
-	</div>
-    
-    
-    <div class="col-md-4">
-	    <div class="panel panel-default">
-	        <div class="panel-heading">
-	            <h3 class="panel-title"><i class="fa fa-comments fa-fw"></i> Comments</h3>
-	        </div>
-	        <!-- /.panel-heading -->
-	        <div class="panel-body">
-	        		<?php if (count($comments) > 0): ?>
-	        			<ul class="chat">
+								<!-- MARKETING -->
+				             <div class="tab-pane fade in" id="marketing">
+							<?php if (count($actions_marketing) > 0): ?>
+								<ul class="list-group">
+								<?php foreach ($actions_marketing as $actions_marketing): 
+								 $created_date_formatted = date("l jS F y",strtotime($actions_marketing->created_at))." @ ".date("H:i",strtotime($actions_marketing->created_at));
+								 $actioned_at_formatted = date(" jS F y",strtotime($actions_marketing->actioned_at))." @ ".date("H:i",strtotime($actions_marketing->actioned_at));
+								?>
+				                <li class="list-group-item">
+				                    <div class="row" style="padding: 15px 0">
+				                        <div class="col-md-12 ">
+				                        	<div class="col-xs-2 col-md-1 profile-heading">
+				                        	<span>
+				                            <img src="<?php echo asset_url();?>images/profiles/<?php echo isset($system_users_images[$actions_marketing->user_id])? $system_users_images[$actions_marketing->user_id]: 'none.jpg' ;?> " class="img-circle img-responsive" alt="" />
+				                        	</span>
+				                        	</div>
+				                        	<div class="col-xs-10 col-md-11">
+				                            <div>
+				                                <h4 style="margin:0;">
+
+				                        <?php echo $action_types_array[$actions_marketing->action_type_id]; ?> 
+				                              	<span class="label label-danger" style="font-size:11px; margin-left:10px;">Actioned on <?php echo $actioned_at_formatted ?></span>
+									  			</h4>
+				                                <div class="mic-info">
+				                                    Created By: <?php echo $system_users[$actions_marketing->user_id]?> on <?php echo $created_date_formatted?>
+				                                </div>
+				                            </div>
+											<?php if (!empty($actions_marketing->comments)):?>
+											<div class="comment-text speech" >
+											<div class="triangle-isosceles top">
+											<?php echo $actions_marketing->comments ?>
+											<?php if (!empty($actions_marketing->outcome)):?>
+											<table style="width:100%">
+											<tr>
+											<td style="width:35%"><hr/></td>
+											<td style="width:20%;vertical-align:middle; text-align: center; font-size:11px; color: #222;"> Outcome <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span></td>
+											<td style="width:35%"><hr/></td>
+											</tr>
+											</table>
+											<?php echo $actions_marketing->outcome ?>
+											<?php endif; ?>
+											</div>
+											</div>
+											<?php endif; ?>
+											
+											<div class="row col-md-12" id="action_outcome_box_<?php echo $action_cancelled->id ?>" style="display:none;">
+											<hr>
+											<textarea class="form-control" name="outcome" placeholder="Add action outcome" rows="3" style="margin-bottom:5px;"></textarea>
+											<button class="btn btn-primary btn-block"><i class="fa fa-check fa-lg"></i> Send</button>
+
+											</div>
+											</div><!--END ACTIONS-->   
+				                        </div>
+				                        </div>
+				                </li>
+				                <?php endforeach ?>
+				                </ul>
+							<?php else: ?>
+								<div class="col-md-12">
+									<h4 style="margin: 50px 0 40px 0; text-align: center;">No completed actions found for this company</h4>
+								</div>
+							<?php endif; ?>
+				            </div>
+				            <div class="tab-pane fade in" id="comments">
+				            
+
+							<?php if (count($comments) > 0): ?>
+								<ul class="list-group">
 	        				<?php foreach ($comments as $comment):
 	        				// print_r('<pre>');print_r($action);print_r('</pre>');
 							 $created_date_formatted = date("d/m/y",strtotime($comment->created_at));
 							?>
-							<li class="left clearfix">
-								<div class="profile-heading">
-	                            <span class="chat-img pull-left">
-	                            <img src="<?php echo asset_url();?>images/profiles/<?php echo isset($system_users_images[$action->user_id])? $system_users_images[$action->user_id]: 'none.jpg' ;?>" class="img-circle img-responsive" alt="" width="40px" />
-	                            </span>
-	                            </div>
-	                            <div class="chat-body clearfix">
-	                                <div class="header">
-	                                    <strong class="primary-font"><?php echo $system_users[$comment->user_id]?></strong> 
-	                                    <small class="pull-right text-muted">
-	                                        <i class="fa fa-calendar fa-fw"></i> <?php echo $created_date_formatted?>
-	                                    </small>
-	                                </div>
-	                                <p>
-									<?php echo isset($comment->comments)? $comment->comments:'No comments'; ?>  
-	                                </p>
-	                            </div>
+							<li class="list-group-item">
+							<div class="row">
+							<div class="col-md-12 ">
+							<h4 style="margin-bottom:0;"><?php echo $system_users[$comment->user_id]?></h4><small class="text-muted">
+							<i class="fa fa-calendar fa-fw"></i> <?php echo $created_date_formatted?></small>
+							</div>
+							<div class="col-md-12 ">
+							<p>
+							<?php echo isset($comment->comments)? $comment->comments:'No comments'; ?>
+							</p>
+	                        </div>
+	                        </div>
 	                        </li>
 	        			<?php endforeach ?>
 	        			</ul>
 	        		<?php else: ?>
 					No Comments
 					<?php endif; ?>
-	        </div>
-	        <!-- /.panel-body -->
-	        <div class="panel-footer">
-		        <?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'],'done'=>'1');
+					<?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'],'done'=>'1');
 					echo form_open(site_url().'actions/create', 'name="create" class="" role=""',$hidden); ?>
 		            <div class="input-group">
 		            	<input type="hidden" name="action_type" value="7">
@@ -663,9 +741,24 @@
 	                    </span>
 	            	</div>
 	            </form>
-	        </div>
-	        <!-- /.panel-footer -->
-	    </div>
-    </div>
+
+
+
+
+
+				            </div>
+				        </div>
+				        <!-- Ad -->
+				    </div>
+				</div>
+			<!--END TABS-->
+		  	</div>
+		</div>
+	</div>
+    
+    
+    
 </div>
 
+</div>
+</div>
