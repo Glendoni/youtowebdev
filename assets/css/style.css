@@ -348,6 +348,10 @@ li.autocomplete-item {
 	font-size: 12px;
 	padding: 10px 5px;
 }
+.autocomplete-holder a:hover {
+	text-decoration: none;
+
+}
 /* SAVED LISTS */
 li.autocomplete-item:hover {
 	background-color: #428bca;
