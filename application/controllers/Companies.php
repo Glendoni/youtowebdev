@@ -358,13 +358,14 @@ class Companies extends MY_Controller {
 
 	public function autocomplete() {
         $search_data = $this->input->post("search_data");
-                $response = "<ul class='autocomplete-holder'>";
-
+		$response = "<ul class='autocomplete-holder'>";
         $query = $this->Companies_model->get_autocomplete($search_data);
         $rowcount = $query->num_rows();
 		if ($rowcount> 0) {
 			$response= $response."<li class='autocomplete-item split-heading'><i class='fa fa-caret-square-o-down'></i> Companies</li>";
-		} else{
+		}
+		else
+		{
 			$response= $response."<li class='autocomplete-item split-heading autocomplete-no-results'><i class='fa fa-times'></i> No Companies Found</li>";
 		}
         $words = array( 'Limited', 'LIMITED', 'LTD','ltd','Ltd' );
@@ -387,9 +388,4 @@ class Companies extends MY_Controller {
         $this->output->set_content_type('application/json');
 		$this->output->set_output(json_encode(array('html'=> $response)));
     }
-
-	
-	
-
-
 }
