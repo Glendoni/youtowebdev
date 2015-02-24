@@ -243,11 +243,11 @@ class Actions_model extends MY_Model {
 			'comments'		=> (isset($post['comment'])?$post['comment']:NULL),
 			'planned_at'	=> (isset($post['planned_at'])? date('Y-m-d H:i:s',strtotime($post['planned_at'])):NULL),
 			'window'		=> (isset($post['window'])?$post['window']:NULL),
-			'contact_id'    => (isset($post['contact_id'])?$post['contact_id']:NULL),
+			'contact_id'    => (!empty($post['contact_id'])?$post['contact_id']:NULL),
 			'created_by'	=> $post['user_id'],
 			'action_type_id'=> $post['action_type'],
 			'actioned_at'	=> (!isset($post['actioned_at']) && !isset($post['planned_at'])?date('Y-m-d H:i:s'):NULL),
-			'created_at' 	=> date('Y-m-d H:i:s'),
+			'created_at' 	=> date('Y-m-d H:i:s')
 			);
 		
 		$query = $this->db->insert('actions', $data);
