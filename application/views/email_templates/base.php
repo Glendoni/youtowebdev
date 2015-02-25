@@ -179,7 +179,7 @@ Office
 </div>
 <div style='float:left; width:200px'>
 <font face='arial, helvetica, sans-serif'>
-<?php echo isset($sender_phone)?ucfirst($sender_phone):'' ?>
+<?php echo isset($sender_direct_line)?ucfirst($sender_direct_line):'' ?>
 </font></div>
 <div style='clear:both;'>
 </div>
