@@ -3,8 +3,35 @@
         <div class="col-lg-12">
           <h1 class="page-header">Dashboard</h1>
         </div>
-        <div class="col-lg-12">    
-      <div class="panel panel-default">
+        <div class="col-lg-12">
+                  <div class="panel panel-default">
+          <div class="panel-heading">
+            <i class="fa fa-search fa-fw"></i> Date Range Search</span> 
+          </div>
+             
+          <div class="panel-body">
+            <div class="clearfix"></div>
+            <form class="form-inline" role="form">
+            <div class="col-md-4">
+            <div class="form-group">
+            <label for="start-date">Start Date:</label>
+            <input type="text" class="form-control" id="start_date" data-date-format="DD-MM-YYYY" name="start_date" placeholder="" value="<?php echo $_GET['start_date']?>">
+            </div>
+            </div>
+            <div class="col-md-4">
+            <div class="form-group">
+            <label for="end-date">End Date:</label>
+            <input type="text" class="form-control" id="end_date" data-date-format="DD-MM-YYYY" name="end_date" placeholder="" value="<?php echo $_GET['end_date']?>">
+            </div>
+            </div>
+            <div class="col-md-4">
+            <input type="hidden" name="search" value="1">
+            <button type="submit" class="btn btn-success btn-block">Search</button>
+            </form>
+            </div>
+          </div>
+        </div><!--END PANEL-->
+              <div class="panel panel-default">
               <div class="panel-heading">
                 <i class="fa fa-bar-chart-o fa-fw"></i> Weekly Stats</span> 
               </div>
@@ -496,26 +523,7 @@
       </div>
           </div>
 
-          <div class="panel panel-default">
-          <div class="panel-heading">
-            <i class="fa fa-search fa-fw"></i> Date Range Search</span> 
-          </div>
-             
-          <div class="panel-body">
-            <div class="clearfix"></div>
-            <form class="form-inline" role="form">
-            <div class="form-group">
-            <label for="start-date">Start Date:</label>
-            <input type="text" class="form-control" id="start_date" data-date-format="DD-MM-YYYY" name="start_date" placeholder="" value="<?php echo $_GET['start_date']?>">    </div>
-            <div class="form-group">
-            <label for="end-date">End Date:</label>
-            <input type="text" class="form-control" id="end_date" data-date-format="DD-MM-YYYY" name="end_date" placeholder="" value="<?php echo $_GET['end_date']?>">
-            </div>
-            <input type="hidden" name="search" value="1">
-            <button type="submit" class="btn btn-success">Submit</button>
-            </form>
-          </div>
-        </div><!--END PANEL-->
+
 
           <div class="panel panel-default">
               <div class="panel-heading">
