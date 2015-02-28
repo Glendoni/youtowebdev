@@ -32,6 +32,13 @@ class Dashboard extends MY_Controller {
 		$this->data['pipelinecustomerindividual'] = $this->Actions_model->get_pipeline_customer_individual($this->get_current_user_id());
 		$this->data['pipelinelost'] = $this->Actions_model->get_pipeline_lost();
 		$this->data['pipelinelostindividual'] = $this->Actions_model->get_pipeline_lost_individual($this->get_current_user_id());
+		$this->data['getuserplacements'] = $this->Actions_model->get_user_placements();
+		$this->data['getuserproposals'] = $this->Actions_model->get_user_proposals();
+		$this->data['getusermeetings'] = $this->Actions_model->get_user_meetings();
+		$this->data['getuserpitches'] = $this->Actions_model->get_user_pitches();
+		$this->data['dates'] = $this->Actions_model->dates();
+
+
 
 		$this->data['main_content'] = 'dashboard/home';
 		$this->load->view('layouts/default_layout', $this->data);	

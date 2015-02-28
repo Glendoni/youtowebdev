@@ -130,12 +130,30 @@ font-size: 10px;
 .pipeline-bottom{
 padding: 10px;
 }
+li.user-stat-holder {
+	padding: 10px 5px;
+list-style-type: none;
+border-bottom: 1px dashed #ddd;
+}
 .navbar-default .navbar-text {
 	color: #000;
 	font-size: 22px;
 	padding: 0px 5px;
 	margin: 0px;
 	line-height: 48px;
+}
+.user-stat.company {
+	font-size: 11px;
+	line-height: 20px;
+}
+.user-stat.actioned a{
+	font-weight:500;
+	color:#6DAD63;
+}
+
+.action_date {
+	font-weight:300;
+	font-size: 10px;
 }
 
 .navbar-default .navbar-text small{
