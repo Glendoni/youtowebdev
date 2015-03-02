@@ -71,15 +71,89 @@
 }
 
 
+/*PIPELINE*/
+.pipeline-holder {
+	padding: 0;
+}
+.contact {
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0;
 
+}
+.proposal_sent {
+		border-top-right-radius: 0;
+		border-top-left-radius: 0;
+		border-bottom-right-radius: 0;
+		border-bottom-left-radius: 0;
 
+}
+.won {
+}
+.lost {
+		border-top-left-radius: 0;
+		border-bottom-left-radius: 0;
+}
 
+.won .panel-heading {
+	background-color: #5cb85c;
+	border-radius: 0;
+	color: #fff;
+}
+.pipeline-details {
+margin: 0;
+padding: 0;
+border: 1px #F2F2F2 solid;
+border-radius: 4px;
+margin-bottom: 5px;
+background-color: #fff;
+}
+.pipeline-days {
+	border-top-left-radius:5px;
+		border-top-right-radius:5px;
+		padding: 4px 10px;
+color: #fff;
+font-size: 10px;
+
+}
+.pipeline-days.ok{
+	background-color:#6DAD63;
+	color:#fff; 
+}
+.pipeline-days.warning{
+	background-color:#f0ad4e;
+	color:#fff; 
+}
+.pipeline-days.overdue{
+	background-color:#B85E64;
+	color:#fff; 
+}
+.pipeline-bottom{
+padding: 10px;
+}
+li.user-stat-holder {
+	padding: 10px 5px;
+list-style-type: none;
+border-bottom: 1px dashed #ddd;
+}
 .navbar-default .navbar-text {
 	color: #000;
 	font-size: 22px;
 	padding: 0px 5px;
 	margin: 0px;
 	line-height: 48px;
+}
+.user-stat.company {
+	font-size: 11px;
+	line-height: 20px;
+}
+.user-stat.actioned a{
+	font-weight:500;
+	color:#6DAD63;
+}
+
+.action_date {
+	font-weight:300;
+	font-size: 10px;
 }
 
 .navbar-default .navbar-text small{

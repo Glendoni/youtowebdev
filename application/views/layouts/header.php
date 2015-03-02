@@ -278,7 +278,7 @@
                                     </div>
                                     <?php echo form_open(site_url().'companies', 'id="main_search" novalidate="novalidate" name="main_search" class="" role="form"'); ?>
                                     <?php echo form_hidden('main_search','1');?>
-                                    <?php if (isset($_POST['main_search'])): ?>
+                                    <?php if (isset($_POST['main_search']) || (isset($_GET['search']))) : ?>
                                     <div class='form-row'>
                                         <div class="col-md-12 form-group ">
                                             <a class="btn btn-block clear-fields" href="<?php echo site_url();?>">
