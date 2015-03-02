@@ -163,7 +163,7 @@ class Actions_model extends MY_Model {
 		$dates = $this->dates();
 		$start_date = $dates['start_date'];
 		$end_date = $dates['end_date'];
-		if (isset($start_date)) {
+		if (isset($_GET['start_date'])) {
 		$start_date_sql = "AND a.created_at > '".date('Y-m-d 00:00:00',strtotime($start_date))."'  AND a.created_at < '".date('Y-m-d 23:59:59',strtotime($end_date))."'";
 		}
 		else {
@@ -223,7 +223,7 @@ class Actions_model extends MY_Model {
 					$dates = $this->dates();
 		$start_date = $dates['start_date'];
 		$end_date = $dates['end_date'];
-		if (isset($start_date)) {
+		if (isset($_GET['start_date'])) {
 		$start_date_sql = "AND a.created_at > '".date('Y-m-d 00:00:00',strtotime($start_date))."'  AND a.created_at < '".date('Y-m-d 23:59:59',strtotime($end_date))."'";
 		}
 		$sql = "select
@@ -242,7 +242,7 @@ class Actions_model extends MY_Model {
 					$dates = $this->dates();
 		$start_date = $dates['start_date'];
 		$end_date = $dates['end_date'];
-		if (isset($start_date)) {
+		if (isset($_GET['start_date'])) {
 		$start_date_sql = "AND a.created_at > '".date('Y-m-d 00:00:00',strtotime($start_date))."'  AND a.created_at < '".date('Y-m-d 23:59:59',strtotime($end_date))."'";
 		}
 		$sql = "select
@@ -265,29 +265,22 @@ class Actions_model extends MY_Model {
 		if (isset($start_date)) {
 		$start_date_sql = "AND a.created_at > '".date('Y-m-d 00:00:00',strtotime($start_date))."'  AND a.created_at < '".date('Y-m-d 23:59:59',strtotime($end_date))."'";
 		}
-		 $sql = "select
-		c.id as company_id,
-		a.comments,
-		c.name as company_name,
-		a.id,
-		a.created_at,
-		c.pipeline,
-		u.name as username
+		$sql = "select c.id as company_id, a.comments, c.name as company_name, a.id, a.created_at, c.pipeline, u.name as username
 		from companies c
 		inner join actions a on
 		c.id = a.company_id
 		and a.id = 	(
 		SELECT MAX(id) 
 		FROM actions z 
-		WHERE z.company_id = a.company_id and z.action_type_id = '19' 
+		WHERE z.company_id = a.company_id and z.action_type_id = '16' 
 		order by a.actioned_at desc
-		) left join users u on a.created_by = u.id where a.action_type_id = '19' and (c.pipeline ilike '%customer%') $start_date_sql order by a.created_at desc";
+		) left join users u on a.created_by = u.id where a.action_type_id = '16'  $start_date_sql order by a.created_at desc";
 		$query = $this->db->query($sql);
 
 		return $query->result_array();
 	}
 
-			function get_pipeline_customer_individual($user_id){
+		function get_pipeline_customer_individual($user_id){
 		$dates = $this->dates();
 		$start_date = $dates['start_date'];
 		$end_date = $dates['end_date'];
@@ -308,9 +301,9 @@ class Actions_model extends MY_Model {
 		and a.id = 	(
 		SELECT MAX(id) 
 		FROM actions z 
-		WHERE z.company_id = a.company_id and z.action_type_id = '19' 
+		WHERE z.company_id = a.company_id and z.action_type_id = '16' 
 		order by a.actioned_at desc
-		) left join users u on a.created_by = u.id where a.created_by = '$user_id' and a.action_type_id = '19' and (c.pipeline ilike '%customer%') $start_date_sql order by a.created_at desc";
+		) left join users u on a.created_by = u.id where a.created_by = '$user_id' and a.action_type_id = '16' and (c.pipeline ilike '%customer%') $start_date_sql order by a.created_at desc";
 		$query = $this->db->query($sql);
 
 		return $query->result_array();
