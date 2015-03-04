@@ -24,7 +24,10 @@
             </div>
             </div>
             <div class="col-md-4">
-            <input type="hidden" name="search" value="<?php if (isset($_GET['search'])) { echo $_GET['search'];} else { echo "1";};?> ">
+            <input type="hidden" name="search" value="<?php if (isset($_GET['search'])){echo $_GET['search'];} else {echo "1";};?>">
+            <?php if (isset($_GET['user'])) { ?>
+             <input type="hidden" name="user" value="<?php echo $_GET['user'];?>"> <?php
+             };?>
             <button type="submit" class="btn btn-success btn-block">Search</button>
             </form>
             </div>
