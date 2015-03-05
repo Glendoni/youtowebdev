@@ -75,8 +75,9 @@
                              <?php foreach ($getuserplacements as $get_user_placements): ?>
                             <li class="user-stat-holder">
                             <div class="user-stat company"><a href="companies/company?id=<?php echo $get_user_placements['id'] ?>"  target="_blank"><?php echo $get_user_placements['name'];?></a></div>
-                            <div class="user-stat company action_date">
+                            <div class="user-stat company action_date" style="margin-bottom:5px;">
                             <?php echo  date('D jS M y',strtotime($get_user_placements['actioned_at']));?></div>
+                             <span class="label pipeline-label label-success"><?php echo $get_user_placements['username'];?></span>
                             </li>
                             <?php endforeach ?>
                             </div>
