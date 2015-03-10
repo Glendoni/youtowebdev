@@ -18,10 +18,7 @@
 <div class="panel <?php if(isset($company['assigned_to_name'])): ?> panel-primary <?php else: ?> panel-default <?php endif; ?> company">
 	<?php if(isset($company['assigned_to_name'])): ?>
 
-	<div class="panel-heading profile-heading text-center">
-        <span class="assigned-image-holder">
-          <img src="<?php echo asset_url();?>images/profiles/<?php echo isset($system_users_images[$company['assigned_to_id']])? $system_users_images[$company['assigned_to_id']]:'none' ;?>.jpg" class="img-circle profile-image" alt="" />
-	   </span>
+	<div class="panel-heading profile-heading text-center"  <?php if(isset($company['assigned_to_name'])): ?> <?php $user_icon = explode(",", ($system_users_images[$company['assigned_to_id']]));echo "style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'";?><?php else: ?> <?php endif; ?>>
         <h3>Assigned to <?php echo $company['assigned_to_name']; ?></h3>
     </div>
 	<?php endif; ?>
@@ -415,7 +412,9 @@
 				                        <div class="col-md-12 ">
 				                        	<div class="col-xs-2 col-md-1 profile-heading">
 				                        	<span>
-				                            <img src="<?php echo asset_url();?>images/profiles/<?php echo isset($system_users_images[$action_outstanding->user_id])? $system_users_images[$action_outstanding->user_id]: 'none.jpg' ;?> " class="img-circle img-responsive" alt="" />
+				                        						<?php 
+					$user_icon = explode(",", ($system_users_images[$action_outstanding->user_id]));
+					echo "<div class='circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
 				                        	</span>
 				                        	</div>
 				                        	<div class="col-xs-10 col-md-11">
@@ -514,7 +513,10 @@
 				                        <div class="col-md-12 ">
 				                        	<div class="col-xs-2 col-md-1 profile-heading">
 				                        	<span>
-				                            <img src="<?php echo asset_url();?>images/profiles/<?php echo isset($system_users_images[$action_completed->user_id])? $system_users_images[$action_completed->user_id]: 'none.jpg' ;?> " class="img-circle img-responsive" alt="" />
+
+					<?php 
+					$user_icon = explode(",", ($system_users_images[$action_completed->user_id]));
+					echo "<div class='circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
 				                        	</span>
 				                        	</div>
 				                        	<div class="col-xs-10 col-md-11">
@@ -587,7 +589,9 @@
 				                        <div class="col-md-12 ">
 				                        	<div class="col-xs-2 col-md-1 profile-heading">
 				                        	<span>
-				                            <img src="<?php echo asset_url();?>images/profiles/<?php echo isset($system_users_images[$action_cancelled->user_id])? $system_users_images[$action_cancelled->user_id]: 'none.jpg' ;?> " class="img-circle img-responsive" alt="" />
+				                        	<?php 
+					$user_icon = explode(",", ($system_users_images[$action_cancelled->user_id]));
+					echo "<div class='circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
 				                        	</span>
 				                        	</div>
 				                        	<div class="col-xs-10 col-md-11">
@@ -652,8 +656,10 @@
 				                        <div class="col-md-12 ">
 				                        	<div class="col-xs-2 col-md-1 profile-heading">
 				                        	<span>
-				                            <img src="<?php echo asset_url();?>images/profiles/<?php echo isset($system_users_images[$actions_marketing->user_id])? $system_users_images[$actions_marketing->user_id]: 'none.jpg' ;?> " class="img-circle img-responsive" alt="" />
-				                        	</span>
+				                        	<?php 
+					$user_icon = explode(",", ($system_users_images[$actions_marketing->user_id]));
+					echo "<div class='circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
+					</span>
 				                        	</div>
 				                        	<div class="col-xs-10 col-md-11">
 				                            <div>
