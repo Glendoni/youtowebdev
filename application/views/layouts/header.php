@@ -427,10 +427,6 @@
                $user_icon = explode(",", $campaign->image);
                echo "<div class='circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";
                 ?>
-
-
-
-<!--<img src="<?php echo asset_url();?>images/profiles/<?php echo $campaign->image; ?>.jpg" alt="<?php echo $campaign->searchcreatedby; ?>" class="img-responsive img-circle" style=""/>-->
                                     </div>
                                     <div class="col-xs-9 col-sm-9">
                                         <span class="name"><?php echo $campaign->name; ?></span><br/>

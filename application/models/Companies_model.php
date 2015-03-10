@@ -895,7 +895,7 @@ class Companies_model extends CI_Model {
 
 
     function get_autocomplete($search_data) {
-		$query1 = $this->db->query("select c.name,c.id, c.pipeline, u.name as user, user_id from companies c left join  users u on u.id = c.user_id
+		$query1 = $this->db->query("select c.name,c.id, c.pipeline, u.name as user, u.image as image, user_id from companies c left join  users u on u.id = c.user_id
 where c.eff_to IS NULL and c.active = 'true' and c.name ilike'".$search_data."%' order by name asc limit 7 ");
 
 	    if ($query1->num_rows() > 0)
@@ -904,7 +904,7 @@ where c.eff_to IS NULL and c.active = 'true' and c.name ilike'".$search_data."%'
 			}
 		else 
 			{
-			return $this->db->query("select c.name,c.id, c.pipeline, u.name as user, user_id from companies c left join  users u on u.id = c.user_id
+			return $this->db->query("select c.name,c.id, c.pipeline, u.name as user, u.image as image, user_id from companies c left join  users u on u.id = c.user_id
 where c.eff_to IS NULL and c.active = 'true' and c.name ilike '%".$search_data."%' order by c.name asc limit 5 ");
 			}
 	}

@@ -8,13 +8,9 @@
 <?php $this->load->view('companies/create_contact_box.php',array('company'=>$company)); ?>
 <div class="panel <?php if(isset($company['assigned_to_name'])): ?> panel-primary <?php else: ?> panel-default <?php endif; ?> company">
 	<?php if(isset($company['assigned_to_name'])): ?>
-	<div class="panel-heading text-center" >
-        <span class="assigned-image-holder" style="max-width:30px; float:left;">
-        	<img src="<?php echo asset_url();?>images/profiles/<?php echo isset($system_users_images[$company['assigned_to_id']])? $system_users_images[$company['assigned_to_id']]:'none' ;?>.jpg" class="img-circle img-responsive" alt="" />
-        </span>
-        <span style="line-height:28px;">
-        Assigned to <?php echo $company['assigned_to_name']; ?> 
-        </span>    
+
+	<div class="panel-heading profile-heading text-center"  <?php if(isset($company['assigned_to_name'])): ?> <?php $user_icon = explode(",", ($system_users_images[$company['assigned_to_id']]));echo "style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'";?><?php else: ?> <?php endif; ?>>
+        <h3>Assigned to <?php echo $company['assigned_to_name']; ?></h3>
     </div>
 	<?php endif; ?>
 	<div class="panel-body">
