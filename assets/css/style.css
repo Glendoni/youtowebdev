@@ -7,7 +7,8 @@
 	height: 30px;
 }
 .profile-heading > h3 {
-	margin:2px 0px 0px 40px;
+	margin:0;
+	font-size: 14px;
 }
 
 #main_search > .form-row > .form-group , #main_search .col-md-6 {
@@ -48,6 +49,25 @@
 	color: #111;
 	font-weight: bold;
 }
+
+.panel-primary {
+border-color: #f7f7f7;
+}
+
+.panel-primary>.panel-heading {
+border-color: #f7f7f7;
+}
+
+.circle
+    {
+width: 40px;
+height: 40px;
+border-radius: 20px;
+font-size: 14px;
+line-height: 40px;
+text-align: center;
+font-weight: 700;
+    }
 
 .sidebar .sidebar-search  {
 	padding:0px;	

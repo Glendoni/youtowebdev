@@ -23,7 +23,7 @@ class Users_model extends MY_Model {
 		$query = $this->db->get_where('users', array('id' => $id), $limit);
 		return $query->row_array();
 	}
-	
+
 	function get_user_by_email($email)
 	{	
 		$limit = 1;
