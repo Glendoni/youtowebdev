@@ -370,7 +370,10 @@ class Companies extends MY_Controller {
 		}
         $words = array( 'Limited', 'LIMITED', 'LTD','ltd','Ltd' );
         foreach ($query->result() as $row):
-        	if(!empty($row->user)) { $assigned_label = "| <span class='label label-primary'>".$row->user."</span>";};
+        	if(!empty($row->user)) { 
+        		$user_icon = explode(",", $row->image);
+
+        		$assigned_label = "| <span class='label label-primary' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$row->user."</div>";};
         	 
 		$response= $response."<a target='_blank' href='". base_url() . "companies/company?id=" . $row->id . "'><li class='autocomplete-item'><strong>" . str_replace($words, ' ',$row->name). "</strong><br><small>".$row->pipeline." ".$assigned_label."</small></li></a>";
         endforeach;
