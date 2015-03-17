@@ -10,6 +10,7 @@ class Campaigns_model extends MY_Model {
 		$this->db->join('users u', 'c.user_id = u.id');
 
 		$this->db->where('shared', 'True');
+		$this->db->where('status', 'search');
 		$this->db->order_by("c.name", "DESC");
 		$this->db->where("(c.eff_to IS NULL OR c.eff_to > '".date('Y-m-d')."')",null, false); 
 		$query = $this->db->get();
@@ -22,6 +23,7 @@ class Campaigns_model extends MY_Model {
 		$this->db->from('campaigns');
 		$this->db->where('user_id', $user_id);
 		$this->db->where('shared', 'False');
+		$this->db->where('status', 'search');
 		$this->db->where("(eff_to IS NULL OR eff_to > '".date('Y-m-d')."')",null, false);
 		$this->db->order_by("name", "desc"); 
 		$query = $this->db->get();
