@@ -357,7 +357,7 @@ class Companies_model extends CI_Model {
 		if(isset($assigned_sql)) $sql = $sql.' JOIN ( '.$assigned_sql.' ) assigned ON C.id = assigned.id';
 		if(isset($class_sql)) $sql = $sql.' JOIN ( '.$class_sql.' ) segment ON C.id = segment.id';
 		if(isset($company_id) && $company_id !== False) $sql = $sql.' JOIN ( select id from companies where id = '.$company_id.' ) company ON C.id = company.id';
-		if(isset($campaign_id) && $campaign_id !== False) $sql = $sql.' JOIN ( select company_id from targets where campaign_id = '.$company_id.' ) company ON C.id = company.id';
+		if(isset($campaign_id) && $campaign_id !== False) $sql = $sql.' JOIN ( select company_id from targets where campaign_id = '.$campaign_id.' ) company ON C.id = company.id';
 		$sql = $sql.' LEFT JOIN 
 		(-- TT1 
 		select T.company_id "company id",
