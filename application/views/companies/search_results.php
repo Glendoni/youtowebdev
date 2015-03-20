@@ -51,6 +51,7 @@
 						<input type="radio" name="public" id="sharedtrue"><i class="fa fa-user"></i> Public
 					</label>
 				</div>
+				|
 			    <button type="submit" name="save_search" class="btn btn-primary">Save Search</button>
 			    or
 			    <button type="submit" name="save_campaign" class="btn btn-warning">Save Campaign</button>
