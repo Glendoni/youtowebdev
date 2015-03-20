@@ -31,15 +31,15 @@ class Campaigns extends MY_Controller {
 		}
 		
 		$user_id = $this->get_current_user_id();
-
+		var_dump($this->input->post());
+		die;
 		if ($this->input->post('save_search')){
 			$current_search = $this->get_current_search();
 			$new_campaign_id = $this->Campaigns_model->save_search($name,$shared,$user_id,$current_search);
 		}elseif ($this->input->post('save_campaign')){
-			var_dump('we are here');
-			die;
+			
 			$current_search = '';
-			$new_campaign_id = $this->Campaigns_model->create_campaign($name,$shared,$user_id,$current_search);
+			$new_campaign_id = $this->Campaigns_model->create_campaign($name,$shared,$user_id);
 			$session_result = $this->session->userdata('companies');
 			$companies_array = unserialize($session_result);
 			foreach ($companies_array as $company) {
@@ -66,7 +66,7 @@ class Campaigns extends MY_Controller {
 			}
 		}
 
-		redirect('/companies');
+		// redirect('/companies');
 	}
 
 	public function get_all_shared_campaigns(){
