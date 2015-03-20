@@ -104,6 +104,22 @@ class Campaigns_model extends MY_Model {
 			return $compaign_id;
 		}
 	}
+	function add_company_to_campaign($new_campaign_id,$company_id,$user_id)
+	{
+		$data['campaign_id'] = $new_campaign_id;
+		$data['company_id'] = $company_id;
+		$data['created_by'] = $user_id;
+		$data['created_at'] = date('Y-m-d H:i:s');
+		$this->db->insert('targets',$data);
+		if($this->db->affected_rows() !== 1){
+			$this->addError($this->db->_error_message());
+			return False;
+		}else{
+			//return user if insert was successful 
+			$target_id = $this->db->insert_id();
+			return $target_id;
+		}
+	}
 
 	function create_campaign($name,$shared,$user_id) 
 	{	
