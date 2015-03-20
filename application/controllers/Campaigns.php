@@ -65,7 +65,7 @@ class Campaigns extends MY_Controller {
 			}
 		}
 
-		// redirect('/companies');
+		redirect('/companies');
 	}
 
 	public function get_all_shared_campaigns(){
