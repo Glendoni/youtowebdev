@@ -16,10 +16,10 @@ class MY_Controller extends CI_Controller {
 		// Debugging funcionality, set it only when on development 
 		switch (ENVIRONMENT) {
 		case 'development':
-		        $this->output->enable_profiler(FALSE);
+		        $this->output->enable_profiler(TRUE);
 		break;
 		case 'staging':
-		        $this->output->enable_profiler(FALSE);
+		        $this->output->enable_profiler(TRUE);
 		break;
 		case 'production':
 				$this->output->enable_profiler(FALSE);
@@ -346,7 +346,7 @@ class MY_Controller extends CI_Controller {
 		}
 		return $companies_array;
 	}
-	
+
 	// Helper function to validade is user agent is a mobile
 	protected function isMobileBrowser(){
  		if(!isset($_SERVER['HTTP_USER_AGENT'])) return FALSE;
