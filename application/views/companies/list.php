@@ -17,7 +17,7 @@
     <div class="row">
 		<div class="col-md-7">
 			<h3 class="name" style="margin-top: 0px;margin-bottom: 10px;">
-				<a href="<?php echo site_url();?>companies/company?id=<?php echo $company['id'];?>" target="_blank">
+				<a href="<?php echo site_url();?>companies/company?id=<?php echo $company['id'];?>">
 					<?php 
 					$words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' );
 					echo str_replace($words, ' ',$company['name']); 
@@ -39,9 +39,7 @@
         <div class="col-md-12">
         	<p style="display:inline;">
 				<i class="fa fa-map-marker"></i>
-				<a class="btn btn-link" target="_blank" style="padding-left:0px;" href="http://maps.google.com/maps?q=<?php echo urlencode($company['address']); ?>&z=17">
 					<?php echo isset($company['address'])?$company['address']:''; ?>
-				</a>
 			</p>
 			<?php if (isset($company['phone'])): ?>
 			<p style="display:inline;">

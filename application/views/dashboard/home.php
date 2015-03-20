@@ -133,6 +133,7 @@
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs" role="tablist">
                       <li <?php if ($_GET['search'] < '1'): ?>class="active"<?php endif; ?>><a href="#this" role="tab" data-toggle="tab">This Week</a></li>
+                      <li><a href="#lastweek" role="tab" data-toggle="tab">Last Week</a></li>
                       <li><a href="#currentmonth" role="tab" data-toggle="tab">This Month</a></li>
                       <?php if ($_GET['search'] > '0'): ?>
                       <li <?php if ($_GET['search'] > '0'): ?>class="active"<?php endif; ?>><a href="#searchresults" role="tab" data-toggle="tab">Search Results</a></li>
@@ -191,6 +192,59 @@
                       <?php endforeach ?>
                       </div>
                       </div><!--END THIS TAB-->
+
+                      <div class="tab-pane" id="lastweek">
+                      <div class="col-md-12">
+                        <div class="row list-group-item">
+                         <div class="col-md-2"> 
+                           <strong>Name</strong>
+                        </div>
+                         <div class="col-md-2 text-center">
+                           <strong>Deals</strong>
+                        </div>
+                         <div class="col-md-2 text-center">
+                           <strong>Proposals</strong>
+                        </div>
+                        <div class="col-md-2 text-center">
+                          <strong>Meetings</strong><br>
+                          <Small> Booked (Attended)</Small>
+                          </div>
+                          <div class="col-md-2 text-center"> 
+                           <strong>Pitches</strong>
+                        </div>
+                        <div class="col-md-2 text-center">
+                           <strong>Pipeline Added</strong>
+                        </div>
+                        </div>
+                       <?php foreach ($lastweekstats as $lastweekstats): ?>
+                          <div class="row list-group-item">
+                          <div class="col-md-2"> 
+                          <?php echo $lastweekstats['name'];?>
+                          </div>
+                          <div class="col-md-2 text-center">
+                          <a href = "?search=2&user=<?php echo $lastweekstats['user'];?>&period=month&start_date=<?php echo $_GET['start_date']?>&end_date=<?php echo $_GET['end_date']?>"><span class="badge"><?php echo $lastweekstats['deals'];?></span></a>
+                          </div>
+                          <div class="col-md-2 text-center"> 
+                          <?php echo $lastweekstats['proposals'];?>
+                          </div>
+                          <div class="col-md-2 text-center">
+                          <?php echo $lastweekstats['meetingbooked'];?> (<?php echo $lastweekstats['meetingcount'];?>)
+                          </div>
+                          <div class="col-md-2 text-center"> 
+                          <?php echo $lastweekstats['introcall'];?>
+                          </div>
+                        
+                          <div class="col-md-2 text-center">
+                          <?php echo $lastweekstats['pipelinecount'];?>
+                          </div>
+                          </div>
+                         
+                      <?php endforeach ?>
+                      
+                      </div>
+                    </div><!--END THIS TAB-->
+
+
                       <div class="tab-pane" id="currentmonth">
                       <div class="col-md-12">
                         <div class="row list-group-item">
