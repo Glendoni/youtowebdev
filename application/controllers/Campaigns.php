@@ -31,7 +31,7 @@ class Campaigns extends MY_Controller {
 		}
 		
 		$user_id = $this->get_current_user_id();
-		var_dump($this->input->post());
+		// var_dump($this->input->post());
 		
 		if ($this->input->post('save_search')){
 			$current_search = $this->get_current_search();
