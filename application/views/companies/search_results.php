@@ -52,9 +52,9 @@
 					</label>
 				</div>
 				|
-			    <button type="submit" name="save_search" class="btn btn-primary">Save Search</button>
+			    <button type="submit" name="save_search" value='1' class="btn btn-primary">Save Search</button>
 			    or
-			    <button type="submit" name="save_campaign" class="btn btn-warning">Save Campaign</button>
+			    <button type="submit" name="save_campaign" value='1' class="btn btn-warning">Save Campaign</button>
 			  <?php echo form_close(); ?>
 			<?php endif; ?>
 		<?php endif; ?>

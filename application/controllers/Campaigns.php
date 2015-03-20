@@ -32,12 +32,11 @@ class Campaigns extends MY_Controller {
 		
 		$user_id = $this->get_current_user_id();
 		var_dump($this->input->post());
-		die;
+		
 		if ($this->input->post('save_search')){
 			$current_search = $this->get_current_search();
 			$new_campaign_id = $this->Campaigns_model->save_search($name,$shared,$user_id,$current_search);
 		}elseif ($this->input->post('save_campaign')){
-			
 			$current_search = '';
 			$new_campaign_id = $this->Campaigns_model->create_campaign($name,$shared,$user_id);
 			$session_result = $this->session->userdata('companies');
