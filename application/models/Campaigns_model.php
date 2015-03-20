@@ -83,7 +83,7 @@ class Campaigns_model extends MY_Model {
 	}
 
 	// INSERTS
-	public function create_from_post($name,$shared,$user_id,$post) 
+	function save_search($name,$shared,$user_id,$post) 
 	{	
 		$data['name'] = $name;	
 		$data['user_id'] = $user_id;
@@ -105,8 +105,31 @@ class Campaigns_model extends MY_Model {
 		}
 	}
 
+	function create_campaign($name,$shared,$user_id) 
+	{	
+		$data['name'] = $name;	
+		$data['user_id'] = $user_id;
+		$data['campaign_user_id'] = $user_id;
+		$data['shared'] = $shared;
+		$data['criteria'] = NULL
+		$data['created_at'] = date('Y-m-d H:i:s');
+		$data['eff_from'] = date('Y-m-d');
+		$data['created_by'] = $user_id;
+
+		$this->db->insert('campaigns',$data);
+		if($this->db->affected_rows() !== 1){
+			$this->addError($this->db->_error_message());
+			return False;
+		}else{
+			//return user if insert was successful 
+			$compaign_id = $this->db->insert_id();
+			return $compaign_id;
+		}
+	}
+	
+
 	// DELETES
-	public function delete_campaign($id,$user_id)
+	function delete_campaign($id,$user_id)
 	{
 		$data = array(
 			'eff_to' => date('Y-m-d'),

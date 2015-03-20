@@ -10,8 +10,7 @@ class Campaigns extends MY_Controller {
 	
 	public function create() 
 	{	
-		var_dump($this->input->post());
-		die;
+
 		if($this->input->post('name'))
 		{
 			$name = $this->input->post('name');
@@ -35,12 +34,17 @@ class Campaigns extends MY_Controller {
 
 		if ($this->input->post('save_search')){
 			$current_search = $this->get_current_search();
-		}else{
-
+			$new_campaign_id = $this->Campaigns_model->save_search($name,$shared,$user_id,$current_search);
+		}elseif ($this->input->post('save_campaign')){
+			$current_search = '';
+			$new_campaign_id = $this->Campaigns_model->create_campaign($name,$shared,$user_id,$current_search);
+			$session_result = $this->session->userdata('companies');
+			$companies_array = unserialize($session_result);
+			foreach ($companies_array as $company) {
+				// create target
+				$this->Campaigns_model->add_company_to_campaign($new_campaign_id,$company['id'],$user_id);
+			}
 		}
-		
-
-		$new_campaign_id = $this->Campaigns_model->create_from_post($name,$shared,$user_id,$current_search);
 		
 		if($new_campaign_id)
 		{
@@ -49,7 +53,15 @@ class Campaigns extends MY_Controller {
 			$this->session->set_userdata('campaign_name',$new_campaign[0]->name);
 			$this->session->set_userdata('campaign_owner',$new_campaign[0]->user_id);
 			$this->session->set_userdata('campaign_shared',(bool)$new_campaign[0]->shared);
-			$this->set_message_success('Campaign saved!');
+			if ($this->input->post('save_search')){
+				$this->set_message_success('Search saved!');
+			}else{
+				$raw_search_results = $this->Companies_model->search_companies_sql(FALSE,FALSE,$new_campaign_id);
+				$companies = $this->process_search_result($raw_search_results);
+				$session_companies = serialize($companies);
+				$this->session->set_userdata('companies',$session_companies);
+				$this->set_message_success('Campaign saved!');
+			}
 		}
 
 		redirect('/companies');
