@@ -111,7 +111,6 @@ class Campaigns_model extends MY_Model {
 		$data['user_id'] = $user_id;
 		$data['campaign_user_id'] = $user_id;
 		$data['shared'] = $shared;
-		$data['criteria'] = NULL;
 		$data['created_at'] = date('Y-m-d H:i:s');
 		$data['eff_from'] = date('Y-m-d');
 		$data['created_by'] = $user_id;
