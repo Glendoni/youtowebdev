@@ -10,6 +10,8 @@ class Campaigns extends MY_Controller {
 	
 	public function create() 
 	{	
+		var_dump($this->input->post());
+		die;
 		if($this->input->post('name'))
 		{
 			$name = $this->input->post('name');
@@ -30,7 +32,13 @@ class Campaigns extends MY_Controller {
 		}
 		
 		$user_id = $this->get_current_user_id();
-		$current_search = $this->get_current_search();
+
+		if ($this->input->post('save_search')){
+			$current_search = $this->get_current_search();
+		}else{
+
+		}
+		
 
 		$new_campaign_id = $this->Campaigns_model->create_from_post($name,$shared,$user_id,$current_search);
 		
@@ -83,7 +91,7 @@ class Campaigns extends MY_Controller {
 	}
 
 	public function edit()
-	{	var_dump($this->input->post());
+	{	
 		if($this->input->post('campaign_id') == FALSE) return False;
 		
 		if(null !== $this->input->post('make_private'))
