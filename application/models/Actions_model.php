@@ -111,7 +111,7 @@ class Actions_model extends MY_Model {
 		# check the value of query , it is returning a boolean
 		// return $query->result_array();
 
-		return []
+		return [];
 	}
 
 	function get_last_week_stats(){
