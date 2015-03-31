@@ -85,7 +85,7 @@ class Campaigns extends MY_Controller {
 		if($this->input->get('id'))
 		{
 			$campaign = $this->Campaigns_model->get_campaign_by_id($this->input->get('id'));
-			var_dump($campaign);die;			
+			print $campaign;die;			
 			$this->refresh_search_results();
 			$this->session->set_userdata('campaign_id',$campaign[0]->id);
 			$this->session->set_userdata('campaign_name',$campaign[0]->name);
