@@ -112,7 +112,7 @@ class Actions_model extends MY_Model {
 		if($query){
 			return $query->result_array();
 		}else{
-			return []
+			return [];
 		}
 
 	}
@@ -134,7 +134,7 @@ class Actions_model extends MY_Model {
 		if($query){
 			return $query->result_array();
 		}else{
-			return []
+			return [];
 		}
 
 	}
@@ -162,7 +162,7 @@ class Actions_model extends MY_Model {
 		if($query){
 			return $query->result_array();
 		}else{
-			return []
+			return [];
 		}
 	}
 
@@ -189,7 +189,7 @@ class Actions_model extends MY_Model {
 		if($query){
 			return $query->result_array();
 		}else{
-			return []
+			return [];
 		}
 	}
 
@@ -224,7 +224,7 @@ class Actions_model extends MY_Model {
 		if($query){
 			return $query->result_array();
 		}else{
-			return []
+			return [];
 		}
 	}
 
@@ -257,7 +257,7 @@ class Actions_model extends MY_Model {
 		if($query){
 			return $query->result_array();
 		}else{
-			return []
+			return [];
 		}
 	}
 
@@ -280,7 +280,7 @@ class Actions_model extends MY_Model {
 		if($query){
 			return $query->result_array();
 		}else{
-			return []
+			return [];
 		}
 	}
 
@@ -303,7 +303,7 @@ class Actions_model extends MY_Model {
 		if($query){
 			return $query->result_array();
 		}else{
-			return []
+			return [];
 		}
 	}
 
@@ -329,7 +329,7 @@ class Actions_model extends MY_Model {
 		if($query){
 			return $query->result_array();
 		}else{
-			return []
+			return [];
 		}
 	}
 
@@ -362,7 +362,7 @@ class Actions_model extends MY_Model {
 		if($query){
 			return $query->result_array();
 		}else{
-			return []
+			return [];
 		}
 	}
 
@@ -393,7 +393,7 @@ class Actions_model extends MY_Model {
 		if($query){
 			return $query->result_array();
 		}else{
-			return []
+			return [];
 		}
 	}
 
@@ -423,7 +423,7 @@ class Actions_model extends MY_Model {
 		if($query){
 			return $query->result_array();
 		}else{
-			return []
+			return [];
 		}
 	}
 
@@ -440,7 +440,7 @@ class Actions_model extends MY_Model {
 			if($query){
 				return $query->result_array();
 			}else{
-				return []
+				return [];
 			}
 		}
 	}
@@ -455,7 +455,7 @@ class Actions_model extends MY_Model {
 			if($query){
 				return $query->result_array();
 			}else{
-				return []
+				return [];
 			}
 		}
 	}
