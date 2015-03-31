@@ -108,9 +108,10 @@ class Actions_model extends MY_Model {
 				Sum(CASE WHEN action_type_id = '19' and a.id = 	(SELECT MAX(id) FROM actions z WHERE z.company_id = a.company_id and z.action_type_id = '19' order by a.actioned_at desc) AND (a.comments ilike '%intent%' or a.comments ilike '%qualified%') AND a.created_at > '$start_date_week' AND a.created_at < '$end_date_week' THEN 1 ELSE 0 END) AS pipelinecount
 				from actions A LEFT JOIN companies C on A.company_id = C.id INNER JOIN users U on A.user_id = U.id where cancelled_at is null and u.department = 'sales' group by U.id,U.name order by deals desc,proposals desc,meetingbooked desc, introcall desc, name desc";
 		$query = $this->db->query($sql);
+		# check the value of query , it is returning a boolean
+		// return $query->result_array();
 
-		return $query->result_array();
-
+		return []
 	}
 
 	function get_last_week_stats(){
