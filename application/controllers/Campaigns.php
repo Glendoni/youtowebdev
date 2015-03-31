@@ -68,12 +68,12 @@ class Campaigns extends MY_Controller {
 		redirect('/companies');
 	}
 
-	public function get_all_shared_campaigns(){
-		return $this->Campaigns_model->get_all_shared_campaigns();
+	public function get_all_shared_searches(){
+		return $this->Campaigns_model->get_all_shared_searches();
 	}
 
-	public function get_all_private_campaigns($user_id){
-		return $this->Campaigns_model->get_all_private_campaigns($user_id);
+	public function get_all_private_searches($user_id){
+		return $this->Campaigns_model->get_all_private_searches($user_id);
 	}
 	
 	public function get_campaigns_for_user($user_id)

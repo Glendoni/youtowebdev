@@ -196,10 +196,13 @@ class MY_Controller extends CI_Controller {
 		$this->data['providers_default'] ='0';
 
 
+		// CAMPAIGN TABLE WITH CRITERIA FIELDS
+		$this->data['shared_searches'] = $this->Campaigns_model->get_all_shared_searches();
+		$this->data['private_searches'] = $this->Campaigns_model->get_all_private_searches($this->get_current_user_id());
 
+		// CAMPAIGN TABLE WITHOUT CRITERIA FIELDS
 		$this->data['shared_campaigns'] = $this->Campaigns_model->get_all_shared_campaigns();
 		$this->data['private_campaigns'] = $this->Campaigns_model->get_all_private_campaigns($this->get_current_user_id());
-
 		
 		//var_dump($this->session->userdata('campaign_shared'));
 		// var_dump($this->data['own_campaigns']);

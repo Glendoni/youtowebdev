@@ -3,12 +3,13 @@ class Campaigns_model extends MY_Model {
 	
 
 	// GETS
-	function get_all_shared_campaigns()
+	function get_all_shared_searches()
 	{
 		$this->db->select('c.name,c.id,c.user_id,u.name as searchcreatedby,u.image');
 		$this->db->from('campaigns c');
 		$this->db->join('users u', 'c.user_id = u.id');
-
+		// Apply this to find saved searches only
+		$this->db->where('criteria IS NOT NULL', null, false);
 		$this->db->where('shared', 'True');
 		$this->db->where('status', 'search');
 		$this->db->order_by("c.name", "DESC");
@@ -17,10 +18,42 @@ class Campaigns_model extends MY_Model {
 		return $query->result();
 	}
 
-	function get_all_private_campaigns($user_id)
+	function get_all_private_searches($user_id)
 	{
 		$this->db->select('name,id,user_id');
 		$this->db->from('campaigns');
+		// Apply this to find saved searches only
+		$this->db->where('criteria IS NOT NULL', null, false);
+		$this->db->where('user_id', $user_id);
+		$this->db->where('shared', 'False');
+		$this->db->where('status', 'search');
+		$this->db->where("(eff_to IS NULL OR eff_to > '".date('Y-m-d')."')",null, false);
+		$this->db->order_by("name", "desc"); 
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	function get_all_shared_campaigns()
+	{
+		$this->db->select('c.name,c.id,c.user_id,u.name as searchcreatedby,u.image');
+		$this->db->from('campaigns c');
+		$this->db->join('users u', 'c.user_id = u.id');
+		// Apply this to find saved searches only
+		$this->db->where('criteria IS NULL', null, false);
+		$this->db->where('shared', 'True');
+		$this->db->where('status', 'search');
+		$this->db->order_by("c.name", "DESC");
+		$this->db->where("(c.eff_to IS NULL OR c.eff_to > '".date('Y-m-d')."')",null, false); 
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	function get_all_private_campaings($user_id)
+	{
+		$this->db->select('name,id,user_id');
+		$this->db->from('campaigns');
+		// Apply this to find saved searches only
+		$this->db->where('criteria IS NULL', null, false);
 		$this->db->where('user_id', $user_id);
 		$this->db->where('shared', 'False');
 		$this->db->where('status', 'search');
@@ -35,6 +68,8 @@ class Campaigns_model extends MY_Model {
 	{
 		$this->db->select('name,id,user_id');
 		$this->db->from('campaigns');
+		// Apply this to find campaigns
+		$this->db->where('criteria IS NULL', null, false);
 		$this->db->where('user_id', $user_id);
 		$this->db->order_by("name", "desc"); 
 		$query = $this->db->get();
@@ -104,6 +139,7 @@ class Campaigns_model extends MY_Model {
 			return $compaign_id;
 		}
 	}
+
 	function add_company_to_campaign($new_campaign_id,$company_id,$user_id)
 	{
 		$data['campaign_id'] = $new_campaign_id;
