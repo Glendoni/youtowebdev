@@ -405,7 +405,7 @@
                                     <ul class="nav nav-second-level ">
                                     <!-- PRIVATE SEARCHES -->
                                     <?php foreach ($private_campaigns as $campaign):?>
-                                        <li class="<?php if(isset($current_campaign_id) and $current_campaign_id == $campaign->id) echo 'active' ?>" ><a href="<?php echo site_url();?>campaigns/display/?id=<?php echo $campaign->id; ?>"><?php echo $campaign->name; ?></a></li>
+                                        <li class="<?php if(isset($current_campaign_id) and $current_campaign_id == $campaign->id) echo 'active' ?>" ><a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $campaign->id; ?>"><?php echo $campaign->name; ?></a></li>
                                     <?php endforeach; ?>
                                     </ul>
                                 </div>
@@ -423,7 +423,7 @@
                                 <!-- SHARED SEARCHES -->
                                 <?php foreach ($shared_campaigns as $campaign):?>
                                     <li class="list-group-item load-saved-search">
-                                        <a href="<?php echo site_url();?>campaigns/display/?id=<?php echo $campaign->id; ?>" class="load-saved-search">
+                                        <a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $campaign->id; ?>" class="load-saved-search">
                                         <div class="col-xs-3 col-sm-3">
                                            <?php 
                                            $user_icon = explode(",", $campaign->image);
@@ -453,7 +453,7 @@
                                     <ul class="nav nav-second-level ">
                                     <!-- PRIVATE SEARCHES -->
                                     <?php foreach ($private_searches as $campaign):?>
-                                        <li class="<?php if(isset($current_campaign_id) and $current_campaign_id == $campaign->id) echo 'active' ?>" ><a href="<?php echo site_url();?>campaigns/display/?id=<?php echo $campaign->id; ?>"><?php echo $campaign->name; ?></a></li>
+                                        <li class="<?php if(isset($current_campaign_id) and $current_campaign_id == $campaign->id) echo 'active' ?>" ><a href="<?php echo site_url();?>campaigns/display_saved_search/?id=<?php echo $campaign->id; ?>"><?php echo $campaign->name; ?></a></li>
                                     <?php endforeach; ?>
                                     </ul>
                                 </div>
@@ -471,7 +471,7 @@
                                 <!-- SHARED SEARCHES -->
                                 <?php foreach ($shared_searches as $campaign):?>
                                     <li class="list-group-item load-saved-search">
-                                        <a href="<?php echo site_url();?>campaigns/display/?id=<?php echo $campaign->id; ?>" class="load-saved-search">
+                                        <a href="<?php echo site_url();?>campaigns/display_saved_search/?id=<?php echo $campaign->id; ?>" class="load-saved-search">
                                         <div class="col-xs-3 col-sm-3">
                                            <?php 
                                            $user_icon = explode(",", $campaign->image);

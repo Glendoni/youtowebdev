@@ -78,13 +78,23 @@ class Campaigns_model extends MY_Model {
 
 	function get_campaign_by_id($id)
 	{
-		$this->db->select('name,id,criteria,shared,user_id,shared');
+		$this->db->select('name,id,shared,user_id');
 		$this->db->from('campaigns');
+		$this->db->join('targets','targets.campaign_id = campaigns.id','left');
+		$this->db->where('campaigns.criteria IS NULL', null, false);
 		$this->db->where('id', $id);
 		$query = $this->db->get();
 		return $query->result();
 	}
 
+	function get_saved_searched_by_id($id)
+	{
+		$this->db->select('name,id,criteria,shared,user_id');
+		$this->db->from('campaigns');
+		$this->db->where('id', $id);
+		$query = $this->db->get();
+		return $query->result();
+	}
 	// UPDATES
 
 	function update_campaign_make_public($id,$user_id)

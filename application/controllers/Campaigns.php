@@ -81,12 +81,34 @@ class Campaigns extends MY_Controller {
 		return $this->Campaigns_model->get_campaigns_for_user($user_id);
 	}
 
-	public function display()
-	{
+	public function display_campaign(){
 		if($this->input->get('id'))
 		{
 			$campaign = $this->Campaigns_model->get_campaign_by_id($this->input->get('id'));
-			$post = unserialize($campaign[0]->criteria);
+			var_dump($campaign);die;			
+			$this->refresh_search_results();
+			$this->session->set_userdata('campaign_id',$campaign[0]->id);
+			$this->session->set_userdata('campaign_name',$campaign[0]->name);
+			$this->session->set_userdata('campaign_owner',$campaign[0]->user_id);
+			
+			$this->session->set_userdata('campaign_shared',$campaign[0]->shared);
+			$this->session->set_userdata('current_search',$post);
+			
+			redirect('/companies');
+		}
+		else
+		{
+			// id missing 
+		}
+
+	}
+
+	public function display_saved_search()
+	{
+		if($this->input->get('id'))
+		{
+			$campaign = $this->Campaigns_model->get_saved_searched_by_id($this->input->get('id'));
+			$post = unserialize($campaign[0]->criteria);			
 			$this->refresh_search_results();
 			$this->session->set_userdata('campaign_id',$campaign[0]->id);
 			$this->session->set_userdata('campaign_name',$campaign[0]->name);
