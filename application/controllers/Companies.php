@@ -375,7 +375,7 @@ class Companies extends MY_Controller {
 
         		$assigned_label = "| <span class='label label-primary' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$row->user."</div>";};
         	 
-		$response= $response."<a target='_blank' href='". base_url() . "companies/company?id=" . $row->id . "'><li class='autocomplete-item'><strong>" . str_replace($words, ' ',$row->name). "</strong><br><small>".$row->pipeline." ".$assigned_label."</small></li></a>";
+		$response= $response."<a href='". base_url() . "companies/company?id=" . $row->id . "'><li class='autocomplete-item'><strong>" . str_replace($words, ' ',$row->name). "</strong><br><small>".$row->pipeline." ".$assigned_label."</small></li></a>";
         endforeach;
 		$query = $this->Companies_model->get_autocomplete_contact($search_data);
 		$rowcount = $query->num_rows();
@@ -385,7 +385,7 @@ class Companies extends MY_Controller {
 			$response= $response."<li class='autocomplete-item split-heading autocomplete-no-results'><i class='fa fa-times'></i> No Contacts Found</li>";
 		}
  		foreach ($query->result() as $row):
-            $response= $response."<a target='_blank' href='". base_url() . "companies/company?id=" . $row->id . "#contacts'><li class='autocomplete-item'>" . str_replace($words, ' ',$row->name). "</strong><br><small>".$row->company_name."</small></li></a>";
+            $response= $response."<a href='". base_url() . "companies/company?id=" . $row->id . "#contacts'><li class='autocomplete-item'>" . str_replace($words, ' ',$row->name). "</strong><br><small>".$row->company_name."</small></li></a>";
         endforeach;
         $response= $response."</ul>";
         $this->output->set_content_type('application/json');
