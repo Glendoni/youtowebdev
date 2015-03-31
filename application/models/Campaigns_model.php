@@ -48,7 +48,7 @@ class Campaigns_model extends MY_Model {
 		return $query->result();
 	}
 
-	function get_all_private_campaings($user_id)
+	function get_all_private_campaigns($user_id)
 	{
 		$this->db->select('name,id,user_id');
 		$this->db->from('campaigns');
