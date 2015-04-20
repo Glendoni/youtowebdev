@@ -382,9 +382,28 @@
                                                 ?>         
                                          </div> 
                                     </div>
+                                    <div class='form-row'>
+                                        <?php  echo form_label('Exclude contacted in the past (days) ', 'exclude_contacted_in', array('class'=>'control-label')); ?>
+                                        <div class="form-group">               
+                                            <?php echo form_input(array('name' => 'exclude_contacted_in', 'id' => 'exclude_contacted_in', 'maxlength' => '100','class'=>'form-control','placeholder'=>' '), set_value('exclude_contacted_in',$this->input->post('exclude_contacted_in')));?>
+                                        </div>
+                                    </div>
+                                    <div class='form-row'>
+                                        <?php  echo form_label('Only no contacted in the past (days) ', 'no_contacted_in', array('class'=>'control-label')); ?>
+                                        <div class="form-group">               
+                                            <?php echo form_input(array('name' => 'no_contacted_in', 'id' => 'no_contacted_in', 'maxlength' => '100','class'=>'form-control','placeholder'=>' '), set_value('no_contacted_in',$this->input->post('no_contacted_in')));?>
+                                        </div>
+                                    </div>
+                                    <div class='form-row'>
+                                        <div class="checkbox">
+                                            <label>
+
+                                              <?php echo form_checkbox('not_contacted', '1', set_value('not_contacted',$this->input->post('not_contacted')));?>Show not contacted only
+                                            </label>
+                                        </div>
+                                    </div>
                                     </div>
                                     <div class="panel-footer">
-                                    
                                         <input type="submit" class="loading-btn btn btn-primary btn-block " value="Search" name="submit">
                                         <?php if (validation_errors()): ?>
                                         <div class="alert alert-danger" role="alert">
@@ -399,7 +418,7 @@
                         <li>
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title"><i class="glyphicon glyphicon glyphicon-lock"></i> Private CAMPAIGNS <span class="badge pull-right"><?php echo count($private_campaigns); ?></span></h3>
+                                    <h3 class="panel-title"><i class="glyphicon glyphicon glyphicon-lock"></i> Private Campaings <span class="badge pull-right"><?php echo count($private_campaigns); ?></span></h3>
                                 </div>
                                 <div class="panel-body">
                                     <ul class="nav nav-second-level ">
@@ -415,7 +434,7 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">
-                                        <span class="glyphicon glyphicon-globe"></span> Shared CAMPAIGNS <span class="badge pull-right"><?php echo count($shared_campaigns); ?></span>
+                                        <span class="glyphicon glyphicon-globe"></span> Shared Campaings <span class="badge pull-right"><?php echo count($shared_campaigns); ?></span>
                                     </h3>    
                                 </div>
                               <div class="panel-body" style="padding:0;">

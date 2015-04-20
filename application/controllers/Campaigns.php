@@ -8,6 +8,52 @@ class Campaigns extends MY_Controller {
 		
 	}
 	
+	public function index() 
+	{	
+		$session_result = $this->session->userdata('companies');
+		$search_results_in_session = unserialize($session_result);
+		$refresh_search_results = $this->session->flashdata('refresh');
+		$campaign = $this->session->userdata('campaign_id');
+
+	
+		
+		$companies_array = $search_results_in_session;
+
+		// if campaign exist set this variables
+		$this->data['current_campaign_name'] = ($this->session->userdata('campaign_name') ?: FALSE );
+		$this->data['current_campaign_owner_id'] = ($this->session->userdata('campaign_owner') ?: FALSE );
+		$this->data['current_campaign_id'] = ($this->session->userdata('campaign_id') ?: FALSE );
+		$this->data['current_campaign_editable'] = ($this->data['current_campaign_owner_id'] == $this->get_current_user_id() ? TRUE : FALSE );
+		
+		$this->data['current_campaign_is_shared'] = $this->session->userdata('campaign_shared') == 'f'? FALSE : TRUE; 
+
+		if(empty($companies_array))
+		{
+			$this->session->unset_userdata('companies');
+			$this->data['companies_count'] = 0;
+			$this->data['page_total'] = 0;
+			$this->data['current_page_number'] = 0;
+			$this->data['next_page_number'] = FALSE;
+			$this->data['previous_page_number'] =  FALSE;
+			$this->data['companies'] = array();
+		}else{
+			// get companies from recent result or get it from session
+			$companies_array_chunk = array_chunk($companies_array, RESULTS_PER_PAGE);
+			$current_page_number = $this->input->get('page_num') ? $this->input->get('page_num') : 1;
+			$this->data['companies_count'] = count($companies_array);
+			$pages_count = ceil(count($companies_array)/RESULTS_PER_PAGE);
+			$this->data['page_total'] = ($pages_count < 1)? 1 : $pages_count;
+			$this->data['current_page_number'] = $current_page_number;
+			$this->data['next_page_number'] = ($current_page_number+1) <= $this->data['page_total'] ? ($current_page_number+1) : FALSE;
+			$this->data['previous_page_number'] = ($current_page_number-1) >= 0 ? ($current_page_number-1) : FALSE;
+			$this->data['companies'] = $companies_array_chunk[($current_page_number-1)];
+		}
+		$this->data['results_type'] = 'Campaign';
+
+		$this->data['main_content'] = 'companies/search_results';
+		$this->load->view('layouts/default_layout', $this->data);
+	}
+
 	public function create() 
 	{	
 
@@ -49,6 +95,7 @@ class Campaigns extends MY_Controller {
 		
 		if($new_campaign_id)
 		{
+			
 			$new_campaign = $this->Campaigns_model->get_campaign_by_id($new_campaign_id);
 			$this->session->set_userdata('campaign_id',$new_campaign[0]->id);
 			$this->session->set_userdata('campaign_name',$new_campaign[0]->name);
@@ -57,7 +104,8 @@ class Campaigns extends MY_Controller {
 			if ($this->input->post('save_search')){
 				$this->set_message_success('Search saved!');
 			}else{
-				$raw_search_results = $this->Companies_model->search_companies_sql(FALSE,FALSE,$new_campaign_id);
+				$raw_search_results = $this->Campaigns_model->get_companies_for_campaign_id($new_campaign_id);
+				$this->refresh_search_results();
 				$companies = $this->process_search_result($raw_search_results);
 				$session_companies = serialize($companies);
 				$this->session->set_userdata('companies',$session_companies);
@@ -65,7 +113,8 @@ class Campaigns extends MY_Controller {
 			}
 		}
 
-		redirect('/companies');
+		if ($this->input->post('save_search')) redirect('/companies');
+		redirect('/campaigns');
 	}
 
 	public function get_all_shared_searches(){
@@ -85,19 +134,39 @@ class Campaigns extends MY_Controller {
 		if($this->input->get('id'))
 		{
 			$campaign = $this->Campaigns_model->get_campaign_by_id($this->input->get('id'));
-			print $campaign;die;			
+			if ($campaign[0]->id == False) {
+				print_r('No campaign');
+				return False;
+			}
+
+			$companies = $this->Campaigns_model->get_companies_for_campaign_id($campaign[0]->id);
+			// print '<pre>';
+			// print_r($companies);
+			// die;	
 			$this->refresh_search_results();
 			$this->session->set_userdata('campaign_id',$campaign[0]->id);
 			$this->session->set_userdata('campaign_name',$campaign[0]->name);
 			$this->session->set_userdata('campaign_owner',$campaign[0]->user_id);
-			
 			$this->session->set_userdata('campaign_shared',$campaign[0]->shared);
-			$this->session->set_userdata('current_search',$post);
-			
-			redirect('/companies');
+			$this->session->unset_userdata('current_search','');
+
+			$result = $this->process_search_result($companies);
+
+			if(empty($result))
+			{
+				$this->session->unset_userdata('companies');
+				unset($search_results_in_session);
+			}
+			else
+			{
+				$session_result = serialize($result);
+				$this->session->set_userdata('companies',$session_result);
+			}
+			redirect('/campaigns');
 		}
 		else
 		{
+			print 'missing id';
 			// id missing 
 		}
 
@@ -157,5 +226,36 @@ class Campaigns extends MY_Controller {
 		redirect('/companies');
 	}
 	
+	public function edit_campaign()
+	{	
+		if($this->input->post('campaign_id') == FALSE) return False;
+		
+		if(null !== $this->input->post('make_private'))
+		{
+			$result = $this->Campaigns_model->update_campaign_make_private($this->input->post('campaign_id'),$this->get_current_user_id());
+			if($result == True)
+			{
+				$this->session->set_userdata('campaign_shared','f');
+			}
+		}
+		elseif(null !== $this->input->post('make_public')) 
+		{
+			$result = $this->Campaigns_model->update_campaign_make_public($this->input->post('campaign_id'),$this->get_current_user_id());
+			if($result == True)
+			{	
+				$this->session->set_userdata('campaign_shared','t');
+			}
+		}
+		elseif (null !== $this->input->post('delete')) 
+		{
+			$result = $this->Campaigns_model->delete_campaign($this->input->post('campaign_id'),$this->get_current_user_id());
+			if($result == True)
+			{
+				$this->clear_campaign_from_session();
+			}
+		}
+		
+		redirect('/campaigns');
+	}
 
 }

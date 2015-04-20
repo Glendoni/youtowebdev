@@ -12,19 +12,16 @@
 	      	<?php if(($companies_count > 0)): ?>
 				<?php if($current_campaign_name && $current_campaign_owner_id && $current_campaign_id ): ?>	
 					<div class="navbar-text saved-search-text">
-						<span class="assigned-image-holder" >
-				        	<img style="height:30px;width:30px;" src="<?php echo asset_url();?>images/profiles/<?php echo isset($system_users_images[$current_campaign_owner_id])? $system_users_images[$current_campaign_owner_id]:'none.jpg' ;?>" class="img-circle img-responsive"  alt="" />
-				        </span>
-						<span style="font-weight:300; font-size:16px;">Search:</span>
+						<span style="font-weight:300; font-size:16px;"><?php echo $results_type ?>:</span>
 						<?php echo $current_campaign_name; ?>
 					</div>
 				<?php if($current_campaign_is_shared == False): ?>
 					<div class="navbar-text saved-search-text">
-						<span style="font-weight:300; font-size:10px;"><i class="fa fa-user"></i> Private Search</span>
+						<span style="font-weight:300; font-size:10px;"><i class="fa fa-user"></i> Private </span>
 					</div>	
 				<?php else: ?> 
 					<div class="navbar-text saved-search-text">
-						<span style="font-weight:300; font-size:10px;"><i class="fa fa-users"></i> Public Search</span>
+						<span style="font-weight:300; font-size:10px;"><i class="fa fa-users"></i> Public </span>
 					</div>	
 				<?php endif;?>  
 				<?php if($current_campaign_editable): ?>

@@ -103,8 +103,6 @@ class Companies extends MY_Controller {
 			$this->data['previous_page_number'] =  FALSE;
 			$this->data['companies'] = array();
 
-			$this->data['main_content'] = 'companies/search_results';
-			$this->load->view('layouts/default_layout', $this->data);
 		}else{
 			// get companies from recent result or get it from session
 			$companies_array_chunk = array_chunk($companies_array, RESULTS_PER_PAGE);
@@ -116,11 +114,10 @@ class Companies extends MY_Controller {
 			$this->data['next_page_number'] = ($current_page_number+1) <= $this->data['page_total'] ? ($current_page_number+1) : FALSE;
 			$this->data['previous_page_number'] = ($current_page_number-1) >= 0 ? ($current_page_number-1) : FALSE;
 			$this->data['companies'] = $companies_array_chunk[($current_page_number-1)];
-
-
-			$this->data['main_content'] = 'companies/search_results';
-			$this->load->view('layouts/default_layout', $this->data);
 		}
+		$this->data['results_type'] = 'Saved Search';
+		$this->data['main_content'] = 'companies/search_results';
+		$this->load->view('layouts/default_layout', $this->data);
 		
 	}
 
