@@ -524,7 +524,7 @@ class Campaigns_model extends MY_Model {
 
 		$this->db->insert('campaigns',$data);
 		if($this->db->affected_rows() !== 1){
-			$this->addError($this->db->_error_message());
+			// $this->addError($this->db->_error_message());
 			return False;
 		}else{
 			//return user if insert was successful 
