@@ -8,12 +8,10 @@
         "ext-memcached": "*",
         "ext-postgresql":"*"
     },
-    "extra": {
-        "heroku": {
-            "compile": [
-                "chmod -R 666 /app/assets/"
-            ]
-        }
-    }
+    "scripts": {
+	    "post-package-update": [
+	        "chmod -R 666 /app/assets/"
+	    ]
+	}
 
 }
