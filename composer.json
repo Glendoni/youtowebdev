@@ -6,7 +6,7 @@
     "require": {
         "compwright/codeigniter-installers": "*",
         "ext-memcached": "*",
-        "ext-postgresql":"*"
+        "shlikhota/postgresdb-php":"*"
     },
     "scripts": {
 	    "post-package-update": [
