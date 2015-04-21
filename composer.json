@@ -8,14 +8,9 @@
         "ext-memcached": "*",
         "shlikhota/postgresdb-php":"*"
     },
-    "scripts": {
-	    "post-package-update": [
-	        "chmod -R 666 /app/assets/"
-	    ]
-	},
 	"scripts": {
         "post-install-cmd": [
-            "chmod -R 666 /app/assets/"                
+            "chmod -R 666 app/assets/"                
         ]
     }
 
