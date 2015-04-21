@@ -7,5 +7,5 @@
         "compwright/codeigniter-installers": "*",
         "ext-memcached": "*",
         "shlikhota/postgresdb-php":"*"
-    },
+    }
 }
