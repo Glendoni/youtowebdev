@@ -10,7 +10,7 @@
     },
 	"scripts": {
         "post-install-cmd": [
-            "chmod -R 666 app/assets/"                
+            "pwd","chmod -R 666 assets/"                
         ]
     }
 
