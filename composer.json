@@ -8,10 +8,4 @@
         "ext-memcached": "*",
         "shlikhota/postgresdb-php":"*"
     },
-	"scripts": {
-        "post-install-cmd": [
-            "pwd","sudo chmod -R 666 assets/"                
-        ]
-    }
-
 }
