@@ -12,6 +12,12 @@
 	    "post-package-update": [
 	        "chmod -R 666 /app/assets/"
 	    ]
-	}
+	},
+	"scripts": {
+        "post-install-cmd": [
+            "php artisan optimize",
+                        "chmod -R 666 /app/assets/"
+        ]
+    }
 
 }
