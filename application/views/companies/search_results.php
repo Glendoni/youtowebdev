@@ -25,7 +25,7 @@
 					</div>	
 				<?php endif;?>  
 				<?php if($current_campaign_editable): ?>
-	                <?php echo form_open(site_url().'campaigns/edit', 'name="edit_campaign" role="form"'); echo form_hidden('campaign_id', $current_campaign_id); ?>
+	                <?php echo form_open(site_url().'campaigns/'.$edit_page, 'name="edit_campaign" role="form"'); echo form_hidden('campaign_id', $current_campaign_id); ?>
 	                <?php if($current_campaign_is_shared == False): ?>
 						<button type="submit" class="btn btn-warning btn-sm btn-search-edit" name="make_public" ><i class="fa fa-users"></i> Make Public</button>
 					<?php else: ?>

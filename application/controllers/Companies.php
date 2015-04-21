@@ -12,12 +12,12 @@ class Companies extends MY_Controller {
 		$session_result = $this->session->userdata('companies');
 		$search_results_in_session = unserialize($session_result);
 		$refresh_search_results = $this->session->flashdata('refresh');
-		$campaign = $this->session->userdata('campaign_id');
+		$saved_search = $this->session->userdata('saved_search_id');
 
-		if($this->input->post('submit') and !$refresh_search_results and !$ajax_refresh and !$campaign )
+		if($this->input->post('submit') and !$refresh_search_results and !$ajax_refresh and !$saved_search )
 		{ 
 			
-			$this->clear_campaign_from_session();
+			$this->clear_saved_search_from_session();
 			// $this->clear_search_results();
 
 			$this->load->library('form_validation');
@@ -86,12 +86,12 @@ class Companies extends MY_Controller {
 		$companies_array = isset($result) ? $result : $search_results_in_session;
 
 		// if campaign exist set this variables
-		$this->data['current_campaign_name'] = ($this->session->userdata('campaign_name') ?: FALSE );
-		$this->data['current_campaign_owner_id'] = ($this->session->userdata('campaign_owner') ?: FALSE );
-		$this->data['current_campaign_id'] = ($this->session->userdata('campaign_id') ?: FALSE );
+		$this->data['current_campaign_name'] = ($this->session->userdata('saved_search_name') ?: FALSE );
+		$this->data['current_campaign_owner_id'] = ($this->session->userdata('saved_search_owner') ?: FALSE );
+		$this->data['current_campaign_id'] = ($this->session->userdata('saved_search_id') ?: FALSE );
 		$this->data['current_campaign_editable'] = ($this->data['current_campaign_owner_id'] == $this->get_current_user_id() ? TRUE : FALSE );
 		
-		$this->data['current_campaign_is_shared'] = $this->session->userdata('campaign_shared') == 'f'? FALSE : TRUE; 
+		$this->data['current_campaign_is_shared'] = $this->session->userdata('saved_search_shared') == 'f'? FALSE : TRUE; 
 
 		if(empty($companies_array))
 		{
@@ -116,6 +116,7 @@ class Companies extends MY_Controller {
 			$this->data['companies'] = $companies_array_chunk[($current_page_number-1)];
 		}
 		$this->data['results_type'] = 'Saved Search';
+		$this->data['edit_page'] = 'edit_saved_search';
 		$this->data['main_content'] = 'companies/search_results';
 		$this->load->view('layouts/default_layout', $this->data);
 		

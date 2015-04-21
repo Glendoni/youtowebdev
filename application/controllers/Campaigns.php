@@ -14,9 +14,7 @@ class Campaigns extends MY_Controller {
 		$search_results_in_session = unserialize($session_result);
 		$refresh_search_results = $this->session->flashdata('refresh');
 		$campaign = $this->session->userdata('campaign_id');
-
 	
-		
 		$companies_array = $search_results_in_session;
 
 		// if campaign exist set this variables
@@ -49,6 +47,7 @@ class Campaigns extends MY_Controller {
 			$this->data['companies'] = $companies_array_chunk[($current_page_number-1)];
 		}
 		$this->data['results_type'] = 'Campaign';
+		$this->data['edit_page'] = 'edit_campaign';
 
 		$this->data['main_content'] = 'companies/search_results';
 		$this->load->view('layouts/default_layout', $this->data);
@@ -81,9 +80,8 @@ class Campaigns extends MY_Controller {
 		
 		if ($this->input->post('save_search')){
 			$current_search = $this->get_current_search();
-			$new_campaign_id = $this->Campaigns_model->save_search($name,$shared,$user_id,$current_search);
+			$new_saved_search_id = $this->Campaigns_model->save_search($name,$shared,$user_id,$current_search);
 		}elseif ($this->input->post('save_campaign')){
-			$current_search = '';
 			$new_campaign_id = $this->Campaigns_model->create_campaign($name,$shared,$user_id);
 			$session_result = $this->session->userdata('companies');
 			$companies_array = unserialize($session_result);
@@ -95,26 +93,29 @@ class Campaigns extends MY_Controller {
 		
 		if($new_campaign_id)
 		{
-			
 			$new_campaign = $this->Campaigns_model->get_campaign_by_id($new_campaign_id);
 			$this->session->set_userdata('campaign_id',$new_campaign[0]->id);
 			$this->session->set_userdata('campaign_name',$new_campaign[0]->name);
 			$this->session->set_userdata('campaign_owner',$new_campaign[0]->user_id);
 			$this->session->set_userdata('campaign_shared',(bool)$new_campaign[0]->shared);
-			if ($this->input->post('save_search')){
-				$this->set_message_success('Search saved!');
-			}else{
-				$raw_search_results = $this->Campaigns_model->get_companies_for_campaign_id($new_campaign_id);
-				$this->refresh_search_results();
-				$companies = $this->process_search_result($raw_search_results);
-				$session_companies = serialize($companies);
-				$this->session->set_userdata('companies',$session_companies);
-				$this->set_message_success('Campaign saved!');
-			}
+			$raw_search_results = $this->Campaigns_model->get_companies_for_campaign_id($new_campaign_id);
+			$this->refresh_search_results();
+			$companies = $this->process_search_result($raw_search_results);
+			$session_companies = serialize($companies);
+			$this->session->set_userdata('companies',$session_companies);
+			$this->set_message_success('Campaign saved!');
+			redirect('/campaigns');
+			
+		}elseif($new_saved_search_id){
+			$this->set_message_success('Search saved!');
+			$new_saved_search_id = $this->Campaigns_model->get_saved_searched_by_id($new_saved_search_id);
+			$this->session->set_userdata('saved_search_id',$new_saved_search_id[0]->id);
+			$this->session->set_userdata('saved_search_name',$new_saved_search_id[0]->name);
+			$this->session->set_userdata('saved_search_owner',$new_saved_search_id[0]->user_id);
+			$this->session->set_userdata('saved_search_shared',(bool)$new_saved_search_id[0]->shared);
+			$this->refresh_search_results();
+			redirect('/companies');
 		}
-
-		if ($this->input->post('save_search')) redirect('/companies');
-		redirect('/campaigns');
 	}
 
 	public function get_all_shared_searches(){
@@ -148,7 +149,7 @@ class Campaigns extends MY_Controller {
 			$this->session->set_userdata('campaign_name',$campaign[0]->name);
 			$this->session->set_userdata('campaign_owner',$campaign[0]->user_id);
 			$this->session->set_userdata('campaign_shared',$campaign[0]->shared);
-			$this->session->unset_userdata('current_search','');
+			$this->session->unset_userdata('current_search');
 
 			$result = $this->process_search_result($companies);
 
@@ -179,11 +180,11 @@ class Campaigns extends MY_Controller {
 			$campaign = $this->Campaigns_model->get_saved_searched_by_id($this->input->get('id'));
 			$post = unserialize($campaign[0]->criteria);			
 			$this->refresh_search_results();
-			$this->session->set_userdata('campaign_id',$campaign[0]->id);
-			$this->session->set_userdata('campaign_name',$campaign[0]->name);
-			$this->session->set_userdata('campaign_owner',$campaign[0]->user_id);
+			$this->session->set_userdata('saved_search_id',$campaign[0]->id);
+			$this->session->set_userdata('saved_search_name',$campaign[0]->name);
+			$this->session->set_userdata('saved_search_owner',$campaign[0]->user_id);
 			
-			$this->session->set_userdata('campaign_shared',$campaign[0]->shared);
+			$this->session->set_userdata('saved_search_shared',$campaign[0]->shared);
 			$this->session->set_userdata('current_search',$post);
 			
 			redirect('/companies');
@@ -193,8 +194,8 @@ class Campaigns extends MY_Controller {
 			// id missing 
 		}
 	}
-
-	public function edit()
+	// edit saved search
+	public function edit_saved_search()
 	{	
 		if($this->input->post('campaign_id') == FALSE) return False;
 		
@@ -203,7 +204,7 @@ class Campaigns extends MY_Controller {
 			$result = $this->Campaigns_model->update_campaign_make_private($this->input->post('campaign_id'),$this->get_current_user_id());
 			if($result == True)
 			{
-				$this->session->set_userdata('campaign_shared','f');
+				$this->session->set_userdata('saved_search_shared','f');
 			}
 		}
 		elseif(null !== $this->input->post('make_public')) 
@@ -211,7 +212,7 @@ class Campaigns extends MY_Controller {
 			$result = $this->Campaigns_model->update_campaign_make_public($this->input->post('campaign_id'),$this->get_current_user_id());
 			if($result == True)
 			{	
-				$this->session->set_userdata('campaign_shared','t');
+				$this->session->set_userdata('saved_search_shared','t');
 			}
 		}
 		elseif (null !== $this->input->post('delete')) 
@@ -219,7 +220,7 @@ class Campaigns extends MY_Controller {
 			$result = $this->Campaigns_model->delete_campaign($this->input->post('campaign_id'),$this->get_current_user_id());
 			if($result == True)
 			{
-				$this->clear_campaign_from_session();
+				$this->clear_saved_search_from_session();
 			}
 		}
 		

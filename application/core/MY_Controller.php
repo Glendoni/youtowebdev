@@ -29,7 +29,7 @@ class MY_Controller extends CI_Controller {
 		        // $config['s3_bucket'] = 'mybucket_production';
 		break;
 		}
-
+		
 		// Load User model for all the controllers
 		$this->load->model('Campaigns_model');
 		$this->load->model('Sectors_model');
@@ -127,7 +127,11 @@ class MY_Controller extends CI_Controller {
 			$this->session->set_userdata('system_users_images',$system_users['images']);
 		}
 		// SET CONSTANTS AND DEFAULTS
-		
+		if ($this->input->post('new_search')){
+			$this->clear_campaign_from_session();
+			$this->clear_saved_search_from_session();
+			unset($_POST['new_search']);
+		}
 		// Keep post data on the search , either get it from post or from sessins
 		if($this->session->userdata('current_search') and !$this->input->post('main_search') and ($this->uri->segment(1) !== 'dashboard'))
 		{
@@ -209,6 +213,8 @@ class MY_Controller extends CI_Controller {
 		//var_dump($this->session->all_userdata());
 		// var_dump($this->input->post());
 
+		
+
 	}
 
 	protected function add_notification($message,$url)
@@ -218,6 +224,16 @@ class MY_Controller extends CI_Controller {
 		$notifications[] = array('message'=>$message,'url' => $url,'date'=> date('Y-m-d H:i:s'));
 		$this->session->set_userdata('notifications',$notifications);
 	}
+	
+	protected function clear_saved_search_from_session(){
+		$this->session->unset_userdata('saved_search_name');
+		$this->session->unset_userdata('saved_search_owner');
+		$this->session->unset_userdata('saved_search_id');
+		$this->session->unset_userdata('current_saved_search_owner_id');
+		$this->session->unset_userdata('saved_search_shared');
+		$this->session->unset_userdata('current_search');
+	}
+
 	protected function clear_campaign_from_session()
 	{
 		$this->session->unset_userdata('campaign_name');
@@ -225,6 +241,7 @@ class MY_Controller extends CI_Controller {
 		$this->session->unset_userdata('campaign_id');
 		$this->session->unset_userdata('current_campaign_owner_id');
 		$this->session->unset_userdata('campaign_shared');
+		$this->session->unset_userdata('current_search');
 	}
 	protected function seve_current_search($post)
 	{
