@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "670553d9b713f87cc493d72cc6e61373",
+    "hash": "b1067bfbfd499a6a14c731de1b850a84",
     "packages": [
         {
             "name": "compwright/codeigniter-installers",
@@ -61,20 +61,15 @@
             "time": "2012-11-12 16:11:38"
         }
     ],
-    "packages-dev": [
-
-    ],
-    "aliases": [
-
-    ],
+    "packages-dev": [],
+    "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [
-
-    ],
-    "platform": [
-
-    ],
-    "platform-dev": [
-
-    ]
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {
+        "ext-memcached": "*",
+        "ext-postgresql": "*"
+    },
+    "platform-dev": []
 }
