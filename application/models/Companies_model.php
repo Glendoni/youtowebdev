@@ -229,40 +229,31 @@ class Companies_model extends CI_Model {
 		}
 		
 		// exclude_contacted_in
-		if (isset($post['exclude_contacted_in']) && !empty($post['exclude_contacted_in'])){
-			$int_val = intval($post['exclude_contacted_in']);  //extract as interger
+		if (isset($post['contacted']) && !empty($post['contacted']) && !empty($post['contacted_days'])){
+			
+			$int_val = intval($post['contacted_days']);  //extract as interger
 			// is valid int 
-			// select companies that have had an action in that period and the exclude them from the results 
-			if (is_int($int_val)){
-				$exclude_contacted_in = "select companies.id 
+			// select companies that have had an action in that period and the exclude them from the results
+			if($post['contacted'] == 'include'){
+				if (is_int($int_val)){
+					$contacted_in = "select companies.id 
 										 from companies 
 										 left join actions on actions.company_id = companies.id 
-										 where actions.actioned_at > current_timestamp - interval '".$int_val." day' or actions.actioned_at is null";
-			}
+										 where actions.actioned_at > current_timestamp - interval '".$int_val." day' ";
+				}
+			}elseif ($post['contacted'] == 'exclude') {
+				if (is_int($int_val)){
+					$contacted_in = "select companies.id 
+										 from companies 
+										 left join actions on actions.company_id = companies.id 
+										 where actions.actioned_at < current_timestamp - interval '".$int_val." day' ";
+					if(isset($post['exlude_no_contact'])){
+						$contacted_in = $contacted_in.'  or actions.id is null';
+					}
+				}
+			}	
 		}
 
-		// no_contacted_in
-		if (isset($post['no_contacted_in']) && !empty($post['no_contacted_in'])){
-			$int_val = intval($post['no_contacted_in']);  //extract as interger
-			// is valid int 
-			// select companies that have had an action in that period and the exclude them from the results 
-			if (is_int($int_val)){
-				$no_contacted_in = "select companies.id
-									from companies
-									left join actions on actions.company_id = companies.id
-									where actions.actioned_at > current_timestamp - interval '".$int_val." day' ";
-			}
-		}
-
-		// not_contact
-		if (isset($post['not_contacted'])){
-				$not_contacted = "select companies.id 
-								from companies 
-								left join actions on actions.company_id = companies.id 
-								where actions.id is null";
-		}
-
-		
 		
 		// EMP COUNT
 		// if((isset($post['employees_to']) and !empty($post['employees_to'])) and (isset($post['employees_from']) and !empty($post['employees_from'])) ) 
@@ -379,9 +370,7 @@ class Companies_model extends CI_Model {
 
 
 		from (select * from COMPANIES where eff_to IS NULL ';
-		if(isset($exclude_contacted_in)) $sql = $sql.' AND id not in ('.$exclude_contacted_in.')';
-		if(isset($no_contacted_in)) $sql = $sql.' AND id in ('.$no_contacted_in.')';
-		if(isset($not_contacted)) $sql = $sql.' AND id in ('.$not_contacted.')';
+		if(isset($contacted_in)) $sql = $sql.' AND id in ('.$contacted_in.')';
 		$sql = $sql.') C ';
 
 		if(isset($company_name_sql)) $sql = $sql. ' JOIN ( '.$company_name_sql.' ) name ON C.id = name.id ';

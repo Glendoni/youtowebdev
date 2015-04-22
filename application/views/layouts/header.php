@@ -382,23 +382,28 @@
                                                 ?>         
                                          </div> 
                                     </div>
-                                    <div class='form-row'>
-                                        <?php  echo form_label('Exclude contacted in the past (days) ', 'exclude_contacted_in', array('class'=>'control-label')); ?>
-                                        <div class="form-group">               
-                                            <?php echo form_input(array('name' => 'exclude_contacted_in', 'id' => 'exclude_contacted_in', 'maxlength' => '100','class'=>'form-control','placeholder'=>' '), set_value('exclude_contacted_in',$this->input->post('exclude_contacted_in')));?>
+                                    <div class="form-row">
+                                    <div class="col-md-12 form-group">
+                                        <div class="col-md-6">
+                                            <?php
+                                            echo form_label('Contacted', 'contacted');
+                                            echo form_dropdown('contacted', $exclude_options, ($this->input->post('contacted')?$this->input->post('contacted'):' ') ,'class="form-control"');
+                                            ?>
+                                         </div> 
+
+                                         <div class="col-md-6 "> 
+                                         <label>Last # days</label>
+                                            <?php   
+                                            echo form_input(array('name' => 'contacted_days', 'id' => 'contacted_days', 'maxlength' => '100','class'=>'form-control','placeholder'=>'','type'=>'number','min'=>'0'), set_value('contacted_days',$this->input->post('contacted_days')));?>
+                                        
+                                        </div>
                                         </div>
                                     </div>
-                                    <div class='form-row'>
-                                        <?php  echo form_label('Only no contacted in the past (days) ', 'no_contacted_in', array('class'=>'control-label')); ?>
-                                        <div class="form-group">               
-                                            <?php echo form_input(array('name' => 'no_contacted_in', 'id' => 'no_contacted_in', 'maxlength' => '100','class'=>'form-control','placeholder'=>' '), set_value('no_contacted_in',$this->input->post('no_contacted_in')));?>
-                                        </div>
-                                    </div>
+                                    
                                     <div class='form-row'>
                                         <div class="checkbox">
                                             <label>
-
-                                              <?php echo form_checkbox('not_contacted', '1', set_value('not_contacted',$this->input->post('not_contacted')));?>Show not contacted only
+                                              <?php echo form_checkbox('exlude_no_contact', '1', set_value('exlude_no_contact',$this->input->post('exlude_no_contact')));?>Include companies no yet contacted
                                             </label>
                                         </div>
                                     </div>

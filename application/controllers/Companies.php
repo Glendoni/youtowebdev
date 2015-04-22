@@ -13,7 +13,7 @@ class Companies extends MY_Controller {
 		$search_results_in_session = unserialize($session_result);
 		$refresh_search_results = $this->session->flashdata('refresh');
 		$saved_search = $this->session->userdata('saved_search_id');
-
+		// print_r($this->input->post());
 		if($this->input->post('submit') and !$refresh_search_results and !$ajax_refresh and !$saved_search )
 		{ 
 			
@@ -61,6 +61,7 @@ class Companies extends MY_Controller {
 		}
 		elseif ($refresh_search_results or $ajax_refresh) 
 		{
+
 			$post = $this->session->userdata('current_search');
 			foreach ($post as $key => $value) {
 				$_POST[$key] = $value;
@@ -79,6 +80,7 @@ class Companies extends MY_Controller {
 			}
 		}
 		elseif (!$this->input->post('submit') and !$search_results_in_session and !$refresh_search_results) {
+
 			$this->session->unset_userdata('companies');
 			unset($search_results_in_session);
 		}

@@ -128,6 +128,7 @@ class MY_Controller extends CI_Controller {
 		}
 		// SET CONSTANTS AND DEFAULTS
 		if ($this->input->post('new_search')){
+			print('clearing');
 			$this->clear_campaign_from_session();
 			$this->clear_saved_search_from_session();
 			unset($_POST['new_search']);
@@ -135,6 +136,7 @@ class MY_Controller extends CI_Controller {
 		// Keep post data on the search , either get it from post or from sessins
 		if($this->session->userdata('current_search') and !$this->input->post('main_search') and ($this->uri->segment(1) !== 'dashboard'))
 		{
+
 			$post = $this->session->userdata('current_search');
 			foreach ($post as $key => $value) {
 				$_POST[$key] = $value;
@@ -195,11 +197,15 @@ class MY_Controller extends CI_Controller {
             '0'  => 'All'),
 			'Top 10 Providers' => $providers_options_top,
       		'All Providers' => $providers_options
-      );
+      		);
 		$this->data['providers_options'] = $providers_options;
 		$this->data['providers_default'] ='0';
 
-
+		$this->data['exclude_options'] = array(
+			' ' => '',
+			'include'=>'Include',
+			'exclude'=>'Exclude'
+			);	
 		// CAMPAIGN TABLE WITH CRITERIA FIELDS
 		$this->data['shared_searches'] = $this->Campaigns_model->get_all_shared_searches();
 		$this->data['private_searches'] = $this->Campaigns_model->get_all_private_searches($this->get_current_user_id());
