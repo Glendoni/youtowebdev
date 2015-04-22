@@ -128,7 +128,7 @@ class MY_Controller extends CI_Controller {
 		}
 		// SET CONSTANTS AND DEFAULTS
 		if ($this->input->post('new_search')){
-			print('clearing');
+			// print('clearing');
 			$this->clear_campaign_from_session();
 			$this->clear_saved_search_from_session();
 			unset($_POST['new_search']);
