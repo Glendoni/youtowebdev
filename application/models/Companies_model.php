@@ -427,7 +427,7 @@ class Companies_model extends CI_Model {
 
 		LEFT JOIN 
 		(
-			SELECT count,company_id FROM "emp_counts" ORDER BY "emp_counts"."created_at" DESC LIMIT 1
+			SELECT count,company_id FROM "emp_counts" ORDER BY "emp_counts"."id" DESC LIMIT 1
 		) EMP ON EMP.company_id = C.id
 
 		LEFT JOIN 
