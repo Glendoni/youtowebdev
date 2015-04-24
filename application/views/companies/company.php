@@ -111,17 +111,17 @@
 		<div class="col-md-12">
 			<hr>
 		</div>
+
+		<div class="row col-md-12">
 				<!-- TURNOVER -->
-		<div class="col-md-2 centre">
+		<div class="col-sm-3 col-xs-6 centre">
 			<strong>Turnover</strong>
 			<p class="details" style="margin-bottom:5px;">
 				£<?php echo isset($company['turnover'])? number_format (round($company['turnover'],-3)):'0';?>
-			</p>
-            <h6 style="margin-top:0;">
-            	<span class="label label-default" ><?php  echo isset($company['turnover_method'])?$company['turnover_method']:'';?></span>
-            </h6>	
+			            	<span class="label label-default" ><?php  echo isset($company['turnover_method'])?$company['turnover_method']:'';?></span>
+</p>	
         </div>
-        <div class="col-md-2 centre">
+        <div class="col-sm-2 col-xs-6 centre">
         	<strong>Founded</strong>
 			<p class="details">
 				<?php echo isset($company['eff_from'])?$company['eff_from']:''; ?>
@@ -129,7 +129,7 @@
 		</div>
 
 		<!-- CONTACTS -->
-		<div class="col-md-2 centre">
+		<div class="col-sm-2 col-xs-6 centre">
 			<strong>Contacts</strong>			
 			<?php if (isset($company['contacts_count'])): ?>
 			<p class="details"><?php echo $company['contacts_count'];?> </p>
@@ -139,7 +139,7 @@
 		</div>
 
 		<!-- EMPLOYEES -->
-		<div class="col-md-2 centre">
+		<div class="col-sm-2 col-xs-6 centre">
 			<strong>Employees</strong>
 			<?php if (isset($company['emp_count'])): ?>
 			<p class="details"><?php echo $company['emp_count'];?> </p>
@@ -149,15 +149,20 @@
 		</div>
 
 		<!-- SECTORS -->
-		<div class="col-md-4">
+		<div class="col-sm-3 col-xs-12 centre">
 			<strong>Sectors</strong> 
 			<?php 
 			if(isset($company['sectors'])){
 				foreach ($company['sectors'] as $key => $name) {
-					echo '<p class="details" style="margin-bottom:0; text-align:left;">'.$name.'</p>';
+					echo '<p class="details" style="margin-bottom:0;">'.$name.'</p>';
 				}
+			} else {
+
+			echo '<p class="details" style="margin-bottom:0; ">Unknown</p>';
+
 			}
 			?>
+		</div>
 		</div>
 
 		<div class="col-md-12">
