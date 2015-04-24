@@ -24,13 +24,12 @@
 	<?php endif; ?>
 	<div class="panel-body">
     	<div class="row">
-    	<div class="col-md-12">
-        <div class="col-md-8 col-sm-6">
+    	        <div class="col-md-9">
+
 			<strong>
 				Address
 			</strong>
 			<p style="margin-bottom:0;">
-			<i class="fa fa-map-marker"></i>
 			<!--<a class="btn btn-link" style="padding-left:0px;" data-toggle="modal" data-target="#map_<?php echo $company['id']; ?>">!-->
 				<?php echo $company['address']; ?>
 			<!--</a>-->
@@ -48,24 +47,14 @@
 			    </div>
 			  </div>
 			</div><!-- /.modal -->
-		</div><!--CLOSE MD-8-->
-		<div class="col-md-4 col-sm-6">
-			<?php $this->load->view('companies/actions_box.php',array('company'=>$company)); ?>
-        </div><!--CLOSE COL-MD-4-->
-        </div><!--CLOSE COL-MD-12-->
-        </div><!--CLOSE ROW-->
 
-
-
-		<div class="row">
-		<div class="col-md-12">
-			<div class="col-md-8 col-sm-4" style="margin-top:10px;">
+			<div class="row col-md-8" style="margin-top:10px;">
     			<strong>Company Name</strong>
 				<p style="margin-bottom:0;">	
 				<?php echo $company['name']; ?>
          		</p>
     		</div>
-    		<div class="col-sm-4" style="margin-top:10px;">
+    		<div class="col-md-4" style="margin-top:10px;">
 			<strong>Company Number</strong>
 			<p style="margin-bottom:0;">	
 			 <!--COMPANY NUMBER IF APPLICABLE-->
@@ -76,13 +65,13 @@
                 <?php endif; ?>
          	</p>
         	</div>
-        	<div class="col-sm-4" style="margin-top:10px;">
+        	<div class="row col-md-4" style="margin-top:10px;">
         		<strong>Phone Number</strong>
         		<p style="margin-bottom:0;">
         		<?php echo isset($company['phone'])?$company['phone']:'-'; ?>                
            		</p>
 			</div>
-    		<div class="col-sm-4" style="margin-top:10px;">
+    		<div class="col-md-4" style="margin-top:10px;">
     			<strong>Website</strong>
     			<p style="margin-bottom:0;">
 				<?php if (isset($company['url'])): ?>
@@ -94,7 +83,7 @@
             	<?php endif; ?>
             	</p>
 			</div>
-        	<div class="col-sm-4" style="margin-top:10px;">
+        	<div class="col-md-4" style="margin-top:10px;">
 				<strong>Segment</strong>
 				<p style="margin-bottom:0;">	
 		            <!--SEGMENT IF APPLICABLE-->
@@ -105,63 +94,82 @@
 		            <?php endif; ?>
 	            </p>
 			</div>
-			
-        	</div>
-        </div><!--END ROW-->
-      
-        
-
-
-
-		<div class="col-md-12">
-			<hr>
-		</div>
-		<!-- TURNOVER -->
-		<div class="col-md-2 centre">
-		<strong>Turnover</strong>
-			<p class="details" style="margin-bottom:5px;">
-				£<?php echo isset($company['turnover'])? number_format (round($company['turnover'],-3)):'0';?></p>
-                <h6 style="margin-top:0;"><span class="label label-default" ><?php  echo isset($company['turnover_method'])?$company['turnover_method']:'';?></span></h6>		
-            </div>
-        <div class="col-md-2 centre">
-        <strong>Founded</strong>
-        <p class="details">
-			<?php echo $company['eff_from'] ?>
-        </p>
-		</div>
-		<!-- EMPLOYEES -->
-		<div class="col-md-2 centre">
-			<strong>Employees</strong>
-			<?php if (isset($company['emp_count'])): ?>
-			<p class="details"><?php echo $company['emp_count'];?> </p>
-			<?php endif; ?>
-		</div>
-
-		<!-- SECTORS -->
-		<div class="col-md-3 centre">
-			<strong>Sectors</strong> 
-			<?php 
-			if(isset($company['sectors'])){
-				foreach ($company['sectors'] as $key => $name) {
-					echo '<p style="margin-bottom:0;">'.$name.'</p>';
-				}
-			}
-			?>
-		</div>
-
-		<!-- LINKS AND BTN -->
+		</div><!--CLOSE MD-9-->
 		<div class="col-md-3">
+			<?php $this->load->view('companies/actions_box.php',array('company'=>$company)); ?>
+				<!-- LINKS AND BTN -->
+		
 			<?php if (isset($company['ddlink'])): ?>
 			<a class="btn  btn-info btn-sm btn-block duedil" href="<?php echo $company['ddlink'] ?>" target="_blank">Duedil</a>
 			<?php endif; ?>
 			<?php if (isset($company['linkedin_id'])): ?>
 			<a class="btn  btn-info btn-sm btn-block linkedin" href="https://www.linkedin.com/company/<?php echo $company['linkedin_id'] ?>"  target="_blank">LinkedIn</a>
 			<?php endif; ?>
-		</div>
-			
-        <div class="col-md-12">
+        </div><!--CLOSE COL-MD-4-->
+        
+
+		<div class="col-md-12">
 			<hr>
-		</div>                    
+		</div>
+
+		<div class="row col-md-12">
+				<!-- TURNOVER -->
+		<div class="col-sm-3 col-xs-6 centre">
+			<strong>Turnover</strong>
+			<p class="details" style="margin-bottom:5px;">
+				£<?php echo isset($company['turnover'])? number_format (round($company['turnover'],-3)):'0';?>
+			            	<span class="label label-default" ><?php  echo isset($company['turnover_method'])?$company['turnover_method']:'';?></span>
+</p>	
+        </div>
+        <div class="col-sm-2 col-xs-6 centre">
+        	<strong>Founded</strong>
+			<p class="details">
+				<?php echo isset($company['eff_from'])?$company['eff_from']:''; ?>
+			</p>
+		</div>
+
+		<!-- CONTACTS -->
+		<div class="col-sm-2 col-xs-6 centre">
+			<strong>Contacts</strong>			
+			<?php if (isset($company['contacts_count'])): ?>
+			<p class="details"><?php echo $company['contacts_count'];?> </p>
+			<?php else: ?>
+			<p class="details">0 </p>
+			<?php endif; ?>
+		</div>
+
+		<!-- EMPLOYEES -->
+		<div class="col-sm-2 col-xs-6 centre">
+			<strong>Employees</strong>
+			<?php if (isset($company['emp_count'])): ?>
+			<p class="details"><?php echo $company['emp_count'];?> </p>
+			<?php else: ?>
+			<p class="details">Unknown</p>
+			<?php endif; ?>
+		</div>
+
+		<!-- SECTORS -->
+		<div class="col-sm-3 col-xs-12 centre">
+			<strong>Sectors</strong> 
+			<?php 
+			if(isset($company['sectors'])){
+				foreach ($company['sectors'] as $key => $name) {
+					echo '<p class="details" style="margin-bottom:0;">'.$name.'</p>';
+				}
+			} else {
+
+			echo '<p class="details" style="margin-bottom:0; ">Unknown</p>';
+
+			}
+			?>
+		</div>
+		</div>
+
+		<div class="col-md-12">
+			<hr>
+		</div>
+
+       
 		<!-- MORTGAGES -->
 
 
@@ -765,6 +773,6 @@
     
     
 </div>
-
+</div><!--CLOSE ROW-->
 </div>
 </div>
