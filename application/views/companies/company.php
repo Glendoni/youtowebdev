@@ -146,7 +146,7 @@
 			<?php else: ?>
 			<p class="details">Unknown</p>
 			<?php endif; ?>
-		</div>
+		</div> 
 
 		<!-- SECTORS -->
 		<div class="col-sm-3 col-xs-12 centre">
