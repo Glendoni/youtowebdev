@@ -2,13 +2,7 @@
 	<nav class="navbar navbar-default companies-list-header" role="navigation">
 	  <div class="container-fluid">
 	    <!-- Collect the nav links, forms, and other content for toggling -->
-	    <div class="col-md-4">
-	      <ul class="nav navbar-nav">
-	      	<li><p class="navbar-text"><strong><?php echo $companies_count; ?></strong> Companies </p></li>        
-	      </ul>  
-      	</div>
-
-		<div class="col-md-8" style="text-align:right;">
+<div class="row">
 	      	<?php if(($companies_count > 0)): ?>
 				<?php if($current_campaign_name && $current_campaign_owner_id && $current_campaign_id ): ?>	
 					<div class="navbar-text saved-search-text">
@@ -36,26 +30,30 @@
 			  	<?php endif; ?>
 			</div>	
 			<?php else: ?>
-			<?php echo form_open(site_url().'campaigns/create', 'name="create_campaign" class="create_campaign navbar-form navbar-left" role="form"'); ?>
-			 	<div class="form-group">
-					<input type="text" name="name" class="form-control" id="name" placeholder="Enter search name...">
+			<?php echo form_open(site_url().'campaigns/create', 'name="create_campaign" class="create_campaign navbar-form navbar-left" style="width:100%;" role="form"'); ?>
+			<div class="col-md-5"   style="padding-top: 3px;">
+			 	<div class="form-group" style="width:100%">
+					<input type="text" name="name" class="form-control col-md-6" style="width:100%" id="name" placeholder="Enter search name...">
 			    </div>
-				<div class="btn-group toggle-btn-group" data-toggle="buttons">
-					<label class="btn  active">
+			    </div>
+			    <div class="col-md-7" style="text-align:center;">
+				<div class="btn-group toggle-btn-group btn-sm" data-toggle="buttons">
+					<label class="btn btn-sm active">
 						<input type="radio" name="private" id="sharedfalse" ><i class="fa fa-user"></i> Private
 					</label>
-					<label class="btn ">
-						<input type="radio" name="public" id="sharedtrue"><i class="fa fa-user"></i> Public
+					<label class="btn btn-sm">
+						<input type="radio" name="public" id="sharedtrue"><i class="fa fa-users"></i> Public
 					</label>
 				</div>
 				|
-			    <button type="submit" name="save_search" value='1' class="btn btn-primary">Save Search</button>
+			    <button type="submit" name="save_search" value='1' class="btn btn-primary btn-sm">Save Search</button>
 			    or
-			    <button type="submit" name="save_campaign" value='1' class="btn btn-warning">Save Campaign</button>
+			    <button type="submit" name="save_campaign" value='1' class="btn btn-warning btn-sm">Save Campaign</button>
+			    </div>
 			  <?php echo form_close(); ?>
 			<?php endif; ?>
 		<?php endif; ?>
-	  </div><!-- /.container-fluid -->
+	  </div><!-- /.row -->
 	</nav>
 
 	<ul class="pager">
@@ -65,7 +63,7 @@
 	  	</li>
 	    <?php endif; ?>
         <span class="count_of_results">
-			Page <?php echo $current_page_number; ?> of <?php echo $page_total ?>
+			<strong><?php echo $companies_count; ?> <?php if ($companies_count<> "1") {echo "Companies";} else { echo "Company";}?></strong> <small>(Page <?php echo $current_page_number; ?> of <?php echo $page_total ?>)</small>
 		</span>
 	    <?php if($next_page_number): ?>
 	  	<li class="next">
