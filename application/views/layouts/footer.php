@@ -245,6 +245,20 @@
             
         }
     </script>
+    <script type="text/javascript">
+                                        $(document).ready(function(){
+                                            $(".include-exclude-drop").change(function(){
+                                                $( ".include-exclude-drop option:selected").each(function(){
+                                                    if($(this).val()=="exclude"){
+                                                        $(".contacted-show").show();
+                                                    }
+                                                    if($(this).val()=="include"){
+                                                        $(".contacted-show").hide();
+                                                    }
+                                                });
+                                            });
+                                        });
+                                    </script>
  <?php if(ENVIRONMENT !== 'production'): ?>
     <div class="alert alert-warning" role="alert">
     <p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>
