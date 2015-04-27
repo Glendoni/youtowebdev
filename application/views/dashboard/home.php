@@ -74,7 +74,7 @@
                             <div class="col-md-3">
                              <?php foreach ($getuserplacements as $get_user_placements): ?>
                             <li class="user-stat-holder">
-                            <div class="user-stat company"><a href="companies/company?id=<?php echo $get_user_placements['id'] ?>"  target="_blank"><?php echo $get_user_placements['name'];?></a></div>
+                            <div class="user-stat company"><a href="companies/company?id=<?php echo $get_user_placements['id'] ?>"><?php echo $get_user_placements['name'];?></a></div>
                             <div class="user-stat company action_date" style="margin-bottom:5px;">
                             <?php echo  date('D jS M y',strtotime($get_user_placements['actioned_at']));?></div>
                              <span class="label pipeline-label label-success"><?php echo $get_user_placements['username'];?></span>
@@ -85,7 +85,7 @@
 
                             <?php foreach ($getuserproposals as $get_user_proposals): ?>
                             <li class="user-stat-holder">
-                            <div class="user-stat company"><div class="user-stat company"><a href="companies/company?id=<?php echo $get_user_proposals['id'] ?>"  target="_blank"><?php echo $get_user_proposals['name'];?></a></div>
+                            <div class="user-stat company"><div class="user-stat company"><a href="companies/company?id=<?php echo $get_user_proposals['id'] ?>" ><?php echo $get_user_proposals['name'];?></a></div>
                             <div class="user-stat company action_date">
                             <?php echo  date('D jS M y',strtotime($get_user_proposals['created_at']));?></div>
                             </li>
@@ -94,7 +94,7 @@
                             <div class="col-md-3">
                             <?php foreach ($getusermeetings as $get_user_meetings): ?>
                               <li class="user-stat-holder">
-                            <div class="user-stat company <?php if ($get_user_meetings['meeting_actioned'] > '0'): ?>actioned<?php endif; ?>"><a href="companies/company?id=<?php echo $get_user_meetings['id'] ?>"  target="_blank"><?php echo $get_user_meetings['name'];?></a></div>
+                            <div class="user-stat company <?php if ($get_user_meetings['meeting_actioned'] > '0'): ?>actioned<?php endif; ?>"><a href="companies/company?id=<?php echo $get_user_meetings['id'] ?>" ><?php echo $get_user_meetings['name'];?></a></div>
                             <div class="user-stat company action_date">
                             <?php echo  date('D jS M y',strtotime($get_user_meetings['created_at']));?></div>
                             </li>
@@ -104,7 +104,7 @@
                             <?php foreach ($getuserpitches as $get_user_pitches): ?>
 
                               <li class="user-stat-holder">
-                            <div class="user-stat company"><a href="companies/company?id=<?php echo $get_user_pitches['id'] ?>"  target="_blank"><?php echo $get_user_pitches['name'];?></a></div>
+                            <div class="user-stat company"><a href="companies/company?id=<?php echo $get_user_pitches['id'] ?>"  ><?php echo $get_user_pitches['name'];?></a></div>
                             <div class="user-stat company action_date">
                             <?php echo  date('D jS M y',strtotime($get_user_pitches['actioned_at']));?></div>
                             </li>
@@ -399,7 +399,7 @@
 
                             <?php echo $display_date;?>
                             <div class="col-md-12 pipeline-bottom">
-                            <div style="font-size=16px; font-weight:600;"><a href="companies/company?id=<?php echo $pipelinecontactedindividual['company_id'] ?>"  target="_blank">
+                            <div style="font-size=16px; font-weight:600;"><a href="companies/company?id=<?php echo $pipelinecontactedindividual['company_id'] ?>">
 
                             <?php echo $pipelinecontactedindividual['company_name'];?></a></div>
                             <span class="label pipeline-label label-<?php echo str_replace(' ', '', $pipelinecontactedindividual['pipeline']); ?>"><?php echo $pipelinecontactedindividual['pipeline'] ?></span> <small><?php echo $pipelinecontactedindividual['username'] ?></small>
@@ -443,7 +443,7 @@
 
                             <?php echo $display_date;?>
                             <div class="col-md-12 pipeline-bottom">
-                            <div style="font-size=16px; font-weight:600;"><a href="companies/company?id=<?php echo $pipelineproposalindividual['company_id'] ?>"  target="_blank">
+                            <div style="font-size=16px; font-weight:600;"><a href="companies/company?id=<?php echo $pipelineproposalindividual['company_id'] ?>">
 
                             <?php echo $pipelineproposalindividual['company_name'];?></a></div>
                             <span class="label pipeline-label label-<?php echo str_replace(' ', '', $pipelineproposalindividual['pipeline']); ?>"><?php echo $pipelineproposalindividual['pipeline'] ?></span> <small><?php echo $pipelineproposalindividual['username'] ?></small>
@@ -481,7 +481,7 @@
                             ?>
                             <?php echo $display_date;?>
                             <div class="col-md-12 pipeline-bottom">
-                            <div style="font-size=16px; font-weight:600;"><a href="companies/company?id=<?php echo $pipelinecustomerindividual['company_id'] ?>"  target="_blank">
+                            <div style="font-size=16px; font-weight:600;"><a href="companies/company?id=<?php echo $pipelinecustomerindividual['company_id'] ?>">
                             <?php echo $pipelinecustomerindividual['company_name'];?></a></div>
                             <span class="label pipeline-label label-<?php echo str_replace(' ', '', $pipelinecustomerindividual['pipeline']); ?>"><?php echo $pipelinecustomerindividual['pipeline'] ?></span> <small><?php echo $pipelinecustomerindividual['username'] ?></small>
                             </div>
@@ -500,7 +500,7 @@
                                                      
                             <div class='col-md-12 pipeline-days overdue'><strong>Lost</strong></div>
                             <div class="col-md-12 pipeline-bottom">
-                            <div style="font-size=16px; font-weight:600;"><a href="companies/company?id=<?php echo $pipelinelostindividual['company_id'] ?>"  target="_blank">
+                            <div style="font-size=16px; font-weight:600;"><a href="companies/company?id=<?php echo $pipelinelostindividual['company_id'] ?>">
 
                             <?php echo $pipelinelostindividual['company_name'];?></a></div>
                             <span class="label pipeline-label label-<?php echo str_replace(' ', '', $pipelinelostindividual['pipeline']); ?>"><?php echo $pipelinelostindividual['pipeline'] ?></span> <small><?php echo $pipelinelostindividual['username'] ?></small>
@@ -547,7 +547,7 @@
 
                             <?php echo $display_date;?>
                             <div class="col-md-12 pipeline-bottom">
-                            <div style="font-size=16px; font-weight:600;"><a href="companies/company?id=<?php echo $pipelinecontacted['company_id'] ?>"  target="_blank">
+                            <div style="font-size=16px; font-weight:600;"><a href="companies/company?id=<?php echo $pipelinecontacted['company_id'] ?>">
 
                             <?php echo $pipelinecontacted['company_name'];?></a></div>
                             <span class="label pipeline-label label-<?php echo str_replace(' ', '', $pipelinecontacted['pipeline']); ?>"><?php echo $pipelinecontacted['pipeline'] ?></span> <small><?php echo $pipelinecontacted['username'] ?></small>
@@ -591,7 +591,7 @@
 
                             <?php echo $display_date;?>
                             <div class="col-md-12 pipeline-bottom">
-                            <div style="font-size=16px; font-weight:600;"><a href="companies/company?id=<?php echo $pipelineproposal['company_id'] ?>"  target="_blank">
+                            <div style="font-size=16px; font-weight:600;"><a href="companies/company?id=<?php echo $pipelineproposal['company_id'] ?>">
 
                             <?php echo $pipelineproposal['company_name'];?></a></div>
                             <span class="label pipeline-label label-<?php echo str_replace(' ', '', $pipelineproposal['pipeline']); ?>"><?php echo $pipelineproposal['pipeline'] ?></span> <small><?php echo $pipelineproposal['username'] ?></small>
@@ -629,7 +629,7 @@
                             ?>
                             <?php echo $display_date;?>
                             <div class="col-md-12 pipeline-bottom">
-                            <div style="font-size=16px; font-weight:600;"><a href="companies/company?id=<?php echo $pipelinecustomer['company_id'] ?>"  target="_blank">
+                            <div style="font-size=16px; font-weight:600;"><a href="companies/company?id=<?php echo $pipelinecustomer['company_id'] ?>">
                             <?php echo $pipelinecustomer['company_name'];?></a></div>
                             <span class="label pipeline-label label-<?php echo str_replace(' ', '', $pipelinecustomer['pipeline']); ?>"><?php echo $pipelinecustomer['pipeline'] ?></span> <small><?php echo $pipelinecustomer['username'] ?></small>
                             </div>
@@ -648,7 +648,7 @@
                                                      
                             <div class='col-md-12 pipeline-days overdue'><strong>Lost</strong></div>
                             <div class="col-md-12 pipeline-bottom">
-                            <div style="font-size=16px; font-weight:600;"><a href="companies/company?id=<?php echo $pipelinelost['company_id'] ?>"  target="_blank">
+                            <div style="font-size=16px; font-weight:600;"><a href="companies/company?id=<?php echo $pipelinelost['company_id'] ?>">
 
                             <?php echo $pipelinelost['company_name'];?></a></div>
                             <span class="label pipeline-label label-<?php echo str_replace(' ', '', $pipelinelost['pipeline']); ?>"><?php echo $pipelinelost['pipeline'] ?></span> <small><?php echo $pipelinelost['username'] ?></small>
@@ -686,7 +686,7 @@
                       ?>
                           <div class="row list-group-item <?php if( strtotime($action->planned_at) < strtotime('today')  ) { echo ' delayed';} ?> ">
                             <div class="col-md-3"> 
-                              <a href="<?php echo site_url();?>companies/company?id=<?php echo $action->company_id;?>" target="_blank"> <?php echo $action->company_name;?></a>
+                              <a href="<?php echo site_url();?>companies/company?id=<?php echo $action->company_id;?>"> <?php echo $action->company_name;?></a>
                             </div>
                             <div class="col-md-2">
                               <?php echo $action_types_array[$action->action_type_id]; ?>

@@ -73,7 +73,7 @@
             	</p>
 			</div>
         	<div class="col-md-4" style="margin-top:10px;">
-				<strong>Segment</strong>
+				<strong>Class</strong>
 				<p style="margin-bottom:0;">	
 		            <!--SEGMENT IF APPLICABLE-->
 		            <?php if (isset($company['class'])): ?>

@@ -273,7 +273,8 @@ border-bottom: 1px dashed #ddd;
 
 .count_of_results {
 line-height: 30px;
-font-weight: 700;
+font-weight: 300;
+font-size: 24px;
 }
 
 .pager li>a {
