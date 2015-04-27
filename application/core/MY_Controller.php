@@ -202,7 +202,7 @@ class MY_Controller extends CI_Controller {
 		$this->data['providers_default'] ='0';
 
 		$this->data['exclude_options'] = array(
-			' ' => '',
+			' ' => 'All',
 			'include'=>'Include',
 			'exclude'=>'Exclude'
 			);	
