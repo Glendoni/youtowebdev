@@ -8,7 +8,7 @@
 	?>
 	</h2>
 	<?php if (isset($company['pipeline'])): ?>
-	<span class="label pipeline-label label-<?php echo str_replace(' ', '', $companies_pipeline[$company['pipeline']]); ?>"><?php echo $companies_pipeline[$company['pipeline']] ?></span>
+		<span class="label pipeline-label label-<?php echo str_replace(' ', '', $company['pipeline']); ?>"><?php echo $company['pipeline'] ?></span>
 	<?php endif; ?>
 	<!-- POPUP BOXES -->
 	<?php $this->load->view('companies/edit_box.php',array('company'=>$company)); ?>

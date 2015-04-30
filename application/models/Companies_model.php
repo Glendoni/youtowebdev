@@ -40,7 +40,6 @@ class Companies_model extends CI_Model {
 			'Intent' => 'Intent',
 			'Qualified' => 'Qualified',
 			'Proposal' => 'Proposal',
-			'Customer' => 'Customer',
 			'Unsuitable' => 'Unsuitable',
 			'Lost' => 'Lost'
 			);

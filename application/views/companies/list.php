@@ -24,9 +24,7 @@
 					?>
 				</a>
 			</h3>
-			<?php if (isset($company['class'])): ?>				
-		<span class="label pipeline-label label-<?php echo str_replace(' ', '', $companies_pipeline[$company['pipeline']]); ?>"><?php echo $companies_pipeline[$company['pipeline']] ?></span>
-		<?php endif; ?>
+		<span class="label pipeline-label label-<?php echo str_replace(' ', '', $company['pipeline']); ?>"><?php echo $company['pipeline'] ?></span>
 <hr>
 		<div class="row col-md-12">
 		<strong>Address</strong>
