@@ -11,21 +11,21 @@
             <div class="row">
             <div class="col-md-6">
                     <div class=" form-group ">
-                    <?php
-                    echo form_label('Pipeline', 'company_pipeline');
-                    echo form_dropdown('company_pipeline', $companies_pipeline, (isset($company['pipeline'])?$company['pipeline']:'') ,'class="form-control"');
-                    ?>
-
+                    <?php  
+                            if ($company['pipeline']=="Customer"){ 
+                                echo form_label('Pipeline', 'company_pipeline');
+                                ?>
+                                <span class="label pipeline-label label-<?php echo str_replace(' ', '', $company['pipeline']); ?>" style="display: block;clear: left;padding: 11px;"><?php echo $company['pipeline'] ?></span>
+                                <?php
+                                } else {
+                                    echo form_label('Pipeline', 'company_pipeline');
+                                    echo form_dropdown('company_pipeline', $companies_pipeline, (isset($company['pipeline'])?$company['pipeline']:'') ,'class="form-control"' );
+                                };
+                                
+                                ?>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class=" form-group ">
-                    <?php
-                    echo form_label('Class', 'company_class');
-                    echo form_dropdown('company_class', $companies_classes, (isset($company['class'])?$company['class']:'') ,'class="form-control"');
-                    ?>
-                    </div>
-                </div>
+              
                 
                 <div class="col-md-6">
                     <div class=" form-group ">

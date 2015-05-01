@@ -40,7 +40,6 @@ class Companies_model extends CI_Model {
 			'Intent' => 'Intent',
 			'Qualified' => 'Qualified',
 			'Proposal' => 'Proposal',
-			'Customer' => 'Customer',
 			'Unsuitable' => 'Unsuitable',
 			'Lost' => 'Lost'
 			);
@@ -887,6 +886,7 @@ class Companies_model extends CI_Model {
 			'contract'=>!empty($post['contract'])?$post['contract']:NULL,
 			'perm'=>!empty($post['perm'])?$post['perm']:NULL,
 			'class'=>!empty($post['company_class'])?$post['company_class']:NULL,
+			'pipeline'=>"Prospect",
 			'eff_from'=> !empty($post['eff_from'])?date("Y-m-d", strtotime($post['eff_from'])):date('Y-m-d H:i:s'),
 		);
 		$this->db->insert('companies', $company);
@@ -899,7 +899,7 @@ class Companies_model extends CI_Model {
 				'address' => $post['address'],
 				'lat' => !empty($post['lat'])?$post['lat']:NULL,
 				'lng' => !empty($post['lng'])?$post['lng']:NULL,
-				'type' => !empty($post['type'])?$post['type']:NULL,
+				'type' => !empty($post['type'])?$post['type']:"Registered",
 				);
 			$this->db->insert('addresses', $address);
 			$new_company_address_id = $this->db->insert_id(); 
