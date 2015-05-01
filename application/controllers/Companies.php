@@ -155,6 +155,7 @@ class Companies extends MY_Controller {
 			$this->form_validation->set_rules('name', 'name', 'xss_clean|required|callback__valid_name');
 			$this->form_validation->set_rules('url', 'url', 'xss_clean');
 			$this->form_validation->set_rules('ddlink', 'ddlink', 'xss_clean');
+			$this->form_validation->set_rules('employees', 'employees', 'xss_clean');
 			$this->form_validation->set_rules('contract', 'contract', 'xss_clean');
 			$this->form_validation->set_rules('perm', 'perm', 'xss_clean');
 			$this->form_validation->set_rules('phone', 'phone', 'xss_clean');
