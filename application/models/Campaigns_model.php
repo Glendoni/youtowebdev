@@ -12,7 +12,7 @@ class Campaigns_model extends MY_Model {
 		$this->db->where('criteria IS NOT NULL', null, false);
 		$this->db->where('shared', 'True');
 		$this->db->where('status', 'search');
-		$this->db->order_by("c.name", "DESC");
+		$this->db->order_by("c.name", "asc");
 		$this->db->where("(c.eff_to IS NULL OR c.eff_to > '".date('Y-m-d')."')",null, false); 
 		$query = $this->db->get();
 		return $query->result();
@@ -28,7 +28,7 @@ class Campaigns_model extends MY_Model {
 		$this->db->where('shared', 'False');
 		$this->db->where('status', 'search');
 		$this->db->where("(eff_to IS NULL OR eff_to > '".date('Y-m-d')."')",null, false);
-		$this->db->order_by("name", "desc"); 
+		$this->db->order_by("name", "asc"); 
 		$query = $this->db->get();
 		return $query->result();
 	}
@@ -42,7 +42,7 @@ class Campaigns_model extends MY_Model {
 		$this->db->where('criteria IS NULL', null, false);
 		$this->db->where('shared', 'True');
 		$this->db->where('status', 'search');
-		$this->db->order_by("c.name", "DESC");
+		$this->db->order_by("c.name", "asc");
 		$this->db->where("(c.eff_to IS NULL OR c.eff_to > '".date('Y-m-d')."')",null, false); 
 		$query = $this->db->get();
 		return $query->result();
@@ -58,7 +58,7 @@ class Campaigns_model extends MY_Model {
 		$this->db->where('shared', 'False');
 		$this->db->where('status', 'search');
 		$this->db->where("(eff_to IS NULL OR eff_to > '".date('Y-m-d')."')",null, false);
-		$this->db->order_by("name", "desc"); 
+		$this->db->order_by("name", "asc"); 
 		$query = $this->db->get();
 		return $query->result();
 	}
@@ -71,7 +71,7 @@ class Campaigns_model extends MY_Model {
 		// Apply this to find campaigns
 		$this->db->where('criteria IS NULL', null, false);
 		$this->db->where('user_id', $user_id);
-		$this->db->order_by("name", "desc"); 
+		$this->db->order_by("name", "asc"); 
 		$query = $this->db->get();
 		return $query->result();
 	}
