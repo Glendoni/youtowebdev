@@ -198,7 +198,7 @@ class Actions_model extends MY_Model {
 		$start_date = $dates['start_date'];
 		$end_date = $dates['end_date'];
 		if (isset($_GET['start_date'])) {
-		$start_date_sql = "AND a.created_at > '".date('Y-m-d 00:00:00',strtotime($start_date))."'  AND a.created_at < '".date('Y-m-d 23:59:59',strtotime($end_date))."'";
+		$start_date_sql = "AND a.created_at > '".date('Y-m-d 00:00:00',strtotime($start_date))."'  AND a.created_at < '".date('Y-m-d 23:59:59',strtotime($end_date))."' ";
 		}
 		else {
 		$start_date = "";}
@@ -218,7 +218,7 @@ class Actions_model extends MY_Model {
 		FROM actions z 
 		WHERE z.company_id = a.company_id and z.action_type_id = '19' 
 		order by a.actioned_at desc
-		) left join users u on a.created_by = u.id where a.action_type_id = '19' and (a.comments ilike '%intent%' or a.comments ilike '%qualified%') $start_date_sql order by a.created_at desc";
+		) left join users u on a.created_by = u.id where a.action_type_id = '19' and (a.comments ilike '%intent%' or a.comments ilike '%qualified%') and a.created_at > NOW() - INTERVAL '60 days' $start_date_sql order by a.created_at desc";
 		$query = $this->db->query($sql);
 
 		if($query){
@@ -251,7 +251,7 @@ class Actions_model extends MY_Model {
 		FROM actions z 
 		WHERE z.company_id = a.company_id and z.action_type_id = '19' 
 		order by a.actioned_at desc
-		) left join users u on a.created_by = u.id where a.created_by = '$user_id' and a.action_type_id = '19' and (a.comments ilike '%intent%' or a.comments ilike '%qualified%') $start_date_sql order by a.created_at desc";
+		) left join users u on a.created_by = u.id where a.created_by = '$user_id' and a.action_type_id = '19' and (a.comments ilike '%intent%' or a.comments ilike '%qualified%') and a.created_at > NOW() - INTERVAL '60 days' $start_date_sql order by a.created_at desc";
 		$query = $this->db->query($sql);
 
 		if($query){
@@ -274,7 +274,7 @@ class Actions_model extends MY_Model {
 		FROM actions z 
 		WHERE z.company_id = a.company_id and z.action_type_id = '19' 
 		order by a.actioned_at desc
-		) left join users u on a.created_by = u.id where a.action_type_id = '19' and (c.pipeline ilike '%proposal%') $start_date_sql order by a.created_at desc";
+		) left join users u on a.created_by = u.id where a.action_type_id = '19' and (c.pipeline ilike '%proposal%') and a.created_at > NOW() - INTERVAL '60 days' $start_date_sql order by a.created_at desc";
 		$query = $this->db->query($sql);
 
 		if($query){
@@ -297,7 +297,7 @@ class Actions_model extends MY_Model {
 		FROM actions z 
 		WHERE z.company_id = a.company_id and z.action_type_id = '19' 
 		order by a.actioned_at desc
-		) left join users u on a.created_by = u.id where a.created_by = '$user_id' and a.action_type_id = '19' and (c.pipeline ilike '%proposal%') $start_date_sql order by a.created_at desc";
+		) left join users u on a.created_by = u.id where a.created_by = '$user_id' and a.action_type_id = '19' and (c.pipeline ilike '%proposal%') and a.created_at > NOW() - INTERVAL '60 days' $start_date_sql order by a.created_at desc";
 		$query = $this->db->query($sql);
 
 		if($query){
@@ -323,7 +323,7 @@ class Actions_model extends MY_Model {
 		FROM actions z 
 		WHERE z.company_id = a.company_id and z.action_type_id = '16' 
 		order by a.actioned_at desc
-		) left join users u on a.created_by = u.id where a.action_type_id = '16'  $start_date_sql order by a.created_at desc";
+		) left join users u on a.created_by = u.id where a.action_type_id = '16'   $start_date_sql order by a.created_at desc";
 		$query = $this->db->query($sql);
 
 		if($query){
@@ -387,7 +387,7 @@ class Actions_model extends MY_Model {
 		FROM actions z 
 		WHERE z.company_id = a.company_id and z.action_type_id = '19' 
 		order by a.actioned_at desc
-		) left join users u on a.created_by = u.id where a.action_type_id = '19' and (c.pipeline ilike '%lost%') AND a.created_at > '$start_date' AND a.created_at < '$end_date'order by a.created_at desc";
+		) left join users u on a.created_by = u.id where a.action_type_id = '19' and (c.pipeline ilike '%lost%') AND a.created_at > '$start_date' AND a.created_at < '$end_date' and a.created_at > NOW() - INTERVAL '60 days' order by a.created_at desc";
 		$query = $this->db->query($sql);
 
 		if($query){
