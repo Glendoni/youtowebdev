@@ -384,26 +384,76 @@ border-right: 1px solid #e7e7e7;
 .label-OnHold {
 	background-color: #f0ad4e;
 }
+ .label-Blacklisted  {
+      animation: blink 1s steps(5, start) infinite;
+      -webkit-animation: blink 1s steps(5, start) infinite;
+    }
+    @keyframes blink {
+      to {
+        visibility: hidden;
+      }
+    }
+    @-webkit-keyframes blink {
+      to {
+        visibility: hidden;
+      }
+    }
+
+.label-Blacklisted {
+	background-color: #000;
+		  	width: 100%;
+ 	display: block;
+ 	padding: 5px;
+  	margin-top: 10px;
+}
 .label-Prospect {
 	background-color: #999;
+	  	width: 100%;
+ 	display: block;
+ 	padding: 5px;
+  	margin-top: 10px;
 }
 .label-Intent {
 	background-color: #46A0D4;
+	  	width: 100%;
+ 	display: block;
+ 	padding: 5px;
+  	margin-top: 10px;
 }
 .label-Qualified {
 	background-color: #59B200;
+	  	width: 100%;
+ 	display: block;
+ 	padding: 5px;
+  	margin-top: 10px;
 }
 .label-Customer {
 	background-color: #00B285;
+	  	width: 100%;
+ 	display: block;
+ 	padding: 5px;
+  	margin-top: 10px;
 }
 .label-Proposal {
 	background-color: #993366;
+	  	width: 100%;
+ 	display: block;
+ 	padding: 5px;
+  	margin-top: 10px;
 }
 .label-Unsuitable {
 	background-color: #B80000 ;
+	  	width: 100%;
+ 	display: block;
+ 	padding: 5px;
+  	margin-top: 10px;
 }
 .label-Lost {
 	background-color: #8C4600 ;
+	  	width: 100%;
+ 	display: block;
+ 	padding: 5px;
+  	margin-top: 10px;
 }
 .panel-default>.panel-heading {
 margin-top: 0;

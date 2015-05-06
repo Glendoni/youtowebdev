@@ -8,7 +8,12 @@
 	?>
 	</h2>
 	<?php if (isset($company['pipeline'])): ?>
-		<span class="label pipeline-label label-<?php echo str_replace(' ', '', $company['pipeline']); ?>"><?php echo $company['pipeline'] ?></span>
+		<span class="label pipeline-label label-<?php echo str_replace(' ', '', $company['pipeline']); ?>">
+		<?php if ($company['pipeline']=='Blacklisted'): ?>
+		<?php echo $company['pipeline'] ?> - Do Not Call - See Comments
+		<?php else: ?>
+		<?php echo $company['pipeline'] ?></span>
+		<?php endif; ?>
 	<?php endif; ?>
 	<!-- POPUP BOXES -->
 	<?php $this->load->view('companies/edit_box.php',array('company'=>$company)); ?>
@@ -96,18 +101,19 @@
 			</div>
 		</div><!--CLOSE MD-9-->
 		<div class="col-md-3">
-			<?php $this->load->view('companies/actions_box.php',array('company'=>$company)); ?>
-				<!-- LINKS AND BTN -->
-		
+		<!--Check if company is blacklisted - if so hide the actions boxes -->
+		<?php if ($company['pipeline']=='Blacklisted'): ?>
+		<?php else: ?>
+		<?php $this->load->view('companies/actions_box.php',array('company'=>$company)); ?>
+		<!-- LINKS AND BTN -->
 			<?php if (isset($company['ddlink'])): ?>
 			<a class="btn  btn-info btn-sm btn-block duedil" href="<?php echo $company['ddlink'] ?>" target="_blank">Duedil</a>
 			<?php endif; ?>
 			<?php if (isset($company['linkedin_id'])): ?>
 			<a class="btn  btn-info btn-sm btn-block linkedin" href="https://www.linkedin.com/company/<?php echo $company['linkedin_id'] ?>"  target="_blank">LinkedIn</a>
 			<?php endif; ?>
-        </div><!--CLOSE COL-MD-4-->
-        
-
+		<?php endif; ?>
+        </div><!--CLOSE COL-MD-3-->
 		<div class="col-md-12">
 			<hr>
 		</div>
@@ -248,7 +254,11 @@
 				<td><?php echo $contact->phone; ?></td>
 				<td>
 		      	<div class=" pull-right ">
+		      	<?php if ($company['pipeline']=='Blacklisted'): ?>
+		<?php else: ?>
+
 	            <?php $this->load->view('companies/action_box_contacts.php',array('contact'=>$contact)); ?>
+	        <?php endif; ?>
 	            </div>
 	            </td>
         	</tr>
