@@ -90,8 +90,8 @@
 		<?php $this->load->view('companies/actions_box.php',array('company'=>$company)); ?>
 				<!-- LINKS AND BTN -->
 		
-			<?php if (isset($company['ddlink'])): ?>
-			<a class="btn  btn-info btn-sm btn-block duedil" href="<?php echo $company['ddlink'] ?>" target="_blank">Duedil</a>
+			<?php if (isset($company['registration'])): ?>
+			<a class="btn  btn-info btn-sm btn-block duedil" href="https://www.duedil.com/company/<?php echo $company['registration'] ?>" target="_blank">Duedil</a>
 			<?php endif; ?>
 			<?php if (isset($company['linkedin_id'])): ?>
 			<a class="btn  btn-info btn-sm btn-block linkedin" href="https://www.linkedin.com/company/<?php echo $company['linkedin_id'] ?>"  target="_blank">LinkedIn</a>
