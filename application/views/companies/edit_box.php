@@ -67,6 +67,14 @@
                     </div>
                 </div>
             	<?php endif; ?>
+                                <div class="col-md-6">
+                    <div class=" form-group ">
+                    <?php
+                    echo form_label('Class', 'company_class');
+                    echo form_dropdown('company_class', $companies_classes, (isset($company['class'])?$company['class']:'') ,'class="form-control"');
+                    ?>
+                    </div>
+                </div>
                 <div class="col-md-6">
                     <div class=" form-group ">
                         <label for="linkedin_id" class="control-label">Linkedin ID</label>                            
@@ -86,14 +94,7 @@
                         </span>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class=" form-group ">
-                    <?php
-                    echo form_label('Class', 'company_class');
-                    echo form_dropdown('company_class', $companies_classes, (isset($company['class'])?$company['class']:'') ,'class="form-control"');
-                    ?>
-                    </div>
-                </div>
+
                 
                 <div class="col-md-12">
                 <hr style="margin-top:10px;">
