@@ -363,9 +363,12 @@ class Companies_model extends CI_Model {
 			   json_agg( 
 			   row_to_json ((
 			   TT2."sector_id", TT2."sector"))),-- f25
-			   C.phone, 
-			   C.pipeline,
-			   CONT.contacts_count)) "JSON output" 
+			   C.phone, -- f26 
+			   C.pipeline, -- f27
+			   CONT.contacts_count, -- f28
+			   C.parent_registration --f 29
+
+			   )) "JSON output" 
 			   
 
 
@@ -446,6 +449,7 @@ class Companies_model extends CI_Model {
 				 
 		group by C.id,
 		         C.name,
+		         
 		         C.url,
 			     C.eff_from,
 			     C.ddlink,
@@ -460,7 +464,8 @@ class Companies_model extends CI_Model {
 			     C.registration,
 			     C.class,
 			     C.phone,
-			     C.pipeline,	
+			     C.pipeline,
+			     C.parent_registration,	
 			     U.id,
 			     U.name,
 			     A.address,

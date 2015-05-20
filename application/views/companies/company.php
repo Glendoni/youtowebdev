@@ -3,10 +3,11 @@
 
 <div class="top-info-holder">
 	<h2 class="company-header">
-	<?php 
-		echo $company['name']; 
-	?>
+	<?php echo $company['name'];?>
 	</h2>
+	<?php if (isset($company['parent_registration'])): ?>
+		<span class="label label-danger">Subsidiary of <?php echo $company['parent_registration'];?></span>
+	<?php endif; ?>
 	<?php if (isset($company['pipeline'])): ?>
 		<span class="label pipeline-label label-<?php echo str_replace(' ', '', $company['pipeline']); ?>">
 		<?php if ($company['pipeline']=='Blacklisted'): ?>
@@ -29,11 +30,8 @@
 	<?php endif; ?>
 	<div class="panel-body">
     	<div class="row">
-    	        <div class="col-md-9">
-
-			<strong>
-				Address
-			</strong>
+			<div class="col-sm-9">
+			<strong>Address</strong>
 			<p style="margin-bottom:0;">
 			<!--<a class="btn btn-link" style="padding-left:0px;" data-toggle="modal" data-target="#map_<?php echo $company['id']; ?>">!-->
 				<?php echo $company['address']; ?>
@@ -53,13 +51,13 @@
 			  </div>
 			</div><!-- /.modal -->
 
-			<div class="row col-md-8" style="margin-top:10px;">
+			<div class="row col-sm-8" style="margin-top:10px;">
     			<strong>Company Name</strong>
 				<p style="margin-bottom:0;">	
 				<?php echo $company['name']; ?>
          		</p>
     		</div>
-    		<div class="col-md-4" style="margin-top:10px;">
+    		<div class="col-sm-4" style="margin-top:10px;">
 			<strong>Company Number</strong>
 			<p style="margin-bottom:0;">	
 			 <!--COMPANY NUMBER IF APPLICABLE-->
@@ -70,13 +68,13 @@
                 <?php endif; ?>
          	</p>
         	</div>
-        	<div class="row col-md-4" style="margin-top:10px;">
+        	<div class="row col-sm-4" style="margin-top:10px;">
         		<strong>Phone Number</strong>
         		<p style="margin-bottom:0;">
         		<?php echo isset($company['phone'])?$company['phone']:'-'; ?>                
            		</p>
 			</div>
-    		<div class="col-md-4" style="margin-top:10px;">
+    		<div class="col-sm-4" style="margin-top:10px;">
     			<strong>Website</strong>
     			<p style="margin-bottom:0;">
 				<?php if (isset($company['url'])): ?>
@@ -88,7 +86,7 @@
             	<?php endif; ?>
             	</p>
 			</div>
-        	<div class="col-md-4" style="margin-top:10px;">
+        	<div class="col-sm-4" style="margin-top:10px;">
 				<strong>Segment</strong>
 				<p style="margin-bottom:0;">	
 		            <!--SEGMENT IF APPLICABLE-->
@@ -100,7 +98,7 @@
 	            </p>
 			</div>
 		</div><!--CLOSE MD-9-->
-		<div class="col-md-3">
+		<div class="col-sm-3">
 		<!--Check if company is blacklisted - if so hide the actions boxes -->
 		<?php if ($company['pipeline']=='Blacklisted'): ?>
 		<?php else: ?>
@@ -163,7 +161,6 @@
 					echo '<p class="details" style="margin-bottom:0;">'.$name.'</p>';
 				}
 			} else {
-
 			echo '<p class="details" style="margin-bottom:0; ">Unknown</p>';
 
 			}
@@ -277,9 +274,7 @@
 		</div>
 		<div class="col-md-6">
 		<div class="panel panel-success ">
-		  <div class="panel-heading">
-		    <h3 class="panel-title"><i class="fa fa-check-square-o"></i> Completed</h3>
-		  </div>
+		  <div class="panel-heading"><h3 class="panel-title"><i class="fa fa-check-square-o"></i> Completed</h3></div>
 		  <div class="panel-body">
 		   <?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'],'done'=>'1');
 			echo form_open(site_url().'actions/create', 'name="create" class="form" role="form"',$hidden); ?>
@@ -526,21 +521,26 @@
 								?>
 				
 								<!-- COMPLETED -->
+				             
+								<?php if ($action_completed->action_type_id == 19): ?>
+									<?php
+										$arr = explode(' ',trim($action_completed->comments));
+										$pipeline_updated = $arr[3];
+										?><li class="list-group-item pipeline-update <?php echo $pipeline_updated;?>"><?php echo $action_completed->comments ?>
+				                                on <?php echo date("l jS F y",strtotime($action_completed->actioned_at))." @ ".date("H:i",strtotime($action_completed->actioned_at)); ?></span></li>
+									<?php else: ?>
 				                <li class="list-group-item">
 				                    <div class="row" style="padding: 15px 0">
 				                        <div class="col-md-12 ">
-				                        	<div class="col-xs-2 col-md-1 profile-heading">
-				                        	<span>
+				                        
 
-					<?php 
-					$user_icon = explode(",", ($system_users_images[$action_completed->user_id]));
-					echo "<div class='circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
+				                        	<div class="col-xs-2 col-md-1 profile-heading">
+				                        	<span><?php $user_icon = explode(",", ($system_users_images[$action_completed->user_id])); echo "<div class='circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
 				                        	</span>
 				                        	</div>
 				                        	<div class="col-xs-10 col-md-11">
 				                            <div>
 				                                <h4 style="margin:0;">
-
 				                        <?php echo $action_types_array[$action_completed->action_type_id]; ?> 
 				                                <?php if($action_completed->cancelled_at) : ?>
 				                              	<span class="label label-default" style="font-size:11px; margin-left:10px;">Cancelled on <?php echo $cancelled_at_formatted ?></span>								                    
@@ -585,7 +585,10 @@
 				                        </div>
 				                        </div>
 				                </li>
+				            <?php endif; ?><!--END LOOP IF STATEMENT RE. PIPELINE UPDATES-->
+
 				                <?php endforeach ?>
+
 				                </ul>
 							<?php else: ?>
 								<div class="col-md-12">
@@ -600,13 +603,13 @@
 								 $created_date_formatted = date("l jS F y",strtotime($action_cancelled->created_at))." @ ".date("H:i",strtotime($action_cancelled->created_at));
 								 $cancelled_at_formatted = date(" jS F y",strtotime($action_cancelled->cancelled_at))." @ ".date("H:i",strtotime($action_cancelled->cancelled_at));
 								?>
-				
 								<!-- COMPLETED -->
 				                <li class="list-group-item">
 				                    <div class="row" style="padding: 15px 0">
 				                        <div class="col-md-12 ">
 				                        	<div class="col-xs-2 col-md-1 profile-heading">
-				                        	<span>
+				                        	<span>	
+
 				                        	<?php 
 					$user_icon = explode(",", ($system_users_images[$action_cancelled->user_id]));
 					echo "<div class='circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
