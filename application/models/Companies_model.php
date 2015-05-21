@@ -518,7 +518,7 @@ class Companies_model extends CI_Model {
 		order by T1.owner_id,lower(T1.name) 
 		 
 		) results';
-		// print_r($sql);
+		//print_r($sql);
 		$query = $this->db->query($sql);
 
 		return $query->result_array();
