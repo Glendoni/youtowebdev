@@ -533,8 +533,18 @@ a li.autocomplete-item:hover {
 }
 
 /* SAVED LISTS */
+
+.load-saved-search {
+	padding: 10px 5px;
+	font-size: 12px;
+	display: block;
+}
 .load-saved-search:hover {
 	background-color: #DEFFE2;
+}
+.no-padding {
+	padding: 0;
+	display: block;
 }
 
 /* Desktops and laptops ----------- */

@@ -425,14 +425,29 @@
                         <li>
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title"><i class="glyphicon glyphicon glyphicon-lock"></i> Private Campaings <span class="badge pull-right"><?php echo count($private_campaigns); ?></span></h3>
+                                    <h3 class="panel-title"><i class="glyphicon glyphicon glyphicon-lock"></i> My Campaings <span class="badge pull-right"><?php echo count($private_campaigns); ?></span></h3>
                                 </div>
-                                <div class="panel-body">
-                                    <ul class="nav nav-second-level ">
+                              <div class="panel-body" style="padding:0;">
+                                <ul class="list-group">
                                     <!-- PRIVATE SEARCHES -->
                                     <?php foreach ($private_campaigns as $campaign):?>
-                                        <li class="<?php if(isset($current_campaign_id) and $current_campaign_id == $campaign->id) echo 'active' ?>" ><a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $campaign->id; ?>"><?php echo $campaign->name; ?></a></li>
-                                    <?php endforeach; ?>
+                                
+                                    <li class="no-padding">
+                                        <a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $campaign->id; ?>" class="load-saved-search">
+                                        
+                                        <div class="col-xs-12 col-sm-12">
+                                            <span class="name"><?php echo $campaign->name; ?></span>
+                                            <?php if ($campaign->shared=='t'):?>
+                                                <br>
+                            <span class="label label-info" style="font-size:8px;">Shared</span>
+                                            <?php endif; ?>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        </a>
+                                    </li>
+                                <?php endforeach; ?>
+
+                                   
                                     </ul>
                                 </div>
                             </div>
@@ -448,17 +463,19 @@
                                 <ul class="list-group">
                                 <!-- SHARED SEARCHES -->
                                 <?php foreach ($shared_campaigns as $campaign):?>
-                                    <li class="list-group-item load-saved-search">
+                                    <?php 
+                                    $user_icon = explode(",", $campaign->image);
+                                    $bg_colour = $user_icon[1];
+                                    $bg_colour_text = $user_icon[2];
+                                    $bg_colour_name = $user_icon[0];?>
+
+                                    <li class="no-padding">
                                         <a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $campaign->id; ?>" class="load-saved-search">
-                                        <div class="col-xs-3 col-sm-3">
-                                           <?php 
-                                           $user_icon = explode(",", $campaign->image);
-                                           echo "<div class='circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";
-                                            ?>
-                                        </div>
-                                        <div class="col-xs-9 col-sm-9">
+                                        <div class="col-xs-12 col-sm-12">
                                             <span class="name"><?php echo $campaign->name; ?></span><br/>
-                                            <small><strong>By:</strong> <span class="text-muted"><?php echo $campaign->searchcreatedby; ?></span></small>
+                                <span class="label label-info" style="background-color: <?php echo $bg_colour; ?>;font-size:8px; color: <?php echo $bg_colour_text; ?>">Shared by: <b><?php echo $campaign->searchcreatedby; ?></b></span>
+
+
                                             
                                         </div>
                                         <div class="clearfix"></div>
@@ -473,13 +490,29 @@
                         <li>
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title"><i class="glyphicon glyphicon glyphicon-lock"></i> Private searches <span class="badge pull-right"><?php echo count($private_searches); ?></span></h3>
+                                    <h3 class="panel-title"><i class="glyphicon glyphicon glyphicon-lock"></i> My Saved Searches<span class="badge pull-right"><?php echo count($private_searches); ?></span></h3>
                                 </div>
-                                <div class="panel-body">
-                                    <ul class="nav nav-second-level ">
+                                <div class="panel-body" style="padding:0;">
+                                <ul class="list-group">
                                     <!-- PRIVATE SEARCHES -->
                                     <?php foreach ($private_searches as $campaign):?>
-                                        <li class="<?php if(isset($current_campaign_id) and $current_campaign_id == $campaign->id) echo 'active' ?>" ><a href="<?php echo site_url();?>campaigns/display_saved_search/?id=<?php echo $campaign->id; ?>"><?php echo $campaign->name; ?></a></li>
+
+                                        <li class="no-padding">
+                                        <a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $campaign->id; ?>" class="load-saved-search">
+                                        
+                                        <div class="col-xs-12 col-sm-12">
+                                            <span class="name"><?php echo $campaign->name; ?></span>
+                                            <?php if ($campaign->shared=='t'):?>
+                                                <br>
+                            <span class="label label-info" style="font-size:8px;">Shared</span>
+                                            <?php endif; ?>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        </a>
+                                    </li>
+
+
+
                                     <?php endforeach; ?>
                                     </ul>
                                 </div>
@@ -489,24 +522,26 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">
-                                        <span class="glyphicon glyphicon-globe"></span> Shared searches <span class="badge pull-right"><?php echo count($shared_searches); ?></span>
+                                        <span class="glyphicon glyphicon-globe"></span>Shared Searches <span class="badge pull-right"><?php echo count($shared_searches); ?></span>
                                     </h3>    
                                 </div>
                               <div class="panel-body" style="padding:0;">
                                 <ul class="list-group">
                                 <!-- SHARED SEARCHES -->
                                 <?php foreach ($shared_searches as $campaign):?>
-                                    <li class="list-group-item load-saved-search">
-                                        <a href="<?php echo site_url();?>campaigns/display_saved_search/?id=<?php echo $campaign->id; ?>" class="load-saved-search">
-                                        <div class="col-xs-3 col-sm-3">
-                                           <?php 
-                                           $user_icon = explode(",", $campaign->image);
-                                           echo "<div class='circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";
-                                            ?>
-                                        </div>
-                                        <div class="col-xs-9 col-sm-9">
+                                   <?php 
+                                    $user_icon = explode(",", $campaign->image);
+                                    $bg_colour = $user_icon[1];
+                                    $bg_colour_text = $user_icon[2];
+                                    $bg_colour_name = $user_icon[0];?>
+
+                                    <li class="no-padding">
+                                        <a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $campaign->id; ?>" class="load-saved-search">
+                                        <div class="col-xs-12 col-sm-12">
                                             <span class="name"><?php echo $campaign->name; ?></span><br/>
-                                            <small><strong>By:</strong> <span class="text-muted"><?php echo $campaign->searchcreatedby; ?></span></small>
+                                <span class="label label-info" style="background-color: <?php echo $bg_colour; ?>;font-size:8px; color: <?php echo $bg_colour_text; ?>">Shared by: <b><?php echo $campaign->searchcreatedby; ?></b></span>
+
+
                                             
                                         </div>
                                         <div class="clearfix"></div>
