@@ -15,7 +15,7 @@
 	<?php endif; ?>
 	<div class="panel-body">
     <div class="row">
-		<div class="col-md-9">
+		<div class="col-sm-9">
 			<h3 class="name" style="margin-top: 0px;margin-bottom: 0;">
 				<a href="<?php echo site_url();?>companies/company?id=<?php echo $company['id'];?>">
 					<?php 
@@ -24,6 +24,10 @@
 					?>
 				</a>
 			</h3>
+			</h2>
+	<?php if (isset($company['parent_registration'])): ?>
+		<span class="label label-danger">Subsidiary of <?php echo $company['parent_registration'];?></span>
+	<?php endif; ?>
 		<span class="label pipeline-label label-<?php echo str_replace(' ', '', $company['pipeline']); ?>"><?php echo $company['pipeline'] ?></span>
 <hr>
 		<div class="row col-md-12">
@@ -35,13 +39,13 @@
 
 
 
-			<div class="row col-md-8" style="margin-top:10px;">
+			<div class="row col-sm-8" style="margin-top:10px;">
     			<strong>Company Name</strong>
 				<p style="margin-bottom:0;">	
 				<?php echo $company['name']; ?>
          		</p>
     		</div>
-    		<div class="col-md-4" style="margin-top:10px;">
+    		<div class="col-sm-4" style="margin-top:10px;">
 			<strong>Company Number</strong>
 			<p style="margin-bottom:0;">	
 			 <!--COMPANY NUMBER IF APPLICABLE-->
@@ -52,13 +56,13 @@
                 <?php endif; ?>
          	</p>
         	</div>
-        	<div class="row col-md-4" style="margin-top:10px;">
+        	<div class="row col-sm-4" style="margin-top:10px;">
         		<strong>Phone Number</strong>
         		<p style="margin-bottom:0;">
         		<?php echo isset($company['phone'])?$company['phone']:'-'; ?>                
            		</p>
 			</div>
-    		<div class="col-md-4" style="margin-top:10px;">
+    		<div class="col-sm-4" style="margin-top:10px;">
     			<strong>Website</strong>
     			<p style="margin-bottom:0;">
 				<?php if (isset($company['url'])): ?>
@@ -70,7 +74,7 @@
             	<?php endif; ?>
             	</p>
 			</div>
-        	<div class="col-md-4" style="margin-top:10px;">
+        	<div class="col-sm-4" style="margin-top:10px;">
 				<strong>Class</strong>
 				<p style="margin-bottom:0;">	
 		            <!--SEGMENT IF APPLICABLE-->
@@ -86,10 +90,9 @@
 
 
 		</div>
-		<div class="col-md-3"><div class="col-md-12" style="padding-right:0;">
+		<div class="col-sm-3"><div class="col-md-12" style="padding-right:0;">
 		<?php $this->load->view('companies/actions_box.php',array('company'=>$company)); ?>
 				<!-- LINKS AND BTN -->
-		
 			<?php if (isset($company['registration'])): ?>
 			<a class="btn  btn-info btn-sm btn-block duedil" href="https://www.duedil.com/company/<?php echo $company['registration'] ?>" target="_blank">Duedil</a>
 			<?php endif; ?>
@@ -97,13 +100,9 @@
 			<a class="btn  btn-info btn-sm btn-block linkedin" href="https://www.linkedin.com/company/<?php echo $company['linkedin_id'] ?>"  target="_blank">LinkedIn</a>
 			<?php endif; ?>
 		</div>
-			
 		</div>
 		</div>
 		<div class="row">
-        <!--ADDRESS-->
-        
-                
 		<div class="col-md-12">
 			<hr>
 		</div>
@@ -111,7 +110,7 @@
 		
         <div class="row">
 		<!-- TURNOVER -->
-		<div class="col-md-2 centre">
+		<div class="col-sm-2 centre">
 			<strong>Turnover</strong>
 			<p class="details" style="margin-bottom:5px;">
 				£<?php echo isset($company['turnover'])? number_format (round($company['turnover'],-3)):'0';?>
@@ -120,7 +119,7 @@
             	<span class="label label-default" ><?php  echo isset($company['turnover_method'])?$company['turnover_method']:'';?></span>
             </h6>	
         </div>
-        <div class="col-md-2 centre">
+        <div class="col-sm-2 centre">
         	<strong>Founded</strong>
 			<p class="details">
 				<?php echo isset($company['eff_from'])?$company['eff_from']:''; ?>
@@ -128,7 +127,7 @@
 		</div>
 
 		<!-- CONTACTS -->
-		<div class="col-md-2 centre">
+		<div class="col-sm-2 centre">
 			<strong>Contacts</strong>			
 			<?php if (isset($company['contacts_count'])): ?>
 			<p class="details"><?php echo $company['contacts_count'];?> </p>
@@ -138,7 +137,7 @@
 		</div>
 
 		<!-- EMPLOYEES -->
-		<div class="col-md-2 centre">
+		<div class="col-sm-2 centre">
 			<strong>Employees</strong>
 			<?php if (isset($company['emp_count'])): ?>
 			<p class="details"><?php echo $company['emp_count'];?> </p>
@@ -148,7 +147,7 @@
 		</div>
 
 		<!-- SECTORS -->
-		<div class="col-md-4">
+		<div class="col-sm-4">
 			<strong>Sectors</strong> 
 			<?php 
 			if(isset($company['sectors'])){

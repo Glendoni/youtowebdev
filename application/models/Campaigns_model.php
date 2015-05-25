@@ -3,14 +3,15 @@ class Campaigns_model extends MY_Model {
 	
 
 	// GETS
-	function get_all_shared_searches()
+	function get_all_shared_searches($user_id)
 	{
-		$this->db->select('c.name,c.id,c.user_id,u.name as searchcreatedby,u.image');
+		$this->db->select('c.name,c.id,c.user_id,u.name as searchcreatedby,u.image,c.shared');
 		$this->db->from('campaigns c');
 		$this->db->join('users u', 'c.user_id = u.id');
 		// Apply this to find saved searches only
 		$this->db->where('criteria IS NOT NULL', null, false);
 		$this->db->where('shared', 'True');
+		$this->db->where_not_in('user_id', $user_id);
 		$this->db->where('status', 'search');
 		$this->db->order_by("c.name", "asc");
 		$this->db->where("(c.eff_to IS NULL OR c.eff_to > '".date('Y-m-d')."')",null, false); 
@@ -20,12 +21,11 @@ class Campaigns_model extends MY_Model {
 
 	function get_all_private_searches($user_id)
 	{
-		$this->db->select('name,id,user_id');
+		$this->db->select('name,id,user_id,shared');
 		$this->db->from('campaigns');
 		// Apply this to find saved searches only
 		$this->db->where('criteria IS NOT NULL', null, false);
 		$this->db->where('user_id', $user_id);
-		$this->db->where('shared', 'False');
 		$this->db->where('status', 'search');
 		$this->db->where("(eff_to IS NULL OR eff_to > '".date('Y-m-d')."')",null, false);
 		$this->db->order_by("name", "asc"); 
@@ -33,14 +33,15 @@ class Campaigns_model extends MY_Model {
 		return $query->result();
 	}
 
-	function get_all_shared_campaigns()
+	function get_all_shared_campaigns($user_id)
 	{
-		$this->db->select('c.name,c.id,c.user_id,u.name as searchcreatedby,u.image');
+		$this->db->select('c.name,c.id,c.user_id,u.name as searchcreatedby,u.image,c.shared');
 		$this->db->from('campaigns c');
 		$this->db->join('users u', 'c.user_id = u.id');
 		// Apply this to find saved searches only
 		$this->db->where('criteria IS NULL', null, false);
 		$this->db->where('shared', 'True');
+		$this->db->where_not_in('user_id', $user_id);
 		$this->db->where('status', 'search');
 		$this->db->order_by("c.name", "asc");
 		$this->db->where("(c.eff_to IS NULL OR c.eff_to > '".date('Y-m-d')."')",null, false); 
@@ -50,12 +51,11 @@ class Campaigns_model extends MY_Model {
 
 	function get_all_private_campaigns($user_id)
 	{
-		$this->db->select('name,id,user_id');
+		$this->db->select('name,id,user_id,shared');
 		$this->db->from('campaigns');
 		// Apply this to find saved searches only
 		$this->db->where('criteria IS NULL', null, false);
 		$this->db->where('user_id', $user_id);
-		$this->db->where('shared', 'False');
 		$this->db->where('status', 'search');
 		$this->db->where("(eff_to IS NULL OR eff_to > '".date('Y-m-d')."')",null, false);
 		$this->db->order_by("name", "asc"); 
@@ -344,10 +344,15 @@ class Campaigns_model extends MY_Model {
 		)   TT2
 		ON TT2."company id" = C.id
 
-		LEFT JOIN 
-		(
-			SELECT count,company_id FROM "emp_counts"  ORDER BY "emp_counts"."id" DESC limit 1
-		) EMP ON EMP.company_id = C.id
+			LEFT JOIN 
+		emp_counts EMP ON EMP.company_id = C.id
+       	AND EMP.id = 
+        (
+           SELECT max(id)
+           FROM emp_counts y 
+           WHERE y.company_id = EMP.company_id
+        )
+
 
 		LEFT JOIN 
 		ADDRESSES A

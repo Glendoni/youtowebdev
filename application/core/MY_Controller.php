@@ -207,11 +207,11 @@ class MY_Controller extends CI_Controller {
 			'exclude'=>'Exclude'
 			);	
 		// CAMPAIGN TABLE WITH CRITERIA FIELDS
-		$this->data['shared_searches'] = $this->Campaigns_model->get_all_shared_searches();
+		$this->data['shared_searches'] = $this->Campaigns_model->get_all_shared_searches($this->get_current_user_id());
 		$this->data['private_searches'] = $this->Campaigns_model->get_all_private_searches($this->get_current_user_id());
 
 		// CAMPAIGN TABLE WITHOUT CRITERIA FIELDS
-		$this->data['shared_campaigns'] = $this->Campaigns_model->get_all_shared_campaigns();
+		$this->data['shared_campaigns'] = $this->Campaigns_model->get_all_shared_campaigns($this->get_current_user_id());
 		$this->data['private_campaigns'] = $this->Campaigns_model->get_all_private_campaigns($this->get_current_user_id());
 		
 		//var_dump($this->session->userdata('campaign_shared'));
@@ -339,6 +339,7 @@ class MY_Controller extends CI_Controller {
 			if($company->company->f1->f20)$mapped_companies_array['emp_count'] = $company->company->f1->f20;
 			if($company->company->f1->f27)$mapped_companies_array['pipeline'] = $company->company->f1->f27;
 			if($company->company->f1->f28)$mapped_companies_array['contacts_count'] = $company->company->f1->f28;
+			if($company->company->f1->f29)$mapped_companies_array['parent_registration'] = $company->company->f1->f29;
 
 			
 			// sectors

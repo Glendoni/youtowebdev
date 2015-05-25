@@ -237,6 +237,23 @@ border-bottom: 1px dashed #ddd;
 	background-color: #f2dede;
 	border-color: #ebccd1;
 }
+
+.pipeline-update {
+  font-size: 12px;
+  padding: 10px;
+  text-align: center;
+  font-weight: 700;
+  background-color: #f3f3f3;
+}
+.pipeline-update.Customer {
+background-color: #BFFFBF;
+}
+.pipeline-update.Proposal {
+background-color: #EFBFFF;
+}
+.pipeline-update.Lost {
+background-color: #FFEFBF;
+}
 /* BUTTONS */
 
 .btn-checkbox {
@@ -516,8 +533,18 @@ a li.autocomplete-item:hover {
 }
 
 /* SAVED LISTS */
+
+.load-saved-search {
+	padding: 10px 5px;
+	font-size: 12px;
+	display: block;
+}
 .load-saved-search:hover {
 	background-color: #DEFFE2;
+}
+.no-padding {
+	padding: 0;
+	display: block;
 }
 
 /* Desktops and laptops ----------- */
