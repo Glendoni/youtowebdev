@@ -277,7 +277,7 @@
                                       <strong>Warning!</strong> Please enter at least one search criteria.
                                     </div>
                                     <?php echo form_open(site_url().'companies', 'id="main_search" novalidate="novalidate" name="main_search" class="" role="form"'); ?>
-                                    <?php echo form_hidden('new_search','1');?>
+                                    <?php echo form_hidden('main_search','1');?>
                                     <?php if (isset($_POST['main_search']) || (isset($_GET['search']))) : ?>
                                     <div class='form-row'>
                                         <div class="col-md-12 form-group ">
@@ -326,7 +326,6 @@
                                         <?php
                                         echo form_label('Mortgage Provider', 'providers');
                                         echo form_dropdown('providers', $providers_options, ($this->input->post('providers')?$this->input->post('providers'):$providers_default) ,'class="form-control"');
-
                                     
                                         ?>
                                         
@@ -382,35 +381,9 @@
                                                 ?>         
                                          </div> 
                                     </div>
-                                    <div class="form-row">
-                                    <div class="col-md-12 form-group">
-                                        <div class="col-md-6">
-                                            <?php
-                                            echo form_label('Contacted', 'contacted');
-                                            echo form_dropdown('contacted', $exclude_options, ($this->input->post('contacted')?$this->input->post('contacted'):' ') ,'class="form-control include-exclude-drop"');
-                                            ?>
-                                         </div> 
-
-                                         <div class="col-md-6 "> 
-                                         <label>Last # days</label>
-                                            <?php   
-                                            echo form_input(array('name' => 'contacted_days', 'id' => 'contacted_days', 'maxlength' => '100','class'=>'form-control','placeholder'=>'','type'=>'number','min'=>'0'), set_value('contacted_days',$this->input->post('contacted_days')));?>
-                                        
-                                        </div>
-                                        </div>
-                                    </div>
-
-                                
-                                    
-                                    <div class='form-row contacted-show' style="display:none;">
-                                        <div class="checkbox">
-                                            <label>
-                                              <?php echo form_checkbox('exlude_no_contact', '1', set_value('exlude_no_contact',$this->input->post('exlude_no_contact')));?>Include companies with no previous contact
-                                            </label>
-                                        </div>
-                                    </div>
                                     </div>
                                     <div class="panel-footer">
+                                    
                                         <input type="submit" class="loading-btn btn btn-primary btn-block " value="Search" name="submit">
                                         <?php if (validation_errors()): ?>
                                         <div class="alert alert-danger" role="alert">
@@ -490,15 +463,15 @@
                         <li>
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title"><i class="glyphicon glyphicon glyphicon-lock"></i> My Saved Searches<span class="badge pull-right"><?php echo count($private_searches); ?></span></h3>
+                                    <h3 class="panel-title"><i class="glyphicon glyphicon glyphicon-lock"></i> Private searches <span class="badge pull-right"><?php echo count($private_searches); ?></span></h3>
                                 </div>
-                                <div class="panel-body" style="padding:0;">
-                                <ul class="list-group">
+                                <div class="panel-body">
+                                    <ul class="list-group">
                                     <!-- PRIVATE SEARCHES -->
                                     <?php foreach ($private_searches as $campaign):?>
 
                                         <li class="no-padding">
-                                        <a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $campaign->id; ?>" class="load-saved-search">
+                                        <a href="<?php echo site_url();?>campaigns/display_saved_search/?id=<?php echo $campaign->id; ?>" class="load-saved-search">
                                         
                                         <div class="col-xs-12 col-sm-12">
                                             <span class="name"><?php echo $campaign->name; ?></span>
@@ -522,13 +495,13 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">
-                                        <span class="glyphicon glyphicon-globe"></span>Shared Searches <span class="badge pull-right"><?php echo count($shared_searches); ?></span>
+                                        <span class="glyphicon glyphicon-globe"></span> Shared searches <span class="badge pull-right"><?php echo count($shared_searches); ?></span>
                                     </h3>    
                                 </div>
                               <div class="panel-body" style="padding:0;">
                                 <ul class="list-group">
                                 <!-- SHARED SEARCHES -->
-                                <?php foreach ($shared_searches as $campaign):?>
+                               <?php foreach ($shared_searches as $campaign):?>
                                    <?php 
                                     $user_icon = explode(",", $campaign->image);
                                     $bg_colour = $user_icon[1];
@@ -536,7 +509,7 @@
                                     $bg_colour_name = $user_icon[0];?>
 
                                     <li class="no-padding">
-                                        <a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $campaign->id; ?>" class="load-saved-search">
+                                        <a href="<?php echo site_url();?>campaigns/display_saved_search/?id=<?php echo $campaign->id; ?>" class="load-saved-search">
                                         <div class="col-xs-12 col-sm-12">
                                             <span class="name"><?php echo $campaign->name; ?></span><br/>
                                 <span class="label label-info" style="background-color: <?php echo $bg_colour; ?>;font-size:8px; color: <?php echo $bg_colour_text; ?>">Shared by: <b><?php echo $campaign->searchcreatedby; ?></b></span>

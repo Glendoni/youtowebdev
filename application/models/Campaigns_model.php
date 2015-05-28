@@ -276,17 +276,20 @@ class Campaigns_model extends MY_Model {
 			   C.registration, -- f17
 		       TT1."turnover", -- f18
 			   TT1."turnover_method",  -- f19
-			   EMP.count,--f20
+			   EMP.company_id,--f20
 			   U.image , -- f21
 			   C.class, -- f22
 			   A.lat, -- f23
 			   A.lng, -- f24
-			   json_agg( 
+			  json_agg( 
 			   row_to_json ((
 			   TT2."sector_id", TT2."sector"))),-- f25
-			   C.phone, 
-			   C.pipeline,
-			   CONT.contacts_count)) "JSON output" 
+			   C.phone, -- f26 
+			   C.pipeline, -- f27
+			   CONT.contacts_count, -- f28
+			   C.parent_registration --f 29
+
+			   )) "JSON output" 
 			   
 
 
@@ -344,14 +347,13 @@ class Campaigns_model extends MY_Model {
 		)   TT2
 		ON TT2."company id" = C.id
 
-			LEFT JOIN 
-		emp_counts EMP ON EMP.company_id = C.id
-       	AND EMP.id = 
-        (
-           SELECT max(id)
-           FROM emp_counts y 
-           WHERE y.company_id = EMP.company_id
-        )
+
+
+
+        left join 
+        (select count, company_id from emp_counts ORDER BY "emp_counts"."created_at" DESC limit 1)
+        EMP ON EMP.company_id = C.id
+
 
 
 		LEFT JOIN 
@@ -364,6 +366,7 @@ class Campaigns_model extends MY_Model {
 				 
 		group by C.id,
 		         C.name,
+		         
 		         C.url,
 			     C.eff_from,
 			     C.ddlink,
@@ -378,7 +381,8 @@ class Campaigns_model extends MY_Model {
 			     C.registration,
 			     C.class,
 			     C.phone,
-			     C.pipeline,	
+			     C.pipeline,
+			     C.parent_registration,	
 			     U.id,
 			     U.name,
 			     A.address,
@@ -386,7 +390,7 @@ class Campaigns_model extends MY_Model {
 			     A.lng,
 		         TT1."turnover",
 			     TT1."turnover_method",
-			     EMP.count,
+			     EMP.company_id,
 			     CONT.contacts_count
 
 		order by C.id 

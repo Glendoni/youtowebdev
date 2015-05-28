@@ -428,14 +428,9 @@ class Companies_model extends CI_Model {
 		)   TT2
 		ON TT2."company id" = C.id
 
-		LEFT JOIN 
-		emp_counts EMP ON EMP.company_id = C.id
-       	AND EMP.id = 
-        (
-           SELECT max(id)
-           FROM emp_counts y 
-           WHERE y.company_id = EMP.company_id
-        )
+        left join 
+        (select count, company_id from emp_counts ORDER BY "emp_counts"."created_at" DESC limit 1)
+        EMP ON EMP.company_id = C.id
 
 
 
