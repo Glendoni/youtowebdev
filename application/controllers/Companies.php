@@ -250,6 +250,7 @@ class Companies extends MY_Controller {
 				$option_contacts[$contact->id] = $contact->first_name.' '.$contact->last_name;
 			}
 			$this->data['option_contacts'] = $option_contacts;
+			$this->data['addresses'] =  $this->Actions_model->get_addresses($this->input->get('id'));
 			$this->data['action_types_done'] = $this->Actions_model->get_action_types_done();
 			$this->data['action_types_planned'] = $this->Actions_model->get_action_types_planned();
 			$this->data['action_types_array'] = $this->Actions_model->get_action_types_array();

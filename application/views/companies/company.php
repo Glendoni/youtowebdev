@@ -214,6 +214,46 @@
 		</div>
 		</div>
 
+		<!-- ADDRESSES -->
+
+
+		
+		<div class="col-md-12">
+		<div class="panel panel-default">
+<div class="panel-heading">
+<h3 class="panel-title"><i class="fa fa-map-marker"></i> Addresses</h3>
+</div>
+<!-- /.panel-heading -->
+<div class="panel-body">
+<?php if(!empty($addresses)): ?>
+			<table class="table table-hover">
+			<thead>
+				<tr>
+					<th class="col-md-6">Address</th>
+					<th class="col-md-3" style="text-align:center;">Country</th>
+					<th class="col-md-3" style="text-align:center;">Type</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php foreach ($addresses as $addresses):?>
+				<tr style="font-size:12px;">
+					<td class="col-md-6" ><?php echo $addresses->address; ?></td>
+					<td class="col-md-3" style="text-align:center;"><?php echo $addresses->name; ?></td>
+					<td class="col-md-3" style="text-align:center;"><?php echo $addresses->type; ?></td>
+				</tr>
+				<?php endforeach; ?>
+			</tbody>
+			</table>
+			<?php else: ?>
+			<div class="alert alert-info" style="margin-top:10px;">
+                No address data found.
+            </div>
+		<?php endif; ?>
+		</div>
+		<!-- /.panel-body -->
+		</div>
+		</div>
+
 		<div class="col-md-12">
 		<div class="panel panel-default">
 		<div class="panel-heading" id="contacts">

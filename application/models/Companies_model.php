@@ -928,6 +928,18 @@ class Companies_model extends CI_Model {
 		return $array;
     }
 
+	    	function get_addresses($company_id)
+	{
+		$data = array(
+			'company_id' => $company_id,
+			);
+				$this->db->join('countries', 'countries.id = addresses.country_id');
+
+		$this->db->order_by('type asc');
+		echo $query = $this->db->get_where('addresses', $data);
+		return $query->result_object();
+	}
+
 
     function get_autocomplete($search_data) {
 		$query1 = $this->db->query("select c.name,c.id, c.pipeline, u.name as user, u.image as image, user_id from companies c left join  users u on u.id = c.user_id
