@@ -15,7 +15,7 @@
                             if ($company['pipeline']=="Customer"){ 
                                 echo form_label('Pipeline', 'company_pipeline');
                                 ?>
-                                <span class="label pipeline-label label-<?php echo str_replace(' ', '', $company['pipeline']); ?>" style="display: block;clear: left;padding: 11px;"><?php echo $company['pipeline'] ?></span>
+                                <span class="label pipeline-label label-<?php echo str_replace(' ', '', $company['pipeline']); ?>" style="display: block;clear: left;padding: 11px; margin:0;"><?php echo $company['pipeline'] ?></span>
                                 <?php
                                 } else {
                                     echo form_label('Pipeline', 'company_pipeline');
