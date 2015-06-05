@@ -32,7 +32,7 @@ class Contacts_model extends CI_Model {
 	}
 
 
-	function create_contact($first_name,$last_name,$email,$role,$company_id,$created_by,$phone=NULL)
+	function create_contact($first_name,$last_name,$email,$role,$company_id,$created_by,$phone=NULL,$linkedin_id)
 	{
         $contact->first_name = $first_name; // please read the below note
         $contact->last_name = $last_name;
@@ -41,7 +41,8 @@ class Contacts_model extends CI_Model {
         $contact->role = $role;
         $contact->company_id = $company_id;
         $contact->created_by = $created_by;
-        $this->db->insert('contacts', $contact);
+		$contact->linkedin_id = $linkedin_id;
+		$this->db->insert('contacts', $contact);
         $new_id = $this->db->insert_id();
         $rows = $this->db->affected_rows();
 	    return $rows;
@@ -53,6 +54,7 @@ class Contacts_model extends CI_Model {
         $contact->role = $post['role'];
         $contact->email = $post['email'];
         $contact->phone = $post['phone'];
+		$contact->linkedin_id = $post['linkedin_id'];
         $contact->updated_by = $user_id;
         $contact->updated_at = date('Y-m-d H:i:s');
 			

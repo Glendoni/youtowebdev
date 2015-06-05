@@ -162,7 +162,6 @@
 				}
 			} else {
 			echo '<p class="details" style="margin-bottom:0; ">Unknown</p>';
-
 			}
 			?>
 		</div>
@@ -214,46 +213,6 @@
 		</div>
 		</div>
 
-		<!-- ADDRESSES -->
-
-
-		
-		<div class="col-md-12">
-		<div class="panel panel-default">
-<div class="panel-heading">
-<h3 class="panel-title"><i class="fa fa-map-marker"></i> Addresses</h3>
-</div>
-<!-- /.panel-heading -->
-<div class="panel-body">
-<?php if(!empty($addresses)): ?>
-			<table class="table table-hover">
-			<thead>
-				<tr>
-					<th class="col-md-6">Address</th>
-					<th class="col-md-3" style="text-align:center;">Country</th>
-					<th class="col-md-3" style="text-align:center;">Type</th>
-				</tr>
-			</thead>
-			<tbody>
-				<?php foreach ($addresses as $addresses):?>
-				<tr style="font-size:12px;">
-					<td class="col-md-6" ><?php echo $addresses->address; ?></td>
-					<td class="col-md-3" style="text-align:center;"><?php echo $addresses->name; ?></td>
-					<td class="col-md-3" style="text-align:center;"><?php echo $addresses->type; ?></td>
-				</tr>
-				<?php endforeach; ?>
-			</tbody>
-			</table>
-			<?php else: ?>
-			<div class="alert alert-info" style="margin-top:10px;">
-                No address data found.
-            </div>
-		<?php endif; ?>
-		</div>
-		<!-- /.panel-body -->
-		</div>
-		</div>
-
 		<div class="col-md-12">
 		<div class="panel panel-default">
 		<div class="panel-heading" id="contacts">
@@ -272,30 +231,31 @@
 		<!-- /.panel-heading -->
 		<div class="panel-body">
 		<?php if(isset($contacts) and !empty($contacts)) : ?>
+
+
 		<table class="table table-hover">
 	      <thead>
 	        <tr>
-	          <th>Name</th>
-	          <th>Role</th>
-	          <th>Email</th>
-	          <th>Phone</th>
-	          <th></th>
+	          <th class="col-md-3">Name</th>
+	          <th class="col-md-2">Role</th>
+	          <th class="col-md-2">Email</th>
+	          <th class="col-md-2">Phone</th>
+	          <th class="col-md-3"></th>
 	        </tr>
 	      </thead>
 	      <tbody>
 	      	<?php foreach ($contacts as $contact): ?>
 	      	<tr>
-				<td><?php echo ucfirst($contact->first_name).' '.ucfirst($contact->last_name); ?></td>
-				<td><?php echo ucfirst($contact->role); ?></td>
-				<td><?php echo $contact->email; ?></td>
-				<td><?php echo $contact->phone; ?></td>
-				<td>
+				<td class="col-md-3"><?php echo ucfirst($contact->first_name).' '.ucfirst($contact->last_name); ?></td>
+				<td class="col-md-2"><?php echo ucfirst($contact->role); ?></td>
+				<td class="col-md-2"><?php echo $contact->email; ?></td>
+				<td class="col-md-2"><?php echo $contact->phone; ?></td>
+				<td  class="col-md-3">
 		      	<div class=" pull-right ">
-		      	<?php if ($company['pipeline']=='Blacklisted'): ?>
-		<?php else: ?>
-
+				<?php if ($company['pipeline']=='Blacklisted'): ?>
+				<?php else: ?>
 	            <?php $this->load->view('companies/action_box_contacts.php',array('contact'=>$contact)); ?>
-	        <?php endif; ?>
+	        	<?php endif; ?>
 	            </div>
 	            </td>
         	</tr>

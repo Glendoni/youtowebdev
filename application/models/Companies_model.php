@@ -942,8 +942,7 @@ class Companies_model extends CI_Model {
 
 
     function get_autocomplete($search_data) {
-		$query1 = $this->db->query("select c.name,c.id, c.pipeline, u.name as user, u.image as image, user_id from companies c left join  users u on u.id = c.user_id
-where c.eff_to IS NULL and c.active = 'true' and c.name ilike'".$search_data."%' order by name asc limit 7 ");
+		$query1 = $this->db->query("select c.name,c.id, c.pipeline, u.name as user, u.image as image, user_id from companies c left join  users u on u.id = c.user_id where c.eff_to IS NULL and c.active = 'true' and c.name ilike'".$search_data."%' order by name asc limit 7 ");
 
 	    if ($query1->num_rows() > 0)
 			{
@@ -956,9 +955,7 @@ where c.eff_to IS NULL and c.active = 'true' and c.name ilike '%".$search_data."
 			}
 	}
 	    function get_autocomplete_contact($search_data) {
-		 $query2 = $this->db->query("select concat(c.first_name::text,' ', c.last_name::text) as name, c.company_id as id, con.name as company_name from contacts c left join companies con on 
-		 	  con.id= c.company_id
-where concat(c.first_name::text, ' ', c.last_name::text) ilike '".$search_data."%' order by name asc limit 7 ");
+		 $query2 = $this->db->query("select concat(c.first_name::text,' ', c.last_name::text) as name, c.company_id as id, con.name as company_name from contacts c left join companies con on con.id= c.company_id where concat(c.first_name::text, ' ', c.last_name::text) ilike '".$search_data."%' order by name asc limit 7 ");
 
 	    if ($query2->num_rows() > 0)
 			{
@@ -966,9 +963,7 @@ where concat(c.first_name::text, ' ', c.last_name::text) ilike '".$search_data."
 			}
 		else 
 			{
-			return $this->db->query("select concat(c.first_name::text,' ', c.last_name::text) as name, c.company_id as id, con.name as company_name from contacts c left join companies con on 
-		 	  con.id= c.company_id
-where concat(c.first_name::text, ' ', c.last_name::text) ilike '%".$search_data."%' order by name asc limit 5 ");
+			return $this->db->query("select concat(c.first_name::text,' ', c.last_name::text) as name, c.company_id as id, con.name as company_name from contacts c left join companies con on con.id= c.company_id where concat(c.first_name::text, ' ', c.last_name::text) ilike '%".$search_data."%' or regexp_replace(c.phone, E'[^0-9]', '', '') ilike regexp_replace('".$search_data."%', E'[^0-9%]', '', '') or regexp_replace(c.email, E'[^0-9]', '', 'g') ilike regexp_replace('%".$search_data."%', E'[^0-9%]', '', 'g') order by name asc limit 5 ");
 			}
 	}
 }

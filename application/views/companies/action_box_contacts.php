@@ -1,9 +1,14 @@
+<?php if($contact->linkedin_id): ?>
+<a href="https://www.linkedin.com/profile/view?id=<?php echo $contact->linkedin_id; ?>" target="_blank" type="button" class="btn btn-xs" style="background-color:#0077b5; color:#fff;">
+    <i class="fa fa-linkedin-square"></i> LinkedIn Profile 
+</a>
+<?php endif;?>
 <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#editContact_<?php echo $contact->id; ?>">
-    edit 
+    <i class="fa fa-pencil-square-o"></i> Edit 
 </button>
 <?php if($contact->email): ?>
 <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#send-email<?php echo $contact->id; ?>">
-    <i class="fa fa-envelope"></i> send email 
+    <i class="fa fa-envelope"></i> Send Email 
 </button>
 <?php endif;?>
 <div class="modal fade" id="send-email<?php echo $contact->id; ?>" tabindex="-1" role="dialog" aria-labelledby="Send email to <?php echo ucfirst($contact->first_name).' '.ucfirst($contact->last_name) ?>" aria-hidden="true" style="display: none;">
@@ -119,6 +124,12 @@
 	                    <div class="form-group">
 	                        <label for="phone" class="control-label">Phone</label>                            
 	                        <input type="text" name="phone" value="<?php echo isset($contact->phone)?$contact->phone:''; ?>" maxlength="50" class="form-control">
+	                    </div>
+	                </div>
+	                <div class="col-md-6">
+	                    <div class="form-group">
+	                        <label for="linkedin_id" class="control-label">LinkedIn ID</label>                            
+	                        <input type="text" name="linkedin_id" value="<?php echo isset($contact->linkedin_id)?$contact->linkedin_id:''; ?>" maxlength="50" class="form-control">
 	                    </div>
 	                </div>
 				 </div>

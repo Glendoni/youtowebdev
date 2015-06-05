@@ -1,5 +1,4 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
 class Companies extends MY_Controller {
 	
 	function __construct() 
@@ -19,7 +18,6 @@ class Companies extends MY_Controller {
 			
 			$this->clear_saved_search_from_session();
 			// $this->clear_search_results();
-
 			$this->load->library('form_validation');
 			$this->form_validation->set_rules('agency_name', 'agency_name', 'xss_clean');
 			$this->form_validation->set_rules('turnover_from', 'turnover_from', 'xss_clean');
@@ -34,13 +32,10 @@ class Companies extends MY_Controller {
 			$this->form_validation->set_rules('mortgage_to', 'anniversary_to', 'xss_clean');
 			$this->form_validation->set_rules('assigned', 'assigned', 'xss_clean');
 			$this->form_validation->set_rules('class', 'class', 'xss_clean');
-
-
 			if($this->form_validation->run())
 			{	
 				// Result set to session and current search 
 				$this->seve_current_search($this->input->post());
-
 				$raw_search_results = $this->Companies_model->search_companies_sql($this->input->post());
 				
 				$result = $this->process_search_result($raw_search_results);
@@ -61,7 +56,6 @@ class Companies extends MY_Controller {
 		}
 		elseif ($refresh_search_results or $ajax_refresh) 
 		{
-
 			$post = $this->session->userdata('current_search');
 			foreach ($post as $key => $value) {
 				$_POST[$key] = $value;
@@ -80,13 +74,11 @@ class Companies extends MY_Controller {
 			}
 		}
 		elseif (!$this->input->post('submit') and !$search_results_in_session and !$refresh_search_results) {
-
 			$this->session->unset_userdata('companies');
 			unset($search_results_in_session);
 		}
 		
 		$companies_array = isset($result) ? $result : $search_results_in_session;
-
 		// if campaign exist set this variables
 		$this->data['current_campaign_name'] = ($this->session->userdata('saved_search_name') ?: FALSE );
 		$this->data['current_campaign_owner_id'] = ($this->session->userdata('saved_search_owner') ?: FALSE );
@@ -94,7 +86,6 @@ class Companies extends MY_Controller {
 		$this->data['current_campaign_editable'] = ($this->data['current_campaign_owner_id'] == $this->get_current_user_id() ? TRUE : FALSE );
 		
 		$this->data['current_campaign_is_shared'] = $this->session->userdata('saved_search_shared') == 'f'? FALSE : TRUE; 
-
 		if(empty($companies_array))
 		{
 			$this->session->unset_userdata('companies');
@@ -104,7 +95,6 @@ class Companies extends MY_Controller {
 			$this->data['next_page_number'] = FALSE;
 			$this->data['previous_page_number'] =  FALSE;
 			$this->data['companies'] = array();
-
 		}else{
 			// get companies from recent result or get it from session
 			$companies_array_chunk = array_chunk($companies_array, RESULTS_PER_PAGE);
@@ -123,7 +113,6 @@ class Companies extends MY_Controller {
 		$this->load->view('layouts/default_layout', $this->data);
 		
 	}
-
 	public function _valid_name(){
 		$result_name = $this->Companies_model->get_company_by_name($this->input->post('name'));
 	
@@ -134,7 +123,6 @@ class Companies extends MY_Controller {
 			return FALSE;
 		}
 	}
-
 	public function _valid_registration(){
 		if($this->input->post('registration')){
 			$result_registration = $this->Companies_model->get_company_by_registration($this->input->post('registration'));
@@ -145,8 +133,6 @@ class Companies extends MY_Controller {
 		}
 		return TRUE;
 	}
-
-
 	public function create_company(){
 		if($this->input->post('create_company_form')){
 			$this->load->library('form_validation');
@@ -161,14 +147,12 @@ class Companies extends MY_Controller {
 			$this->form_validation->set_rules('phone', 'phone', 'xss_clean');
 			$this->form_validation->set_rules('company_class', 'company_class', 'xss_clean');
 			$this->form_validation->set_rules('eff_from','eff_from','xss_clean');
-
 			// address
 			$this->form_validation->set_rules('country_id', 'country_id', 'xss_clean|required');
 			$this->form_validation->set_rules('address', 'address', 'xss_clean|required');
 			$this->form_validation->set_rules('lat', 'latitude', 'xss_clean');
 			$this->form_validation->set_rules('lng', 'longitude', 'xss_clean');
 			$this->form_validation->set_rules('type', 'type', 'xss_clean');
-
 			if($this->form_validation->run())
 			{
 				$result = $this->Companies_model->create_company($this->input->post());
@@ -190,9 +174,7 @@ class Companies extends MY_Controller {
 		$this->data['main_content'] = 'companies/create_company';
 		$this->load->view('layouts/single_page_layout', $this->data);
 		
-
 	}
-
 	public function assignto()
 	{
 		if($this->input->post('company_id') && $this->input->post('user_id'))
@@ -213,7 +195,6 @@ class Companies extends MY_Controller {
 		}
 		return True;
 	}
-
 	public function unassign()
 	{
 		if($this->input->post('company_id') && $this->input->post('user_id'))
@@ -234,7 +215,6 @@ class Companies extends MY_Controller {
 		}
 		return True;
 	}
-
 	
 	public function company()
 	{
@@ -250,7 +230,6 @@ class Companies extends MY_Controller {
 				$option_contacts[$contact->id] = $contact->first_name.' '.$contact->last_name;
 			}
 			$this->data['option_contacts'] = $option_contacts;
-			$this->data['addresses'] =  $this->Actions_model->get_addresses($this->input->get('id'));
 			$this->data['action_types_done'] = $this->Actions_model->get_action_types_done();
 			$this->data['action_types_planned'] = $this->Actions_model->get_action_types_planned();
 			$this->data['action_types_array'] = $this->Actions_model->get_action_types_array();
@@ -271,10 +250,8 @@ class Companies extends MY_Controller {
 			redirect('/dashboard','refresh');
 		}
 	}
-
 	public function edit()
 	{
-
 		if($this->input->post('edit_company'))
 		{
 			// We need to clean the post and validate the post fields *pending*
@@ -284,7 +261,6 @@ class Companies extends MY_Controller {
 			return True;
 		}
 	}
-
 	public function autocomplete() {
         $search_data = $this->input->post("search_data");
 		$response = "<ul class='autocomplete-holder'>";
@@ -301,7 +277,6 @@ class Companies extends MY_Controller {
         foreach ($query->result() as $row):
         	if(!empty($row->user)) { 
         		$user_icon = explode(",", $row->image);
-
         		$assigned_label = "| <span class='label label-primary' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$row->user."</div>";};
         	 
 		$response= $response."<a href='". base_url() . "companies/company?id=" . $row->id . "'><li class='autocomplete-item'><strong>" . str_replace($words, ' ',$row->name). "</strong><br><small>".$row->pipeline." ".$assigned_label."</small></li></a>";
