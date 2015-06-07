@@ -155,12 +155,12 @@ class Companies_model extends CI_Model {
 		
 		if($post['company_age_from'] >= 0  )
 		{
-			$company_age_from = date("m-d-Y", strtotime("-".$post['company_age_from']." year"));
+			$company_age_from = date("m-d-Y", strtotime("-".$post['company_age_from']." month"));
 			
 		}
 		if(!empty($post['company_age_to'])  )
 		{
-			$company_age_to = date("m-d-Y", strtotime("-".$post['company_age_to']." year"));
+			$company_age_to = date("m-d-Y", strtotime("-".$post['company_age_to']." month"));
 			
 		}
 		if(isset($company_age_from) && isset($company_age_to)) 
@@ -293,9 +293,14 @@ class Companies_model extends CI_Model {
 		// Providers
 		if(isset($post['providers']) && (!empty($post['providers'])) )
 		{
-			if($post['providers'] < 0)
+			if($post['providers'] == -1)
 			{
-				$no_providers_sql = 'select distinct(companies.id )from companies left join (select company_id from mortgages where mortgages.stage = \''.MORTGAGES_OUTSTANDING.'\') t on t.company_id = companies.id where t.company_id  is NULL';
+				// no curresnt provider 
+				$no_providers_sql = 'select distinct(companies.id ) from companies left join (select company_id from mortgages where mortgages.stage = \''.MORTGAGES_OUTSTANDING.'\') t on t.company_id = companies.id where t.company_id  is NULL';
+			}
+			elseif ($post['providers'] == -2) {
+				// has provider
+				$providers_sql = 'select mortgages.company_id "company_id" from providers join mortgages on  providers.id = mortgages.provider_id	where mortgages.stage = \''.MORTGAGES_OUTSTANDING.'\'';
 			}
 			else
 			{

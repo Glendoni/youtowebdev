@@ -3,9 +3,6 @@
   <div class="col-lg-12">
     <div class="panel panel-green">
         <div class="panel-heading profile-heading">
-            <span>
-              <img src="<?php echo asset_url();?>images/profiles/<?php echo isset($system_users_images[$current_user['id']])? $system_users_images[$current_user['id']]:'none.jpg' ;?>" class="img-circle" alt="" />
-            </span>
             <h3>Profile</h3>
         </div>
         <!-- /.panel-heading -->
@@ -37,13 +34,13 @@
                   <input type="text" class="form-control" name="linkedin" value="<?php echo $current_user['linkedin'] ?>" > 
                 </div>
                 
-                <div class="form-group col-md-6">  
+<!--                 <div class="form-group col-md-6">  
                   <label>Profile image <small class="mute">(Max 100kb)</small></label>
                   <input type="file" name="userfile" size="20" /> 
                 </div>         
                 <div class="form-group col-md-12">
                   <button class="btn btn-primary" name="update_profile">Update</button>
-                </div>
+                </div> -->
             </form>
         </div>
         <!-- /.panel-body -->
