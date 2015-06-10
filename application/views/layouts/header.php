@@ -429,7 +429,7 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">
-                                        <span class="glyphicon glyphicon-globe"></span> Shared Campaings <span class="badge pull-right"><?php echo count($shared_campaigns); ?></span>
+                                        <span class="glyphicon glyphicon-globe"></span> Shared Campaigns <span class="badge pull-right"><?php echo count($shared_campaigns); ?></span>
                                     </h3>    
                                 </div>
                               <div class="panel-body" style="padding:0;">
