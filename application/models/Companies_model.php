@@ -337,7 +337,6 @@ class Companies_model extends CI_Model {
 		// pipeline
 		//CHECK IF NOT 0
 		foreach($_POST['pipeline'] as $result) {
-		echo $result;
 		}
 		if(isset($_POST['pipeline']) && (!empty($_POST['pipeline'])) && ($_POST['pipeline'] !== 'none') && $result !== '0')
 		{		
@@ -409,7 +408,7 @@ class Companies_model extends CI_Model {
 		if(isset($providers_sql)) $sql = $sql.' JOIN ( '.$providers_sql.' ) providers ON C.id = providers.company_id';
 		if(isset($assigned_sql)) $sql = $sql.' JOIN ( '.$assigned_sql.' ) assigned ON C.id = assigned.id';
 		if(isset($class_sql)) $sql = $sql.' JOIN ( '.$class_sql.' ) segment ON C.id = segment.id';
-		if(isset($pipeline_sql)) $sql = $sql.' LEFT JOIN ( '.$pipeline_sql.' ) pipeline ON C.id = pipeline.id';
+		if(isset($pipeline_sql)) $sql = $sql.' JOIN ( '.$pipeline_sql.' ) pipeline ON C.id = pipeline.id';
 		if(isset($company_id) && $company_id !== False) $sql = $sql.' JOIN ( select id from companies where id = '.$company_id.' ) company ON C.id = company.id';
 		if(isset($emp_count_sql)) $sql = $sql.' JOIN ( '.$emp_count_sql.' ) company ON C.id = company.company_id';
 
@@ -982,6 +981,7 @@ class Companies_model extends CI_Model {
 	}
 	    function get_autocomplete_contact($search_data) {
 		 $query2 = $this->db->query("select concat(c.first_name::text,' ', c.last_name::text) as name, c.company_id as id, con.name as company_name from contacts c left join companies con on con.id= c.company_id where concat(c.first_name::text, ' ', c.last_name::text) ilike '".$search_data."%' order by name asc limit 7 ");
+		print_r($query2);
 
 	    if ($query2->num_rows() > 0)
 			{
@@ -989,7 +989,7 @@ class Companies_model extends CI_Model {
 			}
 		else 
 			{
-			return $this->db->query("select concat(c.first_name::text,' ', c.last_name::text) as name, c.company_id as id, con.name as company_name from contacts c left join companies con on con.id= c.company_id where concat(c.first_name::text, ' ', c.last_name::text) ilike '%".$search_data."%' or regexp_replace(c.phone, E'[^0-9]', '', '') ilike regexp_replace('".$search_data."%', E'[^0-9%]', '', '') or regexp_replace(c.email, E'[^0-9]', '', 'g') ilike regexp_replace('%".$search_data."%', E'[^0-9%]', '', 'g') order by name asc limit 5 ");
+			return $this->db->query("select concat(c.first_name::text,' ', c.last_name::text) as name, c.company_id as id, con.name as company_name from contacts c left join companies con on con.id= c.company_id where concat(c.first_name::text, ' ', c.last_name::text) ilike '%".$search_data."%' or regexp_replace(c.phone, E'[^0-9]', '', '') ilike regexp_replace('".$search_data."%', E'[^0-9%]', '', '') order by name asc limit 5 ");
 			}
 	}
 }
