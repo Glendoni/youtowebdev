@@ -175,7 +175,7 @@ class MY_Controller extends CI_Controller {
 
 		// Pass variables to tempalte views 
 		$this->data['companies_classes'] = array(0=>' ') + $class_options;
-
+		$this->data['companies_pipeline'] =  $pipeline_options;		
 
 		// Pipeline
 		// edit box options 

@@ -409,8 +409,8 @@ class Companies_model extends CI_Model {
 		if(isset($providers_sql)) $sql = $sql.' JOIN ( '.$providers_sql.' ) providers ON C.id = providers.company_id';
 		if(isset($assigned_sql)) $sql = $sql.' JOIN ( '.$assigned_sql.' ) assigned ON C.id = assigned.id';
 		if(isset($class_sql)) $sql = $sql.' JOIN ( '.$class_sql.' ) segment ON C.id = segment.id';
-		if(isset($pipeline_sql)) $sql = $sql.' JOIN ( '.$pipeline_sql.' ) pipeline ON C.id = pipeline.id';
-		if(isset($company_id) && $company_id !== False) $sql = $sql.' LEFT JOIN ( select id from companies where id = '.$company_id.' ) company ON C.id = company.id';
+		if(isset($pipeline_sql)) $sql = $sql.' LEFT JOIN ( '.$pipeline_sql.' ) pipeline ON C.id = pipeline.id';
+		if(isset($company_id) && $company_id !== False) $sql = $sql.' JOIN ( select id from companies where id = '.$company_id.' ) company ON C.id = company.id';
 		if(isset($emp_count_sql)) $sql = $sql.' JOIN ( '.$emp_count_sql.' ) company ON C.id = company.company_id';
 
 		$sql = $sql.' LEFT JOIN 

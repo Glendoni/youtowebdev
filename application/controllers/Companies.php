@@ -32,6 +32,8 @@ class Companies extends MY_Controller {
 			$this->form_validation->set_rules('mortgage_to', 'anniversary_to', 'xss_clean');
 			$this->form_validation->set_rules('assigned', 'assigned', 'xss_clean');
 			$this->form_validation->set_rules('class', 'class', 'xss_clean');
+			$this->form_validation->set_rules('pipeline', 'pipeline', 'xss_clean');
+
 			if($this->form_validation->run())
 			{	
 				// Result set to session and current search 
