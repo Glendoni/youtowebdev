@@ -46,6 +46,20 @@ class Companies_model extends CI_Model {
 		return 	$arrayNamesPipeline;
 	}
 
+		function get_companies_pipeline_search()
+	{
+		$arrayNamesPipelineSearch = array(
+			'Prospect' => 'Prospect',
+			'Intent' => 'Intent',
+			'Qualified' => 'Qualified',
+			'Proposal' => 'Proposal',
+			'Customer' => 'Customer',
+			'Unsuitable' => 'Unsuitable',
+			'Lost' => 'Lost'
+			);
+		return 	$arrayNamesPipelineSearch;
+	}
+
 	// not in use
 	// function get_company_by_id($id)
 	// {
@@ -318,7 +332,17 @@ class Companies_model extends CI_Model {
 		if(isset($post['class']) && (!empty($post['class'])) && ($post['class'] !== ''))
 		{	
 			$class_sql = "select id from companies where class = '".$post['class']."'";
+		}
 
+		// pipeline
+		//CHECK IF NOT 0
+		foreach($_POST['pipeline'] as $result) {
+		echo $result;
+		}
+		if(isset($_POST['pipeline']) && (!empty($_POST['pipeline'])) && ($_POST['pipeline'] !== 'none') && $result !== '0')
+		{		
+		$pipelines = "pipeline = '".implode("' \n   OR pipeline = '",$_POST['pipeline'])."'";
+		$pipeline_sql = "select id from companies where ".$pipelines;
 		}
 
 		// -- Data to Display a Company's details
@@ -372,7 +396,7 @@ class Companies_model extends CI_Model {
 			   
 
 
-		from (select * from COMPANIES where eff_to IS NULL ';
+		from (select * from COMPANIES where eff_to IS NULL and active = \'TRUE\' ';
 		if(isset($contacted_in)) $sql = $sql.' AND id in ('.$contacted_in.')';
 		$sql = $sql.') C ';
 
@@ -385,7 +409,8 @@ class Companies_model extends CI_Model {
 		if(isset($providers_sql)) $sql = $sql.' JOIN ( '.$providers_sql.' ) providers ON C.id = providers.company_id';
 		if(isset($assigned_sql)) $sql = $sql.' JOIN ( '.$assigned_sql.' ) assigned ON C.id = assigned.id';
 		if(isset($class_sql)) $sql = $sql.' JOIN ( '.$class_sql.' ) segment ON C.id = segment.id';
-		if(isset($company_id) && $company_id !== False) $sql = $sql.' JOIN ( select id from companies where id = '.$company_id.' ) company ON C.id = company.id';
+		if(isset($pipeline_sql)) $sql = $sql.' JOIN ( '.$pipeline_sql.' ) pipeline ON C.id = pipeline.id';
+		if(isset($company_id) && $company_id !== False) $sql = $sql.' LEFT JOIN ( select id from companies where id = '.$company_id.' ) company ON C.id = company.id';
 		if(isset($emp_count_sql)) $sql = $sql.' JOIN ( '.$emp_count_sql.' ) company ON C.id = company.company_id';
 
 		$sql = $sql.' LEFT JOIN 
@@ -509,10 +534,12 @@ class Companies_model extends CI_Model {
 
 		)   T2
 		ON T1.id = T2."company id"
+
 		-- insert this for sort order  
 		order by T1.owner_id,lower(T1.name) 
 		 
-		) results';
+		)
+		 results';
 		//print_r($sql);
 		$query = $this->db->query($sql);
 

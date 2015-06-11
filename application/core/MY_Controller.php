@@ -160,13 +160,22 @@ class MY_Controller extends CI_Controller {
 			$pipeline_options = $this->Companies_model->get_companies_pipeline();
 			$this->session->set_userdata('companies_pipeline',$pipeline_options);
 		}
+
+		if($this->session->userdata('companies_pipeline_search'))
+		{
+			$pipeline_options_search = $this->session->userdata('companies_pipeline_search');
+		}else
+		{
+			$pipeline_options_search = $this->Companies_model->get_companies_pipeline_search();
+			$this->session->set_userdata('companies_pipeline_search',$pipeline_options_search);
+		}
+
 	
 
 
 		// Pass variables to tempalte views 
 		$this->data['companies_classes'] = array(0=>' ') + $class_options;
-		
-		$this->data['companies_pipeline'] =  $pipeline_options;
+
 
 		// Pipeline
 		// edit box options 
@@ -187,7 +196,9 @@ class MY_Controller extends CI_Controller {
 		$this->data['class_options'] = array(0=>'All') + $class_options;
 		$this->data['class_default'] ='0';
 
-		
+		$this->data['pipeline_options'] = array('0'=>'All') + $pipeline_options_search;
+		$this->data['pipeline_default'] ='0';
+
 
 		//$providers_options = array(-1=>'No current provider') + $providers_options_top + $providers_options;
 		//$providers_options = array(0=>'All') + $providers_options;
