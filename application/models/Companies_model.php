@@ -981,7 +981,6 @@ class Companies_model extends CI_Model {
 	}
 	    function get_autocomplete_contact($search_data) {
 		 $query2 = $this->db->query("select concat(c.first_name::text,' ', c.last_name::text) as name, c.company_id as id, con.name as company_name from contacts c left join companies con on con.id= c.company_id where concat(c.first_name::text, ' ', c.last_name::text) ilike '".$search_data."%' order by name asc limit 7 ");
-		print_r($query2);
 
 	    if ($query2->num_rows() > 0)
 			{
