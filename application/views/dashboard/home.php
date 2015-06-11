@@ -66,7 +66,7 @@
                           <strong>Meetings</strong><div class="pull-right"><span class="badge badge-warning"><?php echo count($getusermeetings)?></span></div>
                           </div>
                           <div class="col-md-3"> 
-                           <strong>Pitches</strong><div class="pull-right"><span class="badge badge-warning"><?php echo count($getuserpitches)?></span></div>
+                           <strong>Call Activity</strong><div class="pull-right"><span class="badge badge-warning"><?php echo count($getuserpitches)?></span></div>
                         </div>
                         </div>
                           <div class="row list-group-item">
@@ -162,7 +162,8 @@
                           <Small> Booked (Attended)</Small>
                           </div>
                           <div class="col-md-2 text-center"> 
-                           <strong>Pitches</strong>
+                           <strong>Call Activity</strong><br>
+                           <Small> All (Intro)</Small>
                         </div>
                         <div class="col-md-2 text-center">
                            <strong>Pipeline Added</strong>
@@ -210,7 +211,8 @@
                           <Small> Booked (Attended)</Small>
                           </div>
                           <div class="col-md-2 text-center"> 
-                           <strong>Pitches</strong>
+                           <strong>Call Activity</strong><br>
+                           <Small> All (Intro)</Small>
                         </div>
                         <div class="col-md-2 text-center">
                            <strong>Pipeline Added</strong>
@@ -262,7 +264,8 @@
                           <Small> Booked (Attended)</Small>
                           </div>
                           <div class="col-md-2 text-center"> 
-                           <strong>Pitches</strong>
+                           <strong>Call Activity</strong><br>
+                           <Small> All (Intro)</Small>
                         </div>
                         <div class="col-md-2 text-center">
                            <strong>Pipeline Added</strong>
@@ -313,7 +316,9 @@
                           <Small> Booked (Attended)</Small>
                           </div>
                           <div class="col-md-2 text-center"> 
-                           <strong>Pitches</strong>
+                           <strong>Call Activity</strong><br>
+                           <Small> All (Intro)</Small>
+
                         </div>
                         <div class="col-md-2 text-center">
                            <strong>Pipeline Added</strong>

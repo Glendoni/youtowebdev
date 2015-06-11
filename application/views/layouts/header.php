@@ -365,16 +365,25 @@
                                             </div>
                                         </div>
                                     </div> -->
-                                    <div class="form-row">
-                                        <div class="col-md-12 form-group">
+                                    <div class="col-md-12" style="padding-left:0;padding-right:0">
+                                        <div class="form-group">
                                             <?php
                                             echo form_label('Assigned', 'assigned');
                                             echo form_dropdown('assigned', $system_users, ($this->input->post('assigned')?$this->input->post('assigned'):$assigned_default) ,'class="form-control"');
                                             ?>
                                          </div> 
                                     </div>
-                                     <div class="form-row">
-                                        <div class="col-md-12 form-group">
+                                    <div class="col-md-12" style="padding-left:0;padding-right:0;margin-bottom:10px">
+                                        <div class="form-row">
+                                            <?php
+
+                                            echo form_label('Pipeline', 'pipeline');
+                                                echo form_multiselect('pipeline[]', $pipeline_options,
+                                                    ($this->input->post('pipeline')?$this->input->post('pipeline'):$pipeline_default),'class="form-control"');?>
+                                         </div> 
+                                    </div>
+                                    <div class="col-md-12" style="padding-left:0;padding-right:0;margin-bottom:10px">
+                                        <div class="form-row">
                                             <?php
                                                 echo form_label('Class', 'class');
                                                 echo form_dropdown('class', $class_options, ($this->input->post('class')?$this->input->post('class'):$class_default) ,'class="form-control"');
@@ -398,7 +407,7 @@
                         <li>
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title"><i class="glyphicon glyphicon glyphicon-lock"></i> My Campaings <span class="badge pull-right"><?php echo count($private_campaigns); ?></span></h3>
+                                    <h3 class="panel-title"><i class="glyphicon glyphicon glyphicon-lock"></i> My Campaigns <span class="badge pull-right"><?php echo count($private_campaigns); ?></span></h3>
                                 </div>
                               <div class="panel-body" style="padding:0;">
                                 <ul class="list-group">

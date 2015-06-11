@@ -1,6 +1,6 @@
 <?php if($contact->linkedin_id): ?>
 <a href="https://www.linkedin.com/profile/view?id=<?php echo $contact->linkedin_id; ?>" target="_blank" type="button" class="btn btn-xs" style="background-color:#0077b5; color:#fff;">
-    <i class="fa fa-linkedin-square"></i> LinkedIn Profile 
+    <i class="fa fa-linkedin-square"></i> LinkedIn
 </a>
 <?php endif;?>
 <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#editContact_<?php echo $contact->id; ?>">
