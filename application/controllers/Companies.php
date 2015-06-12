@@ -32,8 +32,6 @@ class Companies extends MY_Controller {
 			$this->form_validation->set_rules('mortgage_to', 'anniversary_to', 'xss_clean');
 			$this->form_validation->set_rules('assigned', 'assigned', 'xss_clean');
 			$this->form_validation->set_rules('class', 'class', 'xss_clean');
-			$this->form_validation->set_rules('pipeline', 'pipeline', 'xss_clean');
-
 			if($this->form_validation->run())
 			{	
 				// Result set to session and current search 
@@ -266,7 +264,7 @@ class Companies extends MY_Controller {
 	public function autocomplete() {
         $search_data = $this->input->post("search_data");
 		$response = "<ul class='autocomplete-holder'>";
-        $query = $this->Companies_model->get_autocomplete($search_data);
+        echo $query = $this->Companies_model->get_autocomplete($search_data);
         $rowcount = $query->num_rows();
 		if ($rowcount> 0) {
 			$response= $response."<li class='autocomplete-item split-heading'><i class='fa fa-caret-square-o-down'></i> Companies</li>";
@@ -284,6 +282,7 @@ class Companies extends MY_Controller {
 		$response= $response."<a href='". base_url() . "companies/company?id=" . $row->id . "'><li class='autocomplete-item'><strong>" . str_replace($words, ' ',$row->name). "</strong><br><small>".$row->pipeline." ".$assigned_label."</small></li></a>";
         endforeach;
 		$query = $this->Companies_model->get_autocomplete_contact($search_data);
+
 		$rowcount = $query->num_rows();
 		if ($rowcount> 0) {
 			$response= $response."<li class='autocomplete-item split-heading'><i class='fa fa-caret-square-o-down'></i> Contacts</li>";
