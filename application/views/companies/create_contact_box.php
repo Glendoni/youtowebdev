@@ -43,7 +43,7 @@
                 <div class="col-md-6">
                 <div class=" form-group ">
                     <label for="linkedin_id" class="control-label">LinkedIn ID </label>                            
-                    <input type="linkedin_id" name="linkedin_id" value="" id="linkedin_id" maxlength="50" class="form-control">
+                    <input type="linkedin_id" name="linkedin_id" value="" id="linkedin_id" maxlength="100" class="form-control">
                 </div>
                 </div>
             </div>

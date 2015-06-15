@@ -41,15 +41,15 @@ class Contacts_model extends CI_Model {
         $contact->role = $role;
         $contact->company_id = $company_id;
         $contact->created_by = $created_by;
-        $linkedin_id = $post['linkedin_id'];
-        if(strpos($linkedin_id, '&') !== false) {
-		$parts = explode("&",$linkedin_id); 
+        $contact->linkedin_id = $linkedin_id;
+        $parts = explode("&",$linkedin_id); 
 		$li_id = $parts['0']; 
+        if(strpos($linkedin_id, '&') !== false) {
 		$revised_linkedin_id = str_replace(array('.', ','), '' , preg_replace('/[^0-9,..]/i', '', $li_id));
 		} else {
 		$revised_linkedin_id = str_replace(array('.', ','), '' , preg_replace('/[^0-9,..]/i', '', $li_id));
 		}
-		$contact->linkedin_id = $revised_linkedin_id;
+        $contact->linkedin_id = $revised_linkedin_id;
 		$this->db->insert('contacts', $contact);
         $new_id = $this->db->insert_id();
         $rows = $this->db->affected_rows();
@@ -63,9 +63,9 @@ class Contacts_model extends CI_Model {
         $contact->email = $post['email'];
         $contact->phone = $post['phone'];
         $linkedin_id = $post['linkedin_id'];
-        if(strpos($linkedin_id, '&') !== false) {
-		$parts = explode("&",$linkedin_id); 
+        $parts = explode("&",$linkedin_id); 
 		$li_id = $parts['0']; 
+        if(strpos($linkedin_id, '&') !== false) {
 		$revised_linkedin_id = str_replace(array('.', ','), '' , preg_replace('/[^0-9,..]/i', '', $li_id));
 		} else {
 		$revised_linkedin_id = str_replace(array('.', ','), '' , preg_replace('/[^0-9,..]/i', '', $li_id));
