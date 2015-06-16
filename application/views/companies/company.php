@@ -402,11 +402,6 @@
 							<?php else: ?>
 							<?php endif; ?>
 				            <li class="pull-right"><a href="#comments" data-toggle="tab"><i class="fa fa-check"></i> Comments <span class="label label-success"><?php echo count($comments);?></span></a></li>
-
-
-
-
-
 				        </ul>
 				        <!-- Tab panes -->
 				        <div class="tab-content">
@@ -422,59 +417,50 @@
 								 $now = date(time());
 								?>
 								<!-- OUTSTANDING -->
-				                <li class="list-group-item">
-				                    <div class="row" style="padding: 15px 0">
-				                        <div class="col-md-12 ">
-				                        	<div class="col-xs-2 col-md-1 profile-heading">
-				                        	<span>
-				                        						<?php 
-					$user_icon = explode(",", ($system_users_images[$action_outstanding->user_id]));
-					echo "<div class='circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
-				                        	</span>
-				                        	</div>
-				                        	<div class="col-xs-10 col-md-11">
-				                            <div>
-				                                <h4 style="margin:0;">
-				                        <?php echo $action_types_array[$action_outstanding->action_type_id]; ?> 
-				                                <?php if($action_outstanding->cancelled_at) : ?>
-				                              		<span class="label label-default" style="font-size:11px; margin-left:10px;">Cancelled on <?php echo $cancelled_at_formatted ?></span>
-				                              	<?php elseif(strtotime($action_outstanding->planned_at) > $now and !isset($action_outstanding->actioned_at)) : ?>
-				                              		<span class="label label-warning" style="font-size:11px; margin-left:10px;">Due on <?php echo $planned_date_formatted ?> </span>
-				                              		<?php $hidden = array('action_id' => $action_outstanding->id , 'user_id' => $current_user['id'] , 'action_do' => 'cancelled','outcome' => '' ,'company_id' => $company['id']);
-								                    echo form_open(site_url().'actions/edit', 'name="cancel_action"  class="cancel_action pull-right" style="margin-left:5px;" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action_outstanding->id.'" role="form"',$hidden); ?>
-								                    <button class="btn btn-danger" ><i class="fa fa-trash-o fa-lg"></i> </button>
-								                    <?php echo form_close(); ?>
+				<li class="list-group-item">
+					<div class="row" style="padding: 15px 0">
+						<div class="col-md-12 ">
+							<div class="col-xs-2 col-md-1 profile-heading">
+								<span>
+									<?php $user_icon = explode(",", ($system_users_images[$action_outstanding->user_id])); echo "<div class='circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
+								</span>
+							</div>
+							<div class="col-xs-6 col-md-5">
+								<h4 style="margin:0;">
+									<a data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $action_outstanding->id ?>" aria-expanded="false" aria-controls="collapse<?php echo $action_outstanding->id ?>">
+									<?php echo $action_types_array[$action_outstanding->action_type_id]; ?>
+                                    </a>
+								<div class="mic-info">
+								Created By: <?php echo $system_users[$action_outstanding->user_id]?> on <?php echo $created_date_formatted?>
+								</div>
+       							</h4>
+							</div><!--END COL-MD-5-->
+							<div class="col-xs-4 col-md-6">
+							<!--SHOW CONTACT NAME-->
+                            <?php if($action_outstanding->contact_id):?><span class="label label-primary" style="font-size:11px; margin:0 10px;  "><i class="fa fa-users"></i> <?php echo $option_contacts[$action_outstanding->contact_id]; ?></span>
+                            <?php endif; ?>
+								<?php if($action_outstanding->cancelled_at) : ?>
+								<span class="label label-default" style="font-size:11px; margin-left:10px;">Cancelled on <?php echo $cancelled_at_formatted ?></span>
+								<?php elseif(strtotime($action_outstanding->planned_at) > $now and !isset($action_outstanding->actioned_at)) : ?>
+								<span class="label label-warning" style="font-size:11px; margin-left:10px;">Due on <?php echo $planned_date_formatted ?> </span>
+								<?php $hidden = array('action_id' => $action_outstanding->id , 'user_id' => $current_user['id'] , 'action_do' => 'cancelled','outcome' => '' ,'company_id' => $company['id']); echo form_open(site_url().'actions/edit', 'name="cancel_action"  class="cancel_action pull-right" style="margin-left:5px;" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action_outstanding->id.'" role="form"',$hidden); ?>
+<button class="btn btn-danger" ><i class="fa fa-trash-o fa-lg"></i> </button>
+<?php echo form_close(); ?>
+<?php $hidden = array('action_id' => $action_outstanding->id , 'user_id' => $current_user['id'], 'action_do' => 'completed', 'outcome' => '' ,'company_id' => $company['id']);
+echo form_open(site_url().'actions/edit', 'name="completed_action"  class="completed_action pull-right" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action_outstanding->id.'" style="display:inline-block;" role="form"',$hidden); ?><button class="btn btn-success"><i class="fa fa-check fa-lg"></i> </button> <?php echo form_close(); ?>
+								<?php elseif(strtotime($action_outstanding->planned_at) < $now and !isset($action_outstanding->actioned_at)):?>
+								<span class="label label-danger" style="font-size:11px; margin-left:10px;"><b>Overdue</b> - Due on <?php echo $planned_date_formatted ?> </span>
+								<?php $hidden = array('action_id' => $action_outstanding->id , 'user_id' => $current_user['id'] , 'action_do' => 'cancelled','outcome' => '' ,'company_id' => $company['id'] ); echo form_open(site_url().'actions/edit', 'name="cancel_action"  class="cancel_action pull-right" style="margin-left:5px;" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action_outstanding->id.'" role="form"',$hidden); ?><button class="btn btn-danger" ><i class="fa fa-trash-o fa-lg"></i> </button>
+<?php echo form_close(); ?><?php $hidden = array('action_id' => $action_outstanding->id , 'user_id' => $current_user['id'], 'action_do' => 'completed', 'outcome' => '' ,'company_id' => $company['id']); echo form_open(site_url().'actions/edit', 'name="completed_action"  class="completed_action pull-right" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action_outstanding->id.'" style="display:inline-block;" role="form"',$hidden); ?><button class="btn btn-success"><i class="fa fa-check fa-lg"></i> </button> <?php echo form_close(); ?><?php elseif($action_outstanding->actioned_at): ?>
+<span class="label label-success pull-right" style="font-size:11px; margin-left:10px;">Completed on <?php echo $action_outstandinged_date_formatted ?></span><?php endif; ?>
 
-				                              		<?php $hidden = array('action_id' => $action_outstanding->id , 'user_id' => $current_user['id'], 'action_do' => 'completed', 'outcome' => '' ,'company_id' => $company['id']);
-								               		echo form_open(site_url().'actions/edit', 'name="completed_action"  class="completed_action pull-right" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action_outstanding->id.'" style="display:inline-block;" role="form"',$hidden); ?>
-								                    <button class="btn btn-success"><i class="fa fa-check fa-lg"></i> </button> 
-								                    <?php echo form_close(); ?>
-												<?php elseif(strtotime($action_outstanding->planned_at) < $now and !isset($action_outstanding->actioned_at)):?>
-				                              		<span class="label label-danger" style="font-size:11px; margin-left:10px;"><b>Overdue</b> - Due on <?php echo $planned_date_formatted ?> </span>
-				                              		<?php $hidden = array('action_id' => $action_outstanding->id , 'user_id' => $current_user['id'] , 'action_do' => 'cancelled','outcome' => '' ,'company_id' => $company['id'] );
-								                    echo form_open(site_url().'actions/edit', 'name="cancel_action"  class="cancel_action pull-right" style="margin-left:5px;" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action_outstanding->id.'" role="form"',$hidden); ?>
-								                    <button class="btn btn-danger" ><i class="fa fa-trash-o fa-lg"></i> </button>
-								                    <?php echo form_close(); ?>
-
-				                              		<?php $hidden = array('action_id' => $action_outstanding->id , 'user_id' => $current_user['id'], 'action_do' => 'completed', 'outcome' => '' ,'company_id' => $company['id']);
-								               		echo form_open(site_url().'actions/edit', 'name="completed_action"  class="completed_action pull-right" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action_outstanding->id.'" style="display:inline-block;" role="form"',$hidden); ?>
-								                    <button class="btn btn-success"><i class="fa fa-check fa-lg"></i> </button> 
-								                    <?php echo form_close(); ?>
-								                    
-				                               	<?php elseif($action_outstanding->actioned_at): ?>
-				                               		<span class="label label-success pull-right" style="font-size:11px; margin-left:10px;">Completed on <?php echo $action_outstandinged_date_formatted ?></span>
-												<?php endif; ?>
-												<?php if($action_outstanding->contact_id):?>
-													<span class="label label-warning pull-right" style="font-size:11px; margin-left:10px;"><i class="fa fa-users"></i> <?php echo $option_contacts[$action_outstanding->contact_id]; ?>
-													</span>
-												<?php endif; ?>
-									  			</h4>
-				                                <div class="mic-info">
-				                                    Created By: <?php echo $system_users[$action_outstanding->user_id]?> on <?php echo $created_date_formatted?>
-				                                </div>
-				                            </div>
-				                            
-											
+                            
+                            </div>
+									  			
+				                              
+				                           
+				                            <div class="col-md-12">
+											<div id="collapse<?php echo $action_outstanding->id ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<?php echo $action_outstanding->id ?>">
 											<?php if (!empty($action_outstanding->comments)):?>
 											<div class="comment-text speech" >
 											<div class="triangle-isosceles top">
@@ -492,8 +478,9 @@
 											</div>
 											</div>
 											<?php endif; ?>
+											</div>
 											
-											<div class="row col-md-12" id="action_outcome_box_<?php echo $action_outstanding->id ?>" style="display:none;">
+											<div id="action_outcome_box_<?php echo $action_outstanding->id ?>" style="display:none;">
 											<hr>
 											<textarea class="form-control" name="outcome" placeholder="Add action outcome" rows="3" style="margin-bottom:5px;"></textarea>
 											<button class="btn btn-primary btn-block"><i class="fa fa-check fa-lg"></i> Send</button>
@@ -523,7 +510,6 @@
 								?>
 				
 								<!-- COMPLETED -->
-				             
 								<?php if ($action_completed->action_type_id == 19): ?>
 									<?php
 										$arr = explode(' ',trim($action_completed->comments));
@@ -532,33 +518,31 @@
 				                                on <?php echo date("l jS F y",strtotime($action_completed->actioned_at))." @ ".date("H:i",strtotime($action_completed->actioned_at)); ?></span></li>
 									<?php else: ?>
 				                <li class="list-group-item">
-				                    <div class="row" style="padding: 15px 0">
-				                        <div class="col-md-12 ">
-				                        
-
-				                        	<div class="col-xs-2 col-md-1 profile-heading">
-				                        	<span><?php $user_icon = explode(",", ($system_users_images[$action_completed->user_id])); echo "<div class='circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
-				                        	</span>
-				                        	</div>
-				                        	<div class="col-xs-10 col-md-11">
-				                            <div>
-				                                <h4 style="margin:0;">
-				                        <?php echo $action_types_array[$action_completed->action_type_id]; ?> 
-				                                <?php if($action_completed->cancelled_at) : ?>
-				                              	<span class="label label-default" style="font-size:11px; margin-left:10px;">Cancelled on <?php echo $cancelled_at_formatted ?></span>								                    
-				                               	<?php elseif($action_completed->actioned_at): ?>
-				                               		<span class="label label-success pull-right" style="font-size:11px; margin-left:10px;">Completed on <?php echo date("l jS F y",strtotime($action_completed->actioned_at))." @ ".date("H:i",strtotime($action_completed->actioned_at)); ?></span>
-												<?php endif; ?>
-												<?php if($action_completed->contact_id):?>
-													<span class="label label-warning pull-right" style="font-size:11px; margin-left:10px;"><i class="fa fa-users"></i> <?php echo $option_contacts[$action_completed->contact_id]; ?></span>
-												<?php endif; ?>
-									  			</h4>
-				                                <div class="mic-info">
-				                                    Created By: <?php echo $system_users[$action_completed->user_id]?> on <?php echo $created_date_formatted?>
-				                                </div>
-				                            </div>
-				                            
-											
+					<div class="row" style="padding: 15px 0">
+						<div class="col-md-12 ">
+							<div class="col-xs-2 col-md-1 profile-heading">
+								<span>
+									<?php $user_icon = explode(",", ($system_users_images[$action_completed->user_id])); echo "<div class='circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
+								</span>
+							</div>
+							<div class="col-xs-6 col-md-5">
+								<h4 style="margin:0;">
+									<a data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $action_completed->id ?>" aria-expanded="false" aria-controls="collapse<?php echo $action_completed->id ?>">
+									<?php echo $action_types_array[$action_completed->action_type_id]; ?>
+                                    </a>
+								<div class="mic-info">
+								Created By: <?php echo $system_users[$action_completed->user_id]?> on <?php echo $created_date_formatted?>
+											</div>
+											</h4>
+											</div><!--END COL-MD-5-->
+											<div class="col-xs-4 col-md-6" style="text-align:right;">
+											<!--SHOW CONTACT NAME-->
+											<?php if($action_completed->contact_id):?><span class="label label-primary" style="font-size:11px; margin-left:10px;  "><i class="fa fa-users"></i> <?php echo $option_contacts[$action_completed->contact_id]; ?></span>
+											<?php endif; ?>
+											<span class="label label-success" style="font-size:11px; margin-left:10px;">Completed on <?php echo date("l jS F y",strtotime($action_completed->actioned_at))." @ ".date("H:i",strtotime($action_completed->actioned_at)); ?></span>
+											</div>
+											<div class="col-md-12">
+											<div id="collapse<?php echo $action_completed->id ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<?php echo $action_completed->id ?>">
 											<?php if (!empty($action_completed->comments)):?>
 											<div class="comment-text speech" >
 											<div class="triangle-isosceles top">
@@ -567,7 +551,7 @@
 											<table style="width:100%">
 											<tr>
 											<td style="width:35%"><hr/></td>
-											<td style="width:20%;vertical-align:middle; text-align: center; font-size:11px; color: #222;"> Outcome <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span></td>
+											<td style="width:20%;vertical-align:middle; text-align: center; font-size:11px; color: #222;"> Outcome </td>
 											<td style="width:35%"><hr/></td>
 											</tr>
 											</table>
@@ -576,8 +560,9 @@
 											</div>
 											</div>
 											<?php endif; ?>
+											</div>
 											
-											<div class="row col-md-12" id="action_outcome_box_<?php echo $action_completed->id ?>" style="display:none;">
+											<div id="action_outcome_box_<?php echo $action_completed->id ?>" style="display:none;">
 											<hr>
 											<textarea class="form-control" name="outcome" placeholder="Add action outcome" rows="3" style="margin-bottom:5px;"></textarea>
 											<button class="btn btn-primary btn-block"><i class="fa fa-check fa-lg"></i> Send</button>
@@ -605,31 +590,33 @@
 								 $created_date_formatted = date("l jS F y",strtotime($action_cancelled->created_at))." @ ".date("H:i",strtotime($action_cancelled->created_at));
 								 $cancelled_at_formatted = date(" jS F y",strtotime($action_cancelled->cancelled_at))." @ ".date("H:i",strtotime($action_cancelled->cancelled_at));
 								?>
-								<!-- COMPLETED -->
+								<!-- CANCELLED -->
 				                <li class="list-group-item">
-				                    <div class="row" style="padding: 15px 0">
-				                        <div class="col-md-12 ">
-				                        	<div class="col-xs-2 col-md-1 profile-heading">
-				                        	<span>	
-
-				                        	<?php 
-					$user_icon = explode(",", ($system_users_images[$action_cancelled->user_id]));
-					echo "<div class='circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
-				                        	</span>
-				                        	</div>
-				                        	<div class="col-xs-10 col-md-11">
-				                            <div>
-				                                <h4 style="margin:0;">
-
-				                        <?php echo $action_types_array[$action_cancelled->action_type_id]; ?> 
-				                              	<span class="label label-danger" style="font-size:11px; margin-left:10px;">Cancelled on <?php echo $cancelled_at_formatted ?></span>
-									  			</h4>
-				                                <div class="mic-info">
-				                                    Created By: <?php echo $system_users[$action_cancelled->user_id]?> on <?php echo $created_date_formatted?>
-				                                </div>
-				                            </div>
-				                            
-											
+					<div class="row" style="padding: 15px 0">
+						<div class="col-md-12 ">
+							<div class="col-xs-2 col-md-1 profile-heading">
+								<span>
+									<?php $user_icon = explode(",", ($system_users_images[$action_cancelled->user_id])); echo "<div class='circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
+								</span>
+							</div>
+							<div class="col-xs-6 col-md-5">
+								<h4 style="margin:0;">
+									<a data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $action_cancelled->id ?>" aria-expanded="false" aria-controls="collapse<?php echo $action_cancelled->id ?>">
+									<?php echo $action_types_array[$action_cancelled->action_type_id]; ?>
+                                    </a>
+								<div class="mic-info">
+								Created By: <?php echo $system_users[$action_cancelled->user_id]?> on <?php echo $created_date_formatted?>
+											</div>
+											</h4>
+											</div><!--END COL-MD-6-->
+											<div class="col-xs-4 col-md-6" style="text-align:right;">
+											<!--SHOW CONTACT NAME-->
+											<?php if($action_cancelled->contact_id):?><span class="label label-primary" style="font-size:11px; margin-left:10px;  "><i class="fa fa-users"></i> <?php echo $option_contacts[$action_cancelled->contact_id]; ?></span>
+											<?php endif; ?>
+											<span class="label label-danger" style="font-size:11px; margin-left:10px;">Cancelled on <?php echo $cancelled_at_formatted ?></span>
+											</div>
+											<div class="col-md-12">
+											<div id="collapse<?php echo $action_cancelled->id ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<?php echo $action_cancelled->id ?>">
 											<?php if (!empty($action_cancelled->comments)):?>
 											<div class="comment-text speech" >
 											<div class="triangle-isosceles top">
@@ -638,7 +625,7 @@
 											<table style="width:100%">
 											<tr>
 											<td style="width:35%"><hr/></td>
-											<td style="width:20%;vertical-align:middle; text-align: center; font-size:11px; color: #222;"> Outcome <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span></td>
+											<td style="width:20%;vertical-align:middle; text-align: center; font-size:11px; color: #222;"> Outcome </td>
 											<td style="width:35%"><hr/></td>
 											</tr>
 											</table>
@@ -647,8 +634,9 @@
 											</div>
 											</div>
 											<?php endif; ?>
+											</div>
 											
-											<div class="row col-md-12" id="action_outcome_box_<?php echo $action_cancelled->id ?>" style="display:none;">
+											<div id="action_outcome_box_<?php echo $action_cancelled->id ?>" style="display:none;">
 											<hr>
 											<textarea class="form-control" name="outcome" placeholder="Add action outcome" rows="3" style="margin-bottom:5px;"></textarea>
 											<button class="btn btn-primary btn-block"><i class="fa fa-check fa-lg"></i> Send</button>
