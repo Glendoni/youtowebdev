@@ -15,7 +15,6 @@
                 <th>Name</th>
                 <th>Subject</th>
                 <th>created date</th>
-                <th>created by</th>
                 <th></th>
                 <th></th>
                 </tr>
@@ -26,13 +25,6 @@
                     <td><?php echo $tempalte->name ?></td>
                     <td><?php echo $tempalte->subject ?></td>
                     <td><?php echo $tempalte->created_at ?></td>
-                    <td>
-                      <div class="profile-heading">
-                        <span>
-                          <img src="<?php echo asset_url();?>images/profiles/<?php echo isset($system_users_images[$tempalte->created_by])? $system_users_images[$tempalte->created_by]: 'none.jpg' ;?> " class="img-circle img-responsive" alt="" />
-                        <span>
-                      </div>
-                    </td>
                     <td><a href="<?php echo site_url(); ?>email_templates/edit?id=<?php echo $tempalte->id ?>" class="btn btn-primary btn-xs">view/edit</a></td>
                     <td><a href="<?php echo site_url(); ?>email_templates/delete?id=<?php echo $tempalte->id ?>" class="btn btn-danger btn-xs">delete</a></td>
                   </tr>

@@ -204,6 +204,7 @@ class MY_Controller extends CI_Controller {
 		//$providers_options = array(0=>'All') + $providers_options;
 		$providers_options = array(
 			'With / Without Mortgage' => array(
+			'-2'  => 'Has provider',
         	'-1'  => 'No current provider',
             '0'  => 'All'),
 			'Top 10 Providers' => $providers_options_top,

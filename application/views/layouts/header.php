@@ -298,7 +298,7 @@
                                         </div>
                                     </div>
                                      <div class='form-row'>
-                                         <?php  echo form_label('Age (Years) ', 'company_age_from', array('class'=>'control-label')); ?>
+                                         <?php  echo form_label('Age (Months) ', 'company_age_from', array('class'=>'control-label')); ?>
                                          <div class="form-group"> 
                                             <div class="col-md-6"> 
                                             <?php echo form_input(array('name' => 'company_age_from', 'id' => 'company_age_from', 'maxlength' => '100','class'=>'form-control','placeholder'=>''), set_value('company_age_from',$this->input->post('company_age_from')));?>

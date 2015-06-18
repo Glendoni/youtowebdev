@@ -439,10 +439,8 @@ border-right: 1px solid #e7e7e7;
 }
 .label-Qualified {
 	background-color: #59B200;
-	  	width: 100%;
- 	display: block;
  	padding: 5px;
-  	margin-top: 10px;
+  	margin-top: 20px;
 }
 .label-Customer {
 	background-color: #00B285;
