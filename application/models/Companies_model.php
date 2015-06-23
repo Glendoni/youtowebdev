@@ -25,6 +25,7 @@ class Companies_model extends CI_Model {
 			'PreStartUp' => 'Pre-Start Up',
 			'StartUp' => 'Start Up',
 			'UsingFinance' => 'Using Finance',
+			'PermOnly' => 'Perm Only',
 			'OccasionalContract' => 'Perm - Occasional Placements',
 			'LookingToPlaceContractors' => 'Perm - Looking to Build Contract Business',
 			'SelfFunding' => 'Self-Funding'
