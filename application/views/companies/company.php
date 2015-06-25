@@ -659,55 +659,43 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 							<?php if (count($actions_marketing) > 0): ?>
 								<ul class="list-group">
 								<?php foreach ($actions_marketing as $actions_marketing): 
-								 $created_date_formatted = date("l jS F y",strtotime($actions_marketing->created_at))." @ ".date("H:i",strtotime($actions_marketing->created_at));
-								 $actioned_at_formatted = date(" jS F y",strtotime($actions_marketing->actioned_at))." @ ".date("H:i",strtotime($actions_marketing->actioned_at));
+								 $created_date_formatted = date("l jS F y",strtotime($actions_marketing['date_sent']))." @ ".date("H:i",strtotime($actions_marketing['date_sent']));
+								 $actioned_at_formatted = date(" jS F y",strtotime($actions_marketing['date_sent']))." @ ".date("H:i",strtotime($actions_marketing['date_sent']));
 								?>
 				                <li class="list-group-item">
-				                    <div class="row" style="padding: 15px 0">
-				                        <div class="col-md-12 ">
-				                        	<div class="col-xs-2 col-md-1 profile-heading">
-				                        	<span>
-				                        	<?php 
-					$user_icon = explode(",", ($system_users_images[$actions_marketing->user_id]));
-					echo "<div class='circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
-					</span>
-				                        	</div>
-				                        	<div class="col-xs-10 col-md-11">
-				                            <div>
-				                                <h4 style="margin:0;">
-
-				                        <?php echo $action_types_array[$actions_marketing->action_type_id]; ?> 
-				                              	<span class="label label-danger" style="font-size:11px; margin-left:10px;">Actioned on <?php echo $actioned_at_formatted ?></span>
-									  			</h4>
-				                                <div class="mic-info">
-				                                    Created By: <?php echo $system_users[$actions_marketing->user_id]?> on <?php echo $created_date_formatted?>
-				                                </div>
-				                            </div>
-											<?php if (!empty($actions_marketing->comments)):?>
-											<div class="comment-text speech" >
-											<div class="triangle-isosceles top">
-											<?php echo $actions_marketing->comments ?>
-											<?php if (!empty($actions_marketing->outcome)):?>
-											<table style="width:100%">
-											<tr>
-											<td style="width:35%"><hr/></td>
-											<td style="width:20%;vertical-align:middle; text-align: center; font-size:11px; color: #222;"> Outcome <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span></td>
-											<td style="width:35%"><hr/></td>
-											</tr>
-											</table>
-											<?php echo $actions_marketing->outcome ?>
-											<?php endif; ?>
-											</div>
-											</div>
-											<?php endif; ?>
+				                 
+				                        <div class="row" style="padding: 15px 0">
+						<div class="col-md-12 ">
+					
+							<div class="col-xs-6 col-md-6">
+								<h4 style="margin:0;">
+								<?php echo $actions_marketing['campaign_name'];?>
+								<div class="mic-info">
+								Sent By: <?php echo $actions_marketing['email'];?></br>
+								Sent On: <?php echo $created_date_formatted?>
+								</div>
+								</h4>
+								</div><!--END COL-MD-4-->
+								<div class="col-xs-6 col-md-6">
+								<?php
+								if (($actions_marketing['opened']>'0') || ($actions_marketing['clicked']>'0')): ?>
+								<span class="label label-success">Opened</span>
+								<?php else: ?>
+								<span class="label label-danger">Not Opened</span>
+								<?php endif; ?>
+								<?php
+								if (($actions_marketing['clicked']>'0')): ?>
+								<span class="label label-success">Clicked</span>
+								<?php else: ?>
+								<span class="label label-warning">Not Clicked</span>
+								<?php endif; ?>
+								<?php
+								if (($actions_marketing['unsubscribed']>'0')): ?>
+								<span class="label label-danger">Unsubscribed</span>
+								<?php else: ?>
+								<?php endif; ?>
+								</div>
 											
-											<div class="row col-md-12" id="action_outcome_box_<?php echo $action_cancelled->id ?>" style="display:none;">
-											<hr>
-											<textarea class="form-control" name="outcome" placeholder="Add action outcome" rows="3" style="margin-bottom:5px;"></textarea>
-											<button class="btn btn-primary btn-block"><i class="fa fa-check fa-lg"></i> Send</button>
-
-											</div>
-											</div><!--END ACTIONS-->   
 				                        </div>
 				                        </div>
 				                </li>

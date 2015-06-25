@@ -297,10 +297,10 @@
                                      <div class='form-group'>
                                          <?php  echo form_label('Age (Months) ', 'company_age_from', array('class'=>'control-label')); ?>
                                          <div class="form-group"> 
-                                            <div class="col-md-6"> 
+                                            <div class="col-xs-6 col-md-6"> 
                                             <?php echo form_input(array('name' => 'company_age_from', 'id' => 'company_age_from', 'maxlength' => '100','class'=>'form-control','placeholder'=>''), set_value('company_age_from',$this->input->post('company_age_from')));?>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-xs-6 col-md-6">
                                             <?php echo form_input(array('name' => 'company_age_to', 'id' => 'company_age_to', 'maxlength' => '100','class'=>'form-control','placeholder'=>''), set_value('company_age_to',$this->input->post('company_age_to')));?>    
                                             </div>
                                         </div>

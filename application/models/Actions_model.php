@@ -58,14 +58,25 @@ class Actions_model extends MY_Model {
 
 	function get_actions_marketing($company_id)
 	{
-		$data = array(
-			'company_id' => $company_id,
-			);
-		$this->db->where('actioned_at IS NOT NULL', null);
-		$this->db->where('action_type_id', '20'); 
-		$this->db->order_by('actioned_at desc,planned_at desc');
-		$query = $this->db->get_where('actions', $data);
-		return $query->result_object();
+ 	$sql = "select ec.name as campaign_name,
+c.name, u.email,u.id as user_id,ec.date_sent,
+sum(case when email_action_type = '2' then 1 else 0 end) opened,
+sum(case when email_action_type = '3' then 1 else 0 end) clicked,
+sum(case when email_action_type = '3' and link ilike '%unsubscribe%' then 1 else 0 end) unsubscribed
+from email_campaigns ec
+left join email_actions ea on ec.id = ea.email_campaign_id
+inner join contacts con on ea.contact_id = con.id
+left join companies c on con.company_id = c.id
+left join users u on ec.created_by = u.id
+where c.id = '$company_id'
+group by 1,2,3,4,5 order by date_sent desc";
+		$query = $this->db->query($sql);
+
+		if($query){
+			return $query->result_array();
+		}else{
+			return [];
+		}
 	}
 
 	function get_comments($company_id)
