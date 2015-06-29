@@ -19,6 +19,8 @@
 	<!-- POPUP BOXES -->
 	<?php $this->load->view('companies/edit_box.php',array('company'=>$company)); ?>
 	<?php $this->load->view('companies/create_contact_box.php',array('company'=>$company)); ?>
+	<?php $this->load->view('companies/create_address_box.php',array('company'=>$company)); ?>
+
 	<!-- // POPUP BOXES -->
 </div>
 <div class="panel <?php if(isset($company['assigned_to_name'])): ?> panel-primary <?php else: ?> panel-default <?php endif; ?> company">
@@ -31,33 +33,14 @@
 	<div class="panel-body">
     	<div class="row">
 			<div class="col-sm-9">
-			<strong>Address</strong>
-			<p style="margin-bottom:0;">
-			<!--<a class="btn btn-link" style="padding-left:0px;" data-toggle="modal" data-target="#map_<?php echo $company['id']; ?>">!-->
-				<?php echo $company['address']; ?>
-			<!--</a>-->
-			</p>
-			<!--<div class="modal fade" id="map_<?php echo $company['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="Map">
-			  <div class="modal-dialog">
-			    <div class="modal-content">
-			      <div class="modal-header">
-			        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-			        <h4 class="modal-title"><?php echo $company['name']; ?></h4>
-			      </div>
-			      <div class="modal-body">
-			        <iframe width="670" height="400" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=<?php echo urlencode($company['address']); ?>&key=AIzaSyAwACBDzfasRIRmwYW0KJ4LyFD4fa4jIPg&zoom=10"></iframe>
-			      </div>
-			    </div>
-			  </div>
-			</div><!-- /.modal -->
-
-			<div class="row col-sm-8" style="margin-top:10px;">
-    			<strong>Company Name</strong>
-				<p style="margin-bottom:0;">	
-				<?php echo $company['name']; ?>
-         		</p>
-    		</div>
-    		<div class="col-sm-4" style="margin-top:10px;">
+		<div class="row">
+		<div class="col-sm-12">
+				<strong>Address</strong>
+				<p style="margin-bottom:0;">
+                <?php echo isset($company['address'])?$company['address']:'-'; ?>  
+				</p>
+		</div><!--END ADDRESS-->
+		<div class="col-xs-6 col-md-4" style="margin-top:10px;">
 			<strong>Company Number</strong>
 			<p style="margin-bottom:0;">	
 			 <!--COMPANY NUMBER IF APPLICABLE-->
@@ -68,28 +51,24 @@
                 <?php endif; ?>
          	</p>
         	</div>
-        	<div class="row col-sm-4" style="margin-top:10px;">
+		<div class="col-xs-6" style="margin-top:10px;">
+				<strong>Company Name</strong>
+				<p style="margin-bottom:0;">	
+				<?php echo $company['name']; ?>
+				</p>
+		</div><!--END NAME-->
+				
+		
+        <div class="col-xs-6 col-md-4" style="margin-top:10px;">
         		<strong>Phone Number</strong>
         		<p style="margin-bottom:0;">
         		<?php echo isset($company['phone'])?$company['phone']:'-'; ?>                
            		</p>
-			</div>
-    		<div class="col-sm-4" style="margin-top:10px;">
-    			<strong>Website</strong>
-    			<p style="margin-bottom:0;">
-				<?php if (isset($company['url'])): ?>
-				<a class="btn btn-link" style="padding:0;" href="<?php $parsed = parse_url($company['url']); if (empty($parsed['scheme'])) { echo 'http://' . ltrim($company['url'], '/'); }else{ echo $company['url']; } ?>" target="_blank"><i class="fa fa-home"></i>
-				<?php echo str_replace("http://"," ",str_replace("www.", "", $company['url']))?>
-				</a>
-				<?php else: ?>
-				-
-            	<?php endif; ?>
-            	</p>
-			</div>
-        	<div class="col-sm-4" style="margin-top:10px;">
-				<strong>Segment</strong>
+			</div><!--END PHONE NUMBER-->
+		<div class="col-xs-6 col-md-4" style="margin-top:10px;">
+				<strong>Class</strong>
 				<p style="margin-bottom:0;">	
-		            <!--SEGMENT IF APPLICABLE-->
+		            <!--CLASS IF APPLICABLE-->
 		            <?php if (isset($company['class'])): ?>
 						<span class="label label-info"><?php echo $companies_classes[$company['class']] ?></span>	
 					<?php else: ?>
@@ -97,12 +76,19 @@
 		            <?php endif; ?>
 	            </p>
 			</div>
-		</div><!--CLOSE MD-9-->
+
+		</div><!--END ROW-->
+        </div><!--CLOSE MD-9-->
 		<div class="col-sm-3">
 		<!--Check if company is blacklisted - if so hide the actions boxes -->
 		<?php if ($company['pipeline']=='Blacklisted'): ?>
 		<?php else: ?>
 		<?php $this->load->view('companies/actions_box.php',array('company'=>$company)); ?>
+		<?php if (isset($company['url'])): ?>
+		<a class="btn btn-default btn-sm btn-block" href="<?php $parsed = parse_url($company['url']); if (empty($parsed['scheme'])) { echo 'http://' . ltrim($company['url'], '/'); }else{ echo $company['url']; } ?>" target="_blank">
+				<strong>Web:</strong> <?php echo str_replace("http://"," ",str_replace("www.", "", $company['url']))?>
+		</a>
+			<?php endif; ?>
 		<!-- LINKS AND BTN -->
 			<?php if (isset($company['registration'])): ?>
 			<a class="btn  btn-info btn-sm btn-block duedil" href="https://www.duedil.com/company/<?php echo $company['registration'] ?>" target="_blank">Duedil</a>
@@ -178,12 +164,12 @@
 		
 		<div class="col-md-12">
 		<div class="panel panel-default">
-<div class="panel-heading">
-<h3 class="panel-title"><i class="fa fa-university"></i> Mortgages</h3>
-</div>
-<!-- /.panel-heading -->
-<div class="panel-body">
-<?php if(!empty($company['mortgages'])): ?>
+		<div class="panel-heading">
+		<h3 class="panel-title">Mortgages</h3>
+		</div>
+		<!-- /.panel-heading -->
+		<div class="panel-body">
+		<?php if(!empty($company['mortgages'])): ?>
 			<table class="table table-hover">
 			<thead>
 				<tr>
@@ -213,20 +199,74 @@
 		</div>
 		</div>
 
+<!--ADDRESSES-->
 		<div class="col-md-12">
 		<div class="panel panel-default">
 		<div class="panel-heading" id="contacts">
-		<i class="fa fa-user"></i> Contacts
+		Addresses
 		<div class="pull-right">
 		<div class="btn-group">
-		<button  class="btn btn-success edit-btn btn-xs" data-toggle="modal" id="create_contact_<?php echo $company['id']; ?>"  data-target="#create_contact_<?php echo $company['id']; ?>" >
-        <span class="ladda-label"> <i class="fa fa-plus"></i> Contact </span>
+		<button  class="btn btn-success edit-btn btn-xs" data-toggle="modal" id="create_address_<?php echo $company['id']; ?>"  data-target="#create_address_<?php echo $company['id']; ?>" >
+        <span class="ladda-label"> Add Address </span>
 		</button>
 		</div>
 		</div>
+		</div>
+		<!-- /.panel-heading -->
+		<div class="panel-body">
+		<?php if(isset($addresses) and !empty($addresses)) : ?>
 
-		
 
+		<table class="table table-hover">
+	      <thead>
+	        <tr>
+	          <th class="col-md-6">Address</th>
+	          <th class="col-md-2">Type</th>
+	          <th class="col-md-2">Phone</th>
+				<th class="col-md-2"></th>
+
+	        </tr>
+	      </thead>
+	      <tbody>
+	      	<?php foreach ($addresses as $address): ?>
+	      	<tr>
+				<td class="col-md-6"><?php echo $address->address;?></td>
+				<td class="col-md-3"><?php echo $address->type;?></td>
+				<td class="col-md-2"><?php echo $address->phone; ?></td>
+				<td  class="col-md-3">
+		      	<div class=" pull-right ">
+	            <?php $this->load->view('companies/action_box_addresses.php',array('address'=>$address)); ?>
+	            </div>
+	            </td>
+        	</tr>
+			<?php endforeach; ?>  
+	      </tbody>
+	    </table>
+	    <?php else: ?>
+			<div class="alert alert-info" style="margin-top:10px;">
+                No address data.
+            </div>
+		<?php endif; ?>
+
+		</div>
+		<!-- /.panel-body -->
+		</div>
+		</div>
+
+
+		<!--CONTACTS-->
+
+		<div class="col-md-12">
+		<div class="panel panel-default">
+		<div class="panel-heading" id="contacts">
+		Contacts
+		<div class="pull-right">
+		<div class="btn-group">
+		<button  class="btn btn-success edit-btn btn-xs" data-toggle="modal" id="create_contact_<?php echo $company['id']; ?>"  data-target="#create_contact_<?php echo $company['id']; ?>" >
+        <span class="ladda-label"> Add Contact </span>
+		</button>
+		</div>
+		</div>
 		</div>
 		<!-- /.panel-heading -->
 		<div class="panel-body">
@@ -272,25 +312,26 @@
 		<!-- /.panel-body -->
 		</div>
 		</div>
-		<div class="col-md-6">
-		<div class="panel panel-success ">
-		  <div class="panel-heading"><h3 class="panel-title"><i class="fa fa-check-square-o"></i> Completed</h3></div>
+		<div class="col-md-12">
+		<div class="panel panel-info ">
+		  <div class="panel-heading"><h3 class="panel-title">Completed & Follow Up Actions</h3></div>
 		  <div class="panel-body">
 		   <?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'],'done'=>'1');
 			echo form_open(site_url().'actions/create', 'name="create" class="form" role="form"',$hidden); ?>
 			<div class="row">
-			<div class="col-md-6">
+			<div class="col-md-3">
 				<div class="form-group ">
-					<label>Type</label>
-					<select id="action_type" name="action_type" class="form-control" onchange="commentChange()">
+					<label>Completed Action</label>
+					<select id="action_type_completed" name="action_type_completed" class="form-control" onchange="commentChange()">
 						<?php foreach($action_types_done as $action ): ?>
 						  <option value="<?php echo $action->id; ?>"><?php echo $action->name; ?></option>
 						<?php endforeach; ?>
 					</select>
 				</div>
 			</div>
+			<div class="col-md-3">
+
 			<?php if(isset($contacts) and !empty($contacts)) : ?>
-			<div class="col-md-6">
 				<div class="form-group ">
 					<label>Contact</label>
 					<select name="contact_id" class="form-control">
@@ -300,8 +341,9 @@
 						<?php endforeach; ?>
 					</select>
 				</div>
-			</div>
+			
 			<?php endif; ?>
+			</div>
 				<script>
 				function commentChange() 	{
 					var contact_type = document.getElementById("action_type").value;
@@ -313,10 +355,30 @@
        						}        
 											}
 				</script>
+				 <div class="col-md-3">
+					<div class="form-group ">
+						<label>Follow Up Action</label>
+
+						<select name="action_type_planned" class="form-control">
+						<option value="0">--- No Follow Up ---</option>
+
+							<?php foreach($action_types_planned as $action ): ?>
+
+							  <option value="<?php echo $action->id; ?>"><?php echo $action->name; ?></option>
+							<?php endforeach; ?>
+						</select>
+					</div>
+	                </div>
+	                <div class="col-md-3">
+						<div class="form-group " >
+							<label>Follow Up Date</label>
+							<input type="text" class="form-control" id="planned_at" data-date-format="YYYY/MM/DD H:m" name="planned_at" placeholder="">
+						</div>
+	                </div>
 			<div class="col-md-12">
 				<div class="form-group ">
 					<label>Outcome</label>
-					<textarea class="form-control completed-details" name="comment" rows="6" required="required"></textarea>
+					<textarea class="form-control completed-details" name="comment" rows="3" required="required"></textarea>
 				</div>
 				<button type="submit" name="save" class="btn btn-success form-control">Save</button>
 			</div>
@@ -325,63 +387,14 @@
 		  </div>
 		</div>
 		</div>
-		<div class="col-md-6">
-			<div class="panel panel-info">
-			  <div class="panel-heading">
-			    <h3 class="panel-title"><i class="fa fa-calendar"></i> Follow Up</h3>
-			  </div>
-			  <div class="panel-body">
-			   <?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'],'follow_up'=>'1');
-						 echo form_open(site_url().'actions/create', 'name="create" class="form" role="form"',$hidden); ?>
-				<div class="row">
-	            <div class="col-md-6">
-					<div class="form-group ">
-						<label>Type</label>
-						<select name="action_type" class="form-control">
-							<?php foreach($action_types_planned as $action ): ?>
-							  <option value="<?php echo $action->id; ?>"><?php echo $action->name; ?></option>
-							<?php endforeach; ?>
-						</select>
-					</div>
-	                </div>
-	                <div class="col-md-6">
-						<div class="form-group " >
-							<label>Planned For</label>
-							<input type="text" class="form-control" id="planned_at" data-date-format="YYYY/MM/DD H:m" name="planned_at" placeholder="">
-						</div>
-	                </div>
-	                <?php if(isset($contacts) and !empty($contacts)) : ?>
-	                <div class="col-md-6">
-						<div class="form-group ">
-							<label>Contact</label>
-							<select name="contact_id" class="form-control">
-								<option value=""></option>
-								<?php foreach($contacts as $contact ): ?>
-								  <option value="<?php echo $contact->id; ?>"><?php echo ucfirst($contact->first_name).' '.ucfirst($contact->last_name) ?></option>
-								<?php endforeach; ?>
-							</select>
-						</div>
-					</div>
-					<?php endif; ?>
-	                <div class="col-md-12">
-						<div class="form-group ">
-							<label>Note</label>
-							<textarea class="form-control" name="comment" rows="6" required></textarea>
-						</div>
-						<button type="submit" name="save" class="btn btn-primary form-control">Schedule</button>
-					</div>
-	            </div>
-				<?php echo form_close(); ?>
-			  </div>
-			</div>
-		</div>
+		
 
 
 <div class="">
 	<div class="col-md-12" >
 		<div class="panel panel-default ">
 			<div class="panel-heading">
-				<i class="fa fa-tags"></i> Actions
+			Actions
 			</div>
 			<div class="panel-body">
 
@@ -437,7 +450,7 @@
 							</div><!--END COL-MD-5-->
 							<div class="col-xs-4 col-md-6">
 							<!--SHOW CONTACT NAME-->
-                            <?php if($action_outstanding->contact_id):?><span class="label label-primary" style="font-size:11px; margin:0 10px;  "><i class="fa fa-users"></i> <?php echo $option_contacts[$action_outstanding->contact_id]; ?></span>
+                            <?php if($action_outstanding->contact_id):?><span class="label label-primary" style="font-size:11px; margin:0 10px;  "><?php echo $option_contacts[$action_outstanding->contact_id]; ?></span>
                             <?php endif; ?>
 								<?php if($action_outstanding->cancelled_at) : ?>
 								<span class="label label-default" style="font-size:11px; margin-left:10px;">Cancelled on <?php echo $cancelled_at_formatted ?></span>
@@ -537,7 +550,7 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 											</div><!--END COL-MD-5-->
 											<div class="col-xs-4 col-md-6" style="text-align:right;">
 											<!--SHOW CONTACT NAME-->
-											<?php if($action_completed->contact_id):?><span class="label label-primary" style="font-size:11px; margin-left:10px;  "><i class="fa fa-users"></i> <?php echo $option_contacts[$action_completed->contact_id]; ?></span>
+											<?php if($action_completed->contact_id):?><span class="label label-primary" style="font-size:11px; margin-left:10px;  "><?php echo $option_contacts[$action_completed->contact_id]; ?></span>
 											<?php endif; ?>
 											<span class="label label-success" style="font-size:11px; margin-left:10px;">Completed on <?php echo date("l jS F y",strtotime($action_completed->actioned_at))." @ ".date("H:i",strtotime($action_completed->actioned_at)); ?></span>
 											</div>
@@ -611,7 +624,7 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 											</div><!--END COL-MD-6-->
 											<div class="col-xs-4 col-md-6" style="text-align:right;">
 											<!--SHOW CONTACT NAME-->
-											<?php if($action_cancelled->contact_id):?><span class="label label-primary" style="font-size:11px; margin-left:10px;  "><i class="fa fa-users"></i> <?php echo $option_contacts[$action_cancelled->contact_id]; ?></span>
+											<?php if($action_cancelled->contact_id):?><span class="label label-primary" style="font-size:11px; margin-left:10px;  "><?php echo $option_contacts[$action_cancelled->contact_id]; ?></span>
 											<?php endif; ?>
 											<span class="label label-danger" style="font-size:11px; margin-left:10px;">Cancelled on <?php echo $cancelled_at_formatted ?></span>
 											</div>
@@ -659,15 +672,14 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 							<?php if (count($actions_marketing) > 0): ?>
 								<ul class="list-group">
 								<?php foreach ($actions_marketing as $actions_marketing): 
-								 $created_date_formatted = date("l jS F y",strtotime($actions_marketing['date_sent']))." @ ".date("H:i",strtotime($actions_marketing['date_sent']));
-								 $actioned_at_formatted = date(" jS F y",strtotime($actions_marketing['date_sent']))." @ ".date("H:i",strtotime($actions_marketing['date_sent']));
+								 $created_date_formatted = date("l jS F y",strtotime($actions_marketing['date_sent']));
 								?>
-				                <li class="list-group-item">
+				                <li class="list-group-item" style="padding:0;">
 				                 
 				                        <div class="row" style="padding: 15px 0">
 						<div class="col-md-12 ">
 					
-							<div class="col-xs-6 col-md-6">
+							<div class="col-xs-6 col-md-4">
 								<h4 style="margin:0;">
 								<?php echo $actions_marketing['campaign_name'];?>
 								<div class="mic-info">
@@ -676,7 +688,7 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 								</div>
 								</h4>
 								</div><!--END COL-MD-4-->
-								<div class="col-xs-6 col-md-6">
+								<div class="col-xs-6 col-md-4">
 								<?php
 								if (($actions_marketing['opened']>'0') || ($actions_marketing['clicked']>'0')): ?>
 								<span class="label label-success">Opened</span>
@@ -695,6 +707,10 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 								<?php else: ?>
 								<?php endif; ?>
 								</div>
+								<div class="col-xs-12 col-md-4">
+								<?php if($actions_marketing['first_name']):?><span class="label label-primary" style="font-size:11px;  "><?php echo $actions_marketing['first_name']." ". $actions_marketing['last_name']; ?></span>
+											<?php endif; ?>
+
 											
 				                        </div>
 				                        </div>

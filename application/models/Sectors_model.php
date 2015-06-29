@@ -29,9 +29,12 @@ class Sectors_model extends MY_Model {
 
 		foreach($query->result() as $row)
 		{
-		  $sectors_array[$row->id] = $row->name.' ('.$row->count.')';
+		  $sectors_array[$row->id] = $row->name.' ('.number_format($row->count).')';
+		    $sectors_array_all = $query->row_array(); 
 		} 
 		return $sectors_array;
+				return $sectors_array_all;
+
 	}
 	
 

@@ -39,7 +39,7 @@
 
 	<hr>
 	</div>
-		<div class="col-sm-8">
+		<div class="col-sm-9">
 		<div class="row">
 		<div class="col-sm-12">
 				<strong>Address</strong>
@@ -47,37 +47,48 @@
                 <?php echo isset($company['address'])?$company['address']:'-'; ?>  
 				</p>
 		</div><!--END ADDRESS-->
-				<div class="col-sm-6" style="margin-top:10px;">
-				<strong>Company Number</strong>
-				<p style="margin-bottom:0;">	
-				<!--COMPANY NUMBER IF APPLICABLE-->
-				<?php echo isset($company['registration'])?$company['registration']:'-'; ?>                
-         		</p>
-        </div><!--END COMPANY NUMBER-->
-		<div class="col-sm-6" style="margin-top:10px;">
+		<div class="col-xs-6 col-md-4" style="margin-top:10px;">
+			<strong>Company Number</strong>
+			<p style="margin-bottom:0;">	
+			 <!--COMPANY NUMBER IF APPLICABLE-->
+                <?php if (isset($company['registration'])): ?>
+				<?php echo $company['registration']; ?>
+				<?php else: ?>
+				-
+                <?php endif; ?>
+         	</p>
+        	</div>
+		<div class="col-xs-6" style="margin-top:10px;">
 				<strong>Company Name</strong>
 				<p style="margin-bottom:0;">	
 				<?php echo $company['name']; ?>
 				</p>
 		</div><!--END NAME-->
-        <div class="col-sm-6" style="margin-top:10px;">
+				
+		
+        <div class="col-xs-6 col-md-4" style="margin-top:10px;">
         		<strong>Phone Number</strong>
         		<p style="margin-bottom:0;">
         		<?php echo isset($company['phone'])?$company['phone']:'-'; ?>                
            		</p>
-		</div><!--END PHONE NUMBER-->
-		<div class="col-sm-6" style="margin-top:10px;">
+			</div><!--END PHONE NUMBER-->
+		<div class="col-xs-6 col-md-4" style="margin-top:10px;">
 				<strong>Class</strong>
 				<p style="margin-bottom:0;">	
-				<?php echo isset($company['class'])?$company['class']:'-'; ?>                
+		            <!--CLASS IF APPLICABLE-->
+		            <?php if (isset($company['class'])): ?>
+						<span class="label label-info"><?php echo $companies_classes[$company['class']] ?></span>	
+					<?php else: ?>
+						-
+		            <?php endif; ?>
 	            </p>
-		</div>
+			</div>
 
 		</div><!--END ROW-->
-        </div><!--CLOSE MD-8-->
+        </div><!--CLOSE MD-9-->
 
 
-		<div class="col-sm-4" style="margin-top:10px;">
+		<div class="col-sm-3" style="margin-top:10px;">
 		<?php $this->load->view('companies/actions_box_list.php',array('company'=>$company)); ?>
 		<?php if (isset($company['url'])): ?>
 		<a class="btn btn-default btn-sm btn-block" href="<?php $parsed = parse_url($company['url']); if (empty($parsed['scheme'])) { echo 'http://' . ltrim($company['url'], '/'); }else{ echo $company['url']; } ?>" target="_blank">

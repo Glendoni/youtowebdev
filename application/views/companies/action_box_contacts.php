@@ -4,7 +4,7 @@
 </a>
 <?php endif;?>
 <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#editContact_<?php echo $contact->id; ?>">
-    <i class="fa fa-pencil-square-o"></i> Edit 
+ Edit 
 </button>
 <?php if($contact->email): ?>
 <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#send-email<?php echo $contact->id; ?>">

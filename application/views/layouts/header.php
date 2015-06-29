@@ -264,7 +264,7 @@
             <?php if(!isset($hide_side_nav)): ?>
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="navbar-default sidebar "  role="navigation">
-                <div class="sidebar-nav " id="navbar-ex1-collapse">
+                <div class="sidebar-nav navbar-collapse" id="navbar-ex1-collapse">
                     <ul class="nav" id="">
                         <li class="sidebar-search ">
                             <div class="panel panel-default search">
@@ -294,7 +294,7 @@
                                                 <div id="autoSuggestionsList"></div>
                                             </div>
                                         </div>
-                                     <div class='form-group'>
+                                     <div class="form-row">
                                          <?php  echo form_label('Age (Months) ', 'company_age_from', array('class'=>'control-label')); ?>
                                          <div class="form-group"> 
                                             <div class="col-xs-6 col-md-6"> 
@@ -309,10 +309,10 @@
                                     <div class='form-row'>
                                     <?php  echo form_label('Turnover (£)', 'turnover_from', array('class'=>'control-label')); ?>
                                      <div class="form-group"> 
-                                        <div class="col-md-6"> 
+                                        <div class="col-xs-6 col-md-6"> 
                                         <?php echo form_input(array('name' => 'turnover_from', 'id' => 'turnover_from', 'maxlength' => '100','class'=>'form-control number','placeholder'=>''), set_value('turnover_from',$this->input->post('turnover_from')));?>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-xs-6 col-md-6">
                                          <?php echo form_input(array('name' => 'turnover_to', 'id' => 'turnover_to', 'maxlength' => '100','class'=>'form-control number','placeholder'=>''), set_value('turnover_to',$this->input->post('turnover_to')));?>   
                                         </div>
                                     </div>
@@ -382,7 +382,7 @@
                                     <div class="col-md-12" style="padding-left:0;padding-right:0;margin-bottom:10px">
                                         <div class="form-row">
                                             <?php
-                                                echo form_label('Segment', 'segment');
+                                                echo form_label('Class', 'class');
                                                 echo form_dropdown('class', $class_options, ($this->input->post('class')?$this->input->post('class'):$class_default) ,'class="form-control"');
                                                 ?>         
                                          </div> 
@@ -435,7 +435,7 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">
-                                        Shared Campaigns <span class="badge pull-right"><?php echo count($shared_campaigns); ?></span>
+                                        Team Campaigns <span class="badge pull-right"><?php echo count($shared_campaigns); ?></span>
                                     </h3>    
                                 </div>
                               <div class="panel-body" style="padding:0;">

@@ -20,7 +20,7 @@
 	padding-right: 2px;
 }
 #main_search > .form-row {
-	float: left;
+	/*float: left;*/
 }
 #main_search > .form-row > .form-group > .col-md-6:last-child{
 	padding-left: 2px;
