@@ -391,6 +391,34 @@
                                          </div> 
                                     </div>
                                     </div>
+                                    <div class="form-row">
+                                    <div class="col-md-12 form-group">
+                                        <div class="col-md-6">
+                                            <?php
+                                            echo form_label('Contacted', 'contacted');
+                                            echo form_dropdown('contacted', $exclude_options, ($this->input->post('contacted')?$this->input->post('contacted'):' ') ,'class="form-control include-exclude-drop"');
+                                            ?>
+                                         </div> 
+
+                                         <div class="col-md-6 "> 
+                                         <label>Last # days</label>
+                                            <?php   
+                                            echo form_input(array('name' => 'contacted_days', 'id' => 'contacted_days', 'maxlength' => '100','class'=>'form-control','placeholder'=>'','type'=>'number','min'=>'0'), set_value('contacted_days',$this->input->post('contacted_days')));?>
+                                        
+                                        </div>
+                                        </div>
+                                    </div>
+
+                                
+                                    
+                                    <div class='form-row contacted-show' style="display:none;">
+                                        <div class="checkbox">
+                                            <label>
+                                              <?php echo form_checkbox('exlude_no_contact', '1', set_value('exlude_no_contact',$this->input->post('exlude_no_contact')));?>Include companies with no previous contact
+                                            </label>
+                                        </div>
+                                    </div>
+                                    </div>
                                     <div class="panel-footer">
                                     
                                         <input type="submit" class="loading-btn btn btn-primary btn-block " value="Search" name="submit">
