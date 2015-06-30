@@ -225,6 +225,8 @@ class Companies extends MY_Controller {
 			$raw_search_results = $this->Companies_model->search_companies_sql(FALSE,$this->input->get('id'));
 			$company = $this->process_search_result($raw_search_results);
 			$this->data['contacts'] = $this->Contacts_model->get_contacts($this->input->get('id'));
+			$this->data['addresses'] = $this->Companies_model->get_addresses($this->input->get('id'));
+
 			$option_contacts =  array();
 			foreach ($this->data['contacts'] as $contact) {
 				$option_contacts[$contact->id] = $contact->first_name.' '.$contact->last_name;
@@ -261,10 +263,91 @@ class Companies extends MY_Controller {
 			return True;
 		}
 	}
+
+
+
+public function create_address(){
+		if($this->input->post('create_address')){
+			$this->load->library('form_validation');
+			$this->form_validation->set_rules('phone', 'phone', 'xss_clean');
+			$this->form_validation->set_rules('country_id', 'country_id', 'xss_clean|required');
+			$this->form_validation->set_rules('address', 'address', 'xss_clean|required');
+			$this->form_validation->set_rules('address_types', 'address_types', 'xss_clean');
+			if($this->form_validation->run())
+			{
+				$rows_affected = $this->Companies_model->create_address($this->input->post());
+
+
+				if($rows_affected  > 0)
+				{
+				$this->set_message_success('Address has been added.');
+					redirect('/companies/company?id='.$this->input->post('company_id'));
+					// $this->refresh_search_results();
+				}
+				else
+				{
+					$array = array('error'=>'<p>Error while creating address</p>');
+					$this->output->set_status_header('400');
+					$this->output->set_output(json_encode($array));
+				}
+			}
+			else
+			{
+				
+				$array = array('error'=>validation_errors());
+				$this->output->set_status_header('400');
+				$this->output->set_output(json_encode($array));
+			}
+		}else{
+			
+			$array = array('error'=>'<p>Missing information on form</p>');
+			$this->output->set_status_header('400');
+			$this->output->set_output(json_encode($array));
+		}
+
+	}
+
+
+
+		public function update_address(){
+		if($this->input->post('update_address'))
+		{
+			$this->load->library('form_validation');
+			$this->form_validation->set_rules('address', 'address', 'xss_clean|required');
+			$this->form_validation->set_rules('address_types', 'address_types', 'xss_clean|required');
+			$this->form_validation->set_rules('country_id', 'country_id', 'xss_clean');
+			$this->form_validation->set_rules('phone', 'phone', 'xss_clean');
+			$this->form_validation->set_rules('user_id', 'user_id', 'xss_clean|required');
+			
+			if($this->form_validation->run())
+			{
+				$rows_affected = $this->Companies_model->update_address($this->input->post());
+				if($rows_affected)
+				{
+					$this->set_message_success('Address has been updated.');
+					redirect('/companies/company?id='.$this->input->post('company_id'));
+					// $this->refresh_search_results();
+				}
+				else
+				{
+					$this->set_message_error('Error while updating contact.');
+					redirect('/companies/company?id='.$this->input->post('company_id'));
+				}
+			}
+			else
+			{
+				
+				$this->set_message_error(validation_errors());
+				redirect('/companies/company?id='.$this->input->post('company_id'));
+			}
+		}
+	}
+
+
 	public function autocomplete() {
         $search_data = $this->input->post("search_data");
 		$response = "<ul class='autocomplete-holder'>";
-        echo $query = $this->Companies_model->get_autocomplete($search_data);
+        $query = $this->Companies_model->get_autocomplete($search_data);
         $rowcount = $query->num_rows();
 		if ($rowcount> 0) {
 			$response= $response."<li class='autocomplete-item split-heading'><i class='fa fa-caret-square-o-down'></i> Companies</li>";

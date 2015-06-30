@@ -33,7 +33,6 @@ class Companies_model extends CI_Model {
 		return 	$arrayNames;
 	}
 
-
 	function get_companies_pipeline()
 	{
 		$arrayNamesPipeline = array(
@@ -45,6 +44,15 @@ class Companies_model extends CI_Model {
 			'Lost' => 'Lost'
 			);
 		return 	$arrayNamesPipeline;
+	}
+
+		function get_address_types()
+	{
+		$arrayAddressTypes = array(
+			'Registered Address' => 'Registered Address',
+			'Trading Address' => 'Trading Address'
+			);
+		return 	$arrayAddressTypes;
 	}
 
 		function get_companies_pipeline_search()
@@ -911,6 +919,8 @@ class Companies_model extends CI_Model {
 		
 	}
 
+
+
 	function create_company($post){
 		$company = array(
 			'name' => $post['name'],
@@ -964,17 +974,53 @@ class Companies_model extends CI_Model {
 		return $array;
     }
 
-	    	function get_addresses($company_id)
+	function get_addresses($company_id)
 	{
 		$data = array(
 			'company_id' => $company_id,
 			);
-				$this->db->join('countries', 'countries.id = addresses.country_id');
+		$this->db->select('addresses.id AS addressid, addresses.address as address,addresses.phone, addresses.type, c.id as countryid, c.name, addresses.company_id', FALSE);
 
+		$this->db->join('countries c', 'c.id = addresses.country_id');
 		$this->db->order_by('type asc');
+
 		echo $query = $this->db->get_where('addresses', $data);
 		return $query->result_object();
 	}
+
+		function create_address($post)
+	{
+       	$address->address = $post['address']; // please read the below note
+    	$address->country_id = $post['country_id'];
+		$address->type = $post['address_types'];
+		$address->phone = $post['phone'];
+        $address->company_id = $post['company_id'];
+        $address->created_by = $user_id;
+        $address->created_at = date('Y-m-d H:i:s');
+
+		echo $this->db->insert('addresses',$address);
+	    return $rows;
+    }
+
+
+
+		 function update_address($post)
+	 {
+    	$address->address   = $post['address']; // please read the below note
+    	$address->country_id = $post['country_id'];
+		$address->type = $post['address_types'];
+		$address->phone = $post['phone'];
+        $address->updated_by = $user_id;
+        $address->updated_at = date('Y-m-d H:i:s');
+        $this->db->where('id', $post['address_id']);
+		$this->db->update('addresses',$address);
+        if($this->db->affected_rows() !== 1){
+			$this->addError($this->db->_error_message());
+			return False;
+		}else{
+			return True;
+		} 
+    }
 
 
     function get_autocomplete($search_data) {

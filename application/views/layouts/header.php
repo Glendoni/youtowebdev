@@ -264,7 +264,7 @@
             <?php if(!isset($hide_side_nav)): ?>
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="navbar-default sidebar "  role="navigation">
-                <div class="sidebar-nav " id="navbar-ex1-collapse">
+                <div class="sidebar-nav navbar-collapse" id="navbar-ex1-collapse">
                     <ul class="nav" id="">
                         <li class="sidebar-search ">
                             <div class="panel panel-default search">
@@ -287,23 +287,20 @@
                                         </div>
                                     </div>
                                     <?php endif; ?>
-                                    <div class='form-row'>
-                                        <div class="col-md-12 form-group ">
+                                        <div class="form-group">
                                             <?php  echo form_label('Agency Name or Contact', 'agency_name', array('class'=>'control-label')); ?>
                                             <input name="agency_name" id="agency_name" type="text" onkeyup="ajaxSearch();" class="col-md-12 form-control" autocomplete="off" value="<?php echo $this->input->post('agency_name');?>" >
                                             <div id="suggestions">
-                                                <div id="autoSuggestionsList">  
-                                                </div>
+                                                <div id="autoSuggestionsList"></div>
                                             </div>
                                         </div>
-                                    </div>
-                                     <div class='form-row'>
+                                     <div class="form-row">
                                          <?php  echo form_label('Age (Months) ', 'company_age_from', array('class'=>'control-label')); ?>
                                          <div class="form-group"> 
-                                            <div class="col-md-6"> 
+                                            <div class="col-xs-6 col-md-6"> 
                                             <?php echo form_input(array('name' => 'company_age_from', 'id' => 'company_age_from', 'maxlength' => '100','class'=>'form-control','placeholder'=>''), set_value('company_age_from',$this->input->post('company_age_from')));?>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-xs-6 col-md-6">
                                             <?php echo form_input(array('name' => 'company_age_to', 'id' => 'company_age_to', 'maxlength' => '100','class'=>'form-control','placeholder'=>''), set_value('company_age_to',$this->input->post('company_age_to')));?>    
                                             </div>
                                         </div>
@@ -312,10 +309,10 @@
                                     <div class='form-row'>
                                     <?php  echo form_label('Turnover (£)', 'turnover_from', array('class'=>'control-label')); ?>
                                      <div class="form-group"> 
-                                        <div class="col-md-6"> 
+                                        <div class="col-xs-6 col-md-6"> 
                                         <?php echo form_input(array('name' => 'turnover_from', 'id' => 'turnover_from', 'maxlength' => '100','class'=>'form-control number','placeholder'=>''), set_value('turnover_from',$this->input->post('turnover_from')));?>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-xs-6 col-md-6">
                                          <?php echo form_input(array('name' => 'turnover_to', 'id' => 'turnover_to', 'maxlength' => '100','class'=>'form-control number','placeholder'=>''), set_value('turnover_to',$this->input->post('turnover_to')));?>   
                                         </div>
                                     </div>
@@ -435,7 +432,7 @@
                         <li>
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title"><i class="glyphicon glyphicon glyphicon-lock"></i> My Campaigns <span class="badge pull-right"><?php echo count($private_campaigns); ?></span></h3>
+                                    <h3 class="panel-title">My Campaigns <span class="badge pull-right"><?php echo count($private_campaigns); ?></span></h3>
                                 </div>
                               <div class="panel-body" style="padding:0;">
                                 <ul class="list-group">
@@ -466,7 +463,7 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">
-                                        <span class="glyphicon glyphicon-globe"></span> Shared Campaigns <span class="badge pull-right"><?php echo count($shared_campaigns); ?></span>
+                                        Team Campaigns <span class="badge pull-right"><?php echo count($shared_campaigns); ?></span>
                                     </h3>    
                                 </div>
                               <div class="panel-body" style="padding:0;">
@@ -484,9 +481,6 @@
                                         <div class="col-xs-12 col-sm-12">
                                             <span class="name"><?php echo $campaign->name; ?></span><br/>
                                 <span class="label label-info" style="background-color: <?php echo $bg_colour; ?>;font-size:8px; color: <?php echo $bg_colour_text; ?>">Shared by: <b><?php echo $campaign->searchcreatedby; ?></b></span>
-
-
-                                            
                                         </div>
                                         <div class="clearfix"></div>
                                         </a>
@@ -500,7 +494,7 @@
                         <li>
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title"><i class="glyphicon glyphicon glyphicon-lock"></i> Private searches <span class="badge pull-right"><?php echo count($private_searches); ?></span></h3>
+                                    <h3 class="panel-title">My Searches <span class="badge pull-right"><?php echo count($private_searches); ?></span></h3>
                                 </div>
                                 <div class="panel-body">
                                     <ul class="list-group">
@@ -532,7 +526,7 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">
-                                        <span class="glyphicon glyphicon-globe"></span> Shared searches <span class="badge pull-right"><?php echo count($shared_searches); ?></span>
+                                       Shared Searches <span class="badge pull-right"><?php echo count($shared_searches); ?></span>
                                     </h3>    
                                 </div>
                               <div class="panel-body" style="padding:0;">

@@ -1,31 +1,56 @@
 <div class="row page-results-list">
+
+	<ul class="pager">
+		<?php if($previous_page_number): ?>
+	  	<li class="previous">
+	  		<a href="?page_num=<?php echo $previous_page_number; ?>">&larr; Previous</a>
+	  	</li>
+	    <?php endif; ?>
+        <span class="count_of_results">
+			<strong><?php echo $companies_count; ?> <?php if ($companies_count<> "1") {echo "Companies";} else { echo "Company";}?></strong> <small>(Page <?php echo $current_page_number; ?> of <?php echo $page_total ?>)</small>
+		</span>
+	    <?php if($next_page_number): ?>
+	  	<li class="next">
+	  		<a href="?page_num=<?php echo $next_page_number; ?>">Next &rarr;</a>
+	  	</li>
+		<?php endif; ?>
+	</ul>
+
 	<nav class="navbar navbar-default companies-list-header" role="navigation">
 	  <div class="container-fluid">
 	    <!-- Collect the nav links, forms, and other content for toggling -->
-<div class="row">
+<div class="row" style="text-align:center;">
 	      	<?php if(($companies_count > 0)): ?>
 				<?php if($current_campaign_name && $current_campaign_owner_id && $current_campaign_id ): ?>	
 					<div class="navbar-text saved-search-text">
-						<span style="font-weight:300; font-size:16px;"><?php echo $results_type ?>:</span>
-						<?php echo $current_campaign_name; ?>
+						<span style="font-weight:300; font-size:16px;"><?php echo $results_type ?>:
+						<strong><?php echo $current_campaign_name; ?></strong></span>
 					</div>
 				<?php if($current_campaign_is_shared == False): ?>
 					<div class="navbar-text saved-search-text">
-						<span style="font-weight:300; font-size:10px;"><i class="fa fa-user"></i> Private </span>
+						<div style="font-weight:300; font-size:12px;">
+						<span class="label label-default">
+						Private
+						</span>
+						</div>
 					</div>	
 				<?php else: ?> 
 					<div class="navbar-text saved-search-text">
-						<span style="font-weight:300; font-size:10px;"><i class="fa fa-users"></i> Public </span>
+						<div style="font-weight:300; font-size:12px;">
+						<span class="label label-success">
+						Public
+						</span>
+						</div>
 					</div>	
 				<?php endif;?>  
 				<?php if($current_campaign_editable): ?>
 	                <?php echo form_open(site_url().'campaigns/'.$edit_page, 'name="edit_campaign" role="form"'); echo form_hidden('campaign_id', $current_campaign_id); ?>
 	                <?php if($current_campaign_is_shared == False): ?>
-						<button type="submit" class="btn btn-warning btn-sm btn-search-edit" name="make_public" ><i class="fa fa-users"></i> Make Public</button>
+						<button type="submit" class="btn btn-warning btn-sm btn-search-edit" name="make_public" >Make Public</button>
 					<?php else: ?>
-						<button type="submit" class="btn btn-warning btn-success btn-sm btn-search-edit" name="make_private" ><i class="fa fa-user"></i> Make Private</button>
+						<button type="submit" class="btn btn-warning btn-success btn-sm btn-search-edit" name="make_private" >Make Private</button>
 					<?php endif; ?> 
-					<button type="submit" class="btn btn-danger btn-sm btn-search-edit" name="delete" ><i class="fa fa-trash-o fa-lg"></i> </button>
+					<button type="submit" class="btn btn-danger btn-sm btn-search-edit" name="delete" >Delete</button>
 					<?php echo form_close(); ?>
 			  	<?php endif; ?>
 			</div>	
@@ -56,21 +81,6 @@
 	  </div><!-- /.row -->
 	</nav>
 
-	<ul class="pager">
-		<?php if($previous_page_number): ?>
-	  	<li class="previous">
-	  		<a href="?page_num=<?php echo $previous_page_number; ?>">&larr; Previous</a>
-	  	</li>
-	    <?php endif; ?>
-        <span class="count_of_results">
-			<strong><?php echo $companies_count; ?> <?php if ($companies_count<> "1") {echo "Companies";} else { echo "Company";}?></strong> <small>(Page <?php echo $current_page_number; ?> of <?php echo $page_total ?>)</small>
-		</span>
-	    <?php if($next_page_number): ?>
-	  	<li class="next">
-	  		<a href="?page_num=<?php echo $next_page_number; ?>">Next &rarr;</a>
-	  	</li>
-		<?php endif; ?>
-	</ul>
 
 	
 	<?php 

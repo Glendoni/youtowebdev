@@ -161,6 +161,15 @@ class MY_Controller extends CI_Controller {
 			$this->session->set_userdata('companies_pipeline',$pipeline_options);
 		}
 
+		if($this->session->userdata('address_types'))
+		{
+			$address_types = $this->session->userdata('address_types');
+		}else
+		{
+			$address_types = $this->Companies_model->get_address_types();
+			$this->session->set_userdata('address_types',$address_types);
+		}
+
 		if($this->session->userdata('companies_pipeline_search'))
 		{
 			$pipeline_options_search = $this->session->userdata('companies_pipeline_search');
@@ -173,9 +182,13 @@ class MY_Controller extends CI_Controller {
 	
 
 
-		// Pass variables to tempalte views 
+		// Pass variables to template views 
 		$this->data['companies_classes'] = array(0=>' ') + $class_options;
 		$this->data['companies_pipeline'] =  $pipeline_options;		
+		$this->data['address_types'] =  $address_types;
+		$this->data['country_options'] = $this->Companies_model->get_countries_options();
+
+
 
 		// Pipeline
 		// edit box options 
@@ -186,7 +199,7 @@ class MY_Controller extends CI_Controller {
 		$this->data['assigned_default'] = '0';
 
 		if($sectors_search){
-			$sectors_search = array(0=>'All') + $sectors_search;
+			$sectors_search = array(0=>'All') +  $sectors_search;
 		}
 		
 		// $sectors_options = array(-1=>'No sectors') + $sectors_options;

@@ -5,6 +5,8 @@
 
 <?php  foreach ( $companies as $company):  ?>
 <?php $this->load->view('companies/edit_box.php',array('company'=>$company)); ?>
+
+<?php $this->load->view('companies/edit_box.php',array('company'=>$company)); ?>
 <?php $this->load->view('companies/create_contact_box.php',array('company'=>$company)); ?>
 <div class="panel <?php if(isset($company['assigned_to_name'])): ?> panel-primary <?php else: ?> panel-default <?php endif; ?> company">
 	<div class="panel-body">
@@ -26,9 +28,9 @@
 	<?php endif; ?>
 	<span class="label label-<?php echo str_replace(' ', '', $company['pipeline']); ?>"><?php echo $company['pipeline']?></span>
 	<?php if(isset($company['assigned_to_name'])): ?>
-		<span class="label pipeline-label label-Qualified"
+		<span class="label label-Prospect"
 		<?php $user_icon = explode(",", ($system_users_images[$company['assigned_to_id']]));echo "style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'";?>>
-        Assigned to <?php echo $company['assigned_to_name']; ?>
+        <?php echo $company['assigned_to_name']; ?>
         </span>
 	<?php else: ?>
 	<?php endif; ?>
@@ -37,29 +39,15 @@
 
 	<hr>
 	</div>
-		<div class="col-sm-8" style="margin-top:10px;">
-		<strong>Address</strong>
-		<p style="margin-bottom:0;">
-		<?php echo $company['address']; ?>
-		</p>
-        </div><!--CLOSE MD-8-->
-
-			<div class="col-sm-4" style="margin-top:10px;">
-			<?php if (isset($company['registration'])): ?>
-			<a class="btn  btn-info btn-sm btn-block duedil" href="https://www.duedil.com/company/<?php echo $company['registration'] ?>" target="_blank">Duedil</a>
-			<?php endif; ?>
-			<?php if (isset($company['linkedin_id'])): ?>
-			<a class="btn  btn-info btn-sm btn-block linkedin" href="https://www.linkedin.com/company/<?php echo $company['linkedin_id'] ?>"  target="_blank">LinkedIn</a>
-			<?php endif; ?>
-			</div><!--CLOSE MD-8-->
-
-			<div class="col-sm-4" style="margin-top:10px;">
-			<strong>Company Name</strong>
-			<p style="margin-bottom:0;">	
-			<?php echo $company['name']; ?>
-			</p>
-			</div>
-    		<div class="col-sm-4" style="margin-top:10px;">
+		<div class="col-sm-9">
+		<div class="row">
+		<div class="col-sm-12">
+				<strong>Address</strong>
+				<p style="margin-bottom:0;">
+                <?php echo isset($company['address'])?$company['address']:'-'; ?>  
+				</p>
+		</div><!--END ADDRESS-->
+		<div class="col-xs-6 col-md-4" style="margin-top:10px;">
 			<strong>Company Number</strong>
 			<p style="margin-bottom:0;">	
 			 <!--COMPANY NUMBER IF APPLICABLE-->
@@ -70,35 +58,50 @@
                 <?php endif; ?>
          	</p>
         	</div>
-        	<div class=" col-sm-4" style="margin-top:10px;">
+		<div class="col-xs-6" style="margin-top:10px;">
+				<strong>Company Name</strong>
+				<p style="margin-bottom:0;">	
+				<?php echo $company['name']; ?>
+				</p>
+		</div><!--END NAME-->
+				
+		
+        <div class="col-xs-6 col-md-4" style="margin-top:10px;">
         		<strong>Phone Number</strong>
         		<p style="margin-bottom:0;">
         		<?php echo isset($company['phone'])?$company['phone']:'-'; ?>                
            		</p>
-			</div>
-    		<div class="col-sm-4" style="margin-top:10px;">
-    			<strong>Website</strong>
-    			<p style="margin-bottom:0;">
-				<?php if (isset($company['url'])): ?>
-				<a class="btn btn-link" style="padding:0;" href="<?php $parsed = parse_url($company['url']); if (empty($parsed['scheme'])) { echo 'http://' . ltrim($company['url'], '/'); }else{ echo $company['url']; } ?>" target="_blank">
-				<?php echo str_replace("http://"," ",str_replace("www.", "", $company['url']))?>
-				</a>
-				<?php else: ?>
-				-
-            	<?php endif; ?>
-            	</p>
-			</div>
-        	<div class="col-sm-4" style="margin-top:10px;">
+			</div><!--END PHONE NUMBER-->
+		<div class="col-xs-6 col-md-4" style="margin-top:10px;">
 				<strong>Class</strong>
 				<p style="margin-bottom:0;">	
-		            <!--SEGMENT IF APPLICABLE-->
+		            <!--CLASS IF APPLICABLE-->
 		            <?php if (isset($company['class'])): ?>
 						<span class="label label-info"><?php echo $companies_classes[$company['class']] ?></span>	
 					<?php else: ?>
 						-
 		            <?php endif; ?>
 	            </p>
-		</div>
+			</div>
+
+		</div><!--END ROW-->
+        </div><!--CLOSE MD-9-->
+
+
+		<div class="col-sm-3" style="margin-top:10px;">
+		<?php $this->load->view('companies/actions_box_list.php',array('company'=>$company)); ?>
+		<?php if (isset($company['url'])): ?>
+		<a class="btn btn-default btn-sm btn-block" href="<?php $parsed = parse_url($company['url']); if (empty($parsed['scheme'])) { echo 'http://' . ltrim($company['url'], '/'); }else{ echo $company['url']; } ?>" target="_blank">
+				<strong>Web:</strong> <?php echo str_replace("http://"," ",str_replace("www.", "", $company['url']))?>
+		</a>
+			<?php endif; ?>
+			<?php if (isset($company['registration'])): ?>
+			<a class="btn btn-info btn-sm btn-block duedil" href="https://www.duedil.com/company/<?php echo $company['registration'] ?>" target="_blank">Duedil</a>
+			<?php endif; ?>
+			<?php if (isset($company['linkedin_id'])): ?>
+			<a class="btn  btn-info btn-sm btn-block linkedin" href="https://www.linkedin.com/company/<?php echo $company['linkedin_id'] ?>"  target="_blank">LinkedIn</a>
+			<?php endif; ?>
+			</div><!--CLOSE MD-8-->
 		</div>
 		<div class="row">
 		<div class="col-md-12">

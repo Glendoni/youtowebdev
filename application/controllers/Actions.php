@@ -24,7 +24,7 @@ class Actions extends MY_Controller {
 		if($this->input->post('done'))
 		{	
 			$this->load->library('form_validation');
-			$this->form_validation->set_rules('action_type', 'action_type', 'xss_clean|required');
+			$this->form_validation->set_rules('action_type_completed', 'action_type', 'xss_clean|required');
 			$this->form_validation->set_rules('actioned_at', 'actioned_at', 'xss_clean');
 			$this->form_validation->set_rules('company_id', 'company_id', 'xss_clean|required');
 			$this->form_validation->set_rules('user_id', 'user_id', 'xss_clean|required');
@@ -47,10 +47,11 @@ class Actions extends MY_Controller {
 				redirect('companies/company?id='.$this->input->post('company_id'),'location');
 			}
 
-		}elseif($this->input->post('follow_up')){
+		}
+		elseif($this->input->post('follow_up')){
 			
 			$this->load->library('form_validation');
-			$this->form_validation->set_rules('action_type', 'action_type', 'xss_clean|required');
+			$this->form_validation->set_rules('action_type_completed', 'action_type_completed', 'xss_clean|required');
 			$this->form_validation->set_rules('comment', 'comment', 'xss_clean|required');
 			$this->form_validation->set_rules('planned_at', 'planned_at', 'required|callback__valid_date');
 			$this->form_validation->set_rules('company_id', 'company_id', 'xss_clean|required');

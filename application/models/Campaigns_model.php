@@ -42,8 +42,7 @@ class Campaigns_model extends MY_Model {
 		$this->db->where('criteria IS NULL', null, false);
 		$this->db->where('shared', 'True');
 		$this->db->where_not_in('user_id', $user_id);
-		$this->db->where('status', 'search');
-		$this->db->order_by("c.name", "asc");
+		$this->db->order_by("c.created_at", "desc");
 		$this->db->where("(c.eff_to IS NULL OR c.eff_to > '".date('Y-m-d')."')",null, false); 
 		$query = $this->db->get();
 		return $query->result();
@@ -56,9 +55,8 @@ class Campaigns_model extends MY_Model {
 		// Apply this to find saved searches only
 		$this->db->where('criteria IS NULL', null, false);
 		$this->db->where('user_id', $user_id);
-		$this->db->where('status', 'search');
 		$this->db->where("(eff_to IS NULL OR eff_to > '".date('Y-m-d')."')",null, false);
-		$this->db->order_by("name", "asc"); 
+		$this->db->order_by("created_at", "desc"); 
 		$query = $this->db->get();
 		return $query->result();
 	}

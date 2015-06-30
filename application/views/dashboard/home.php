@@ -4,33 +4,28 @@
           <h1 class="page-header">Dashboard</h1>
         </div>
         <div class="col-lg-12">
-                  <div class="panel panel-default">
+<div class="panel panel-default">
           <div class="panel-heading">
             <i class="fa fa-search fa-fw"></i> Date Range Search</span> 
           </div>
-             
           <div class="panel-body">
             <div class="clearfix"></div>
+
             <form class="form-inline" role="form">
-            <div class="col-md-4">
             <div class="form-group">
             <label for="start-date">Start Date:</label>
-            <input type="text" class="form-control" id="start_date" data-date-format="DD-MM-YYYY" name="start_date" placeholder="" value="<?php echo  date('d-m-Y',strtotime($dates['start_date']));?>"></div>
+            <input type="text" class="form-control" id="start_date" data-date-format="DD-MM-YYYY" name="start_date" placeholder="" value="<?php echo  date('d-m-Y',strtotime($dates['start_date']));?>">
             </div>
-            <div class="col-md-4">
             <div class="form-group">
             <label for="end-date">End Date:</label>
             <input type="text" class="form-control" id="end_date" data-date-format="DD-MM-YYYY" name="end_date" placeholder="" value="<?php echo  date('d-m-Y',strtotime($dates['end_date']));?>">
             </div>
-            </div>
-            <div class="col-md-4">
             <input type="hidden" name="search" value="<?php if (isset($_GET['search'])){echo $_GET['search'];} else {echo "1";};?>">
             <?php if (isset($_GET['user'])) { ?>
              <input type="hidden" name="user" value="<?php echo $_GET['user'];?>"> <?php
              };?>
-            <button type="submit" class="btn btn-success btn-block">Search</button>
+            <button type="submit" class="btn btn-success">Search</button>
             </form>
-            </div>
           </div>
         </div><!--END PANEL-->
 
