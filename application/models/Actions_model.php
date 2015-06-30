@@ -100,6 +100,7 @@ class Actions_model extends MY_Model {
 		$end_date_week = date('Y-m-d 23:59:59',strtotime('sunday this week'));
 		$sql = "select U.name, U.id as user,
 				sum(case when action_type_id = '4' AND actioned_at > '$start_date_week' AND actioned_at < '$end_date_week' then 1 else 0 end) introcall,
+				sum(case when (action_type_id = '4' or action_type_id = '5')  AND actioned_at > '$start_date_week' AND actioned_at < '$end_date_week' then 1 else 0 end) salescall,
 		    	sum(case when (action_type_id = '5' OR action_type_id = '11') AND actioned_at > '$start_date_week' AND actioned_at < '$end_date_week' then 1 else 0 end) callcount,
 		   		sum(case when (action_type_id = '12' or action_type_id = '10' or action_type_id = '9' or action_type_id = '15') AND actioned_at > '$start_date_week' AND actioned_at < '$end_date_week' then 1 else 0 end) meetingcount,
 		    	sum(case when (action_type_id = '12' or action_type_id = '10' or action_type_id = '9' or action_type_id = '15') AND a.created_at > '$start_date_week' AND a.created_at < '$end_date_week' then 1 else 0 end) meetingbooked,
@@ -122,6 +123,7 @@ class Actions_model extends MY_Model {
 		$end_date_week = date('Y-m-d 23:59:59',strtotime('sunday last week'));
 		$sql = "select U.name, U.id as user,
 				sum(case when action_type_id = '4' AND actioned_at > '$start_date_week' AND actioned_at < '$end_date_week' then 1 else 0 end) introcall,
+				sum(case when (action_type_id = '4' or action_type_id = '5')  AND actioned_at > '$start_date_week' AND actioned_at < '$end_date_week' then 1 else 0 end) salescall,
 		    	sum(case when (action_type_id = '5' OR action_type_id = '11') AND actioned_at > '$start_date_week' AND actioned_at < '$end_date_week' then 1 else 0 end) callcount,
 		   		sum(case when (action_type_id = '12' or action_type_id = '10' or action_type_id = '9' or action_type_id = '15') AND actioned_at > '$start_date_week' AND actioned_at < '$end_date_week' then 1 else 0 end) meetingcount,
 		    	sum(case when (action_type_id = '12' or action_type_id = '10' or action_type_id = '9' or action_type_id = '15') AND a.created_at > '$start_date_week' AND a.created_at < '$end_date_week' then 1 else 0 end) meetingbooked,
@@ -145,6 +147,7 @@ class Actions_model extends MY_Model {
 		$end_date_month = date('Y-m-d 23:59:59',strtotime('last day of this month'));
 		$sql = "select U.name, U.id as user,
 				sum(case when action_type_id = '4' AND actioned_at > '$start_date_month' AND actioned_at < '$end_date_month' then 1 else 0 end) introcall,
+				sum(case when (action_type_id = '4' or action_type_id = '5')  AND actioned_at > '$start_date_month' AND actioned_at < '$end_date_month' then 1 else 0 end) salescall,
 		    	sum(case when (action_type_id = '5' OR action_type_id = '11') AND actioned_at > '$start_date_month' AND actioned_at < '$end_date_month' then 1 else 0 end) callcount,
 		   		sum(case when (action_type_id = '12' or action_type_id = '10' or action_type_id = '9' or action_type_id = '15') AND actioned_at > '$start_date_month' AND actioned_at < '$end_date_month' then 1 else 0 end) meetingcount,
 		    	sum(case when (action_type_id = '12' or action_type_id = '10' or action_type_id = '9' or action_type_id = '15') AND a.created_at > '$start_date_month' AND a.created_at < '$end_date_month' then 1 else 0 end) meetingbooked,
@@ -172,6 +175,7 @@ class Actions_model extends MY_Model {
 		$end_date = $dates['end_date'];
 		$sql = "select U.name, U.id as user,
 				sum(case when action_type_id = '4' AND actioned_at > '$start_date' AND actioned_at < '$end_date' then 1 else 0 end) introcall,
+				sum(case when (action_type_id = '4' or action_type_id = '5')  AND actioned_at > '$start_date' AND actioned_at < '$end_date' then 1 else 0 end) salescall,
 		    	sum(case when (action_type_id = '5' OR action_type_id = '11') AND actioned_at > '$start_date' AND actioned_at < '$end_date' then 1 else 0 end) callcount,
 		   		sum(case when (action_type_id = '12' or action_type_id = '10' or action_type_id = '9' or action_type_id = '15') AND actioned_at > '$start_date' AND actioned_at < '$end_date' then 1 else 0 end) meetingcount,
 		    	sum(case when (action_type_id = '12' or action_type_id = '10' or action_type_id = '9' or action_type_id = '15') AND a.created_at > '$start_date' AND a.created_at < '$end_date' then 1 else 0 end) meetingbooked,

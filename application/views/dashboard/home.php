@@ -163,7 +163,7 @@
                           </div>
                           <div class="col-md-2 text-center"> 
                            <strong>Call Activity</strong><br>
-                           <Small> All (Intro)</Small>
+                           <Small> Total Calls (Intro)</Small>
                         </div>
                         <div class="col-md-2 text-center">
                            <strong>Pipeline Added</strong>
@@ -184,7 +184,8 @@
                             <?php echo $stat['meetingbooked'];?> (<?php echo $stat['meetingcount'];?>)
                             </div>
                             <div class="col-md-2 text-center"> 
-                            <?php echo $stat['introcall'];?>
+                            <?php echo $stat['salescall'];?>
+                            (<?php echo $stat['introcall'];?>)
                             </div>
                             <div class="col-md-2 text-center">
                               <?php echo $stat['pipelinecount'];?>
@@ -212,7 +213,7 @@
                           </div>
                           <div class="col-md-2 text-center"> 
                            <strong>Call Activity</strong><br>
-                           <Small> All (Intro)</Small>
+                           <Small> Total Calls (Intro)</Small>
                         </div>
                         <div class="col-md-2 text-center">
                            <strong>Pipeline Added</strong>
@@ -233,7 +234,8 @@
                           <?php echo $lastweekstats['meetingbooked'];?> (<?php echo $lastweekstats['meetingcount'];?>)
                           </div>
                           <div class="col-md-2 text-center"> 
-                          <?php echo $lastweekstats['introcall'];?>
+                          <?php echo $lastweekstats['salescall'];?>
+                            (<?php echo $lastweekstats['introcall'];?>)
                           </div>
                         
                           <div class="col-md-2 text-center">
@@ -264,9 +266,9 @@
                           <Small> Booked (Attended)</Small>
                           </div>
                           <div class="col-md-2 text-center"> 
-                           <strong>Call Activity</strong><br>
-                           <Small> All (Intro)</Small>
-                        </div>
+                            <strong>Call Activity</strong><br>
+                            <Small> Total Calls (Intro)</Small>
+                           </div>
                         <div class="col-md-2 text-center">
                            <strong>Pipeline Added</strong>
                         </div>
@@ -286,7 +288,8 @@
                           <?php echo $thismonthstat['meetingbooked'];?> (<?php echo $thismonthstat['meetingcount'];?>)
                           </div>
                           <div class="col-md-2 text-center"> 
-                          <?php echo $thismonthstat['introcall'];?>
+                           <?php echo $thismonthstat['salescall'];?>
+                            (<?php echo $thismonthstat['introcall'];?>)
                           </div>
                         
                           <div class="col-md-2 text-center">
@@ -317,7 +320,7 @@
                           </div>
                           <div class="col-md-2 text-center"> 
                            <strong>Call Activity</strong><br>
-                           <Small> All (Intro)</Small>
+                            <Small> Total Calls (Intro)</Small>
 
                         </div>
                         <div class="col-md-2 text-center">
@@ -340,7 +343,8 @@
                           <?php echo $getstatssearch['meetingbooked'];?> (<?php echo $getstatssearch['meetingcount'];?>)
                           </div>
                           <div class="col-md-2 text-center"> 
-                          <?php echo $getstatssearch['introcall'];?>
+                          <?php echo $getstatssearch['salescall'];?>
+                            (<?php echo $getstatssearch['introcall'];?>)
                           </div>
                         
                           <div class="col-md-2 text-center">
