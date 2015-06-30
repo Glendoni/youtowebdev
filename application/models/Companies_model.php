@@ -254,14 +254,16 @@ class Companies_model extends CI_Model {
 					$contacted_in = "select companies.id 
 										 from companies 
 										 left join actions on actions.company_id = companies.id 
-										 where actions.actioned_at > current_timestamp - interval '".$int_val." day' ";
+										 where actions.actioned_at > current_timestamp - interval '".$int_val." day' 
+										 and actions.id in (11,5,4,16,8)";
 				}
 			}elseif ($post['contacted'] == 'exclude') {
 				if (is_int($int_val)){
 					$contacted_in = "select companies.id 
 										 from companies 
 										 left join actions on actions.company_id = companies.id 
-										 where actions.actioned_at < current_timestamp - interval '".$int_val." day' ";
+										 where actions.actioned_at < current_timestamp - interval '".$int_val." day' 
+										 and actions.id in (11,5,4,16,8)";
 					if(isset($post['exlude_no_contact'])){
 						$contacted_in = $contacted_in.'  or actions.id is null';
 					}
