@@ -390,7 +390,7 @@
                                                 ?>         
                                          </div> 
                                     </div>
-                                    </div>
+                                    
                                     <div class="form-row">
                                     <div class="col-md-12 form-group">
                                         <div class="col-md-6">
