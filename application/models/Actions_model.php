@@ -626,7 +626,7 @@ group by 1,2,3,4,5,6,7 order by date_sent desc";
 
 			$planneddata = array(
 			'company_id' 	=> $post['company_id'],
-			'user_id' 		=> '12',
+			'user_id' 		=> $post['user_id'],
 			'comments'		=> (isset($post['comment'])?$post['comment']:NULL),
 			'planned_at'	=> $post['planned_at'],
 			'window'		=> (isset($post['window'])?$post['window']:NULL),

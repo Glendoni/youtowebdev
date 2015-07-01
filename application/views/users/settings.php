@@ -3,9 +3,6 @@
   <div class="col-lg-12">
     <div class="panel panel-green">
         <div class="panel-heading profile-heading">
-            <span>
-              <img src="<?php echo asset_url();?>images/profiles/<?php echo isset($system_users_images[$current_user['id']])? $system_users_images[$current_user['id']]:'none.jpg' ;?>" class="img-circle" alt="" />
-            </span>
             <h3>Settings</h3>
         </div>
         <!-- /.panel-heading -->
