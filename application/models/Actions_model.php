@@ -611,7 +611,7 @@ group by 1,2,3,4,5,6,7 order by date_sent desc";
 			'window'		=> (isset($post['window'])?$post['window']:NULL),
 			'contact_id'    => (!empty($post['contact_id'])?$post['contact_id']:NULL),
 			'created_by'	=> $post['user_id'],
-			'action_type_id'=> $post['action_type_completed'],
+			'action_type_id'=> (isset($post['action_type_completed'])?$post['action_type_completed']:$post['action_type']),
 			'actioned_at'	=> date('Y-m-d H:i:s'),
 			'created_at' 	=> date('Y-m-d H:i:s'),
 			);
