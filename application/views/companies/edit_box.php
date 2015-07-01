@@ -92,6 +92,7 @@
                             <button type="button" class="btn btn-default" data-color="primary" id="permanent"><i class="state-icon glyphicon glyphicon-unchecked"></i>&nbsp;Permanent</button>
                             <input type="checkbox" name="perm" value="1" id="permanent" class="hidden" <?php echo isset($company['perm'])? 'checked': '' ; ?> >
                         </span>
+
                     </div>
                 </div>
 
@@ -108,6 +109,7 @@
 					    </span>
 					<?php endforeach ?>
 					</div>
+            
 				</div>
 				</div>
 				<div class="modal-loading-display text-center " id="loading-display-<?php echo $company['id']; ?>" style="display:none;">

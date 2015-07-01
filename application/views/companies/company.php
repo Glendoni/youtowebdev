@@ -1,47 +1,60 @@
 <?php  $company = $companies[0]; ?>
 <div class="row page-results-list">
-
 <div class="top-info-holder">
 	<h2 class="company-header">
 	<?php echo $company['name'];?>
 	</h2>
 	<?php if (isset($company['parent_registration'])): ?>
-		<span class="label label-danger">Subsidiary of <?php echo $company['parent_registration'];?></span>
+		<div style="height: 1px; background-color: #d9534f; text-align: center; margin:30px 0; ">
+		<span class="label label-danger" style="position: relative; top: -10px;">Subsidiary of <?php echo $company['parent_registration'];?></span>
+			</div>
+
 	<?php endif; ?>
-	<?php if (isset($company['pipeline'])): ?>
-		<span class="label pipeline-label label-<?php echo str_replace(' ', '', $company['pipeline']); ?>">
-		<?php if ($company['pipeline']=='Blacklisted'): ?>
-		<?php echo $company['pipeline'] ?> - Do Not Call - See Comments
-		<?php else: ?>
+<?php if (isset($company['pipeline'])): ?>
+			<div style="height: 1px; background-color: #f2f2f2; text-align: center; margin:30px 0; ">
+				<span class="label pipeline-label label-<?php echo str_replace(' ', '', $company['pipeline']); ?>" style="position: relative; top: -10px;">
 		<?php echo $company['pipeline'] ?></span>
-		<?php endif; ?>
+			</span>
+			</div>
+<?php endif; ?>
+
+
+<?php if(isset($company['assigned_to_name'])): ?>
+
+	<div style="height: 1px; background-color: #f2f2f2; text-align: center; margin:30px 0; ">
+				<span class="label pipeline-label label-<?php echo str_replace(' ', '', $company['pipeline']); ?>" style="position: relative; top: -10px; <?php if(isset($company['assigned_to_name'])): ?> <?php $user_icon = explode(",", ($system_users_images[$company['assigned_to_id']]));echo "background-color:".$user_icon[1]."; color:".$user_icon[2].";";?><?php else: ?> <?php endif; ?>>">
+		<?php echo $company['assigned_to_name']; ?></span>
+			</span>
+			</div>
+
 	<?php endif; ?>
+
+
+
+
+
 	<!-- POPUP BOXES -->
 	<?php $this->load->view('companies/edit_box.php',array('company'=>$company)); ?>
 	<?php $this->load->view('companies/create_contact_box.php',array('company'=>$company)); ?>
 	<?php $this->load->view('companies/create_address_box.php',array('company'=>$company)); ?>
 
 	<!-- // POPUP BOXES -->
-</div>
-<div class="panel <?php if(isset($company['assigned_to_name'])): ?> panel-primary <?php else: ?> panel-default <?php endif; ?> company">
-	<?php if(isset($company['assigned_to_name'])): ?>
+</div><!--END TOP INFO HOLDER-->
 
-	<div class="panel-heading profile-heading text-center"  <?php if(isset($company['assigned_to_name'])): ?> <?php $user_icon = explode(",", ($system_users_images[$company['assigned_to_id']]));echo "style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'";?><?php else: ?> <?php endif; ?>>
-        <h3>Assigned to <?php echo $company['assigned_to_name']; ?></h3>
-    </div>
-	<?php endif; ?>
+<div class="panel panel-primary" style="padding-top: 30px;">
 	<div class="panel-body">
     	<div class="row">
 			<div class="col-sm-9">
 		<div class="row">
 		<div class="col-sm-12">
-				<strong>Address</strong>
+				<label>Address</label>
 				<p style="margin-bottom:0;">
                 <?php echo isset($company['address'])?$company['address']:'-'; ?>  
-				</p>
+				</p><hr>
 		</div><!--END ADDRESS-->
-		<div class="col-xs-6 col-md-4" style="margin-top:10px;">
-			<strong>Company Number</strong>
+		
+		<div class="col-xs-6" style="margin-top:10px;">
+			<label>Company Number</label>
 			<p style="margin-bottom:0;">	
 			 <!--COMPANY NUMBER IF APPLICABLE-->
                 <?php if (isset($company['registration'])): ?>
@@ -52,21 +65,22 @@
          	</p>
         	</div>
 		<div class="col-xs-6" style="margin-top:10px;">
-				<strong>Company Name</strong>
+				<label>Company Name</label>
 				<p style="margin-bottom:0;">	
 				<?php echo $company['name']; ?>
 				</p>
 		</div><!--END NAME-->
+
 				
 		
-        <div class="col-xs-6 col-md-4" style="margin-top:10px;">
-        		<strong>Phone Number</strong>
+        <div class="col-xs-6" style="margin-top:10px;">
+        		<label>Phone Number</label>
         		<p style="margin-bottom:0;">
         		<?php echo isset($company['phone'])?$company['phone']:'-'; ?>                
            		</p>
 			</div><!--END PHONE NUMBER-->
 		<div class="col-xs-6 col-md-4" style="margin-top:10px;">
-				<strong>Class</strong>
+				<label>Class</label>
 				<p style="margin-bottom:0;">	
 		            <!--CLASS IF APPLICABLE-->
 		            <?php if (isset($company['class'])): ?>
@@ -86,7 +100,7 @@
 		<?php $this->load->view('companies/actions_box.php',array('company'=>$company)); ?>
 		<?php if (isset($company['url'])): ?>
 		<a class="btn btn-default btn-sm btn-block" href="<?php $parsed = parse_url($company['url']); if (empty($parsed['scheme'])) { echo 'http://' . ltrim($company['url'], '/'); }else{ echo $company['url']; } ?>" target="_blank">
-				<strong>Web:</strong> <?php echo str_replace("http://"," ",str_replace("www.", "", $company['url']))?>
+				<label>Web:</label> <?php echo str_replace("http://"," ",str_replace("www.", "", $company['url']))?>
 		</a>
 			<?php endif; ?>
 		<!-- LINKS AND BTN -->
@@ -105,14 +119,14 @@
 		<div class="row col-md-12">
 				<!-- TURNOVER -->
 		<div class="col-sm-3 col-xs-6 centre">
-			<strong>Turnover</strong>
+			<label>Turnover</label>
 			<p class="details" style="margin-bottom:5px;">
 				£<?php echo isset($company['turnover'])? number_format (round($company['turnover'],-3)):'0';?>
 			            	<span class="label label-default" ><?php  echo isset($company['turnover_method'])?$company['turnover_method']:'';?></span>
 </p>	
         </div>
         <div class="col-sm-2 col-xs-6 centre">
-        	<strong>Founded</strong>
+        	<label>Founded</label>
 			<p class="details">
 				<?php echo isset($company['eff_from'])?$company['eff_from']:''; ?>
 			</p>
@@ -120,7 +134,7 @@
 
 		<!-- CONTACTS -->
 		<div class="col-sm-2 col-xs-6 centre">
-			<strong>Contacts</strong>			
+			<label>Contacts</label>			
 			<?php if (isset($company['contacts_count'])): ?>
 			<p class="details"><?php echo $company['contacts_count'];?> </p>
 			<?php else: ?>
@@ -130,7 +144,7 @@
 
 		<!-- EMPLOYEES -->
 		<div class="col-sm-2 col-xs-6 centre">
-			<strong>Employees</strong>
+			<label>Employees</label>
 			<?php if (isset($company['emp_count'])): ?>
 			<p class="details"><?php echo $company['emp_count'];?> </p>
 			<?php else: ?>
@@ -140,7 +154,7 @@
 
 		<!-- SECTORS -->
 		<div class="col-sm-3 col-xs-12 centre">
-			<strong>Sectors</strong> 
+			<label>Sectors</label> 
 			<?php 
 			if(isset($company['sectors'])){
 				foreach ($company['sectors'] as $key => $name) {

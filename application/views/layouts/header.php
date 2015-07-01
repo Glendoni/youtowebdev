@@ -69,7 +69,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/" >Baselist</a>
+                <a class="navbar-brand" href="/" >Baselist <span style="font-size:10px; font-weight:300;">v1.01</span></a>
             </div>
             <!-- Top Menu Items -->
             <?php if (isset($current_user)): ?>
@@ -241,7 +241,9 @@
                 <?php endif; ?>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <i class="fa fa-user"></i> <?php echo $current_user['name'] ?> <b class="caret"></b></a>
+
+                    <?php $user_icon = explode(",", ($system_users_images[$current_user['id']])); echo "<div class='circle' style='float: left;margin-top: 0px;margin-right: 10px;width: 20px;height: 20px;border-radius: 15px;font-size: 8px;line-height: 20px;text-align: center;font-weight: 700;background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
+                    <?php echo $current_user['name'] ?> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <a href="<?php echo site_url(); ?>users/profile"><i class="fa fa-fw fa-user"></i> Profile</a>
@@ -468,7 +470,7 @@
                                 <div class="panel-heading">
                                     <h3 class="panel-title">My Searches <span class="badge pull-right"><?php echo count($private_searches); ?></span></h3>
                                 </div>
-                                <div class="panel-body">
+                              <div class="panel-body" style="padding:0;">
                                     <ul class="list-group">
                                     <!-- PRIVATE SEARCHES -->
                                     <?php foreach ($private_searches as $campaign):?>

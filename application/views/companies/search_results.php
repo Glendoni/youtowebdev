@@ -56,7 +56,7 @@
 			</div>	
 			<?php else: ?>
 			<?php echo form_open(site_url().'campaigns/create', 'name="create_campaign" class="create_campaign navbar-form navbar-left" style="width:100%;" role="form"'); ?>
-			<div class="col-md-5"   style="padding-top: 3px;">
+			<div class="row col-md-5"   style="padding-top: 3px;">
 			 	<div class="form-group" style="width:100%">
 					<input type="text" name="name" class="form-control col-md-6" style="width:100%" id="name" placeholder="Enter search name...">
 			    </div>

@@ -12,17 +12,15 @@
 	<div class="panel-body">
     <div class="row">
 		<div class="col-sm-12">
-			<h3 class="name" style="margin-top: 0px;margin-bottom: 0;">
+		<h2 class="company-header">
 				<a href="<?php echo site_url();?>companies/company?id=<?php echo $company['id'];?>">
 					<?php 
 					$words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' );
 					echo str_replace($words, ' ',$company['name']); 
 					?>
-				</a>
-			</h3>
-			</h2>
+				</a></h2>
 			</div>
-			<div class="col-sm-12" style="margin-top:5px;">
+			<div class="col-sm-12" style="margin-top:5px; text-align:center;">
 	<?php if (isset($company['parent_registration'])): ?>
 		<span class="label label-danger">Subsidiary of <?php echo $company['parent_registration'];?></span>
 	<?php endif; ?>
