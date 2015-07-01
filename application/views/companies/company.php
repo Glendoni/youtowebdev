@@ -327,8 +327,8 @@
 		</div>
 		</div>
 		<div class="col-md-12">
-		<div class="panel panel-info ">
-		  <div class="panel-heading"><h3 class="panel-title">Completed & Follow Up Actions</h3></div>
+		<div class="panel panel-default">
+		  <div class="panel-heading">Completed & Follow Up Actions</div>
 		  <div class="panel-body">
 		   <?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'],'done'=>'1');
 			echo form_open(site_url().'actions/create', 'name="create" class="form" role="form"',$hidden); ?>

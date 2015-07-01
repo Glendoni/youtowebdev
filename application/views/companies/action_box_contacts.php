@@ -8,7 +8,7 @@
 </button>
 <?php if($contact->email): ?>
 <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#send-email<?php echo $contact->id; ?>">
-    <i class="fa fa-envelope"></i> Send Email 
+   Send Email 
 </button>
 <?php endif;?>
 <div class="modal fade" id="send-email<?php echo $contact->id; ?>" tabindex="-1" role="dialog" aria-labelledby="Send email to <?php echo ucfirst($contact->first_name).' '.ucfirst($contact->last_name) ?>" aria-hidden="true" style="display: none;">
