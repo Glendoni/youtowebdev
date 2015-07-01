@@ -139,7 +139,7 @@ class Email_templates extends MY_Controller {
 							'comment'		=> nl2br($message),
 							'contact_id'    => $contact->id,
 							'created_by'	=> $this->data['current_user']['id'],
-							'action_type'=> '13',//email
+							'action_type_completed'=> '13',//email
 							'created_at' 	=> date('Y-m-d H:i:s'),
 							);
 				    $this->Actions_model->create($data); 
