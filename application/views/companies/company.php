@@ -767,7 +767,7 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 					<?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'],'done'=>'1');
 					echo form_open(site_url().'actions/create', 'name="create" class="" role=""',$hidden); ?>
 		            <div class="input-group">
-		            	<input type="hidden" name="action_type" value="7">
+		            	<input type="hidden" name="action_type_completed" value="7">
 	                    <input id="btn-input" type="text" class="form-control input-sm" name="comment" placeholder="Type your comments here...">
 	                    <span class="input-group-btn">
 	                        <button class="btn btn-warning btn-sm" id="btn-chat">
