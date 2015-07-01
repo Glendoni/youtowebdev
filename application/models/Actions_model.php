@@ -111,7 +111,7 @@ group by 1,2,3,4,5,6,7 order by date_sent desc";
 		$end_date_week = date('Y-m-d 23:59:59',strtotime('sunday this week'));
 		$sql = "select U.name, U.id as user,
 				sum(case when action_type_id = '4' AND actioned_at > '$start_date_week' AND actioned_at < '$end_date_week' then 1 else 0 end) introcall,
-				sum(case when (action_type_id = '4' or action_type_id = '5')  AND actioned_at > '$start_date_week' AND actioned_at < '$end_date_week' then 1 else 0 end) salescall,
+				sum(case when (action_type_id = '4' or action_type_id = '5' or action_type_id = '11' or action_type_id = '17')  AND actioned_at > '$start_date_week' AND actioned_at < '$end_date_week' then 1 else 0 end) salescall,
 		    	sum(case when (action_type_id = '5' OR action_type_id = '11') AND actioned_at > '$start_date_week' AND actioned_at < '$end_date_week' then 1 else 0 end) callcount,
 		   		sum(case when (action_type_id = '12' or action_type_id = '10' or action_type_id = '9' or action_type_id = '15') AND actioned_at > '$start_date_week' AND actioned_at < '$end_date_week' then 1 else 0 end) meetingcount,
 		    	sum(case when (action_type_id = '12' or action_type_id = '10' or action_type_id = '9' or action_type_id = '15') AND a.created_at > '$start_date_week' AND a.created_at < '$end_date_week' then 1 else 0 end) meetingbooked,
@@ -134,7 +134,7 @@ group by 1,2,3,4,5,6,7 order by date_sent desc";
 		$end_date_week = date('Y-m-d 23:59:59',strtotime('sunday last week'));
 		$sql = "select U.name, U.id as user,
 				sum(case when action_type_id = '4' AND actioned_at > '$start_date_week' AND actioned_at < '$end_date_week' then 1 else 0 end) introcall,
-				sum(case when (action_type_id = '4' or action_type_id = '5')  AND actioned_at > '$start_date_week' AND actioned_at < '$end_date_week' then 1 else 0 end) salescall,
+				sum(case when (action_type_id = '4' or action_type_id = '5' or action_type_id = '11' or action_type_id = '17')  AND actioned_at > '$start_date_week' AND actioned_at < '$end_date_week' then 1 else 0 end) salescall,
 		    	sum(case when (action_type_id = '5' OR action_type_id = '11') AND actioned_at > '$start_date_week' AND actioned_at < '$end_date_week' then 1 else 0 end) callcount,
 		   		sum(case when (action_type_id = '12' or action_type_id = '10' or action_type_id = '9' or action_type_id = '15') AND actioned_at > '$start_date_week' AND actioned_at < '$end_date_week' then 1 else 0 end) meetingcount,
 		    	sum(case when (action_type_id = '12' or action_type_id = '10' or action_type_id = '9' or action_type_id = '15') AND a.created_at > '$start_date_week' AND a.created_at < '$end_date_week' then 1 else 0 end) meetingbooked,
@@ -158,7 +158,7 @@ group by 1,2,3,4,5,6,7 order by date_sent desc";
 		$end_date_month = date('Y-m-d 23:59:59',strtotime('last day of this month'));
 		$sql = "select U.name, U.id as user,
 				sum(case when action_type_id = '4' AND actioned_at > '$start_date_month' AND actioned_at < '$end_date_month' then 1 else 0 end) introcall,
-				sum(case when (action_type_id = '4' or action_type_id = '5')  AND actioned_at > '$start_date_month' AND actioned_at < '$end_date_month' then 1 else 0 end) salescall,
+				sum(case when (action_type_id = '4' or action_type_id = '5' or action_type_id = '11' or action_type_id = '17')  AND actioned_at > '$start_date_month' AND actioned_at < '$end_date_month' then 1 else 0 end) salescall,
 		    	sum(case when (action_type_id = '5' OR action_type_id = '11') AND actioned_at > '$start_date_month' AND actioned_at < '$end_date_month' then 1 else 0 end) callcount,
 		   		sum(case when (action_type_id = '12' or action_type_id = '10' or action_type_id = '9' or action_type_id = '15') AND actioned_at > '$start_date_month' AND actioned_at < '$end_date_month' then 1 else 0 end) meetingcount,
 		    	sum(case when (action_type_id = '12' or action_type_id = '10' or action_type_id = '9' or action_type_id = '15') AND a.created_at > '$start_date_month' AND a.created_at < '$end_date_month' then 1 else 0 end) meetingbooked,
@@ -213,10 +213,10 @@ group by 1,2,3,4,5,6,7 order by date_sent desc";
 		$start_date = $dates['start_date'];
 		$end_date = $dates['end_date'];
 		if (isset($_GET['start_date'])) {
-		$start_date_sql = "AND a.created_at > '".date('Y-m-d 00:00:00',strtotime($start_date))."'  AND a.created_at < '".date('Y-m-d 23:59:59',strtotime($end_date))."' ";
+		$start_date_sql = "a.created_at > '".date('Y-m-d 00:00:00',strtotime($start_date))."'  AND a.created_at < '".date('Y-m-d 23:59:59',strtotime($end_date))."' ";
 		}
 		else {
-		$start_date = "";}
+		$start_date_sql = "a.created_at > NOW() - INTERVAL '60 days'";}
 		$sql = "select
 		c.id as company_id,
 		a.comments,
@@ -233,7 +233,7 @@ group by 1,2,3,4,5,6,7 order by date_sent desc";
 		FROM actions z 
 		WHERE z.company_id = a.company_id and z.action_type_id = '19' 
 		order by a.actioned_at desc
-		) left join users u on a.created_by = u.id where a.action_type_id = '19' and (a.comments ilike '%intent%' or a.comments ilike '%qualified%') and a.created_at > NOW() - INTERVAL '60 days' $start_date_sql order by a.created_at desc";
+		) left join users u on a.created_by = u.id where a.action_type_id = '19' and (a.comments ilike '%intent%' or a.comments ilike '%qualified%') and $start_date_sql order by a.created_at desc";
 		$query = $this->db->query($sql);
 
 		if($query){
@@ -247,9 +247,11 @@ group by 1,2,3,4,5,6,7 order by date_sent desc";
 		$dates = $this->dates();
 		$start_date = $dates['start_date'];
 		$end_date = $dates['end_date'];
-		if (isset($start_date)) {
-		$start_date_sql = "AND a.created_at > '".date('Y-m-d 00:00:00',strtotime($start_date))."'  AND a.created_at < '".date('Y-m-d 23:59:59',strtotime($end_date))."'";
+		if (isset($_GET['start_date'])) {
+		$start_date_sql = "a.created_at > '".date('Y-m-d 00:00:00',strtotime($start_date))."'  AND a.created_at < '".date('Y-m-d 23:59:59',strtotime($end_date))."' ";
 		}
+		else {
+		$start_date_sql = "a.created_at > NOW() - INTERVAL '60 days'";}
 		$sql = "select
 		c.id as company_id,
 		a.comments,
@@ -266,7 +268,7 @@ group by 1,2,3,4,5,6,7 order by date_sent desc";
 		FROM actions z 
 		WHERE z.company_id = a.company_id and z.action_type_id = '19' 
 		order by a.actioned_at desc
-		) left join users u on a.created_by = u.id where a.created_by = '$user_id' and a.action_type_id = '19' and (a.comments ilike '%intent%' or a.comments ilike '%qualified%') and a.created_at > NOW() - INTERVAL '60 days' $start_date_sql order by a.created_at desc";
+		) left join users u on a.created_by = u.id where a.created_by = '$user_id' and a.action_type_id = '19' and (a.comments ilike '%intent%' or a.comments ilike '%qualified%') and $start_date_sql order by a.created_at desc";
 		$query = $this->db->query($sql);
 
 		if($query){
@@ -281,15 +283,17 @@ group by 1,2,3,4,5,6,7 order by date_sent desc";
 		$start_date = $dates['start_date'];
 		$end_date = $dates['end_date'];
 		if (isset($_GET['start_date'])) {
-		$start_date_sql = "AND a.created_at > '".date('Y-m-d 00:00:00',strtotime($start_date))."'  AND a.created_at < '".date('Y-m-d 23:59:59',strtotime($end_date))."'";
+		$start_date_sql = "a.created_at > '".date('Y-m-d 00:00:00',strtotime($start_date))."'  AND a.created_at < '".date('Y-m-d 23:59:59',strtotime($end_date))."' ";
 		}
+		else {
+		$start_date_sql = "a.created_at > NOW() - INTERVAL '60 days'";}
 		$sql = "select
 		c.id as company_id,a.comments,c.name as company_name,a.id,a.created_at,c.pipeline,u.name as username from companies c inner join actions a on c.id = a.company_id and a.id = 	(
 		SELECT MAX(id) 
 		FROM actions z 
 		WHERE z.company_id = a.company_id and z.action_type_id = '19' 
 		order by a.actioned_at desc
-		) left join users u on a.created_by = u.id where a.action_type_id = '19' and (c.pipeline ilike '%proposal%') and a.created_at > NOW() - INTERVAL '60 days' $start_date_sql order by a.created_at desc";
+		) left join users u on a.created_by = u.id where a.action_type_id = '19' and (c.pipeline ilike '%proposal%') and a.created_at > NOW() - INTERVAL '60 days' AND $start_date_sql order by a.created_at desc";
 		$query = $this->db->query($sql);
 
 		if($query){
@@ -304,15 +308,17 @@ group by 1,2,3,4,5,6,7 order by date_sent desc";
 		$start_date = $dates['start_date'];
 		$end_date = $dates['end_date'];
 		if (isset($_GET['start_date'])) {
-		$start_date_sql = "AND a.created_at > '".date('Y-m-d 00:00:00',strtotime($start_date))."'  AND a.created_at < '".date('Y-m-d 23:59:59',strtotime($end_date))."'";
+		$start_date_sql = "a.created_at > '".date('Y-m-d 00:00:00',strtotime($start_date))."'  AND a.created_at < '".date('Y-m-d 23:59:59',strtotime($end_date))."' ";
 		}
+		else {
+		$start_date_sql = "a.created_at > NOW() - INTERVAL '60 days'";}
 		$sql = "select
 		c.id as company_id,a.comments,c.name as company_name,a.id,a.created_at,c.pipeline,u.name as username from companies c inner join actions a on c.id = a.company_id and a.id = 	(
 		SELECT MAX(id) 
 		FROM actions z 
 		WHERE z.company_id = a.company_id and z.action_type_id = '19' 
 		order by a.actioned_at desc
-		) left join users u on a.created_by = u.id where a.created_by = '$user_id' and a.action_type_id = '19' and (c.pipeline ilike '%proposal%') and a.created_at > NOW() - INTERVAL '60 days' $start_date_sql order by a.created_at desc";
+		) left join users u on a.created_by = u.id where a.created_by = '$user_id' and a.action_type_id = '19' and (c.pipeline ilike '%proposal%') and $start_date_sql order by a.created_at desc";
 		$query = $this->db->query($sql);
 
 		if($query){
@@ -601,6 +607,7 @@ group by 1,2,3,4,5,6,7 order by date_sent desc";
 		} 
 	}
 
+	
 
 	// INSERTS
 	function create($post)

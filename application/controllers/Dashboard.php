@@ -27,11 +27,11 @@ class Dashboard extends MY_Controller {
 		$this->data['getstatssearch'] = $this->Actions_model->get_stats_search();
 		$this->data['pipelinecontacted'] = $this->Actions_model->get_pipeline_contacted();
 		$this->data['pipelinecontactedindividual'] = $this->Actions_model->get_pipeline_contacted_individual($this->get_current_user_id());
-		$this->data['pipelineproposal'] = $this->Actions_model->get_pipeline_proposal();
+		$this->data['pipelineproposal'] = $this->Actions_model->get_pipeline_proposal($this->get_current_user_id());
 		$this->data['pipelineproposalindividual'] = $this->Actions_model->get_pipeline_proposal_individual($this->get_current_user_id());
-		$this->data['pipelinecustomer'] = $this->Actions_model->get_pipeline_customer();
+		$this->data['pipelinecustomer'] = $this->Actions_model->get_pipeline_customer($this->get_current_user_id());
 		$this->data['pipelinecustomerindividual'] = $this->Actions_model->get_pipeline_customer_individual($this->get_current_user_id());
-		$this->data['pipelinelost'] = $this->Actions_model->get_pipeline_lost();
+		$this->data['pipelinelost'] = $this->Actions_model->get_pipeline_lost($this->get_current_user_id());
 		$this->data['pipelinelostindividual'] = $this->Actions_model->get_pipeline_lost_individual($this->get_current_user_id());
 		$this->data['getuserplacements'] = $this->Actions_model->get_user_placements();
 		$this->data['getuserproposals'] = $this->Actions_model->get_user_proposals();
