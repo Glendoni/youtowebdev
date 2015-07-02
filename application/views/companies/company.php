@@ -327,8 +327,8 @@
 		</div>
 		</div>
 		<div class="col-md-12">
-		<div class="panel panel-default">
-		  <div class="panel-heading">Completed & Follow Up Actions</div>
+		<div class="panel panel-info ">
+		  <div class="panel-heading"><h3 class="panel-title">Completed & Follow Up Actions</h3></div>
 		  <div class="panel-body">
 		   <?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'],'done'=>'1');
 			echo form_open(site_url().'actions/create', 'name="create" class="form" role="form"',$hidden); ?>
@@ -401,11 +401,7 @@
 		  </div>
 		</div>
 		</div>
-		
-
-
-<div class="">
-	<div class="col-md-12" >
+			<div class="col-md-12" >
 		<div class="panel panel-default ">
 			<div class="panel-heading">
 			Actions
@@ -432,26 +428,23 @@
 				        </ul>
 				        <!-- Tab panes -->
 				        <div class="tab-content">
-				            <div class="tab-pane fade in active" id="outstanding">
-				               <?php if (count($actions_outstanding) > 0): ?>
-								<ul class="list-group">
+				        <!-- OUTSTANDING -->
+<div class="tab-pane fade in active" id="outstanding">
+		<?php if (count($actions_outstanding) > 0): ?>
+				<ul class="list-group">
 								<?php foreach ($actions_outstanding as $action_outstanding): 
-								 // print_r('<pre>');print_r($action);print_r('</pre>');
 								 $created_date_formatted = date("l jS F y",strtotime($action_outstanding->created_at))." @ ".date("H:i",strtotime($action_outstanding->created_at));
 								 $actioned_date_formatted = date("l jS F y",strtotime($action_outstanding->actioned_at))." @ ".date("H:i",strtotime($action_outstanding->actioned_at));
 								 $planned_date_formatted = date("l jS F y",strtotime($action_outstanding->planned_at))." @ ".date("H:i",strtotime($action_outstanding->planned_at));
 								 $cancelled_at_formatted = date(" jS F y",strtotime($action_outstanding->cancelled_at))." @ ".date("H:i",strtotime($action_outstanding->cancelled_at));
 								 $now = date(time());
 								?>
-								<!-- OUTSTANDING -->
-				<li class="list-group-item">
-					<div class="row" style="padding: 15px 0">
-						<div class="col-md-12 ">
-							<div class="col-xs-2 col-md-1 profile-heading">
-								<span>
+						<li class="list-group-item">
+							<div class="row" style="padding: 15px 0">
+								<div class="col-md-12 ">
+									<div class="col-xs-2 col-md-1 profile-heading">
 									<?php $user_icon = explode(",", ($system_users_images[$action_outstanding->user_id])); echo "<div class='circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
-								</span>
-							</div>
+								</div>
 							<div class="col-xs-6 col-md-5">
 								<h4 style="margin:0;">
 									<a data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $action_outstanding->id ?>" aria-expanded="false" aria-controls="collapse<?php echo $action_outstanding->id ?>">
@@ -524,7 +517,10 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 									<h4 style="margin: 50px 0 40px 0; text-align: center;">No outstanding actions found for this company</h4>
 								</div>
 							<?php endif; ?>
-				            </div>
+				            </div>    
+
+
+<!-- COMPLETED -->
 				            <div class="tab-pane fade in" id="completed">
 				               <?php if (count($actions_completed) > 0): ?>
 								<ul class="list-group">
@@ -536,13 +532,9 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 								 $now = date(time());
 								?>
 				
-								<!-- COMPLETED -->
 								<?php if ($action_completed->action_type_id == 19): ?>
-									<?php
-										$arr = explode(' ',trim($action_completed->comments));
-										$pipeline_updated = $arr[3];
-										?><li class="list-group-item pipeline-update <?php echo $pipeline_updated;?>"><?php echo $action_completed->comments ?>
-				                                on <?php echo date("l jS F y",strtotime($action_completed->actioned_at))." @ ".date("H:i",strtotime($action_completed->actioned_at)); ?></span></li>
+									<?php $arr = explode(' ',trim($action_completed->comments));$pipeline_updated = $arr[3];?><li class="list-group-item pipeline-update <?php echo $pipeline_updated;?>"><?php echo $action_completed->comments ?>
+				                                on <?php echo date("l jS F y",strtotime($action_completed->actioned_at))." @ ".date("H:i",strtotime($action_completed->actioned_at)); ?></li>
 									<?php else: ?>
 				                <li class="list-group-item">
 					<div class="row" style="padding: 15px 0">
@@ -573,15 +565,8 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 											<?php if (!empty($action_completed->comments)):?>
 											<div class="comment-text speech" >
 											<div class="triangle-isosceles top">
-											<?php echo $action_completed->comments ?>
+											<?php echo nl2br($action_completed->comments) ?>
 											<?php if (!empty($action_completed->outcome)):?>
-											<table style="width:100%">
-											<tr>
-											<td style="width:35%"><hr/></td>
-											<td style="width:20%;vertical-align:middle; text-align: center; font-size:11px; color: #222;"> Outcome </td>
-											<td style="width:35%"><hr/></td>
-											</tr>
-											</table>
 											<?php echo $action_completed->outcome ?>
 											<?php endif; ?>
 											</div>
@@ -610,6 +595,8 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 								</div>
 							<?php endif; ?>
 				            </div>
+				            								<!-- CANCELLED -->
+
 				            <div class="tab-pane fade in" id="cancelled">
 						<?php if (count($actions_cancelled) > 0): ?>
 								<ul class="list-group">
@@ -617,7 +604,6 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 								 $created_date_formatted = date("l jS F y",strtotime($action_cancelled->created_at))." @ ".date("H:i",strtotime($action_cancelled->created_at));
 								 $cancelled_at_formatted = date(" jS F y",strtotime($action_cancelled->cancelled_at))." @ ".date("H:i",strtotime($action_cancelled->cancelled_at));
 								?>
-								<!-- CANCELLED -->
 				                <li class="list-group-item">
 					<div class="row" style="padding: 15px 0">
 						<div class="col-md-12 ">
@@ -688,9 +674,8 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 								<?php foreach ($actions_marketing as $actions_marketing): 
 								 $created_date_formatted = date("l jS F y",strtotime($actions_marketing['date_sent']));
 								?>
-				                <li class="list-group-item" style="padding:0;">
-				                 
-				                        <div class="row" style="padding: 15px 0">
+<li class="list-group-item">
+					<div class="row" style="padding: 15px 0">				                 
 						<div class="col-md-12 ">
 					
 							<div class="col-xs-6 col-md-4">
@@ -728,6 +713,7 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 											
 				                        </div>
 				                        </div>
+				                        </div>
 				                </li>
 				                <?php endforeach ?>
 				                </ul>
@@ -741,23 +727,21 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 				            
 
 							<?php if (count($comments) > 0): ?>
-								<ul class="list-group">
+							<ul class="list-group">
 	        				<?php foreach ($comments as $comment):
 	        				// print_r('<pre>');print_r($action);print_r('</pre>');
 							 $created_date_formatted = date("d/m/y",strtotime($comment->created_at));
 							?>
 							<li class="list-group-item">
-							<div class="row">
+							
 							<div class="col-md-12 ">
 							<h4 style="margin-bottom:0;"><?php echo $system_users[$comment->user_id]?></h4><small class="text-muted">
 							<i class="fa fa-calendar fa-fw"></i> <?php echo $created_date_formatted?></small>
 							</div>
 							<div class="col-md-12 ">
-							<p>
-							<?php echo isset($comment->comments)? $comment->comments:'No comments'; ?>
-							</p>
+							
 	                        </div>
-	                        </div>
+	                        
 	                        </li>
 	        			<?php endforeach ?>
 	        			</ul>
@@ -774,8 +758,8 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 	                            Send
 	                        </button>
 	                    </span>
-	            	</div>
-	            </form>
+			            	</div>
+			            </form>
 
 
 
@@ -783,7 +767,7 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 
 				            </div>
 				        </div>
-				        <!-- Ad -->
+				        <!-- End Tab Content -->
 				    </div>
 				</div>
 			<!--END TABS-->
@@ -795,7 +779,7 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
     
     
     
-</div>
+
 </div><!--CLOSE ROW-->
 </div>
 </div>
