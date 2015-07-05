@@ -381,33 +381,32 @@ class Companies_model extends CI_Model {
 		       C.name, -- f2
 		       C.url, -- f3
 			   to_char(C.eff_from, \'dd/mm/yyyy\'), -- f4
-			   C.ddlink, -- f5
-			   C.linkedin_id, -- f6
-			   U.name, -- f7
-			   U.id , -- f8
-			   A.address, --f9
-			   C.contract, --f10
-			   C.perm, -- f11
-			   C.active, -- f12
-			   C.created_at, -- f13
-			   C.updated_at, -- f14
-			   C.created_by,-- f15
-			   C.updated_by,-- f16
-			   C.registration, -- f17
-		       TT1."turnover", -- f18
-			   TT1."turnover_method",  -- f19
-			   EMP.count,--f20
-			   U.image , -- f21
-			   C.class, -- f22
-			   A.lat, -- f23
-			   A.lng, -- f24
+			   C.linkedin_id, -- f5
+			   U.name, -- f6
+			   U.id , -- f7
+			   A.address, --f8
+			   C.contract, --f9
+			   C.perm, -- f10
+			   C.active, -- f11
+			   C.created_at, -- f12
+			   C.updated_at, -- f13
+			   C.created_by,-- f14
+			   C.updated_by,-- f15
+			   C.registration, -- f16
+		       TT1."turnover", -- f17
+			   TT1."turnover_method",  -- f18
+			   EMP.count,--f19
+			   U.image , -- f20
+			   C.class, -- f21
+			   A.lat, -- f22
+			   A.lng, -- f23
 			   json_agg( 
 			   row_to_json ((
-			   TT2."sector_id", TT2."sector"))),-- f25
-			   C.phone, -- f26 
-			   C.pipeline, -- f27
-			   CONT.contacts_count, -- f28
-			   C.parent_registration --f 29
+			   TT2."sector_id", TT2."sector"))),-- f24
+			   C.phone, -- f25 
+			   C.pipeline, -- f26
+			   CONT.contacts_count, -- f27
+			   C.parent_registration --f 28
 
 			   )) "JSON output" 
 			   
@@ -489,7 +488,6 @@ class Companies_model extends CI_Model {
 		         
 		         C.url,
 			     C.eff_from,
-			     C.ddlink,
 			     C.linkedin_id,
 			     C.contract,
 			     C.perm,
@@ -925,7 +923,7 @@ class Companies_model extends CI_Model {
 		$company = array(
 			'name' => $post['name'],
 			'registration' => !empty($post['registration'])?$post['registration']:NULL,
-			'ddlink' => !empty($post['ddlink'])?$post['ddlink']:NULL,
+			// 'ddlink' => !empty($post['ddlink'])?$post['ddlink']:NULL,
 			'phone' => !empty($post['phone'])?$post['phone']:NULL,
 			'linkedin_id' => (!empty($post['linkedin_id']) and !empty($post['linkedin_id']))?$post['linkedin_id']:NULL,
 			'url' => !empty($post['url'])?$post['url']:NULL,
