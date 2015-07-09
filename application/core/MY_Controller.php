@@ -19,7 +19,7 @@ class MY_Controller extends CI_Controller {
 		        $this->output->enable_profiler(FALSE);
 		break;
 		case 'staging':
-		        $this->output->enable_profiler(FALSE);
+		        $this->output->enable_profiler(TRUE);
 		break;
 		case 'production':
 				$this->output->enable_profiler(FALSE);
