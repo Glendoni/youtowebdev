@@ -223,6 +223,7 @@ class Companies extends MY_Controller {
 			$this->data['email_templates'] = $this->Email_templates_model->get_all();
 			$raw_search_results = $this->Companies_model->search_companies_sql(FALSE,$this->input->get('id'));
 			$company = $this->process_search_result($raw_search_results);
+			var_dump($company);
 			$this->data['contacts'] = $this->Contacts_model->get_contacts($this->input->get('id'));
 			$this->data['addresses'] = $this->Companies_model->get_addresses($this->input->get('id'));
 

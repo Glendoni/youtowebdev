@@ -6,23 +6,22 @@
 	</h2>
 	<?php if (isset($company['parent_registration'])): ?>
 		<div style="height: 1px; background-color: #d9534f; text-align: center; margin:30px 0; ">
-		<span class="label label-danger" style="position: relative; top: -10px;">Subsidiary of <?php echo $company['parent_registration'];?></span>
-			</div>
-
+			<span class="label label-danger" style="position: relative; top: -10px;">Subsidiary of <?php echo $company['parent_registration'];?></span>
+		</div>
 	<?php endif; ?>
-<?php if (isset($company['pipeline']) and empty($company['customer_from'])): ?>
+	<?php if (isset($company['pipeline']) and empty($company['customer_from'])): ?>
+			<div style="height: 1px; background-color: #f2f2f2; text-align: center; margin:30px 0; ">
+				<span class="label pipeline-label label-<?php echo str_replace(' ', '', $company['pipeline']); ?>" style="position: relative; top: -10px;">
+				<?php echo $company['pipeline'] ?>
+				</span>
+			</div>
+	<?php elseif ($company['customer_from']): ?>
 		<div style="height: 1px; background-color: #f2f2f2; text-align: center; margin:30px 0; ">
-			<span class="label pipeline-label label-<?php echo str_replace(' ', '', $company['pipeline']); ?>" style="position: relative; top: -10px;">
-			<?php echo $company['pipeline'] ?>
+			<span class="label pipeline-label label-success" style="position: relative; top: -10px;">
+				Client
 			</span>
 		</div>
-<?php elseif ($company['customer_from']): ?>
-	<div style="height: 1px; background-color: #f2f2f2; text-align: center; margin:30px 0; ">
-		<span class="label pipeline-label label-success" style="position: relative; top: -10px;">
-			Client
-		</span>
-	</div>
-<?php endif; ?>
+	<?php endif; ?>
 
 
 <?php if(isset($company['assigned_to_name'])): ?>
