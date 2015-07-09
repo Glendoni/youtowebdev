@@ -51,7 +51,7 @@ class Actions extends MY_Controller {
 							$this->set_message_warning('Error while updating company.');	
 						}else{
 							// actions models, register the update of a company to customer status 
-							$result = $this->Action_model->company_updated_to_customer($post);
+							$result = $this->Actions_model->company_updated_to_customer($post);
 							if(empty($result)) $this->set_message_warning('Error while updating action for the company.');
 						}
 						
@@ -62,7 +62,7 @@ class Actions extends MY_Controller {
 							$this->set_message_warning('Error while updating company.');
 						}else{
 							// action model, update register an action for the proposal
-							$result = $this->Action_model->company_updated_to_proposal($post);
+							$result = $this->Actions_model->company_updated_to_proposal($post);
 							if(empty($result)) $this->set_message_warning('Error while updating action for the company.');
 						}
 					}
