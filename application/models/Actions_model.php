@@ -59,17 +59,17 @@ class Actions_model extends MY_Model {
 	function get_actions_marketing($company_id)
 	{
  	$sql = "select ec.name as campaign_name, con.first_name, con.last_name,
-c.name, u.email,u.id as user_id,ec.date_sent,
-sum(case when email_action_type = '2' then 1 else 0 end) opened,
-sum(case when email_action_type = '3' then 1 else 0 end) clicked,
-sum(case when email_action_type = '3' and link ilike '%unsubscribe%' then 1 else 0 end) unsubscribed
-from email_campaigns ec
-left join email_actions ea on ec.id = ea.email_campaign_id
-inner join contacts con on ea.contact_id = con.id
-left join companies c on con.company_id = c.id
-left join users u on ec.created_by = u.id
-where c.id = '$company_id'
-group by 1,2,3,4,5,6,7 order by date_sent desc";
+			c.name, u.email,u.id as user_id,ec.date_sent,
+			sum(case when email_action_type = '2' then 1 else 0 end) opened,
+			sum(case when email_action_type = '3' then 1 else 0 end) clicked,
+			sum(case when email_action_type = '3' and link ilike '%unsubscribe%' then 1 else 0 end) unsubscribed
+			from email_campaigns ec
+			left join email_actions ea on ec.id = ea.email_campaign_id
+			inner join contacts con on ea.contact_id = con.id
+			left join companies c on con.company_id = c.id
+			left join users u on ec.created_by = u.id
+			where c.id = '$company_id'
+			group by 1,2,3,4,5,6,7 order by date_sent desc";
 		$query = $this->db->query($sql);
 
 		if($query){
@@ -510,7 +510,7 @@ group by 1,2,3,4,5,6,7 order by date_sent desc";
 
 	}
 
-		function get_user_meetings(){
+	function get_user_meetings(){
 		$dates = $this->dates();
 		$search_user_id = $dates['search_user_id'];
 		$start_date = $dates['start_date'];
@@ -522,7 +522,7 @@ group by 1,2,3,4,5,6,7 order by date_sent desc";
 	}
 	}
 
-		function get_user_pitches(){
+	function get_user_pitches(){
 		$dates = $this->dates();
 		$search_user_id = $dates['search_user_id'];
 		$start_date = $dates['start_date'];
@@ -613,7 +613,7 @@ group by 1,2,3,4,5,6,7 order by date_sent desc";
 	function create($post)
 	{
 		//TEST - COMPLETED ACTION ONLY
-			$completeddata = array(
+		$completeddata = array(
 			'company_id' 	=> $post['company_id'],
 			'user_id' 		=> $post['user_id'],
 			'comments'		=> (isset($post['comment'])?$post['comment']:NULL),
@@ -636,82 +636,48 @@ group by 1,2,3,4,5,6,7 order by date_sent desc";
 			'comments'		=> (isset($post['comment'])?$post['comment']:NULL),
 			'planned_at'	=> $post['planned_at'],
 			'window'		=> (isset($post['window'])?$post['window']:NULL),
-
 			'contact_id'    => (!empty($post['contact_id'])?$post['contact_id']:NULL),
 			'created_by'	=> $post['user_id'],
 			'action_type_id'=> $post['action_type_planned'],
 			'actioned_at'	=> NULL,
 			'created_at' 	=> date('Y-m-d H:i:s'),
 			);
-		$query = $this->db->insert('actions', $planneddata);
-
-
+			$query = $this->db->insert('actions', $planneddata);
 		}
+		return $this->db->insert_id();
+	}
 
-
-
-
-		$data = array(
-			'company_id' 	=> $post['company_id'],
-			'user_id' 		=> $post['user_id'],
-			'comments'		=> (isset($post['comment'])?$post['comment']:NULL),
-			'planned_at'	=> (isset($post['planned_at'])? date('Y-m-d H:i:s',strtotime($post['planned_at'])):NULL),
-			'window'		=> (isset($post['window'])?$post['window']:NULL),
-			'contact_id'    => (!empty($post['contact_id'])?$post['contact_id']:NULL),
-			'created_by'	=> $post['user_id'],
-			'action_type_id'=> $post['action_type'],
-			'actioned_at'	=> (!isset($post['actioned_at']) && !isset($post['planned_at'])?date('Y-m-d H:i:s'):NULL),
-			'created_at' 	=> date('Y-m-d H:i:s')
-			);
-
-		if ($post['action_type']=='16') {
-			$id = $post['company_id'];
-			$pipelinedata = array('pipeline' => "Customer");
-
-		$this->db->where('id', $id);
-		$this->db->update('companies', $pipelinedata); 
-
+	function company_updated_to_customer($post){
 		$actiondata = array(
-			'company_id' 	=> $post['company_id'],
-			'user_id' 		=> $post['user_id'],
-			'comments'		=> 'Pipeline changed to Customer',
-			'planned_at'	=> (isset($post['planned_at'])? date('Y-m-d H:i:s',strtotime($post['planned_at'])):NULL),
-			'window'		=> (isset($post['window'])?$post['window']:NULL),
-			'contact_id'    => (!empty($post['contact_id'])?$post['contact_id']:NULL),
-			'created_by'	=> $post['user_id'],
-			'action_type_id'=> '19',
-			'actioned_at'	=> (!isset($post['actioned_at']) && !isset($post['planned_at'])?date('Y-m-d H:i:s'):NULL),
-			'created_at' 	=> date('Y-m-d H:i:s'),
-			);
+					'company_id' 	=> $post['company_id'],
+					'user_id' 		=> $post['user_id'],
+					'comments'		=> 'Pipeline changed to Customer',
+					'planned_at'	=> (isset($post['planned_at'])? date('Y-m-d H:i:s',strtotime($post['planned_at'])):NULL),
+					'window'		=> (isset($post['window'])?$post['window']:NULL),
+					'contact_id'    => (!empty($post['contact_id'])?$post['contact_id']:NULL),
+					'created_by'	=> $post['user_id'],
+					'action_type_id'=> '19',
+					'actioned_at'	=> (!isset($post['actioned_at']) && !isset($post['planned_at'])?date('Y-m-d H:i:s'):NULL),
+					'created_at' 	=> date('Y-m-d H:i:s'),
+					);
 		$query = $this->db->insert('actions', $actiondata);
-
-
-	}
-			else if ($post['action_type']=='8') {
-			$id = $post['company_id'];
-			$pipelinedata = array(
-               'pipeline' => "Proposal"
-            );
-
-		$this->db->where('id', $id);
-		$this->db->update('companies', $pipelinedata); 
-
-			$actiondata = array(
-			'company_id' 	=> $post['company_id'],
-			'user_id' 		=> $post['user_id'],
-			'comments'		=> 'Pipeline changed to Proposal',
-			'planned_at'	=> (isset($post['planned_at'])? date('Y-m-d H:i:s',strtotime($post['planned_at'])):NULL),
-			'window'		=> (isset($post['window'])?$post['window']:NULL),
-			'contact_id'    => (!empty($post['contact_id'])?$post['contact_id']:NULL),
-			'created_by'	=> $post['user_id'],
-			'action_type_id'=> '19',
-			'actioned_at'	=> (!isset($post['actioned_at']) && !isset($post['planned_at'])?date('Y-m-d H:i:s'):NULL),
-			'created_at' 	=> date('Y-m-d H:i:s'),
-			);
-		//$query = $this->db->insert('actions', $actiondata);
+		return $this->db->insert_id();
 	}
 
-	//	$query = $this->db->insert('actions', $completeddata);
+	function company_updated_to_proposal($post){
+		$actiondata = array(
+						'company_id' 	=> $post['company_id'],
+						'user_id' 		=> $post['user_id'],
+						'comments'		=> 'Pipeline changed to Proposal',
+						'planned_at'	=> (isset($post['planned_at'])? date('Y-m-d H:i:s',strtotime($post['planned_at'])):NULL),
+						'window'		=> (isset($post['window'])?$post['window']:NULL),
+						'contact_id'    => (!empty($post['contact_id'])?$post['contact_id']:NULL),
+						'created_by'	=> $post['user_id'],
+						'action_type_id'=> '19',
+						'actioned_at'	=> (!isset($post['actioned_at']) && !isset($post['planned_at'])?date('Y-m-d H:i:s'):NULL),
+						'created_at' 	=> date('Y-m-d H:i:s'),
+						);
+		$query = $this->db->insert('actions', $actiondata);
 		return $this->db->insert_id();
 	}
 	

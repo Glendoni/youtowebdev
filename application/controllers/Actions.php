@@ -39,6 +39,33 @@ class Actions extends MY_Controller {
 				}
 				else
 				{
+					// after the initial action has been successfully created we can continue with the following login
+					// *** TRY TO KEEP LOGIC IN THE CONTROLLER AND DATABASE COMMITS IN THE MODELS***
+					$post = $this->input->post();
+					$company_id = $post['company_id'];
+					if ($post['action_type_completed']=='16') {
+						// if action type completed is a deal then company is a now a customer
+						// companies model update the company to customer
+						$result = $this->Companies_model->update_company_to_customer($company_id);
+						if(empty($result)){
+							$this->set_message_warning('Error while updating company.');	
+						}else{
+							// actions models, register the update of a company to customer status 
+							$result = $this->Action_model->company_updated_to_customer($post);
+							if(empty($result)) $this->set_message_warning('Error while updating action for the company.');
+						}
+						
+					}else if($post['action_type']=='8'){
+						// proposal sent to company 
+						$result = $this->Companies_model->update_company_to_proposal($company_id);
+						if(empty($result)){
+							$this->set_message_warning('Error while updating company.');
+						}else{
+							// action model, update register an action for the proposal
+							$result = $this->Action_model->company_updated_to_proposal($post);
+							if(empty($result)) $this->set_message_warning('Error while updating action for the company.');
+						}
+					}
 					$this->set_message_success('Action successfully inserted');
 					redirect('companies/company?id='.$this->input->post('company_id'),'location');
 				}
