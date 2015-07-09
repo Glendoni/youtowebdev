@@ -16,7 +16,7 @@
 			<?php echo $company['pipeline'] ?>
 			</span>
 		</div>
-<?php elseif ($company['customer_from']) ?>
+<?php elseif ($company['customer_from']): ?>
 	<div style="height: 1px; background-color: #f2f2f2; text-align: center; margin:30px 0; ">
 		<span class="label pipeline-label label-success" style="position: relative; top: -10px;">
 			Client
