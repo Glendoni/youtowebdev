@@ -417,7 +417,7 @@
 				            <?php echo count($actions_marketing);?></span></a></li>
 							<?php else: ?>
 							<?php endif; ?>
-				            <li class="pull-right"><a href="#comments" data-toggle="tab"><i class="fa fa-check"></i> Comments <span class="label label-success"><?php echo count($comments);?></span></a></li>
+				            <li><a href="#comments" data-toggle="tab"> Comments <span class="label label-success"><?php echo count($comments);?></span></a></li>
 				        </ul>
 				        <!-- Tab panes -->
 				        <div class="tab-content">
