@@ -161,6 +161,18 @@ class Companies_model extends CI_Model {
 	}
 
 
+	function update_company_to_customer($id){
+		$this->db->where('id', $id);
+		$this->db->update('companies', array('customer_from'=>date('Y-m-d H:i:s'),'pipeline' => "Customer"));
+		return $this->db->affected_rows();
+	}
+	function update_company_to_proposal($id){
+		$pipelinedata = array('pipeline' => "Proposal");
+		$this->db->where('id', $id);
+		$this->db->update('companies', $pipelinedata);
+		return $this->db->affected_rows(); 
+	}
+
 
 
      // $query = $this->db->query("YOUR QUERY");

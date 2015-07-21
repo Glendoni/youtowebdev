@@ -1,33 +1,27 @@
 <?php  $company = $companies[0]; ?>
 <div class="row page-results-list">
 <div class="top-info-holder">
-	<h2 class="company-header">
-	<?php echo $company['name'];?>
-	</h2>
 	<?php if (isset($company['parent_registration'])): ?>
 		<div style="height: 1px; background-color: #d9534f; text-align: center; margin:30px 0; ">
 		<span class="label label-danger" style="position: relative; top: -10px;">Subsidiary of <?php echo $company['parent_registration'];?></span>
 			</div>
 
 	<?php endif; ?>
-<?php if (isset($company['pipeline'])): ?>
-			<div style="height: 1px; background-color: #f2f2f2; text-align: center; margin:30px 0; ">
-				<span class="label pipeline-label label-<?php echo str_replace(' ', '', $company['pipeline']); ?>" style="position: relative; top: -10px;">
-		<?php echo $company['pipeline'] ?></span>
-			</span>
-			</div>
-<?php endif; ?>
+	<h2 class="company-header">
+	<?php echo $company['name'];?>
+	</h2>
 
+			<div class="row" style="margin-top:5px; text-align:center;">
 
-<?php if(isset($company['assigned_to_name'])): ?>
-
-	<div style="height: 1px; background-color: #f2f2f2; text-align: center; margin:30px 0; ">
-				<span class="label pipeline-label label-<?php echo str_replace(' ', '', $company['pipeline']); ?>" style="position: relative; top: -10px; <?php if(isset($company['assigned_to_name'])): ?> <?php $user_icon = explode(",", ($system_users_images[$company['assigned_to_id']]));echo "background-color:".$user_icon[1]."; color:".$user_icon[2].";";?><?php else: ?> <?php endif; ?>>">
-		<?php echo $company['assigned_to_name']; ?></span>
-			</span>
-			</div>
-
+	<span class="label label-<?php echo str_replace(' ', '', $company['pipeline']); ?>"><?php echo $company['pipeline']?></span>
+	<?php if(isset($company['assigned_to_name'])): ?>
+		<span class="label label-Prospect"
+		<?php $user_icon = explode(",", ($system_users_images[$company['assigned_to_id']]));echo "style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'";?>>
+        <?php echo $company['assigned_to_name']; ?>
+        </span>
+	<?php else: ?>
 	<?php endif; ?>
+</div>
 
 
 
@@ -46,7 +40,13 @@
     	<div class="row">
 			<div class="col-sm-9">
 		<div class="row">
-		<div class="col-sm-12">
+		<div class="col-sm-12" style="margin-bottom:10px;">
+				<label>Company Name</label>
+				<p style="margin-bottom:0;">	
+				<?php echo $company['name']; ?>
+				</p>
+		</div><!--END NAME-->
+		<div class="col-sm-12" style="margin-top:10px;">
 				<label>Address</label>
 				<p style="margin-bottom:0;">
                 <?php echo isset($company['address'])?$company['address']:'-'; ?>  
@@ -55,33 +55,33 @@
 		
 		<div class="col-xs-6" style="margin-top:10px;">
 			<label>Company Number</label>
-			<p style="margin-bottom:0;">	
+			<p>	
 			 <!--COMPANY NUMBER IF APPLICABLE-->
-                <?php if (isset($company['registration'])): ?>
-				<?php echo $company['registration']; ?>
-				<?php else: ?>
-				-
-                <?php endif; ?>
+			<?php echo isset($company['registration'])?$company['registration']:'-'; ?>
          	</p>
         	</div>
-		<div class="col-xs-6" style="margin-top:10px;">
-				<label>Company Name</label>
-				<p style="margin-bottom:0;">	
-				<?php echo $company['name']; ?>
-				</p>
-		</div><!--END NAME-->
+
+        	<div class="col-xs-6" style="margin-top:10px;">
+        	<label>Founded</label>
+			<p>	
+				<?php echo isset($company['eff_from'])?$company['eff_from']:'-'; ?>
+			</p>
+		</div>
+
+
+
 
 				
 		
         <div class="col-xs-6" style="margin-top:10px;">
         		<label>Phone Number</label>
-        		<p style="margin-bottom:0;">
-        		<?php echo isset($company['phone'])?$company['phone']:'-'; ?>                
+        		<p>
+        		<?php echo isset($company['phone'])?$company['phone']:''; ?>                
            		</p>
 			</div><!--END PHONE NUMBER-->
 		<div class="col-xs-6 col-md-4" style="margin-top:10px;">
 				<label>Class</label>
-				<p style="margin-bottom:0;">	
+				<p>	
 		            <!--CLASS IF APPLICABLE-->
 		            <?php if (isset($company['class'])): ?>
 						<span class="label label-info"><?php echo $companies_classes[$company['class']] ?></span>	
@@ -97,7 +97,7 @@
 		<!--Check if company is blacklisted - if so hide the actions boxes -->
 		<?php if ($company['pipeline']=='Blacklisted'): ?>
 		<?php else: ?>
-		<?php $this->load->view('companies/actions_box.php',array('company'=>$company)); ?>
+		<?php $this->load->view('companies/actions_box_list.php',array('company'=>$company)); ?>
 		<?php if (isset($company['url'])): ?>
 		<a class="btn btn-default btn-sm btn-block" href="<?php $parsed = parse_url($company['url']); if (empty($parsed['scheme'])) { echo 'http://' . ltrim($company['url'], '/'); }else{ echo $company['url']; } ?>" target="_blank">
 				<label>Web:</label> <?php echo str_replace("http://"," ",str_replace("www.", "", $company['url']))?>
@@ -119,21 +119,16 @@
 		<div class="row col-md-12">
 				<!-- TURNOVER -->
 		<div class="col-sm-3 col-xs-6 centre">
-			<label>Turnover</label>
+			<label><?php  echo isset($company['turnover_method'])?$company['turnover_method']." ":'';?>Turnover</label>
 			<p class="details" style="margin-bottom:5px;">
 				£<?php echo isset($company['turnover'])? number_format (round($company['turnover'],-3)):'0';?>
-			            	<span class="label label-default" ><?php  echo isset($company['turnover_method'])?$company['turnover_method']:'';?></span>
+			    <!--<span class="label label-default" ><?php  echo isset($company['turnover_method'])?$company['turnover_method']:'';?></span>-->
 </p>	
         </div>
-        <div class="col-sm-2 col-xs-6 centre">
-        	<label>Founded</label>
-			<p class="details">
-				<?php echo isset($company['eff_from'])?$company['eff_from']:''; ?>
-			</p>
-		</div>
+        
 
 		<!-- CONTACTS -->
-		<div class="col-sm-2 col-xs-6 centre">
+		<div class="col-sm-3 col-xs-6 centre">
 			<label>Contacts</label>			
 			<?php if (isset($company['contacts_count'])): ?>
 			<p class="details"><?php echo $company['contacts_count'];?> </p>
@@ -143,7 +138,7 @@
 		</div>
 
 		<!-- EMPLOYEES -->
-		<div class="col-sm-2 col-xs-6 centre">
+		<div class="col-sm-3 col-xs-6 centre">
 			<label>Employees</label>
 			<?php if (isset($company['emp_count'])): ?>
 			<p class="details"><?php echo $company['emp_count'];?> </p>
@@ -335,7 +330,7 @@
 			<div class="row">
 			<div class="col-md-3">
 				<div class="form-group ">
-					<label>Completed Action</label>
+					<label>New Actions</label>
 					<select id="action_type_completed" name="action_type_completed" class="form-control" onchange="commentChange()">
 						<?php foreach($action_types_done as $action ): ?>
 						  <option value="<?php echo $action->id; ?>"><?php echo $action->name; ?></option>
@@ -375,9 +370,7 @@
 
 						<select name="action_type_planned" class="form-control">
 						<option value="0">--- No Follow Up ---</option>
-
 							<?php foreach($action_types_planned as $action ): ?>
-
 							  <option value="<?php echo $action->id; ?>"><?php echo $action->name; ?></option>
 							<?php endforeach; ?>
 						</select>
@@ -404,7 +397,7 @@
 			<div class="col-md-12" >
 		<div class="panel panel-default ">
 			<div class="panel-heading">
-			Actions
+			Action History
 			</div>
 			<div class="panel-body">
 
@@ -464,14 +457,19 @@
 								<?php elseif(strtotime($action_outstanding->planned_at) > $now and !isset($action_outstanding->actioned_at)) : ?>
 								<span class="label label-warning" style="font-size:11px; margin-left:10px;">Due on <?php echo $planned_date_formatted ?> </span>
 								<?php $hidden = array('action_id' => $action_outstanding->id , 'user_id' => $current_user['id'] , 'action_do' => 'cancelled','outcome' => '' ,'company_id' => $company['id']); echo form_open(site_url().'actions/edit', 'name="cancel_action"  class="cancel_action pull-right" style="margin-left:5px;" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action_outstanding->id.'" role="form"',$hidden); ?>
-<button class="btn btn-danger" ><i class="fa fa-trash-o fa-lg"></i> </button>
+<button class="btn btn-danger btn-sm" ><i class="fa fa-trash-o fa-lg"></i> </button>
 <?php echo form_close(); ?>
-<?php $hidden = array('action_id' => $action_outstanding->id , 'user_id' => $current_user['id'], 'action_do' => 'completed', 'outcome' => '' ,'company_id' => $company['id']);
-echo form_open(site_url().'actions/edit', 'name="completed_action"  class="completed_action pull-right" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action_outstanding->id.'" style="display:inline-block;" role="form"',$hidden); ?><button class="btn btn-success"><i class="fa fa-check fa-lg"></i> </button> <?php echo form_close(); ?>
+<?php $hidden = array('action_id' => $action_outstanding->id , 'user_id' => $current_user['id'], 'action_do' => 'completed', 'outcome' => '' ,'action_type_id_outcome' =>'','company_id' => $company['id']);
+echo form_open(site_url().'actions/edit', 'name="completed_action"  class="completed_action pull-right" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action_outstanding->id.'" style="display:inline-block;" role="form"',$hidden); ?><button class="btn btn-success btn-sm"><i class="fa fa-check fa-lg"></i> </button> <?php echo form_close(); ?>
 								<?php elseif(strtotime($action_outstanding->planned_at) < $now and !isset($action_outstanding->actioned_at)):?>
 								<span class="label label-danger" style="font-size:11px; margin-left:10px;"><b>Overdue</b> - Due on <?php echo $planned_date_formatted ?> </span>
-								<?php $hidden = array('action_id' => $action_outstanding->id , 'user_id' => $current_user['id'] , 'action_do' => 'cancelled','outcome' => '' ,'company_id' => $company['id'] ); echo form_open(site_url().'actions/edit', 'name="cancel_action"  class="cancel_action pull-right" style="margin-left:5px;" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action_outstanding->id.'" role="form"',$hidden); ?><button class="btn btn-danger" ><i class="fa fa-trash-o fa-lg"></i> </button>
-<?php echo form_close(); ?><?php $hidden = array('action_id' => $action_outstanding->id , 'user_id' => $current_user['id'], 'action_do' => 'completed', 'outcome' => '' ,'company_id' => $company['id']); echo form_open(site_url().'actions/edit', 'name="completed_action"  class="completed_action pull-right" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action_outstanding->id.'" style="display:inline-block;" role="form"',$hidden); ?><button class="btn btn-success"><i class="fa fa-check fa-lg"></i> </button> <?php echo form_close(); ?><?php elseif($action_outstanding->actioned_at): ?>
+<!--CANCELLED BUTTON-->
+								<?php $hidden = array('action_id' => $action_outstanding->id , 'user_id' => $current_user['id'] , 'action_do' => 'cancelled','outcome' => '' ,'company_id' => $company['id'] ); echo form_open(site_url().'actions/edit', 'name="cancel_action"  class="cancel_action pull-right" style="margin-left:5px;" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action_outstanding->id.'" role="form"',$hidden); ?><button class="btn btn-danger btn-sm"><i class="fa fa-trash-o fa-lg"></i> </button>
+<?php echo form_close(); ?>
+<!--COMPLETED BUTTON-->
+<?php $hidden = array('action_id' => $action_outstanding->id , 'user_id' => $current_user['id'], 'action_do' => 'completed', 'outcome' => '' ,'company_id' => $company['id']); echo form_open(site_url().'actions/edit', 'name="completed_action"  class="completed_action pull-right" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action_outstanding->id.'" style="display:inline-block;" role="form"',$hidden); ?>
+<button class="btn btn-success btn-sm"><i class="fa fa-check fa-lg"></i> </button><?php echo form_close(); ?>
+<?php elseif($action_outstanding->actioned_at): ?>
 <span class="label label-success pull-right" style="font-size:11px; margin-left:10px;">Completed on <?php echo $action_outstandinged_date_formatted ?></span><?php endif; ?>
 
                             
@@ -502,6 +500,8 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 											
 											<div id="action_outcome_box_<?php echo $action_outstanding->id ?>" style="display:none;">
 											<hr>
+											
+
 											<textarea class="form-control" name="outcome" placeholder="Add action outcome" rows="3" style="margin-bottom:5px;"></textarea>
 											<button class="btn btn-primary btn-block"><i class="fa fa-check fa-lg"></i> Send</button>
 
@@ -567,13 +567,13 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 											<div class="triangle-isosceles top">
 											<?php echo nl2br($action_completed->comments) ?>
 											<?php if (!empty($action_completed->outcome)):?>
+											<hr>
 											<?php echo $action_completed->outcome ?>
 											<?php endif; ?>
 											</div>
 											</div>
 											<?php endif; ?>
 											</div>
-											
 											<div id="action_outcome_box_<?php echo $action_completed->id ?>" style="display:none;">
 											<hr>
 											<textarea class="form-control" name="outcome" placeholder="Add action outcome" rows="3" style="margin-bottom:5px;"></textarea>

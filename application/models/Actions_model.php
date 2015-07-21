@@ -1,9 +1,7 @@
 <?php
 class Actions_model extends MY_Model {
 	
-
 	// GETS
-
 	function get_actions($company_id)
 	{
 		$data = array(
@@ -14,7 +12,6 @@ class Actions_model extends MY_Model {
 		$query = $this->db->get_where('actions', $data);
 		return $query->result_object();
 	}
-
 	function get_actions_outstanding($company_id)
 	{
 		$category_exclude = array('7', '20');
@@ -29,7 +26,6 @@ class Actions_model extends MY_Model {
 		$query = $this->db->get_where('actions', $data);
 		return $query->result_object();
 	}
-
 	function get_actions_completed($company_id)
 	{
 		$category_exclude = array('7', '20');
@@ -42,7 +38,6 @@ class Actions_model extends MY_Model {
 		$query = $this->db->get_where('actions', $data);
 		return $query->result_object();
 	}
-
 	function get_actions_cancelled($company_id)
 	{
 		$category_exclude = array('7', '20');
@@ -55,30 +50,27 @@ class Actions_model extends MY_Model {
 		$query = $this->db->get_where('actions', $data);
 		return $query->result_object();
 	}
-
 	function get_actions_marketing($company_id)
 	{
  	$sql = "select ec.name as campaign_name, con.first_name, con.last_name,
-c.name, u.email,u.id as user_id,ec.date_sent,
-sum(case when email_action_type = '2' then 1 else 0 end) opened,
-sum(case when email_action_type = '3' then 1 else 0 end) clicked,
-sum(case when email_action_type = '3' and link ilike '%unsubscribe%' then 1 else 0 end) unsubscribed
-from email_campaigns ec
-left join email_actions ea on ec.id = ea.email_campaign_id
-inner join contacts con on ea.contact_id = con.id
-left join companies c on con.company_id = c.id
-left join users u on ec.created_by = u.id
-where c.id = '$company_id'
-group by 1,2,3,4,5,6,7 order by date_sent desc";
+			c.name, u.email,u.id as user_id,ec.date_sent,
+			sum(case when email_action_type = '2' then 1 else 0 end) opened,
+			sum(case when email_action_type = '3' then 1 else 0 end) clicked,
+			sum(case when email_action_type = '3' and link ilike '%unsubscribe%' then 1 else 0 end) unsubscribed
+			from email_campaigns ec
+			left join email_actions ea on ec.id = ea.email_campaign_id
+			inner join contacts con on ea.contact_id = con.id
+			left join companies c on con.company_id = c.id
+			left join users u on ec.created_by = u.id
+			where c.id = '$company_id'
+			group by 1,2,3,4,5,6,7 order by date_sent desc";
 		$query = $this->db->query($sql);
-
 		if($query){
 			return $query->result_array();
 		}else{
 			return [];
 		}
 	}
-
 	function get_comments($company_id)
 	{
 		$data = array(
@@ -89,7 +81,6 @@ group by 1,2,3,4,5,6,7 order by date_sent desc";
 		$query = $this->db->get_where('actions', $data);
 		return $query->result_object();
 	}
-
 	function get_pending_actions($user_id){		
 		$this->db->select('company_id, actions.id "action_id",comments,planned_at,action_type_id,name "company_name",');
 		$this->db->where('actions.user_id',$user_id);
@@ -100,11 +91,7 @@ group by 1,2,3,4,5,6,7 order by date_sent desc";
 		$query = $this->db->get('actions');
 		// var_dump($query);
 		return $query->result_object();
-
 	}
-
-
-
 	
 	function get_recent_stats(){
 		$start_date_week = date('Y-m-d 00:00:00',strtotime('monday this week'));
@@ -120,15 +107,12 @@ group by 1,2,3,4,5,6,7 order by date_sent desc";
 				Sum(CASE WHEN action_type_id = '19' and a.id = 	(SELECT MAX(id) FROM actions z WHERE z.company_id = a.company_id and z.action_type_id = '19' order by a.actioned_at desc) AND (a.comments ilike '%intent%' or a.comments ilike '%qualified%') AND a.created_at > '$start_date_week' AND a.created_at < '$end_date_week' THEN 1 ELSE 0 END) AS pipelinecount
 				from actions A LEFT JOIN companies C on A.company_id = C.id INNER JOIN users U on A.user_id = U.id where cancelled_at is null and u.department = 'sales' group by U.id,U.name order by deals desc,proposals desc,meetingbooked desc, introcall desc, name desc";
 		$query = $this->db->query($sql);
-
 		if($query){
 			return $query->result_array();
 		}else{
 			return [];
 		}
-
 	}
-
 	function get_last_week_stats(){
 		$start_date_week = date('Y-m-d 00:00:00',strtotime('monday last week'));
 		$end_date_week = date('Y-m-d 23:59:59',strtotime('sunday last week'));
@@ -143,16 +127,12 @@ group by 1,2,3,4,5,6,7 order by date_sent desc";
 				Sum(CASE WHEN action_type_id = '19' and a.id = 	(SELECT MAX(id) FROM actions z WHERE z.company_id = a.company_id and z.action_type_id = '19' order by a.actioned_at desc) AND (a.comments ilike '%intent%' or a.comments ilike '%qualified%') AND a.created_at > '$start_date_week' AND a.created_at < '$end_date_week' THEN 1 ELSE 0 END) AS pipelinecount
 				from actions A LEFT JOIN companies C on A.company_id = C.id INNER JOIN users U on A.user_id = U.id where cancelled_at is null and u.department = 'sales' group by U.id,U.name order by deals desc,proposals desc,meetingbooked desc, introcall desc, name desc";
 		$query = $this->db->query($sql);
-
 		if($query){
 			return $query->result_array();
 		}else{
 			return [];
 		}
-
 	}
-
-
 	function get_this_month_stats(){
 		$start_date_month = date('Y-m-d 00:00:00',strtotime('first day of this month'));
 		$end_date_month = date('Y-m-d 23:59:59',strtotime('last day of this month'));
@@ -172,14 +152,12 @@ group by 1,2,3,4,5,6,7 order by date_sent desc";
 				on A.company_id = C.id
 				where cancelled_at is null and u.department = 'sales' group by U.name, U.id order by deals desc, meetingbooked desc, introcall desc,  name desc";
 		$query = $this->db->query($sql);
-
 		if($query){
 			return $query->result_array();
 		}else{
 			return [];
 		}
 	}
-
 	function get_stats_search(){
 		$dates = $this->dates();
 		$start_date = $dates['start_date'];
@@ -200,14 +178,12 @@ group by 1,2,3,4,5,6,7 order by date_sent desc";
 				on A.company_id = C.id
 				where cancelled_at is null and u.department = 'sales' group by U.name, U.id order by deals desc, meetingbooked desc, introcall desc,  name desc";
 		$query = $this->db->query($sql);
-
 		if($query){
 			return $query->result_array();
 		}else{
 			return [];
 		}
 	}
-
 	function get_pipeline_contacted(){
 		$dates = $this->dates();
 		$start_date = $dates['start_date'];
@@ -235,14 +211,12 @@ group by 1,2,3,4,5,6,7 order by date_sent desc";
 		order by a.actioned_at desc
 		) left join users u on a.created_by = u.id where a.action_type_id = '19' and (a.comments ilike '%intent%' or a.comments ilike '%qualified%') and $start_date_sql order by a.created_at desc";
 		$query = $this->db->query($sql);
-
 		if($query){
 			return $query->result_array();
 		}else{
 			return [];
 		}
 	}
-
 	function get_pipeline_contacted_individual($user_id){
 		$dates = $this->dates();
 		$start_date = $dates['start_date'];
@@ -270,14 +244,12 @@ group by 1,2,3,4,5,6,7 order by date_sent desc";
 		order by a.actioned_at desc
 		) left join users u on a.created_by = u.id where a.created_by = '$user_id' and a.action_type_id = '19' and (a.comments ilike '%intent%' or a.comments ilike '%qualified%') and $start_date_sql order by a.created_at desc";
 		$query = $this->db->query($sql);
-
 		if($query){
 			return $query->result_array();
 		}else{
 			return [];
 		}
 	}
-
 	function get_pipeline_proposal(){
 		$dates = $this->dates();
 		$start_date = $dates['start_date'];
@@ -295,14 +267,12 @@ group by 1,2,3,4,5,6,7 order by date_sent desc";
 		order by a.actioned_at desc
 		) left join users u on a.created_by = u.id where a.action_type_id = '19' and (c.pipeline ilike '%proposal%') and a.created_at > NOW() - INTERVAL '60 days' AND $start_date_sql order by a.created_at desc";
 		$query = $this->db->query($sql);
-
 		if($query){
 			return $query->result_array();
 		}else{
 			return [];
 		}
 	}
-
 	function get_pipeline_proposal_individual($user_id){
 		$dates = $this->dates();
 		$start_date = $dates['start_date'];
@@ -320,14 +290,12 @@ group by 1,2,3,4,5,6,7 order by date_sent desc";
 		order by a.actioned_at desc
 		) left join users u on a.created_by = u.id where a.created_by = '$user_id' and a.action_type_id = '19' and (c.pipeline ilike '%proposal%') and $start_date_sql order by a.created_at desc";
 		$query = $this->db->query($sql);
-
 		if($query){
 			return $query->result_array();
 		}else{
 			return [];
 		}
 	}
-
 	function get_pipeline_customer(){
 		$dates = $this->dates();
 		$start_date = $dates['start_date'];
@@ -346,14 +314,12 @@ group by 1,2,3,4,5,6,7 order by date_sent desc";
 		order by a.actioned_at desc
 		) left join users u on a.created_by = u.id where a.action_type_id = '16'   $start_date_sql order by a.created_at desc";
 		$query = $this->db->query($sql);
-
 		if($query){
 			return $query->result_array();
 		}else{
 			return [];
 		}
 	}
-
 	function get_pipeline_customer_individual($user_id){
 		$dates = $this->dates();
 		$start_date = $dates['start_date'];
@@ -379,16 +345,13 @@ group by 1,2,3,4,5,6,7 order by date_sent desc";
 		order by a.actioned_at desc
 		) left join users u on a.created_by = u.id where a.created_by = '$user_id' and a.action_type_id = '16' and (c.pipeline ilike '%customer%') $start_date_sql order by a.created_at desc";
 		$query = $this->db->query($sql);
-
 		if($query){
 			return $query->result_array();
 		}else{
 			return [];
 		}
 	}
-
 	function get_pipeline_lost(){
-
 		$dates = $this->dates();
 		$start_date = $dates['start_date'];
 		$end_date = $dates['end_date'];
@@ -410,14 +373,12 @@ group by 1,2,3,4,5,6,7 order by date_sent desc";
 		order by a.actioned_at desc
 		) left join users u on a.created_by = u.id where a.action_type_id = '19' and (c.pipeline ilike '%lost%') AND a.created_at > '$start_date' AND a.created_at < '$end_date' and a.created_at > NOW() - INTERVAL '60 days' order by a.created_at desc";
 		$query = $this->db->query($sql);
-
 		if($query){
 			return $query->result_array();
 		}else{
 			return [];
 		}
 	}
-
 	function get_pipeline_lost_individual($user_id){
 		$dates = $this->dates();
 		$start_date = $dates['start_date'];
@@ -440,14 +401,12 @@ group by 1,2,3,4,5,6,7 order by date_sent desc";
 		order by a.actioned_at desc
 		) left join users u on a.created_by = u.id where a.created_by = '$user_id' and a.action_type_id = '19' and (c.pipeline ilike '%lost%') AND a.created_at > '$start_date' AND a.created_at < '$end_date'order by a.created_at desc";
 		$query = $this->db->query($sql);
-
 		if($query){
 			return $query->result_array();
 		}else{
 			return [];
 		}
 	}
-
 	function get_user_placements(){
 		$dates = $this->dates();
 		$search_user_id = $dates['search_user_id'];
@@ -480,7 +439,6 @@ group by 1,2,3,4,5,6,7 order by date_sent desc";
 			}
 		}
 	}
-
 	function dates(){
 		$period = $_GET['period'];
 		if (!empty($_GET['start_date'])) {
@@ -489,13 +447,9 @@ group by 1,2,3,4,5,6,7 order by date_sent desc";
 			if (!empty($_GET['end_date'])) {
 		$end_date = date('Y-m-d 00:00:00',strtotime($_GET['end_date']));
 		
-
 		} else {
-
 					$end_date = date('Y-m-d 23:59:59',strtotime('last day of this month'));
-
 		}
-
 		}
 		else if ($period==='week') {
 		$start_date = date('Y-m-d 00:00:00',strtotime('monday this week'));
@@ -507,10 +461,8 @@ group by 1,2,3,4,5,6,7 order by date_sent desc";
 		$end_date = date('Y-m-d 23:59:59',strtotime('last day of this month'));
 		}
 				return array('search_user_id' => $_GET['user'], 'start_date' => $start_date, 'end_date' => $end_date);
-
 	}
-
-		function get_user_meetings(){
+	function get_user_meetings(){
 		$dates = $this->dates();
 		$search_user_id = $dates['search_user_id'];
 		$start_date = $dates['start_date'];
@@ -521,8 +473,7 @@ group by 1,2,3,4,5,6,7 order by date_sent desc";
 		return $query->result_array();
 	}
 	}
-
-		function get_user_pitches(){
+	function get_user_pitches(){
 		$dates = $this->dates();
 		$search_user_id = $dates['search_user_id'];
 		$start_date = $dates['start_date'];
@@ -533,22 +484,16 @@ group by 1,2,3,4,5,6,7 order by date_sent desc";
 		return $query->result_array();
 	}
 	}
-
-
 	function get_action_types_array()
 	{
-
 		$this->db->select("id,name");
-
 		$query = $this->db->get('action_types');
 		foreach($query->result() as $row)
 		{
 		  $array[$row->id] = $row->name;
 		} 	
 		return $array;
-
 	}
-
 	function get_action_types_done()
 	{
 		$ignore = array('19','7','20'); //EXCLUDE PIPELINE TRACKING, COMMENT AND MARKETING//
@@ -557,12 +502,9 @@ group by 1,2,3,4,5,6,7 order by date_sent desc";
 			);
 		$this->db->where_not_in('id', $ignore);
 		$this->db->order_by('name', 'asc'); 
-
 		$query = $this->db->get_where('action_types',$data);
 		return $query->result_object();
 	}
-
-
 	function get_action_types_planned()
 	{	
 		$this->db->order_by('name', 'asc'); 
@@ -570,12 +512,8 @@ group by 1,2,3,4,5,6,7 order by date_sent desc";
 		return $query->result_object();
 	}
 	
-
 	// UPDATES
-
-
 	function set_action_state($action_id,$user_id,$state,$outcome)
-
 	{
 		if($state == 'completed')
 		{
@@ -586,7 +524,6 @@ group by 1,2,3,4,5,6,7 order by date_sent desc";
 			'updated_by' => $user_id,
 			);
 		}
-
 		if($state == 'cancelled')
 		{
 			$data = array(
@@ -596,7 +533,6 @@ group by 1,2,3,4,5,6,7 order by date_sent desc";
 			'updated_by' => $user_id,
 			);
 		}
-
 		$this->db->where('id',$action_id);
 		$this->db->update('actions',$data);
 		if($this->db->affected_rows() !== 1){
@@ -606,14 +542,12 @@ group by 1,2,3,4,5,6,7 order by date_sent desc";
 			return True;
 		} 
 	}
-
 	
-
 	// INSERTS
 	function create($post)
 	{
 		//TEST - COMPLETED ACTION ONLY
-			$completeddata = array(
+		$completeddata = array(
 			'company_id' 	=> $post['company_id'],
 			'user_id' 		=> $post['user_id'],
 			'comments'		=> (isset($post['comment'])?$post['comment']:NULL),
@@ -627,91 +561,53 @@ group by 1,2,3,4,5,6,7 order by date_sent desc";
 			);
 		$query = $this->db->insert('actions', $completeddata);
 		//END TEST
-
 		if ($post['action_type_planned']>0) {
-
 			$planneddata = array(
 			'company_id' 	=> $post['company_id'],
 			'user_id' 		=> $post['user_id'],
 			'comments'		=> (isset($post['comment'])?$post['comment']:NULL),
 			'planned_at'	=> $post['planned_at'],
 			'window'		=> (isset($post['window'])?$post['window']:NULL),
-
 			'contact_id'    => (!empty($post['contact_id'])?$post['contact_id']:NULL),
 			'created_by'	=> $post['user_id'],
 			'action_type_id'=> $post['action_type_planned'],
 			'actioned_at'	=> NULL,
 			'created_at' 	=> date('Y-m-d H:i:s'),
 			);
-		$query = $this->db->insert('actions', $planneddata);
-
-
+			$query = $this->db->insert('actions', $planneddata);
 		}
-
-
-
-
-		$data = array(
-			'company_id' 	=> $post['company_id'],
-			'user_id' 		=> $post['user_id'],
-			'comments'		=> (isset($post['comment'])?$post['comment']:NULL),
-			'planned_at'	=> (isset($post['planned_at'])? date('Y-m-d H:i:s',strtotime($post['planned_at'])):NULL),
-			'window'		=> (isset($post['window'])?$post['window']:NULL),
-			'contact_id'    => (!empty($post['contact_id'])?$post['contact_id']:NULL),
-			'created_by'	=> $post['user_id'],
-			'action_type_id'=> $post['action_type'],
-			'actioned_at'	=> (!isset($post['actioned_at']) && !isset($post['planned_at'])?date('Y-m-d H:i:s'):NULL),
-			'created_at' 	=> date('Y-m-d H:i:s')
-			);
-
-		if ($post['action_type']=='16') {
-			$id = $post['company_id'];
-			$pipelinedata = array('pipeline' => "Customer");
-
-		$this->db->where('id', $id);
-		$this->db->update('companies', $pipelinedata); 
-
+		return $this->db->insert_id();
+	}
+	function company_updated_to_customer($post){
 		$actiondata = array(
-			'company_id' 	=> $post['company_id'],
-			'user_id' 		=> $post['user_id'],
-			'comments'		=> 'Pipeline changed to Customer',
-			'planned_at'	=> (isset($post['planned_at'])? date('Y-m-d H:i:s',strtotime($post['planned_at'])):NULL),
-			'window'		=> (isset($post['window'])?$post['window']:NULL),
-			'contact_id'    => (!empty($post['contact_id'])?$post['contact_id']:NULL),
-			'created_by'	=> $post['user_id'],
-			'action_type_id'=> '19',
-			'actioned_at'	=> (!isset($post['actioned_at']) && !isset($post['planned_at'])?date('Y-m-d H:i:s'):NULL),
-			'created_at' 	=> date('Y-m-d H:i:s'),
-			);
+					'company_id' 	=> $post['company_id'],
+					'user_id' 		=> $post['user_id'],
+					'comments'		=> 'Pipeline changed to Customer',
+					'planned_at'	=> (isset($post['planned_at'])? date('Y-m-d H:i:s',strtotime($post['planned_at'])):NULL),
+					'window'		=> (isset($post['window'])?$post['window']:NULL),
+					'contact_id'    => (!empty($post['contact_id'])?$post['contact_id']:NULL),
+					'created_by'	=> $post['user_id'],
+					//'action_type_id'=> '19',
+					'actioned_at'	=> date('Y-m-d H:i:s'),
+					'created_at' 	=> date('Y-m-d H:i:s'),
+					);
 		$query = $this->db->insert('actions', $actiondata);
-
-
+		return $this->db->insert_id();
 	}
-			else if ($post['action_type']=='8') {
-			$id = $post['company_id'];
-			$pipelinedata = array(
-               'pipeline' => "Proposal"
-            );
-
-		$this->db->where('id', $id);
-		$this->db->update('companies', $pipelinedata); 
-
-			$actiondata = array(
-			'company_id' 	=> $post['company_id'],
-			'user_id' 		=> $post['user_id'],
-			'comments'		=> 'Pipeline changed to Proposal',
-			'planned_at'	=> (isset($post['planned_at'])? date('Y-m-d H:i:s',strtotime($post['planned_at'])):NULL),
-			'window'		=> (isset($post['window'])?$post['window']:NULL),
-			'contact_id'    => (!empty($post['contact_id'])?$post['contact_id']:NULL),
-			'created_by'	=> $post['user_id'],
-			'action_type_id'=> '19',
-			'actioned_at'	=> (!isset($post['actioned_at']) && !isset($post['planned_at'])?date('Y-m-d H:i:s'):NULL),
-			'created_at' 	=> date('Y-m-d H:i:s'),
-			);
-		//$query = $this->db->insert('actions', $actiondata);
-	}
-
-	//	$query = $this->db->insert('actions', $completeddata);
+	function company_updated_to_proposal($post){
+		$actiondata = array(
+						'company_id' 	=> $post['company_id'],
+						'user_id' 		=> $post['user_id'],
+						'comments'		=> 'Pipeline changed to Proposal',
+						'planned_at'	=> (isset($post['planned_at'])? date('Y-m-d H:i:s',strtotime($post['planned_at'])):NULL),
+						'window'		=> (isset($post['window'])?$post['window']:NULL),
+						'contact_id'    => (!empty($post['contact_id'])?$post['contact_id']:NULL),
+						'created_by'	=> $post['user_id'],
+						//'action_type_id'=> '19',
+						'actioned_at'	=> date('Y-m-d H:i:s'),
+						'created_at' 	=> date('Y-m-d H:i:s'),
+						);
+		$query = $this->db->insert('actions', $actiondata);
 		return $this->db->insert_id();
 	}
 	
@@ -732,5 +628,4 @@ group by 1,2,3,4,5,6,7 order by date_sent desc";
 			return True;
 		} 
 	}
-
 }

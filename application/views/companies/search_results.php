@@ -6,9 +6,13 @@
 	  		<a href="?page_num=<?php echo $previous_page_number; ?>">&larr; Previous</a>
 	  	</li>
 	    <?php endif; ?>
+
         <span class="count_of_results">
-			<strong><?php echo $companies_count; ?> <?php if ($companies_count<> "1") {echo "Companies";} else { echo "Company";}?></strong> <small>(Page <?php echo $current_page_number; ?> of <?php echo $page_total ?>)</small>
+			<?php echo $companies_count; ?> <?php if ($companies_count<> "1") {echo "Companies";} else { echo "Company";}?>
+			<?php if($previous_page_number or $next_page_number): ?><span style="font-size:15px; font-weight:700;"> Page <?php echo $current_page_number; ?> of <?php echo $page_total ?> </span><?php endif; ?>
 		</span>
+			    
+
 	    <?php if($next_page_number): ?>
 	  	<li class="next">
 	  		<a href="?page_num=<?php echo $next_page_number; ?>">Next &rarr;</a>
@@ -19,34 +23,24 @@
 	<nav class="navbar navbar-default companies-list-header" role="navigation">
 	  <div class="container-fluid">
 	    <!-- Collect the nav links, forms, and other content for toggling -->
-<div class="row" style="text-align:center;">
+		<div style="text-align:center;">
 	      	<?php if(($companies_count > 0)): ?>
-				<?php if($current_campaign_name && $current_campaign_owner_id && $current_campaign_id ): ?>	
-					<div class="navbar-text saved-search-text">
-						<span style="font-weight:300; font-size:16px;"><?php echo $results_type ?>:
-						<strong><?php echo $current_campaign_name; ?></strong></span>
-					</div>
-				<?php if($current_campaign_is_shared == False): ?>
-					<div class="navbar-text saved-search-text">
-						<div style="font-weight:300; font-size:12px;">
-						<span class="label label-default">
+				<?php if($current_campaign_name && $current_campaign_owner_id && $current_campaign_id ): ?>
+					 	<div class="navbar-text saved-search-text">
+						<span style="font-weight:300; font-size:22px;"><strong>
+						<?php if($current_campaign_is_shared == False): ?>
 						Private
-						</span>
+						<?php else: ?> 						
+						Team
+						<?php endif;?> <?php echo $results_type ?>:
+						</strong>
+						<?php echo $current_campaign_name; ?></span>
 						</div>
-					</div>	
-				<?php else: ?> 
-					<div class="navbar-text saved-search-text">
-						<div style="font-weight:300; font-size:12px;">
-						<span class="label label-success">
-						Public
-						</span>
-						</div>
-					</div>	
-				<?php endif;?>  
+			
 				<?php if($current_campaign_editable): ?>
 	                <?php echo form_open(site_url().'campaigns/'.$edit_page, 'name="edit_campaign" role="form"'); echo form_hidden('campaign_id', $current_campaign_id); ?>
 	                <?php if($current_campaign_is_shared == False): ?>
-						<button type="submit" class="btn btn-warning btn-sm btn-search-edit" name="make_public" >Make Public</button>
+						<button type="submit" class="btn btn-warning btn-sm btn-search-edit" name="make_public" >Share With Team</button>
 					<?php else: ?>
 						<button type="submit" class="btn btn-warning btn-success btn-sm btn-search-edit" name="make_private" >Make Private</button>
 					<?php endif; ?> 
@@ -67,7 +61,7 @@
 						<input type="radio" name="private" id="sharedfalse" ><i class="fa fa-user"></i> Private
 					</label>
 					<label class="btn btn-sm">
-						<input type="radio" name="public" id="sharedtrue"><i class="fa fa-users"></i> Public
+						<input type="radio" name="public" id="sharedtrue"><i class="fa fa-users"></i> Team
 					</label>
 				</div>
 				|
