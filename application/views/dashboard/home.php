@@ -138,18 +138,16 @@
                     <!-- Tab panes -->
                     <div class="tab-content">
                       <div class="tab-pane <?php if ($_GET['search'] < '1'): ?>active<?php endif; ?>" id="this">
-                      <div class="col-md-12">
-
-                      
+                      <div class="col-md-12">                      
                       <div class="row list-group-item">
 
                       <div class="col-md-2"> 
                            <strong>Name</strong>
                         </div>
-                         <div class="col-md-2 text-center">
+                         <div class="col-md-1 text-center">
                            <strong>Deals</strong>
                         </div>
-                         <div class="col-md-2 text-center">
+                         <div class="col-md-1 text-center">
                            <strong>Proposals</strong>
                         </div>
                         <div class="col-md-2 text-center">
@@ -160,19 +158,27 @@
                            <strong>Call Activity</strong><br>
                            <Small> Total Calls (Intro)</Small>
                         </div>
-                        <div class="col-md-2 text-center">
+                        <div class="col-md-1 text-center">
                            <strong>Pipeline Added</strong>
+                        </div>
+                        <div class="col-md-2 text-center"> 
+                           <strong>Review Months</strong><br>
+                           <Small>Added / Occuring</Small>
+                        </div>
+                        <div class="col-md-1 text-center">
+                           <strong>DueDil</strong>
                         </div>
                         </div>
                         <?php foreach ($stats as $stat): ?>
                           <div class="row list-group-item">
                             <div class="col-md-2"> 
-                            <?php echo $stat['name'];?>
+                            <?php $user_icon = explode(",",$stat['image']); echo "<div class='circle' style='float: left;margin-top: -5px;margin-right: 10px;width: 35px;height: 35px;border-radius: 30px;font-size: 12px;line-height: 35px;text-align: center;font-weight: 700;background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
+
                             </div>
-                            <div class="col-md-2 text-center">
+                            <div class="col-md-1 text-center">
                             <a href = "?search=2&user=<?php echo $stat['user'];?>&period=week&start_date=<?php echo $_GET['start_date']?>&end_date=<?php echo $_GET['end_date']?>"><span class="badge"><?php echo $stat['deals'];?></a></span>
                             </div>
-                            <div class="col-md-2 text-center"> 
+                            <div class="col-md-1 text-center"> 
                             <?php echo $stat['proposals'];?>
                             </div>
                             <div class="col-md-2 text-center">
@@ -182,8 +188,14 @@
                             <?php echo $stat['salescall'];?>
                             (<?php echo $stat['introcall'];?>)
                             </div>
-                            <div class="col-md-2 text-center">
+                            <div class="col-md-1 text-center">
                               <?php echo $stat['pipelinecount'];?>
+                            </div>
+                            <div class="col-md-2 text-center">
+                              <?php echo $stat['key_review_added'];?> / <?php echo $stat['key_review_occuring'];?>
+                            </div>
+                            <div class="col-md-1 text-center">
+                              <?php echo $stat['duediligence'];?>
                             </div>
                           </div>     
                       <?php endforeach ?>
@@ -193,13 +205,13 @@
                       <div class="tab-pane" id="lastweek">
                       <div class="col-md-12">
                         <div class="row list-group-item">
-                         <div class="col-md-2"> 
+                          <div class="col-md-2"> 
                            <strong>Name</strong>
                         </div>
-                         <div class="col-md-2 text-center">
+                         <div class="col-md-1 text-center">
                            <strong>Deals</strong>
                         </div>
-                         <div class="col-md-2 text-center">
+                         <div class="col-md-1 text-center">
                            <strong>Proposals</strong>
                         </div>
                         <div class="col-md-2 text-center">
@@ -210,34 +222,46 @@
                            <strong>Call Activity</strong><br>
                            <Small> Total Calls (Intro)</Small>
                         </div>
-                        <div class="col-md-2 text-center">
+                        <div class="col-md-1 text-center">
                            <strong>Pipeline Added</strong>
                         </div>
+                        <div class="col-md-2 text-center"> 
+                           <strong>Review Months</strong><br>
+                           <Small>Added / Occuring</Small>
                         </div>
-                       <?php foreach ($lastweekstats as $lastweekstats): ?>
+                        <div class="col-md-1 text-center">
+                           <strong>DueDil</strong>
+                        </div>
+                        </div>
+                        <?php foreach ($lastweekstats as $lastweekstats): ?>
                           <div class="row list-group-item">
-                          <div class="col-md-2"> 
-                          <?php echo $lastweekstats['name'];?>
-                          </div>
-                          <div class="col-md-2 text-center">
-                          <a href = "?search=2&user=<?php echo $lastweekstats['user'];?>&period=month&start_date=<?php echo $_GET['start_date']?>&end_date=<?php echo $_GET['end_date']?>"><span class="badge"><?php echo $lastweekstats['deals'];?></span></a>
-                          </div>
-                          <div class="col-md-2 text-center"> 
-                          <?php echo $lastweekstats['proposals'];?>
-                          </div>
-                          <div class="col-md-2 text-center">
-                          <?php echo $lastweekstats['meetingbooked'];?> (<?php echo $lastweekstats['meetingcount'];?>)
-                          </div>
-                          <div class="col-md-2 text-center"> 
-                          <?php echo $lastweekstats['salescall'];?>
+                            <div class="col-md-2"> 
+                            <?php $user_icon = explode(",",$lastweekstats['image']); echo "<div class='circle' style='float: left;margin-top: -5px;margin-right: 10px;width: 35px;height: 35px;border-radius: 30px;font-size: 12px;line-height: 35px;text-align: center;font-weight: 700;background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
+
+                            </div>
+                            <div class="col-md-1 text-center">
+                            <a href = "?search=2&user=<?php echo $lastweekstats['user'];?>&period=week&start_date=<?php echo $_GET['start_date']?>&end_date=<?php echo $_GET['end_date']?>"><span class="badge"><?php echo $lastweekstats['deals'];?></a></span>
+                            </div>
+                            <div class="col-md-1 text-center"> 
+                            <?php echo $lastweekstats['proposals'];?>
+                            </div>
+                            <div class="col-md-2 text-center">
+                            <?php echo $lastweekstats['meetingbooked'];?> (<?php echo $lastweekstats['meetingcount'];?>)
+                            </div>
+                            <div class="col-md-2 text-center"> 
+                            <?php echo $lastweekstats['salescall'];?>
                             (<?php echo $lastweekstats['introcall'];?>)
-                          </div>
-                        
-                          <div class="col-md-2 text-center">
-                          <?php echo $lastweekstats['pipelinecount'];?>
-                          </div>
-                          </div>
-                         
+                            </div>
+                            <div class="col-md-1 text-center">
+                              <?php echo $lastweekstats['pipelinecount'];?>
+                            </div>
+                            <div class="col-md-2 text-center">
+                              <?php echo $lastweekstats['key_review_added'];?> / <?php echo $lastweekstats['key_review_occuring'];?>
+                            </div>
+                            <div class="col-md-1 text-center">
+                              <?php echo $lastweekstats['duediligence'];?>
+                            </div>
+                          </div>     
                       <?php endforeach ?>
                       
                       </div>
@@ -247,66 +271,13 @@
                       <div class="tab-pane" id="currentmonth">
                       <div class="col-md-12">
                         <div class="row list-group-item">
-                         <div class="col-md-2"> 
-                           <strong>Name</strong>
-                        </div>
-                         <div class="col-md-2 text-center">
-                           <strong>Deals</strong>
-                        </div>
-                         <div class="col-md-2 text-center">
-                           <strong>Proposals</strong>
-                        </div>
-                        <div class="col-md-2 text-center">
-                          <strong>Meetings</strong><br>
-                          <Small> Booked (Attended)</Small>
-                          </div>
-                          <div class="col-md-2 text-center"> 
-                            <strong>Call Activity</strong><br>
-                            <Small> Total Calls (Intro)</Small>
-                           </div>
-                        <div class="col-md-2 text-center">
-                           <strong>Pipeline Added</strong>
-                        </div>
-                        </div>
-                       <?php foreach ($thismonthstats as $thismonthstat): ?>
-                          <div class="row list-group-item">
                           <div class="col-md-2"> 
-                          <?php echo $thismonthstat['name'];?>
-                          </div>
-                          <div class="col-md-2 text-center">
-                          <a href = "?search=2&user=<?php echo $thismonthstats['user'];?>&period=month&start_date=<?php echo $_GET['start_date']?>&end_date=<?php echo $_GET['end_date']?>"><span class="badge"><?php echo $thismonthstat['deals'];?></span></a>
-                          </div>
-                          <div class="col-md-2 text-center"> 
-                          <?php echo $thismonthstat['proposals'];?>
-                          </div>
-                          <div class="col-md-2 text-center">
-                          <?php echo $thismonthstat['meetingbooked'];?> (<?php echo $thismonthstat['meetingcount'];?>)
-                          </div>
-                          <div class="col-md-2 text-center"> 
-                           <?php echo $thismonthstat['salescall'];?>
-                            (<?php echo $thismonthstat['introcall'];?>)
-                          </div>
-                        
-                          <div class="col-md-2 text-center">
-                          <?php echo $thismonthstat['pipelinecount'];?>
-                          </div>
-                          </div>
-                         
-                      <?php endforeach ?>
-                      
-                      </div>
-                    </div>
-
-                    <div class="tab-pane <?php if ($_GET['search'] > '0'): ?>active<?php endif; ?>" id="searchresults">
-                      <div class="col-md-12">
-                        <div class="row list-group-item">
-                         <div class="col-md-2"> 
                            <strong>Name</strong>
                         </div>
-                         <div class="col-md-2 text-center">
+                         <div class="col-md-1 text-center">
                            <strong>Deals</strong>
                         </div>
-                         <div class="col-md-2 text-center">
+                         <div class="col-md-1 text-center">
                            <strong>Proposals</strong>
                         </div>
                         <div class="col-md-2 text-center">
@@ -315,39 +286,114 @@
                           </div>
                           <div class="col-md-2 text-center"> 
                            <strong>Call Activity</strong><br>
-                            <Small> Total Calls (Intro)</Small>
-
+                           <Small> Total Calls (Intro)</Small>
                         </div>
-                        <div class="col-md-2 text-center">
+                        <div class="col-md-1 text-center">
                            <strong>Pipeline Added</strong>
                         </div>
+                        <div class="col-md-2 text-center"> 
+                           <strong>Review Months</strong><br>
+                           <Small>Added / Occuring</Small>
+                        </div>
+                        <div class="col-md-1 text-center">
+                           <strong>DueDil</strong>
+                        </div>
+                        </div>
+                        <?php foreach ($thismonthstats as $thismonthstats): ?>
+                          <div class="row list-group-item">
+                            <div class="col-md-2"> 
+                            <?php $user_icon = explode(",",$thismonthstats['image']); echo "<div class='circle' style='float: left;margin-top: -5px;margin-right: 10px;width: 35px;height: 35px;border-radius: 30px;font-size: 12px;line-height: 35px;text-align: center;font-weight: 700;background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
+
+                            </div>
+                            <div class="col-md-1 text-center">
+                            <a href = "?search=2&user=<?php echo $thismonthstats['user'];?>&period=week&start_date=<?php echo $_GET['start_date']?>&end_date=<?php echo $_GET['end_date']?>"><span class="badge"><?php echo $thismonthstats['deals'];?></a></span>
+                            </div>
+                            <div class="col-md-1 text-center"> 
+                            <?php echo $thismonthstats['proposals'];?>
+                            </div>
+                            <div class="col-md-2 text-center">
+                            <?php echo $thismonthstats['meetingbooked'];?> (<?php echo $thismonthstats['meetingcount'];?>)
+                            </div>
+                            <div class="col-md-2 text-center"> 
+                            <?php echo $thismonthstats['salescall'];?>
+                            (<?php echo $thismonthstats['introcall'];?>)
+                            </div>
+                            <div class="col-md-1 text-center">
+                              <?php echo $thismonthstats['pipelinecount'];?>
+                            </div>
+                            <div class="col-md-2 text-center">
+                              <?php echo $thismonthstats['key_review_added'];?> / <?php echo $thismonthstats['key_review_occuring'];?>
+                            </div>
+                            <div class="col-md-1 text-center">
+                              <?php echo $thismonthstats['duediligence'];?>
+                            </div>
+                          </div>     
+                      <?php endforeach ?>
+                      
+                      </div>
+                    </div>
+
+                    <div class="tab-pane <?php if ($_GET['search'] > '0'): ?>active<?php endif; ?>" id="searchresults">
+                      <div class="col-md-12">
+                        <div class="row list-group-item">
+                          <div class="col-md-2"> 
+                           <strong>Name</strong>
+                        </div>
+                         <div class="col-md-1 text-center">
+                           <strong>Deals</strong>
+                        </div>
+                         <div class="col-md-1 text-center">
+                           <strong>Proposals</strong>
+                        </div>
+                        <div class="col-md-2 text-center">
+                          <strong>Meetings</strong><br>
+                          <Small> Booked (Attended)</Small>
+                          </div>
+                          <div class="col-md-2 text-center"> 
+                           <strong>Call Activity</strong><br>
+                           <Small> Total Calls (Intro)</Small>
+                        </div>
+                        <div class="col-md-1 text-center">
+                           <strong>Pipeline Added</strong>
+                        </div>
+                        <div class="col-md-2 text-center"> 
+                           <strong>Review Months</strong><br>
+                           <Small>Added / Occuring</Small>
+                        </div>
+                        <div class="col-md-1 text-center">
+                           <strong>DueDil</strong>
+                        </div>
                         </div>
 
-                       <?php foreach ($getstatssearch as $getstatssearch): ?>
+                        <?php foreach ($getstatssearch as $getstatssearch): ?>
                           <div class="row list-group-item">
-                          <div class="col-md-2"> 
-                          <?php echo $getstatssearch['name'];?>
-                          </div>
-                          <div class="col-md-2 text-center">
-                          <a href = "?search=2&user=<?php echo $getstatssearch['user'];?>&period=&start_date=<?php echo $_GET['start_date']?>&end_date=<?php echo $_GET['end_date']?>"><span class="badge"><?php echo $getstatssearch['deals'];?></span></a>
-                          </div>
-                          <div class="col-md-2 text-center"> 
-                          <?php echo $getstatssearch['proposals'];?>
-                          </div>
-                          <div class="col-md-2 text-center">
-                          <?php echo $getstatssearch['meetingbooked'];?> (<?php echo $getstatssearch['meetingcount'];?>)
-                          </div>
-                          <div class="col-md-2 text-center"> 
-                          <?php echo $getstatssearch['salescall'];?>
-                            (<?php echo $getstatssearch['introcall'];?>)
-                          </div>
-                        
-                          <div class="col-md-2 text-center">
-                          <?php echo $getstatssearch['pipelinecount'];?>
+                            <div class="col-md-2"> 
+                            <?php $user_icon = explode(",",$getstatssearch['image']); echo "<div class='circle' style='float: left;margin-top: -5px;margin-right: 10px;width: 35px;height: 35px;border-radius: 30px;font-size: 12px;line-height: 35px;text-align: center;font-weight: 700;background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
 
-                          </div>
-                          </div>
-                         
+                            </div>
+                            <div class="col-md-1 text-center">
+                            <a href = "?search=2&user=<?php echo $getstatssearch['user'];?>&period=week&start_date=<?php echo $_GET['start_date']?>&end_date=<?php echo $_GET['end_date']?>"><span class="badge"><?php echo $getstatssearch['deals'];?></a></span>
+                            </div>
+                            <div class="col-md-1 text-center"> 
+                            <?php echo $getstatssearch['proposals'];?>
+                            </div>
+                            <div class="col-md-2 text-center">
+                            <?php echo $getstatssearch['meetingbooked'];?> (<?php echo $getstatssearch['meetingcount'];?>)
+                            </div>
+                            <div class="col-md-2 text-center"> 
+                            <?php echo $getstatssearch['salescall'];?>
+                            (<?php echo $getstatssearch['introcall'];?>)
+                            </div>
+                            <div class="col-md-1 text-center">
+                              <?php echo $getstatssearch['pipelinecount'];?>
+                            </div>
+                            <div class="col-md-2 text-center">
+                              <?php echo $getstatssearch['key_review_added'];?> / <?php echo $getstatssearch['key_review_occuring'];?>
+                            </div>
+                            <div class="col-md-1 text-center">
+                              <?php echo $getstatssearch['duediligence'];?>
+                            </div>
+                          </div>     
                       <?php endforeach ?>
                       
                       </div>

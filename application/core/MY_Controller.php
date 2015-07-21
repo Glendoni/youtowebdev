@@ -38,6 +38,8 @@ class MY_Controller extends CI_Controller {
 		$this->load->model('Actions_model');
 		$this->load->model('Companies_model');
 		$this->load->model('Contacts_model');
+		$this->load->model('Email_templates_model');
+
 		// $this->load->helper('mobile');
 		
 		// loging checking and redirect

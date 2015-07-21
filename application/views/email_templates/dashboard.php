@@ -7,7 +7,7 @@
         <!-- /.panel-heading -->
         <div class="panel-body">
             <?php if(empty($email_templates)): ?>
-              <h3>No email tempaltes <span ><a style="color:#fff;" href="<?php echo site_url(); ?>email_templates/edit" class="btn btn-primary">Add template</a></span></h3>
+              <h3>No email templates <span ><a style="color:#fff;" href="<?php echo site_url(); ?>email_templates/edit" class="btn btn-primary">Add template</a></span></h3>
             <?php else: ?>
               <table class="table table-striped">
                 <thead>

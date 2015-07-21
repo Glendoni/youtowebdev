@@ -96,15 +96,18 @@ class Actions_model extends MY_Model {
 	function get_recent_stats(){
 		$start_date_week = date('Y-m-d 00:00:00',strtotime('monday this week'));
 		$end_date_week = date('Y-m-d 23:59:59',strtotime('sunday this week'));
-		$sql = "select U.name, U.id as user,
+		$sql = "select U.name, U.id as user, U.image,
 				sum(case when action_type_id = '4' AND actioned_at > '$start_date_week' AND actioned_at < '$end_date_week' then 1 else 0 end) introcall,
 				sum(case when (action_type_id = '4' or action_type_id = '5' or action_type_id = '11' or action_type_id = '17')  AND actioned_at > '$start_date_week' AND actioned_at < '$end_date_week' then 1 else 0 end) salescall,
 		    	sum(case when (action_type_id = '5' OR action_type_id = '11') AND actioned_at > '$start_date_week' AND actioned_at < '$end_date_week' then 1 else 0 end) callcount,
 		   		sum(case when (action_type_id = '12' or action_type_id = '10' or action_type_id = '9' or action_type_id = '15') AND actioned_at > '$start_date_week' AND actioned_at < '$end_date_week' then 1 else 0 end) meetingcount,
 		    	sum(case when (action_type_id = '12' or action_type_id = '10' or action_type_id = '9' or action_type_id = '15') AND a.created_at > '$start_date_week' AND a.created_at < '$end_date_week' then 1 else 0 end) meetingbooked,
 		    	sum(case when (action_type_id = '16') AND a.created_at > '$start_date_week' AND a.created_at < '$end_date_week' then 1 else 0 end) deals,
+		    	sum(case when action_type_id = '25' AND a.created_at > '$start_date_week' AND a.created_at < '$end_date_week' then 1 else 0 end) duediligence,
+		    	sum(case when action_type_id = '22' AND a.created_at > '$start_date_week' AND a.created_at < '$end_date_week' then 1 else 0 end) key_review_added,
+		    	sum(case when action_type_id = '22' AND a.planned_at > '$start_date_week' AND a.planned_at < '$end_date_week' then 1 else 0 end) key_review_occuring,
 		    	sum(case when (action_type_id = '8') AND a.created_at > '$start_date_week' AND a.created_at < '$end_date_week' then 1 else 0 end) proposals,
-				Sum(CASE WHEN action_type_id = '19' and a.id = 	(SELECT MAX(id) FROM actions z WHERE z.company_id = a.company_id and z.action_type_id = '19' order by a.actioned_at desc) AND (a.comments ilike '%intent%' or a.comments ilike '%qualified%') AND a.created_at > '$start_date_week' AND a.created_at < '$end_date_week' THEN 1 ELSE 0 END) AS pipelinecount
+				Sum(case when action_type_id = '19' and a.id = 	(SELECT MAX(id) FROM actions z WHERE z.company_id = a.company_id and z.action_type_id = '19' order by a.actioned_at desc) AND (a.comments ilike '%intent%' or a.comments ilike '%qualified%') AND a.created_at > '$start_date_week' AND a.created_at < '$end_date_week' THEN 1 ELSE 0 END) AS pipelinecount
 				from actions A LEFT JOIN companies C on A.company_id = C.id INNER JOIN users U on A.user_id = U.id where cancelled_at is null and u.department = 'sales' group by U.id,U.name order by deals desc,proposals desc,meetingbooked desc, introcall desc, name desc";
 		$query = $this->db->query($sql);
 		if($query){
@@ -116,7 +119,7 @@ class Actions_model extends MY_Model {
 	function get_last_week_stats(){
 		$start_date_week = date('Y-m-d 00:00:00',strtotime('monday last week'));
 		$end_date_week = date('Y-m-d 23:59:59',strtotime('sunday last week'));
-		$sql = "select U.name, U.id as user,
+		$sql = "select U.name, U.id as user, U.image,
 				sum(case when action_type_id = '4' AND actioned_at > '$start_date_week' AND actioned_at < '$end_date_week' then 1 else 0 end) introcall,
 				sum(case when (action_type_id = '4' or action_type_id = '5' or action_type_id = '11' or action_type_id = '17')  AND actioned_at > '$start_date_week' AND actioned_at < '$end_date_week' then 1 else 0 end) salescall,
 		    	sum(case when (action_type_id = '5' OR action_type_id = '11') AND actioned_at > '$start_date_week' AND actioned_at < '$end_date_week' then 1 else 0 end) callcount,
@@ -124,7 +127,10 @@ class Actions_model extends MY_Model {
 		    	sum(case when (action_type_id = '12' or action_type_id = '10' or action_type_id = '9' or action_type_id = '15') AND a.created_at > '$start_date_week' AND a.created_at < '$end_date_week' then 1 else 0 end) meetingbooked,
 		    	sum(case when (action_type_id = '16') AND a.created_at > '$start_date_week' AND a.created_at < '$end_date_week' then 1 else 0 end) deals,
 		    	sum(case when (action_type_id = '8') AND a.created_at > '$start_date_week' AND a.created_at < '$end_date_week' then 1 else 0 end) proposals,
-				Sum(CASE WHEN action_type_id = '19' and a.id = 	(SELECT MAX(id) FROM actions z WHERE z.company_id = a.company_id and z.action_type_id = '19' order by a.actioned_at desc) AND (a.comments ilike '%intent%' or a.comments ilike '%qualified%') AND a.created_at > '$start_date_week' AND a.created_at < '$end_date_week' THEN 1 ELSE 0 END) AS pipelinecount
+				Sum(CASE WHEN action_type_id = '19' and a.id = 	(SELECT MAX(id) FROM actions z WHERE z.company_id = a.company_id and z.action_type_id = '19' order by a.actioned_at desc) AND (a.comments ilike '%intent%' or a.comments ilike '%qualified%') AND a.created_at > '$start_date_week' AND a.created_at < '$end_date_week' THEN 1 ELSE 0 END) AS pipelinecount,
+				sum(case when action_type_id = '25' AND a.created_at > '$start_date_week' AND a.created_at < '$end_date_week' then 1 else 0 end) duediligence,
+		    	sum(case when action_type_id = '22' AND a.created_at > '$start_date_week' AND a.created_at < '$end_date_week' then 1 else 0 end) key_review_added,
+		    	sum(case when action_type_id = '22' AND a.planned_at > '$start_date_week' AND a.planned_at < '$end_date_week' then 1 else 0 end) key_review_occuring
 				from actions A LEFT JOIN companies C on A.company_id = C.id INNER JOIN users U on A.user_id = U.id where cancelled_at is null and u.department = 'sales' group by U.id,U.name order by deals desc,proposals desc,meetingbooked desc, introcall desc, name desc";
 		$query = $this->db->query($sql);
 		if($query){
@@ -136,7 +142,7 @@ class Actions_model extends MY_Model {
 	function get_this_month_stats(){
 		$start_date_month = date('Y-m-d 00:00:00',strtotime('first day of this month'));
 		$end_date_month = date('Y-m-d 23:59:59',strtotime('last day of this month'));
-		$sql = "select U.name, U.id as user,
+		$sql = "select U.name, U.id as user, U.image,
 				sum(case when action_type_id = '4' AND actioned_at > '$start_date_month' AND actioned_at < '$end_date_month' then 1 else 0 end) introcall,
 				sum(case when (action_type_id = '4' or action_type_id = '5' or action_type_id = '11' or action_type_id = '17')  AND actioned_at > '$start_date_month' AND actioned_at < '$end_date_month' then 1 else 0 end) salescall,
 		    	sum(case when (action_type_id = '5' OR action_type_id = '11') AND actioned_at > '$start_date_month' AND actioned_at < '$end_date_month' then 1 else 0 end) callcount,
@@ -144,6 +150,9 @@ class Actions_model extends MY_Model {
 		    	sum(case when (action_type_id = '12' or action_type_id = '10' or action_type_id = '9' or action_type_id = '15') AND a.created_at > '$start_date_month' AND a.created_at < '$end_date_month' then 1 else 0 end) meetingbooked,
 		    	sum(case when (action_type_id = '16') AND a.created_at > '$start_date_month' AND a.created_at < '$end_date_month' then 1 else 0 end) deals,
 		    	sum(case when (action_type_id = '8') AND a.created_at > '$start_date_month' AND a.created_at < '$end_date_month' then 1 else 0 end) proposals,
+		    	sum(case when action_type_id = '25' AND a.created_at > '$start_date_month' AND a.created_at < '$end_date_month' then 1 else 0 end) duediligence,
+		    	sum(case when action_type_id = '22' AND a.created_at > '$start_date_month' AND a.created_at < '$end_date_month' then 1 else 0 end) key_review_added,
+		    	sum(case when action_type_id = '22' AND a.planned_at > '$start_date_month' AND a.planned_at < '$end_date_month' then 1 else 0 end) key_review_occuring,
 		    	Sum(CASE WHEN action_type_id = '19' and a.id = 	(SELECT MAX(id) FROM actions z WHERE z.company_id = a.company_id and z.action_type_id = '19' order by a.actioned_at desc) AND (a.comments ilike '%intent%' or a.comments ilike '%qualified%') AND a.created_at > '$start_date_month' AND a.created_at < '$end_date_month' THEN 1 ELSE 0 END) AS pipelinecount 
 				from actions A
 				INNER JOIN users U
@@ -162,7 +171,7 @@ class Actions_model extends MY_Model {
 		$dates = $this->dates();
 		$start_date = $dates['start_date'];
 		$end_date = date('Y-m-d H:i:s', strtotime($dates['end_date'] . ' +1 day'));
-		$sql = "select U.name, U.id as user,
+		$sql = "select U.name, U.id as user, U.image,
 				sum(case when action_type_id = '4' AND actioned_at > '$start_date' AND actioned_at < '$end_date' then 1 else 0 end) introcall,
 				sum(case when (action_type_id = '4' or action_type_id = '5')  AND actioned_at > '$start_date' AND actioned_at < '$end_date' then 1 else 0 end) salescall,
 		    	sum(case when (action_type_id = '5' OR action_type_id = '11') AND actioned_at > '$start_date' AND actioned_at < '$end_date' then 1 else 0 end) callcount,
@@ -170,6 +179,9 @@ class Actions_model extends MY_Model {
 		    	sum(case when (action_type_id = '12' or action_type_id = '10' or action_type_id = '9' or action_type_id = '15') AND a.created_at > '$start_date' AND a.created_at < '$end_date' then 1 else 0 end) meetingbooked,
 		    	sum(case when (action_type_id = '16') AND a.created_at > '$start_date' AND a.created_at < '$end_date' then 1 else 0 end) deals,
 		    	sum(case when (action_type_id = '8') AND a.created_at > '$start_date' AND a.created_at < '$end_date' then 1 else 0 end) proposals,
+		    	sum(case when action_type_id = '25' AND a.created_at > '$start_date' AND a.created_at < '$end_date' then 1 else 0 end) duediligence,
+		    	sum(case when action_type_id = '22' AND a.created_at > '$start_date' AND a.created_at < '$end_date' then 1 else 0 end) key_review_added,
+		    	sum(case when action_type_id = '22' AND a.planned_at > '$start_date' AND a.planned_at < '$end_date' then 1 else 0 end) key_review_occuring,
 		    	Sum(CASE WHEN action_type_id = '19' and a.id = 	(SELECT MAX(id) FROM actions z WHERE z.company_id = a.company_id and z.action_type_id = '19' order by a.actioned_at desc) AND (a.comments ilike '%intent%' or a.comments ilike '%qualified%') AND a.created_at > '$start_date' AND a.created_at < '$end_date' THEN 1 ELSE 0 END) AS pipelinecount 
 				from actions A
 				INNER JOIN users U
