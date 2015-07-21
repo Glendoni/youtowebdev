@@ -37,10 +37,10 @@
 <!--                 <div class="form-group col-md-6">  
                   <label>Profile image <small class="mute">(Max 100kb)</small></label>
                   <input type="file" name="userfile" size="20" /> 
-                </div>         
+                </div>      -->    
                 <div class="form-group col-md-12">
                   <button class="btn btn-primary" name="update_profile">Update</button>
-                </div> -->
+                </div>
             </form>
         </div>
         <!-- /.panel-body -->

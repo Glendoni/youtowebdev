@@ -161,7 +161,7 @@ class Actions_model extends MY_Model {
 	function get_stats_search(){
 		$dates = $this->dates();
 		$start_date = $dates['start_date'];
-		$end_date = $dates['end_date'];
+		$end_date = date('Y-m-d H:i:s', strtotime($dates['end_date'] . ' +1 day'));
 		$sql = "select U.name, U.id as user,
 				sum(case when action_type_id = '4' AND actioned_at > '$start_date' AND actioned_at < '$end_date' then 1 else 0 end) introcall,
 				sum(case when (action_type_id = '4' or action_type_id = '5')  AND actioned_at > '$start_date' AND actioned_at < '$end_date' then 1 else 0 end) salescall,
@@ -187,7 +187,7 @@ class Actions_model extends MY_Model {
 	function get_pipeline_contacted(){
 		$dates = $this->dates();
 		$start_date = $dates['start_date'];
-		$end_date = $dates['end_date'];
+		$end_date = date('Y-m-d H:i:s', strtotime($dates['end_date'] . ' +1 day'));
 		if (isset($_GET['start_date'])) {
 		$start_date_sql = "a.created_at > '".date('Y-m-d 00:00:00',strtotime($start_date))."'  AND a.created_at < '".date('Y-m-d 23:59:59',strtotime($end_date))."' ";
 		}
@@ -220,7 +220,7 @@ class Actions_model extends MY_Model {
 	function get_pipeline_contacted_individual($user_id){
 		$dates = $this->dates();
 		$start_date = $dates['start_date'];
-		$end_date = $dates['end_date'];
+		$end_date = date('Y-m-d H:i:s', strtotime($dates['end_date'] . ' +1 day'));
 		if (isset($_GET['start_date'])) {
 		$start_date_sql = "a.created_at > '".date('Y-m-d 00:00:00',strtotime($start_date))."'  AND a.created_at < '".date('Y-m-d 23:59:59',strtotime($end_date))."' ";
 		}
@@ -253,7 +253,7 @@ class Actions_model extends MY_Model {
 	function get_pipeline_proposal(){
 		$dates = $this->dates();
 		$start_date = $dates['start_date'];
-		$end_date = $dates['end_date'];
+		$end_date = date('Y-m-d H:i:s', strtotime($dates['end_date'] . ' +1 day'));
 		if (isset($_GET['start_date'])) {
 		$start_date_sql = "a.created_at > '".date('Y-m-d 00:00:00',strtotime($start_date))."'  AND a.created_at < '".date('Y-m-d 23:59:59',strtotime($end_date))."' ";
 		}
@@ -276,7 +276,7 @@ class Actions_model extends MY_Model {
 	function get_pipeline_proposal_individual($user_id){
 		$dates = $this->dates();
 		$start_date = $dates['start_date'];
-		$end_date = $dates['end_date'];
+		$end_date = date('Y-m-d H:i:s', strtotime($dates['end_date'] . ' +1 day'));
 		if (isset($_GET['start_date'])) {
 		$start_date_sql = "a.created_at > '".date('Y-m-d 00:00:00',strtotime($start_date))."'  AND a.created_at < '".date('Y-m-d 23:59:59',strtotime($end_date))."' ";
 		}
@@ -299,7 +299,7 @@ class Actions_model extends MY_Model {
 	function get_pipeline_customer(){
 		$dates = $this->dates();
 		$start_date = $dates['start_date'];
-		$end_date = $dates['end_date'];
+		$end_date = date('Y-m-d H:i:s', strtotime($dates['end_date'] . ' +1 day'));
 		if (isset($start_date)) {
 		$start_date_sql = "AND a.created_at > '".date('Y-m-d 00:00:00',strtotime($start_date))."'  AND a.created_at < '".date('Y-m-d 23:59:59',strtotime($end_date))."'";
 		}
@@ -323,7 +323,7 @@ class Actions_model extends MY_Model {
 	function get_pipeline_customer_individual($user_id){
 		$dates = $this->dates();
 		$start_date = $dates['start_date'];
-		$end_date = $dates['end_date'];
+		$end_date = date('Y-m-d H:i:s', strtotime($dates['end_date'] . ' +1 day'));
 		if (isset($start_date)) {
 		$start_date_sql = "AND a.created_at > '".date('Y-m-d 00:00:00',strtotime($start_date))."'  AND a.created_at < '".date('Y-m-d 23:59:59',strtotime($end_date))."'";
 		}
@@ -354,7 +354,7 @@ class Actions_model extends MY_Model {
 	function get_pipeline_lost(){
 		$dates = $this->dates();
 		$start_date = $dates['start_date'];
-		$end_date = $dates['end_date'];
+		$end_date = date('Y-m-d H:i:s', strtotime($dates['end_date'] . ' +1 day'));
 		$sql = "select
 		c.id as company_id,
 		a.comments,
@@ -382,7 +382,7 @@ class Actions_model extends MY_Model {
 	function get_pipeline_lost_individual($user_id){
 		$dates = $this->dates();
 		$start_date = $dates['start_date'];
-		$end_date = $dates['end_date'];
+		$end_date = date('Y-m-d H:i:s', strtotime($dates['end_date'] . ' +1 day'));
 		$sql = "select
 		c.id as company_id,
 		a.comments,
@@ -411,7 +411,7 @@ class Actions_model extends MY_Model {
 		$dates = $this->dates();
 		$search_user_id = $dates['search_user_id'];
 		$start_date = $dates['start_date'];
-		$end_date = $dates['end_date'];
+		$end_date = date('Y-m-d H:i:s', strtotime($dates['end_date'] . ' +1 day'));
 		if (!empty($search_user_id)) {
 			 $sql = "select distinct c.name, a.actioned_at, c.id, u.name as username from companies c 
 			 inner join actions a on c.id = a.company_id
@@ -428,7 +428,7 @@ class Actions_model extends MY_Model {
 		$dates = $this->dates();
 		$search_user_id = $dates['search_user_id'];
 		$start_date = $dates['start_date'];
-		$end_date = $dates['end_date'];
+		$end_date = date('Y-m-d H:i:s', strtotime($dates['end_date'] . ' +1 day'));
 		if (!empty($search_user_id)) {
 		  	$sql = "select distinct c.name, a.created_at, c.id from companies c inner join actions a on c.id = a.company_id where a.action_type_id = '8' and a.created_by = '$search_user_id' AND a.created_at > '$start_date' AND a.created_at < '$end_date' order by a.created_at asc";
 			$query = $this->db->query($sql);
@@ -466,7 +466,7 @@ class Actions_model extends MY_Model {
 		$dates = $this->dates();
 		$search_user_id = $dates['search_user_id'];
 		$start_date = $dates['start_date'];
-		$end_date = $dates['end_date'];
+		$end_date = date('Y-m-d H:i:s', strtotime($dates['end_date'] . ' +1 day'));
 		if (!empty($search_user_id)) {
 		$sql = "select distinct c.name, a.created_at,c.id, sum(case when (action_type_id = '12' or action_type_id = '10' or action_type_id = '9' or action_type_id = '15') AND actioned_at > '$start_date' AND actioned_at < '$end_date' then 1 else 0 end) meeting_actioned from companies c inner join actions a on c.id = a.company_id where (action_type_id = '12' or action_type_id = '10' or action_type_id = '9' or action_type_id = '15') and a.created_by = '$search_user_id' AND (a.created_at > '$start_date' or a.actioned_at > '$start_date') AND (a.created_at < '$end_date' or a.actioned_at < '$end_date') group by c.name, a.created_at, c.id order by a.created_at asc";
 		$query = $this->db->query($sql);
@@ -477,7 +477,7 @@ class Actions_model extends MY_Model {
 		$dates = $this->dates();
 		$search_user_id = $dates['search_user_id'];
 		$start_date = $dates['start_date'];
-		$end_date = $dates['end_date'];
+		$end_date = date('Y-m-d H:i:s', strtotime($dates['end_date'] . ' +1 day'));
 		if (!empty($search_user_id)) {
 		$sql = "select distinct c.name, a.actioned_at, c.id from companies c inner join actions a on c.id = a.company_id where a.action_type_id = '4' and a.created_by = '$search_user_id' AND a.actioned_at > '$start_date' AND a.actioned_at < '$end_date' order by a.actioned_at asc";
 		$query = $this->db->query($sql);
