@@ -123,7 +123,7 @@ class Actions extends MY_Controller {
 				}else{
 					$this->set_message_error(validation_errors());
 				}
-				redirect('companies/company?id='.$this->input->post('company_id'),'location');
+				redirect('companies/company?id='.$this->input->post('company_id').'#actions','location');
 			}
 			else if($this->input->post('action_do') == 'cancelled')
 			{	
