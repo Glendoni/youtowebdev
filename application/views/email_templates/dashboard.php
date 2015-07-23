@@ -14,7 +14,6 @@
                 <tr>
                 <th>Name</th>
                 <th>Subject</th>
-                <th>created date</th>
                 <th></th>
                 <th></th>
                 </tr>
@@ -24,7 +23,6 @@
                   <tr>
                     <td><?php echo $tempalte->name ?></td>
                     <td><?php echo $tempalte->subject ?></td>
-                    <td><?php echo $tempalte->created_at ?></td>
                     <td><a href="<?php echo site_url(); ?>email_templates/edit?id=<?php echo $tempalte->id ?>" class="btn btn-primary btn-xs">view/edit</a></td>
                     <td><a href="<?php echo site_url(); ?>email_templates/delete?id=<?php echo $tempalte->id ?>" class="btn btn-danger btn-xs">delete</a></td>
                   </tr>
