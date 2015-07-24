@@ -41,15 +41,9 @@ echo form_open('',$attributes,$hidden);
 	</div>
 </div>
 <div class="form-group">
-	<label class="control-label col-sm-2" for="ddlink">DDlink:</label>
+	<label class="control-label col-sm-2" for="ddlemployeesink">Employees:</label>
 	<div class="col-sm-10">
-	  <input type="url" class="form-control" name="ddlink" sid="ddlink" value="<?php echo isset($_POST['ddlink'])?$_POST['ddlink']:''; ?>">
-	</div>
-</div>
-<div class="form-group">
-	<label class="control-label col-sm-2" for="ddlink">Employees:</label>
-	<div class="col-sm-10">
-	  <input type="url" class="form-control" name="employees" sid="employees" value="<?php echo isset($_POST['employees'])?$_POST['employees']:''; ?>">
+	  <input type="url" class="form-control" name="employees" id="employees" value="<?php echo isset($_POST['employees'])?$_POST['employees']:''; ?>">
 	</div>
 </div>
 <div class="form-group">

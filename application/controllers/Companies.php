@@ -140,7 +140,6 @@ class Companies extends MY_Controller {
 			$this->form_validation->set_rules('registration', 'registration', 'xss_clean|callback__valid_registration');
 			$this->form_validation->set_rules('name', 'name', 'xss_clean|required|callback__valid_name');
 			$this->form_validation->set_rules('url', 'url', 'xss_clean');
-			$this->form_validation->set_rules('ddlink', 'ddlink', 'xss_clean');
 			$this->form_validation->set_rules('employees', 'employees', 'xss_clean');
 			$this->form_validation->set_rules('contract', 'contract', 'xss_clean');
 			$this->form_validation->set_rules('perm', 'perm', 'xss_clean');
@@ -224,6 +223,7 @@ class Companies extends MY_Controller {
 			$this->data['email_templates'] = $this->Email_templates_model->get_all();
 			$raw_search_results = $this->Companies_model->search_companies_sql(FALSE,$this->input->get('id'));
 			$company = $this->process_search_result($raw_search_results);
+			// var_dump($company);
 			$this->data['contacts'] = $this->Contacts_model->get_contacts($this->input->get('id'));
 			$this->data['addresses'] = $this->Companies_model->get_addresses($this->input->get('id'));
 

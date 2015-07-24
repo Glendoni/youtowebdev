@@ -19,7 +19,7 @@ class MY_Controller extends CI_Controller {
 		        $this->output->enable_profiler(FALSE);
 		break;
 		case 'staging':
-		        $this->output->enable_profiler(FALSE);
+		        $this->output->enable_profiler(TRUE);
 		break;
 		case 'production':
 				$this->output->enable_profiler(FALSE);
@@ -339,39 +339,39 @@ class MY_Controller extends CI_Controller {
 			if($company->company->f1->f2)$mapped_companies_array['name'] = $company->company->f1->f2;
 			if($company->company->f1->f3)$mapped_companies_array['url'] = $company->company->f1->f3;
 			if($company->company->f1->f4)$mapped_companies_array['eff_from'] = $company->company->f1->f4;
-			if($company->company->f1->f5)$mapped_companies_array['ddlink'] = $company->company->f1->f5;
-			if($company->company->f1->f6)$mapped_companies_array['linkedin_id'] = $company->company->f1->f6;
-			if($company->company->f1->f7)$mapped_companies_array['assigned_to_name'] = $company->company->f1->f7;
-			if($company->company->f1->f21)$mapped_companies_array['assigned_to_image'] = $company->company->f1->f21;
-			if($company->company->f1->f22)$mapped_companies_array['class'] = $company->company->f1->f22;
-			if($company->company->f1->f23)$mapped_companies_array['address_lat'] = $company->company->f1->f23;
-			if($company->company->f1->f24)$mapped_companies_array['address_lng'] = $company->company->f1->f24;
-			if($company->company->f1->f26)$mapped_companies_array['phone'] = $company->company->f1->f26;
+			// if($company->company->f1->f5)$mapped_companies_array['ddlink'] = $company->company->f1->f5;
+			if($company->company->f1->f6)$mapped_companies_array['linkedin_id'] = $company->company->f1->f5;
+			if($company->company->f1->f7)$mapped_companies_array['assigned_to_name'] = $company->company->f1->f6;
+			if($company->company->f1->f21)$mapped_companies_array['assigned_to_image'] = $company->company->f1->f20;
+			if($company->company->f1->f22)$mapped_companies_array['class'] = $company->company->f1->f21;
+			if($company->company->f1->f23)$mapped_companies_array['address_lat'] = $company->company->f1->f22;
+			if($company->company->f1->f24)$mapped_companies_array['address_lng'] = $company->company->f1->f23;
+			if($company->company->f1->f26)$mapped_companies_array['phone'] = $company->company->f1->f25;
 
 
-			if($company->company->f1->f8)$mapped_companies_array['assigned_to_id'] = $company->company->f1->f8;
-			if($company->company->f1->f9)$mapped_companies_array['address'] = $company->company->f1->f9;
-			if($company->company->f1->f10)$mapped_companies_array['contract'] = $company->company->f1->f10;
-			if($company->company->f1->f11)$mapped_companies_array['perm'] = $company->company->f1->f11;
-			if($company->company->f1->f12)$mapped_companies_array['active'] = (bool)$company->company->f1->f12;
-			if($company->company->f1->f13)$mapped_companies_array['created_at'] = (bool)$company->company->f1->f13;
-			if($company->company->f1->f14)$mapped_companies_array['updated_at'] = (bool)$company->company->f1->f14;
-			if($company->company->f1->f15)$mapped_companies_array['created_by'] = $company->company->f1->f15;
-			if($company->company->f1->f16)$mapped_companies_array['updated_by'] = $company->company->f1->f16;
-			if($company->company->f1->f17)$mapped_companies_array['registration'] = $company->company->f1->f17;
-			if($company->company->f1->f18)$mapped_companies_array['turnover'] = $company->company->f1->f18;
-			if($company->company->f1->f19)$mapped_companies_array['turnover_method'] = $company->company->f1->f19;
-			if($company->company->f1->f20)$mapped_companies_array['emp_count'] = $company->company->f1->f20;
-			if($company->company->f1->f27)$mapped_companies_array['pipeline'] = $company->company->f1->f27;
-			if($company->company->f1->f28)$mapped_companies_array['contacts_count'] = $company->company->f1->f28;
-			if($company->company->f1->f29)$mapped_companies_array['parent_registration'] = $company->company->f1->f29;
+			if($company->company->f1->f8)$mapped_companies_array['assigned_to_id'] = $company->company->f1->f7;
+			if($company->company->f1->f9)$mapped_companies_array['address'] = $company->company->f1->f8;
+			if($company->company->f1->f10)$mapped_companies_array['contract'] = $company->company->f1->f9;
+			if($company->company->f1->f11)$mapped_companies_array['perm'] = $company->company->f1->f10;
+			if($company->company->f1->f12)$mapped_companies_array['active'] = (bool)$company->company->f1->f11;
+			if($company->company->f1->f13)$mapped_companies_array['created_at'] = (bool)$company->company->f1->f12;
+			if($company->company->f1->f14)$mapped_companies_array['updated_at'] = (bool)$company->company->f1->f13;
+			if($company->company->f1->f15)$mapped_companies_array['created_by'] = $company->company->f1->f14;
+			if($company->company->f1->f16)$mapped_companies_array['updated_by'] = $company->company->f1->f15;
+			if($company->company->f1->f17)$mapped_companies_array['registration'] = $company->company->f1->f16;
+			if($company->company->f1->f18)$mapped_companies_array['turnover'] = $company->company->f1->f17;
+			if($company->company->f1->f19)$mapped_companies_array['turnover_method'] = $company->company->f1->f18;
+			if($company->company->f1->f20)$mapped_companies_array['emp_count'] = $company->company->f1->f19;
+			if($company->company->f1->f27)$mapped_companies_array['pipeline'] = $company->company->f1->f26;
+			if($company->company->f1->f28)$mapped_companies_array['contacts_count'] = $company->company->f1->f27;
+			if($company->company->f1->f29)$mapped_companies_array['parent_registration'] = $company->company->f1->f28;
 
 			
 			// sectors
 
-			if(!empty($company->company->f1->f25)){
+			if(!empty($company->company->f1->f24)){
 				$sectors = array();
-				foreach ($company->company->f1->f25 as $sector) {
+				foreach ($company->company->f1->f24 as $sector) {
 					if(isset($sector->f1) && !empty($sector->f1)) 
 						$sectors[$sector->f1] = $sector->f2;
 				}
