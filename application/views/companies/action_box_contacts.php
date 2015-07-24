@@ -45,7 +45,7 @@
 	                    <div class="form-group">
 	                        <label for="name" class="control-label">Email body:</label>
 	                        <?php foreach ($email_templates as $email_template): ?>
-                			<textarea class="form-control info_box tinymce template_<?php echo $email_template->id; ?>" rows="18" cols="50" name="message_<?php echo $email_template->id; ?>" style="display:none;"><?php echo $email_template->message; ?></textarea>
+                			<textarea class="form-control info_box template_<?php echo $email_template->id; ?>" rows="18" cols="50" name="message_<?php echo $email_template->id; ?>" style="display:none;"><?php echo $email_template->message; ?></textarea>
 						  	<?php endforeach; ?>
 	                    </div>
 	                </div>

@@ -16,7 +16,7 @@ class MY_Controller extends CI_Controller {
 		// Debugging funcionality, set it only when on development 
 		switch (ENVIRONMENT) {
 		case 'development':
-		        $this->output->enable_profiler(TRUE);
+		        $this->output->enable_profiler(FALSE);
 		break;
 		case 'staging':
 		        $this->output->enable_profiler(FALSE);
@@ -38,8 +38,6 @@ class MY_Controller extends CI_Controller {
 		$this->load->model('Actions_model');
 		$this->load->model('Companies_model');
 		$this->load->model('Contacts_model');
-		$this->load->model('Email_templates_model');
-
 		// $this->load->helper('mobile');
 		
 		// loging checking and redirect

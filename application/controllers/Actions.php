@@ -1,10 +1,13 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
 class Actions extends MY_Controller {
+
 	function __construct() 
 	{
 		parent::__construct();
 		
 	}
+
 	public function _valid_date(){
 		$now = date('Y-m-d H:i:s',time());
 		$date = date('Y-m-d H:i:s',strtotime($this->input->post('planned_at')));
@@ -14,6 +17,7 @@ class Actions extends MY_Controller {
 			$this->form_validation->set_message('_valid_date', 'Planned date for action must be in the future');
 			return FALSE;
 		}
+
 	}
 	public function create(){
 		 // print_r('<pre>');print_r($this->input->post());print_r('</pre>');
@@ -42,21 +46,23 @@ class Actions extends MY_Controller {
 					if ($post['action_type_completed']=='16') {
 						// if action type completed is a deal then company is a now a customer
 						// companies model update the company to customer
+						$result = $this->Companies_model->update_company_to_customer($company_id);
 						if(empty($result)){
 							$this->set_message_warning('Error while updating company.');	
 						}else{
 							// actions models, register the update of a company to customer status 
-						$result = $this->Companies_model->update_company_to_customer($company_id);
+							$result = $this->Actions_model->company_updated_to_customer($post);
 							if(empty($result)) $this->set_message_warning('Error while updating action for the company.');
 						}
 						
 					}else if($post['action_type']=='8'){
 						// proposal sent to company 
+						$result = $this->Companies_model->update_company_to_proposal($company_id);
 						if(empty($result)){
 							$this->set_message_warning('Error while updating company.');
 						}else{
 							// action model, update register an action for the proposal
-						$result = $this->Companies_model->update_company_to_proposal($company_id);
+							$result = $this->Actions_model->company_updated_to_proposal($post);
 							if(empty($result)) $this->set_message_warning('Error while updating action for the company.');
 						}
 					}
@@ -67,6 +73,7 @@ class Actions extends MY_Controller {
 				$this->set_message_error(validation_errors());
 				redirect('companies/company?id='.$this->input->post('company_id'),'location');
 			}
+
 		}
 		elseif($this->input->post('follow_up')){
 			
@@ -77,6 +84,7 @@ class Actions extends MY_Controller {
 			$this->form_validation->set_rules('company_id', 'company_id', 'xss_clean|required');
 			$this->form_validation->set_rules('user_id', 'user_id', 'xss_clean|required');
 			$this->form_validation->set_rules('contact_id', 'contact_id', 'xss_clean');
+
 			if($this->form_validation->run())
 			{
 				$result = $this->Actions_model->create($this->input->post());
@@ -95,6 +103,7 @@ class Actions extends MY_Controller {
 			}
 		}
 	} 
+
 	public function edit(){
 		if($this->input->post('action_id'))
 		{
@@ -108,6 +117,7 @@ class Actions extends MY_Controller {
 				$this->form_validation->set_rules('window', 'window', 'xss_clean');
 				$this->form_validation->set_rules('company_id', 'company_id', 'xss_clean');
 				$this->form_validation->set_rules('user_id', 'user_id', 'xss_clean');
+
 				if($this->form_validation->run())
 				{
 					$outcome = $this->input->post('outcome');
