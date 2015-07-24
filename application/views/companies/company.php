@@ -3,32 +3,28 @@
 <div class="top-info-holder">
 	<?php if (isset($company['parent_registration'])): ?>
 		<div style="height: 1px; background-color: #d9534f; text-align: center; margin:30px 0; ">
-			<span class="label label-danger" style="position: relative; top: -10px;">Subsidiary of <?php echo $company['parent_registration'];?></span>
-		</div>
-	<?php endif; ?>
-	<?php if (isset($company['pipeline']) and empty($company['customer_from'])): ?>
-			<div style="height: 1px; background-color: #f2f2f2; text-align: center; margin:30px 0; ">
-				<span class="label pipeline-label label-<?php echo str_replace(' ', '', $company['pipeline']); ?>" style="position: relative; top: -10px;">
-				<?php echo $company['pipeline'] ?>
-				</span>
+		<span class="label label-danger" style="position: relative; top: -10px;">Subsidiary of <?php echo $company['parent_registration'];?></span>
 			</div>
-	<?php elseif ($company['customer_from']): ?>
-		<div style="height: 1px; background-color: #f2f2f2; text-align: center; margin:30px 0; ">
-			<span class="label pipeline-label label-success" style="position: relative; top: -10px;">
-				Client
-			</span>
-		</div>
+
+	<?php endif; ?>
+	<h2 class="company-header">
+	<?php echo $company['name'];?>
+	</h2>
+
+			<div class="row" style="margin-top:5px; text-align:center;">
+
+	<span class="label label-<?php echo str_replace(' ', '', $company['pipeline']); ?>"><?php echo $company['pipeline']?></span>
+	<?php if(isset($company['assigned_to_name'])): ?>
+		<span class="label label-Prospect"
+		<?php $user_icon = explode(",", ($system_users_images[$company['assigned_to_id']]));echo "style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'";?>>
+        <?php echo $company['assigned_to_name']; ?>
+        </span>
+	<?php else: ?>
 	<?php endif; ?>
 </div>
 
 
-<?php if(isset($company['assigned_to_name'])): ?>
-	<div style="height: 1px; background-color: #f2f2f2; text-align: center; margin:30px 0; ">
-		<span class="label pipeline-label label-<?php echo str_replace(' ', '', $company['pipeline']); ?>" style="position: relative; top: -10px; <?php if(isset($company['assigned_to_name'])): ?> <?php $user_icon = explode(",", ($system_users_images[$company['assigned_to_id']]));echo "background-color:".$user_icon[1]."; color:".$user_icon[2].";";?><?php else: ?> <?php endif; ?>>">
-		<?php echo $company['assigned_to_name']; ?>
-		</span>
-	</div>
-<?php endif; ?>
+
 
 
 	<!-- POPUP BOXES -->
@@ -371,12 +367,9 @@
 				 <div class="col-md-3">
 					<div class="form-group ">
 						<label>Follow Up Action</label>
+
 						<select name="action_type_planned" class="form-control">
-<<<<<<< HEAD
 						<option value="0">--- No Follow Up ---</option>
-=======
-							<option value="0">--- No Follow Up ---</option>
->>>>>>> master
 							<?php foreach($action_types_planned as $action ): ?>
 							  <option value="<?php echo $action->id; ?>"><?php echo $action->name; ?></option>
 							<?php endforeach; ?>
