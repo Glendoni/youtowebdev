@@ -297,7 +297,7 @@ background-color: #FFEFBF;
 .count_of_results {
 line-height: 30px;
 font-weight: 300;
-font-size: 24px;
+font-size: 30px;
 }
 
 .pager li>a {
@@ -399,6 +399,7 @@ border-right: 1px solid #e7e7e7;
 	border-bottom: none;
 	text-align: center;
 	font-weight: 300;
+	margin-top: 10px;
 }
 
 .top-info-holder {

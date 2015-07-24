@@ -33,7 +33,6 @@
                   <label>LinkedIn username</label>
                   <input type="text" class="form-control" name="linkedin" value="<?php echo $current_user['linkedin'] ?>" > 
                 </div>
-                      
                 <div class="form-group col-md-12">
                   <button class="btn btn-primary" name="update_profile">Update</button>
                 </div>

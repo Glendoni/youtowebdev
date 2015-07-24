@@ -173,8 +173,6 @@ class Companies_model extends CI_Model {
 		return $this->db->affected_rows(); 
 	}
 
-
-
      // $query = $this->db->query("YOUR QUERY");
 
 	function search_companies_sql($post,$company_id = False)
