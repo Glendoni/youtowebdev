@@ -270,9 +270,7 @@
                     <ul class="nav" id="">
                         <li class="sidebar-search ">
                             <div class="panel panel-default search">
-                               <!--  <div class="panel-heading">
-                                    <h3 class="panel-title"><i class="fa fa-search fa-fw"></i> Search</h3>
-                                </div> -->
+                            
                                 <div class="panel-body">
                                     <div class="alert alert-warning alert-dismissible" style="display:none;" id="empty_form_error" role="alert">
                                       <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>

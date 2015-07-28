@@ -450,8 +450,11 @@
                             <?php echo $display_date;?>
                             <div class="col-md-12 pipeline-bottom">
                             <div style="font-size=16px; font-weight:600;"><a href="companies/company?id=<?php echo $pipelinecontactedindividual['company_id'] ?>">
-
-                            <?php echo $pipelinecontactedindividual['company_name'];?></a></div>
+                            <?php 
+                            $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' );
+                            echo str_replace($words, ' ',$pipelinecontactedindividual['company_name']); 
+                            ?>
+                            </a></div>
                            <small><?php echo $pipelinecontactedindividual['username'] ?></small>
                             </div>
                             </div>
@@ -494,8 +497,11 @@
                             <?php echo $display_date;?>
                             <div class="col-md-12 pipeline-bottom">
                             <div style="font-size=16px; font-weight:600;"><a href="companies/company?id=<?php echo $pipelineproposalindividual['company_id'] ?>">
-
-                            <?php echo $pipelineproposalindividual['company_name'];?></a></div>
+                            <?php 
+                            $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' );
+                            echo str_replace($words, ' ',$pipelineproposalindividual['company_name']); 
+                            ?>
+                          </a></div>
                             <small><?php echo $pipelineproposalindividual['username'] ?></small>
                             </div>
                             </div>

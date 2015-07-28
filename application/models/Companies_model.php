@@ -996,16 +996,15 @@ class Companies_model extends CI_Model {
 		return $query->result_object();
 	}
 
-		function create_address($post)
+		function create_address($post,$user_id)
 	{
        	$address->address = $post['address']; // please read the below note
     	$address->country_id = $post['country_id'];
 		$address->type = $post['address_types'];
 		$address->phone = $post['phone'];
         $address->company_id = $post['company_id'];
-        $address->created_by = $user_id;
+        $address->created_by = $post['user_id'];
         $address->created_at = date('Y-m-d H:i:s');
-
 		echo $this->db->insert('addresses',$address);
 	    return $rows;
     }
@@ -1018,7 +1017,7 @@ class Companies_model extends CI_Model {
     	$address->country_id = $post['country_id'];
 		$address->type = $post['address_types'];
 		$address->phone = $post['phone'];
-        $address->updated_by = $user_id;
+        $address->updated_by = $post['user_id'];
         $address->updated_at = date('Y-m-d H:i:s');
         $this->db->where('id', $post['address_id']);
 		$this->db->update('addresses',$address);
@@ -1040,7 +1039,7 @@ class Companies_model extends CI_Model {
 			}
 		else 
 			{
-			return $this->db->query("select c.name,c.id, c.pipeline, u.name as user, u.image as image, user_id from companies c left join  users u on u.id = c.user_id where c.eff_to IS NULL and c.active = 'true' and c.name ilike '%".$search_data."%' order by c.name asc limit 5 ");
+			return $this->db->query("select c.name,c.id, c.pipeline, u.name as user, u.image as image, user_id from companies c left join  users u on u.id = c.user_id where c.eff_to IS NULL and c.active = 'true' and c.name ilike '%".$search_data."%' or c.registration ilike '".$search_data."%' order by c.name asc limit 5 ");
 			}
 	}
 	    function get_autocomplete_contact($search_data) {

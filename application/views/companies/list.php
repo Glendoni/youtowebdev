@@ -27,7 +27,6 @@
 				</a></h2>
 			</div>
 			<div class="col-sm-12" style="margin-top:5px; text-align:center;">
-
 	<span class="label label-<?php echo str_replace(' ', '', $company['pipeline']); ?>"><?php echo $company['pipeline']?></span>
 	<?php if(isset($company['assigned_to_name'])): ?>
 		<span class="label label-Prospect"
@@ -43,41 +42,38 @@
 	</div>
 		<div class="col-sm-9">
 		<div class="row">
-		<div class="col-sm-12" style="margin-bottom:10px;">
-				<label>Company Name</label>
+		<div class="col-sm-12">
+				<strong>Address</strong>
+				<p style="margin-bottom:0;">
+                <?php echo isset($company['address'])?$company['address']:'-'; ?>  
+				</p>
+		</div><!--END ADDRESS-->
+		<div class="col-xs-6 col-md-4" style="margin-top:10px;">
+			<strong>Company Number</strong>
+			<p style="margin-bottom:0;">	
+			 <!--COMPANY NUMBER IF APPLICABLE-->
+                <?php if (isset($company['registration'])): ?>
+				<?php echo $company['registration']; ?>
+				<?php else: ?>
+				-
+                <?php endif; ?>
+         	</p>
+        	</div>
+		<div class="col-xs-6" style="margin-top:10px;">
+				<strong>Company Name</strong>
 				<p style="margin-bottom:0;">	
 				<?php echo $company['name']; ?>
 				</p>
 		</div><!--END NAME-->
-		<div class="col-sm-12" style="margin-top:10px;">
-				<label>Address</label>
-				<p style="margin-bottom:0;">
-                <?php echo isset($company['address'])?$company['address']:'-'; ?>  
-				</p><hr>
-		</div><!--END ADDRESS-->
-		<div class="col-xs-6 " style="margin-top:10px;">
-			<strong>Company Number</strong>
-			<p style="margin-bottom:0;">	
-			 <!--COMPANY NUMBER IF APPLICABLE-->
-				<?php echo isset($company['registration'])?$company['registration']:'-'; ?>
-
-         	</p>
-        	</div>
-		<div class="col-xs-6" style="margin-top:10px;">
-        	<strong>Founded</strong>
-				<p style="margin-bottom:0;">	
-				<?php echo isset($company['eff_from'])?$company['eff_from']:'-'; ?>
-				</p>
-		</div><!--END NAME-->
 				
 		
-        <div class="col-xs-6" style="margin-top:10px;">
+        <div class="col-xs-6 col-md-4" style="margin-top:10px;">
         		<strong>Phone Number</strong>
         		<p style="margin-bottom:0;">
-        		<?php echo isset($company['phone'])?$company['phone']:''; ?>                
+        		<?php echo isset($company['phone'])?$company['phone']:'-'; ?>                
            		</p>
-		</div><!--END PHONE NUMBER-->
-		<div class="col-xs-6" style="margin-top:10px;">
+			</div><!--END PHONE NUMBER-->
+		<div class="col-xs-6 col-md-4" style="margin-top:10px;">
 				<strong>Class</strong>
 				<p style="margin-bottom:0;">	
 		            <!--CLASS IF APPLICABLE-->
@@ -87,7 +83,8 @@
 						-
 		            <?php endif; ?>
 	            </p>
-		</div>
+			</div>
+
 		</div><!--END ROW-->
         </div><!--CLOSE MD-9-->
 
@@ -115,7 +112,7 @@
 		
         <div class="row">
 		<!-- TURNOVER -->
-		<div class="col-sm-3 centre">
+		<div class="col-sm-2 centre">
 			<strong>Turnover</strong>
 			<p class="details" style="margin-bottom:5px;">
 				£<?php echo isset($company['turnover'])? number_format (round($company['turnover'],-3)):'0';?>
@@ -124,10 +121,15 @@
             	<span class="label label-default" ><?php  echo isset($company['turnover_method'])?$company['turnover_method']:'';?></span>
             </h6>	
         </div>
-        
+        <div class="col-sm-2 centre">
+        	<strong>Founded</strong>
+			<p class="details">
+				<?php echo isset($company['eff_from'])?$company['eff_from']:''; ?>
+			</p>
+		</div>
 
 		<!-- CONTACTS -->
-		<div class="col-sm-3 centre">
+		<div class="col-sm-2 centre">
 			<strong>Contacts</strong>			
 			<?php if (isset($company['contacts_count'])): ?>
 			<p class="details"><?php echo $company['contacts_count'];?> </p>
@@ -137,7 +139,7 @@
 		</div>
 
 		<!-- EMPLOYEES -->
-		<div class="col-sm-3 centre">
+		<div class="col-sm-2 centre">
 			<strong>Employees</strong>
 			<?php if (isset($company['emp_count'])): ?>
 			<p class="details"><?php echo $company['emp_count'];?> </p>
@@ -147,7 +149,7 @@
 		</div>
 
 		<!-- SECTORS -->
-		<div class="col-sm-3">
+		<div class="col-sm-4">
 			<strong>Sectors</strong> 
 			<?php 
 			if(isset($company['sectors'])){
@@ -182,9 +184,11 @@
 				<?php foreach ($company['mortgages'] as $mortgage):?>
 				<tr <?php echo $mortgage['stage']==MORTGAGES_SATISFIED? 'class="danger"' : 'class="success"' ?> >
 					<td class="col-md-6" ><?php echo $mortgage['name']; ?>
-					</br><small><strong><?php echo $mortgage['type']; ?></strong></small>
+
+					<span class="label label-default" style="margin-left: 20px;
+  padding: 1px 10px;"><?php echo $mortgage['type']; ?></span>
 </td>
-					<td class="col-md-3" style="text-align:center;"><strong><?php echo $mortgage['stage']; ?><?php if(!empty($mortgage['eff_to'])){echo ' on '.$mortgage['eff_to'];} ?></strong></td>
+					<td class="col-md-3" style="text-align:center;"><!--<span class="label label-<?php echo $mortgage['stage']==MORTGAGES_SATISFIED? 'default' : 'success' ?>">--><strong><?php echo $mortgage['stage']; ?></strong><?php if(!empty($mortgage['eff_to'])){echo ' on '.$mortgage['eff_to'];} ?></span></td>
 					<td class="col-md-3" style="text-align:center;"><?php echo $mortgage['eff_from']; ?></td>
 
 				</tr>
