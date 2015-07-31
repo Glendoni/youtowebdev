@@ -996,7 +996,7 @@ class Companies_model extends CI_Model {
 		return $query->result_object();
 	}
 
-		function create_address($post,$user_id)
+	function create_address($post,$user_id)
 	{
        	$address->address = $post['address']; // please read the below note
     	$address->country_id = $post['country_id'];
@@ -1005,14 +1005,15 @@ class Companies_model extends CI_Model {
         $address->company_id = $post['company_id'];
         $address->created_by = $post['user_id'];
         $address->created_at = date('Y-m-d H:i:s');
-		echo $this->db->insert('addresses',$address);
-	    return $rows;
+		$this->db->insert('addresses',$address);
+		return $this->db->affected_rows();
+
     }
 
 
 
-		 function update_address($post)
-	 {
+	function update_address($post)
+	{
     	$address->address   = $post['address']; // please read the below note
     	$address->country_id = $post['country_id'];
 		$address->type = $post['address_types'];
