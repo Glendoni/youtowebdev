@@ -294,7 +294,7 @@
                                                 <div id="autoSuggestionsList"></div>
                                             </div>
                                         </div>
-                                     <div class="form-row">
+                                        <div class="form-row">
                                          <?php  echo form_label('Age (Months) ', 'company_age_from', array('class'=>'control-label')); ?>
                                          <div class="form-group"> 
                                             <div class="col-xs-6 col-md-6"> 
@@ -416,6 +416,7 @@
                                         </div>
                                     </div>
                                     </div>
+
                                     <div class="panel-footer">
                                     
                                         <input type="submit" class="loading-btn btn btn-primary btn-block " value="Search" name="submit">
