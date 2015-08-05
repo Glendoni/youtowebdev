@@ -529,16 +529,19 @@ padding: 3px 5px;}
 	position: relative;
 	clear: both;
 }
-
-ul.autocomplete-holder {
-	list-style-type: none;
-	padding-left: 0;
-	-webkit-border-radius:0  0 5px 5px !important;
+.autocomplete-full-holder {
+-webkit-border-radius:0  0 5px 5px !important;
 	-moz-border-radius:0  0 5px 5px !important;
   	border-radius:0  0 5px 5px !important;
   	background-color: #F6F6F6;
   	border: 1px #A5B0B1 solid;
   	border-top: none;
+    display: flex;
+}
+ul.autocomplete-holder {
+	list-style-type: none;
+	padding-left: 0;
+	margin-bottom: 0;
   	width: 100%;
 }
 li.autocomplete-item:first-child { 
@@ -548,10 +551,92 @@ li.autocomplete-item {
 	font-size: 12px;
 	padding: 10px 5px;
 }
+li.autocomplete-company { 
+	padding: 10px 20px;
+	    border-bottom: 1px #e7e7e7 solid;
+    border-right: 1px #e7e7e7 solid;
+       background-color: #fff;
+}
+li.autocomplete-contact { 
+	padding: 10px 20px;
+	    border-bottom: 1px #e7e7e7 solid;
+    border-left: 1px #e7e7e7 solid;
+    background-color: #fff;
+}
+.autocomplete-holder a {
+	color: #555;
+}
 .autocomplete-holder a:hover {
 	text-decoration: none;
-
 }
+
+   .dropdown.dropdown-lg .dropdown-menu {
+    margin-top: -1px;
+    padding: 6px 20px;
+}
+.input-group-btn {
+    position: absolute;
+    font-size: 0;
+    white-space: nowrap;
+    top: 0;
+    right: 0;
+    z-index: 999;
+}
+.input-group-btn .btn-group {
+    display: flex !important;
+}
+.btn-group .btn {
+    border-radius: 0;
+    margin-left: -1px;
+}
+.btn-group .btn:last-child {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+.btn-group .form-horizontal .btn[type="submit"] {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+.form-horizontal .form-group {
+    margin-left: 0;
+    margin-right: 0;
+}
+.form-group .form-control:last-child {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+.large-search-height {
+  height: 56px;
+}
+.large-search {
+font-size: 30px;
+font-weight: 300;
+}
+.large-form-holder {
+margin-top: 20px;
+margin-bottom: 20px;
+}
+.advanced-search {
+  float: left;
+  width: 100%;
+  background-color: #fff;
+      z-index: 9999;
+    position: absolute;
+}
+
+@media screen and (min-width: 768px) {
+    #adv-search {
+        width: 100%;
+        margin: 0 auto;
+    }
+    .dropdown.dropdown-lg {
+        position: static !important;
+    }
+    .dropdown.dropdown-lg .dropdown-menu {
+        min-width: 500px;
+    }
+}
+
 /* SAVED LISTS */
 li.autocomplete-item:hover {
 	background-color: #428bca;

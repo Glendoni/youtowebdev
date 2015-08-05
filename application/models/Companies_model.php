@@ -405,7 +405,6 @@ class Companies_model extends CI_Model {
 			   C.registration, -- f16
 		       TT1."turnover", -- f17
 			   TT1."turnover_method",  -- f18
-			   EMP.count,--f19
 			   U.image , -- f20
 			   C.class, -- f21
 			   A.lat, -- f22
@@ -479,11 +478,15 @@ class Companies_model extends CI_Model {
 		)   TT2
 		ON TT2."company id" = C.id
 
+<<<<<<< HEAD
 		
 		LEFT JOIN 
 		emp_counts emp
 		ON emp.id = (select id from emp_counts where company_id = C.id order by id desc limit 1)
 
+=======
+	
+>>>>>>> nick
 
 		LEFT JOIN 
 		ADDRESSES A
@@ -518,7 +521,6 @@ class Companies_model extends CI_Model {
 			     A.lng,
 		         TT1."turnover",
 			     TT1."turnover_method",
-			     EMP.count,
 			     CONT.contacts_count
 
 		order by C.id 
