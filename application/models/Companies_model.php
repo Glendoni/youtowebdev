@@ -422,7 +422,7 @@ class Companies_model extends CI_Model {
 			   
 
 
-		from (select * from COMPANIES where eff_to IS NULL and active = \'TRUE\' ';
+		from (select * from COMPANIES where active = \'TRUE\' ';
 		if(isset($contacted_in)) $sql = $sql.' AND id in ('.$contacted_in.')';
 		$sql = $sql.') C ';
 
@@ -479,15 +479,15 @@ class Companies_model extends CI_Model {
 		)   TT2
 		ON TT2."company id" = C.id
 
-        left join 
-        (select count, company_id from emp_counts ORDER BY "emp_counts"."created_at" DESC limit 1)
-        EMP ON EMP.company_id = C.id
-
+		
+		LEFT JOIN 
+		emp_counts emp
+		ON emp.id = (select id from emp_counts where company_id = C.id order by id desc limit 1)
 
 
 		LEFT JOIN 
 		ADDRESSES A
-		ON A.company_id = C.id
+		ON a.id = (select id from addresses where type ilike \'registered address\' and company_id = C.id limit 1)
 
 		LEFT JOIN
 		USERS U
