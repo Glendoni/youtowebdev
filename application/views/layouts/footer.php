@@ -2,13 +2,6 @@
     <!-- /#wrapper -->
     <!-- jQuery Version 1.11.0 -->
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <!--MAKE ADVANCED SEARCH DROP DOWN-->
-<script>
-function toggler(divId) {
-    $("#" + divId).toggle();
-}
-</script>
-
 
     <!-- Bootstrap Core JavaScript -->
     <script type="text/javascript" src="<?php echo asset_url();?>js/bootstrap.min.js"></script>
@@ -280,6 +273,13 @@ function toggler(divId) {
   ga('create', 'UA-64636609-1', 'auto');
   ga('send', 'pageview');
 
+</script>
+<script type="text/javascript">
+$('.toggle').click(function (event) {
+    event.preventDefault();
+    var target = $(this).attr('href');
+    $(target).toggleClass('hidden show');
+});
 </script>
 
 </body>

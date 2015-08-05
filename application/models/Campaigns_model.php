@@ -48,7 +48,7 @@ class Campaigns_model extends MY_Model {
 		return $query->result();
 	}
 
-	function get_all_private_campaigns($user_id)
+		function get_all_private_campaigns($user_id)
 	{
 		$this->db->select('name,id,user_id,shared');
 		$this->db->from('campaigns');
@@ -60,6 +60,112 @@ class Campaigns_model extends MY_Model {
 		$query = $this->db->get();
 		return $query->result();
 	}
+
+
+// 	function get_all_private_campaigns($user_id)
+// 	{
+// 		if (!empty($user_id)) {
+// 			$user_select_camapigns = ' and u.id = '.$user_id.'';
+// 		}
+//  	echo $sql = 'select "campaign_id",
+//  	"name",
+//        "owner",
+//        "created",
+//        "shared",
+// 	   "companies in campaign",
+// 	   "one or more action",
+// 	    "co one or more action during campaign",
+// 		"qualified",
+// 		"intent",
+// 		"proposal",
+// 		"customer",
+// 		T2."emails"
+
+// from
+// (
+// select C.id,
+// 		C.id "campaign_id",
+//        C.created_at::date "created",
+//        U.name "owner",
+//        C.name "name" ,
+//        C.shared "shared",
+// 	   count(distinct T.company_id) "companies in campaign",
+// 	   count(distinct A.company_id) "one or more action",
+//        count(distinct (CASE when A.created_at > C.created_at then A.company_id else null END )) "co one or more action during campaign",
+// 	   CASE when count(distinct CASE when CO.pipeline = \'Intent\' then CO.id END) = 0 then null 
+// 	        else count(distinct CASE when CO.pipeline = \'Intent\' then CO.id END) END "intent",
+// 	   CASE when count(distinct CASE when CO.pipeline = \'Qualified\' then CO.id END) = 0 then null 
+// 	        else count(distinct CASE when CO.pipeline = \'Qualified\' then CO.id END) END "qualified",
+// 	   CASE when count(distinct CASE when CO.pipeline = \'Proposal\' then CO.id END) = 0 then null
+// 	        else count(distinct CASE when CO.pipeline = \'Proposal\' then CO.id END)  END "proposal",
+// 	   CASE when count(distinct CASE when CO.pipeline = \'Customer\' and CO.customer_from > C.created_at then CO.id END) = 0 then null
+// 	        else count(distinct 
+// 			   CASE when CO.pipeline = \'Customer\' and CO.customer_from > C.created_at then CO.id END) END "customer"
+
+
+// FROM   CAMPAIGNS C
+
+// JOIN USERS U
+// ON C.user_id = U.id
+
+// LEFT JOIN TARGETS T
+// ON C.id = T.campaign_id
+
+// LEFT JOIN COMPANIES CO  on
+// T.company_id = CO.id
+
+// LEFT JOIN 
+// (
+// select *
+// from ACTIONS 
+// where (action_type_id in (\'4\',\'5\',\'8\',\'9\',\'10\',\'16\',\'17\',\'18\',\'23\',\'6\')) 
+//   or (action_type_id in (\'11\',\'12\',\'13\',\'14\',\'15\') 
+// 	  and actioned_at is not null and cancelled_at is null)
+// )   A
+// on CO.id = A.company_id
+
+// where C.criteria is null '.$user_select_camapigns.'
+
+// group by 1,2,3,4,5
+
+// order by 2, 1 desc
+// )   T1
+
+// LEFT JOIN
+
+// (
+// select CA.id,
+//        count(*) "emails",
+// 	   count(distinct C.company_id) "distinct companies emailed"
+     
+// from EMAIL_CAMPAIGNS EC
+// JOIN USERS U
+// ON EC.created_by = U.id
+
+// LEFT JOIN EMAIL_ACTIONS EA
+// ON EC.id = EA.email_campaign_id
+
+// JOIN CONTACTS C
+// ON EA.contact_id = C.id
+
+// JOIN TARGETS T
+// ON C.company_id = T.company_id
+// JOIN CAMPAIGNS CA
+// ON T.campaign_id = CA.id
+// group by 1
+// )   T2
+// ON T1.id = T2.id
+// order by 3 desc';
+// 		$query = $this->db->query($sql);
+
+// 		if($query){
+// 		return $query->result();
+// 		}else{
+// 			return [];
+// 		}
+// 	}
+
+
 
 
 	function get_campaigns_for_user($user_id)

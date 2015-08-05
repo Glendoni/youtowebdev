@@ -346,7 +346,7 @@ public function create_address(){
 
 	public function autocomplete() {
         $search_data = $this->input->post("search_data");
-		$response = "<ul class='autocomplete-holder'>";
+		$response = "<div class='autocomplete-full-holder'><div class='col-md-6 clearfix no-padding'><ul class='autocomplete-holder'>";
         $query = $this->Companies_model->get_autocomplete($search_data);
         $rowcount = $query->num_rows();
 		if ($rowcount> 0) {
@@ -360,10 +360,13 @@ public function create_address(){
         foreach ($query->result() as $row):
         	if(!empty($row->user)) { 
         		$user_icon = explode(",", $row->image);
-        		$assigned_label = "| <span class='label label-primary' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$row->user."</div>";};
+        		$assigned_label = "| <span class='label label-primary' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$row->user."</span>";};
         	 
-		$response= $response."<a href='". base_url() . "companies/company?id=" . $row->id . "'><li class='autocomplete-item'><strong>" . str_replace($words, ' ',$row->name). "</strong><br><small>".$row->pipeline." ".$assigned_label."</small></li></a>";
+		$response= $response."<a href='". base_url() . "companies/company?id=" . $row->id . "'><li class='autocomplete-item autocomplete-company'><strong>" . str_replace($words, ' ',$row->name). "</strong><br><small>".$row->pipeline." ".$assigned_label."</small></li></a>";
         endforeach;
+        $response= $response."</ul></div>";
+        $response= $response."<div class='col-md-6 no-padding'><ul class='autocomplete-holder'>";
+
 		$query = $this->Companies_model->get_autocomplete_contact($search_data);
 
 		$rowcount = $query->num_rows();
@@ -373,9 +376,9 @@ public function create_address(){
 			$response= $response."<li class='autocomplete-item split-heading autocomplete-no-results'><i class='fa fa-times'></i> No Contacts Found</li>";
 		}
  		foreach ($query->result() as $row):
-            $response= $response."<a href='". base_url() . "companies/company?id=" . $row->id . "#contacts'><li class='autocomplete-item'>" . str_replace($words, ' ',$row->name). "</strong><br><small>".$row->company_name."</small></li></a>";
+            $response= $response."<a href='". base_url() . "companies/company?id=" . $row->id . "#contacts'><li class='autocomplete-item autocomplete-contact'><strong>" . str_replace($words, ' ',$row->name). "</strong><br><small>".$row->company_name."</small></li></a>";
         endforeach;
-        $response= $response."</ul>";
+        $response= $response."</ul></div>";
         $this->output->set_content_type('application/json');
 		$this->output->set_output(json_encode(array('html'=> $response)));
     }

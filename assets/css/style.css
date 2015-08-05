@@ -529,16 +529,19 @@ padding: 3px 5px;}
 	position: relative;
 	clear: both;
 }
-
-ul.autocomplete-holder {
-	list-style-type: none;
-	padding-left: 0;
-	-webkit-border-radius:0  0 5px 5px !important;
+.autocomplete-full-holder {
+-webkit-border-radius:0  0 5px 5px !important;
 	-moz-border-radius:0  0 5px 5px !important;
   	border-radius:0  0 5px 5px !important;
   	background-color: #F6F6F6;
   	border: 1px #A5B0B1 solid;
   	border-top: none;
+    display: flex;
+}
+ul.autocomplete-holder {
+	list-style-type: none;
+	padding-left: 0;
+	margin-bottom: 0;
   	width: 100%;
 }
 li.autocomplete-item:first-child { 
@@ -548,10 +551,25 @@ li.autocomplete-item {
 	font-size: 12px;
 	padding: 10px 5px;
 }
+li.autocomplete-company { 
+	padding: 10px 20px;
+	    border-bottom: 1px #e7e7e7 solid;
+    border-right: 1px #e7e7e7 solid;
+       background-color: #fff;
+}
+li.autocomplete-contact { 
+	padding: 10px 20px;
+	    border-bottom: 1px #e7e7e7 solid;
+    border-left: 1px #e7e7e7 solid;
+    background-color: #fff;
+}
+.autocomplete-holder a {
+	color: #555;
+}
 .autocomplete-holder a:hover {
 	text-decoration: none;
-
 }
+
 /* SAVED LISTS */
 li.autocomplete-item:hover {
 	background-color: #428bca;

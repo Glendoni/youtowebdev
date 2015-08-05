@@ -405,7 +405,6 @@ class Companies_model extends CI_Model {
 			   C.registration, -- f16
 		       TT1."turnover", -- f17
 			   TT1."turnover_method",  -- f18
-			   EMP.count,--f19
 			   U.image , -- f20
 			   C.class, -- f21
 			   A.lat, -- f22
@@ -422,7 +421,7 @@ class Companies_model extends CI_Model {
 			   
 
 
-		from (select * from COMPANIES where eff_to IS NULL and active = \'TRUE\' ';
+		from (select * from COMPANIES where active = \'TRUE\' ';
 		if(isset($contacted_in)) $sql = $sql.' AND id in ('.$contacted_in.')';
 		$sql = $sql.') C ';
 
@@ -479,15 +478,11 @@ class Companies_model extends CI_Model {
 		)   TT2
 		ON TT2."company id" = C.id
 
-        left join 
-        (select count, company_id from emp_counts ORDER BY "emp_counts"."created_at" DESC limit 1)
-        EMP ON EMP.company_id = C.id
-
-
+	
 
 		LEFT JOIN 
 		ADDRESSES A
-		ON A.company_id = C.id
+		ON a.id = (select id from addresses where type ilike \'registered address\' and company_id = C.id limit 1)
 
 		LEFT JOIN
 		USERS U
@@ -518,7 +513,6 @@ class Companies_model extends CI_Model {
 			     A.lng,
 		         TT1."turnover",
 			     TT1."turnover_method",
-			     EMP.count,
 			     CONT.contacts_count
 
 		order by C.id 
