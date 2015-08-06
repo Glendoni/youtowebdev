@@ -35,15 +35,19 @@ class Campaigns_model extends MY_Model {
 
 	function get_all_shared_campaigns($user_id)
 	{
-		$this->db->select('c.name,c.id,c.user_id,u.name as searchcreatedby,u.image,c.shared');
+		$this->db->select('c.name,c.id,c.user_id,u.name as searchcreatedby,u.image,c.shared,count(t.*) as campaigncount');
 		$this->db->from('campaigns c');
 		$this->db->join('users u', 'c.user_id = u.id');
+		$this->db->join('targets t', 'c.id = t.campaign_id');
+
 		// Apply this to find saved searches only
 		$this->db->where('criteria IS NULL', null, false);
 		$this->db->where('shared', 'True');
 		$this->db->where_not_in('user_id', $user_id);
 		$this->db->order_by("c.created_at", "desc");
 		$this->db->where("(c.eff_to IS NULL OR c.eff_to > '".date('Y-m-d')."')",null, false); 
+				$this->db->group_by("1,2,3,4,5"); 
+
 		$query = $this->db->get();
 		return $query->result();
 	}

@@ -1,6 +1,5 @@
-<div class="row" style="margin-top:20px;">
+<div style="margin-top:20px;">
 <div class="col-md-3 clearfix no-padding">
-<div class="col-md-12">
 <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">My Campaigns <span class="badge pull-right"><?php echo count($private_campaigns); ?></span></h3>
@@ -10,11 +9,11 @@
                                     <!-- PRIVATE SEARCHES -->
                                     <?php foreach ($private_campaigns as $campaign):?>
                                 
-                                    <li class="no-padding">
+                                    <li class="no-padding" style="padding: 0 5px;">
                                         <a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $campaign->id; ?>" class="load-saved-search">
                                         
                                             <span class="name"  style="margin-right: 10px;"><?php echo $campaign->name; ?></span>
-                                            <span class="badge"><?php echo $campaign->campaigncount; ?></span>
+                                            <span class="badge small-badge pull-right"><?php echo $campaign->campaigncount; ?></span>
                                         </a>
                                     </li>
                                 <?php endforeach; ?>
@@ -22,10 +21,8 @@
                                     </ul>
                                 </div>
                             </div>
-                            </div>
-                            <div class="col-lg-12">
-
-<div class="panel panel-default">
+                      
+                            <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">
                                         Team Campaigns <span class="badge pull-right"><?php echo count($shared_campaigns); ?></span>
@@ -40,16 +37,11 @@
                                     $bg_colour = $user_icon[1];
                                     $bg_colour_text = $user_icon[2];
                                     $bg_colour_name = $user_icon[0];?>
-
-
-                                
-
-
-                                    <li class="no-padding">
+                                    <li class="no-padding" style="padding: 0 5px;">
                                         <a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $campaign->id; ?>" class="load-saved-search">
 
-                                            <span class="name"  style="margin-right: 10px;"><?php echo $campaign->name; ?></span>
-                                <span class="label label-info" style="background-color: <?php echo $bg_colour; ?>;font-size:8px; color: <?php echo $bg_colour_text;   ?>"><b><?php echo $campaign->searchcreatedby; ?></b></span>
+                                            <span class="name"  style="margin-right: 5px;"><?php echo $campaign->name; ?></span>
+                                <span class="label label-info" style="background-color: <?php echo $bg_colour; ?>;font-size:8px; color: <?php echo $bg_colour_text;?>"><b><?php echo $bg_colour_name; ?></b></span><span class="badge small-badge pull-right"><?php echo $campaign->campaigncount; ?></span>
                                         </a>
                                     </li>
                                 <?php endforeach; ?>
@@ -57,12 +49,11 @@
                               </div>
                             </div>
 
-                              </div>
                             </div>
 
 
 
-<div class="col-lg-9">
+<div class="col-md-9">
 
 <div class="panel panel-default">
               <div class="panel-heading">

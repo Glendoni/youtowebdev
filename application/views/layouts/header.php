@@ -303,11 +303,11 @@
             </div>
 
             <?php if (!isset($_GET['id']) && (isset($_POST['main_search']) || (isset($_GET['search'])))) : ?>
-                                        <div class="col-md-12 no-padding" style="margin-top:20px;">
+                                <!--         <div class="col-md-12 no-padding" style="margin-top:20px;">
                                             <a class="btn btn-block clear-fields" href="<?php echo site_url();?>">
                                                 <span class="glyphicon glyphicon-remove"></span> Clear fields
                                             </a>
-                                        </div>
+                                        </div> -->
                                     <?php endif; ?>
             <div id="credits" class="well hidden advanced-search">
 <div class="form-row" style="margin-bottom:50px;"> 

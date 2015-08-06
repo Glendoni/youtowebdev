@@ -637,6 +637,11 @@ margin-bottom: 20px;
     position: absolute;
 }
 
+.small-badge {
+	font-size: 10px;
+	font-weight: 500;
+}
+
 @media screen and (min-width: 768px) {
     #adv-search {
         width: 100%;
