@@ -261,7 +261,7 @@
                     </ul>
                 </li>
             </ul>
-            <?php endif; ?>
+            
             <!--TOP SEARCH BAR-->
             <?php if (isset($_GET['id'])) { 
                 $company = $companies[0];
@@ -399,7 +399,7 @@
 </div><!--END ADVANCED SEARCH-->
 </div>
 <?php echo form_close(); ?>
-
+<?php endif; ?>
 
            
         </nav>
