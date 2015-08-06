@@ -1,136 +1,4 @@
-<div class="row">
-    <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 large-form-holder clearfix">
-            <div class="input-group" id="adv-search">
-             <?php echo form_open(site_url().'companies', 'id="main_search" novalidate="novalidate" name="main_search" class="" role="form"'); ?>
-                                    <?php echo form_hidden('main_search','1');?>
-                                    <?php if (isset($_POST['main_search']) || (isset($_GET['search']))) : ?>
-                                    <div class='form-row'>
-                                        <div class="col-md-12 form-group ">
-                                            <a class="btn btn-block clear-fields" href="<?php echo site_url();?>">
-                                                <span class="glyphicon glyphicon-remove"></span> Clear fields
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <?php endif; ?>
-                    <input name="agency_name" id="agency_name" type="text" onkeyup="ajaxSearch();" class="form-control large-search-height large-search" autocomplete="off" value="<?php echo $this->input->post('agency_name');?>" placeholder="Enter Search Here">
-                    <div class="alert alert-warning alert-dismissible" style="display:none;" id="empty_form_error" role="alert">
-                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-
-                    <strong>Warning!</strong> Please enter at least one search criteria.
-                    </div>
-
-                                   
-                      <div id="suggestions">
-                      <div id="autoSuggestionsList"></div>
-                      </div>
-                       <div class="input-group-btn">
-                    <div class="btn-group" role="group">
-                        <div class="dropdown dropdown-lg ">
-                            <button href="#credits" type="button" class="toggle btn btn-default dropdown-toggle large-search-height" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
-                        </div>
-                        
-                    <input type="submit" class="loading-btn btn btn-primary " value="Go" name="submit">
-                        <?php if (validation_errors()): ?>
-                        <div class="alert alert-danger" role="alert">
-                        <?php echo validation_errors(); ?>
-                        </div>
-                        <?php endif; ?>
-                    </div>
-                </div>
-            </div>
-            <div id="credits" class="well hidden advanced-search">
-<div class="form-row" style="margin-bottom:50px;"> 
-                                         <?php  echo form_label('Age (Months) ', 'company_age_from', array('class'=>'control-label')); ?>
-                                         <div class="form-group" >
-                                            <div class="col-xs-6 col-md-6 no-padding"> 
-                                            <?php echo form_input(array('name' => 'company_age_from', 'id' => 'company_age_from', 'maxlength' => '100','class'=>'form-control','placeholder'=>'From'), set_value('company_age_from',$this->input->post('company_age_from')));?>
-                                            </div>
-                                            <div class="col-xs-6 col-md-6 no-padding">
-                                            <?php echo form_input(array('name' => 'company_age_to', 'id' => 'company_age_to', 'maxlength' => '100','class'=>'form-control','placeholder'=>'To'), set_value('company_age_to',$this->input->post('company_age_to')));?>    
-                                            </div>
-                                        </div>
-                                    </div><!--END FORM ROW-->
-                                    <div class='form-row' style="margin-bottom:50px;"> 
-                                    <?php  echo form_label('Turnover (£)', 'turnover_from', array('class'=>'control-label')); ?>
-                                     <div class="form-group"> 
-                                        <div class="col-xs-6 col-md-6 no-padding"> 
-                                        <?php echo form_input(array('name' => 'turnover_from', 'id' => 'turnover_from', 'maxlength' => '100','class'=>'form-control number','placeholder'=>'From'), set_value('turnover_from',$this->input->post('turnover_from')));?>
-                                        </div>
-                                        <div class="col-xs-6 col-md-6 no-padding">
-                                         <?php echo form_input(array('name' => 'turnover_to', 'id' => 'turnover_to', 'maxlength' => '100','class'=>'form-control number','placeholder'=>'To'), set_value('turnover_to',$this->input->post('turnover_to')));?>   
-                                        </div>
-                                    </div>
-                                    </div><!--END FORM ROW-->
-
-                                    <div class='form-row'>
-                                        <div class="form-group">
-                                        <?php
-                                        echo form_label('Mortgage Provider', 'providers');
-                                        echo form_dropdown('providers', $providers_options, ($this->input->post('providers')?$this->input->post('providers'):$providers_default) ,'class="form-control"');
-                                    
-                                        ?>
-                                        
-                                        </div>
-                                    </div><!--END FORM ROW-->
-                                    <div class='form-row'>
-                                        <div class="form-group">
-                                        <?php 
-                                        echo form_label('Sectors', 'sectors');
-                                        echo form_dropdown('sectors', $sectors_search, ($this->input->post('sectors')?$this->input->post('sectors'):$sectors_default),'class="form-control"');
-                                        ?>
-                                        </div>
-                                    </div><!--END FORM ROW-->
-                                    <div class='form-row'>
-                                        <div class="form-group">
-                                            <?php
-                                            echo form_label('Assigned', 'assigned');
-                                            echo form_dropdown('assigned', $system_users, ($this->input->post('assigned')?$this->input->post('assigned'):$assigned_default) ,'class="form-control"');
-                                            ?>
-                                         </div> 
-                                    </div>
-                                    <div class='form-row'>
-                                        <div class="form-group">
-                                            <?php
-
-                                            echo form_label('Pipeline', 'pipeline');
-                                                echo form_multiselect('pipeline[]', $pipeline_options,
-                                                    ($this->input->post('pipeline')?$this->input->post('pipeline'):$pipeline_default),'class="form-control"');?>
-                                         </div> 
-                                    </div>
-                                    <div class='form-row'>
-                                        <div class="form-group">
-                                            <?php
-                                                echo form_label('Class', 'class');
-                                                echo form_dropdown('class', $class_options, ($this->input->post('class')?$this->input->post('class'):$class_default) ,'class="form-control"');
-                                                ?>         
-                                         </div> 
-                                    </div>
-                                    
-                                    <div class='form-row'>
-                                        <div class="col-md-6 no-padding">
-                                            <?php
-                                            echo form_label('Contacted', 'contacted');
-                                            echo form_dropdown('contacted', $exclude_options, ($this->input->post('contacted')?$this->input->post('contacted'):' ') ,'class="form-control include-exclude-drop"');
-                                            ?>
-                                         </div> 
-
-                                         <div class="col-md-6 no-padding"> 
-                                         <label>Last # days</label>
-                                            <?php   
-                                            echo form_input(array('name' => 'contacted_days', 'id' => 'contacted_days', 'maxlength' => '100','class'=>'form-control','placeholder'=>'','type'=>'number','min'=>'0'), set_value('contacted_days',$this->input->post('contacted_days')));?>
-                                        
-                                        </div>
-                                    </div><!--END FORM ROW-->
-                                    <div class="form-row">
-                                                        <input type="submit" class="loading-btn btn btn-primary " value="Go" name="submit">
-
-</div>
-</div><!--END ADVANCED SEARCH-->
-</div>
-<?php echo form_close(); ?>
-</div>
-    <!-- /.row -->
-<div class="row">
+<div class="row" style="margin-top:20px;">
 <div class="col-md-3 clearfix no-padding">
 <div class="col-md-12">
 <div class="panel panel-default">
@@ -146,9 +14,7 @@
                                         <a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $campaign->id; ?>" class="load-saved-search">
                                         
                                             <span class="name"  style="margin-right: 10px;"><?php echo $campaign->name; ?></span>
-                                            <?php if ($campaign->shared=='t'):?>
-                            <span class="label label-info" style="font-size:8px">Shared</span>
-                                            <?php endif; ?>
+                                            <span class="badge"><?php echo $campaign->campaigncount; ?></span>
                                         </a>
                                     </li>
                                 <?php endforeach; ?>
@@ -261,7 +127,7 @@
 
                             </div>
                             <div class="col-md-1 text-center">
-                            <a href = "?search=2&user=<?php echo $stat['user'];?>&period=week&start_date=<?php echo $_GET['start_date']?>&end_date=<?php echo $_GET['end_date']?>"><span class="badge"><?php echo $stat['deals'];?></a></span>
+                            <a href = "?search=2&user=<?php echo $stat['user'];?>&period=week&start_date=<?php echo $_GET['start_date']?>&end_date=<?php echo $_GET['end_date']?>"><span class="badge" style="background-color:#00B285;"><?php echo $stat['deals'];?></a></span>
                             </div>
                             <div class="col-md-1 text-center"> 
                             <?php echo $stat['proposals'];?>
@@ -325,7 +191,7 @@
 
                             </div>
                             <div class="col-md-1 text-center">
-                            <a href = "?search=2&user=<?php echo $lastweekstats['user'];?>&period=week&start_date=<?php echo $_GET['start_date']?>&end_date=<?php echo $_GET['end_date']?>"><span class="badge"><?php echo $lastweekstats['deals'];?></a></span>
+                            <a href = "?search=2&user=<?php echo $lastweekstats['user'];?>&period=week&start_date=<?php echo $_GET['start_date']?>&end_date=<?php echo $_GET['end_date']?>"><span class="badge" style="background-color:#00B285;"><?php echo $lastweekstats['deals'];?></a></span>
                             </div>
                             <div class="col-md-1 text-center"> 
                             <?php echo $lastweekstats['proposals'];?>
@@ -391,7 +257,7 @@
 
                             </div>
                             <div class="col-md-1 text-center">
-                            <a href = "?search=2&user=<?php echo $thismonthstats['user'];?>&period=week&start_date=<?php echo $_GET['start_date']?>&end_date=<?php echo $_GET['end_date']?>"><span class="badge"><?php echo $thismonthstats['deals'];?></a></span>
+                            <a href = "?search=2&user=<?php echo $thismonthstats['user'];?>&period=week&start_date=<?php echo $_GET['start_date']?>&end_date=<?php echo $_GET['end_date']?>"><span class="badge"  style="background-color:#00B285;"><?php echo $thismonthstats['deals'];?></a></span>
                             </div>
                             <div class="col-md-1 text-center"> 
                             <?php echo $thismonthstats['proposals'];?>

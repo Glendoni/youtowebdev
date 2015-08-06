@@ -260,7 +260,14 @@ background-color: #EFBFFF;
 .pipeline-update.Lost {
 background-color: #FFEFBF;
 }
+.input-group-btn:last-child>.btn, .input-group-btn:last-child>.btn-group {
+	    margin-left: -68px;
+}
 /* BUTTONS */
+
+a.btn.btn-block.clear-fields {
+    color: #000;
+}
 
 .btn-checkbox {
 	font-size:12px !important;
@@ -541,7 +548,8 @@ padding: 3px 5px;}
   	background-color: #F6F6F6;
   	border: 1px #A5B0B1 solid;
   	border-top: none;
-    display: flex;
+	position: absolute;
+    width: 100%;
 }
 ul.autocomplete-holder {
 	list-style-type: none;

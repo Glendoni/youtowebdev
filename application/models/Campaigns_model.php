@@ -50,13 +50,15 @@ class Campaigns_model extends MY_Model {
 
 		function get_all_private_campaigns($user_id)
 	{
-		$this->db->select('name,id,user_id,shared');
-		$this->db->from('campaigns');
+		$this->db->select('c.name,c.id,c.user_id,c.shared,count(t.*) as campaigncount');
+		$this->db->from('campaigns c');
+		$this->db->join('targets t', 'c.id = t.campaign_id');
 		// Apply this to find saved searches only
-		$this->db->where('criteria IS NULL', null, false);
-		$this->db->where('user_id', $user_id);
-		$this->db->where("(eff_to IS NULL OR eff_to > '".date('Y-m-d')."')",null, false);
-		$this->db->order_by("created_at", "desc"); 
+		$this->db->where('c.criteria IS NULL', null, false);
+		$this->db->where('c.user_id', $user_id);
+		$this->db->where("(c.eff_to IS NULL OR c.eff_to > '".date('Y-m-d')."')",null, false);
+		$this->db->group_by("1,2,3"); 
+		$this->db->order_by("c.created_at", "desc"); 
 		$query = $this->db->get();
 		return $query->result();
 	}
