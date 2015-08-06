@@ -1039,7 +1039,7 @@ class Companies_model extends CI_Model {
 			}
 		else 
 			{
-			return $this->db->query("select c.name,c.id, c.pipeline, u.name as user, u.image as image, user_id from companies c left join  users u on u.id = c.user_id where c.eff_to IS NULL and c.active = 'true' and c.name ilike '%".$search_data."%' or c.registration ilike '".$search_data."%' order by c.name asc limit 5 ");
+			return $this->db->query("select c.name,c.id, c.pipeline, u.name as user, u.image as image, user_id from companies c left join  users u on u.id = c.user_id where c.eff_to IS NULL and c.active = 'true' and c.name ilike '%".$search_data."%' or c.registration ilike '".$search_data."%' or regexp_replace(c.phone, E'[^0-9]', '', '') ilike regexp_replace('".$search_data."%', E'[^0-9%]', '', '') order by c.name asc limit 5 ");
 			}
 	}
 	    function get_autocomplete_contact($search_data) {
