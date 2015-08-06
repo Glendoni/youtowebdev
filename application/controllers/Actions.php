@@ -55,7 +55,7 @@ class Actions extends MY_Controller {
 							if(empty($result)) $this->set_message_warning('Error while updating action for the company.');
 						}
 						
-					}else if($post['action_type']=='8'){
+					}else if($post['action_type_completed']=='8'){
 						// proposal sent to company 
 						$result = $this->Companies_model->update_company_to_proposal($company_id);
 						if(empty($result)){
