@@ -661,6 +661,8 @@ class Actions_model extends MY_Model {
 						'actioned_at'	=> date('Y-m-d H:i:s'),
 						'created_at' 	=> date('Y-m-d H:i:s'),
 						);
+		$this->load->helper('zendesk');  
+
 
 		$query = $this->db->insert('actions', $actiondata);
 		return $this->db->insert_id();
