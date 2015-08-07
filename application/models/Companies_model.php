@@ -385,6 +385,7 @@ class Companies_model extends CI_Model {
 		(-- T1
 		select C.id,
 			   C.name,
+			   C.pipeline,
 			   U.id "owner_id",
 		       row_to_json((
 		       C.id, -- f1
@@ -491,10 +492,8 @@ class Companies_model extends CI_Model {
 		USERS U
 		ON U.id = C.user_id
 				 
-				 
 		group by C.id,
 		         C.name,
-		         
 		         C.url,
 			     C.eff_from,
 			     C.linkedin_id,
@@ -560,7 +559,13 @@ class Companies_model extends CI_Model {
 		ON T1.id = T2."company id"
 
 		-- insert this for sort order  
-		order by T1.owner_id,lower(T1.name) 
+		order by case when pipeline = \'Customer\' then 1
+		when pipeline = \'Proposal\' then 2
+		when pipeline = \'Intent\' then 3
+		when pipeline = \'Qualified\' then 4
+		when pipeline = \'Lost\' then 8
+		else 5
+		end, name asc
 		 
 		)
 		 results';

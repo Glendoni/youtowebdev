@@ -22,11 +22,6 @@
 	<?php else: ?>
 	<?php endif; ?>
 </div>
-
-
-
-
-
 	<!-- POPUP BOXES -->
 	<?php $this->load->view('companies/edit_box.php',array('company'=>$company)); ?>
 	<?php $this->load->view('companies/create_contact_box.php',array('company'=>$company)); ?>
