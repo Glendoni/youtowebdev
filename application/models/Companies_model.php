@@ -565,10 +565,9 @@ class Companies_model extends CI_Model {
 		when pipeline = \'Qualified\' then 4
 		when pipeline = \'Lost\' then 8
 		else 5
-		, name asc
+		end, name asc
 		 
-		)
-		 results';
+		) results';
 		//print_r($sql);
 		$query = $this->db->query($sql);
 
