@@ -567,8 +567,7 @@ class Companies_model extends CI_Model {
 		else 5
 		end, name asc
 		 
-		)
-		 results';
+		) results';
 		//print_r($sql);
 		$query = $this->db->query($sql);
 
