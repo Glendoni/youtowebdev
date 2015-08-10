@@ -16,6 +16,7 @@
                                 echo form_label('Pipeline', 'company_pipeline');
                                 ?>
                                 <span class="label pipeline-label label-<?php echo str_replace(' ', '', $company['pipeline']); ?>" style="display: block;clear: left;padding: 11px; margin:0;"><?php echo $company['pipeline'] ?></span>
+                                <input type="hidden" name="company_pipeline" value="<?php echo $company['pipeline'];?>" />
 
                                 <?php
                                 } else {
