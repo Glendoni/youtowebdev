@@ -1,4 +1,4 @@
-<div class="row" style="background-color:#fff; margin-top:-20px; padding:10px 0; border-bottom:1px solid #e7e7e7; margin-bottom:20px;">
+<div class="col-md-12" style="background-color:#fff; margin-top:-20px; padding:10px 0; border-bottom:1px solid #e7e7e7; margin-bottom:20px;border-left:1px solid #e7e7e7; margin-bottom:20px;border-right:1px solid #e7e7e7; margin-bottom:20px;">
 <div class="col-sm-9 col-sm-offset-3">
 
   <!-- Nav tabs -->
@@ -458,7 +458,7 @@
                       <div class="tab-pane active" id="individual_pipeline">
               <div class="panel-body">
               <div class="col-md-3 pipeline-holder ">
-                            <div class="panel panel-default contact">
+                            <div class="panel panel-default">
                             <div class="panel-heading">
                             Initial Contact <div class="pull-right"><span class="badge"><?php echo count($pipelinecontactedindividual)?></span></div>
                             </div>
@@ -501,7 +501,7 @@
                             </div><!--END PANEL-->
               </div><!--END COL-MD-3-->
               <div class="col-md-3 pipeline-holder ">
-                            <div class="panel panel-default contact">
+                            <div class="panel panel-default">
                             <div class="panel-heading">
                             Proposals <div class="pull-right"><span class="badge"><?php echo count($pipelineproposalindividual)?></span></div>
                             </div>
@@ -550,7 +550,7 @@
 
 
               <div class="col-md-3 pipeline-holder ">
-                            <div class="panel panel-default contact">
+                            <div class="panel panel-default">
                             <div class="panel-heading">
                             Deals <div class="pull-right"><span class="badge"><?php echo count($pipelinecustomerindividual)?></span></div>
                             </div>
@@ -585,7 +585,7 @@
                             </div><!--END PANEL-->
               </div><!--END COL-MD-3-->
                   <div class="col-md-3 pipeline-holder ">
-                            <div class="panel panel-default contact">
+                            <div class="panel panel-default">
                             <div class="panel-heading">
                             Lost <?php if (!isset($_GET['start_date'])) { echo"<small>(This Month)</small>";}?> <div class="pull-right"><span class="badge badge-warning"><?php echo count($pipelinelostindividual)?></span></div>
                             </div>
@@ -609,7 +609,7 @@
       <div class="tab-pane" id="team_pipeline">
 <div class="panel-body">
               <div class="col-md-3 pipeline-holder ">
-                            <div class="panel panel-default contact">
+                            <div class="panel panel-default">
                             <div class="panel-heading">
                             Initial Contact <div class="pull-right"><span class="badge"><?php echo count($pipelinecontacted)?></span></div>
                             </div>
@@ -649,7 +649,7 @@
                             </div><!--END PANEL-->
               </div><!--END COL-MD-3-->
               <div class="col-md-3 pipeline-holder ">
-                            <div class="panel panel-default contact">
+                            <div class="panel panel-default">
                             <div class="panel-heading">
                             Proposals <div class="pull-right"><span class="badge"><?php echo count($pipelineproposal)?></span></div>
                             </div>
@@ -695,7 +695,7 @@
 
 
               <div class="col-md-3 pipeline-holder ">
-                            <div class="panel panel-default contact">
+                            <div class="panel panel-default">
                             <div class="panel-heading">
                             Deals <div class="pull-right"><span class="badge"><?php echo count($pipelinecustomer)?></span></div>
                             </div>
@@ -730,7 +730,7 @@
                             </div><!--END PANEL-->
               </div><!--END COL-MD-3-->
                   <div class="col-md-3 pipeline-holder ">
-                            <div class="panel panel-default contact">
+                            <div class="panel panel-default">
                             <div class="panel-heading">
                             Lost <?php if (!isset($_GET['start_date'])) { echo"<small>(This Month)</small>";}?> <div class="pull-right"><span class="badge badge-warning"><?php echo count($pipelinelost)?></span></div>
                             </div>
