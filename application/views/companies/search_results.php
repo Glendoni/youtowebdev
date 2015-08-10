@@ -1,4 +1,4 @@
-<div class="row col-md-12">
+<div class="row">
 <div class="page-results-list">
 	<ul class="pager">
 

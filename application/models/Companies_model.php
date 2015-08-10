@@ -180,7 +180,8 @@ class Companies_model extends CI_Model {
 		// filter by name
 		if (isset($post['agency_name']) && strlen($post['agency_name'])) 
 		{
-			$company_name_sql = "select id from companies  where name ilike '%".$post['agency_name']."%'"; 
+			$company_name_Search = pg_escape_string($post['agency_name']);
+			$company_name_sql = "select id from companies  where name ilike '%".$company_name_Search."%'"; 
 			
 		}
 
@@ -417,7 +418,9 @@ class Companies_model extends CI_Model {
 			   C.phone, -- f25 
 			   C.pipeline, -- f26
 			   CONT.contacts_count, -- f27
-			   C.parent_registration --f 28
+			   C.parent_registration, --f28
+			   C.zendesk_id, -- f29
+			   C.customer_from -- f30
 
 			   )) "JSON output" 
 			   
@@ -517,7 +520,9 @@ class Companies_model extends CI_Model {
 		         TT1."turnover",
 			     TT1."turnover_method",
 			     EMP.count,
-			     CONT.contacts_count
+			     CONT.contacts_count,
+			     C.zendesk_id,
+			     C.customer_from
 
 		order by C.id 
 
