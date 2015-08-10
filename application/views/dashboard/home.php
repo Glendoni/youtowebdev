@@ -21,9 +21,7 @@
                                     <?php foreach ($private_campaigns as $campaign):?>
                                 
                                     <li class="no-padding" style="padding: 0 5px;">
-                                        <a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $campaign->id; ?>" class="load-saved-search">
-                                        
-                                            <span class="name"  style="margin-right: 10px;"><?php echo $campaign->name; ?></span>
+                                      <a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $campaign->id; ?>" class="load-saved-search" <?php echo strlen($campaign->name) > 36 ? 'title="'.$campaign->name.'">':">" ?><span class="name"  style="margin-right: 10px;"><?php echo strlen($campaign->name) > 36 ? substr($campaign->name,0,36).'...' : $campaign->name?></span>
                                             <span class="badge small-badge pull-right"><?php echo $campaign->campaigncount; ?></span>
                                         </a>
                                     </li>
@@ -49,10 +47,11 @@
                                     $bg_colour_text = $user_icon[2];
                                     $bg_colour_name = $user_icon[0];?>
                                     <li class="no-padding" style="padding: 0 5px;">
-                                        <a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $campaign->id; ?>" class="load-saved-search">
-
-                                            <span class="name"  style="margin-right: 5px;"><?php echo $campaign->name; ?></span>
-                                <span class="label label-info" style="background-color: <?php echo $bg_colour; ?>;font-size:8px; color: <?php echo $bg_colour_text;?>"><b><?php echo $bg_colour_name; ?></b></span><span class="badge small-badge pull-right"><?php echo $campaign->campaigncount; ?></span>
+                                        <a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $campaign->id; ?>" class="load-saved-search"  <?php echo strlen($campaign->name) > 33 ? 'title="'.$campaign->name.'">':">" ?>
+                                        <span class="label label-info" style="margin-right:3px;background-color: <?php echo $bg_colour; ?>;font-size:8px; color: <?php echo $bg_colour_text;?>"><b><?php echo $bg_colour_name; ?></b></span>
+                                            <span class="name"  style="margin-right: 5px;">
+                         <?php echo strlen($campaign->name) > 33 ? substr($campaign->name,0,33).'...' : $campaign->name?></span>
+                                <span class="badge small-badge pull-right"><?php echo $campaign->campaigncount; ?></span>
                                         </a>
                                     </li>
                                 <?php endforeach; ?>
@@ -87,6 +86,7 @@
                       <li <?php if ($_GET['search'] < '1'): ?>class="active"<?php endif; ?>><a href="#this" role="tab" data-toggle="tab">This Week</a></li>
                       <li><a href="#lastweek" role="tab" data-toggle="tab">Last Week</a></li>
                       <li><a href="#currentmonth" role="tab" data-toggle="tab">This Month</a></li>
+                      <li><a href="#lastmonth" role="tab" data-toggle="tab">Last Month</a></li>
                       <?php if ($_GET['search'] > '0'): ?>
                       <li <?php if ($_GET['search'] > '0'): ?>class="active"<?php endif; ?>><a href="#searchresults" role="tab" data-toggle="tab">Search Results</a></li>
                       <?php endif; ?>
@@ -283,6 +283,71 @@
                             </div>
                             <div class="col-md-1 text-center">
                               <?php echo $thismonthstats['duediligence'];?>
+                            </div>
+                          </div>     
+                      <?php endforeach ?>
+                      
+                      </div>
+                    </div>
+
+                    <div class="tab-pane" id="lastmonth">
+                      <div class="col-md-12">
+                        <div class="row list-group-item">
+                          <div class="col-md-2"> 
+                           <strong>Name</strong>
+                        </div>
+                         <div class="col-md-1 text-center">
+                           <strong>Deals</strong>
+                        </div>
+                         <div class="col-md-1 text-center">
+                           <strong>Proposals</strong>
+                        </div>
+                        <div class="col-md-2 text-center">
+                          <strong>Meetings</strong><br>
+                          <Small> Booked (Attended)</Small>
+                          </div>
+                          <div class="col-md-2 text-center"> 
+                           <strong>Call Activity</strong><br>
+                           <Small> Total Calls (Intro)</Small>
+                        </div>
+                        <div class="col-md-1 text-center">
+                           <strong>Pipeline Added</strong>
+                        </div>
+                        <div class="col-md-2 text-center"> 
+                           <strong>Review Months</strong><br>
+                           <Small>Added / Occuring</Small>
+                        </div>
+                        <div class="col-md-1 text-center">
+                           <strong>DueDil</strong>
+                        </div>
+                        </div>
+                        <?php foreach ($lastmonthstats as $lastmonthstats): ?>
+                          <div class="row list-group-item">
+                            <div class="col-md-2"> 
+                            <?php $user_icon = explode(",",$lastmonthstats['image']); echo "<div class='circle' style='float: left;margin-top: -5px;margin-right: 10px;width: 35px;height: 35px;border-radius: 30px;font-size: 12px;line-height: 35px;text-align: center;font-weight: 700;background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
+
+                            </div>
+                            <div class="col-md-1 text-center">
+                            <a href = "?search=2&user=<?php echo $lastmonthstats['user'];?>&period=week&start_date=<?php echo $_GET['start_date']?>&end_date=<?php echo $_GET['end_date']?>"><span class="badge"  style="background-color:#00B285;"><?php echo $lastmonthstats['deals'];?></a></span>
+                            </div>
+                            <div class="col-md-1 text-center"> 
+                            <?php echo $lastmonthstats['proposals'];?>
+                            </div>
+                            <div class="col-md-2 text-center">
+                            <?php echo $lastmonthstats['meetingbooked'];?> (<?php echo $lastmonthstats['meetingcount'];?>)
+                            </div>
+                            <div class="col-md-2 text-center"> 
+                            <?php echo $lastmonthstats['salescall'];?>
+                            (<?php echo $lastmonthstats['introcall'];?>)
+                            </div>
+                            <div class="col-md-1 text-center">
+                              <?php echo $lastmonthstats['pipelinecount'];?>
+                            </div>
+                            <div class="col-md-2 text-center">
+                              <?php echo $lastmonthstats['key_review_added'];?> / <?php echo $lastmonthstats['key_review_occuring'];?>
+                            </div>
+                            <div class="col-md-1 text-center">
+                              <?php echo $lastmonthstats['duediligence'];?>
                             </div>
                           </div>     
                       <?php endforeach ?>

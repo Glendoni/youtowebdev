@@ -69,7 +69,7 @@ class Actions extends MY_Controller {
 						}
 					}
 					$this->set_message_success('Action successfully inserted');
-					redirect('companies/company?id='.$this->input->post('company_id'),'location');
+					redirect('companies/company?id='.$this->input->post('company_id').'#actions','location');
 				}
 			}else{
 				$this->set_message_error(validation_errors());

@@ -727,47 +727,51 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 							<?php endif; ?>
 				            </div>
 				            <div class="tab-pane fade in" id="comments">
+							<div class="col-md-12">
+
 				            
 
 							<?php if (count($comments) > 0): ?>
 							<ul class="list-group">
 	        				<?php foreach ($comments as $comment):
-	        				// print_r('<pre>');print_r($action);print_r('</pre>');
-							 $created_date_formatted = date("d/m/y",strtotime($comment->created_at));
+							
 							?>
 							<li class="list-group-item">
-							
-							<div class="col-md-12 ">
-							<h4 style="margin-bottom:0;"><?php echo $system_users[$comment->user_id]?></h4><small class="text-muted">
-							<i class="fa fa-calendar fa-fw"></i> <?php echo $created_date_formatted?></small>
-							</div>
-							<div class="col-md-12 ">
-							
+							<div class="row">
+							<div class="col-xs-10 col-md-11">
+                                <div>
+                                    <div class="mic-info">
+                                        By: <?php echo $system_users[$comment->user_id]?> on <?php echo date("j M Y",strtotime($comment->created_at));?>
+                                    </div>
+                                </div>
+                                <div class="comment-text" style="margin-top:10px;">
+                                    <?php echo $comment->comments; ?>
+                                </div>
+                          
 	                        </div>
-	                        
+	                        </div>
 	                        </li>
 	        			<?php endforeach ?>
 	        			</ul>
 	        		<?php else: ?>
-					No Comments
+
+	        		<div style="margin:10px 0;">
+					<h4 style="margin: 50px 0 40px 0; text-align: center;">No Comments</h4>
+					</div>
 					<?php endif; ?>
+					</div>
 					<?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'],'done'=>'1');
 					echo form_open(site_url().'actions/create', 'name="create" class="" role=""',$hidden); ?>
-		            <div class="input-group">
 		            	<input type="hidden" name="action_type_completed" value="7">
-	                    <input id="btn-input" type="text" class="form-control input-sm" name="comment" placeholder="Type your comments here...">
-	                    <span class="input-group-btn">
-	                        <button class="btn btn-warning btn-sm" id="btn-chat">
-	                            Send
+		            	<div class="col-md-10">					
+	                    <input id="btn-input" type="text" class="form-control input-md" name="comment" placeholder="Type your comment here...">
+	                    </div>
+	                    <div class="col-md-2">	
+	                        <button class="btn btn-primary btn-md btn-block" id="btn-chat">
+	                            Comment
 	                        </button>
-	                    </span>
-			            	</div>
+	                    </div>
 			            </form>
-
-
-
-
-
 				            </div>
 				        </div>
 				        <!-- End Tab Content -->

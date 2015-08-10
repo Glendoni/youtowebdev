@@ -365,6 +365,7 @@ class Campaigns_model extends MY_Model {
 		(-- T1
 		select C.id,
 			   C.name,
+			   C.pipeline,
 			   U.id "owner_id",
 		       row_to_json((
 		       C.id, -- f1
@@ -385,18 +386,20 @@ class Campaigns_model extends MY_Model {
 			   C.registration, -- f16
 		       TT1."turnover", -- f17
 			   TT1."turnover_method",  -- f18
-			   EMP.company_id,--f19
+			   EMP.count,--f19
 			   U.image , -- f20
 			   C.class, -- f21
 			   A.lat, -- f22
 			   A.lng, -- f23
-			  json_agg( 
+			   json_agg( 
 			   row_to_json ((
 			   TT2."sector_id", TT2."sector"))),-- f24
 			   C.phone, -- f25 
 			   C.pipeline, -- f26
 			   CONT.contacts_count, -- f27
-			   C.parent_registration --f 28
+			   C.parent_registration, --f28
+			   C.zendesk_id, -- f29
+			   C.customer_from -- f30
 
 			   )) "JSON output" 
 			   
@@ -475,7 +478,6 @@ class Campaigns_model extends MY_Model {
 				 
 		group by C.id,
 		         C.name,
-		         
 		         C.url,
 			     C.eff_from,
 			     C.linkedin_id,
@@ -498,8 +500,10 @@ class Campaigns_model extends MY_Model {
 			     A.lng,
 		         TT1."turnover",
 			     TT1."turnover_method",
-			     EMP.company_id,
-			     CONT.contacts_count
+			     EMP.count,
+			     CONT.contacts_count,
+			     C.zendesk_id,
+			     C.customer_from
 
 		order by C.id 
 
@@ -540,7 +544,13 @@ class Campaigns_model extends MY_Model {
 		)   T2
 		ON T1.id = T2."company id"
 		-- insert this for sort order  
-		order by T1.owner_id,lower(T1.name) 
+		order by case when pipeline = \'Customer\' then 1
+		when pipeline = \'Proposal\' then 2
+		when pipeline = \'Intent\' then 3
+		when pipeline = \'Qualified\' then 4
+		when pipeline = \'Lost\' then 8
+		else 5
+		end, name asc
 		 
 		) results';
 		// print_r($sql);

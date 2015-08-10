@@ -25,6 +25,7 @@ class Dashboard extends MY_Controller {
 		$this->data['stats'] = $this->Actions_model->get_recent_stats();
 		$this->data['lastweekstats'] = $this->Actions_model->get_last_week_stats();
 		$this->data['thismonthstats'] = $this->Actions_model->get_this_month_stats();
+		$this->data['lastmonthstats'] = $this->Actions_model->get_last_month_stats();
 		$this->data['getstatssearch'] = $this->Actions_model->get_stats_search();
 		$this->data['pipelinecontacted'] = $this->Actions_model->get_pipeline_contacted();
 		$this->data['pipelinecontactedindividual'] = $this->Actions_model->get_pipeline_contacted_individual($this->get_current_user_id());
