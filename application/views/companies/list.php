@@ -25,9 +25,13 @@
 				</a></h2>
 			</div>
 			<div class="col-sm-12" style="margin-top:5px; text-align:center;">
-	<span class="label label-<?php echo str_replace(' ', '', $company['pipeline']); ?>"><?php echo $company['pipeline']?></span>
+	<span class="label label-<?php echo str_replace(' ', '', $company['pipeline']); ?>"><?php echo $company['pipeline']?>
+	<?php if (isset($company['customer_from'])):?>
+		since <?php echo date("d/m/y",strtotime($company['customer_from']));?>
+		<?php endif; ?>
+		</span>
 	<?php if(isset($company['assigned_to_name'])): ?>
-		<span class="label label-Prospect"
+		<span class="label label-assigned"
 		<?php $user_icon = explode(",", ($system_users_images[$company['assigned_to_id']]));echo "style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'";?>>
         <?php echo $company['assigned_to_name']; ?>
         </span>
@@ -100,7 +104,10 @@
 			<?php if (isset($company['linkedin_id'])): ?>
 			<a class="btn  btn-info btn-sm btn-block linkedin" href="https://www.linkedin.com/company/<?php echo $company['linkedin_id'] ?>"  target="_blank">LinkedIn</a>
 			<?php endif; ?>
-			</div><!--CLOSE MD-8-->
+			<?php if (($current_user['department']) =='support' && isset($company['zendesk_id'])): ?>
+			<a class="btn  btn-info btn-sm btn-block zendesk" href="https://www.linkedin.com/company/<?php echo $company['linkedin_id'] ?>"  target="_blank">ZenDesk</a>
+			<?php endif; ?>
+			</div><!--CLOSE MD-3-->
 		</div>
 		<div class="row">
 		<div class="col-md-12">

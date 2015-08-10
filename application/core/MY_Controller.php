@@ -365,6 +365,8 @@ class MY_Controller extends CI_Controller {
 			if($company->company->f1->f26)$mapped_companies_array['pipeline'] = $company->company->f1->f26;
 			if($company->company->f1->f27)$mapped_companies_array['contacts_count'] = $company->company->f1->f27;
 			if($company->company->f1->f28)$mapped_companies_array['parent_registration'] = $company->company->f1->f28;
+			if($company->company->f1->f29)$mapped_companies_array['zendesk_id'] = $company->company->f1->f29;
+			if($company->company->f1->f30)$mapped_companies_array['customer_from'] = $company->company->f1->f30;
 
 			
 			// sectors

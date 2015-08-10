@@ -661,13 +661,50 @@ class Actions_model extends MY_Model {
 						'actioned_at'	=> date('Y-m-d H:i:s'),
 						'created_at' 	=> date('Y-m-d H:i:s'),
 						);
-		$this->load->helper('zendesk');  
-
 
 		$query = $this->db->insert('actions', $actiondata);
 		return $this->db->insert_id();
 
 	}
+	function add_to_zendesk($post){
+		$company_id = $post['company_id'];
+		$this->db->where('id', $company_id);
+		$this->db->limit(1);
+
+		$query = $this->db->get('companies');
+foreach ($query->result() as $row)
+{
+  $company_name= $row->name;
+  $company_url= str_replace("http://"," ",str_replace("www.", "", $row->url));
+}
+$ch = curl_init();
+$username = 'dchapple@sonovate.com';
+$password = '25Million';
+curl_setopt($ch, CURLOPT_URL, "https://sonovate.zendesk.com/api/v2/organizations.json");
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
+$body = '{"organization": {"name": "'.$company_name.'","domain_names": ["'.$company_url.'"]}}';
+
+curl_setopt($ch, CURLOPT_POSTFIELDS,$body);
+curl_setopt($ch, CURLOPT_USERPWD, $username . ":" . $password);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
+curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+'Content-Type: application/json',
+'Connection: Keep-Alive'
+));
+$result=curl_exec($ch);
+$data = json_decode($result, true);
+$zendesk_id = $data["organization"]["id"]; // "John"
+if(!empty($zendesk_id)) {
+$data = array('zendesk_id' => $zendesk_id);
+$this->db->where('id', $company_id);
+$this->db->update('companies', $data); 
+}
+
+curl_close($ch);
+
+
+		}
+
 
 
 	

@@ -1,5 +1,16 @@
-<div style="margin-top:20px;">
-<div class="col-md-3 clearfix no-padding">
+<div class="row" style="background-color:#fff; margin-top:-20px; padding:10px 0; border-bottom:1px solid #e7e7e7; margin-bottom:20px;">
+<div class="col-sm-9 col-sm-offset-3">
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs dashboard" role="tablist">
+    <li role="presentation" class="active"><button href="#team_stats" aria-controls="team_stats" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;">Stats</button></li>
+    <li role="presentation"><button href="#calls" aria-controls="calls" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;">Calls & Meetings</button></li>
+    <li role="presentation"><button href="#pipeline" aria-controls="pipeline" role="tab" data-toggle="tab" class="btn btn-primary btn-sm">Pipeline</button></li>
+  </ul>
+  </div>
+</div>
+
+<div class="col-sm-3 clearfix no-padding">
 <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h3 class="panel-title">My Campaigns <span class="badge pull-right"><?php echo count($private_campaigns); ?></span></h3>
@@ -53,9 +64,13 @@
 
 
 
-<div class="col-md-9">
+<div class="col-sm-9">
 
-<div class="panel panel-default">
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="team_stats">
+      <div class="panel panel-default">
               <div class="panel-heading">
                 <h3 class="panel-title">Team Stats</h3>
               </div>
@@ -80,63 +95,63 @@
                     <!-- Tab panes -->
                     <div class="tab-content">
                       <div class="tab-pane <?php if ($_GET['search'] < '1'): ?>active<?php endif; ?>" id="this">
-                      <div class="col-md-12">                      
+                      <div class="col-sm-12">                      
                       <div class="row list-group-item">
 
-                      <div class="col-md-2"> 
+                      <div class="col-sm-2"> 
                            <strong>Name</strong>
                         </div>
-                         <div class="col-md-1 text-center">
+                         <div class="col-sm-1 text-center">
                            <strong>Deals</strong>
                         </div>
-                         <div class="col-md-1 text-center">
+                         <div class="col-sm-1 text-center">
                            <strong>Proposals</strong>
                         </div>
-                        <div class="col-md-2 text-center">
+                        <div class="col-sm-2 text-center">
                           <strong>Meetings</strong><br>
                           <Small> Booked (Attended)</Small>
                           </div>
-                          <div class="col-md-2 text-center"> 
+                          <div class="col-sm-2 text-center"> 
                            <strong>Call Activity</strong><br>
                            <Small> Total Calls (Intro)</Small>
                         </div>
-                        <div class="col-md-1 text-center">
+                        <div class="col-sm-1 text-center">
                            <strong>Pipeline Added</strong>
                         </div>
-                        <div class="col-md-2 text-center"> 
+                        <div class="col-sm-2 text-center"> 
                            <strong>Review Months</strong><br>
                            <Small>Added / Occuring</Small>
                         </div>
-                        <div class="col-md-1 text-center">
+                        <div class="col-sm-1 text-center">
                            <strong>DueDil</strong>
                         </div>
                         </div>
                         <?php foreach ($stats as $stat): ?>
                           <div class="row list-group-item">
-                            <div class="col-md-2"> 
+                            <div class="col-sm-2"> 
                             <?php $user_icon = explode(",",$stat['image']); echo "<div class='circle' style='float: left;margin-top: -5px;margin-right: 10px;width: 35px;height: 35px;border-radius: 30px;font-size: 12px;line-height: 35px;text-align: center;font-weight: 700;background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
 
                             </div>
-                            <div class="col-md-1 text-center">
+                            <div class="col-sm-1 text-center">
                             <a href = "?search=2&user=<?php echo $stat['user'];?>&period=week&start_date=<?php echo $_GET['start_date']?>&end_date=<?php echo $_GET['end_date']?>"><span class="badge" style="background-color:#00B285;"><?php echo $stat['deals'];?></a></span>
                             </div>
-                            <div class="col-md-1 text-center"> 
+                            <div class="col-sm-1 text-center"> 
                             <?php echo $stat['proposals'];?>
                             </div>
-                            <div class="col-md-2 text-center">
+                            <div class="col-sm-2 text-center">
                             <?php echo $stat['meetingbooked'];?> (<?php echo $stat['meetingcount'];?>)
                             </div>
-                            <div class="col-md-2 text-center"> 
+                            <div class="col-sm-2 text-center"> 
                             <?php echo $stat['salescall'];?>
                             (<?php echo $stat['introcall'];?>)
                             </div>
-                            <div class="col-md-1 text-center">
+                            <div class="col-sm-1 text-center">
                               <?php echo $stat['pipelinecount'];?>
                             </div>
-                            <div class="col-md-2 text-center">
+                            <div class="col-sm-2 text-center">
                               <?php echo $stat['key_review_added'];?> / <?php echo $stat['key_review_occuring'];?>
                             </div>
-                            <div class="col-md-1 text-center">
+                            <div class="col-sm-1 text-center">
                               <?php echo $stat['duediligence'];?>
                             </div>
                           </div>     
@@ -314,7 +329,7 @@
 
                             </div>
                             <div class="col-md-1 text-center">
-                            <a href = "?search=2&user=<?php echo $getstatssearch['user'];?>&period=week&start_date=<?php echo $_GET['start_date']?>&end_date=<?php echo $_GET['end_date']?>"><span class="badge"><?php echo $getstatssearch['deals'];?></a></span>
+                            <a href = "?search=2&user=<?php echo $getstatssearch['user'];?>&period=week&start_date=<?php echo $_GET['start_date']?>&end_date=<?php echo $_GET['end_date']?>"><span class="badge" style="background-color:#00B285;"><?php echo $getstatssearch['deals'];?></a></span>
                             </div>
                             <div class="col-md-1 text-center"> 
                             <?php echo $getstatssearch['proposals'];?>
@@ -374,12 +389,14 @@
             </form>
           </div>
         </div><!--END PANEL-->
-<div class="panel panel-default">
+
+    </div>
+    <div role="tabpanel" class="tab-pane" id="calls"><div class="panel panel-default">
               <div class="panel-heading">
               <h3 class="panel-title">My Calls & Meetings<span class="badge pull-right"><?php echo count($pending_actions); ?></span></h3>
               </div>
              
-              <div class="panel-body">
+              <div class="panel-body no-padding">
               <div class="col-md-12">
                   <div class="clearfix"></div>
                   <div clas="list-group">
@@ -399,10 +416,12 @@
                             <div class="col-md-2">
                               <?php echo $action_types_array[$action->action_type_id]; ?>
                             </div>
-                            <div class="col-md-3"> 
-                              <?php echo date("D jS M ",strtotime($action->planned_at));?> @ <?php echo date("g:i",strtotime($action->planned_at));?>
+                            <div class="col-md-2 text-center">
+                            <?php echo date("H:i",strtotime($action->planned_at));?><br>
+                              <strong><?php echo date("d/m/y",strtotime($action->planned_at));?></strong>
+                              
                             </div>
-                            <div class="col-md-3" style="text-align:right;">
+                            <div class="col-md-4" style="text-align:right;">
                               <?php $hidden = array('action_id' => $action->action_id , 'user_id' => $current_user['id'], 'action_do' => 'completed', 'outcome' => '' , 'company_id' => $action->company_id);
                                echo form_open(site_url().'actions/edit', 'name="completed_action"  class="completed_action" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action->action_id.'" style="display:inline-block;" role="form"',$hidden); ?>
                                <button class="btn btn-sm btn-success"><i class="fa fa-check fa-lg"></i> Completed</button> 
@@ -423,22 +442,21 @@
                   </div>
               </div>
               </div>
-          </div><!--END OF PANEL-->
-
-          <div class="panel panel-default">
+          </div><!--END OF PANEL--></div>
+    <div role="tabpanel" class="tab-pane" id="pipeline">
+      <div class="panel panel-default">
               <div class="panel-heading">
               <h3 class="panel-title">Pipeline</h3>
-                
               </div>
              
               <div clas="list-group">
                     <ul class="nav nav-tabs" role="tablist">
                       <li class="active"><a href="#individual_pipeline" role="tab" data-toggle="tab">My Pipeline</a></li>
                       <li><a href="#team_pipeline" role="tab" data-toggle="tab">Team Pipeline</a></li>
-      </ul>
+                    </ul>
                       <div class="tab-content">
                       <div class="tab-pane active" id="individual_pipeline">
-<div class="panel-body">
+              <div class="panel-body">
               <div class="col-md-3 pipeline-holder ">
                             <div class="panel panel-default contact">
                             <div class="panel-heading">
@@ -735,27 +753,19 @@
         </div><!--END THIS TAB-->
       </div>
       </div>
-          </div>
+          </div><!--END PANEL-->
 
+    </div>
+  </div>
 
+</div>
+</div>
 </div>
 
 
-
-
-
-
-
-
-
-
-        </div>
-        <div class="col-lg-12">
-
-
-        <?php if ($_GET['search']==2) { ?>
-
-<div class="panel panel-default">
+<div class="col-lg-12">
+    <?php if ($_GET['search']==2) { ?>
+        <div class="panel panel-default">
               <div class="panel-heading">
                 <?php echo $end_date;?><i class="fa fa-user"></i></i> User Stats <div class="pull-right" style="font-weight:300;">
                 (<?php echo date('D jS M y',strtotime($dates['start_date']));?> - <?php echo date('D jS M y',strtotime($dates['end_date']));?>)</div>
@@ -846,5 +856,4 @@
           
           
       </div>
-  </div>
   
