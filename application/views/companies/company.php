@@ -110,7 +110,7 @@
 			<a class="btn  btn-info btn-sm btn-block linkedin" href="https://www.linkedin.com/company/<?php echo $company['linkedin_id'] ?>"  target="_blank">LinkedIn</a>
 			<?php endif; ?>
 			<?php if (($current_user['department']) =='support' && isset($company['zendesk_id'])): ?>
-			<a class="btn  btn-info btn-sm btn-block zendesk" href="https://www.linkedin.com/company/<?php echo $company['linkedin_id'] ?>"  target="_blank">ZenDesk</a>
+			<a class="btn  btn-info btn-sm btn-block zendesk" href="https://sonovate.zendesk.com/agent/organizations/<?php echo $company['zendesk_id'] ?>"  target="_blank">ZenDesk</a>
 			<?php endif; ?>
 
 		<?php endif; ?>
