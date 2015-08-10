@@ -888,7 +888,8 @@ class Companies_model extends CI_Model {
 				'contract'=>!empty($post['contract'])?$post['contract']:NULL,
 				'perm'=>!empty($post['perm'])?$post['perm']:NULL,
 				'class'=>!empty($post['company_class'])?$post['company_class']:NULL,
-				'pipeline'=>!empty($post['company_pipeline'])?$post['company_pipeline']:NULL,
+				'pipeline'=>$post['company_pipeline'],
+				//'pipeline'=>!empty($post['company_pipeline'])?$post['company_pipeline']:NULL,
 				'updated_at' => date('Y-m-d H:i:s')
 			);
 
