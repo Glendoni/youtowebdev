@@ -476,9 +476,9 @@
                           <div class="row list-group-item <?php if( strtotime($action->planned_at) < strtotime('today')  ) { echo ' delayed';} ?> " style="font-size:12px;">
                             <div class="col-md-4"> 
                               <a href="<?php echo site_url();?>companies/company?id=<?php echo $action->company_id;?>"> <?php echo $action->company_name;?></a>
-                              <?php if(!empty($action->first_name)) : $contact_details_for_calendar = urlencode('Meeting with '.$action->first_name.' '.$action->last_name).'%0A'.urlencode($action->email.' '.$action->phone).'%0D%0D';?>
+                              <?php if(!empty($action->first_name)) { $contact_details_for_calendar = urlencode('Meeting with '.$action->first_name.' '.$action->last_name).'%0A'.urlencode($action->email.' '.$action->phone).'%0D%0D';?>
                               <div style="clear:both"><?php echo $action->first_name.' '.$action->last_name;?></div>
-                              <?php endif ?>
+                              <?php } else { $contact_details_for_calendar="";};?>
                             </div>
                             <div class="col-md-2">
                               <?php echo $action_types_array[$action->action_type_id]; ?>

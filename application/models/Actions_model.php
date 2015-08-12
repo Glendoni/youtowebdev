@@ -99,8 +99,8 @@ class Actions_model extends MY_Model {
 		$this->db->where('actions.user_id',$user_id);
 		$this->db->where('actioned_at',NULL);
 		$this->db->where('cancelled_at',NULL);
-		$this->db->join('companies', 'companies.id = actions.company_id');
-		$this->db->join('contacts', 'contacts.id = actions.contact_id');
+		$this->db->join('companies', 'companies.id = actions.company_id', 'left');
+		$this->db->join('contacts', 'contacts.id = actions.contact_id', 'left');
 		$this->db->order_by('cancelled_at desc,planned_at asc');
 		$query = $this->db->get('actions');
 		// var_dump($query);
