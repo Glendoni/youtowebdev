@@ -21,15 +21,15 @@ class Actions_model extends MY_Model {
 		$data = array(
 			'actions.company_id' => $company_id,
 			);
-		$this->db->select('actions.company_id, actions.id "action_id",comments,planned_at,action_type_id,name "company_name",contacts.first_name,contacts.last_name,contacts.phone,contacts.email,actions.user_id,contacts.id "contact_id",actions.created_at as "created_at", companies.name, ');
-		$this->db->where('planned_at IS NOT NULL', null);
-		$this->db->where('actioned_at IS NULL', null);
-		$this->db->where('cancelled_at IS NULL', null);
+			$this->db->select('actions.company_id, actions.id "action_id",comments,planned_at,action_type_id,name "company_name",contacts.first_name,contacts.last_name,contacts.phone,contacts.email,actions.user_id,contacts.id "contact_id",actions.created_at as "created_at", companies.name,actions.actioned_at as "actioned_at",actions.planned_at as "planned_at", ');
+		$this->db->where('actions.planned_at IS NOT NULL', null);
+		$this->db->where('actions.actioned_at IS NULL', null);
+		$this->db->where('actions.cancelled_at IS NULL', null);
 		$this->db->where_not_in('action_type_id',$category_exclude);
-		$this->db->join('companies', 'companies.id = actions.company_id');
-		$this->db->join('contacts', 'contacts.id = actions.contact_id');
+		$this->db->join('companies', 'companies.id = actions.company_id', 'left');
+		$this->db->join('contacts', 'contacts.id = actions.contact_id', 'left');
 
-		$this->db->order_by('actioned_at desc, cancelled_at desc,planned_at desc');
+		$this->db->order_by('actions.actioned_at desc, actions.cancelled_at desc,actions.planned_at desc');
 		$query = $this->db->get_where('actions', $data);
 		return $query->result_object();
 	}

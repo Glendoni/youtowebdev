@@ -253,6 +253,7 @@ border-bottom: 1px dashed #ddd;
 }
 .pipeline-update.Customer {
 background-color: #BFFFBF;
+color: #333;
 }
 .pipeline-update.Proposal {
 background-color: #EFBFFF;
