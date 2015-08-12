@@ -19,12 +19,16 @@ class Actions_model extends MY_Model {
 	{
 		$category_exclude = array('7', '20');
 		$data = array(
-			'company_id' => $company_id,
+			'actions.company_id' => $company_id,
 			);
+		$this->db->select('actions.company_id, actions.id "action_id",comments,planned_at,action_type_id,name "company_name",contacts.first_name,contacts.last_name,contacts.phone,contacts.email,actions.user_id,contacts.id "contact_id",actions.created_at as "created_at", companies.name, ');
 		$this->db->where('planned_at IS NOT NULL', null);
 		$this->db->where('actioned_at IS NULL', null);
 		$this->db->where('cancelled_at IS NULL', null);
 		$this->db->where_not_in('action_type_id',$category_exclude);
+		$this->db->join('companies', 'companies.id = actions.company_id');
+		$this->db->join('contacts', 'contacts.id = actions.contact_id');
+
 		$this->db->order_by('actioned_at desc, cancelled_at desc,planned_at desc');
 		$query = $this->db->get_where('actions', $data);
 		return $query->result_object();
@@ -91,11 +95,12 @@ class Actions_model extends MY_Model {
 	}
 
 	function get_pending_actions($user_id){		
-		$this->db->select('company_id, actions.id "action_id",comments,planned_at,action_type_id,name "company_name",');
+		$this->db->select('actions.company_id, actions.id "action_id",comments,planned_at,action_type_id,name "company_name",contacts.first_name,contacts.last_name,contacts.phone,contacts.email, ');
 		$this->db->where('actions.user_id',$user_id);
 		$this->db->where('actioned_at',NULL);
 		$this->db->where('cancelled_at',NULL);
 		$this->db->join('companies', 'companies.id = actions.company_id');
+		$this->db->join('contacts', 'contacts.id = actions.contact_id');
 		$this->db->order_by('cancelled_at desc,planned_at asc');
 		$query = $this->db->get('actions');
 		// var_dump($query);

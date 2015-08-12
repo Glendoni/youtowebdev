@@ -69,7 +69,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/" >Baselist <span style="font-size:12px; font-weight:300;">v2.10</span></a>
+                <a class="navbar-brand" href="/" >Baselist <span style="font-size:12px; font-weight:300;">v2.11</span></a>
             </div>
             <!-- Top Menu Items -->
             <?php if (isset($current_user)): ?>
@@ -231,14 +231,7 @@
                     </ul>
                     
                 </li>-->
-                <?php if ($current_user['permission'] == 'admin'): ?>
-                <li>
-                    <a href="<?php echo base_url(); ?>companies/create_company" ><i class="fa fa-plus-circle"></i> add company</a>
-                </li>
-                <li>
-                    <a href="<?php echo base_url(); ?>email_templates/" ><i class="fa fa-envelope"></i> email templates</a>
-                </li>
-                <?php endif; ?>
+                
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 
@@ -255,6 +248,15 @@
                             <a href="<?php echo site_url(); ?>users/settings"><i class="fa fa-fw fa-gear"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
+                        <?php if ($current_user['permission'] == 'admin'): ?>
+                <li>
+                    <a href="<?php echo base_url(); ?>companies/create_company" ><i class="fa fa-plus-circle"></i> add company</a>
+                </li>
+                <li>
+                    <a href="<?php echo base_url(); ?>email_templates/" ><i class="fa fa-envelope"></i> email templates</a>
+                </li>
+                <li class="divider"></li>
+                <?php endif; ?>
                         <li>
                             <a href="<?php echo site_url(); ?>login/logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                         </li>

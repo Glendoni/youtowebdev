@@ -19,7 +19,6 @@
                                 <ul class="list-group" style="margin-bottom:0;">
                                     <!-- PRIVATE SEARCHES -->
                                     <?php foreach ($private_campaigns as $campaign):?>
-                                
                                     <li class="no-padding" style="padding: 0 5px;">
                                       <a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $campaign->id; ?>" class="load-saved-search" <?php echo strlen($campaign->name) > 36 ? 'title="'.$campaign->name.'">':">" ?><span class="name"  style="margin-right: 10px;"><?php echo strlen($campaign->name) > 36 ? substr($campaign->name,0,36).'...' : $campaign->name?></span>
                                             <span class="badge small-badge pull-right"><?php echo $campaign->campaigncount; ?></span>
@@ -477,23 +476,26 @@
                           <div class="row list-group-item <?php if( strtotime($action->planned_at) < strtotime('today')  ) { echo ' delayed';} ?> " style="font-size:12px;">
                             <div class="col-md-4"> 
                               <a href="<?php echo site_url();?>companies/company?id=<?php echo $action->company_id;?>"> <?php echo $action->company_name;?></a>
+                              <?php if(!empty($action->first_name)) : $contact_details_for_calendar = urlencode('Meeting with '.$action->first_name.' '.$action->last_name).'%0A'.urlencode($action->email.' '.$action->phone).'%0D%0D';?>
+                              <div style="clear:both"><?php echo $action->first_name.' '.$action->last_name;?></div>
+                              <?php endif ?>
                             </div>
                             <div class="col-md-2">
                               <?php echo $action_types_array[$action->action_type_id]; ?>
                             </div>
                             <div class="col-md-2 text-center">
-                            <?php echo date("H:i",strtotime($action->planned_at));?><br>
+                            <?php echo date("H:i",strtotime($action->planned_at));?>
                               <strong><?php echo date("d/m/y",strtotime($action->planned_at));?></strong>
-                              
+                              <div style="clear:both;"><small><a class="btn btn-default btn-xs add-to-calendar" href="http://www.google.com/calendar/event?action=TEMPLATE&text=<?php echo urlencode($action_types_array[$action->action_type_id].' | '.$action->company_name); ?>&dates=<?php echo date("Ymd\\THi00",strtotime($action->planned_at));?>/<?php echo date("Ymd\\THi00\\Z",strtotime($action->planned_at));?>&details=<?php echo $contact_details_for_calendar;?><?php echo urlencode('http://baselist.herokuapp.com/companies/company?id='.$action->company_id);?>%0D%0DAny changes made to this event are not updated in Baselist."target="_blank" rel="nofollow">Add to Calendar</a></small></div>
                             </div>
                             <div class="col-md-4" style="text-align:right;">
                               <?php $hidden = array('action_id' => $action->action_id , 'user_id' => $current_user['id'], 'action_do' => 'completed', 'outcome' => '' , 'company_id' => $action->company_id);
                                echo form_open(site_url().'actions/edit', 'name="completed_action"  class="completed_action" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action->action_id.'" style="display:inline-block;" role="form"',$hidden); ?>
-                               <button class="btn btn-sm btn-success"><i class="fa fa-check fa-lg"></i> Completed</button> 
+                               <button class="btn btn-xs btn-success">Completed</button> 
                                </form>
                                <?php $hidden = array('action_id' => $action->action_id , 'user_id' => $current_user['id'] , 'action_do' => 'cancelled','outcome' => '' , 'company_id' => $action->company_id);
                                echo form_open(site_url().'actions/edit', 'name="cancel_action"  class="cancel_action" style="display:inline-block;" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action->action_id.'" role="form"',$hidden); ?>
-                               <button class="btn btn-sm btn-danger" ><i class="fa fa-trash-o fa-lg"></i> Cancel</button>
+                               <button class="btn btn-xs btn-danger" >Cancel</button>
                                </form>
                             </div>
                           </div>

@@ -884,7 +884,7 @@ class Companies_model extends CI_Model {
 		$company = array(
 				'phone' => !empty($post['phone'])?$post['phone']:NULL,
 				'linkedin_id' => (isset($post['linkedin_id']) and !empty($post['linkedin_id']))?$post['linkedin_id']:NULL,
-				'url' => !empty($post['url'])?$post['url']:NULL,
+				'url' => !empty($post['url'])?str_replace('http://', '',$post['url']):NULL,
 				'contract'=>!empty($post['contract'])?$post['contract']:NULL,
 				'perm'=>!empty($post['perm'])?$post['perm']:NULL,
 				'class'=>!empty($post['company_class'])?$post['company_class']:NULL,
@@ -945,7 +945,7 @@ class Companies_model extends CI_Model {
 			// 'ddlink' => !empty($post['ddlink'])?$post['ddlink']:NULL,
 			'phone' => !empty($post['phone'])?$post['phone']:NULL,
 			'linkedin_id' => (!empty($post['linkedin_id']) and !empty($post['linkedin_id']))?$post['linkedin_id']:NULL,
-			'url' => !empty($post['url'])?$post['url']:NULL,
+			'url' => !empty($post['url'])?str_replace('http://', '',$post['url']):NULL,
 			'contract'=>!empty($post['contract'])?$post['contract']:NULL,
 			'perm'=>!empty($post['perm'])?$post['perm']:NULL,
 			'class'=>!empty($post['company_class'])?$post['company_class']:NULL,
