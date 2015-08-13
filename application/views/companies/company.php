@@ -287,7 +287,7 @@ $mortgages_start  = $mortgage['eff_from'];$date_pieces = explode("/", $mortgages
 	      <tbody>
 	      	<?php foreach ($campaigns as $campaign): ?>
 	      	<tr>
-				<td class="col-md-6"><?php echo $campaign->campaign_name;?></td>
+				<td class="col-md-6"><a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $campaign->id;?>"><?php echo $campaign->campaign_name;?></a></td>
 				<td class="col-md-3"><?php echo $campaign->name;?></td>
 				<td class="col-md-2"><?php echo date("d/m/y",strtotime($campaign->created_at));?></td>
 				<td  class="col-md-3">

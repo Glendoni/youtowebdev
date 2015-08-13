@@ -410,7 +410,7 @@ class Campaigns_model extends MY_Model {
 
 		function get_campaigns($company_id)
 	{
-		$this->db->select('campaigns.name as "campaign_name", users.name, campaigns.created_at');
+		$this->db->select('campaigns.id,campaigns.name as "campaign_name", users.name, campaigns.created_at');
 		$this->db->join('campaigns', 'campaigns.id = targets.campaign_id', 'left');
 		$this->db->join('users', 'users.id = targets.created_by', 'left');
 		$this->db->where('eff_to', NULL);
