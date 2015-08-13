@@ -784,3 +784,7 @@ margin-bottom: 20px;
 a.btn.btn-default.btn-xs.add-to-calendar {
 	margin-top: 5px;
 }
+/* CAMPAIGN LINK */
+.campaign-link {
+	font-size: 11px;
+}

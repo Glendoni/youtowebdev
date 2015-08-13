@@ -36,8 +36,22 @@ class Sectors_model extends MY_Model {
 				return $sectors_array_all;
 
 	}
-	
 
+		function get_all_target_in_array()
+	{
+	
+		$this->db->select('id, name');
+		$this->db->where('display', 'true');
+		$query = $this->db->get_where('sectors');
+
+		foreach($query->result() as $row)
+		{
+		  $sectors_target_array[$row->id] = ucwords(strtolower($row->name));
+		} 	
+		return $sectors_target_array;
+	}
+
+	
 	function get_by_id($id)
 	{
 		$query = $this->db->get_where('sectors',array('id'=>$id));

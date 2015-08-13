@@ -38,8 +38,8 @@
 						Team
 						<?php endif;?> <?php echo $results_type ?>:
 						</strong>
-						<?php echo $current_campaign_name; ?></div>
-						
+						<?php echo $current_campaign_name; ?>
+						<div class="campaign-link"><?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $current_campaign_id; ?></div></div>						
 			
 				
 			</div>	

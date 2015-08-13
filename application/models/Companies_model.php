@@ -309,9 +309,13 @@ class Companies_model extends CI_Model {
 
 		if( isset($post['sectors']) && !empty($post['sectors']) && $post['sectors'] !== '0' )
 		{	
-			if ($post['sectors'] < 0)
+			if ($post['sectors'] = 0)
 			{
 				$sectors_sql = 'select operates.company_id from operates where operates.active = True and operates.sector_id = NULL ';
+			}
+			elseif ($post['sectors'] = -1)
+			{
+				$sectors_sql = 'select operates.company_id from operates where operates.active = True and operates.sector_id in (select id from sectors where display = \'t\')';
 			}
 			else
 			{	$sectors = $post['sectors'];
@@ -483,7 +487,7 @@ class Companies_model extends CI_Model {
 		)   TT2
 		ON TT2."company id" = C.id
 
-	        left join 
+	    left join 
         (select count, company_id from emp_counts ORDER BY "emp_counts"."created_at" DESC limit 1)
         EMP ON EMP.company_id = C.id
 
