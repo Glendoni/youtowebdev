@@ -67,113 +67,6 @@ class Campaigns_model extends MY_Model {
 		return $query->result();
 	}
 
-
-// 	function get_all_private_campaigns($user_id)
-// 	{
-// 		if (!empty($user_id)) {
-// 			$user_select_camapigns = ' and u.id = '.$user_id.'';
-// 		}
-//  	echo $sql = 'select "campaign_id",
-//  	"name",
-//        "owner",
-//        "created",
-//        "shared",
-// 	   "companies in campaign",
-// 	   "one or more action",
-// 	    "co one or more action during campaign",
-// 		"qualified",
-// 		"intent",
-// 		"proposal",
-// 		"customer",
-// 		T2."emails"
-
-// from
-// (
-// select C.id,
-// 		C.id "campaign_id",
-//        C.created_at::date "created",
-//        U.name "owner",
-//        C.name "name" ,
-//        C.shared "shared",
-// 	   count(distinct T.company_id) "companies in campaign",
-// 	   count(distinct A.company_id) "one or more action",
-//        count(distinct (CASE when A.created_at > C.created_at then A.company_id else null END )) "co one or more action during campaign",
-// 	   CASE when count(distinct CASE when CO.pipeline = \'Intent\' then CO.id END) = 0 then null 
-// 	        else count(distinct CASE when CO.pipeline = \'Intent\' then CO.id END) END "intent",
-// 	   CASE when count(distinct CASE when CO.pipeline = \'Qualified\' then CO.id END) = 0 then null 
-// 	        else count(distinct CASE when CO.pipeline = \'Qualified\' then CO.id END) END "qualified",
-// 	   CASE when count(distinct CASE when CO.pipeline = \'Proposal\' then CO.id END) = 0 then null
-// 	        else count(distinct CASE when CO.pipeline = \'Proposal\' then CO.id END)  END "proposal",
-// 	   CASE when count(distinct CASE when CO.pipeline = \'Customer\' and CO.customer_from > C.created_at then CO.id END) = 0 then null
-// 	        else count(distinct 
-// 			   CASE when CO.pipeline = \'Customer\' and CO.customer_from > C.created_at then CO.id END) END "customer"
-
-
-// FROM   CAMPAIGNS C
-
-// JOIN USERS U
-// ON C.user_id = U.id
-
-// LEFT JOIN TARGETS T
-// ON C.id = T.campaign_id
-
-// LEFT JOIN COMPANIES CO  on
-// T.company_id = CO.id
-
-// LEFT JOIN 
-// (
-// select *
-// from ACTIONS 
-// where (action_type_id in (\'4\',\'5\',\'8\',\'9\',\'10\',\'16\',\'17\',\'18\',\'23\',\'6\')) 
-//   or (action_type_id in (\'11\',\'12\',\'13\',\'14\',\'15\') 
-// 	  and actioned_at is not null and cancelled_at is null)
-// )   A
-// on CO.id = A.company_id
-
-// where C.criteria is null '.$user_select_camapigns.'
-
-// group by 1,2,3,4,5
-
-// order by 2, 1 desc
-// )   T1
-
-// LEFT JOIN
-
-// (
-// select CA.id,
-//        count(*) "emails",
-// 	   count(distinct C.company_id) "distinct companies emailed"
-     
-// from EMAIL_CAMPAIGNS EC
-// JOIN USERS U
-// ON EC.created_by = U.id
-
-// LEFT JOIN EMAIL_ACTIONS EA
-// ON EC.id = EA.email_campaign_id
-
-// JOIN CONTACTS C
-// ON EA.contact_id = C.id
-
-// JOIN TARGETS T
-// ON C.company_id = T.company_id
-// JOIN CAMPAIGNS CA
-// ON T.campaign_id = CA.id
-// group by 1
-// )   T2
-// ON T1.id = T2.id
-// order by 3 desc';
-// 		$query = $this->db->query($sql);
-
-// 		if($query){
-// 		return $query->result();
-// 		}else{
-// 			return [];
-// 		}
-// 	}
-
-
-
-
 	function get_campaigns_for_user($user_id)
 	{
 		$this->db->select('name,id,user_id');
@@ -198,159 +91,6 @@ class Campaigns_model extends MY_Model {
 
 	function get_companies_for_campaign_id($campaign_id)
 	{	
-		// filter by name
-		if (isset($post['agency_name']) && strlen($post['agency_name'])) 
-		{
-			$company_name_sql = "select id from companies  where name ilike '%".$post['agency_name']."%'"; 
-			
-		}
-
-		// COMPANY AGE
-		
-		if($post['company_age_from'] >= 0  )
-		{
-			$company_age_from = date("m-d-Y", strtotime("-".$post['company_age_from']." year"));
-			
-		}
-		if(!empty($post['company_age_to'])  )
-		{
-			$company_age_to = date("m-d-Y", strtotime("-".$post['company_age_to']." year"));
-			
-		}
-		if(isset($company_age_from) && isset($company_age_to)) 
-		{
-			$company_age_sql = 'select id from companies  where companies.eff_from between \''.$company_age_to.'\'  and  \''.$company_age_from.'\' ';
-		}
-		
-
-		
-		// TURNOVER
-
-		//REMOVE COMMA ETC FROM TURNOVER
-
-		$turnover_from = preg_replace('/[^0-9]/','',$post['turnover_from']);
-		$turnover_to = preg_replace('/[^0-9]/','',$post['turnover_to']);
-
-
-		if(empty($turnover_to) && !empty($turnover_from))
-		{
-			$turnover_to = '100000000';
-		}
-	
-
-		
-		if( (isset($turnover_from) && strlen($turnover_from) > 0) && (strlen($turnover_to) > 0 && isset($turnover_to)) ) 
-		{	
-				if($post['turnover_from'] == 0)
-				{
-					$turnover_sql = 'select T.company_id "company_id",
-									       T.turnover "turnover",
-									       T.method "turnover_method"       
-									from 
-									(-- T1
-									select id "id",
-									       company_id,
-									       max(eff_from) OVER (PARTITION BY company_id) "max eff date"
-									from TURNOVERS
-									)   T1
-									  
-									JOIN TURNOVERS T
-									ON T1.id = T.id
-									  
-									where T1."max eff date" = T.eff_from 
-									and T.turnover = NULL or  T.turnover < '.$turnover_to.'
-			  
-			  						';
-				}
-				else
-				{
-					$turnover_sql = 'select T.company_id "company_id",
-									       T.turnover "turnover",
-									       T.method "turnover_method"       
-									from 
-									(-- T1
-									select id "id",
-									       company_id,
-									       max(eff_from) OVER (PARTITION BY company_id) "max eff date"
-									from TURNOVERS
-									)   T1
-									  
-									JOIN TURNOVERS T
-									ON T1.id = T.id
-									  
-									where T1."max eff date" = T.eff_from 
-									and  T.turnover between '.$turnover_from.'  and '.$turnover_to.'  ';
-				}
-				
-		}
-		
-		
-		
-		// EMP COUNT
-		// if((isset($post['employees_to']) and !empty($post['employees_to'])) and (isset($post['employees_from']) and !empty($post['employees_from'])) ) 
-		// {
-		// 	$emp_count_sql = 'select company_id  from emp_counts where count > '.$post['employees_from'].'  and turnover < '.$post['employees_to'].'  ';
-		// }
-
-		// MORTGAGE
-		// if (!empty($post['mortgage_to']) && !empty($post['mortgage_from']))
-		// {
-		// 	$mortgage_sql = 'select company_id  from mortgages where mortgages.stage = \''.MORTGAGES_OUTSTANDING.'\' and EXTRACT (doy from mortgages.eff_from) - EXTRACT (doy from now()) BETWEEN '.$post['mortgage_from'].' AND '.$post['mortgage_to'].'  ';
-		// }
-
-		// SECTORS
-
-		if( isset($post['sectors']) && !empty($post['sectors']) && $post['sectors'] !== '0' )
-		{	
-			if ($post['sectors'] < 0)
-			{
-				$sectors_sql = 'select operates.company_id from operates where operates.active = True and operates.sector_id = NULL ';
-			}
-			else
-			{	$sectors = $post['sectors'];
-				if(is_array($sectors))
-				{
-					$sectors_sql = 'select operates.company_id from operates where operates.active = True and operates.sector_id in ('.implode(', ', $post['sectors']).')';
-				}
-				else
-				{
-					$sectors_sql = 'select operates.company_id from operates where operates.active = True and operates.sector_id = '.$post['sectors'].' ';
-				}
-				
-			}
-			
-		}
-
-		// Providers
-		if(isset($post['providers']) && (!empty($post['providers'])) )
-		{
-			if($post['providers'] < 0)
-			{
-				$no_providers_sql = 'select distinct(companies.id )from companies left join (select company_id from mortgages where mortgages.stage = \''.MORTGAGES_OUTSTANDING.'\') t on t.company_id = companies.id where t.company_id  is NULL';
-			}
-			else
-			{
-				$providers_sql = 'select mortgages.company_id "company_id" from providers join mortgages on  providers.id = mortgages.provider_id	where mortgages.stage = \''.MORTGAGES_OUTSTANDING.'\' and providers.id = '.$post['providers'];
-			}
-			
-		}
-
-		// assigned
-		if(isset($post['assigned']) && (!empty($post['assigned'])) && ($post['assigned'] > 0 ))
-		{	
-			$assigned_sql = 'select id from companies where user_id = '.$post['assigned'].'';
-		}
-		else if (isset($post['assigned']) && (!empty($post['assigned'])) && ($post['assigned'] =='-1'))
-		{
-			$assigned_sql = 'select id from companies where user_id is Null';
-		}
-		
-		// segment
-		if(isset($post['class']) && (!empty($post['class'])) && ($post['class'] !== ''))
-		{	
-			$class_sql = "select id from companies where class = '".$post['class']."'";
-
-		}
 
 		// -- Data to Display a Company's details
 		// IMPORTANT if you change/add colums on the following query then change the mapping array on the companies controller
@@ -408,17 +148,6 @@ class Campaigns_model extends MY_Model {
 		from (select * from COMPANIES where eff_to IS NULL) C ';
 		
 		$sql = $sql.' JOIN ( select company_id from targets where campaign_id = '.$campaign_id.' ) company ON C.id = company.company_id';
-		// if(isset($company_name_sql)) $sql = $sql. ' JOIN ( '.$company_name_sql.' ) name ON C.id = name.id ';
-		// if(isset($no_providers_sql)) $sql = $sql. ' JOIN ( '.$no_providers_sql.' ) companies on C.id = companies.id ';
-		// if(isset($company_age_sql)) $sql =  $sql.' JOIN ( '.$company_age_sql.' ) company_age ON C.id = company_age.id ';
-		// if(isset($turnover_sql)) $sql = $sql.' JOIN ( '.$turnover_sql.' ) turnovers ON C.id = turnovers.company_id';
-		// if(isset($mortgage_sql)) $sql = $sql.' JOIN ( '.$mortgage_sql.' ) mortgages ON C.id = mortgages.company_id';
-		// if(isset($sectors_sql)) $sql = $sql.' JOIN ( '.$sectors_sql.' ) sectors ON C.id = sectors.company_id';
-		// if(isset($providers_sql)) $sql = $sql.' JOIN ( '.$providers_sql.' ) providers ON C.id = providers.company_id';
-		// if(isset($assigned_sql)) $sql = $sql.' JOIN ( '.$assigned_sql.' ) assigned ON C.id = assigned.id';
-		// if(isset($class_sql)) $sql = $sql.' JOIN ( '.$class_sql.' ) segment ON C.id = segment.id';
-		// if(isset($company_id) && $company_id !== False) $sql = $sql.' JOIN ( select id from companies where id = '.$company_id.' ) company ON C.id = company.id';
-		
 		$sql = $sql.' LEFT JOIN 
 		(-- TT1 
 		select T.company_id "company id",
@@ -677,6 +406,17 @@ class Campaigns_model extends MY_Model {
 		}else{
 			return True;
 		} 
+	}
+
+		function get_campaigns($company_id)
+	{
+		$this->db->select('campaigns.name as "campaign_name", users.name, campaigns.created_at');
+		$this->db->join('campaigns', 'campaigns.id = targets.campaign_id', 'left');
+		$this->db->join('users', 'users.id = targets.created_by', 'left');
+		$this->db->where('eff_to', NULL);
+		$this->db->order_by('campaigns.created_at', 'desc'); 
+		$query = $this->db->get_where('targets',array('company_id'=>$company_id));	
+		return $query->result();
 	}
 
 }

@@ -91,6 +91,18 @@ class MY_Controller extends CI_Controller {
 			$this->session->set_userdata('sectors_list',$sectors_list);
 			$this->session->set_userdata('sectors_search',$sectors_search);
 		}
+
+				if($this->session->userdata('sectors_targets'))
+		{
+			$sectors_targets = $this->session->userdata('sectors_targets');
+		}
+		else
+		{
+			$sectors_targets = $this->Sectors_model->get_all_target_in_array();
+			asort($sectors_targets);
+			$this->session->set_userdata('sectors_targets',$sectors_targets);
+		}
+
 		
 		if($this->session->userdata('providers_options'))
 		{
@@ -199,8 +211,9 @@ class MY_Controller extends CI_Controller {
 		$this->data['assigned_default'] = '0';
 
 		if($sectors_search){
-			$sectors_search = array(0=>'All') +  $sectors_search;
+			$sectors_search = array(-1=>'All Target Sectors',0=>'Any') +  $sectors_search;
 		}
+		
 		
 		// $sectors_options = array(-1=>'No sectors') + $sectors_options;
 		$this->data['sectors_search'] = $sectors_search;

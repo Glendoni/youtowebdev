@@ -226,6 +226,7 @@ class Companies extends MY_Controller {
 			// var_dump($company);
 			$this->data['contacts'] = $this->Contacts_model->get_contacts($this->input->get('id'));
 			$this->data['addresses'] = $this->Companies_model->get_addresses($this->input->get('id'));
+			$this->data['campaigns'] = $this->Campaigns_model->get_campaigns($this->input->get('id'));
 
 			$option_contacts =  array();
 			foreach ($this->data['contacts'] as $contact) {

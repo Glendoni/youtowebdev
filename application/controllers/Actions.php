@@ -30,13 +30,22 @@ class Actions extends MY_Controller {
 			$this->form_validation->set_rules('user_id', 'user_id', 'xss_clean|required');
 			$this->form_validation->set_rules('contact_id', 'contact_id', 'xss_clean');
 			if($this->form_validation->run())
-			{	
+			{	$post = $this->input->post();
+				if (($post['action_type_completed']=='16') && (empty($post['class_check'] ))){
+					$this->set_message_warning('Please set a company class before adding a deal.');
+				redirect('companies/company?id='.$this->input->post('company_id'),'location');
+					}
+					else 
+					{
 				$result = $this->Actions_model->create($this->input->post());
+				}
 				if(empty($result))
 				{
 					$this->set_message_warning('Error while inserting details to database');
 					
 				}
+				
+
 				else
 				{
 					// after the initial action has been successfully created we can continue with the following login
@@ -44,12 +53,14 @@ class Actions extends MY_Controller {
 					$post = $this->input->post();
 					$company_id = $post['company_id'];
 					if ($post['action_type_completed']=='16') {
+
 						// if action type completed is a deal then company is a now a customer
 						// companies model update the company to customer
 						$result = $this->Companies_model->update_company_to_customer($company_id);
 						if(empty($result)){
 							$this->set_message_warning('Error while updating company.');	
-						}else{
+						}
+						else{
 							// actions models, register the update of a company to customer status 
 							$result = $this->Actions_model->company_updated_to_customer($post);
 							$result1 = $this->Actions_model->add_to_zendesk($post);

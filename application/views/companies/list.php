@@ -27,7 +27,7 @@
 			<div class="col-sm-12" style="margin-top:5px; text-align:center;">
 	<span class="label label-<?php echo str_replace(' ', '', $company['pipeline']); ?>"><?php echo $company['pipeline']?>
 	<?php if (isset($company['customer_from'])):?>
-		since <?php echo date("d/m/y",strtotime($company['customer_from']));?>
+		from <?php echo date("d/m/y",strtotime($company['customer_from']));?>
 		<?php endif; ?>
 		</span>
 	<?php if(isset($company['assigned_to_name'])): ?>
@@ -44,11 +44,11 @@
 	</div>
 		<div class="col-sm-9">
 		<div class="row">
-		<div class="col-sm-12">
-				<strong>Address</strong>
+		<div class="col-sm-12" style="margin-top:10px;">
+				<label>Address</label>
 				<p style="margin-bottom:0;">
-                <?php echo isset($company['address'])?$company['address']:'-'; ?>  
-				</p>
+                <?php echo isset($company['address'])?'<a href="http://maps.google.com/?q='.urlencode($company['address']).'" target="_blank">'.$company['address'].'<span style="    line-height: 15px;font-size: 10px;padding-left: 5px;"><i class="fa fa-external-link"></i></span></a>':'-'; ?>  
+				</p><hr>
 		</div><!--END ADDRESS-->
 		<div class="col-xs-6 col-md-4" style="margin-top:10px;">
 			<strong>Company Number</strong>

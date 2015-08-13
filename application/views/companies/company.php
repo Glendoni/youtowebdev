@@ -48,7 +48,7 @@
 		<div class="col-sm-12" style="margin-top:10px;">
 				<label>Address</label>
 				<p style="margin-bottom:0;">
-                <?php echo isset($company['address'])?$company['address']:'-'; ?>  
+                <?php echo isset($company['address'])?'<a href="http://maps.google.com/?q='.urlencode($company['address']).'" target="_blank">'.$company['address'].'<span style="    line-height: 15px;font-size: 10px;padding-left: 5px;"><i class="fa fa-external-link"></i></span></a>':'-'; ?>  
 				</p><hr>
 		</div><!--END ADDRESS-->
 		
@@ -66,11 +66,7 @@
 				<?php echo isset($company['eff_from'])?$company['eff_from']:'-'; ?>
 			</p>
 		</div>
-
-
-
-
-				
+	
 		
         <div class="col-xs-6" style="margin-top:10px;">
         		<label>Phone Number</label>
@@ -186,16 +182,21 @@
 			<thead>
 				<tr>
 					<th class="col-md-6">Provider</th>
-					<th class="col-md-3" style="text-align:center;">Status</th>
 					<th class="col-md-3" style="text-align:center;">Started</th>
+					<th class="col-md-3" style="text-align:center;">Status</th>
 				</tr>
 			</thead>
 			<tbody>
 				<?php foreach ($company['mortgages'] as $mortgage):?>
 				<tr <?php echo $mortgage['stage']==MORTGAGES_SATISFIED? 'class="danger"' : 'class="success"' ?> >
 					<td class="col-md-6" ><?php echo $mortgage['name']; ?><div style="font-size:11px;"><?php echo $mortgage['type']; ?></div></td>
-					<td class="col-md-3" style="text-align:center;"><span class="label label-<?php echo $mortgage['stage']==MORTGAGES_SATISFIED? 'default' : 'success' ?>"><?php echo $mortgage['stage']; ?><?php if(!empty($mortgage['eff_to'])){echo ' on '.$mortgage['eff_to'];} ?></span></td>
-					<td class="col-md-3" style="text-align:center;"><?php echo $mortgage['eff_from']; ?></td>
+					
+					<td class="col-md-3" style="text-align:center;">
+					<?php
+$mortgages_start  = $mortgage['eff_from'];$date_pieces = explode("/", $mortgages_start);$formatted_mortgage_date = $date_pieces[2].'/'.$date_pieces[1].'/'.$date_pieces[0];echo date("F Y",strtotime($formatted_mortgage_date));
+?></td><td class="col-md-3" style="text-align:center;"><span class="label label-<?php echo $mortgage['stage']==MORTGAGES_SATISFIED? 'default' : 'success' ?>"><?php echo $mortgage['stage']; ?><?php if(!empty($mortgage['eff_to'])){echo ' on '.$mortgage['eff_to'];} ?></span></td>
+
+
 
 				</tr>
 				<?php endforeach; ?>
@@ -266,6 +267,44 @@
 		</div>
 
 
+		<!--CAMPAIGNS-->
+		<?php if(isset($campaigns) and !empty($campaigns)) : ?>
+		<div class="col-md-12">
+		<div class="panel panel-default">
+		<div class="panel-heading" id="contacts">
+		Campaigns
+		</div>
+		<!-- /.panel-heading -->
+		<div class="panel-body">
+		<table class="table table-hover">
+	      <thead>
+	        <tr>
+	          <th class="col-md-6">Campaign Name</th>
+	          <th class="col-md-3">Owner</th>
+	          <th class="col-md-3">Date</th>
+	        </tr>
+	      </thead>
+	      <tbody>
+	      	<?php foreach ($campaigns as $campaign): ?>
+	      	<tr>
+				<td class="col-md-6"><?php echo $campaign->campaign_name;?></td>
+				<td class="col-md-3"><?php echo $campaign->name;?></td>
+				<td class="col-md-2"><?php echo date("d/m/y",strtotime($campaign->created_at));?></td>
+				<td  class="col-md-3">
+	            </td>
+        	</tr>
+			<?php endforeach; ?>  
+	      </tbody>
+	    </table>
+		
+
+		</div>
+		<!-- /.panel-body -->
+		</div>
+		</div>
+		<?php endif; ?>
+
+
 		<!--CONTACTS-->
 
 		<div class="col-md-12">
@@ -311,8 +350,8 @@
 	            </div>
 	            </td>
         	</tr>
-			<?php endforeach; ?>  
-	      </tbody>
+			<?php endforeach; ?>
+			</tbody>
 	    </table>
 	    <?php else: ?>
 			<div class="alert alert-info" style="margin-top:10px;">
@@ -328,8 +367,9 @@
 		<div class="panel panel-info ">
 		  <div class="panel-heading"><h3 class="panel-title">Completed & Follow Up Actions</h3></div>
 		  <div class="panel-body">
-		   <?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'],'done'=>'1');
+		   <?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'],'done'=>'1', 'class_check' => $companies_classes[$company['class']],);
 			echo form_open(site_url().'actions/create', 'name="create" class="form" role="form"',$hidden); ?>
+			<!--THE BELOW PASSES THE CLASS FIELD ACROSS PURELY FOR VALIDATION - IF THERE IS A BETTER WAY OF DOING THIS THEN IT NEEDS TO BE HERE-->
 			<div class="row">
 			<div class="col-md-3">
 				<div class="form-group ">
