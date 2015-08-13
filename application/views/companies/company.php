@@ -486,6 +486,7 @@ $mortgages_start  = $mortgage['eff_from'];$date_pieces = explode("/", $mortgages
 									<a data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $action_outstanding->action_id ?>" aria-expanded="false" aria-controls="collapse<?php echo $action_outstanding->action_id ?>">
 									<?php echo $action_types_array[$action_outstanding->action_type_id]; ?><?php if(strtotime($action_outstanding->planned_at) < $now and !isset($action_outstanding->actioned_at)):?>
 								<span class="label label-danger" style="font-size:11px; margin-left:10px;"><b>Overdue</b></span>
+								<?php endif ?>
                                     </a>
 								<div class="mic-info">
 								Created By: <?php echo $system_users[$action_outstanding->user_id]?> on <?php echo $created_date_formatted?>

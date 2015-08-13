@@ -21,11 +21,7 @@ class Actions_model extends MY_Model {
 		$data = array(
 			'actions.company_id' => $company_id,
 			);
-<<<<<<< Updated upstream
 			$this->db->select('actions.company_id, actions.id "action_id",comments,planned_at,action_type_id,name "company_name",contacts.first_name,contacts.last_name,contacts.phone,contacts.email,actions.user_id,contacts.id "contact_id",actions.created_at as "created_at", companies.name,actions.actioned_at as "actioned_at",actions.planned_at as "planned_at", ');
-=======
-		$this->db->select('actions.company_id, actions.id "action_id",comments,planned_at,action_type_id,name "company_name",contacts.first_name,contacts.last_name,contacts.phone,contacts.email,actions.user_id,contacts.id "contact_id",actions.created_at as "created_at", companies.name,actions.actioned_at as "actioned_at",actions.planned_at as "planned_at", ');
->>>>>>> Stashed changes
 		$this->db->where('actions.planned_at IS NOT NULL', null);
 		$this->db->where('actions.actioned_at IS NULL', null);
 		$this->db->where('actions.cancelled_at IS NULL', null);
