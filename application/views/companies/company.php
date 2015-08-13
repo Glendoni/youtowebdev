@@ -279,9 +279,9 @@ $mortgages_start  = $mortgage['eff_from'];$date_pieces = explode("/", $mortgages
 		<table class="table table-hover">
 	      <thead>
 	        <tr>
-	          <th class="col-md-6">Campaign Name</th>
+	          <th class="col-md-6">Name</th>
 	          <th class="col-md-3">Owner</th>
-	          <th class="col-md-3">Date</th>
+	          <th class="col-md-3">Created</th>
 	        </tr>
 	      </thead>
 	      <tbody>
