@@ -69,7 +69,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/" >Baselist <span style="font-size:12px; font-weight:300;">v2.21</span></a>
+                <a class="navbar-brand" href="/" >Baselist <span style="font-size:12px; font-weight:300;">v2.2</span></a>
             </div>
                         <?php if (isset($current_user)): ?>
 
