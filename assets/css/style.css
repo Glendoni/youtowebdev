@@ -804,8 +804,8 @@ a.btn.btn-default.btn-xs.add-to-calendar {
     font-weight: 200;
     margin-top: -35px;
 }
-.circle-content.small-text{
-	    font-size: 140px;
+.circle-content .small-text{
+	    font-size: 12px;
     font-weight: 500;
 }
 .black-circle {
@@ -848,3 +848,9 @@ a.btn.btn-default.btn-xs.add-to-calendar {
 	border-style: solid;
 	background-color: transparent;;
 }
+@media screen and (max-width: 767px) {
+.mobile-hide {
+	display: none;
+}
+}
+

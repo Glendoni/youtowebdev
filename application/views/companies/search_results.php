@@ -49,7 +49,7 @@
 						<?php echo $current_campaign_name; ?>
 						</div>	
 					<div class="row" style="margin-bottom: 20px;">
-					<div class="col-md-2">
+					<div class="col-sm-2 mobile-hide">
 <div class="circle-responsive black-circle">
   <div class="circle-content mega">
 <div class="large-number"><?php echo number_format($companies_count); ?></div> <div class="small-text"><?php if ($companies_count<> "1") {echo "Companies in List";} else { echo "Company in List";}?></div></div>
@@ -58,35 +58,35 @@
 
 <?php foreach($current_campaign_stats as $current_campaign_stats)
         {?>
-<div class="col-md-2">
+<div class="col-sm-2 mobile-hide">
 <div class="circle-responsive gray-circle">
 <div class="circle-content mega">
 <div class="large-number"><?php echo $current_campaign_stats->campaign_prospects; ?></div>
 <div class="small-text"><?php if ($current_campaign_stats->campaign_prospects <> "1") {echo "Prospects";} else { echo "Prospect";}?></div></div>
 </div>
 </div>
-<div class="col-md-2">
+<div class="col-sm-2 mobile-hide">
 <div class="circle-responsive gray-circle">
 <div class="circle-content mega">
 <div class="large-number"><?php echo $current_campaign_stats->campaign_intent; ?></div>
 <div class="small-text">Intent</div></div>
 </div>
 </div>
-<div class="col-md-2">
+<div class="col-sm-2 mobile-hide">
 <div class="circle-responsive gray-circle">
 <div class="circle-content mega">
 <div class="large-number"><?php echo $current_campaign_stats->campaign_proposals; ?></div>
 <div class="small-text"><?php if ($current_campaign_stats->campaign_proposals <> "1") {echo "Proposals";} else { echo "Proposal";}?></div></div>
 </div>
 </div>
-<div class="col-md-2">
+<div class="col-sm-2 mobile-hide">
 <div class="circle-responsive green3-circle">
 <div class="circle-content mega">
 <div class="large-number"><?php echo $current_campaign_stats->campaign_customers; ?></div>
 <div class="small-text"><?php if ($current_campaign_stats->campaign_customers <> "1") {echo "Customers";} else { echo "Customer";}?></div></div>
 </div>
 </div>
-<div class="col-md-2">
+<div class="col-sm-2 mobile-hide">
 <div class="circle-responsive red-circle">
 <div class="circle-content mega">
 <div class="large-number"><?php echo $current_campaign_stats->campaign_lost; ?></div>
@@ -100,7 +100,6 @@
 ?>				
 </div><!--END ROW-->
 					
-			</div>	
 			<?php else: ?>
 			<?php endif; ?>
 		<?php endif; ?>
