@@ -290,11 +290,30 @@ class Campaigns_model extends MY_Model {
 
 	function get_saved_searched_by_id($id)
 	{
-		$this->db->select('name,id,criteria,shared,user_id');
-		$this->db->from('campaigns');
-		$this->db->where('id', $id);
-		$query = $this->db->get();
-		return $query->result();
+	$sql = "select U.name, U.id as user, U.image,
+				sum(case when action_type_id = '4' AND actioned_at > '$start_date_month' AND actioned_at < '$end_date_month' then 1 else 0 end) introcall,
+				sum(case when (action_type_id = '4' or action_type_id = '5' or action_type_id = '11' or action_type_id = '17')  AND actioned_at > '$start_date_month' AND actioned_at < '$end_date_month' then 1 else 0 end) salescall,
+		    	sum(case when (action_type_id = '5' OR action_type_id = '11') AND actioned_at > '$start_date_month' AND actioned_at < '$end_date_month' then 1 else 0 end) callcount,
+		   		sum(case when (action_type_id = '12' or action_type_id = '10' or action_type_id = '9' or action_type_id = '15') AND actioned_at > '$start_date_month' AND actioned_at < '$end_date_month' then 1 else 0 end) meetingcount,
+		    	sum(case when (action_type_id = '12' or action_type_id = '10' or action_type_id = '9' or action_type_id = '15') AND a.created_at > '$start_date_month' AND a.created_at < '$end_date_month' then 1 else 0 end) meetingbooked,
+		    	sum(case when (action_type_id = '16') AND a.created_at > '$start_date_month' AND a.created_at < '$end_date_month' then 1 else 0 end) deals,
+		    	sum(case when (action_type_id = '8') AND a.created_at > '$start_date_month' AND a.created_at < '$end_date_month' then 1 else 0 end) proposals,
+		    	sum(case when action_type_id = '25' AND a.created_at > '$start_date_month' AND a.created_at < '$end_date_month' then 1 else 0 end) duediligence,
+		    	sum(case when action_type_id = '22' AND a.created_at > '$start_date_month' AND a.created_at < '$end_date_month' then 1 else 0 end) key_review_added,
+		    	sum(case when action_type_id = '22' AND a.planned_at > '$start_date_month' AND a.planned_at < '$end_date_month' then 1 else 0 end) key_review_occuring,
+		    	Sum(CASE WHEN action_type_id = '19' and a.id = 	(SELECT MAX(id) FROM actions z WHERE z.company_id = a.company_id and z.action_type_id = '19' order by a.actioned_at desc) AND (a.comments ilike '%intent%' or a.comments ilike '%qualified%') AND a.created_at > '$start_date_month' AND a.created_at < '$end_date_month' THEN 1 ELSE 0 END) AS pipelinecount 
+				from actions A
+				INNER JOIN users U
+				on A.user_id = U.id
+				LEFT JOIN companies C
+				on A.company_id = C.id
+				where cancelled_at is null and u.department = 'sales' group by U.name, U.id order by deals desc, meetingbooked desc, introcall desc,  name desc";
+		$query = $this->db->query($sql);
+		if($query){
+			return $query->result_array();
+		}else{
+			return [];
+		}
 	}
 	// UPDATES
 
@@ -418,5 +437,21 @@ class Campaigns_model extends MY_Model {
 		$query = $this->db->get_where('targets',array('company_id'=>$company_id));	
 		return $query->result();
 	}
+
+function get_campaign_pipeline($id)
+	{
+	$sql = "select 
+				sum(case when company_id in (select id from companies where pipeline = 'Prospect') then 1 else 0 end) campaign_prospects,
+				sum(case when company_id in (select id from companies where pipeline = 'Intent') then 1 else 0 end) campaign_intent,
+				sum(case when company_id in (select id from companies where pipeline = 'Customer') then 1 else 0 end) campaign_customers,
+				sum(case when company_id in (select id from companies where pipeline = 'Lost') then 1 else 0 end) campaign_lost,
+				sum(case when company_id in (select id from companies where pipeline = 'Proposal') then 1 else 0 end) campaign_proposals
+				from targets T
+				INNER JOIN campaigns CP
+				on T.campaign_id = CP.id
+				where CP.id = $id limit 1";
+		$query = $this->db->query($sql);
+		    return $query->result(); /* returns an object */
+}
 
 }
