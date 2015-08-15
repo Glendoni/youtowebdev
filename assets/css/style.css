@@ -263,7 +263,7 @@ background-color: #EFBFFF;
 background-color: #FFEFBF;
 }
 .input-group-btn:last-child>.btn, .input-group-btn:last-child>.btn-group {
-	    margin-left: -68px;
+	    margin-left: -86px;
 }
 /* BUTTONS */
 
@@ -570,6 +570,7 @@ padding: 3px 5px;}
   	border-top: none;
 	position: absolute;
     width: 100%;
+    z-index: 9999;
 }
 ul.autocomplete-holder {
 	list-style-type: none;
@@ -644,6 +645,7 @@ li.autocomplete-contact {
 .large-search {
 font-size: 20px;
 font-weight: 300;
+width: 100% !important;
 }
 .large-form-holder {
 margin-top: 20px;
@@ -784,6 +786,18 @@ a.btn.btn-default.btn-xs.add-to-calendar {
 	font-size: 11px;
 }
 /*CIRCLES FOR DASHBOARD*/
+.name-circle {
+	float: left;
+    margin-top: -5px;
+    margin-right: 10px;
+    width: 35px;
+    height: 35px;
+    border-radius: 30px;
+    font-size: 12px;
+    line-height: 35px;
+    text-align: center;
+    font-weight: 700;
+}
 .circle-responsive {
   background: #ddd;
   border-radius: 50%;
@@ -851,6 +865,26 @@ a.btn.btn-default.btn-xs.add-to-calendar {
 @media screen and (max-width: 767px) {
 .mobile-hide {
 	display: none;
+}
+.hide-overflow {
+	font-size: 10px;
+	overflow: hidden;
+}
+.stats-row {
+	font-size: 10px;
+}
+.stats-row .badge {
+	font-size: 10px;
+	margin-top: -2px;
+}
+.name-circle {
+	font-size: 10px;
+	width: 25px;
+    height: 25px;
+	line-height: 25px;
+}
+.nav>li>a {
+	font-size: 10px;
 }
 }
 

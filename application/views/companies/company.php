@@ -115,20 +115,27 @@
 			<hr>
 		</div>
 
-		<div class="row col-md-12">
-				<!-- TURNOVER -->
-		<div class="col-sm-3 col-xs-6 centre">
-			<label><?php  echo isset($company['turnover_method'])?$company['turnover_method']." ":'';?>Turnover</label>
+		<div class="row">
+		<!-- TURNOVER -->
+		<div class="col-xs-4 col-sm-2 centre">
+			<strong>Turnover</strong>
 			<p class="details" style="margin-bottom:5px;">
 				£<?php echo isset($company['turnover'])? number_format (round($company['turnover'],-3)):'0';?>
-			    <!--<span class="label label-default" ><?php  echo isset($company['turnover_method'])?$company['turnover_method']:'';?></span>-->
-</p>	
+			</p>
+            <h6 style="margin-top:0;">
+            	<span class="label label-default" ><?php  echo isset($company['turnover_method'])?$company['turnover_method']:'';?></span>
+            </h6>	
         </div>
-        
+        <div class="col-xs-4 col-sm-2 centre">
+        	<strong>Founded</strong>
+			<p class="details">
+				<?php echo isset($company['eff_from'])?$company['eff_from']:''; ?>
+			</p>
+		</div>
 
 		<!-- CONTACTS -->
-		<div class="col-sm-3 col-xs-6 centre">
-			<label>Contacts</label>			
+		<div class="col-xs-4 col-sm-2 centre">
+			<strong>Contacts</strong>			
 			<?php if (isset($company['contacts_count'])): ?>
 			<p class="details"><?php echo $company['contacts_count'];?> </p>
 			<?php else: ?>
@@ -137,34 +144,32 @@
 		</div>
 
 		<!-- EMPLOYEES -->
-		<div class="col-sm-3 col-xs-6 centre">
-			<label>Employees</label>
+		<div class="col-xs-4 col-sm-2 centre">
+			<strong>Employees</strong>
 			<?php if (isset($company['emp_count'])): ?>
 			<p class="details"><?php echo $company['emp_count'];?> </p>
 			<?php else: ?>
 			<p class="details">Unknown</p>
 			<?php endif; ?>
-		</div> 
+		</div>
 
 		<!-- SECTORS -->
-		<div class="col-sm-3 col-xs-12 centre">
-			<label>Sectors</label> 
+		<div class="col-xs-4 col-sm-4">
+			<strong>Sectors</strong> 
 			<?php 
 			if(isset($company['sectors'])){
 				foreach ($company['sectors'] as $key => $name) {
-					echo '<p class="details" style="margin-bottom:0;">'.$name.'</p>';
+					echo '<p class="details" style="margin-bottom:0; text-align:left;">'.$name.'</p>';
 				}
-			} else {
-			echo '<p class="details" style="margin-bottom:0; ">Unknown</p>';
 			}
 			?>
-		</div>
 		</div>
 
 		<div class="col-md-12">
 			<hr>
 		</div>
 
+		</div>
        
 		<!-- MORTGAGES -->
 
@@ -328,7 +333,7 @@ $mortgages_start  = $mortgage['eff_from'];$date_pieces = explode("/", $mortgages
 	      <thead>
 	        <tr>
 	          <th class="col-md-3">Name</th>
-	          <th class="col-md-2">Role</th>
+	          <th class="col-md-2 mobile-hide">Role</th>
 	          <th class="col-md-2">Email</th>
 	          <th class="col-md-2">Phone</th>
 	          <th class="col-md-3"></th>
@@ -338,7 +343,7 @@ $mortgages_start  = $mortgage['eff_from'];$date_pieces = explode("/", $mortgages
 	      	<?php foreach ($contacts as $contact): ?>
 	      	<tr>
 				<td class="col-md-3"><?php echo ucfirst($contact->first_name).' '.ucfirst($contact->last_name); ?></td>
-				<td class="col-md-2"><?php echo ucfirst($contact->role); ?></td>
+				<td class="col-md-2 mobile-hide"><?php echo ucfirst($contact->role); ?></td>
 				<td class="col-md-2"><?php echo $contact->email; ?></td>
 				<td class="col-md-2"><?php echo $contact->phone; ?></td>
 				<td  class="col-md-3">

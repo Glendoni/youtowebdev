@@ -63,15 +63,9 @@
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex1-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
                 <a class="navbar-brand" href="/" >Baselist <span style="font-size:12px; font-weight:300;">v2.2</span></a>
             </div>
-                        <?php if (isset($current_user)): ?>
+<?php if (isset($current_user)): ?>
 
                         <!--TOP SEARCH BAR-->
             <?php if (isset($_GET['id'])) { 
@@ -81,8 +75,8 @@
     $search_default = $this->input->post('agency_name');
 }?>
 
-    <div class="col-md-7 col-md-offset-1 large-form-holder clearfix">
-            <div class="input-group" id="adv-search">
+    <div class="col-lg-6 col-lg-offset-2 col-sm-6 col-md-offset-2 large-form-holder clearfix">
+            <div class="" id="adv-search">
              <?php echo form_open(site_url().'companies', 'id="main_search" novalidate="novalidate" name="main_search" class="" role="form"'); ?>
                                     <?php echo form_hidden('main_search','1');?>
                                     
@@ -211,166 +205,8 @@
 </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-top-links navbar-right">
-                <!-- <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="fa fa-envelope"></i> <b class="caret"></b>
-                    </a>
-                    <ul class="dropdown-menu dropdown-messages">
-                        <li class="message-preview">
-                            <a href="#">
-                                <div class="media">
-                                    <span class="pull-left">
-                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                    </span>
-                                    <div class="media-body">
-                                        <h5 class="media-heading"><strong><?php echo $current_user['name'] ?></strong>
-                                        </h5>
-                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="message-preview">
-                            <a href="#">
-                                <div class="media">
-                                    <span class="pull-left">
-                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                    </span>
-                                    <div class="media-body">
-                                        <h5 class="media-heading"><strong><?php echo $current_user['name'] ?></strong>
-                                        </h5>
-                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="message-preview">
-                            <a href="#">
-                                <div class="media">
-                                    <span class="pull-left">
-                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
-                                    </span>
-                                    <div class="media-body">
-                                        <h5 class="media-heading"><strong><?php echo $current_user['name'] ?></strong>
-                                        </h5>
-                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur...</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="message-footer">
-                            <a href="#">Read All New Messages</a>
-                        </li>
-                    </ul>
-                </li> -->
-                <!-- <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-tasks fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-tasks">
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <p>
-                                        <strong>Task 1</strong>
-                                        <span class="pull-right text-muted">40% Complete</span>
-                                    </p>
-                                    <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                                            <span class="sr-only">40% Complete (success)</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <p>
-                                        <strong>Task 2</strong>
-                                        <span class="pull-right text-muted">20% Complete</span>
-                                    </p>
-                                    <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
-                                            <span class="sr-only">20% Complete</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <p>
-                                        <strong>Task 3</strong>
-                                        <span class="pull-right text-muted">60% Complete</span>
-                                    </p>
-                                    <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-                                            <span class="sr-only">60% Complete (warning)</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <p>
-                                        <strong>Task 4</strong>
-                                        <span class="pull-right text-muted">80% Complete</span>
-                                    </p>
-                                    <div class="progress progress-striped active">
-                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-                                            <span class="sr-only">80% Complete (danger)</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a class="text-center" href="#">
-                                <strong>See All Tasks</strong>
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        </li>
-                    </ul>
-                   
-                </li> -->
-                   <!-- /.dropdown -->
-                 <!--<li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-bell fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-alerts">
-                        <li>
-                            <a href="#">
-                                <div>
-                                    <i class="fa fa-comment fa-fw"></i> New Comment
-                                    <span class="pull-right text-muted small">4 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a class="text-center" href="#">
-                                <strong>See All Alerts</strong>
-                                <i class="fa fa-angle-right"></i>
-                            </a>
-                        </li> 
-                    </ul>
-                    
-                </li>-->
-                
-                <li class="dropdown" style="margin-top:17px;">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <li class="dropdown" style="margin-top:17px;">
+               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 
                     <?php $user_icon = explode(",", ($system_users_images[$current_user['id']])); echo "<div class='circle' style='float: left;margin-top: 0px;margin-right: 10px;width: 20px;height: 20px;border-radius: 15px;font-size: 8px;line-height: 20px;text-align: center;font-weight: 700;background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
                     <?php echo $current_user['name'] ?> <b class="caret"></b></a>

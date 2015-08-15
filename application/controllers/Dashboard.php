@@ -14,6 +14,8 @@ class Dashboard extends MY_Controller {
 		$this->clear_search_results();
 		$this->clear_campaign_from_session();
 		$this->data['hide_side_nav'] = True;
+		$this->data['full_container'] = True;
+
 		
 		// Getting all sectors 
 
@@ -40,6 +42,7 @@ class Dashboard extends MY_Controller {
 		$this->data['getusermeetings'] = $this->Actions_model->get_user_meetings();
 		$this->data['getuserpitches'] = $this->Actions_model->get_user_pitches();
 		$this->data['dates'] = $this->Actions_model->dates();
+
 
 
 
