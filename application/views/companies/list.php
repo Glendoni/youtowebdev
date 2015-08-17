@@ -117,14 +117,12 @@
 		
         <div class="row">
 		<!-- TURNOVER -->
-		<div class="col-xs-4 col-sm-2 centre">
-			<strong>Turnover</strong>
+		<div class="col-xs-4 col-sm-3 centre">
+			<strong><span style="text-transform: capitalize"><?php echo isset($company['turnover_method'])?$company['turnover_method']:'';?></span>
+Turnover</strong>
 			<p class="details" style="margin-bottom:5px;">
-				£<?php echo isset($company['turnover'])? number_format (round($company['turnover'],-3)):'0';?>
+				<?php echo isset($company['turnover'])? '£'.number_format (round($company['turnover'],-3)):'Unknown';?>
 			</p>
-            <h6 style="margin-top:0;">
-            	<span class="label label-default" ><?php  echo isset($company['turnover_method'])?$company['turnover_method']:'';?></span>
-            </h6>	
         </div>
         <div class="col-xs-4 col-sm-2 centre">
         	<strong>Founded</strong>
@@ -154,7 +152,7 @@
 		</div>
 
 		<!-- SECTORS -->
-		<div class="col-xs-4 col-sm-4">
+		<div class="col-xs-4 col-sm-3">
 			<strong>Sectors</strong> 
 			<?php 
 			if(isset($company['sectors'])){

@@ -94,7 +94,7 @@
 		<?php else: ?>
 		<?php $this->load->view('companies/actions_box_list.php',array('company'=>$company)); ?>
 		<?php if (isset($company['url'])): ?>
-		<a class="btn btn-default btn-sm btn-block" href="<?php $parsed = parse_url($company['url']); if (empty($parsed['scheme'])) { echo 'http://' . ltrim($company['url'], '/'); }else{ echo $company['url']; } ?>" target="_blank">
+		<a class="btn btn-default btn-sm btn-block btn-url" href="<?php $parsed = parse_url($company['url']); if (empty($parsed['scheme'])) { echo 'http://' . ltrim($company['url'], '/'); }else{ echo $company['url']; } ?>" target="_blank">
 				<label style="margin-bottom:0;">Web:</label> <?php echo str_replace("http://"," ",str_replace("www.", "", $company['url']))?>
 		</a>
 			<?php endif; ?>
@@ -117,14 +117,13 @@
 
 		<div class="row">
 		<!-- TURNOVER -->
-		<div class="col-xs-4 col-sm-2 centre">
-			<strong>Turnover</strong>
+		<!-- TURNOVER -->
+		<div class="col-xs-4 col-sm-3 centre">
+			<strong><span style="text-transform: capitalize"><?php echo isset($company['turnover_method'])?$company['turnover_method']:'';?></span>
+Turnover</strong>
 			<p class="details" style="margin-bottom:5px;">
-				£<?php echo isset($company['turnover'])? number_format (round($company['turnover'],-3)):'0';?>
+				<?php echo isset($company['turnover'])? '£'.number_format (round($company['turnover'],-3)):'Unknown';?>
 			</p>
-            <h6 style="margin-top:0;">
-            	<span class="label label-default" ><?php  echo isset($company['turnover_method'])?$company['turnover_method']:'';?></span>
-            </h6>	
         </div>
         <div class="col-xs-4 col-sm-2 centre">
         	<strong>Founded</strong>
@@ -154,7 +153,7 @@
 		</div>
 
 		<!-- SECTORS -->
-		<div class="col-xs-4 col-sm-4">
+		<div class="col-xs-4 col-sm-3">
 			<strong>Sectors</strong> 
 			<?php 
 			if(isset($company['sectors'])){
