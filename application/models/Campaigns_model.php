@@ -441,7 +441,7 @@ class Campaigns_model extends MY_Model {
 
 function get_campaign_pipeline($id)
 	{
-	$sql = "select
+	$sql = "select u.image,
 				sum(case when company_id in (select id from companies where pipeline = 'Prospect') then 1 else 0 end) campaign_prospects,
 				sum(case when company_id in (select id from companies where pipeline = 'Intent') then 1 else 0 end) campaign_intent,
 				sum(case when company_id in (select id from companies where pipeline = 'Customer') then 1 else 0 end) campaign_customers,
@@ -450,7 +450,19 @@ function get_campaign_pipeline($id)
 				from targets T
 				INNER JOIN campaigns CP
 				on T.campaign_id = CP.id
-				where CP.id = $id limit 1";
+				LEFT JOIN users u
+				on CP.user_id = u.id
+				where CP.id = $id group by 1 limit 1";
+		$query = $this->db->query($sql);
+		    return $query->result(); /* returns an object */
+}
+function get_campaign_owner($id)
+	{
+	$sql = "select u.image, u.name as \"username\"
+				from campaigns CP
+				LEFT JOIN users u
+				on CP.user_id = u.id
+				where CP.id = $id group by 1,2 limit 1";
 		$query = $this->db->query($sql);
 		    return $query->result(); /* returns an object */
 }

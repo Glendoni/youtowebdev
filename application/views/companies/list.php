@@ -94,7 +94,7 @@
 		<div class="col-sm-3" style="margin-top:10px;">
 		<?php $this->load->view('companies/actions_box_list.php',array('company'=>$company)); ?>
 		<?php if (isset($company['url'])): ?>
-		<a class="btn btn-default btn-sm btn-block" href="<?php $parsed = parse_url($company['url']); if (empty($parsed['scheme'])) { echo 'http://' . ltrim($company['url'], '/'); }else{ echo $company['url']; } ?>" target="_blank">
+		<a class="btn btn-default btn-sm btn-block btn-url" href="<?php $parsed = parse_url($company['url']); if (empty($parsed['scheme'])) { echo 'http://' . ltrim($company['url'], '/'); }else{ echo $company['url']; } ?>" target="_blank">
 				<strong>Web:</strong> <?php echo str_replace("http://"," ",str_replace("www.", "", $company['url']))?>
 		</a>
 			<?php endif; ?>

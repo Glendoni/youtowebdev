@@ -33,7 +33,9 @@ body {
 .sidebar ul li a {
 	color:#000;
 }
-
+.btn-url {
+	overflow: hidden;
+}
 .btn-group.toggle-btn-group > .active {
 	color: #fff !important;
 	background-color: #5cb85c!important;
@@ -862,6 +864,17 @@ a.btn.btn-default.btn-xs.add-to-calendar {
 	border-style: solid;
 	background-color: transparent;;
 }
+@media screen and (max-width: 991px) {
+.large-number {
+    font-size: 40px;
+    font-weight: 200;
+    margin-top: -20px;
+}
+.circle-content .small-text {
+    font-size: 9px;
+    font-weight: 500;
+    }
+}/*END 991 MAX*/
 @media screen and (max-width: 767px) {
 .mobile-hide {
 	display: none;

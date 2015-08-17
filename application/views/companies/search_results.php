@@ -35,15 +35,13 @@
 	    <!-- Collect the nav links, forms, and other content for toggling -->
 		<div style="text-align:center;">
 	      	<?php if(($companies_count > 0)): ?>
-
 				<?php if($current_campaign_name && $current_campaign_owner_id && $current_campaign_id ): ?>
-
 						<div style="font-weight:300; font-size:22px; margin-bottom: 20px; margin-top: -20px;">
 						<strong>
 						<?php if($current_campaign_is_shared == False): ?>
-						Private
-						<?php else: ?> 						
-						Team
+						<?php else: ?>
+						 <?php foreach($current_campaign_owners as $current_campaign_owner):
+echo "<div style='font-size:12px;'>Owned by ".$current_campaign_owner->username."</div>"; endforeach ?>					
 						<?php endif;?> <?php echo $results_type ?>:
 						</strong>
 						<?php echo $current_campaign_name; ?>
@@ -97,11 +95,12 @@
 
 <?php
 }
-?>				
+?>
+<?php else: ?>
+<?php endif; ?>				
 </div><!--END ROW-->
 					
-			<?php else: ?>
-			<?php endif; ?>
+			
 		<?php endif; ?>
 	  </div><!-- /.row -->
 
