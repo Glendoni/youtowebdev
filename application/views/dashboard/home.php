@@ -756,16 +756,14 @@
                 <h3 class="panel-title">My Campaigns <span class="badge pull-right"><?php echo count($private_campaigns); ?></span></h3>
               </div>
               <div class="panel-body" style="padding:0;">
-                <ul class="list-group" style="margin-bottom:0;">
                   <!-- PRIVATE SEARCHES -->
                   <?php foreach ($private_campaigns as $campaign):?>
-                    <li class="no-padding" style="padding: 0 5px;">
-                      <a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $campaign->id; ?>" class="load-saved-search" <?php echo strlen($campaign->name) > 36 ? 'title="'.$campaign->name.'"':"" ?>><span class="name"  style="margin-right: 10px;"><?php echo strlen($campaign->name) > 36 ? substr($campaign->name,0,36).'...' : $campaign->name?></span>
-                      <span class="badge small-badge pull-right"><?php echo $campaign->campaigncount; ?></span>
-                      </a>
-                    </li>
+                  <a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $campaign->id; ?>" class="load-saved-search" <?php echo strlen($campaign->name) > 33 ? 'title="'.$campaign->name.'"':"" ?>><div class="row">
+                  <div class="col-xs-8 col-xs-offset-1"><?php echo strlen($campaign->name) > 33? substr($campaign->name,0,36).'...' : $campaign->name?></div>
+                  <div class="col-xs-2" style="text-align:right;"><b><?php echo $campaign->campaigncount; ?></b></div>
+                  </div>
+                  </a>
                   <?php endforeach; ?>
-                </ul>
               </div>
             </div>
             <div class="panel panel-default">
@@ -776,19 +774,15 @@
                 <ul class="list-group">
                   <!-- SHARED SEARCHES -->
                   <?php foreach ($shared_campaigns as $campaign):?>
-                  <?php $user_icon = explode(",", $campaign->image);$bg_colour = $user_icon[1];$bg_colour_text = $user_icon[2];$bg_colour_name = $user_icon[0];?>
-                    <li class="no-padding" style="padding: 0 5px;">
-                    <a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $campaign->id; ?>" class="load-saved-search"  <?php echo strlen($campaign->name) > 33 ? 'title="'.$campaign->name.'"':"" ?>>
-                    <span class="label label-info" style="margin-right:3px;background-color: <?php echo $bg_colour; ?>;font-size:8px; color: <?php echo $bg_colour_text;?>"><b><?php echo $bg_colour_name; ?></b>
-                    </span>
-                    <span class="name"  style="margin-right: 5px;">
-                    <?php echo strlen($campaign->name) > 33 ? substr($campaign->name,0,33).'...' : $campaign->name?>
-                    </span>
-                    <span class="badge small-badge pull-right">
-                      <?php echo $campaign->campaigncount; ?>
-                    </span>
-                    </a>
-                    </li>
+                    <?php $user_icon = explode(",", $campaign->image);$bg_colour = $user_icon[1];$bg_colour_text = $user_icon[2];$bg_colour_name = $user_icon[0];?>
+                    <a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $campaign->id; ?>" class="load-saved-search" <?php echo strlen($campaign->name) > 36 ? 'title="'.$campaign->name.'"':"" ?>><div class="row">
+                  <div class="col-xs-1"><span class="label label-info" style="margin-right:3px;background-color: <?php echo $bg_colour; ?>;font-size:8px; color: <?php echo $bg_colour_text;?>"><b><?php echo $bg_colour_name; ?></b>
+                    </span></div>
+
+                  <div class="col-xs-8"><?php echo strlen($campaign->name) > 33 ? substr($campaign->name,0,33).'...' : $campaign->name?></div>
+                  <div class="col-xs-2" style="text-align:right;"><b><?php echo $campaign->campaigncount; ?></b></div>
+                  </div>
+                  </a>
                     <?php endforeach; ?>
                 </ul>
               </div>
