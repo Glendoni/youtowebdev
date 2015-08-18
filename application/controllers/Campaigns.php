@@ -140,8 +140,8 @@ class Campaigns extends MY_Controller {
 				print_r('No campaign');
 				return False;
 			}
-
-			$companies = $this->Campaigns_model->get_companies_for_campaign_id($campaign[0]->id);
+			$pipeline = $this->input->get('pipeline');
+			$companies = $this->Campaigns_model->get_companies_for_campaign_id($campaign[0]->id,$pipeline);
 			// print '<pre>';
 			// print_r($companies);
 			// die;	
@@ -162,6 +162,7 @@ class Campaigns extends MY_Controller {
 			else
 			{
 				$session_result = serialize($result);
+				$this->session->set_userdata('pipeline',$pipeline);
 				$this->session->set_userdata('companies',$session_result);
 			}
 			redirect('/campaigns');
@@ -177,7 +178,7 @@ class Campaigns extends MY_Controller {
 	public function display_saved_search()
 	{
 		if($this->input->get('id'))
-		{
+		{ 
 			$campaign = $this->Campaigns_model->get_saved_searched_by_id($this->input->get('id'));
 			$post = unserialize($campaign[0]->criteria);			
 			$this->refresh_search_results();

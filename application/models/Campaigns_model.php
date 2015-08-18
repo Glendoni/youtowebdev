@@ -89,9 +89,11 @@ class Campaigns_model extends MY_Model {
 		return $query->result();
 	}
 
-	function get_companies_for_campaign_id($campaign_id)
-	{	
+	function get_companies_for_campaign_id($campaign_id,$pipeline)
+	{
 
+		if(!empty($pipeline)) { 
+		$pipeline_sql =  "and pipeline ilike '$pipeline'";} else {$pipeline_sql ="";};
 		// -- Data to Display a Company's details
 		// IMPORTANT if you change/add colums on the following query then change the mapping array on the companies controller
 		$sql = 'select json_agg(results)
@@ -145,7 +147,7 @@ class Campaigns_model extends MY_Model {
 			   
 
 
-		from (select * from COMPANIES where eff_to IS NULL) C ';
+		from (select * from COMPANIES where eff_to IS NULL  '.$pipeline_sql.') C ';
 		
 		$sql = $sql.' JOIN ( select company_id from targets where campaign_id = '.$campaign_id.' ) company ON C.id = company.company_id';
 		$sql = $sql.' LEFT JOIN 
@@ -204,6 +206,8 @@ class Campaigns_model extends MY_Model {
 		LEFT JOIN
 		USERS U
 		ON U.id = C.user_id
+
+
 				 
 		group by C.id,
 		         C.name,
@@ -290,7 +294,7 @@ class Campaigns_model extends MY_Model {
 
 	function get_saved_searched_by_id($id)
 	{
-	$sql = "select U.name, U.id as user, U.image,
+	$sql = "select U.name, U.id as user, U.image, 
 				sum(case when action_type_id = '4' AND actioned_at > '$start_date_month' AND actioned_at < '$end_date_month' then 1 else 0 end) introcall,
 				sum(case when (action_type_id = '4' or action_type_id = '5' or action_type_id = '11' or action_type_id = '17')  AND actioned_at > '$start_date_month' AND actioned_at < '$end_date_month' then 1 else 0 end) salescall,
 		    	sum(case when (action_type_id = '5' OR action_type_id = '11') AND actioned_at > '$start_date_month' AND actioned_at < '$end_date_month' then 1 else 0 end) callcount,
@@ -441,18 +445,19 @@ class Campaigns_model extends MY_Model {
 
 function get_campaign_pipeline($id)
 	{
-	$sql = "select u.image,
+	$sql = "select u.image, cp.id,
 				sum(case when company_id in (select id from companies where pipeline = 'Prospect') then 1 else 0 end) campaign_prospects,
 				sum(case when company_id in (select id from companies where pipeline = 'Intent') then 1 else 0 end) campaign_intent,
 				sum(case when company_id in (select id from companies where pipeline = 'Customer') then 1 else 0 end) campaign_customers,
 				sum(case when company_id in (select id from companies where pipeline = 'Lost') then 1 else 0 end) campaign_lost,
-				sum(case when company_id in (select id from companies where pipeline = 'Proposal') then 1 else 0 end) campaign_proposals
+				sum(case when company_id in (select id from companies where pipeline = 'Proposal') then 1 else 0 end) campaign_proposals,
+				Sum(case when company_id in (select id from companies) then 1 else 0 end) campaign_total
 				from targets T
 				INNER JOIN campaigns CP
 				on T.campaign_id = CP.id
 				LEFT JOIN users u
 				on CP.user_id = u.id
-				where CP.id = $id group by 1 limit 1";
+				where CP.id = $id group by 1,2 limit 1";
 		$query = $this->db->query($sql);
 		    return $query->result(); /* returns an object */
 }

@@ -832,23 +832,33 @@ a.btn.btn-default.btn-xs.add-to-calendar {
 	border-color: #262626;
 	border-width: 1px;
 	border-style: solid;
-	background-color: transparent;;
+	background-color: transparent;
+}
+.black-circle.active {
+	background-color: #262626;
+	color: #fff;
+	border-color: #fff;
 }
 .gray-circle {
 	color: #999;
 	border-color: #999;
 	border-width: 1px;
 	border-style: solid;
-	background-color: transparent;;
+	background-color: transparent;
 }
-.green2-circle {
-	color: #88D498;
-	border-color: #88D498;
-	border-width: 1px;
-	border-style: solid;
-	background-color: transparent;;
+.gray-circle.active {
+	color: #fff;
+	border-color: #fff;
+	background-color: #999;
 }
 .green3-circle {
+    color: #33bea8;
+    background-color: transparent;
+	border-color: #33bea8;
+	border-width: 1px;
+	border-style: solid;
+}
+.green3-circle.active {
     color: #fff;
     background-color: #33bea8;
 
@@ -858,7 +868,7 @@ a.btn.btn-default.btn-xs.add-to-calendar {
 	border-color: #f24040;
 	border-width: 1px;
 	border-style: solid;
-	background-color: transparent;;
+	background-color: transparent;
 }
 .blue-circle {
 	color: #348aa7;
@@ -867,6 +877,12 @@ a.btn.btn-default.btn-xs.add-to-calendar {
 	border-style: solid;
 	background-color: transparent;;
 }
+.blue-circle.active {
+	color: #fff;
+	border-color: #fff;
+	background-color:#348aa7;
+}
+
 
 @media only screen and (min-width: 991px) {
 .modal-dialog {

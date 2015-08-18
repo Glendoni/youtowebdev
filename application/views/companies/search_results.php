@@ -46,49 +46,83 @@ echo "<div style='font-size:12px;'>Owned by ".$current_campaign_owner->username.
 						<?php echo $current_campaign_name; ?>
 						</div>	
 					<div class="row" style="margin-bottom: 20px;">
-					<div class="col-sm-2 mobile-hide">
-<div class="circle-responsive black-circle">
-  <div class="circle-content mega">
-<div class="large-number"><?php echo number_format($companies_count); ?></div> <div class="small-text"><?php if ($companies_count<> "1") {echo "Companies in List";} else { echo "Company in List";}?></div></div>
-  </div>
-</div>
 
 <?php foreach($current_campaign_stats as $current_campaign_stats)
         {?>
 <div class="col-sm-2 mobile-hide">
-<div class="circle-responsive gray-circle">
+<a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $current_campaign_stats->id; ?>">
+<div class="circle-responsive black-circle <?php echo empty($this->session->userdata('pipeline'))? 'active':'';?>"><div class="circle-content mega">
+<div class="large-number"><?php echo number_format($current_campaign_stats->campaign_total); ?></div> <div class="small-text"><?php if ($companies_count<> "1") {echo "Companies in List";} else { echo "Company in List";}?></div></div>
+</div>
+</a>
+</div>
+
+
+
+<div class="col-sm-2 mobile-hide">
+<?php if ($current_campaign_stats->campaign_prospects>0): ?>
+<a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $current_campaign_stats->id; ?>&pipeline=prospect">
+<?php else: endif; ?>
+<div class="circle-responsive gray-circle <?php if ($this->session->userdata('pipeline')=='prospect'): echo 'active';else: endif; ?>
+">
 <div class="circle-content mega">
 <div class="large-number"><?php echo $current_campaign_stats->campaign_prospects; ?></div>
 <div class="small-text"><?php if ($current_campaign_stats->campaign_prospects <> "1") {echo "Prospects";} else { echo "Prospect";}?></div></div>
 </div>
+<?php if ($current_campaign_stats->campaign_prospects>0): ?>
+</a><?php else: endif; ?>
 </div>
 <div class="col-sm-2 mobile-hide">
-<div class="circle-responsive gray-circle">
+<?php if ($current_campaign_stats->campaign_intent>0): ?>
+<a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $current_campaign_stats->id; ?>&pipeline=intent">
+<?php else: endif; ?>
+<div class="circle-responsive gray-circle <?php if ($this->session->userdata('pipeline')=='intent'): echo 'active';else: endif; ?>">
 <div class="circle-content mega">
 <div class="large-number"><?php echo $current_campaign_stats->campaign_intent; ?></div>
 <div class="small-text">Intent</div></div>
 </div>
+<?php if ($current_campaign_stats->campaign_intent>0): ?>
+</a>
+<?php else: endif; ?>
 </div>
 <div class="col-sm-2 mobile-hide">
-<div class="circle-responsive gray-circle">
+<?php if ($current_campaign_stats->campaign_proposals>0): ?>
+<a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $current_campaign_stats->id; ?>&pipeline=proposal">
+<?php else: endif; ?>
+<div class="circle-responsive blue-circle <?php if ($this->session->userdata('pipeline')=='proposal'): echo 'active';else: endif; ?>">
 <div class="circle-content mega">
 <div class="large-number"><?php echo $current_campaign_stats->campaign_proposals; ?></div>
 <div class="small-text"><?php if ($current_campaign_stats->campaign_proposals <> "1") {echo "Proposals";} else { echo "Proposal";}?></div></div>
 </div>
+<?php if ($current_campaign_stats->campaign_proposals>0): ?>
+</a>
+<?php else: endif; ?>
 </div>
 <div class="col-sm-2 mobile-hide">
-<div class="circle-responsive green3-circle">
+<?php if ($current_campaign_stats->campaign_customers>0): ?>
+<a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $current_campaign_stats->id; ?>&pipeline=customer">
+<?php else: endif; ?>
+<div class="circle-responsive green3-circle <?php if ($this->session->userdata('pipeline')=='customer'): echo 'active';else: endif; ?>">
 <div class="circle-content mega">
 <div class="large-number"><?php echo $current_campaign_stats->campaign_customers; ?></div>
 <div class="small-text"><?php if ($current_campaign_stats->campaign_customers <> "1") {echo "Customers";} else { echo "Customer";}?></div></div>
 </div>
+<?php if ($current_campaign_stats->campaign_customers>0): ?>
+</a><?php else: endif; ?>
 </div>
 <div class="col-sm-2 mobile-hide">
+<?php if ($current_campaign_stats->campaign_lost>0): ?>
+<a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $current_campaign_stats->id; ?>&pipeline=lost">
+<?php else: endif; ?>
+
 <div class="circle-responsive red-circle">
 <div class="circle-content mega">
 <div class="large-number"><?php echo $current_campaign_stats->campaign_lost; ?></div>
 <div class="small-text">Lost</div></div>
 </div>
+<?php if ($current_campaign_stats->campaign_lost>0): ?>
+</a>
+<?php else: endif; ?>
 </div>
 
 
