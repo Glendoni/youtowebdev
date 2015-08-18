@@ -83,21 +83,20 @@
                         </div>
                     </div>
                 </div>
-            	
-            	<?php if (isset($company['emp_count']) == False ):?>
-                <div class="col-sm-6 col-md-4">
-                    <div class=" form-group ">
-                        <label for="emp_count" class="control-label">Employees</label>                            
-                        <input type="text" name="emp_count" value="" id="emp_count" maxlength="50" class="form-control">
-                    </div>
-                </div>
-            	<?php endif; ?>
                 <div class="col-sm-6 col-md-4">
                     <div class=" form-group ">
                         <label for="linkedin_id" class="control-label">Linkedin ID</label>                            
                         <input type="text" name="linkedin_id" value="<?php echo isset($company['linkedin_id'])?$company['linkedin_id']:''; ?>" id="linkedin_id" maxlength="50" class="form-control">
                     </div>
                 </div>
+                <?php if (isset($company['emp_count']) == False ):?>
+                <div class="col-sm-6 col-md-4">
+                    <div class=" form-group ">
+                        <label for="emp_count" class="control-label">Employees</label>                            
+                        <input type="text" name="emp_count" value="" id="emp_count" maxlength="50" class="form-control">
+                    </div>
+                </div>
+                <?php endif; ?>
 
                 
                 <div class="col-md-12">
