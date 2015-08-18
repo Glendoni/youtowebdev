@@ -110,8 +110,8 @@ class Actions_model extends MY_Model {
 	function get_assigned_companies($user_id){	
 		
 		$this->db->where('user_id',$user_id);
+		$this->db->order_by("assign_date", "desc"); 
 		$query = $this->db->get('companies');
-		// var_dump($query);
 		return $query->result_object();
 
 	}
