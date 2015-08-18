@@ -1,4 +1,4 @@
-<div class="col-md-12" style="background-color:#fff; margin-top:-20px; padding:10px 0; border-bottom:1px solid #e7e7e7; margin-bottom:20px;border-left:1px solid #e7e7e7; margin-bottom:20px;border-right:1px solid #e7e7e7; margin-bottom:20px;">
+<div class="col-md-12" style="margin-top:-20px; padding:10px 0;">
 <div class="col-sm-9 col-sm-offset-3">
 
   <!-- Nav tabs -->
