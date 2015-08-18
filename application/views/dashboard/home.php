@@ -488,7 +488,8 @@
 
                             </div>
                             <div class="col-md-1 text-center">
-                            <a href = "?search=2&user=<?php echo $getstatssearch['user'];?>&period=week&start_date=<?php echo $_GET['start_date']?>&end_date=<?php echo $_GET['end_date']?>"><span class="badge" style="background-color:#00B285;"><?php echo $getstatssearch['deals'];?></a></span>
+                            <a href = "?search=2&user=<?php echo $getstatssearch['user'];?>&
+                            start_date=<?php echo $_GET['start_date']?>&end_date=<?php echo $_GET['end_date']?>"><span class="badge" style="background-color:#00B285;"><?php echo $getstatssearch['deals'];?></a></span>
                             </div>
                             <div class="col-md-1 text-center"> 
                             <?php echo $getstatssearch['proposals'];?>
