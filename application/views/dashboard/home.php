@@ -5,10 +5,13 @@
   <ul class="nav nav-tabs dashboard" role="tablist">
     <li role="presentation" class="active"><button href="#team_stats" aria-controls="team_stats" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;">Stats</button></li>
     <li role="presentation"><button href="#calls" aria-controls="calls" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;">Calls & Meetings</button></li>
-    <li role="presentation"><button href="#pipeline" aria-controls="pipeline" role="tab" data-toggle="tab" class="btn btn-primary btn-sm">Pipeline</button></li>
+    <li role="presentation"><button href="#pipeline" aria-controls="pipeline" role="tab" data-toggle="tab" class="btn btn-primary btn-sm"style="margin-right:10px;">Pipeline</button></li>
+    <!--<li role="presentation"><button href="#assigned" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm">Assigned Companies</button></li>-->
   </ul>
   </div>
 </div>
+
+
 
 <div class="col-sm-3 clearfix no-padding">
 <div class="panel panel-default">
@@ -63,6 +66,91 @@
 
 
 <div class="col-sm-9">
+
+<?php if ($_GET['search']==2) { ?>
+<!--GET SEARCH DATES TO DISPLAY-->
+
+<div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">User Stats<div class="pull-right" style="font-weight:300;">
+                (<?php echo date('D jS M y',strtotime($dates['start_date']));?> - <?php echo date('D jS M y',strtotime($dates['end_date']));?>)</div></h3> 
+              </div>
+             
+              <div class="panel-body">
+                  <div class="clearfix"></div>
+                  <div clas="list-group">
+
+                    <?php if(empty($stats)) : ?>
+                    <p>You have no recent activity.</p>
+                    <?php else: ?>
+                    <!-- Nav tabs -->
+
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                      <div class="col-md-12">
+                      <div class="row list-group-item">
+                         <div class="col-md-3">
+                           <strong>Deals</strong><div class="pull-right"><span class="badge badge-warning"><?php echo count($getuserplacements)?></span></div>
+                        </div>
+                         <div class="col-md-3">
+                           <strong>Proposals</strong><div class="pull-right"><span class="badge badge-warning"><?php echo count($getuserproposals)?></span></div>
+                        </div>
+                        <div class="col-md-3">
+                          <strong>Meetings</strong><div class="pull-right"><span class="badge badge-warning"><?php echo count($getusermeetings)?></span></div>
+                          </div>
+                          <div class="col-md-3"> 
+                           <strong>Call Activity</strong><div class="pull-right"><span class="badge badge-warning"><?php echo count($getuserpitches)?></span></div>
+                        </div>
+                        </div>
+                          <div class="row list-group-item">
+                            
+                            <div class="col-md-3">
+                             <?php foreach ($getuserplacements as $get_user_placements): ?>
+                            <li class="user-stat-holder">
+                            <div class="user-stat company"><a href="companies/company?id=<?php echo $get_user_placements['id'] ?>"><?php echo $get_user_placements['name'];?></a></div>
+                            <div class="user-stat company action_date" style="margin-bottom:5px;">
+                            <?php echo  date('D jS M y',strtotime($get_user_placements['actioned_at']));?></div>
+                             <span class="label pipeline-label label-success"><?php echo $get_user_placements['username'];?></span>
+                            </li>
+                            <?php endforeach ?>
+                            </div>
+                            <div class="col-md-3"> 
+
+                            <?php foreach ($getuserproposals as $get_user_proposals): ?>
+                            <li class="user-stat-holder">
+                            <div class="user-stat company"><div class="user-stat company"><a href="companies/company?id=<?php echo $get_user_proposals['id'] ?>" ><?php echo $get_user_proposals['name'];?></a></div>
+                            <div class="user-stat company action_date">
+                            <?php echo  date('D jS M y',strtotime($get_user_proposals['created_at']));?></div>
+                            </li>
+                            <?php endforeach ?>
+                            </div>
+                            <div class="col-md-3">
+                            <?php foreach ($getusermeetings as $get_user_meetings): ?>
+                              <li class="user-stat-holder">
+                            <div class="user-stat company <?php if ($get_user_meetings['meeting_actioned'] > '0'): ?>actioned<?php endif; ?>"><a href="companies/company?id=<?php echo $get_user_meetings['id'] ?>" ><?php echo $get_user_meetings['name'];?></a></div>
+                            <div class="user-stat company action_date">
+                            <?php echo  date('D jS M y',strtotime($get_user_meetings['created_at']));?></div>
+                            </li>
+                            <?php endforeach ?>
+                            </div>
+                            <div class="col-md-3"> 
+                            <?php foreach ($getuserpitches as $get_user_pitches): ?>
+
+                              <li class="user-stat-holder">
+                            <div class="user-stat company"><a href="companies/company?id=<?php echo $get_user_pitches['id'] ?>"  ><?php echo $get_user_pitches['name'];?></a></div>
+                            <div class="user-stat company action_date">
+                            <?php echo  date('D jS M y',strtotime($get_user_pitches['actioned_at']));?></div>
+                            </li>
+                            <?php endforeach ?>
+                            </div>
+                          </div>     
+                      </div><!--END THIS TAB-->
+                      </div>
+                      <?php endif ?>
+                      </div>
+                      </div>
+                      </div><!--END PANEL-->
+                      <?php };?>
 
 
   <!-- Tab panes -->
@@ -132,7 +220,7 @@
 
                             </div>
                             <div class="col-sm-1 text-center">
-                            <a href = "?search=2&user=<?php echo $stat['user'];?>&period=week&start_date=<?php echo $_GET['start_date']?>&end_date=<?php echo $_GET['end_date']?>"><span class="badge" style="background-color:#00B285;"><?php echo $stat['deals'];?></a></span>
+                            <a href = "?search=2&user=<?php echo $stat['user'];?>&period=week"><span class="badge" style="background-color:#00B285;"><?php echo $stat['deals'];?></a></span>
                             </div>
                             <div class="col-sm-1 text-center"> 
                             <?php echo $stat['proposals'];?>
@@ -196,7 +284,7 @@
 
                             </div>
                             <div class="col-md-1 text-center">
-                            <a href = "?search=2&user=<?php echo $lastweekstats['user'];?>&period=week&start_date=<?php echo $_GET['start_date']?>&end_date=<?php echo $_GET['end_date']?>"><span class="badge" style="background-color:#00B285;"><?php echo $lastweekstats['deals'];?></a></span>
+                            <a href = "?search=2&user=<?php echo $lastweekstats['user'];?>&period=lastweek"><span class="badge" style="background-color:#00B285;"><?php echo $lastweekstats['deals'];?></a></span>
                             </div>
                             <div class="col-md-1 text-center"> 
                             <?php echo $lastweekstats['proposals'];?>
@@ -262,7 +350,7 @@
 
                             </div>
                             <div class="col-md-1 text-center">
-                            <a href = "?search=2&user=<?php echo $thismonthstats['user'];?>&period=week&start_date=<?php echo $_GET['start_date']?>&end_date=<?php echo $_GET['end_date']?>"><span class="badge"  style="background-color:#00B285;"><?php echo $thismonthstats['deals'];?></a></span>
+                            <a href = "?search=2&user=<?php echo $thismonthstats['user'];?>&period=thismonth"><span class="badge"  style="background-color:#00B285;"><?php echo $thismonthstats['deals'];?></a></span>
                             </div>
                             <div class="col-md-1 text-center"> 
                             <?php echo $thismonthstats['proposals'];?>
@@ -327,7 +415,7 @@
 
                             </div>
                             <div class="col-md-1 text-center">
-                            <a href = "?search=2&user=<?php echo $lastmonthstats['user'];?>&period=week&start_date=<?php echo $_GET['start_date']?>&end_date=<?php echo $_GET['end_date']?>"><span class="badge"  style="background-color:#00B285;"><?php echo $lastmonthstats['deals'];?></a></span>
+                            <a href = "?search=2&user=<?php echo $lastmonthstats['user'];?>&period=lastmonth"><span class="badge"  style="background-color:#00B285;"><?php echo $lastmonthstats['deals'];?></a></span>
                             </div>
                             <div class="col-md-1 text-center"> 
                             <?php echo $lastmonthstats['proposals'];?>

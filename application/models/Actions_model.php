@@ -468,6 +468,7 @@ class Actions_model extends MY_Model {
 		$start_date = $dates['start_date'];
 		$end_date = date('Y-m-d H:i:s', strtotime($dates['end_date'] . ' +1 day'));
 		if (!empty($search_user_id)) {
+			 
 			 $sql = "select distinct c.name, a.actioned_at, c.id, u.name as username from companies c 
 			 inner join actions a on c.id = a.company_id
 			 left join users u on a.created_by = u.id where a.action_type_id = '16' and a.created_by = '$search_user_id' AND a.created_at > '$start_date' AND a.created_at < '$end_date' order by a.actioned_at asc";
@@ -499,7 +500,6 @@ class Actions_model extends MY_Model {
 		$period = $_GET['period'];
 		if (!empty($_GET['start_date'])) {
 		$start_date = date('Y-m-d 00:00:00',strtotime($_GET['start_date']));
-			
 			if (!empty($_GET['end_date'])) {
 		$end_date = date('Y-m-d 00:00:00',strtotime($_GET['end_date']));
 		
@@ -515,13 +515,25 @@ class Actions_model extends MY_Model {
 		$start_date = date('Y-m-d 00:00:00',strtotime('monday this week'));
 		$end_date = date('Y-m-d 23:59:59',strtotime('sunday this week'));
 		}
+		else if ($period==='lastweek') {
+		$start_date = date('Y-m-d 00:00:00',strtotime('monday last week'));
+		$end_date = date('Y-m-d 23:59:59',strtotime('sunday last week'));
+	}
+		else if ($period==='thismonth') {
+		$start_date = date('Y-m-d 00:00:00',strtotime('first day of this month'));
+		$end_date = date('Y-m-d 23:59:59',strtotime('last day of this month'));
+
+		}
+		else if ($period==='lastmonth') {
+		$start_date = date('Y-m-d 00:00:00',strtotime('first day of previous month'));
+		$end_date = date('Y-m-d 23:59:59',strtotime('last day of previous month'));
+		}
 		else
 		{
 		$start_date = date('Y-m-d 00:00:00',strtotime('first day of this month'));
 		$end_date = date('Y-m-d 23:59:59',strtotime('last day of this month'));
 		}
-				return array('search_user_id' => $_GET['user'], 'start_date' => $start_date, 'end_date' => $end_date);
-
+		return array('search_user_id' => $_GET['user'], 'start_date' => $start_date, 'end_date' => $end_date);
 	}
 
 	function get_user_meetings(){
