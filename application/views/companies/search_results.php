@@ -1,4 +1,3 @@
-<div class="row">
 <div class="page-results-list">
 	<ul class="pager">
 
@@ -120,5 +119,4 @@ echo "<div style='font-size:12px;'>Owned by ".$current_campaign_owner->username.
 	  	<li class="next"><a href="?page_num=<?php echo $next_page_number; ?>">Next &rarr;</a></li>
 		<?php endif; ?>
 	</ul>
-</div>
 </div>

@@ -9,7 +9,7 @@
             </div>
             <div class="modal-body">
             <div class="row">
-            <div class="col-md-6">
+            <div class="col-sm-6 col-md-4">
                     <div class=" form-group ">
                     <?php  
                             if ($company['pipeline']=="Customer"){ 
@@ -27,30 +27,53 @@
                                 ?>
                     </div>
                 </div>
-              
+              <div class="col-sm-6 col-md-4">
+                    <div class=" form-group ">
+                    <?php
+                    echo form_label('Class', 'company_class');
+                    echo form_dropdown('company_class', $companies_classes, (isset($company['class'])?$company['class']:'') ,'class="form-control"');
+                    ?>
+                    </div>
+                </div>
+              <div class="col-sm-6 col-md-4">
+                                  <div class=" form-group ">
+
+                    <label for="url" class="control-label">Recruitment Type</label>
+                    <div class="tag-holder">  
+                    <div></div>
+                        <span class="button-checkbox" id="contract">
+                            <button type="button" class="btn btn-default" data-color="primary" id="contract"><i class="state-icon glyphicon glyphicon-unchecked"></i>&nbsp;Contract</button>
+                            <input type="checkbox" name="contract" value="1" id="contract" class="hidden" <?php echo isset($company['contract'])? 'checked': '' ; ?> >                          
+                        </span>
+                        <span class="button-checkbox" id="contract">
+                            <button type="button" class="btn btn-default" data-color="primary" id="permanent"><i class="state-icon glyphicon glyphicon-unchecked"></i>&nbsp;Permanent</button>
+                            <input type="checkbox" name="perm" value="1" id="permanent" class="hidden" <?php echo isset($company['perm'])? 'checked': '' ; ?> >
+                        </span>
+                    </div>
+                    </div>
+                </div>
                 
-                <div class="col-md-6">
+                <div class="col-sm-6 col-md-4">
                     <div class=" form-group ">
                         <label for="url" class="control-label">Website</label>                            
                         <input type="text" name="url" value="<?php echo isset($company['url'])?$company['url']:''; ?>" id="url" maxlength="50" class="form-control">
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-sm-6 col-md-4">
                     <div class=" form-group ">
                         <label for="phone" class="control-label">Phone</label>                            
                         <input type="text" name="phone" value="<?php echo isset($company['phone'])?$company['phone']:''; ?>" id="url" maxlength="50" class="form-control">
                     </div>
                 </div>
-				
-                <div class="col-md-6">
+                <div class="col-sm-6 col-md-4">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class=" form-group ">
                                 <label for="turnover" class="control-label">Turnover</label>                            
                                 <input type="text" name="turnover" value="" id="turnover" maxlength="50" class="form-control">
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-xs-6 col-sm-6 col-md-6">
                             <label for="turnover" class="control-label">Method</label>   
                             <select name="method" class="form-control">
                             <option value=""></option>
@@ -62,39 +85,17 @@
                 </div>
             	
             	<?php if (isset($company['emp_count']) == False ):?>
-                <div class="col-md-6">
+                <div class="col-sm-6 col-md-4">
                     <div class=" form-group ">
                         <label for="emp_count" class="control-label">Employees</label>                            
                         <input type="text" name="emp_count" value="" id="emp_count" maxlength="50" class="form-control">
                     </div>
                 </div>
             	<?php endif; ?>
-                                <div class="col-md-6">
-                    <div class=" form-group ">
-                    <?php
-                    echo form_label('Class', 'company_class');
-                    echo form_dropdown('company_class', $companies_classes, (isset($company['class'])?$company['class']:'') ,'class="form-control"');
-                    ?>
-                    </div>
-                </div>
-                <div class="col-md-6">
+                <div class="col-sm-6 col-md-4">
                     <div class=" form-group ">
                         <label for="linkedin_id" class="control-label">Linkedin ID</label>                            
                         <input type="text" name="linkedin_id" value="<?php echo isset($company['linkedin_id'])?$company['linkedin_id']:''; ?>" id="linkedin_id" maxlength="50" class="form-control">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <label for="url" class="control-label">Recruitment Type</label>
-                    <div class="tag-holder">  
-                        <span class="button-checkbox" id="contract">
-                            <button type="button" class="btn btn-default" data-color="primary" id="contract"><i class="state-icon glyphicon glyphicon-unchecked"></i>&nbsp;Contract</button>
-                            <input type="checkbox" name="contract" value="1" id="contract" class="hidden" <?php echo isset($company['contract'])? 'checked': '' ; ?> >                          
-                        </span>
-                        <span class="button-checkbox" id="contract">
-                            <button type="button" class="btn btn-default" data-color="primary" id="permanent"><i class="state-icon glyphicon glyphicon-unchecked"></i>&nbsp;Permanent</button>
-                            <input type="checkbox" name="perm" value="1" id="permanent" class="hidden" <?php echo isset($company['perm'])? 'checked': '' ; ?> >
-                        </span>
-
                     </div>
                 </div>
 
@@ -118,11 +119,18 @@
 					<span class="btn btn-default btn-lg" ><i class="fa fa-refresh fa-spin"></i></span>
 				</div>
 			</div>
+            
             <div class="modal-footer">
             	<button type="submit" class="btn btn-sm btn-primary btn-block ladda-button submit_btn" edit-btn="editbtn<?php echo $company['id']; ?>" loading-display="loading-display-<?php echo $company['id']; ?>" data-style="expand-right" data-size="1">
 		        	<span class="ladda-label"> Save changes </span>
 		    	</button>                
                 
+            </div>
+            <div class="modal-footer">
+                <small><b>Record Created:</b> <?php echo date("d/m/y",strtotime($company['created_at']));?> | <b>Last Updated:</b>
+            <?php echo isset($company['updated_at'])?date("d/m/y",strtotime($company['updated_at'])):'Never'; ?>
+
+            </small>
             </div>
             <?php echo form_close(); ?>
         </div>

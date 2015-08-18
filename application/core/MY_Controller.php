@@ -367,8 +367,8 @@ class MY_Controller extends CI_Controller {
 			if($company->company->f1->f9)$mapped_companies_array['contract'] = $company->company->f1->f9;
 			if($company->company->f1->f10)$mapped_companies_array['perm'] = $company->company->f1->f10;
 			if($company->company->f1->f11)$mapped_companies_array['active'] = (bool)$company->company->f1->f11;
-			if($company->company->f1->f12)$mapped_companies_array['created_at'] = (bool)$company->company->f1->f12;
-			if($company->company->f1->f13)$mapped_companies_array['updated_at'] = (bool)$company->company->f1->f13;
+			if($company->company->f1->f12)$mapped_companies_array['created_at'] = $company->company->f1->f12;
+			if($company->company->f1->f13)$mapped_companies_array['updated_at'] = $company->company->f1->f13;
 			if($company->company->f1->f14)$mapped_companies_array['created_by'] = $company->company->f1->f14;
 			if($company->company->f1->f15)$mapped_companies_array['updated_by'] = $company->company->f1->f15;
 			if($company->company->f1->f16)$mapped_companies_array['registration'] = $company->company->f1->f16;

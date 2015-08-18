@@ -1,5 +1,5 @@
 <?php  $company = $companies[0]; ?>
-<div class="row page-results-list">
+<div class="page-results-list">
 <div class="top-info-holder">
 	<?php if (isset($company['parent_registration'])): ?>
 		<div style="height: 1px; background-color: #d9534f; text-align: center; margin:30px 0; ">

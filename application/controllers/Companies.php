@@ -12,6 +12,7 @@ class Companies extends MY_Controller {
 		$search_results_in_session = unserialize($session_result);
 		$refresh_search_results = $this->session->flashdata('refresh');
 		$saved_search = $this->session->userdata('saved_search_id');
+
 		// print_r($this->input->post());
 		if($this->input->post('submit') and !$refresh_search_results and !$ajax_refresh and !$saved_search )
 		{ 
@@ -110,8 +111,9 @@ class Companies extends MY_Controller {
 		$this->data['results_type'] = 'Saved Search';
 		$this->data['edit_page'] = 'edit_saved_search';
 		$this->data['main_content'] = 'companies/search_results';
+		$this->data['full_container'] = True;
 		$this->load->view('layouts/default_layout', $this->data);
-		
+
 	}
 	public function _valid_name(){
 		$result_name = $this->Companies_model->get_company_by_name($this->input->post('name'));
@@ -171,6 +173,7 @@ class Companies extends MY_Controller {
 		$this->data['country_options'] = $this->Companies_model->get_countries_options();
 		$this->data['hide_side_nav'] = True;
 		$this->data['main_content'] = 'companies/create_company';
+		$this->data['full_container'] = True;
 		$this->load->view('layouts/single_page_layout', $this->data);
 		
 	}
@@ -245,6 +248,7 @@ class Companies extends MY_Controller {
 			$this->data['companies'] = $company;
 			$this->data['hide_side_nav'] = True;
 			$this->data['main_content'] = 'companies/company';
+			$this->data['full_container'] = True;
 			$this->load->view('layouts/single_page_layout', $this->data);
 		}
 		else

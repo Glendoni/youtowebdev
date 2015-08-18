@@ -2,6 +2,9 @@
 body {
 	  font-family: 'Open Sans', sans-serif;
 }
+.container-fluid {
+	max-width: 1270px;
+}
 
 /*page-results-list */
 .profile-heading > span {
@@ -864,6 +867,14 @@ a.btn.btn-default.btn-xs.add-to-calendar {
 	border-style: solid;
 	background-color: transparent;;
 }
+
+@media only screen and (min-width: 991px) {
+.modal-dialog {
+    width: 900px !important ;
+}
+}
+
+
 @media screen and (max-width: 991px) {
 .large-number {
     font-size: 40px;
