@@ -914,7 +914,7 @@
             </div>
             <div class="panel panel-default">
               <div class="panel-heading">
-                <h3 class="panel-title">Team Campaigns <span class="badge pull-right"><?php echo count($shared_campaigns); ?></span></h3>    
+                <h3 class="panel-title">Campaigns <span class="badge pull-right"><?php echo count($shared_campaigns); ?></span></h3>    
               </div>
               <div class="panel-body" style="padding:0;">
                 <ul class="list-group">
