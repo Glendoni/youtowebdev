@@ -67,9 +67,19 @@
 
 <div class="col-sm-9">
 
-<?php if ($_GET['search']==2) { ?>
-<!--GET SEARCH DATES TO DISPLAY-->
 
+
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+
+
+
+
+    <div role="tabpanel" class="tab-pane active" id="team_stats">
+      <?php if ($_GET['search']==2) { ?>
+<!--GET SEARCH DATES TO DISPLAY-->
+<div role="tabpanel" class="tab-pane active" id="user_stats">
 <div class="panel panel-default">
               <div class="panel-heading">
                 <h3 class="panel-title">User Stats<div class="pull-right" style="font-weight:300;">
@@ -150,12 +160,9 @@
                       </div>
                       </div>
                       </div><!--END PANEL-->
+                      </div>
                       <?php };?>
 
-
-  <!-- Tab panes -->
-  <div class="tab-content">
-    <div role="tabpanel" class="tab-pane active" id="team_stats">
       <div class="panel panel-default">
               <div class="panel-heading">
                 <h3 class="panel-title">Team Stats</h3>
@@ -933,99 +940,3 @@
 </div>
 </div>
 </div>
-
-
-<div class="col-lg-12">
-    <?php if ($_GET['search']==2) { ?>
-        <div class="panel panel-default">
-              <div class="panel-heading">
-                <?php echo $end_date;?><i class="fa fa-user"></i></i> User Stats <div class="pull-right" style="font-weight:300;">
-                (<?php echo date('D jS M y',strtotime($dates['start_date']));?> - <?php echo date('D jS M y',strtotime($dates['end_date']));?>)</div>
-              </div>
-             
-              <div class="panel-body">
-                  <div class="clearfix"></div>
-                  <div clas="list-group">
-
-                    <?php if(empty($stats)) : ?>
-                    <p>You have no recent activity.</p>
-                    <?php else: ?>
-                    <!-- Nav tabs -->
-
-                    <!-- Tab panes -->
-                    <div class="tab-content">
-                      <div class="col-md-12">
-                      <div class="row list-group-item">
-                         <div class="col-md-3">
-                           <strong>Deals</strong><div class="pull-right"><span class="badge badge-warning"><?php echo count($getuserplacements)?></span></div>
-                        </div>
-                         <div class="col-md-3">
-                           <strong>Proposals</strong><div class="pull-right"><span class="badge badge-warning"><?php echo count($getuserproposals)?></span></div>
-                        </div>
-                        <div class="col-md-3">
-                          <strong>Meetings</strong><div class="pull-right"><span class="badge badge-warning"><?php echo count($getusermeetings)?></span></div>
-                          </div>
-                          <div class="col-md-3"> 
-                           <strong>Call Activity</strong><div class="pull-right"><span class="badge badge-warning"><?php echo count($getuserpitches)?></span></div>
-                        </div>
-                        </div>
-                          <div class="row list-group-item">
-                            
-                            <div class="col-md-3">
-                             <?php foreach ($getuserplacements as $get_user_placements): ?>
-                            <li class="user-stat-holder">
-                            <div class="user-stat company"><a href="companies/company?id=<?php echo $get_user_placements['id'] ?>"><?php echo $get_user_placements['name'];?></a></div>
-                            <div class="user-stat company action_date" style="margin-bottom:5px;">
-                            <?php echo  date('D jS M y',strtotime($get_user_placements['actioned_at']));?></div>
-                             <span class="label pipeline-label label-success"><?php echo $get_user_placements['username'];?></span>
-                            </li>
-                            <?php endforeach ?>
-                            </div>
-                            <div class="col-md-3"> 
-
-                            <?php foreach ($getuserproposals as $get_user_proposals): ?>
-                            <li class="user-stat-holder">
-                            <div class="user-stat company"><div class="user-stat company"><a href="companies/company?id=<?php echo $get_user_proposals['id'] ?>" ><?php echo $get_user_proposals['name'];?></a></div>
-                            <div class="user-stat company action_date">
-                            <?php echo  date('D jS M y',strtotime($get_user_proposals['created_at']));?></div>
-                            </li>
-                            <?php endforeach ?>
-                            </div>
-                            <div class="col-md-3">
-                            <?php foreach ($getusermeetings as $get_user_meetings): ?>
-                              <li class="user-stat-holder">
-                            <div class="user-stat company <?php if ($get_user_meetings['meeting_actioned'] > '0'): ?>actioned<?php endif; ?>"><a href="companies/company?id=<?php echo $get_user_meetings['id'] ?>" ><?php echo $get_user_meetings['name'];?></a></div>
-                            <div class="user-stat company action_date">
-                            <?php echo  date('D jS M y',strtotime($get_user_meetings['created_at']));?></div>
-                            </li>
-                            <?php endforeach ?>
-                            </div>
-                            <div class="col-md-3"> 
-                            <?php foreach ($getuserpitches as $get_user_pitches): ?>
-
-                              <li class="user-stat-holder">
-                            <div class="user-stat company"><a href="companies/company?id=<?php echo $get_user_pitches['id'] ?>"  ><?php echo $get_user_pitches['name'];?></a></div>
-                            <div class="user-stat company action_date">
-                            <?php echo  date('D jS M y',strtotime($get_user_pitches['actioned_at']));?></div>
-                            </li>
-                            <?php endforeach ?>
-                            </div>
-                          </div>     
-                      </div><!--END THIS TAB-->
-                      </div>
-                      <?php endif ?>
-                      </div>
-                      </div>
-                      </div><!--END PANEL-->
-                      <?php };?>
-              
-          
-          
-
-
-
-          
-          
-          
-      </div>
-  
