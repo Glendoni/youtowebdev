@@ -107,7 +107,14 @@ class Actions_model extends MY_Model {
 		return $query->result_object();
 
 	}
+	function get_assigned_companies($user_id){	
+		
+		$this->db->where('user_id',$user_id);
+		$query = $this->db->get('companies');
+		// var_dump($query);
+		return $query->result_object();
 
+	}
 
 
 	
