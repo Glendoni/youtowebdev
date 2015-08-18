@@ -4,7 +4,7 @@ class Actions_model extends MY_Model {
 
 	// GETS
 
-	function get_actions($company_id)
+	function get_actions1($company_id)
 	{
 		$data = array(
 			'company_id' => $company_id,
@@ -14,6 +14,57 @@ class Actions_model extends MY_Model {
 		$query = $this->db->get_where('actions', $data);
 		return $query->result_object();
 	}
+
+		function get_actions($company_id)
+	{
+ 	$sql = "select distinct
+c.id,
+ec.id as id,
+ec.name as campaign_name,
+con.id as contact_id,
+con.first_name,
+con.last_name,
+ec.date_sent,
+u.image,
+u.name,
+ec.created_at,
+20 AS action_type_id,
+ec.date_sent as actioned_at,
+'email campaign' as comments
+from email_campaigns ec
+left join email_actions ea on ec.id = ea.email_campaign_id
+left join contacts con on ea.contact_id = con.id
+left join companies c on con.company_id = c.id
+left join users u on ec.created_by = u.id
+where c.id = '$company_id'
+union all
+select distinct
+c.id,
+a.id as id,
+at.name as campaign_name,
+con.id as contact_id,
+con.first_name,
+con.last_name,
+a.actioned_at as \"actioned_at\",
+u.image,
+u.name,
+a.created_at,
+a.action_type_id as action_type_id,
+a.actioned_at as actioned_at,
+a.comments
+from actions a
+left join
+action_types at on
+a.action_type_id = at.id
+left join companies c on a.company_id = c.id
+left join users u on a.user_id = u.id
+left join contacts con on a.contact_id = con.id
+where c.id = '$company_id'
+ORDER BY 10 desc";
+		$query = $this->db->query($sql);
+return $query->result_object();
+	}
+
 
 	function get_actions_outstanding($company_id)
 	{
@@ -62,7 +113,7 @@ class Actions_model extends MY_Model {
 
 	function get_actions_marketing($company_id)
 	{
- 	$sql = "select ec.name as campaign_name, con.first_name, con.last_name,
+ 	$sql = "select distinct ec.name as campaign_name, con.first_name, con.last_name,
 			c.name, u.email,u.id as user_id,ec.date_sent,
 			sum(case when email_action_type = '2' then 1 else 0 end) opened,
 			sum(case when email_action_type = '3' then 1 else 0 end) clicked,

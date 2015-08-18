@@ -243,6 +243,7 @@ class Companies extends MY_Controller {
 			$this->data['actions_completed'] = $this->Actions_model->get_actions_completed($this->input->get('id'));
 			$this->data['actions_cancelled'] = $this->Actions_model->get_actions_cancelled($this->input->get('id'));
 			$this->data['actions_marketing'] = $this->Actions_model->get_actions_marketing($this->input->get('id'));
+			$this->data['get_actions'] = $this->Actions_model->get_actions($this->input->get('id'));
 			$this->data['comments'] = $this->Actions_model->get_comments($this->input->get('id'));
 			$this->data['page_title'] = $company[0]['name'];
 			$this->data['companies'] = $company;

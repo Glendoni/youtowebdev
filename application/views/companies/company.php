@@ -452,15 +452,17 @@ $mortgages_start  = $mortgage['eff_from'];$date_pieces = explode("/", $mortgages
 				    <div class="col-sm-12 col-md-12">
 				        <!-- Nav tabs -->
 				        <ul class="nav nav-tabs">
-				            <li class="active"><a href="#outstanding" data-toggle="tab"><i class="fa fa-cogs"></i>  Outstanding <span class="label label-warning"><?php echo count($actions_outstanding);?></span></a></li>
-				            <li><a href="#completed" data-toggle="tab"><i class="fa fa-check"></i> Completed <span class="label label-success"><?php echo count($actions_completed);?></span></a></li>
+							<li><a href="#all" data-toggle="tab">All <span class="label label-primary">
+							<?php echo count($get_actions);?></span></a></li>
+				            <li class="active"><a href="#outstanding" data-toggle="tab">Outstanding <span class="label label-warning"><?php echo count($actions_outstanding);?></span></a></li>
+				            <li><a href="#completed" data-toggle="tab">Completed <span class="label label-success"><?php echo count($actions_completed);?></span></a></li>
 				            <?php if (count($actions_cancelled) > 0): ?>
-				            <li><a href="#cancelled" data-toggle="tab"><i class="fa fa-ban"></i> Cancelled <span class="label label-danger">
+				            <li><a href="#cancelled" data-toggle="tab">Cancelled <span class="label label-danger">
 				            <?php echo count($actions_cancelled);?></span></a></li>
 							<?php else: ?>
 							<?php endif; ?>
 							<?php if (count($actions_marketing) > 0): ?>
-				            <li><a href="#marketing" data-toggle="tab"><i class="fa fa-paper-plane-o"></i> Marketing <span class="label label-default">
+				            <li><a href="#marketing" data-toggle="tab">Marketing <span class="label label-default">
 				            <?php echo count($actions_marketing);?></span></a></li>
 							<?php else: ?>
 							<?php endif; ?>
@@ -468,6 +470,10 @@ $mortgages_start  = $mortgage['eff_from'];$date_pieces = explode("/", $mortgages
 				        </ul>
 				        <!-- Tab panes -->
 				        <div class="tab-content">
+
+
+				        							
+
 				        <!-- OUTSTANDING -->
 <div class="tab-pane fade in active" id="outstanding">
 		<?php if (count($actions_outstanding) > 0): ?>
@@ -719,6 +725,88 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 								</div>
 							<?php endif; ?>
 				            </div>
+
+				            <!--ALL ACTIONS -->
+
+				<div class="tab-pane fade in" id="all">
+				<?php if (count($get_actions) > 0): ?>
+					<ul class="list-group">
+					<?php foreach ($get_actions as $get_action):?>
+						<?php if ($get_action->action_type_id == 19): ?>
+									<?php $arr = explode(' ',trim($get_action->comments));$pipeline_updated = $arr[3];?><li class="list-group-item pipeline-update <?php echo $pipeline_updated;?>"><?php echo $get_action->comments ?>
+				                                on <?php echo date("l jS F y",strtotime($get_action->actioned_at))." @ ".date("H:i",strtotime($get_action->actioned_at)); ?></li>
+									<?php else: ?>
+
+					<li class="list-group-item">
+					<div class="row" style="padding: 15px 0">
+						<div class="col-md-12 ">
+							<div class="col-xs-2 col-md-1 profile-heading">
+								<span>
+									<?php $user_icon = explode(",", ($get_action->image)); echo "<div class='circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
+								</span>
+							</div>
+							<div class="col-xs-6 col-md-5">
+								<h4 style="margin:0;"><?php if ($get_action->action_type_id <> 20): ?><a data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $get_action->id ?>all" aria-expanded="false" aria-controls="collapse<?php echo $get_action->id ?>all"><?php echo $get_action->campaign_name; ?></a>
+                                    <?php else: ?>
+                                    	<div style="margin-right: 10px;margin-top: -15px;font-size: 10px;float: left;"><span class="label label-default">Marketing</span></div><?php echo $get_action->campaign_name; ?>
+                                    <?php endif; ?>
+
+								<div class="mic-info">
+								Created By: <?php echo $get_action->name?> on <?php echo date('l jS F y',strtotime($get_action->created_at));?>
+											</div>
+											</h4>
+											</div><!--END COL-MD-6-->
+											<div class="col-xs-4 col-md-6" style="text-align:right;">
+											<!--SHOW CONTACT NAME-->
+											<?php if($get_action->contact_id):?><span class="label label-primary" style="font-size:11px; margin-left:10px;  "><?php echo $get_action->first_name.' '.$get_action->last_name; ?></span>
+											<?php endif; ?>
+											</div>
+											<div class="col-md-12">
+											<div id="collapse<?php echo $get_action->id ?>all" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<?php echo $get_action->id ?>">
+											<?php if (!empty($get_action->comments)):?>
+											<div class="comment-text speech" >
+											<div class="triangle-isosceles top">
+											<?php echo $get_action->comments ?>
+											<?php if (!empty($action_cancelled->outcome)):?>
+											<table style="width:100%">
+											<tr>
+											<td style="width:35%"><hr/></td>
+											<td style="width:20%;vertical-align:middle; text-align: center; font-size:11px; color: #222;"> Outcome </td>
+											<td style="width:35%"><hr/></td>
+											</tr>
+											</table>
+											<?php echo $action_cancelled->outcome ?>
+											<?php endif; ?>
+											</div>
+											</div>
+											<?php endif; ?>
+											</div>
+											
+											<div id="action_outcome_box_<?php echo $get_action->id ?>" style="display:none;">
+											<hr>
+											
+
+											</div>
+											</div><!--END ACTIONS-->   
+				                        </div>
+				                        </div>
+				                </li>
+								<?php endif; ?><!--END LOOP IF STATEMENT RE. PIPELINE UPDATES-->
+
+				                <?php endforeach ?>
+				                </ul>
+							<?php else: ?>
+								<div class="col-md-12">
+									<h4 style="margin: 50px 0 40px 0; text-align: center;">1No completed actions found for this company</h4>
+								</div>
+							<?php endif; ?>
+				            </div>
+
+				            <!--ALL ACTIONS-->
+
+				            
+
+
 								<!-- MARKETING -->
 				             <div class="tab-pane fade in" id="marketing">
 							<?php if (count($actions_marketing) > 0): ?>
