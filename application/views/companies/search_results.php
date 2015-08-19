@@ -1,26 +1,21 @@
 <div class="page-results-list">
-	<ul class="pager">
-
-	<div class="col-xs-2">
-
+		<ul class="pager">
+		<div class="col-xs-2">
 		<?php if($previous_page_number): ?>
 	  	<li class="previous">
 	  		<a href="?page_num=<?php echo $previous_page_number; ?>">&larr; Previous</a>
 	  	</li>
 	    <?php endif; ?>
-</div>
-<div class="col-xs-8 ">
+		</div>
+		<div class="col-xs-8 ">
         <span class="count_of_results">
-        				<?php if($current_campaign_name && $current_campaign_owner_id && $current_campaign_id ): ?>
-
-        					<?php else: ?>
-			<?php echo number_format($companies_count); ?> <?php if ($companies_count<> "1") {echo "Companies";} else { echo "Company";}?>
-			<?php endif; ?>
-
-			
-			<?php if($previous_page_number or $next_page_number): ?><span style="font-size:15px; font-weight:700;"> Page <?php echo $current_page_number; ?> of <?php echo $page_total ?> </span><?php endif; ?>
+				<?php if($current_campaign_name && $current_campaign_owner_id && $current_campaign_id ): ?>
+				<?php else: ?>
+				<?php echo number_format($companies_count); ?> <?php if ($companies_count<> "1") {echo "Companies";} else { echo "Company";}?>
+				<?php endif; ?>
+				<?php if($previous_page_number or $next_page_number): ?><span style="font-size:15px; font-weight:700;"> Page <?php echo $current_page_number; ?> of <?php echo $page_total ?> </span><?php endif; ?>
 		</span>
-			</div>    
+		</div>    
 	<div class="col-xs-2">
 	    <?php if($next_page_number): ?>
 	  	<li class="next">
@@ -35,6 +30,8 @@
 		<div style="text-align:center;">
 	      	<?php if(($companies_count > 0)): ?>
 				<?php if($current_campaign_name && $current_campaign_owner_id && $current_campaign_id ): ?>
+					<?php foreach($current_campaign_stats as $current_campaign_stats)
+        {?>
 						<div style="font-weight:300; font-size:22px; margin-bottom: 20px; margin-top: -20px;">
 						<strong>
 						<?php if($current_campaign_is_shared == False): ?>
@@ -44,11 +41,13 @@ echo "<div style='font-size:12px;'>Owned by ".$current_campaign_owner->username.
 						<?php endif;?> <?php echo $results_type ?>:
 						</strong>
 						<?php echo $current_campaign_name; ?>
+						<p style="font-size:14px"><?php echo $current_campaign_stats->description; ?></p>
+
 						</div>	
 					<div class="row" style="margin-bottom: 20px;">
 
-<?php foreach($current_campaign_stats as $current_campaign_stats)
-        {?>
+<div class="col-sm-12 mobile-hide">
+</div>
 <div class="col-sm-2 mobile-hide">
 <a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $current_campaign_stats->id; ?>">
 <div class="circle-responsive black-circle <?php echo empty($this->session->userdata('pipeline'))? 'active':'';?>"><div class="circle-content mega">
@@ -56,8 +55,6 @@ echo "<div style='font-size:12px;'>Owned by ".$current_campaign_owner->username.
 </div>
 </a>
 </div>
-
-
 
 <div class="col-sm-2 mobile-hide">
 <?php if ($current_campaign_stats->campaign_prospects>0): ?>
@@ -129,13 +126,13 @@ echo "<div style='font-size:12px;'>Owned by ".$current_campaign_owner->username.
 <?php
 }
 ?>
-<?php else: ?>
-<?php endif; ?>				
+		
 </div><!--END ROW-->
 					
-			
-		<?php endif; ?>
-	  </div><!-- /.row -->
+<?php else: ?>
+<?php endif; ?>					
+<?php endif; ?>
+</div><!-- /.row -->
 
 
 	
