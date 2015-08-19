@@ -445,7 +445,7 @@ class Campaigns_model extends MY_Model {
 
 function get_campaign_pipeline($id)
 	{
-	$sql = "select u.image, cp.id,
+	$sql = "select u.image, cp.id, cp.description,
 				sum(case when company_id in (select id from companies where pipeline = 'Prospect') then 1 else 0 end) campaign_prospects,
 				sum(case when company_id in (select id from companies where pipeline = 'Intent') then 1 else 0 end) campaign_intent,
 				sum(case when company_id in (select id from companies where pipeline = 'Customer') then 1 else 0 end) campaign_customers,
