@@ -148,11 +148,12 @@ class Campaigns_model extends MY_Model {
 			   C.zendesk_id, -- f29
 			   C.customer_from -- f30
 
-			   )) "JSON output" 
-			   
 
+			   )) "JSON output" 
+			  
 
 		from (select * from COMPANIES where eff_to IS NULL  '.$pipeline_sql.') C ';
+
 		
 		$sql = $sql.' JOIN ( select company_id from targets where campaign_id = '.$campaign_id.' ) company ON C.id = company.company_id';
 		$sql = $sql.' LEFT JOIN 
@@ -450,19 +451,80 @@ class Campaigns_model extends MY_Model {
 
 function get_campaign_pipeline($id)
 	{
-	$sql = "select u.image, cp.id, cp.description,
-				sum(case when company_id in (select id from companies where pipeline = 'Prospect') then 1 else 0 end) campaign_prospects,
-				sum(case when company_id in (select id from companies where pipeline = 'Intent') then 1 else 0 end) campaign_intent,
-				sum(case when company_id in (select id from companies where pipeline = 'Customer') then 1 else 0 end) campaign_customers,
-				sum(case when company_id in (select id from companies where pipeline = 'Lost') then 1 else 0 end) campaign_lost,
-				sum(case when company_id in (select id from companies where pipeline = 'Proposal') then 1 else 0 end) campaign_proposals,
-				Sum(case when company_id in (select id from companies) then 1 else 0 end) campaign_total
-				from targets T
-				INNER JOIN campaigns CP
-				on T.campaign_id = CP.id
-				LEFT JOIN users u
-				on CP.user_id = u.id
-				where CP.id = $id group by 1,2 limit 1";
+	$sql = "select campaign_id ,\"campaign name\",
+description,
+image,
+\"created\",
+campaign_total,
+\"%\" contacted,
+campaign_prospects,
+campaign_intent,
+campaign_proposals,
+campaign_customers,
+T2.\"emails\",
+T2.\"distinct companies emailed\",
+round(100 * T2.\"distinct companies emailed\"::numeric / campaign_total::numeric) \"% support\"
+from
+(-- T1
+select C.id,
+C.id campaign_id,
+C.created_at::date \"created\",
+U.image image,
+C.name \"campaign name\" ,
+C.description description ,
+count(distinct T.company_id) campaign_total,
+round (100 * count(distinct (CASE when A.created_at > C.created_at then A.company_id else null END ))::numeric  / count(distinct CO.id)::numeric) \"%\",
+CASE when count(distinct CASE when CO.pipeline ilike 'Prospect' then CO.id END) = 0 then null 
+else count(distinct CASE when CO.pipeline ilike 'Prospect' then CO.id END) END campaign_prospects,
+CASE when count(distinct CASE when CO.pipeline = 'Intent' then CO.id END) = 0 then null 
+else count(distinct CASE when CO.pipeline = 'Intent' then CO.id END) END campaign_intent,
+CASE when count(distinct CASE when CO.pipeline = 'Proposal' then CO.id END) = 0 then null
+else count(distinct CASE when CO.pipeline = 'Proposal' then CO.id END)  END campaign_proposals,
+CASE when count(distinct CASE when CO.pipeline = 'Customer' and CO.customer_from > C.created_at then CO.id END) = 0 then null
+else count(distinct 
+CASE when CO.pipeline = 'Customer' and CO.customer_from > C.created_at then CO.id END) END campaign_customers
+FROM   CAMPAIGNS C
+JOIN USERS U
+ON C.user_id = U.id
+LEFT JOIN TARGETS T
+ON C.id = T.campaign_id
+LEFT JOIN COMPANIES CO
+ON T.company_id = CO.id
+LEFT JOIN 
+(-- A
+select *
+from ACTIONS 
+where (action_type_id in ('4','5','8','9','10','16','17','18','23','6')) 
+  or (action_type_id in ('11','12','13','14','15') 
+	  and actioned_at is not null and cancelled_at is null)
+)   A
+on CO.id = A.company_id
+where C.criteria is null
+and C.created_at::date >= '2015-05-01'::date
+and C.id = '119'
+group by 1,2,3,4
+order by 2, 1 desc
+)   T1
+LEFT JOIN
+(-- T2
+select CA.id,
+count(*) \"emails\",
+count(distinct C.company_id) \"distinct companies emailed\"
+from EMAIL_CAMPAIGNS EC
+LEFT JOIN EMAIL_ACTIONS EA
+ON EC.id = EA.email_campaign_id
+JOIN CONTACTS C
+ON EA.contact_id = C.id
+JOIN TARGETS T
+ON C.company_id = T.company_id
+JOIN CAMPAIGNS CA
+ON T.campaign_id = CA.id
+where 
+EC.created_at > C.created_at
+group by 1
+)   T2
+ON T1.id = T2.id
+order by 3 desc";
 		$query = $this->db->query($sql);
 		    return $query->result(); /* returns an object */
 }
