@@ -23,7 +23,7 @@ class Actions extends MY_Controller {
 		 // print_r('<pre>');print_r($this->input->post());print_r('</pre>');
 		$post = $this->input->post();
 		if ((empty($post['action_type_completed'])) && (empty($post['action_type_planned']))) {
-		$this->set_message_action_error('Please select either a completed or planned action.');
+		$this->set_message_action_error('Please select either a new or follow up action.');
 		$message = $post['comment'];
 		redirect('companies/company?id='.$this->input->post('company_id').'&message='.urlencode($message).'#action-error','location');
 
