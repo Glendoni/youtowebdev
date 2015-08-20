@@ -12,7 +12,7 @@
             <div class="col-sm-6 col-md-4">
                     <div class=" form-group ">
                     <?php  
-                            if ($company['pipeline']=="Customer"){ 
+                            if (($company['pipeline']=="Customer") || ($company['pipeline']=="Proposal")){ 
                                 echo form_label('Pipeline', 'company_pipeline');
                                 ?>
                                 <span class="label pipeline-label label-<?php echo str_replace(' ', '', $company['pipeline']); ?>" style="display: block;clear: left;padding: 11px; margin:0;"><?php echo $company['pipeline'] ?></span>
