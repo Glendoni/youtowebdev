@@ -1,8 +1,8 @@
 <?php $this->load->view('layouts/header'); ?>
 <div id="single-page">
-    <div class="<?php if(isset($full_container)): ?>container-fluid<?php else: ?>container<?php endif; ?>">
+    <div class="container-fluid">
     <?php $msg = $this->session->flashdata('message'); $msg_2 = validation_errors(); if($msg or $msg_2): ?>
-        <div class="row alert alert-<?php echo $this->session->flashdata('message_type'); ?> alert-dismissible " role="alert">
+        <div class="alert alert-<?php echo $this->session->flashdata('message_type'); ?> alert-dismissible " role="alert">
           <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
             <?php echo $msg ?>
             <?php echo $msg_2 ?>

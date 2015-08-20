@@ -15,9 +15,9 @@ class Actions_model extends MY_Model {
 		return $query->result_object();
 	}
 
-		function get_actions($company_id)
+	function get_actions($company_id)
 	{
- 	$sql = "select distinct
+		$sql = "select distinct
 c.id,
 ec.id as id,
 ec.name as campaign_name,
@@ -701,6 +701,8 @@ return $query->result_object();
 	// INSERTS
 	function create($post)
 	{
+				if ($post['action_type_completed']>0) {
+
 		//TEST - COMPLETED ACTION ONLY
 		$completeddata = array(
 			'company_id' 	=> $post['company_id'],
@@ -716,6 +718,7 @@ return $query->result_object();
 			);
 		$query = $this->db->insert('actions', $completeddata);
 		//END TEST
+	}
 
 		if ($post['action_type_planned']>0) {
 

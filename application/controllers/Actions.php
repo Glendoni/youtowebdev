@@ -21,10 +21,20 @@ class Actions extends MY_Controller {
 	}
 	public function create(){
 		 // print_r('<pre>');print_r($this->input->post());print_r('</pre>');
+		$post = $this->input->post();
+		if ((empty($post['action_type_completed'])) && (empty($post['action_type_planned']))) {
+		$this->set_message_action_error('Please select either a completed or planned action.');
+		$message = $post['comment'];
+		redirect('companies/company?id='.$this->input->post('company_id').'&message='.urlencode($message).'#action-error','location');
+
+		}
+else
+{
+
+
 		if($this->input->post('done'))
 		{	
 			$this->load->library('form_validation');
-			$this->form_validation->set_rules('action_type_completed', 'action_type', 'xss_clean|required');
 			$this->form_validation->set_rules('actioned_at', 'actioned_at', 'xss_clean');
 			$this->form_validation->set_rules('company_id', 'company_id', 'xss_clean|required');
 			$this->form_validation->set_rules('user_id', 'user_id', 'xss_clean|required');
@@ -33,21 +43,19 @@ class Actions extends MY_Controller {
 			{	$post = $this->input->post();
 				if (($post['action_type_completed']=='16') && (empty($post['class_check'] ))){
 					$this->set_message_warning('Please set a company class before adding a deal.');
-				redirect('companies/company?id='.$this->input->post('company_id'),'location');
+					redirect('companies/company?id='.$this->input->post('company_id'),'location');
+
 					}
 					else 
 					{
 				$result = $this->Actions_model->create($this->input->post());
-				}
+					}
 				if(empty($result))
-				{
+					{
 					$this->set_message_warning('Error while inserting details to database');
-					
-				}
-				
-
+					}
 				else
-				{
+					{
 					// after the initial action has been successfully created we can continue with the following login
 					// *** TRY TO KEEP LOGIC IN THE CONTROLLER AND DATABASE COMMITS IN THE MODELS***
 					$post = $this->input->post();
@@ -115,6 +123,7 @@ class Actions extends MY_Controller {
 				redirect('companies/company?id='.$this->input->post('company_id'),'location');
 			}
 		}
+	}
 	} 
 
 	public function edit(){

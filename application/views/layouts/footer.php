@@ -1,5 +1,6 @@
        </div>
-        <hr>
+
+  <hr>
         <div class="col-lg-12">
             <ul class="nav nav-pills nav-justified">
                 <li>© <?php echo date("Y");?> Sonovate</li>
@@ -252,6 +253,20 @@
             
         }
     </script>
+<!--ENABLE DATE SELECT VALIDATION ON ACTION-->
+    <script>
+                function dateRequired()     {
+                    var contact_type = document.getElementById("action_type_planned").value;
+                    if (contact_type > '0'){
+                        $(".follow-up-date").attr('required', true)
+                                            }     
+                        else{
+                        $(".follow-up-date").attr('required', false)
+                            }        
+                            }
+                </script>
+
+
     <script type="text/javascript">
                                         $(document).ready(function(){
                                             $(".include-exclude-drop").change(function(){

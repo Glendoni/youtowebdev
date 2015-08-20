@@ -326,6 +326,12 @@ class MY_Controller extends CI_Controller {
 		$this->session->set_flashdata('message_type', 'warning');
 	}
 
+	protected function set_message_action_error($message)
+	{
+		$this->session->set_flashdata('message_action', $message);
+		$this->session->set_flashdata('message_type', 'danger');
+	}
+
 	protected function set_message_error($message)
 	{
 		$this->session->set_flashdata('message', $message);

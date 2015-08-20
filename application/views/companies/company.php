@@ -374,11 +374,21 @@ $mortgages_start  = $mortgage['eff_from'];$date_pieces = explode("/", $mortgages
 		   <?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'],'done'=>'1', 'class_check' => $companies_classes[$company['class']],);
 			echo form_open(site_url().'actions/create', 'name="create" class="form" role="form"',$hidden); ?>
 			<!--THE BELOW PASSES THE CLASS FIELD ACROSS PURELY FOR VALIDATION - IF THERE IS A BETTER WAY OF DOING THIS THEN IT NEEDS TO BE HERE-->
-			<div class="row">
+			
+			<!--VALIDATION ERROR IF NO ACTION IS SELECTED-->
+			<?php $msg = $this->session->flashdata('message_action'); if($msg): ?>
+        <div id="action-error" class="alert alert-<?php echo $this->session->flashdata('message_type'); ?> alert-dismissible " role="alert">
+          <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <?php echo $msg ?>
+        </div>
+    <?php endif; ?><!--END VALIDATION-->
+<div class="row">
 			<div class="col-md-3">
 				<div class="form-group ">
 					<label>New Actions</label>
+
 					<select id="action_type_completed" name="action_type_completed" class="form-control" onchange="commentChange()">
+						<option value="">--- Select an Action ---</option>
 						<?php foreach($action_types_done as $action ): ?>
 						  <option value="<?php echo $action->id; ?>"><?php echo $action->name; ?></option>
 						<?php endforeach; ?>
@@ -391,7 +401,7 @@ $mortgages_start  = $mortgage['eff_from'];$date_pieces = explode("/", $mortgages
 				<div class="form-group ">
 					<label>Contact</label>
 					<select name="contact_id" class="form-control">
-						<option value=""></option>
+						<option value="">--- Select a Contact ---</option>
 						<?php foreach($contacts as $contact ): ?>
 						  <option value="<?php echo $contact->id; ?>"><?php echo ucfirst($contact->first_name).' '.ucfirst($contact->last_name); ?></option>
 						<?php endforeach; ?>
@@ -400,23 +410,13 @@ $mortgages_start  = $mortgage['eff_from'];$date_pieces = explode("/", $mortgages
 			
 			<?php endif; ?>
 			</div>
-				<script>
-				function commentChange() 	{
-					var contact_type = document.getElementById("action_type").value;
-						if (contact_type == '16' || contact_type == '9' ){
-						$(".completed-details").attr('required', false)
-    										}     
-    					else{
-						$(".completed-details").attr('required', true)
-       						}        
-											}
-				</script>
+				
 				 <div class="col-md-3">
 					<div class="form-group ">
 						<label>Follow Up Action</label>
 
-						<select name="action_type_planned" class="form-control">
-						<option value="0">--- No Follow Up ---</option>
+						<select id="action_type_planned" name="action_type_planned" class="form-control" onchange="dateRequired()">
+						<option value="">--- No Follow Up ---</option>
 							<?php foreach($action_types_planned as $action ): ?>
 							  <option value="<?php echo $action->id; ?>"><?php echo $action->name; ?></option>
 							<?php endforeach; ?>
@@ -426,13 +426,13 @@ $mortgages_start  = $mortgage['eff_from'];$date_pieces = explode("/", $mortgages
 	                <div class="col-md-3">
 						<div class="form-group " >
 							<label>Follow Up Date</label>
-							<input type="text" class="form-control" id="planned_at" data-date-format="YYYY/MM/DD H:m" name="planned_at" placeholder="">
+							<input type="text" class="form-control follow-up-date" id="planned_at" data-date-format="YYYY/MM/DD H:m" name="planned_at" placeholder="">
 						</div>
 	                </div>
 			<div class="col-md-12">
 				<div class="form-group ">
 					<label>Outcome</label>
-					<textarea class="form-control completed-details" name="comment" rows="3" required="required"></textarea>
+					<textarea class="form-control completed-details" name="comment" rows="3" required="required"><?php echo $_GET['message'];?></textarea>
 				</div>
 				<button type="submit" name="save" class="btn btn-success form-control">Save</button>
 			</div>
@@ -748,7 +748,7 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 							<div class="col-xs-6 col-md-5">
 								<h4 style="margin:0;"><?php if ($get_action->action_type_id <> 20): ?><a data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $get_action->id ?>all" aria-expanded="false" aria-controls="collapse<?php echo $get_action->id ?>all"><?php echo $get_action->campaign_name; ?></a>
                                     <?php else: ?>
-                                    	<div style="margin-right: 10px;margin-top: -15px;font-size: 10px;float: left;"><span class="label label-default">Marketing</span></div><?php echo $get_action->campaign_name; ?>
+                                    	<div style="margin-right: 10px;margin-top: -15px;font-size: 10px;float: left;"><span class="label label-default">Marketing</span></div>><?php echo $get_action->campaign_name; ?>
                                     <?php endif; ?>
 
 								<div class="mic-info">
