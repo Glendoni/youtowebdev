@@ -870,6 +870,13 @@ a.btn.btn-default.btn-xs.add-to-calendar {
 	border-style: solid;
 	background-color: transparent;
 }
+.cyan-circle {
+	color: #00BCD4;
+	border-color: #00BCD4;
+	border-width: 1px;
+	border-style: solid;
+	background-color: transparent;
+}
 .blue-circle {
 	color: #348aa7;
 	border-color: #348aa7;

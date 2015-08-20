@@ -55,7 +55,7 @@ echo "<div style='font-size:12px;'>Owned by ".$current_campaign_owner->username.
 </a>
 </div>
 <div class="col-sm-2 mobile-hide">
-<div class="circle-responsive red-circle">
+<div class="circle-responsive cyan-circle ">
 <div class="circle-content mega">
 <div class="large-number"><?php echo $current_campaign_stats->contacted; ?>%</div>
 <div class="small-text">Contacted</div></div>
