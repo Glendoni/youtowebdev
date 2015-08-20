@@ -20,13 +20,23 @@
 <!--GET SEARCH DATES TO DISPLAY-->
 <div class="panel panel-default">
               <div class="panel-heading">
-                <h3 class="panel-title">User Stats<div class="pull-right" style="font-weight:300;">
+                <h3 class="panel-title">
+
+                                  <?php
+    foreach($userimage as $userimage)
+    {
+      $user_icon = explode(",",$userimage->image); echo "<div class='circle name-circle' style='width:25px;height: 25px;line-height: 25px;background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";
+    }
+?>
+                 User Stats<div class="pull-right" style="font-weight:300;">
                 (<?php echo date('D jS M y',strtotime($dates['start_date']));?> - <?php echo date('D jS M y',strtotime($dates['end_date']));?>)</div></h3> 
               </div>
-             
+            
+
               <div class="panel-body">
                   <div class="clearfix"></div>
                   <div clas="list-group">
+
 
                     <?php if(empty($stats)) : ?>
                       <div class="col-md-12">
@@ -36,7 +46,6 @@
                       </div>
                     <?php else: ?>
                     <!-- Nav tabs -->
-
                     <!-- Tab panes -->
                     <div class="tab-content">
                       <div class="col-md-12">

@@ -30,6 +30,18 @@ class Users_model extends MY_Model {
 		$query = $this->db->get_where('users', array('email' => $email), $limit);
 		return $query->result();
 	}
+
+		function get_user_image()
+	{
+			if (!empty($_GET['user'])) {
+	 	$sql = "select u.image, u.name as \"username\"
+				from users u
+				where u.id = '".$_GET['user']."' limit 1";
+		$query = $this->db->query($sql);
+
+		    return $query->result(); /* returns an object */
+		}
+	}
 	
 	function get_user_login($email,$password)
 	{	

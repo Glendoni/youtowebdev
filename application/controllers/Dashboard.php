@@ -43,6 +43,7 @@ class Dashboard extends MY_Controller {
 		$this->data['getusermeetings'] = $this->Actions_model->get_user_meetings();
 		$this->data['getuserpitches'] = $this->Actions_model->get_user_pitches();
 		$this->data['dates'] = $this->Actions_model->dates();
+		$this->data['userimage'] = $this->Users_model->get_user_image();
 
 
 
