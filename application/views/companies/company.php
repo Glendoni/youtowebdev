@@ -11,8 +11,7 @@
 	<?php echo $company['name'];?>
 	</h2>
 
-			<div class="row" style="margin-top:5px; text-align:center;">
-
+	<div class="row" style="margin-top:5px; text-align:center;">
 	<span class="label label-<?php echo str_replace(' ', '', $company['pipeline']); ?>"><?php echo $company['pipeline']?>
 	<?php if (isset($company['customer_from'])):?>
 		from <?php echo date("d/m/y",strtotime($company['customer_from']));?>
@@ -95,7 +94,7 @@
 		<?php $this->load->view('companies/actions_box_list.php',array('company'=>$company)); ?>
 		<?php if (isset($company['url'])): ?>
 		<a class="btn btn-default btn-sm btn-block btn-url" href="<?php $parsed = parse_url($company['url']); if (empty($parsed['scheme'])) { echo 'http://' . ltrim($company['url'], '/'); }else{ echo $company['url']; } ?>" target="_blank">
-				<label style="margin-bottom:0;">Web:</label> <?php echo str_replace("http://"," ",str_replace("www.", "", $company['url']))?>
+		<label style="margin-bottom:0;">Web:</label> <?php echo str_replace("http://"," ",str_replace("www.", "", $company['url']))?>
 		</a>
 			<?php endif; ?>
 		<!-- LINKS AND BTN -->
@@ -108,7 +107,9 @@
 			<?php if (($current_user['department']) =='support' && isset($company['zendesk_id'])): ?>
 			<a class="btn  btn-info btn-sm btn-block zendesk" href="https://sonovate.zendesk.com/agent/organizations/<?php echo $company['zendesk_id'] ?>"  target="_blank">ZenDesk</a>
 			<?php endif; ?>
-
+			<?php if (isset($company['sonovate_id'])): ?>
+			<a class="btn  btn-info btn-sm btn-block sonovate" href="https://members.sonovate.com/agency-admin/<?php echo $company['sonovate_id'] ?>/profile"  target="_blank">Sonovate 3.0</a>
+			<?php endif; ?>
 		<?php endif; ?>
         </div><!--CLOSE COL-MD-3-->
 		<div class="col-md-12">
