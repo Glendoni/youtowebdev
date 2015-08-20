@@ -461,8 +461,8 @@ campaign_prospects,
 campaign_intent,
 campaign_proposals,
 campaign_customers,
-T2.\"emails\",
-T2.\"distinct companies emailed\",
+T2.\"emails\" as emails,
+T2.\"distinct companies emailed\" as companies_emailed,
 round(100 * T2.\"distinct companies emailed\"::numeric / campaign_total::numeric) \"% support\"
 from
 (-- T1
@@ -500,7 +500,6 @@ where (action_type_id in ('4','5','8','9','10','16','17','18','23','6'))
 )   A
 on CO.id = A.company_id
 where C.criteria is null
-and C.created_at::date >= '2015-05-01'::date
 and C.id = '$id'
 group by 1,2,3,4
 order by 2, 1 desc
