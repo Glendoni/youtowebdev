@@ -490,7 +490,7 @@ JOIN USERS U
 ON C.user_id = U.id
 LEFT JOIN TARGETS T
 ON C.id = T.campaign_id
-LEFT JOIN COMPANIES CO
+INNER JOIN COMPANIES CO
 ON T.company_id = CO.id
 LEFT JOIN 
 (-- A
