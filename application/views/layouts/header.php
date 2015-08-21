@@ -9,10 +9,18 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title> <?php echo (isset($page_title))? $page_title: 'Baselist'; ?></title>
+    <title><?php echo (isset($page_title))? $page_title: 'Baselist'; ?></title>
     
+    <?php if (ENVIRONMENT  =='staging'){?>
+    <link rel="icon" type="image/png" href="<?php echo asset_url();?>images/favicon-staging.jpg">
+
+    <?php
+} else {?>
+
     <link rel="icon" type="image/png" href="<?php echo asset_url();?>images/favicon.jpg">
-    
+<?php
+}
+        ; ?>
 
     <!-- Timeline CSS -->
     <!-- <link rel="stylesheet" type="text/css" media="screen" href="<?php echo asset_url();?>css/plugins/timeline.css" rel="stylesheet"> -->
