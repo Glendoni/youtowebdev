@@ -880,7 +880,10 @@
                           <div class="row list-group-item" style="font-size:12px;">
                             <div class="col-xs-4"> 
                               <a href="<?php echo site_url();?>companies/company?id=<?php echo $assigned->id;?>">
-                              <?php echo $assigned->name;?>
+                              <?php 
+                            $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' );
+                            echo str_replace($words, ' ',$assigned->name); 
+                            ?>
                               </a> 
                               </div>
                               <div class="col-xs-2">

@@ -1,4 +1,3 @@
-
 <?php if(empty($companies)): ?>
 	<div class="alert alert-warning">No companies found</div>
 <?php else: ?>
@@ -22,7 +21,8 @@
 					$words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' );
 					echo str_replace($words, ' ',$company['name']); 
 					?>
-				</a></h2>
+				</a>
+		</h2>
 			</div>
 			<div class="col-sm-12" style="margin-top:5px; text-align:center;">
 	<span class="label label-<?php echo str_replace(' ', '', $company['pipeline']); ?>"><?php echo $company['pipeline']?>
@@ -44,40 +44,43 @@
 	</div>
 		<div class="col-sm-9">
 		<div class="row">
+		<div class="col-sm-12" style="margin-bottom:10px;">
+				<label>Company Name</label>
+				<p style="margin-bottom:0;">	
+				<?php echo $company['name']; ?>
+				</p>
+		</div><!--END NAME-->
 		<div class="col-sm-12" style="margin-top:10px;">
 				<label>Address</label>
 				<p style="margin-bottom:0;">
                 <?php echo isset($company['address'])?'<a href="http://maps.google.com/?q='.urlencode($company['address']).'" target="_blank">'.$company['address'].'<span style="    line-height: 15px;font-size: 10px;padding-left: 5px;"><i class="fa fa-external-link"></i></span></a>':'-'; ?>  
 				</p><hr>
 		</div><!--END ADDRESS-->
-		<div class="col-xs-6 col-md-4" style="margin-top:10px;">
-			<strong>Company Number</strong>
-			<p style="margin-bottom:0;">	
+		<div class="col-xs-6" style="margin-top:10px;">
+			<label>Company Number</label>
+			<p>	
 			 <!--COMPANY NUMBER IF APPLICABLE-->
-                <?php if (isset($company['registration'])): ?>
-				<?php echo $company['registration']; ?>
-				<?php else: ?>
-				-
-                <?php endif; ?>
+			<?php echo isset($company['registration'])?$company['registration']:'-'; ?>
          	</p>
         	</div>
-		<div class="col-xs-6" style="margin-top:10px;">
-				<strong>Company Name</strong>
-				<p style="margin-bottom:0;">	
-				<?php echo $company['name']; ?>
-				</p>
-		</div><!--END NAME-->
-				
+
+        	<div class="col-xs-6" style="margin-top:10px;">
+        	<label>Founded</label>
+			<p>	
+				<?php echo isset($company['eff_from'])?$company['eff_from']:'-'; ?>
+			</p>
+		</div>
+	
 		
-        <div class="col-xs-6 col-md-4" style="margin-top:10px;">
-        		<strong>Phone Number</strong>
-        		<p style="margin-bottom:0;">
-        		<?php echo isset($company['phone'])?$company['phone']:'-'; ?>                
+        <div class="col-xs-6" style="margin-top:10px;">
+        		<label>Phone Number</label>
+        		<p>
+        		<?php echo isset($company['phone'])?$company['phone']:''; ?>                
            		</p>
 			</div><!--END PHONE NUMBER-->
 		<div class="col-xs-6 col-md-4" style="margin-top:10px;">
-				<strong>Class</strong>
-				<p style="margin-bottom:0;">	
+				<label>Class</label>
+				<p>	
 		            <!--CLASS IF APPLICABLE-->
 		            <?php if (isset($company['class'])): ?>
 						<span class="label label-info"><?php echo $companies_classes[$company['class']] ?></span>	
@@ -107,15 +110,17 @@
 			<?php if (($current_user['department']) =='support' && isset($company['zendesk_id'])): ?>
 			<a class="btn  btn-info btn-sm btn-block zendesk" href="https://sonovate.zendesk.com/agent/organizations/<?php echo $company['zendesk_id'] ?>"  target="_blank">ZenDesk</a>
 		<?php endif; ?>
+			<?php if (isset($company['sonovate_id'])): ?>
+			<a class="btn  btn-info btn-sm btn-block sonovate" href="https://members.sonovate.com/agency-admin/<?php echo $company['sonovate_id'] ?>/profile"  target="_blank">Sonovate 3.0</a>
+			<?php endif; ?>
 			</div><!--CLOSE MD-3-->
 		</div>
-		<div class="row">
 		<div class="col-md-12">
 			<hr>
 		</div>
-        </div>
 		
-        <div class="row">
+        		<div class="row">
+		<div class="col-xs-12">
 		<!-- TURNOVER -->
 		<div class="col-xs-4 col-sm-3 centre">
 			<strong><span style="text-transform: capitalize"><?php echo isset($company['turnover_method'])?$company['turnover_method']:'';?></span>
@@ -162,11 +167,11 @@ Turnover</strong>
 			}
 			?>
 		</div>
+		</div>
+		</div>
 
 		<div class="col-md-12">
 			<hr>
-		</div>
-
 		</div>
 
 		<div class="row">
@@ -174,7 +179,7 @@ Turnover</strong>
 		<!-- MORTGAGES -->
 			
 			<div class="col-md-12">
-		<?php if(!empty($company['mortgages'])): ?>
+			<?php if(!empty($company['mortgages'])): ?>
 			<table class="table table-hover" style="font-size:12px">
 			<thead>
 				<tr>

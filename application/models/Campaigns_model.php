@@ -146,7 +146,8 @@ class Campaigns_model extends MY_Model {
 			   CONT.contacts_count, -- f27
 			   C.parent_registration, --f28
 			   C.zendesk_id, -- f29
-			   C.customer_from -- f30
+			   C.customer_from, -- f30
+			   C.sonovate_id -- f31
 
 
 			   )) "JSON output" 
@@ -242,7 +243,8 @@ class Campaigns_model extends MY_Model {
 			     EMP.count,
 			     CONT.contacts_count,
 			     C.zendesk_id,
-			     C.customer_from
+			     C.customer_from,
+			     C.sonovate_id
 
 		order by C.id 
 

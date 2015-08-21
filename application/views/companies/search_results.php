@@ -25,7 +25,6 @@
 		</div>
 	</ul>
 
-	  <div class="container-fluid">
 	    <!-- Collect the nav links, forms, and other content for toggling -->
 		<div style="text-align:center;">
 	      	<?php if(($companies_count > 0)): ?>
@@ -129,7 +128,6 @@ echo "<div style='font-size:12px;'>Owned by ".$current_campaign_owner->username.
 	// Display companies
 	$this->load->view('companies/list.php');
 	?>
-	
 	<ul class="pager">
 		<?php if($previous_page_number): ?>
 	  	<li class="previous"><a href="?page_num=<?php echo $previous_page_number; ?>">&larr; Previous</a></li>
@@ -139,4 +137,3 @@ echo "<div style='font-size:12px;'>Owned by ".$current_campaign_owner->username.
 	  	<li class="next"><a href="?page_num=<?php echo $next_page_number; ?>">Next &rarr;</a></li>
 		<?php endif; ?>
 	</ul>
-</div>

@@ -1,15 +1,17 @@
 <?php  $company = $companies[0]; ?>
 <div class="page-results-list">
 <div class="top-info-holder">
-	<?php if (isset($company['parent_registration'])): ?>
-		<div style="height: 1px; background-color: #d9534f; text-align: center; margin:30px 0; ">
-		<span class="label label-danger" style="position: relative; top: -10px;">Subsidiary of <?php echo $company['parent_registration'];?></span>
+    <div class="row">
+		<?php if (isset($company['parent_registration'])): ?>
+			<div style="height: 1px; background-color: #d9534f; text-align: center; margin:30px 0; ">
+				<span class="label label-danger" style="position: relative; top: -10px;">Subsidiary of <?php echo $company['parent_registration'];?></span>
 			</div>
 
-	<?php endif; ?>
+		<?php endif; ?>
 	<h2 class="company-header">
-	<?php echo $company['name'];?>
+		<?php $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' );echo str_replace($words, ' ',$company['name']); ?>
 	</h2>
+	</div><!--END ROW-->
 
 	<div class="row" style="margin-top:5px; text-align:center;">
 	<span class="label label-<?php echo str_replace(' ', '', $company['pipeline']); ?>"><?php echo $company['pipeline']?>
@@ -24,7 +26,7 @@
         </span>
 	<?php else: ?>
 	<?php endif; ?>
-</div>
+	</div><!--END ROW-->
 	<!-- POPUP BOXES -->
 	<?php $this->load->view('companies/edit_box.php',array('company'=>$company)); ?>
 	<?php $this->load->view('companies/create_contact_box.php',array('company'=>$company)); ?>
@@ -35,8 +37,8 @@
 
 <div class="panel panel-primary" style="padding-top: 30px;">
 	<div class="panel-body">
-    	<div class="row">
-			<div class="col-sm-9">
+    	<div class="row"><!--FINISHED AT THE END OF PANEL-->
+		<div class="col-sm-9">
 		<div class="row">
 		<div class="col-sm-12" style="margin-bottom:10px;">
 				<label>Company Name</label>
@@ -50,7 +52,7 @@
                 <?php echo isset($company['address'])?'<a href="http://maps.google.com/?q='.urlencode($company['address']).'" target="_blank">'.$company['address'].'<span style="    line-height: 15px;font-size: 10px;padding-left: 5px;"><i class="fa fa-external-link"></i></span></a>':'-'; ?>  
 				</p><hr>
 		</div><!--END ADDRESS-->
-		
+
 		<div class="col-xs-6" style="margin-top:10px;">
 			<label>Company Number</label>
 			<p>	
@@ -117,6 +119,7 @@
 		</div>
 
 		<div class="row">
+		<div class="col-xs-12">
 		<!-- TURNOVER -->
 		<!-- TURNOVER -->
 		<div class="col-xs-4 col-sm-3 centre">
@@ -164,12 +167,13 @@ Turnover</strong>
 			}
 			?>
 		</div>
-
+		</div>
+</div>
 		<div class="col-md-12">
 			<hr>
 		</div>
 
-		</div>
+		
        
 		<!-- MORTGAGES -->
 

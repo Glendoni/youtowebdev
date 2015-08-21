@@ -7,7 +7,9 @@ class Tools extends MY_Controller {
 //$conn = pg_pconnect("host=ec2-184-73-219-162.compute-1.amazonaws.com port=5892 dbname=d7vgng5fag3om9 user=uamsnmk9i2in0 password=p47ul5n2vd9jvsaeui6la197nnr");
 
 		$this->load->database();
-		 $conn = pg_pconnect("host=".$this->db->hostname." port=".$this->db->port." dbname=".$this->db->database." user=".$this->db->username." password=".$this->db->password."");
+		 $conn = pg_pconnect("host=ec2-54-228-195-52.eu-west-1.compute.amazonaws.com port=5432 dbname=d1bna94a8j95ip user=mhcpgrefocjdtf password=CZbMFlzImraARQeWme1UM3VFOm");
+		 		 //$conn = pg_pconnect("host=".$this->db->hostname." port=".$this->db->port." dbname=".$this->db->database." user=".$this->db->username." password=".$this->db->password."");
+
 $connson = pg_pconnect("host=ec2-54-217-211-247.eu-west-1.compute.amazonaws.com port=5432 dbname=d3k8mv1a7or6bn user=pmpsyelzzvrqpf password=NW3K8kqYtHuy--GKpcC1-E6u04");
 if (!$conn) {
   echo "Unable to connect - Baselist";
