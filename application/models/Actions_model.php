@@ -161,6 +161,7 @@ return $query->result_object();
 	function get_assigned_companies($user_id){	
 		
 		$this->db->where('user_id',$user_id);
+		$this->db->where('active','t');
 		$this->db->order_by("assign_date", "desc"); 
 		$query = $this->db->get('companies');
 		return $query->result_object();
