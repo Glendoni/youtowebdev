@@ -60,7 +60,7 @@ left join companies c on a.company_id = c.id
 left join users u on a.user_id = u.id
 left join contacts con on a.contact_id = con.id
 where c.id = '$company_id'
-ORDER BY 10 desc";
+ORDER BY 7 desc";
 		$query = $this->db->query($sql);
 return $query->result_object();
 	}
@@ -750,7 +750,7 @@ return $query->result_object();
 					'contact_id'    => (!empty($post['contact_id'])?$post['contact_id']:NULL),
 					'created_by'	=> $post['user_id'],
 					'action_type_id'=> '19',
-					'actioned_at'	=> date('Y-m-d H:i:s'),
+					'actioned_at'	=> date('Y-m-d H:i:s', time() + 3),
 					'created_at' 	=> date('Y-m-d H:i:s'),
 					);
 		$query = $this->db->insert('actions', $actiondata);
@@ -767,7 +767,7 @@ return $query->result_object();
 						'contact_id'    => (!empty($post['contact_id'])?$post['contact_id']:NULL),
 						'created_by'	=> $post['user_id'],
 						'action_type_id'=> '19',
-						'actioned_at'	=> date('Y-m-d H:i:s'),
+						'actioned_at'	=> date('Y-m-d H:i:s', time() + 3),
 						'created_at' 	=> date('Y-m-d H:i:s'),
 						);
 

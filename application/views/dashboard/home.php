@@ -1,5 +1,4 @@
 <div class="row">
-<?php echo $config['sess_expiration']; ?>
           <div class="col-sm-9 col-sm-offset-3 " style="margin-bottom:20px;">
               <!-- Nav tabs -->
               <ul class="nav nav-tabs dashboard" role="tablist">
