@@ -105,10 +105,10 @@
             color = $button.data('color'),
             settings = {
                 on: {
-                    icon: 'glyphicon glyphicon-check'
+                    //icon: 'glyphicon glyphicon-check'
                 },
                 off: {
-                    icon: 'glyphicon glyphicon-unchecked'
+                    //icon: 'glyphicon glyphicon-unchecked'
                 }
             };
         // Event Handlers

@@ -583,10 +583,7 @@
                              $display_date = "<div class='col-md-12 pipeline-days ok'>".$date_since." Days</div>";
                              }
                               else if ($date_since>19) {
-                             $display_date = "<div class='col-md-12 pipeline-days overdue'><strong>OVERDUE:</strong> ".$date_since." Days</div>";
-                             }
-                            ?>
-
+                             $display_date = "<div class='col-md-12 pipeline-days overdue'><strong>OVERDUE:</strong> ".$date_since." Days</div>";}?>
                             <?php echo $display_date;?>
                             <div class="col-md-12 pipeline-bottom">
                             <div style="font-size=16px; font-weight:600;"><a href="companies/company?id=<?php echo $pipelinecontactedindividual['company_id'] ?>">
@@ -595,7 +592,6 @@
                             echo str_replace($words, ' ',$pipelinecontactedindividual['company_name']); 
                             ?>
                             </a></div>
-                           <small><?php echo $pipelinecontactedindividual['username'] ?></small>
                             </div>
                             </div>
                           <?php endforeach ?>
@@ -639,7 +635,6 @@
                             echo str_replace($words, ' ',$pipelineproposalindividual['company_name']); 
                             ?>
                           </a></div>
-                            <small><?php echo $pipelineproposalindividual['username'] ?></small>
                             </div>
                             </div>
                           <?php endforeach ?>
@@ -678,7 +673,6 @@
                             $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' );
                             echo str_replace($words, ' ',$pipelinecustomerindividual['company_name']); 
                             ?></a></div>
-                            <small><?php echo $pipelinecustomerindividual['username'] ?></small>
                             </div>
                             </div>
                           <?php endforeach ?>
@@ -700,7 +694,6 @@
                             $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' );
                             echo str_replace($words, ' ',$pipelinelostindividual['company_name']); 
                             ?></a></div>
-                           <small><?php echo $pipelinelostindividual['username'] ?></small>
                             </div>
                             
                           <?php endforeach ?>

@@ -37,7 +37,7 @@
 						<?php else: ?>
 						 <?php foreach($current_campaign_owners as $current_campaign_owner):
 echo "<div style='font-size:12px;'>Owned by ".$current_campaign_owner->username."</div>"; endforeach ?>					
-						<?php endif;?> <?php echo $results_type ?>:
+						<?php endif;?>
 						</strong>
 						<?php echo $current_campaign_name; ?>
 						<p style="font-size:14px"><?php echo $current_campaign_stats->description; ?></p>
@@ -50,7 +50,7 @@ echo "<div style='font-size:12px;'>Owned by ".$current_campaign_owner->username.
 <div class="col-sm-2 mobile-hide">
 <a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $current_campaign_stats->campaign_id; ?>">
 <div class="circle-responsive black-circle <?php echo empty($this->session->userdata('pipeline'))? 'active':'';?>"><div class="circle-content mega">
-<div class="large-number"><?php echo number_format($current_campaign_stats->campaign_total); ?></div> <div class="small-text"><?php if ($companies_count<> "1") {echo "Companies in List";} else { echo "Company in List";}?></div></div>
+<div class="large-number"><?php echo number_format($current_campaign_stats->campaign_total); ?></div> <div class="small-text"><?php if ($companies_count<> "1") {echo "Companies in $results_type";} else { echo "Company in $results_type";}?></div></div>
 </div>
 </a>
 </div>

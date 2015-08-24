@@ -538,8 +538,8 @@ count(distinct T.company_id) campaign_total,
 round (100 * count(distinct (CASE when A.created_at > C.created_at then A.company_id else null END ))::numeric  / count(distinct CO.id)::numeric) \"%\",
 CASE when count(distinct CASE when CO.pipeline ilike 'Prospect' then CO.id END) = 0 then 0 
 else count(distinct CASE when CO.pipeline ilike 'Prospect' then CO.id END) END campaign_prospects,
-CASE when count(distinct CASE when CO.pipeline ilike 'Intent' then CO.id END) = 0 then 0 
-else count(distinct CASE when CO.pipeline ilike 'Intent' then CO.id END) END campaign_intent,
+CASE when count(distinct CASE when CO.pipeline ilike 'Intent' or CO.pipeline ilike 'Qualified' then CO.id END) = 0 then 0 
+else count(distinct CASE when CO.pipeline ilike 'Intent' or CO.pipeline ilike 'Qualified' then CO.id END) END campaign_intent,
 CASE when count(distinct CASE when CO.pipeline ilike 'Proposal' then CO.id END) = 0 then 0
 else count(distinct CASE when CO.pipeline ilike 'Proposal' then CO.id END)  END campaign_proposals,
 CASE when count(distinct CASE when CO.pipeline ilike 'Customer' and CO.customer_from > C.created_at then CO.id END) = 0 then 0

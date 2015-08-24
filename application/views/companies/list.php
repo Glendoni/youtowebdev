@@ -239,20 +239,18 @@ Turnover</strong>
 			<thead>
 				<tr>
 					<th class="col-md-6">Provider</th>
-					<th class="col-md-3" style="text-align:center;">Status</th>
 					<th class="col-md-3" style="text-align:center;">Started</th>
+					<th class="col-md-3" style="text-align:center;">Status</th>
 				</tr>
 			</thead>
 			<tbody>
 				<?php foreach ($company['mortgages'] as $mortgage):?>
 				<tr <?php echo $mortgage['stage']==MORTGAGES_SATISFIED? 'class="danger"' : 'class="success"' ?> >
 					<td class="col-md-6" ><?php echo $mortgage['name']; ?>
-
-					<span class="label label-default" style="margin-left: 20px;
-  padding: 1px 10px;"><?php echo $mortgage['type']; ?></span>
-</td>
-					<td class="col-md-3" style="text-align:center;"><!--<span class="label label-<?php echo $mortgage['stage']==MORTGAGES_SATISFIED? 'default' : 'success' ?>">--><strong><?php echo $mortgage['stage']; ?></strong><?php if(!empty($mortgage['eff_to'])){echo ' on '.$mortgage['eff_to'];} ?></span></td>
+					<span class="label label-default" style="margin-left: 20px;padding: 1px 10px;"><?php echo $mortgage['type']; ?></span>
+					</td>
 					<td class="col-md-3" style="text-align:center;"><?php echo $mortgage['eff_from']; ?></td>
+					<td class="col-md-3" style="text-align:center;"><!--<span class="label label-<?php echo $mortgage['stage']==MORTGAGES_SATISFIED? 'default' : 'success' ?>">--><strong><?php echo $mortgage['stage']; ?></strong><?php if(!empty($mortgage['eff_to'])){echo ' on '.$mortgage['eff_to'];} ?></span></td>
 
 				</tr>
 				<?php endforeach; ?>
