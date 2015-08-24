@@ -114,6 +114,10 @@ class Campaigns_model extends MY_Model {
 			   C.name,
 			   C.pipeline,
 			   U.id "owner_id",
+			   AC1.actioned_at, -- f32
+			   AC2.planned_at, -- f35
+			   AU1.name "aname1",
+			   AU2.name "aname2",
 		       row_to_json((
 		       C.id, -- f1
 		       C.name, -- f2
@@ -147,7 +151,13 @@ class Campaigns_model extends MY_Model {
 			   C.parent_registration, --f28
 			   C.zendesk_id, -- f29
 			   C.customer_from, -- f30
-			   C.sonovate_id -- f31
+			   C.sonovate_id, -- f31
+			   AC1.actioned_at, -- f32
+			   ACT1.name, -- f33
+			   AU1.name, -- f34
+			   AC2.planned_at, -- f35
+			   ACT2.name , -- f36
+			   AU2.name -- f37			   
 
 
 			   )) "JSON output" 
@@ -183,6 +193,46 @@ class Campaigns_model extends MY_Model {
 		(
 			SELECT count(*) as "contacts_count",company_id FROM "contacts" group by contacts.company_id
 		) CONT ON CONT.company_id = C.id
+
+		LEFT JOIN 
+		actions ac1 ON ac1.company_id = c.id 
+		AND ac1.id = 
+		(
+		SELECT MAX(id) 
+		FROM actions z 
+		WHERE z.company_id = ac1.company_id and z.action_type_id in (\'4\',\'5\',\'8\',\'9\',\'10\',\'11\',\'12\',\'13\',\'17\',\'18\')
+		and z.actioned_at is not null
+		order by ac1.actioned_at desc
+		)
+
+		LEFT JOIN 
+ 		action_types ACT1 on
+ 		AC1.action_type_id = ACT1.id
+
+		LEFT JOIN 
+ 		users AU1 on
+ 		ac1.user_id = AU1.id
+
+
+		LEFT JOIN 
+		actions ac2 ON ac2.company_id = c.id 
+		AND ac2.id = 
+		(
+		SELECT id
+		FROM actions z2 
+		WHERE z2.company_id = ac2.company_id and z2.actioned_at is null and z2.cancelled_at is null
+		order by z2.planned_at asc limit 1
+		)
+
+		LEFT JOIN 
+ 		action_types ACT2 on
+ 		AC2.action_type_id = ACT2.id
+
+		LEFT JOIN 
+ 		users AU2 on
+ 		ac2.user_id = AU2.id
+
+
 
 		LEFT JOIN
 		(-- TT2
@@ -244,7 +294,13 @@ class Campaigns_model extends MY_Model {
 			     CONT.contacts_count,
 			     C.zendesk_id,
 			     C.customer_from,
-			     C.sonovate_id
+			     C.sonovate_id,
+			     AC1.actioned_at,
+			     ACT1.name,
+			     AU1.name,
+			     AC2.planned_at,
+			     ACT2.name,
+			     AU2.name
 
 		order by C.id 
 
@@ -285,13 +341,13 @@ class Campaigns_model extends MY_Model {
 		)   T2
 		ON T1.id = T2."company id"
 		-- insert this for sort order  
-		order by case when pipeline = \'Customer\' then 1
+		order by actioned_at asc NULLS FIRST,case when pipeline = \'Customer\' then 1
 		when pipeline = \'Proposal\' then 2
 		when pipeline = \'Intent\' then 3
 		when pipeline = \'Qualified\' then 4
 		when pipeline = \'Lost\' then 8
 		else 5
-		end, name asc
+		end
 		 
 		) results';
 		// print_r($sql);

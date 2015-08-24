@@ -835,7 +835,7 @@ a.btn.btn-default.btn-xs.add-to-calendar {
 	background-color: transparent;
 }
 .black-circle.active {
-	background-color: #262626;
+	background-color: #9797A6;
 	color: #fff;
 	border-color: #fff;
 }
@@ -871,11 +871,11 @@ a.btn.btn-default.btn-xs.add-to-calendar {
 	background-color: transparent;
 }
 .cyan-circle {
-	color: #00BCD4;
+	color: #fff;
 	border-color: #00BCD4;
 	border-width: 1px;
 	border-style: solid;
-	background-color: transparent;
+	background-color: #00BCD4;
 }
 .blue-circle {
 	color: #348aa7;
@@ -889,7 +889,25 @@ a.btn.btn-default.btn-xs.add-to-calendar {
 	border-color: #fff;
 	background-color:#348aa7;
 }
+/*TILES*/
+.tiles {
+	    background-color: #bcbcbc;
+		color: #ffffff;
+		position: relative;
+		min-height: 90px;
+}
+.red {
+	background-color: #5CB85C;
+}
+.grey {
+background-color: #9797A6;
+}
+.big-number {
+	    text-align: center;
+    font-size: 30px;
+    font-weight: 700;
 
+}
 
 @media only screen and (min-width: 991px) {
 .modal-dialog {

@@ -387,6 +387,14 @@ class MY_Controller extends CI_Controller {
 			if($company->company->f1->f29)$mapped_companies_array['zendesk_id'] = $company->company->f1->f29;
 			if($company->company->f1->f30)$mapped_companies_array['customer_from'] = $company->company->f1->f30;
 			if($company->company->f1->f31)$mapped_companies_array['sonovate_id'] = $company->company->f1->f31;
+			if($company->company->f1->f32)$mapped_companies_array['actioned_at1'] = $company->company->f1->f32;
+			if($company->company->f1->f33)$mapped_companies_array['action_name1'] = $company->company->f1->f33;
+			if($company->company->f1->f34)$mapped_companies_array['action_user1'] = $company->company->f1->f34;
+			if($company->company->f1->f35)$mapped_companies_array['planned_at2'] = $company->company->f1->f35;
+			if($company->company->f1->f36)$mapped_companies_array['action_name2'] = $company->company->f1->f36;
+			if($company->company->f1->f37)$mapped_companies_array['action_user2'] = $company->company->f1->f37;
+
+
 
 
 			

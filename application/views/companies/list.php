@@ -38,12 +38,67 @@
 	<?php else: ?>
 	<?php endif; ?>
 
-
-
 	<hr>
 	</div>
 		<div class="col-sm-9">
 		<div class="row">
+<div class="col-sm-12 action-details">
+<div class="row"> 
+<div class="col-md-6 col-lg-6 col-sm-6">
+<div><strong>Last Contact</strong></div>
+<div>
+<?php if (empty($company['actioned_at1'])): ?>
+Never
+<?php else: ?>
+<div class="action_type"><?php echo $company['action_name1']." by ".$company['action_user1']; ?></div>
+<div class="action_date_list">
+<?php echo date("l jS F Y",strtotime($company['actioned_at1']));?>
+<?php
+$now = time (); // or your date as well
+$your_date = strtotime($company['actioned_at1']);
+$datediff = abs($now - $your_date);
+$days_since = floor($datediff/(60*60*24));
+if ($company['actioned_at1'] > 0){
+	echo " (".$days_since." days ago)";
+	} else {
+	echo " (".$days_since." day ago)";;
+	}
+?></div>
+
+<?php endif; ?>
+
+</div>
+</div>
+<div class="col-md-6 col-lg-6 col-sm-6">
+<div><strong> Next Planned Contact</strong></div>
+<?php if (empty($company['planned_at2'])): ?>
+	None
+<?php else: ?>
+	<div class="action_type"><?php echo $company['action_name2']." by ".$company['action_user2']; ?></div>
+
+	<div class="action_date_list">
+<?php echo date("l jS F Y",strtotime($company['planned_at2']));?>
+</div>
+<?php
+$now = time (); // or your date as well
+$your_date = strtotime($company['planned_at2']);
+$days_since = floor($datediff/(60*60*24));
+if ($your_date < $now){; ?>
+<div><span class="label label-danger" style="font-size:11px;">Overdue</span></div><?php } else {}
+?>
+<?php endif; ?>
+
+</div>
+</div><!--END ROW-->
+<hr>
+</div>
+
+ 
+
+
+
+
+
 		<div class="col-sm-12" style="margin-bottom:10px;">
 				<label>Company Name</label>
 				<p style="margin-bottom:0;">	

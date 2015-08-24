@@ -40,6 +40,7 @@ echo "<div style='font-size:12px;'>Owned by ".$current_campaign_owner->username.
 						<?php endif;?> <?php echo $results_type ?>:
 						</strong>
 						<?php echo $current_campaign_name; ?>
+						<div><a class="btn  btn-info btn-xs" href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $current_campaign_id; ?>">Refresh</a></div>
 						<p style="font-size:14px"><?php echo $current_campaign_stats->description; ?></p>
 
 						</div>	
