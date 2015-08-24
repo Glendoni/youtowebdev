@@ -221,7 +221,7 @@ class Campaigns_model extends MY_Model {
 		SELECT id
 		FROM actions z2 
 		WHERE z2.company_id = ac2.company_id and z2.actioned_at is null and z2.cancelled_at is null
-		order by z2.planned_at asc limit 1
+		order by z2.planned_at desc limit 1
 		)
 
 		LEFT JOIN 
@@ -341,11 +341,15 @@ class Campaigns_model extends MY_Model {
 		)   T2
 		ON T1.id = T2."company id"
 		-- insert this for sort order  
-		order by actioned_at asc NULLS FIRST,case when pipeline = \'Customer\' then 1
+		order by 
+		CASE when pipeline = \'Lost\' then 9
+		when pipeline = \'Unsuitable\' then 10
+		else 1
+        END,
+		actioned_at asc NULLS FIRST,case when pipeline = \'Customer\' then 1
 		when pipeline = \'Proposal\' then 2
 		when pipeline = \'Intent\' then 3
 		when pipeline = \'Qualified\' then 4
-		when pipeline = \'Lost\' then 8
 		else 5
 		end
 		 
