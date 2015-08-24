@@ -6,7 +6,6 @@
                 <li role="presentation"><button href="#calls" aria-controls="calls" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;">Calls & Meetings</button></li>
                 <li role="presentation"><button href="#pipeline" aria-controls="pipeline" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;">Pipeline</button></li>
                 <li role="presentation"><button href="#assigned" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;">Assigned</button></li>
-                <li role="presentation"><a href="https://wrangler.io/public/1/jjtUMfMwWMaLKNUo5bE_Tg" target="_blank" class="btn btn-primary btn-sm" style="margin-right:10px;    padding: 5px 10px;font-size: 12px;line-height: 1.5;border-radius: 3px; color:#fff;   background-color: #428bca;border-color: #357ebd;">Weekly Health-Check <span style="line-height: 15px;font-size: 10px;padding-left: 5px;"><i class="fa fa-external-link"></i></span></a></li>
 
               </ul>
 
