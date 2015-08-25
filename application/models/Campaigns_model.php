@@ -45,6 +45,8 @@ class Campaigns_model extends MY_Model {
 		// Apply this to find saved searches only
 		$this->db->where('criteria IS NULL', null, false);
 		$this->db->where('c.shared', 'True');
+				$this->db->where('comp.active', 'True');
+
 		$this->db->where_not_in('c.user_id', $user_id);
 		$this->db->order_by("c.created_at", "desc");
 		$this->db->where("(c.eff_to IS NULL OR c.eff_to > '".date('Y-m-d')."')",null, false); 
@@ -562,7 +564,7 @@ where (action_type_id in ('4','5','8','9','10','16','17','18','23','6'))
 )   A
 on CO.id = A.company_id
 where C.criteria is null
-and C.id = '$id'
+and C.id = '$id' and CO.active = 't'
 group by 1,2,3,4
 order by 2, 1 desc
 )   T1
@@ -581,6 +583,7 @@ ON C.company_id = T.company_id
 JOIN CAMPAIGNS CA
 ON T.campaign_id = CA.id
 where 
+
 EC.created_at > C.created_at
 group by 1
 )   T2

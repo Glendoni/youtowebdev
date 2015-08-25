@@ -24,7 +24,7 @@ class Contacts extends MY_Controller {
 
 			if($this->form_validation->run())
 			{
-				echo $rows_affected = $this->Contacts_model->create_contact($this->input->post('first_name'),$this->input->post('last_name'),$this->input->post('email'),$this->input->post('role'),$this->input->post('company_id'),$this->input->post('user_id'),$this->input->post('phone'),$this->input->post('linkedin_id'));
+				$rows_affected = $this->Contacts_model->create_contact($this->input->post('first_name'),$this->input->post('last_name'),$this->input->post('email'),$this->input->post('role'),$this->input->post('company_id'),$this->input->post('user_id'),$this->input->post('phone'),$this->input->post('linkedin_id'));
 				if($rows_affected  > 0)
 				{
 					$this->output->set_status_header('200');

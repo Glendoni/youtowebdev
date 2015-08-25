@@ -1,5 +1,12 @@
 <div class="container">
     <div class="row">
+    <?php $msg = $this->session->flashdata('message'); $msg_2 = validation_errors(); if($msg or $msg_2): ?>
+        <div class="alert alert-danger alert-dismissible " role="alert">
+          <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+           <strong> <?php echo $msg ?>
+            <?php echo $msg_2 ?></strong>
+        </div>
+    <?php endif; ?>
         <div class="col-md-4 col-md-offset-4">
             <div class="login-panel panel panel-default">
                 <div class="panel-heading">

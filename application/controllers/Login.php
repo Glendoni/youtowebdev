@@ -42,16 +42,20 @@ class Login extends MY_Controller {
 			$sess_array = array();
 			foreach($result as $row)
 			{
+				$logged_in_user_id = $row->id;
+				$this->Users_model->update_last_login($logged_in_user_id);
 				$sess_array = array(
 				 'user_id' => $row->id,
 				 'user_name' => $row->name
 				);
 				$this->session->set_userdata('logged_in', $sess_array);
+				//UPDATE LAST LOGIN
 			}
 			return TRUE;
 		}
 		else
 		{
+			$this->Users_model->update_last_unsuccessful_login($email);
 			$this->form_validation->set_message('check_database', 'Invalid email or password');
 			return FALSE;
 		}
