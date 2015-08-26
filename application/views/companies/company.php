@@ -1,4 +1,8 @@
 <?php  $company = $companies[0]; ?>
+		<?php if (!isset($company['id'])): ?>
+<div class="alert alert-danger" role="alert">This company is no longer active.</div>
+			<?php endif; ?>
+
 <div class="page-results-list">
 <div class="top-info-holder">
     <div class="row">

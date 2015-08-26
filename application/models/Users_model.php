@@ -55,12 +55,21 @@ class Users_model extends MY_Model {
 		$sql = "update users set last_login = now(), unsuccessful_login_attempts = '0' where id = '$logged_in_user_id'";
 		$query = $this->db->query($sql);
 	}
-		function update_last_unsuccessful_login($email)
+	function update_last_unsuccessful_login($email)
 	{	
 		$sql = "update users set last_unsuccessful_login_attempt = now(), unsuccessful_login_attempts = unsuccessful_login_attempts + 1 where email = '$email'";
 		$query = $this->db->query($sql);
+		$sql = "select unsuccessful_login_attempts
+				from users u
+				where u.email = '$email' limit 1";
+		$query = $this->db->query($sql);
+		return $query->result(); /* returns an object */
 	}
-
+	function disable_user($email)
+	{	
+		$sql = "update users set active = 'f' where email = '$email'";
+		$query = $this->db->query($sql);
+	}
 
 
 	// UPDATES

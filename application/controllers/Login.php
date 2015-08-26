@@ -55,8 +55,16 @@ class Login extends MY_Controller {
 		}
 		else
 		{
-			$this->Users_model->update_last_unsuccessful_login($email);
 			$this->form_validation->set_message('check_database', 'Invalid email or password');
+			$result = $this->Users_model->update_last_unsuccessful_login($email);
+			foreach($result as $row)
+			{
+			if ($row->unsuccessful_login_attempts >9){
+			$this->Users_model->disable_user($email);
+			$this->form_validation->set_message('check_database', 'Your account is now locked.');
+			}
+			}
+
 			return FALSE;
 		}
 	}
