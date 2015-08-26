@@ -966,14 +966,16 @@ LEFT JOIN
 			'contact_id'    => (isset($post['contact_id'])?$post['contact_id']:NULL),
 			'created_by'	=> $post['user_id'],
 			'action_type_id'=> '19',
-			'actioned_at'	=> (!isset($post['actioned_at']) && !isset($post['planned_at'])?date('Y-m-d H:i:s', time() + 30):NULL),
-			'created_at' 	=> date('Y-m-d H:i:s', time() + 30), 
+			'actioned_at'	=> (!isset($post['actioned_at']) && !isset($post['planned_at'])?date('Y-m-d H:i:s'):NULL),
+			'created_at' 	=> date('Y-m-d H:i:s'),
 			);
 		
 		$query = $this->db->insert('actions', $data);
     	}
 		$this->db->where('id', $post['company_id']);
 		$this->db->update('companies', $company);
+		
+
 		$company_status = $this->db->affected_rows();
 
 		// clear existing sectors to no active 

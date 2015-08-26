@@ -41,7 +41,7 @@
 
 <div class="panel panel-primary" style="padding-top: 30px;">
 	<div class="panel-body">
-    	<div class="row"><!-- AT THE END OF PANEL-->
+    	<div class="row"><!--FINISHED AT THE END OF PANEL-->
 		<div class="col-sm-9">
 		<div class="row">
 		<div class="col-sm-12" style="margin-bottom:10px;">
@@ -53,7 +53,7 @@
 		<div class="col-sm-12" style="margin-top:10px;">
 				<label>Address</label>
 				<p style="margin-bottom:0;">
-                <?php echo isset($company['address'])?'<a href="http://maps.google.com/?q='.urlencode($company['address']).'" target="_blank">'.$company['address'].'<span style="line-height: 15px;font-size: 10px;padding-left: 5px;"><i class="fa fa-external-link"></i></span></a>':'-'; ?>  
+                <?php echo isset($company['address'])?'<a href="http://maps.google.com/?q='.urlencode($company['address']).'" target="_blank">'.$company['address'].'<span style="    line-height: 15px;font-size: 10px;padding-left: 5px;"><i class="fa fa-external-link"></i></span></a>':'-'; ?>  
 				</p><hr>
 		</div><!--END ADDRESS-->
 
