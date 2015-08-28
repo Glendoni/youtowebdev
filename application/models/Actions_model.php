@@ -89,12 +89,15 @@ return $query->result_object();
 	{
 		$category_exclude = array('7', '20');
 		$data = array(
-			'company_id' => $company_id,
+			'a.company_id' => $company_id,
 			);
+		$this->db->select('a.created_at,a.actioned_at,a.action_type_id,a.comments,a.outcome,a.id,u.image,u.name,c.first_name,c.last_name,a.contact_id", ');
+		$this->db->join('contacts c', 'c.id = a.contact_id', 'left');
+		$this->db->join('users u', 'a.user_id = u.id', 'left');
 		$this->db->where('actioned_at IS NOT NULL', null);
 		$this->db->where_not_in('action_type_id', $category_exclude);
 		$this->db->order_by('actioned_at desc,planned_at desc');
-		$query = $this->db->get_where('actions', $data);
+		$query = $this->db->get_where('actions a', $data);
 		return $query->result_object();
 	}
 

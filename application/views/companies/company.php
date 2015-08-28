@@ -610,44 +610,39 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 
 
 <!-- COMPLETED -->
-				            <div class="tab-pane fade in" id="completed">
-				               <?php if (count($actions_completed) > 0): ?>
-								<ul class="list-group">
+				<div class="tab-pane fade in" id="completed">
+				   	<?php if (count($actions_completed) > 0): ?>
+						<ul class="list-group">
 								<?php foreach ($actions_completed as $action_completed): 
-	 // print_r('<pre>');print_r($action);print_r('</pre>');
 								 $created_date_formatted = date("l jS F y",strtotime($action_completed->created_at))." @ ".date("H:i",strtotime($action_completed->created_at));
 								 $actioned_date_formatted = date("l jS F y",strtotime($action_completed->actioned_at))." @ ".date("H:i",strtotime($action_completed->actioned_at));
-								 $cancelled_at_formatted = date(" jS F y",strtotime($action_completed->cancelled_at))." @ ".date("H:i",strtotime($action_completed->cancelled_at));
 								 $now = date(time());
 								?>
 				
-								<?php if ($action_completed->action_type_id == 19): ?>
+						<?php if ($action_completed->action_type_id == 19): ?>
 									<?php $arr = explode(' ',trim($action_completed->comments));$pipeline_updated = $arr[3];?><li class="list-group-item pipeline-update <?php echo $pipeline_updated;?>"><?php echo $action_completed->comments ?>
 				                                on <?php echo date("l jS F y",strtotime($action_completed->actioned_at))." @ ".date("H:i",strtotime($action_completed->actioned_at)); ?></li>
 									<?php else: ?>
-				                <li class="list-group-item">
-					<div class="row" style="padding: 15px 0">
-						<div class="col-md-12 ">
-							<div class="col-xs-2 col-md-1 profile-heading">
-								<span><?php $user_icon = explode(",", ($action_completed->image)); echo "<div class='circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
-
-
-				
-								</span>
-							</div>
+						<li class="list-group-item">
+							<div class="row" style="padding: 15px 0">
+								<div class="col-md-12 ">
+									<div class="col-xs-2 col-md-1 profile-heading">
+										<span>
+										<?php $user_icon = explode(",", ($action_completed->image)); echo "<div class='circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?></span>
+									</div>
 							<div class="col-xs-6 col-md-5">
 								<h4 style="margin:0;">
 									<a data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $action_completed->id ?>" aria-expanded="false" aria-controls="collapse<?php echo $action_completed->id ?>">
 									<?php echo $action_types_array[$action_completed->action_type_id]; ?>
                                     </a>
 								<div class="mic-info">
-								Created By: <?php echo $system_users[$action_completed->user_id]?> on <?php echo $created_date_formatted?>
+								Created By: <?php echo $action_completed->name;?> on <?php echo $created_date_formatted?>
 											</div>
 											</h4>
 											</div><!--END COL-MD-5-->
 											<div class="col-xs-4 col-md-6" style="text-align:right;">
 											<!--SHOW CONTACT NAME-->
-											<?php if($action_completed->contact_id):?><span class="label label-primary" style="font-size:11px; margin-left:10px;  "><?php echo $option_contacts[$action_completed->contact_id]; ?></span>
+											<?php if($action_completed->contact_id):?><span class="label label-primary" style="font-size:11px; margin-left:10px;  "><?php echo $action_completed->first_name.' '.$action_completed->last_name; ?></span>
 											<?php endif; ?>
 											<span class="label label-success" style="font-size:11px; margin-left:10px;">Completed on <?php echo date("l jS F y",strtotime($action_completed->actioned_at))." @ ".date("H:i",strtotime($action_completed->actioned_at)); ?></span>
 											</div>

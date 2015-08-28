@@ -203,7 +203,7 @@ class Campaigns_model extends MY_Model {
 		(
 		SELECT MAX(id) 
 		FROM actions z 
-		WHERE z.company_id = ac1.company_id and z.action_type_id in (\'4\',\'5\',\'8\',\'9\',\'10\',\'11\',\'12\',\'13\',\'17\',\'18\')
+		WHERE z.company_id = ac1.company_id and z.action_type_id in (\'4\',\'5\',\'6\',\'8\',\'9\',\'10\',\'11\',\'12\',\'13\',\'17\',\'18\')
 		and z.actioned_at is not null
 		order by ac1.actioned_at desc
 		)
@@ -350,7 +350,7 @@ class Campaigns_model extends MY_Model {
 		when pipeline = \'Unsuitable\' then 10
 		else 1
         END,
-		actioned_at asc NULLS FIRST,case when pipeline = \'Customer\' then 1
+		AC1.actioned_at asc NULLS FIRST,case when pipeline = \'Customer\' then 1
 		when pipeline = \'Proposal\' then 2
 		when pipeline = \'Intent\' then 3
 		when pipeline = \'Qualified\' then 4
@@ -517,7 +517,7 @@ class Campaigns_model extends MY_Model {
 
 function get_campaign_pipeline($id)
 	{
-	$sql = "select campaign_id ,\"campaign name\",
+$sql = "select campaign_id ,\"campaign name\",
 description,
 image,
 \"created\",
@@ -527,11 +527,12 @@ campaign_prospects,
 campaign_intent,
 campaign_proposals,
 campaign_customers,
+campaign_unsuitable,
 T2.\"emails\" as emails,
 T2.\"distinct companies emailed\" as companies_emailed,
 round(100 * T2.\"distinct companies emailed\"::numeric / campaign_total::numeric) \"% support\"
 from
-(-- T1
+(
 select C.id,
 C.id campaign_id,
 C.created_at::date \"created\",
@@ -539,13 +540,16 @@ U.image image,
 C.name \"campaign name\" ,
 C.description description ,
 count(distinct T.company_id) campaign_total,
-round (100 * count(distinct (CASE when A.created_at > C.created_at then A.company_id else null END ))::numeric  / count(distinct CO.id)::numeric) \"%\",
+round (100 * count(distinct (CASE when A.created_at > C.created_at AND CO.pipeline <> 'Unsuitable' then A.company_id else null END ))::numeric  / CASE when count(distinct CASE when CO.pipeline <> 'Unsuitable' then CO.id END) = 0 then 0 
+else count(distinct CASE when CO.pipeline <> 'Unsuitable' then CO.id END) END::numeric) \"%\",
 CASE when count(distinct CASE when CO.pipeline ilike 'Prospect' then CO.id END) = 0 then 0 
 else count(distinct CASE when CO.pipeline ilike 'Prospect' then CO.id END) END campaign_prospects,
 CASE when count(distinct CASE when CO.pipeline ilike 'Intent' or CO.pipeline ilike 'Qualified' then CO.id END) = 0 then 0 
 else count(distinct CASE when CO.pipeline ilike 'Intent' or CO.pipeline ilike 'Qualified' then CO.id END) END campaign_intent,
 CASE when count(distinct CASE when CO.pipeline ilike 'Proposal' then CO.id END) = 0 then 0
 else count(distinct CASE when CO.pipeline ilike 'Proposal' then CO.id END)  END campaign_proposals,
+	CASE when count(distinct CASE when CO.pipeline ilike 'Unsuitable' then CO.id END) = 0 then 0
+else count(distinct CASE when CO.pipeline ilike 'Unsuitable' then CO.id END)  END campaign_unsuitable,
 CASE when count(distinct CASE when CO.pipeline ilike 'Customer' and CO.customer_from > C.created_at then CO.id END) = 0 then 0
 else count(distinct 
 CASE when CO.pipeline = 'Customer' and CO.customer_from > C.created_at then CO.id END) END campaign_customers
@@ -557,7 +561,7 @@ ON C.id = T.campaign_id
 INNER JOIN COMPANIES CO
 ON T.company_id = CO.id
 LEFT JOIN 
-(-- A
+(
 select *
 from ACTIONS 
 where (action_type_id in ('4','5','8','9','10','16','17','18','23','6')) 
@@ -571,7 +575,7 @@ group by 1,2,3,4
 order by 2, 1 desc
 )   T1
 LEFT JOIN
-(-- T2
+(
 select CA.id,
 count(*) \"emails\",
 count(distinct C.company_id) \"distinct companies emailed\"
