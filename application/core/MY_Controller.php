@@ -393,8 +393,7 @@ class MY_Controller extends CI_Controller {
 			if($company->company->f1->f35)$mapped_companies_array['planned_at2'] = $company->company->f1->f35;
 			if($company->company->f1->f36)$mapped_companies_array['action_name2'] = $company->company->f1->f36;
 			if($company->company->f1->f37)$mapped_companies_array['action_user2'] = $company->company->f1->f37;
-
-
+			if($company->company->f1->f38)$mapped_companies_array['trading_name'] = $company->company->f1->f38;
 
 
 			

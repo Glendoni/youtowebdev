@@ -433,7 +433,8 @@ class Companies_model extends CI_Model {
 			   AU1.name, -- f34
 			   AC2.planned_at, -- f35
 			   ACT2.name , -- f36
-			   AU2.name -- f37
+			   AU2.name, -- f37
+			   C.trading_name --f38
 
 			   )) "JSON output" 
 			   
@@ -580,7 +581,8 @@ LEFT JOIN
 			     AU1.name,
 			     AC2.planned_at,
 			     ACT2.name,
-			     AU2.name
+			     AU2.name,
+			     C.trading_name
 
 		order by C.id 
 
@@ -940,6 +942,7 @@ LEFT JOIN
 		
 		
 		$company = array(
+				'trading_name' => !empty($post['trading_name'])?$post['trading_name']:NULL,
 				'phone' => !empty($post['phone'])?$post['phone']:NULL,
 				'linkedin_id' => (isset($post['linkedin_id']) and !empty($post['linkedin_id']))?$post['linkedin_id']:NULL,
 				'url' => !empty($post['url'])?str_replace('http://', '',$post['url']):NULL,
@@ -947,9 +950,10 @@ LEFT JOIN
 				'perm'=>!empty($post['perm'])?$post['perm']:NULL,
 				'class'=>!empty($post['company_class'])?$post['company_class']:NULL,
 				'pipeline'=>$post['company_pipeline'],
+				'updated_by'=>$post['user_id'],
 				//'pipeline'=>!empty($post['company_pipeline'])?$post['company_pipeline']:NULL,
-				'updated_at' => date('Y-m-d H:i:s')
-			);
+				'updated_at' => date('Y-m-d H:i:s')			
+				);
 
 		$this->db->select('id,pipeline');
 		$this->db->where('pipeline',$post['company_pipeline']);
@@ -1099,7 +1103,7 @@ LEFT JOIN
 
 
     function get_autocomplete($search_data) {
-		$query1 = $this->db->query("select c.name,c.id, c.pipeline, u.name as user, u.image as image, user_id from companies c left join  users u on u.id = c.user_id where c.eff_to IS NULL and c.active = 'true' and c.name ilike'".$search_data."%' order by name asc limit 7 ");
+		$query1 = $this->db->query("select c.name,c.id, c.pipeline, u.name as user, u.image as image, user_id from companies c left join  users u on u.id = c.user_id where c.eff_to IS NULL and c.active = 'true' and (c.name ilike'".$search_data."%' or c.trading_name ilike'".$search_data."%') order by name asc limit 7 ");
 
 	    if ($query1->num_rows() > 0)
 			{
@@ -1107,7 +1111,7 @@ LEFT JOIN
 			}
 		else 
 			{
-			return $this->db->query("select c.name,c.id, c.pipeline, u.name as user, u.image as image, user_id from companies c left join  users u on u.id = c.user_id where c.eff_to IS NULL and c.active = 'true' and (c.name ilike '%".$search_data."%' or c.registration ilike '".$search_data."%' or regexp_replace(c.phone, E'[^0-9]', '', '') ilike regexp_replace('".$search_data."%', E'[^0-9%]', '', '')) order by c.name asc limit 5 ");
+			return $this->db->query("select c.name,c.id, c.pipeline, u.name as user, u.image as image, user_id from companies c left join  users u on u.id = c.user_id where c.eff_to IS NULL and c.active = 'true' and (c.name ilike '%".$search_data."%' or c.trading_name ilike '%".$search_data."%' or c.registration ilike '".$search_data."%' or regexp_replace(c.phone, E'[^0-9]', '', '') ilike regexp_replace('".$search_data."%', E'[^0-9%]', '', '')) order by c.name asc limit 7 ");
 			}
 	}
 	    function get_autocomplete_contact($search_data) {
@@ -1119,7 +1123,7 @@ LEFT JOIN
 			}
 		else 
 			{
-			return $this->db->query("select concat(c.first_name::text,' ', c.last_name::text) as name, c.company_id as id, con.name as company_name from contacts c left join companies con on con.id= c.company_id where concat(c.first_name::text, ' ', c.last_name::text) ilike '%".$search_data."%' or regexp_replace(c.phone, E'[^0-9]', '', '') ilike regexp_replace('".$search_data."%', E'[^0-9%]', '', '') or regexp_replace(c.email, E'[^0-9]', '', '') ilike regexp_replace('".$search_data."%', E'[^0-9%]', '', '') order by name asc limit 5 ");
+			return $this->db->query("select concat(c.first_name::text,' ', c.last_name::text) as name, c.company_id as id, con.name as company_name from contacts c left join companies con on con.id= c.company_id where concat(c.first_name::text, ' ', c.last_name::text) ilike '%".$search_data."%' or regexp_replace(c.phone, E'[^0-9]', '', '') ilike regexp_replace('".$search_data."%', E'[^0-9%]', '', '') or regexp_replace(c.email, E'[^0-9]', '', '') ilike regexp_replace('".$search_data."%', E'[^0-9%]', '', '') order by name asc limit 7 ");
 			}
 	}
 }

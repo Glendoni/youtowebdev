@@ -9,6 +9,13 @@
             </div>
             <div class="modal-body">
             <div class="row">
+            <div class="col-sm-6 col-md-8">
+            <div class=" form-group ">
+                        <label for="trading_name" class="control-label">Trading Name</label>                            
+                        <input type="text" name="trading_name" value="<?php echo isset($company['trading_name'])?$company['trading_name']:''; ?>" id="trading_name" maxlength="50" class="form-control" placeholder="<?php echo isset($company['name'])?$company['name']:''; ?>">
+            </div>
+            </div>
+
             <div class="col-sm-6 col-md-4">
                     <div class=" form-group ">
                     <?php  
@@ -27,6 +34,9 @@
                                 ?>
                     </div>
                 </div>
+                </div>
+                            <div class="row">
+
               <div class="col-sm-6 col-md-4">
                     <div class=" form-group ">
                     <?php
@@ -62,7 +72,7 @@
                 <div class="col-sm-6 col-md-4">
                     <div class=" form-group ">
                         <label for="phone" class="control-label">Phone</label>                            
-                        <input type="text" name="phone" value="<?php echo isset($company['phone'])?$company['phone']:''; ?>" id="url" maxlength="50" class="form-control">
+                        <input type="text" name="phone" value="<?php echo isset($company['phone'])?$company['phone']:''; ?>" id="phone" maxlength="50" class="form-control">
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-4">

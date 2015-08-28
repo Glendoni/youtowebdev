@@ -15,6 +15,11 @@
 	<h2 class="company-header">
 		<?php $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' );echo str_replace($words, ' ',$company['name']); ?>
 	</h2>
+	<?php if (isset($company['trading_name'])): ?>
+	<h5 class="trading-header">
+<?php echo $company['trading_name'];?>
+</h5>
+	<?php endif; ?>
 	</div><!--END ROW-->
 
 	<div class="row" style="margin-top:5px; text-align:center;">
@@ -44,12 +49,29 @@
     	<div class="row"><!--FINISHED AT THE END OF PANEL-->
 		<div class="col-sm-9">
 		<div class="row">
-		<div class="col-sm-12" style="margin-bottom:10px;">
+
+		<?php if (isset($company['trading_name'])): ?>
+		<div class="col-md-6" style="margin-bottom:10px;">
 				<label>Company Name</label>
 				<p style="margin-bottom:0;">	
 				<?php echo $company['name']; ?>
 				</p>
 		</div><!--END NAME-->
+		<div class="col-md-6" style="margin-bottom:10px;">
+				<label>Trading Name</label>
+				<p style="margin-bottom:0;">	
+				<?php echo $company['trading_name']; ?>
+				</p>
+		</div><!--END TRADING NAME-->
+		<?php else: ?>
+						<div class="col-sm-12" style="margin-bottom:10px;">
+				<label>Company Name</label>
+				<p style="margin-bottom:0;">	
+				<?php echo $company['name']; ?>
+				</p>
+		</div><!--END NAME-->
+		<?php endif; ?>
+
 		<div class="col-sm-12" style="margin-top:10px;">
 				<label>Address</label>
 				<p style="margin-bottom:0;">
