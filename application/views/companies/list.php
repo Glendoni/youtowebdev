@@ -23,6 +23,11 @@
 					?>
 				</a>
 		</h2>
+		<?php if (isset($company['trading_name'])): ?>
+	<h5 class="trading-header">
+<?php echo $company['trading_name'];?>
+</h5>
+	<?php endif; ?>
 			</div>
 			<div class="col-sm-12" style="margin-top:5px; text-align:center;">
 	<span class="label label-<?php echo str_replace(' ', '', $company['pipeline']); ?>"><?php echo $company['pipeline']?>
