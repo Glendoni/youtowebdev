@@ -350,7 +350,7 @@ class Campaigns_model extends MY_Model {
 		when pipeline = \'Unsuitable\' then 10
 		else 1
         END,
-		AC1.actioned_at asc NULLS FIRST,case when pipeline = \'Customer\' then 1
+		actioned_at asc NULLS FIRST,case when pipeline = \'Customer\' then 1
 		when pipeline = \'Proposal\' then 2
 		when pipeline = \'Intent\' then 3
 		when pipeline = \'Qualified\' then 4
