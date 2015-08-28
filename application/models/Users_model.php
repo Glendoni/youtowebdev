@@ -46,7 +46,7 @@ class Users_model extends MY_Model {
 	function get_user_login($email,$password)
 	{	
 		$limit = 1;
-		$query = $this->db->get_where('users', array('email' => $email,'password'=>md5($password)), $limit);
+		$query = $this->db->get_where('users', array('active'=>'True','email' => $email,'password'=>md5($password)), $limit);
 		return $query->result();
 	}
 
