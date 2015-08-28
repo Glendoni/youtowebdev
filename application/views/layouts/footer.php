@@ -284,8 +284,9 @@
  <?php if(ENVIRONMENT !== 'production'): ?>
     <div class="alert alert-warning" role="alert">
     <p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>
-    </div>
- <?php endif; ?>
+    </div> <?php endif; ?>
+     <?php if(ENVIRONMENT == 'production'): ?>
+
  <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -296,12 +297,26 @@
   ga('send', 'pageview');
 
 </script>
+<?php endif; ?>
+
+
 <script type="text/javascript">
 $('.toggle').click(function (event) {
     event.preventDefault();
     var target = $(this).attr('href');
     $(target).toggleClass('hidden show');
 });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+  $(window).bind('scroll', function() {
+    var navHeight = 300; // custom nav height
+    ($(window).scrollTop() > navHeight) ? $('nav').addClass('goToTop') : $('nav').removeClass('goToTop');
+  });
+});
+
+
 </script>
 
 </body>

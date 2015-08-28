@@ -88,7 +88,11 @@ else
 						}
 					}
 					$this->set_message_success('Action successfully inserted');
-					redirect('companies/company?id='.$this->input->post('company_id').'#actions','location');
+
+					if (!empty($this->input->post('campaign_id'))) {
+					$campaign_id = "&campaign_id=".$this->input->post('campaign_id');}
+					else {$campaign_id ="";};
+					redirect('companies/company?id='.$this->input->post('company_id').$campaign_id.'#actions','location');
 				}
 			}else{
 				$this->set_message_error(validation_errors());
@@ -139,9 +143,10 @@ else
 				$this->form_validation->set_rules('window', 'window', 'xss_clean');
 				$this->form_validation->set_rules('company_id', 'company_id', 'xss_clean');
 				$this->form_validation->set_rules('user_id', 'user_id', 'xss_clean');
+				//REDIRECTION VARIABLE FOR CAMPAIGNS
 
 				if($this->form_validation->run())
-				{
+				{	
 					$outcome = $this->input->post('outcome');
 					$result = $this->Actions_model->set_action_state($this->input->post('action_id'),$this->input->post('user_id'),'completed',$outcome);
 					if($result)
@@ -155,7 +160,11 @@ else
 				}else{
 					$this->set_message_error(validation_errors());
 				}
-				redirect('companies/company?id='.$this->input->post('company_id').'#actions','location');
+
+					if (!empty($this->input->post('campaign_id'))) {
+					$campaign_id = "&campaign_id=".$this->input->post('campaign_id');}
+					else {$campaign_id ="";};
+					redirect('companies/company?id='.$this->input->post('company_id').$campaign_id.'#actions','location');
 			}
 			else if($this->input->post('action_do') == 'cancelled')
 			{	
@@ -169,7 +178,10 @@ else
 				{
 					$this->set_message_warning('Error while canceling action');
 				}
-				redirect('companies/company?id='.$this->input->post('company_id'),'location');
+					if (!empty($this->input->post('campaign_id'))) {
+					$campaign_id = "&campaign_id=".$this->input->post('campaign_id');}
+					else {$campaign_id ="";};
+					redirect('companies/company?id='.$this->input->post('company_id').$campaign_id.'#actions','location');
 			}
 		}
 	}

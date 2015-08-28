@@ -16,12 +16,13 @@
 
 	<?php endif; ?>
 		<h2 class="company-header">
-				<a href="<?php echo site_url();?>companies/company?id=<?php echo $company['id'];?>">
+				<a href="<?php echo site_url();?>companies/company?id=<?php echo $company['id'];?>
+				<?php echo isset($current_campaign_id)?'&campaign_id='.$current_campaign_id:''; ?>">
 					<?php 
 					$words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' );
 					echo str_replace($words, ' ',$company['name']); 
 					?>
-				</a>
+				</a> <?php echo next($company['id']);?>
 		</h2>
 		<?php if (isset($company['trading_name'])): ?>
 	<h5 class="trading-header">

@@ -364,6 +364,21 @@ border-right: 1px solid #e7e7e7;
 	background-color:#FFBFBF !important;
 }
 
+.return_to_campaign {
+	background-color: #F3583E;
+	margin: -20px -15px 20px -15px;
+    color: #fff;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    text-align: center;
+    border-bottom: 2px solid rgba(248,248,249, .5);
+}
+.return_to_campaign .btn {
+	background-color: transparent;
+	border-color: #fff;
+	color: #fff;
+}
+
 /*ACTION COMMENTS BOX*/
 .mic-info { color: #666666;font-size: 11px;margin-top: 5px; }
 

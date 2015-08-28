@@ -911,7 +911,7 @@
                   <!-- PRIVATE SEARCHES -->
                   <?php foreach ($private_campaigns as $campaign):?>
                   <a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $campaign->id; ?>" class="load-saved-search" <?php echo strlen($campaign->name) > 33 ? 'title="'.$campaign->name.'"':"" ?>><div class="row">
-                  <div class="col-xs-9 col-xs-offset-1"><?php echo strlen($campaign->name) > 33? substr($campaign->name,0,36).'...' : $campaign->name?></div>
+                  <div class="col-xs-9 col-xs-offset-1"><?php echo strlen($campaign->name) > 33? substr($campaign->name,0,33).'...' : $campaign->name?></div>
                   <div class="col-xs-1" style="text-align:right;"><b><?php echo $campaign->campaigncount; ?></b></div>
                   </div>
                   </a>
