@@ -75,13 +75,11 @@ class Contacts_model extends CI_Model {
         $contact->updated_at = date('Y-m-d H:i:s');
         $this->db->where('id', $post['contact_id']);
 		$this->db->update('contacts',$contact);
-		echo $this->db->last_query();
-
-        if($this->db->affected_rows() !== 1){
+		 if($this->db->affected_rows() !== 1){
 			$this->addError($this->db->_error_message());
-			return false;
+			return False;
 		}else{
-			return true;
+			return True;
 		} 
     }
     
