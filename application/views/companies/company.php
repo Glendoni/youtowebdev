@@ -1,5 +1,7 @@
 <?php  $company = $companies[0]; ?>
-<?php $campaign_id = $_GET['campaign_id'];?>
+<?php if (!empty($_GET['campaign_id'])): 
+$campaign_id = $_GET['campaign_id'];
+endif; ?>
 		<?php if (!isset($company['id'])): ?>
 <div class="alert alert-danger" role="alert">This company is no longer active.</div>
 			<?php endif; ?>

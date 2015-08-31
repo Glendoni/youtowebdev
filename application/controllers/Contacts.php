@@ -74,7 +74,10 @@ class Contacts extends MY_Controller {
 				if($rows_affected)
 				{
 					$this->set_message_success('Contact has been updated.');
-					redirect('/companies/company?id='.$this->input->post('company_id'));
+					if (!empty($this->input->post('campaign_id'))) {
+					$campaign_id = "&campaign_id=".$this->input->post('campaign_id');}
+					else {$campaign_id ="";};
+					redirect('companies/company?id='.$this->input->post('company_id').$campaign_id.'#contacts','location');
 					// $this->refresh_search_results();
 				}
 				else
