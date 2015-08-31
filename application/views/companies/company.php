@@ -404,7 +404,7 @@ $mortgages_start  = $mortgage['eff_from'];$date_pieces = explode("/", $mortgages
 		<div class="panel panel-info ">
 		  <div class="panel-heading"><h3 class="panel-title">Completed & Follow Up Actions</h3></div>
 		  <div class="panel-body">
-		   <?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'],'done'=>'1','campaign_id' => $campaign_id, 'class_check' => $companies_classes[$company['class']],);
+		   <?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'],'done'=>'1', 'class_check' => $companies_classes[$company['class']],);
 			echo form_open(site_url().'actions/create', 'name="create" class="form" role="form"',$hidden); ?>
 			<!--THE BELOW PASSES THE CLASS FIELD ACROSS PURELY FOR VALIDATION - IF THERE IS A BETTER WAY OF DOING THIS THEN IT NEEDS TO BE HERE-->
 			
@@ -547,18 +547,18 @@ $mortgages_start  = $mortgage['eff_from'];$date_pieces = explode("/", $mortgages
 					
 								<?php if(strtotime($action_outstanding->planned_at) > $now and !isset($action_outstanding->actioned_at)) : ?>
 								<span class="label label-warning" style="font-size:11px; margin-left:10px;"><?php echo $planned_date_formatted ?> </span>
-								<?php $hidden = array('action_id' => $action_outstanding->action_id , 'user_id' => $current_user['id'] , 'action_do' => 'cancelled','outcome' => '' ,'company_id' => $company['id'],'campaign_id' => $campaign_id,); echo form_open(site_url().'actions/edit', 'name="cancel_action"  class="cancel_action pull-right" style="margin-left:5px;" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action_outstanding->action_id.'" role="form"',$hidden); ?>
+								<?php $hidden = array('action_id' => $action_outstanding->action_id , 'user_id' => $current_user['id'] , 'action_do' => 'cancelled','outcome' => '' ,'company_id' => $company['id'],); echo form_open(site_url().'actions/edit', 'name="cancel_action"  class="cancel_action pull-right" style="margin-left:5px;" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action_outstanding->action_id.'" role="form"',$hidden); ?>
 <button class="btn btn-danger btn-sm" ><i class="fa fa-trash-o fa-sm"></i> </button>
 <?php echo form_close(); ?>
-<?php $hidden = array('action_id' => $action_outstanding->action_id , 'user_id' => $current_user['id'], 'action_do' => 'completed', 'outcome' => '' ,'action_type_id_outcome' =>'','company_id' => $company['id'],'campaign_id' => $campaign_id,);
+<?php $hidden = array('action_id' => $action_outstanding->action_id , 'user_id' => $current_user['id'], 'action_do' => 'completed', 'outcome' => '' ,'action_type_id_outcome' =>'','company_id' => $company['id'],);
 echo form_open(site_url().'actions/edit', 'name="completed_action"  class="completed_action pull-right" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action_outstanding->action_id.'" style="display:inline-block;" role="form"',$hidden); ?><button class="btn btn-success btn-sm"><i class="fa fa-check fa-sm"></i> </button> <?php echo form_close(); ?>
 								<?php elseif(strtotime($action_outstanding->planned_at) < $now and !isset($action_outstanding->actioned_at)):?>
 								<span class="label label-danger" style="font-size:11px; margin-left:10px;"><b>Overdue</b> <?php echo $planned_date_formatted ?> </span>
 <!--CANCELLED BUTTON-->
-								<?php $hidden = array('action_id' => $action_outstanding->action_id , 'user_id' => $current_user['id'] , 'action_do' => 'cancelled','outcome' => '' ,'company_id' => $company['id'],'campaign_id' => $campaign_id, ); echo form_open(site_url().'actions/edit', 'name="cancel_action"  class="cancel_action pull-right" style="margin-left:5px;" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action_outstanding->action_id.'" role="form"',$hidden); ?><button class="btn btn-danger btn-sm"><i class="fa fa-trash-o fa-sm"></i> </button>
+								<?php $hidden = array('action_id' => $action_outstanding->action_id , 'user_id' => $current_user['id'] , 'action_do' => 'cancelled','outcome' => '' ,'company_id' => $company['id'], ); echo form_open(site_url().'actions/edit', 'name="cancel_action"  class="cancel_action pull-right" style="margin-left:5px;" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action_outstanding->action_id.'" role="form"',$hidden); ?><button class="btn btn-danger btn-sm"><i class="fa fa-trash-o fa-sm"></i> </button>
 <?php echo form_close(); ?>
 <!--COMPLETED BUTTON-->
-<?php $hidden = array('action_id' => $action_outstanding->action_id , 'user_id' => $current_user['id'], 'action_do' => 'completed', 'outcome' => '' ,'company_id' => $company['id'],'campaign_id' => $campaign_id,); echo form_open(site_url().'actions/edit', 'name="completed_action"  class="completed_action pull-right" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action_outstanding->action_id.'" style="display:inline-block;" role="form"',$hidden); ?>
+<?php $hidden = array('action_id' => $action_outstanding->action_id , 'user_id' => $current_user['id'], 'action_do' => 'completed', 'outcome' => '' ,'company_id' => $company['id'],); echo form_open(site_url().'actions/edit', 'name="completed_action"  class="completed_action pull-right" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action_outstanding->action_id.'" style="display:inline-block;" role="form"',$hidden); ?>
 <button class="btn btn-success btn-sm"><i class="fa fa-check fa-sm"></i> </button><?php echo form_close(); ?>
 <?php elseif($action_outstanding->actioned_at): ?>
 <span class="label label-success pull-right" style="font-size:11px; margin-left:10px;">Completed on <?php echo $action_outstandinged_date_formatted ?></span><?php endif; ?>
@@ -927,7 +927,7 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 					</div>
 					<?php endif; ?>
 					</div>
-					<?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'],'done'=>'1','campaign_id' => $campaign_id,);
+					<?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'],'done'=>'1',);
 					echo form_open(site_url().'actions/create', 'name="create" class="" role=""',$hidden); ?>
 		            	<input type="hidden" name="action_type_completed" value="7">
 		            	<div class="col-md-10">					
