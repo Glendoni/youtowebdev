@@ -24,7 +24,7 @@ class Contacts extends MY_Controller {
 
 			if($this->form_validation->run())
 			{
-				 echo $rows_affected = $this->Contacts_model->create_contact($this->input->post('first_name'),$this->input->post('last_name'),$this->input->post('email'),$this->input->post('role'),$this->input->post('company_id'),$this->input->post('user_id'),$this->input->post('phone'),$this->input->post('linkedin_id'));
+				echo $rows_affected = $this->Contacts_model->create_contact($this->input->post('first_name'),$this->input->post('last_name'),$this->input->post('email'),$this->input->post('role'),$this->input->post('company_id'),$this->input->post('user_id'),$this->input->post('phone'),$this->input->post('linkedin_id'));
 				if($rows_affected  > 0)
 				{
 					$this->output->set_status_header('200');
@@ -70,14 +70,11 @@ class Contacts extends MY_Controller {
 
 			if($this->form_validation->run())
 			{
-				echo $rows_affected = $this->Contacts_model->update($this->input->post());
+				$rows_affected = $this->Contacts_model->update($this->input->post());
 				if($rows_affected)
 				{
 					$this->set_message_success('Contact has been updated.');
-					if (!empty($this->input->post('campaign_id'))) {
-					$campaign_id = "&campaign_id=".$this->input->post('campaign_id');}
-					else {$campaign_id ="";};
-					redirect('companies/company?id='.$this->input->post('company_id').$campaign_id.'#contacts','location');
+					redirect('/companies/company?id='.$this->input->post('company_id'));
 					// $this->refresh_search_results();
 				}
 				else
