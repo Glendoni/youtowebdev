@@ -78,9 +78,9 @@ class Contacts_model extends CI_Model {
 		$this->db->update('contacts',$contact);
         if($this->db->affected_rows() !== 1){
 			$this->addError($this->db->_error_message());
-			return False;
+			return false;
 		}else{
-			return True;
+			return true;
 		} 
     }
     
