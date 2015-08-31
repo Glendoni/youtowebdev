@@ -70,7 +70,7 @@ class Contacts extends MY_Controller {
 
 			if($this->form_validation->run())
 			{
-				echo $rows_affected = $this->Contacts_model->update($this->input->post());
+				$rows_affected = $this->Contacts_model->update($this->input->post());
 				if($rows_affected)
 				{
 					$this->set_message_success('Contact has been updated.');
