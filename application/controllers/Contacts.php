@@ -21,7 +21,7 @@ class Contacts extends MY_Controller {
 			$this->form_validation->set_rules('email', 'email', 'valid_email');
 			if($this->form_validation->run())
 			{
-				 $rows_affected = $this->Contacts_model->create_contact($this->input->post('first_name'),$this->input->post('last_name'),$this->input->post('email'),$this->input->post('role'),$this->input->post('company_id'),$this->input->post('user_id'),$this->input->post('phone'),$this->input->post('linkedin_id'));
+				 echo $rows_affected = $this->Contacts_model->create_contact($this->input->post('first_name'),$this->input->post('last_name'),$this->input->post('email'),$this->input->post('role'),$this->input->post('company_id'),$this->input->post('user_id'),$this->input->post('phone'),$this->input->post('linkedin_id'));
 				if($rows_affected  > 0)
 				{
 					$this->output->set_status_header('200');
@@ -64,7 +64,7 @@ class Contacts extends MY_Controller {
 			$this->form_validation->set_rules('email', 'email', 'valid_email');
 			if($this->form_validation->run())
 			{
-				$rows_affected = $this->Contacts_model->update($this->input->post());
+				echo $rows_affected = $this->Contacts_model->update($this->input->post());
 				if($rows_affected)
 				{
 					$this->set_message_success('Contact has been updated.');
