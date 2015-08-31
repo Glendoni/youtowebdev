@@ -71,9 +71,7 @@ class Contacts_model extends CI_Model {
 		$revised_linkedin_id = str_replace(array('.', ','), '' , preg_replace('/[^0-9,..]/i', '', $li_id));
 		}
 		$contact->linkedin_id = $revised_linkedin_id;
-        $contact->updated_by = $user_id;
-        $contact->updated_at = date('Y-m-d H:i:s');
-			
+   
         $this->db->where('id', $post['contact_id']);
 		$this->db->update('contacts',$contact);
         if($this->db->affected_rows() !== 1){
