@@ -647,7 +647,7 @@ where (action_type_id in ('4','5','8','9','10','16','17','18','23','6'))
 )   A
 on CO.id = A.company_id
 where C.criteria is null
-and C.user_id = '$user_id' and CO.active = 't'
+and C.user_id = '$user_id' and CO.active = 't' and c.eff_to is null
 order by 2, 1 desc
 )   T1";
 		echo $query = $this->db->query($sql);
@@ -705,7 +705,7 @@ where (action_type_id in ('4','5','8','9','10','16','17','18','23','6'))
 )   A
 on CO.id = A.company_id
 where C.criteria is null and
-CO.active = 't' and u.active = 'true' and u.department = 'sales'
+CO.active = 't' and u.active = 'true' and u.department = 'sales' and c.eff_to is null
 group by 1
 order by 2 desc
 )   T1";
