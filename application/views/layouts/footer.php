@@ -1,11 +1,6 @@
        </div>
 
-  <hr>
-        <div class="col-lg-12">
-            <ul class="nav nav-pills nav-justified">
-                <li>© <?php echo date("Y");?> Sonovate</li>
-            </ul>
-        </div>
+
     <!-- /#wrapper -->
     <!-- jQuery Version 1.11.0 -->
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
@@ -317,7 +312,15 @@ $('.toggle').click(function (event) {
 
 
 </script>
+  <hr>
+  <?php if (isset($current_user)): ?>
 
+        <div class="col-lg-12">
+            <ul class="nav nav-pills nav-justified">
+                <li>© <?php echo date("Y");?> Sonovate</li>
+            </ul>
+        </div>
+        <?php endif; ?>
 </body>
 
 </html>

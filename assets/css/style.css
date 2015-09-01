@@ -695,7 +695,7 @@ ul.nav.nav-tabs.dashboard {
 	border-bottom: none;
 	margin-top: 0;
 }
-.dashboard .active button.btn.btn-primary.btn-sm.btn-primary {
+.dashboard .active button.btn.btn-primary.btn-primary {
     color: #fff;
     background-color: #5cb85c;
     border-color: #4cae4c;
@@ -844,7 +844,7 @@ a.btn.btn-default.btn-xs.add-to-calendar {
 .large-number {
 	    font-size: 60px;
     font-weight: 200;
-    margin-top: -35px;
+    margin-top: -28px;
 }
 .circle-content .small-text{
 	    font-size: 12px;

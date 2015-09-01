@@ -12,6 +12,7 @@ class Campaigns_model extends MY_Model {
 		$this->db->where('criteria IS NOT NULL', null, false);
 		$this->db->where('shared', 'True');
 		$this->db->where_not_in('user_id', $user_id);
+
 		$this->db->where('status', 'search');
 		$this->db->order_by("c.name", "asc");
 		$this->db->where("(c.eff_to IS NULL OR c.eff_to > '".date('Y-m-d')."')",null, false); 
@@ -35,8 +36,7 @@ class Campaigns_model extends MY_Model {
 
 	function get_all_shared_campaigns($user_id)
 	{
-				$this->db->distinct();
-
+		$this->db->distinct();
 		$this->db->select('c.name,c.id,c.user_id,u.name as searchcreatedby,u.image,c.shared,count(distinct(t.company_id)) as campaigncount, c.created_at');
 		$this->db->from('campaigns c');
 		$this->db->join('users u', 'c.user_id = u.id');
@@ -44,14 +44,13 @@ class Campaigns_model extends MY_Model {
 		$this->db->join('companies comp', 't.company_id = comp.id');
 		// Apply this to find saved searches only
 		$this->db->where('criteria IS NULL', null, false);
+		$this->db->where('u.active', 'True');
 		$this->db->where('c.shared', 'True');
-				$this->db->where('comp.active', 'True');
-
+		$this->db->where('comp.active', 'True');
 		$this->db->where_not_in('c.user_id', $user_id);
 		$this->db->order_by("c.created_at", "desc");
 		$this->db->where("(c.eff_to IS NULL OR c.eff_to > '".date('Y-m-d')."')",null, false); 
-				$this->db->group_by("1,2,3,4,5"); 
-
+		$this->db->group_by("1,2,3,4,5"); 
 		$query = $this->db->get();
 		return $query->result();
 	}
@@ -598,6 +597,123 @@ order by 3 desc";
 		$query = $this->db->query($sql);
 		    return $query->result(); /* returns an object */
 }
+
+function get_user_campaigns($user_id)
+	{
+$sql = "select campaign_total,
+campaign_prospects,
+campaign_intent,
+campaign_proposals,
+campaign_customers,
+campaign_unsuitable,
+\"%\" contacted,
+campaign_lost
+from
+(
+select 
+count(distinct T.company_id) campaign_total,
+
+round (100 * count(distinct (CASE when A.created_at > C.created_at AND CO.pipeline <> 'Unsuitable' then A.company_id else null END ))::numeric  / CASE when count( CASE when CO.pipeline <> 'Unsuitable' then CO.id END) = 0 then 0
+else count(distinct CASE when CO.pipeline <> 'Unsuitable' then CO.id END) END::numeric) \"%\",
+CASE when count(distinct CASE when CO.pipeline ilike 'Lost' then CO.id END) = 0 then 0 
+else count(distinct CASE when CO.pipeline ilike 'Lost' then CO.id END) END campaign_lost,
+CASE when count(distinct CASE when CO.pipeline ilike 'Prospect' then CO.id END) = 0 then 0 
+else count(distinct CASE when CO.pipeline ilike 'Prospect' then CO.id END) END campaign_prospects,
+CASE when count(distinct CASE when CO.pipeline ilike 'Intent' or CO.pipeline ilike 'Qualified' then CO.id END) = 0 then 0 
+else count(distinct CASE when CO.pipeline ilike 'Intent' or CO.pipeline ilike 'Qualified' then CO.id END) END campaign_intent,
+CASE when count(distinct CASE when CO.pipeline ilike 'Proposal' then CO.id END) = 0 then 0
+else count(distinct CASE when CO.pipeline ilike 'Proposal' then CO.id END)  END campaign_proposals,
+	CASE when count(distinct CASE when CO.pipeline ilike 'Unsuitable' then CO.id END) = 0 then 0
+else count(distinct CASE when CO.pipeline ilike 'Unsuitable' then CO.id END)  END campaign_unsuitable,
+CASE when count(distinct CASE when CO.pipeline ilike 'Customer' and CO.customer_from > C.created_at then CO.id END) = 0 then 0
+else count(distinct 
+CASE when CO.pipeline = 'Customer' and CO.customer_from > C.created_at then CO.id END) END campaign_customers
+FROM   CAMPAIGNS C
+JOIN USERS U
+ON C.user_id = U.id
+LEFT JOIN TARGETS T
+ON C.id = T.campaign_id
+INNER JOIN COMPANIES CO
+ON T.company_id = CO.id
+LEFT JOIN 
+(
+select *
+from ACTIONS 
+where (action_type_id in ('4','5','8','9','10','16','17','18','23','6')) 
+  or (action_type_id in ('11','12','13','14','15') 
+	  and actioned_at is not null and cancelled_at is null)
+)   A
+on CO.id = A.company_id
+where C.criteria is null
+and C.user_id = '$user_id' and CO.active = 't'
+order by 2, 1 desc
+)   T1";
+		echo $query = $this->db->query($sql);
+		    return $query->result(); /* returns an object */
+}
+
+function get_team_campaigns()
+	{
+$sql = "select userimage,
+campaign_total,
+campaign_prospects,
+campaign_intent,
+campaign_proposals,
+campaign_customers,
+campaign_unsuitable,
+campaign_lost,
+\"%\" contacted
+from
+(
+select 
+u.image userimage,
+count(distinct T.company_id) campaign_total,
+
+round (100 * count(distinct (CASE when A.created_at > C.created_at AND CO.pipeline <> 'Unsuitable' then A.company_id else null END ))::numeric  / CASE when count( CASE when CO.pipeline <> 'Unsuitable' then CO.id END) = 0 then 0
+else count(distinct CASE when CO.pipeline <> 'Unsuitable' then CO.id END) END::numeric) \"%\",
+CASE when count(distinct CASE when CO.pipeline ilike 'Lost' then CO.id END) = 0 then 0 
+else count(distinct CASE when CO.pipeline ilike 'Lost' then CO.id END) END campaign_lost,
+CASE when count(distinct CASE when CO.pipeline ilike 'Prospect' then CO.id END) = 0 then 0 
+else count(distinct CASE when CO.pipeline ilike 'Prospect' then CO.id END) END campaign_prospects,
+CASE when count(distinct CASE when CO.pipeline ilike 'Intent' or CO.pipeline ilike 'Qualified' then CO.id END) = 0 then 0 
+else count(distinct CASE when CO.pipeline ilike 'Intent' or CO.pipeline ilike 'Qualified' then CO.id END) END campaign_intent,
+CASE when count(distinct CASE when CO.pipeline ilike 'Proposal' then CO.id END) = 0 then 0
+else count(distinct CASE when CO.pipeline ilike 'Proposal' then CO.id END)  END campaign_proposals,
+	CASE when count(distinct CASE when CO.pipeline ilike 'Unsuitable' then CO.id END) = 0 then 0
+else count(distinct CASE when CO.pipeline ilike 'Unsuitable' then CO.id END)  END campaign_unsuitable,
+CASE when count(distinct CASE when CO.pipeline ilike 'Customer' and CO.customer_from > C.created_at then CO.id END) = 0 then 0
+else count(distinct 
+CASE when CO.pipeline = 'Customer' and CO.customer_from > C.created_at then CO.id END) END campaign_customers
+FROM   CAMPAIGNS C
+JOIN USERS U
+ON C.user_id = U.id
+LEFT JOIN TARGETS T
+ON C.id = T.campaign_id
+INNER JOIN COMPANIES CO
+ON T.company_id = CO.id
+LEFT JOIN 
+(
+select *
+from ACTIONS 
+where (action_type_id in ('4','5','8','9','10','16','17','18','23','6')) 
+  or (action_type_id in ('11','12','13','14','15') 
+	  and actioned_at is not null and cancelled_at is null)
+)   A
+on CO.id = A.company_id
+where C.criteria is null and
+CO.active = 't' and u.active = 'true' and u.department = 'sales'
+group by 1
+order by 2 desc
+)   T1";
+$query = $this->db->query($sql);
+		if($query){
+			return $query->result_array();
+		}else{
+			return [];
+		}
+}
+
+
 function get_campaign_owner($id)
 	{
 	$sql = "select u.image, u.name as \"username\"

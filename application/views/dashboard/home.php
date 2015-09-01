@@ -15,10 +15,183 @@
         <div class="row">
           
           <div class="col-sm-9 col-sm-push-3">
-          <!-- Tab panes -->
-            <div class="tab-content">
-<div role="tabpanel" class="tab-pane active" id="team_stats">
+                   
 
+                    <?php foreach($campaignsummary as $get_user_campaign)
+        {?>
+
+<div class="tab-content mobile-hide">
+<div class="panel panel-default">
+<div class="panel-heading">
+
+<h3 class="panel-title pull-left">Campaigns Summary</h3>
+<?php if ($current_user['permission'] == 'admin'): ?>
+<ul class="nav nav-tabs dashboard pull-right" role="tablist">
+<li role="presentation" class="active"><button href="#campaign_user" aria-controls="campaign_user" role="tab" data-toggle="tab" class="btn btn-primary btn-xs pull-right" style="margin-right:10px;">My Campaigns</button></li>
+                <li role="presentation"><button href="#campaign_team" aria-controls="campaign_team" role="tab" data-toggle="tab" class="btn btn-primary btn-xs pull-right" style="margin-right:10px;">Team Campaigns</button></li>
+              </ul>
+
+<?php endif; ?>
+        <div class="clearfix"></div>
+
+</div>
+<div class="panel-body">
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane fade in active" id="campaign_user">
+
+
+<div class="col-sm-2 mobile-hide">
+<div class="circle-responsive black-circle <?php echo empty($this->session->userdata('pipeline'))? 'active':'';?>"><div class="circle-content mega">
+<div class="large-number"><?php echo number_format($get_user_campaign->campaign_total); ?></div> <div class="small-text">Companies
+</div>
+
+</div>
+</div>
+<div class="small-text" style="font-weight:300; font-size:9px; max-width:80%; margin-left:auto; margin-right:auto; text-align:center;"><?php if ($get_user_campaign->campaign_unsuitable > "0") {echo "Includes ".$get_user_campaign->campaign_unsuitable." marked as unsuitable";} else {}?></div>
+</div>
+<div class="col-sm-2 mobile-hide">
+<div class="circle-responsive cyan-circle ">
+<div class="circle-content mega">
+<div class="large-number"><?php echo $get_user_campaign->contacted; ?><span style="font-size:32px;">%</span></div>
+<div class="small-text">Contacted</div>
+
+
+</div>
+</div>
+<div class="small-text" style="font-weight:300; font-size:9px; max-width:80%; margin-left:auto; margin-right:auto; text-align:center;"><?php if ($get_user_campaign->campaign_unsuitable > "0") {echo "Companies marked as Unsuitable are not included in this figure.";} else {}?></div>
+</div>
+<div class="col-sm-2 mobile-hide">
+<?php if ($get_user_campaign->campaign_prospects>0): ?>
+<?php else: endif; ?>
+<div class="circle-responsive gray-circle <?php if ($this->session->userdata('pipeline')=='prospect'): echo 'active';else: endif; ?>
+">
+<div class="circle-content mega">
+<div class="large-number"><?php echo $get_user_campaign->campaign_prospects; ?></div>
+<div class="small-text"><?php if ($get_user_campaign->campaign_prospects <> "1") {echo "Prospects";} else { echo "Prospect";}?></div></div>
+</div>
+<?php if ($get_user_campaign->campaign_prospects>0): ?>
+<?php else: endif; ?>
+</div>
+
+<div class="col-sm-2 mobile-hide">
+<?php if ($get_user_campaign->campaign_intent>0): ?>
+<a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $current_campaign_stats->campaign_id; ?>&pipeline=intent">
+<?php else: endif; ?>
+<div class="circle-responsive gray-circle <?php if ($this->session->userdata('pipeline')=='intent'): echo 'active';else: endif; ?>">
+<div class="circle-content mega">
+<div class="large-number"><?php echo $get_user_campaign->campaign_intent; ?></div>
+<div class="small-text">Intent</div></div>
+</div>
+<?php if ($get_user_campaign->campaign_intent>0): ?>
+</a>
+<?php else: endif; ?>
+</div>
+
+<div class="col-sm-2 mobile-hide">
+<?php if ($get_user_campaign->campaign_proposals>0): ?>
+<?php else: endif; ?>
+<div class="circle-responsive blue-circle <?php if ($this->session->userdata('pipeline')=='proposal'): echo 'active';else: endif; ?>">
+<div class="circle-content mega">
+<div class="large-number"><?php echo $get_user_campaign->campaign_proposals; ?></div>
+<div class="small-text"><?php if ($get_user_campaign->campaign_proposals <> "1") {echo "Proposals";} else { echo "Proposal";}?></div></div>
+</div>
+<?php if ($get_user_campaign->campaign_proposals>0): ?>
+<?php else: endif; ?>
+</div>
+<div class="col-sm-2 mobile-hide">
+<?php if ($get_user_campaign->campaign_customers>0): ?>
+<?php else: endif; ?>
+<div class="circle-responsive green3-circle <?php if ($this->session->userdata('pipeline')=='customer'): echo 'active';else: endif; ?>">
+<div class="circle-content mega">
+<div class="large-number"><?php echo $get_user_campaign->campaign_customers; ?></div>
+<div class="small-text"><?php if ($get_user_campaign->campaign_customers <> "1") {echo "Customers";} else { echo "Customer";}?></div></div>
+</div>
+<?php if ($get_user_campaign->campaign_customers>0): ?>
+<?php else: endif; ?>
+</div>
+
+</div>
+<?php if ($current_user['permission'] == 'admin'): ?>
+
+    <div role="tabpanel" class="tab-pane fade" id="campaign_team">
+      <div class="col-md-12">
+                      <div class="row list-group-item">
+                        <div class="col-xs-2 col-md-1 hide-overflow"> 
+                            <strong>Name</strong>
+                        </div>
+                        <div class="col-xs-2 col-md-2 text-center hide-overflow">
+                            <strong>Companies</strong>
+                        </div>
+                        <div class="col-xs-3 col-md-2 text-center hide-overflow">
+                            <strong>Contacted</strong>
+                        </div>
+                        <div class="col-xs-2 col-md-1 text-center hide-overflow">
+                            <strong>Prospect</strong>
+                        </div>
+                        <div class="col-xs-3 col-md-1 text-center hide-overflow"> 
+                           <strong>Intent</strong>
+                        </div>
+                        <div class="col-md-1 hidden-xs text-center hide-overflow">
+                           <strong>Proposals</strong>
+                        </div>
+                        <div class="col-md-2 hidden-xs text-center hide-overflow"> 
+                           <strong>Customers</strong>
+                        </div>
+                        <div class="col-md-2 hidden-xs text-center hide-overflow">
+                           <strong>Other</strong></br>
+                          <Small>Lost / Unsuitable</Small>
+                        </div>
+                        </div>
+                            <?php foreach ($teamcampaignsummary as $teamcampaigns): ?>
+                              <div class="row list-group-item stats-row">
+                            <div class="col-xs-2 col-md-1"> 
+                            <?php $user_icon = explode(",",$teamcampaigns['userimage']); echo "<div class='circle name-circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
+                            </div>
+
+                    
+                        <div class="col-xs-2 col-md-2 text-center hide-overflow">
+                            <?php echo $teamcampaigns['campaign_total'];?>
+                        </div>
+                        <div class="col-xs-3 col-md-2 text-center hide-overflow">
+                            <?php echo $teamcampaigns['contacted'];?>%
+                        </div>
+                        <div class="col-xs-2 col-md-1 text-center hide-overflow">
+                            <?php echo $teamcampaigns['campaign_prospects'];?>
+                        </div>
+                        <div class="col-xs-3 col-md-1 text-center hide-overflow"> 
+                            <?php echo $teamcampaigns['campaign_intent'];?>
+                        </div>
+                        <div class="col-md-1 hidden-xs text-center hide-overflow">
+                            <?php echo $teamcampaigns['campaign_proposals'];?>
+                        </div>
+                        <div class="col-md-2 hidden-xs text-center hide-overflow"> 
+                            <?php echo $teamcampaigns['campaign_customers'];?>
+                        </div>
+                          <div class="col-md-2 hidden-xs text-center hide-overflow">
+                          <?php echo $teamcampaigns['campaign_lost'];?> / <?php echo $teamcampaigns['campaign_unsuitable'];?>
+                          </div>
+                        </div>
+                      <?php endforeach ?>
+      </div><!--END COL-MD-12-->
+    </div><!--END TEAM CAMPAIGN SUMMARY-->
+                <?php endif; ?>
+
+
+
+  </div><!--END CONTENT-->
+
+
+
+
+
+</div>
+</div>
+</div>
+
+        <?php }?>
+          <!-- Tab panes -->
+<div class="tab-content">
+<div role="tabpanel" class="tab-pane fade in active" id="team_stats">
 <?php if ($_GET['search']==2) { ?>
 <!--GET SEARCH DATES TO DISPLAY-->
 <div class="panel panel-default">
@@ -140,7 +313,7 @@
                     </ul>
                     <!-- Tab panes -->
                     <div class="tab-content">
-                      <div class="tab-pane <?php if ($_GET['search'] < '1'): ?>active<?php endif; ?>" id="this">
+                      <div class="tab-pane fade in <?php if ($_GET['search'] < '1'): ?>active<?php endif; ?>" id="this">
                       <div class="col-md-12">
                       <div class="row list-group-item">
                         <div class="col-xs-2 col-md-1 hide-overflow"> 
@@ -203,7 +376,7 @@
                       </div><!--END COL-MD-12-->
                       </div><!--END THIS TAB-->
 
-                      <div class="tab-pane" id="lastweek">
+                      <div class="tab-pane fade" id="lastweek">
                       <div class="col-md-12">
                       <div class="row list-group-item">
                         <div class="col-xs-2 col-md-1 hide-overflow"> 
@@ -267,7 +440,7 @@
                     </div><!--END THIS TAB-->
 
 
-                      <div class="tab-pane" id="currentmonth">
+                      <div class="tab-pane fade" id="currentmonth">
                       <div class="col-md-12">
                       <div class="row list-group-item">
                         <div class="col-xs-2 col-md-1 hide-overflow"> 
@@ -330,7 +503,7 @@
                       </div><!--END COL-MD-12-->
                     </div><!--END THIS TAB-->
 
-                    <div class="tab-pane" id="lastmonth">
+                    <div class="tab-pane fade" id="lastmonth">
                       <div class="col-md-12">
                       <div class="row list-group-item">
                         <div class="col-xs-2 col-md-1 hide-overflow"> 
@@ -393,7 +566,7 @@
                       </div><!--END COL-MD-12-->
                     </div><!--END THIS TAB-->
 
-                    <div class="tab-pane <?php if ($_GET['search'] > '0'): ?>active<?php endif; ?>" id="searchresults">
+                    <div class="tab-pane fade in <?php if ($_GET['search'] > '0'): ?>active<?php endif; ?>" id="searchresults">
                      <div class="col-md-12">
                       <div class="row list-group-item">
                         <div class="col-xs-2 col-md-1 hide-overflow"> 
@@ -489,7 +662,7 @@
         </div><!--END PANEL-->
 
     </div>
-    <div role="tabpanel" class="tab-pane" id="calls"><div class="panel panel-default">
+    <div role="tabpanel" class="tab-pane fade" id="calls"><div class="panel panel-default">
               <div class="panel-heading">
               <h3 class="panel-title">My Calls & Meetings<span class="badge pull-right"><?php echo count($pending_actions); ?></span></h3>
               </div>
@@ -548,7 +721,7 @@
               </div>
               </div>
           </div><!--END OF PANEL--></div>
-    <div role="tabpanel" class="tab-pane" id="pipeline">
+    <div role="tabpanel" class="tab-pane fade" id="pipeline">
       <div class="panel panel-default">
               <div class="panel-heading">
               <h3 class="panel-title">Pipeline</h3>
@@ -560,7 +733,7 @@
                       <li><a href="#team_pipeline" role="tab" data-toggle="tab">Team Pipeline</a></li>
                     </ul>
                       <div class="tab-content">
-                      <div class="tab-pane active" id="individual_pipeline">
+                      <div class="tab-pane fade in active" id="individual_pipeline">
               <div class="col-md-3 pipeline-holder ">
                             <div class="panel panel-default">
                             <div class="panel-heading">
@@ -701,7 +874,7 @@
                             </div><!--END PANEL-->
                             </div><!--END COL-MD-3-->
                             </div><!--END THIS TAB-->
-      <div class="tab-pane" id="team_pipeline">
+      <div class="tab-pane fade" id="team_pipeline">
               <div class="col-md-3 pipeline-holder ">
                             <div class="panel panel-default">
                             <div class="panel-heading">
@@ -855,7 +1028,7 @@
 </div><!--END PANEL-->
 </div>
 <!--ASSIGNED-->
-    <div role="tabpanel" class="tab-pane" id="assigned"><div class="panel panel-default">
+    <div role="tabpanel" class="tab-pane fade" id="assigned"><div class="panel panel-default">
               <div class="panel-heading">
               <h3 class="panel-title">Assigned Companies<span class="badge pull-right"><?php echo count($assigned_companies); ?></span></h3>
               </div>

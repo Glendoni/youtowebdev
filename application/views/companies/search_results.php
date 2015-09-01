@@ -36,7 +36,7 @@
 						<?php if($current_campaign_is_shared == False): ?>
 						<?php else: ?>
 						 <?php foreach($current_campaign_owners as $current_campaign_owner):
-echo "<div style='font-size:12px;'>Owned by ".$current_campaign_owner->username."</div>"; endforeach ?>					
+						echo "<div style='font-size:12px;'>Owned by ".$current_campaign_owner->username."</div>"; endforeach ?>		
 						<?php endif;?>
 						</strong>
 						<?php echo $current_campaign_name; ?>
@@ -44,29 +44,28 @@ echo "<div style='font-size:12px;'>Owned by ".$current_campaign_owner->username.
 						<div><a class="btn  btn-info btn-xs" href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $current_campaign_id; ?>">Refresh</a></div>
 
 						</div>	
-					<div class="row" style="margin-bottom: 20px;">
+<div class="row" style="margin-bottom: 20px;">
 <div class="col-sm-12 mobile-hide">
 </div>
 <div class="col-sm-2 mobile-hide">
 <a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $current_campaign_stats->campaign_id; ?>">
 <div class="circle-responsive black-circle <?php echo empty($this->session->userdata('pipeline'))? 'active':'';?>"><div class="circle-content mega">
 <div class="large-number"><?php echo number_format($current_campaign_stats->campaign_total); ?></div> <div class="small-text"><?php if ($companies_count<> "1") {echo "Companies in $results_type";} else { echo "Company in $results_type";}?></div>
-<div class="small-text" style="font-weight:300; font-size:9px; max-width:80%; margin-left:auto; margin-right:auto;"><?php if ($current_campaign_stats->campaign_unsuitable > "0") {echo "Includes ".$current_campaign_stats->campaign_unsuitable." marked as unsuitable";} else {}?></div>
-
-
 </div>
 </div>
 </a>
+<div class="small-text" style="font-weight:300; font-size:9px; max-width:80%; margin-left:auto; margin-right:auto;"><?php if ($current_campaign_stats->campaign_unsuitable > "0") {echo "Includes ".$current_campaign_stats->campaign_unsuitable." marked as unsuitable";} else {}?></div>
 </div>
 <div class="col-sm-2 mobile-hide">
 <div class="circle-responsive cyan-circle ">
 <div class="circle-content mega">
 <div class="large-number"><?php echo $current_campaign_stats->contacted; ?>%</div>
 <div class="small-text">Contacted</div>
-<div class="small-text" style="font-weight:300; font-size:9px; max-width:80%; margin-left:auto; margin-right:auto;"><?php if ($current_campaign_stats->campaign_unsuitable > "0") {echo "Companies marked as Unsuitable are not included in this figure";} else {}?></div>
+
 
 </div>
 </div>
+<div class="small-text" style="font-weight:300; font-size:9px; max-width:80%; margin-left:auto; margin-right:auto;"><?php if ($current_campaign_stats->campaign_unsuitable > "0") {echo "Companies marked as Unsuitable are not included in this figure";} else {}?></div>
 </div>
 <div class="col-sm-2 mobile-hide">
 <?php if ($current_campaign_stats->campaign_prospects>0): ?>
