@@ -612,9 +612,11 @@ from
 (
 select 
 count(distinct T.company_id) campaign_total,
-
+case when 
+count(distinct (CASE when A.created_at > C.created_at AND CO.pipeline <> 'Unsuitable' then A.company_id else null END ))::numeric = 0 then 0 
+else
 round (100 * count(distinct (CASE when A.created_at > C.created_at AND CO.pipeline <> 'Unsuitable' then A.company_id else null END ))::numeric  / CASE when count( CASE when CO.pipeline <> 'Unsuitable' then CO.id END) = 0 then 0
-else count(distinct CASE when CO.pipeline <> 'Unsuitable' then CO.id END) END::numeric) \"%\",
+else count(distinct CASE when CO.pipeline <> 'Unsuitable' then CO.id END) END::numeric) end AS \"%\",
 CASE when count(distinct CASE when CO.pipeline ilike 'Lost' then CO.id END) = 0 then 0 
 else count(distinct CASE when CO.pipeline ilike 'Lost' then CO.id END) END campaign_lost,
 CASE when count(distinct CASE when CO.pipeline ilike 'Prospect' then CO.id END) = 0 then 0 
@@ -668,9 +670,11 @@ from
 select 
 u.image userimage,
 count(distinct T.company_id) campaign_total,
-
+case when 
+count(distinct (CASE when A.created_at > C.created_at AND CO.pipeline <> 'Unsuitable' then A.company_id else null END ))::numeric = 0 then 0 
+else
 round (100 * count(distinct (CASE when A.created_at > C.created_at AND CO.pipeline <> 'Unsuitable' then A.company_id else null END ))::numeric  / CASE when count( CASE when CO.pipeline <> 'Unsuitable' then CO.id END) = 0 then 0
-else count(distinct CASE when CO.pipeline <> 'Unsuitable' then CO.id END) END::numeric) \"%\",
+else count(distinct CASE when CO.pipeline <> 'Unsuitable' then CO.id END) END::numeric) end AS \"%\",
 CASE when count(distinct CASE when CO.pipeline ilike 'Lost' then CO.id END) = 0 then 0 
 else count(distinct CASE when CO.pipeline ilike 'Lost' then CO.id END) END campaign_lost,
 CASE when count(distinct CASE when CO.pipeline ilike 'Prospect' then CO.id END) = 0 then 0 
