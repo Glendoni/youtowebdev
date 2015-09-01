@@ -156,6 +156,8 @@ else
 					if (!empty($post['campaign_id'])) {
 					$campaign_redirect ='&campaign_id='.$post['campaign_id'];
 					}
+
+
 					$outcome = $this->input->post('outcome');
 					$result = $this->Actions_model->set_action_state($this->input->post('action_id'),$this->input->post('user_id'),'completed',$outcome);
 					if($result)
@@ -183,7 +185,7 @@ else
 				{
 					$this->set_message_warning('Error while canceling action');
 				}
-				redirect('companies/company?id='.$this->input->post('company_id').$campaign_redirect,'location');
+				redirect('companies/company?id='.$this->input->post('company_id'),'location');
 			}
 		}
 	}
