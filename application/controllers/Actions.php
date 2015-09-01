@@ -118,7 +118,7 @@ else
 							if (!empty($post['campaign_id'])) {
 			$campaign_redirect ='&campaign_id='.$post['campaign_id'];
 			}
-			
+
 				$result = $this->Actions_model->create($this->input->post());
 				if(empty($result))
 				{
@@ -153,6 +153,9 @@ else
 
 				if($this->form_validation->run())
 				{
+					if (!empty($post['campaign_id'])) {
+					$campaign_redirect ='&campaign_id='.$post['campaign_id'];
+					}
 					$outcome = $this->input->post('outcome');
 					$result = $this->Actions_model->set_action_state($this->input->post('action_id'),$this->input->post('user_id'),'completed',$outcome);
 					if($result)
@@ -166,7 +169,7 @@ else
 				}else{
 					$this->set_message_error(validation_errors());
 				}
-				redirect('companies/company?id='.$this->input->post('company_id').'#actions','location');
+				redirect('companies/company?id='.$this->input->post('company_id').$campaign_redirect.'#actions','location');
 			}
 			else if($this->input->post('action_do') == 'cancelled')
 			{	
@@ -180,7 +183,7 @@ else
 				{
 					$this->set_message_warning('Error while canceling action');
 				}
-				redirect('companies/company?id='.$this->input->post('company_id'),'location');
+				redirect('companies/company?id='.$this->input->post('company_id').$campaign_redirect,'location');
 			}
 		}
 	}
