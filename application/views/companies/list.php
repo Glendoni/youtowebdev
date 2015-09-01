@@ -24,7 +24,7 @@
 					?>
 				</a> <?php echo next($company['id']);?>
 		</h2>
-		<?php if (isset($company['trading_name'])): ?>
+	<?php if (isset($company['trading_name'])): ?>
 	<h5 class="trading-header">
 <?php echo $company['trading_name'];?>
 </h5>

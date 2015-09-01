@@ -20,16 +20,22 @@ class Actions extends MY_Controller {
 
 	}
 	public function create(){
+			if (!empty($post['campaign_id'])) {
+			$campaign_redirect ='&campaign_id='.$post['campaign_id'];
+			}
 		 // print_r('<pre>');print_r($this->input->post());print_r('</pre>');
 		$post = $this->input->post();
 		if ((empty($post['action_type_completed'])) && (empty($post['action_type_planned']))) {
 		$this->set_message_action_error('Please select either a new or follow up action.');
 		$message = $post['comment'];
-		redirect('companies/company?id='.$this->input->post('company_id').'&message='.urlencode($message).'#action-error','location');
+		redirect('companies/company?id='.$this->input->post('company_id').$campaign_redirect.'&message='.urlencode($message).'#action-error','location');
 
 		}
 else
 {
+			if (!empty($post['campaign_id'])) {
+			$campaign_redirect ='&campaign_id='.$post['campaign_id'];
+			}
 
 
 		if($this->input->post('done'))
@@ -41,9 +47,10 @@ else
 			$this->form_validation->set_rules('contact_id', 'contact_id', 'xss_clean');
 			if($this->form_validation->run())
 			{	$post = $this->input->post();
+
 				if (($post['action_type_completed']=='16') && (empty($post['class_check'] ))){
 					$this->set_message_warning('Please set a company class before adding a deal.');
-					redirect('companies/company?id='.$this->input->post('company_id'),'location');
+					redirect('companies/company?id='.$this->input->post('company_id').$campaign_redirect,'location');
 
 					}
 					else 
@@ -88,11 +95,11 @@ else
 						}
 					}
 					$this->set_message_success('Action successfully inserted');
-					redirect('companies/company?id='.$this->input->post('company_id').'#actions','location');
+					redirect('companies/company?id='.$this->input->post('company_id').$campaign_redirect.'#actions','location');
 				}
 			}else{
 				$this->set_message_error(validation_errors());
-				redirect('companies/company?id='.$this->input->post('company_id'),'location');
+				redirect('companies/company?id='.$this->input->post('company_id').$campaign_redirect,'location');
 			}
 
 		}
@@ -108,6 +115,10 @@ else
 
 			if($this->form_validation->run())
 			{
+							if (!empty($post['campaign_id'])) {
+			$campaign_redirect ='&campaign_id='.$post['campaign_id'];
+			}
+			
 				$result = $this->Actions_model->create($this->input->post());
 				if(empty($result))
 				{
@@ -116,11 +127,11 @@ else
 				else
 				{
 					$this->set_message_success('Action successfully inserted');
-					redirect('companies/company?id='.$this->input->post('company_id'),'location');
+					redirect('companies/company?id='.$this->input->post('company_id').$campaign_redirect,'location');
 				}
 			}else{
 				$this->set_message_error(validation_errors());
-				redirect('companies/company?id='.$this->input->post('company_id'),'location');
+				redirect('companies/company?id='.$this->input->post('company_id').$campaign_redirect,'location');
 			}
 		}
 	}
