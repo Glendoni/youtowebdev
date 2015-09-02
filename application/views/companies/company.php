@@ -210,7 +210,7 @@ Turnover</strong>
 		<div class="col-md-12">
 		<div class="panel panel-default">
 		<div class="panel-heading">
-		<h3 class="panel-title">Mortgages</h3>
+		Mortgages
 		</div>
 		<!-- /.panel-heading -->
 		<div class="panel-body">
@@ -402,7 +402,7 @@ $mortgages_start  = $mortgage['eff_from'];$date_pieces = explode("/", $mortgages
 		</div>
 		<div class="col-md-12">
 		<div class="panel panel-info ">
-		  <div class="panel-heading"><h3 class="panel-title">Completed & Follow Up Actions</h3></div>
+		  <div class="panel-heading">Completed & Follow Up Actions</div>
 		  <div class="panel-body">
 		   <?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'],'done'=>'1','campaign_id' => $campaign_id, 'class_check' => $companies_classes[$company['class']],);
 			echo form_open(site_url().'actions/create', 'name="create" class="form" role="form"',$hidden); ?>

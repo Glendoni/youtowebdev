@@ -562,7 +562,7 @@ border-right: 1px solid #e7e7e7;
  	padding-right: 5px;
   	margin-top: 10px;
 }
-.panel-default>.panel-heading {
+.panel-heading {
 margin-top: 0;
 margin-bottom: 0;
 font-size: 16px;
