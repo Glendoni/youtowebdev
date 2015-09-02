@@ -73,14 +73,6 @@ endif; ?>
 				</p>
 		</div><!--END NAME-->
 		<?php endif; ?>
-
-		<div class="col-sm-12" style="margin-top:10px;">
-				<label>Address</label>
-				<p style="margin-bottom:0;">
-                <?php echo isset($company['address'])?'<a href="http://maps.google.com/?q='.urlencode($company['address']).'" target="_blank">'.$company['address'].'<span style="    line-height: 15px;font-size: 10px;padding-left: 5px;"><i class="fa fa-external-link"></i></span></a>':'-'; ?>  
-				</p><hr>
-		</div><!--END ADDRESS-->
-
 		<div class="col-xs-6" style="margin-top:10px;">
 			<label>Company Number</label>
 			<p>	
@@ -98,7 +90,7 @@ endif; ?>
 	
 		
         <div class="col-xs-6" style="margin-top:10px;">
-        		<label>Phone Number</label>
+        		<label>Phone</label>
         		<p>
         		<?php echo isset($company['phone'])?$company['phone']:''; ?>                
            		</p>
@@ -149,23 +141,14 @@ endif; ?>
 		<div class="row">
 		<div class="col-xs-12">
 		<!-- TURNOVER -->
-		<!-- TURNOVER -->
 		<div class="col-xs-4 col-sm-3 centre">
-			<strong><span style="text-transform: capitalize"><?php echo isset($company['turnover_method'])?$company['turnover_method']:'';?></span>
-Turnover</strong>
+			<strong><span style="text-transform: capitalize"><?php echo isset($company['turnover_method'])?$company['turnover_method']:'';?></span> Turnover</strong>
 			<p class="details" style="margin-bottom:5px;">
 				<?php echo isset($company['turnover'])? '£'.number_format (round($company['turnover'],-3)):'Unknown';?>
 			</p>
         </div>
-        <div class="col-xs-4 col-sm-2 centre">
-        	<strong>Founded</strong>
-			<p class="details">
-				<?php echo isset($company['eff_from'])?$company['eff_from']:''; ?>
-			</p>
-		</div>
-
 		<!-- CONTACTS -->
-		<div class="col-xs-4 col-sm-2 centre">
+		<div class="col-xs-4 col-sm-3 centre">
 			<strong>Contacts</strong>			
 			<?php if (isset($company['contacts_count'])): ?>
 			<p class="details"><?php echo $company['contacts_count'];?> </p>
@@ -173,9 +156,8 @@ Turnover</strong>
 			<p class="details">0 </p>
 			<?php endif; ?>
 		</div>
-
 		<!-- EMPLOYEES -->
-		<div class="col-xs-4 col-sm-2 centre">
+		<div class="col-xs-4 col-sm-3 centre">
 			<strong>Employees</strong>
 			<?php if (isset($company['emp_count'])): ?>
 			<p class="details"><?php echo $company['emp_count'];?> </p>
@@ -183,14 +165,14 @@ Turnover</strong>
 			<p class="details">Unknown</p>
 			<?php endif; ?>
 		</div>
-
 		<!-- SECTORS -->
-		<div class="col-xs-4 col-sm-3">
+		<div class="col-xs-4 col-sm-3 centre">
 			<strong>Sectors</strong> 
 			<?php 
 			if(isset($company['sectors'])){
-				foreach ($company['sectors'] as $key => $name) {
-					echo '<p class="details" style="margin-bottom:0; text-align:left;">'.$name.'</p>';
+				foreach ($company['sectors'] as $key => $name)
+				{
+				echo '<p class="details" style="margin-bottom:0; text-align:centre;">'.$name.'</p>';
 				}
 			}
 			?>
@@ -229,9 +211,10 @@ Turnover</strong>
 					<td class="col-md-6" ><?php echo $mortgage['name']; ?><div style="font-size:11px;"><?php echo $mortgage['type']; ?></div></td>
 					
 					<td class="col-md-3" style="text-align:center;">
-					<?php
-$mortgages_start  = $mortgage['eff_from'];$date_pieces = explode("/", $mortgages_start);$formatted_mortgage_date = $date_pieces[2].'/'.$date_pieces[1].'/'.$date_pieces[0];echo date("F Y",strtotime($formatted_mortgage_date));
-?></td><td class="col-md-3" style="text-align:center;"><span class="label label-<?php echo $mortgage['stage']==MORTGAGES_SATISFIED? 'default' : 'success' ?>"><?php echo $mortgage['stage']; ?><?php if(!empty($mortgage['eff_to'])){echo ' on '.$mortgage['eff_to'];} ?></span></td>
+<?php $mortgages_start  = $mortgage['eff_from'];$date_pieces = explode("/", $mortgages_start);$formatted_mortgage_date = $date_pieces[2].'/'.$date_pieces[1].'/'.$date_pieces[0];echo date("F Y",strtotime($formatted_mortgage_date));
+?></td><td class="col-md-3" style="text-align:center;">
+
+<?php echo $mortgage['stage']; ?><?php if(!empty($mortgage['eff_to'])){echo ' on '.$mortgage['eff_to'];} ?></td>
 
 
 
@@ -284,9 +267,12 @@ $mortgages_start  = $mortgage['eff_from'];$date_pieces = explode("/", $mortgages
 				<td class="col-md-3"><?php echo $address->type;?></td>
 				<td class="col-md-2"><?php echo $address->phone; ?></td>
 				<td  class="col-md-3">
+				<?php if ($address->type<>'Registered Address'): ?>
 		      	<div class=" pull-right ">
 	            <?php $this->load->view('companies/action_box_addresses.php',array('address'=>$address)); ?>
 	            </div>
+	            <?php else: ?>
+	        	<?php endif; ?>
 	            </td>
         	</tr>
 			<?php endforeach; ?>  
@@ -308,7 +294,7 @@ $mortgages_start  = $mortgage['eff_from'];$date_pieces = explode("/", $mortgages
 		<?php if(isset($campaigns) and !empty($campaigns)) : ?>
 		<div class="col-md-12">
 		<div class="panel panel-default">
-		<div class="panel-heading" id="contacts">
+		<div class="panel-heading" id="campaigns">
 		Campaigns
 		</div>
 		<!-- /.panel-heading -->
@@ -605,7 +591,7 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 				                </ul>
 							<?php else: ?>
 								<div class="col-md-12">
-									<h4 style="margin: 50px 0 40px 0; text-align: center;">No outstanding actions found for this company</h4>
+									<h4 style="margin: 50px 0 40px 0; text-align: center;">No Outstanding Actions</h4>
 								</div>
 							<?php endif; ?>
 				            </div>    

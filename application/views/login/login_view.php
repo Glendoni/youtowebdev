@@ -1,3 +1,15 @@
+            <?php
+            $this->load->library('user_agent');
+
+ if ($this->agent->is_browser('Chrome'))
+{?>
+<?php }
+else if ($this->agent->is_browser())
+{?>
+<div class="alert alert-info" role="alert"><strong>Tip:</strong> Baselist is designed to work best on Chrome.</div>
+    <?php
+} ?>
+
 <div class="container">
     <div class="row">
     <?php $msg = $this->session->flashdata('message'); $msg_2 = validation_errors(); if($msg or $msg_2): ?>

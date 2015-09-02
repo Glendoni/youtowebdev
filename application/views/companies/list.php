@@ -143,7 +143,7 @@ if ($your_date < $now){; ?>
 	
 		
         <div class="col-xs-6" style="margin-top:10px;">
-        		<label>Phone Number</label>
+        		<label>Phone</label>
         		<p>
         		<?php echo isset($company['phone'])?$company['phone']:''; ?>                
            		</p>
@@ -193,21 +193,13 @@ if ($your_date < $now){; ?>
 		<div class="col-xs-12">
 		<!-- TURNOVER -->
 		<div class="col-xs-4 col-sm-3 centre">
-			<strong><span style="text-transform: capitalize"><?php echo isset($company['turnover_method'])?$company['turnover_method']:'';?></span>
-Turnover</strong>
+			<strong><span style="text-transform: capitalize"><?php echo isset($company['turnover_method'])?$company['turnover_method']:'';?></span> Turnover</strong>
 			<p class="details" style="margin-bottom:5px;">
 				<?php echo isset($company['turnover'])? '£'.number_format (round($company['turnover'],-3)):'Unknown';?>
 			</p>
         </div>
-        <div class="col-xs-4 col-sm-2 centre">
-        	<strong>Founded</strong>
-			<p class="details">
-				<?php echo isset($company['eff_from'])?$company['eff_from']:''; ?>
-			</p>
-		</div>
-
 		<!-- CONTACTS -->
-		<div class="col-xs-4 col-sm-2 centre">
+		<div class="col-xs-4 col-sm-3 centre">
 			<strong>Contacts</strong>			
 			<?php if (isset($company['contacts_count'])): ?>
 			<p class="details"><?php echo $company['contacts_count'];?> </p>
@@ -215,9 +207,8 @@ Turnover</strong>
 			<p class="details">0 </p>
 			<?php endif; ?>
 		</div>
-
 		<!-- EMPLOYEES -->
-		<div class="col-xs-4 col-sm-2 centre">
+		<div class="col-xs-4 col-sm-3 centre">
 			<strong>Employees</strong>
 			<?php if (isset($company['emp_count'])): ?>
 			<p class="details"><?php echo $company['emp_count'];?> </p>
@@ -225,14 +216,14 @@ Turnover</strong>
 			<p class="details">Unknown</p>
 			<?php endif; ?>
 		</div>
-
 		<!-- SECTORS -->
-		<div class="col-xs-4 col-sm-3">
+		<div class="col-xs-4 col-sm-3 centre">
 			<strong>Sectors</strong> 
 			<?php 
 			if(isset($company['sectors'])){
-				foreach ($company['sectors'] as $key => $name) {
-					echo '<p class="details" style="margin-bottom:0; text-align:left;">'.$name.'</p>';
+				foreach ($company['sectors'] as $key => $name)
+				{
+				echo '<p class="details" style="margin-bottom:0; text-align:centre;">'.$name.'</p>';
 				}
 			}
 			?>

@@ -29,6 +29,10 @@ class MY_Controller extends CI_Controller {
 		        // $config['s3_bucket'] = 'mybucket_production';
 		break;
 		}
+
+		// Check Browser
+		$this->load->library('user_agent');
+
 		
 		// Load User model for all the controllers
 		$this->load->model('Campaigns_model');
@@ -76,6 +80,8 @@ class MY_Controller extends CI_Controller {
 		    
 		// }
         // session data only test for positve so be careful with the if stataments
+
+
 		if($this->session->userdata('sectors_search'))
 		{	
 			$sectors_search = $this->session->userdata('sectors_search');

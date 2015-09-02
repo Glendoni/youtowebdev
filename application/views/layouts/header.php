@@ -67,7 +67,6 @@
 
 
     <div id="wrapper">
-
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <!-- Brand and toggle get grouped for better mobile display -->
