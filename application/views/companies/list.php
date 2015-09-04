@@ -17,7 +17,7 @@
 	<?php endif; ?>
 		<h2 class="company-header">
 				<a href="<?php echo site_url();?>companies/company?id=<?php echo $company['id'];?>
-				<?php echo isset($current_campaign_id)?'&campaign_id='.$current_campaign_id:''; ?>">
+				<?php echo !empty($current_campaign_id)?'&campaign_id='.$current_campaign_id:''; ?>">
 					<?php 
 					$words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' );
 					echo str_replace($words, ' ',$company['name']); 

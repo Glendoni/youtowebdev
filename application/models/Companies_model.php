@@ -33,6 +33,26 @@ class Companies_model extends CI_Model {
 		return 	$arrayNames;
 	}
 
+		function get_companies_source()
+	{
+		$arrayNamesSources = array(
+			'0' => '--- Select a Source ---',
+			'Campaign' => 'Campaign',
+			'LegacyCampaign' => 'Legacy Campaign',
+			'EmailCampaign' => 'Email Campaign',
+			'Referral' => 'Referral',
+			'SpecialInsight' => 'Special Insight',
+			'CalledIn' => 'Called In'
+			);
+		return 	$arrayNamesSources;
+	}
+
+	function get_pipeline_show_source()
+	{
+		$arrayNamesSources = array('Intent','Customer','Proposal','Qualified');
+		return 	$arrayNamesSources;
+	}
+
 	function get_companies_pipeline()
 	{
 		$arrayNamesPipeline = array(
@@ -434,7 +454,9 @@ class Companies_model extends CI_Model {
 			   AC2.planned_at, -- f35
 			   ACT2.name , -- f36
 			   AU2.name, -- f37
-			   C.trading_name --f38
+			   C.trading_name, --f38
+			   C.source, --f39
+			   C.source_date --f40
 
 			   )) "JSON output" 
 			   
@@ -582,7 +604,9 @@ LEFT JOIN
 			     AC2.planned_at,
 			     ACT2.name,
 			     AU2.name,
-			     C.trading_name
+			     C.trading_name,
+				 C.source,
+			     C.source_date
 
 		order by C.id 
 
@@ -939,7 +963,15 @@ LEFT JOIN
 			$this->db->insert('emp_counts', $emp_count);
 			$emp_counts = $this->db->affected_rows();
 		}
-		
+		//CHECK IF SOURCE HAS BEEN UPDATED
+		if($post['company_source'] <> $post['original_source']) {
+			$source = $post['company_source'];
+			$source_date = date('Y-m-d H:i:s');
+
+		} else {
+			$source = $post['original_source'];
+			$source_date = $post['original_source_date'];
+		}
 		
 		$company = array(
 				'trading_name' => !empty($post['trading_name'])?$post['trading_name']:NULL,
@@ -952,7 +984,9 @@ LEFT JOIN
 				'pipeline'=>$post['company_pipeline'],
 				'updated_by'=>$post['user_id'],
 				//'pipeline'=>!empty($post['company_pipeline'])?$post['company_pipeline']:NULL,
-				'updated_at' => date('Y-m-d H:i:s')			
+				'updated_at' => date('Y-m-d H:i:s'),
+				'source'=>$source,
+				'source_date'=>$source_date,
 				);
 
 		$this->db->select('id,pipeline');

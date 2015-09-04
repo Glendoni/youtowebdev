@@ -188,6 +188,23 @@ class MY_Controller extends CI_Controller {
 			$this->session->set_userdata('address_types',$address_types);
 		}
 
+		if($this->session->userdata('company_sources'))
+		{
+			$company_sources = $this->session->userdata('company_sources');
+		}else
+		{
+			$company_sources = $this->Companies_model->get_companies_source();
+			$this->session->set_userdata('company_sources',$company_sources);
+		}
+
+		if($this->session->userdata('get_pipeline_show_source'))
+		{
+			$show_sources = $this->session->userdata('get_pipeline_show_source');
+		}else
+		{
+			$show_sources = $this->Companies_model->get_pipeline_show_source();
+			$this->session->set_userdata('get_pipeline_show_source',$show_sources);
+		}
 		if($this->session->userdata('companies_pipeline_search'))
 		{
 			$pipeline_options_search = $this->session->userdata('companies_pipeline_search');
@@ -197,7 +214,6 @@ class MY_Controller extends CI_Controller {
 			$this->session->set_userdata('companies_pipeline_search',$pipeline_options_search);
 		}
 
-	
 
 
 		// Pass variables to template views 
@@ -205,7 +221,8 @@ class MY_Controller extends CI_Controller {
 		$this->data['companies_pipeline'] =  $pipeline_options;		
 		$this->data['address_types'] =  $address_types;
 		$this->data['country_options'] = $this->Companies_model->get_countries_options();
-
+		$this->data['company_sources'] =  $company_sources;
+		$this->data['show_sources'] =  $show_sources;
 
 
 		// Pipeline
@@ -400,6 +417,9 @@ class MY_Controller extends CI_Controller {
 			if($company->company->f1->f36)$mapped_companies_array['action_name2'] = $company->company->f1->f36;
 			if($company->company->f1->f37)$mapped_companies_array['action_user2'] = $company->company->f1->f37;
 			if($company->company->f1->f38)$mapped_companies_array['trading_name'] = $company->company->f1->f38;
+			if($company->company->f1->f39)$mapped_companies_array['source'] = $company->company->f1->f39;
+			if($company->company->f1->f40)$mapped_companies_array['source_date'] = $company->company->f1->f40;
+
 
 
 			

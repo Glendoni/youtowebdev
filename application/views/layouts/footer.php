@@ -279,8 +279,8 @@
     <div class="alert alert-warning" role="alert">
     <p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>
     </div> <?php endif; ?>
-     <?php if(($current_user['id'] != '1') && ($current_user['id'] != '7')): ?>
-1
+     <?php if((ENVIRONMENT == 'production') && ($current_user['id'] != '1') && ($current_user['id'] != '6')): ?>
+
  <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

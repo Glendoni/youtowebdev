@@ -159,7 +159,9 @@ class Campaigns_model extends MY_Model {
 			   AC2.planned_at, -- f35
 			   ACT2.name , -- f36
 			   AU2.name, -- f37
-			   C.trading_name --38		   
+			   C.trading_name, --f38
+			   C.source, --f39
+			   C.source_date --f40  
 
 
 			   )) "JSON output" 
@@ -303,7 +305,9 @@ class Campaigns_model extends MY_Model {
 			     AC2.planned_at,
 			     ACT2.name,
 			     AU2.name,
-			     C.trading_name
+			     C.trading_name,
+			   	 C.source,
+			   	 C.source_date
 
 		order by C.id 
 

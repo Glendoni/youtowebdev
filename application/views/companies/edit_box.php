@@ -45,6 +45,7 @@
                     ?>
                     </div>
                 </div>
+                
               <div class="col-sm-6 col-md-4">
                                   <div class=" form-group ">
 
@@ -108,6 +109,26 @@
                 </div>
                 <?php endif; ?>
 
+                <?php 
+                if (in_array($company['pipeline'], $show_sources))
+                  {?>
+
+                <div class="col-sm-6 col-md-4">
+                    <div class=" form-group ">
+                    <?php
+                    echo form_label('Source', 'company_source');
+                    echo form_dropdown('company_source', $company_sources, (isset($company['source'])?$company['source']:'') ,'class="form-control"');
+                    ?>
+                    <input type="hidden" name="original_source" value="<?php echo $company['source'];?>" />
+                    <input type="hidden" name="original_source_date" value="<?php echo $company['source_date'];?>" />
+
+                    </div>
+                </div>
+                <?php 
+                  }
+                else
+                  {}
+                ?>
                 
                 <div class="col-md-12">
                 <hr style="margin-top:10px;">
