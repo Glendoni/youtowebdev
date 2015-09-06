@@ -14,7 +14,7 @@
                 </div>
                 <div class="form-group col-md-6">  
                   <label>Email *</label>
-                  <input type="text" class="form-control" name="email" id="email" value="<?php echo $current_user['email'] ?>" > 
+                  <input type="text" class="form-control" name="email" value="<?php echo $current_user['email'] ?>" > 
                 </div>
                 <div class="form-group col-md-6">            
                 <label>Full Name *</label>
@@ -35,15 +35,6 @@
                 </div>
                 <div class="form-group col-md-12">
                 <hr>
-                </div>
-                <div class="form-group col-md-6">  
-                  <label>New Password</label>
-                  <input type="password" class="form-control" id="password"> 
-                  <div id="messages"></div>
-                </div>   
-                <div class="form-group col-md-6">  
-                  <label>Repeat New Password</label>
-                  <input type="text" class="form-control" name="linkedin"> 
                 </div>
                 <div class="form-group col-md-12">
                   <button class="btn btn-primary" name="update_profile">Update</button>

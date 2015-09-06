@@ -74,13 +74,12 @@
                 <a class="navbar-brand" href="/" >Baselist <span style="font-size:12px; font-weight:300;">v2.5</span></a>
             </div>
 <?php if (isset($current_user)): ?>
-
-                        <!--TOP SEARCH BAR-->
-            <?php if (isset($_GET['id'])) { 
-                $company = $companies[0];
-                $search_default = $company['name'];
-                } else {
-    $search_default = $this->input->post('agency_name');
+    <!--TOP SEARCH BAR-->
+    <?php if (isset($_GET['id'])) { 
+        $company = $companies[0];
+        $search_default = $company['name'];
+        } else {
+        $search_default = $this->input->post('agency_name');
 }?>
 
     <div class="col-lg-6 col-lg-offset-2 col-sm-6 col-md-offset-2 large-form-holder clearfix">
