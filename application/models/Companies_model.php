@@ -40,6 +40,7 @@ class Companies_model extends CI_Model {
 			'Campaign' => 'Campaign',
 			'EmailCampaign' => 'Email Campaign',
 			'WebForm' => 'Web Form',
+			'LegacyCampaign' => 'Legacy Campaign',
 			'Referral' => 'Referral',
 			'SpecialInsight' => 'Special Insight',
 			'CalledIn' => 'Called In',
