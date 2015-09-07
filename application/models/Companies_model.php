@@ -42,7 +42,9 @@ class Companies_model extends CI_Model {
 			'WebForm' => 'Web Form',
 			'Referral' => 'Referral',
 			'SpecialInsight' => 'Special Insight',
-			'CalledIn' => 'Called In'
+			'CalledIn' => 'Called In',
+			'StrategicPartnerships' => 'Strategic Partnerships',
+			'Events' => 'Events'
 			);
 		return 	$arrayNamesSources;
 	}
