@@ -1045,7 +1045,6 @@ LEFT JOIN
 			'contract'=>!empty($post['contract'])?$post['contract']:NULL,
 			'perm'=>!empty($post['perm'])?$post['perm']:NULL,
 			'class'=>!empty($post['company_class'])?$post['company_class']:NULL,
-			'pipeline'=>"Prospect",
 			'eff_from'=> !empty($post['eff_from'])?date("Y-m-d", strtotime($post['eff_from'])):date('Y-m-d H:i:s'),
 		);
 		$this->db->insert('companies', $company);
@@ -1079,6 +1078,8 @@ LEFT JOIN
     // should be here but let's just use this model for the countries bit
     function get_countries_options(){
     	$this->db->select('id,name');
+    	$this->db->order_by('id','asc'); 
+
     	$query = $this->db->get('countries');	
 		foreach($query->result() as $row)
 		{
