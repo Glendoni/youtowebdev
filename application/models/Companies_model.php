@@ -24,9 +24,9 @@ class Companies_model extends CI_Model {
     	$this->db->where('eff_to >', 'now()');
     	$this->db->or_where('eff_to', NULL); 
 
-    	$this->db->order_by('id','asc'); 
+    	$this->db->order_by('display_seq','asc'); 
 
-    	$query = $this->db->get('deal_sources');	
+    	$query = $this->db->get('lead_sources');	
 		foreach($query->result() as $row)
 		{
 		  $array[$row->id] = $row->name;
