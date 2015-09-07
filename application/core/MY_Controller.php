@@ -221,7 +221,7 @@ class MY_Controller extends CI_Controller {
 		$this->data['companies_pipeline'] =  $pipeline_options;		
 		$this->data['address_types'] =  $address_types;
 		$this->data['country_options'] = $this->Companies_model->get_countries_options();
-		$this->data['company_sources'] =  $company_sources;
+		$this->data['company_sources'] =  array(0=> '--- Select a Source ---') + $this->Companies_model->get_company_sources();
 		$this->data['show_sources'] =  $show_sources;
 
 

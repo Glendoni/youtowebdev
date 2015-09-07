@@ -19,6 +19,23 @@ class Companies_model extends CI_Model {
 		return $query->result();
 	}
 
+	    function get_company_sources(){
+    	$this->db->select('id,name');
+    	$this->db->where('eff_to >', 'now()');
+    	$this->db->or_where('eff_to', NULL); 
+
+    	$this->db->order_by('id','asc'); 
+
+    	$query = $this->db->get('deal_sources');	
+		foreach($query->result() as $row)
+		{
+		  $array[$row->id] = $row->name;
+		} 	
+		return $array;
+
+
+    }
+
 	function get_companies_classes()
 	{
 		$arrayNames = array(
