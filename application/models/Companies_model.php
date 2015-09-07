@@ -38,7 +38,6 @@ class Companies_model extends CI_Model {
 		$arrayNamesSources = array(
 			'0' => '--- Select a Source ---',
 			'Campaign' => 'Campaign',
-			'LegacyCampaign' => 'Legacy Campaign',
 			'EmailCampaign' => 'Email Campaign',
 			'WebForm' => 'Web Form',
 			'Referral' => 'Referral',
