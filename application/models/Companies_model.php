@@ -984,14 +984,18 @@ LEFT JOIN
 			$emp_counts = $this->db->affected_rows();
 		}
 		//CHECK IF SOURCE HAS BEEN UPDATED
-		if($post['company_source'] <> $post['original_source']) {
-			$source = $post['company_source'];
-			$source_date = date('Y-m-d H:i:s');
+		if($post['company_source'] > 0) {
+			if($post['company_source'] <> $post['original_source']) {
+				$source = $post['company_source'];
+				$source_date = date('Y-m-d H:i:s');
 
-		} else {
-			$source = $post['original_source'];
-			$source_date = $post['original_source_date'];
+			} else {
+				$source = $post['original_source'];
+				$source_date = $post['original_source_date'];
+			} 
 		}
+		else 
+			{$source = NULL;$source_date = NULL;}
 		
 		$company = array(
 				'trading_name' => !empty($post['trading_name'])?$post['trading_name']:NULL,
