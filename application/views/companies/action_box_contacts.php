@@ -3,6 +3,10 @@
     <i class="fa fa-linkedin-square"></i> LinkedIn
 </a>
 <?php endif;?>
+
+<?php if (!empty($contact->eff_to)): ?>
+<span class="label label-danger">Left Company</span>
+<?php else: ?>
 <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#editContact_<?php echo $contact->id; ?>">
  Edit 
 </button>
@@ -11,6 +15,8 @@
    Send Email 
 </button>
 <?php endif;?>
+<?php endif; ?><!--END IF EFF-TO COMPLETED-->
+
 <div class="modal fade" id="send-email<?php echo $contact->id; ?>" tabindex="-1" role="dialog" aria-labelledby="Send email to <?php echo ucfirst($contact->first_name).' '.ucfirst($contact->last_name) ?>" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
         <div class="modal-content">

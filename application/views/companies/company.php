@@ -235,7 +235,7 @@ endif; ?>
 <!--ADDRESSES-->
 		<div class="col-md-12">
 		<div class="panel panel-default">
-		<div class="panel-heading" id="contacts">
+		<div class="panel-heading" id="addresses">
 		Addresses
 		<div class="pull-right">
 		<div class="btn-group">
