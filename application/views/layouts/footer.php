@@ -160,9 +160,9 @@
           })
         .always(function() { 
             if(typeof name != 'undefined'){
-                    textbtn.text('Assigned to '+name ); 
+                    textbtn.text('Watched by '+name ); 
                 }else{
-                    textbtn.text('Unassigned');
+                    textbtn.text('No Longer Watching');
                     form.closest('.panel').children('.panel-heading').hide();
                 }  
             l.stop(); 

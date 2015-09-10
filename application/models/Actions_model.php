@@ -70,18 +70,18 @@ return $query->result_object();
 	{
 		$category_exclude = array('7', '20');
 		$data = array(
-			'actions.company_id' => $company_id,
+			'a.company_id' => $company_id,
 			);
-			$this->db->select('actions.company_id, actions.id "action_id",comments,planned_at,action_type_id,name "company_name",contacts.first_name,contacts.last_name,contacts.phone,contacts.email,actions.user_id,contacts.id "contact_id",actions.created_at as "created_at", companies.name,actions.actioned_at as "actioned_at",actions.planned_at as "planned_at", ');
-		$this->db->where('actions.planned_at IS NOT NULL', null);
-		$this->db->where('actions.actioned_at IS NULL', null);
-		$this->db->where('actions.cancelled_at IS NULL', null);
-		$this->db->where_not_in('action_type_id',$category_exclude);
-		$this->db->join('companies', 'companies.id = actions.company_id', 'left');
-		$this->db->join('contacts', 'contacts.id = actions.contact_id', 'left');
+		$this->db->select('a.created_at,a.planned_at,a.action_type_id,a.comments,a.outcome,a.id,u.image,u.name,c.first_name,c.last_name,a.contact_id", ');
+		$this->db->join('contacts c', 'c.id = a.contact_id', 'left');
+		$this->db->join('users u', 'a.user_id = u.id', 'left');
+		$this->db->where('a.planned_at IS NOT NULL', null);
+		$this->db->where('a.actioned_at IS NULL', null);
+		$this->db->where('a.cancelled_at IS NULL', null);
+		$this->db->where_not_in('a.action_type_id',$category_exclude);
 
-		$this->db->order_by('actions.actioned_at desc, actions.cancelled_at desc,actions.planned_at desc');
-		$query = $this->db->get_where('actions', $data);
+		$this->db->order_by('planned_at desc');
+		$query = $this->db->get_where('actions a', $data);
 		return $query->result_object();
 	}
 
@@ -105,12 +105,15 @@ return $query->result_object();
 	{
 		$category_exclude = array('7', '20');
 		$data = array(
-			'company_id' => $company_id,
+			'a.company_id' => $company_id,
 			);
-		$this->db->where('cancelled_at IS NOT NULL', null);
-		$this->db->where_not_in('action_type_id', 7);
-		$this->db->order_by('cancelled_at, planned_at desc');
-		$query = $this->db->get_where('actions', $data);
+		$this->db->select('a.created_at,a.cancelled_at,a.action_type_id,a.comments,a.outcome,a.id,u.image,u.name,c.first_name,c.last_name,a.contact_id", ');
+		$this->db->join('contacts c', 'c.id = a.contact_id', 'left');
+		$this->db->join('users u', 'a.user_id = u.id', 'left');
+		$this->db->where('a.cancelled_at IS NOT NULL', null);
+		$this->db->where_not_in('a.action_type_id', $category_exclude);
+		$this->db->order_by('a.cancelled_at, a.planned_at desc');
+		$query = $this->db->get_where('actions a', $data);
 		return $query->result_object();
 	}
 

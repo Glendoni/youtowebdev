@@ -45,6 +45,8 @@ class Users extends MY_Controller {
 			$this->form_validation->set_rules('role', 'role', 'xss_clean|required');
 			$this->form_validation->set_rules('mobile', 'mobile', 'xss_clean');
 			$this->form_validation->set_rules('linkedin', 'linkedin', 'xss_clean');
+			$this->form_validation->set_rules('gmail_account', 'gmail_account', 'xss_clean');
+			$this->form_validation->set_rules('gmail_password', 'gmail_password', 'xss_clean');
 			if($this->form_validation->run())
 			{	
 				$result = $this->Users_model->update($this->input->post(),$this->data['current_user']['id'],$image_updated);

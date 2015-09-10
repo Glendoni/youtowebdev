@@ -29,7 +29,6 @@ class Actions extends MY_Controller {
 		$this->set_message_action_error('Please select either a new or follow up action.');
 		$message = $post['comment'];
 		redirect('companies/company?id='.$this->input->post('company_id').$campaign_redirect.'&message='.urlencode($message).'#action-error','location');
-
 		}
 else
 {
@@ -50,9 +49,14 @@ else
 
 				if (($post['action_type_completed']=='16') && (empty($post['class_check'] ))){
 					$this->set_message_warning('Please set a company class before adding a deal.');
-					redirect('companies/company?id='.$this->input->post('company_id').$campaign_redirect,'location');
-
+					redirect('companies/company?id='.$this->input->post('company_id').$campaign_redirect.'#add_action','location');
 					}
+
+				else if (($post['action_type_completed']=='16') && ($post['sector_check'] < 1 )){
+					$this->set_message_action_error('<strong>Deal Not Added</strong></br> Please add at least one sector to this company.');
+					redirect('companies/company?id='.$this->input->post('company_id').$campaign_redirect.'#add_action','location');
+					}
+
 					else 
 					{
 				$result = $this->Actions_model->create($this->input->post());

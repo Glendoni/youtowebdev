@@ -43,7 +43,7 @@ echo form_open('',$attributes,$hidden);
 <div class="form-group">
 	<label class="control-label col-sm-2" for="ddlemployeesink">Employees:</label>
 	<div class="col-sm-10">
-	  <input type="url" class="form-control" name="employees" id="employees" value="<?php echo isset($_POST['employees'])?$_POST['employees']:''; ?>">
+	  <input type="text" class="form-control" name="employees" id="employees" value="<?php echo isset($_POST['employees'])?$_POST['employees']:''; ?>">
 	</div>
 </div>
 <div class="form-group">
@@ -103,9 +103,8 @@ echo form_open('',$attributes,$hidden);
 <div class=" form-group ">
     <label for="type" class="control-label col-sm-2">Type</label>
     <div class="col-sm-10">                            
-    	<input type="text" name="type" <?php echo isset($_POST['type'])?$_POST['type']:''; ?> id="type" maxlength="50" class="form-control">
-    </div>
-</div>
+<?php echo form_dropdown('address_types', $address_types, (isset($address->type)?$address->type:'') ,'class="form-control"' );?>    </div>
+	</div>
 
 <!-- <div class=" form-group ">
     <label for="turnover" class="control-label col-sm-2">Turnover</label>

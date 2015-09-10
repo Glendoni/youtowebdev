@@ -71,7 +71,7 @@
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <a class="navbar-brand" href="/" >Baselist <span style="font-size:12px; font-weight:300;">v2.51</span></a>
+                <a class="navbar-brand" href="/" >Baselist <span style="font-size:12px; font-weight:300;">v2.6</span></a>
             </div>
 <?php if (isset($current_user)): ?>
     <!--TOP SEARCH BAR-->
@@ -215,7 +215,7 @@
             <li class="dropdown" style="margin-top:17px;">
                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 
-                    <?php $user_icon = explode(",", ($system_users_images[$current_user['id']])); echo "<div class='circle' style='float: left;margin-top: 0px;margin-right: 10px;width: 20px;height: 20px;border-radius: 15px;font-size: 8px;line-height: 20px;text-align: center;font-weight: 700;background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
+                    <?php $user_icon = explode(",", ($current_user['image'])); echo "<div class='circle' style='float: left;margin-top: 0px;margin-right: 10px;width: 20px;height: 20px;border-radius: 15px;font-size: 8px;line-height: 20px;text-align: center;font-weight: 700;background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
                     <?php echo $current_user['name'] ?> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
@@ -223,10 +223,10 @@
                         </li>
                         <!-- <li>
                             <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
-                        </li> -->
+                        </li> 
                         <li>
                             <a href="<?php echo site_url(); ?>users/settings"><i class="fa fa-fw fa-gear"></i> Settings</a>
-                        </li>
+                        </li>-->
                         <li class="divider"></li>
                         <?php if ($current_user['permission'] == 'admin'): ?>
                 <li>

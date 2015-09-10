@@ -38,7 +38,7 @@
 		</span>
 	<?php if(isset($company['assigned_to_name'])): ?>
 		<span class="label label-assigned"
-		<?php $user_icon = explode(",", ($system_users_images[$company['assigned_to_id']]));echo "style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'";?>>
+		<?php $user_icon = explode(",", ($current_user['image']));echo "style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'";?>>
         <?php echo $company['assigned_to_name']; ?>
         </span>
 	<?php else: ?>
@@ -76,7 +76,7 @@ if ($company['actioned_at1'] > 0){
 </div>
 </div>
 <div class="col-md-6 col-lg-6 col-sm-6">
-<div><strong> Next Planned Contact</strong></div>
+<div><strong> Next Contact</strong></div>
 <?php if (empty($company['planned_at2'])): ?>
 	None
 <?php else: ?>

@@ -32,7 +32,7 @@ endif; ?>
 		</span>
 	<?php if(isset($company['assigned_to_name'])): ?>
 		<span class="label label-assigned"
-		<?php $user_icon = explode(",", ($system_users_images[$company['assigned_to_id']]));echo "style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'";?>>
+		<?php $user_icon = explode(",", ($current_user['image']));echo "style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'";?>>
         <?php echo $company['assigned_to_name']; ?>
         </span>
 	<?php else: ?>
@@ -168,7 +168,7 @@ endif; ?>
 		<!-- SECTORS -->
 		<div class="col-xs-4 col-sm-3 centre">
 			<strong>Sectors</strong> 
-			<?php 
+			<?php
 			if(isset($company['sectors'])){
 				foreach ($company['sectors'] as $key => $name)
 				{
@@ -386,11 +386,13 @@ endif; ?>
 		<!-- /.panel-body -->
 		</div>
 		</div>
-		<div class="col-md-12">
+
+		<!--ACTIONS-->
+		<div class="col-md-12" id="add_action">
 		<div class="panel panel-info ">
-		  <div class="panel-heading">Completed & Follow Up Actions</div>
+		  <div class="panel-heading">Actions</div>
 		  <div class="panel-body">
-		   <?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'],'done'=>'1','campaign_id' => $campaign_id, 'class_check' => $companies_classes[$company['class']],);
+		   <?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'],'done'=>'1','campaign_id' => $campaign_id, 'class_check' => $companies_classes[$company['class']],'sector_check' => count($company['sectors']),);
 			echo form_open(site_url().'actions/create', 'name="create" class="form" role="form"',$hidden); ?>
 			<!--THE BELOW PASSES THE CLASS FIELD ACROSS PURELY FOR VALIDATION - IF THERE IS A BETTER WAY OF DOING THIS THEN IT NEEDS TO BE HERE-->
 			
@@ -508,8 +510,12 @@ endif; ?>
 							<div class="row" style="padding: 15px 0">
 								<div class="col-md-12 ">
 									<div class="col-xs-2 col-md-1 profile-heading">
-									<?php $user_icon = explode(",", ($system_users_images[$action_outstanding->user_id])); echo "<div class='circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
-								</div>
+									<span>
+										<?php $user_icon = explode(",", ($action_outstanding->image)); echo "<div class='circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
+										</span>
+
+									<?php echo $action_outstanding->user_id; $user_icon = explode(",", ($action_outstanding->user_id)); echo "<div class='circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
+									</div>
 							<div class="col-xs-6 col-md-5">
 								<h4 style="margin:0;">
 									<a data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $action_outstanding->action_id ?>" aria-expanded="false" aria-controls="collapse<?php echo $action_outstanding->action_id ?>">
@@ -616,7 +622,8 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 								<div class="col-md-12 ">
 									<div class="col-xs-2 col-md-1 profile-heading">
 										<span>
-										<?php $user_icon = explode(",", ($action_completed->image)); echo "<div class='circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?></span>
+										<?php $user_icon = explode(",", ($action_completed->image)); echo "<div class='circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
+										</span>
 									</div>
 							<div class="col-xs-6 col-md-5">
 								<h4 style="margin:0;">
@@ -683,8 +690,8 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 						<div class="col-md-12 ">
 							<div class="col-xs-2 col-md-1 profile-heading">
 								<span>
-									<?php $user_icon = explode(",", ($system_users_images[$action_cancelled->user_id])); echo "<div class='circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
-								</span>
+										<?php $user_icon = explode(",", ($action_cancelled->image)); echo "<div class='circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
+										</span>
 							</div>
 							<div class="col-xs-6 col-md-5">
 								<h4 style="margin:0;">
@@ -813,7 +820,7 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 				                </ul>
 							<?php else: ?>
 								<div class="col-md-12">
-									<h4 style="margin: 50px 0 40px 0; text-align: center;">1No completed actions found for this company</h4>
+									<h4 style="margin: 50px 0 40px 0; text-align: center;">No completed actions found for this company</h4>
 								</div>
 							<?php endif; ?>
 				            </div>

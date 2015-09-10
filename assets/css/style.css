@@ -789,6 +789,7 @@ margin-bottom: 20px;
 	padding: 10px 5px;
 	font-size: 12px;
 	display: block;
+	    border-bottom: 1px solid #ddd;
 }
 .load-saved-search:hover {
 	background-color: #DEFFE2;

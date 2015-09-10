@@ -790,9 +790,6 @@
                             else if ($date_since<20) {
                              $display_date = "<div class='col-md-12 pipeline-days ok'>".$date_since." Days</div>";
                              }
-                             else if (($date_since>14) && ($date_since<30)) {
-                             $display_date = "<div class='col-md-12 pipeline-days warning'><strong>WARNING: </strong>".$date_since." Days</div>";
-                             }
                               else if ($date_since>29) {
                              $display_date = "<div class='col-md-12 pipeline-days overdue'><strong>OVERDUE:</strong> ".$date_since." Days</div>";
                              }
@@ -1082,8 +1079,8 @@
                   <!-- PRIVATE SEARCHES -->
                   <?php foreach ($private_campaigns as $campaign):?>
                   <a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $campaign->id; ?>" class="load-saved-search" <?php echo strlen($campaign->name) > 33 ? 'title="'.$campaign->name.'"':"" ?>><div class="row">
-                  <div class="col-xs-9 col-xs-offset-1"><?php echo strlen($campaign->name) > 33? substr($campaign->name,0,33).'...' : $campaign->name?></div>
-                  <div class="col-xs-1" style="padding:0;"><b><?php echo $campaign->campaigncount; ?></b></div>
+                  <div class="col-xs-10" style="max-height:15px; overflow:hidden"><?php echo $campaign->name;?></div>
+                  <div class="col-xs-1" style="padding: 0 0 0 5px;"><b><?php echo $campaign->campaigncount; ?></b></div>
                   </div>
                   </a>
                   <?php endforeach; ?>
@@ -1094,7 +1091,6 @@
                 <h3 class="panel-title">Campaigns <span class="badge pull-right"><?php echo count($shared_campaigns); ?></span></h3>    
               </div>
               <div class="panel-body" style="padding:0;">
-                <ul class="list-group">
                   <!-- SHARED SEARCHES -->
                   <?php foreach ($shared_campaigns as $campaign):?>
                     <?php $user_icon = explode(",", $campaign->image);$bg_colour = $user_icon[1];$bg_colour_text = $user_icon[2];$bg_colour_name = $user_icon[0];?>
@@ -1102,12 +1098,11 @@
                   <div class="col-xs-1"><span class="label label-info" style="margin-right:3px;background-color: <?php echo $bg_colour; ?>;font-size:8px; color: <?php echo $bg_colour_text;?>"><b><?php echo $bg_colour_name; ?></b>
                     </span></div>
 
-                  <div class="col-xs-9"><?php echo strlen($campaign->name) > 33 ? substr($campaign->name,0,30).'...' : $campaign->name?></div>
-                  <div class="col-xs-1"  style="padding:0;"><b><?php echo $campaign->campaigncount; ?></b></div>
+                  <div class="col-xs-9" style="max-height:15px;overflow:hidden"><?php echo $campaign->name;?></div>
+                  <div class="col-xs-1" style="padding: 0 0 0 5px;"><b><?php echo $campaign->campaigncount; ?></b></div>
                   </div>
                   </a>
                     <?php endforeach; ?>
-                </ul>
               </div>
             </div>
           </div><!--END COL-3-->

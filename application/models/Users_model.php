@@ -75,6 +75,17 @@ class Users_model extends MY_Model {
 	// UPDATES
 
 	function update($data,$user_id,$image_updated=FALSE){
+
+		//GET INITIALS OF USER//
+		$words = explode(" ",$data['name'] );
+		foreach ($words as $w) {
+  		 	  $initials .= $w[0];
+		};
+		$fgcolour = !empty($data['user-fg'])?$data['user-fg']:'#FFFFF';
+		$bgcolour = !empty($data['user-fg'])?$data['user-bg']:'#FF0000';
+		$image = $initials.','.$fgcolour.','.$bgcolour;
+		$this->load->library('encrypt');
+
 		$data = array(
 			'name' => $data['name'],
 			'email' => $data['email'],
@@ -84,8 +95,13 @@ class Users_model extends MY_Model {
 			'role' => !empty($data['role'])?$data['role']:Null,
 			'updated_at' => date('Y-m-d H:i:s'),
 			'updated_by' => $user_id,
-			'image'=> $image_updated?$image_updated:Null,
+			'image' => $image,
+			'gmail_account' => $data['gmail_account']
 			);
+		if( $this->input->post('gmail_password') != "" )
+		{
+		$data['gmail_password'] = $this->encrypt->encode($data['gmail_password']);
+		}
 
 		$this->db->where('id', $user_id);
 		$this->db->update('users',$data);
@@ -93,7 +109,10 @@ class Users_model extends MY_Model {
 			$this->addError($this->db->_error_message());
 			return False;
 		}else{
+					$this->session->set_userdata('system_users_images',$current_user['id']);
+
 			return True;
+
 		} 
 	}
 
