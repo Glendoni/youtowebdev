@@ -48,10 +48,15 @@
 $active_group = 'remote';
 $active_record = TRUE;
 
-$db['remote']['hostname'] = 'ec2-54-228-195-52.eu-west-1.compute.amazonaws.com';
-$db['remote']['username'] = 'mhcpgrefocjdtf';
-$db['remote']['password'] = 'CZbMFlzImraARQeWme1UM3VFOm';
-$db['remote']['database'] = 'd1bna94a8j95ip';
+
+$db = parse_url(getenv('DATABASE_URL'));
+(sprintf('host=%s port=%d user=%s password=%s dbname=%s sslmode=require', $db['host'], $db['port'], $db['user'], $db['pass'], substr($db['path'], 1)));
+
+
+$db['remote']['hostname'] = $db['host'];
+$db['remote']['username'] = $db['user'];
+$db['remote']['password'] = $db['pass'];
+$db['remote']['database'] = substr($db['path'];
 $db['remote']['dbdriver'] = 'postgre';
 $db['remote']['dbprefix'] = '';
 $db['remote']['pconnect'] = TRUE;
@@ -63,7 +68,7 @@ $db['remote']['dbcollat'] = 'utf8_general_ci';
 $db['remote']['swap_pre'] = '';
 $db['remote']['autoinit'] = TRUE;
 $db['remote']['stricton'] = FALSE;
-$db['remote']['port'] = 5432;
+$db['remote']['port'] = $db['port'];
 
 
 
