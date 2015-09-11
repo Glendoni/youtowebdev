@@ -6,7 +6,7 @@
                 <li role="presentation" class="active"><button href="#team_stats" aria-controls="team_stats" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;">Stats</button></li>
                 <li role="presentation"><button href="#calls" aria-controls="calls" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;">Calls & Meetings</button></li>
                 <li role="presentation"><button href="#pipeline" aria-controls="pipeline" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;">Pipeline</button></li>
-                <li role="presentation"><button href="#assigned" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;">Assigned</button></li>
+                <li role="presentation"><button href="#assigned" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;">Watching</button></li>
 
               </ul>
 
@@ -1025,7 +1025,7 @@
 <!--ASSIGNED-->
     <div role="tabpanel" class="tab-pane fade" id="assigned"><div class="panel panel-default">
               <div class="panel-heading">
-              <h3 class="panel-title">Assigned Companies<span class="badge pull-right"><?php echo count($assigned_companies); ?></span></h3>
+              <h3 class="panel-title">Companies You're Watching<span class="badge pull-right"><?php echo count($assigned_companies); ?></span></h3>
               </div>
               <div class="panel-body no-padding">
               <div class="col-md-12">
