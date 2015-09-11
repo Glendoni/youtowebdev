@@ -419,6 +419,8 @@ class MY_Controller extends CI_Controller {
 			if($company->company->f1->f38)$mapped_companies_array['trading_name'] = $company->company->f1->f38;
 			if($company->company->f1->f39)$mapped_companies_array['source'] = $company->company->f1->f39;
 			if($company->company->f1->f40)$mapped_companies_array['source_date'] = $company->company->f1->f40;
+			if($company->company->f1->f41)$mapped_companies_array['image'] = $company->company->f1->f41;
+
 
 
 

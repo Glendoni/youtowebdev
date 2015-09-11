@@ -32,7 +32,7 @@ endif; ?>
 		</span>
 	<?php if(isset($company['assigned_to_name'])): ?>
 		<span class="label label-assigned"
-		<?php $user_icon = explode(",", ($current_user['image']));echo "style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'";?>>
+		<?php $user_icon = explode(",", ($company['image']));echo "style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'";?>>
         <?php echo $company['assigned_to_name']; ?>
         </span>
 	<?php else: ?>
@@ -514,7 +514,6 @@ endif; ?>
 										<?php $user_icon = explode(",", ($action_outstanding->image)); echo "<div class='circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
 										</span>
 
-									<?php echo $action_outstanding->user_id; $user_icon = explode(",", ($action_outstanding->user_id)); echo "<div class='circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
 									</div>
 							<div class="col-xs-6 col-md-5">
 								<h4 style="margin:0;">

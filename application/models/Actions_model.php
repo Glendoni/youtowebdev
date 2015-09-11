@@ -72,15 +72,15 @@ return $query->result_object();
 		$data = array(
 			'a.company_id' => $company_id,
 			);
-		$this->db->select('a.created_at,a.planned_at,a.action_type_id,a.comments,a.outcome,a.id,u.image,u.name,c.first_name,c.last_name,a.contact_id", ');
-		$this->db->join('contacts c', 'c.id = a.contact_id', 'left');
-		$this->db->join('users u', 'a.user_id = u.id', 'left');
+		$this->db->select('a.company_id, a.id "action_id",a.comments,a.planned_at,a.action_type_id,u.name ,c.first_name,c.last_name,c.phone,c.email,a.user_id,c.id "contact_id",a.created_at as "created_at",a.actioned_at as "actioned_at",a.planned_at as "planned_at", u.image , ');
 		$this->db->where('a.planned_at IS NOT NULL', null);
 		$this->db->where('a.actioned_at IS NULL', null);
 		$this->db->where('a.cancelled_at IS NULL', null);
 		$this->db->where_not_in('a.action_type_id',$category_exclude);
+		$this->db->join('contacts c', 'c.id = a.contact_id', 'left');
+		$this->db->join('users u', 'a.user_id = u.id', 'left');
 
-		$this->db->order_by('planned_at desc');
+		$this->db->order_by('a.actioned_at desc, a.cancelled_at desc,a.planned_at desc');
 		$query = $this->db->get_where('actions a', $data);
 		return $query->result_object();
 	}
@@ -105,15 +105,12 @@ return $query->result_object();
 	{
 		$category_exclude = array('7', '20');
 		$data = array(
-			'a.company_id' => $company_id,
+			'company_id' => $company_id,
 			);
-		$this->db->select('a.created_at,a.cancelled_at,a.action_type_id,a.comments,a.outcome,a.id,u.image,u.name,c.first_name,c.last_name,a.contact_id", ');
-		$this->db->join('contacts c', 'c.id = a.contact_id', 'left');
-		$this->db->join('users u', 'a.user_id = u.id', 'left');
-		$this->db->where('a.cancelled_at IS NOT NULL', null);
-		$this->db->where_not_in('a.action_type_id', $category_exclude);
-		$this->db->order_by('a.cancelled_at, a.planned_at desc');
-		$query = $this->db->get_where('actions a', $data);
+		$this->db->where('cancelled_at IS NOT NULL', null);
+		$this->db->where_not_in('action_type_id', 7);
+		$this->db->order_by('cancelled_at, planned_at desc');
+		$query = $this->db->get_where('actions', $data);
 		return $query->result_object();
 	}
 
