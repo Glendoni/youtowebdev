@@ -211,6 +211,8 @@
 </div><!--END ADVANCED SEARCH-->
 </div>
             <!-- Top Menu Items -->
+            <?php echo $db = parse_url(getenv('DATABASE_URL'));?>
+
             <ul class="nav navbar-top-links navbar-right">
             <li class="dropdown" style="margin-top:17px;">
                <a href="#" class="dropdown-toggle" data-toggle="dropdown">

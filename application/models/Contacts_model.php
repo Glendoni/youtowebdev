@@ -30,6 +30,7 @@ class Contacts_model extends CI_Model {
 $data = array('company_id' => $company_id,);
 		//$this->db->where('eff_to >', 'now()');
 		//$this->db->or_where('eff_to', null);
+		$this->db->order_by("last_name", "asc"); 
 		$query = $this->db->get_where('contacts', $data);
 		return $query->result();
 	}
@@ -73,7 +74,11 @@ $data = array('company_id' => $company_id,);
 		} else {
 		$revised_linkedin_id = str_replace(array('.', ','), '' , preg_replace('/[^0-9,..]/i', '', $li_id));
 		}
-		$contact->linkedin_id = $revised_linkedin_id;
+		if($post['eff_to'] == 1) {
+        $contact->eff_to = date('Y-m-d');
+		}
+		else{};
+		$contact->linkedin_id = (!empty($revised_linkedin_id)?$revised_linkedin_id:NULL);
         $contact->updated_by = $user_id;
         $contact->updated_at = date('Y-m-d H:i:s');
         $this->db->where('id', $post['contact_id']);

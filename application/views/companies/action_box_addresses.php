@@ -22,8 +22,8 @@
 	                    <div class="form-group">
 	                    <?php  
                             
-                                    echo form_label('Type', 'address_types');
-                                    echo form_dropdown('address_types', $address_types, (isset($address->type)?$address->type:'') ,'class="form-control"' );?>
+			echo form_label('Type', 'address_types');
+						echo form_dropdown('address_types', $address_types, (isset($address->type)?$address->type:'') ,'class="form-control"' );?>
 	                    </div>
 	                </div>
 

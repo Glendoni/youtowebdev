@@ -138,8 +138,20 @@
 	                        <input type="text" name="linkedin_id" value="<?php echo isset($contact->linkedin_id)?$contact->linkedin_id:''; ?>" maxlength="50" class="form-control">
 	                    </div>
 	                </div>
+	                <div class="col-md-6">
+	                    <div class="form-group">
+						<label for="eff_to" class="control-label">Status</label>   
+                        <select name="eff_to" class="form-control">
+                            <option value="0" selected="">Active</option>
+                            <option value="1">Left</option>
+                        </select>
+						</div>
+	                </div>
 				 </div>
 	      	</div>
+
+
+	      	
 	      	<div class="modal-footer">
 	        	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 	        	<button type="submit" class="btn btn-primary">Save changes</button>
