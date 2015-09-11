@@ -211,7 +211,10 @@
 </div><!--END ADVANCED SEARCH-->
 </div>
             <!-- Top Menu Items -->
-            <?php echo $db = parse_url(getenv('DATABASE_URL'));?>
+            <?php
+            $db = parse_url(getenv('DATABASE_URL'));
+echo (sprintf('host=%s port=%d user=%s password=%s dbname=%s sslmode=require', $db['host'], $db['port'], $db['user'], $db['pass'], substr($db['path'], 1)));
+?>
 
             <ul class="nav navbar-top-links navbar-right">
             <li class="dropdown" style="margin-top:17px;">
