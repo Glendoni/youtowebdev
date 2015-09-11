@@ -949,9 +949,17 @@ LEFT JOIN
 	    return $rows;
 	}
 
-	function clear_company_sectors($id){
+	function clear_company_sectors($id,$user_id){
+				$data = array(
+				'active'=>'False',
+                'updated_by' => $user_id,
+                'updated_at' => date('Y-m-d H:i:s')
+            );
+
 		$this->db->where('company_id', $id);
-		$this->db->update('operates', array('active'=>'False'));
+		$this->db->where('active', 'true');
+
+		$this->db->update('operates', $data);
 		return $this->db->affected_rows();
 	}
 
@@ -1041,13 +1049,15 @@ LEFT JOIN
 		$company_status = $this->db->affected_rows();
 
 		// clear existing sectors to no active 
-		$result = $this->clear_company_sectors($post['company_id']);
+		$result = $this->clear_company_sectors($post['company_id'], $post['user_id']);
 
 		if (isset($post['add_sectors']) and !empty($post['add_sectors']))
 		{
 			foreach ($post['add_sectors'] as $sector_id) {
 				$this->db->set('company_id', $post['company_id']);
-				$this->db->set('sector_id', $sector_id);  
+				$this->db->set('sector_id', $sector_id);
+				$this->db->set('created_by', $post['user_id']);  
+ 
 				$this->db->insert('operates'); 
 			}
 			$sectors_status = $this->db->affected_rows();
