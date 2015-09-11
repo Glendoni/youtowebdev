@@ -30,6 +30,8 @@ class Contacts_model extends CI_Model {
 $data = array('company_id' => $company_id,);
 		//$this->db->where('eff_to >', 'now()');
 		//$this->db->or_where('eff_to', null);
+		$this->db->order_by("eff_to", "desc"); 
+
 		$this->db->order_by("last_name", "asc"); 
 		$query = $this->db->get_where('contacts', $data);
 		return $query->result();
