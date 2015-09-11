@@ -211,11 +211,6 @@
 </div><!--END ADVANCED SEARCH-->
 </div>
             <!-- Top Menu Items -->
-            <?php
-            $db = parse_url(getenv('DATABASE_URL'));
-echo (sprintf('host=%s port=%d user=%s password=%s dbname=%s sslmode=require', $db['host'], $db['port'], $db['user'], $db['pass'], substr($db['path'], 1)));
-?>
-
             <ul class="nav navbar-top-links navbar-right">
             <li class="dropdown" style="margin-top:17px;">
                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
