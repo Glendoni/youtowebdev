@@ -404,6 +404,8 @@ class MY_Controller extends CI_Controller {
 			if($company->company->f1->f17)$mapped_companies_array['turnover'] = $company->company->f1->f17;
 			if($company->company->f1->f18)$mapped_companies_array['turnover_method'] = $company->company->f1->f18;
 			if($company->company->f1->f19)$mapped_companies_array['emp_count'] = $company->company->f1->f19;
+			if($company->company->f1->f20)$mapped_companies_array['image'] = $company->company->f1->f20;
+
 			if($company->company->f1->f26)$mapped_companies_array['pipeline'] = $company->company->f1->f26;
 			if($company->company->f1->f27)$mapped_companies_array['contacts_count'] = $company->company->f1->f27;
 			if($company->company->f1->f28)$mapped_companies_array['parent_registration'] = $company->company->f1->f28;
@@ -419,7 +421,6 @@ class MY_Controller extends CI_Controller {
 			if($company->company->f1->f38)$mapped_companies_array['trading_name'] = $company->company->f1->f38;
 			if($company->company->f1->f39)$mapped_companies_array['source'] = $company->company->f1->f39;
 			if($company->company->f1->f40)$mapped_companies_array['source_date'] = $company->company->f1->f40;
-			if($company->company->f1->f41)$mapped_companies_array['image'] = $company->company->f1->f41;
 
 
 
