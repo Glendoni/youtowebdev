@@ -101,7 +101,7 @@ if ($your_date < $now){; ?>
 
 	<?php if (isset($company['trading_name'])): ?>
 		<div class="col-md-6" style="margin-bottom:10px;">
-				<label>Company Name</label>
+				<label>Registered Name</label>
 				<p style="margin-bottom:0;">	
 				<?php echo $company['name']; ?>
 				</p>
@@ -114,14 +114,14 @@ if ($your_date < $now){; ?>
 		</div><!--END TRADING NAME-->
 		<?php else: ?>
 				<div class="col-sm-12" style="margin-bottom:10px;">
-				<label>Company Name</label>
+				<label>Registered Name</label>
 				<p style="margin-bottom:0;">	
 				<?php echo $company['name']; ?>
 				</p>
 		</div><!--END NAME-->
 		<?php endif; ?>
 		<div class="col-sm-12" style="margin-top:10px;">
-				<label>Address</label>
+				<label>Registered Address</label>
 				<p style="margin-bottom:0;">
                 <?php echo isset($company['address'])?'<a href="http://maps.google.com/?q='.urlencode($company['address']).'" target="_blank">'.$company['address'].'<span style="    line-height: 15px;font-size: 10px;padding-left: 5px;"><i class="fa fa-external-link"></i></span></a>':'-'; ?>  
 				</p><hr>

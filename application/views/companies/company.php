@@ -54,7 +54,7 @@ endif; ?>
 
 		<?php if (isset($company['trading_name'])): ?>
 		<div class="col-md-6" style="margin-bottom:10px;">
-				<label>Company Name</label>
+				<label>Registered Name</label>
 				<p style="margin-bottom:0;">	
 				<?php echo $company['name']; ?>
 				</p>
@@ -66,8 +66,8 @@ endif; ?>
 				</p>
 		</div><!--END TRADING NAME-->
 		<?php else: ?>
-						<div class="col-sm-12" style="margin-bottom:10px;">
-				<label>Company Name</label>
+				<div class="col-sm-12" style="margin-bottom:10px;">
+				<label>Registered Name</label>
 				<p style="margin-bottom:0;">	
 				<?php echo $company['name']; ?>
 				</p>

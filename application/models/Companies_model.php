@@ -1080,6 +1080,8 @@ LEFT JOIN
 			'perm'=>!empty($post['perm'])?$post['perm']:NULL,
 			'class'=>!empty($post['company_class'])?$post['company_class']:NULL,
 			'eff_from'=> !empty($post['eff_from'])?date("Y-m-d", strtotime($post['eff_from'])):date('Y-m-d H:i:s'),
+			'created_by'=>$post['user_id'],
+
 		);
 		$this->db->insert('companies', $company);
 		$new_company_id = $this->db->insert_id(); 
@@ -1092,6 +1094,8 @@ LEFT JOIN
 				'lat' => !empty($post['lat'])?$post['lat']:NULL,
 				'lng' => !empty($post['lng'])?$post['lng']:NULL,
 				'type' => !empty($post['type'])?$post['type']:"Registered",
+				'created_by'=> $post['user_id'],
+
 				);
 			$this->db->insert('addresses', $address);
 			$new_company_address_id = $this->db->insert_id(); 
@@ -1141,7 +1145,7 @@ LEFT JOIN
        	$address->address = $post['address']; // please read the below note
     	$address->country_id = $post['country_id'];
 		$address->type = $post['address_types'];
-		$address->phone = $post['phone'];
+		$address->phone = !empty($post['phone'])?$post['phone']:NULL;
         $address->company_id = $post['company_id'];
         $address->created_by = $post['user_id'];
         $address->created_at = date('Y-m-d H:i:s');

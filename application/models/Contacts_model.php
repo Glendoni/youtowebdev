@@ -81,7 +81,7 @@ $data = array('company_id' => $company_id,);
 		}
 		else{};
 		$contact->linkedin_id = (!empty($revised_linkedin_id)?$revised_linkedin_id:NULL);
-        $contact->updated_by = $user_id;
+        $contact->updated_by = $post['user_id'];
         $contact->updated_at = date('Y-m-d H:i:s');
         $this->db->where('id', $post['contact_id']);
 		$this->db->update('contacts',$contact);

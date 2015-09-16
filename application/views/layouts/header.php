@@ -71,7 +71,7 @@
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <a class="navbar-brand" href="/" >Baselist <span style="font-size:12px; font-weight:300;">v2.6</span></a>
+                <a class="navbar-brand" href="/" >Baselist <span style="font-size:12px; font-weight:300;">v2.7</span></a>
             </div>
 <?php if (isset($current_user)): ?>
     <!--TOP SEARCH BAR-->
@@ -113,7 +113,15 @@
                     </div>
                 </div>
             </div>
-
+<?php if (isset($_POST['main_search'])): ?>
+                                    <div class='form-row'>
+                                        <div class="col-md-12 form-group ">
+                                            <a class="btn btn-block clear-fields" href="<?php echo site_url();?>">
+                                                <span class="glyphicon glyphicon-remove"></span> Clear Search
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <?php endif; ?>
             <?php if (!isset($_GET['id']) && (isset($_POST['main_search']) || (isset($_GET['search'])))) : ?>
                                 <!--         <div class="col-md-12 no-padding" style="margin-top:20px;">
                                             <a class="btn btn-block clear-fields" href="<?php echo site_url();?>">
@@ -174,7 +182,6 @@
                                     <div class='form-row'>
                                         <div class="form-group">
                                             <?php
-
                                             echo form_label('Pipeline', 'pipeline');
                                                 echo form_multiselect('pipeline[]', $pipeline_options,
                                                     ($this->input->post('pipeline')?$this->input->post('pipeline'):$pipeline_default),'class="form-control"');?>

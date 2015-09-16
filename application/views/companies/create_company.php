@@ -5,7 +5,7 @@ Create company
 </h2>
 <?php  
 $attributes = array('name' => 'create_company_form', 'class'=>'form-horizontal');
-$hidden = array('create_company_form'=>'1');
+$hidden = array('create_company_form'=>'1','user_id'=>$current_user['id']);
 echo form_open('',$attributes,$hidden); 
 ?>
 <div class="form-group">

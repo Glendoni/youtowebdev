@@ -36,12 +36,17 @@
 						<?php if($current_campaign_is_shared == False): ?>
 						<?php else: ?>
 						 <?php foreach($current_campaign_owners as $current_campaign_owner):
-						echo "<div style='font-size:12px;'>Owned by ".$current_campaign_owner->username."</div>"; endforeach ?>		
+						$user_icon = explode(",", ($current_campaign_owner->image)); echo "<div style='margin-bottom:5px;'><div class='label' style='text-align: center;font-weight: 300; font-size:12px;background-color:".$user_icon[1]."; color:".$user_icon[2].";'>Owned by ".$current_campaign_owner->username."</div></div>"
+						; endforeach ?>		
 						<?php endif;?>
 						</strong>
 						<?php echo $current_campaign_name; ?>
+					<?php if(!empty($current_campaign_stats->description)): ?>
+
 						<p style="font-size:14px"><?php echo $current_campaign_stats->description; ?></p>
-						<div><a class="btn  btn-info btn-xs" href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $current_campaign_id; ?>">Refresh</a></div>
+												<?php endif;?>
+
+						<div><a class="btn btn-info btn-xs" href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $current_campaign_id; ?>">Refresh</a></div>
 
 						</div>	
 <div class="row" style="margin-bottom: 20px;">
