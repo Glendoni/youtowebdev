@@ -121,7 +121,7 @@ endif; ?>
 			<?php endif; ?>
 		<!-- LINKS AND BTN -->
 			<?php if (isset($company['registration'])): ?>
-			<a class="btn  btn-info btn-sm btn-block endole" href="http://www.endole.co.uk/company/<?php echo $company['registration'] ?>" target="_blank">Endole</a>
+			<a class="btn  btn-info btn-sm btn-block companieshouse" href="https://beta.companieshouse.gov.uk/company/<?php echo $company['registration'] ?>" target="_blank">Companies House</a>
 			<?php endif; ?>
 			<?php if (isset($company['linkedin_id'])): ?>
 			<a class="btn  btn-info btn-sm btn-block linkedin" href="https://www.linkedin.com/company/<?php echo $company['linkedin_id'] ?>"  target="_blank">LinkedIn</a>
