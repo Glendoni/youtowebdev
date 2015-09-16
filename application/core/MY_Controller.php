@@ -54,31 +54,12 @@ class MY_Controller extends CI_Controller {
 		else
 		{
 			//user not in session and segment 1 exist then redirect to login
-			if($this->uri->segment(1)) redirect('/','location');
+			if($this->uri->segment(1)){
+				$this->session->set_userdata('last_page', current_full_url());
+				redirect('/','location');
+			}
 		}
 
-		// load and pre-populate email library 
-		// if (!class_exists('email')) 
-		// {
-		// 	if(!empty($this->data['current_user']['gmail_account']) and !empty($this->data['current_user']['gmail_password']))
-		// 	{
-		// 		$this->load->library('encrypt');
-		// 		$email_config = Array(
-		// 	        'protocol'  => 'smtp',
-		// 	        'smtp_host' => 'ssl://smtp.googlemail.com',
-		// 	        'smtp_port' => '465',
-		// 	        'smtp_user' => $this->data['current_user']['gmail_account'],
-		// 	        'smtp_pass' => $this->encrypt->decode($this->data['current_user']['gmail_password']),
-		// 	        'mailtype'  => 'html',
-		// 	        'starttls'  => true,
-		// 	        'newline'   => "\r\n"
-		// 	    );
-		//     	$this->load->library('email', $email_config);
-		// 	}else{
-		// 		$this->add_notification('Please add your Gmail account to yours settings.','/users/settings');
-		// 	}
-		    
-		// }
         // session data only test for positve so be careful with the if stataments
 
 
@@ -514,5 +495,4 @@ class MY_Controller extends CI_Controller {
 		   return FALSE;
 		}
 	}
-
 }

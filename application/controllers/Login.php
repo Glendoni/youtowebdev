@@ -16,7 +16,13 @@ class Login extends MY_Controller {
 		}
 
 		if($this->session->userdata('logged_in')){
-			redirect('/dashboard');
+			echo $this->session->userdata('last_page');
+			if($this->session->userdata('last_page') and $this->session->userdata('last_page') !== 'http://baselist/'){
+				redirect($this->session->userdata('last_page'));
+			}else{
+				redirect('/dashboard');	
+			}
+			
 		}else{
 			// Not user found, show login page
 			$this->data['hide_side_nav'] = True;
