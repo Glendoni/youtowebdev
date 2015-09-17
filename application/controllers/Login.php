@@ -16,8 +16,7 @@ class Login extends MY_Controller {
 		}
 
 		if($this->session->userdata('logged_in')){
-			echo $this->session->userdata('last_page');
-			if($this->session->userdata('last_page') and $this->session->userdata('last_page') !== 'http://baselist/'){
+			if($this->session->userdata('last_page') and (!in_array($this->session->userdata('last_page'),array("http://staging-baselist.herokuapp.com/", "http://baselist.herokuapp.com/", "http://baselist/")))){
 				redirect($this->session->userdata('last_page'));
 			}else{
 				redirect('/dashboard');	
