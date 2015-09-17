@@ -49,10 +49,10 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'postgres';
-$db['default']['password'] = 'postgres';
-$db['default']['database'] = 'baselist';
+$db['remote']['hostname'] = 'ec2-54-204-20-164.compute-1.amazonaws.com';
+$db['remote']['username'] = 'vafphclbfjerkp';
+$db['remote']['password'] = 'Kvp5YitVv9EJdniusHfCmGkf-g';
+$db['remote']['database'] = 'djl07jil7t8tc';
 $db['default']['dbdriver'] = 'postgre';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
