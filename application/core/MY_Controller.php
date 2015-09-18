@@ -498,9 +498,9 @@ class MY_Controller extends CI_Controller {
 
 	protected function is_ajax_request(){
 		if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'){
-			return TRUE
+			return TRUE;
 		}else{
-			return FALSE
+			return FALSE;
 		} 	
 	}
 }
