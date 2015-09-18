@@ -49,7 +49,8 @@ class MY_Controller extends CI_Controller {
 		if($this->session->userdata('logged_in')) 
 		{
 			$logged_in = $this->session->userdata('logged_in');
-			$this->data['current_user'] = $this->Users_model->get_user($logged_in['user_id']);	
+			$this->data['current_user'] = $this->Users_model->get_user($logged_in['user_id']);
+			$this->session->unset_userdata('last_page');	
 		}
 		else
 		{
