@@ -16,7 +16,7 @@ class MY_Controller extends CI_Controller {
 		// Debugging funcionality, set it only when on development 
 		switch (ENVIRONMENT) {
 		case 'development':
-		        $this->output->enable_profiler(FALSE);
+		        $this->output->enable_profiler(TRUE);
 		break;
 		case 'staging':
 		        $this->output->enable_profiler(TRUE);
@@ -498,7 +498,6 @@ class MY_Controller extends CI_Controller {
 
 	protected function is_ajax_request(){
 		if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') return TRUE
-			return FALSE
-			
+		return FALSE	
 	}
 }
