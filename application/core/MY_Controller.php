@@ -495,4 +495,10 @@ class MY_Controller extends CI_Controller {
 		   return FALSE;
 		}
 	}
+
+	protected function is_ajax_request(){
+		if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') return TRUE
+			return FALSE
+			
+	}
 }
