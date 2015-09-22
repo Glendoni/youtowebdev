@@ -476,7 +476,9 @@ class Companies_model extends CI_Model {
 			   AU2.name, -- f37
 			   C.trading_name, --f38
 			   C.source, --f39
-			   C.source_date --f40
+			   C.source_date, --f40
+			   pr.name, --f41
+			   pr.id --f42
 
 			   )) "JSON output" 
 			   
@@ -541,10 +543,13 @@ LEFT JOIN
  		action_types ACT1 on
  		AC1.action_type_id = ACT1.id
 
+ 		LEFT JOIN
+ 		companies pr
+		ON C.parent_registration = pr.registration
+
 		LEFT JOIN 
  		users AU1 on
  		ac1.user_id = AU1.id
-
 
 		LEFT JOIN 
 		actions ac2 ON ac2.company_id = c.id 
@@ -626,10 +631,11 @@ LEFT JOIN
 			     AU2.name,
 			     C.trading_name,
 				 C.source,
-			     C.source_date
+			     C.source_date,
+			     pr.name,
+			     pr.id
 
 		order by C.id 
-
 
 		)   T1
 
