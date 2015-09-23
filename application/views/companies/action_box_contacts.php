@@ -17,7 +17,7 @@
 <?php endif;?>
 <?php endif; ?><!--END IF EFF-TO COMPLETED-->
 
-<div class="modal fade" id="send-email<?php echo $contact->id; ?>" tabindex="-1" role="dialog" aria-labelledby="Send email to <?php echo ucfirst($contact->first_name).' '.ucfirst($contact->last_name) ?>" aria-hidden="true" style="display: none;">
+<div class="modal draggable-modal fade" id="send-email<?php echo $contact->id; ?>" tabindex="-1" role="dialog" aria-labelledby="Send email to <?php echo ucfirst($contact->first_name).' '.ucfirst($contact->last_name) ?>" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
         <div class="modal-content">
         	<div class="modal-header">

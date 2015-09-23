@@ -1,4 +1,4 @@
-	<div class="modal fade" id="create_address_<?php echo $company['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="Create Address" aria-hidden="true" style="display: none;">
+	<div class="modal draggable-modal fade" id="create_address_<?php echo $company['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="Create Address" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">

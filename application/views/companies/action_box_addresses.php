@@ -1,7 +1,7 @@
 <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#editAddress_<?php echo $address->addressid; ?>">Edit
 
 </button>
-<div class="modal fade" id="editAddress_<?php echo $address->addressid; ?>" tabindex="-1" role="dialog" aria-labelledby="Edit Address" aria-hidden="true" style="display: none;">
+<div class="modal draggable-modal fade" id="editAddress_<?php echo $address->addressid; ?>" tabindex="-1" role="dialog" aria-labelledby="Edit Address" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
         <div class="modal-content">
         	<div class="modal-header">
