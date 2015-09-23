@@ -113,7 +113,6 @@ class MY_Controller extends CI_Controller {
 			asort($providers_options_top);
 			$this->session->set_userdata('providers_options_top',$providers_options_top);
 		}
- 		
  		// $this->session->unset_userdata('system_users');
 		if($this->session->userdata('system_users'))
 		{
@@ -126,6 +125,17 @@ class MY_Controller extends CI_Controller {
 			$this->session->set_userdata('system_users',$system_users['users']);
 			$this->session->set_userdata('system_users_images',$system_users['images']);
 		}
+
+		if($this->session->userdata('sales_users'))
+		{
+			$sales_users = $this->session->userdata('sales_users');
+		}
+		else
+		{
+			$sales_users = $this->Users_model->get_sales_users_for_select();
+			$this->session->set_userdata('sales_users',$sales_users['users']);
+		}
+
 		// SET CONSTANTS AND DEFAULTS
 		if ($this->input->post('new_search')){
 			// print('clearing');
@@ -214,7 +224,13 @@ class MY_Controller extends CI_Controller {
 		$system_users = array(0=>'All') + $system_users;
 		$this->data['system_users'] = array(-1=>'Not Assigned') + $system_users;
 		$this->data['assigned_default'] = '0';
+		if($sectors_search){
+			$sectors_search = array(-1=>'All Target Sectors',0=>'Any') +  $sectors_search;
+		}
 
+		$sales_users = array(0=>'All') + $sales_users;
+		$this->data['sales_users'] = array(-1=>'Not Assigned') + $sales_users;
+		$this->data['assigned_default'] = '0';
 		if($sectors_search){
 			$sectors_search = array(-1=>'All Target Sectors',0=>'Any') +  $sectors_search;
 		}

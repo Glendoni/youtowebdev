@@ -173,8 +173,8 @@
                                     <div class='form-row'>
                                         <div class="form-group">
                                             <?php
-                                            echo form_label('Assigned', 'assigned');
-                                            echo form_dropdown('assigned', $system_users, ($this->input->post('assigned')?$this->input->post('assigned'):$assigned_default) ,'class="form-control"');
+                                            echo form_label('Watching', 'assigned');
+                                            echo form_dropdown('assigned', $sales_users, ($this->input->post('assigned')?$this->input->post('assigned'):$assigned_default) ,'class="form-control"');
                                             ?>
                                          </div> 
                                     </div>

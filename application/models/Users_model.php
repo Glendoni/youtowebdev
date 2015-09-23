@@ -17,6 +17,22 @@ class Users_model extends MY_Model {
 		return array('users'=>$users,'images'=>$images);
 	}
 	// returns a user for a given id
+
+		function get_sales_users_for_select() 
+	{	
+		$this->db->select('id, name, image');
+		$this->db->where('active', 'True');
+		$this->db->where('department', 'sales');
+		$query = $this->db->get('users');
+		$users[0] = ' ';
+		foreach ($query->result_array() as $row)
+		{
+			$users[$row['id']] = $row['name'];
+			$images[$row['id']] = $row['image'];		  
+		}
+		return array('users'=>$users,'images'=>$images);
+	}
+	// returns a user for a given id
 	function get_user($id) 
 	{
 		$limit = 1;
