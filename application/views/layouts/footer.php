@@ -4,17 +4,10 @@
     <!-- /#wrapper -->
     <!-- jQuery Version 1.11.0 -->
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script type="text/javascript"  src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script type="text/javascript" src="<?php echo asset_url();?>js/bootstrap.min.js"></script>
-
-    <!-- Metis Menu Plugin JavaScript 
-    <script type="text/javascript"  src="<?php echo asset_url();?>js/plugins/metisMenu/metisMenu.min.js"></script>-->
-
-    <!-- Morris Charts JavaScript 
-    
-    <script type="text/javascript"  src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-    <script type="text/javascript"  src="//cdn.oesmith.co.uk/morris-0.5.1.min.js"></script>-->
 
     <!-- Custom Theme JavaScript -->
     <script type="text/javascript"  src="<?php echo asset_url();?>js/sb-admin-2.js"></script>
@@ -23,10 +16,7 @@
     <script type="text/javascript" src="<?php echo asset_url();?>js/ladda.min.js"></script>
 
 
-    <script type="text/javascript"  src="<?php echo asset_url();?>js/pace.min.js"></script> 
-
-    <script type="text/javascript"  src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
-    
+    <script type="text/javascript"  src="<?php echo asset_url();?>js/pace.min.js"></script>     
     <!-- DATE TIME PICKER -->
     <!--<script type="text/javascript" src="https://eonasdan.github.io/bootstrap-datetimepicker/scripts/moment.js"></script>-->
     <script type="text/javascript" src="<?php echo asset_url();?>js/moment.js"></script>
@@ -292,8 +282,6 @@
 
 </script>
 <?php endif; ?>
-
-
 <script type="text/javascript">
 $('.toggle').click(function (event) {
     event.preventDefault();
@@ -301,7 +289,6 @@ $('.toggle').click(function (event) {
     $(target).toggleClass('hidden show');
 });
 </script>
-
 <script type="text/javascript">
     $(document).ready(function(){
   $(window).bind('scroll', function() {
@@ -309,7 +296,14 @@ $('.toggle').click(function (event) {
     ($(window).scrollTop() > navHeight) ? $('nav').addClass('goToTop') : $('nav').removeClass('goToTop');
   });
 });
-
+</script>
+<!--MAKE MODALS WITH DRAGGABLE-MODAL CLASS DRAGGABLE-->
+<script type="text/javascript">
+$(window).load(function(){
+  $(".draggable-modal").draggable({
+      handle: ".modal-header"
+  });
+});
 
 </script>
   <hr>
