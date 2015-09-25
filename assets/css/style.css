@@ -535,18 +535,27 @@ border-right: 1px solid #e7e7e7;
  	padding-left: 5px;
  	padding-right: 5px;
   	margin-top: 10px;
+	width: 100px;
+    display: block;
+    margin: auto;
 }
 .label-Intent {
 	background-color: #46A0D4;
  	padding-left: 5px;
  	padding-right: 5px;
   	margin-top: 10px;
+	width: 120px;
+    display: block;
+    margin: auto;
 }
 .label-Qualified {
 	background-color: #59B200;
  	padding-left: 5px;
  	padding-right: 5px;
   	margin-top: 10px;
+  		width: 140px;
+    display: block;
+    margin: auto;
 }
 .label-Customer {
 	background-color: #00B285;
@@ -559,6 +568,9 @@ border-right: 1px solid #e7e7e7;
  	padding-left: 5px;
  	padding-right: 5px;
   	margin-top: 10px;
+  		width: 160px;
+    display: block;
+    margin: auto;
 }
 .label-Unsuitable {
 	background-color: #B80000 ;

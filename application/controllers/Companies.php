@@ -351,7 +351,7 @@ public function create_address(){
 
 
 	public function autocomplete() {
-        $search_data = $this->input->post("search_data");
+        $search_data = ltrim($this->input->post("search_data"));
 		$response = "<div class='autocomplete-full-holder'><div class='col-md-6 clearfix no-padding'><ul class='autocomplete-holder'>";
         $query = $this->Companies_model->get_autocomplete($search_data);
         $rowcount = $query->num_rows();

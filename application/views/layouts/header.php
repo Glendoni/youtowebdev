@@ -88,7 +88,7 @@
                                     
 
 
-                    <input name="agency_name" id="agency_name" type="text" onkeyup="ajaxSearch();" class="form-control large-search-height large-search" autocomplete="off" value="<?php echo $search_default;?>" placeholder="Search Baselist">
+                    <input name="agency_name" id="agency_name" type="text" onkeyup="ajaxSearch();" class="form-control large-search-height large-search" autocomplete="off" value="<?php echo ltrim($search_default);?>" placeholder="Search Baselist">
                     <div class="alert alert-warning alert-dismissible" style="display:none;" id="empty_form_error" role="alert">
                     <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 
