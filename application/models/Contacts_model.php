@@ -42,9 +42,9 @@ $data = array('company_id' => $company_id,);
 	{
         $contact->first_name = $first_name; // please read the below note
         $contact->last_name = $last_name;
-        $contact->email = $email;
-        $contact->phone = $phone;
-        $contact->role = $role;
+        $contact->email = !empty($email)?$email:NULL;
+        $contact->phone = !empty($phone)?$phone:NULL;
+        $contact->role = !empty($role)?$role:NULL;
         $contact->company_id = $company_id;
         $contact->created_by = $created_by;
         $contact->linkedin_id = $linkedin_id;
@@ -55,7 +55,7 @@ $data = array('company_id' => $company_id,);
 		} else {
 		$revised_linkedin_id = str_replace(array('.', ','), '' , preg_replace('/[^0-9,..]/i', '', $li_id));
 		}
-        $contact->linkedin_id = $revised_linkedin_id;
+        $contact->linkedin_id = !empty($revised_linkedin_id)?$revised_linkedin_id:NULL;
 		$this->db->insert('contacts', $contact);
         $new_id = $this->db->insert_id();
         $rows = $this->db->affected_rows();
@@ -66,8 +66,8 @@ $data = array('company_id' => $company_id,);
     	$contact->first_name   = $post['first_name']; // please read the below note
     	$contact->last_name = $post['last_name'];
         $contact->role = $post['role'];
-        $contact->email = $post['email'];
-        $contact->phone = $post['phone'];
+        $contact->email = !empty($post['email'])?$post['email']:NULL;
+        $contact->phone = !empty($post['phone'])?$post['phone']:NULL;
         $linkedin_id = $post['linkedin_id'];
         $parts = explode("&",$linkedin_id); 
 		$li_id = $parts['0']; 

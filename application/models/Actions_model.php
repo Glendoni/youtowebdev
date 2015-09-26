@@ -675,7 +675,7 @@ return $query->result_object();
 		if($state == 'completed')
 		{
 			$data = array(
-			'outcome' => $outcome,
+			'outcome' => (!empty($outcome)?$outcome:NULL),
 			'actioned_at' => date('Y-m-d H:i:s'),
 			'updated_at' => date('Y-m-d H:i:s'),
 			'updated_by' => $user_id,
@@ -685,7 +685,7 @@ return $query->result_object();
 		if($state == 'cancelled')
 		{
 			$data = array(
-			'outcome' => $outcome,
+			'outcome' => (!empty($outcome)?$outcome:NULL),
 			'cancelled_at' => date('Y-m-d H:i:s'),
 			'updated_at' => date('Y-m-d H:i:s'),
 			'updated_by' => $user_id,
