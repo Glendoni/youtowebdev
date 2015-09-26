@@ -12,7 +12,7 @@
             <div class="col-sm-6 col-md-8">
             <div class=" form-group ">
                         <label for="trading_name" class="control-label">Trading Name</label>                            
-                        <input type="text" name="trading_name" value="<?php echo isset($company['trading_name'])?$company['trading_name']:''; ?>" id="trading_name" maxlength="50" class="form-control" placeholder="Enter Trading Name">
+                        <input type="text" name="trading_name" value="<?php echo isset($company['trading_name'])?$company['trading_name']:''; ?>" id="trading_name" maxlength="50" class="form-control">
             </div>
             </div>
 
