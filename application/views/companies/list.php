@@ -9,16 +9,15 @@
 	<div class="panel-body">
     <div class="row">
 		<div class="col-sm-12">
-			<?php if (isset($company['parent_registration'])): ?>
+				<?php if (isset($company['parent_name'])): ?>
 			<div class="subsidiary">
 			<span class="label label-danger"><a href="<?php echo site_url();?>companies/company?id=<?php echo $company['parent_id'];?>" target="_blank">Subsidiary of <?php echo $company['parent_name'];?> <i class="fa fa-external-link"></i></a></span>
 			</div>
 			<?php elseif (isset($company['parent_registration'])): ?>
-			<div class="subsidiary">
+				<div class="subsidiary">
 			<span class="label label-danger"><a href="https://beta.companieshouse.gov.uk/company/<?php echo $company['parent_registration'];?>" target="_blank">Parent Registration: <?php echo $company['parent_registration'];?> <i class="fa fa-external-link"></i></a></span>
 			</div>
-
-	<?php endif; ?>
+		<?php endif; ?>
 		<h2 class="company-header">
 				<a href="<?php echo site_url();?>companies/company?id=<?php echo $company['id'];?>
 				<?php echo !empty($current_campaign_id)?'&campaign_id='.$current_campaign_id:''; ?>">
