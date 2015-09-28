@@ -221,7 +221,7 @@ class Companies_model extends CI_Model {
 		// filter by name
 		if (isset($post['agency_name']) && strlen($post['agency_name'])) 
 		{
-			$company_name_Search = ltrim(pg_escape_string($post['agency_name']));
+			$company_name_Search = trim(pg_escape_string($post['agency_name']));
 			$company_name_sql = "select id from companies  where (name ilike '%".$company_name_Search."%' or trading_name ilike '%".$company_name_Search."%' or registration = '".str_replace(' ', '', $company_name_Search)."')"; 
 		}
 

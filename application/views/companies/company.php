@@ -839,20 +839,19 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 								<?php foreach ($actions_marketing as $actions_marketing): 
 								 $created_date_formatted = date("l jS F y",strtotime($actions_marketing['date_sent']));
 								?>
-<li class="list-group-item">
-					<div class="row" style="padding: 15px 0">				                 
-						<div class="col-md-12 ">
-					
-							<div class="col-xs-6 col-md-4">
+						<li class="list-group-item">
+								<div class="row">				                 
+								<div class="col-xs-6 col-md-7">
 								<h4 style="margin:0;">
 								<?php echo $actions_marketing['campaign_name'];?>
 								<div class="mic-info">
-								Sent By: <?php echo $actions_marketing['email'];?></br>
-								Sent On: <?php echo $created_date_formatted?>
+								<?php echo $created_date_formatted?> by <?php echo $actions_marketing['email'];?>
 								</div>
 								</h4>
 								</div><!--END COL-MD-4-->
-								<div class="col-xs-6 col-md-4">
+								<div class="col-xs-6 col-md-5" style="text-align:right;">
+								<?php if($actions_marketing['first_name']):?><span class="label label-primary" style="font-size:11px;  "><?php echo $actions_marketing['first_name']." ". $actions_marketing['last_name']; ?></span>
+								<?php endif; ?>
 								<?php
 								if (($actions_marketing['opened']>'0') || ($actions_marketing['clicked']>'0')): ?>
 								<span class="label label-success">Opened</span>
@@ -870,14 +869,9 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 								<span class="label label-danger">Unsubscribed</span>
 								<?php else: ?>
 								<?php endif; ?>
-								</div>
-								<div class="col-xs-12 col-md-4">
-								<?php if($actions_marketing['first_name']):?><span class="label label-primary" style="font-size:11px;  "><?php echo $actions_marketing['first_name']." ". $actions_marketing['last_name']; ?></span>
-											<?php endif; ?>
-
-											
+			
 				                        </div>
-				                        </div>
+				                      
 				                        </div>
 				                </li>
 				                <?php endforeach ?>
