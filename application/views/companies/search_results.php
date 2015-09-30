@@ -76,7 +76,7 @@
 <?php if ($current_campaign_stats->campaign_prospects>0): ?>
 <a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $current_campaign_stats->campaign_id; ?>&pipeline=prospect">
 <?php else: endif; ?>
-<div class="circle-responsive gray-circle <?php if ($this->session->userdata('pipeline')=='prospect'): echo 'active';else: endif; ?>
+<div class="circle-responsive gray-circle <?php if ($this->session->userdata('pipeline')=='prospect'): echo 'Prospect active';else: endif; ?>
 ">
 <div class="circle-content mega">
 <div class="large-number"><?php echo $current_campaign_stats->campaign_prospects; ?></div>
@@ -89,7 +89,7 @@
 <?php if ($current_campaign_stats->campaign_intent>0): ?>
 <a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $current_campaign_stats->campaign_id; ?>&pipeline=intent">
 <?php else: endif; ?>
-<div class="circle-responsive gray-circle <?php if ($this->session->userdata('pipeline')=='intent'): echo 'active';else: endif; ?>">
+<div class="circle-responsive gray-circle <?php if ($this->session->userdata('pipeline')=='intent'): echo 'Intent active';else: endif; ?>">
 <div class="circle-content mega">
 <div class="large-number"><?php echo $current_campaign_stats->campaign_intent; ?></div>
 <div class="small-text">Intent</div></div>

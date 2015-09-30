@@ -34,7 +34,7 @@
 	<?php endif; ?>
 			</div>
 			<div class="col-sm-12" style="margin-top:5px; text-align:center;">
-	<span class="label label-<?php echo str_replace(' ', '', $company['pipeline']); ?>"><?php echo $company['pipeline']?>
+	<span class="label pipeline label-<?php echo str_replace(' ', '', $company['pipeline']); ?>"><?php echo $company['pipeline']?>
 	<?php if (isset($company['customer_from'])):?>
 		from <?php echo date("d/m/y",strtotime($company['customer_from']));?>
 		<?php endif; ?>

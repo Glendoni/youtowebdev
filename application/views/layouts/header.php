@@ -70,7 +70,7 @@
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <a class="navbar-brand" href="/" >Baselist <span style="font-size:12px; font-weight:300;">v2.8</span></a>
+                <a class="navbar-brand" href="/" >Baselist <span style="font-size:12px; font-weight:300;">v2.9</span></a>
             </div>
 <?php if (isset($current_user)): ?>
     <!--TOP SEARCH BAR-->
