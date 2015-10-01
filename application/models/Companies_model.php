@@ -477,7 +477,7 @@ class Companies_model extends CI_Model {
 			   ACT2.name , -- f36
 			   AU2.name, -- f37
 			   C.trading_name, --f38
-			   C.source, --f39
+			   C.lead_source_id, --f39
 			   C.source_date, --f40
 			   pr.name, --f41
 			   pr.id --f42
@@ -632,7 +632,7 @@ LEFT JOIN
 			     ACT2.name,
 			     AU2.name,
 			     C.trading_name,
-				 C.source,
+				 C.lead_source_id,
 			     C.source_date,
 			     pr.name,
 			     pr.id
@@ -1025,7 +1025,7 @@ LEFT JOIN
 				'updated_by'=>$post['user_id'],
 				//'pipeline'=>!empty($post['company_pipeline'])?$post['company_pipeline']:NULL,
 				'updated_at' => date('Y-m-d H:i:s'),
-				'source'=>$source,
+				'lead_source_id'=>$source,
 				'source_date'=>$source_date,
 				);
 

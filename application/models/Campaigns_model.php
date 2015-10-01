@@ -160,7 +160,7 @@ class Campaigns_model extends MY_Model {
 			   ACT2.name , -- f36
 			   AU2.name, -- f37
 			   C.trading_name, --f38
-			   C.source, --f39
+			   C.lead_source_id, --f39
 			   C.source_date, --f40
 			   pr.name, --f41
 			   pr.id --f42
@@ -310,7 +310,7 @@ class Campaigns_model extends MY_Model {
 			     ACT2.name,
 			     AU2.name,
 			     C.trading_name,
-			   	 C.source,
+			   	 C.lead_source_id,
 				 C.source_date,
 			     pr.name,
 			     pr.id
