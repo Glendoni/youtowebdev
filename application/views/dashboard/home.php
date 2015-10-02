@@ -422,9 +422,12 @@
                             <div class="col-xs-2 col-md-1 text-center">
                             <a href = "?search=2&user=<?php echo $lastweekstat['user'];?>&period=lastweek"><span class="badge" style="background-color:#00B285;"><?php echo $lastweekstat['deals'];?></a></span>
                             </div>
-                            <div class="col-xs-3 col-md-2 text-center"> 
-                            <?php echo $lastweekstat['proposals'];?>
-                            </div>
+                            <div class="col-xs-2 col-md-1 text-center"> 
+                              <?php echo $lastweekstat['proposals'];?>
+                              </div>
+                              <div class="col-xs-1 col-md-1 text-center"> 
+                              <?php echo $lastweekstat['democount'];?>
+                              </div>
                             <div class="col-xs-2 col-md-2 text-center">
                             <?php echo $lastweekstat['meetingbooked'];?> (<?php echo $lastweekstat['meetingcount'];?>)
                             </div>
@@ -489,9 +492,12 @@
                             <div class="col-xs-2 col-md-1 text-center">
                             <a href = "?search=2&user=<?php echo $thismonthstat['user'];?>&period=month"><span class="badge" style="background-color:#00B285;"><?php echo $thismonthstat['deals'];?></a></span>
                             </div>
-                            <div class="col-xs-3 col-md-2 text-center"> 
-                            <?php echo $thismonthstat['proposals'];?>
-                            </div>
+                            <div class="col-xs-2 col-md-1 text-center"> 
+                              <?php echo $thismonthstat['proposals'];?>
+                              </div>
+                              <div class="col-xs-1 col-md-1 text-center"> 
+                              <?php echo $thismonthstat['democount'];?>
+                              </div>
                             <div class="col-xs-2 col-md-2 text-center">
                             <?php echo $thismonthstat['meetingbooked'];?> (<?php echo $thismonthstat['meetingcount'];?>)
                             </div>
@@ -555,9 +561,12 @@
                             <div class="col-xs-2 col-md-1 text-center">
                             <a href = "?search=2&user=<?php echo $lastmonthstat['user'];?>&period=lastmonth"><span class="badge" style="background-color:#00B285;"><?php echo $lastmonthstat['deals'];?></a></span>
                             </div>
-                            <div class="col-xs-3 col-md-2 text-center"> 
-                            <?php echo $lastmonthstat['proposals'];?>
-                            </div>
+                              <div class="col-xs-2 col-md-1 text-center"> 
+                              <?php echo $lastmonthstat['proposals'];?>
+                              </div>
+                              <div class="col-xs-1 col-md-1 text-center"> 
+                              <?php echo $lastmonthstat['democount'];?>
+                              </div>
                             <div class="col-xs-2 col-md-2 text-center">
                             <?php echo $lastmonthstat['meetingbooked'];?> (<?php echo $lastmonthstat['meetingcount'];?>)
                             </div>
@@ -621,9 +630,12 @@
                             <div class="col-xs-2 col-md-1 text-center">
                             <a href = "?search=2&user=<?php echo $getstatssearch['user'];?>&start_date=<?php echo $_GET['start_date']?>&end_date=<?php echo $_GET['end_date']?>"><span class="badge" style="background-color:#00B285;"><?php echo $getstatssearch['deals'];?></a></span>
                             </div>
-                            <div class="col-xs-3 col-md-2 text-center"> 
-                            <?php echo $getstatssearch['proposals'];?>
-                            </div>
+                                  <div class="col-xs-2 col-md-1 text-center"> 
+                              <?php echo $getstatssearch['proposals'];?>
+                              </div>
+                              <div class="col-xs-1 col-md-1 text-center"> 
+                              <?php echo $getstatssearch['democount'];?>
+                              </div>
                             <div class="col-xs-2 col-md-2 text-center">
                             <?php echo $getstatssearch['meetingbooked'];?> (<?php echo $getstatssearch['meetingcount'];?>)
                             </div>
