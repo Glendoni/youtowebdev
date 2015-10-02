@@ -363,11 +363,17 @@ endif; ?>
 	      <tbody>
 	      	<?php foreach ($contacts as $contact): ?>
 	      	<tr>
-				<td class="col-md-3"><?php echo ucfirst($contact->first_name).' '.ucfirst($contact->last_name); ?></td>
+				<td class="col-md-2"><?php echo ucfirst($contact->first_name).' '.ucfirst($contact->last_name); ?></td>
 				<td class="col-md-2 mobile-hide"><?php echo ucfirst($contact->role); ?></td>
-				<td class="col-md-2"><?php echo $contact->email; ?></td>
+				<td class="col-md-2">
+				<?php echo $contact->email; ?>
+				<?php if (!empty($contact->email_opt_out_date)): ?>
+				<span class="label label-warning">Email Marketing Opt-Out</span>
+				<?php else: ?>
+				<?php endif;?>
+				</td>
 				<td class="col-md-2"><?php echo $contact->phone; ?></td>
-				<td  class="col-md-3">
+				<td  class="col-md-4">
 		      	<div class=" pull-right ">
 				<?php if ($company['pipeline']=='Blacklisted'): ?>
 				<?php else: ?>

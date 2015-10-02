@@ -6,7 +6,7 @@ class Users_model extends MY_Model {
 	function get_users_for_select() 
 	{	
 		$this->db->select('id, name, image');
-		$this->db->where('active', 'True');
+		$this->db->where('eff_to', null);
 		$query = $this->db->get('users');
 		$users[0] = ' ';
 		foreach ($query->result_array() as $row)
@@ -17,11 +17,10 @@ class Users_model extends MY_Model {
 		return array('users'=>$users,'images'=>$images);
 	}
 	// returns a user for a given id
-
-		function get_sales_users_for_select() 
+	function get_sales_users_for_select() 
 	{	
 		$this->db->select('id, name, image');
-		$this->db->where('active', 'True');
+		$this->db->where('eff_to', null);
 		$this->db->where('department', 'sales');
 		$query = $this->db->get('users');
 		$users[0] = ' ';
@@ -62,7 +61,7 @@ class Users_model extends MY_Model {
 	function get_user_login($email,$password)
 	{	
 		$limit = 1;
-		$query = $this->db->get_where('users', array('active'=>'True','email' => $email,'password'=>md5($password)), $limit);
+		$query = $this->db->get_where('users', array('eff_to'=>NULL,'email' => $email,'password'=>md5($password)), $limit);
 		return $query->result();
 	}
 
@@ -83,8 +82,10 @@ class Users_model extends MY_Model {
 	}
 	function disable_user($email)
 	{	
-		$sql = "update users set active = 'f' where email = '$email'";
-		$query = $this->db->query($sql);
+
+		$user->eff_to = date('Y-m-d');
+        $this->db->where('email', $email);
+		$this->db->update('users',$user);
 	}
 
 
