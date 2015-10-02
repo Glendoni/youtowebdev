@@ -518,7 +518,7 @@ class Campaigns_model extends MY_Model {
 		$this->db->distinct();
 		$this->db->join('campaigns', 'campaigns.id = targets.campaign_id', 'left');
 		$this->db->join('users', 'users.id = campaigns.created_by', 'left');
-		$this->db->where('eff_to', NULL);
+		$this->db->where('campaigns.eff_to', NULL);
 		$this->db->order_by('campaigns.created_at', 'desc'); 
 		$query = $this->db->get_where('targets',array('company_id'=>$company_id));	
 		return $query->result();

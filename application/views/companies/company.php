@@ -401,7 +401,7 @@ endif; ?>
 		<div class="panel panel-info ">
 		  <div class="panel-heading">Actions</div>
 		  <div class="panel-body">
-		   <?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'],'done'=>'1','campaign_id' => $campaign_id, 'class_check' => $companies_classes[$company['class']],'sector_check' => count($company['sectors']),);
+		   <?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'],'done'=>'1','campaign_id' => $campaign_id, 'class_check' => $companies_classes[$company['class']],'source_check' => $company['source'],'sector_check' => count($company['sectors']),);
 			echo form_open(site_url().'actions/create', 'name="create" class="form" role="form"',$hidden); ?>
 			<!--THE BELOW PASSES THE CLASS FIELD ACROSS PURELY FOR VALIDATION - IF THERE IS A BETTER WAY OF DOING THIS THEN IT NEEDS TO BE HERE-->
 			
