@@ -100,7 +100,7 @@ class Users_model extends MY_Model {
 		$fgcolour = !empty($data['user-fg'])?$data['user-fg']:'#FFFFF';
 		$bgcolour = !empty($data['user-fg'])?$data['user-bg']:'#FF0000';
 		$image = $initials.','.$fgcolour.','.$bgcolour;
-		$this->load->library('encrypt');
+		//$this->load->library('encrypt');
 
 		$data = array(
 			'name' => $data['name'],
@@ -112,14 +112,10 @@ class Users_model extends MY_Model {
 			'updated_at' => date('Y-m-d H:i:s'),
 			'updated_by' => $user_id,
 			'image' => $image,
-			'gmail_account' => $data['gmail_account'],
+			//'gmail_account' => $data['gmail_account'],
 			'new_window' => $data['new_window']
 
 			);
-		if( $this->input->post('gmail_password') != "" )
-		{
-		$data['gmail_password'] = $this->encrypt->encode($data['gmail_password']);
-		}
 
 		$this->db->where('id', $user_id);
 		$this->db->update('users',$data);

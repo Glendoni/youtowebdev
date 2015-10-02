@@ -229,10 +229,10 @@
                         </li>
                         <!-- <li>
                             <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
-                        </li> 
+                        </li> -->
                         <li>
-                            <a href="<?php echo site_url(); ?>users/settings"><i class="fa fa-fw fa-gear"></i> Settings</a>
-                        </li>-->
+                            <a href="<?php echo site_url(); ?>users/settings"><i class="fa fa-fw fa-envelope"></i> Email Settings</a>
+                        </li>
                         <li class="divider"></li>
                         <?php if ($current_user['permission'] == 'admin'): ?>
                 <li>

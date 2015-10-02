@@ -61,17 +61,15 @@ $user_icon = explode(",", ($current_user['image']));
                 <hr>
                 </div>
 
-                <div class="form-group col-md-6">            
+                <!--<div class="form-group col-md-6">            
                 <label>Gmail Account</label>
                 <input type="text" class="form-control" name="gmail_account" value="<?php echo $current_user['gmail_account'] ?>" >
                 </div>
                 <div class="form-group col-md-6">  
                   <label>Gmail Password</label><?php if (!empty($current_user['gmail_password'])): ?> <span class="label label-success"> Active </span><?php endif; ?>
                   <input type="password" class="form-control" name="gmail_password" value="" placeholder="Enter a new password here." autocomplete="off"> 
-                </div>
-                                <div class="form-group col-md-12">
-                <hr>
-                </div>
+                </div>-->
+
                 <div class="form-group col-md-12">
                   <button class="btn btn-primary" name="update_profile">Save</button>
                 </div>
