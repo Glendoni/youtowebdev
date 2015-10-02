@@ -11,7 +11,7 @@
 		<div class="col-sm-12">
 				<?php if (isset($company['parent_name'])): ?>
 			<div class="subsidiary">
-			<span class="label label-danger"><a href="<?php echo site_url();?>companies/company?id=<?php echo $company['parent_id'];?>" target="_blank">Subsidiary of <?php echo $company['parent_name'];?> <i class="fa fa-external-link"></i></a></span>
+			<span class="label label-danger"><a href="<?php echo site_url();?>companies/company?id=<?php echo $company['parent_id'];?>"  <?php if(($current_user['new_window']=='t')): ?> target="_blank"<?php endif; ?>>Subsidiary of <?php echo $company['parent_name'];?> <i class="fa fa-external-link"></i></a></span>
 			</div>
 			<?php elseif (isset($company['parent_registration'])): ?>
 				<div class="subsidiary">
@@ -20,7 +20,7 @@
 		<?php endif; ?>
 		<h2 class="company-header">
 				<a href="<?php echo site_url();?>companies/company?id=<?php echo $company['id'];?>
-				<?php echo !empty($current_campaign_id)?'&campaign_id='.$current_campaign_id:''; ?>">
+				<?php echo !empty($current_campaign_id)?'&campaign_id='.$current_campaign_id:''; ?>" <?php if(($current_user['new_window']=='t')): ?> target="_blank"<?php endif; ?>>
 					<?php 
 					$words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' );
 					echo str_replace($words, ' ',$company['name']); 
@@ -39,9 +39,9 @@
 		from <?php echo date("d/m/y",strtotime($company['customer_from']));?>
 		<?php endif; ?>
 		</span>
-	<?php if(isset($company['assigned_to_name'])): ?>
+		<?php if(isset($company['assigned_to_name'])): ?>
 		<span class="label label-assigned"
-		<?php $user_icon = explode(",", ($current_user['image']));echo "style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'";?>>
+		<?php $user_icon = explode(",", ($company['image']));echo "style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'";?>>
         <?php echo $company['assigned_to_name']; ?>
         </span>
 	<?php else: ?>

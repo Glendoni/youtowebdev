@@ -112,7 +112,9 @@ class Users_model extends MY_Model {
 			'updated_at' => date('Y-m-d H:i:s'),
 			'updated_by' => $user_id,
 			'image' => $image,
-			'gmail_account' => $data['gmail_account']
+			'gmail_account' => $data['gmail_account'],
+			'new_window' => $data['new_window']
+
 			);
 		if( $this->input->post('gmail_password') != "" )
 		{

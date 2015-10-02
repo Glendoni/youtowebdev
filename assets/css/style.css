@@ -271,7 +271,7 @@ background-color: #BFFFBF;
 color: #333;
 }
 .pipeline-update.Proposal {
-background-color: #EFBFFF;
+background-color: #348aa7;
 }
 .pipeline-update.Lost {
 background-color: #FFEFBF;
@@ -512,7 +512,7 @@ border-right: 1px solid #e7e7e7;
 	color: #fff !important;
 }
 .Proposal {
-	background-color: #993366 !important;
+	background-color: #348aa7 !important;
 	color: #fff !important;
 }
 .Unsuitable {
@@ -531,7 +531,6 @@ border-right: 1px solid #e7e7e7;
 }
 .pipeline.label-Prospect {
 	width: 80px;
-	display: block;
     margin: auto;
 }
 .label-Prospect {
@@ -542,7 +541,6 @@ border-right: 1px solid #e7e7e7;
 }
 .pipeline.label-Intent {
 	width: 100px;
-	display: block;
     margin: auto;
 }
 .label-Intent {
@@ -553,7 +551,6 @@ border-right: 1px solid #e7e7e7;
 }
 .pipeline.label-Qualified {
 	width: 100px;
-	display: block;
     margin: auto;
 }
 .label-Qualified {
@@ -561,12 +558,10 @@ border-right: 1px solid #e7e7e7;
  	padding-left: 5px;
  	padding-right: 5px;
   	margin-top: 10px;
-    display: block;
     margin: auto;
 }
 .pipeline.label-Customer {
 	width: 300px;
-	display: block;
     margin: auto;
 }
 .label-Customer {
@@ -574,15 +569,13 @@ border-right: 1px solid #e7e7e7;
  	padding-left: 5px;
  	padding-right: 5px;
   	margin-top: 10px;
-    display: block;
     margin: auto;
 }
 .label-Proposal {
-	background-color: #993366;
+	background-color: #348aa7;
  	padding-left: 5px;
  	padding-right: 5px;
   	margin-top: 10px;
-    display: block;
     margin: auto;
 }
 .label-Unsuitable {

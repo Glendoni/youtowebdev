@@ -32,6 +32,16 @@
                   <label>LinkedIn username</label>
                   <input type="text" class="form-control" name="linkedin" value="<?php echo $current_user['linkedin'] ?>" > 
                 </div>
+                <div class="form-group col-md-6">  
+                  <label>Open Companies in...</label>
+
+<select name="new_window" class="form-control">
+                  <option value="0" <?php if(($current_user['new_window']=='f')): ?> selected="selected"<?php endif; ?>
+>Same Window</option>
+                  <option value="1" <?php if(($current_user['new_window']=='t')): ?> selected="selected"<?php endif; ?>
+>New Window</option>
+                  </select>
+                </div>
                 <div class="form-group col-md-12">
                 <hr>
                 </div>

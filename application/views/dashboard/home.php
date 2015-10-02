@@ -1043,7 +1043,7 @@
                     <?php foreach ($assigned_companies as $assigned):?>
                           <div class="row list-group-item" style="font-size:12px;">
                             <div class="col-xs-4"> 
-                              <a href="<?php echo site_url();?>companies/company?id=<?php echo $assigned->id;?>">
+                              <a href="<?php echo site_url();?>companies/company?id=<?php echo $assigned->id;?>" <?php if(($current_user['new_window']=='t')): ?> target="_blank"<?php endif; ?>>
                               <?php 
                             $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' );
                             echo str_replace($words, ' ',$assigned->name); 
