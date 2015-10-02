@@ -286,11 +286,11 @@
                       <?php };?>                
 
 
-<div class="panel panel-default">
+                  <div class="panel panel-default">
                   <div class="panel-heading">
                     <h3 class="panel-title">Team Stats</h3>
                   </div>
-                  <div class="panel-body">
+                  <div class="panel-body" style="font-size:12px;">
                   <div class="list-group">
                     <?php if(empty($stats)) : ?>
                     <div class="col-md-12">
@@ -320,8 +320,11 @@
                         <div class="col-xs-2 col-md-1 text-center hide-overflow">
                             <strong>Deals</strong>
                         </div>
-                        <div class="col-xs-3 col-md-2 text-center hide-overflow">
+                        <div class="col-xs-2 col-md-1 text-center hide-overflow">
                             <strong>Proposals</strong>
+                        </div>
+                        <div class="col-xs-1 col-md-1 text-center hide-overflow">
+                            <strong>Demos</strong>
                         </div>
                         <div class="col-xs-2 col-md-2 text-center hide-overflow">
                             <strong>Meetings</strong><br>
@@ -331,14 +334,14 @@
                            <strong>Call Activity</strong><br>
                            <Small> Total Calls (Intro)</Small>
                         </div>
-                        <div class="col-md-1 hidden-xs text-center hide-overflow">
+                        <div class="col-md-1 hidden-sm text-center hide-overflow">
                            <strong>Pipeline Added</strong>
                         </div>
-                        <div class="col-md-2 hidden-xs text-center hide-overflow"> 
+                        <div class="col-md-2 hidden-sm text-center hide-overflow"> 
                            <strong>Review Months</strong><br>
                            <Small>Added / Occuring</Small>
                         </div>
-                        <div class="col-md-1 hidden-xs text-center hide-overflow">
+                        <div class="col-md-1 hidden-sm text-center hide-overflow">
                            <strong>DueDil</strong>
                         </div>
                         </div>
@@ -350,8 +353,11 @@
                             <div class="col-xs-2 col-md-1 text-center">
                             <a href = "?search=2&user=<?php echo $stat['user'];?>&period=week"><span class="badge" style="background-color:#00B285;"><?php echo $stat['deals'];?></a></span>
                             </div>
-                            <div class="col-xs-3 col-md-2 text-center"> 
+                            <div class="col-xs-2 col-md-1 text-center"> 
                             <?php echo $stat['proposals'];?>
+                            </div>
+                            <div class="col-xs-1 col-md-1 text-center"> 
+                            <?php echo $stat['democount'];?>
                             </div>
                             <div class="col-xs-2 col-md-2 text-center">
                             <?php echo $stat['meetingbooked'];?> (<?php echo $stat['meetingcount'];?>)
@@ -360,13 +366,13 @@
                             <?php echo $stat['salescall'];?>
                             (<?php echo $stat['introcall'];?>)
                             </div>
-                            <div class="col-md-1 hidden-xs text-center">
+                            <div class="col-md-1 hidden-sm text-center">
                               <?php echo $stat['pipelinecount'];?>
                             </div>
-                            <div class="col-md-2 hidden-xs text-center">
+                            <div class="col-md-2 hidden-sm text-center">
                               <?php echo $stat['key_review_added'];?> / <?php echo $stat['key_review_occuring'];?>
                             </div>
-                            <div class="col-md-1 hidden-xs text-center">
+                            <div class="col-md-1 hidden-sm text-center">
                               <?php echo $stat['duediligence'];?>
                             </div>
                           </div> <!--END ROW-->    
@@ -383,8 +389,11 @@
                         <div class="col-xs-2 col-md-1 text-center hide-overflow">
                             <strong>Deals</strong>
                         </div>
-                        <div class="col-xs-3 col-md-2 text-center hide-overflow">
+                        <div class="col-xs-2 col-md-1 text-center hide-overflow">
                             <strong>Proposals</strong>
+                        </div>
+                        <div class="col-xs-1 col-md-1 text-center hide-overflow">
+                            <strong>Demos</strong>
                         </div>
                         <div class="col-xs-2 col-md-2 text-center hide-overflow">
                             <strong>Meetings</strong><br>
@@ -394,14 +403,14 @@
                            <strong>Call Activity</strong><br>
                            <Small> Total Calls (Intro)</Small>
                         </div>
-                        <div class="col-md-1 hidden-xs text-center hide-overflow">
+                        <div class="col-md-1 hidden-sm text-center hide-overflow">
                            <strong>Pipeline Added</strong>
                         </div>
-                        <div class="col-md-2 hidden-xs text-center hide-overflow"> 
+                        <div class="col-md-2 hidden-sm text-center hide-overflow"> 
                            <strong>Review Months</strong><br>
                            <Small>Added / Occuring</Small>
                         </div>
-                        <div class="col-md-1 hidden-xs text-center hide-overflow">
+                        <div class="col-md-1 hidden-sm text-center hide-overflow">
                            <strong>DueDil</strong>
                         </div>
                         </div>
@@ -447,8 +456,11 @@
                         <div class="col-xs-2 col-md-1 text-center hide-overflow">
                             <strong>Deals</strong>
                         </div>
-                        <div class="col-xs-3 col-md-2 text-center hide-overflow">
+                        <div class="col-xs-2 col-md-1 text-center hide-overflow">
                             <strong>Proposals</strong>
+                        </div>
+                        <div class="col-xs-1 col-md-1 text-center hide-overflow">
+                            <strong>Demos</strong>
                         </div>
                         <div class="col-xs-2 col-md-2 text-center hide-overflow">
                             <strong>Meetings</strong><br>
@@ -458,14 +470,14 @@
                            <strong>Call Activity</strong><br>
                            <Small> Total Calls (Intro)</Small>
                         </div>
-                        <div class="col-md-1 hidden-xs text-center hide-overflow">
+                        <div class="col-md-1 hidden-sm text-center hide-overflow">
                            <strong>Pipeline Added</strong>
                         </div>
-                        <div class="col-md-2 hidden-xs text-center hide-overflow"> 
+                        <div class="col-md-2 hidden-sm text-center hide-overflow"> 
                            <strong>Review Months</strong><br>
                            <Small>Added / Occuring</Small>
                         </div>
-                        <div class="col-md-1 hidden-xs text-center hide-overflow">
+                        <div class="col-md-1 hidden-sm text-center hide-overflow">
                            <strong>DueDil</strong>
                         </div>
                         </div>
@@ -510,8 +522,11 @@
                         <div class="col-xs-2 col-md-1 text-center hide-overflow">
                             <strong>Deals</strong>
                         </div>
-                        <div class="col-xs-3 col-md-2 text-center hide-overflow">
+                        <div class="col-xs-2 col-md-1 text-center hide-overflow">
                             <strong>Proposals</strong>
+                        </div>
+                        <div class="col-xs-1 col-md-1 text-center hide-overflow">
+                            <strong>Demos</strong>
                         </div>
                         <div class="col-xs-2 col-md-2 text-center hide-overflow">
                             <strong>Meetings</strong><br>
@@ -521,14 +536,14 @@
                            <strong>Call Activity</strong><br>
                            <Small> Total Calls (Intro)</Small>
                         </div>
-                        <div class="col-md-1 hidden-xs text-center hide-overflow">
+                        <div class="col-md-1 hidden-sm text-center hide-overflow">
                            <strong>Pipeline Added</strong>
                         </div>
-                        <div class="col-md-2 hidden-xs text-center hide-overflow"> 
+                        <div class="col-md-2 hidden-sm text-center hide-overflow"> 
                            <strong>Review Months</strong><br>
                            <Small>Added / Occuring</Small>
                         </div>
-                        <div class="col-md-1 hidden-xs text-center hide-overflow">
+                        <div class="col-md-1 hidden-sm text-center hide-overflow">
                            <strong>DueDil</strong>
                         </div>
                         </div>
@@ -573,8 +588,11 @@
                         <div class="col-xs-2 col-md-1 text-center hide-overflow">
                             <strong>Deals</strong>
                         </div>
-                        <div class="col-xs-3 col-md-2 text-center hide-overflow">
+                        <div class="col-xs-2 col-md-1 text-center hide-overflow">
                             <strong>Proposals</strong>
+                        </div>
+                        <div class="col-xs-1 col-md-1 text-center hide-overflow">
+                            <strong>Demos</strong>
                         </div>
                         <div class="col-xs-2 col-md-2 text-center hide-overflow">
                             <strong>Meetings</strong><br>
@@ -584,14 +602,14 @@
                            <strong>Call Activity</strong><br>
                            <Small> Total Calls (Intro)</Small>
                         </div>
-                        <div class="col-md-1 hidden-xs text-center hide-overflow">
+                        <div class="col-md-1 hidden-sm text-center hide-overflow">
                            <strong>Pipeline Added</strong>
                         </div>
-                        <div class="col-md-2 hidden-xs text-center hide-overflow"> 
+                        <div class="col-md-2 hidden-sm text-center hide-overflow"> 
                            <strong>Review Months</strong><br>
                            <Small>Added / Occuring</Small>
                         </div>
-                        <div class="col-md-1 hidden-xs text-center hide-overflow">
+                        <div class="col-md-1 hidden-sm text-center hide-overflow">
                            <strong>DueDil</strong>
                         </div>
                         </div>

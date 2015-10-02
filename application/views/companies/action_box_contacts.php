@@ -147,6 +147,19 @@
                         </select>
 						</div>
 	                </div>
+	                <div class="col-md-6">
+	                    <div class="form-group">
+						<label for="marketing" class="control-label">Opt Out of Marketing </label>   
+                        <select name="marketing_opt_out" class="form-control">
+                            <option value="0" <?php if(empty($contact->email_opt_out_date)): ?>selected=""<?php endif; ?>>No</option>
+                            <option value="1" <?php if(!empty($contact->email_opt_out_date)): ?>selected=""<?php endif; ?>>Yes</option>
+                        </select>
+                        <!-- PASS OPT OUT DATE IF SET TO STOP BEING OVERWRITTEN-->
+                        <?php if(!empty($contact->email_opt_out_date)): ?>
+						<input type="hidden" name="opt_out_check" value="<?php echo $contact->email_opt_out_date; ?>" />
+                        <?php endif; ?>
+						</div>
+	                </div>
 				 </div>
 	      	</div>
 

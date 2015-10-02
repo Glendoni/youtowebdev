@@ -172,24 +172,23 @@ return $query->result_object();
 		return $query->result_object();
 
 	}
-
-
-	
-	function get_recent_stats(){
-		$start_date_week = date('Y-m-d 00:00:00',strtotime('monday this week'));
-		$end_date_month = date('Y-m-d 23:59:59',strtotime('sunday this week'));
+	function get_recent_stats($period){
+		$dates = $this->dates($period);
+		$start_date = $dates['start_date'];
+		$end_date = $dates['end_date'];
 		$sql = "select U.name, U.id as user, U.image,
-				sum(case when action_type_id = '4' AND actioned_at > '$start_date_week' AND actioned_at < '$end_date_month' then 1 else 0 end) introcall,
-				sum(case when (action_type_id = '4' or action_type_id = '5' or action_type_id = '11' or action_type_id = '17')  AND actioned_at > '$start_date_week' AND actioned_at < '$end_date_month' then 1 else 0 end) salescall,
-		    	sum(case when (action_type_id = '5' OR action_type_id = '11') AND actioned_at > '$start_date_week' AND actioned_at < '$end_date_month' then 1 else 0 end) callcount,
-		   		sum(case when (action_type_id = '12' or action_type_id = '10' or action_type_id = '9' or action_type_id = '15') AND actioned_at > '$start_date_week' AND actioned_at < '$end_date_month' then 1 else 0 end) meetingcount,
-		    	sum(case when (action_type_id = '12' or action_type_id = '10' or action_type_id = '9' or action_type_id = '15') AND a.created_at > '$start_date_week' AND a.created_at < '$end_date_month' then 1 else 0 end) meetingbooked,
-		    	sum(case when (action_type_id = '16') AND a.created_at > '$start_date_week' AND a.created_at < '$end_date_month' then 1 else 0 end) deals,
-		    	sum(case when action_type_id = '25' AND a.created_at > '$start_date_week' AND a.created_at < '$end_date_month' then 1 else 0 end) duediligence,
-		    	sum(case when action_type_id = '22' AND a.created_at > '$start_date_week' AND a.created_at < '$end_date_month' then 1 else 0 end) key_review_added,
-		    	sum(case when action_type_id = '22' AND a.planned_at > '$start_date_week' AND a.planned_at < '$end_date_month' then 1 else 0 end) key_review_occuring,
-		    	sum(case when (action_type_id = '8') AND a.created_at > '$start_date_week' AND a.created_at < '$end_date_month' then 1 else 0 end) proposals,
-				Sum(case when action_type_id = '19' and a.id = 	(SELECT MAX(id) FROM actions z WHERE z.company_id = a.company_id and z.action_type_id = '19' order by a.actioned_at desc) AND (a.comments ilike '%intent%' or a.comments ilike '%qualified%') AND a.created_at > '$start_date_week' AND a.created_at < '$end_date_month' THEN 1 ELSE 0 END) AS pipelinecount
+				sum(case when action_type_id = '4' AND actioned_at > '$start_date' AND actioned_at < '$end_date' then 1 else 0 end) introcall,
+				sum(case when (action_type_id = '4' or action_type_id = '5' or action_type_id = '11' or action_type_id = '17')  AND actioned_at > '$start_date' AND actioned_at < '$end_date' then 1 else 0 end) salescall,
+		    	sum(case when (action_type_id = '5' OR action_type_id = '11') AND actioned_at > '$start_date' AND actioned_at < '$end_date' then 1 else 0 end) callcount,
+		   		sum(case when (action_type_id = '12' or action_type_id = '10') AND actioned_at > '$start_date' AND actioned_at < '$end_date' then 1 else 0 end) meetingcount,
+		   		sum(case when (action_type_id = '9' or action_type_id = '15') AND actioned_at > '$start_date' AND actioned_at < '$end_date' then 1 else 0 end) democount,
+		    	sum(case when (action_type_id = '12' or action_type_id = '10' or action_type_id = '9' or action_type_id = '15') AND a.created_at > '$start_date' AND a.created_at < '$end_date' then 1 else 0 end) meetingbooked,
+		    	sum(case when (action_type_id = '16') AND a.created_at > '$start_date' AND a.created_at < '$end_date' then 1 else 0 end) deals,
+		    	sum(case when action_type_id = '25' AND a.created_at > '$start_date' AND a.created_at < '$end_date' then 1 else 0 end) duediligence,
+		    	sum(case when action_type_id = '22' AND a.created_at > '$start_date' AND a.created_at < '$end_date' then 1 else 0 end) key_review_added,
+		    	sum(case when action_type_id = '22' AND a.planned_at > '$start_date' AND a.planned_at < '$end_date' then 1 else 0 end) key_review_occuring,
+		    	sum(case when (action_type_id = '8') AND a.created_at > '$start_date' AND a.created_at < '$end_date' then 1 else 0 end) proposals,
+				Sum(case when action_type_id = '19' and a.id = 	(SELECT MAX(id) FROM actions z WHERE z.company_id = a.company_id and z.action_type_id = '19' order by a.actioned_at desc) AND (a.comments ilike '%intent%' or a.comments ilike '%qualified%') AND a.created_at > '$start_date' AND a.created_at < '$end_date' THEN 1 ELSE 0 END) AS pipelinecount
 				from actions A LEFT JOIN companies C on A.company_id = C.id INNER JOIN users U on A.user_id = U.id where cancelled_at is null and u.department = 'sales' and u.active = 't' group by U.id,U.name order by deals desc,proposals desc,meetingbooked desc, introcall desc, name desc";
 		$query = $this->db->query($sql);
 		if($query){
@@ -198,116 +197,46 @@ return $query->result_object();
 			return [];
 		}
 	}
-	function get_last_week_stats(){
-		$start_date_week = date('Y-m-d 00:00:00',strtotime('monday last week'));
-		$end_date_month = date('Y-m-d 23:59:59',strtotime('sunday last week'));
-		$sql = "select U.name, U.id as user, U.image,
-				sum(case when action_type_id = '4' AND actioned_at > '$start_date_week' AND actioned_at < '$end_date_month' then 1 else 0 end) introcall,
-				sum(case when (action_type_id = '4' or action_type_id = '5' or action_type_id = '11' or action_type_id = '17')  AND actioned_at > '$start_date_week' AND actioned_at < '$end_date_month' then 1 else 0 end) salescall,
-		    	sum(case when (action_type_id = '5' OR action_type_id = '11') AND actioned_at > '$start_date_week' AND actioned_at < '$end_date_month' then 1 else 0 end) callcount,
-		   		sum(case when (action_type_id = '12' or action_type_id = '10' or action_type_id = '9' or action_type_id = '15') AND actioned_at > '$start_date_week' AND actioned_at < '$end_date_month' then 1 else 0 end) meetingcount,
-		    	sum(case when (action_type_id = '12' or action_type_id = '10' or action_type_id = '9' or action_type_id = '15') AND a.created_at > '$start_date_week' AND a.created_at < '$end_date_month' then 1 else 0 end) meetingbooked,
-		    	sum(case when (action_type_id = '16') AND a.created_at > '$start_date_week' AND a.created_at < '$end_date_month' then 1 else 0 end) deals,
-		    	sum(case when (action_type_id = '8') AND a.created_at > '$start_date_week' AND a.created_at < '$end_date_month' then 1 else 0 end) proposals,
-				Sum(CASE WHEN action_type_id = '19' and a.id = 	(SELECT MAX(id) FROM actions z WHERE z.company_id = a.company_id and z.action_type_id = '19' order by a.actioned_at desc) AND (a.comments ilike '%intent%' or a.comments ilike '%qualified%') AND a.created_at > '$start_date_week' AND a.created_at < '$end_date_month' THEN 1 ELSE 0 END) AS pipelinecount,
-				sum(case when action_type_id = '25' AND a.created_at > '$start_date_week' AND a.created_at < '$end_date_month' then 1 else 0 end) duediligence,
-		    	sum(case when action_type_id = '22' AND a.created_at > '$start_date_week' AND a.created_at < '$end_date_month' then 1 else 0 end) key_review_added,
-		    	sum(case when action_type_id = '22' AND a.planned_at > '$start_date_week' AND a.planned_at < '$end_date_month' then 1 else 0 end) key_review_occuring
-				from actions A LEFT JOIN companies C on A.company_id = C.id INNER JOIN users U on A.user_id = U.id where cancelled_at is null and u.department = 'sales'  and u.active = 't'  group by U.id,U.name order by deals desc,proposals desc,meetingbooked desc, introcall desc, name desc";
-		$query = $this->db->query($sql);
-		if($query){
-			return $query->result_array();
-		}else{
-			return [];
-		}
-	}
-	function get_this_month_stats(){
-		$start_date_month = date('Y-m-d 00:00:00',strtotime('first day of this month'));
-		$end_date_month = date('Y-m-d 23:59:59',strtotime('last day of this month'));
-		$sql = "select U.name, U.id as user, U.image,
-				sum(case when action_type_id = '4' AND actioned_at > '$start_date_month' AND actioned_at < '$end_date_month' then 1 else 0 end) introcall,
-				sum(case when (action_type_id = '4' or action_type_id = '5' or action_type_id = '11' or action_type_id = '17')  AND actioned_at > '$start_date_month' AND actioned_at < '$end_date_month' then 1 else 0 end) salescall,
-		    	sum(case when (action_type_id = '5' OR action_type_id = '11') AND actioned_at > '$start_date_month' AND actioned_at < '$end_date_month' then 1 else 0 end) callcount,
-		   		sum(case when (action_type_id = '12' or action_type_id = '10' or action_type_id = '9' or action_type_id = '15') AND actioned_at > '$start_date_month' AND actioned_at < '$end_date_month' then 1 else 0 end) meetingcount,
-		    	sum(case when (action_type_id = '12' or action_type_id = '10' or action_type_id = '9' or action_type_id = '15') AND a.created_at > '$start_date_month' AND a.created_at < '$end_date_month' then 1 else 0 end) meetingbooked,
-		    	sum(case when (action_type_id = '16') AND a.created_at > '$start_date_month' AND a.created_at < '$end_date_month' then 1 else 0 end) deals,
-		    	sum(case when (action_type_id = '8') AND a.created_at > '$start_date_month' AND a.created_at < '$end_date_month' then 1 else 0 end) proposals,
-		    	sum(case when action_type_id = '25' AND a.created_at > '$start_date_month' AND a.created_at < '$end_date_month' then 1 else 0 end) duediligence,
-		    	sum(case when action_type_id = '22' AND a.created_at > '$start_date_month' AND a.created_at < '$end_date_month' then 1 else 0 end) key_review_added,
-		    	sum(case when action_type_id = '22' AND a.planned_at > '$start_date_month' AND a.planned_at < '$end_date_month' then 1 else 0 end) key_review_occuring,
-		    	Sum(CASE WHEN action_type_id = '19' and a.id = 	(SELECT MAX(id) FROM actions z WHERE z.company_id = a.company_id and z.action_type_id = '19' order by a.actioned_at desc) AND (a.comments ilike '%intent%' or a.comments ilike '%qualified%') AND a.created_at > '$start_date_month' AND a.created_at < '$end_date_month' THEN 1 ELSE 0 END) AS pipelinecount 
-				from actions A
-				INNER JOIN users U
-				on A.user_id = U.id
-				LEFT JOIN companies C
-				on A.company_id = C.id
-				where cancelled_at is null and u.department = 'sales'  and u.active = 't'  group by U.name, U.id order by deals desc, meetingbooked desc, introcall desc,  name desc";
-		$query = $this->db->query($sql);
-		if($query){
-			return $query->result_array();
-		}else{
-			return [];
-		}
-	}
 
-		function get_last_month_stats(){
+		function dates($period){
+		if ($period==='search') {
+		if (!empty($_GET['start_date'])) {
+		$start_date = date('Y-m-d 00:00:00',strtotime($_GET['start_date']));
+		} else {
+		$start_date = date('Y-m-d 23:59:59',strtotime('first day of this month'));
+		}
+
+		if (!empty($_GET['end_date'])) {
+		$end_date = date('Y-m-d 23:59:59',strtotime($_GET['end_date']));
+		} else {
+		$end_date = date('Y-m-d 23:59:59',strtotime('last day of this month'));
+		}
+		}
+		
+		else if ($period==='week') {
+		$start_date = date('Y-m-d 00:00:00',strtotime('monday this week'));
+		$end_date = date('Y-m-d 23:59:59',strtotime('sunday this week'));
+		}
+		else if ($period==='lastweek') {
+		$start_date = date('Y-m-d 00:00:00',strtotime('monday last week'));
+		$end_date = date('Y-m-d 23:59:59',strtotime('sunday last week'));
+		}
+		else if ($period==='thismonth') {
+		$start_date = date('Y-m-d 00:00:00',strtotime('first day of this month'));
+		$end_date = date('Y-m-d 23:59:59',strtotime('last day of this month'));
+		}
+		else if ($period==='lastmonth') {
 		$start_date = date('Y-m-d 00:00:00',strtotime('first day of previous month'));
 		$end_date = date('Y-m-d 23:59:59',strtotime('last day of previous month'));
-		$sql = "select U.name, U.id as user, U.image,
-				sum(case when action_type_id = '4' AND actioned_at > '$start_date' AND actioned_at < '$end_date' then 1 else 0 end) introcall,
-				sum(case when (action_type_id = '4' or action_type_id = '5')  AND actioned_at > '$start_date' AND actioned_at < '$end_date' then 1 else 0 end) salescall,
-		    	sum(case when (action_type_id = '5' OR action_type_id = '11') AND actioned_at > '$start_date' AND actioned_at < '$end_date' then 1 else 0 end) callcount,
-		   		sum(case when (action_type_id = '12' or action_type_id = '10' or action_type_id = '9' or action_type_id = '15') AND actioned_at > '$start_date' AND actioned_at < '$end_date' then 1 else 0 end) meetingcount,
-		    	sum(case when (action_type_id = '12' or action_type_id = '10' or action_type_id = '9' or action_type_id = '15') AND a.created_at > '$start_date' AND a.created_at < '$end_date' then 1 else 0 end) meetingbooked,
-		    	sum(case when (action_type_id = '16') AND a.created_at > '$start_date' AND a.created_at < '$end_date' then 1 else 0 end) deals,
-		    	sum(case when (action_type_id = '8') AND a.created_at > '$start_date' AND a.created_at < '$end_date' then 1 else 0 end) proposals,
-		    	sum(case when action_type_id = '25' AND a.created_at > '$start_date' AND a.created_at < '$end_date' then 1 else 0 end) duediligence,
-		    	sum(case when action_type_id = '22' AND a.created_at > '$start_date' AND a.created_at < '$end_date' then 1 else 0 end) key_review_added,
-		    	sum(case when action_type_id = '22' AND a.planned_at > '$start_date' AND a.planned_at < '$end_date' then 1 else 0 end) key_review_occuring,
-		    	Sum(CASE WHEN action_type_id = '19' and a.id = 	(SELECT MAX(id) FROM actions z WHERE z.company_id = a.company_id and z.action_type_id = '19' order by a.actioned_at desc) AND (a.comments ilike '%intent%' or a.comments ilike '%qualified%') AND a.created_at > '$start_date' AND a.created_at < '$end_date' THEN 1 ELSE 0 END) AS pipelinecount 
-				from actions A
-				INNER JOIN users U
-				on A.user_id = U.id
-				LEFT JOIN companies C
-				on A.company_id = C.id
-				where cancelled_at is null and u.department = 'sales'  and u.active = 't'  group by U.name, U.id order by deals desc, meetingbooked desc, introcall desc,  name desc";
-		$query = $this->db->query($sql);
-		if($query){
-			return $query->result_array();
-		}else{
-			return [];
 		}
+		else
+		{
+		$start_date = date('Y-m-d 00:00:00',strtotime('first day of this month'));
+		$end_date = date('Y-m-d 23:59:59',strtotime('last day of this month'));
+		}
+		return array('search_user_id' => $_GET['user'], 'start_date' => $start_date, 'end_date' => $end_date);
 	}
 
-	function get_stats_search(){
-		$dates = $this->dates();
-		$start_date = $dates['start_date'];
-		$end_date = $dates['end_date'];
-	 	$sql = "select U.name, U.id as user, U.image,
-				sum(case when action_type_id = '4' AND actioned_at > '$start_date' AND actioned_at < '$end_date' then 1 else 0 end) introcall,
-				sum(case when (action_type_id = '4' or action_type_id = '5')  AND actioned_at > '$start_date' AND actioned_at < '$end_date' then 1 else 0 end) salescall,
-		    	sum(case when (action_type_id = '5' OR action_type_id = '11') AND actioned_at > '$start_date' AND actioned_at < '$end_date' then 1 else 0 end) callcount,
-		   		sum(case when (action_type_id = '12' or action_type_id = '10' or action_type_id = '9' or action_type_id = '15') AND actioned_at > '$start_date' AND actioned_at < '$end_date' then 1 else 0 end) meetingcount,
-		    	sum(case when (action_type_id = '12' or action_type_id = '10' or action_type_id = '9' or action_type_id = '15') AND a.created_at > '$start_date' AND a.created_at < '$end_date' then 1 else 0 end) meetingbooked,
-		    	sum(case when (action_type_id = '16') AND a.created_at > '$start_date' AND a.created_at < '$end_date' then 1 else 0 end) deals,
-		    	sum(case when (action_type_id = '8') AND a.created_at > '$start_date' AND a.created_at < '$end_date' then 1 else 0 end) proposals,
-		    	sum(case when action_type_id = '25' AND a.created_at > '$start_date' AND a.created_at < '$end_date' then 1 else 0 end) duediligence,
-		    	sum(case when action_type_id = '22' AND a.created_at > '$start_date' AND a.created_at < '$end_date' then 1 else 0 end) key_review_added,
-		    	sum(case when action_type_id = '22' AND a.planned_at > '$start_date' AND a.planned_at < '$end_date' then 1 else 0 end) key_review_occuring,
-		    	Sum(CASE WHEN action_type_id = '19' and a.id = 	(SELECT MAX(id) FROM actions z WHERE z.company_id = a.company_id and z.action_type_id = '19' order by a.actioned_at desc) AND (a.comments ilike '%intent%' or a.comments ilike '%qualified%') AND a.created_at > '$start_date' AND a.created_at < '$end_date' THEN 1 ELSE 0 END) AS pipelinecount 
-				from actions A
-				INNER JOIN users U
-				on A.user_id = U.id
-				LEFT JOIN companies C
-				on A.company_id = C.id
-				where cancelled_at is null and u.department = 'sales'  and u.active = 't' group by U.name, U.id order by deals desc, meetingbooked desc, introcall desc,  name desc";
-		$query = $this->db->query($sql);
-		if($query){
-			return $query->result_array();
-		}else{
-			return [];
-		}
-	}
 	function get_pipeline_contacted(){
 		$dates = $this->dates();
 		$start_date = $dates['start_date'];
@@ -565,45 +494,6 @@ return $query->result_object();
 		}
 	}
 
-	function dates(){
-		$period = $_GET['period'];
-		if (!empty($_GET['start_date'])) {
-		$start_date = date('Y-m-d 00:00:00',strtotime($_GET['start_date']));
-			if (!empty($_GET['end_date'])) {
-		$end_date = date('Y-m-d 23:59:59',strtotime($_GET['end_date']));
-		
-
-		} else {
-
-					$end_date = date('Y-m-d 23:59:59',strtotime('last day of this month'));
-
-		}
-
-		}
-		else if ($period==='week') {
-		$start_date = date('Y-m-d 00:00:00',strtotime('monday this week'));
-		$end_date = date('Y-m-d 23:59:59',strtotime('sunday this week'));
-		}
-		else if ($period==='lastweek') {
-		$start_date = date('Y-m-d 00:00:00',strtotime('monday last week'));
-		$end_date = date('Y-m-d 23:59:59',strtotime('sunday last week'));
-	}
-		else if ($period==='thismonth') {
-		$start_date = date('Y-m-d 00:00:00',strtotime('first day of this month'));
-		$end_date = date('Y-m-d 23:59:59',strtotime('last day of this month'));
-
-		}
-		else if ($period==='lastmonth') {
-		$start_date = date('Y-m-d 00:00:00',strtotime('first day of previous month'));
-		$end_date = date('Y-m-d 23:59:59',strtotime('last day of previous month'));
-		}
-		else
-		{
-		$start_date = date('Y-m-d 00:00:00',strtotime('first day of this month'));
-		$end_date = date('Y-m-d 23:59:59',strtotime('last day of this month'));
-		}
-		return array('search_user_id' => $_GET['user'], 'start_date' => $start_date, 'end_date' => $end_date);
-	}
 
 	function get_user_meetings(){
 		$dates = $this->dates();

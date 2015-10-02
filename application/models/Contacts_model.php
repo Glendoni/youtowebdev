@@ -80,14 +80,20 @@ $data = array('company_id' => $company_id,);
         $contact->eff_to = date('Y-m-d');
 		}
 		else{};
+		if (($post['marketing_opt_out'] == 1) && (empty($post['opt_out_check']))) { 
+        $contact->email_opt_out_date = date('Y-m-d');
+		}
+		else if (($post['marketing_opt_out'] == 0)){
+		$contact->email_opt_out_date = NULL;
+		};
 		$contact->linkedin_id = (!empty($revised_linkedin_id)?$revised_linkedin_id:NULL);
         $contact->updated_by = $post['user_id'];
         $contact->updated_at = date('Y-m-d H:i:s');
         $this->db->where('id', $post['contact_id']);
 		$this->db->update('contacts',$contact);
-		 if($this->db->affected_rows() !== 1){
-			$this->addError($this->db->_error_message());
-			return False;
+		if($this->db->affected_rows() !== 1){
+		$this->addError($this->db->_error_message());
+		return False;
 		}else{
 			return True;
 		} 

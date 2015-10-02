@@ -25,11 +25,11 @@ class Dashboard extends MY_Controller {
 		$this->data['pending_actions'] = $this->Actions_model->get_pending_actions($this->get_current_user_id());
 		$this->data['assigned_companies'] = $this->Actions_model->get_assigned_companies($this->get_current_user_id());
 		$this->data['action_types_array'] = $this->Actions_model->get_action_types_array();
-		$this->data['stats'] = $this->Actions_model->get_recent_stats();
-		$this->data['lastweekstats'] = $this->Actions_model->get_last_week_stats();
-		$this->data['thismonthstats'] = $this->Actions_model->get_this_month_stats();
-		$this->data['lastmonthstats'] = $this->Actions_model->get_last_month_stats();
-		$this->data['getstatssearch'] = $this->Actions_model->get_stats_search();
+		$this->data['stats'] = $this->Actions_model->get_recent_stats('week');
+		$this->data['lastweekstats'] = $this->Actions_model->get_recent_stats('lastweek');
+		$this->data['thismonthstats'] = $this->Actions_model->get_recent_stats('thismonth');
+		$this->data['lastmonthstats'] = $this->Actions_model->get_recent_stats('lastmonth');
+		$this->data['getstatssearch'] = $this->Actions_model->get_recent_stats('search');
 		$this->data['pipelinecontacted'] = $this->Actions_model->get_pipeline_contacted();
 		$this->data['pipelinecontactedindividual'] = $this->Actions_model->get_pipeline_contacted_individual($this->get_current_user_id());
 		$this->data['pipelineproposal'] = $this->Actions_model->get_pipeline_proposal($this->get_current_user_id());
