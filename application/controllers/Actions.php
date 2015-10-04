@@ -52,10 +52,7 @@ else
 					redirect('companies/company?id='.$this->input->post('company_id').$campaign_redirect.'#add_action','location');
 					}
 
-				else if (($post['action_type_completed']=='16') && ($post['source_check'] < 1 )){
-					$this->set_message_action_error('<strong>Deal Not Added</strong></br> Please add a source.');
-					redirect('companies/company?id='.$this->input->post('company_id').$campaign_redirect.'#add_action','location');
-					}
+			
 
 				else if (($post['action_type_completed']=='16') && ($post['sector_check'] < 1 )){
 					$this->set_message_action_error('<strong>Deal Not Added</strong></br> Please add at least one sector to this company.');
