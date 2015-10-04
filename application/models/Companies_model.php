@@ -1040,7 +1040,6 @@ LEFT JOIN
 			'user_id' 		=> $post['user_id'],
 			'comments'		=> 'Pipeline changed to '.$post['company_pipeline'],
 			'planned_at'	=> (isset($post['planned_at'])? date('Y-m-d H:i:s',strtotime($post['planned_at'])):NULL),
-			'window'		=> (isset($post['window'])?$post['window']:NULL),
 			'contact_id'    => (isset($post['contact_id'])?$post['contact_id']:NULL),
 			'created_by'	=> $post['user_id'],
 			'action_type_id'=> '19',
