@@ -52,7 +52,10 @@ else
 					redirect('companies/company?id='.$this->input->post('company_id').$campaign_redirect.'#add_action','location');
 					}
 
-			
+				else if (($post['action_type_completed']=='16') && ($post['source_check'] < 1 )){
+					$this->set_message_action_error('<strong>Deal Not Added</strong></br> Please add a source.');
+					redirect('companies/company?id='.$this->input->post('company_id').$campaign_redirect.'#add_action','location');
+					}
 
 				else if (($post['action_type_completed']=='16') && ($post['sector_check'] < 1 )){
 					$this->set_message_action_error('<strong>Deal Not Added</strong></br> Please add at least one sector to this company.');
@@ -153,7 +156,6 @@ else
 				$this->form_validation->set_rules('comment', 'comment', 'xss_clean');
 				$this->form_validation->set_rules('planned_at', 'planned_at', 'xss_clean');
 				$this->form_validation->set_rules('actioned_at', 'actioned_at', 'xss_clean');
-				$this->form_validation->set_rules('window', 'window', 'xss_clean');
 				$this->form_validation->set_rules('company_id', 'company_id', 'xss_clean');
 				$this->form_validation->set_rules('user_id', 'user_id', 'xss_clean');
 
