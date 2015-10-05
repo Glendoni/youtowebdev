@@ -1168,7 +1168,7 @@ LEFT JOIN
     	$address->address   = $post['address']; // please read the below note
     	$address->country_id = $post['country_id'];
 		$address->type = $post['address_types'];
-		$address->phone = $post['phone'];
+		$address->phone = !empty($post['phone'])?$post['phone']:NULL;
         $address->updated_by = $post['user_id'];
         $address->updated_at = date('Y-m-d H:i:s');
         $this->db->where('id', $post['address_id']);
