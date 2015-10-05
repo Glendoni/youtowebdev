@@ -149,7 +149,7 @@
 	                </div>
 	                <div class="col-md-6">
 	                    <div class="form-group">
-						<label for="marketing" class="control-label">Opt Out of Marketing </label>   
+						<label for="marketing" class="control-label">Opt Out of Email Marketing </label>   
                         <select name="marketing_opt_out" class="form-control">
                             <option value="0" <?php if(empty($contact->email_opt_out_date)): ?>selected=""<?php endif; ?>>No</option>
                             <option value="1" <?php if(!empty($contact->email_opt_out_date)): ?>selected=""<?php endif; ?>>Yes</option>
