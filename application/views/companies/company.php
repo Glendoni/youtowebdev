@@ -623,7 +623,7 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 				
 						<?php if ($action_completed->action_type_id == 19): ?>
 									<?php $arr = explode(' ',trim($action_completed->comments));$pipeline_updated = $arr[3];?><li class="list-group-item pipeline-update <?php echo $pipeline_updated;?>"><?php echo $action_completed->comments ?>
-				                                on <?php echo date("l jS F y",strtotime($action_completed->actioned_at))." @ ".date("H:i",strtotime($action_completed->actioned_at)); ?></li>
+				                                on <?php echo date("l jS F y",strtotime($action_completed->created_at))." @ ".date("H:i",strtotime($action_completed->created_at)); ?></li>
 									<?php else: ?>
 						<li class="list-group-item">
 							<div class="row" style="padding: 15px 0">

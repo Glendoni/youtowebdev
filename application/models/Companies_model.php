@@ -1043,7 +1043,7 @@ LEFT JOIN
 			'contact_id'    => (isset($post['contact_id'])?$post['contact_id']:NULL),
 			'created_by'	=> $post['user_id'],
 			'action_type_id'=> '19',
-			'actioned_at'	=> (!isset($post['actioned_at']) && !isset($post['planned_at'])?date('Y-m-d H:i:s'):NULL),
+			'actioned_at'	=> (!empty($post['actioned_at']) && !empty($post['planned_at'])?date('Y-m-d H:i:s'):NULL),
 			'created_at' 	=> date('Y-m-d H:i:s'),
 			);
 		
