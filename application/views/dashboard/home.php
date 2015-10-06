@@ -323,16 +323,17 @@
                         <div class="col-xs-2 col-md-1 text-center hide-overflow">
                             <strong>Proposals</strong>
                         </div>
-                        <div class="col-xs-1 col-md-1 text-center hide-overflow">
-                            <strong>Demos</strong>
-                        </div>
                         <div class="col-xs-2 col-md-2 text-center hide-overflow">
+                            <strong>Demos</strong><br>
+                            <Small> Booked / Done</Small>
+                        </div>
+                        <div class="col-xs-1 col-md-1 text-center hide-overflow">
                             <strong>Meetings</strong><br>
-                            <Small> Booked (Attended)</Small>
+                            <Small> Booked<br>(Done)</Small>
                         </div>
                         <div class="col-xs-3 col-md-2 text-center hide-overflow"> 
                            <strong>Call Activity</strong><br>
-                           <Small> Total Calls (Intro)</Small>
+                           <Small> Total Calls<br>(Intro)</Small>
                         </div>
                         <div class="col-md-1 hidden-sm text-center hide-overflow">
                            <strong>Pipeline Added</strong>
@@ -356,10 +357,10 @@
                             <div class="col-xs-2 col-md-1 text-center"> 
                             <?php echo $stat['proposals'];?>
                             </div>
-                            <div class="col-xs-1 col-md-1 text-center"> 
-                            <?php echo $stat['democount'];?>
+                            <div class="col-xs-2 col-md-2 text-center"> 
+                            <?php echo $stat['demobookedcount'];?> / <?php echo $stat['democount'];?>
                             </div>
-                            <div class="col-xs-2 col-md-2 text-center">
+                            <div class="col-xs-1 col-md-1 text-center">
                             <?php echo $stat['meetingbooked'];?> (<?php echo $stat['meetingcount'];?>)
                             </div>
                             <div class="col-xs-3 col-md-2 text-center"> 
@@ -392,12 +393,13 @@
                         <div class="col-xs-2 col-md-1 text-center hide-overflow">
                             <strong>Proposals</strong>
                         </div>
-                        <div class="col-xs-1 col-md-1 text-center hide-overflow">
-                            <strong>Demos</strong>
-                        </div>
                         <div class="col-xs-2 col-md-2 text-center hide-overflow">
+                            <strong>Demos</strong><br>
+                            <Small> Booked / Done</Small>
+                        </div>
+                        <div class="col-xs-1 col-md-1 text-center hide-overflow">
                             <strong>Meetings</strong><br>
-                            <Small> Booked (Attended)</Small>
+                            <Small> Booked<br>(Done)</Small>
                         </div>
                         <div class="col-xs-3 col-md-2 text-center hide-overflow"> 
                            <strong>Call Activity</strong><br>
@@ -425,12 +427,15 @@
                             <div class="col-xs-2 col-md-1 text-center"> 
                               <?php echo $lastweekstat['proposals'];?>
                               </div>
-                              <div class="col-xs-1 col-md-1 text-center"> 
-                              <?php echo $lastweekstat['democount'];?>
-                              </div>
-                            <div class="col-xs-2 col-md-2 text-center">
+                         
+                            <div class="col-xs-2 col-md-2 text-center"> 
+                            <?php echo $lastweekstat['demobookedcount'];?> / <?php echo $lastweekstat['democount'];?>
+                            </div>
+                            <div class="col-xs-1 col-md-1 text-center">
                             <?php echo $lastweekstat['meetingbooked'];?> (<?php echo $lastweekstat['meetingcount'];?>)
                             </div>
+
+
                             <div class="col-xs-3 col-md-2 text-center"> 
                             <?php echo $lastweekstat['salescall'];?>
                             (<?php echo $lastweekstat['introcall'];?>)
@@ -462,12 +467,13 @@
                         <div class="col-xs-2 col-md-1 text-center hide-overflow">
                             <strong>Proposals</strong>
                         </div>
-                        <div class="col-xs-1 col-md-1 text-center hide-overflow">
-                            <strong>Demos</strong>
+                         <div class="col-xs-2 col-md-2 text-center hide-overflow">
+                            <strong>Demos</strong><br>
+                            <Small> Booked / Done</Small>
                         </div>
-                        <div class="col-xs-2 col-md-2 text-center hide-overflow">
+                        <div class="col-xs-1 col-md-1 text-center hide-overflow">
                             <strong>Meetings</strong><br>
-                            <Small> Booked (Attended)</Small>
+                            <Small> Booked<br>(Done)</Small>
                         </div>
                         <div class="col-xs-3 col-md-2 text-center hide-overflow"> 
                            <strong>Call Activity</strong><br>
@@ -495,12 +501,15 @@
                             <div class="col-xs-2 col-md-1 text-center"> 
                               <?php echo $thismonthstat['proposals'];?>
                               </div>
-                              <div class="col-xs-1 col-md-1 text-center"> 
-                              <?php echo $thismonthstat['democount'];?>
-                              </div>
-                            <div class="col-xs-2 col-md-2 text-center">
+                          
+                            <div class="col-xs-2 col-md-2 text-center"> 
+                            <?php echo $thismonthstat['demobookedcount'];?> / <?php echo $thismonthstat['democount'];?>
+                            </div>
+                            <div class="col-xs-1 col-md-1 text-center">
                             <?php echo $thismonthstat['meetingbooked'];?> (<?php echo $thismonthstat['meetingcount'];?>)
                             </div>
+
+
                             <div class="col-xs-3 col-md-2 text-center"> 
                             <?php echo $thismonthstat['salescall'];?>
                             (<?php echo $thismonthstat['introcall'];?>)
@@ -531,12 +540,13 @@
                         <div class="col-xs-2 col-md-1 text-center hide-overflow">
                             <strong>Proposals</strong>
                         </div>
-                        <div class="col-xs-1 col-md-1 text-center hide-overflow">
-                            <strong>Demos</strong>
+                         <div class="col-xs-2 col-md-2 text-center hide-overflow">
+                            <strong>Demos</strong><br>
+                            <Small> Booked / Done</Small>
                         </div>
-                        <div class="col-xs-2 col-md-2 text-center hide-overflow">
+                        <div class="col-xs-1 col-md-1 text-center hide-overflow">
                             <strong>Meetings</strong><br>
-                            <Small> Booked (Attended)</Small>
+                            <Small> Booked<br>(Done)</Small>
                         </div>
                         <div class="col-xs-3 col-md-2 text-center hide-overflow"> 
                            <strong>Call Activity</strong><br>
@@ -564,12 +574,14 @@
                               <div class="col-xs-2 col-md-1 text-center"> 
                               <?php echo $lastmonthstat['proposals'];?>
                               </div>
-                              <div class="col-xs-1 col-md-1 text-center"> 
-                              <?php echo $lastmonthstat['democount'];?>
-                              </div>
-                            <div class="col-xs-2 col-md-2 text-center">
+                              <div class="col-xs-2 col-md-2 text-center"> 
+                            <?php echo $lastmonthstat['demobookedcount'];?> / <?php echo $lastmonthstat['democount'];?>
+                            </div>
+                            <div class="col-xs-1 col-md-1 text-center">
                             <?php echo $lastmonthstat['meetingbooked'];?> (<?php echo $lastmonthstat['meetingcount'];?>)
                             </div>
+
+
                             <div class="col-xs-3 col-md-2 text-center"> 
                             <?php echo $lastmonthstat['salescall'];?>
                             (<?php echo $lastmonthstat['introcall'];?>)
@@ -600,12 +612,13 @@
                         <div class="col-xs-2 col-md-1 text-center hide-overflow">
                             <strong>Proposals</strong>
                         </div>
-                        <div class="col-xs-1 col-md-1 text-center hide-overflow">
-                            <strong>Demos</strong>
+                         <div class="col-xs-2 col-md-2 text-center hide-overflow">
+                            <strong>Demos</strong><br>
+                            <Small> Booked / Done</Small>
                         </div>
-                        <div class="col-xs-2 col-md-2 text-center hide-overflow">
+                        <div class="col-xs-1 col-md-1 text-center hide-overflow">
                             <strong>Meetings</strong><br>
-                            <Small> Booked (Attended)</Small>
+                            <Small> Booked<br>(Done)</Small>
                         </div>
                         <div class="col-xs-3 col-md-2 text-center hide-overflow"> 
                            <strong>Call Activity</strong><br>
@@ -633,12 +646,16 @@
                                   <div class="col-xs-2 col-md-1 text-center"> 
                               <?php echo $getstatssearch['proposals'];?>
                               </div>
-                              <div class="col-xs-1 col-md-1 text-center"> 
-                              <?php echo $getstatssearch['democount'];?>
-                              </div>
-                            <div class="col-xs-2 col-md-2 text-center">
+
+                                <div class="col-xs-2 col-md-2 text-center"> 
+                            <?php echo $getstatssearch['demobookedcount'];?> / <?php echo $getstatssearch['democount'];?>
+                            </div>
+                            <div class="col-xs-1 col-md-1 text-center">
                             <?php echo $getstatssearch['meetingbooked'];?> (<?php echo $getstatssearch['meetingcount'];?>)
                             </div>
+
+
+                          
                             <div class="col-xs-3 col-md-2 text-center"> 
                             <?php echo $getstatssearch['salescall'];?>
                             (<?php echo $getstatssearch['introcall'];?>)
