@@ -201,7 +201,7 @@ return $query->result_object();
 	}
 
 		function dates($period){
-		if ($period==='search') {
+		if ($period==='search' || $_GET['period'] == 'search') {
 		if (!empty($_GET['start_date'])) {
 		$start_date = date('Y-m-d 00:00:00',strtotime($_GET['start_date']));
 		} else {
@@ -214,7 +214,6 @@ return $query->result_object();
 		$end_date = date('Y-m-d 23:59:59',strtotime('last day of this month'));
 		}
 		}
-		
 		else if ($period==='week') {
 		$start_date = date('Y-m-d 00:00:00',strtotime('monday this week'));
 		$end_date = date('Y-m-d 23:59:59',strtotime('sunday this week'));
@@ -469,7 +468,7 @@ return $query->result_object();
 		$end_date = date('Y-m-d H:i:s', strtotime($dates['end_date'] . ' +1 day'));
 		if (!empty($search_user_id)) {
 			 
-			 $sql = "select distinct c.name, a.actioned_at, c.id, u.name as username from companies c 
+			$sql = "select distinct c.name, a.actioned_at, c.id, u.name as username from companies c 
 			 inner join actions a on c.id = a.company_id
 			 left join users u on a.created_by = u.id where a.action_type_id = '16' and a.created_by = '$search_user_id' AND a.created_at > '$start_date' AND a.created_at < '$end_date' order by a.actioned_at asc";
 			$query = $this->db->query($sql);

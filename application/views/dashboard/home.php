@@ -232,7 +232,7 @@
                           <strong>Meetings</strong><div class="pull-right"><span class="badge badge-warning"><?php echo count($getusermeetings)?></span></div>
                           </div>
                           <div class="col-md-3"> 
-                           <strong>Call Activity</strong><div class="pull-right"><span class="badge badge-warning"><?php echo count($getuserpitches)?></span></div>
+                           <strong>Intro Calls</strong><div class="pull-right"><span class="badge badge-warning"><?php echo count($getuserpitches)?></span></div>
                         </div>
                         </div>
                           <div class="row list-group-item">
@@ -641,7 +641,7 @@
                             <?php $user_icon = explode(",",$getstatssearch['image']); echo "<div class='circle name-circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
                             </div>
                             <div class="col-xs-2 col-md-1 text-center">
-                            <a href = "?search=2&user=<?php echo $getstatssearch['user'];?>&start_date=<?php echo $_GET['start_date']?>&end_date=<?php echo $_GET['end_date']?>"><span class="badge" style="background-color:#00B285;"><?php echo $getstatssearch['deals'];?></a></span>
+                            <a href = "?search=2&user=<?php echo $getstatssearch['user'];?>&start_date=<?php echo $_GET['start_date']?>&end_date=<?php echo $_GET['end_date']?>&period=search"><span class="badge" style="background-color:#00B285;"><?php echo $getstatssearch['deals'];?></a></span>
                             </div>
                                   <div class="col-xs-2 col-md-1 text-center"> 
                               <?php echo $getstatssearch['proposals'];?>
