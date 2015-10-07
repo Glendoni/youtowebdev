@@ -301,12 +301,14 @@
                     <?php else: ?>
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs" role="tablist">
-                      <li <?php if ($_GET['search'] < '1'): ?>class="active"<?php endif; ?>><a href="#this" role="tab" data-toggle="tab">This Week</a></li>
+                      <li><a href="#this" role="tab" data-toggle="tab">This Week</a></li>
                       <li><a href="#lastweek" role="tab" data-toggle="tab">Last Week</a></li>
                       <li><a href="#currentmonth" role="tab" data-toggle="tab">This Month</a></li>
                       <li><a href="#lastmonth" role="tab" data-toggle="tab">Last Month</a></li>
-                      <?php if ($_GET['search'] == '1'): ?>
-                      <li <?php if ($_GET['search'] == '1'): ?>class="active"<?php endif; ?>><a href="#searchresults" role="tab" data-toggle="tab">Search Results</a></li>
+
+
+                      <?php if ($_GET['search'] == '3'): ?>
+                      <li <?php if ($_GET['search'] == '3'): ?>class="active"<?php endif; ?>><a href="#searchresults" role="tab" data-toggle="tab">Search Results</a></li>
                       <?php endif; ?>
                     </ul>
                     <!-- Tab panes -->
@@ -696,7 +698,7 @@
             <input type="text" class="form-control" id="end_date" data-date-format="DD-MM-YYYY" name="end_date" placeholder="" value="<?php echo  date('d-m-Y',strtotime($dates['end_date']));?>">
             </div>
             <div class="form-group col-md-4">
-            <input type="hidden" name="search" value="<?php if (isset($_GET['search'])){echo $_GET['search'];} else {echo "1";};?>">
+            <input type="hidden" name="search" value="3">
             <?php if (isset($_GET['user'])) { ?>
              <input type="hidden" name="user" value="<?php echo $_GET['user'];?>"> <?php
              };?>
