@@ -184,7 +184,7 @@ return $query->result_object();
 		   		sum(case when (action_type_id = '9' or action_type_id = '15') AND actioned_at > '$start_date' AND actioned_at < '$end_date' then 1 else 0 end) democount,
 				sum(case when (action_type_id = '9' or action_type_id = '15') AND a.created_at > '$start_date' AND a.created_at < '$end_date' then 1 else 0 end) demobookedcount,
 
-		    	sum(case when (action_type_id = '12' or action_type_id = '10' or action_type_id = '9' or action_type_id = '15') AND a.created_at > '$start_date' AND a.created_at < '$end_date' then 1 else 0 end) meetingbooked,
+		    	sum(case when (action_type_id = '12' or action_type_id = '10') AND a.created_at > '$start_date' AND a.created_at < '$end_date' then 1 else 0 end) meetingbooked,
 		    	sum(case when (action_type_id = '16') AND a.created_at > '$start_date' AND a.created_at < '$end_date' then 1 else 0 end) deals,
 		    	sum(case when action_type_id = '25' AND a.created_at > '$start_date' AND a.created_at < '$end_date' then 1 else 0 end) duediligence,
 		    	sum(case when action_type_id = '22' AND a.created_at > '$start_date' AND a.created_at < '$end_date' then 1 else 0 end) key_review_added,
@@ -503,7 +503,7 @@ return $query->result_object();
 		$start_date = $dates['start_date'];
 		$end_date = $dates['end_date'];
 		if (!empty($search_user_id)) {
-		 $sql = "select distinct c.name, a.created_at,c.id, sum(case when (action_type_id = '12' or action_type_id = '10' or action_type_id = '9' or action_type_id = '15') AND actioned_at > '$start_date' AND actioned_at < '$end_date' then 1 else 0 end) meeting_actioned from companies c inner join actions a on c.id = a.company_id where (action_type_id = '12' or action_type_id = '10' or action_type_id = '9' or action_type_id = '15') and a.created_by = '$search_user_id' AND (a.created_at > '$start_date' or a.actioned_at > '$start_date') AND (a.created_at < '$end_date' or a.actioned_at < '$end_date') group by c.name, a.created_at, c.id order by a.created_at asc";
+		 $sql = "select distinct c.name, a.created_at,c.id, sum(case when (action_type_id = '12' or action_type_id = '10') AND actioned_at > '$start_date' AND actioned_at < '$end_date' then 1 else 0 end) meeting_actioned from companies c inner join actions a on c.id = a.company_id where (action_type_id = '12' or action_type_id = '10' or action_type_id = '9' or action_type_id = '15') and a.created_by = '$search_user_id' AND (a.created_at > '$start_date' or a.actioned_at > '$start_date') AND (a.created_at < '$end_date' or a.actioned_at < '$end_date') group by c.name, a.created_at, c.id order by a.created_at asc";
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
