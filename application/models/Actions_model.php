@@ -176,7 +176,7 @@ return $query->result_object();
 		$dates = $this->dates($period);
 		$start_date = $dates['start_date'];
 		$end_date = $dates['end_date'];
-		$sql = "select U.name, U.id as user, U.image,
+		 $sql = "select U.name, U.id as user, U.image,
 				sum(case when action_type_id = '4' AND actioned_at > '$start_date' AND actioned_at < '$end_date' then 1 else 0 end) introcall,
 				sum(case when (action_type_id = '4' or action_type_id = '5' or action_type_id = '11' or action_type_id = '17')  AND actioned_at > '$start_date' AND actioned_at < '$end_date' then 1 else 0 end) salescall,
 		    	sum(case when (action_type_id = '5' OR action_type_id = '11') AND actioned_at > '$start_date' AND actioned_at < '$end_date' then 1 else 0 end) callcount,
@@ -191,7 +191,7 @@ return $query->result_object();
 		    	sum(case when action_type_id = '22' AND a.planned_at > '$start_date' AND a.planned_at < '$end_date' then 1 else 0 end) key_review_occuring,
 		    	sum(case when (action_type_id = '8') AND a.created_at > '$start_date' AND a.created_at < '$end_date' then 1 else 0 end) proposals,
 				Sum(case when action_type_id = '19' and a.id = 	(SELECT MAX(id) FROM actions z WHERE z.company_id = a.company_id and z.action_type_id = '19' order by a.actioned_at desc) AND (a.comments ilike '%intent%' or a.comments ilike '%qualified%') AND a.created_at > '$start_date' AND a.created_at < '$end_date' THEN 1 ELSE 0 END) AS pipelinecount
-				from actions A LEFT JOIN companies C on A.company_id = C.id INNER JOIN users U on A.user_id = U.id where cancelled_at is null and u.department = 'sales' and u.active = 't' group by U.id,U.name order by deals desc,proposals desc,meetingbooked desc, introcall desc, name desc";
+				from actions A INNER JOIN companies C on A.company_id = C.id INNER JOIN users U on A.user_id = U.id where cancelled_at is null and u.department = 'sales' and u.active = 't' group by U.id,U.name order by deals desc,proposals desc,meetingbooked desc, introcall desc, name desc";
 		$query = $this->db->query($sql);
 		if($query){
 			return $query->result_array();
@@ -503,7 +503,7 @@ return $query->result_object();
 		$start_date = $dates['start_date'];
 		$end_date = $dates['end_date'];
 		if (!empty($search_user_id)) {
-		$sql = "select distinct c.name, a.created_at,c.id, sum(case when (action_type_id = '12' or action_type_id = '10' or action_type_id = '9' or action_type_id = '15') AND actioned_at > '$start_date' AND actioned_at < '$end_date' then 1 else 0 end) meeting_actioned from companies c inner join actions a on c.id = a.company_id where (action_type_id = '12' or action_type_id = '10' or action_type_id = '9' or action_type_id = '15') and a.created_by = '$search_user_id' AND (a.created_at > '$start_date' or a.actioned_at > '$start_date') AND (a.created_at < '$end_date' or a.actioned_at < '$end_date') group by c.name, a.created_at, c.id order by a.created_at asc";
+		 $sql = "select distinct c.name, a.created_at,c.id, sum(case when (action_type_id = '12' or action_type_id = '10' or action_type_id = '9' or action_type_id = '15') AND actioned_at > '$start_date' AND actioned_at < '$end_date' then 1 else 0 end) meeting_actioned from companies c inner join actions a on c.id = a.company_id where (action_type_id = '12' or action_type_id = '10' or action_type_id = '9' or action_type_id = '15') and a.created_by = '$search_user_id' AND (a.created_at > '$start_date' or a.actioned_at > '$start_date') AND (a.created_at < '$end_date' or a.actioned_at < '$end_date') group by c.name, a.created_at, c.id order by a.created_at asc";
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
