@@ -13,8 +13,8 @@ class Cron extends CI_Controller {
 
     }
  
-    function cron()
+    function update_marketing_clicks()
     {
-        $this->Cron_model->hello();
+        $this->Cron_model->update_marketing_clicks();
     }
 }

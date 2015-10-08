@@ -1,7 +1,7 @@
 <?php
 class Cron_model extends CI_Model {
 
-	function hello()
+	function update_marketing_clicks()
 	{
 	$con = mysqli_connect("137.117.165.135","baselist","OzzyElmo$1","sonovate_finance");
 	// Check connection
@@ -96,10 +96,10 @@ $unix_date = $t=time() - 345600; //CHECK FOR LAST FOUR DAYS
    	$add_action_to_postgres = "insert INTO email_actions (email_campaign_id,sent_action_id,contact_id,email_action_type,link,action_time) VALUES ((select id from email_campaigns where sent_id = '$campaign_id'),'$action_id', '$contact_id','$action_type','$action_link','$action_date')";
 	$this->db->query($add_action_to_postgres);
 	}
- 	echo "Contact Updated</br>";
  	}//END DUPE CHECK
 	}
 	}
+	echo "Campaigns & Actions Updated";
 	//UPDATE LINKS REMOVE EMPTY ROWS
 	$this->db->query("update email_actions set link = NULL where link = ''");
 	//MYSQL CLOSE
