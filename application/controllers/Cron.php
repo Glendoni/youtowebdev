@@ -7,9 +7,8 @@ class Cron extends CI_Controller {
  
         // this controller can only be called from the command line
         if (!$this->input->is_cli_request()) show_error('Direct access is not allowed');
-                $this->load->helper('date');
-
-            $this->load->model('Cron_model');
+        $this->load->helper('date');
+        $this->load->model('Cron_model');
 
     }
  

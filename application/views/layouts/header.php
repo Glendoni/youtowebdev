@@ -102,7 +102,6 @@
                         <div class="dropdown dropdown-lg ">
                             <button href="#credits" type="button" class="toggle btn btn-default dropdown-toggle large-search-height" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
                         </div>
-                        
                     <input type="submit" class="loading-btn btn btn-primary " value="Go" name="submit">
                         <?php if (validation_errors()): ?>
                         <div class="alert alert-danger" role="alert">
@@ -154,16 +153,19 @@
 
                                     <div class='form-row'>
                                         <div class="form-group">
+                                            <div class="col-xs-6 col-md-6 no-padding"> 
+
                                         <?php
                                         echo form_label('Mortgage Provider', 'providers');
                                         echo form_dropdown('providers', $providers_options, ($this->input->post('providers')?$this->input->post('providers'):$providers_default) ,'class="form-control"');
                                     
                                         ?>
-                                        
+                                            </div>
                                         </div>
                                     </div><!--END FORM ROW-->
                                     <div class='form-row'>
                                         <div class="form-group">
+                                        
                                         <?php 
                                         echo form_label('Sectors', 'sectors');
                                         echo form_dropdown('sectors', $sectors_search, ($this->input->post('sectors')?$this->input->post('sectors'):$sectors_default),'class="form-control"');

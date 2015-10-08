@@ -63,7 +63,7 @@
 <div class="col-sm-2 mobile-hide">
 <?php if ($get_user_campaign->campaign_prospects>0): ?>
 <?php else: endif; ?>
-<div class="circle-responsive gray-circle <?php if ($this->session->userdata('pipeline')=='prospect'): echo 'active';else: endif; ?>
+<div class="circle-responsive prospect-circle <?php if ($this->session->userdata('pipeline')=='prospect'): echo 'active';else: endif; ?>
 ">
 <div class="circle-content mega">
 <div class="large-number"><?php echo $get_user_campaign->campaign_prospects; ?></div>
@@ -76,7 +76,7 @@
 <div class="col-sm-2 mobile-hide">
 <?php if ($get_user_campaign->campaign_intent>0): ?>
 <?php else: endif; ?>
-<div class="circle-responsive gray-circle <?php if ($this->session->userdata('pipeline')=='intent'): echo 'active';else: endif; ?>">
+<div class="circle-responsive intent-circle <?php if ($this->session->userdata('pipeline')=='intent'): echo 'active';else: endif; ?>">
 <div class="circle-content mega">
 <div class="large-number"><?php echo $get_user_campaign->campaign_intent; ?></div>
 <div class="small-text">Intent &</br>Qualified</div></div>
@@ -88,7 +88,7 @@
 <div class="col-sm-2 mobile-hide">
 <?php if ($get_user_campaign->campaign_proposals>0): ?>
 <?php else: endif; ?>
-<div class="circle-responsive blue-circle <?php if ($this->session->userdata('pipeline')=='proposal'): echo 'active';else: endif; ?>">
+<div class="circle-responsive proposal-circle <?php if ($this->session->userdata('pipeline')=='proposal'): echo 'active';else: endif; ?>">
 <div class="circle-content mega">
 <div class="large-number"><?php echo $get_user_campaign->campaign_proposals; ?></div>
 <div class="small-text"><?php if ($get_user_campaign->campaign_proposals <> "1") {echo "Proposals";} else { echo "Proposal";}?></div></div>
@@ -99,7 +99,7 @@
 <div class="col-sm-2 mobile-hide">
 <?php if ($get_user_campaign->campaign_customers>0): ?>
 <?php else: endif; ?>
-<div class="circle-responsive green3-circle <?php if ($this->session->userdata('pipeline')=='customer'): echo 'active';else: endif; ?>">
+<div class="circle-responsive customer-circle <?php if ($this->session->userdata('pipeline')=='customer'): echo 'active';else: endif; ?>">
 <div class="circle-content mega">
 <div class="large-number"><?php echo $get_user_campaign->campaign_customers; ?></div>
 <div class="small-text"><?php if ($get_user_campaign->campaign_customers <> "1") {echo "Customers";} else { echo "Customer";}?></div></div>
