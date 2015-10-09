@@ -1,14 +1,24 @@
 <?php
 class Cron_model extends CI_Model {
 
+
+	function connect_to_wordpress_database()  {
+	
+
+	}
+
+
 	function update_marketing_clicks()
 	{
-	$con = mysqli_connect("137.117.165.135","baselist","OzzyElmo$1","sonovate_finance");
+	//$con = mysqli_connect("137.117.165.135","baselist","OzzyElmo$1","sonovate_finance");
+	$con = mysqli_connect("localhost","root","root","sonovate");
+
 	// Check connection
 	if (mysqli_connect_errno())
 	{
 	echo "Failed to connect to MySQL: " . mysqli_connect_error();
 	}
+
 
 	//GET NEW CAMPAIGNS
 	$add_new_campaigns_sql = '	select distinct
@@ -66,7 +76,7 @@ class Cron_model extends CI_Model {
 
 	<?php
 //ADD ACTIONS
-$unix_date = $t=time() - 345600; //CHECK FOR LAST FOUR DAYS
+$unix_date = time() - 345600; //CHECK FOR LAST FOUR DAYS
 	  $add_new_actions_sql = 'select CONCAT(a.campaign_id,a.timestamp,LPAD(s.id, 4, "0"),a.type) as "Unique ID", s.email as "Subscriber Email", a.campaign_id as "Campaign ID", a.type as "Action Type", l.link as "Clicked Link", from_unixtime(a.timestamp) as "Actioned At" from sf_mymail_subscribers s inner join sf_mymail_actions a on a.subscriber_id = s.id inner join sf_posts p on a.campaign_id = p.id inner join sf_postmeta pm on p.id = pm.post_id left join sf_mymail_links l on a.link_id = l.id where a.campaign_id is not null and pm.meta_key = "_mymail_finished" and p.post_title <> "" AND a.timestamp > '.$unix_date.' order by pm.meta_value asc ';
 	$add_new_actions_query = mysqli_query($con, $add_new_actions_sql);
 	while($row1 = mysqli_fetch_array($add_new_actions_query))
@@ -105,4 +115,61 @@ $unix_date = $t=time() - 345600; //CHECK FOR LAST FOUR DAYS
 	//MYSQL CLOSE
 	mysqli_close($con);
 	}
+
+	function prospects_not_in_sector() {
+	//REMOVE PROSPECT FROM COMPANIES NOT IN TARGET SECTOR
+	$update_prospects = "update companies set pipeline = null where pipeline ilike 'Prospect' and id not in (select company_id from operates where active = 't' and sector_id in (select id from sectors where target = 't'))";
+	$this->db->query($update_prospects);
+	}
+
+	
+
+
+function remove_contacts_from_marketing() {
+	
+	$con = mysqli_connect("137.117.165.135","baselist","OzzyElmo$1","sonovate_finance");
+	//$con = mysqli_connect("localhost","root","root","sonovate");
+
+	// Check connection
+	if (mysqli_connect_errno())
+	{
+	echo "Failed to connect to MySQL: " . mysqli_connect_error();
+	}
+	 $select_contacts_sql = "select con.email, con.email_opt_out_date, u.name from contacts con left join users u on con.email_opt_out_user = u.id where con.email_opt_out_date is not null and con.email is not null and con.eff_to is NULL";
+	$select_contacts = $this->db->query($select_contacts_sql);
+	if ($select_contacts->num_rows() > 0)
+	{
+	//REMOVE ALL BEFORE RE-ADDING THOSE STILL UNSUBSCRIBED//
+	$delete_all = "delete from sf_mymail_subscriber_fields where meta_key = 'unsubscribed-via-baselist'";
+	mysqli_query($con, $delete_all);
+		$delete_101 =  "delete from sf_mymail_lists_subscribers where list_id = '101'";		
+	mysqli_query($con, $delete_101);
+
+   	foreach ($select_contacts->result() as $row)
+   	{
+
+	$contact_email = $row->email;
+	$contact_date = $row->email_opt_out_date;
+	$opt_out_name = $row->name;
+$sql = "select s.id, s.email from sf_mymail_subscribers s where email = '$contact_email'";
+$result = mysqli_query($con, $sql);
+if (mysqli_num_rows($result) > 0) {
+    // output data of each row
+    while($row = mysqli_fetch_assoc($result)) {
+	$delete =  "delete from sf_mymail_lists_subscribers where subscriber_id = '". $row["id"]."'";		
+	mysqli_query($con, $delete);
+ 	$update = "insert into sf_mymail_subscriber_fields (subscriber_id, meta_key, meta_value) values ('". $row["id"]."','unsubscribed-via-baselist','".$contact_date." by ".$opt_out_name."');";
+ 	mysqli_query($con, $update);
+	$add = "insert into sf_mymail_lists_subscribers (list_id, subscriber_id, added) values ('101','". $row["id"]."','".time()."');";
+ 	mysqli_query($con, $add);
+    }
+	} 
+	else {}
+   	} //END FOR EACH
+   	}
+   	//MYSQL CLOSE
+	mysqli_close($con);
+	echo "Complete";
+   }
+
 }

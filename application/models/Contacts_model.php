@@ -81,9 +81,13 @@ class Contacts_model extends CI_Model {
 		else{};
 		if (($post['marketing_opt_out'] == 1) && (empty($post['opt_out_check']))) { 
         $contact->email_opt_out_date = date('Y-m-d');
+        $contact->email_opt_out_user = $post['user_id'];
+
 		}
-		else if (($post['marketing_opt_out'] == 0)){
+		else if (($post['marketing_opt_out'] == 0) && (!empty($post['opt_out_check']))){
 		$contact->email_opt_out_date = NULL;
+		$contact->email_opt_out_user = $post['user_id'];
+
 		};
 		$contact->linkedin_id = (!empty($revised_linkedin_id)?$revised_linkedin_id:NULL);
         $contact->updated_by = $post['user_id'];
