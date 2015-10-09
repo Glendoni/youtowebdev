@@ -70,7 +70,7 @@
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <a class="navbar-brand" href="/" >Baselist <span style="font-size:12px; font-weight:300;">v2.9</span></a>
+                <a class="navbar-brand" href="/" >Baselist <span style="font-size:12px; font-weight:300;">v2.10</span></a>
             </div>
 <?php if (isset($current_user)): ?>
     <!--TOP SEARCH BAR-->
@@ -102,6 +102,7 @@
                         <div class="dropdown dropdown-lg ">
                             <button href="#credits" type="button" class="toggle btn btn-default dropdown-toggle large-search-height" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
                         </div>
+                        
                     <input type="submit" class="loading-btn btn btn-primary " value="Go" name="submit">
                         <?php if (validation_errors()): ?>
                         <div class="alert alert-danger" role="alert">
@@ -165,11 +166,12 @@
                                     </div><!--END FORM ROW-->
                                     <div class='form-row'>
                                         <div class="form-group">
-                                        
+                                        <div class="col-xs-6 col-md-6 no-padding">
                                         <?php 
                                         echo form_label('Sectors', 'sectors');
                                         echo form_dropdown('sectors', $sectors_search, ($this->input->post('sectors')?$this->input->post('sectors'):$sectors_default),'class="form-control"');
                                         ?>
+                                        </div>
                                         </div>
                                     </div><!--END FORM ROW-->
                                     <div class='form-row'>

@@ -16,20 +16,19 @@ class Sectors_model extends MY_Model {
 
 	function get_all_for_search()
 	{
-		$sql ='
+		$sql ="
 		SELECT s.id,s.name,count(O.id)
 		FROM sectors s
 		LEFT JOIN operates O on s.id = O.sector_id
-		WHERE s.display = \'True\'
-		GROUP BY s.id,s.name
-		ORDER BY count desc,s.name desc
-		';
+		WHERE s.display = 't' and o.active = 't'
+		GROUP BY s.id
+		ORDER BY count desc,s.name desc";
 		
 		$query = $this->db->query($sql);
 
 		foreach($query->result() as $row)
 		{
-		  $sectors_array[$row->id] = $row->name.' ('.number_format($row->count).')';
+		  $sectors_array[$row->id] = $row->name;//.' ('.number_format($row->count).')';
 		    $sectors_array_all = $query->row_array(); 
 		} 
 		return $sectors_array;

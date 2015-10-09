@@ -37,26 +37,26 @@
 
 <select name="new_window" class="form-control">
                   <option value="0" <?php if(($current_user['new_window']=='f')): ?> selected="selected"<?php endif; ?>
->Same Window</option>
+>Same Tab</option>
                   <option value="1" <?php if(($current_user['new_window']=='t')): ?> selected="selected"<?php endif; ?>
->New Window</option>
+>New Tab</option>
                   </select>
                 </div>
                 <div class="form-group col-md-12">
                 <hr>
                 </div>
-<?php 
-$user_icon = explode(",", ($current_user['image'])); 
-        $backgroundcolour = $user_icon[1]; 
-        $foregroundcolour = $user_icon[2];?>
+                <?php 
+                  $user_icon = explode(",", ($current_user['image'])); 
+                  $backgroundcolour = $user_icon[1]; 
+                  $foregroundcolour = $user_icon[2];
+                ?>
 
                 <div class="form-group col-md-6">  
                   <label>Background Colour</label>
                 <input type="color" name="user-fg" class="form-control" onchange="clickColor(0, -1, -1, 5)" value="<?php echo $backgroundcolour;?>"></div>   
                 <div class="form-group col-md-6">  
                   <label>Foreground Colour</label>
-                <input type="color" name="user-bg" class="form-control" onchange="clickColor(0, -1, -1, 5)" value="<?php echo $foregroundcolour;?>"></div>   
-
+                <input type="color" name="user-bg" class="form-control" onchange="clickColor(0, -1, -1, 5)" value="<?php echo $foregroundcolour;?>"></div>
                 <div class="form-group col-md-12">
                 <hr>
                 </div>
