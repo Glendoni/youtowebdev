@@ -2,9 +2,9 @@
 <?php if (!empty($_GET['campaign_id'])): 
 $campaign_id = $_GET['campaign_id'];
 endif; ?>
-		<?php if (!isset($company['id'])): ?>
+<?php if (!isset($company['id'])): ?>
 <div class="alert alert-danger" role="alert">This company is no longer active.</div>
-			<?php endif; ?>
+<?php endif; ?>
 <div class="page-results-list">
 <div class="top-info-holder">
     <div class="row">

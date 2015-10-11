@@ -46,9 +46,6 @@
                     </div>
                 </div>
 
-                <?php 
-                if (in_array($company['pipeline'], $show_sources))
-                  {?>
 
                 <div class="col-sm-6 col-md-4">
                     <div class=" form-group ">
@@ -61,11 +58,6 @@
 
                     </div>
                 </div>
-                <?php 
-                  }
-                else
-                  {}
-                ?>
                 
               <div class="col-sm-6 col-md-4">
                                   <div class=" form-group ">

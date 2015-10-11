@@ -750,6 +750,16 @@ margin-bottom: 20px;
 	font-size: 10px;
 	font-weight: 500;
 }
+.top-alert {
+	position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+}
+.modal-open .modal {
+z-index: 99999;
+	}
 ul.nav.nav-tabs.dashboard {
 	border-bottom: none;
 	margin-top: 0;

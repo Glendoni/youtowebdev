@@ -71,7 +71,7 @@ class Companies_model extends CI_Model {
 
 	function get_pipeline_show_source()
 	{
-		$arrayNamesSources = array('Intent','Customer','Proposal','Qualified');
+		$arrayNamesSources = array('Proposal','Intent','Customer','Proposal','Qualified');
 		return 	$arrayNamesSources;
 	}
 

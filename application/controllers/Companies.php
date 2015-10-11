@@ -262,11 +262,20 @@ class Companies extends MY_Controller {
 	{
 		if($this->input->post('edit_company'))
 		{
+			$post = $this->input->post();
+			if (($post['company_pipeline']<>'prospect') && (empty($post['company_source']))){
+			$this->set_message_error('<b>Not Update</b> Please select a source before changing pipeline status.');
+			redirect('/companies','refresh');
+			}
+			else {
+
 			// We need to clean the post and validate the post fields *pending*
 			$result = $this->Companies_model->update_details($this->input->post());
 			$this->refresh_search_results();
+			$this->set_message_success('Company Updated');
 			redirect('/companies','refresh');
 			return True;
+		}
 		}
 	}
 
