@@ -9,6 +9,12 @@
             </div>
             <div class="modal-body">
             <div class="row">
+                        <div class="col-sm-12">
+
+            <div id="action-error" class="no-source-pipeline alert alert-warning" role="alert" style="display:none">
+            <strong>Source Required.</strong><br> To complete this action please add a source.
+            </div>
+            </div>
             <div class="col-sm-6 col-md-8">
             <div class=" form-group ">
                         <label for="trading_name" class="control-label">Trading Name</label>                            
@@ -28,7 +34,7 @@
                                 <?php
                                 } else {
                                     echo form_label('Pipeline', 'company_pipeline');
-                                    echo form_dropdown('company_pipeline', $companies_pipeline, (isset($company['pipeline'])?$company['pipeline']:'') ,'class="form-control"' );
+                                    echo form_dropdown('company_pipeline', $companies_pipeline, (isset($company['pipeline'])?$company['pipeline']:'') ,'class="form-control pipeline-validation-check"' );
                                 };
                                 
                                 ?>
@@ -41,7 +47,7 @@
                     <div class=" form-group ">
                     <?php
                     echo form_label('Class', 'company_class');
-                    echo form_dropdown('company_class', $companies_classes, (isset($company['class'])?$company['class']:'') ,'class="form-control"');
+                    echo form_dropdown('company_class', $companies_classes, (isset($company['class'])?$company['class']:'') ,'class="form-control pipeline-validation-check"');
                     ?>
                     </div>
                 </div>
@@ -51,7 +57,7 @@
                     <div class=" form-group ">
                     <?php
                     echo form_label('Source', 'company_source');
-                    echo form_dropdown('company_source', $company_sources, (isset($company['source'])?$company['source']:'') ,'class="form-control"');
+                    echo form_dropdown('company_source', $company_sources, (isset($company['source'])?$company['source']:'') ,'class="form-control pipeline-validation-check"');
                     ?>
                     <input type="hidden" name="original_source" value="<?php echo $company['source'];?>" />
                     <input type="hidden" name="original_source_date" value="<?php echo $company['source_date'];?>" />
@@ -145,7 +151,7 @@
 			</div>
             
             <div class="modal-footer">
-            	<button type="submit" class="btn btn-sm btn-success btn-block ladda-button submit_btn" edit-btn="editbtn<?php echo $company['id']; ?>" loading-display="loading-display-<?php echo $company['id']; ?>" data-style="expand-right" data-size="1">
+            	<button type="submit" class="btn btn-sm btn-success btn-block ladda-button submit_btn disable_no_source" edit-btn="editbtn<?php echo $company['id']; ?>" loading-display="loading-display-<?php echo $company['id']; ?>" data-style="expand-right" data-size="1" >
 		        	<span class="ladda-label"> Save changes </span>
 		    	</button>                
                 

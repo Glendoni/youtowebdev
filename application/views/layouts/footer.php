@@ -319,6 +319,49 @@ window.setTimeout(function() {
 
 </script>
 
+<!--MAKE ACTION DROP DOWN DISPLAY ALERT IF NO SOURCE IS SET-->
+<script type="text/javascript">
+$('#action_type_completed').change(function(){
+var source_check = $("input[name=source_check]").val();
+if ((this.value == '16' || this.value == '8') && (!source_check)) 
+      {
+        $(".no-source").slideDown(600);
+        //$(".no-source").show();
+        $(".disable_no_source").attr('disabled', 'disabled');
+}
+      else
+      {
+        $(".no-source").slideUp(600);
+        //$(".no-source").hide();
+        $(".disable_no_source").removeAttr('disabled', 'disabled');
+}
+});
+</script>
+<!--PIPELINE VALIDATION-->
+<script type="text/javascript">
+
+
+$(".pipeline-validation-check").change(function() {
+var company_source = $("select[name=company_source]").val();
+var pipeline_check = $("input[name=company_pipeline]").val();
+var company_class = $("input[name=company_class]").val();
+if ((this.value == 'Prospect' || this.value !== 'Lost') && (!company_source || company_source==0)) 
+      {
+        $(".no-source-pipeline").slideDown(600);
+        //$(".no-source").show();
+        $(".disable_no_source").attr('disabled', 'disabled');
+}
+      else
+      {
+        $(".no-source-pipeline").slideUp(600);
+        //$(".no-source").hide();
+        $(".disable_no_source").removeAttr('disabled', 'disabled');
+}
+});
+</script>
+
+
+
   <hr>
   <?php if (isset($current_user)): ?>
 

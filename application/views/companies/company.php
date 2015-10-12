@@ -406,18 +406,17 @@ endif; ?>
 			<!--THE BELOW PASSES THE CLASS FIELD ACROSS PURELY FOR VALIDATION - IF THERE IS A BETTER WAY OF DOING THIS THEN IT NEEDS TO BE HERE-->
 			
 			<!--VALIDATION ERROR IF NO ACTION IS SELECTED-->
-			<?php $msg = $this->session->flashdata('message_action'); if($msg): ?>
-        <div id="action-error" class="alert alert-<?php echo $this->session->flashdata('message_type'); ?> alert-dismissible " role="alert">
-          <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            <?php echo $msg ?>
-        </div>
-    <?php endif; ?><!--END VALIDATION-->
+
+			<div id="action-error" class="no-source alert alert-warning" role="alert" style="display:none">
+   
+            <strong>Source Required.</strong><br> To add a deal or proposal, please add a source to this company.</div>
+
 <div class="row">
 			<div class="col-md-3">
 				<div class="form-group ">
 					<label>New Actions</label>
 
-					<select id="action_type_completed" name="action_type_completed" class="form-control" onchange="commentChange()">
+<select id="action_type_completed" name="action_type_completed" class="form-control" onchange="commentChange()">
 						<option value="">--- Select an Action ---</option>
 						<?php foreach($action_types_done as $action ): ?>
 						  <option value="<?php echo $action->id; ?>"><?php echo $action->name; ?></option>
@@ -462,9 +461,9 @@ endif; ?>
 			<div class="col-md-12">
 				<div class="form-group ">
 					<label>Outcome</label>
-					<textarea class="form-control completed-details" name="comment" rows="3" required="required"><?php echo $_GET['message'];?></textarea>
+<textarea class="form-control completed-details" name="comment" rows="3" required="required"></textarea>
 				</div>
-				<button type="submit" name="save" class="btn btn-success form-control">Save</button>
+				<button type="submit" name="save" class="btn btn-success form-control disable_no_source">Save</button>
 			</div>
 			<?php echo form_close(); ?>
 			</div>
