@@ -232,7 +232,7 @@
                           <strong>Meetings</strong><div class="pull-right"><span class="badge badge-warning"><?php echo count($getusermeetings)?></span></div>
                           </div>
                           <div class="col-md-3"> 
-                           <strong>Intro Calls</strong><div class="pull-right"><span class="badge badge-warning"><?php echo count($getuserpitches)?></span></div>
+                           <strong>Demos</strong><div class="pull-right"><span class="badge badge-warning"><?php echo count($getuserdemos)?></span></div>
                         </div>
                         </div>
                           <div class="row list-group-item">
@@ -241,9 +241,8 @@
                              <?php foreach ($getuserplacements as $get_user_placements): ?>
                             <li class="user-stat-holder">
                             <div class="user-stat company"><a href="companies/company?id=<?php echo $get_user_placements['id'] ?>" <?php if(($current_user['new_window']=='t')): ?> target="_blank"<?php endif; ?>><?php echo $get_user_placements['name'];?></a></div>
-                            <div class="user-stat company action_date" style="margin-bottom:5px;">
+                            <div class="user-stat company action_date">
                             <?php echo  date('D jS M y',strtotime($get_user_placements['actioned_at']));?></div>
-                             <span class="label pipeline-label label-success"><?php echo $get_user_placements['username'];?></span>
                             </li>
                             <?php endforeach ?>
                             </div>
@@ -260,19 +259,26 @@
                             <div class="col-md-3">
                             <?php foreach ($getusermeetings as $get_user_meetings): ?>
                               <li class="user-stat-holder">
-                            <div class="user-stat company <?php if ($get_user_meetings['meeting_actioned'] > '0'): ?>actioned<?php endif; ?>"><a href="companies/company?id=<?php echo $get_user_meetings['id'] ?>"  <?php if(($current_user['new_window']=='t')): ?> target="_blank"<?php endif; ?>><?php echo $get_user_meetings['name'];?></a></div>
+                            <div class="user-stat company"><a href="companies/company?id=<?php echo $get_user_meetings['id'] ?>"  <?php if(($current_user['new_window']=='t')): ?> target="_blank"<?php endif; ?>><?php echo $get_user_meetings['name'];?></a> <?php if(!empty($get_user_meetings['actioned_at'])): ?><span class="label label-success">Done</span><?php endif ?></div>
                             <div class="user-stat company action_date">
-                            <?php echo  date('D jS M y',strtotime($get_user_meetings['created_at']));?></div>
+                            <?php if(!empty($get_user_meetings['actioned_at'])): ?>
+                            <b>Done: </b> <?php echo  date('D jS M y',strtotime($get_user_meetings['actioned_at']));?></div>
+                            <?php else: ?>
+                            <b>Due:  </b> <?php echo  date('D jS M y',strtotime($get_user_meetings['planned_at']));?></div>
+                            <?php endif ?>
                             </li>
                             <?php endforeach ?>
                             </div>
                             <div class="col-md-3"> 
-                            <?php foreach ($getuserpitches as $get_user_pitches): ?>
-
-                              <li class="user-stat-holder">
-                            <div class="user-stat company"><a href="companies/company?id=<?php echo $get_user_pitches['id'] ?>"  <?php if(($current_user['new_window']=='t')): ?> target="_blank"<?php endif; ?>><?php echo $get_user_pitches['name'];?></a></div>
+                            <?php foreach ($getuserdemos as $get_user_demos): ?>
+                            <li class="user-stat-holder">
+                            <div class="user-stat company"><a href="companies/company?id=<?php echo $get_user_demos['id'] ?>"  <?php if(($current_user['new_window']=='t')): ?> target="_blank"<?php endif; ?>><?php echo $get_user_demos['name'];?></a> <?php if(!empty($get_user_demos['actioned_at'])): ?><span class="label label-success">Done</span><?php endif ?></div>
                             <div class="user-stat company action_date">
-                            <?php echo  date('D jS M y',strtotime($get_user_pitches['actioned_at']));?></div>
+                            <?php if(!empty($get_user_demos['actioned_at'])): ?>
+                            <b>Done: </b> <?php echo  date('D jS M y',strtotime($get_user_demos['actioned_at']));?></div>
+                            <?php else: ?>
+                            <b>Due:  </b> <?php echo  date('D jS M y',strtotime($get_user_demos['planned_at']));?></div>
+                            <?php endif ?>
                             </li>
                             <?php endforeach ?>
                             </div>

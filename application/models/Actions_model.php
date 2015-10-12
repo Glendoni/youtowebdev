@@ -503,19 +503,20 @@ return $query->result_object();
 		$start_date = $dates['start_date'];
 		$end_date = $dates['end_date'];
 		if (!empty($search_user_id)) {
-		 $sql = "select distinct c.name, a.created_at,c.id, sum(case when (action_type_id = '12' or action_type_id = '10') AND actioned_at > '$start_date' AND actioned_at < '$end_date' then 1 else 0 end) meeting_actioned from companies c inner join actions a on c.id = a.company_id where (action_type_id = '12' or action_type_id = '10') and a.created_by = '$search_user_id' AND (a.created_at > '$start_date' or a.actioned_at > '$start_date') AND (a.created_at < '$end_date' or a.actioned_at < '$end_date') group by c.name, a.created_at, c.id order by a.created_at asc";
+		 $sql = "select distinct c.name, a.created_at,a.actioned_at,a.planned_at, c.id from companies c inner join actions a on c.id = a.company_id where (action_type_id = '12' or action_type_id = '10') and a.created_by = '$search_user_id' AND (a.created_at > '$start_date' or a.actioned_at > '$start_date') AND (a.created_at < '$end_date' or a.actioned_at < '$end_date') group by c.name, a.created_at,a.actioned_at,a.planned_at, c.id order by a.created_at asc";
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
 	}
 
-	function get_user_pitches($period){
+	function get_user_demos($period){
 		$dates = $this->dates($period);
 		$search_user_id = $dates['search_user_id'];
 		$start_date = $dates['start_date'];
 		$end_date = $dates['end_date'];
 		if (!empty($search_user_id)) {
-		$sql = "select distinct c.name, a.actioned_at, c.id from companies c inner join actions a on c.id = a.company_id where a.action_type_id = '4' and a.created_by = '$search_user_id' AND a.actioned_at > '$start_date' AND a.actioned_at < '$end_date' order by a.actioned_at asc";
+
+		 $sql = "select distinct c.name, a.created_at,a.actioned_at,a.planned_at, c.id from companies c inner join actions a on c.id = a.company_id where (action_type_id = '9' or action_type_id = '15') and (a.created_by = '$search_user_id' or a.updated_by = '$search_user_id') AND (a.created_at > '$start_date' or a.actioned_at > '$start_date') AND (a.created_at < '$end_date' or a.actioned_at < '$end_date') and a.cancelled_at is null group by c.name, a.created_at,a.actioned_at,a.planned_at, c.id order by a.created_at asc";
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
