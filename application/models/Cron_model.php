@@ -122,9 +122,6 @@ $unix_date = time() - 345600; //CHECK FOR LAST FOUR DAYS
 	$this->db->query($update_prospects);
 	}
 
-	
-
-
 function remove_contacts_from_marketing() {
 	
 	$con = mysqli_connect("137.117.165.135","baselist","OzzyElmo$1","sonovate_finance");
