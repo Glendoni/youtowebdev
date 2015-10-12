@@ -264,7 +264,7 @@ class Companies extends MY_Controller {
 		{
 			$post = $this->input->post();
 			if (($post['company_pipeline']<>'prospect') && (empty($post['company_source']))){
-			$this->set_message_error('<b>Not Update</b> Please select a source before changing pipeline status.');
+			$this->set_message_error('<b>Not Updated</b> Please select a source before changing pipeline status.');
 			redirect('/companies','refresh');
 			}
 			else {

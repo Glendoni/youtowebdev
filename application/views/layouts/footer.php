@@ -310,10 +310,10 @@ $(window).load(function(){
 <script type="text/javascript">//<![CDATA[
 $(window).load(function(){
 window.setTimeout(function() {
-    $(".alert-success").fadeTo(900, 0).slideUp(900, function(){
+    $(".alert-message").fadeTo(500, 0).slideUp(500, function(){
         $(this).remove(); 
     });
-}, 3000);
+}, 5000);
 
 });//]]> 
 

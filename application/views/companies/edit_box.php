@@ -1,6 +1,8 @@
 	<div class="modal draggable-modal fade" id="editModal<?php echo $company['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="Edit <?php echo $company['name']; ?>" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
         <div class="modal-content">
+
+        
         	<?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'],'edit_company'=>'1' );
 				 echo form_open(site_url().'companies/edit', 'name="edit_company" class="edit_company" role="form"',$hidden); ?>
             <div class="modal-header">
