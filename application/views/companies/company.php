@@ -408,7 +408,7 @@ endif; ?>
 			<!--VALIDATION ERROR IF NO ACTION IS SELECTED-->
 
 			<div id="action-error" class="no-source alert alert-warning" role="alert" style="display:none">
-            <strong>Source Required.</strong><br> To add a deal or proposal, please add a source to this company.
+            <strong>Source Required.</strong><br> To add a Deal or Proposal, please add a Source to this company.
             </div>
 
 <div class="row">

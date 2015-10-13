@@ -12,7 +12,7 @@
                         <div class="col-sm-12">
 
             <div id="action-error" class="no-source-pipeline alert alert-warning" role="alert" style="display:none">
-            <strong>Source Required.</strong><br> To complete this action please add a source.
+            <strong>Source & Class Required.</strong><br> To complete this action please add a Source & Class to this company.
             </div>
             </div>
             <div class="col-sm-6 col-md-8">
