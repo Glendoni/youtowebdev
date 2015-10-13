@@ -10,8 +10,8 @@ class Cron_model extends CI_Model {
 
 	function update_marketing_clicks()
 	{
-	//$con = mysqli_connect("137.117.165.135","baselist","OzzyElmo$1","sonovate_finance");
-	$con = mysqli_connect("localhost","root","root","sonovate");
+	$con = mysqli_connect("137.117.165.135","baselist","OzzyElmo$1","sonovate_finance");
+	//$con = mysqli_connect("localhost","root","root","sonovate");
 
 	// Check connection
 	if (mysqli_connect_errno())
