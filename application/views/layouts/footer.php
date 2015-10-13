@@ -339,13 +339,10 @@ if ((this.value == '16' || this.value == '8') && (!source_check))
 </script>
 <!--PIPELINE VALIDATION-->
 <script type="text/javascript">
-
-
 $(".pipeline-validation-check").change(function() {
 var company_source = $("select[name=company_source]").val();
 var company_pipeline = $("select[name=company_pipeline]").val();
 var pipeline_check = $("input[name=pipeline_check]").val();
-
 var company_class = $("input[name=company_class]").val();
 if ((this.value !== 'Prospect' && this.value !== 'Lost') && (!company_source || company_source==0)) 
       {

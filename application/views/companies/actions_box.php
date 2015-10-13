@@ -2,9 +2,6 @@
 	<button class="btn btn-warning btn-block btn-sm edit-btn" data-toggle="modal" id="editbtn<?php echo $company['id']; ?>"  data-target="#editModal<?php echo $company['id']; ?>">
         <span class="ladda-label"> Edit </span>
     </button> 
-	<button  class="btn btn-info btn-block btn-sm edit-btn" data-toggle="modal" id="create_contact_<?php echo $company['id']; ?>"  data-target="#create_contact_<?php echo $company['id']; ?>" >
-        <span class="ladda-label"> Add Contact </span>
-    </button>
 	<?php if(isset($company['assigned_to_name']) and !empty($company['assigned_to_name'])): ?>
 		<?php if($company['assigned_to_id'] == $current_user['id']) : ?>	
 		<div style="  margin: 5px 0;">		
