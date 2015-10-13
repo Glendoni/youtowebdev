@@ -176,7 +176,7 @@ return $query->result_object();
 		$dates = $this->dates($period);
 		$start_date = $dates['start_date'];
 		$end_date = $dates['end_date'];
-		 $sql = "select U.name, U.id as user, U.image,
+	 	$sql = "select U.name, U.id as user, U.image,
 				sum(case when action_type_id = '4' AND actioned_at > '$start_date' AND actioned_at < '$end_date' then 1 else 0 end) introcall,
 				sum(case when (action_type_id = '4' or action_type_id = '5' or action_type_id = '11' or action_type_id = '17')  AND actioned_at > '$start_date' AND actioned_at < '$end_date' then 1 else 0 end) salescall,
 		    	sum(case when (action_type_id = '5' OR action_type_id = '11') AND actioned_at > '$start_date' AND actioned_at < '$end_date' then 1 else 0 end) callcount,
@@ -503,7 +503,7 @@ return $query->result_object();
 		$start_date = $dates['start_date'];
 		$end_date = $dates['end_date'];
 		if (!empty($search_user_id)) {
-		 $sql = "select distinct c.name, a.created_at,a.actioned_at,a.planned_at, c.id from companies c inner join actions a on c.id = a.company_id where (action_type_id = '12' or action_type_id = '10') and a.created_by = '$search_user_id' AND (a.created_at > '$start_date' or a.actioned_at > '$start_date') AND (a.created_at < '$end_date' or a.actioned_at < '$end_date') group by c.name, a.created_at,a.actioned_at,a.planned_at, c.id order by a.created_at asc";
+		 $sql = "select distinct c.name, a.created_at,a.actioned_at,a.planned_at, c.id from companies c inner join actions a on c.id = a.company_id where (action_type_id = '12' or action_type_id = '10') and a.created_by = '$search_user_id' AND (a.created_at > '$start_date' or a.actioned_at > '$start_date') AND (a.created_at < '$end_date' or a.actioned_at < '$end_date') group by c.name, a.created_at,a.actioned_at,a.planned_at, c.id order by a.actioned_at, a.planned_at asc";
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}
@@ -516,7 +516,7 @@ return $query->result_object();
 		$end_date = $dates['end_date'];
 		if (!empty($search_user_id)) {
 
-		 $sql = "select distinct c.name, a.created_at,a.actioned_at,a.planned_at, c.id from companies c inner join actions a on c.id = a.company_id where (action_type_id = '9' or action_type_id = '15') and (a.created_by = '$search_user_id' or a.updated_by = '$search_user_id') AND (a.created_at > '$start_date' or a.actioned_at > '$start_date') AND (a.created_at < '$end_date' or a.actioned_at < '$end_date') and a.cancelled_at is null group by c.name, a.created_at,a.actioned_at,a.planned_at, c.id order by a.created_at asc";
+		  $sql = "select distinct c.name, a.created_at,a.actioned_at,a.planned_at, c.id from companies c inner join actions a on c.id = a.company_id where (action_type_id = '9' or action_type_id = '15') and (a.created_by = '$search_user_id' or a.updated_by = '$search_user_id') AND (a.created_at > '$start_date' or a.actioned_at > '$start_date') AND (a.created_at < '$end_date' or a.actioned_at < '$end_date') and a.cancelled_at is null group by c.name, a.created_at,a.actioned_at,a.planned_at, c.id order by a.actioned_at, a.planned_at asc";
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}

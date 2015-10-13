@@ -198,13 +198,7 @@
 <?php
     foreach($userimage as $userimage)
     {
-      $user_icon = explode(",",$userimage->image); echo "<div class='circle name-circle' style='width:25px;height: 25px;line-height: 25px;background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";
-    }
-?>User Stats<div class="pull-right" style="font-weight:300;">
-                (<?php echo date('D jS M y',strtotime($dates['start_date']));?> - <?php echo date('D jS M y',strtotime($dates['end_date']));?>)</div></h3> 
-              </div>
-            
-
+      $user_icon = explode(",",$userimage->image); echo "<div class='circle name-circle' style='width:25px;height: 25px;line-height: 25px;background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";}?>User Stats</h3> </div>
               <div class="panel-body">
                   <div class="clearfix"></div>
                   <div clas="list-group">
@@ -259,25 +253,34 @@
                             <div class="col-md-3">
                             <?php foreach ($getusermeetings as $get_user_meetings): ?>
                               <li class="user-stat-holder">
-                            <div class="user-stat company"><a href="companies/company?id=<?php echo $get_user_meetings['id'] ?>"  <?php if(($current_user['new_window']=='t')): ?> target="_blank"<?php endif; ?>><?php echo $get_user_meetings['name'];?></a> <?php if(!empty($get_user_meetings['actioned_at'])): ?><span class="label label-success">Done</span><?php endif ?></div>
+                            <div class="user-stat company"><a href="companies/company?id=<?php echo $get_user_meetings['id'] ?>"  <?php if(($current_user['new_window']=='t')): ?> target="_blank"<?php endif; ?>><?php echo $get_user_meetings['name'];?></a></div>
                             <div class="user-stat company action_date">
+                            <b>Created: </b> <?php echo  date('D jS M y',strtotime($get_user_meetings['created_at']));?></div>
                             <?php if(!empty($get_user_meetings['actioned_at'])): ?>
-                            <b>Done: </b> <?php echo  date('D jS M y',strtotime($get_user_meetings['actioned_at']));?></div>
-                            <?php else: ?>
-                            <b>Due:  </b> <?php echo  date('D jS M y',strtotime($get_user_meetings['planned_at']));?></div>
+                            <div class="user-stat company action_date">
+                            <span class="label label-success"><?php echo  date('D jS M y',strtotime($get_user_meetings['actioned_at']));?></span>
+                            </div><?php else: ?>
+                            <div class="user-stat company action_date">
+                            <span class="label label-default"><?php echo  date('D jS M y',strtotime($get_user_meetings['planned_at']));?></span>
+                            </div>
                             <?php endif ?>
+
                             </li>
                             <?php endforeach ?>
                             </div>
                             <div class="col-md-3"> 
                             <?php foreach ($getuserdemos as $get_user_demos): ?>
                             <li class="user-stat-holder">
-                            <div class="user-stat company"><a href="companies/company?id=<?php echo $get_user_demos['id'] ?>"  <?php if(($current_user['new_window']=='t')): ?> target="_blank"<?php endif; ?>><?php echo $get_user_demos['name'];?></a> <?php if(!empty($get_user_demos['actioned_at'])): ?><span class="label label-success">Done</span><?php endif ?></div>
+                            <div class="user-stat company"><a href="companies/company?id=<?php echo $get_user_demos['id'] ?>"  <?php if(($current_user['new_window']=='t')): ?> target="_blank"<?php endif; ?>><?php echo $get_user_demos['name'];?></a></div>
                             <div class="user-stat company action_date">
+                            <b>Created: </b> <?php echo  date('D jS M y',strtotime($get_user_demos['created_at']));?></div>
                             <?php if(!empty($get_user_demos['actioned_at'])): ?>
-                            <b>Done: </b> <?php echo  date('D jS M y',strtotime($get_user_demos['actioned_at']));?></div>
-                            <?php else: ?>
-                            <b>Due:  </b> <?php echo  date('D jS M y',strtotime($get_user_demos['planned_at']));?></div>
+                            <div class="user-stat company action_date">
+                            <span class="label label-success"><?php echo  date('D jS M y',strtotime($get_user_demos['actioned_at']));?></span>
+                            </div><?php else: ?>
+                            <div class="user-stat company action_date">
+                            <span class="label label-default"><?php echo  date('D jS M y',strtotime($get_user_demos['planned_at']));?></span>
+                            </div>
                             <?php endif ?>
                             </li>
                             <?php endforeach ?>
@@ -307,11 +310,10 @@
                     <?php else: ?>
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs" role="tablist">
-                      <li><a href="#this" role="tab" data-toggle="tab">This Week</a></li>
-                      <li><a href="#lastweek" role="tab" data-toggle="tab">Last Week</a></li>
-                      <li><a href="#currentmonth" role="tab" data-toggle="tab">This Month</a></li>
-                      <li><a href="#lastmonth" role="tab" data-toggle="tab">Last Month</a></li>
-
+                      <li <?php if (($_GET['period'] == 'this') ||  (empty($_GET['period']))): ?>class="active"<?php endif; ?>><a href="#this" role="tab" data-toggle="tab">This Week</a></li>
+                      <li <?php if ($_GET['period'] == 'lastweek'): ?>class="active"<?php endif; ?>><a href="#lastweek" role="tab" data-toggle="tab">Last Week</a></li>
+                      <li <?php if ($_GET['period'] == 'month'): ?>class="active"<?php endif; ?>><a href="#currentmonth" role="tab" data-toggle="tab">This Month</a></li>
+                      <li <?php if ($_GET['period'] == 'lastmonth'): ?>class="active"<?php endif; ?>><a href="#lastmonth" role="tab" data-toggle="tab">Last Month</a></li>
 
                       <?php if ($_GET['search'] == '3'): ?>
                       <li <?php if ($_GET['search'] == '3'): ?>class="active"<?php endif; ?>><a href="#searchresults" role="tab" data-toggle="tab">Search Results</a></li>
@@ -319,7 +321,7 @@
                     </ul>
                     <!-- Tab panes -->
                     <div class="tab-content">
-                      <div class="tab-pane fade in <?php if ($_GET['search'] < '1'): ?>active<?php endif; ?>" id="this">
+                      <div class="tab-pane fade <?php if (($_GET['period'] == 'this') ||  (empty($_GET['period']))): ?>active in <?php endif; ?>" id="this">
                       <div class="col-md-12">
                       <div class="row list-group-item">
                         <div class="col-xs-2 col-md-1 hide-overflow"> 
@@ -389,7 +391,7 @@
                       </div><!--END COL-MD-12-->
                       </div><!--END THIS TAB-->
 
-                      <div class="tab-pane fade" id="lastweek">
+                      <div class="tab-pane fade <?php if ($_GET['period'] == 'lastweek'): ?>active in <?php endif; ?>" id="lastweek">
                       <div class="col-md-12">
                       <div class="row list-group-item">
                         <div class="col-xs-2 col-md-1 hide-overflow"> 
@@ -463,7 +465,7 @@
                     </div><!--END THIS TAB-->
 
 
-                      <div class="tab-pane fade" id="currentmonth">
+                      <div class="tab-pane fade <?php if ($_GET['period'] == 'month'): ?>active in <?php endif; ?>" id="currentmonth">
                       <div class="col-md-12">
                       <div class="row list-group-item">
                         <div class="col-xs-2 col-md-1 hide-overflow"> 
@@ -536,7 +538,7 @@
                       </div><!--END COL-MD-12-->
                     </div><!--END THIS TAB-->
 
-                    <div class="tab-pane fade" id="lastmonth">
+                    <div class="tab-pane fade <?php if ($_GET['period'] == 'lastmonth'): ?>active in <?php endif; ?>" id="lastmonth">
                       <div class="col-md-12">
                       <div class="row list-group-item">
                         <div class="col-xs-2 col-md-1 hide-overflow"> 
@@ -608,7 +610,7 @@
                       </div><!--END COL-MD-12-->
                     </div><!--END THIS TAB-->
 
-                    <div class="tab-pane fade in <?php if ($_GET['search'] > '0'): ?>active<?php endif; ?>" id="searchresults">
+                    <div class="tab-pane fade <?php if ($_GET['search'] == '3'): ?>active in <?php endif; ?>" id="searchresults">
                      <div class="col-md-12">
                       <div class="row list-group-item">
                         <div class="col-xs-2 col-md-1 hide-overflow"> 
@@ -654,7 +656,6 @@
                                   <div class="col-xs-2 col-md-1 text-center"> 
                               <?php echo $getstatssearch['proposals'];?>
                               </div>
-
                                 <div class="col-xs-2 col-md-2 text-center"> 
                             <?php echo $getstatssearch['demobookedcount'];?> / <?php echo $getstatssearch['democount'];?>
                             </div>
