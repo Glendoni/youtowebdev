@@ -55,7 +55,7 @@
 <div class="col-sm-2 mobile-hide">
 <a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $current_campaign_stats->campaign_id; ?>">
 <div class="circle-responsive black-circle <?php echo empty($this->session->userdata('pipeline'))? 'active':'';?>"><div class="circle-content mega">
-<div class="large-number"><?php echo number_format($current_campaign_stats->campaign_total); ?></div> <div class="small-text"><?php if ($companies_count<> "1") {echo "Companies in $results_type";} else { echo "Company in $results_type";}?></div>
+<div class="large-number"><?php echo number_format($current_campaign_stats->campaign_total); ?></div> <div class="small-text"><?php if ($companies_count<> "1") {echo "Companies in</br>$results_type";} else { echo "Company in</br>$results_type";}?></div>
 </div>
 </div>
 </a>

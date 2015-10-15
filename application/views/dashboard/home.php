@@ -42,7 +42,7 @@
 
 <div class="col-sm-2 mobile-hide">
 <div class="circle-responsive black-circle <?php echo empty($this->session->userdata('pipeline'))? 'active':'';?>"><div class="circle-content mega">
-<div class="large-number"><?php echo number_format($get_user_campaign->campaign_total); ?></div> <div class="small-text">Companies
+<div class="large-number"><?php echo number_format($get_user_campaign->campaign_total); ?></div> <div class="small-text" style="font-size:11px;">Companies
 </div>
 
 </div>
@@ -53,7 +53,7 @@
 <div class="circle-responsive cyan-circle ">
 <div class="circle-content mega">
 <div class="large-number"><?php echo $get_user_campaign->contacted; ?><span style="font-size:32px;">%</span></div>
-<div class="small-text">Contacted</div>
+<div class="small-text" style="font-size:11px;">Contacted</div>
 
 
 </div>
@@ -67,7 +67,7 @@
 ">
 <div class="circle-content mega">
 <div class="large-number"><?php echo $get_user_campaign->campaign_prospects; ?></div>
-<div class="small-text"><?php if ($get_user_campaign->campaign_prospects <> "1") {echo "Prospects";} else { echo "Prospect";}?></div></div>
+<div class="small-text" style="font-size:11px;"><?php if ($get_user_campaign->campaign_prospects <> "1") {echo "Prospects";} else { echo "Prospect";}?></div></div>
 </div>
 <?php if ($get_user_campaign->campaign_prospects>0): ?>
 <?php else: endif; ?>
@@ -79,7 +79,7 @@
 <div class="circle-responsive intent-circle <?php if ($this->session->userdata('pipeline')=='intent'): echo 'active';else: endif; ?>">
 <div class="circle-content mega">
 <div class="large-number"><?php echo $get_user_campaign->campaign_intent; ?></div>
-<div class="small-text">Intent &</br>Qualified</div></div>
+<div class="small-text" style="font-size:11px;">Intent &</br>Qualified</div></div>
 </div>
 <?php if ($get_user_campaign->campaign_intent>0): ?>
 <?php else: endif; ?>
@@ -91,7 +91,7 @@
 <div class="circle-responsive proposal-circle <?php if ($this->session->userdata('pipeline')=='proposal'): echo 'active';else: endif; ?>">
 <div class="circle-content mega">
 <div class="large-number"><?php echo $get_user_campaign->campaign_proposals; ?></div>
-<div class="small-text"><?php if ($get_user_campaign->campaign_proposals <> "1") {echo "Proposals";} else { echo "Proposal";}?></div></div>
+<div class="small-text" style="font-size:11px;"><?php if ($get_user_campaign->campaign_proposals <> "1") {echo "Proposals";} else { echo "Proposal";}?></div></div>
 </div>
 <?php if ($get_user_campaign->campaign_proposals>0): ?>
 <?php else: endif; ?>
@@ -102,7 +102,7 @@
 <div class="circle-responsive customer-circle <?php if ($this->session->userdata('pipeline')=='customer'): echo 'active';else: endif; ?>">
 <div class="circle-content mega">
 <div class="large-number"><?php echo $get_user_campaign->campaign_customers; ?></div>
-<div class="small-text"><?php if ($get_user_campaign->campaign_customers <> "1") {echo "Customers";} else { echo "Customer";}?></div></div>
+<div class="small-text" style="font-size:11px;"><?php if ($get_user_campaign->campaign_customers <> "1") {echo "Customers";} else { echo "Customer";}?></div></div>
 </div>
 <?php if ($get_user_campaign->campaign_customers>0): ?>
 <?php else: endif; ?>
@@ -359,7 +359,9 @@
                         <?php foreach ($stats as $stat): ?>
                           <div class="row list-group-item stats-row">
                             <div class="col-xs-2 col-md-1"> 
+                            <a href = "?search=2&user=<?php echo $stat['user'];?>&period=week">
                             <?php $user_icon = explode(",",$stat['image']); echo "<div class='circle name-circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
+                            </a>
                             </div>
                             <div class="col-xs-2 col-md-1 text-center">
                             <a href = "?search=2&user=<?php echo $stat['user'];?>&period=week"><span class="badge" style="background-color:#00B285;"><?php echo $stat['deals'];?></a></span>
@@ -429,7 +431,9 @@
                         <?php foreach ($lastweekstats as $lastweekstat): ?>
                           <div class="row list-group-item stats-row">
                             <div class="col-xs-2 col-md-1"> 
+                            <a href = "?search=2&user=<?php echo $lastweekstat['user'];?>&period=lastweek">
                             <?php $user_icon = explode(",",$lastweekstat['image']); echo "<div class='circle name-circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
+                            </a>
                             </div>
                             <div class="col-xs-2 col-md-1 text-center">
                             <a href = "?search=2&user=<?php echo $lastweekstat['user'];?>&period=lastweek"><span class="badge" style="background-color:#00B285;"><?php echo $lastweekstat['deals'];?></a></span>
@@ -502,8 +506,10 @@
                         </div>
                         <?php foreach ($thismonthstats as $thismonthstat): ?>
                           <div class="row list-group-item stats-row">
-                            <div class="col-xs-2 col-md-1"> 
+                            <div class="col-xs-2 col-md-1">
+                            <a href = "?search=2&user=<?php echo $thismonthstat['user'];?>&period=month">
                             <?php $user_icon = explode(",",$thismonthstat['image']); echo "<div class='circle name-circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
+                            </a>
                             </div>
                             <div class="col-xs-2 col-md-1 text-center">
                             <a href = "?search=2&user=<?php echo $thismonthstat['user'];?>&period=month"><span class="badge" style="background-color:#00B285;"><?php echo $thismonthstat['deals'];?></a></span>
@@ -518,8 +524,6 @@
                             <div class="col-xs-1 col-md-1 text-center">
                             <?php echo $thismonthstat['meetingbooked'];?> (<?php echo $thismonthstat['meetingcount'];?>)
                             </div>
-
-
                             <div class="col-xs-3 col-md-2 text-center"> 
                             <?php echo $thismonthstat['salescall'];?>
                             (<?php echo $thismonthstat['introcall'];?>)
@@ -575,8 +579,10 @@
                         </div>
                         <?php foreach ($lastmonthstats as $lastmonthstat): ?>
                           <div class="row list-group-item stats-row">
-                            <div class="col-xs-2 col-md-1"> 
+                            <div class="col-xs-2 col-md-1">
+                            <a href = "?search=2&user=<?php echo $lastmonthstat['user'];?>&period=lastmonth"> 
                             <?php $user_icon = explode(",",$lastmonthstat['image']); echo "<div class='circle name-circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
+                            </a>
                             </div>
                             <div class="col-xs-2 col-md-1 text-center">
                             <a href = "?search=2&user=<?php echo $lastmonthstat['user'];?>&period=lastmonth"><span class="badge" style="background-color:#00B285;"><?php echo $lastmonthstat['deals'];?></a></span>
@@ -647,8 +653,10 @@
                         </div>
                         <?php foreach ($getstatssearch as $getstatssearch): ?>
                           <div class="row list-group-item stats-row">
-                            <div class="col-xs-2 col-md-1"> 
+                            <div class="col-xs-2 col-md-1">
+                            <a href = "?search=2&user=<?php echo $getstatssearch['user'];?>&start_date=<?php echo $_GET['start_date']?>&end_date=<?php echo $_GET['end_date']?>&period=search">
                             <?php $user_icon = explode(",",$getstatssearch['image']); echo "<div class='circle name-circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
+                            </a>
                             </div>
                             <div class="col-xs-2 col-md-1 text-center">
                             <a href = "?search=2&user=<?php echo $getstatssearch['user'];?>&start_date=<?php echo $_GET['start_date']?>&end_date=<?php echo $_GET['end_date']?>&period=search"><span class="badge" style="background-color:#00B285;"><?php echo $getstatssearch['deals'];?></a></span>
@@ -1147,18 +1155,20 @@
                 <h3 class="panel-title">Campaigns <span class="badge pull-right"><?php echo count($shared_campaigns); ?></span></h3>    
               </div>
               <div class="panel-body" style="padding:0;">
+              <div id="campaignList">
                   <!-- SHARED SEARCHES -->
                   <?php foreach ($shared_campaigns as $campaign):?>
                     <?php $user_icon = explode(",", $campaign->image);$bg_colour = $user_icon[1];$bg_colour_text = $user_icon[2];$bg_colour_name = $user_icon[0];?>
                     <a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $campaign->id; ?>" class="load-saved-search" <?php echo strlen($campaign->name) > 36 ? 'title="'.$campaign->name.'"':"" ?>><div class="row">
                   <div class="col-xs-1"><span class="label label-info" style="margin-right:3px;background-color: <?php echo $bg_colour; ?>;font-size:8px; color: <?php echo $bg_colour_text;?>"><b><?php echo $bg_colour_name; ?></b>
                     </span></div>
-
                   <div class="col-xs-9" style="max-height:15px;overflow:hidden"><?php echo $campaign->name;?></div>
                   <div class="col-xs-1" style="padding: 0 0 0 5px;"><b><?php echo $campaign->campaigncount; ?></b></div>
                   </div>
                   </a>
                     <?php endforeach; ?>
+              </div><!--END CAMPAIGN LIST-->
+              <button type="submit" class="btn btn-success btn-block" id="loadMore">Load More</button>
               </div>
             </div>
           </div><!--END COL-3-->

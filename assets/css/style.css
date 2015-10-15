@@ -883,6 +883,8 @@ a.btn.btn-default.btn-xs.add-to-calendar {
 .campaign-link {
 	font-size: 11px;
 }
+#campaignList a{ display:none;
+}
 /*CIRCLES FOR DASHBOARD*/
 .name-circle {
 	float: left;
@@ -917,9 +919,9 @@ a.btn.btn-default.btn-xs.add-to-calendar {
     margin-top: -28px;
 }
 .circle-content .small-text{
-font-size: 10px;
+font-size: 14px;
     font-weight: 300;
-    line-height: 11px;
+    line-height: 15px;
 }
 .black-circle {
 	color: #262626;
