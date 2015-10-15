@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link rel="apple-touch-icon-precomposed" sizes="180x180" href="<?php echo asset_url();?>images/apple-icon.png" />
 
     <title><?php echo (isset($page_title))? $page_title: 'Baselist'; ?></title>
     
