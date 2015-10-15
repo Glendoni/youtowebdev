@@ -255,8 +255,15 @@ if ($your_date < $now){; ?>
 			<tbody>
 				<?php foreach ($company['mortgages'] as $mortgage):?>
 				<tr <?php echo $mortgage['stage']==MORTGAGES_SATISFIED? 'class="danger"' : 'class="success"' ?> >
-					<td class="col-md-6" ><?php echo $mortgage['name']; ?>
-					<span class="label label-default" style="margin-left: 20px;padding: 1px 10px;"><?php echo $mortgage['type']; ?></span>
+					<td class="col-md-6" >
+					<?php if(isset($mortgage['url'])) : ?>
+						<a href="http://<?php echo $mortgage['url']; ?>" target="_blank"><?php echo $mortgage['name']; ?> <span style="font-size:10px;"><i class="fa fa-external-link"></i></span></a>
+	    			<?php else: ?>
+						<?php echo $mortgage['name']; ?>
+					<?php endif; ?>
+				<div style="font-size:11px;">
+				<?php echo $mortgage['type']; ?>
+				</div>
 					</td>
 					<td class="col-md-3" style="text-align:center;"><?php echo $mortgage['eff_from']; ?></td>
 					<td class="col-md-3" style="text-align:center;"><!--<span class="label label-<?php echo $mortgage['stage']==MORTGAGES_SATISFIED? 'default' : 'success' ?>">--><strong><?php echo $mortgage['stage']; ?></strong><?php if(!empty($mortgage['eff_to'])){echo ' on '.$mortgage['eff_to'];} ?></span></td>

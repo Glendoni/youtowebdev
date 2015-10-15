@@ -647,13 +647,14 @@ LEFT JOIN
 		select T."company id",
 		       json_agg(
 			   row_to_json(
-			   row (T."mortgage id", T."mortgage provider", T."mortgage stage", T."mortgage start", T."mortgage end", T."mortgage type"))) "JSON output"  -- f11
+			   row (T."mortgage id", T."mortgage provider", T."mortgage stage", T."mortgage start", T."mortgage end", T."mortgage type",  T."provider url"))) "JSON output"  -- f11
 				 
 		from 
 		(-- T
 		select M.company_id "company id",
 		       M.id "mortgage id",
 		       P.name "mortgage provider",
+		       P.url "provider url",
 		       M.stage "mortgage stage",
 		       to_char(M.eff_from, \'dd/mm/yyyy\')  "mortgage start",
 		       to_char(M.eff_to, \'dd/mm/yyyy\')  "mortgage end",
@@ -664,7 +665,7 @@ LEFT JOIN
 		JOIN PROVIDERS P
 		ON M.provider_id = P.id 
 
-		order by 1, 4, M.eff_from desc
+		order by 1, 5, M.eff_from desc
 
 		)   T
 

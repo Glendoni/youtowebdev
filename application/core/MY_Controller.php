@@ -448,6 +448,8 @@ class MY_Controller extends CI_Controller {
 					$mortgages['eff_from'] = $mortgage->f4;
 					$mortgages['eff_to'] = $mortgage->f5;
 					$mortgages['type'] = $mortgage->f6;
+					$mortgages['url'] = $mortgage->f7;
+
 
 					$mortgages_array[] = $mortgages;
 				}
