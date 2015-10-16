@@ -71,7 +71,7 @@
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <a class="navbar-brand" href="/" >Baselist <span style="font-size:12px; font-weight:300;">v2.11</span></a>
+                <a class="navbar-brand" href="/" ><img src="<?php echo asset_url();?>images/baselist-logotype-black-transparent-bg.png" style="width:120px;"> <div style="font-size:10px; font-weight:300; text-align:right;">Version 2.11</div></a>
             </div>
 <?php if (isset($current_user)): ?>
     <!--TOP SEARCH BAR-->
@@ -85,7 +85,7 @@
     <div class="col-lg-6 col-lg-offset-2 col-sm-6 col-md-offset-2 large-form-holder clearfix">
             <div class="" id="adv-search">
              <?php echo form_open(site_url().'companies', 'id="main_search" novalidate="novalidate" name="main_search" class="" role="form"'); ?>
-                                    <?php echo form_hidden('main_search','1');?>
+                <?php echo form_hidden('main_search','1');?>
                                     
 
 

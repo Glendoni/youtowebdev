@@ -131,8 +131,7 @@
                 
                 
                 <div class="col-md-12">
-                <hr style="margin-top:10px;">
-					<label for="url" class="control-label">Sectors</label>
+					<label for="sectors" class="control-label">Sectors</label>
 					<div class="tag-holder">
 					<?php 	
 					foreach ($sectors_list as $key => $value): ?>

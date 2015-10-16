@@ -248,7 +248,7 @@ endif; ?>
 		<div class="col-md-12">
 		<div class="panel panel-default">
 		<div class="panel-heading" id="addresses">
-		Addresses
+		Locations
 		<div class="pull-right">
 		<div class="btn-group">
 		<button  class="btn btn-success edit-btn btn-xs" data-toggle="modal" id="create_address_<?php echo $company['id']; ?>"  data-target="#create_address_<?php echo $company['id']; ?>" >
@@ -265,10 +265,10 @@ endif; ?>
 		<table class="table table-hover">
 	      <thead>
 	        <tr>
-	          <th class="col-md-6">Address</th>
+	          <th class="col-md-7">Address</th>
 	          <th class="col-md-2">Type</th>
 	          <th class="col-md-2">Phone</th>
-				<th class="col-md-2"></th>
+				<th class="col-md-1"></th>
 
 	        </tr>
 	      </thead>
