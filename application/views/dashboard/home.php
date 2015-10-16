@@ -705,11 +705,11 @@
           <div class="panel-body">
             <form class="form-inline" role="form">
             <div class="form-group col-md-4">
-            <label for="start-date">Start Date:</label>
+            <label for="start-date">Start</label>
             <input type="text" class="form-control" id="start_date" data-date-format="DD-MM-YYYY" name="start_date" placeholder="" value="<?php echo  date('d-m-Y',strtotime($dates['start_date']));?>">
             </div>
             <div class="form-group col-md-4">
-            <label for="end-date">End Date:</label>
+            <label for="end-date">End</label>
             <input type="text" class="form-control" id="end_date" data-date-format="DD-MM-YYYY" name="end_date" placeholder="" value="<?php echo  date('d-m-Y',strtotime($dates['end_date']));?>">
             </div>
             <div class="form-group col-md-4">
@@ -717,7 +717,7 @@
             <?php if (isset($_GET['user'])) { ?>
              <input type="hidden" name="user" value="<?php echo $_GET['user'];?>"> <?php
              };?>
-            <button type="submit" class="btn btn-success btn-block">Search</button>
+            <button type="submit" class="btn btn-primary btn-block">Search</button>
             </div>
             </form>
           </div>

@@ -23,7 +23,7 @@ class Mortgages_model extends MY_Model {
 
 	function get_by_company_id_with_provider($company_id,$order_by = 'asc')
 	{
-		$this->db->select('providers.name, mortgages.stage , mortgages.eff_from, providers.url');
+		$this->db->select('providers.name, mortgages.stage , mortgages.eff_from');
 		$this->db->from('mortgages');
 		$this->db->where('mortgages',"mortgages.company_id = $company_id ");
 		$this->db->join('providers','providers.id = mortgages.provider_id','left');

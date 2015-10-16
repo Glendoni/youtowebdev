@@ -985,6 +985,18 @@ font-size: 14px;
 	border-color: #fff;
 	background-color:#348aa7;
 }
+
+/*CONTACTS*/
+.row.record-holder {
+    margin: 0;
+    border-top: 1px solid #ddd;
+    padding: 10px 0;
+}
+.row.record-holder-header {
+    margin: 0;
+    border-bottom: 2px solid #ddd;
+    padding: 10px 0;
+}
 /*TILES*/
 .tiles {
 	    background-color: #bcbcbc;
@@ -1047,6 +1059,21 @@ font-size: 10px;
 }
 .nav>li>a {
 	font-size: 10px;
+}
+.mobile-left {
+	float: left !important;
+}
+.contact-options{
+	padding-top: 5px;
+}
+.contact-role {
+	font-size: 75%;
+}
+.contact-email {
+	font-size: 75%;
+}
+.contact-phone {
+	font-size: 75%;
 }
 }
 

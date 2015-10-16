@@ -341,7 +341,6 @@ endif; ?>
 
 
 		<!--CONTACTS-->
-
 		<div class="col-md-12">
 		<div class="panel panel-default">
 		<div class="panel-heading" id="contacts">
@@ -358,42 +357,44 @@ endif; ?>
 		<div class="panel-body">
 		<?php if(isset($contacts) and !empty($contacts)) : ?>
 
+<div class="row record-holder-header mobile-hide">
+<div class="col-xs-12 col-md-2"><strong>Name</strong></div>
+<div class="col-xs-12 col-md-2"><strong>Role</strong></div>
+<div class="col-xs-12 col-md-3"><strong>Email</strong></div>
+<div class="col-xs-12 col-md-2"><strong>Phone</strong></div>
+<div class="col-md-3">
+	<div class=" pull-right ">
+		<strong>Actions</strong>
+	</div>
+</div>
+</div>
 
-		<table class="table table-hover">
-	      <thead>
-	        <tr>
-	          <th class="col-md-3">Name</th>
-	          <th class="col-md-2 mobile-hide">Role</th>
-	          <th class="col-md-2">Email</th>
-	          <th class="col-md-2">Phone</th>
-	          <th class="col-md-3"></th>
-	        </tr>
-	      </thead>
-	      <tbody>
-	      	<?php foreach ($contacts as $contact): ?>
-	      	<tr>
-				<td class="col-md-2"><?php echo ucfirst($contact->first_name).' '.ucfirst($contact->last_name); ?></td>
-				<td class="col-md-2 mobile-hide"><?php echo ucfirst($contact->role); ?></td>
-				<td class="col-md-2">
-				<?php echo $contact->email; ?>
-				<?php if (!empty($contact->email_opt_out_date)): ?>
-				<span class="label label-warning">Email Marketing Opt-Out</span>
-				<?php else: ?>
-				<?php endif;?>
-				</td>
-				<td class="col-md-2"><?php echo $contact->phone; ?></td>
-				<td  class="col-md-4">
-		      	<div class=" pull-right ">
+
+
+<?php foreach ($contacts as $contact): ?>
+<div class="row record-holder">
+<div class="col-xs-12 col-md-2 contact-name"><?php echo ucfirst($contact->first_name).' '.ucfirst($contact->last_name); ?></div>
+<div class="col-xs-12 col-md-2 contact-role"><?php echo ucfirst($contact->role); ?></div>
+<div class="col-xs-12 col-md-3 contact-email"><?php echo $contact->email; ?>
+	<?php if (!empty($contact->email_opt_out_date)): ?>
+		<span class="label label-danger contact-opt-out">Email Marketing Opt-Out</span>
+	<?php endif;?>
+</div>
+<div class="col-xs-12 col-md-2 contact-phone">
+	<?php echo $contact->phone; ?>
+</div>
+				<div class="col-md-3">
+		      	<div class="pull-right mobile-left actionsactionscontact-options">
 				<?php if ($company['pipeline']=='Blacklisted'): ?>
 				<?php else: ?>
 	            <?php $this->load->view('companies/action_box_contacts.php',array('contact'=>$contact)); ?>
 	        	<?php endif; ?>
 	            </div>
-	            </td>
-        	</tr>
+	            </div>
+	            </div>
+
+
 			<?php endforeach; ?>
-			</tbody>
-	    </table>
 	    <?php else: ?>
 			<div class="alert alert-info" style="margin-top:10px;">
                 No contacts registered.
@@ -525,20 +526,19 @@ endif; ?>
 								?>
 						<li class="list-group-item">
 							<div class="row" style="padding: 15px 0">
-								<div class="col-md-12 ">
-									<div class="col-xs-2 col-md-1 profile-heading">
-									<span>
-										<?php $user_icon = explode(",", ($action_outstanding->image)); echo "<div class='circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
-										</span>
+									
 
+									<div class="col-xs-2 col-md-1 profile-heading">
+										<?php $user_icon = explode(",", ($action_outstanding->image)); echo "<div class='circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
 									</div>
-							<div class="col-xs-6 col-md-5">
+							<div class="col-xs-10 col-md-5">
 								<h4 style="margin:0;">
 									<a data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $action_outstanding->action_id ?>" aria-expanded="false" aria-controls="collapse<?php echo $action_outstanding->action_id ?>">
 									<?php echo $action_types_array[$action_outstanding->action_type_id]; ?><?php if(strtotime($action_outstanding->planned_at) < $now and !isset($action_outstanding->actioned_at)):?>
-								<span class="label label-danger" style="font-size:11px; margin-left:10px;"><b>Overdue</b></span>
 								<?php endif ?>
                                     </a>
+                                    </h4><span class="label label-danger">Overdue</span>
+
 								<div class="mic-info">
 								Created By: <?php echo $system_users[$action_outstanding->user_id]?> on <?php echo $created_date_formatted?>
 								</div>
@@ -546,25 +546,32 @@ endif; ?>
                               <?php endif ?>
 
 								<div style="clear:both;"><small><a class="btn btn-default btn-xs add-to-calendar" href="http://www.google.com/calendar/event?action=TEMPLATE&text=<?php echo urlencode($action_types_array[$action_outstanding->action_type_id].' | '.$action_outstanding->company_name); ?>&dates=<?php echo date("Ymd\\THi00",strtotime($action_outstanding->planned_at));?>/<?php echo date("Ymd\\THi00\\Z",strtotime($action_outstanding->planned_at));?>&details=<?php echo $contact_details_for_calendar;?>%0D%0D<?php echo urlencode('http://baselist.herokuapp.com/companies/company?id='.$action_outstanding->company_id);?>%0D%0DAny changes made to this event are not updated in Baselist."target="_blank" rel="nofollow">Add to Calendar</a></small></div>
-       							</h4>
+       							
 							</div><!--END COL-MD-5-->
-							<div class="col-xs-4 col-md-6">
+
+
+							<div class="col-xs-12 col-md-6">
 							<!--SHOW CONTACT NAME-->
                             <?php if($action_outstanding->contact_id):?><span class="label label-primary" style="font-size:11px; margin:0 10px;  "><?php echo $action_outstanding->first_name.' '.$action_outstanding->last_name; ?></span>
                             <?php endif; ?>
-					
 								<?php if(strtotime($action_outstanding->planned_at) > $now and !isset($action_outstanding->actioned_at)) : ?>
-								<span class="label label-warning" style="font-size:11px; margin-left:10px;"><?php echo $planned_date_formatted ?> </span>
+								<span class="label label-warning"><?php echo $planned_date_formatted ?> </span>
 								<?php $hidden = array('action_id' => $action_outstanding->action_id , 'user_id' => $current_user['id'] , 'action_do' => 'cancelled','outcome' => '' ,'company_id' => $company['id'],'campaign_id' => $campaign_id,); echo form_open(site_url().'actions/edit', 'name="cancel_action"  class="cancel_action pull-right" style="margin-left:5px;" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action_outstanding->action_id.'" role="form"',$hidden); ?>
 <button class="btn btn-danger btn-sm" ><i class="fa fa-trash-o fa-sm"></i> </button>
 <?php echo form_close(); ?>
+
 <?php $hidden = array('action_id' => $action_outstanding->action_id , 'user_id' => $current_user['id'], 'action_do' => 'completed', 'outcome' => '' ,'action_type_id_outcome' =>'','company_id' => $company['id'],'campaign_id' => $campaign_id,);
-echo form_open(site_url().'actions/edit', 'name="completed_action"  class="completed_action pull-right" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action_outstanding->action_id.'" style="display:inline-block;" role="form"',$hidden); ?><button class="btn btn-success btn-sm"><i class="fa fa-check fa-sm"></i> </button> <?php echo form_close(); ?>
-								<?php elseif(strtotime($action_outstanding->planned_at) < $now and !isset($action_outstanding->actioned_at)):?>
-								<span class="label label-danger" style="font-size:11px; margin-left:10px;"><b>Overdue</b> <?php echo $planned_date_formatted ?> </span>
-<!--CANCELLED BUTTON-->
-								<?php $hidden = array('action_id' => $action_outstanding->action_id , 'user_id' => $current_user['id'] , 'action_do' => 'cancelled','outcome' => '' ,'company_id' => $company['id'],'campaign_id' => $campaign_id, ); echo form_open(site_url().'actions/edit', 'name="cancel_action"  class="cancel_action pull-right" style="margin-left:5px;" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action_outstanding->action_id.'" role="form"',$hidden); ?><button class="btn btn-danger btn-sm"><i class="fa fa-trash-o fa-sm"></i> </button>
+echo form_open(site_url().'actions/edit', 'name="completed_action"  class="completed_action pull-right" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action_outstanding->action_id.'" style="display:inline-block;" role="form"',$hidden); ?><button class="btn btn-success btn-sm"><i class="fa fa-check fa-sm"></i> </button>
 <?php echo form_close(); ?>
+
+
+								<?php elseif(strtotime($action_outstanding->planned_at) < $now and !isset($action_outstanding->actioned_at)):?>
+								<span class="label label-danger" style="margin-left:10px;"><?php echo $planned_date_formatted ?> </span>
+<!--CANCELLED BUTTON-->
+<?php $hidden = array('action_id' => $action_outstanding->action_id , 'user_id' => $current_user['id'] , 'action_do' => 'cancelled','outcome' => '' ,'company_id' => $company['id'],'campaign_id' => $campaign_id, ); echo form_open(site_url().'actions/edit', 'name="cancel_action"  class="cancel_action pull-right" style="margin-left:5px;" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action_outstanding->action_id.'" role="form"',$hidden); ?><button class="btn btn-danger btn-sm"><i class="fa fa-trash-o fa-sm"></i> </button>
+<?php echo form_close(); ?>
+
+
 <!--COMPLETED BUTTON-->
 <?php $hidden = array('action_id' => $action_outstanding->action_id , 'user_id' => $current_user['id'], 'action_do' => 'completed', 'outcome' => '' ,'company_id' => $company['id'],'campaign_id' => $campaign_id,); echo form_open(site_url().'actions/edit', 'name="completed_action"  class="completed_action pull-right" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action_outstanding->action_id.'" style="display:inline-block;" role="form"',$hidden); ?>
 <button class="btn btn-success btn-sm"><i class="fa fa-check fa-sm"></i> </button><?php echo form_close(); ?>
@@ -576,7 +583,7 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 									  			
 				                              
 				                           
-				                            <div class="col-md-12">
+							<div class="col-xs-12 col-md-6">
 											<div id="collapse<?php echo $action_outstanding->action_id ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<?php echo $action_outstanding->action_id ?>">
 											<?php if (!empty($action_outstanding->comments)):?>
 											<div class="comment-text speech" >
@@ -606,7 +613,6 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 
 											</div>
 											</div><!--END ACTIONS-->   
-				                        </div>
 				                        </div>
 				                </li>
 				                <?php endforeach ?>

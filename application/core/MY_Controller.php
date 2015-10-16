@@ -222,14 +222,14 @@ class MY_Controller extends CI_Controller {
 		$this->data['sectors_list'] = $sectors_list;
 		// Add options 
 		$system_users = array(0=>'All') + $system_users;
-		$this->data['system_users'] = array(-1=>'Not Assigned') + $system_users;
+		$this->data['system_users'] = array(-1=>'No Watchers') + $system_users;
 		$this->data['assigned_default'] = '0';
 		if($sectors_search){
 			$sectors_search = array(-1=>'All Target Sectors',0=>'Any') +  $sectors_search;
 		}
 
 		$sales_users = array(0=>'All') + $sales_users;
-		$this->data['sales_users'] = array(-1=>'Not Assigned') + $sales_users;
+		$this->data['sales_users'] = array(-1=>'No Watchers') + $sales_users;
 		$this->data['assigned_default'] = '0';
 		if($sectors_search){
 			$sectors_search = array(-1=>'All Target Sectors',0=>'Any') +  $sectors_search;
