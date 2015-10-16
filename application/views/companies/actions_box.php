@@ -18,7 +18,7 @@
 	<?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'], 'page_number' => (isset($current_page_number))? $current_page_number:'');
 	echo form_open(site_url().'companies/assignto',array('name' => 'assignto', 'class'=>'assign-to-form'),$hidden); ?>
 	<button type="submit" assignto="<?php echo $current_user['name']; ?>" class="btn  btn-success btn-block btn-sm ladda-button" data-style="expand-right" data-size="1">
-        <span class="ladda-label"> Watch Company </span>
+        <span class="ladda-label"> Watch </span>
     </button>
 	<?php echo form_close(); ?>
 	</div>

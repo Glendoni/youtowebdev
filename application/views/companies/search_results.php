@@ -29,18 +29,16 @@
 		<div style="text-align:center;">
 	      	<?php if(($companies_count > 0)): ?>
 				<?php if($current_campaign_name && $current_campaign_owner_id && $current_campaign_id ): ?>
-					<?php foreach($current_campaign_stats as $current_campaign_stats)
-        {?>
-						<div style="font-weight:300; font-size:22px; margin-bottom: 20px; margin-top: -20px;">
-						<strong>
-						<?php if($current_campaign_is_shared == False): ?>
+					<?php foreach($current_campaign_stats as $current_campaign_stats){?>
+						<div style="font-weight:300; font-size:32px; margin-bottom: 20px; margin-top: -20px;">
+						<?php echo $current_campaign_name; ?> <?php if($current_campaign_is_shared == False): ?>
 						<?php else: ?>
 						 <?php foreach($current_campaign_owners as $current_campaign_owner):
-						$user_icon = explode(",", ($current_campaign_owner->image)); echo "<div style='margin-bottom:5px;'><div class='label' style='text-align: center;font-weight: 300; font-size:12px;background-color:".$user_icon[1]."; color:".$user_icon[2].";'>Owned by ".$current_campaign_owner->username."</div></div>"
+						echo "<span style='text-align: center;font-weight: 300; font-size:12px;'>Owned by <b>".$current_campaign_owner->username."</b></span>"
 						; endforeach ?>		
 						<?php endif;?>
-						</strong>
-						<?php echo $current_campaign_name; ?>
+
+
 					<?php if(!empty($current_campaign_stats->description)): ?>
 
 						<p style="font-size:14px"><?php echo $current_campaign_stats->description; ?></p>

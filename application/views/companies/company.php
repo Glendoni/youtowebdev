@@ -119,7 +119,7 @@ endif; ?>
 		<?php $this->load->view('companies/actions_box.php',array('company'=>$company)); ?>
 		<?php if (isset($company['url'])): ?>
 		<a class="btn btn-default btn-sm btn-block btn-url" href="<?php $parsed = parse_url($company['url']); if (empty($parsed['scheme'])) { echo 'http://' . ltrim($company['url'], '/'); }else{ echo $company['url']; } ?>" target="_blank">
-		<label style="margin-bottom:0;">Web:</label> <?php echo str_replace("http://"," ",str_replace("www.", "", $company['url']))?>
+		<label style="margin-bottom:0;"></label> <?php echo str_replace("http://"," ",str_replace("www.", "", $company['url']))?>
 		</a>
 			<?php endif; ?>
 		<!-- LINKS AND BTN -->
@@ -473,7 +473,7 @@ endif; ?>
 					<label>Outcome</label>
 <textarea class="form-control completed-details" name="comment" rows="3" required="required"></textarea>
 				</div>
-				<button type="submit" name="save" class="btn btn-success form-control disable_no_source">Save</button>
+				<button type="submit" name="save" class="btn btn-primary form-control disable_no_source">Add Action</button>
 			</div>
 			<?php echo form_close(); ?>
 			</div>

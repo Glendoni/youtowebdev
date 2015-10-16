@@ -369,8 +369,6 @@ $(document).ready(function () {
     });
 });
 </script>
-
-
   <hr>
   <?php if (isset($current_user)): ?>
 

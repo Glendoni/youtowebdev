@@ -75,7 +75,7 @@
                     <?php if (isset($current_user)): ?>
                         <div style="font-size:10px; font-weight:300; text-align:right;">Version 2.11</div>
                     <?php endif; ?>
-                </a>
+        </a>
             </div>
 <?php if (isset($current_user)): ?>
     <!--TOP SEARCH BAR-->
