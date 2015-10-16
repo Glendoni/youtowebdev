@@ -162,7 +162,7 @@
                                             <div class="col-xs-6 col-md-6 no-padding"> 
 
                                         <?php
-                                        echo form_label('Mortgage Provider', 'providers');
+                                        echo form_label('Provider', 'providers');
                                         echo form_dropdown('providers', $providers_options, ($this->input->post('providers')?$this->input->post('providers'):$providers_default) ,'class="form-control"');
                                     
                                         ?>
