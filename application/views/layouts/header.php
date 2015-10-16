@@ -133,8 +133,9 @@
                                             </a>
                                         </div> -->
                                     <?php endif; ?>
-            <div id="credits" class="well hidden advanced-search">
-<div class="form-row" style="margin-bottom:50px;"> 
+                    <div id="credits" class="well hidden advanced-search">
+                            <div class="form-row" style="margin-bottom:50px;">
+                                    <div class="col-xs-6 col-md-6 no-padding">
                                          <?php  echo form_label('Age (Months) ', 'company_age_from', array('class'=>'control-label')); ?>
                                          <div class="form-group" >
                                             <div class="col-xs-6 col-md-6 no-padding"> 
@@ -144,10 +145,11 @@
                                             <?php echo form_input(array('name' => 'company_age_to', 'id' => 'company_age_to', 'maxlength' => '100','class'=>'form-control','placeholder'=>'To'), set_value('company_age_to',$this->input->post('company_age_to')));?>    
                                             </div>
                                         </div>
-                                    </div><!--END FORM ROW-->
-                                    <div class='form-row' style="margin-bottom:50px;"> 
-                                    <?php  echo form_label('Turnover (£)', 'turnover_from', array('class'=>'control-label')); ?>
-                                     <div class="form-group"> 
+                                    </div>
+                           
+                                    <div class="col-xs-6 col-md-6 no-padding">
+                                <?php  echo form_label('Turnover (£)', 'turnover_from', array('class'=>'control-label')); ?>
+                                         <div class="form-group"> 
                                         <div class="col-xs-6 col-md-6 no-padding"> 
                                         <?php echo form_input(array('name' => 'turnover_from', 'id' => 'turnover_from', 'maxlength' => '100','class'=>'form-control number','placeholder'=>'From'), set_value('turnover_from',$this->input->post('turnover_from')));?>
                                         </div>
@@ -155,7 +157,10 @@
                                          <?php echo form_input(array('name' => 'turnover_to', 'id' => 'turnover_to', 'maxlength' => '100','class'=>'form-control number','placeholder'=>'To'), set_value('turnover_to',$this->input->post('turnover_to')));?>   
                                         </div>
                                     </div>
-                                    </div><!--END FORM ROW-->
+                                    </div>
+                            </div><!--END FORM ROW-->
+
+
 
                                     <div class='form-row'>
                                         <div class="form-group">
