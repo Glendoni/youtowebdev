@@ -181,15 +181,6 @@ class MY_Controller extends CI_Controller {
 			$this->session->set_userdata('address_types',$address_types);
 		}
 
-		if($this->session->userdata('company_sources'))
-		{
-			$company_sources = $this->session->userdata('company_sources');
-		}else
-		{
-			$company_sources = $this->Companies_model->get_companies_source();
-			$this->session->set_userdata('company_sources',$company_sources);
-		}
-
 		if($this->session->userdata('get_pipeline_show_source'))
 		{
 			$show_sources = $this->session->userdata('get_pipeline_show_source');
