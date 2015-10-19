@@ -410,7 +410,7 @@ class Companies_model extends CI_Model {
 		       )) "company"
 		from 
 		(-- T1
-		select distinct C.id,
+		select C.id,
 			   C.name,
 			   C.pipeline,
 			   U.id "owner_id",
@@ -493,7 +493,7 @@ class Companies_model extends CI_Model {
 		       T.method "turnover_method"       
 		from 
 		(-- T1
-		select id "id",
+		select distinct id "id",
 		       company_id,
 		       max(eff_from) OVER (PARTITION BY company_id) "max eff date"
 		from TURNOVERS
