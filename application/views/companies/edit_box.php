@@ -5,12 +5,11 @@
 				 echo form_open(site_url().'companies/edit', 'name="edit_company" class="edit_company" role="form"',$hidden); ?>
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title" id="myModalLabel">Edit <?php echo isset($company['name'])?$company['name']:'';; ?></h4>
+                <h4 class="modal-title" id="myModalLabel">Edit</h4>
             </div>
             <div class="modal-body">
             <div class="row">
-                        <div class="col-sm-12">
-
+            <div class="col-sm-12">
             <div id="action-error" class="no-source-pipeline alert alert-warning" role="alert" style="display:none">
             <strong>Source & Class Required.</strong><br> To complete this action please add a Source & Class to this company.
             </div>
@@ -21,28 +20,26 @@
                         <input type="text" name="trading_name" value="<?php echo isset($company['trading_name'])?$company['trading_name']:''; ?>" id="trading_name" maxlength="50" class="form-control">
             </div>
             </div>
-
             <div class="col-sm-6 col-md-4">
-                    <div class=" form-group ">
-                    <?php  
-                            if (($company['pipeline']=="Customer") || ($company['pipeline']=="Proposal")){ 
-                                echo form_label('Pipeline', 'company_pipeline');
-                                ?>
-                                <span class="label pipeline-label label-<?php echo str_replace(' ', '', $company['pipeline']); ?>" style="display: block;clear: left;padding: 11px; margin:0;"><?php echo $company['pipeline'] ?></span>
-                                <input type="hidden" name="company_pipeline" value="<?php echo $company['pipeline'];?>" />
+                                  <div class=" form-group ">
 
-                                <?php
-                                } else {
-                                    echo form_label('Pipeline', 'company_pipeline');
-                                    echo form_dropdown('company_pipeline', $companies_pipeline, (isset($company['pipeline'])?$company['pipeline']:'') ,'class="form-control pipeline-validation-check"' );
-                                };
-                                
-                                ?>
+                    <label for="url" class="control-label">Recruitment Type</label>
+                    <div class="tag-holder">  
+                    <div></div>
+                        <span class="button-checkbox" id="contract">
+                            <button type="button" class="btn btn-default" data-color="primary" id="contract"><i class="state-icon glyphicon glyphicon-unchecked"></i>&nbsp;Contract</button>
+                            <input type="checkbox" name="contract" value="1" id="contract" class="hidden" <?php echo isset($company['contract'])? 'checked': '' ; ?> >                          
+                        </span>
+                        <span class="button-checkbox" id="contract">
+                            <button type="button" class="btn btn-default" data-color="primary" id="permanent"><i class="state-icon glyphicon glyphicon-unchecked"></i>&nbsp;Permanent</button>
+                            <input type="checkbox" name="perm" value="1" id="permanent" class="hidden" <?php echo isset($company['perm'])? 'checked': '' ; ?> >
+                        </span>
+                    </div>
                     </div>
                 </div>
+            
                 </div>
-                            <div class="row">
-
+                <div class="row">
               <div class="col-sm-6 col-md-4">
                     <div class=" form-group ">
                     <?php
@@ -64,24 +61,26 @@
 
                     </div>
                 </div>
-                
-              <div class="col-sm-6 col-md-4">
-                                  <div class=" form-group ">
+                <div class="col-sm-6 col-md-4">
+                    <div class=" form-group ">
+                    <?php  
+                            if (($company['pipeline']=="Customer") || ($company['pipeline']=="Proposal")){ 
+                                echo form_label('Pipeline', 'company_pipeline');
+                                ?>
+                                <span class="label pipeline-label label-<?php echo str_replace(' ', '', $company['pipeline']); ?>" style="display: block;clear: left;padding: 11px; margin:0;"><?php echo $company['pipeline'] ?></span>
+                                <input type="hidden" name="company_pipeline" value="<?php echo $company['pipeline'];?>" />
 
-                    <label for="url" class="control-label">Recruitment Type</label>
-                    <div class="tag-holder">  
-                    <div></div>
-                        <span class="button-checkbox" id="contract">
-                            <button type="button" class="btn btn-default" data-color="primary" id="contract"><i class="state-icon glyphicon glyphicon-unchecked"></i>&nbsp;Contract</button>
-                            <input type="checkbox" name="contract" value="1" id="contract" class="hidden" <?php echo isset($company['contract'])? 'checked': '' ; ?> >                          
-                        </span>
-                        <span class="button-checkbox" id="contract">
-                            <button type="button" class="btn btn-default" data-color="primary" id="permanent"><i class="state-icon glyphicon glyphicon-unchecked"></i>&nbsp;Permanent</button>
-                            <input type="checkbox" name="perm" value="1" id="permanent" class="hidden" <?php echo isset($company['perm'])? 'checked': '' ; ?> >
-                        </span>
-                    </div>
+                                <?php
+                                } else {
+                                    echo form_label('Pipeline', 'company_pipeline');
+                                    echo form_dropdown('company_pipeline', $companies_pipeline, (isset($company['pipeline'])?$company['pipeline']:'') ,'class="form-control pipeline-validation-check"' );
+                                };
+                                ?>
                     </div>
                 </div>
+
+                
+              
                 
                 <div class="col-sm-6 col-md-4">
                     <div class=" form-group ">

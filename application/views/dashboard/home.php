@@ -738,8 +738,8 @@
 </div>
 <?php foreach ($marketing_actions as $marketing): ?>
 <div class="row record-holder">
-<div class="col-xs-12 col-md-3 contact-role"><?php echo ucfirst($marketing->company); ?></div>
-<div class="col-xs-12 col-md-3 contact-name"><?php echo ucfirst($marketing->first_name).' '.ucfirst($marketing->last_name); ?></div>
+<div class="col-xs-12 col-md-3 contact-role"><a href="<?php echo site_url();?>companies/company?id=<?php echo $marketing->company_id;?>"><?php echo ucfirst($marketing->company); ?></a></div>
+<div class="col-xs-12 col-md-3 contact-name"><a href="<?php echo site_url();?>companies/company?id=<?php echo $marketing->company_id;?>#contacts"><?php echo ucfirst($marketing->first_name).' '.ucfirst($marketing->last_name); ?></a></div>
 <div class="col-xs-12 col-md-4 contact-email">
   <?php if (($marketing->email_action_type)=='2'): ?>
     <span class="label label-primary">Opened</span>
