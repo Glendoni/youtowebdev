@@ -337,7 +337,7 @@ class Companies_model extends CI_Model {
 			}
 			elseif ($post['sectors'] = -1)
 			{
-				$sectors_sql = 'select operates.company_id from operates where operates.active = True and operates.sector_id in (select id from sectors where target = \'t\')';
+				$sectors_sql = 'select distinct o.company_id from operates o where o.active = True and o.sector_id in (select id from sectors where target = \'t\')';
 			}
 			else
 			{	$sectors = $post['sectors'];
@@ -670,6 +670,7 @@ LEFT JOIN
 		end, name asc
 		 
 		) results';
+		//nl2br($sql);
 		//print_r($sql);
 		$query = $this->db->query($sql);
 
