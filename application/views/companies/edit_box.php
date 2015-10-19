@@ -81,10 +81,12 @@
 
 <!--HIDDEN UNLESS SPECIAL INSIGHT-->
             <div class="col-sm-12">
-                <div id="show_si_box" class="show_si_box" role="alert" style="display:none">
+                <div id="show_si_box" class="show_si_box" style="display:none">
+                            <div class="alert alert-info" role="alert">
                     <div class=" form-group ">
                         <label for="source_explanation" class="control-label">Special Insight (Required)</label>
                         <input type="text" name="source_explanation" value="<?php echo isset($company['source_explanation'])?$company['source_explanation']:NULL; ?>" id="url" maxlength="50" class="form-control source_explanation">
+                    </div>
                     </div>
                 </div>
             </div>
