@@ -3,7 +3,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title" id="myModalLabel">Add Contact</h4>
+                <h4 class="modal-title" id="myModalLabel"><?php echo isset($company['name'])?$company['name']:''; ?></h4>
             </div>
             <?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'],'create_contact'=>'1', 'page_number' => (isset($current_page_number))? $current_page_number:'');
 				echo form_open(site_url().'contacts/create_contact',array('onSubmit'=>'return validateContactForm();','name' => 'create_contact', 'class'=>'create_contact','role'=>"form" ),$hidden); ?>

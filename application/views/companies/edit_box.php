@@ -5,7 +5,7 @@
 				 echo form_open(site_url().'companies/edit', 'name="edit_company" class="edit_company" role="form"',$hidden); ?>
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title" id="myModalLabel">Edit</h4>
+                <h4 class="modal-title" id="myModalLabel"><?php echo $company['name']; ?></h4>
             </div>
             <div class="modal-body">
             <div class="row">

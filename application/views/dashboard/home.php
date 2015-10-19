@@ -725,22 +725,25 @@
         <!--START MARKETING STATS-->
             <div class="panel panel-default">
     <div class="panel-heading" id="contacts">
-    <h3 class="panel-title">My Marketing Campaign Activity</h3>
+    <h3 class="panel-title">My Email Campaign Activity</h3>
     </div>
     <!-- /.panel-heading -->
     <div class="panel-body" style="font-size:12px;">
 <?php if(!empty($marketing_actions)) : ?>
 <div class="row record-holder-header mobile-hide">
 <div class="col-xs-12 col-md-3"><strong>Company</strong></div>
-<div class="col-xs-12 col-md-3"><strong>Contact</strong></div>
-<div class="col-xs-12 col-md-4"><strong>Action</strong></div>
+<div class="col-xs-12 col-md-2"><strong>Pipeline</strong></div>
+<div class="col-xs-12 col-md-2"><strong>Contact</strong></div>
+<div class="col-xs-12 col-md-3"><strong>Action</strong></div>
 <div class="col-xs-12 col-md-2"><strong>Date</strong></div>
 </div>
 <?php foreach ($marketing_actions as $marketing): ?>
 <div class="row record-holder">
 <div class="col-xs-12 col-md-3 contact-role"><a href="<?php echo site_url();?>companies/company?id=<?php echo $marketing->company_id;?>"><?php echo ucfirst($marketing->company); ?></a></div>
-<div class="col-xs-12 col-md-3 contact-name"><a href="<?php echo site_url();?>companies/company?id=<?php echo $marketing->company_id;?>#contacts"><?php echo ucfirst($marketing->first_name).' '.ucfirst($marketing->last_name); ?></a></div>
-<div class="col-xs-12 col-md-4 contact-email">
+<div class="col-xs-12 col-md-2 contact-name"><?php echo $marketing->pipeline;?></div>
+
+<div class="col-xs-12 col-md-2 contact-name"><a href="<?php echo site_url();?>companies/company?id=<?php echo $marketing->company_id;?>#contacts"><?php echo ucfirst($marketing->first_name).' '.ucfirst($marketing->last_name); ?></a></div>
+<div class="col-xs-12 col-md-3 contact-email">
   <?php if (($marketing->email_action_type)=='2'): ?>
     <span class="label label-primary">Opened</span>
     <?php elseif (!empty($marketing->url)):?>
@@ -756,7 +759,7 @@
     <?php endif;?>
 </div>
 <div class="col-xs-12 col-md-2 contact-phone">
-<?php echo date("d/m/y",strtotime($marketing->created_at));?>
+<?php echo date("d/m/Y",strtotime($marketing->created_at));?>
 </div>
 </div>
 
