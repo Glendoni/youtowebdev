@@ -65,8 +65,22 @@ ORDER BY 10 desc";
 return $query->result_object();
 	}
 
+function get_marketing_actions($user_id)
+	{
+$sql = "select ec.name as campaign, c.id as company_id, c.name as company, con.first_name, con.last_name, ea.created_at, ea.email_action_type, ea.link as url from companies c
+left join contacts con on
+c.id = con.company_id
+left join email_actions ea on 
+ea.contact_id = con.id
+left join email_campaigns ec on 
+ec.id = ea.email_campaign_id
+where (ea.email_action_type = '2' or ea.email_action_type = '3') and c.pipeline not in ('proposal','customer') and ec.created_by = $user_id 
+order by created_at desc limit 20 ";
+$query = $this->db->query($sql);
+return $query->result_object();
+	}
 
-	function get_actions_outstanding($company_id)
+function get_actions_outstanding($company_id)
 	{
 		$category_exclude = array('7', '20');
 		$data = array(

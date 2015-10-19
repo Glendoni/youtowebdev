@@ -46,6 +46,7 @@ class Dashboard extends MY_Controller {
 		$this->data['campaignsummary'] = $this->Campaigns_model->get_user_campaigns($this->get_current_user_id());
 		$this->data['teamcampaignsummary'] = $this->Campaigns_model->get_team_campaigns();
 		$this->data['userimage'] = $this->Users_model->get_user_image();
+		$this->data['marketing_actions'] = $this->Actions_model->get_marketing_actions($this->get_current_user_id());
 
 		$this->data['main_content'] = 'dashboard/home';
 		$this->load->view('layouts/default_layout', $this->data);	
