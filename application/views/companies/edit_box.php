@@ -9,11 +9,7 @@
             </div>
             <div class="modal-body">
             <div class="row">
-            <div class="col-sm-12">
-            <div id="action-error" class="no-source-pipeline alert alert-warning" role="alert" style="display:none">
-            <strong>Source & Class Required.</strong><br> To complete this action please add a Source & Class to this company.
-            </div>
-            </div>
+            
             <div class="col-sm-6 col-md-8">
             <div class=" form-group ">
                         <label for="trading_name" class="control-label">Trading Name</label>                            
@@ -78,6 +74,16 @@
                                 ?>
                     </div>
                 </div>
+
+<!--HIDDEN UNLESS SPECIAL INSIGHT-->
+            <div class="col-sm-12">
+                <div id="show_si_box" class="show_si_box" role="alert" style="display:none">
+                    <div class=" form-group ">
+                        <label for="source_explanation" class="control-label">Special Insight Details</label>
+                        <input type="text" name="source_explanation" value="<?php echo isset($company['source_explanation'])?$company['source_explanation']:NULL; ?>" id="url" maxlength="50" class="form-control">
+                    </div>
+                </div>
+            </div>
 
                 
               

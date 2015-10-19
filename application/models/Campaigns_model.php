@@ -162,8 +162,8 @@ class Campaigns_model extends MY_Model {
 			   C.trading_name, --f38
 			   C.lead_source_id, --f39
 			   C.source_date, --f40
-			   pr.name, --f41
-			   pr.id --f42
+			   pr.name, --f42
+			   C.source_explanation--f43
 
 			   )) "JSON output" 
 			  
@@ -313,7 +313,8 @@ class Campaigns_model extends MY_Model {
 			   	 C.lead_source_id,
 				 C.source_date,
 			     pr.name,
-			     pr.id
+			     pr.id,
+			     C.source_explanation
 
 		order by C.id 
 

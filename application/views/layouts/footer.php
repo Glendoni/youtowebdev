@@ -357,6 +357,24 @@ if ((this.value !== 'Prospect' && this.value !== 'Lost') && (!company_source || 
         $(".disable_no_source").removeAttr('disabled', 'disabled');
 }
 });
+
+$(".pipeline-validation-check").change(function() {
+var company_source = $("select[name=company_source]").val();
+if (company_source=='8') 
+      {
+        $(".show_si_box").slideDown(600);
+}
+      else
+      {
+        $(".show_si_box").slideUp(600);
+}
+});
+jQuery(window).on("load", function(){
+
+$(".pipeline-validation-check").change();
+
+});
+
 </script>
 <script type="text/javascript">
 $(document).ready(function () {

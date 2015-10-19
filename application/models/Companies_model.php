@@ -23,7 +23,6 @@ class Companies_model extends CI_Model {
     	$this->db->select('id,name');
     	$this->db->where('eff_to >', 'now()');
     	$this->db->or_where('eff_to', NULL); 
-
     	$this->db->order_by('display_seq','asc'); 
 
     	$query = $this->db->get('lead_sources');	
@@ -50,23 +49,6 @@ class Companies_model extends CI_Model {
 
 			);
 		return 	$arrayNames;
-	}
-
-		function get_companies_source()
-	{
-		$arrayNamesSources = array(
-			'0' => '--- Select a Source ---',
-			'Campaign' => 'Campaign',
-			'EmailCampaign' => 'Email Campaign',
-			'WebForm' => 'Web Form',
-			'LegacyCampaign' => 'Legacy Campaign',
-			'Referral' => 'Referral',
-			'SpecialInsight' => 'Special Insight',
-			'CalledIn' => 'Called In',
-			'StrategicPartnerships' => 'Strategic Partnerships',
-			'Events' => 'Events'
-			);
-		return 	$arrayNamesSources;
 	}
 
 	function get_pipeline_show_source()
@@ -480,7 +462,8 @@ class Companies_model extends CI_Model {
 			   C.lead_source_id, --f39
 			   C.source_date, --f40
 			   pr.name, --f41
-			   pr.id --f42
+			   pr.id, --f42
+			   C.source_explanation--f43
 
 			   )) "JSON output" 
 			   
@@ -635,7 +618,8 @@ LEFT JOIN
 				 C.lead_source_id,
 			     C.source_date,
 			     pr.name,
-			     pr.id
+			     pr.id,
+			     C.source_explanation
 
 		order by C.id 
 
@@ -1027,6 +1011,7 @@ LEFT JOIN
 				//'pipeline'=>!empty($post['company_pipeline'])?$post['company_pipeline']:NULL,
 				'updated_at' => date('Y-m-d H:i:s'),
 				'lead_source_id'=>$source,
+				'source_explanation'=>!empty($post['source_explanation'])?$post['source_explanation']:NULL,
 				'source_date'=>$source_date,
 				);
 
@@ -1101,7 +1086,7 @@ LEFT JOIN
 				'address' => $post['address'],
 				'lat' => !empty($post['lat'])?$post['lat']:NULL,
 				'lng' => !empty($post['lng'])?$post['lng']:NULL,
-				'type' => !empty($post['type'])?$post['type']:"Registered",
+				'type' => !empty($post['type'])?$post['type']:"Registered Address",
 				'created_by'=> $post['user_id'],
 
 				);

@@ -531,7 +531,7 @@ endif; ?>
 									<div class="col-xs-2 col-md-1 profile-heading">
 										<?php $user_icon = explode(",", ($action_outstanding->image)); echo "<div class='circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
 									</div>
-							<div class="col-xs-10 col-md-5">
+							<div class="col-xs-10 col-md-6">
 								<h4 style="margin:0;">
 									<a data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $action_outstanding->action_id ?>" aria-expanded="false" aria-controls="collapse<?php echo $action_outstanding->action_id ?>">
 									<?php echo $action_types_array[$action_outstanding->action_type_id]; ?><?php if(strtotime($action_outstanding->planned_at) < $now and !isset($action_outstanding->actioned_at)):?>
@@ -550,7 +550,7 @@ endif; ?>
 							</div><!--END COL-MD-5-->
 
 
-							<div class="col-xs-12 col-md-6">
+							<div class="col-xs-12 col-md-5">
 							<!--SHOW CONTACT NAME-->
                             <?php if($action_outstanding->contact_id):?><span class="label label-primary" style="font-size:11px; margin:0 10px;  "><?php echo $action_outstanding->first_name.' '.$action_outstanding->last_name; ?></span>
                             <?php endif; ?>
@@ -583,7 +583,7 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 									  			
 				                              
 				                           
-							<div class="col-xs-12 col-md-6">
+							<div class="col-xs-12">
 											<div id="collapse<?php echo $action_outstanding->action_id ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<?php echo $action_outstanding->action_id ?>">
 											<?php if (!empty($action_outstanding->comments)):?>
 											<div class="comment-text speech" >
@@ -606,10 +606,9 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 											
 											<div id="action_outcome_box_<?php echo $action_outstanding->action_id ?>" style="display:none;">
 											<hr>
-											
-
+										
 											<textarea class="form-control" name="outcome" placeholder="Add action outcome" rows="3" style="margin-bottom:5px;"></textarea>
-											<button class="btn btn-primary btn-block"><i class="fa fa-check fa-sm"></i> Send</button>
+											<button class="btn btn-primary btn-block">Add Outcome</button>
 
 											</div>
 											</div><!--END ACTIONS-->   

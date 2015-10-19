@@ -67,7 +67,7 @@ return $query->result_object();
 
 function get_marketing_actions($user_id)
 	{
-$sql = "select ec.name as campaign, c.id as company_id, c.name as company, c.pipeline, con.first_name, con.last_name, ea.created_at, ea.email_action_type, ea.link as url from companies c
+$sql = "select ec.name as campaign, c.id as company_id, ec.sent_id, c.name as company, c.pipeline, con.first_name, con.last_name, ea.created_at, ea.email_action_type, ea.link as url from companies c
 left join contacts con on
 c.id = con.company_id
 left join email_actions ea on 

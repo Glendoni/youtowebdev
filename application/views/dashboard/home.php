@@ -725,25 +725,30 @@
         <!--START MARKETING STATS-->
             <div class="panel panel-default">
     <div class="panel-heading" id="contacts">
-    <h3 class="panel-title">My Email Campaign Activity</h3>
+    <h3 class="panel-title">My Email Campaigns</h3>
     </div>
     <!-- /.panel-heading -->
     <div class="panel-body" style="font-size:12px;">
 <?php if(!empty($marketing_actions)) : ?>
 <div class="row record-holder-header mobile-hide">
 <div class="col-xs-12 col-md-3"><strong>Company</strong></div>
-<div class="col-xs-12 col-md-2"><strong>Pipeline</strong></div>
+<div class="col-xs-12 col-md-1"><strong>Pipeline</strong></div>
 <div class="col-xs-12 col-md-2"><strong>Contact</strong></div>
-<div class="col-xs-12 col-md-3"><strong>Action</strong></div>
+<div class="col-xs-12 col-md-4"><strong>Action</strong></div>
 <div class="col-xs-12 col-md-2"><strong>Date</strong></div>
 </div>
 <?php foreach ($marketing_actions as $marketing): ?>
 <div class="row record-holder">
-<div class="col-xs-12 col-md-3 contact-role"><a href="<?php echo site_url();?>companies/company?id=<?php echo $marketing->company_id;?>"><?php echo ucfirst($marketing->company); ?></a></div>
-<div class="col-xs-12 col-md-2 contact-name"><?php echo $marketing->pipeline;?></div>
+<div class="col-xs-10 col-md-3 contact-name"><a href="<?php echo site_url();?>companies/company?id=<?php echo $marketing->company_id;?>"><?php echo ucfirst($marketing->company); ?></a></div>
+<div class="col-xs-12 col-md-1 contact-email">
+<span class="label pipeline label-<?php echo str_replace(' ', '', $marketing->pipeline); ?>"><?php echo $marketing->pipeline;?>
+</span>
+</div>
 
-<div class="col-xs-12 col-md-2 contact-name"><a href="<?php echo site_url();?>companies/company?id=<?php echo $marketing->company_id;?>#contacts"><?php echo ucfirst($marketing->first_name).' '.ucfirst($marketing->last_name); ?></a></div>
-<div class="col-xs-12 col-md-3 contact-email">
+<div class="col-xs-12 col-md-2 contact-email"><a href="<?php echo site_url();?>companies/company?id=<?php echo $marketing->company_id;?>#contacts"><?php echo ucfirst($marketing->first_name).' '.ucfirst($marketing->last_name); ?></a></div>
+<div class="col-xs-12 col-md-4 contact-email">
+<?php if (!isset($_GET['start_date'])) {?><a href="http://www.sonovate.com/?p=<?php echo $marketing->sent_id;?>" style="padding-right:5px;" target="_blank"><i class="fa fa-eye"></i></a><?php;}?> 
+
   <?php if (($marketing->email_action_type)=='2'): ?>
     <span class="label label-primary">Opened</span>
     <?php elseif (!empty($marketing->url)):?>
@@ -751,7 +756,7 @@
     <?php 
     $urlwords = array( 'http://', 'https://', 'www.');
     $link = str_replace($urlwords, "", $marketing->url);
-    $link = (strlen($link) > 43) ? substr($link,0,40).'...' : $link;
+    $link = (strlen($link) > 35) ? substr($link,0,32).'...' : $link;
     echo $link;?>
     </a>
     </span>

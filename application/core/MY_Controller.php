@@ -422,6 +422,8 @@ class MY_Controller extends CI_Controller {
 			if($company->company->f1->f40)$mapped_companies_array['source_date'] = $company->company->f1->f40;
 			if($company->company->f1->f41)$mapped_companies_array['parent_name'] = $company->company->f1->f41;
 			if($company->company->f1->f42)$mapped_companies_array['parent_id'] = $company->company->f1->f42;
+			if($company->company->f1->f43)$mapped_companies_array['source_explanation'] = $company->company->f1->f43;
+
 
 
 
