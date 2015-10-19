@@ -337,7 +337,7 @@ class Companies_model extends CI_Model {
 			}
 			elseif ($post['sectors'] = -1)
 			{
-				$sectors_sql = 'select distinct o.company_id from operates o where o.active = True and o.sector_id in (select id from sectors where target = \'t\')';
+				$sectors_sql = 'select o.company_id from operates o where o.active = True and o.sector_id in (select id from sectors where target = \'t\')';
 			}
 			else
 			{	$sectors = $post['sectors'];
@@ -410,7 +410,7 @@ class Companies_model extends CI_Model {
 		       )) "company"
 		from 
 		(-- T1
-		select C.id,
+		select distinct C.id,
 			   C.name,
 			   C.pipeline,
 			   U.id "owner_id",

@@ -1,15 +1,19 @@
-	<div class="modal draggable-modal fade" id="editModal<?php echo $company['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="Edit <?php echo $company['name']; ?>" aria-hidden="true" style="display: none;">
+    <div class="modal draggable-modal fade" id="editModal<?php echo $company['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="Edit <?php echo $company['name']; ?>" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
         <div class="modal-content">
-        	<?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'],'edit_company'=>'1', 'class_check' => $company['class'], 'pipeline_check' => $company['pipeline']);
-				 echo form_open(site_url().'companies/edit', 'name="edit_company" class="edit_company" role="form"',$hidden); ?>
+            <?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'],'edit_company'=>'1', 'class_check' => $company['class'], 'pipeline_check' => $company['pipeline']);
+                 echo form_open(site_url().'companies/edit', 'name="edit_company" class="edit_company" role="form"',$hidden); ?>
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 <h4 class="modal-title" id="myModalLabel"><?php echo $company['name']; ?></h4>
             </div>
             <div class="modal-body">
             <div class="row">
-            
+                        <div class="col-sm-12">
+            <div id="action-error" class="no-source-pipeline alert alert-warning" role="alert" style="display:none">
+            <strong>Source & Class Required.</strong><br> To complete this action please add a Source & Class to this company.
+            </div>
+            </div>
             <div class="col-sm-6 col-md-8">
             <div class=" form-group ">
                         <label for="trading_name" class="control-label">Trading Name</label>                            
@@ -136,28 +140,28 @@
                 
                 
                 <div class="col-md-12">
-					<label for="sectors" class="control-label">Sectors</label>
-					<div class="tag-holder">
-					<?php 	
-					foreach ($sectors_list as $key => $value): ?>
-						<span class="button-checkbox">
-					        <button type="button" class="btn btn-checkbox" data-color="primary" >&nbsp;<?php echo $value; ?></button>
-					        <input type="checkbox" name="add_sectors[]" value="<?php echo $key; ?>" class="hidden" <?php echo (isset($company['sectors']) and array_key_exists($key,$company['sectors']))? 'checked': '' ; ?>  />
-					    </span>
-					<?php endforeach ?>
-					</div>
+                    <label for="sectors" class="control-label">Sectors</label>
+                    <div class="tag-holder">
+                    <?php   
+                    foreach ($sectors_list as $key => $value): ?>
+                        <span class="button-checkbox">
+                            <button type="button" class="btn btn-checkbox" data-color="primary" >&nbsp;<?php echo $value; ?></button>
+                            <input type="checkbox" name="add_sectors[]" value="<?php echo $key; ?>" class="hidden" <?php echo (isset($company['sectors']) and array_key_exists($key,$company['sectors']))? 'checked': '' ; ?>  />
+                        </span>
+                    <?php endforeach ?>
+                    </div>
             
-				</div>
-				</div>
-				<div class="modal-loading-display text-center " id="loading-display-<?php echo $company['id']; ?>" style="display:none;">
-					<span class="btn btn-default btn-lg" ><i class="fa fa-refresh fa-spin"></i></span>
-				</div>
-			</div>
+                </div>
+                </div>
+                <div class="modal-loading-display text-center " id="loading-display-<?php echo $company['id']; ?>" style="display:none;">
+                    <span class="btn btn-default btn-lg" ><i class="fa fa-refresh fa-spin"></i></span>
+                </div>
+            </div>
             
             <div class="modal-footer">
-            	<button type="submit" class="btn btn-sm btn-success btn-block ladda-button submit_btn disable_no_source disable_no_si" edit-btn="editbtn<?php echo $company['id']; ?>" loading-display="loading-display-<?php echo $company['id']; ?>" data-style="expand-right" data-size="1" >
-		        	<span class="ladda-label"> Save changes </span>
-		    	</button>                
+                <button type="submit" class="btn btn-sm btn-success btn-block ladda-button submit_btn disable_no_source disable_no_si" edit-btn="editbtn<?php echo $company['id']; ?>" loading-display="loading-display-<?php echo $company['id']; ?>" data-style="expand-right" data-size="1" >
+                    <span class="ladda-label"> Save changes </span>
+                </button>                
                 
             </div>
             <div class="modal-footer">
