@@ -488,7 +488,7 @@ class Companies_model extends CI_Model {
 
 		$sql = $sql.' LEFT JOIN 
 		(-- TT1 
-		select T.company_id "company id",
+		select distinct T.company_id "company id",
 		       T.turnover "turnover",
 		       T.method "turnover_method"       
 		from 
@@ -496,7 +496,7 @@ class Companies_model extends CI_Model {
 		select distinct id "id",
 		       company_id,
 		       max(eff_from) OVER (PARTITION BY company_id) "max eff date"
-		from TURNOVERS
+		from TURNOVERS limit 1
 		)   T1
 		  
 		JOIN TURNOVERS T
