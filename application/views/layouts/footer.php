@@ -363,15 +363,32 @@ var company_source = $("select[name=company_source]").val();
 if (company_source=='8') 
       {
         $(".show_si_box").slideDown(600);
+        $(".source_explanation").prop('required',true);
+        $(".disable_no_si").attr('disabled', 'disabled');
+
 }
       else
       {
         $(".show_si_box").slideUp(600);
+        $(".source_explanation").prop('required',false);
+        $(".disable_no_si").removeAttr('disabled', 'disabled');
+}
+});
+$(".source_explanation").keyup(function() {
+var si_check = $("input[name=source_explanation]").val();
+var company_source = $("select[name=company_source]").val();
+if ((!si_check || si_check==0||si_check=='') && company_source=='8') {
+$(".disable_no_si").attr('disabled', 'disabled');
+}
+else
+{
+$(".disable_no_si").removeAttr('disabled', 'disabled');
 }
 });
 jQuery(window).on("load", function(){
 
 $(".pipeline-validation-check").change();
+$(".source_explanation").keyup();
 
 });
 

@@ -79,8 +79,8 @@
             <div class="col-sm-12">
                 <div id="show_si_box" class="show_si_box" role="alert" style="display:none">
                     <div class=" form-group ">
-                        <label for="source_explanation" class="control-label">Special Insight Details</label>
-                        <input type="text" name="source_explanation" value="<?php echo isset($company['source_explanation'])?$company['source_explanation']:NULL; ?>" id="url" maxlength="50" class="form-control">
+                        <label for="source_explanation" class="control-label">Special Insight (Required)</label>
+                        <input type="text" name="source_explanation" value="<?php echo isset($company['source_explanation'])?$company['source_explanation']:NULL; ?>" id="url" maxlength="50" class="form-control source_explanation">
                     </div>
                 </div>
             </div>
@@ -155,7 +155,7 @@
 			</div>
             
             <div class="modal-footer">
-            	<button type="submit" class="btn btn-sm btn-success btn-block ladda-button submit_btn disable_no_source" edit-btn="editbtn<?php echo $company['id']; ?>" loading-display="loading-display-<?php echo $company['id']; ?>" data-style="expand-right" data-size="1" >
+            	<button type="submit" class="btn btn-sm btn-success btn-block ladda-button submit_btn disable_no_source disable_no_si" edit-btn="editbtn<?php echo $company['id']; ?>" loading-display="loading-display-<?php echo $company['id']; ?>" data-style="expand-right" data-size="1" >
 		        	<span class="ladda-label"> Save changes </span>
 		    	</button>                
                 
