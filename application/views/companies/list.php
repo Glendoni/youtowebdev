@@ -127,41 +127,9 @@ if ($your_date < $now){; ?>
 				<label>Registered Address</label>
 				<p style="margin-bottom:0;">
                 <?php echo isset($company['address'])?'<a href="http://maps.google.com/?q='.urlencode($company['address']).'" target="_blank">'.$company['address'].'<span style="    line-height: 15px;font-size: 10px;padding-left: 5px;"><i class="fa fa-external-link"></i></span></a>':'-'; ?>  
-				</p><hr>
+				</p>
 		</div><!--END ADDRESS-->
-		<div class="col-xs-6" style="margin-top:10px;">
-			<label>Company Number</label>
-			<p>	
-			 <!--COMPANY NUMBER IF APPLICABLE-->
-			<?php echo isset($company['registration'])?$company['registration']:'-'; ?>
-         	</p>
-        	</div>
-
-        	<div class="col-xs-6" style="margin-top:10px;">
-        	<label>Founded</label>
-			<p>	
-				<?php echo isset($company['eff_from'])?$company['eff_from']:'-'; ?>
-			</p>
-		</div>
-	
 		
-        <div class="col-xs-6" style="margin-top:10px;">
-        		<label>Phone</label>
-        		<p>
-        		<?php echo isset($company['phone'])?$company['phone']:''; ?>                
-           		</p>
-			</div><!--END PHONE NUMBER-->
-		<div class="col-xs-6 col-md-4" style="margin-top:10px;">
-				<label>Class</label>
-				<p>	
-		            <!--CLASS IF APPLICABLE-->
-		            <?php if (isset($company['class'])): ?>
-						<span class="label label-info"><?php echo $companies_classes[$company['class']] ?></span>	
-					<?php else: ?>
-						-
-		            <?php endif; ?>
-	            </p>
-			</div>
 
 		</div><!--END ROW-->
         </div><!--CLOSE MD-9-->
@@ -188,21 +156,57 @@ if ($your_date < $now){; ?>
 			<?php endif; ?>
 			</div><!--CLOSE MD-3-->
 		</div>
-		<div class="col-md-12">
+
+
+		<div class="row centre padding-bottom">
+				<div class="col-md-12">
 			<hr>
 		</div>
+		<div class="col-xs-6 col-md-3" style="margin-top:10px;">
+			<label>Company Number</label>
+			<p>	
+			 <!--COMPANY NUMBER IF APPLICABLE-->
+			<?php echo isset($company['registration'])?$company['registration']:'-'; ?>
+         	</p>
+        	</div>
+
+        	<div class="col-xs-6 col-md-3" style="margin-top:10px;">
+        	<label>Founded</label>
+			<p>	
+				<?php echo isset($company['eff_from'])?$company['eff_from']:'-'; ?>
+			</p>
+		</div>
+
+        <div class="col-xs-6 col-md-3" style="margin-top:10px;">
+        		<label>Phone</label>
+        		<p>
+        		<?php echo isset($company['phone'])?$company['phone']:''; ?>                
+           		</p>
+			</div><!--END PHONE NUMBER-->
+		<div class="col-xs-6 col-md-3" style="margin-top:10px;">
+				<label>Class</label>
+				<p>	
+		            <!--CLASS IF APPLICABLE-->
+		            <?php if (isset($company['class'])): ?>
+						<span class="label label-info"><?php echo $companies_classes[$company['class']] ?></span>	
+					<?php else: ?>
+						-
+		            <?php endif; ?>
+	            </p>
+			</div>
+
+		</div>
 		
-        		<div class="row">
-		<div class="col-xs-12">
+	<div class="row">
 		<!-- TURNOVER -->
-		<div class="col-xs-4 col-sm-3 centre">
+		<div class="col-xs-6 col-sm-3 centre">
 			<strong><span style="text-transform: capitalize"><?php echo isset($company['turnover_method'])?$company['turnover_method']:'';?></span> Turnover</strong>
 			<p class="details" style="margin-bottom:5px;">
 				<?php echo isset($company['turnover'])? '£'.number_format (round($company['turnover'],-3)):'Unknown';?>
 			</p>
         </div>
 		<!-- CONTACTS -->
-		<div class="col-xs-4 col-sm-3 centre">
+		<div class="col-xs-6 col-sm-3 centre">
 			<strong>Contacts</strong>			
 			<?php if (isset($company['contacts_count'])): ?>
 			<p class="details"><?php echo $company['contacts_count'];?> </p>
@@ -211,7 +215,7 @@ if ($your_date < $now){; ?>
 			<?php endif; ?>
 		</div>
 		<!-- EMPLOYEES -->
-		<div class="col-xs-4 col-sm-3 centre">
+		<div class="col-xs-6 col-sm-3 centre">
 			<strong>Employees</strong>
 			<?php if (isset($company['emp_count'])): ?>
 			<p class="details"><?php echo $company['emp_count'];?> </p>
@@ -220,7 +224,7 @@ if ($your_date < $now){; ?>
 			<?php endif; ?>
 		</div>
 		<!-- SECTORS -->
-		<div class="col-xs-4 col-sm-3 centre">
+		<div class="col-xs-6 col-sm-3 centre">
 			<strong>Sectors</strong> 
 			<?php 
 			if(isset($company['sectors'])){
@@ -232,8 +236,6 @@ if ($your_date < $now){; ?>
 			?>
 		</div>
 		</div>
-		</div>
-
 		<div class="col-md-12">
 			<hr>
 		</div>

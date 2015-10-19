@@ -32,10 +32,7 @@
 					<?php foreach($current_campaign_stats as $current_campaign_stats){?>
 						<div style="font-weight:300; font-size:32px; margin-bottom: 20px; margin-top: -20px;">
 						<?php echo $current_campaign_name; ?> <?php if($current_campaign_is_shared == False): ?>
-						<?php else: ?>
-						 <?php foreach($current_campaign_owners as $current_campaign_owner):
-						echo "<span style='text-align: center;font-weight: 300; font-size:12px;'>Owned by <b>".$current_campaign_owner->username."</b></span>"
-						; endforeach ?>		
+						<?php else: ?>	
 						<?php endif;?>
 
 
@@ -53,6 +50,7 @@
 <div class="col-sm-2 mobile-hide">
 <a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $current_campaign_stats->campaign_id; ?>">
 <div class="circle-responsive black-circle <?php echo empty($this->session->userdata('pipeline'))? 'active':'';?>"><div class="circle-content mega">
+<?php // foreach($current_campaign_owners as $current_campaign_owner): echo "<span style='text-align: center;font-weight: 300; font-size:12px;'>Owned by <b>".$current_campaign_owner->username."</b></span>"; endforeach ?>	
 <div class="large-number"><?php echo number_format($current_campaign_stats->campaign_total); ?></div> <div class="small-text"><?php if ($companies_count<> "1") {echo "Companies in</br>$results_type";} else { echo "Company in</br>$results_type";}?></div>
 </div>
 </div>
@@ -90,7 +88,7 @@
 <div class="circle-responsive intent-circle <?php if ($this->session->userdata('pipeline')=='intent'): echo 'Intent active';else: endif; ?>">
 <div class="circle-content mega">
 <div class="large-number"><?php echo $current_campaign_stats->campaign_intent; ?></div>
-<div class="small-text">Intent</div></div>
+<div class="small-text">Intent & Qualified</div></div>
 </div>
 <?php if ($current_campaign_stats->campaign_intent>0): ?>
 </a>

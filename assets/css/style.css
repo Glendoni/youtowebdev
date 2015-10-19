@@ -5,6 +5,11 @@ body {
 	max-width: 1370px;
 }
 
+.padding-bottom {
+	padding-bottom: 30px;
+
+}
+
 /*page-results-list */
 .profile-heading > span {
 	float: left;
@@ -50,6 +55,7 @@ body {
 
 .nav>li>a {
 	color:#000;
+	padding: 8px 10px;
 }
 
 .nav>li>a {
@@ -914,12 +920,12 @@ a.btn.btn-default.btn-xs.add-to-calendar {
   width: 100%;
 }
 .large-number {
-	    font-size: 60px;
-    font-weight: 200;
-    margin-top: -28px;
+font-size: 60px;
+font-weight: 200;
+margin-top: -28px;
 }
 .circle-content .small-text{
-font-size: 14px;
+	font-size: 11px;
     font-weight: 300;
     line-height: 15px;
 }
@@ -1016,6 +1022,28 @@ background-color: #9797A6;
     font-weight: 700;
 
 }
+.small-text {
+font-size: 11px;
+}
+.small-text-unsuitable {
+	font-weight:300; font-size:9px; max-width:80%; margin-left:auto; margin-right:auto; text-align:center;
+}
+
+@media screen and (max-width: 1100px) {
+.large-number {
+    font-size: 40px;
+    font-weight: 200;
+    margin-top: -20px;
+}
+.small-text {
+	font-size: 9px;
+}
+.circle-content .small-text {
+font-size: 9px;
+    font-weight: 300;
+    line-height: 11px;
+    }
+}
 
 @media only screen and (min-width: 991px) {
 .modal-dialog {
@@ -1031,7 +1059,7 @@ background-color: #9797A6;
     margin-top: -20px;
 }
 .circle-content .small-text {
-font-size: 10px;
+font-size: 9px;
     font-weight: 300;
     line-height: 11px;
     }

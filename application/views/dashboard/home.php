@@ -42,23 +42,23 @@
 
 <div class="col-sm-2 mobile-hide">
 <div class="circle-responsive black-circle <?php echo empty($this->session->userdata('pipeline'))? 'active':'';?>"><div class="circle-content mega">
-<div class="large-number"><?php echo number_format($get_user_campaign->campaign_total); ?></div> <div class="small-text" style="font-size:11px;">Companies
+<div class="large-number"><?php echo number_format($get_user_campaign->campaign_total); ?></div> <div class="small-text">Companies
 </div>
 
 </div>
 </div>
-<div class="small-text" style="font-weight:300; font-size:9px; max-width:80%; margin-left:auto; margin-right:auto; text-align:center;"><?php if ($get_user_campaign->campaign_unsuitable > "0") {echo "Includes ".$get_user_campaign->campaign_unsuitable." marked as unsuitable";} else {}?></div>
+<div class="small-text-unsuitable"><?php if ($get_user_campaign->campaign_unsuitable > "0") {echo "Includes ".$get_user_campaign->campaign_unsuitable." marked as unsuitable";} else {}?></div>
 </div>
 <div class="col-sm-2 mobile-hide">
 <div class="circle-responsive cyan-circle ">
 <div class="circle-content mega">
 <div class="large-number"><?php echo $get_user_campaign->contacted; ?><span style="font-size:32px;">%</span></div>
-<div class="small-text" style="font-size:11px;">Contacted</div>
+<div class="small-text">Contacted</div>
 
 
 </div>
 </div>
-<div class="small-text" style="font-weight:300; font-size:9px; max-width:80%; margin-left:auto; margin-right:auto; text-align:center;"><?php if ($get_user_campaign->campaign_unsuitable > "0") {echo "Companies marked as Unsuitable are not included in this figure.";} else {}?></div>
+<div class="small-text-unsuitable"><?php if ($get_user_campaign->campaign_unsuitable > "0") {echo "Companies marked as Unsuitable are not included in this figure.";} else {}?></div>
 </div>
 <div class="col-sm-2 mobile-hide">
 <?php if ($get_user_campaign->campaign_prospects>0): ?>
@@ -67,7 +67,7 @@
 ">
 <div class="circle-content mega">
 <div class="large-number"><?php echo $get_user_campaign->campaign_prospects; ?></div>
-<div class="small-text" style="font-size:11px;"><?php if ($get_user_campaign->campaign_prospects <> "1") {echo "Prospects";} else { echo "Prospect";}?></div></div>
+<div class="small-text"><?php if ($get_user_campaign->campaign_prospects <> "1") {echo "Prospects";} else { echo "Prospect";}?></div></div>
 </div>
 <?php if ($get_user_campaign->campaign_prospects>0): ?>
 <?php else: endif; ?>
@@ -79,7 +79,7 @@
 <div class="circle-responsive intent-circle <?php if ($this->session->userdata('pipeline')=='intent'): echo 'active';else: endif; ?>">
 <div class="circle-content mega">
 <div class="large-number"><?php echo $get_user_campaign->campaign_intent; ?></div>
-<div class="small-text" style="font-size:11px;">Intent &</br>Qualified</div></div>
+<div class="small-text">Intent & Qualified</div></div>
 </div>
 <?php if ($get_user_campaign->campaign_intent>0): ?>
 <?php else: endif; ?>
@@ -91,7 +91,7 @@
 <div class="circle-responsive proposal-circle <?php if ($this->session->userdata('pipeline')=='proposal'): echo 'active';else: endif; ?>">
 <div class="circle-content mega">
 <div class="large-number"><?php echo $get_user_campaign->campaign_proposals; ?></div>
-<div class="small-text" style="font-size:11px;"><?php if ($get_user_campaign->campaign_proposals <> "1") {echo "Proposals";} else { echo "Proposal";}?></div></div>
+<div class="small-text"><?php if ($get_user_campaign->campaign_proposals <> "1") {echo "Proposals";} else { echo "Proposal";}?></div></div>
 </div>
 <?php if ($get_user_campaign->campaign_proposals>0): ?>
 <?php else: endif; ?>
@@ -102,7 +102,7 @@
 <div class="circle-responsive customer-circle <?php if ($this->session->userdata('pipeline')=='customer'): echo 'active';else: endif; ?>">
 <div class="circle-content mega">
 <div class="large-number"><?php echo $get_user_campaign->campaign_customers; ?></div>
-<div class="small-text" style="font-size:11px;"><?php if ($get_user_campaign->campaign_customers <> "1") {echo "Customers";} else { echo "Customer";}?></div></div>
+<div class="small-text"><?php if ($get_user_campaign->campaign_customers <> "1") {echo "Customers";} else { echo "Customer";}?></div></div>
 </div>
 <?php if ($get_user_campaign->campaign_customers>0): ?>
 <?php else: endif; ?>
@@ -341,18 +341,18 @@
                             <strong>Meetings</strong><br>
                             <Small> Booked<br>(Done)</Small>
                         </div>
-                        <div class="col-xs-3 col-md-2 text-center hide-overflow"> 
+                        <div class="col-xs-2 col-md-2 text-center hide-overflow"> 
                            <strong>Call Activity</strong><br>
                            <Small> Total Calls<br>(Intro)</Small>
                         </div>
-                        <div class="col-md-1 hidden-sm text-center hide-overflow">
+                        <div class="col-md-1 hidden-xs text-center hide-overflow">
                            <strong>Pipeline Added</strong>
                         </div>
-                        <div class="col-md-2 hidden-sm text-center hide-overflow"> 
+                        <div class="col-md-2 hidden-xs text-center hide-overflow"> 
                            <strong>Review Months</strong><br>
                            <Small>Added / Occuring</Small>
                         </div>
-                        <div class="col-md-1 hidden-sm text-center hide-overflow">
+                        <div class="col-md-1 hidden-xs text-center hide-overflow">
                            <strong>DueDil</strong>
                         </div>
                         </div>
@@ -363,7 +363,7 @@
                             <?php $user_icon = explode(",",$stat['image']); echo "<div class='circle name-circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
                             </a>
                             </div>
-                            <div class="col-xs-2 col-md-1 text-center">
+                            <div class="col-xs-1 col-md-1 text-center">
                             <a href = "?search=2&user=<?php echo $stat['user'];?>&period=week"><span class="badge" style="background-color:#00B285;"><?php echo $stat['deals'];?></a></span>
                             </div>
                             <div class="col-xs-2 col-md-1 text-center"> 
@@ -372,20 +372,20 @@
                             <div class="col-xs-2 col-md-2 text-center"> 
                             <?php echo $stat['demobookedcount'];?> / <?php echo $stat['democount'];?>
                             </div>
-                            <div class="col-xs-1 col-md-1 text-center">
+                            <div class="col-xs-2 col-md-1 text-center">
                             <?php echo $stat['meetingbooked'];?> (<?php echo $stat['meetingcount'];?>)
                             </div>
-                            <div class="col-xs-3 col-md-2 text-center"> 
+                            <div class="col-xs-2 col-md-2 text-center"> 
                             <?php echo $stat['salescall'];?>
                             (<?php echo $stat['introcall'];?>)
                             </div>
-                            <div class="col-md-1 hidden-sm text-center">
+                            <div class="col-md-1 hidden-xs text-center">
                               <?php echo $stat['pipelinecount'];?>
                             </div>
-                            <div class="col-md-2 hidden-sm text-center">
+                            <div class="col-md-2 hidden-xs text-center">
                               <?php echo $stat['key_review_added'];?> / <?php echo $stat['key_review_occuring'];?>
                             </div>
-                            <div class="col-md-1 hidden-sm text-center">
+                            <div class="col-md-1 hidden-xs text-center">
                               <?php echo $stat['duediligence'];?>
                             </div>
                           </div> <!--END ROW-->    
@@ -413,18 +413,18 @@
                             <strong>Meetings</strong><br>
                             <Small> Booked<br>(Done)</Small>
                         </div>
-                        <div class="col-xs-3 col-md-2 text-center hide-overflow"> 
+                        <div class="col-xs-2 col-md-2 text-center hide-overflow"> 
                            <strong>Call Activity</strong><br>
-                           <Small> Total Calls (Intro)</Small>
+                           <Small> Total Calls<br>(Intro)</Small>
                         </div>
-                        <div class="col-md-1 hidden-sm text-center hide-overflow">
+                        <div class="col-md-1 hidden-xs text-center hide-overflow">
                            <strong>Pipeline Added</strong>
                         </div>
-                        <div class="col-md-2 hidden-sm text-center hide-overflow"> 
+                        <div class="col-md-2 hidden-xs text-center hide-overflow"> 
                            <strong>Review Months</strong><br>
                            <Small>Added / Occuring</Small>
                         </div>
-                        <div class="col-md-1 hidden-sm text-center hide-overflow">
+                        <div class="col-md-1 hidden-xs text-center hide-overflow">
                            <strong>DueDil</strong>
                         </div>
                         </div>
@@ -450,7 +450,7 @@
                             </div>
 
 
-                            <div class="col-xs-3 col-md-2 text-center"> 
+                            <div class="col-xs-2 col-md-2 text-center"> 
                             <?php echo $lastweekstat['salescall'];?>
                             (<?php echo $lastweekstat['introcall'];?>)
                             </div>
@@ -481,7 +481,7 @@
                         <div class="col-xs-2 col-md-1 text-center hide-overflow">
                             <strong>Proposals</strong>
                         </div>
-                         <div class="col-xs-2 col-md-2 text-center hide-overflow">
+                        <div class="col-xs-2 col-md-2 text-center hide-overflow">
                             <strong>Demos</strong><br>
                             <Small> Booked / Done</Small>
                         </div>
@@ -489,18 +489,18 @@
                             <strong>Meetings</strong><br>
                             <Small> Booked<br>(Done)</Small>
                         </div>
-                        <div class="col-xs-3 col-md-2 text-center hide-overflow"> 
+                        <div class="col-xs-2 col-md-2 text-center hide-overflow"> 
                            <strong>Call Activity</strong><br>
-                           <Small> Total Calls (Intro)</Small>
+                           <Small> Total Calls<br>(Intro)</Small>
                         </div>
-                        <div class="col-md-1 hidden-sm text-center hide-overflow">
+                        <div class="col-md-1 hidden-xs text-center hide-overflow">
                            <strong>Pipeline Added</strong>
                         </div>
-                        <div class="col-md-2 hidden-sm text-center hide-overflow"> 
+                        <div class="col-md-2 hidden-xs text-center hide-overflow"> 
                            <strong>Review Months</strong><br>
                            <Small>Added / Occuring</Small>
                         </div>
-                        <div class="col-md-1 hidden-sm text-center hide-overflow">
+                        <div class="col-md-1 hidden-xs text-center hide-overflow">
                            <strong>DueDil</strong>
                         </div>
                         </div>
@@ -524,7 +524,7 @@
                             <div class="col-xs-1 col-md-1 text-center">
                             <?php echo $thismonthstat['meetingbooked'];?> (<?php echo $thismonthstat['meetingcount'];?>)
                             </div>
-                            <div class="col-xs-3 col-md-2 text-center"> 
+                            <div class="col-xs-2 col-md-2 text-center"> 
                             <?php echo $thismonthstat['salescall'];?>
                             (<?php echo $thismonthstat['introcall'];?>)
                             </div>
@@ -554,7 +554,7 @@
                         <div class="col-xs-2 col-md-1 text-center hide-overflow">
                             <strong>Proposals</strong>
                         </div>
-                         <div class="col-xs-2 col-md-2 text-center hide-overflow">
+                        <div class="col-xs-2 col-md-2 text-center hide-overflow">
                             <strong>Demos</strong><br>
                             <Small> Booked / Done</Small>
                         </div>
@@ -562,18 +562,18 @@
                             <strong>Meetings</strong><br>
                             <Small> Booked<br>(Done)</Small>
                         </div>
-                        <div class="col-xs-3 col-md-2 text-center hide-overflow"> 
+                        <div class="col-xs-2 col-md-2 text-center hide-overflow"> 
                            <strong>Call Activity</strong><br>
-                           <Small> Total Calls (Intro)</Small>
+                           <Small> Total Calls<br>(Intro)</Small>
                         </div>
-                        <div class="col-md-1 hidden-sm text-center hide-overflow">
+                        <div class="col-md-1 hidden-xs text-center hide-overflow">
                            <strong>Pipeline Added</strong>
                         </div>
-                        <div class="col-md-2 hidden-sm text-center hide-overflow"> 
+                        <div class="col-md-2 hidden-xs text-center hide-overflow"> 
                            <strong>Review Months</strong><br>
                            <Small>Added / Occuring</Small>
                         </div>
-                        <div class="col-md-1 hidden-sm text-center hide-overflow">
+                        <div class="col-md-1 hidden-xs text-center hide-overflow">
                            <strong>DueDil</strong>
                         </div>
                         </div>
@@ -598,7 +598,7 @@
                             </div>
 
 
-                            <div class="col-xs-3 col-md-2 text-center"> 
+                            <div class="col-xs-2 col-md-2 text-center"> 
                             <?php echo $lastmonthstat['salescall'];?>
                             (<?php echo $lastmonthstat['introcall'];?>)
                             </div>
@@ -628,7 +628,7 @@
                         <div class="col-xs-2 col-md-1 text-center hide-overflow">
                             <strong>Proposals</strong>
                         </div>
-                         <div class="col-xs-2 col-md-2 text-center hide-overflow">
+                        <div class="col-xs-2 col-md-2 text-center hide-overflow">
                             <strong>Demos</strong><br>
                             <Small> Booked / Done</Small>
                         </div>
@@ -636,18 +636,18 @@
                             <strong>Meetings</strong><br>
                             <Small> Booked<br>(Done)</Small>
                         </div>
-                        <div class="col-xs-3 col-md-2 text-center hide-overflow"> 
+                        <div class="col-xs-2 col-md-2 text-center hide-overflow"> 
                            <strong>Call Activity</strong><br>
-                           <Small> Total Calls (Intro)</Small>
+                           <Small> Total Calls<br>(Intro)</Small>
                         </div>
-                        <div class="col-md-1 hidden-sm text-center hide-overflow">
+                        <div class="col-md-1 hidden-xs text-center hide-overflow">
                            <strong>Pipeline Added</strong>
                         </div>
-                        <div class="col-md-2 hidden-sm text-center hide-overflow"> 
+                        <div class="col-md-2 hidden-xs text-center hide-overflow"> 
                            <strong>Review Months</strong><br>
                            <Small>Added / Occuring</Small>
                         </div>
-                        <div class="col-md-1 hidden-sm text-center hide-overflow">
+                        <div class="col-md-1 hidden-xs text-center hide-overflow">
                            <strong>DueDil</strong>
                         </div>
                         </div>
@@ -670,10 +670,7 @@
                             <div class="col-xs-1 col-md-1 text-center">
                             <?php echo $getstatssearch['meetingbooked'];?> (<?php echo $getstatssearch['meetingcount'];?>)
                             </div>
-
-
-                          
-                            <div class="col-xs-3 col-md-2 text-center"> 
+                            <div class="col-xs-2 col-md-2 text-center"> 
                             <?php echo $getstatssearch['salescall'];?>
                             (<?php echo $getstatssearch['introcall'];?>)
                             </div>

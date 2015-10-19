@@ -53,8 +53,7 @@ endif; ?>
 	<div class="panel-body">
     	<div class="row"><!--FINISHED AT THE END OF PANEL-->
 		<div class="col-sm-9">
-		<div class="row">
-
+		<div class="row padding-bottom">
 		<?php if (isset($company['trading_name'])): ?>
 		<div class="col-md-6" style="margin-bottom:10px;">
 				<label>Registered Name</label>
@@ -76,7 +75,9 @@ endif; ?>
 				</p>
 		</div><!--END NAME-->
 		<?php endif; ?>
-		<div class="col-xs-6" style="margin-top:10px;">
+		</div>
+		<div class="row padding-bottom">
+		<div class="col-xs-6 col-md-3">
 			<label>Company Number</label>
 			<p>	
 			 <!--COMPANY NUMBER IF APPLICABLE-->
@@ -84,7 +85,7 @@ endif; ?>
          	</p>
         	</div>
 
-        	<div class="col-xs-6" style="margin-top:10px;">
+        	<div class="col-xs-6  col-md-3">
         	<label>Founded</label>
 			<p>	
 				<?php echo isset($company['eff_from'])?$company['eff_from']:'-'; ?>
@@ -92,13 +93,13 @@ endif; ?>
 		</div>
 	
 		
-        <div class="col-xs-6" style="margin-top:10px;">
+        <div class="col-xs-6 col-md-3">
         		<label>Phone</label>
         		<p>
         		<?php echo isset($company['phone'])?$company['phone']:''; ?>                
            		</p>
 			</div><!--END PHONE NUMBER-->
-		<div class="col-xs-6 col-md-4" style="margin-top:10px;">
+		<div class="col-xs-6  col-md-3">
 				<label>Class</label>
 				<p>	
 		            <!--CLASS IF APPLICABLE-->
