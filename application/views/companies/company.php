@@ -538,8 +538,10 @@ endif; ?>
 									<?php echo $action_types_array[$action_outstanding->action_type_id]; ?><?php if(strtotime($action_outstanding->planned_at) < $now and !isset($action_outstanding->actioned_at)):?>
 								<?php endif ?>
                                     </a>
-                                    </h4><span class="label label-danger">Overdue</span>
-
+                                    </h4><?php 
+                                    if( strtotime($action_outstanding->planned_at ) < strtotime('now') ) {?>
+                                    <span class="label label-danger">Overdue</span>
+                                    <?php }; ?>
 								<div class="mic-info">
 								Created By: <?php echo $system_users[$action_outstanding->user_id]?> on <?php echo $created_date_formatted?>
 								</div>

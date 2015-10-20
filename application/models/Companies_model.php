@@ -32,7 +32,6 @@ class Companies_model extends CI_Model {
 		} 	
 		return $array;
 
-
     }
 
 	function get_companies_classes()
@@ -328,32 +327,31 @@ class Companies_model extends CI_Model {
 		// }
 
 		// SECTORS
-
 		if( isset($post['sectors']) && !empty($post['sectors']) && $post['sectors'] !== '0' )
 		{	
-			if ($post['sectors'] = 0)
+			if ($post['sectors'] == 0)
 			{
-				$sectors_sql = 'select operates.company_id from operates where operates.active = True and operates.sector_id = NULL ';
+				$sectors_sql = 'select operates.company_id from operates where operates.active = \'t\' and operates.sector_id = NULL ';
 			}
-			elseif ($post['sectors'] = -1)
+			elseif ($post['sectors'] == -1)
 			{
 				$sectors_sql = 'select o.company_id from operates o where o.active = True and o.sector_id in (select id from sectors where target = \'t\')';
 			}
 			else
-			{	$sectors = $post['sectors'];
+			{	
+				$sectors = $post['sectors'];
 				if(is_array($sectors))
 				{
-					$sectors_sql = 'select operates.company_id from operates where operates.active = True and operates.sector_id in ('.implode(', ', $post['sectors']).')';
+					 $sectors_sql = 'select operates.company_id from operates where operates.active = \'t\' and operates.sector_id in ('.implode(', ', $post['sectors']).')';
 				}
 				else
 				{
-					$sectors_sql = 'select operates.company_id from operates where operates.active = True and operates.sector_id = '.$post['sectors'].' ';
+					 $sectors_sql = "select operates.company_id from operates where operates.active = 't' and operates.sector_id = '".$post['sectors']."'";
 				}
 				
 			}
 			
 		}
-
 		// Providers
 		if(isset($post['providers']) && (!empty($post['providers'])) )
 		{
