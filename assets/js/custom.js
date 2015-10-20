@@ -74,12 +74,12 @@ $(".source_explanation").prop('required',false);
 //$(".disable_no_si").removeAttr('disabled', 'disabled');
 //}
 //});
-jQuery(window).on("load", function(){
+//jQuery(window).on("load", function(){
 
-$(".pipeline-validation-check").change();
-$(".source_explanation").keyup();
+//$(".pipeline-validation-check").change();
+//$(".source_explanation").keyup();
 
-});
+//});
 $(document).ready(function () {
     size_li = $("#campaignList a").size();
     x=15;
