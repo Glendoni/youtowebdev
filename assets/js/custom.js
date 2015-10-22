@@ -18,17 +18,19 @@ $(this).remove();
 });//]]> 
 $('#action_type_completed').change(function(){
 var source_check = $("input[name=source_check]").val();
+var company_pipeline = $("input[name=company_pipeline]").val();
+
 if ((this.value == '16' || this.value == '8') && (!source_check)) 
       {
 $(".no-source").slideDown(600);
 //$(".no-source").show();
-$(".disable_no_source").attr('disabled', 'disabled');
+//$(".disable_no_source").attr('disabled', 'disabled');
 }
-      else
-      {
+else
+{
 $(".no-source").slideUp(600);
 //$(".no-source").hide();
-$(".disable_no_source").removeAttr('disabled', 'disabled');
+//$(".disable_no_source").removeAttr('disabled', 'disabled');
 }
 });
 $(".pipeline-validation-check").change(function() {
@@ -39,12 +41,12 @@ var company_class = $("select[name=company_class]").val();
 if ((this.value !== 'Prospect' && this.value !== 'Lost' && this.value !== 'Unsuitable') && (!company_source || company_source==0||company_class=='Unknown')) 
 {
 $(".no-source-pipeline").slideDown(600);
-$(".disable_no_source").attr('disabled', 'disabled');
+//$(".disable_no_source").attr('disabled', 'disabled');
 }
 else
 {
 $(".no-source-pipeline").slideUp(600);
-$(".disable_no_source").removeAttr('disabled', 'disabled');
+//$(".disable_no_source").removeAttr('disabled', 'disabled');
 }
 });
 
@@ -56,8 +58,8 @@ $(".show_si_box").slideDown(600);
 $(".source_explanation").prop('required',true);
 //$(".disable_no_si").attr('disabled', 'disabled');
 }
-      else
-      {
+else
+{
 $(".show_si_box").slideUp(600);
 $(".source_explanation").prop('required',false);
 //$(".disable_no_si").removeAttr('disabled', 'disabled');
