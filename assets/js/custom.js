@@ -63,6 +63,8 @@ $(".source_explanation").prop('required',false);
 //$(".disable_no_si").removeAttr('disabled', 'disabled');
 }
 });
+
+
 //$(".source_explanation").keyup(function() {
 //var si_check = $("input[name=source_explanation]").val();
 //var company_source = $("select[name=company_source]").val();
@@ -74,12 +76,16 @@ $(".source_explanation").prop('required',false);
 //$(".disable_no_si").removeAttr('disabled', 'disabled');
 //}
 //});
-//jQuery(window).on("load", function(){
 
-//$(".pipeline-validation-check").change();
-//$(".source_explanation").keyup();
+$( document ).ready(function() {
+var source_explanation = $("input[name=source_explanation]").val();
+var company_source = $("select[name=company_source]").val();
+if (company_source=='8') {
+$(".show_si_box").slideDown(600);
+}
+});
+ 
 
-//});
 $(document).ready(function () {
     size_li = $("#campaignList a").size();
     x=15;
