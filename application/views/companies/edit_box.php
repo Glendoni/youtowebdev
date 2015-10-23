@@ -27,11 +27,11 @@
                     <div class="tag-holder">  
                     <div></div>
                         <span class="button-checkbox" id="contract">
-                            <button type="button" class="btn btn-default" data-color="primary" id="contract"><i class="state-icon glyphicon glyphicon-unchecked"></i>&nbsp;Contract</button>
+                            <button type="button" class="btn btn-default" data-color="primary" id="contract" style="width:49%;"><i class="state-icon glyphicon glyphicon-unchecked"></i>&nbsp;Contract</button>
                             <input type="checkbox" name="contract" value="1" id="contract" class="hidden" <?php echo isset($company['contract'])? 'checked': '' ; ?> >                          
                         </span>
                         <span class="button-checkbox" id="contract">
-                            <button type="button" class="btn btn-default" data-color="primary" id="permanent"><i class="state-icon glyphicon glyphicon-unchecked"></i>&nbsp;Permanent</button>
+                            <button type="button" class="btn btn-default" data-color="primary" id="permanent" style="width:49%;"><i class="state-icon glyphicon glyphicon-unchecked"></i>&nbsp;Permanent</button>
                             <input type="checkbox" name="perm" value="1" id="permanent" class="hidden" <?php echo isset($company['perm'])? 'checked': '' ; ?> >
                         </span>
                     </div>
@@ -161,8 +161,8 @@
             </div>
             
             <div class="modal-footer">
-                <button type="submit" class="btn btn-sm btn-success btn-block ladda-button submit_btn disable_no_source disable_no_si" edit-btn="editbtn<?php echo $company['id']; ?>" loading-display="loading-display-<?php echo $company['id']; ?>" data-style="expand-right" data-size="1" >
-                    <span class="ladda-label"> Save changes </span>
+                <button type="submit" class="btn btn-sm btn-warning btn-block ladda-button submit_btn disable_no_source disable_no_si" edit-btn="editbtn<?php echo $company['id']; ?>" loading-display="loading-display-<?php echo $company['id']; ?>" data-style="expand-right" data-size="1" >
+                    <span class="ladda-label">Save</span>
                 </button>                
                 
             </div>

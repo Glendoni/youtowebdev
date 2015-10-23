@@ -17,7 +17,7 @@
                   <input type="password" class="form-control" name="gmail_password" value="" > 
                 </div>
                 <div class="form-group col-md-12">
-                  <button class="btn btn-primary" name="update_profile">Update</button>
+                  <button class="btn btn-sm btn-warning btn-block" name="update_profile">Save</button>
                 </div>
             </form>
         </div>

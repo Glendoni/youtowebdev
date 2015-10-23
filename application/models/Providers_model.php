@@ -10,8 +10,8 @@ class Providers_model extends MY_Model {
 	function get_all_in_array()
 	{
 
-		$this->db->select('id, name');
-		$query = $this->db->get_where('providers');
+		$sql = "select P.id,P.name from MORTGAGES M JOIN PROVIDERS P ON P.id = M.provider_id JOIN COMPANIES C ON M.company_id = C.id where pipeline is not null and stage = 'Outstanding' and C.active is true group by 1 order by 1";
+		$query = $this->db->query($sql);
 
 		foreach($query->result() as $row)
 		{
@@ -19,6 +19,7 @@ class Providers_model extends MY_Model {
 		} 	
 		return $providers_array;
 	}
+
 
 	function get_top_10_in_array()
 	{

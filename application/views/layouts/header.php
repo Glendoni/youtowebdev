@@ -73,7 +73,7 @@
             <div class="navbar-header">
                 <a class="navbar-brand" href="/" ><img src="<?php echo asset_url();?>images/baselist-logotype-black-transparent-bg.png" style="width:120px;">
                     <?php if (isset($current_user)): ?>
-                        <div style="font-size:10px; font-weight:300; text-align:right;">Version 2.11</div>
+                        <div style="font-size:10px; font-weight:300; text-align:right;">Version 2.12</div>
                     <?php endif; ?>
         </a>
             </div>

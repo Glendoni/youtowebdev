@@ -398,7 +398,7 @@ endif; ?>
 			<?php endforeach; ?>
 	    <?php else: ?>
 			<div class="alert alert-info" style="margin-top:10px;">
-                No contacts registered.
+                No contacts found.
             </div>
 		<?php endif; ?>
 
@@ -423,11 +423,10 @@ endif; ?>
             </div>
 
 <div class="row">
-			<div class="col-md-3">
+			<div class="col-sm-3 col-md-3">
 				<div class="form-group ">
 					<label>New Actions</label>
-
-<select id="action_type_completed" name="action_type_completed" class="form-control" onchange="commentChange()">
+					<select id="action_type_completed" name="action_type_completed" class="form-control" onchange="commentChange()">
 						<option value="">--- Select an Action ---</option>
 						<?php foreach($action_types_done as $action ): ?>
 						  <option value="<?php echo $action->id; ?>"><?php echo $action->name; ?></option>
@@ -435,7 +434,7 @@ endif; ?>
 					</select>
 				</div>
 			</div>
-			<div class="col-md-3">
+			<div class="col-sm-3 col-md-3">
 
 			<?php if(isset($contacts) and !empty($contacts)) : ?>
 				<div class="form-group ">
@@ -451,7 +450,7 @@ endif; ?>
 			<?php endif; ?>
 			</div>
 				
-				 <div class="col-md-3">
+				 <div class="col-sm-3 col-md-3">
 					<div class="form-group ">
 						<label>Follow Up Action</label>
 
@@ -463,18 +462,18 @@ endif; ?>
 						</select>
 					</div>
 	                </div>
-	                <div class="col-md-3">
+	                <div class="col-sm-3 col-md-3">
 						<div class="form-group " >
 							<label>Follow Up Date</label>
 							<input type="text" class="form-control follow-up-date" id="planned_at" data-date-format="YYYY/MM/DD H:m" name="planned_at" placeholder="">
 						</div>
 	                </div>
-			<div class="col-md-12">
+			<div class="col-sm-12 col-md-12">
 				<div class="form-group ">
 					<label>Outcome</label>
 <textarea class="form-control completed-details" name="comment" rows="3" required="required"></textarea>
 				</div>
-				<button type="submit" name="save" class="btn btn-primary form-control disable_no_source">Add Action</button>
+				<button type="submit" name="no contno con" class="btn btn-primary form-control disable_no_source">Add Action</button>
 			</div>
 			<?php echo form_close(); ?>
 			</div>
@@ -525,21 +524,19 @@ endif; ?>
 								 $cancelled_at_formatted = date(" jS F y",strtotime($action_outstanding->cancelled_at))." @ ".date("H:i",strtotime($action_outstanding->cancelled_at));
 								 $now = date(time());
 								?>
-						<li class="list-group-item">
-							<div class="row" style="padding: 15px 0">
-									
-
-									<div class="col-xs-2 col-md-1 profile-heading">
-										<?php $user_icon = explode(",", ($action_outstanding->image)); echo "<div class='circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
-									</div>
+					<li class="list-group-item">
+						<div class="row">
+							<div class="col-xs-2 col-md-1 profile-heading">
+								<?php $user_icon = explode(",", ($action_outstanding->image)); echo "<div class='circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
+							</div>
 							<div class="col-xs-10 col-md-6">
 								<h4 style="margin:0;">
 									<a data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $action_outstanding->action_id ?>" aria-expanded="false" aria-controls="collapse<?php echo $action_outstanding->action_id ?>">
-									<?php echo $action_types_array[$action_outstanding->action_type_id]; ?><?php if(strtotime($action_outstanding->planned_at) < $now and !isset($action_outstanding->actioned_at)):?>
+								<?php echo $action_types_array[$action_outstanding->action_type_id]; ?><?php if(strtotime($action_outstanding->planned_at) < $now and !isset($action_outstanding->actioned_at)):?>
 								<?php endif ?>
-                                    </a>
-                                    </h4><?php 
-                                    if( strtotime($action_outstanding->planned_at ) < strtotime('now') ) {?>
+									</a>
+								</h4>
+								<?php if( strtotime($action_outstanding->planned_at ) < strtotime('now') ) {?>
                                     <span class="label label-danger">Overdue</span>
                                     <?php }; ?>
 								<div class="mic-info">
@@ -550,7 +547,7 @@ endif; ?>
 
 								<div style="clear:both;"><small><a class="btn btn-default btn-xs add-to-calendar" href="http://www.google.com/calendar/event?action=TEMPLATE&text=<?php echo urlencode($action_types_array[$action_outstanding->action_type_id].' | '.$action_outstanding->company_name); ?>&dates=<?php echo date("Ymd\\THi00",strtotime($action_outstanding->planned_at));?>/<?php echo date("Ymd\\THi00\\Z",strtotime($action_outstanding->planned_at));?>&details=<?php echo $contact_details_for_calendar;?>%0D%0D<?php echo urlencode('http://baselist.herokuapp.com/companies/company?id='.$action_outstanding->company_id);?>%0D%0DAny changes made to this event are not updated in Baselist."target="_blank" rel="nofollow">Add to Calendar</a></small></div>
        							
-							</div><!--END COL-MD-5-->
+							</div><!--END COL-MD-6-->
 
 
 							<div class="col-xs-12 col-md-5">
@@ -615,7 +612,7 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 
 											</div>
 											</div><!--END ACTIONS-->   
-				                        </div>
+				                        </div><!--END ROW-->
 				                </li>
 				                <?php endforeach ?>
 				                </ul>

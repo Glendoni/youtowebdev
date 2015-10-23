@@ -166,7 +166,7 @@ $.post(url, form.serialize(),
     console.log(error['error']);
     form.find('#error_box').html(error['error']);
     form.find('#error_box').show();
-    btn.addClass('btn-primary').removeClass('btn-success').text('Save changes');
+    btn.addClass('btn-primary').removeClass('btn-success').text('Save');
     btn.button('reset');
 })
 .success(function(){

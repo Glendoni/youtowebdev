@@ -71,7 +71,8 @@
                 </div>-->
 
                 <div class="form-group col-md-12">
-                  <button class="btn btn-primary" name="update_profile">Save</button>
+                
+                  <button class="btn btn-sm btn-warning btn-block" name="update_profile">Save</button>
                 </div>
 
             </form>
