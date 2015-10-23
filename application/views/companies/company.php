@@ -792,7 +792,8 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 							<div class="col-xs-6 col-md-5">
 								<h4 style="margin:0;"><?php if ($get_action->action_type_id <> 20): ?><a data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $get_action->id ?>all" aria-expanded="false" aria-controls="collapse<?php echo $get_action->id ?>all"><?php echo $get_action->campaign_name; ?></a>
                                     <?php else: ?>
-                                    	<div style="margin-right: 10px;margin-top: -15px;font-size: 10px;float: left;"><span class="label label-default">Marketing</span></div>><?php echo $get_action->campaign_name; ?>
+                                    	<div style="margin-right: 10px;margin-top: -15px;font-size: 10px;float: left;"><span class="label label-default">Marketing</span></div>
+                                    	<?php echo $get_action->campaign_name; ?>
                                     <?php endif; ?>
 
 								<div class="mic-info">
@@ -862,7 +863,7 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 								<div class="row">				                 
 								<div class="col-xs-6 col-md-7">
 								<h4 style="margin:0;">
-								<?php echo $actions_marketing['campaign_name'];?>
+								<?php echo $actions_marketing['campaign_name'];?><?php if (isset($actions_marketing['sent_id'])) {?><a href="http://www.sonovate.com/?p=<?php echo $actions_marketing['sent_id'];?>" style="padding-left:10px;" target="_blank"><i class="fa fa-eye"></i></a><?php;}?>
 								<div class="mic-info">
 								<?php echo $created_date_formatted?> by <?php echo $actions_marketing['email'];?>
 								</div>
@@ -871,6 +872,7 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 								<div class="col-xs-6 col-md-5" style="text-align:right;">
 								<?php if($actions_marketing['first_name']):?><span class="label label-primary" style="font-size:11px;  "><?php echo $actions_marketing['first_name']." ". $actions_marketing['last_name']; ?></span>
 								<?php endif; ?>
+
 								<?php
 								if (($actions_marketing['opened']>'0') || ($actions_marketing['clicked']>'0')): ?>
 								<span class="label label-success">Opened</span>

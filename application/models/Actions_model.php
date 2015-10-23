@@ -133,7 +133,7 @@ function get_actions_outstanding($company_id)
 	function get_actions_marketing($company_id)
 	{
  	$sql = "select distinct ec.name as campaign_name, con.first_name, con.last_name,
-			c.name, u.email,u.id as user_id,ec.date_sent,
+			c.name, u.email,u.id as user_id,ec.date_sent,ec.sent_id,
 			sum(case when email_action_type = '2' then 1 else 0 end) opened,
 			sum(case when email_action_type = '3' then 1 else 0 end) clicked,
 			sum(case when email_action_type = '3' and link ilike '%unsubscribe%' then 1 else 0 end) unsubscribed
@@ -143,7 +143,7 @@ function get_actions_outstanding($company_id)
 			left join companies c on con.company_id = c.id
 			left join users u on ec.created_by = u.id
 			where c.id = '$company_id'
-			group by 1,2,3,4,5,6,7 order by date_sent desc";
+			group by 1,2,3,4,5,6,7,8 order by date_sent desc";
 		$query = $this->db->query($sql);
 
 		if($query){

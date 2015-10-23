@@ -479,21 +479,6 @@ border-right: 1px solid #e7e7e7;
 .label-OnHold {
 	background-color: #f0ad4e;
 }
- .label-Blacklisted  {
-      animation: blink 1s steps(5, start) infinite;
-      -webkit-animation: blink 1s steps(5, start) infinite;
-    }
-    @keyframes blink {
-      to {
-        visibility: hidden;
-      }
-    }
-    @-webkit-keyframes blink {
-      to {
-        visibility: hidden;
-      }
-    }
-
 .label-Blacklisted {
 	background-color: #000;
 		  	width: 100%;
