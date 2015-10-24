@@ -138,7 +138,7 @@ class Campaigns_model extends MY_Model {
 			   C.registration, -- f16
 		       TT1."turnover", -- f17
 			   TT1."turnover_method",  -- f18
-			   EMP.count,--f19
+			   E.count,--f19
 			   U.image , -- f20
 			   C.class, -- f21
 			   A.lat, -- f22
@@ -208,6 +208,16 @@ class Campaigns_model extends MY_Model {
 		WHERE z.company_id = ac1.company_id and z.action_type_id in (\'4\',\'5\',\'6\',\'8\',\'9\',\'10\',\'11\',\'12\',\'13\',\'17\',\'18\')
 		and z.actioned_at is not null
 		order by ac1.actioned_at desc
+		)
+
+		LEFT JOIN 
+		emp_counts e ON e.company_id = c.id 
+		AND e.id = 
+		(
+		SELECT MAX(id) 
+		FROM emp_counts w 
+		WHERE w.company_id = e.company_id
+		order by e.created_at desc
 		)
 
 		LEFT JOIN 
@@ -298,7 +308,7 @@ class Campaigns_model extends MY_Model {
 			     A.lng,
 		         TT1."turnover",
 			     TT1."turnover_method",
-			     EMP.count,
+			     E.count,
 			     CONT.contacts_count,
 			     C.zendesk_id,
 			     C.customer_from,

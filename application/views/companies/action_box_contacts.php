@@ -1,10 +1,5 @@
 
-<?php if (!empty($contact->eff_to)): ?>
-<span class="label label-danger">Left Company</span>
-<?php else: ?>
-<button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#editContact_<?php echo $contact->id; ?>" style="margin-right:3px;">
- Edit 
-</button><?php if($contact->linkedin_id): ?>
+<?php if($contact->linkedin_id): ?>
 <a href="https://www.linkedin.com/profile/view?id=<?php echo $contact->linkedin_id; ?>" target="_blank" type="button" class="btn btn-xs" style="background-color:#0077b5; color:#fff;">
     <i class="fa fa-linkedin-square"></i> LinkedIn
 </a>
@@ -16,7 +11,12 @@
    Send Email 
 </button>
 <?php endif;?>
-
+<?php if (!empty($contact->eff_to)): ?>
+<span class="label label-danger">Left Company</span>
+<?php else: ?>
+<button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#editContact_<?php echo $contact->id; ?>">
+ Edit 
+</button>
 <?php endif; ?><!--END IF EFF-TO COMPLETED-->
 
 <div class="modal draggable-modal fade" id="send-email<?php echo $contact->id; ?>" tabindex="-1" role="dialog" aria-labelledby="Send email to <?php echo ucfirst($contact->first_name).' '.ucfirst($contact->last_name) ?>" aria-hidden="true" style="display: none;">

@@ -103,29 +103,29 @@ if ($your_date < $now){; ?>
 </div>
 
 	<?php if (isset($company['trading_name'])): ?>
-		<div class="col-md-6" style="margin-bottom:10px;">
+		<div class="col-md-6">
 				<label>Registered Name</label>
 				<p style="margin-bottom:0;">	
 				<?php echo $company['name']; ?>
 				</p>
 		</div><!--END NAME-->
-		<div class="col-md-6" style="margin-bottom:10px;">
+		<div class="col-md-6">
 				<label>Trading Name</label>
 				<p style="margin-bottom:0;">	
 				<?php echo $company['trading_name']; ?>
 				</p>
 		</div><!--END TRADING NAME-->
 		<?php else: ?>
-				<div class="col-sm-12" style="margin-bottom:10px;">
+				<div class="col-md-6">
 				<label>Registered Name</label>
-				<p style="margin-bottom:0;">	
+				<p style="margin-bottom:10px;">	
 				<?php echo $company['name']; ?>
 				</p>
 		</div><!--END NAME-->
 		<?php endif; ?>
-		<div class="col-sm-12" style="margin-top:10px;">
+		<div class="col-md-6">
 				<label>Registered Address</label>
-				<p style="margin-bottom:0;">
+				<p style="margin-bottom:10px;">
                 <?php echo isset($company['address'])?'<a href="http://maps.google.com/?q='.urlencode($company['address']).'" target="_blank">'.$company['address'].'<span style="    line-height: 15px;font-size: 10px;padding-left: 5px;"><i class="fa fa-external-link"></i></span></a>':'-'; ?>  
 				</p>
 		</div><!--END ADDRESS-->
@@ -220,7 +220,7 @@ if ($your_date < $now){; ?>
 			<?php if (isset($company['emp_count'])): ?>
 			<p class="details"><?php echo $company['emp_count'];?> </p>
 			<?php else: ?>
-			<p class="details">Unknown</p>
+			<!--<p class="details">Unknown</p>-->
 			<?php endif; ?>
 		</div>
 		<!-- SECTORS -->
