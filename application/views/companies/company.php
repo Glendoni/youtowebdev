@@ -81,14 +81,14 @@ endif; ?>
 			<label>Company Number</label>
 			<p>	
 			 <!--COMPANY NUMBER IF APPLICABLE-->
-			<?php echo isset($company['registration'])?$company['registration']:'-'; ?>
+			<?php echo isset($company['registration'])?$company['registration']:''; ?>
          	</p>
         	</div>
 
         	<div class="col-xs-6  col-md-3">
         	<label>Founded</label>
 			<p>	
-				<?php echo isset($company['eff_from'])?$company['eff_from']:'-'; ?>
+				<?php echo isset($company['eff_from'])?$company['eff_from']:''; ?>
 			</p>
 		</div>
 	
@@ -166,7 +166,6 @@ endif; ?>
 			<?php if (isset($company['emp_count'])): ?>
 			<p class="details"><?php echo $company['emp_count'];?> </p>
 			<?php else: ?>
-			<p class="details">Unknown</p>
 			<?php endif; ?>
 		</div>
 		<!-- SECTORS -->

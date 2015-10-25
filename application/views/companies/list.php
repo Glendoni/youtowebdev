@@ -166,14 +166,14 @@ if ($your_date < $now){; ?>
 			<label>Company Number</label>
 			<p>	
 			 <!--COMPANY NUMBER IF APPLICABLE-->
-			<?php echo isset($company['registration'])?$company['registration']:'-'; ?>
+			<?php echo isset($company['registration'])?$company['registration']:''; ?>
          	</p>
         	</div>
 
         	<div class="col-xs-6 col-md-3" style="margin-top:10px;">
         	<label>Founded</label>
 			<p>	
-				<?php echo isset($company['eff_from'])?$company['eff_from']:'-'; ?>
+				<?php echo isset($company['eff_from'])?$company['eff_from']:''; ?>
 			</p>
 		</div>
 
@@ -211,7 +211,7 @@ if ($your_date < $now){; ?>
 			<?php if (isset($company['contacts_count'])): ?>
 			<p class="details"><?php echo $company['contacts_count'];?> </p>
 			<?php else: ?>
-			<p class="details">0 </p>
+			<p class="details">0</p>
 			<?php endif; ?>
 		</div>
 		<!-- EMPLOYEES -->
