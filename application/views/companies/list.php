@@ -158,11 +158,11 @@ if ($your_date < $now){; ?>
 		</div>
 
 
-		<div class="row centre padding-bottom">
+		<div class="row padding-bottom">
 				<div class="col-md-12">
 			<hr>
 		</div>
-		<div class="col-xs-6 col-md-3" style="margin-top:10px;">
+		<div class="col-xs-6 col-md-3 centre" style="margin-top:10px;">
 			<label>Company Number</label>
 			<p>	
 			 <!--COMPANY NUMBER IF APPLICABLE-->
@@ -170,20 +170,20 @@ if ($your_date < $now){; ?>
          	</p>
         	</div>
 
-        	<div class="col-xs-6 col-md-3" style="margin-top:10px;">
+        	<div class="col-xs-6 col-md-3 centre" style="margin-top:10px;">
         	<label>Founded</label>
 			<p>	
 				<?php echo isset($company['eff_from'])?$company['eff_from']:''; ?>
 			</p>
 		</div>
 
-        <div class="col-xs-6 col-md-3" style="margin-top:10px;">
+        <div class="col-xs-6 col-md-3 centre" style="margin-top:10px;">
         		<label>Phone</label>
         		<p>
         		<?php echo isset($company['phone'])?$company['phone']:''; ?>                
            		</p>
 			</div><!--END PHONE NUMBER-->
-		<div class="col-xs-6 col-md-3" style="margin-top:10px;">
+		<div class="col-xs-6 col-md-3 centre" style="margin-top:10px;">
 				<label>Class</label>
 				<p>	
 		            <!--CLASS IF APPLICABLE-->

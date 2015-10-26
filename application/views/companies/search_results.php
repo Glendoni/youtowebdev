@@ -26,29 +26,26 @@
 	</ul>
 
 	    <!-- Collect the nav links, forms, and other content for toggling -->
-		<div style="text-align:center;">
+		<div>
 	      	<?php if(($companies_count > 0)): ?>
 				<?php if($current_campaign_name && $current_campaign_owner_id && $current_campaign_id ): ?>
 
 					<?php foreach($current_campaign_stats as $current_campaign_stats){?>
 						<div style="font-weight:300; font-size:32px; margin-bottom: 20px; margin-top: -20px;">
-						<?php echo $current_campaign_name; ?> <?php if($current_campaign_is_shared == False): ?></div>	
+						<?php echo $current_campaign_name; ?> <?php if($current_campaign_is_shared == False): ?>
+						</div>	
 						<?php else: ?>	
 						<?php endif;?>
-<?php foreach($current_campaign_owners as $current_campaign_owner): echo "<div style='text-align: center;font-weight: 300; font-size:12px;'>Owned by <b>".$current_campaign_owner->username."</b></div>"; endforeach ?>	
-
+					<?php foreach($current_campaign_owners as $current_campaign_owner): echo "<div style='text-align: center;font-weight: 300; font-size:12px;'>Owned by <b>".$current_campaign_owner->username."</b></div>"; endforeach ?>	
 
 					<?php if(!empty($current_campaign_stats->description)): ?>
-
 						<p style="font-size:14px"><?php echo $current_campaign_stats->description; ?></p>
-												<?php endif;?>
+					<?php endif;?>
 
 						<div><a class="btn btn-info btn-xs" href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $current_campaign_id; ?>">Refresh</a></div>
 
 						
 <div class="row" style="margin-bottom: 20px;">
-<div class="col-sm-12 mobile-hide">
-</div>
 <div class="col-sm-2 mobile-hide">
 <a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $current_campaign_stats->campaign_id; ?>">
 <div class="circle-responsive black-circle <?php echo empty($this->session->userdata('pipeline'))? 'active':'';?>"><div class="circle-content mega">
