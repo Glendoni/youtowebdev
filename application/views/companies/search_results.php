@@ -31,7 +31,7 @@
 				<?php if($current_campaign_name && $current_campaign_owner_id && $current_campaign_id ): ?>
 
 					<?php foreach($current_campaign_stats as $current_campaign_stats){?>
-						<div style="font-weight:300; font-size:32px; margin-bottom: 20px; margin-top: -20px;">
+						<div style="font-weight:300; font-size:32px; margin-bottom: 20px; margin-top: -20px; text-align:center;">
 						<?php echo $current_campaign_name; ?> <?php if($current_campaign_is_shared == False): ?>
 						</div>	
 						<?php else: ?>	
