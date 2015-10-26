@@ -251,7 +251,7 @@ endif; ?>
 		Locations
 		<div class="pull-right">
 		<div class="btn-group">
-		<button  class="btn btn-success edit-btn btn-xs" data-toggle="modal" id="create_address_<?php echo $company['id']; ?>"  data-target="#create_address_<?php echo $company['id']; ?>" >
+		<button  class="btn btn-primary edit-btn btn-xs" data-toggle="modal" id="create_address_<?php echo $company['id']; ?>"  data-target="#create_address_<?php echo $company['id']; ?>" >
         <span class="ladda-label"> Add Address </span>
 		</button>
 		</div>
@@ -347,7 +347,7 @@ endif; ?>
 		Contacts
 		<div class="pull-right">
 		<div class="btn-group">
-		<button  class="btn btn-success edit-btn btn-xs" data-toggle="modal" id="create_contact_<?php echo $company['id']; ?>"  data-target="#create_contact_<?php echo $company['id']; ?>" >
+		<button  class="btn btn-primary edit-btn btn-xs" data-toggle="modal" id="create_contact_<?php echo $company['id']; ?>"  data-target="#create_contact_<?php echo $company['id']; ?>" >
         <span class="ladda-label"> Add Contact </span>
 		</button>
 		</div>
@@ -397,7 +397,7 @@ endif; ?>
 			<?php endforeach; ?>
 	    <?php else: ?>
 			<div class="alert alert-info" style="margin-top:10px;">
-                No contacts found.
+                None
             </div>
 		<?php endif; ?>
 
