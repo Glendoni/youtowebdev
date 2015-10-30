@@ -135,9 +135,7 @@ class Users_model extends MY_Model {
 		$this->load->library('encrypt');
 		$data = array(
 			'gmail_account' => $data['gmail_account'],
-			'gmail_password' => $this->encrypt->encode($data['gmail_password']),
-			'updated_at' => date('Y-m-d H:i:s'),
-			'updated_by' => $user_id,
+			'gmail_password' => $this->encrypt->encode($data['gmail_password'])
 			);
 
 		$this->db->where('id', $user_id);

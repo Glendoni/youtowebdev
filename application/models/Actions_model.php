@@ -446,7 +446,7 @@ function get_actions_outstanding($company_id)
 		if (!empty($search_user_id)) {
 			$sql = "select distinct c.name, a.actioned_at, c.id, u.name as username from companies c 
 			 inner join actions a on c.id = a.company_id
-			 left join users u on a.created_by = u.id where a.action_type_id = '16' and a.created_by = '$search_user_id' AND a.created_at > '$start_date' AND a.created_at < '$end_date' order by a.actioned_at asc";
+			 left join users u on a.created_by = u.id where a.action_type_id = '16' and a.user_id = '$search_user_id' AND a.created_at > '$start_date' AND a.created_at < '$end_date' order by a.actioned_at asc";
 			$query = $this->db->query($sql);
 			if($query){
 				return $query->result_array();
@@ -500,7 +500,7 @@ function get_actions_outstanding($company_id)
 		$start_date = $dates['start_date'];
 		$end_date = date('Y-m-d H:i:s', strtotime($dates['end_date'] . ' +1 day'));
 		if (!empty($search_user_id)) {
-		  	$sql = "select distinct c.name, a.created_at, c.id from companies c inner join actions a on c.id = a.company_id where a.action_type_id = '8' and a.created_by = '$search_user_id' AND a.created_at > '$start_date' AND a.created_at < '$end_date' order by a.created_at asc";
+		  	$sql = "select distinct c.name, a.created_at, c.id from companies c inner join actions a on c.id = a.company_id where a.action_type_id = '8' and a.user_id = '$search_user_id' AND a.created_at > '$start_date' AND a.created_at < '$end_date' order by a.created_at asc";
 			$query = $this->db->query($sql);
 			if($query){
 				return $query->result_array();
@@ -517,7 +517,7 @@ function get_actions_outstanding($company_id)
 		$start_date = $dates['start_date'];
 		$end_date = $dates['end_date'];
 		if (!empty($search_user_id)) {
-		 $sql = "select distinct c.name, a.created_at,a.actioned_at,a.planned_at, c.id from companies c inner join actions a on c.id = a.company_id where (action_type_id = '12' or action_type_id = '10') and a.created_by = '$search_user_id' AND (a.created_at > '$start_date' or a.actioned_at > '$start_date') AND (a.created_at < '$end_date' or a.actioned_at < '$end_date') group by c.name, a.created_at,a.actioned_at,a.planned_at, c.id order by a.actioned_at, a.planned_at asc";
+		 $sql = "select distinct c.name, a.created_at,a.actioned_at,a.planned_at, c.id from companies c inner join actions a on c.id = a.company_id where (action_type_id = '12' or action_type_id = '10') and a.user_id = '$search_user_id' AND (a.created_at > '$start_date' or a.actioned_at > '$start_date') AND (a.created_at < '$end_date' or a.actioned_at < '$end_date') group by c.name, a.created_at,a.actioned_at,a.planned_at, c.id order by a.actioned_at, a.planned_at asc";
 		$query = $this->db->query($sql);
 		return $query->result_array();
 	}

@@ -414,6 +414,8 @@ class MY_Controller extends CI_Controller {
 			if($company->company->f1->f41)$mapped_companies_array['parent_name'] = $company->company->f1->f41;
 			if($company->company->f1->f42)$mapped_companies_array['parent_id'] = $company->company->f1->f42;
 			if($company->company->f1->f43)$mapped_companies_array['source_explanation'] = $company->company->f1->f43;
+			if($company->company->f1->f44)$mapped_companies_array['created_by_name'] = $company->company->f1->f44;
+			if($company->company->f1->f45)$mapped_companies_array['updated_by_name'] = $company->company->f1->f45;
 
 
 

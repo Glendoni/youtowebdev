@@ -3,10 +3,10 @@
           <div class="col-sm-9 col-sm-offset-3 " style="margin-bottom:20px;">
               <!-- Nav tabs -->
               <ul class="nav nav-tabs dashboard" role="tablist">
-                <li role="presentation" class="active"><button href="#team_stats" aria-controls="team_stats" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;">Stats</button></li>
-                <li role="presentation"><button href="#calls" aria-controls="calls" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;">Calls & Meetings</button></li>
-                <li role="presentation"><button href="#pipeline" aria-controls="pipeline" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;">Pipeline</button></li>
-                <li role="presentation"><button href="#assigned" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;">Watching</button></li>
+                <li role="presentation" class="active"><button href="#team_stats" aria-controls="team_stats" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Stats')">Stats</button></li>
+                <li role="presentation"><button href="#calls" aria-controls="calls" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Calls & Meetings')">Calls & Meetings</button></li>
+                <li role="presentation"><button href="#pipeline" aria-controls="pipeline" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Pipeline')">Pipeline</button></li>
+                <li role="presentation"><button href="#assigned" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Watching')">Watching</button></li>
 
               </ul>
 
@@ -15,9 +15,7 @@
         <div class="row">
           
           <div class="col-sm-9 col-sm-push-3">
-                   
-
-                    <?php foreach($campaignsummary as $get_user_campaign)
+        <?php foreach($campaignsummary as $get_user_campaign)
         {?>
 
 <div class="tab-content mobile-hide">

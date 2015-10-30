@@ -748,6 +748,14 @@ margin-bottom: 20px;
     width: 100%;
     z-index: 9999;
 }
+.bottom-alert {
+	position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+    margin-bottom: -20px;
+}
 .modal-open .modal {
 z-index: 99999;
 	}
@@ -1033,6 +1041,7 @@ font-size: 9px;
 @media only screen and (min-width: 991px) {
 .modal-dialog {
     width: 85% !important ;
+    max-width: 1050px;
 }
 }
 

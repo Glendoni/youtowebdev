@@ -167,10 +167,10 @@
                 
             </div>
             <div class="modal-footer">
-                <small><b>Record Created:</b> <?php echo date("d/m/y",strtotime($company['created_at']));?> | <b>Last Updated:</b>
-            <?php echo isset($company['updated_at'])?date("d/m/y",strtotime($company['updated_at'])):'Never'; ?>
+            <div><small><b>Record Created:</b> <?php echo date("d/m/y",strtotime($company['created_at']));?> - <?php echo $company['created_by_name']; ?></small></div><div><small><b>Last Updated:</b>
+            <?php echo isset($company['updated_at'])?date("d/m/y",strtotime($company['updated_at']))." - ".$company['updated_by_name']:'Never'; ?>
 
-            </small>
+            </small></div>
             </div>
             <?php echo form_close(); ?>
         </div>

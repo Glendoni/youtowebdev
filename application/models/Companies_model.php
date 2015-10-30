@@ -461,8 +461,9 @@ class Companies_model extends CI_Model {
 			   C.source_date, --f40
 			   pr.name, --f41
 			   pr.id, --f42
-			   C.source_explanation --f43
-
+			   C.source_explanation, --f43
+			   UC.name, --f44
+			   UU.name --f45
 			   )) "JSON output" 
 			   
 
@@ -539,6 +540,14 @@ class Companies_model extends CI_Model {
  		LEFT JOIN
  		companies pr
 		ON C.parent_registration = pr.registration
+
+		LEFT JOIN 
+ 		users UC on
+ 		uc.id = C.created_by
+
+		LEFT JOIN 
+ 		users UU on
+ 		uu.id = C.updated_by
 
 		LEFT JOIN 
  		users AU1 on
@@ -624,7 +633,9 @@ class Companies_model extends CI_Model {
 			     C.source_date,
 			     pr.name,
 			     pr.id,
-			     C.source_explanation
+			     C.source_explanation,
+			     UC.name, 
+			     UU.name
 
 		order by C.id 
 
