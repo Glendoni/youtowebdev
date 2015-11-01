@@ -167,8 +167,8 @@
                 
             </div>
             <div class="modal-footer">
-            <div><small><b>Record Created:</b> <?php echo date("d/m/y",strtotime($company['created_at']));?> - <?php echo $company['created_by_name']; ?></small></div><div><small><b>Last Updated:</b>
-            <?php echo isset($company['updated_at'])?date("d/m/y",strtotime($company['updated_at']))." - ".$company['updated_by_name']:'Never'; ?>
+            <div><small><b>Record Created:</b> <?php echo date("d/m/Y",strtotime($company['created_at']));?> - <?php echo $company['created_by_name']; ?></small></div><div><small><b>Last Updated:</b>
+            <?php echo isset($company['updated_at'])?date("d/m/Y",strtotime($company['updated_at']))." - ".$company['updated_by_name']:'Never'; ?>
 
             </small></div>
             </div>
