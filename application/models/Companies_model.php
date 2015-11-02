@@ -37,7 +37,7 @@ class Companies_model extends CI_Model {
 	function get_companies_classes()
 	{
 		$arrayNames = array(
-			'Unknown' => 'Unknown',
+			'Unknown' => 'Unknowns',
 			'PreStartUp' => 'Pre-Start Up',
 			'StartUp' => 'Start Up',
 			'UsingFinance' => 'Using Finance',
@@ -522,6 +522,16 @@ class Companies_model extends CI_Model {
 		WHERE z.company_id = ac1.company_id and z.action_type_id in (\'4\',\'5\',\'8\',\'9\',\'10\',\'11\',\'12\',\'13\',\'17\',\'18\')
 		and z.actioned_at is not null
 		order by ac1.actioned_at desc
+		)
+
+		LEFT JOIN 
+		emp_counts e ON e.company_id = c.id 
+		AND e.id = 
+		(
+		SELECT MAX(id) 
+		FROM emp_counts w 
+		WHERE w.company_id = e.company_id
+		order by e.created_at desc
 		)
 
 		LEFT JOIN 
