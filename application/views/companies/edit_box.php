@@ -17,7 +17,7 @@
             <div class="col-sm-6 col-md-8">
             <div class=" form-group ">
                         <label for="trading_name" class="control-label">Trading Name</label>                            
-                        <input type="text" name="trading_name" value="<?php echo isset($company['trading_name'])?$company['trading_name']:''; ?>" id="trading_name" maxlength="50" class="form-control">
+                        <input type="text" name="trading_name" value="<?php echo isset($company['trading_name'])?$company['trading_name']:''; ?>" id="trading_name" class="form-control">
             </div>
             </div>
             <div class="col-sm-6 col-md-4">
@@ -85,7 +85,7 @@
                             <div class="alert alert-info" role="alert">
                     <div class=" form-group ">
                         <label for="source_explanation" class="control-label">Special Insight (Required)</label>
-                        <input type="text" name="source_explanation" value="<?php echo isset($company['source_explanation'])?$company['source_explanation']:NULL; ?>" id="url" maxlength="50" class="form-control source_explanation">
+                        <input type="text" name="source_explanation" value="<?php echo isset($company['source_explanation'])?$company['source_explanation']:NULL; ?>" id="source_explanation" class="form-control source_explanation">
                     </div>
                     </div>
                 </div>
@@ -168,9 +168,7 @@
             </div>
             <div class="modal-footer">
             <div><small><b>Record Created:</b> <?php echo date("d/m/Y",strtotime($company['created_at']));?> - <?php echo $company['created_by_name']; ?></small></div><div><small><b>Last Updated:</b>
-            <?php echo isset($company['updated_at'])?date("d/m/Y",strtotime($company['updated_at']))." - ".$company['updated_by_name']:'Never'; ?>
-
-            </small></div>
+            <?php echo isset($company['updated_at'])?date("d/m/Y",strtotime($company['updated_at']))." - ".$company['updated_by_name']:'Never'; ?></small></div>
             </div>
             <?php echo form_close(); ?>
         </div>
