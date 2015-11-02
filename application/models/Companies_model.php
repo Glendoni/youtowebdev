@@ -525,16 +525,6 @@ class Companies_model extends CI_Model {
 		)
 
 		LEFT JOIN 
-		emp_counts e ON e.company_id = c.id 
-		AND e.id = 
-		(
-		SELECT MAX(id) 
-		FROM emp_counts w 
-		WHERE w.company_id = e.company_id
-		order by e.created_at desc
-		)
-
-		LEFT JOIN 
  		action_types ACT1 on
  		AC1.action_type_id = ACT1.id
 
