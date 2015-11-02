@@ -436,7 +436,7 @@ class Companies_model extends CI_Model {
 			   C.registration, -- f16
 		       TT1."turnover", -- f17
 			   TT1."turnover_method",  -- f18
-			   E.count,--f19
+			    EMP.count,--f19
 			   U.image , -- f20
 			   C.class, -- f21
 			   A.lat, -- f22
@@ -524,15 +524,9 @@ class Companies_model extends CI_Model {
 		order by ac1.actioned_at desc
 		)
 
-		LEFT JOIN 
-		emp_counts e ON e.company_id = c.id 
-		AND e.id = 
-		(
-		SELECT MAX(id) 
-		FROM emp_counts w 
-		WHERE w.company_id = e.company_id
-		order by e.created_at desc
-		)
+	    left join 
+        (select count, company_id from emp_counts ORDER BY "emp_counts"."created_at" DESC limit 1)
+        EMP ON EMP.company_id = C.id
 
 		LEFT JOIN 
  		action_types ACT1 on
@@ -618,7 +612,7 @@ class Companies_model extends CI_Model {
 			     A.lng,
 		         TT1."turnover",
 			     TT1."turnover_method",
-			     E.count,
+			      EMP.count,
 			     CONT.contacts_count,
 			     C.zendesk_id,
 			     C.customer_from,
