@@ -115,8 +115,8 @@ class Campaigns_model extends MY_Model {
 			   C.name,
 			   C.pipeline,
 			   U.id "owner_id",
-			   AC1.actioned_at, -- f32
-			   AC2.planned_at, -- f35
+			   TT5.actioned_at, -- f32
+			   TT6.planned_at, -- f35
 			   AU1.name "aname1",
 			   AU2.name "aname2",
 		       row_to_json((
@@ -138,7 +138,7 @@ class Campaigns_model extends MY_Model {
 			   C.registration, -- f16
 		       TT1."turnover", -- f17
 			   TT1."turnover_method",  -- f18
-			    EMP.count, -- 19
+			   TT4.count,--f19
 			   U.image , -- f20
 			   C.class, -- f21
 			   A.lat, -- f22
@@ -153,18 +153,20 @@ class Campaigns_model extends MY_Model {
 			   C.zendesk_id, -- f29
 			   C.customer_from, -- f30
 			   C.sonovate_id, -- f31
-			   AC1.actioned_at, -- f32
+			   TT5.actioned_at, -- f32
 			   ACT1.name, -- f33
 			   AU1.name, -- f34
-			   AC2.planned_at, -- f35
+			   TT6.planned_at, -- f35
 			   ACT2.name , -- f36
 			   AU2.name, -- f37
 			   C.trading_name, --f38
 			   C.lead_source_id, --f39
 			   C.source_date, --f40
-			   pr.name, --f42
-			   C.source_explanation--f43
-
+			   pr.name, --f41
+			   pr.id, --f42
+			   C.source_explanation, --f43
+			   UC.name, --f44
+			   UU.name --f45
 			   )) "JSON output" 
 			  
 
@@ -194,57 +196,91 @@ class Campaigns_model extends MY_Model {
 		)   TT1
 		ON TT1."company id" = C.id 
 
+		LEFT JOIN 
+		(-- TT4 
+		select distinct E.company_id,
+		E.count
+		from 
+		(-- T4
+		select distinct id,
+		company_id,
+		max(created_at) OVER (PARTITION BY company_id) "max created_at date"
+		from emp_counts
+		)   T4
+		JOIN EMP_COUNTS E
+		ON T4.id = E.id 
+		where T4."max created_at date" = E.created_at
+		)   TT4
+		ON TT4.company_id = C.id 
+
 		LEFT JOIN
 		(
-			SELECT count(*) as "contacts_count",company_id FROM "contacts" group by contacts.company_id
+		SELECT count(*) as "contacts_count",company_id FROM "contacts" group by contacts.company_id
 		) CONT ON CONT.company_id = C.id
-
+	
 		LEFT JOIN 
-		actions ac1 ON ac1.company_id = c.id 
-		AND ac1.id = 
-		(
-		SELECT MAX(id) 
-		FROM actions z 
-		WHERE z.company_id = ac1.company_id and z.action_type_id in (\'4\',\'5\',\'6\',\'8\',\'9\',\'10\',\'11\',\'12\',\'13\',\'17\',\'18\')
-		and z.actioned_at is not null
-		order by ac1.actioned_at desc
-		)
-
-			    left join 
-        (select count, company_id from emp_counts ORDER BY "emp_counts"."created_at" DESC limit 1)
-        EMP ON EMP.company_id = C.id
+		(-- TT5 LAST ACTION
+		select distinct ac1.*
+		from 
+		(-- T5
+		select distinct id,
+		       company_id,
+		       max(id) OVER (PARTITION BY company_id) "max id"
+		from actions
+		where action_type_id in (\'4\',\'5\',\'8\',\'9\',\'10\',\'11\',\'12\',\'13\',\'17\',\'18\')
+		and actioned_at is not null
+		)   T5
+		JOIN ACTIONS AC1
+		ON T5.id = AC1.id 
+		where T5."max id" = AC1.id
+		)   TT5
+		ON TT5.company_id = C.id
 
 		LEFT JOIN 
  		action_types ACT1 on
- 		AC1.action_type_id = ACT1.id
+ 		TT5.action_type_id = ACT1.id
 
-		LEFT JOIN 
- 		users AU1 on
- 		ac1.user_id = AU1.id
-
-		LEFT JOIN
+ 		LEFT JOIN
  		companies pr
 		ON C.parent_registration = pr.registration
 
 		LEFT JOIN 
-		actions ac2 ON ac2.company_id = c.id 
-		AND ac2.id = 
-		(
-		SELECT id
-		FROM actions z2 
-		WHERE z2.company_id = ac2.company_id and z2.actioned_at is null and z2.cancelled_at is null
-		order by z2.planned_at desc limit 1
-		)
+ 		users UC on
+ 		uc.id = C.created_by
 
 		LEFT JOIN 
+ 		users UU on
+ 		uu.id = C.updated_by
+
+		LEFT JOIN 
+ 		users AU1 on
+ 		TT5.user_id = AU1.id
+
+ 		LEFT JOIN 
+		(-- TT6 NEXT ACTION
+		select distinct ac2.*
+		from 
+		(-- T6
+		select distinct id,
+		       company_id,
+		       planned_at
+		from actions
+		where actioned_at is null and cancelled_at is null
+		order by planned_at asc
+		)   T6
+		JOIN ACTIONS AC2
+		ON T6.id = AC2.id 
+		where T6.id = AC2.id
+		)   TT6
+		ON TT6.company_id = C.id
+		
+		LEFT JOIN 
  		action_types ACT2 on
- 		AC2.action_type_id = ACT2.id
+ 		TT6.action_type_id = ACT2.id
 
 		LEFT JOIN 
  		users AU2 on
- 		ac2.user_id = AU2.id
-
-
+ 		TT6.user_id = AU2.id
 
 		LEFT JOIN
 		(-- TT2
@@ -262,7 +298,7 @@ class Campaigns_model extends MY_Model {
 
 		LEFT JOIN 
 		ADDRESSES A
-		ON A.company_id = C.id
+		ON a.id = (select id from addresses where type ilike \'registered address\' and company_id = C.id limit 1)
 
 		LEFT JOIN
 		USERS U
@@ -294,23 +330,26 @@ class Campaigns_model extends MY_Model {
 			     A.lng,
 		         TT1."turnover",
 			     TT1."turnover_method",
-			      EMP.count,
+			     TT4.count,
 			     CONT.contacts_count,
 			     C.zendesk_id,
 			     C.customer_from,
 			     C.sonovate_id,
-			     AC1.actioned_at,
+			     TT5.actioned_at,
 			     ACT1.name,
 			     AU1.name,
-			     AC2.planned_at,
+			     TT6.planned_at,
 			     ACT2.name,
 			     AU2.name,
 			     C.trading_name,
-			   	 C.lead_source_id,
-				 C.source_date,
+				 C.lead_source_id,
+			     C.source_date,
 			     pr.name,
 			     pr.id,
-			     C.source_explanation
+			     C.source_explanation,
+			     UC.name, 
+			     UU.name
+
 
 		order by C.id 
 
