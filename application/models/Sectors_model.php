@@ -13,7 +13,31 @@ class Sectors_model extends MY_Model {
 		
 		return $sectors_array;
 	}
+		function get_all_target()
+	{
+		$this->db->where('target', 't'); 
+		$this->db->order_by("name", "asc");
+		$query = $this->db->get_where('sectors');	
+		foreach($query->result() as $row)
+		{
+		  $target_sectors_array[$row->id] = $row->name;
+		} 
+		
+		return $target_sectors_array;
+	}
+	function get_all_not_target()
+	{
+		$this->db->where('target', 'f'); 
+		$this->db->order_by("name", "asc");
+		$query = $this->db->get_where('sectors');	
 
+		foreach($query->result() as $row)
+		{
+		  $not_target_sectors_array[$row->id] = $row->name;
+		} 
+		
+		return $not_target_sectors_array;
+	}
 	function get_all_for_search()
 	{
 		$sql ="
@@ -38,7 +62,6 @@ class Sectors_model extends MY_Model {
 
 		function get_all_target_in_array()
 	{
-	
 		$this->db->select('id, name');
 		$this->db->where('display', 'true');
 		$query = $this->db->get_where('sectors');

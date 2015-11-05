@@ -69,12 +69,10 @@ class MY_Controller extends CI_Controller {
 		{	
 			$sectors_search = $this->session->userdata('sectors_search');
 			$sectors_list = $this->session->userdata('sectors_list');
-
 		}
 		else
 		{
 			$sectors_search = $this->Sectors_model->get_all_for_search();
-			
 			$sectors_list = $this->Sectors_model->get_all();
 			// asort($sectors_options);
 			$this->session->set_userdata('sectors_list',$sectors_list);
@@ -90,6 +88,20 @@ class MY_Controller extends CI_Controller {
 			$sectors_targets = $this->Sectors_model->get_all_target_in_array();
 			asort($sectors_targets);
 			$this->session->set_userdata('sectors_targets',$sectors_targets);
+		}
+		//TARGET SECTORS
+		if($this->session->userdata('target_sectors_list'))
+		{	
+			$target_sectors_list = $this->session->userdata('target_sectors_list');
+			$not_target_sectors_list = $this->session->userdata('not_target_sectors_list');
+
+		}
+		else
+		{
+			$target_sectors_list = $this->Sectors_model->get_all_target();
+			$this->session->set_userdata('target_sectors_list',$target_sectors_list);
+			$not_target_sectors_list = $this->Sectors_model->get_all_not_target();
+			$this->session->set_userdata('not_target_sectors_list',$not_target_sectors_list);
 		}
 
 		
@@ -212,6 +224,9 @@ class MY_Controller extends CI_Controller {
 		// Pipeline
 		// edit box options 
 		$this->data['sectors_list'] = $sectors_list;
+		$this->data['target_sectors_list'] = $target_sectors_list;
+		$this->data['not_target_sectors_list'] = $not_target_sectors_list;
+
 		// Add options 
 		$system_users = array(0=>'All') + $system_users;
 		$this->data['system_users'] = array(-1=>'No Watchers') + $system_users;

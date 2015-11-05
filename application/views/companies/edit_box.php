@@ -14,13 +14,13 @@
             <strong>Source & Class Required</strong><br> Please add a Source & Class to this company.
             </div>
             </div>
-            <div class="col-sm-6 col-md-8">
+            <div class="col-sm-6 col-md-9">
             <div class=" form-group ">
                         <label for="trading_name" class="control-label">Trading Name</label>                            
                         <input type="text" name="trading_name" value="<?php echo isset($company['trading_name'])?$company['trading_name']:''; ?>" id="trading_name" class="form-control">
             </div>
             </div>
-            <div class="col-sm-6 col-md-4">
+            <div class="col-sm-6 col-md-3">
                                   <div class=" form-group ">
 
                     <label for="url" class="control-label">Recruitment Type</label>
@@ -40,7 +40,7 @@
             
                 </div>
                 <div class="row">
-              <div class="col-sm-6 col-md-4">
+              <div class="col-sm-6 col-md-3">
                     <div class=" form-group ">
                     <?php
                     echo form_label('Class', 'company_class');
@@ -50,7 +50,7 @@
                 </div>
 
 
-                <div class="col-sm-6 col-md-4">
+                <div class="col-sm-6 col-md-3">
                     <div class=" form-group ">
                     <?php
                     echo form_label('Source', 'company_source');
@@ -61,7 +61,7 @@
 
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-4">
+                <div class="col-sm-6 col-md-3">
                     <div class=" form-group ">
                     <?php  
                             if (($company['pipeline']=="Customer") || ($company['pipeline']=="Proposal")){ 
@@ -76,6 +76,25 @@
                                     echo form_dropdown('company_pipeline', $companies_pipeline, (isset($company['pipeline'])?$company['pipeline']:'') ,'class="form-control pipeline-validation-check"' );
                                 };
                                 ?>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-3">
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-6 col-md-6" style="padding-right:2px;">
+                            <div class=" form-group ">
+                                <label for="turnover" class="control-label">Turnover</label>                            
+                                <input type="text" name="turnover" value="" id="turnover" maxlength="50" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6" style="padding-left:2px;">
+                            <label for="turnover" class="control-label">Method</label>   
+                            <select name="method" class="form-control">
+                            <option value=""></option>
+                            <option value="actual">Actual</option>
+                            <option value="projected">Projected</option>
+                        </select>
+                        </div>
                     </div>
                 </div>
 
@@ -94,44 +113,27 @@
                 
               
                 
-                <div class="col-sm-6 col-md-4">
+                <div class="col-sm-6 col-md-3">
                     <div class=" form-group ">
                         <label for="url" class="control-label">Website</label>                            
                         <input type="text" name="url" value="<?php echo isset($company['url'])?$company['url']:''; ?>" id="url" maxlength="50" class="form-control">
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-4">
+                <div class="col-sm-6 col-md-3">
                     <div class=" form-group ">
                         <label for="phone" class="control-label">Phone</label>                            
                         <input type="text" name="phone" value="<?php echo isset($company['phone'])?$company['phone']:''; ?>" id="phone" maxlength="50" class="form-control">
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-4">
-                    <div class="row">
-                        <div class="col-xs-6 col-sm-6 col-md-6">
-                            <div class=" form-group ">
-                                <label for="turnover" class="control-label">Turnover</label>                            
-                                <input type="text" name="turnover" value="" id="turnover" maxlength="50" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-xs-6 col-sm-6 col-md-6">
-                            <label for="turnover" class="control-label">Method</label>   
-                            <select name="method" class="form-control">
-                            <option value=""></option>
-                            <option value="actual">Actual</option>
-                            <option value="projected">Projected</option>
-                        </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4">
+                
+                <div class="col-sm-6 col-md-3">
                     <div class=" form-group ">
                         <label for="linkedin_id" class="control-label">Linkedin ID</label>                            
                         <input type="text" name="linkedin_id" value="<?php echo isset($company['linkedin_id'])?$company['linkedin_id']:''; ?>" id="linkedin_id" maxlength="50" class="form-control">
                     </div>
                 </div>
                 <?php if (isset($company['emp_count']) == False ):?>
-                <div class="col-sm-6 col-md-4">
+                <div class="col-sm-6 col-md-3">
                     <div class=" form-group ">
                         <label for="emp_count" class="control-label">Employees</label>                            
                         <input type="text" name="emp_count" value="" id="emp_count" maxlength="50" class="form-control">
@@ -141,11 +143,24 @@
 
                 
                 
-                <div class="col-md-12">
-                    <label for="sectors" class="control-label">Sectors</label>
+                <div class="col-md-12 target_sectors">
+                    <label for="sectors" class="control-label">Target Sectors</label>
                     <div class="tag-holder">
                     <?php   
-                    foreach ($sectors_list as $key => $value): ?>
+                    foreach ($target_sectors_list as $key => $value): ?>
+                        <span class="button-checkbox">
+                            <button type="button" class="btn btn-checkbox" data-color="primary" >&nbsp;<?php echo $value; ?></button>
+                            <input type="checkbox" name="add_sectors[]" value="<?php echo $key; ?>" class="hidden" <?php echo (isset($company['sectors']) and array_key_exists($key,$company['sectors']))? 'checked': '' ; ?>  />
+                        </span>
+                    <?php endforeach ?>
+                    </div>
+            
+                </div>
+                    <div class="col-md-12" style="margin-top:10px;">
+                    <label for="sectors" class="control-label">Other Sectors</label>
+                    <div class="tag-holder">
+                    <?php   
+                    foreach ($not_target_sectors_list as $key => $value): ?>
                         <span class="button-checkbox">
                             <button type="button" class="btn btn-checkbox" data-color="primary" >&nbsp;<?php echo $value; ?></button>
                             <input type="checkbox" name="add_sectors[]" value="<?php echo $key; ?>" class="hidden" <?php echo (isset($company['sectors']) and array_key_exists($key,$company['sectors']))? 'checked': '' ; ?>  />
@@ -167,8 +182,8 @@
                 
             </div>
             <div class="modal-footer">
-            <div><small><b>Record Created:</b> <?php echo date("d/m/Y",strtotime($company['created_at']));?> - <?php echo $company['created_by_name']; ?></small></div><div><small><b>Last Updated:</b>
-            <?php echo isset($company['updated_at'])?date("d/m/Y",strtotime($company['updated_at']))." - ".$company['updated_by_name']:'Never'; ?></small></div>
+            <div><small><b>Last Updated:</b>
+            <?php echo isset($company['updated_at'])?date("d/m/Y",strtotime($company['updated_at']))." - ".$company['updated_by_name']:'Never'; ?></small></div><div><small><b>Record Created:</b> <?php echo date("d/m/Y",strtotime($company['created_at']));?> - <?php echo $company['created_by_name']; ?></small></div>
             </div>
             <?php echo form_close(); ?>
         </div>

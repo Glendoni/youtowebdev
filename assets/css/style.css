@@ -291,6 +291,11 @@ a.btn.btn-block.clear-fields {
     color: #000;
 }
 
+.target_sectors .btn.btn-checkbox.btn-primary.active {
+	background-color: #689F38;
+	border-color: #33691E;
+}
+
 .btn-checkbox {
 	font-size:11px !important;
 	margin-bottom:2px !important;
