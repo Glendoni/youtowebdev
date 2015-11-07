@@ -442,6 +442,7 @@ class MY_Controller extends CI_Controller {
 			if(!empty($company->company->f1->f24)){
 				$sectors = array();
 				foreach ($company->company->f1->f24 as $sector) {
+
 					if(isset($sector->f1) && !empty($sector->f1)) 
 						$sectors[$sector->f1] = $sector->f2;
 				}

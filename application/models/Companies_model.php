@@ -443,7 +443,7 @@ class Companies_model extends CI_Model {
 			   A.lng, -- f23
 			   json_agg( 
 			   row_to_json ((
-			   TT2."sector_id", TT2."sector"))),-- f24
+			   TT2."sector_id", TT2."sector", TT2."target"))),-- f24
 			   C.phone, -- f25 
 			   C.pipeline, -- f26
 			   CONT.contacts_count, -- f27
@@ -488,20 +488,22 @@ class Companies_model extends CI_Model {
 
 		$sql = $sql.' LEFT JOIN 
 		(-- TT1 
-		select distinct T.company_id "company id",
+		select T.company_id "company id",
 		       T.turnover "turnover",
 		       T.method "turnover_method"       
 		from 
 		(-- T1
-		select distinct id "id",
+		select id "id",
 		       company_id,
 		       max(eff_from) OVER (PARTITION BY company_id) "max eff date"
-		from TURNOVERS limit 1
+		from TURNOVERS
 		)   T1
 		  
 		JOIN TURNOVERS T
-		ON T1.id = T.id 
+		ON T1.id = T.id
 		where T1."max eff date" = T.eff_from
+		  
+		  
 		)   TT1
 		ON TT1."company id" = C.id 
 
@@ -522,7 +524,6 @@ class Companies_model extends CI_Model {
 		where T4."max created_at date" = E.created_at
 		)   TT4
 		ON TT4.company_id = C.id 
-
 
 		LEFT JOIN
 		(
@@ -597,7 +598,8 @@ class Companies_model extends CI_Model {
 		(-- TT2
 		select O.company_id "company id",
 		       S.id "sector_id",
-		       S.name "sector"       
+		       S.name "sector",
+		       S.target "target"      
 		from OPERATES O
 
 		JOIN SECTORS S

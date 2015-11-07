@@ -148,7 +148,7 @@ endif; ?>
 		<div class="col-xs-4 col-sm-3 centre">
 			<strong><span style="text-transform: capitalize"><?php echo isset($company['turnover_method'])?$company['turnover_method']:'';?></span> Turnover</strong>
 			<p class="details" style="margin-bottom:5px;">
-				<?php echo isset($company['turnover'])? '£'.number_format (round($company['turnover'],-3)):'';?>
+				<?php echo isset($company['turnover'])? '£'.number_format (round($company['turnover'],-3)):'Unknown';?>
 			</p>
         </div>
 		<!-- CONTACTS -->
@@ -173,6 +173,7 @@ endif; ?>
 			<strong>Sectors</strong> 
 			<?php
 			if(isset($company['sectors'])){
+		
 				foreach ($company['sectors'] as $key => $name)
 				{
 				echo '<p class="details" style="margin-bottom:0; text-align:centre;">'.$name.'</p>';
