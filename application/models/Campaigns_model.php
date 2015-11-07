@@ -270,7 +270,7 @@ class Campaigns_model extends MY_Model {
 		)   T6
 		JOIN ACTIONS AC2
 		ON T6.id = AC2.id 
-		where T6.id = AC2.id
+		where T6.id = AC2.id limit 1
 		)   TT6
 		ON TT6.company_id = C.id
 		
