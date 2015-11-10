@@ -70,25 +70,66 @@
         <!-- Navigation -->
 <!--<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">-->
 
-        <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <a class="navbar-brand" href="/" ><img src="<?php echo asset_url();?>images/baselist-logotype-black-transparent-bg.png" style="width:120px;">
-                    <?php if (isset($current_user)): ?>
-                        <div style="font-size:10px; font-weight:300; text-align:right;">Version 2.15</div>
-                    <?php endif; ?>
-        </a>
-            </div>
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
+<!-- Brand and toggle get grouped for better mobile display -->
+<!--<div class="navbar-header">-->
+<div class="col-sm-3 col-md-3">
+<a class="navbar-brand" href="/" ><img src="<?php echo asset_url();?>images/baselist-logotype-black-transparent-bg.png" style="width:120px;">
 <?php if (isset($current_user)): ?>
-    <!--TOP SEARCH BAR-->
-    <?php if (isset($_GET['id'])) { 
-        $company = $companies[0];
-        $search_default = $company['name'];
-        } else {
-        $search_default = $this->input->post('agency_name');
+<div style="font-size: 10px;font-weight: 300;text-align: right;float: right;line-height: 40px;padding-left: 5px;">Version 2.15</div>
+<?php endif; ?>
+</a>
+</div>
+
+
+            <div class="col-sm-3 col-sm-push-6">
+            <!-- Top Menu Items -->
+            <ul class="nav navbar-top-links navbar-right">
+            <li class="dropdown">
+               <a href="#" class="dropdown-toggle user-profile" data-toggle="dropdown">
+
+                    <?php $user_icon = explode(",", ($current_user['image'])); echo "<div class='circle' style='float: left;margin-top: 0px;margin-right: 10px;width: 20px;height: 20px;border-radius: 15px;font-size: 8px;line-height: 20px;text-align: center;font-weight: 700;background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
+                    <?php echo $current_user['name'] ?> <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="<?php echo site_url(); ?>users/profile"><i class="fa fa-fw fa-user"></i> Profile</a>
+                        </li>
+                        <!-- <li>
+                            <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
+                        </li> -->
+                        <li>
+                            <a href="<?php echo site_url(); ?>users/settings"><i class="fa fa-fw fa-envelope"></i> Email Settings</a>
+                        </li>
+                        <li class="divider"></li>
+                        <?php if ($current_user['permission'] == 'admin'): ?>
+                <li>
+                    <a href="<?php echo base_url(); ?>companies/create_company" ><i class="fa fa-plus-circle"></i> add company</a>
+                </li>
+                <li>
+                    <a href="<?php echo base_url(); ?>email_templates/" ><i class="fa fa-envelope"></i> email templates</a>
+                </li>
+                <li class="divider"></li>
+                <?php endif; ?>
+                        <li>
+                            <a href="<?php echo site_url(); ?>login/logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            </div>
+
+
+
+<?php if (isset($current_user)): ?>
+<!--TOP SEARCH BAR-->
+<?php if (isset($_GET['id'])) { 
+$company = $companies[0];
+$search_default = $company['name'];
+} else {
+$search_default = $this->input->post('agency_name');
 }?>
 
-    <div class="col-lg-6 col-lg-offset-2 col-sm-6 col-md-offset-2 large-form-holder clearfix">
+    <div class="col-sm-6 col-md-6 col-sm-pull-3 large-form-holder clearfix">
             <div class="" id="adv-search">
              <?php echo form_open(site_url().'companies', 'id="main_search" novalidate="novalidate" name="main_search" class="" role="form"'); ?>
                 <?php echo form_hidden('main_search','1');?>
@@ -232,39 +273,8 @@
 </div>
 </div><!--END ADVANCED SEARCH-->
 </div>
-            <!-- Top Menu Items -->
-            <ul class="nav navbar-top-links navbar-right">
-            <li class="dropdown" style="margin-top:17px;">
-               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 
-                    <?php $user_icon = explode(",", ($current_user['image'])); echo "<div class='circle' style='float: left;margin-top: 0px;margin-right: 10px;width: 20px;height: 20px;border-radius: 15px;font-size: 8px;line-height: 20px;text-align: center;font-weight: 700;background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
-                    <?php echo $current_user['name'] ?> <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="<?php echo site_url(); ?>users/profile"><i class="fa fa-fw fa-user"></i> Profile</a>
-                        </li>
-                        <!-- <li>
-                            <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
-                        </li> -->
-                        <li>
-                            <a href="<?php echo site_url(); ?>users/settings"><i class="fa fa-fw fa-envelope"></i> Email Settings</a>
-                        </li>
-                        <li class="divider"></li>
-                        <?php if ($current_user['permission'] == 'admin'): ?>
-                <li>
-                    <a href="<?php echo base_url(); ?>companies/create_company" ><i class="fa fa-plus-circle"></i> add company</a>
-                </li>
-                <li>
-                    <a href="<?php echo base_url(); ?>email_templates/" ><i class="fa fa-envelope"></i> email templates</a>
-                </li>
-                <li class="divider"></li>
-                <?php endif; ?>
-                        <li>
-                            <a href="<?php echo site_url(); ?>login/logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
+
             
 
 <?php echo form_close(); ?>

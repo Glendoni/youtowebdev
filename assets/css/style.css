@@ -66,7 +66,7 @@ body {
 .navbar-default .navbar-brand {
 	color: #111;
 	font-weight: bold;
-	margin-top: 16px;
+	margin-top: 10px;
 }
 
 .panel-primary {
@@ -203,6 +203,11 @@ border-bottom: 1px dashed #ddd;
 .user-stat.actioned a{
 	font-weight:500;
 	color:#6DAD63;
+}
+.user-profile {
+	padding-top: 25px !important;
+    height: 100%;
+    padding-bottom: 20px !important;
 }
 
 .action_date {
@@ -458,9 +463,11 @@ border-right: 1px solid #e7e7e7;
 .saved-search-text .assigned-image-holder {
 	margin-top: 12px;margin-right: 5px;
 }
-
+h2.company-header {
+	font-size: 36px;
+}
 .company-header {
-	margin-bottom: 0;
+	margin-bottom: 5px;
 	padding-bottom: 0;
 	border-bottom: none;
 	text-align: center;
@@ -731,8 +738,8 @@ font-weight: 300;
 width: 100% !important;
 }
 .large-form-holder {
-margin-top: 20px;
-margin-bottom: 20px;
+margin-top: 12px;
+margin-bottom: 10px;
 }
 .advanced-search {
   float: left;
@@ -746,13 +753,39 @@ margin-bottom: 20px;
 	font-size: 10px;
 	font-weight: 500;
 }
+.alert-success {
+	
+	    color: #fff;
+    background-color: #559959;
+    margin-bottom: 0;
+    border: none;
+    border-radius: 0;
+        -webkit-box-shadow: 0 8px 6px -6px #999;
+    -moz-box-shadow: 0 8px 6px -6px #999;
+    box-shadow: 0 8px 6px -6px #999;	
+}
+.alert-danger {
+    color: #fff;
+    background-color: #DE361C;
+    margin-bottom: 0;
+    border: none;
+    border-radius: 0;
+        -webkit-box-shadow: 0 8px 6px -6px #999;
+    -moz-box-shadow: 0 8px 6px -6px #999;
+    box-shadow: 0 8px 6px -6px #999;
+    }
+    .close {
+    	opacity: 1;
+    }
 .top-alert {
 	position: fixed;
-    top: 0;
+    top: 67px;
     left: 0;
     width: 100%;
     z-index: 9999;
+    
 }
+
 .bottom-alert {
 	position: fixed;
     bottom: 0;
@@ -831,10 +864,7 @@ a li.autocomplete-item:hover {
     border-bottom-left-radius: 4px;
 }
 
-.large-form-holder {
-margin-top: 20px;
-margin-bottom: 20px;
-}
+
 .advanced-search {
   float: left;
   width: 100%;
@@ -877,7 +907,7 @@ margin-bottom: 20px;
 }
 
 #single-page {
-	padding-top: 120px;
+	padding-top: 90px;
 }
 /* ADD TO CALL */
 a.btn.btn-default.btn-xs.add-to-calendar {
@@ -1064,6 +1094,13 @@ font-size: 9px;
     }
 }/*END 991 MAX*/
 @media screen and (max-width: 767px) {
+
+	#single-page {
+	padding-top: 150px;
+}
+h2.company-header{
+	font-size: 24px;
+}
 .mobile-hide {
 	display: none;
 }
