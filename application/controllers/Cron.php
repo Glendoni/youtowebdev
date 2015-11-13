@@ -6,7 +6,7 @@ class Cron extends CI_Controller {
         parent::__construct();
  
         // this controller can only be called from the command line
-        if (!$this->input->is_cli_request()) show_error('Direct access is not allowed');
+       // if (!$this->input->is_cli_request()) show_error('Direct access is not allowed');
         $this->load->helper('date');
         $this->load->model('Cron_model');
 
@@ -24,6 +24,10 @@ class Cron extends CI_Controller {
     {
         $this->Cron_model->remove_contacts_from_marketing();
     }
-    
+    function remove_customer_contacts_from_marketing($con)
+    {
+        $this->Cron_model->remove_customer_contacts_from_marketing();
+    }
+
 
 }
