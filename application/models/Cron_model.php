@@ -1,18 +1,11 @@
 <?php
 class Cron_model extends CI_Model {
-
-
 	function connect_to_wordpress_database()  {
-	
-
 	}
-
-
 	function update_marketing_clicks()
 	{
 	$con = mysqli_connect("137.117.165.135","baselist","OzzyElmo$1","sonovate_finance");
 	//$con = mysqli_connect("localhost","root","root","sonovate");
-
 	// Check connection
 	if (mysqli_connect_errno())
 	{
@@ -21,11 +14,10 @@ class Cron_model extends CI_Model {
 
 
 	//GET NEW CAMPAIGNS
-	$add_new_campaigns_sql = '	select distinct
-									a.campaign_id as "Campaign ID",
-									p.post_title as "Campaign Name",
-									pm2.meta_value as "Sent By",
-									from_unixtime(pm.meta_value) as "Sent At"
+	$add_new_campaigns_sql = 'select distinct a.campaign_id as "Campaign ID",
+								p.post_title as "Campaign Name",
+								pm2.meta_value as "Sent By",
+								from_unixtime(pm.meta_value) as "Sent At"
 								from sf_mymail_subscribers s
 								inner join sf_mymail_actions a on
 									a.subscriber_id = s.id
@@ -122,6 +114,7 @@ $unix_date = time() - 345600; //CHECK FOR LAST FOUR DAYS
 	$this->db->query($update_prospects);
 	}
 
+
 function remove_contacts_from_marketing() {
 	
 	$con = mysqli_connect("137.117.165.135","baselist","OzzyElmo$1","sonovate_finance");
@@ -148,9 +141,9 @@ function remove_contacts_from_marketing() {
 	$contact_email = $row->email;
 	$contact_date = $row->email_opt_out_date;
 	$opt_out_name = $row->name;
-$sql = "select s.id, s.email from sf_mymail_subscribers s where email = '$contact_email'";
-$result = mysqli_query($con, $sql);
-if (mysqli_num_rows($result) > 0) {
+	$sql = "select s.id, s.email from sf_mymail_subscribers s where email = '$contact_email'";
+	$result = mysqli_query($con, $sql);
+	if (mysqli_num_rows($result) > 0) {
     // output data of each row
     while($row = mysqli_fetch_assoc($result)) {
 	$delete =  "delete from sf_mymail_lists_subscribers where subscriber_id = '". $row["id"]."'";		
@@ -158,6 +151,52 @@ if (mysqli_num_rows($result) > 0) {
  	$update = "insert into sf_mymail_subscriber_fields (subscriber_id, meta_key, meta_value) values ('". $row["id"]."','unsubscribed-via-baselist','".$contact_date." by ".$opt_out_name."');";
  	mysqli_query($con, $update);
 	$add = "insert into sf_mymail_lists_subscribers (list_id, subscriber_id, added) values ('101','". $row["id"]."','".time()."');";
+ 	mysqli_query($con, $add);
+    }
+	} 
+	else {}
+   	} //END FOR EACH
+   	}
+   	//MYSQL CLOSE
+	mysqli_close($con);
+	echo "Complete";
+   }
+
+   function remove_customer_contacts_from_marketing() {
+	
+	$con = mysqli_connect("137.117.165.135","baselist","OzzyElmo$1","sonovate_finance");
+	//$con = mysqli_connect("localhost","root","root","sonovate");
+
+	// Check connection
+	if (mysqli_connect_errno())
+	{
+	echo "Failed to connect to MySQL: " . mysqli_connect_error();
+	}
+	 $select_contacts_sql = "select con.email, c.customer_from from contacts con left join companies c on con.company_id = c.id where c.pipeline ilike 'Customer' and c.customer_from is not null and con.email is not null";
+	$select_contacts = $this->db->query($select_contacts_sql);
+	if ($select_contacts->num_rows() > 0)
+	{
+	//REMOVE ALL BEFORE RE-ADDING THOSE STILL UNSUBSCRIBED//
+	$delete_all = "delete from sf_mymail_subscriber_fields where meta_key = 'customer-on-baselist'";
+	mysqli_query($con, $delete_all);
+	$delete_121 = "delete from sf_mymail_lists_subscribers where list_id = '121'";		
+	mysqli_query($con, $delete_121);
+
+   	foreach ($select_contacts->result() as $row)
+   	{
+
+	$contact_email = $row->email;
+	$contact_date = $row->customer_from;
+	$sql = "select s.id, s.email from sf_mymail_subscribers s where email = '$contact_email'";
+	$result = mysqli_query($con, $sql);
+	if (mysqli_num_rows($result) > 0) {
+    // output data of each row
+    while($row = mysqli_fetch_assoc($result)) {
+	$delete =  "delete from sf_mymail_lists_subscribers where subscriber_id = '". $row["id"]."'";		
+	mysqli_query($con, $delete);
+ 	$update = "insert into sf_mymail_subscriber_fields (subscriber_id, meta_key, meta_value) values ('". $row["id"]."','customer-on-baselist','".$contact_date."');";
+ 	mysqli_query($con, $update);
+	$add = "insert into sf_mymail_lists_subscribers (list_id, subscriber_id, added) values ('121','". $row["id"]."','".time()."');";
  	mysqli_query($con, $add);
     }
 	} 
