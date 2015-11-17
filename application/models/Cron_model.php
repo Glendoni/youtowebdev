@@ -146,7 +146,7 @@ function remove_contacts_from_marketing() {
 	if (mysqli_num_rows($result) > 0) {
     // output data of each row
     while($row = mysqli_fetch_assoc($result)) {
-	$delete =  "delete from sf_mymail_lists_subscribers where subscriber_id = '". $row["id"]."'";		
+	$delete =  "delete from sf_mymail_lists_subscribers where subscriber_id = '". $row["id"]."' and ";		
 	mysqli_query($con, $delete);
  	$update = "insert into sf_mymail_subscriber_fields (subscriber_id, meta_key, meta_value) values ('". $row["id"]."','unsubscribed-via-baselist','".$contact_date." by ".$opt_out_name."');";
  	mysqli_query($con, $update);
@@ -166,7 +166,6 @@ function remove_contacts_from_marketing() {
 	
 	$con = mysqli_connect("137.117.165.135","baselist","OzzyElmo$1","sonovate_finance");
 	//$con = mysqli_connect("localhost","root","root","sonovate");
-
 	// Check connection
 	if (mysqli_connect_errno())
 	{
@@ -176,15 +175,16 @@ function remove_contacts_from_marketing() {
 	$select_contacts = $this->db->query($select_contacts_sql);
 	if ($select_contacts->num_rows() > 0)
 	{
-	//REMOVE ALL BEFORE RE-ADDING THOSE STILL UNSUBSCRIBED//
+	//REMOVE ALL BEFORE RE-ADDING THOSE STILL CUSTOMERS//
 	$delete_all = "delete from sf_mymail_subscriber_fields where meta_key = 'customer-on-baselist'";
 	mysqli_query($con, $delete_all);
-	$delete_121 = "delete from sf_mymail_lists_subscribers where list_id = '121'";		
+	$delete_121 = "delete from sf_mymail_lists_subscribers where list_id = '121';";		
 	mysqli_query($con, $delete_121);
-
+	$update_timestamp = "update sf_mymail_lists set updated = UNIX_TIMESTAMP () where id = '121';";	
+	mysqli_query($con, $update_timestamp);
+	 
    	foreach ($select_contacts->result() as $row)
    	{
-
 	$contact_email = $row->email;
 	$contact_date = $row->customer_from;
 	$sql = "select s.id, s.email from sf_mymail_subscribers s where email = '$contact_email'";
@@ -192,11 +192,38 @@ function remove_contacts_from_marketing() {
 	if (mysqli_num_rows($result) > 0) {
     // output data of each row
     while($row = mysqli_fetch_assoc($result)) {
-	$delete =  "delete from sf_mymail_lists_subscribers where subscriber_id = '". $row["id"]."'";		
+	$delete =  "delete from sf_mymail_lists_subscribers where subscriber_id = '". $row["id"]."' and list_id not in (select id from sf_mymail_lists where parent_id ='121')";		
 	mysqli_query($con, $delete);
- 	$update = "insert into sf_mymail_subscriber_fields (subscriber_id, meta_key, meta_value) values ('". $row["id"]."','customer-on-baselist','".$contact_date."');";
- 	mysqli_query($con, $update);
 	$add = "insert into sf_mymail_lists_subscribers (list_id, subscriber_id, added) values ('121','". $row["id"]."','".time()."');";
+ 	mysqli_query($con, $add);
+    }
+	} 
+	else {}
+   	} //END FOR EACH
+   	}
+
+	$select_contacts_sql = "select con.email, a.actioned_at from contacts con left join companies c on con.company_id = c.id inner join actions a on a.company_id = c.id where a.action_type_id = '8' and c.pipeline ilike 'Proposal' and con.email is not null";
+	$select_contacts = $this->db->query($select_contacts_sql);
+	if ($select_contacts->num_rows() > 0)
+	{
+	//REMOVE ALL BEFORE RE-ADDING THOSE STILL PROSPECTS//
+	$delete_all = "delete from sf_mymail_subscriber_fields where meta_key = 'proposal-on-baselist'";
+	mysqli_query($con, $delete_all);
+	$delete_122 = "delete from sf_mymail_lists_subscribers where list_id = '122'; update sf_mymail_lists set updated = UNIX_TIMESTAMP () where id = '122';";		
+	mysqli_query($con, $delete_122);
+	$update_timestamp = "update sf_mymail_lists set updated = UNIX_TIMESTAMP () where id = '122';";	
+	mysqli_query($con, $update_timestamp);
+   	foreach ($select_contacts->result() as $row)
+   	{
+	$contact_email = $row->email;
+	$contact_date = $row->customer_from;
+	$sql = "select s.id, s.email from sf_mymail_subscribers s where email = '$contact_email'";
+	$result = mysqli_query($con, $sql);
+	if (mysqli_num_rows($result) > 0) {
+    // output data of each row
+    while($row = mysqli_fetch_assoc($result)) {
+	$delete =  "delete from sf_mymail_lists_subscribers where subscriber_id = '". $row["id"]."'";	mysqli_query($con, $delete);
+	$add = "insert into sf_mymail_lists_subscribers (list_id, subscriber_id, added) values ('122','". $row["id"]."','".time()."');";
  	mysqli_query($con, $add);
     }
 	} 
