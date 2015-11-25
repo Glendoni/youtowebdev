@@ -391,7 +391,6 @@ border-right: 1px solid #e7e7e7;
 
 .return_to_campaign {
 	background-color: #F3583E;
-	margin: -20px -15px 20px -15px;
     color: #fff;
     padding-top: 7px;
     padding-bottom: 7px;
@@ -907,7 +906,7 @@ a li.autocomplete-item:hover {
 }
 
 #single-page {
-	padding-top: 90px;
+	padding-top: 110px;
 }
 /* ADD TO CALL */
 a.btn.btn-default.btn-xs.add-to-calendar {

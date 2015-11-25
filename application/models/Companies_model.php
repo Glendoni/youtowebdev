@@ -544,7 +544,7 @@ class Companies_model extends CI_Model {
 		)   T5
 		JOIN ACTIONS AC1
 		ON T5.id = AC1.id 
-		where T5."max id" = AC1.id limit 1
+		where T5."max id" = AC1.id
 		)   TT5
 		ON TT5.company_id = C.id
 
@@ -578,11 +578,11 @@ class Companies_model extends CI_Model {
 		       planned_at
 		from actions
 		where actioned_at is null and cancelled_at is null
-		order by planned_at asc limit 1
+		order by planned_at asc
 		)   T6
 		JOIN ACTIONS AC2
 		ON T6.id = AC2.id 
-		where T6.id = AC2.id
+		where T6.id = AC2.id limit 1
 		)   TT6
 		ON TT6.company_id = C.id
 		

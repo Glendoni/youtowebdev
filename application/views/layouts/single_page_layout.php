@@ -8,13 +8,18 @@
         </div>
         </div>
     <?php endif; ?>
-<div id="single-page">
-    <div class="container-fluid">
     <?php if (!empty($_GET['campaign_id'])):   ?>
+            <div class="top-alert">
+
 <div class="return_to_campaign">
+
 <a class="btn btn-default btn-sm" href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $_GET['campaign_id']; ?>" role="button">Return to Campaign</a>
 </div>
+</div>
 <?php endif; ?>
+<div id="single-page">
+    <div class="container-fluid">
+    
 
 	<?php  $this->load->view($main_content); ?>
 	</div>

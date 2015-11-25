@@ -9,7 +9,7 @@
 		</div>
 		<div class="col-xs-8 ">
         <span class="count_of_results">
-				<?php if($current_campaign_name && $current_campaign_owner_id && $current_campaign_id ): ?>
+        <?php if($current_campaign_name && $current_campaign_owner_id && $current_campaign_id ): ?>
 				<?php else: ?>
 				<?php echo number_format($companies_count); ?> <?php if ($companies_count<> "1") {echo "Companies";} else { echo "Company";}?>
 				<?php endif; ?>
