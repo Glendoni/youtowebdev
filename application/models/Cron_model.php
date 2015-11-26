@@ -137,7 +137,6 @@ function remove_contacts_from_marketing() {
 
    	foreach ($select_contacts->result() as $row)
    	{
-
 	$contact_email = $row->email;
 	$contact_date = $row->email_opt_out_date;
 	$opt_out_name = $row->name;
@@ -146,7 +145,7 @@ function remove_contacts_from_marketing() {
 	if (mysqli_num_rows($result) > 0) {
     // output data of each row
     while($row = mysqli_fetch_assoc($result)) {
-	$delete =  "delete from sf_mymail_lists_subscribers where subscriber_id = '". $row["id"]."' and ";		
+	$delete =  "delete from sf_mymail_lists_subscribers where subscriber_id = '". $row["id"]."'' ";		
 	mysqli_query($con, $delete);
  	$update = "insert into sf_mymail_subscriber_fields (subscriber_id, meta_key, meta_value) values ('". $row["id"]."','unsubscribed-via-baselist','".$contact_date." by ".$opt_out_name."');";
  	mysqli_query($con, $update);
