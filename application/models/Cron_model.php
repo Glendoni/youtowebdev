@@ -117,8 +117,8 @@ $unix_date = time() - 345600; //CHECK FOR LAST FOUR DAYS
 
 function remove_contacts_from_marketing() {
 	
-	//$con = mysqli_connect("137.117.165.135","baselist","OzzyElmo$1","sonovate_finance");
-	$con = mysqli_connect("localhost","root","root","sonovate");
+	$con = mysqli_connect("137.117.165.135","baselist","OzzyElmo$1","sonovate_finance");
+	//$con = mysqli_connect("localhost","root","root","sonovate");
 
 	// Check connection
 	if (mysqli_connect_errno())
