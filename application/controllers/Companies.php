@@ -356,16 +356,26 @@ public function create_address(){
 
 
 	public function autocomplete() {
+        
+        $callCH = true;
         $search_data = trim($this->input->post("search_data"));
 		$response = "<div class='autocomplete-full-holder'><div class='col-md-6 clearfix no-padding'><ul class='autocomplete-holder'>";
+        
+        
         $query = $this->Companies_model->get_autocomplete($search_data);
+        
+        
         $rowcount = $query->num_rows();
 		if ($rowcount> 0) {
 			$response= $response."<li class='autocomplete-item split-heading'><i class='fa fa-caret-square-o-down'></i> Companies</li>";
 		}
 		else
 		{
-			$response= $response."<li class='autocomplete-item split-heading autocomplete-no-results'><i class='fa fa-times'></i> No Companies Found</li>";
+            
+            $response= $response."<li class='autocomplete-item split-heading autocomplete-no-results'><i class='fa fa-times'></i> No Companies Found</li>";
+            $callCH = false;
+           // $responsed=  $response.$this->getCompanyHouseDetails(08245800);
+            
 		}
         $words = array( 'Limited', 'LIMITED', 'LTD','ltd','Ltd' );
         foreach ($query->result() as $row):
@@ -391,7 +401,74 @@ public function create_address(){
         endforeach;
         $response= $response."</ul></div>";
         $this->output->set_content_type('application/json');
-		$this->output->set_output(json_encode(array('html'=> $response)));
+		$this->output->set_output(json_encode(array('html'=> $response, 'callCH'=> $callCH))); //callCH = return true or false (default) call company house function
+        
+        
+       // $responsed=  $this->getCompanyHouseDetails(08245800);
     }
+    	public function getCompany() 
+        {
+            header('Content-Type : application/json');
+            $obj = json_decode($_POST);
+            $output = array(
+            'registration' => $_POST['registration'],
+                'user_id' => $_POST['user_id'],
+             'company_type' => $_POST['company_type']   
+                
+            );
+            
+            if($this->input->post('postal_code'))
+		{            
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('registration', 'registration', 'xss_clean');
+        $this->form_validation->set_rules('name', 'name', 'xss_clean|required');
+        $this->form_validation->set_rules('address', 'address', 'xss_clean|required');
+        $this->form_validation->set_rules('user_id', 'user_id', 'xss_clean|required');
+          $this->form_validation->set_rules('company_type', 'company_type', 'xss_clean|required'); 
+        $this->form_validation->set_rules('date_of_creation', 'date_of_creation', 'xss_clean|required');
+        $this->form_validation->set_rules('name', 'name', 'xss_clean|required');
+        $rows_affected = $this->Companies_model->create_company_from_CH($this->input->post());
+
+            if($rows_affected)
+            {
+                //$this->set_message_success('New company has been added.');
+               //redirect('/companies/company?id='.$this->input->post('registration'));
+               //$this->refresh_search_results();
+                
+                echo json_encode(array('status' => 200, 'message' => $rows_affected));
+            }else{
+                  echo json_encode(array('status' => 'Error', 'message' => 'Something went wrong'));
+            }
+                //$rows_affected = $this->Companies_model->create_company_from_CH($this->input->post());
+
+
+           // if($rows_affected  > 0)
+            //{
+                //$this->set_message_success('Address has been added.');
+                 //redirect('/companies/company?id='.$this->input->post('registration'));
+                  //$this->refresh_search_results();
+            //}
+
+            }
+             
+        }
+    
+    	public function getCompanyHouseDetails($id = 0) 
+	{
+        
+           $id = str_replace(' ', '', $id);
+             $server_output = array();
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL,"https://api.companieshouse.gov.uk/search/companies?q=".$id);
+            curl_setopt($ch, CURLOPT_GET, 2);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, false);
+            $headers = array();
+            $headers[] = 'Authorization: Basic RWFpN0V2N0JOSk1wcDlkcThUTWxkdHZzOXBDSzRTdmt0UGpzVjduWDo=';
+            $headers[] = 'Content-Type: application/json';
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+             $server_output = curl_exec ($ch);
+               curl_close ($ch); 
+             return   json_encode($server_output);
+ }
 
 }

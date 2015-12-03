@@ -45,16 +45,118 @@ $.ajax({
     url: "<?php echo base_url(); ?>companies/autocomplete/",
     data: post_data,
     success: function(data) {
+        
+        //alert();
+     
 // return success
 // console.log(data.html);
 $('#suggestions').show();
 $('#autoSuggestionsList').addClass('auto_list');
 $('#autoSuggestionsList').html(data.html);
 $('#agency_name').addClass('autocomplete-live');
+        
+        
+          if (data.callCH != true ) { 
+          // alert('I worked');
+          
+         getCompany(input_data);
+              
+              
+              
+       }
     }
 });
     }
 }
+   
+    
+function  getCompany(input_data){
+    // 08245800
+    
+     $.ajax({
+            type: "GET",
+            url: "<?php echo base_url(); ?>companies/getCompanyHouseDetails/"+input_data,
+            //data: post_data,
+            success: function(data) {
+             var obj =   $.parseJSON(data);
+                
+            var i = 0;
+            var text = "";
+            var out = [];
+            while ( obj.items[i]) {
+
+                if(obj.items[i].company_status == 'active' ){
+             out += '<a href="javascript:;" company_number="'+obj.items[i].company_number+'" title="'+obj.items[i].title+'" postal_code="'+obj.items[i].address.postal_code+'" address_line_1="'+obj.items[i].address.address_line_1+'" locality="'+obj.items[i].address.locality+'" snippet="'+obj.items[i].snippet+'" company_type="'+obj.items[i].company_type+'" company_status="'+obj.items[i].company_status+'" description="'+obj.items[i].description+'" date_of_creation="'+obj.items[i].date_of_creation+'"   class="companyHouseRegNum"><li class="autocomplete-item autocomplete-company"><strong>' + obj.items[i].title + ' </strong> <i class="glyphicon glyphicon-floppy-save"></i><br><small></small></li></a>';  
+                     }
+               i++;
+
+                if (i === 7) { break; }
+
+
+            }    
+
+                            $('#suggestions').show();
+            $('#autoSuggestionsList').addClass('auto_list');
+            $('#autoSuggestionsList').html('<div class="autocomplete-full-holder"><div class="col-md-6 clearfix no-padding"><ul class="autocomplete-holder"><li class="autocomplete-item split-heading"><i class="fa fa-caret-square-o-down"></i> Companies</li>'+out+'</ul></div><div class="col-md-6 no-padding"><ul class="autocomplete-holder"><li class="autocomplete-item split-heading autocomplete-no-results"><i class="fa fa-times"></i> No Contacts Found</li></ul></div></div>');
+            $('#agency_name').addClass('autocomplete-live');
+                             saveCompanyHandler();
+            }
+            });
+    
+}
+    
+        function saveCompanyHandler(){
+
+            $('.companyHouseRegNum').click(function(){
+
+              //  alert($(this).attr('companyHouseRegNum'));
+                
+ 
+            // ,    
+  var mode =  "create";
+                var user_id  =  <?php echo $current_user['id']; ?> ; 
+                
+             
+          var data = {
+              "registration": $(this).attr('company_number'),
+              "date_of_creation": $(this).attr('date_of_creation'),
+              "name": $(this).attr('title'),
+              "postal_code": $(this).attr('postal_code'),
+              "address": $(this).attr('snippet'),
+              "user_id" : user_id,
+              "company_status": $(this).attr('company_status'),
+              "address_line_1": $(this).attr('address_line_1'),
+              "company_type": $(this).attr('company_type'),
+               "description": $(this).attr('description'),
+               "date_of_creation": $(this).attr('date_of_creation'),
+    };
+        data = $.param(data);
+            
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "<?php echo base_url(); ?>companies/getCompany",
+                data: data,
+                success: function (data) {
+                //alert(data.registration);
+                    if(data.status == 200){
+                        //alert('redirect');
+                        //var milliseconds = 2000;
+ //if ((new Date().getTime() - start) > milliseconds){
+    window.location.href = "<?php echo base_url(); ?>companies/company?id="+data.message;
+    
+                        
+       
+                    }else{
+                        alert('No registration')
+                    }
+            }
+        })
+
+            });    
+        } 
+    
+    
     $( document ).ready(function() {
 // Datetime picker
 $('#start_date').datetimepicker();

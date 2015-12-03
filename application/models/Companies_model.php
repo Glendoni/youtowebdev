@@ -1101,6 +1101,9 @@ class Companies_model extends CI_Model {
 	}
 
 
+    
+    
+    
 
 	function create_company($post){
 		$company = array(
@@ -1233,5 +1236,30 @@ class Companies_model extends CI_Model {
 			return $this->db->query("select concat(c.first_name::text,' ', c.last_name::text) as name, c.company_id as id, con.name as company_name from contacts c left join companies con on con.id= c.company_id where concat(c.first_name::text, ' ', c.last_name::text) ilike '%".$search_data."%' or regexp_replace(c.phone, E'[^0-9]', '', '') ilike regexp_replace('".$search_data."%', E'[^0-9%]', '', '') or regexp_replace(c.email, E'[^0-9]', '', '') ilike regexp_replace('".$search_data."%', E'[^0-9%]', '', '') order by name asc limit 7 ");
 			}
 	}
+   
+public function create_company_from_CH($post){ //create company from company house
+		
+    $company = array(
+			'name' => $post['name'],
+            'eff_from'=> $post['date_of_creation'],
+			'registration' => !empty($post['registration'])?$post['registration']:NULL,		 
+		);
+		$this->db->insert('companies', $company);
+		$new_company_id = $this->db->insert_id(); 
+		if($new_company_id){
+			// address
+			$address = array(
+				'company_id' => $new_company_id,
+				'address' => $post['address'],
+                'type' => $post['company_type'],
+                'country_id' => 1,
+				'created_by'=> $post['user_id'],
+				);
+			$this->db->insert('addresses', $address);
+			$new_company_address_id = $this->db->insert_id();
+		}
+    if($new_company_id and $new_company_address_id) return $new_company_id;
+		return FALSE;
+        
+	}    
 }
-
