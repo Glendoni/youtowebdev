@@ -82,22 +82,32 @@ function  getCompany(input_data){
                 
             var i = 0;
             var text = "";
+                var preview = [];
             var out = [];
             while ( obj.items[i]) {
 
                 if(obj.items[i].company_status == 'active' ){
-             out += '<a href="javascript:;" company_number="'+obj.items[i].company_number+'" title="'+obj.items[i].title+'" postal_code="'+obj.items[i].address.postal_code+'" address_line_1="'+obj.items[i].address.address_line_1+'" locality="'+obj.items[i].address.locality+'" snippet="'+obj.items[i].snippet+'" company_type="'+obj.items[i].company_type+'" company_status="'+obj.items[i].company_status+'" description="'+obj.items[i].description+'" date_of_creation="'+obj.items[i].date_of_creation+'"   class="companyHouseRegNum"><li class="autocomplete-item autocomplete-company"><strong>' + obj.items[i].title + ' </strong> <i class="glyphicon glyphicon-floppy-save"></i><br><small></small></li></a>';  
-                     }
+             out += '<a href="javascript:;" company_number="'+obj.items[i].company_number+'" title="'+obj.items[i].title+'" postal_code="'+obj.items[i].address.postal_code+'" address_line_1="'+obj.items[i].address.address_line_1+'" locality="'+obj.items[i].address.locality+'" snippet="'+obj.items[i].snippet+'" company_type="'+obj.items[i].company_type+'" company_status="'+obj.items[i].company_status+'" description="'+obj.items[i].description+'" date_of_creation="'+obj.items[i].date_of_creation+'"    ><li class="autocomplete-item autocomplete-company companyHouseRegNum"><strong>' + obj.items[i].title + '</strong><i class="glyphicon glyphicon-floppy-save"></i><br><small></small></li></a>';  
+                     
+                
+                preview += '<a target="_blank" href="https://beta.companieshouse.gov.uk/company/'+obj.items[i].company_number+'"><li class="autocomplete-item autocomplete-contact"><strong> PREVIEW</strong><br><small></small></li></a>'; 
+                }
+                
+                
+
+
                i++;
 
                 if (i === 7) { break; }
 
 
             }    
+                
+                
 
                             $('#suggestions').show();
             $('#autoSuggestionsList').addClass('auto_list');
-            $('#autoSuggestionsList').html('<div class="autocomplete-full-holder"><div class="col-md-6 clearfix no-padding"><ul class="autocomplete-holder"><li class="autocomplete-item split-heading"><i class="fa fa-caret-square-o-down"></i> Companies</li>'+out+'</ul></div><div class="col-md-6 no-padding"><ul class="autocomplete-holder"><li class="autocomplete-item split-heading autocomplete-no-results"><i class="fa fa-times"></i> No Contacts Found</li></ul></div></div>');
+            $('#autoSuggestionsList').html('<div class="autocomplete-full-holder"><div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 clearfix no-padding"><ul class="autocomplete-holder"><li class="autocomplete-item split-heading"><i class="fa fa-caret-square-o-down"></i> Companies</li>'+out+'</ul></div><div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 no-padding"><ul class="autocomplete-holder"><li class="autocomplete-item split-heading autocomplete-no-results"><i class="fa fa-times"></i> Preview</li>'+preview+'</ul></div></div>');
             $('#agency_name').addClass('autocomplete-live');
                              saveCompanyHandler();
             }
@@ -106,7 +116,6 @@ function  getCompany(input_data){
 }
     
         function saveCompanyHandler(){
-
             $('.companyHouseRegNum').click(function(){
 
               //  alert($(this).attr('companyHouseRegNum'));
@@ -375,7 +384,7 @@ $('.toggle').click(function (event) {
 <!--COMBINE MULTIPLE JS FILES-->
 <hr>
 <?php if (isset($current_user)): ?>
-<div class="col-lg-12">
+<div class="col-lg-12">    
 <ul class="nav nav-pills nav-justified">
 <li>© <?php echo date("Y");?> Sonovate</li>
 </ul>

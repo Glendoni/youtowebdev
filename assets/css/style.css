@@ -1142,3 +1142,6 @@ h2.company-header{
 text-align: right;
 }
 }
+
+.companyHouseRegNum i{float:right;
+}
