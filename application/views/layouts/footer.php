@@ -149,7 +149,7 @@ function  getCompany(input_data){
                 success: function (data) {
              
                     if(data.status == 200){
-                        alert('redirect');
+                       // alert('redirect');
                         //var milliseconds = 2000;
  //if ((new Date().getTime() - start) > milliseconds){
     window.location.href = "<?php echo base_url(); ?>companies/company?id="+data.message;
