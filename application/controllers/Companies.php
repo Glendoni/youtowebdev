@@ -408,6 +408,8 @@ public function create_address(){
     }
     	public function getCompany() 
         {
+            
+             file_put_contents('glen.txt', 'this has ran');
             header('Content-Type : application/json');
             $obj = json_decode($_POST);
             $output = array(
@@ -418,7 +420,9 @@ public function create_address(){
             );
             
             if($this->input->post('postal_code'))
-		{            
+		{  
+                
+               
         $this->load->library('form_validation');
         $this->form_validation->set_rules('registration', 'registration', 'xss_clean');
         $this->form_validation->set_rules('name', 'name', 'xss_clean|required');
@@ -431,6 +435,9 @@ public function create_address(){
 
             if($rows_affected)
             {
+                
+                
+                
                 //$this->set_message_success('New company has been added.');
                //redirect('/companies/company?id='.$this->input->post('registration'));
                //$this->refresh_search_results();
@@ -470,5 +477,8 @@ public function create_address(){
                curl_close ($ch); 
              return   json_encode($server_output);
  }
+    
+
+    
 
 }
