@@ -1306,7 +1306,7 @@ public function providerCheck($name){
             
 $q = '
  SELECT id,name
- FROM providers
+ FROM providers_check
  WHERE name=\''.$name.'\'
 ';
 $result = $this->db->query($q);
