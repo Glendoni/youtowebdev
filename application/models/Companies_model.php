@@ -1307,7 +1307,7 @@ public function providerCheck($name){
 $q = '
  SELECT id,name
  FROM providers_check
- WHERE name=\''.$name.'\'
+ WHERE name ilike \''.$name.'\'
 ';
 $result = $this->db->query($q);
           if( $result->num_rows()){
