@@ -1145,3 +1145,8 @@ text-align: right;
 
 .companyHouseRegNum i{float:right;
 }
+
+h2.company-header{
+    
+    text-transform: capitalize;
+}

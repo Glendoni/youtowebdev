@@ -136,6 +136,7 @@ class Companies extends MY_Controller {
 		return TRUE;
 	}
 	public function create_company(){
+        
 		if($this->input->post('create_company_form')){
 			$this->load->library('form_validation');
 			$this->form_validation->set_rules('linkedin_id', 'linkedin id', 'xss_clean');
@@ -258,6 +259,7 @@ class Companies extends MY_Controller {
 			redirect('/dashboard','refresh');
 		}
 	}
+    
 	public function edit()
 	{
 		if($this->input->post('edit_company'))
@@ -275,9 +277,7 @@ class Companies extends MY_Controller {
 		}
 	}
 
-
-
-public function create_address(){
+    public function create_address(){
 		if($this->input->post('create_address')){
 			$this->load->library('form_validation');
 			$this->form_validation->set_rules('phone', 'phone', 'xss_clean');
@@ -318,9 +318,8 @@ public function create_address(){
 
 	}
 
-
-
-		public function update_address(){
+		public function update_address()
+        {
 		if($this->input->post('update_address'))
 		{
 			$this->load->library('form_validation');
@@ -355,7 +354,8 @@ public function create_address(){
 	}
 
 
-	public function autocomplete() {
+	public function autocomplete() 
+    {
         
         $callCH = true;
         $search_data = trim($this->input->post("search_data"));
@@ -408,8 +408,6 @@ public function create_address(){
     }
     	public function getCompany() 
         {
-            
-             file_put_contents('glen.txt', 'this has ran');
             header('Content-Type : application/json');
             $obj = json_decode($_POST);
             $output = array(
@@ -419,50 +417,54 @@ public function create_address(){
                 
             );
             
-            if($this->input->post('postal_code'))
-		{  
-                
-               
-        $this->load->library('form_validation');
-        $this->form_validation->set_rules('registration', 'registration', 'xss_clean');
-        $this->form_validation->set_rules('name', 'name', 'xss_clean|required');
-        $this->form_validation->set_rules('address', 'address', 'xss_clean|required');
-        $this->form_validation->set_rules('user_id', 'user_id', 'xss_clean|required');
-          $this->form_validation->set_rules('company_type', 'company_type', 'xss_clean|required'); 
-        $this->form_validation->set_rules('date_of_creation', 'date_of_creation', 'xss_clean|required');
-        $this->form_validation->set_rules('name', 'name', 'xss_clean|required');
-        $rows_affected = $this->Companies_model->create_company_from_CH($this->input->post());
+            if($this->input->post('postal_code')){  
 
-            if($rows_affected)
-            {
-                
-                
-                
-                //$this->set_message_success('New company has been added.');
-               //redirect('/companies/company?id='.$this->input->post('registration'));
-               //$this->refresh_search_results();
-                
-                echo json_encode(array('status' => 200, 'message' => $rows_affected));
-            }else{
-                  echo json_encode(array('status' => 'Error', 'message' => 'Something went wrong'));
-            }
-                //$rows_affected = $this->Companies_model->create_company_from_CH($this->input->post());
+                // file_put_contents('glen.txt', 'this has ran');
 
+                $this->load->library('form_validation');
+                $this->form_validation->set_rules('registration', 'registration', 'xss_clean');
+                $this->form_validation->set_rules('name', 'name', 'xss_clean|required');
+                $this->form_validation->set_rules('address', 'address', 'xss_clean|required');
+                $this->form_validation->set_rules('user_id', 'user_id', 'xss_clean|required');
+                $this->form_validation->set_rules('company_type', 'company_type', 'xss_clean|required'); 
+                $this->form_validation->set_rules('date_of_creation', 'date_of_creation', 'xss_clean|required');
+                $this->form_validation->set_rules('name', 'name', 'xss_clean|required');
+                $rows_affected = $this->Companies_model->create_company_from_CH($this->input->post());
 
-           // if($rows_affected  > 0)
-            //{
-                //$this->set_message_success('Address has been added.');
-                 //redirect('/companies/company?id='.$this->input->post('registration'));
-                  //$this->refresh_search_results();
-            //}
+                if($rows_affected)
+                {
+                    file_put_contents('apitext.txt', 'Initial stage two'.PHP_EOL, FILE_APPEND);            
+                    $chargesResponse = $this->getCompanyHouseCharges($this->input->post('registration'));
 
+                    //file_put_contents('apitext.txt', 'This has ran retured a $chargesResponse condition bbb:'.$rows_affected, FILE_APPEND); 
+
+                    if($chargesResponse){      
+                        file_put_contents('apitext.txt', 'Initial stage three'.PHP_EOL, FILE_APPEND); 
+                        $this->Companies_model->insert_charges_CH($chargesResponse,$rows_affected,$this->data['current_user']['id']);      
+                    }
+                        echo json_encode(array('status' => 200, 'message' => $rows_affected));
+                }else{
+                          echo json_encode(array('status' => '400', 'message' => 'Something went wrong'));
+                }
             }
              
         }
     
-    	public function getCompanyHouseDetails($id = 0) 
+    public function getCompanyHouseCharges($id)
+    { 
+       $response =  $this->getCompanyHouseChargesApi($id);
+            //file_put_contents('apitext.txt', 'Initial stage four'.PHP_EOL, FILE_APPEND); 
+       if($response['items'][0]['status'] == 'outstanding'){
+          // file_put_contents('apitext.txt', 'Initial stage five'.PHP_EOL, FILE_APPEND);  
+          //  $this->Companies_model->insert_charges_CH($response,$id); 
+            return $response;
+       } 
+        //file_put_contents('south.txt', 'getCompanyHouseCharges1');
+    }
+    
+    public function getCompanyHouseDetails($id = 0) 
 	{
-        
+          
            $id = str_replace(' ', '', $id);
              $server_output = array();
             $ch = curl_init();
@@ -474,16 +476,34 @@ public function create_address(){
             $headers[] = 'Content-Type: application/json';
             curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
              $server_output = curl_exec ($ch);
-               curl_close ($ch); 
+               
              return   json_encode($server_output);
-            
-            
-            
-            
-            
- }
+            curl_close ($ch);  
+    }
     
+    public function getCompanyHouseChargesApi($id = 0)
+    {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL,"https://api.companieshouse.gov.uk/company/".$id."/charges");
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-    
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'Accept: application/json',
+            'Content-Type: application/json;',
+            'Authorization: Basic RWFpN0V2N0JOSk1wcDlkcThUTWxkdHZzOXBDSzRTdmt0UGpzVjduWDo=' 
 
+          ]
+        );
+
+        $result = curl_exec($ch);
+        // Check for errors
+        if($result === FALSE){
+
+          die(curl_errno($ch).': '.curl_error($ch));
+        }
+
+        return json_decode($result,TRUE);
+        
+    }
 }

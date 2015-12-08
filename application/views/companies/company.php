@@ -18,7 +18,7 @@ endif; ?>
 			</div>
 		<?php endif; ?>
 	<h2 class="company-header">
-		<?php $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' );echo str_replace($words, ' ',$company['name']); ?>
+		<?php $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' );echo str_replace($words, ' ',strtolower($company['name'])); ?>
 	</h2>
 	<?php if (isset($company['trading_name'])): ?>
 	<h5 class="trading-header">
@@ -226,7 +226,7 @@ endif; ?>
 				<?php $mortgages_start  = $mortgage['eff_from'];$date_pieces = explode("/", $mortgages_start);$formatted_mortgage_date = $date_pieces[2].'/'.$date_pieces[1].'/'.$date_pieces[0];echo date("F Y",strtotime($formatted_mortgage_date));?>
 				</td>
 				<td class="col-md-3" style="text-align:center;">
-				<?php echo $mortgage['stage']; ?><?php if(!empty($mortgage['eff_to'])){echo ' on '.$mortgage['eff_to'];} ?>
+				<?php echo ucfirst($mortgage['stage']); ?><?php if(!empty($mortgage['eff_to'])){echo ' on '.$mortgage['eff_to'];} ?>
 				</td>
 
 

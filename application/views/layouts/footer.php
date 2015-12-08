@@ -117,7 +117,7 @@ function  getCompany(input_data){
     
         function saveCompanyHandler(){
             $('.companyHouseRegNum').click(function(){
-
+  
               //  alert($(this).attr('companyHouseRegNum'));
                 
  

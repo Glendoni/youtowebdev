@@ -1236,8 +1236,11 @@ class Companies_model extends CI_Model {
 			return $this->db->query("select concat(c.first_name::text,' ', c.last_name::text) as name, c.company_id as id, con.name as company_name from contacts c left join companies con on con.id= c.company_id where concat(c.first_name::text, ' ', c.last_name::text) ilike '%".$search_data."%' or regexp_replace(c.phone, E'[^0-9]', '', '') ilike regexp_replace('".$search_data."%', E'[^0-9%]', '', '') or regexp_replace(c.email, E'[^0-9]', '', '') ilike regexp_replace('".$search_data."%', E'[^0-9%]', '', '') order by name asc limit 7 ");
 			}
 	}
-   
-public function create_company_from_CH($post){ //create company from company house
+    /*
+    @ Insert Company details from Company House API Record
+    @ Author: Glen Small
+    */
+    public function create_company_from_CH($post){
 		
     $company = array(
 			'name' => $post['name'],
@@ -1261,5 +1264,62 @@ public function create_company_from_CH($post){ //create company from company hou
     if($new_company_id and $new_company_address_id) return $new_company_id;
 		return FALSE;
         
-	}    
+	}
+    /*
+    @ Insert Company Charges from Company House API Record
+    @ Author: Glen Small
+    */
+    public function insert_charges_CH($response, $company_id,$user_id){
+        
+        $provider  = '';
+        $provider = $response['items'][0]['persons_entitled'][0]['name'];
+         $provider_id = $this->providerCheck($provider);
+        
+        //API TESTER WRITES TO FILE
+    $filecontent =  'company_id : '.$company_id.' provider_id: '.$provider_id.' ref: '.$response['items'][0]['etag'].' type: '.$response['items'][0]['classification']['description'].' stage: '.$response['items'][0]['status'].' eff_from: '.date('Y-m-d').' user: '.$user_id; 
+    
+  file_put_contents('apitext.txt', $filecontent, FILE_APPEND);    
+  
+         
+     
+        
+       
+ if($provider_id){
+        $mortgages = array(
+				'company_id' => $company_id,
+                'provider_id' => $provider_id,
+				'ref' => $response['items'][0]['etag'],
+               'type' =>  $response['items'][0]['classification']['description'],
+                'stage' =>  $response['items'][0]['status'],
+                'eff_from' => $response['items'][0]['transactions'][0]['delivered_on'],
+                'created_at' =>   date('Y-m-d'),	
+				'created_by' => $user_id
+			 
+				);
+			$this->db->insert('mortgages', $mortgages);
+    }        
+             
+    }  
+    
+    
+public function providerCheck($name){
+            
+$q = '
+ SELECT id,name
+ FROM providers
+ WHERE name=\''.$name.'\'
+';
+$result = $this->db->query($q);
+          if( $result->num_rows()){
+            
+           foreach ($result->result() as $row)
+            {
+                return $row->id;
+            } 
+                }else{
+              
+              return false;
+              
+          }
+    }
 }
