@@ -1242,9 +1242,11 @@ class Companies_model extends CI_Model {
     public function create_company_from_CH($post){
 		  $this->load->helper('inflector');
     $company = array(
-			'name' => humanize($post['name']),
-            'eff_from'=> $post['date_of_creation'],
-			'registration' => !empty($post['registration'])?$post['registration']:NULL,		 
+        'name' => humanize($post['name']),
+        'contract' => null,
+        'perm' => null,
+        'eff_from'=> $post['date_of_creation'],
+        'registration' => !empty($post['registration'])?$post['registration']:NULL,		 
 		);
 		$this->db->insert('companies', $company);
 		$new_company_id = $this->db->insert_id(); 
