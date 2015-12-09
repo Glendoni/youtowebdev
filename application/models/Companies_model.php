@@ -1169,7 +1169,6 @@ class Companies_model extends CI_Model {
 			'company_id' => $company_id,
 			);
 		$this->db->select('addresses.id AS addressid, addresses.address as address,addresses.phone, addresses.type,addresses.created_by, c.id as countryid, c.name, addresses.company_id', FALSE);
-
 		$this->db->join('countries c', 'c.id = addresses.country_id');
 		$this->db->order_by('type asc');
 
@@ -1241,9 +1240,9 @@ class Companies_model extends CI_Model {
     @ Author: Glen Small
     */
     public function create_company_from_CH($post){
-		
+		  $this->load->helper('inflector');
     $company = array(
-			'name' => $post['name'],
+			'name' => humanize($post['name']),
             'eff_from'=> $post['date_of_creation'],
 			'registration' => !empty($post['registration'])?$post['registration']:NULL,		 
 		);
@@ -1254,7 +1253,7 @@ class Companies_model extends CI_Model {
 			$address = array(
 				'company_id' => $new_company_id,
 				'address' => $post['address'],
-                'type' => $post['company_type'],
+                'type' => 'Registered Address',
                 'country_id' => 1,
 				'created_by'=> $post['user_id'],
 				);
@@ -1270,7 +1269,7 @@ class Companies_model extends CI_Model {
     @ Author: Glen Small
     */
     public function insert_charges_CH($response, $company_id,$user_id){
-        
+          $this->load->helper('inflector');
         $provider  = '';
         $provider = $response['items'][0]['persons_entitled'][0]['name'];
          $provider_id = $this->providerCheck($provider);
@@ -1289,7 +1288,7 @@ class Companies_model extends CI_Model {
 				'company_id' => $company_id,
                 'provider_id' => $provider_id,
 				'ref' => $response['items'][0]['etag'],
-               'type' =>  $response['items'][0]['classification']['description'],
+               'type' =>  humanize($response['items'][0]['classification']['type']),
                 'stage' =>  $response['items'][0]['status'],
                 'eff_from' => $response['items'][0]['transactions'][0]['delivered_on'],
                 'created_at' =>   date('Y-m-d'),	
