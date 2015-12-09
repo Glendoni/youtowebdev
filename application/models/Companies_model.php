@@ -1168,7 +1168,7 @@ class Companies_model extends CI_Model {
 		$data = array(
 			'company_id' => $company_id,
 			);
-		$this->db->select('addresses.id AS addressid, addresses.address as address,addresses.phone, addresses.type, c.id as countryid, c.name, addresses.company_id', FALSE);
+		$this->db->select('addresses.id AS addressid, addresses.address as address,addresses.phone, addresses.type,addresses.created_by, c.id as countryid, c.name, addresses.company_id', FALSE);
 
 		$this->db->join('countries c', 'c.id = addresses.country_id');
 		$this->db->order_by('type asc');

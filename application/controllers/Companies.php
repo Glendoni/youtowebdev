@@ -221,6 +221,8 @@ class Companies extends MY_Controller {
 	
 	public function company()
 	{
+        
+        $this->load->helper('array');
 		if($this->input->get('id'))
 		{	
             
@@ -228,15 +230,22 @@ class Companies extends MY_Controller {
             
 			$this->load->model('Email_templates_model');
 			$this->data['email_templates'] = $this->Email_templates_model->get_all();
-			$raw_search_results = $this->Companies_model->search_companies_sql(FALSE,$this->input->get('id'));
+			$raw_search_results = $this->Companies_model->search_companies_sql(FALSE,$this->input->get('id'));            
             $this->data['companieshack'] = $this->Companies_model->hackmorgages($this->input->get('id'));
-
 			$company = $this->process_search_result($raw_search_results);
-			// var_dump($company);
+            $this->data['companieshack'] = $this->Companies_model->hackmorgages($this->input->get('id'));
 			$this->data['contacts'] = $this->Contacts_model->get_contacts($this->input->get('id'));
-			$this->data['addresses'] = $this->Companies_model->get_addresses($this->input->get('id'));
+            $address = $this->Companies_model->get_addresses($this->input->get('id'));
+            foreach ($address as $row)
+            {
+                if($row->created_by){
+                    $user_id =  $row->created_by; 
+                break; 
+                }
+            }
+			$this->data['addresses'] = $address;
 			$this->data['campaigns'] = $this->Campaigns_model->get_campaigns($this->input->get('id'));
-            $this->data['created_by_name'] = $this->Users_model->get_user(31);
+            $this->data['created_by_name'] = $this->Users_model->get_user($user_id);
 			$option_contacts =  array();
 			foreach ($this->data['contacts'] as $contact) {
 				$option_contacts[$contact->id] = $contact->first_name.' '.$contact->last_name;
@@ -253,6 +262,7 @@ class Companies extends MY_Controller {
 			$this->data['comments'] = $this->Actions_model->get_comments($this->input->get('id'));
 			$this->data['page_title'] = $company[0]['name'];
 			$this->data['companies'] = $company;
+           
 			$this->data['hide_side_nav'] = True;
 			$this->data['main_content'] = 'companies/company';
 			$this->data['full_container'] = True;
@@ -264,6 +274,18 @@ class Companies extends MY_Controller {
 			redirect('/dashboard','refresh');
 		}
 	}
+    
+    
+    public function hackmorgages(){
+        
+        $compohack =  $this->Companies_model->hackmorgages(346339);
+        
+        //echo $compohack->name;
+        
+    }
+    
+    
+    
     
 	public function edit()
 	{
