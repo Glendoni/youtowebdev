@@ -472,13 +472,11 @@ class Companies extends MY_Controller {
     public function getCompanyHouseCharges($id)
     { 
        $response =  $this->getCompanyHouseChargesApi($id);
-            //file_put_contents('apitext.txt', 'Initial stage four'.PHP_EOL, FILE_APPEND); 
+      
        if($response['items'][0]['status'] == 'outstanding'){
-          // file_put_contents('apitext.txt', 'Initial stage five'.PHP_EOL, FILE_APPEND);  
-          //  $this->Companies_model->insert_charges_CH($response,$id); 
             return $response;
        } 
-        //file_put_contents('south.txt', 'getCompanyHouseCharges1');
+ 
     }
     
     public function getCompanyHouseDetails($id = 0) 

@@ -994,12 +994,6 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 		  	</div>
 		</div>
 	</div>
-
-	
-    
-    
-    
-
 </div><!--CLOSE ROW-->
 </div>
 </div>

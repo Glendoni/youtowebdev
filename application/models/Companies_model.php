@@ -1343,31 +1343,7 @@ $query = $this->db->get();
 {
     return $row;
 }
-        
-        
-        
-        /* 
-        $q = '
- SELECT id,name
- FROM providers_check
- WHERE id=\''.$id.'\'
- LIMIT 1
-';
-$result = $this->db->query($q);
-          if( $result->num_rows()){
-            
-           foreach ($result->result() as $row)
-            {
-                return $row->name;
-            } 
-                }else{
-              
-              return false;
-              
-          }
-          
-          */
-          
+    
           
     }
 }
