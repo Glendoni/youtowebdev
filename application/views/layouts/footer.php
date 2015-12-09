@@ -28,6 +28,12 @@
 
 <!--AUTO COMPLETE-->
 
+
+<style>
+
+    .toLowerCase{ text-transform:capitalize;}
+</style>
+
 <script type="text/javascript">
 // AJAX SEARCH AUTOCOMPlETE
 function ajaxSearch() {
@@ -70,11 +76,12 @@ $('#agency_name').addClass('autocomplete-live');
 }
    
     
+    
+
+    
 function  getCompany(input_data){
     // 08245800
-                   String.prototype.capitalize = function() {
-    return this.charAt(0).toUpperCase() + this.slice(1);
-}
+
      $.ajax({
             type: "GET",
             url: "<?php echo base_url(); ?>companies/getCompanyHouseDetails/"+input_data,
@@ -84,20 +91,18 @@ function  getCompany(input_data){
                 
             var i = 0;
             var text = "";
-                
- 
-
-                
-                
                 var preview = [];
             var out = [];
+                
+                
+ 
             while ( obj.items[i]) {
 
                 if(obj.items[i].company_status == 'active' ){
-             out += '<a href="javascript:;" company_number="'+obj.items[i].company_number+'" title="'+obj.items[i].title+'" postal_code="'+obj.items[i].address.postal_code+'" address_line_1="'+obj.items[i].address.address_line_1+'" locality="'+obj.items[i].address.locality+'" snippet="'+obj.items[i].snippet+'" company_type="'+obj.items[i].company_type+'" company_status="'+obj.items[i].company_status+'" description="'+obj.items[i].description+'" date_of_creation="'+obj.items[i].date_of_creation+'" class="companyHouseRegNum"   ><li class="autocomplete-item autocomplete-company"><strong class="toLowerCase">' + obj.items[i].title.capitalize() + '</strong><i class="glyphicon glyphicon-floppy-save"></i><br><small></small></li></a>';  
+             out += '<a href="javascript:;" company_number="'+obj.items[i].company_number+'" title="'+obj.items[i].title+'" postal_code="'+obj.items[i].address.postal_code+'" address_line_1="'+obj.items[i].address.address_line_1+'" locality="'+obj.items[i].address.locality+'" snippet="'+obj.items[i].snippet+'" company_type="'+obj.items[i].company_type+'" company_status="'+obj.items[i].company_status+'" description="'+obj.items[i].description+'" date_of_creation="'+obj.items[i].date_of_creation+'" class="companyHouseRegNum"><li class="autocomplete-item autocomplete-company toLowerCase"><strong>' + ucwords(obj.items[i].title) + '</strong><i class="glyphicon glyphicon-floppy-save"></i><br><small></small></li></a>';  
                      
                 
-                preview += '<a target="_blank" href="https://beta.companieshouse.gov.uk/company/'+obj.items[i].company_number+'"><li class="autocomplete-item autocomplete-contact"><strong> PREVIEW</strong><br><small></small></li></a>'; 
+                preview += '<a target="_blank" href="https://beta.companieshouse.gov.uk/company/'+obj.items[i].company_number+'"><li class="autocomplete-item autocomplete-contact"><strong> Preview</strong><br><small></small></li></a>'; 
                 }
                 
                 
@@ -110,6 +115,10 @@ function  getCompany(input_data){
 
             }    
                 
+                
+                            
+
+ 
                 
 
                             $('#suggestions').show();
@@ -166,6 +175,13 @@ function  getCompany(input_data){
 
             });    
         } 
+    
+    
+    function ucwords (str) {
+    return (str + '').replace(/^([a-z])|\s+([a-z])/g, function ($1) {
+        return $1.toUpperCase();
+    });
+}
     
     
     $( document ).ready(function() {

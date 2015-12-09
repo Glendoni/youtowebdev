@@ -1241,9 +1241,12 @@ class Companies_model extends CI_Model {
     @ Author: Glen Small
     */
     public function create_company_from_CH($post){
-		
+        
+        $this->load->helper('inflector');
+        file_put_contents('api.txt', humanize($post['name']));
+    
     $company = array(
-			'name' => $post['name'],
+			'name' =>  humanize($post['name']),
             'eff_from'=> $post['date_of_creation'],
 			'registration' => !empty($post['registration'])?$post['registration']:NULL,		 
 		);
@@ -1254,7 +1257,7 @@ class Companies_model extends CI_Model {
 			$address = array(
 				'company_id' => $new_company_id,
 				'address' => $post['address'],
-                'type' => $post['company_type'],
+                'type' => 'Registered Address',
                 'country_id' => 1,
 				'created_by'=> $post['user_id'],
 				);
@@ -1289,7 +1292,7 @@ class Companies_model extends CI_Model {
 				'company_id' => $company_id,
                 'provider_id' => $provider_id,
 				'ref' => $response['items'][0]['etag'],
-               'type' =>  $response['items'][0]['classification']['description'],
+               'type' =>  ucwords($response['items'][0]['classification']['type']),
                 'stage' =>  $response['items'][0]['status'],
                 'eff_from' => $response['items'][0]['transactions'][0]['delivered_on'],
                 'created_at' =>   date('Y-m-d'),	
@@ -1307,8 +1310,13 @@ public function providerCheck($name){
 $q = '
  SELECT id,name
  FROM providers_check
- WHERE name=\''.$name.'\'
+ WHERE name ilike \''.$name.'\'
+ LIMIT 1
 ';
+    
+    
+    
+    
 $result = $this->db->query($q);
           if( $result->num_rows()){
             
@@ -1321,5 +1329,53 @@ $result = $this->db->query($q);
               return false;
               
           }
+    }
+    
+    
+    public function hackmorgages($id){
+       
+        
+        $this->db->select('*');
+$this->db->from('companies');
+$this->db->join('mortgages', 'mortgages.company_id= companies.id');
+        $this->db->join('providers_check', 'providers_check.id= mortgages.provider_id');
+ $this->db->where('companies.id',$id); 
+        
+        $this->db->limit(1);
+        
+
+$query = $this->db->get();
+        
+ 
+        foreach ($query->result() as $row)
+{
+    return $row;
+}
+        
+        
+        
+        /* 
+        $q = '
+ SELECT id,name
+ FROM providers_check
+ WHERE id=\''.$id.'\'
+ LIMIT 1
+';
+$result = $this->db->query($q);
+          if( $result->num_rows()){
+            
+           foreach ($result->result() as $row)
+            {
+                return $row->name;
+            } 
+                }else{
+              
+              return false;
+              
+          }
+          
+          */
+          
+          
     }
 }
