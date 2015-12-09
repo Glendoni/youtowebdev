@@ -1308,6 +1308,7 @@ $q = '
  SELECT id,name
  FROM providers_check
  WHERE name ilike \''.$name.'\'
+ LIMIT 1
 ';
 $result = $this->db->query($q);
           if( $result->num_rows()){
@@ -1321,5 +1322,52 @@ $result = $this->db->query($q);
               return false;
               
           }
+    }
+    
+    
+    public function hackmorgages($id){
+       
+        
+        $this->db->select('*');
+$this->db->from('companies');
+$this->db->join('mortgages', 'mortgages.company_id= companies.id');
+        $this->db->join('providers_check', 'providers_check.id= mortgages.provider_id');
+ $this->db->where('companies.id',$id); 
+        $this->db->limit(1);
+        
+
+$query = $this->db->get();
+        
+ 
+        foreach ($query->result() as $row)
+{
+    return $row;
+}
+        
+        
+        
+        /* 
+        $q = '
+ SELECT id,name
+ FROM providers_check
+ WHERE id=\''.$id.'\'
+ LIMIT 1
+';
+$result = $this->db->query($q);
+          if( $result->num_rows()){
+            
+           foreach ($result->result() as $row)
+            {
+                return $row->name;
+            } 
+                }else{
+              
+              return false;
+              
+          }
+          
+          */
+          
+          
     }
 }
