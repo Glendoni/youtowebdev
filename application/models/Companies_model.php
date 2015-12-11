@@ -1239,12 +1239,13 @@ class Companies_model extends CI_Model {
     @ Insert Company details from Company House API Record
     @ Author: Glen Small
     */
-    public function create_company_from_CH($post){
+    public function create_company_from_CH($post,$user_id){
 		  $this->load->helper('inflector');
     $company = array(
         'name' => humanize($post['name']),
         'contract' => null,
         'perm' => null,
+        'created_by'=> $user_id,
         'eff_from'=> $post['date_of_creation'],
         'registration' => !empty($post['registration'])?$post['registration']:NULL,		 
 		);
@@ -1257,7 +1258,7 @@ class Companies_model extends CI_Model {
 				'address' => $post['address'],
                 'type' => 'Registered Address',
                 'country_id' => 1,
-				'created_by'=> $post['user_id'],
+				'created_by'=> $user_id,
 				);
 			$this->db->insert('addresses', $address);
 			$new_company_address_id = $this->db->insert_id();

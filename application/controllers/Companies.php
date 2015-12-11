@@ -454,7 +454,7 @@ class Companies extends MY_Controller {
                 $this->form_validation->set_rules('company_type', 'company_type', 'xss_clean|required'); 
                 $this->form_validation->set_rules('date_of_creation', 'date_of_creation', 'xss_clean|required');
                 $this->form_validation->set_rules('name', 'name', 'xss_clean|required');
-                $rows_affected = $this->Companies_model->create_company_from_CH($this->input->post());
+                $rows_affected = $this->Companies_model->create_company_from_CH($this->input->post(),$this->data['current_user']['id']);
 
                 if($rows_affected)
                 {
