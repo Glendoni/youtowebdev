@@ -1143,10 +1143,29 @@ text-align: right;
 }
 }
 
+a.companyHouseRegNum{
+    
+    background-color: #7fe3d5;
+    color: #2d2d2d;
+    
+}
 .companyHouseRegNum i{float:right;
 }
 
 h2.company-header{
     
     text-transform: capitalize !important;
+}
+ 
+.ch_drop_title li {
+    padding: 10px 20px;
+    border-bottom: 1px #e7e7e7 solid;
+    border-right: 1px #e7e7e7 solid;
+    background-color: #D04A4A;
+}
+.preview_slogan{
+   
+    font-weight: 300;
+ 
+    
 }

@@ -996,4 +996,29 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 	</div>
 </div><!--CLOSE ROW-->
 </div>
+        <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Add Company</h4>
+                </div>
+            
+                <div class="modal-body">
+                   
+                    <p>Are you sure you want to add this company?</p>
+                    <p class="debug-url"></p>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default confirm_delete_cancel" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-danger btn-ok confirm_ch_add">Add</a>
+                </div>
+            </div>
+        </div>
+    </div>
+ 
+    
+    
 </div>
