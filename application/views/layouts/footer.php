@@ -99,10 +99,10 @@ function  getCompany(input_data){
             while ( obj.items[i]) {
 
                 if(obj.items[i].company_status == 'active' ){
-             out += '<a href="javascript:;" company_number="'+obj.items[i].company_number+'" title="'+obj.items[i].title+'" postal_code="'+obj.items[i].address.postal_code+'" address_line_1="'+obj.items[i].address.address_line_1+'" locality="'+obj.items[i].address.locality+'" snippet="'+obj.items[i].snippet+'" company_type="'+obj.items[i].company_type+'" company_status="'+obj.items[i].company_status+'" description="'+obj.items[i].description+'" date_of_creation="'+obj.items[i].date_of_creation+'" class="companyHouseRegNum"><li class="autocomplete-item autocomplete-company toLowerCase"><strong>' + ucwords(obj.items[i].title) + '</strong><i class="glyphicon glyphicon-floppy-save"></i><br><small></small></li></a>';  
+             out += '<a href="javascript:;" company_number="'+obj.items[i].company_number+'" title="'+obj.items[i].title+'" postal_code="'+obj.items[i].address.postal_code+'" address_line_1="'+obj.items[i].address.address_line_1+'" locality="'+obj.items[i].address.locality+'" snippet="'+obj.items[i].snippet+'" company_type="'+obj.items[i].company_type+'" company_status="'+obj.items[i].company_status+'" description="'+obj.items[i].description+'" date_of_creation="'+obj.items[i].date_of_creation+'" class="companyHouseRegNum"><li class="autocomplete-item autocomplete-company toLowerCase"><strong>' + ucwords(obj.items[i].title) + '</strong><br><small>Click to download</small></li></a>';  
                      
                 
-                preview += '<a target="_blank" href="https://beta.companieshouse.gov.uk/company/'+obj.items[i].company_number+'"><li class="autocomplete-item autocomplete-contact"><strong> Preview</strong><br><small></small></li></a>'; 
+                preview += '<a target="_blank" href="https://beta.companieshouse.gov.uk/company/'+obj.items[i].company_number+'"><li class="autocomplete-item autocomplete-contact"><strong> View at Companies House </strong> <i class="glyphicon glyphicon-link"></i><br><small>&nbsp;</small></li></a>'; 
                 }
                 
                 
@@ -123,7 +123,7 @@ function  getCompany(input_data){
 
                             $('#suggestions').show();
             $('#autoSuggestionsList').addClass('auto_list');
-            $('#autoSuggestionsList').html('<div class="autocomplete-full-holder"><div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 clearfix no-padding"><ul class="autocomplete-holder"><li class="autocomplete-item split-heading"><i class="fa fa-caret-square-o-down"></i> Companies</li>'+out+'</ul></div><div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 no-padding"><ul class="autocomplete-holder"><li class="autocomplete-item split-heading autocomplete-no-results"><i class="fa fa-times"></i> Preview</li>'+preview+'</ul></div></div>');
+            $('#autoSuggestionsList').html('<div class="autocomplete-full-holder"><div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 clearfix no-padding"><ul class="autocomplete-holder"><li class="autocomplete-item split-heading"><i class="fa fa-caret-square-o-down"></i> Companies</li>'+out+'</ul></div><div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 no-padding"><ul class="autocomplete-holder"><li class="autocomplete-item split-heading autocomplete-no-results"><i class="fa fa-times"></i> Preview</li>'+preview+'</ul></div></div>');
             $('#agency_name').addClass('autocomplete-live');
                              saveCompanyHandler();
             }
