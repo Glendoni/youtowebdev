@@ -1,26 +1,3 @@
-
-  <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">Add Company</h4>
-                </div>
-            
-                <div class="modal-body">
-                   
-                    <p>Are you sure you want to add this company?</p>
-                    <p class="debug-url"></p>
-                </div>
-                
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default confirm_delete_cancel" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-danger btn-ok confirm_ch_add">Add</a>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 
 
@@ -49,6 +26,8 @@
 <!--FORMAT NUMBERS WITH COMMAS (ADD CLASS NUMBER TO INPUT)-->
     <script type="text/javascript" src="<?php echo asset_url();?>js/format-numbers.js"></script>
 
+<script src="http://bootboxjs.com/bootbox.js"></script>
+
 <!--AUTO COMPLETE-->
 
 
@@ -58,6 +37,7 @@
 </style>
 
 <script type="text/javascript">
+    
 // AJAX SEARCH AUTOCOMPlETE
 function ajaxSearch() {
     var input_data = $('#agency_name').val();
@@ -116,61 +96,74 @@ function  getCompany(input_data){
             var text = "";
                 var preview = [];
             var out = [];
-                
-                
- 
             while ( obj.items[i]) {
 
                 if(obj.items[i].company_status == 'active' ){
              out += '<a href="javascript:;" company_number="'+obj.items[i].company_number+'" title="'+obj.items[i].title+'" postal_code="'+obj.items[i].address.postal_code+'" address_line_1="'+obj.items[i].address.address_line_1+'" locality="'+obj.items[i].address.locality+'" snippet="'+obj.items[i].snippet+'" company_type="'+obj.items[i].company_type+'" company_status="'+obj.items[i].company_status+'" description="'+obj.items[i].description+'" date_of_creation="'+obj.items[i].date_of_creation+'" class="companyHouseRegNum"><li class="autocomplete-item autocomplete-company toLowerCase ch_drop_title"><strong>' + ucwords(obj.items[i].title) + '</strong><br><small>Add to Baselist</small></li></a>';  
                      
-                
                 preview += '<a target="_blank" href="https://beta.companieshouse.gov.uk/company/'+obj.items[i].company_number+'"><li class="autocomplete-item autocomplete-contact preview_slogan" > View at Companies House   <i class="fa fa-external-link"></i><br><small>&nbsp;</small></li></a>'; 
                 }
                 
-                
-
-
                i++;
 
                 if (i === 7) { break; }
 
-
             }    
-                
-                
-                            
-
- 
-                
 
                             $('#suggestions').show();
             $('#autoSuggestionsList').addClass('auto_list');
             $('#autoSuggestionsList').html('<div class="autocomplete-full-holder"><div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 clearfix no-padding"><ul class="autocomplete-holder"><li class="autocomplete-item split-heading"><i class="fa fa-caret-square-o-down"></i> Companies</li>'+out+'</ul></div><div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 no-padding"><ul class="autocomplete-holder"><li class="autocomplete-item split-heading autocomplete-no-results"><i class="fa fa-times"></i> Preview</li>'+preview+'</ul></div></div>');
             $('#agency_name').addClass('autocomplete-live');
-                             saveCompanyHandlerModal();
+                             saveCompanyHandler();
             }
             });
     
-    
-    
-   
-    
-   
-    
-    
 }
     
-    //$('#confirm-delete .modal-footer button').hide()
+    function saveCompanyHandler() {
 
-    
-    
-    
-    
-    
-    
-    
-    
+  $('.companyHouseRegNum').click(function() {
+                 
+       var mode =  "create";
+                var user_id  =  <?php echo $current_user['id']; ?> ; 
+      var data = {
+              "registration": $(this).attr('company_number'),
+              "date_of_creation": $(this).attr('date_of_creation'),
+              "name": $(this).attr('title'),
+              "postal_code": $(this).attr('postal_code'),
+              "address": $(this).attr('snippet'),
+              "user_id" : user_id,
+              "company_status": $(this).attr('company_status'),
+              "address_line_1": $(this).attr('address_line_1'),
+              "company_type": $(this).attr('company_type'),
+               "description": $(this).attr('description'),
+               "date_of_creation": $(this).attr('date_of_creation'),
+    };
+    bootbox.confirm("Are you sure want to add this company?", function(result) {
+        if(result){
+        data = $.param(data);
+            
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "<?php echo base_url(); ?>companies/getCompany",
+                data: data,
+                success: function (data) {
+             
+                    if(data.status == 200){
+                       // alert('redirect');
+                        //var milliseconds = 2000;
+ //if ((new Date().getTime() - start) > milliseconds){
+    window.location.href = "<?php echo base_url(); ?>companies/company?id="+data.message;
+                    } 
+            }
+        })
+             
+        }else{
+        }
+    });
+  });
+};
     
     //   $('#confirm-delete').modal('show');
     
@@ -180,7 +173,7 @@ function  getCompany(input_data){
         $('.ch_drop_title').css('color' ,'#2d2d2d');
         $('.ch_drop_title strong').css('font-weight' ,'300'); 
           //  $(this).removeClass('active');
-        $('.companyHouseRegNum').click(function(){
+        $('._companyHouseRegNum').click(function(){
 
      
   $(this).addClass('active');
@@ -215,10 +208,9 @@ function  getCompany(input_data){
 
     }
     
-        function saveCompanyHandler(){
+   
             
-
-             $('.active').click(function(){
+           $('.active').click(function(){
                var mode =  "create";
                 var user_id  =  <?php echo $current_user['id']; ?> ; 
                 
@@ -255,11 +247,14 @@ function  getCompany(input_data){
         })
             
             
-            });     
-            
-            
-            
-        } 
+            });         
+    
+        
+ 
+
+     
+        
+        
     
     
     function ucwords (str) {
