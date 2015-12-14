@@ -1,3 +1,26 @@
+
+  <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Add Company</h4>
+                </div>
+            
+                <div class="modal-body">
+                   
+                    <p>Are you sure you want to add this company?</p>
+                    <p class="debug-url"></p>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default confirm_delete_cancel" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-danger btn-ok confirm_ch_add">Add</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 
@@ -25,8 +48,7 @@
 
 <!--FORMAT NUMBERS WITH COMMAS (ADD CLASS NUMBER TO INPUT)-->
     <script type="text/javascript" src="<?php echo asset_url();?>js/format-numbers.js"></script>
-
-<script src="http://bootboxjs.com/bootbox.js"></script>
+ <script src="http://bootboxjs.com/bootbox.js"></script>
 
 <!--AUTO COMPLETE-->
 
@@ -37,7 +59,6 @@
 </style>
 
 <script type="text/javascript">
-    
 // AJAX SEARCH AUTOCOMPlETE
 function ajaxSearch() {
     var input_data = $('#agency_name').val();
@@ -96,19 +117,33 @@ function  getCompany(input_data){
             var text = "";
                 var preview = [];
             var out = [];
+                
+                
+ 
             while ( obj.items[i]) {
 
                 if(obj.items[i].company_status == 'active' ){
              out += '<a href="javascript:;" company_number="'+obj.items[i].company_number+'" title="'+obj.items[i].title+'" postal_code="'+obj.items[i].address.postal_code+'" address_line_1="'+obj.items[i].address.address_line_1+'" locality="'+obj.items[i].address.locality+'" snippet="'+obj.items[i].snippet+'" company_type="'+obj.items[i].company_type+'" company_status="'+obj.items[i].company_status+'" description="'+obj.items[i].description+'" date_of_creation="'+obj.items[i].date_of_creation+'" class="companyHouseRegNum"><li class="autocomplete-item autocomplete-company toLowerCase ch_drop_title"><strong>' + ucwords(obj.items[i].title) + '</strong><br><small>Add to Baselist</small></li></a>';  
                      
+                
                 preview += '<a target="_blank" href="https://beta.companieshouse.gov.uk/company/'+obj.items[i].company_number+'"><li class="autocomplete-item autocomplete-contact preview_slogan" > View at Companies House   <i class="fa fa-external-link"></i><br><small>&nbsp;</small></li></a>'; 
                 }
                 
+                
+
+
                i++;
 
                 if (i === 7) { break; }
 
+
             }    
+                
+                
+                            
+
+ 
+                
 
                             $('#suggestions').show();
             $('#autoSuggestionsList').addClass('auto_list');
@@ -118,144 +153,93 @@ function  getCompany(input_data){
             }
             });
     
+    
+    
+   
+    
+   
+    
+    
 }
     
-    function saveCompanyHandler() {
+    //$('#confirm-delete .modal-footer button').hide()
 
-  $('.companyHouseRegNum').click(function() {
-                 
-       var mode =  "create";
-                var user_id  =  <?php echo $current_user['id']; ?> ; 
-      var data = {
-              "registration": $(this).attr('company_number'),
-              "date_of_creation": $(this).attr('date_of_creation'),
-              "name": $(this).attr('title'),
-              "postal_code": $(this).attr('postal_code'),
-              "address": $(this).attr('snippet'),
-              "user_id" : user_id,
-              "company_status": $(this).attr('company_status'),
-              "address_line_1": $(this).attr('address_line_1'),
-              "company_type": $(this).attr('company_type'),
-               "description": $(this).attr('description'),
-               "date_of_creation": $(this).attr('date_of_creation'),
-    };
-    bootbox.confirm("Are you sure want to add this company?", function(result) {
-        if(result){
-        data = $.param(data);
-            
-            $.ajax({
-                type: "POST",
-                dataType: "json",
-                url: "<?php echo base_url(); ?>companies/getCompany",
-                data: data,
-                success: function (data) {
-             
-                    if(data.status == 200){
-                       // alert('redirect');
-                        //var milliseconds = 2000;
- //if ((new Date().getTime() - start) > milliseconds){
-    window.location.href = "<?php echo base_url(); ?>companies/company?id="+data.message;
-                    } 
-            }
-        })
-             
-        }else{
-        }
-    });
-  });
-};
+    
+    
+    
+    
+    
+    
+    
+    
     
     //   $('#confirm-delete').modal('show');
     
-    function saveCompanyHandlerModal(){    
-       
+ 
+   
+    function saveCompanyHandler(){
         $('.ch_drop_title').css('background','#7fe3d5');
         $('.ch_drop_title').css('color' ,'#2d2d2d');
         $('.ch_drop_title strong').css('font-weight' ,'300'); 
-          //  $(this).removeClass('active');
-        $('._companyHouseRegNum').click(function(){
 
-     
-  $(this).addClass('active');
+        $('.companyHouseRegNum').click(function(){
+
             
-                $('#confirm-delete').modal('show');
-     saveCompanyHandler();
-            });
-
-
-   
-
-        $('#confirm-delete .modal-footer .confirm_ch_add').click(function(){
-
-            $('#confirm-delete').modal('hide'); 
-            $('.active').trigger('click', function(){
-
-                $('#confirm-delete').modal('hide'); 
-                //$('.active').trigger('click');   
-
-            });
-
-        });
-        
-        
-        
-     $('#confirm-delete .modal-footer button').click(function(){
-         
-         $('.companyHouseRegNum').removeClass('active');
-         
-         
-     })
-
-    }
-    
-   
-            
-           $('.active').click(function(){
-               var mode =  "create";
+           var mode =  "create";
                 var user_id  =  <?php echo $current_user['id']; ?> ; 
-                
-             
-          var data = {
-              "registration": $(this).attr('company_number'),
-              "date_of_creation": $(this).attr('date_of_creation'),
-              "name": $(this).attr('title'),
-              "postal_code": $(this).attr('postal_code'),
-              "address": $(this).attr('snippet'),
-              "user_id" : user_id,
-              "company_status": $(this).attr('company_status'),
-              "address_line_1": $(this).attr('address_line_1'),
-              "company_type": $(this).attr('company_type'),
-               "description": $(this).attr('description'),
-               "date_of_creation": $(this).attr('date_of_creation'),
-    };
-        data = $.param(data);
-            
-            $.ajax({
-                type: "POST",
-                dataType: "json",
-                url: "<?php echo base_url(); ?>companies/getCompany",
-                data: data,
-                success: function (data) {
-             
-                    if(data.status == 200){
-                       // alert('redirect');
-                        //var milliseconds = 2000;
- //if ((new Date().getTime() - start) > milliseconds){
-    window.location.href = "<?php echo base_url(); ?>companies/company?id="+data.message;
-                    } 
-            }
-        })
-            
-            
-            });         
-    
-        
- 
 
-     
-        
-        
-    
+ 
+                var data = {
+                "registration": $(this).attr('company_number'),
+                "date_of_creation": $(this).attr('date_of_creation'),
+                "name": $(this).attr('title'),
+                "postal_code": $(this).attr('postal_code'),
+                "address": $(this).attr('snippet'),
+                "user_id" : user_id,
+                "company_status": $(this).attr('company_status'),
+                "address_line_1": $(this).attr('address_line_1'),
+                "company_type": $(this).attr('company_type'),
+                "description": $(this).attr('description'),
+                "date_of_creation": $(this).attr('date_of_creation'),
+                };
+            
+            bootbox.confirm("Are you sure want to add this company?", function(result) {
+             
+
+                if(result){
+
+
+               
+                data = $.param(data);
+
+                    $.ajax({
+                        type: "POST",
+                        dataType: "json",
+                        url: "<?php echo base_url(); ?>companies/getCompany",
+                        data: data,
+                        success: function (data) {
+
+                        if(data.status == 200){
+                            // alert('redirect');
+                            //var milliseconds = 2000;
+                            //if ((new Date().getTime() - start) > milliseconds){
+                            window.location.href = "<?php echo base_url(); ?>companies/company?id="+data.message;
+                            } 
+                        }
+                    });
+
+
+                }else{
+
+
+                }                
+
+
+            })
+
+        }); 
+    }; 
+
     
     function ucwords (str) {
     return (str + '').replace(/^([a-z])|\s+([a-z])/g, function ($1) {
