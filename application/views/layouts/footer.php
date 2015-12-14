@@ -1,6 +1,6 @@
 
   <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog small-modal">
             <div class="modal-content">
             
                 <div class="modal-header">
@@ -15,9 +15,13 @@
                 </div>
                 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default confirm_delete_cancel" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-danger btn-ok confirm_ch_add">Add</a>
-                </div>
+                <div class="col-sm-4">
+                    <button type="button" class="btn btn-default confirm_delete_cancel btn-block" data-dismiss="modal">Cancel</button>
+                    </div>
+                    <div class="col-sm-8">
+                    <a class="btn btn-warning btn-ok btn-block confirm_ch_add btn-warning">Add</a>
+                    </div>
+                  </div>
             </div>
         </div>
     </div>

@@ -1075,7 +1075,11 @@ font-size: 9px;
 @media only screen and (min-width: 991px) {
 .modal-dialog {
     width: 85% !important ;
-    max-width: 1050px;
+    max-width: 1050px;   
+}
+.small-modal {
+    width: 50% !important ;
+    max-width: 1050px;   
 }
 }
 

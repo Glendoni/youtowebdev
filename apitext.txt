@@ -24,4 +24,20 @@ company_id : 346351 provider_id: 1769 ref: a7e4847fb4291afd169ea5f85359ec77f95c6
 Initial stage three
 company_id : 346352 provider_id: 1769 ref: a7e4847fb4291afd169ea5f85359ec77f95c6f04 type: Debenture stage: outstanding eff_from: 2015-12-09 user: 31Initial stage two
 Initial stage three
-company_id : 346353 provider_id: 1769 ref: a7e4847fb4291afd169ea5f85359ec77f95c6f04 type: Debenture stage: outstanding eff_from: 2015-12-09 user: 31
+company_id : 346353 provider_id: 1769 ref: a7e4847fb4291afd169ea5f85359ec77f95c6f04 type: Debenture stage: outstanding eff_from: 2015-12-09 user: 31Initial stage two
+Initial stage two
+Initial stage two
+Initial stage two
+Initial stage two
+Initial stage two
+Initial stage two
+Initial stage two
+Initial stage two
+Initial stage two
+Initial stage two
+Initial stage two
+Initial stage two
+Initial stage two
+Initial stage two
+Initial stage two
+Initial stage two
