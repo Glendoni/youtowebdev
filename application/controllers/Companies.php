@@ -418,8 +418,10 @@ class Companies extends MY_Controller {
 		$rowcount = $query->num_rows();
 		if ($rowcount> 0) {
 			$response= $response."<li class='autocomplete-item split-heading'><i class='fa fa-caret-square-o-down'></i> Contacts</li>";
+             $callCH = true;
 		} else{
 			$response= $response."<li class='autocomplete-item split-heading autocomplete-no-results'><i class='fa fa-times'></i> No Contacts Found</li>";
+            $callCH = false;
 		}
  		foreach ($query->result() as $row):
             $response= $response."<a href='". base_url() . "companies/company?id=" . $row->id . "#contacts'><li class='autocomplete-item autocomplete-contact'><strong>" . str_replace($words, ' ',$row->name). "</strong><br><small>".$row->company_name."</small></li></a>";
@@ -453,7 +455,6 @@ class Companies extends MY_Controller {
                 $this->form_validation->set_rules('user_id', 'user_id', 'xss_clean|required');
                 $this->form_validation->set_rules('company_type', 'company_type', 'xss_clean|required'); 
                 $this->form_validation->set_rules('date_of_creation', 'date_of_creation', 'xss_clean|required');
-                $this->form_validation->set_rules('name', 'name', 'xss_clean|required');
                 $rows_affected = $this->Companies_model->create_company_from_CH($this->input->post(),$this->data['current_user']['id']);
 
                 if($rows_affected)
