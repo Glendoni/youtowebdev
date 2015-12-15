@@ -52,7 +52,7 @@
 
 <!--FORMAT NUMBERS WITH COMMAS (ADD CLASS NUMBER TO INPUT)-->
     <script type="text/javascript" src="<?php echo asset_url();?>js/format-numbers.js"></script>
- <script src="https://bootboxjs.com/bootbox.js"></script>
+ <script src="<?php echo asset_url();?>js/bootbox.js"></script>
 
 <!--AUTO COMPLETE-->
 
