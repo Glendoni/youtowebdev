@@ -1241,8 +1241,11 @@ class Companies_model extends CI_Model {
     */
     public function create_company_from_CH($post,$user_id){
 		  $this->load->helper('inflector');
+        
+        $postName = str_replace('"', '&quot;', $post['name']);
+        
     $company = array(
-        'name' => humanize($post['name']),
+        'name' => humanize($postName),
         'contract' => null,
         'perm' => null,
         'created_by'=> $user_id,
@@ -1347,5 +1350,69 @@ class Companies_model extends CI_Model {
         }
 
           
+    }
+    
+    
+    public function create_pipeline($post, user_id){
+        
+          $pipeline = array(
+				'company_id' => '',	
+                'user_id' => '',	
+				'status' => '',	
+              	'created_at' => '',
+               'mounth_due' =>  '',
+				'created_by' => '',
+              'updated_by' => null
+			 
+				);
+			$this->db->insert('deals_pipeline', $pipeline);
+    } 
+    
+    
+     public function update_pipeline($id,$user_id){
+        
+          $pipeline = array(
+			 'mounth_due' =>  '',	
+				 'updated_by' => $user_id
+			 
+				);
+       
+            $this->db->where('id', $id);
+			$this->db->update('deals_pipeline', $pipeline);
+    }  
+    
+        public function get_pipeline($id)
+    {
+       //get all pipelines and retrun to browser in json formatt 
+        $this->db->select('*');
+        $this->db->from('companies');
+        $this->db->join('deals_pipeline', 'deals_pipeline.company_id= companies.id');
+        $this->db->limit(1);
+        $this->db->where('companies.id',$id);
+        
+        $query = $this->db->get();
+        
+         if($query->num_rows()){
+            
+            foreach ($query->result() as $row)
+            {
+                return $row;
+            } 
+             
+         }else{
+             
+             return '{}';
+         }
+    }
+    
+    public delete_pipeline($id){
+        //soft delete entry
+                 $pipeline = array(
+			 'mounth_due' =>  '"2015-12-01 00:00:00"'
+				);
+       
+            $this->db->where('id', $id);
+			$this->db->update('deals_pipeline', $pipeline);
+    } 
     }
 }
