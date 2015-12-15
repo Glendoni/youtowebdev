@@ -1277,6 +1277,9 @@ class Companies_model extends CI_Model {
         $provider = $response['items'][0]['persons_entitled'][0]['name'];
          $provider_id = $this->providerCheck($provider);
         
+        
+        
+        
         //API TESTER WRITES TO FILE
     $filecontent =  'company_id : '.$company_id.' provider_id: '.$provider_id.' ref: '.$response['items'][0]['etag'].' type: '.$response['items'][0]['classification']['description'].' stage: '.$response['items'][0]['status'].' eff_from: '.date('Y-m-d').' user: '.$user_id; 
     
@@ -1304,48 +1307,45 @@ class Companies_model extends CI_Model {
     }  
     
     
-public function providerCheck($name){
+    public function providerCheck($name){
             
-$q = '
- SELECT id,name
- FROM providers_check
- WHERE name ilike \''.$name.'\'
- LIMIT 1
-';
-$result = $this->db->query($q);
-          if( $result->num_rows()){
-            
-           foreach ($result->result() as $row)
-            {
-                return $row->id;
-            } 
-                }else{
-              
-              return false;
-              
-          }
+    $q = '
+     SELECT id,name,provider_id
+     FROM providers_check
+     WHERE name ilike \''.$name.'\'
+     LIMIT 1
+    ';
+    $result = $this->db->query($q);
+              if( $result->num_rows()){
+
+               foreach ($result->result() as $row)
+                {
+                    return $row->provider_id;
+                } 
+                    }else{
+
+                  return false;
+
+              }
     }
     
-    
     public function hackmorgages($id){
-       
-        
-        $this->db->select('*');
-$this->db->from('companies');
-$this->db->join('mortgages', 'mortgages.company_id= companies.id');
-        $this->db->join('providers_check', 'providers_check.id= mortgages.provider_id');
- $this->db->where('companies.id',$id); 
-        $this->db->limit(1);
-        
+       //Redundent function used temporarily for testing purposes only!
 
-$query = $this->db->get();
-        
- 
+        $this->db->select('*');
+        $this->db->from('companies');
+        $this->db->join('mortgages', 'mortgages.company_id= companies.id');
+        $this->db->join('providers', 'providers.id=mortgages.provider_id');
+        $this->db->where('companies.id',$id); 
+        $this->db->limit(1);
+
+        $query = $this->db->get();
+
         foreach ($query->result() as $row)
-{
-    return $row;
-}
-    
+        {
+            return $row;
+        }
+
           
     }
 }

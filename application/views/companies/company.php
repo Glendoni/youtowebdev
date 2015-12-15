@@ -199,9 +199,7 @@ endif; ?>
 		Mortgages
 		</div>
 		<!-- /.panel-heading -->
-            
-
-            
+ 
 		<div class="panel-body">
             
 		<?php if(!empty($company['mortgages'])): ?>
@@ -245,6 +243,7 @@ endif; ?>
             </div>
 		<?php endif; ?>
 		</div>
+ 
 		<!-- /.panel-body -->
 		</div>
 		</div>
