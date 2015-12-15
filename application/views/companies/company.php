@@ -200,39 +200,8 @@ endif; ?>
 		</div>
 		<!-- /.panel-heading -->
             
-            		<div class="panel-body">
-             
-            
-		<?php if(!empty($companieshack->id)): ?>
-			<table class="table table-hover">
-			<thead>
-				<tr>
-					<th class="col-md-6">Provider</th>
-					<th class="col-md-3" style="text-align:left;">Started</th>
-					<th class="col-md-3" style="text-align:left;">Status</th>
-				</tr>
-			</thead>
-			<tbody>
-				 
-				<tr <?php echo $mortgage['stage']==MORTGAGES_SATISFIED? 'class="danger"' : 'class="success"' ?>>
-			 
-				<td class="col-md-6"><?php echo $companieshack->name; ?> </td><td class="col-md-3"><?php echo date("d F Y", strtotime($companieshack->eff_from)); ?> </td><td class="col-md-3"><?php echo ucfirst($companieshack->stage); ?> </td>
 
-
-
-				</tr>
-			 
-			</tbody>
-			</table>
-			<?php else: ?>
-			<div class="alert alert-info" style="margin-top:10px;">
-                No mortgage data registered.
-            </div>
-		<?php endif; ?>
-		</div>
             
-            
-           <?php /* ?> 
 		<div class="panel-body">
             
 		<?php if(!empty($company['mortgages'])): ?>
@@ -276,7 +245,6 @@ endif; ?>
             </div>
 		<?php endif; ?>
 		</div>
-        <?php */ ?>
 		<!-- /.panel-body -->
 		</div>
 		</div>
