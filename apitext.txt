@@ -41,3 +41,16 @@ Initial stage two
 Initial stage two
 Initial stage two
 Initial stage two
+Initial stage two
+Initial stage three
+company_id : 346741 provider_id: 2582 ref: 2d334c9b000b3d0e1922885aeeb344945d318c48 type: Debenture stage: outstanding eff_from: 2015-12-15 user: 1Initial stage two
+Initial stage three
+company_id : 346742 provider_id: 2329 ref: 7718cc91f215045e8bfd4c85272f15edf677973e type: A registered charge stage: outstanding eff_from: 2015-12-15 user: 1Initial stage two
+Initial stage two
+Initial stage two
+Initial stage three
+company_id : 346745 provider_id: 2329 ref: a9f1f85746b6e803f98b66cc2ab97776195aeddf type: A registered charge stage: outstanding eff_from: 2015-12-15 user: 1Initial stage two
+Initial stage three
+company_id : 346746 provider_id:  ref: cffcbcaf838b52c899b1a33fb23af24495ff09e9 type: Rent deposit deed stage: outstanding eff_from: 2015-12-15 user: 1Initial stage two
+Initial stage three
+company_id : 346747 provider_id: 2550 ref: 44d501eb756bdbf9ee4c39446c761f238e8ab6ae type: Rent deposit deed stage: outstanding eff_from: 2015-12-15 user: 1
