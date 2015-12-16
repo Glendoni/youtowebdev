@@ -417,13 +417,6 @@ class Companies extends MY_Controller {
 
 		$query = $this->Companies_model->get_autocomplete_contact($search_data);
 
-        
-         
-              
-            
-         //
-       
-      
 		$rowcount = $query->num_rows();
 		if ($rowcount> 0) {
 			$response= $response."<li class='autocomplete-item split-heading'><i class='fa fa-caret-square-o-down'></i> Contacts</li>";
