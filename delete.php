@@ -84,7 +84,7 @@ echo  $response['items'][0]['status'];
       "status": "outstanding",
       "classification": {
         "description": "Debenture",
-        "type": "charge-description"
+        "type": "charge-description1"
       },
       "etag": "a7e4847fb4291afd169ea5f85359ec77f95c6f04",
       "delivered_on": "2009-03-31"
