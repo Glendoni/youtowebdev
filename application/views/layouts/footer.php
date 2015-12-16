@@ -90,7 +90,7 @@ $('#autoSuggestionsList').html(data.html);
 $('#agency_name').addClass('autocomplete-live');
         
         
-          if (data.callCH != true ) { 
+          if (data.callCH ===true) { 
           // alert('I worked');
           
          getCompany(input_data);

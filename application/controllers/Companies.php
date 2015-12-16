@@ -382,7 +382,7 @@ class Companies extends MY_Controller {
 	public function autocomplete() 
     {
         
-        $callCH = true;
+        $callCH = false;
         $search_data = trim($this->input->post("search_data"));
 		$response = "<div class='autocomplete-full-holder'><div class='col-md-6 clearfix no-padding'><ul class='autocomplete-holder'>";
         
@@ -393,13 +393,13 @@ class Companies extends MY_Controller {
         $rowcount = $query->num_rows();
 		if ($rowcount> 0) {
 			$response= $response."<li class='autocomplete-item split-heading'><i class='fa fa-caret-square-o-down'></i> Companies</li>";
- 
+        $callCH = false;
 		}
 		else
 		{
             
             $response= $response."<li class='autocomplete-item split-heading autocomplete-no-results'><i class='fa fa-times'></i> No Companies Found</li>";
-           // $callCH = false;
+          $callCH = true;
            // $responsed=  $response.$this->getCompanyHouseDetails(08245800);
             
 		}
@@ -420,10 +420,10 @@ class Companies extends MY_Controller {
 		$rowcount = $query->num_rows();
 		if ($rowcount> 0) {
 			$response= $response."<li class='autocomplete-item split-heading'><i class='fa fa-caret-square-o-down'></i> Contacts</li>";
-           $callCH = true;
+           $callCH = false;
 		} else{
 			$response= $response."<li class='autocomplete-item split-heading autocomplete-no-results'><i class='fa fa-times'></i> No Contacts Found</li>";
-           $callCH = false;
+          
 		}
         
      
