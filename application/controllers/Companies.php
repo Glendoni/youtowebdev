@@ -393,12 +393,13 @@ class Companies extends MY_Controller {
         $rowcount = $query->num_rows();
 		if ($rowcount> 0) {
 			$response= $response."<li class='autocomplete-item split-heading'><i class='fa fa-caret-square-o-down'></i> Companies</li>";
+ 
 		}
 		else
 		{
             
             $response= $response."<li class='autocomplete-item split-heading autocomplete-no-results'><i class='fa fa-times'></i> No Companies Found</li>";
-            $callCH = false;
+           // $callCH = false;
            // $responsed=  $response.$this->getCompanyHouseDetails(08245800);
             
 		}
@@ -409,23 +410,39 @@ class Companies extends MY_Controller {
         		$assigned_label = "| <span class='label label-primary' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$row->user."</span>";};
         	 
 		$response= $response."<a href='". base_url() . "companies/company?id=" . $row->id . "'><li class='autocomplete-item autocomplete-company'><strong>" . str_replace($words, ' ',$row->name). "</strong><br><small>".$row->pipeline." ".$assigned_label."</small></li></a>";
+         //$callCH = false;
         endforeach;
         $response= $response."</ul></div>";
         $response= $response."<div class='col-md-6 no-padding'><ul class='autocomplete-holder'>";
 
 		$query = $this->Companies_model->get_autocomplete_contact($search_data);
 
+        
+         
+              
+            
+         //
+       
+      
 		$rowcount = $query->num_rows();
 		if ($rowcount> 0) {
 			$response= $response."<li class='autocomplete-item split-heading'><i class='fa fa-caret-square-o-down'></i> Contacts</li>";
-             $callCH = true;
+           $callCH = true;
 		} else{
 			$response= $response."<li class='autocomplete-item split-heading autocomplete-no-results'><i class='fa fa-times'></i> No Contacts Found</li>";
-            $callCH = false;
+           $callCH = false;
 		}
+        
+     
  		foreach ($query->result() as $row):
             $response= $response."<a href='". base_url() . "companies/company?id=" . $row->id . "#contacts'><li class='autocomplete-item autocomplete-contact'><strong>" . str_replace($words, ' ',$row->name). "</strong><br><small>".$row->company_name."</small></li></a>";
+           //
+     
+        
         endforeach;
+        
+    
+        
         $response= $response."</ul></div>";
         $this->output->set_content_type('application/json');
 		$this->output->set_output(json_encode(array('html'=> $response, 'callCH'=> $callCH))); //callCH = return true or false (default) call company house function
@@ -459,18 +476,28 @@ class Companies extends MY_Controller {
 
                 if($rows_affected)
                 {
-                    file_put_contents('apitext.txt', 'Initial stage two'.PHP_EOL, FILE_APPEND);            
-                    $chargesResponse = $this->getCompanyHouseCharges($this->input->post('registration'));
-
-                    //file_put_contents('apitext.txt', 'This has ran retured a $chargesResponse condition bbb:'.$rows_affected, FILE_APPEND); 
-
-                    if($chargesResponse){      
-                        file_put_contents('apitext.txt', 'Initial stage three'.PHP_EOL, FILE_APPEND); 
-                        $this->Companies_model->insert_charges_CH($chargesResponse,$rows_affected,$this->data['current_user']['id']);      
+                    if(is_array($rows_affected)){
+                        
+                        echo  json_encode(array('status' => 200, 'message' => $rows_affected['row_id']));
+                        
+                     exit();
                     }
-                        echo json_encode(array('status' => 200, 'message' => $rows_affected));
-                }else{
-                          echo json_encode(array('status' => '400', 'message' => 'Something went wrong'));
+                   
+                    
+                    
+                        file_put_contents('apitext.txt', 'Initial stage two'.PHP_EOL, FILE_APPEND);            
+                        $chargesResponse = $this->getCompanyHouseCharges($this->input->post('registration'));
+
+                        //file_put_contents('apitext.txt', 'This has ran retured a $chargesResponse condition bbb:'.$rows_affected, FILE_APPEND); 
+
+                        if($chargesResponse){      
+                            file_put_contents('apitext.txt', 'Initial stage three'.PHP_EOL, FILE_APPEND); 
+                            $this->Companies_model->insert_charges_CH($chargesResponse,$rows_affected,$this->data['current_user']['id']);      
+                        }
+                            echo json_encode(array('status' => 200, 'message' => $rows_affected));
+                    }else{
+                              echo json_encode(array('status' =>202, 'message' => 'Something went wrong'));
+                   
                 }
             }
              
@@ -489,7 +516,7 @@ class Companies extends MY_Controller {
     public function getCompanyHouseDetails($id = 0) 
 	{
           
-           $id = str_replace(' ', '', $id);
+           //$id = str_replace(' ', '', $id);
              $server_output = array();
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL,"https://api.companieshouse.gov.uk/search/companies?q=".$id);
