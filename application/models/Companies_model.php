@@ -1240,6 +1240,19 @@ class Companies_model extends CI_Model {
     @ Author: Glen Small
     */
     public function create_company_from_CH($post,$user_id){
+        
+        
+     
+                   $q = '
+     SELECT id
+     FROM companies
+     WHERE registration=\''.$post['registration'].'\'
+     LIMIT 1
+    ';
+    $result = $this->db->query($q);
+              if(!$result->num_rows()){
+        
+     
 		  $this->load->helper('inflector');
         
         $postName = str_replace('"', '&quot;', $post['name']);
@@ -1269,12 +1282,31 @@ class Companies_model extends CI_Model {
     if($new_company_id and $new_company_address_id) return $new_company_id;
 		return FALSE;
         
+ 
+              }else{
+                  
+             foreach ($result->result() as $row)
+                {
+                    return array('row_id' => $row->id);
+                } 
+                  
+              }
+              
+           
+                  
+                  
 	}
+        
     /*
     @ Insert Company Charges from Company House API Record
     @ Author: Glen Small
     */
     public function insert_charges_CH($response, $company_id,$user_id){
+        
+        
+
+        
+        
           $this->load->helper('inflector');
         $provider  = '';
         $provider = $response['items'][0]['persons_entitled'][0]['name'];
@@ -1297,7 +1329,6 @@ class Companies_model extends CI_Model {
 				'company_id' => $company_id,
                 'provider_id' => $provider_id,
 				'ref' => $response['items'][0]['etag'],
-               'type' =>  humanize($response['items'][0]['classification']['type']),
                 'stage' =>  $response['items'][0]['status'],
                 'eff_from' => $response['items'][0]['transactions'][0]['delivered_on'],
                 'created_at' =>   date('Y-m-d'),	
