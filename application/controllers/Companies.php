@@ -224,12 +224,11 @@ class Companies extends MY_Controller {
 		if($this->input->get('id'))
 		{	
             
-
-		$months = array();
-		$currentMonth = (int)date('m');
-		for ($x = $currentMonth; $x < $currentMonth + 12; $x++) {
-		$monthArr[] = date('M y', mktime(0, 0, 0, $x, 1));
-		}
+			$months = array();
+			$currentMonth = (int)date('m');
+			for ($x = $currentMonth; $x < $currentMonth + 12; $x++) {
+			$monthArr[] = date('M y', mktime(0, 0, 0, $x, 1));
+			}
 
 
 

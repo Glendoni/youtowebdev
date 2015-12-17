@@ -123,3 +123,33 @@ Pipeline month: 2016-09-01 Pipleine: 1
     LIMIT 1
     
 check_if_pipeline_exist test false xxxxx: PM: 2016-09-01
+Pipeline month: 2015-12-01 Pipleine: 2
+
+     SELECT company_id
+     FROM deals_pipeline
+    WHERE company_id=65347
+    AND status LIKE '2'
+    AND eff_to IS NULL
+    LIMIT 1
+    
+check_if_pipeline_exist test false xxxxx: PM: 2015-12-01
+Pipeline month: 2016-01-01 Pipleine: 1
+
+     SELECT company_id
+     FROM deals_pipeline
+    WHERE company_id=65347
+    AND status LIKE '1'
+    AND eff_to IS NULL
+    LIMIT 1
+    
+check_if_pipeline_exist test false xxxxx: PM: 2016-01-01
+Pipeline month: 2016-02-01 Pipleine: 2
+
+     SELECT company_id
+     FROM deals_pipeline
+    WHERE company_id=65347
+    AND status LIKE '2'
+    AND eff_to IS NULL
+    LIMIT 1
+    
+check_if_pipeline_exist test false xxxxx: PM: 2016-02-01
