@@ -76,7 +76,7 @@
 <div class="col-sm-3 col-md-3">
 <a class="navbar-brand" href="/" ><img src="<?php echo asset_url();?>images/baselist-logotype-black-transparent-bg.png" style="width:120px;">
 <?php if (isset($current_user)): ?>
-<div style="font-size: 10px;font-weight: 300;text-align: right;float: right;line-height: 40px;padding-left: 5px;">Version 2.16.1</div>
+<div style="font-size: 10px;font-weight: 300;text-align: right;float: right;line-height: 40px;padding-left: 5px;">Version 2.17</div>
 <?php endif; ?>
 </a>
 </div>
@@ -84,6 +84,8 @@
 
             <div class="col-sm-3 col-sm-push-6">
             <!-- Top Menu Items -->
+            <?php if (isset($current_user)): ?>
+
             <ul class="nav navbar-top-links navbar-right">
             <li class="dropdown">
                <a href="#" class="dropdown-toggle user-profile" data-toggle="dropdown">
@@ -99,6 +101,9 @@
                         </li> -->
                         <li>
                             <a href="<?php echo site_url(); ?>users/settings"><i class="fa fa-fw fa-envelope"></i> Email Settings</a>
+                        </li>
+                        <li>
+                            <a href="https://status.heroku.com/" target="_blank"><i class="fa fa-fw fa-tasks"></i> Baselist Status</a>
                         </li>
                         <li class="divider"></li>
                         <?php if ($current_user['permission'] == 'admin'): ?>
@@ -116,6 +121,8 @@
                     </ul>
                 </li>
             </ul>
+            <?php endif; ?>
+
             </div>
 
 
