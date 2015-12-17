@@ -32,7 +32,7 @@
 	      		<div class="row">
 					<div class="col-md-12">
 	                    <div class="form-group">
-	                        <label for="role" class="control-label">Select template:</label>                            
+	                        <label for="role" class="control-label">Select Template</label>                            
 	                        <select class="form-control template_selector" name="template_selector" required>
 	                        <option value=""></option>
 							  <?php foreach ($email_templates as $email_template): ?>
@@ -43,7 +43,7 @@
 	                </div>
 	                <div class="col-md-12">
 	                    <div class="form-group">
-	                        <label for="name" class="control-label">Email subject:</label>
+	                        <label for="name" class="control-label">Email Subject</label>
 	                        <?php foreach ($email_templates as $email_template): ?>
                 			<input type="text" name="subject_<?php echo $email_template->id; ?>" style="display:none;" class="form-control info_box template_<?php echo $email_template->id; ?>" value="<?php echo $email_template->subject; ?>" >
 						  	<?php endforeach; ?>
@@ -51,7 +51,7 @@
 	                </div>
 					<div class="col-md-12">
 	                    <div class="form-group">
-	                        <label for="name" class="control-label">Email body:</label>
+	                        <label for="name" class="control-label">Email Body</label>
 	                        <?php foreach ($email_templates as $email_template): ?>
                 			<textarea class="form-control info_box template_<?php echo $email_template->id; ?>" rows="18" cols="50" name="message_<?php echo $email_template->id; ?>" style="display:none;"><?php echo $email_template->message; ?></textarea>
 						  	<?php endforeach; ?>
@@ -59,7 +59,7 @@
 	                </div>
 	                <div class="col-md-12">
 	                	<div class="form-group">
-	                		<label class="control-label"> Attachements:</label>
+	                		<label class="control-label"> Attachements</label>
                 			<?php foreach ($email_templates as $email_template): ?>
                 			<div class="template_<?php echo $email_template->id; ?> info_box" style="display:none;">
 						  		<?php $attchs = json_decode($email_template->attachments);?>
@@ -74,7 +74,7 @@
 	                </div>
 	                <div class="col-md-12">
 	                    <div class="form-group">
-	                        <label for="email" class="control-label">Extra attachments:</label>                            
+	                        <label for="email" class="control-label">Extra Attachments</label>                            
 	                        <input type="file" name="files[]" multiple>
 	                    </div>
 	                </div>
