@@ -997,8 +997,10 @@ class Companies_model extends CI_Model {
 		return $this->db->affected_rows();
 	}
 
-	function update_details($post)
+	function update_details($post, $user_id=0)
 	{
+        
+          
 		if(isset($post['turnover']) and !empty($post['turnover']))
 		{	
 			// this should only happen when no turnonver exist
@@ -1013,6 +1015,30 @@ class Companies_model extends CI_Model {
 			$this->db->insert('turnovers', $turnover);
 			$turnover_status = $this->db->affected_rows();
 		}
+        
+        
+        	if(isset($post['pipeline_status']) && $post['pipeline_status'] == true)
+		{
+
+              
+                
+
+                $status = 1;
+                
+               // $check = $this->check_if_pipeline_exist($post['company_id'])? 'Yes' : 'No';
+                
+                
+              $this->update_pipline($post,$user_id);  
+                
+                
+file_put_contents('apitext.txt', 'company ID '.$post['company_id']. ' Pipeline Status: '.$post['pipeline_status'].' Pipeline month '.$pipeline_month. ' User Id/ updated by '.$user_id. ' Status '.$status.  PHP_EOL   , FILE_APPEND);   
+                
+       
+                
+                
+		}
+        
+        
 		
 		if(isset($post['emp_count']) and !empty($post['emp_count']))
 		{
@@ -1320,9 +1346,6 @@ class Companies_model extends CI_Model {
     
   file_put_contents('apitext.txt', $filecontent, FILE_APPEND);    
   
-         
-     
-        
        
  if($provider_id){
         $mortgages = array(
@@ -1382,5 +1405,120 @@ class Companies_model extends CI_Model {
 
           
     }
+    
+
+       
+    
+    public function update_pipline($post, $user_id){
+        
+        
+    $action = $this->check_if_pipeline_exist($post['company_id']);
+        
+    $dateObj   = DateTime::createFromFormat('!m', $post['pipeline_month']);
+    $monthName = $dateObj->format('m'); // March 
+    $pipeline_month =  date('Y').'-'.$monthName.'-'.date('d'); 
+        
+        
+        if($action){
+            
+              	$this->db->where('company_id', $post['company_id']);
+		$this->db->update('deals_pipeline', array('updated_at'=>date('Y-m-d H:i:s'),'updated_by' =>$user_id, 'status' => $post['pipeline_status'],'eff_from' => $pipeline_month));
+		return $this->db->affected_rows();
+            
+        }else{
+            
+                $pipeline = array(
+				'company_id' => $post['company_id'],
+				'created_by' => $user_id,
+				'status' => $post['pipeline_status'],
+                    'user_id' => $user_id,
+				'eff_from' => $pipeline_month
+				);
+			$this->db->insert('deals_pipeline', $pipeline);
+			$pipeline = $this->db->affected_rows();
+            
+        }
+        
+          /*
+            
+                
+                */
+        
+        
+        
+    }
+    
+    
+    
+    
+    public function check_if_pipeline_exist($id =0){
+    
+       //file_put_contents('apitext.txt', 'Pipeline update id: '.$id.' User Id '.$user_id.' mode '.$mode. PHP_EOL  , FILE_APPEND);
+       
+              
+    $q = '
+     SELECT company_id
+     FROM deals_pipeline
+    WHERE company_id='.$id.'
+     LIMIT 1
+    ';
+    $result = $this->db->query($q);
+   
+        if($result->num_rows()){ 
+            return true ;
+        }else{
+                 return  false;
+        }
+    }
+    
+    
+    
+    public function get_pipeline($id =0, $user_id = 1, $mode = 2){
+    
+       //file_put_contents('apitext.txt', 'Pipeline update id: '.$id.' User Id '.$user_id.' mode '.$mode. PHP_EOL  , FILE_APPEND);
+       
+    $id = 343738;               
+    $q = '
+     SELECT company_id
+     FROM deals_pipeline
+    WHERE company_id='.$id.'
+     LIMIT 1
+    ';
+    $result = $this->db->query($q);
+              if( $result->num_rows()){
+
+               foreach ($result->result() as $row)
+                {
+                    
+//file_put_contents('apitext.txt', 'Pipeline check id run: '.$row->company_id.' User Id '.$user_id.' mode '.$mode. PHP_EOL  , FILE_APPEND);
+                } 
+                    }else{
+
+                  //echo 'Not found';
+
+              }
+
+        return array();
+        
+    }
+ 
+    
+    public function creat_pipeline($post, $user_id){
+        /*
+               $pipeline = array(
+				'company_id' => $post[],
+                'user_id' => $post[],
+				'status' => $post[],
+                'month_due' =>  post[],
+                'created_by' => $user_id,
+               
+				);
+			$this->db->insert('deals_pipeline', $pipeline);
+        
+        */
+        
+    }
+    
+ 
     
 }

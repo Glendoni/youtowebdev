@@ -14,7 +14,7 @@
             <strong>Source & Class Required</strong><br> Please add a Source & Class to this company.
             </div>
             </div>
-            <div class="col-sm-6 col-md-9">
+            <div class="col-sm-6 col-md-6">
             <div class=" form-group ">
                         <label for="trading_name" class="control-label">Trading Name</label>                            
                         <input type="text" name="trading_name" value="<?php echo isset($company['trading_name'])?$company['trading_name']:''; ?>" id="trading_name" class="form-control">
@@ -37,8 +37,49 @@
                     </div>
                     </div>
                 </div>
-            
+
+        <div class="col-sm-6 col-md-3">
+
+
+            <div class="col-sm-6 col-md-6">
+                <div class=" form-group ">
+                <label for="exampleSelect1">Pipeline</label>
+                    <select name="pipeline_status" class="form-control company_class">
+                        <option value="0">Please select</option>
+                        <option value="should">Should Close</option>
+                        <option value="will">Will Close</option>
+                    </select>
                 </div>
+            </div>
+
+
+            <div class="col-sm-6 col-md-6">
+                <div class=" form-group ">
+                    <label for="exampleSelect1">Pipeline</label>
+                    <select name="pipeline_month" class="form-control company_class">
+                        <option>Please select</option>
+                        <option value="1">January</option>
+                        <option value="2">Feburary</option>
+                        <option value="3">March</option>
+                        <option value="4">April</option>
+                        <option value="5">May</option>
+                        <option value="6">June</option>
+                        <option value="7">July</option>
+                        <option value="8">Augaust</option>
+                        <option value="9">September</option>
+                        <option value="10">October</option>
+                        <option value="11">November</option>
+                        <option value="12">December</option>
+                    </select>
+                </div>
+            </div>
+
+
+        </div>
+                
+</div>
+            
+            
                 <div class="row">
               <div class="col-sm-6 col-md-3">
                     <div class=" form-group ">
