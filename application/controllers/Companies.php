@@ -224,8 +224,6 @@ class Companies extends MY_Controller {
 		if($this->input->get('id'))
 		{	
             
-            
-            
 			$this->load->model('Email_templates_model');
 			$this->data['email_templates'] = $this->Email_templates_model->get_all();
 			$raw_search_results = $this->Companies_model->search_companies_sql(FALSE,$this->input->get('id'));            
@@ -242,7 +240,14 @@ class Companies extends MY_Controller {
                 }
             }
 			$this->data['addresses'] = $address;
-			$this->data['campaigns'] = $this->Campaigns_model->get_campaigns($this->input->get('id'));
+            
+            
+$this->data['pipeline'] = $this->Companies_model->get_pipeline($this->input->get('id'),$this->data['current_user']['id'],false);
+			
+            
+            
+            
+            $this->data['campaigns'] = $this->Campaigns_model->get_campaigns($this->input->get('id'));
             $this->data['created_by_name'] = $this->Users_model->get_user($user_id);
 			$option_contacts =  array();
 			foreach ($this->data['contacts'] as $contact) {
@@ -260,7 +265,6 @@ class Companies extends MY_Controller {
 			$this->data['comments'] = $this->Actions_model->get_comments($this->input->get('id'));
 			$this->data['page_title'] = $company[0]['name'];
 			$this->data['companies'] = $company;
-           
 			$this->data['hide_side_nav'] = True;
 			$this->data['main_content'] = 'companies/company';
 			$this->data['full_container'] = True;
@@ -278,12 +282,8 @@ class Companies extends MY_Controller {
         // this is a redunudent function
         $compohack =  $this->Companies_model->hackmorgages(346339);
         
-        //echo $compohack->name;
-        
+        //echo $compohack->name;    
     }
-    
-    
-    
     
 	public function edit()
 	{
@@ -291,9 +291,9 @@ class Companies extends MY_Controller {
 		{
 
 			$post = $this->input->post();
-			
+//file_put_contents('apitext.txt', 'Pipeline Status: '.$post['pipeline_status'].' Pipeline month '.$post['pipeline_month']  , FILE_APPEND); 
 			// We need to clean the post and validate the post fields *pending*
-			$result = $this->Companies_model->update_details($this->input->post());
+			$result = $this->Companies_model->update_details($this->input->post(),$this->data['current_user']['id']);
 			$this->refresh_search_results();
 			$this->set_message_success('Company Updated');
 			redirect('/companies','refresh');
@@ -548,6 +548,18 @@ class Companies extends MY_Controller {
         }
 
         return json_decode($result,TRUE);
+        
+    }
+    
+    public function delete(){
+ 
+        
+       $monthNum  = 3;
+$dateObj   = DateTime::createFromFormat('!m', $monthNum);
+$monthName = $dateObj->format('m'); // March 
+        
+        
+     echo date('Y').'-'.$monthName.'-'.date('d');
         
     }
 }
