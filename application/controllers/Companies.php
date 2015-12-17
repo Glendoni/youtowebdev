@@ -225,7 +225,7 @@ class Companies extends MY_Controller {
 		{	
             
             
-           $monthArr  = array(0=>'Please select', 1 => 'January',2 => 'Feburary',3 => 'March',4 => 'April',5 => 'May',6 => 'June',7 => 'July',8 => 'Augaust',9 => 'September',10 => 'October',11 => 'November',12 => 'December'); //Move will be moved to a new array file.
+           $monthArr  = array(0=>'Please select', 1 => 'January',2 => 'Feburary',3 => 'March',4 => 'April',5 => 'May',6 => 'June',7 => 'July',8 => 'August',9 => 'September',10 => 'October',11 => 'November',12 => 'December'); //Move will be moved to a new array file.
  
            $deals_pipeline_statusArr  = array(0=>'Please select', 1 => 'Should Close',2 => 'Will Close'); //Move will be moved to a new array file.
             
