@@ -47,7 +47,7 @@
                      <div class="col-xs-6 col-sm-6 col-md-8" style="
     right: 14px;
 " >
-                           <label for="exampleSelect1">Pipeline Status</label>
+                           <label for="pipeline_text">Pipeline Status</label>
                    <p style="
     font-size: 12px;
 "> 
@@ -58,7 +58,7 @@
     
     
             
-        echo ucfirst($deals_pipeline_status[$deals_pipline->status]).' Close In '.date("F", strtotime($deals_pipline->eff_from)). '<br/> by: '.$deals_pipline->name ;
+        echo ucfirst($deals_pipeline_status[$deals_pipline->status]).' In '.date("F", strtotime($deals_pipline->eff_from)). '<br/> by: '.$deals_pipline->name ;
             
             ?>
                     </p>      </div>
@@ -87,7 +87,7 @@
             
                  <div class="col-xs-6 col-sm-6 col-md-6" style="padding-left: 0px;padding-right: 2px;">
                      <label for="exampleSelect1">Pipeline Status</label>
-                 <?php echo form_dropdown('pipeline_status', $deals_pipeline_status , 0,'class="form-control pipeline-validation-check"' );    ?>
+                 <?php echo form_dropdown('pipeline_status', $deals_pipeline_status , 0,'class="form-control"' );    ?>
                         </div>
             
             
@@ -95,7 +95,7 @@
             
            <div class="col-xs-6 col-sm-6 col-md-6" style="padding-right: 0px;padding-left: 2px;">
                     <label for="exampleSelect1"> Month Due</label>        
-                 <?php echo form_dropdown('pipeline_month', $deals_pipeline_months , 0,'class="form-control pipeline-validation-check"' );    ?>
+                 <?php echo form_dropdown('pipeline_month', $deals_pipeline_months , 0,'class="form-control"' );    ?>
                
             </div>
 
