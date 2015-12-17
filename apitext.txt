@@ -53,4 +53,73 @@ company_id : 346745 provider_id: 2329 ref: a9f1f85746b6e803f98b66cc2ab97776195ae
 Initial stage three
 company_id : 346746 provider_id:  ref: cffcbcaf838b52c899b1a33fb23af24495ff09e9 type: Rent deposit deed stage: outstanding eff_from: 2015-12-15 user: 1Initial stage two
 Initial stage three
-company_id : 346747 provider_id: 2550 ref: 44d501eb756bdbf9ee4c39446c761f238e8ab6ae type: Rent deposit deed stage: outstanding eff_from: 2015-12-15 user: 1
+company_id : 346747 provider_id: 2550 ref: 44d501eb756bdbf9ee4c39446c761f238e8ab6ae type: Rent deposit deed stage: outstanding eff_from: 2015-12-15 user: 1Pipeline month: 2015-01-17 Pipleine: 1
+
+     SELECT company_id
+     FROM deals_pipeline
+    WHERE company_id=65347
+    AND status LIKE '1'
+    AND eff_to IS NULL
+    LIMIT 1
+    
+check_if_pipeline_exist test false xxxxx: PM: 2015-01-17
+Pipeline month: 2015-02-17 Pipleine: 2
+
+     SELECT company_id
+     FROM deals_pipeline
+    WHERE company_id=65347
+    AND status LIKE '2'
+    AND eff_to IS NULL
+    LIMIT 1
+    
+check_if_pipeline_exist test false xxxxx: PM: 2015-02-17
+Pipeline month: 1970-04-01 Pipleine: 2
+
+     SELECT company_id
+     FROM deals_pipeline
+    WHERE company_id=65347
+    AND status LIKE '2'
+    AND eff_to IS NULL
+    LIMIT 1
+    
+check_if_pipeline_exist test false xxxxx: PM: 1970-04-01
+Pipeline month: 1970-03-01 Pipleine: 2
+
+     SELECT company_id
+     FROM deals_pipeline
+    WHERE company_id=65347
+    AND status LIKE '2'
+    AND eff_to IS NULL
+    LIMIT 1
+    
+check_if_pipeline_exist test false xxxxx: PM: 1970-03-01
+Pipeline month: 2009-02-15 Pipleine: 1
+
+     SELECT company_id
+     FROM deals_pipeline
+    WHERE company_id=65347
+    AND status LIKE '1'
+    AND eff_to IS NULL
+    LIMIT 1
+    
+check_if_pipeline_exist test false xxxxx: PM: 2009-02-15
+Pipeline month: 2016-01-01 Pipleine: 1
+
+     SELECT company_id
+     FROM deals_pipeline
+    WHERE company_id=65347
+    AND status LIKE '1'
+    AND eff_to IS NULL
+    LIMIT 1
+    
+check_if_pipeline_exist test false xxxxx: PM: 2016-01-01
+Pipeline month: 2016-09-01 Pipleine: 1
+
+     SELECT company_id
+     FROM deals_pipeline
+    WHERE company_id=65347
+    AND status LIKE '1'
+    AND eff_to IS NULL
+    LIMIT 1
+    
+check_if_pipeline_exist test false xxxxx: PM: 2016-09-01

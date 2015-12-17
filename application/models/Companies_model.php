@@ -1431,9 +1431,14 @@ $this->update_pipline($post,$user_id);
     
     public function update_pipline($post, $user_id){
         
-       $dateObj   = DateTime::createFromFormat('!m', $post['pipeline_month']);
-    $monthName = $dateObj->format('m'); // March 
-    $pipeline_month =  date('Y').'-'.$monthName.'-'.date('d');   
+    //$dateObj   = DateTime::createFromFormat('!m', $post['pipeline_month']);
+    //$monthName = $dateObj->format('m'); // March 
+    //$pipeline_month =  date('Y').'-'.$monthName.'-'.date('d');   
+
+         	$ts = mktime(0, 0, 0, date("n") + $post['pipeline_month'], 1);
+ 			$pipeline_month = date("Y-m-01", $ts);
+
+
    
         
         $action = $this->check_if_pipeline_exist($post['company_id'], $pipeline_month ,$post['pipeline_status']);
@@ -1450,7 +1455,7 @@ $this->update_pipline($post,$user_id);
                                 'company_id' => $post['company_id'],
                                 'created_by' => $user_id,
                                 'status' => $post['pipeline_status'],
-                                    'user_id' => $user_id,
+					'user_id' => $user_id,
                                 'eff_from' => $pipeline_month
                                 );
                             $this->db->insert('deals_pipeline', $pipeline);
