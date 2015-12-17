@@ -224,6 +224,13 @@ class Companies extends MY_Controller {
 		if($this->input->get('id'))
 		{	
             
+            
+           $monthArr  = array(0=>'Please select', 1 => 'January',2 => 'Feburary',3 => 'March',4 => 'April',5 => 'May',6 => 'June',7 => 'July',8 => 'Augaust',9 => 'September',10 => 'October',11 => 'November',12 => 'December'); //Move will be moved to a new array file.
+ 
+           $deals_pipeline_statusArr  = array(0=>'Please select', 1 => 'Should',2 => 'Will'); //Move will be moved to a new array file.
+            
+            
+            
 			$this->load->model('Email_templates_model');
 			$this->data['email_templates'] = $this->Email_templates_model->get_all();
 			$raw_search_results = $this->Companies_model->search_companies_sql(FALSE,$this->input->get('id'));            
@@ -242,18 +249,18 @@ class Companies extends MY_Controller {
 			$this->data['addresses'] = $address;
             
             
-$this->data['pipeline'] = $this->Companies_model->get_pipeline($this->input->get('id'),$this->data['current_user']['id'],false);
+            $this->data['deals_pipline'] = $this->Companies_model->get_deals_pipeline($this->input->get('id'),$this->data['current_user']['id'],false);
 			
-            
-            
-            
             $this->data['campaigns'] = $this->Campaigns_model->get_campaigns($this->input->get('id'));
             $this->data['created_by_name'] = $this->Users_model->get_user($user_id);
 			$option_contacts =  array();
 			foreach ($this->data['contacts'] as $contact) {
 				$option_contacts[$contact->id] = $contact->first_name.' '.$contact->last_name;
 			}
-			$this->data['option_contacts'] = $option_contacts;
+ 
+            $this->data['deals_pipeline_months'] = $monthArr;
+            $this->data['deals_pipeline_status'] = $deals_pipeline_statusArr;
+            $this->data['option_contacts'] = $option_contacts;
 			$this->data['action_types_done'] = $this->Actions_model->get_action_types_done();
 			$this->data['action_types_planned'] = $this->Actions_model->get_action_types_planned();
 			$this->data['action_types_array'] = $this->Actions_model->get_action_types_array();

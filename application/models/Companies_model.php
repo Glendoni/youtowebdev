@@ -1017,7 +1017,15 @@ class Companies_model extends CI_Model {
 		}
         
         
-        	if(isset($post['pipeline_status']) && $post['pipeline_status'] == true)
+             if(isset($post['remove_pipeline']) || $post['remove_pipeline'] == true ){
+                 
+                 $this->delete_pipeline($post);     
+             } 
+        
+        
+        
+        
+        	if(isset($post['pipeline_status']) && $post['pipeline_status'] != 0 && $post['pipeline_month'] !=0 )
 		{
 
               
@@ -1027,11 +1035,14 @@ class Companies_model extends CI_Model {
                 
                // $check = $this->check_if_pipeline_exist($post['company_id'])? 'Yes' : 'No';
                 
+        
                 
-              $this->update_pipline($post,$user_id);  
                 
                 
-file_put_contents('apitext.txt', 'company ID '.$post['company_id']. ' Pipeline Status: '.$post['pipeline_status'].' Pipeline month '.$pipeline_month. ' User Id/ updated by '.$user_id. ' Status '.$status.  PHP_EOL   , FILE_APPEND);   
+$this->update_pipline($post,$user_id);  
+                
+                
+//file_put_contents('apitext.txt', 'company ID '.$post['company_id']. ' Pipeline Status: '.$post['pipeline_status'].' Pipeline month '.$pipeline_month. ' User Id/ updated by '.$user_id. ' Status '.$status.  PHP_EOL   , FILE_APPEND);   
                 
        
                 
@@ -1407,37 +1418,62 @@ file_put_contents('apitext.txt', 'company ID '.$post['company_id']. ' Pipeline S
     }
     
 
+    
+    public function delete_pipeline($post){
+        
+        //remove_pipeline
+         $this->db->where('company_id', $post['company_id']);
+            $this->db->update('deals_pipeline', array('eff_to' => date('Y-m-d H:i:s')));
+        
+    }
+    
        
     
     public function update_pipline($post, $user_id){
         
-        
-    $action = $this->check_if_pipeline_exist($post['company_id']);
-        
-    $dateObj   = DateTime::createFromFormat('!m', $post['pipeline_month']);
+       $dateObj   = DateTime::createFromFormat('!m', $post['pipeline_month']);
     $monthName = $dateObj->format('m'); // March 
-    $pipeline_month =  date('Y').'-'.$monthName.'-'.date('d'); 
+    $pipeline_month =  date('Y').'-'.$monthName.'-'.date('d');   
+   
         
+        $action = $this->check_if_pipeline_exist($post['company_id'], $pipeline_month ,$post['pipeline_status']);
         
-        if($action){
+   
+    
+        
+                    if($action){
+
+                        $this->db->where('company_id', $post['company_id']);
+                        $this->db->update('deals_pipeline', array('eff_to' => date('Y-m-d H:i:s')));
+
+                                $pipeline = array(
+                                'company_id' => $post['company_id'],
+                                'created_by' => $user_id,
+                                'status' => $post['pipeline_status'],
+                                    'user_id' => $user_id,
+                                'eff_from' => $pipeline_month
+                                );
+                            $this->db->insert('deals_pipeline', $pipeline);
+                            $pipeline = $this->db->affected_rows();
+
+
+                        return $this->db->affected_rows();
+
+                    }else{
+
+                            $pipeline = array(
+                            'company_id' => $post['company_id'],
+                            'created_by' => $user_id,
+                            'status' => $post['pipeline_status'],
+                                'user_id' => $user_id,
+                            'eff_from' => $pipeline_month
+                            );
+                        $this->db->insert('deals_pipeline', $pipeline);
+                        $pipeline = $this->db->affected_rows();
+
+                    }
+
             
-              	$this->db->where('company_id', $post['company_id']);
-		$this->db->update('deals_pipeline', array('updated_at'=>date('Y-m-d H:i:s'),'updated_by' =>$user_id, 'status' => $post['pipeline_status'],'eff_from' => $pipeline_month));
-		return $this->db->affected_rows();
-            
-        }else{
-            
-                $pipeline = array(
-				'company_id' => $post['company_id'],
-				'created_by' => $user_id,
-				'status' => $post['pipeline_status'],
-                    'user_id' => $user_id,
-				'eff_from' => $pipeline_month
-				);
-			$this->db->insert('deals_pipeline', $pipeline);
-			$pipeline = $this->db->affected_rows();
-            
-        }
         
           /*
             
@@ -1451,37 +1487,51 @@ file_put_contents('apitext.txt', 'company ID '.$post['company_id']. ' Pipeline S
     
     
     
-    public function check_if_pipeline_exist($id =0){
+    public function check_if_pipeline_exist($id =0, $pipeline_month, $pipeline_status){
     
-       //file_put_contents('apitext.txt', 'Pipeline update id: '.$id.' User Id '.$user_id.' mode '.$mode. PHP_EOL  , FILE_APPEND);
+    file_put_contents('apitext.txt', 'Pipeline month: '.$pipeline_month.' Pipleine: '.$pipeline_status. PHP_EOL  , FILE_APPEND);
        
               
-    $q = '
+    $q = "
      SELECT company_id
      FROM deals_pipeline
-    WHERE company_id='.$id.'
-     LIMIT 1
-    ';
+    WHERE company_id=".$id."
+    AND status LIKE '".$pipeline_status."'
+    AND eff_to IS NULL
+    LIMIT 1
+    ";
+        
+        
+         file_put_contents('apitext.txt', $q. PHP_EOL  , FILE_APPEND);
     $result = $this->db->query($q);
    
         if($result->num_rows()){ 
-            return true ;
+        
+            
+         file_put_contents('apitext.txt', 'check_if_pipeline_exist test true xxxxx: '. $pipeline_month. PHP_EOL  , FILE_APPEND);
+            
+                return true ;
         }else{
+            
+           file_put_contents('apitext.txt', 'check_if_pipeline_exist test false xxxxx: PM: '.$pipeline_month .  PHP_EOL  , FILE_APPEND);
                  return  false;
         }
     }
     
     
     
-    public function get_pipeline($id =0, $user_id = 1, $mode = 2){
+    public function get_deals_pipeline($id =0, $user_id = 1, $mode = 2){
     
        //file_put_contents('apitext.txt', 'Pipeline update id: '.$id.' User Id '.$user_id.' mode '.$mode. PHP_EOL  , FILE_APPEND);
        
-    $id = 343738;               
+    //$id = 343738;               
     $q = '
-     SELECT company_id
-     FROM deals_pipeline
-    WHERE company_id='.$id.'
+    SELECT deals_pipeline.*, users.name
+FROM deals_pipeline
+LEFT JOIN users
+ON deals_pipeline.user_id=users.id
+    WHERE deals_pipeline.company_id='.$id.'
+     AND deals_pipeline.eff_to IS NULL
      LIMIT 1
     ';
     $result = $this->db->query($q);
@@ -1489,11 +1539,13 @@ file_put_contents('apitext.txt', 'company ID '.$post['company_id']. ' Pipeline S
 
                foreach ($result->result() as $row)
                 {
-                    
+                    return $row;
 //file_put_contents('apitext.txt', 'Pipeline check id run: '.$row->company_id.' User Id '.$user_id.' mode '.$mode. PHP_EOL  , FILE_APPEND);
                 } 
                     }else{
 
+                  return false;
+                  
                   //echo 'Not found';
 
               }

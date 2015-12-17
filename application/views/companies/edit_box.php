@@ -38,44 +38,72 @@
                     </div>
                 </div>
 
-        <div class="col-sm-6 col-md-3">
-
-
-            <div class="col-sm-6 col-md-6">
-                <div class=" form-group ">
-                <label for="exampleSelect1">Pipeline</label>
-                    <select name="pipeline_status" class="form-control company_class">
-                        <option value="0">Please select</option>
-                        <option value="should">Should Close</option>
-                        <option value="will">Will Close</option>
-                    </select>
+           
+    
+                <?php if($deals_pipline->eff_from){ ?>
+                <div class="col-sm-6 col-md-3 pipeline_text"  > 
+                    
+                     
+                     <div class="col-xs-6 col-sm-6 col-md-8" style="
+    right: 14px;
+" >
+                           <label for="exampleSelect1">Pipeline Status</label>
+                   <p style="
+    font-size: 12px;
+"> 
+                <?php //print_r($deals_pipline); 
+    
+    
+    
+    
+    
+            
+        echo ucfirst($deals_pipeline_status[$deals_pipline->status]).' Close In '.date("F", strtotime($deals_pipline->eff_from)). '<br/> by: '.$deals_pipline->name ;
+            
+            ?>
+                    </p>      </div>
+                    
+                    
+                       <div class="col-xs-6 col-sm-6 col-md-4" >
+                            <label for="exampleSelect1">Delete</label>
+                           
+                           <br/>
+  <input type="checkbox" name="remove_pipeline" style="
+    margin-left: 18px;
+"><br/>
+                    </div>
+                    
+                    
                 </div>
-            </div>
+                
+            <?php }else{ ?>    
+                
+                <div class="col-sm-6 col-md-3 pipeline_form">
 
 
-            <div class="col-sm-6 col-md-6">
-                <div class=" form-group ">
-                    <label for="exampleSelect1">Pipeline</label>
-                    <select name="pipeline_month" class="form-control company_class">
-                        <option>Please select</option>
-                        <option value="1">January</option>
-                        <option value="2">Feburary</option>
-                        <option value="3">March</option>
-                        <option value="4">April</option>
-                        <option value="5">May</option>
-                        <option value="6">June</option>
-                        <option value="7">July</option>
-                        <option value="8">Augaust</option>
-                        <option value="9">September</option>
-                        <option value="10">October</option>
-                        <option value="11">November</option>
-                        <option value="12">December</option>
-                    </select>
-                </div>
+         
+
+
+            
+                 <div class="col-xs-6 col-sm-6 col-md-6" style="padding-left: 0px;padding-right: 2px;">
+                     <label for="exampleSelect1">Pipeline Status</label>
+                 <?php echo form_dropdown('pipeline_status', $deals_pipeline_status , 0,'class="form-control pipeline-validation-check"' );    ?>
+                        </div>
+            
+            
+            
+            
+           <div class="col-xs-6 col-sm-6 col-md-6" style="padding-right: 0px;padding-left: 2px;">
+                    <label for="exampleSelect1"> Month Due</label>        
+                 <?php echo form_dropdown('pipeline_month', $deals_pipeline_months , 0,'class="form-control pipeline-validation-check"' );    ?>
+               
             </div>
 
 
         </div>
+                
+                
+                <?php } ?>
                 
 </div>
             
