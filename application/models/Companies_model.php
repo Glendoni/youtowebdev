@@ -45,6 +45,7 @@ class Companies_model extends CI_Model {
 			'OccasionalContract' => 'Perm - Occasional Placements',
 			'LookingToPlaceContractors' => 'Perm - Looking to Build Contract Business',
 			'SelfFunding' => 'Self-Funding',
+			'LowFixedFee' => 'Low Fixed Fee',
 			'Consultancy' => 'Consultancy'
 
 			);
@@ -974,7 +975,8 @@ class Companies_model extends CI_Model {
 	{
 		$data = array(
                'user_id' => NULL,
-               'assign_date' => date('Y-m-d H:i:s')
+               'assign_date' => NULL
+               //'assign_date' => date('Y-m-d H:i:s')
             );
 
 		$this->db->update('companies', $data, array('id' => $company_id));
@@ -1381,7 +1383,7 @@ $this->update_pipline($post,$user_id);
             
     $q = '
      SELECT id,name,provider_id
-     FROM providers_check
+     FROM provider_checks
      WHERE name ilike \''.$name.'\'
      LIMIT 1
     ';

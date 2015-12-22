@@ -103,7 +103,7 @@
                             <a href="<?php echo site_url(); ?>users/settings"><i class="fa fa-fw fa-envelope"></i> Email Settings</a>
                         </li>
                         <li>
-                            <a href="https://status.heroku.com/" target="_blank"><i class="fa fa-fw fa-tasks"></i> Baselist Status</a>
+                            <a href="https://status.heroku.com/" target="_blank"><i class="fa fa-fw fa-tasks"></i> Hosting Status</a>
                         </li>
                         <li class="divider"></li>
                         <?php if ($current_user['permission'] == 'admin'): ?>

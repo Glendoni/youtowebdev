@@ -1,7 +1,9 @@
 <div class="row ">
+<div class="panel-body">
+<div class="col-md-8 col-md-offset-2">
 <div  class="mainbox ">
 <h2 class="page-header">
-Create company
+Create Company
 </h2>
 <?php  
 $attributes = array('name' => 'create_company_form', 'class'=>'form-horizontal');
@@ -14,7 +16,7 @@ echo form_open('',$attributes,$hidden);
 	  <input type="text" class="form-control" name="name" id="name" placeholder="" value="<?php echo isset($_POST['name'])?$_POST['name']:''; ?>">
 	</div>
 </div>
-<div class="form-group">
+<!--<div class="form-group">
 	<label class="control-label col-sm-2" for="linkedin_id">Linkedin ID:</label>
 	<div class="col-sm-10">
 	  <input type="text" class="form-control" name="linkedin_id" id="linkedin_id" value="<?php echo isset($_POST['linkedin_id'])?$_POST['linkedin_id']:''; ?>">
@@ -65,7 +67,7 @@ echo form_open('',$attributes,$hidden);
             <input type="checkbox" name="perm" value="1" id="permanent" class="hidden" <?php echo isset($_POST['perm'])? 'checked': '' ; ?> >
         </span>
     </div>
-</div>
+</div>-->
 <div class=" form-group ">
 	<label for="emp_count" class="control-label col-sm-2">Class</label>
 	<div class="col-sm-10">
@@ -90,7 +92,7 @@ echo form_open('',$attributes,$hidden);
     ?>
     </div>
 </div>
-<div class="form-group">
+<!--<div class="form-group">
 	<label class="control-label col-sm-2" for="phone">Latitude:</label>
 	<div class="col-sm-3">
 	  <input type="text" class="form-control" name="lat"  value="<?php echo isset($_POST['lat'])?$_POST['lat']:''; ?>">
@@ -99,7 +101,7 @@ echo form_open('',$attributes,$hidden);
 	<div class="col-sm-3">
 	  <input type="text" class="form-control" name="lng"  value="<?php echo isset($_POST['lng'])?$_POST['lng']:''; ?>">
 	</div>
-</div>
+</div>-->
 <div class=" form-group ">
     <label for="type" class="control-label col-sm-2">Type</label>
     <div class="col-sm-10">                            
@@ -143,5 +145,7 @@ echo form_open('',$attributes,$hidden);
 
 
 <?php echo form_close(); ?>
+</div>
+</div>
 </div>
 </div>

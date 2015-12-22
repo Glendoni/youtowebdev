@@ -3,7 +3,6 @@
 <?php else: ?>
 <?php  foreach ( $companies as $company):  ?>
 <?php $this->load->view('companies/edit_box.php',array('company'=>$company)); ?>
-<?php $this->load->view('companies/edit_box.php',array('company'=>$company)); ?>
 <?php $this->load->view('companies/create_contact_box.php',array('company'=>$company)); ?>
 <div class="panel <?php if(isset($company['assigned_to_name'])): ?> panel-primary <?php else: ?> panel-default <?php endif; ?> company">
 	<div class="panel-body">

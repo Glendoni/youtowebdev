@@ -153,3 +153,7 @@ Pipeline month: 2016-02-01 Pipleine: 2
     LIMIT 1
     
 check_if_pipeline_exist test false xxxxx: PM: 2016-02-01
+Initial stage two
+Initial stage two
+Initial stage three
+company_id : 346749 provider_id: 2582 ref: b826ebaf34aca9e8e5c4f3045f16afdcae234235 type: Charge stage: outstanding eff_from: 2015-12-22 user: 1
