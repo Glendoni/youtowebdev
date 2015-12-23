@@ -104,7 +104,7 @@
         { //gets entries from server
                $.ajax({
                         dataType: "json",
-                        url: "http://localhost:8888/baselist/companies/drag",
+                        url: "../../baselist/companies/drag",
                         success: function (data) {
                             
                                   var img = "https://sonovate.peoplehr.net/Files/Employee/210194/5013/d63f04039c6e473a980b71d316cdaa38.jpg";
