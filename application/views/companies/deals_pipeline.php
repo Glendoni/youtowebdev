@@ -76,7 +76,7 @@ if(str){
 $.ajax({
 type: "POST",
 dataType: "json",
-url: "http://localhost:8888/baselist/companies/dragupdate",
+url: "../companies/dragupdate",
 data: str,
 success: function (data) {
     //alert('From Server')
