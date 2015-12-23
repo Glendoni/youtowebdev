@@ -45,7 +45,7 @@ class Companies_model extends CI_Model {
 			'OccasionalContract' => 'Perm - Occasional Placements',
 			'LookingToPlaceContractors' => 'Perm - Looking to Build Contract Business',
 			'SelfFunding' => 'Self-Funding',
-			'LowFixedFee' => 'Low Fixed Fee',
+            'LowFixedFee' => 'Low Fixed Fee',
 			'Consultancy' => 'Consultancy'
 
 			);
@@ -975,8 +975,7 @@ class Companies_model extends CI_Model {
 	{
 		$data = array(
                'user_id' => NULL,
-               'assign_date' => NULL
-               //'assign_date' => date('Y-m-d H:i:s')
+               'assign_date' => date('Y-m-d H:i:s')
             );
 
 		$this->db->update('companies', $data, array('id' => $company_id));
@@ -1027,9 +1026,7 @@ class Companies_model extends CI_Model {
         
         
         
-        	//if(isset($post['pipeline_status']) && $post['pipeline_status'] != 0 && $post['pipeline_month'] !=0 )
-			if(isset($post['pipeline_status']) && $post['pipeline_status'] != 0 )
-
+        	if(isset($post['pipeline_status']) && $post['pipeline_status'] != 0 && $post['pipeline_month'] !=0 )
 		{
 
               
@@ -1383,7 +1380,7 @@ $this->update_pipline($post,$user_id);
             
     $q = '
      SELECT id,name,provider_id
-     FROM provider_checks
+     FROM provider_check
      WHERE name ilike \''.$name.'\'
      LIMIT 1
     ';
@@ -1435,16 +1432,20 @@ $this->update_pipline($post,$user_id);
     
     public function update_pipline($post, $user_id){
         
-    //$dateObj   = DateTime::createFromFormat('!m', $post['pipeline_month']);
+       //$dateObj   = DateTime::createFromFormat('!m', $post['pipeline_month']);
     //$monthName = $dateObj->format('m'); // March 
-    //$pipeline_month =  date('Y').'-'.$monthName.'-'.date('d');   
-		$months_to_add = $post['pipeline_month'];
-		$ts = mktime(0, 0, 0, date("n") + $months_to_add);
-		$pipeline_month = date("Y-m-01", $ts);
-
+    //$pipeline_month =  date('Y').'-'.$monthName.'-01';   
+   $pipeline_month = $post['pipeline_month'];
+        
+        
+        file_put_contents('apitext.txt', 'Pipeline month zzz: '.$pipeline_month. PHP_EOL  , FILE_APPEND);
+        
         $action = $this->check_if_pipeline_exist($post['company_id'], $pipeline_month ,$post['pipeline_status']);
-					
-					if($action){
+        
+   
+    
+        
+                    if($action){
 
                         $this->db->where('company_id', $post['company_id']);
                         $this->db->update('deals_pipeline', array('eff_to' => date('Y-m-d H:i:s')));
@@ -1453,8 +1454,8 @@ $this->update_pipline($post,$user_id);
                                 'company_id' => $post['company_id'],
                                 'created_by' => $user_id,
                                 'status' => $post['pipeline_status'],
-					'user_id' => $user_id,
-                                'eff_from' => $pipeline_month
+                                    'user_id' => $user_id,
+                                'eff_from' => $post['pipeline_month']
                                 );
                             $this->db->insert('deals_pipeline', $pipeline);
                             $pipeline = $this->db->affected_rows();
@@ -1469,7 +1470,7 @@ $this->update_pipline($post,$user_id);
                             'created_by' => $user_id,
                             'status' => $post['pipeline_status'],
                                 'user_id' => $user_id,
-                            'eff_from' => $pipeline_month
+                            'eff_from' => $post['pipeline_month']
                             );
                         $this->db->insert('deals_pipeline', $pipeline);
                         $pipeline = $this->db->affected_rows();
@@ -1521,7 +1522,7 @@ $this->update_pipline($post,$user_id);
         }
     }
     
-    
+
     
     public function get_deals_pipeline($id =0, $user_id = 1, $mode = 2){
     
@@ -1557,7 +1558,59 @@ ON deals_pipeline.user_id=users.id
         
     }
  
+    public function get_pipline_deals(){
+        
+  $q = '
+    SELECT *,deals_pipeline.eff_from as efffrom, companies.name as companyname,  users.name as owner
+FROM deals_pipeline
+LEFT JOIN companies
+ON deals_pipeline.company_id=companies.id
+LEFT JOIN users
+ON deals_pipeline.user_id=users.id
+WHERE deals_pipeline.eff_to IS NULL 
+
     
+     
+    
+    ';
+ $result = $this->db->query($q);
+      return    $result->result();
+    }
+    
+    
+    public function update_pipline_from_drag_and_drop($post,$user){
+        
+         $companyID = $post['companyId'];
+        
+        if($post['monthupdate']  != 'delete'){
+            $status = substr($post['monthupdate'], 0, 2);
+            $newmonth =   str_replace($status, '', $post['monthupdate']); 
+            if($status == 'sc'){
+                $status  = 1;
+            }else{
+                $status  = 2;
+            }
+            
+            $data = array(
+                   'eff_from' => $newmonth,
+                   'updated_by' => $user,
+                'updated_at' => date('Y-m-d H:i:s'),
+                'status' => $status
+                );
+                 }else{
+            $data = array(
+                'eff_to' => date('Y-m-d') 
+                );
+           // return 'delete';
+            
+        }
+            
+     $this->db->where('company_id',  $companyID);
+            $this->db->where('eff_to IS NULL',  null,true);       
+            $this->db->update('deals_pipeline', $data); 
+    return  $user;
+    
+    }
     public function creat_pipeline($post, $user_id){
         /*
                $pipeline = array(

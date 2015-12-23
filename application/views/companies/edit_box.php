@@ -95,7 +95,13 @@
             
            <div class="col-xs-6 col-sm-6 col-md-6" style="padding-right: 0px;padding-left: 2px;">
                     <label for="exampleSelect1"> Month Due</label>        
-                 <?php echo form_dropdown('pipeline_month', $deals_pipeline_months , 0,'class="form-control"' );    ?>
+                 <?php // echo form_dropdown('pipeline_month', $deals_pipeline_months , 0,'class="form-control"' );    ?>
+              
+                <select id="mounthdue" name="pipeline_month" class="form-control">
+               
+               </select>
+
+               
                
             </div>
 

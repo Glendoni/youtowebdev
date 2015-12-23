@@ -178,6 +178,19 @@ class Companies extends MY_Controller {
 		$this->load->view('layouts/single_page_layout', $this->data);
 		
 	}
+    
+    public function  pipeline(){
+        
+        $this->data['hide_side_nav'] = True;
+		$this->data['main_content'] = 'companies/deals_pipeline';
+		$this->data['full_container'] = True;
+		$this->load->view('layouts/single_page_layout', $this->data);
+        
+        
+        
+    }
+    
+    
 	public function assignto()
 	{
 		if($this->input->post('company_id') && $this->input->post('user_id'))
@@ -566,15 +579,24 @@ class Companies extends MY_Controller {
         
     }
     
-    public function delete(){
- 
-        
-       $monthNum  = 3;
-$dateObj   = DateTime::createFromFormat('!m', $monthNum);
-$monthName = $dateObj->format('m'); // March 
+    public function dragupdate(){
+      $post =  $this->input->post();
         
         
-     echo date('Y').'-'.$monthName.'-'.date('d');
+        $user = $this->data['current_user']['id'];
+				 $pipeline = $this->Companies_model->update_pipline_from_drag_and_drop($post,$user);
         
+        
+        echo $pipeline;
+        
+    }
+    
+    
+    public function drag(){
+      //$post =  $this->input->post();
+        
+				$pipeline = $this->Companies_model->get_pipline_deals();
+        
+        echo json_encode($pipeline);
     }
 }
