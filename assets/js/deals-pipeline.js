@@ -4,7 +4,6 @@
       d.setMonth(d.getMonth()+3);   //change retruned months here
       var   montheval =""+d.getMonth()+"" ;
       montheval =  montheval.substr(1, 1) ? d.getMonth() : '0'+d.getMonth() ;
-      
       monthevalconcat = d.getFullYear()+"-"+(montheval)+"-01";
       
     //console.log(monthevalconcat);
@@ -21,7 +20,7 @@
 
     var start = new Date(newdate); //yyyy-mm-dd
     var end = new Date(monthevalconcat); //yyyy-mm-dd
-    var mon =['January','Feburary','March','April','May','June','July','Auguast','September','October','November','December' ];
+    var mon =['January','February','March','April','May','June','July','August','September','October','November','December' ];
         while(start <= end){
 
             var mm = ((start.getMonth()+1)>=10)?(start.getMonth()+1):'0'+(start.getMonth()+1);
@@ -29,16 +28,16 @@
             var yyyy = start.getFullYear();
             var date = yyyy +"-"+mm+"-"+dd; //yyyy-mm-dd
             if(dd == 01){
-
-
-                //console.log(mon[(mm-1)]); 
-
-                $(' <div class="column" placement="sc'+date+'"><h2>'+mon[(mm-1)]+'<br/>SHOULD</h2></div>').appendTo('#pipleine_content'); 
-                    $(' <div class="column" placement="wc'+date+'"><h2>'+mon[(mm-1)]+'<br/>WILL</h2></div>').appendTo('#pipleine_content'); 
-
-            }
-                start = new Date(start.setDate(start.getDate() + 1)); //date increase by 1
-        }
+//console.log(mon[(mm-1)]); 
+$(' <div class="col-md-2 reduced-padding"><div class="colum-header"><h2>'+mon[(mm-1)]+' <span class="header-bold">Should</span></h2></div></div>').appendTo('#pipeline_labels'); 
+$(' <div class="col-md-2 reduced-padding"><div class="colum-header"><h2>'+mon[(mm-1)]+' <span class="header-bold">Will</span></h2></div></div>').appendTo('#pipeline_labels'); 
+//$(' <div class="column col-md-2" placement="sc'+date+'"><h2>'+mon[(mm-1)]+'<br/>SHOULD</h2></div>').appendTo('#pipeline_content'); 
+//$(' <div class="column col-md-2" placement="wc'+date+'"><h2>'+mon[(mm-1)]+'<br/>WILL</h2></div>').appendTo('#pipeline_content'); 
+$(' <div class="col-md-2 reduced-padding"><div class="column"  placement="sc'+date+'"></div></div>').appendTo('#pipeline_content'); 
+$(' <div class="col-md-2 reduced-padding"><div class="column"  placement="wc'+date+'"></div></div>').appendTo('#pipeline_content'); 
+}
+start = new Date(start.setDate(start.getDate() + 1)); //date increase by 1
+}
 
   $(function() {
  
@@ -119,8 +118,7 @@
                                    placement_holder_prefix = 'wc';  
 
                                 }
-     $('<div class="portlet ui-widget ui-widget-content ui-helper-clearfix ui-corner-all" company_id="'+data[key]['company_id'] +'"><div class="portlet-header ui-sortable-handle ui-widget-header ui-corner-all"><span class="ui-icon ui-icon-minusthick portlet-toggle"></span>'+ 
-       data[key]['companyname'] +
+     $('<div class="portlet ui-widget ui-widget-content ui-helper-clearfix ui-corner-all" company_id="'+data[key]['company_id'] +'"><div class="portlet-header ui-sortable-handle ui-widget-header ui-corner-all">'+ data[key]['companyname'] +
          '</div><div class="portlet-content">'+ data[key]['owner'] +
          ' <img class="circle" src="'+ img +'"><br/></div></div>').appendTo("[placement="+placement_holder_prefix+data[key]['efffrom']+"]" );
    

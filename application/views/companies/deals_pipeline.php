@@ -4,23 +4,32 @@
   <style>
  
   .column {
-    width: 200px;
-    float: left;
-    padding-bottom: 100px;
+    padding-bottom: 50px;
+    background-color: #D7DEE6;
+    padding-top: 10px;
+        border-bottom-left-radius:4px;
+        border-bottom-right-radius:4px;
   }
   .portlet {
-    margin: 0 1em 1em 0;
-    padding: 0.3em;
+     padding: 10px;
+    width: 96%;
+    margin: auto;
+  }
+  .portlet:hover {
+    cursor: pointer; 
   }
   .portlet-header {
-    padding: 0.2em 0.3em;
     margin-bottom: 0.5em;
     position: relative;
-     font-size: 11px;
-    background: #F0AD4E;
-    color: #fff;
       font-weight:100;
-          font-family: 'Open Sans', sans-serif;
+      background: none;
+border-bottom:1px solid #9797A6;
+border-top: none;
+border-right: none;
+border-left: none;
+border-radius: 0;
+font-family: 'Open Sans', sans-serif;
+
   }
   .portlet-toggle {
     position: absolute;
@@ -36,26 +45,58 @@
   }
   .portlet-placeholder {
     border: 1px dotted black;
-    margin: 0 1em 1em 0;
-    height: 50px;
+    height: 100px;
+    display: block;
+    text-indent: -9999px;
+  width: 96%;
+  background: url(../assets/images/plus.svg) #D8D8D8;
+  background-size: 100px 82px;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: auto;
   }
-   
-      #pipleine_content h2{
+
+      #pipeline_labels h2{
           
-          font-size: 11px;
-             text-align: center;
+          font-size: 14px;
+             text-align: left;
+             color: #778794;
+                         text-transform: uppercase;
+
       }
       
-   #pipleine_content img{
+   #pipeline_content img{
           float:left; 
           padding-right:3px; 
           width: 23%;
       }
       
       #pipe{
-              padding-left: 2%;
+              /*padding-left: 2%;*/
       }
-      
+      .ui-sortable-helper {
+-webkit-box-shadow: 10px 10px 75px -16px rgba(0,0,0,0.75);
+-moz-box-shadow: 10px 10px 75px -16px rgba(0,0,0,0.75);
+box-shadow: 10px 10px 75px -16px rgba(0,0,0,0.75);
+      }
+      .colum-header {
+        background-color: #D7DEE6;
+        border-top-left-radius:4px;
+        border-top-right-radius:4px;
+            padding: 1px 10px 8px 10px;
+            border-bottom: 1px #CAD1DB solid;
+      }
+      .p-holder {
+            background-color: red;
+    height: 10px;
+
+      }
+      .reduced-padding {
+        padding: 0 5px;
+      }
+      .header-bold {
+        font-weight: 800;
+      }
   </style>
     
  <script>
@@ -90,19 +131,32 @@ success: function (data) {
 
 
 <div class="row ">
-    <h2 class="company-header">
-		Deals Pipeline 	</h2>
-<div  class="mainboxs ">
- 
- 
-    
-    <div id="pipe">
-        <div id="pipleine_content">
+
+<div  class="mainboxs " style="overflow:hidden;">
+<div class="row ">
+
+<div class="col-md-2">
+<span class="column glyphicon glyphicon-trash" style="width:50px; height:90px; font-size: 30px;" placement="delete" aria-hidden="true"></span>
+</div>
+<div class="col-md-8"><h2 class="company-header">Deals Pipeline</h2></div>
+<div class="col-md-2"></div>
+</div>
+<div class="row"]>
+<div class="col-md-12">
+<div id="pipeline_labels">
+</div>
+</div>
+<div class="col-md-12">
+
+<div id="pipe">
+
+<div id="pipeline_content">
             
-            <span class="column glyphicon glyphicon-trash" style="width:50px; height:90px; font-size: 30px;" placement="delete" aria-hidden="true"></span>
+           
  </div>
         </div>
-    
+    </div>
+    </div><!--END ROW-->
 
     
     

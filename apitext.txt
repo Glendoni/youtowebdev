@@ -156,4 +156,58 @@ check_if_pipeline_exist test false xxxxx: PM: 2016-02-01
 Initial stage two
 Initial stage two
 Initial stage three
-company_id : 346749 provider_id: 2582 ref: b826ebaf34aca9e8e5c4f3045f16afdcae234235 type: Charge stage: outstanding eff_from: 2015-12-22 user: 1
+company_id : 346749 provider_id: 2582 ref: b826ebaf34aca9e8e5c4f3045f16afdcae234235 type: Charge stage: outstanding eff_from: 2015-12-22 user: 1Pipeline month zzz: 2016-01-01
+Pipeline month: 2016-01-01 Pipleine: 2
+
+     SELECT company_id
+     FROM deals_pipeline
+    WHERE company_id=154537
+    AND status LIKE '2'
+    AND eff_to IS NULL
+    LIMIT 1
+    
+check_if_pipeline_exist test false xxxxx: PM: 2016-01-01
+Pipeline month zzz: 2015-12-01
+Pipeline month: 2015-12-01 Pipleine: 1
+
+     SELECT company_id
+     FROM deals_pipeline
+    WHERE company_id=154537
+    AND status LIKE '1'
+    AND eff_to IS NULL
+    LIMIT 1
+    
+check_if_pipeline_exist test false xxxxx: PM: 2015-12-01
+Pipeline month zzz: 2016-01-01
+Pipeline month: 2016-01-01 Pipleine: 2
+
+     SELECT company_id
+     FROM deals_pipeline
+    WHERE company_id=154537
+    AND status LIKE '2'
+    AND eff_to IS NULL
+    LIMIT 1
+    
+check_if_pipeline_exist test false xxxxx: PM: 2016-01-01
+Pipeline month zzz: 2016-02-01
+Pipeline month: 2016-02-01 Pipleine: 2
+
+     SELECT company_id
+     FROM deals_pipeline
+    WHERE company_id=343178
+    AND status LIKE '2'
+    AND eff_to IS NULL
+    LIMIT 1
+    
+check_if_pipeline_exist test false xxxxx: PM: 2016-02-01
+Pipeline month zzz: 2016-01-01
+Pipeline month: 2016-01-01 Pipleine: 2
+
+     SELECT company_id
+     FROM deals_pipeline
+    WHERE company_id=344415
+    AND status LIKE '2'
+    AND eff_to IS NULL
+    LIMIT 1
+    
+check_if_pipeline_exist test false xxxxx: PM: 2016-01-01

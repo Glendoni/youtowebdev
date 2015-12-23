@@ -1561,18 +1561,13 @@ ON deals_pipeline.user_id=users.id
     public function get_pipline_deals(){
         
   $q = '
-    SELECT *,deals_pipeline.eff_from as efffrom, companies.name as companyname,  users.name as owner
+    SELECT *,deals_pipeline.eff_from as efffrom, companies.name as companyname, users.name as owner
 FROM deals_pipeline
 LEFT JOIN companies
 ON deals_pipeline.company_id=companies.id
 LEFT JOIN users
 ON deals_pipeline.user_id=users.id
-WHERE deals_pipeline.eff_to IS NULL 
-
-    
-     
-    
-    ';
+WHERE deals_pipeline.eff_to IS NULL ';
  $result = $this->db->query($q);
       return    $result->result();
     }
