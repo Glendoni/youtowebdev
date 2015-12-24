@@ -29,12 +29,12 @@
             var date = yyyy +"-"+mm+"-"+dd; //yyyy-mm-dd
             if(dd == 01){
 //console.log(mon[(mm-1)]); 
-$(' <div class="col-md-3 reduced-padding"><div class="colum-header"><h2>'+mon[(mm-1)]+' <span class="header-bold">Should</span></h2></div></div>').appendTo('#pipeline_labels'); 
-$(' <div class="col-md-3 reduced-padding"><div class="colum-header"><h2>'+mon[(mm-1)]+' <span class="header-bold">Will</span></h2></div></div>').appendTo('#pipeline_labels'); 
+$(' <div class="col-md-2 reduced-padding"><div class="colum-header"><h2>'+mon[(mm-1)]+' <span class="header-bold pipeline_should">Should</span></h2></div></div>').appendTo('#pipeline_labels'); 
+$(' <div class="col-md-2 reduced-padding"><div class="colum-header"><h2>'+mon[(mm-1)]+' <span class="header-bold pipeline_will">Will</span></h2></div></div>').appendTo('#pipeline_labels'); 
 //$(' <div class="column col-md-2" placement="sc'+date+'"><h2>'+mon[(mm-1)]+'<br/>SHOULD</h2></div>').appendTo('#pipeline_content'); 
 //$(' <div class="column col-md-2" placement="wc'+date+'"><h2>'+mon[(mm-1)]+'<br/>WILL</h2></div>').appendTo('#pipeline_content'); 
-$(' <div class="col-md-3 reduced-padding"><div class="column"  placement="sc'+date+'"></div></div>').appendTo('#pipeline_content'); 
-$(' <div class="col-md-3 reduced-padding"><div class="column"  placement="wc'+date+'"></div></div>').appendTo('#pipeline_content'); 
+$(' <div class="col-md-2 reduced-padding"><div class="column"  placement="sc'+date+'"></div></div>').appendTo('#pipeline_content'); 
+$(' <div class="col-md-2 reduced-padding"><div class="column"  placement="wc'+date+'"></div></div>').appendTo('#pipeline_content'); 
 }
 start = new Date(start.setDate(start.getDate() + 1)); //date increase by 1
 }
@@ -109,7 +109,9 @@ start = new Date(start.setDate(start.getDate() + 1)); //date increase by 1
                                   var img = "https://sonovate.peoplehr.net/Files/Employee/210194/5013/d63f04039c6e473a980b71d316cdaa38.jpg";
                                  
                                   //var  updateinfo = "updated by: Richard Lester<br/> On: 20/11/2015"
-                                  var placement_holder_prefix;                      
+                                  var placement_holder_prefix; 
+                            
+                            var res;
                             for (var key in data) {
                                 if(data[key]['status']== 1 ){
                                 placement_holder_prefix = 'sc';
@@ -118,7 +120,11 @@ start = new Date(start.setDate(start.getDate() + 1)); //date increase by 1
                                    placement_holder_prefix = 'wc';  
 
                                 }
-     $('<div class="portlet ui-widget ui-widget-content ui-helper-clearfix ui-corner-all" company_id="'+data[key]['company_id'] +'"><div class="portlet-header ui-sortable-handle ui-widget-header ui-corner-all">'+ data[key]['companyname'] +
+                                
+                                
+                                 res = data[key]['companyname'].replace(/Limited|Ltd|ltd/gi, function myFunction(x){return ''});
+                                
+     $('<div class="portlet ui-widget ui-widget-content ui-helper-clearfix ui-corner-all" company_id="'+data[key]['company_id'] +'"><div class="portlet-header ui-sortable-handle ui-widget-header ui-corner-all">'+ res +
          '</div><div class="portlet-content">'+ data[key]['owner'] +
          ' <img class="circle" src="'+ img +'"><br/></div></div>').appendTo("[placement="+placement_holder_prefix+data[key]['efffrom']+"]" );
    
