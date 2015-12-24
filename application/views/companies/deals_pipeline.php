@@ -2,7 +2,9 @@
 
   <!--<link rel="stylesheet" href="/resources/demos/style.css"> -->
   <style>
- 
+ html {
+       overflow-y: scroll;
+}
   .column {
     padding-bottom: 50px;
     background-color: #D7DEE6;
@@ -14,6 +16,7 @@
      padding: 10px;
     width: 96%;
     margin: auto;
+    background-color: #ffffff !important;
   }
   .portlet:hover {
     cursor: pointer; 
@@ -70,9 +73,14 @@ font-family: 'Open Sans', sans-serif;
           padding-right:3px; 
           width: 23%;
       }
-      
+      .ui-widget-content {
+        background: none;
+      }
       #pipe{
               /*padding-left: 2%;*/
+      }
+      .ui-widget-content.ui-sortable-helper {
+        background-color: rgba(255, 255, 255, 0.7) !important;
       }
       .ui-sortable-helper {
 -webkit-box-shadow: 10px 10px 75px -16px rgba(0,0,0,0.75);
@@ -97,6 +105,34 @@ box-shadow: 10px 10px 75px -16px rgba(0,0,0,0.75);
       .header-bold {
         font-weight: 800;
       }
+      .delete {
+        background-color: red;
+        border-radius: 50%;
+  width:60px;
+    background: url(../assets/images/bin.svg) #FB6174;
+    background-size: 25px;
+    background-repeat: no-repeat;
+        background-position: center;
+  height: 60px; 
+  margin-left: 30px;
+  padding-top: 0;
+  transition: width 2s;
+      }
+      
+       .delete .portlet-placeholder {
+        background-color: red;
+        border-radius: 50%;
+  width:80px;
+    background: url(../assets/images/bin.svg) #FB6174;
+    background-size: 25px;
+    background-repeat: no-repeat;
+        background-position: center;
+  height: 80px; 
+  margin-left: -10px;
+  margin-top: 0;
+  
+  }
+
   </style>
     
  <script>
@@ -136,12 +172,14 @@ success: function (data) {
 <div class="row ">
 
 <div class="col-md-2">
-<span class="column glyphicon glyphicon-trash" style="width:50px; height:90px; font-size: 30px;" placement="delete" aria-hidden="true"></span>
+<div  class="column delete" placement="delete" aria-hidden="true"
+<span class="glyphicon glyphicon-trash"></span>
+</div>
 </div>
 <div class="col-md-8"><h2 class="company-header">Deals Pipeline</h2></div>
 <div class="col-md-2"></div>
 </div>
-<div class="row"]>
+<div class="row" style="margin-top:20px;">
 <div class="col-md-12">
 <div id="pipeline_labels">
 </div>
