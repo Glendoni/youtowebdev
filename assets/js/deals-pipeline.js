@@ -29,8 +29,8 @@
             var date = yyyy +"-"+mm+"-"+dd; //yyyy-mm-dd
             if(dd == 01){
 //console.log(mon[(mm-1)]); 
-$(' <div class="col-md-2 reduced-padding"><div class="colum-header"><h2>'+mon[(mm-1)]+' <span class="header-bold">Should</span></h2></div></div>').appendTo('#pipeline_labels'); 
-$(' <div class="col-md-2 reduced-padding"><div class="colum-header"><h2>'+mon[(mm-1)]+' <span class="header-bold">Will</span></h2></div></div>').appendTo('#pipeline_labels'); 
+$(' <div class="col-md-2 reduced-padding"><div class="colum-header"><h2>'+mon[(mm-1)]+' <span class="header-bold pipeline_should">Should</span></h2></div></div>').appendTo('#pipeline_labels'); 
+$(' <div class="col-md-2 reduced-padding"><div class="colum-header"><h2>'+mon[(mm-1)]+' <span class="header-bold pipeline_will">Will</span></h2></div></div>').appendTo('#pipeline_labels'); 
 //$(' <div class="column col-md-2" placement="sc'+date+'"><h2>'+mon[(mm-1)]+'<br/>SHOULD</h2></div>').appendTo('#pipeline_content'); 
 //$(' <div class="column col-md-2" placement="wc'+date+'"><h2>'+mon[(mm-1)]+'<br/>WILL</h2></div>').appendTo('#pipeline_content'); 
 $(' <div class="col-md-2 reduced-padding"><div class="column"  placement="sc'+date+'"></div></div>').appendTo('#pipeline_content'); 
