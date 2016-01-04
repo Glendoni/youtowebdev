@@ -72,18 +72,7 @@ start = new Date(start.setDate(start.getDate() + 1)); //date increase by 1
         },
              update: function( event, ui ) {
                  
-                     var newMonth = $('.active').parent().attr('placement');
-            var elementId = $('.active .portlet-header').text();
-            var companyId  = $('.active').attr('company_id');
-            
-            var params = { 
-                monthupdate:newMonth, 
-                companyId:companyId };
-            var str = jQuery.param( params );
-                    dragg(str);
-                 
-                 
-                //alert($('.active').parent().attr('placement') + $('.active .portlet-header').text() + $('.active').attr('company_id'));
+  
             
              }
     });
@@ -139,13 +128,13 @@ start = new Date(start.setDate(start.getDate() + 1)); //date increase by 1
                                 
                                 disc = data[key]['image'].split(",");
                                 
-                              console.log(disc[1]);  
+                              //console.log(disc[1]);  
                                 
                                 
                                  res = data[key]['companyname'].replace(/Limited|Ltd|ltd/gi, function myFunction(x){return ''});
                                 
-     $('<div class="portlet ui-widget ui-widget-content ui-helper-clearfix ui-corner-all" company_id="'+data[key]['company_id'] +'"><div class="portlet-header ui-sortable-handle ui-widget-header ui-corner-all">'+ res +
-         '</div><div class="portlet-content"><a target="_blank" href="../companies/company?id='+data[key]['company_id'] +'" style="color:#000; float:right;">Link</a>  <div class="circle name-circle" style="background-color:'+disc[1]+'; color:'+disc[2]+';">'+disc[0]+'</div> ').appendTo("[placement="+placement_holder_prefix+data[key]['efffrom']+"]" );
+     $('<div class="portlet ui-widget ui-widget-content ui-helper-clearfix ui-corner-all" company_id="'+data[key]['company_id'] +'"> <div class="circle name-circle pipe-user" style="background-color:'+disc[1]+'; color:'+disc[2]+';">'+disc[0]+'</div><div class="portlet-content"><a target="_blank" href="../companies/company?id='+data[key]['company_id'] +'" style="color:#000; float:right;     margin-top: -7px;"><i class="fa fa-external-link"></i></a> </div><div class="portlet-header ui-sortable-handle ui-widget-header ui-corner-all">'+ res +
+         '</div> ').appendTo("[placement="+placement_holder_prefix+data[key]['efffrom']+"]" );
    
                                     jsonBinder(); //binds listeners to JSON  generated elements retruned back from the server
                         }

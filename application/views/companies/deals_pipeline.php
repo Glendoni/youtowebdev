@@ -19,10 +19,10 @@
     background-color: #ffffff !important;
   }
   .portlet:hover {
-    cursor: pointer; 
+    cursor: move; 
   }
   .portlet-header {
-    margin-bottom: 0.5em;
+  /*  margin-bottom: 0.5em; */
     position: relative;
       font-weight:100;
       background: none;
@@ -137,12 +137,22 @@ box-shadow: 10px 10px 75px -16px rgba(0,0,0,0.75);
   margin-top: 0;
   
   }
-
+.ui-widget-header {
+     border: none;
+    
+      }
+#pipeline_labels h2, .pipeline_will, .pipeline_should {
+    
+    font-weight: 500;
+}
+.pipe-user{
+    cursor: move;
+}      
   </style>
     
  <script>
     function  dragg(str){
- console.log(str);
+ //console.log(str);
 
  //console.log('Portal headers '+$('.active .portlet-header').text() + ' id '+$('.active').parent().attr('placement')+ ' company ID: '+ $('.active').attr('company_id')); 
  //alert('drag258'+str);
