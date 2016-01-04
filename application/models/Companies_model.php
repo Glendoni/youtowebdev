@@ -1380,7 +1380,7 @@ $this->update_pipline($post,$user_id);
             
     $q = '
      SELECT id,name,provider_id
-     FROM provider_check
+     FROM provider_checks
      WHERE name ilike \''.$name.'\'
      LIMIT 1
     ';
