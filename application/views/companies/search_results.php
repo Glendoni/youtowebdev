@@ -41,6 +41,7 @@
 					<?php if(!empty($current_campaign_stats->description)): ?>
 						<p style="font-size:14px"><?php echo $current_campaign_stats->description; ?></p>
 					<?php endif;?>
+					<p style="font-size:10px; margin-top:3px;"><b>Note:</b> Campaigns are ordered so companies not contacted recently will appear first.</p>
 
 						<div><a class="btn btn-info btn-xs" href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $current_campaign_id; ?>">Refresh</a></div>
 
