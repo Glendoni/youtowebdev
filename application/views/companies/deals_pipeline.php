@@ -14,6 +14,7 @@
   }
   .portlet {
      padding: 10px;
+          padding-bottom: 30px;
     width: 96%;
     margin: auto;
     background-color: #ffffff !important;
@@ -60,10 +61,9 @@ font-family: 'Open Sans', sans-serif;
   }
 
       #pipeline_labels h2{
-          
               font-size: 1.4em;
              text-align: left;
-             color: #191212;
+            color: #FFFFFF;
             text-transform: capitalize;
               font-weight: 100;
           letter-spacing: 2px;
@@ -92,7 +92,7 @@ font-family: 'Open Sans', sans-serif;
 box-shadow: 10px 10px 75px -16px rgba(0,0,0,0.75);
       }
       .colum-header {
-        background-color: #D7DEE6;
+        background-color: #2B4461;
         border-top-left-radius:4px;
         border-top-right-radius:4px;
             padding: 1px 10px 8px 10px;
@@ -141,7 +141,7 @@ box-shadow: 10px 10px 75px -16px rgba(0,0,0,0.75);
      border: none;
     
       }
-#pipeline_labels h2, .pipeline_will, .pipeline_should {
+#pipeline_labels h2  {
     
     font-weight: 500;
 }
