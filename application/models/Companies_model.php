@@ -1356,7 +1356,7 @@ $this->update_pipline($post,$user_id);
         //API TESTER WRITES TO FILE
     $filecontent =  'company_id : '.$company_id.' provider_id: '.$provider_id.' ref: '.$response['items'][0]['etag'].' type: '.$response['items'][0]['classification']['description'].' stage: '.$response['items'][0]['status'].' eff_from: '.date('Y-m-d').' user: '.$user_id; 
     
-  file_put_contents('apitext.txt', $filecontent, FILE_APPEND);    
+ // file_put_contents('apitext.txt', $filecontent, FILE_APPEND);    
   
        
  if($provider_id){
@@ -1438,7 +1438,7 @@ $this->update_pipline($post,$user_id);
    $pipeline_month = $post['pipeline_month'];
         
         
-        file_put_contents('apitext.txt', 'Pipeline month zzz: '.$pipeline_month. PHP_EOL  , FILE_APPEND);
+     //file_put_contents('apitext.txt', 'Pipeline month zzz: '.$pipeline_month. PHP_EOL  , FILE_APPEND);
         
         $action = $this->check_if_pipeline_exist($post['company_id'], $pipeline_month ,$post['pipeline_status']);
         
@@ -1512,12 +1512,12 @@ $this->update_pipline($post,$user_id);
         if($result->num_rows()){ 
         
             
-         file_put_contents('apitext.txt', 'check_if_pipeline_exist test true xxxxx: '. $pipeline_month. PHP_EOL  , FILE_APPEND);
+       //  file_put_contents('apitext.txt', 'check_if_pipeline_exist test true xxxxx: '. $pipeline_month. PHP_EOL  , FILE_APPEND);
             
                 return true ;
         }else{
             
-           file_put_contents('apitext.txt', 'check_if_pipeline_exist test false xxxxx: PM: '.$pipeline_month .  PHP_EOL  , FILE_APPEND);
+          // file_put_contents('apitext.txt', 'check_if_pipeline_exist test false xxxxx: PM: '.$pipeline_month .  PHP_EOL  , FILE_APPEND);
                  return  false;
         }
     }

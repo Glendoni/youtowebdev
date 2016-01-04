@@ -13,8 +13,7 @@
         border-bottom-right-radius:4px;
   }
   .portlet {
-     padding: 10px;
-          padding-bottom: 30px;
+    padding: 20px 10px;
     width: 96%;
     margin: auto;
     background-color: #ffffff !important;
