@@ -1173,3 +1173,11 @@ h2.company-header{
  
     
 }
+
+.pipeline_should{
+     color: #ff8c00;
+}
+
+.pipeline_will{
+    color: #00c8ac;
+}

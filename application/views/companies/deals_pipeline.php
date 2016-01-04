@@ -176,7 +176,7 @@ success: function (data) {
 <span class="glyphicon glyphicon-trash"></span>
 </div>
 </div>
-<div class="col-md-8"><h2 class="company-header">Deals Pipeline</h2></div>
+<div class="col-md-8"><h2 class="company-header">Should &amp; Will Forecast</h2></div>
 <div class="col-md-2"></div>
 </div>
 <div class="row" style="margin-top:20px;">
