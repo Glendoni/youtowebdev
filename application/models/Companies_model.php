@@ -1567,7 +1567,9 @@ LEFT JOIN companies
 ON deals_pipeline.company_id=companies.id
 LEFT JOIN users
 ON deals_pipeline.user_id=users.id
-WHERE deals_pipeline.eff_to IS NULL ';
+WHERE deals_pipeline.eff_to IS NULL 
+ORDER BY deals_pipeline.updated_at desc
+';
  $result = $this->db->query($q);
       return    $result->result();
     }

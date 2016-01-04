@@ -61,10 +61,14 @@ font-family: 'Open Sans', sans-serif;
 
       #pipeline_labels h2{
           
-          font-size: 14px;
+              font-size: 1.4em;
              text-align: left;
-             color: #778794;
-                         text-transform: uppercase;
+             color: #191212;
+            text-transform: capitalize;
+              font-weight: 100;
+          letter-spacing: 2px;
+    font-family: inherit;
+          text-align: center;
 
       }
       
@@ -103,7 +107,8 @@ box-shadow: 10px 10px 75px -16px rgba(0,0,0,0.75);
         padding: 0 5px;
       }
       .header-bold {
-        font-weight: 800;
+      font-weight: 300;
+    text-transform: capitalize;
       }
       .delete {
         background-color: red;
@@ -137,7 +142,7 @@ box-shadow: 10px 10px 75px -16px rgba(0,0,0,0.75);
     
  <script>
     function  dragg(str){
-//console.log(str);
+ console.log(str);
 
  //console.log('Portal headers '+$('.active .portlet-header').text() + ' id '+$('.active').parent().attr('placement')+ ' company ID: '+ $('.active').attr('company_id')); 
  //alert('drag258'+str);
@@ -176,7 +181,7 @@ success: function (data) {
 <span class="glyphicon glyphicon-trash"></span>
 </div>
 </div>
-<div class="col-md-8"><h2 class="company-header">Should &amp; Will Forecast</h2></div>
+<div class="col-md-8"><h2 class="company-header">Upcoming Deals</h2></div>
 <div class="col-md-2"></div>
 </div>
 <div class="row" style="margin-top:20px;">

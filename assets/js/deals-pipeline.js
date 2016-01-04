@@ -29,12 +29,15 @@
             var date = yyyy +"-"+mm+"-"+dd; //yyyy-mm-dd
             if(dd == 01){
 //console.log(mon[(mm-1)]); 
+                
+                $(' <div class="col-md-3 reduced-padding"><div class="colum-header"><h2>'+mon[(mm-1)]+' <span class="header-bold pipeline_will">Will</span></h2></div></div>').appendTo('#pipeline_labels'); 
 $(' <div class="col-md-3 reduced-padding"><div class="colum-header"><h2>'+mon[(mm-1)]+' <span class="header-bold pipeline_should">Should</span></h2></div></div>').appendTo('#pipeline_labels'); 
-$(' <div class="col-md-3 reduced-padding"><div class="colum-header"><h2>'+mon[(mm-1)]+' <span class="header-bold pipeline_will">Will</span></h2></div></div>').appendTo('#pipeline_labels'); 
+
 //$(' <div class="column col-md-2" placement="sc'+date+'"><h2>'+mon[(mm-1)]+'<br/>SHOULD</h2></div>').appendTo('#pipeline_content'); 
-//$(' <div class="column col-md-2" placement="wc'+date+'"><h2>'+mon[(mm-1)]+'<br/>WILL</h2></div>').appendTo('#pipeline_content'); 
+//$(' <div class="column col-md-2" placement="wc'+date+'"><h2>'+mon[(mm-1)]+'<br/>WILL</h2></div>').appendTo('#pipeline_content');
+                $(' <div class="col-md-3 reduced-padding"><div class="column"  placement="wc'+date+'"></div></div>').appendTo('#pipeline_content');
 $(' <div class="col-md-3 reduced-padding"><div class="column"  placement="sc'+date+'"></div></div>').appendTo('#pipeline_content'); 
-$(' <div class="col-md-3 reduced-padding"><div class="column"  placement="wc'+date+'"></div></div>').appendTo('#pipeline_content'); 
+ 
 }
 start = new Date(start.setDate(start.getDate() + 1)); //date increase by 1
 }
@@ -68,6 +71,19 @@ start = new Date(start.setDate(start.getDate() + 1)); //date increase by 1
 						return true;
         },
              update: function( event, ui ) {
+                 
+                     var newMonth = $('.active').parent().attr('placement');
+            var elementId = $('.active .portlet-header').text();
+            var companyId  = $('.active').attr('company_id');
+            
+            var params = { 
+                monthupdate:newMonth, 
+                companyId:companyId };
+            var str = jQuery.param( params );
+                    dragg(str);
+                 
+                 
+                //alert($('.active').parent().attr('placement') + $('.active .portlet-header').text() + $('.active').attr('company_id'));
             
              }
     });
@@ -106,7 +122,7 @@ start = new Date(start.setDate(start.getDate() + 1)); //date increase by 1
                         url: "../companies/drag",
                         success: function (data) {
                             
-                                  var img = "https://sonovate.peoplehr.net/Files/Employee/210194/5013/d63f04039c6e473a980b71d316cdaa38.jpg";
+                                  //var img = "https://sonovate.peoplehr.net/Files/Employee/210194/5013/d63f04039c6e473a980b71d316cdaa38.jpg";
                                  
                                   //var  updateinfo = "updated by: Richard Lester<br/> On: 20/11/2015"
                                   var placement_holder_prefix; 
@@ -121,12 +137,15 @@ start = new Date(start.setDate(start.getDate() + 1)); //date increase by 1
 
                                 }
                                 
+                                disc = data[key]['image'].split(",");
+                                
+                              console.log(disc[1]);  
+                                
                                 
                                  res = data[key]['companyname'].replace(/Limited|Ltd|ltd/gi, function myFunction(x){return ''});
                                 
      $('<div class="portlet ui-widget ui-widget-content ui-helper-clearfix ui-corner-all" company_id="'+data[key]['company_id'] +'"><div class="portlet-header ui-sortable-handle ui-widget-header ui-corner-all">'+ res +
-         '</div><div class="portlet-content">'+ data[key]['owner'] +
-         ' <img class="circle" src="'+ img +'"><br/></div></div>').appendTo("[placement="+placement_holder_prefix+data[key]['efffrom']+"]" );
+         '</div><div class="portlet-content"><a target="_blank" href="../companies/company?id='+data[key]['company_id'] +'" style="color:#000; float:right;">Link</a>  <div class="circle name-circle" style="background-color:'+disc[1]+'; color:'+disc[2]+';">'+disc[0]+'</div> ').appendTo("[placement="+placement_holder_prefix+data[key]['efffrom']+"]" );
    
                                     jsonBinder(); //binds listeners to JSON  generated elements retruned back from the server
                         }
