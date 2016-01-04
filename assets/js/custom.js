@@ -101,13 +101,13 @@ $('#campaignList a:lt('+x+')').css('display', 'block');
     ////////////////THE HOLY GRAIL
     
     var d = new Date();
-d.setMonth(d.getMonth()+12);   //change retruned months here
+d.setMonth(d.getMonth()+11);   //change retruned months here
       var   montheval =""+d.getMonth()+"" ;
       montheval =  montheval.substr(1, 1) ? d.getMonth() : '0'+d.getMonth() ;
       
       monthevalconcat = d.getFullYear()+"-"+(montheval)+"-01";
       
-//console.log(monthevalconcat);
+console.log(monthevalconcat);
       
       
  
