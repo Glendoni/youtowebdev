@@ -217,7 +217,7 @@
                       <div class="col-md-12">
                       <div class="row list-group-item">
                          <div class="col-md-3">
-                           <strong>Deals</strong><div class="pull-right"><span class="badge" style="background-color:#00B285;"><?php echo count($getuserplacements)?></span></div>
+                           <strong>Deals</strong><div class="pull-right"><span class="badge" style="background-color:#45AE7C;"><?php echo count($getuserplacements)?></span></div>
                         </div>
                          <div class="col-md-3">
                            <strong>Proposals</strong><div class="pull-right"><span class="badge badge-warning"><?php echo count($getuserproposals)?></span></div>
@@ -364,7 +364,7 @@
                             </a>
                             </div>
                             <div class="col-xs-1 col-md-1 text-center">
-                            <a href = "?search=2&user=<?php echo $stat['user'];?>&period=week"><span class="badge" style="background-color:#00B285;"><?php echo $stat['deals'];?></a></span>
+                            <a href = "?search=2&user=<?php echo $stat['user'];?>&period=week"><span class="badge" style="background-color:#45AE7C;"><?php echo $stat['deals'];?></a></span>
                             </div>
                             <div class="col-xs-2 col-md-1 text-center"> 
                             <?php echo $stat['proposals'];?>
@@ -436,7 +436,7 @@
                             </a>
                             </div>
                             <div class="col-xs-2 col-md-1 text-center">
-                            <a href = "?search=2&user=<?php echo $lastweekstat['user'];?>&period=lastweek"><span class="badge" style="background-color:#00B285;"><?php echo $lastweekstat['deals'];?></a></span>
+                            <a href = "?search=2&user=<?php echo $lastweekstat['user'];?>&period=lastweek"><span class="badge" style="background-color:#45AE7C;"><?php echo $lastweekstat['deals'];?></a></span>
                             </div>
                             <div class="col-xs-2 col-md-1 text-center"> 
                               <?php echo $lastweekstat['proposals'];?>
@@ -512,7 +512,7 @@
                             </a>
                             </div>
                             <div class="col-xs-2 col-md-1 text-center">
-                            <a href = "?search=2&user=<?php echo $thismonthstat['user'];?>&period=month"><span class="badge" style="background-color:#00B285;"><?php echo $thismonthstat['deals'];?></a></span>
+                            <a href = "?search=2&user=<?php echo $thismonthstat['user'];?>&period=month"><span class="badge" style="background-color:#45AE7C;"><?php echo $thismonthstat['deals'];?></a></span>
                             </div>
                             <div class="col-xs-2 col-md-1 text-center"> 
                               <?php echo $thismonthstat['proposals'];?>
@@ -585,7 +585,7 @@
                             </a>
                             </div>
                             <div class="col-xs-2 col-md-1 text-center">
-                            <a href = "?search=2&user=<?php echo $lastmonthstat['user'];?>&period=lastmonth"><span class="badge" style="background-color:#00B285;"><?php echo $lastmonthstat['deals'];?></a></span>
+                            <a href = "?search=2&user=<?php echo $lastmonthstat['user'];?>&period=lastmonth"><span class="badge" style="background-color:#45AE7C;"><?php echo $lastmonthstat['deals'];?></a></span>
                             </div>
                               <div class="col-xs-2 col-md-1 text-center"> 
                               <?php echo $lastmonthstat['proposals'];?>
@@ -659,7 +659,7 @@
                             </a>
                             </div>
                             <div class="col-xs-2 col-md-1 text-center">
-                            <a href = "?search=2&user=<?php echo $getstatssearch['user'];?>&start_date=<?php echo $_GET['start_date']?>&end_date=<?php echo $_GET['end_date']?>&period=search"><span class="badge" style="background-color:#00B285;"><?php echo $getstatssearch['deals'];?></a></span>
+                            <a href = "?search=2&user=<?php echo $getstatssearch['user'];?>&start_date=<?php echo $_GET['start_date']?>&end_date=<?php echo $_GET['end_date']?>&period=search"><span class="badge" style="background-color:#45AE7C;"><?php echo $getstatssearch['deals'];?></a></span>
                             </div>
                                   <div class="col-xs-2 col-md-1 text-center"> 
                               <?php echo $getstatssearch['proposals'];?>

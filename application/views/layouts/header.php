@@ -186,7 +186,7 @@ $search_default = $this->input->post('agency_name');
                     <div id="credits" class="well hidden advanced-search">
                             <div class="form-row" style="margin-bottom:50px;">
                                     <div class="col-xs-6 col-md-6 no-padding">
-                                         <?php  echo form_label('Age (Months) ', 'company_age_from', array('class'=>'control-label')); ?>
+                                         <?php  echo form_label('Company Age (Months) ', 'company_age_from', array('class'=>'control-label')); ?>
                                          <div class="form-group" >
                                             <div class="col-xs-6 col-md-6 no-padding"> 
                                             <?php echo form_input(array('name' => 'company_age_from', 'id' => 'company_age_from', 'maxlength' => '100','class'=>'form-control','placeholder'=>'From'), set_value('company_age_from',$this->input->post('company_age_from')));?>
