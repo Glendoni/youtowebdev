@@ -133,7 +133,7 @@ if(dd == 01){
 }
     
     
-});
+ 
 $(window).load(function(){
   $(".draggable-modal").draggable({
       handle: ".modal-header"
