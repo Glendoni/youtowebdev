@@ -2,7 +2,7 @@ body {
 	  font-family: 'Open Sans', sans-serif;
 }
 .container-fluid {
-	max-width: 1370px;
+	max-width: 1500px;
 }
 
 .padding-bottom {
@@ -930,8 +930,7 @@ a.btn.btn-default.btn-xs.add-to-calendar {
 .campaign-link {
 	font-size: 11px;
 }
-#campaignList a{ display:none;
-}
+
 /*CIRCLES FOR DASHBOARD*/
 .name-circle {
 	float: left;

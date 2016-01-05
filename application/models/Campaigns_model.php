@@ -15,8 +15,6 @@ class Campaigns_model extends MY_Model {
 
 		$this->db->where('status', 'search');
 		$this->db->order_by("c.name", "asc");
-		$this->db->limit(20);
-
 		$this->db->where("(c.eff_to IS NULL OR c.eff_to > '".date('Y-m-d')."')",null, false); 
 		$query = $this->db->get();
 		return $query->result();
@@ -51,6 +49,7 @@ class Campaigns_model extends MY_Model {
 		$this->db->where('comp.active', 'True');
 		$this->db->where_not_in('c.user_id', $user_id);
 		$this->db->order_by("c.created_at", "desc");
+		$this->db->limit(20);
 		$this->db->where("(c.eff_to IS NULL OR c.eff_to > '".date('Y-m-d')."')",null, false); 
 		$this->db->group_by("1,2,3,4,5"); 
 		$query = $this->db->get();
