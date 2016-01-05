@@ -15,6 +15,8 @@ class Campaigns_model extends MY_Model {
 
 		$this->db->where('status', 'search');
 		$this->db->order_by("c.name", "asc");
+		$this->db->limit(20);
+
 		$this->db->where("(c.eff_to IS NULL OR c.eff_to > '".date('Y-m-d')."')",null, false); 
 		$query = $this->db->get();
 		return $query->result();
