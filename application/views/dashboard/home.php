@@ -1203,9 +1203,12 @@
               <div class="panel-body" style="padding:0;">
                   <!-- PRIVATE SEARCHES -->
                   <?php foreach ($private_campaigns as $campaign):?>
-                  <a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $campaign->id; ?>" class="load-saved-search" <?php echo strlen($campaign->name) > 33 ? 'title="'.$campaign->name.'"':"" ?>><div class="row">
-                  <div class="col-xs-10" style="max-height:15px; overflow:hidden"><?php echo $campaign->name;?></div>
-                  <div class="col-xs-1" style="padding: 0 0 0 5px;"><b><?php echo $campaign->campaigncount; ?></b></div>
+                  <a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $campaign->id; ?>" class="load-saved-search" <?php echo strlen($campaign->name) > 33 ? 'title="'.$campaign->name.'"':"" ?>>
+                  <div class="row">
+                  <div class="col-xs-10" style="overflow:hidden"><?php echo $campaign->name;?></br><small style="font-weight:700;"><?php echo date('D jS M y',strtotime($campaign->created_at));?></small></div>
+
+
+                  <div class="col-xs-1"><b><?php echo $campaign->campaigncount; ?></b></div>
                   </div>
                   </a>
                   <?php endforeach; ?>
