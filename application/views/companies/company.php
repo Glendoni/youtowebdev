@@ -5,6 +5,8 @@ endif; ?>
 		<?php if (!isset($company['id'])): ?>
 <div class="alert alert-danger" role="alert">This company is no longer active.</div>
 			<?php endif; ?>
+<?php //hide core page content if no company is found ?>
+<?php if (isset($company['id'])): ?>
 <div class="page-results-list">
 <div class="top-info-holder">
     <div class="row">
@@ -49,6 +51,8 @@ endif; ?>
 	<!-- // POPUP BOXES -->
 </div><!--END TOP INFO HOLDER-->
 
+    
+   
 <div class="panel panel-primary" style="padding-top: 30px;">
 	<div class="panel-body">
     	<div class="row"><!--FINISHED AT THE END OF PANEL-->
@@ -963,7 +967,10 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 	</div>
 </div><!--CLOSE ROW-->
 </div>
-      
+    
+    
+    <?php //hide core page END ?>
+       <?php endif; ?>
  
     
     
