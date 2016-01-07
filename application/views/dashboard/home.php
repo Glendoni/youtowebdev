@@ -724,7 +724,7 @@
 
     <div role="tabpanel" class="tab-pane fade" id="calls"><div class="panel panel-default">
               <div class="panel-heading">
-              <h3 class="panel-title">My Calls & Meetings<span class="badge pull-right"><?php echo count($pending_actions); ?></span></h3>
+              <h3 class="panel-title">My Activity<span class="badge pull-right"><?php echo count($pending_actions); ?></span></h3>
               </div>
              
               <div class="panel-body no-padding">
