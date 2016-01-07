@@ -7,8 +7,8 @@
                 <li role="presentation"><button href="#calls" aria-controls="calls" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Calls & Meetings','<?php echo $current_user['id'];?>')">Actions</button></li>
                 <li role="presentation"><button href="#pipeline" aria-controls="pipeline" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Pipeline','<?php echo $current_user['id'];?>')">Pipeline</button></li>
                 <li role="presentation"><button href="#assigned" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Watching','<?php echo $current_user['id'];?>')">Watching</button></li>
-                   <li><button href="companies/pipeline"role="tab" class="button btn btn-primary btn-sm deals_pipeline" style="margin-right:10px;" onclick="window.location ='companies/pipeline'">Upcoming Deals</button></li>
-
+                <li role="presentation"><button href="#emailstats" aria-controls="emailstats" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Email Stats','<?php echo $current_user['id'];?>')">Email Stats</button></li>
+                <li><button href="companies/pipeline"role="tab" class="button btn btn-primary btn-sm deals_pipeline" style="margin-right:10px;" onclick="window.location ='companies/pipeline'">Upcoming Deals</button></li>
               </ul>
 
           </div>
@@ -719,69 +719,7 @@
 </div>
 
 <?php }?>
-
-        <!--START MARKETING STATS-->
-            <div class="panel panel-default">
-    <div class="panel-heading" id="contacts">
-    <h3 class="panel-title">My Email Campaigns</h3>
-    </div>
-    <!-- /.panel-heading -->
-    <div class="panel-body" style="font-size:12px;">
-<?php if(!empty($marketing_actions)) : ?>
-<div class="row record-holder-header mobile-hide">
-<div class="col-xs-8 col-sm-4 col-md-4"><strong>Company</strong></div>
-<div class="col-xs-4 col-sm-1 col-md-1"><strong>Pipeline</strong></div>
-<div class="col-xs-6 col-sm-2 col-md-2"><strong>Contact</strong></div>
-<div class="col-xs-6 col-sm-3 col-md-3"><strong>Action</strong></div>
-<div class="col-xs-12 col-sm-2 col-md-2"><strong>Date</strong></div>
-</div>
-<?php foreach ($marketing_actions as $marketing): ?>
-<div class="row record-holder">
-<div class="col-xs-8 col-sm-4 col-md-4">
-<a href="<?php echo site_url();?>companies/company?id=<?php echo $marketing->company_id;?>"><?php echo ucfirst($marketing->company); ?></a>
-</div>
-<div class="col-xs-4 col-sm-1 col-md-1 text-right">
-<span class="label pipeline label-<?php echo str_replace(' ', '', $marketing->pipeline); ?>">#<?php echo $marketing->pipeline;?>
-</span>
-</div>
-
-<div class="col-xs-6 col-sm-2 col-md-2"><a href="<?php echo site_url();?>companies/company?id=<?php echo $marketing->company_id;?>#contacts"><?php echo ucfirst($marketing->first_name).' '.ucfirst($marketing->last_name); ?></a></div>
-<div class="col-xs-6 col-sm-3 col-md-3 align-right ">
-<?php if (isset($marketing->sent_id)) {?><a href="http://www.sonovate.com/?p=<?php echo $marketing->sent_id;?>" style="padding-right:5px;" target="_blank"><i class="fa fa-eye"></i></a><?php;}?> 
-
-  <?php if (($marketing->email_action_type)=='2'): ?>
-    <span class="label label-primary">Opened</span>
-    <?php elseif (!empty($marketing->url)):?>
-    <span class="label label-success"><a href="<?php echo $marketing->url;?>" style="color:#fff;">
-    <?php 
-    $urlwords = array( 'http://', 'https://', 'www.');
-    $link = str_replace($urlwords, "", $marketing->url);
-    $link = (strlen($link) > 23) ? substr($link,0,20).'...' : $link;
-    echo $link;?>
-    </a>
-    </span>
-    <?php else:?>
-    <?php endif;?>
-</div>
-<div class="col-xs-12 col-sm-2 col-md-2 contact-phone">
-<?php echo date("d/m/Y",strtotime($marketing->created_at));?>
-</div>
-</div>
-
-
-      <?php endforeach; ?>
-      <?php else: ?>
-      <div class="alert alert-info" style="margin-top:10px;">
-                You currently have no marketing actions.
-            </div>
-    <?php endif; ?>
-
-    </div>
-    <!-- /.panel-body -->
-    </div>
-
-
-    </div><!--END TAB-->
+</div><!--END TAB-->
 
 
     <div role="tabpanel" class="tab-pane fade" id="calls"><div class="panel panel-default">
@@ -1197,6 +1135,72 @@
               </div>
           </div><!--END OF PANEL-->
           <!--END ASSIGNED-->
+
+          <!--ASSIGNED-->
+    <div role="tabpanel" class="tab-pane fade" id="emailstats">
+    <!--START MARKETING STATS-->
+            <div class="panel panel-default">
+    <div class="panel-heading" id="contacts">
+    <h3 class="panel-title">My Email Stats</h3>
+    </div>
+    <!-- /.panel-heading -->
+    <div class="panel-body" style="font-size:12px;">
+<?php if(!empty($marketing_actions)) : ?>
+<div class="row record-holder-header mobile-hide">
+<div class="col-xs-8 col-sm-4 col-md-4"><strong>Company</strong></div>
+<div class="col-xs-4 col-sm-1 col-md-1"><strong>Pipeline</strong></div>
+<div class="col-xs-6 col-sm-2 col-md-2"><strong>Contact</strong></div>
+<div class="col-xs-6 col-sm-3 col-md-3"><strong>Action</strong></div>
+<div class="col-xs-12 col-sm-2 col-md-2"><strong>Date</strong></div>
+</div>
+<?php foreach ($marketing_actions as $marketing): ?>
+<div class="row record-holder">
+<div class="col-xs-8 col-sm-4 col-md-4">
+<a href="<?php echo site_url();?>companies/company?id=<?php echo $marketing->company_id;?>"><?php echo ucfirst($marketing->company); ?></a>
+</div>
+<div class="col-xs-4 col-sm-1 col-md-1 text-right">
+<span class="label pipeline label-<?php echo str_replace(' ', '', $marketing->pipeline); ?>">#<?php echo $marketing->pipeline;?>
+</span>
+</div>
+
+<div class="col-xs-6 col-sm-2 col-md-2"><a href="<?php echo site_url();?>companies/company?id=<?php echo $marketing->company_id;?>#contacts"><?php echo ucfirst($marketing->first_name).' '.ucfirst($marketing->last_name); ?></a></div>
+<div class="col-xs-6 col-sm-3 col-md-3 align-right ">
+<?php if (isset($marketing->sent_id)) {?><a href="http://www.sonovate.com/?p=<?php echo $marketing->sent_id;?>" style="padding-right:5px;" target="_blank"><i class="fa fa-eye"></i></a><?php;}?> 
+
+  <?php if (($marketing->email_action_type)=='2'): ?>
+    <span class="label label-primary">Opened</span>
+    <?php elseif (!empty($marketing->url)):?>
+    <span class="label label-success"><a href="<?php echo $marketing->url;?>" style="color:#fff;">
+    <?php 
+    $urlwords = array( 'http://', 'https://', 'www.');
+    $link = str_replace($urlwords, "", $marketing->url);
+    $link = (strlen($link) > 23) ? substr($link,0,20).'...' : $link;
+    echo $link;?>
+    </a>
+    </span>
+    <?php else:?>
+    <?php endif;?>
+</div>
+<div class="col-xs-12 col-sm-2 col-md-2 contact-phone">
+<?php echo date("d/m/Y",strtotime($marketing->created_at));?>
+</div>
+</div>
+
+
+      <?php endforeach; ?>
+      <?php else: ?>
+      <div class="alert alert-info" style="margin-top:10px;">
+                You currently have no marketing actions.
+            </div>
+    <?php endif; ?>
+
+    </div>
+    <!-- /.panel-body -->
+    </div>
+          </div><!--END OF PANEL-->
+          <!--END ASSIGNED-->
+
+
 </div><!--END TAB PANES-->
 </div><!--END-COL-SM-9-->
 <div class="col-sm-3 col-sm-pull-9">
