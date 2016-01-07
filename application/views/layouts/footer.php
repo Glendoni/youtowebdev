@@ -144,17 +144,26 @@ function  getCompany(input_data){
             }    
                 
                 
-                            
+     /*                       
 
- 
+ */
                 
 
                             $('#suggestions').show();
             $('#autoSuggestionsList').addClass('auto_list');
             $('#autoSuggestionsList').html('<div class="autocomplete-full-holder"><div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 clearfix no-padding"><ul class="autocomplete-holder"><li class="autocomplete-item split-heading"><i class="fa fa-caret-square-o-down"></i> Companies</li>'+out+'</ul></div><div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 no-padding"><ul class="autocomplete-holder"><li class="autocomplete-item split-heading autocomplete-no-results"><i class="fa fa-times"></i> Preview</li>'+preview+'</ul></div></div>');
+                
+                if(i == 0){
+    
+   $('#autoSuggestionsList').html('<div class="autocomplete-full-holder"><div class="col-xs-12 col-sm-12 col-md-5 col-lg-12 no-padding"><ul class="autocomplete-holder"><li class="autocomplete-item split-heading autocomplete-no-results"><i class="fa fa-times"></i> No records found</li></ul></div></div>');
+}
+                
             $('#agency_name').addClass('autocomplete-live');
                              saveCompanyHandler();
             }
+         
+       
+         
             });
     
     
