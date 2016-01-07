@@ -10,6 +10,27 @@ body {
 
 }
 
+.assigned-star {
+	color: #FFA03C;
+    border: none;
+    background: none;
+    font-size: 34px;
+    
+}
+.unassigned-star{
+	color: #DCDCDC;
+    border: none;
+    background: none;
+    font-size: 34px;
+}
+.unassigned-star .ladda-label {
+	color: #FFA03C;
+
+}
+.assigned-star .ladda-label {
+	color: #DCDCDC;
+
+}
 /*page-results-list */
 .profile-heading > span {
 	float: left;
