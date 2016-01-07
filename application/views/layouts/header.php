@@ -158,7 +158,7 @@ $search_default = $this->input->post('agency_name');
                             <button href="#credits" type="button" class="toggle btn btn-default dropdown-toggle large-search-height" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
                         </div>
                         
-                    <input type="submit" class="loading-btn btn btn-primary " value="Go" name="submit">
+                    <input type="submit" class="loading-btn btn btn-primary " value="Go" name="submit" style="width: 100%;">
                         <?php if (validation_errors()): ?>
                         <div class="alert alert-danger" role="alert">
                         <?php echo validation_errors(); ?>
