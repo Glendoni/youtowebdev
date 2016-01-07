@@ -887,6 +887,8 @@
                             echo str_replace($words, ' ',$pipelinecontactedindividual['company_name']); 
                             ?>
                             </a></div>
+                                                      <span class="label pipeline-label label-<?php echo str_replace(' ', '', $pipelinecontactedindividual['pipeline']); ?>">#<?php echo $pipelinecontactedindividual['pipeline'] ?></span> <small><?php echo $pipelinecontactedindividual['username'] ?></small>
+
                             </div>
                             </div>
                           <?php endforeach ?>
@@ -927,6 +929,7 @@
                             echo str_replace($words, ' ',$pipelineproposalindividual['company_name']); 
                             ?>
                           </a></div>
+                          <span class="label pipeline-label label-<?php echo str_replace(' ', '', $pipelineproposalindividual['pipeline']); ?>">#<?php echo $pipelineproposalindividual['pipeline'] ?></span> <small><?php echo $pipelineproposalindividual['username'] ?></small>
                             </div>
                             </div>
                           <?php endforeach ?>
@@ -965,6 +968,7 @@
                             $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' );
                             echo str_replace($words, ' ',$pipelinecustomerindividual['company_name']); 
                             ?></a></div>
+                            <span class="label pipeline-label label-<?php echo str_replace(' ', '', $pipelinecustomerindividual['pipeline']); ?>">#<?php echo $pipelinecustomerindividual['pipeline'] ?></span> <small><?php echo $pipelinecustomerindividual['username'] ?></small>
                             </div>
                             </div>
                           <?php endforeach ?>
@@ -984,8 +988,8 @@
                             <div style="font-size=16px; font-weight:600;"><a href="companies/company?id=<?php echo $pipelinelostindividual['company_id'] ?>" <?php if(($current_user['new_window']=='t')): ?> target="_blank"<?php endif; ?>>
                             <?php 
                             $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' );
-                            echo str_replace($words, ' ',$pipelinelostindividual['company_name']); 
                             ?></a></div>
+                            <span class="label pipeline-label label-<?php echo str_replace(' ', '', $pipelinelostindividual['pipeline']); ?>">#<?php echo $pipelinelostindividual['pipeline'] ?></span> <small><?php echo $pipelinelostindividual['username'] ?></small>
                             </div>
                             
                           <?php endforeach ?>
@@ -1029,6 +1033,7 @@
                             ?></a></div>
                             <span class="label pipeline-label label-<?php echo str_replace(' ', '', $pipelinecontacted['pipeline']); ?>">#<?php echo $pipelinecontacted['pipeline'] ?></span> <small><?php echo $pipelinecontacted['username'] ?></small>
                             </div>
+
                             </div>
                           <?php endforeach ?>
                             </div>
@@ -1175,7 +1180,7 @@
                               </a> 
                               </div>
                               <div class="col-xs-2">
-                              <span class="label label-<?php echo str_replace(' ', '', $assigned->pipeline); ?>" style="    margin-top: 3px;"><?php echo $assigned->pipeline;?>
+                              <span class="label label-<?php echo str_replace(' ', '', $assigned->pipeline); ?>" style="    margin-top: 3px;">#<?php echo $assigned->pipeline;?>
   <?php if (isset($company['customer_from'])):?>
     from <?php echo date("d/m/y",strtotime($company['customer_from']));?>
     <?php endif; ?>
