@@ -381,7 +381,7 @@ class Campaigns_model extends MY_Model {
 		JOIN PROVIDERS P
 		ON M.provider_id = P.id 
 
-		order by 1, 4, M.eff_from desc
+		order by 1, 5, M.eff_from desc
 
 		)   T
 
