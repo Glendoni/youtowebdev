@@ -165,22 +165,22 @@
                         </div>
                         <div class="col-xs-2 col-md-2 text-center hide-overflow">
                             <strong>Demos</strong><br>
-                            <Small> Booked / Done</Small>
+                            <Small>Booked/Done</Small>
                         </div>
                         <div class="col-xs-1 col-md-1 text-center hide-overflow">
                             <strong>Meetings</strong><br>
-                            <Small> Booked<br>(Done)</Small>
+                            <Small>Booked/Done</Small>
                         </div>
                         <div class="col-xs-2 col-md-2 text-center hide-overflow"> 
                            <strong>Call Activity</strong><br>
-                           <Small> Total Calls<br>(Intro)</Small>
+                           <Small>Total Calls/Intro</Small>
                         </div>
                         <div class="col-md-1 hidden-xs text-center hide-overflow">
                            <strong>Pipeline Added</strong>
                         </div>
                         <div class="col-md-2 hidden-xs text-center hide-overflow"> 
                            <strong>Review Months</strong><br>
-                           <Small>Added / Occuring</Small>
+                           <Small>Added/Occuring</Small>
                         </div>
                         <div class="col-md-1 hidden-xs text-center hide-overflow">
                            <strong>DueDil</strong>
@@ -203,11 +203,10 @@
                             <?php echo $stat['demobookedcount'];?> / <?php echo $stat['democount'];?>
                             </div>
                             <div class="col-xs-2 col-md-1 text-center">
-                            <?php echo $stat['meetingbooked'];?> (<?php echo $stat['meetingcount'];?>)
+                            <?php echo $stat['meetingbooked'];?> / <?php echo $stat['meetingcount'];?>
                             </div>
                             <div class="col-xs-2 col-md-2 text-center"> 
-                            <?php echo $stat['salescall'];?>
-                            (<?php echo $stat['introcall'];?>)
+                            <?php echo $stat['salescall'];?> / <?php echo $stat['introcall'];?>
                             </div>
                             <div class="col-md-1 hidden-xs text-center">
                               <?php echo $stat['pipelinecount'];?>
@@ -226,7 +225,7 @@
                       <div class="tab-pane fade <?php if ($_GET['period'] == 'lastweek'): ?>active in <?php endif; ?>" id="lastweek">
                       <div class="col-md-12">
                       <div class="row list-group-item">
-                        <div class="col-xs-2 col-md-1 hide-overflow"> 
+                         <div class="col-xs-2 col-md-1 hide-overflow"> 
                             <strong>Name</strong>
                         </div>
                         <div class="col-xs-2 col-md-1 text-center hide-overflow">
@@ -237,22 +236,22 @@
                         </div>
                         <div class="col-xs-2 col-md-2 text-center hide-overflow">
                             <strong>Demos</strong><br>
-                            <Small> Booked / Done</Small>
+                            <Small>Booked/Done</Small>
                         </div>
                         <div class="col-xs-1 col-md-1 text-center hide-overflow">
                             <strong>Meetings</strong><br>
-                            <Small> Booked<br>(Done)</Small>
+                            <Small>Booked/Done</Small>
                         </div>
                         <div class="col-xs-2 col-md-2 text-center hide-overflow"> 
                            <strong>Call Activity</strong><br>
-                           <Small> Total Calls<br>(Intro)</Small>
+                           <Small>Total Calls/Intro</Small>
                         </div>
                         <div class="col-md-1 hidden-xs text-center hide-overflow">
                            <strong>Pipeline Added</strong>
                         </div>
                         <div class="col-md-2 hidden-xs text-center hide-overflow"> 
                            <strong>Review Months</strong><br>
-                           <Small>Added / Occuring</Small>
+                           <Small>Added/Occuring</Small>
                         </div>
                         <div class="col-md-1 hidden-xs text-center hide-overflow">
                            <strong>DueDil</strong>
@@ -276,13 +275,10 @@
                             <?php echo $lastweekstat['demobookedcount'];?> / <?php echo $lastweekstat['democount'];?>
                             </div>
                             <div class="col-xs-1 col-md-1 text-center">
-                            <?php echo $lastweekstat['meetingbooked'];?> (<?php echo $lastweekstat['meetingcount'];?>)
+                            <?php echo $lastweekstat['meetingbooked'];?> / <?php echo $lastweekstat['meetingcount'];?>
                             </div>
-
-
                             <div class="col-xs-2 col-md-2 text-center"> 
-                            <?php echo $lastweekstat['salescall'];?>
-                            (<?php echo $lastweekstat['introcall'];?>)
+                            <?php echo $lastweekstat['salescall'];?> / <?php echo $lastweekstat['introcall'];?>
                             </div>
                             <div class="col-md-1 hidden-xs text-center">
                               <?php echo $lastweekstat['pipelinecount'];?>
@@ -302,7 +298,7 @@
                       <div class="tab-pane fade <?php if ($_GET['period'] == 'month'): ?>active in <?php endif; ?>" id="currentmonth">
                       <div class="col-md-12">
                       <div class="row list-group-item">
-                        <div class="col-xs-2 col-md-1 hide-overflow"> 
+                         <div class="col-xs-2 col-md-1 hide-overflow"> 
                             <strong>Name</strong>
                         </div>
                         <div class="col-xs-2 col-md-1 text-center hide-overflow">
@@ -313,22 +309,22 @@
                         </div>
                         <div class="col-xs-2 col-md-2 text-center hide-overflow">
                             <strong>Demos</strong><br>
-                            <Small> Booked / Done</Small>
+                            <Small>Booked/Done</Small>
                         </div>
                         <div class="col-xs-1 col-md-1 text-center hide-overflow">
                             <strong>Meetings</strong><br>
-                            <Small> Booked<br>(Done)</Small>
+                            <Small>Booked/Done</Small>
                         </div>
                         <div class="col-xs-2 col-md-2 text-center hide-overflow"> 
                            <strong>Call Activity</strong><br>
-                           <Small> Total Calls<br>(Intro)</Small>
+                           <Small>Total Calls/Intro</Small>
                         </div>
                         <div class="col-md-1 hidden-xs text-center hide-overflow">
                            <strong>Pipeline Added</strong>
                         </div>
                         <div class="col-md-2 hidden-xs text-center hide-overflow"> 
                            <strong>Review Months</strong><br>
-                           <Small>Added / Occuring</Small>
+                           <Small>Added/Occuring</Small>
                         </div>
                         <div class="col-md-1 hidden-xs text-center hide-overflow">
                            <strong>DueDil</strong>
@@ -352,11 +348,10 @@
                             <?php echo $thismonthstat['demobookedcount'];?> / <?php echo $thismonthstat['democount'];?>
                             </div>
                             <div class="col-xs-1 col-md-1 text-center">
-                            <?php echo $thismonthstat['meetingbooked'];?> (<?php echo $thismonthstat['meetingcount'];?>)
+                            <?php echo $thismonthstat['meetingbooked'];?> / <?php echo $thismonthstat['meetingcount'];?>
                             </div>
                             <div class="col-xs-2 col-md-2 text-center"> 
-                            <?php echo $thismonthstat['salescall'];?>
-                            (<?php echo $thismonthstat['introcall'];?>)
+                            <?php echo $thismonthstat['salescall'];?> / <?php echo $thismonthstat['introcall'];?>
                             </div>
                             <div class="col-md-1 hidden-xs text-center">
                               <?php echo $thismonthstat['pipelinecount'];?>
@@ -375,7 +370,7 @@
                     <div class="tab-pane fade <?php if ($_GET['period'] == 'lastmonth'): ?>active in <?php endif; ?>" id="lastmonth">
                       <div class="col-md-12">
                       <div class="row list-group-item">
-                        <div class="col-xs-2 col-md-1 hide-overflow"> 
+                         <div class="col-xs-2 col-md-1 hide-overflow"> 
                             <strong>Name</strong>
                         </div>
                         <div class="col-xs-2 col-md-1 text-center hide-overflow">
@@ -386,22 +381,22 @@
                         </div>
                         <div class="col-xs-2 col-md-2 text-center hide-overflow">
                             <strong>Demos</strong><br>
-                            <Small> Booked / Done</Small>
+                            <Small>Booked/Done</Small>
                         </div>
                         <div class="col-xs-1 col-md-1 text-center hide-overflow">
                             <strong>Meetings</strong><br>
-                            <Small> Booked<br>(Done)</Small>
+                            <Small>Booked/Done</Small>
                         </div>
                         <div class="col-xs-2 col-md-2 text-center hide-overflow"> 
                            <strong>Call Activity</strong><br>
-                           <Small> Total Calls<br>(Intro)</Small>
+                           <Small>Total Calls/Intro</Small>
                         </div>
                         <div class="col-md-1 hidden-xs text-center hide-overflow">
                            <strong>Pipeline Added</strong>
                         </div>
                         <div class="col-md-2 hidden-xs text-center hide-overflow"> 
                            <strong>Review Months</strong><br>
-                           <Small>Added / Occuring</Small>
+                           <Small>Added/Occuring</Small>
                         </div>
                         <div class="col-md-1 hidden-xs text-center hide-overflow">
                            <strong>DueDil</strong>
@@ -424,13 +419,10 @@
                             <?php echo $lastmonthstat['demobookedcount'];?> / <?php echo $lastmonthstat['democount'];?>
                             </div>
                             <div class="col-xs-1 col-md-1 text-center">
-                            <?php echo $lastmonthstat['meetingbooked'];?> (<?php echo $lastmonthstat['meetingcount'];?>)
+                            <?php echo $lastmonthstat['meetingbooked'];?> / <?php echo $lastmonthstat['meetingcount'];?>
                             </div>
-
-
                             <div class="col-xs-2 col-md-2 text-center"> 
-                            <?php echo $lastmonthstat['salescall'];?>
-                            (<?php echo $lastmonthstat['introcall'];?>)
+                            <?php echo $lastmonthstat['salescall'];?> / <?php echo $lastmonthstat['introcall'];?>
                             </div>
                             <div class="col-md-1 hidden-xs text-center">
                               <?php echo $lastmonthstat['pipelinecount'];?>
@@ -449,7 +441,7 @@
                     <div class="tab-pane fade <?php if ($_GET['search'] == '3'): ?>active in <?php endif; ?>" id="searchresults">
                      <div class="col-md-12">
                       <div class="row list-group-item">
-                        <div class="col-xs-2 col-md-1 hide-overflow"> 
+                         <div class="col-xs-2 col-md-1 hide-overflow"> 
                             <strong>Name</strong>
                         </div>
                         <div class="col-xs-2 col-md-1 text-center hide-overflow">
@@ -460,22 +452,22 @@
                         </div>
                         <div class="col-xs-2 col-md-2 text-center hide-overflow">
                             <strong>Demos</strong><br>
-                            <Small> Booked / Done</Small>
+                            <Small>Booked/Done</Small>
                         </div>
                         <div class="col-xs-1 col-md-1 text-center hide-overflow">
                             <strong>Meetings</strong><br>
-                            <Small> Booked<br>(Done)</Small>
+                            <Small>Booked/Done</Small>
                         </div>
                         <div class="col-xs-2 col-md-2 text-center hide-overflow"> 
                            <strong>Call Activity</strong><br>
-                           <Small> Total Calls<br>(Intro)</Small>
+                           <Small>Total Calls/Intro</Small>
                         </div>
                         <div class="col-md-1 hidden-xs text-center hide-overflow">
                            <strong>Pipeline Added</strong>
                         </div>
                         <div class="col-md-2 hidden-xs text-center hide-overflow"> 
                            <strong>Review Months</strong><br>
-                           <Small>Added / Occuring</Small>
+                           <Small>Added/Occuring</Small>
                         </div>
                         <div class="col-md-1 hidden-xs text-center hide-overflow">
                            <strong>DueDil</strong>
@@ -498,11 +490,10 @@
                             <?php echo $getstatssearch['demobookedcount'];?> / <?php echo $getstatssearch['democount'];?>
                             </div>
                             <div class="col-xs-1 col-md-1 text-center">
-                            <?php echo $getstatssearch['meetingbooked'];?> (<?php echo $getstatssearch['meetingcount'];?>)
+                            <?php echo $getstatssearch['meetingbooked'];?> / <?php echo $getstatssearch['meetingcount'];?>
                             </div>
                             <div class="col-xs-2 col-md-2 text-center"> 
-                            <?php echo $getstatssearch['salescall'];?>
-                            (<?php echo $getstatssearch['introcall'];?>)
+                            <?php echo $getstatssearch['salescall'];?> / <?php echo $getstatssearch['introcall'];?>
                             </div>
                             <div class="col-md-1 hidden-xs text-center">
                               <?php echo $getstatssearch['pipelinecount'];?>
