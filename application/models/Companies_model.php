@@ -540,7 +540,7 @@ class Companies_model extends CI_Model {
 		       company_id,
 		       max(id) OVER (PARTITION BY company_id) "max id"
 		from actions
-		where action_type_id in (\'4\',\'5\',\'8\',\'9\',\'10\',\'11\',\'12\',\'13\',\'17\',\'18\')
+		where action_type_id in (\'4\',\'5\',\'6\',\'8\',\'9\',\'10\',\'11\',\'12\',\'13\',\'17\',\'18\')
 		and actioned_at is not null
 		)   T5
 		JOIN ACTIONS AC1
@@ -583,7 +583,9 @@ class Companies_model extends CI_Model {
 		)   T6
 		JOIN ACTIONS AC2
 		ON T6.id = AC2.id 
-		where T6.id = AC2.id limit 1
+		--where T6.id = AC2.id limit 1
+		where T6.id = AC2.id
+
 		)   TT6
 		ON TT6.company_id = C.id
 		
