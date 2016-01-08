@@ -144,24 +144,27 @@ endif; ?>
 		<?php if ($company['pipeline']=='Blacklisted'): ?>
 		<?php else: ?>
 		<?php $this->load->view('companies/actions_box.php',array('company'=>$company)); ?>
-		<?php if (isset($company['url'])): ?>
-		<a class="btn btn-default btn-sm btn-block btn-url" href="<?php $parsed = parse_url($company['url']); if (empty($parsed['scheme'])) { echo 'http://' . ltrim($company['url'], '/'); }else{ echo $company['url']; } ?>" target="_blank">
-		<label style="margin-bottom:0;"></label> <?php echo str_replace("http://"," ",str_replace("www.", "", $company['url']))?>
-		</a>
-			<?php endif; ?>
+
 		<!-- LINKS AND BTN -->
-			<?php if (isset($company['registration'])): ?>
-			<a class="btn  btn-info btn-sm btn-block companieshouse" href="https://beta.companieshouse.gov.uk/company/<?php echo $company['registration'] ?>" target="_blank">Companies House</a>
+			<?php if (isset($company['sonovate_id'])): ?>
+			<a class="btn  btn-info btn-sm btn-block sonovate" href="https://members.sonovate.com/agency-admin/<?php echo $company['sonovate_id'] ?>/profile"  target="_blank">Sonovate 3.0</a>
+			<?php endif; ?>
+	<?php if (($current_user['department']) =='support' && isset($company['zendesk_id'])): ?>
+			<a class="btn  btn-info btn-sm btn-block zendesk" href="https://sonovate.zendesk.com/agent/organizations/<?php echo $company['zendesk_id'] ?>"  target="_blank">ZenDesk</a>
 			<?php endif; ?>
 			<?php if (isset($company['linkedin_id'])): ?>
 			<a class="btn  btn-info btn-sm btn-block linkedin" href="https://www.linkedin.com/company/<?php echo $company['linkedin_id'] ?>"  target="_blank">LinkedIn</a>
 			<?php endif; ?>
-			<?php if (($current_user['department']) =='support' && isset($company['zendesk_id'])): ?>
-			<a class="btn  btn-info btn-sm btn-block zendesk" href="https://sonovate.zendesk.com/agent/organizations/<?php echo $company['zendesk_id'] ?>"  target="_blank">ZenDesk</a>
+					<?php if (isset($company['url'])): ?>
+		<a class="btn btn-default btn-sm btn-block btn-url" href="<?php $parsed = parse_url($company['url']); if (empty($parsed['scheme'])) { echo 'http://' . ltrim($company['url'], '/'); }else{ echo $company['url']; } ?>" target="_blank">
+		<label style="margin-bottom:0;"></label> <?php echo str_replace("http://"," ",str_replace("www.", "", $company['url']))?>
+		</a>
+		<?php endif; ?>
+			<?php if (isset($company['registration'])): ?>
+			<a class="btn  btn-info btn-sm btn-block companieshouse" href="https://beta.companieshouse.gov.uk/company/<?php echo $company['registration'] ?>" target="_blank">Companies House</a>
 			<?php endif; ?>
-			<?php if (isset($company['sonovate_id'])): ?>
-			<a class="btn  btn-info btn-sm btn-block sonovate" href="https://members.sonovate.com/agency-admin/<?php echo $company['sonovate_id'] ?>/profile"  target="_blank">Sonovate 3.0</a>
-			<?php endif; ?>
+
+
 		<?php endif; ?>
         </div><!--CLOSE COL-MD-3-->
 		<div class="col-md-12">
