@@ -937,6 +937,10 @@ a li.autocomplete-item:hover {
 .load-saved-search:hover {
 	background-color: #DEFFE2;
 }
+
+#campaignList a{ display:none;
+}
+
 .no-padding {
 	padding: 0;
 	display: block;
