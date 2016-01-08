@@ -139,3 +139,17 @@ $(window).load(function(){
       handle: ".modal-header"
   });
 });
+$(document).ready(function () {
+    size_li = $("#campaignList a").size();
+    x=15;
+    $('#campaignList a:lt('+x+')').css('display', 'block');
+    $('#loadMore').click(function () {
+x= (x+5 <= size_li) ? x+20 : size_li;
+$('#campaignList a:lt('+x+')').css('display', 'block');
+    });
+});
+$(window).load(function(){
+  $(".draggable-modal").draggable({
+      handle: ".modal-header"
+  });
+});
