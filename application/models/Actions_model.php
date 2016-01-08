@@ -75,7 +75,7 @@ ea.contact_id = con.id
 left join email_campaigns ec on 
 ec.id = ea.email_campaign_id
 where (ea.email_action_type = '2' or ea.email_action_type = '3') and c.pipeline not in ('proposal','customer') and ec.created_by = $user_id 
-order by created_at desc limit 50 ";
+order by created_at desc limit 100 ";
 $query = $this->db->query($sql);
 return $query->result_object();
 	}

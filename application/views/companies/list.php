@@ -264,7 +264,7 @@ if ($your_date < $now){; ?>
 			<table class="table table-hover" style="font-size:12px">
 			<thead>
 				<tr>
-					<th class="col-md-6">Provider</th>
+					<th class="col-md-6">Mortgage Provider</th>
 					<th class="col-md-3" style="text-align:center;">Started</th>
 					<th class="col-md-3" style="text-align:center;">Status</th>
 				</tr>

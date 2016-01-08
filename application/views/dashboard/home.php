@@ -6,7 +6,7 @@
                 <li role="presentation" class="active"><button href="#team_stats" aria-controls="team_stats" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Stats','<?php echo $current_user['id'];?>')">Stats</button></li>
                 <li role="presentation"><button href="#calls" aria-controls="calls" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Calls & Meetings','<?php echo $current_user['id'];?>')">Actions</button></li>
                 <li role="presentation"><button href="#pipeline" aria-controls="pipeline" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Pipeline','<?php echo $current_user['id'];?>')">Pipeline</button></li>
-                <li role="presentation"><button href="#assigned" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Watching','<?php echo $current_user['id'];?>')">Watching</button></li>
+                <li role="presentation"><button href="#assigned" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Favourites','<?php echo $current_user['id'];?>')">Favourites</button></li>
                 <li role="presentation"><button href="#emailstats" aria-controls="emailstats" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Email Stats','<?php echo $current_user['id'];?>')">Email Stats</button></li>
                 <li><button href="companies/pipeline"role="tab" class="button btn btn-primary btn-sm deals_pipeline" style="margin-right:10px;" onclick="window.location ='companies/pipeline'">Upcoming Deals</button></li>
               </ul>
@@ -1141,7 +1141,7 @@
     <!--START MARKETING STATS-->
             <div class="panel panel-default">
     <div class="panel-heading" id="contacts">
-    <h3 class="panel-title">My Email Stats</h3>
+    <h3 class="panel-title">Email Engagement</h3>
     </div>
     <!-- /.panel-heading -->
     <div class="panel-body" style="font-size:12px;">

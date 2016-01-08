@@ -15,7 +15,7 @@ body {
     border: none;
     background: none;
     font-size: 34px;
-    
+
 }
 .unassigned-star{
 	color: #DCDCDC;
@@ -603,6 +603,7 @@ h2.company-header a:hover {
  	padding-left: 5px;
  	padding-right: 5px;
   	margin-top: 10px;
+    text-transform: lowercase;
 }
 .pipeline.label-Intent {
 	width: 100px;
@@ -613,6 +614,7 @@ h2.company-header a:hover {
  	padding-left: 5px;
  	padding-right: 5px;
   	margin-top: 10px;
+    text-transform: lowercase;
 }
 .pipeline.label-Qualified {
 	width: 100px;
@@ -624,6 +626,8 @@ h2.company-header a:hover {
  	padding-right: 5px;
   	margin-top: 10px;
     margin: auto;
+	text-transform: lowercase;
+
 }
 .pipeline.label-Customer {
 	width: 300px;
@@ -635,6 +639,8 @@ h2.company-header a:hover {
  	padding-right: 5px;
   	margin-top: 10px;
     margin: auto;
+	text-transform: lowercase;
+
 }
 .label-Proposal {
 	background-color: #5CBAD0;
@@ -642,18 +648,21 @@ h2.company-header a:hover {
  	padding-right: 5px;
   	margin-top: 10px;
     margin: auto;
+    text-transform: lowercase;
 }
 .label-Unsuitable {
 	background-color: #B80000 ;
  	padding-left: 5px;
  	padding-right: 5px;
   	margin-top: 10px;
+    text-transform: lowercase;
 }
 .label-Lost {
 	background-color: #8C4600 ;
  	padding-left: 5px;
  	padding-right: 5px;
   	margin-top: 10px;
+    text-transform: lowercase;
 }
 h4#myModalLabel {
 	font-weight: 700;
