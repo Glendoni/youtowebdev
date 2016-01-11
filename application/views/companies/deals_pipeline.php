@@ -180,14 +180,25 @@ success: function (data) {
     </script> 
 
 
-<div class="row ">
+<div class="row">
+          <div class="col-sm-9 col-sm-offset-3 " style="margin-bottom:20px;">
+              <!-- Nav tabs -->
+              <ul class="nav nav-tabs dashboard" role="tablist">
+                <li><button role="tab" class="button btn btn-primary btn-sm deals_pipeline" style="margin-right:10px;" onclick="window.location ='/dashboard'">Dashboard</button></li>
+                <li  class="active"><button role="tab" class="button btn btn-primary btn-sm deals_pipeline" style="margin-right:10px;" onclick="window.location ='/companies/pipeline'">Upcoming Deals</button></li>
+              </ul>
+
+          </div>
+          <div class="col-sm-9 col-sm-push-3">
+          </div>
+        </div>
+
 
 <div  class="mainboxs " style="overflow:hidden;">
 <div class="row ">
 
 <div class="col-md-2">
-<div  class="column delete" placement="delete" aria-hidden="true"
-<span class="glyphicon glyphicon-trash"></span>
+<div  class="column delete" placement="delete" aria-hidden="true">
 </div>
 </div>
 <div class="col-md-8"><h2 class="company-header">Upcoming Deals</h2></div>
@@ -199,30 +210,16 @@ success: function (data) {
 </div>
 </div>
 <div class="col-md-12">
-
 <div id="pipe">
-
 <div id="pipeline_content">
-            
-           
- </div>
-        </div>
-    </div>
-    </div><!--END ROW-->
-
-    
-    
+                     
 </div>
 </div>
+</div>
+</div><!--END ROW-->    
+</div>
 
-    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-
- <script type="text/javascript"  src="<?php echo asset_url();?>js/deals-pipeline.js"></script> 
-  <script>
- 
-
-        
-        
-    </script>
+<!--<script src="//code.jquery.com/jquery-1.10.2.js"></script>-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script type="text/javascript"  src="<?php echo asset_url();?>js/deals-pipeline.js"></script> 
