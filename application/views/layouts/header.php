@@ -158,7 +158,7 @@ $search_default = $this->input->post('agency_name');
                             <button href="#credits" type="button" class="toggle btn btn-default dropdown-toggle large-search-height" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
                         </div>
                         
-                    <input type="submit" class="loading-btn btn btn-primary " value="Go" name="submit" style="width: 100%;">
+                    <input type="submit" class="loading-btn btn btn-warning " value="Go" name="submit" style="width: 100%;">
                         <?php if (validation_errors()): ?>
                         <div class="alert alert-danger" role="alert">
                         <?php echo validation_errors(); ?>
@@ -275,7 +275,7 @@ $search_default = $this->input->post('agency_name');
                                         </div>
                                     </div><!--END FORM ROW-->
                                     <div class="form-row" style="padding-top:50px;">
-                                    <input type="submit" class="loading-btn btn btn-primary btn-block" value="Go" name="submit"  style="margin-top: 30px;">
+                                    <input type="submit" class="loading-btn btn btn-warning btn-block" value="Go" name="submit"  style="margin-top: 30px;">
 
 </div>
 </div><!--END ADVANCED SEARCH-->
