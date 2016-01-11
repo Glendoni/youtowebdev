@@ -4,11 +4,12 @@
               <!-- Nav tabs -->
               <ul class="nav nav-tabs dashboard" role="tablist">
                 <li role="presentation" class="active"><button href="#team_stats" aria-controls="team_stats" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Stats','<?php echo $current_user['id'];?>')">Stats</button></li>
+
                 <li role="presentation"><button href="#calls" aria-controls="calls" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Calls & Meetings','<?php echo $current_user['id'];?>')">Actions</button></li>
                 <li role="presentation"><button href="#pipeline" aria-controls="pipeline" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Pipeline','<?php echo $current_user['id'];?>')">Pipeline</button></li>
                 <li><button href="companies/pipeline"role="tab" class="button btn btn-primary btn-sm deals_pipeline" style="margin-right:10px;" onclick="window.location ='companies/pipeline'">Upcoming Deals</button></li>
                 <li role="presentation"><button href="#assigned" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Favourites','<?php echo $current_user['id'];?>')">Favourites</button></li>
-                <li role="presentation"><button href="#emailstats" aria-controls="emailstats" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Email Stats','<?php echo $current_user['id'];?>')">Email Stats</button></li>
+                <li role="presentation"><button href="#emailstats" aria-controls="emailstats" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Email Stats','<?php echo $current_user['id'];?>')">Email Engagement</button></li>
               </ul>
 
           </div>
@@ -737,7 +738,10 @@
                       ?>
                           <div class="row list-group-item <?php if( strtotime($action->planned_at) < strtotime('today')  ) { echo ' delayed';} ?> " style="font-size:12px;">
                             <div class="col-md-4"> 
-                              <a href="<?php echo site_url();?>companies/company?id=<?php echo $action->company_id;?>" <?php if(($current_user['new_window']=='t')): ?> target="_blank"<?php endif; ?>> <?php echo $action->company_name;?></a>
+                              <a href="<?php echo site_url();?>companies/company?id=<?php echo $action->company_id;?>" <?php if(($current_user['new_window']=='t')): ?> target="_blank"<?php endif; ?>>
+                                  <?php $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' );echo str_replace($words, ' ',$action->company_name); ?>
+
+                              </a>
                               <?php if(!empty($action->first_name)) { $contact_details_for_calendar = urlencode('Meeting with '.$action->first_name.' '.$action->last_name).'%0A'.urlencode($action->email.' '.$action->phone).'%0D%0D';?>
                               <div style="clear:both"><?php echo $action->first_name.' '.$action->last_name;?></div>
                               <?php } else { $contact_details_for_calendar="";};?>
@@ -762,9 +766,11 @@
                             </div>
                           </div>
                           <div class="row list-group-item" id="action_outcome_box_<?php echo $action->action_id ?>" style="display:none;">
+                          <div class="col-md-12">
                           <label>Outcome</label>
                           <textarea class="form-control" name="outcome" rows="3" style="margin-bottom:5px;"></textarea>
-                          <button class="btn btn-primary pull-right"><i class="fa fa-check fa-lg"></i> Send</button>
+                          <button class="btn btn-primary btn-block">Add Outcome</button>
+                          </div>
                           </div>
                       <?php endforeach ?>
                     <?php endif ?>
@@ -1085,10 +1091,8 @@
               <div class="panel-heading">
               <h3 class="panel-title">Favourites<span class="badge pull-right"><?php echo count($assigned_companies); ?></span></h3>
               </div>
-              <div class="panel-body no-padding">
-              <div class="col-md-12">
-                  <div class="clearfix"></div>
-                  <div clas="list-group">
+<div class="panel-body" style="padding:0;">
+
 
                     <?php if(empty($assigned_companies)) : ?>
                     <div class="col-md-12">
@@ -1099,30 +1103,28 @@
                     <?php else: ?>
 
                     <?php foreach ($assigned_companies as $assigned):?>
-                          <div class="row list-group-item" style="font-size:12px;">
-                            <div class="col-xs-4"> 
-                              <a href="<?php echo site_url();?>companies/company?id=<?php echo $assigned->id;?>" <?php if(($current_user['new_window']=='t')): ?> target="_blank"<?php endif; ?>>
-                              <?php 
-                            $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' );
-                            echo str_replace($words, ' ',$assigned->name); 
-                            ?>
-                              </a> 
-                              </div>
-                              <div class="col-xs-2">
-                              <span class="label label-<?php echo str_replace(' ', '', $assigned->pipeline); ?>" style="    margin-top: 3px;">#<?php echo $assigned->pipeline;?>
-  <?php if (isset($company['customer_from'])):?>
-    from <?php echo date("d/m/y",strtotime($company['customer_from']));?>
-    <?php endif; ?>
-    </span>
-    </div>
 
-                              </div>
+                  <a href="<?php echo site_url();?>companies/company?id=<?php echo $assigned->id;?>" <?php if(($current_user['new_window']=='t')): ?> target="_blank"<?php endif; ?> class="load-saved-search">
+                  <div class="row">
+                  <div class="col-xs-8">
+                  <?php $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' ); echo str_replace($words, ' ',$assigned->name); ?>
+                  </div>
+                  <div class="col-xs-4">
+                  <span class="label label-<?php echo str_replace(' ', '', $assigned->pipeline); ?>" style="margin-top: 3px;">#<?php echo $assigned->pipeline;?>
+                  <?php if (isset($company['customer_from'])):?> from <?php echo date("d/m/y",strtotime($company['customer_from']));?><?php endif; ?>
+                  </span>
+                  </div>
+                  </div>
+                  </a>
+
+
+
+
+
                          
                       <?php endforeach ?>
                     <?php endif ?>
                 </div>
-                </div>
-              </div>
               </div>
           </div><!--END OF PANEL-->
           <!--END ASSIGNED-->
@@ -1132,7 +1134,7 @@
     <!--START MARKETING STATS-->
             <div class="panel panel-default">
     <div class="panel-heading" id="contacts">
-    <h3 class="panel-title">Email Engagement</h3>
+    <h3 class="panel-title">Email Engagement<span class="badge pull-right"><?php echo count($marketing_actions); ?></span></h3>
     </div>
     <!-- /.panel-heading -->
     <div class="panel-body" style="font-size:12px;">

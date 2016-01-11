@@ -475,6 +475,12 @@ $('.toggle').click(function (event) {
     ($(window).scrollTop() > navHeight) ? $('nav').addClass('goToTop') : $('nav').removeClass('goToTop');
   });
 });
+
+    $('.nav-tabs a').click(function (e) {
+    // No e.preventDefault() here
+    $(this).tab('show');
+});
+    
 </script>
 <!--COMBINE MULTIPLE JS FILES-->
 <hr>

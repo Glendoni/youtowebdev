@@ -34,7 +34,7 @@ else if ($this->agent->is_browser())
                                 <input class="form-control" placeholder="Password" name="password" type="password" value="">
                             </div>
                             <!-- Change this to a button or input when using this as a form -->
-                            <button type="submit" class="btn btn-lg btn-success btn-block">Login</button> 
+                            <button type="submit" class="btn btn-lg btn-warning btn-block">Login</button> 
                         </fieldset>
                     </form>
                 </div>
