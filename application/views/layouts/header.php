@@ -237,7 +237,7 @@ $search_default = $this->input->post('agency_name');
                                     <div class='form-row'>
                                         <div class="form-group">
                                             <?php
-                                            echo form_label('Watching', 'assigned');
+                                            echo form_label('Favourites', 'assigned');
                                             echo form_dropdown('assigned', $sales_users, ($this->input->post('assigned')?$this->input->post('assigned'):$assigned_default) ,'class="form-control"');
                                             ?>
                                          </div> 

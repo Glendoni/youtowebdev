@@ -300,11 +300,11 @@ border-bottom: 1px dashed #ddd;
   background-color: #f3f3f3;
 }
 .pipeline-update.Customer {
-background-color: #BFFFBF;
+background-color: #148CD2;
 color: #333;
 }
 .pipeline-update.Proposal {
-background-color: #5CBAD0;
+background-color: #45AE7C;
 }
 .pipeline-update.Lost {
 background-color: #FFEFBF;
@@ -535,50 +535,50 @@ h2.company-header a:hover {
 }
 .prospect-circle {
     background: transparent !important;
-    color: #FFA03C !important;
-    border-color: #FFA03C !important;
-    border-width: 2px;
-    border-style: solid;
-}
-.Prospect {
-	background-color: #FFA03C !important;
-	color: #fff !important;
-}
-.intent-circle {
-    background: transparent !important;
     color: #C062D0 !important;
     border-color: #C062D0 !important;
     border-width: 2px;
     border-style: solid;
 }
-.Intent {
+.Prospect {
 	background-color: #C062D0 !important;
+	color: #fff !important;
+}
+.intent-circle {
+    background: transparent !important;
+    color: #FFA03C !important;
+    border-color: #FFA03C !important;
+    border-width: 2px;
+    border-style: solid;
+}
+.Intent {
+	background-color: #FFA03C !important;
 	color: #fff !important;
 }
 .Qualified {
-	background-color: #C062D0 !important;
+	background-color: #FFA03C !important;
 	color: #fff !important;
 }
 .customer-circle {
+    background: transparent !important;
+    color: #148CD2 !important;
+    border-color: #148CD2 !important;
+    border-width: 2px;
+    border-style: solid;
+}
+.Customer {
+	background-color: #148CD2 !important;
+	color: #fff !important;
+}
+.proposal-circle {
     background: transparent !important;
     color: #45AE7C !important;
     border-color: #45AE7C !important;
     border-width: 2px;
     border-style: solid;
 }
-.Customer {
-	background-color: #45AE7C !important;
-	color: #fff !important;
-}
-.proposal-circle {
-    background: transparent !important;
-    color: #5CBAD0 !important;
-    border-color: #5CBAD0 !important;
-    border-width: 2px;
-    border-style: solid;
-}
 .Proposal {
-	background-color: #5CBAD0 !important;
+	background-color: #45AE7C !important;
 	color: #fff !important;
 }
 .Unsuitable {
@@ -600,7 +600,7 @@ h2.company-header a:hover {
     margin: auto;
 }
 .label-Prospect {
-	background-color: #FFA03C;
+	background-color: #C062D0;
  	padding-left: 5px;
  	padding-right: 5px;
   	margin-top: 10px;
@@ -611,7 +611,7 @@ h2.company-header a:hover {
     margin: auto;
 }
 .label-Intent {
-	background-color: #C062D0;
+	background-color: #FFA03C;
  	padding-left: 5px;
  	padding-right: 5px;
   	margin-top: 10px;
@@ -622,7 +622,7 @@ h2.company-header a:hover {
     margin: auto;
 }
 .label-Qualified {
-	background-color: #C062D0;
+	background-color: #FFA03C;
  	padding-left: 5px;
  	padding-right: 5px;
   	margin-top: 10px;
@@ -635,7 +635,7 @@ h2.company-header a:hover {
     margin: auto;
 }
 .label-Customer {
-	background-color: #45AE7C;
+	background-color: #148CD2;
  	padding-left: 5px;
  	padding-right: 5px;
   	margin-top: 10px;
@@ -644,7 +644,7 @@ h2.company-header a:hover {
 
 }
 .label-Proposal {
-	background-color: #5CBAD0;
+	background-color: #45AE7C;
  	padding-left: 5px;
  	padding-right: 5px;
   	margin-top: 10px;
@@ -1012,7 +1012,7 @@ margin-top: -28px;
 	background-color: transparent;
 }
 .black-circle.active {
-	background-color: #148CD2;
+	background-color: #262626;
 	color: #fff;
 	border-color: #fff;
 }
@@ -1089,7 +1089,7 @@ margin-top: -28px;
 	background-color: #5CB85C;
 }
 .grey {
-background-color: #148CD2;
+background-color: #262626;
 }
 .big-number {
 	    text-align: center;
