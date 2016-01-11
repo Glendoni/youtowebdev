@@ -1083,7 +1083,7 @@
 <!--ASSIGNED-->
     <div role="tabpanel" class="tab-pane fade" id="assigned"><div class="panel panel-default">
               <div class="panel-heading">
-              <h3 class="panel-title">Companies You're Watching<span class="badge pull-right"><?php echo count($assigned_companies); ?></span></h3>
+              <h3 class="panel-title">Favourites<span class="badge pull-right"><?php echo count($assigned_companies); ?></span></h3>
               </div>
               <div class="panel-body no-padding">
               <div class="col-md-12">
@@ -1204,7 +1204,7 @@
                   <?php foreach ($private_campaigns as $campaign):?>
                   <a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $campaign->id; ?>" class="load-saved-search" <?php echo strlen($campaign->name) > 33 ? 'title="'.$campaign->name.'"':"" ?>>
                   <div class="row">
-                  <div class="col-xs-10" style="overflow:hidden"><?php echo $campaign->name;?></br><small style="font-weight:700;"><?php echo date('D jS M y',strtotime($campaign->created_at));?></small></div>
+                  <div class="col-xs-10" style="overflow:hidden"><?php echo $campaign->name;?></br><small style="font-weight:300;"><?php echo date('D jS M y',strtotime($campaign->created_at));?></small></div>
 
 
                   <div class="col-xs-1"><b><?php echo $campaign->campaigncount; ?></b></div>

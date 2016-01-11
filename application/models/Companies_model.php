@@ -977,7 +977,7 @@ class Companies_model extends CI_Model {
 	{
 		$data = array(
                'user_id' => NULL,
-               'assign_date' => date('Y-m-d H:i:s')
+               'assign_date' => NULL
             );
 
 		$this->db->update('companies', $data, array('id' => $company_id));
@@ -1087,7 +1087,7 @@ $this->update_pipline($post,$user_id);
 				'contract'=>!empty($post['contract'])?$post['contract']:NULL,
 				'perm'=>!empty($post['perm'])?$post['perm']:NULL,
 				'class'=>!empty($post['company_class'])?$post['company_class']:NULL,
-				'pipeline'=>$post['company_pipeline'],
+				'pipeline'=>(!empty($post['company_pipeline'])?$post['company_pipeline']:NULL),
 				'updated_by'=>$post['user_id'],
 				//'pipeline'=>!empty($post['company_pipeline'])?$post['company_pipeline']:NULL,
 				'updated_at' => date('Y-m-d H:i:s'),
@@ -1101,6 +1101,7 @@ $this->update_pipline($post,$user_id);
 		$this->db->where('id',$post['company_id']);
     	$query = $this->db->get('companies');
     	if ($query->num_rows() === 0){
+    		if(!empty($post['company_pipeline'])) {
    		
 		$data = array(
 			'company_id' 	=> $post['company_id'],
@@ -1110,12 +1111,13 @@ $this->update_pipline($post,$user_id);
 			'contact_id'    => (isset($post['contact_id'])?$post['contact_id']:NULL),
 			'created_by'	=> $post['user_id'],
 			'action_type_id'=> '19',
-			'actioned_at'	=> (!empty($post['actioned_at']) && !empty($post['planned_at'])?date('Y-m-d H:i:s'):NULL),
+			'actioned_at'	=> date('Y-m-d H:i:s'),
 			'created_at' 	=> date('Y-m-d H:i:s'),
 			);
 		
 		$query = $this->db->insert('actions', $data);
     	}
+    }
 		$this->db->where('id', $post['company_id']);
 		$this->db->update('companies', $company);
 		
