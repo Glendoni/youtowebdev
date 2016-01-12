@@ -38,6 +38,15 @@
 |	['stricton'] TRUE/FALSE - forces 'Strict Mode' connections
 |							- good for ensuring strict SQL while developing
 |
+|    
+|    $DB1 = $this->load->database('group_two', TRUE);  if using multiple databases use this sytax to connect
+|                                                      the default database connection name is called default however this can be named to whatever you want.
+|                                                      anything you want within first parameter of the multidimentional array.
+|           $DB1->query() use this syntax to query the database. Change the $DB1 variable to match whatever you choose as the connection variable.
+|           $DB1->result(); use this syntax to return the query array. Change the $DB1 variable to match whatever you choose as the connection variable.
+|
+|
+|
 | The $active_group variable lets you choose which connection group to
 | make active.  By default there is only one group (the 'default' group).
 |
@@ -65,7 +74,45 @@ $db['default']['swap_pre'] = '';
 $db['default']['autoinit'] = TRUE;
 $db['default']['stricton'] = FALSE;
 
+//Second DB connection string
 
+$db['olive']['hostname'] = 'ec2-54-83-52-144.compute-1.amazonaws.com';
+$db['olive']['username'] = 'xhzgajpalgleka';
+$db['olive']['password'] = '0e7EcoxppxFx3BhlMDQ7bveCVt';
+$db['olive']['database'] = 'd1o6886mll7nc5';
+$db['olive']['dbdriver'] = 'postgre';
+$db['olive']['dbprefix'] = '';
+$db['olive']['pconnect'] = TRUE;
+$db['olive']['db_debug'] = TRUE;
+$db['olive']['cache_on'] = FALSE;
+ $db['olive']['port'] = 5432;
+$db['olive']['cachedir'] = '';
+$db['olive']['char_set'] = 'utf8';
+$db['olive']['dbcollat'] = 'utf8_general_ci';
+$db['olive']['swap_pre'] = '';
+$db['olive']['autoinit'] = TRUE;
+$db['olive']['stricton'] = FALSE;
+
+
+
+//Second DB connection string
+
+$db['autopilot']['hostname'] = 'ec2-54-83-52-144.compute-1.amazonaws.com';
+$db['autopilot']['username'] = 'xhzgajpalgleka';
+$db['autopilot']['password'] = '0e7EcoxppxFx3BhlMDQ7bveCVt';
+$db['autopilot']['database'] = 'd1o6886mll7nc5';
+$db['autopilot']['dbdriver'] = 'postgre';
+$db['autopilot']['dbprefix'] = '';
+$db['autopilot']['pconnect'] = TRUE;
+$db['autopilot']['db_debug'] = TRUE;
+$db['autopilot']['cache_on'] = FALSE;
+ $db['autopilot']['port'] = 5432;
+$db['autopilot']['cachedir'] = '';
+$db['autopilot']['char_set'] = 'utf8';
+$db['autopilot']['dbcollat'] = 'utf8_general_ci';
+$db['autopilot']['swap_pre'] = '';
+$db['autopilot']['autoinit'] = TRUE;
+$db['autopilot']['stricton'] = FALSE;
 
 
 /* End of file database.php */
