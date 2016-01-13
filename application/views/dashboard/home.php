@@ -766,11 +766,11 @@
                             </div>
                           </div>
                           <div class="row list-group-item" id="action_outcome_box_<?php echo $action->action_id ?>" style="display:none;">
-                          <div class="col-md-12">
+                          
                           <label>Outcome</label>
                           <textarea class="form-control" name="outcome" rows="3" style="margin-bottom:5px;"></textarea>
                           <button class="btn btn-primary btn-block">Add Outcome</button>
-                          </div>
+                          
                           </div>
                       <?php endforeach ?>
                     <?php endif ?>
