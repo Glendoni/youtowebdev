@@ -30,13 +30,13 @@
             if(dd == 01){
 //console.log(mon[(mm-1)]); 
                 
-                $(' <div class="col-md-3 reduced-padding"><div class="colum-header"><h2>'+mon[(mm-1)]+' <span class="header-bold pipeline_will">Will</span></h2></div></div>').appendTo('#pipeline_labels'); 
-$(' <div class="col-md-3 reduced-padding"><div class="colum-header"><h2>'+mon[(mm-1)]+' <span class="header-bold pipeline_should">Should</span></h2></div></div>').appendTo('#pipeline_labels'); 
+                $(' <div class="col-md-3 reduced-padding"><div class="colum-header"><h2>'+mon[(mm-1)]+' <span class="header-bold pipeline_will">Will </span> <span class="pcountwc'+date+' pipeListCounter"></span></h2> </div></div>').appendTo('#pipeline_labels'); 
+$(' <div class="col-md-3 reduced-padding"><div class="colum-header"><h2>'+mon[(mm-1)]+' <span class="header-bold pipeline_should">Should</span> <span class="pcountsc'+date+' pipeListCounter"></span></div> </h2></div>').appendTo('#pipeline_labels'); 
 
 //$(' <div class="column col-md-2" placement="sc'+date+'"><h2>'+mon[(mm-1)]+'<br/>SHOULD</h2></div>').appendTo('#pipeline_content'); 
 //$(' <div class="column col-md-2" placement="wc'+date+'"><h2>'+mon[(mm-1)]+'<br/>WILL</h2></div>').appendTo('#pipeline_content');
-                $(' <div class="col-md-3 reduced-padding"><div class="column"  placement="wc'+date+'"></div></div>').appendTo('#pipeline_content');
-$(' <div class="col-md-3 reduced-padding"><div class="column"  placement="sc'+date+'"></div></div>').appendTo('#pipeline_content'); 
+                $(' <div class="col-md-3 reduced-padding"><div class="column wc'+date+'"  placement="wc'+date+'"></div></div>').appendTo('#pipeline_content');
+$(' <div class="col-md-3 reduced-padding"><div class="column sc'+date+'"  placement="sc'+date+'"></div></div>').appendTo('#pipeline_content'); 
  
 }
 start = new Date(start.setDate(start.getDate() + 1)); //date increase by 1
@@ -72,7 +72,7 @@ start = new Date(start.setDate(start.getDate() + 1)); //date increase by 1
         },
              update: function( event, ui ) {
                  
-  
+                addListQuantity();
             
              }
     });
@@ -137,6 +137,8 @@ start = new Date(start.setDate(start.getDate() + 1)); //date increase by 1
          '</div> ').appendTo("[placement="+placement_holder_prefix+data[key]['efffrom']+"]" );
    
                                     jsonBinder(); //binds listeners to JSON  generated elements retruned back from the server
+                                
+                                addListQuantity();
                         }
                     }
             
@@ -145,18 +147,36 @@ start = new Date(start.setDate(start.getDate() + 1)); //date increase by 1
     
     }
     
-        function  jsonBinder()
-        { //binds listeners to JSON  generated elements retruned back from the server
 
-            $('.portlet').click(function(){
-                $(this).addClass('active');
-            })
 
-            $('.portlet').mouseup(function(){
-                $('.portlet').removeClass('active');
-                $(this).addClass('active');
-                var placement = $(this).parent().attr('placement');
-                //console.log('What was the original placement  '+ placement);
-            })
-        }
+
+
+    function  jsonBinder()
+    { //binds listeners to JSON  generated elements retruned back from the server
+
+        $('.portlet').click(function(){
+            $(this).addClass('active');
+        })
+
+        $('.portlet').mouseup(function(){
+            $('.portlet').removeClass('active');
+            $(this).addClass('active');
+            var placement = $(this).parent().attr('placement');
+            //console.log('What was the original placement  '+ placement);
+        })
+    }
+
+
+    function addListQuantity(){
+
+        var clid 
+        var clidListQty
+        $.each($('.column'), function(index) { 
+            clid =$(this).attr('placement');
+            clidListQty  = $('.'+clid + ' .portlet').length;
+            $('.pcount'+clid).text(clidListQty)
+
+        });
+
+    }
     
