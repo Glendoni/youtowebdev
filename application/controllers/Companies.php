@@ -437,7 +437,7 @@ class Companies extends MY_Controller {
         		$user_icon = explode(",", $row->image);
         		$assigned_label = "| <span class='label label-primary' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$row->user."</span>";};
         	 
-		$response= $response."<a href='". base_url() . "companies/company?id=" . $row->id . "'><li class='autocomplete-item autocomplete-company'><strong>" . str_replace($words, ' ',$row->name). "</strong><br><small>".$row->pipeline." ".$assigned_label."</small></li></a>";
+		$response= $response."<a href='". base_url() . "companies/company?id=" . $row->id . "'><li class='autocomplete-item autocomplete-company'><strong>" . str_replace($words, ' ',$row->name). '<a href="https://www.linkedin.com/'.$row->linkedin_id."> <i class='fa fa-caret-square-o-down'></i> </a></strong><br><small>".$row->pipeline." ".$assigned_label."</small></li></a>";
          //$callCH = false;
         endforeach;
         $response= $response."</ul></div>";

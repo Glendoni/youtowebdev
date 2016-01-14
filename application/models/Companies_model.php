@@ -1254,7 +1254,7 @@ $this->update_pipline($post,$user_id);
 
 
     function get_autocomplete($search_data) {
-		$query1 = $this->db->query("select c.name,c.id, c.pipeline, u.name as user, u.image as image, user_id from companies c left join  users u on u.id = c.user_id where c.eff_to IS NULL and c.active = 'true' and (c.name ilike'".$search_data."%' or c.trading_name ilike'".$search_data."%') order by name asc limit 7 ");
+		$query1 = $this->db->query("select linkedin_id, c.name,c.id, c.pipeline, u.name as user, u.image as image, user_id from companies c left join  users u on u.id = c.user_id where c.eff_to IS NULL and c.active = 'true' and (c.name ilike'".$search_data."%' or c.trading_name ilike'".$search_data."%') order by name asc limit 7 ");
 
 	    if ($query1->num_rows() > 0)
 			{
