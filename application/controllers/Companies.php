@@ -436,7 +436,7 @@ class Companies extends MY_Controller {
         	if(!empty($row->user)) { 
         		$user_icon = explode(",", $row->image);
         		$assigned_label = "| <span class='label label-primary' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$row->user."</span>";};
-  $linkedin_id  =   $row->linkedin_id ? "<a target=\"_blank\"  href=\"https://www.linkedin.com/in/".$row->linkedin_id."\" ><img class=\"search_linkedin_img\" src=\"https://static.licdn.com/scds/common/u/images/logos/linkedin/logo_in_nav_44x36.png\"></a>" : "";  
+  $linkedin_id  =   $row->linkedin_id ? "<a target=\"_blank\"  href=\"https://www.linkedin.com/profile/view?id=".$row->linkedin_id."\" ><img class=\"search_linkedin_img\" src=\"https://static.licdn.com/scds/common/u/images/logos/linkedin/logo_in_nav_44x36.png\"></a>" : "";  
         
         
 		$response= $response."<a href='". base_url() . "companies/company?id=" . $row->id . "'><li class='autocomplete-item autocomplete-company'><strong>" . str_replace($words, ' ',$row->name). 
