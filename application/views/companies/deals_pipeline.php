@@ -184,8 +184,8 @@ success: function (data) {
           <div class="col-sm-9 col-sm-offset-3 " style="margin-bottom:20px;">
               <!-- Nav tabs -->
               <ul class="nav nav-tabs dashboard" role="tablist">
-                <li><button role="tab" class="button btn btn-primary btn-sm deals_pipeline" style="margin-right:10px;" onclick="window.location ='/dashboard'">Dashboard</button></li>
-                <li  class=""><button role="tab" class="button btn btn-primary btn-sm deals_pipeline" style="margin-right:10px;" onclick="window.location ='/companies/pipeline'">Upcoming Deals</button></li>
+                <li><button role="tab" class="button btn btn-primary btn-sm deals_pipeline" style="margin-right:10px;" onclick="window.location ='<?php echo base_url(); ?>dashboard'">Dashboard</button></li>
+                <li  class=""><button role="tab" class="button btn btn-primary btn-sm deals_pipeline" style="margin-right:10px;" onclick="window.location ='<?php echo base_url(); ?>companies/pipeline'">Upcoming Deals</button></li>
               </ul>
 
           </div>
@@ -201,7 +201,7 @@ success: function (data) {
 <div  class="column delete" placement="delete" aria-hidden="true">
 </div>
 </div>
-<div class="col-md-8"><h2 class="company-header">Deals Forcast</h2></div>
+<div class="col-md-8"><h2 class="company-header">Deals Forecast</h2></div>
 <div class="col-md-2"></div>
 </div>
 <div class="row" style="margin-top:20px;">
