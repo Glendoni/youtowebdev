@@ -188,7 +188,7 @@
                         </div>
                         </div>
                         <?php foreach ($stats as $stat): ?>
-                          <div class="row list-group-item stats-row">
+                          <div class="row list-group-item stats-row active-<?php echo $stat['active'];?>">
                             <div class="col-xs-2 col-md-1"> 
                             <a href = "?search=2&user=<?php echo $stat['user'];?>&period=week">
                             <?php $user_icon = explode(",",$stat['image']); echo "<div class='circle name-circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
@@ -259,7 +259,8 @@
                         </div>
                         </div>
                         <?php foreach ($lastweekstats as $lastweekstat): ?>
-                          <div class="row list-group-item stats-row">
+                        <div class="row list-group-item stats-row active-<?php echo $lastweekstat['active'];?>">
+
                             <div class="col-xs-2 col-md-1"> 
                             <a href = "?search=2&user=<?php echo $lastweekstat['user'];?>&period=lastweek">
                             <?php $user_icon = explode(",",$lastweekstat['image']); echo "<div class='circle name-circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
@@ -332,7 +333,7 @@
                         </div>
                         </div>
                         <?php foreach ($thismonthstats as $thismonthstat): ?>
-                          <div class="row list-group-item stats-row">
+                          <div class="row list-group-item stats-row active-<?php echo $thismonthstat['active'];?>">
                             <div class="col-xs-2 col-md-1">
                             <a href = "?search=2&user=<?php echo $thismonthstat['user'];?>&period=month">
                             <?php $user_icon = explode(",",$thismonthstat['image']); echo "<div class='circle name-circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
@@ -404,7 +405,7 @@
                         </div>
                         </div>
                         <?php foreach ($lastmonthstats as $lastmonthstat): ?>
-                          <div class="row list-group-item stats-row">
+                          <div class="row list-group-item stats-row active-<?php echo $lastmonthstat['active'];?>">
                             <div class="col-xs-2 col-md-1">
                             <a href = "?search=2&user=<?php echo $lastmonthstat['user'];?>&period=lastmonth"> 
                             <?php $user_icon = explode(",",$lastmonthstat['image']); echo "<div class='circle name-circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
@@ -475,7 +476,7 @@
                         </div>
                         </div>
                         <?php foreach ($getstatssearch as $getstatssearch): ?>
-                          <div class="row list-group-item stats-row">
+                          <div class="row list-group-item stats-row active-<?php echo $getstatssearch['active'];?>">
                             <div class="col-xs-2 col-md-1">
                             <a href = "?search=2&user=<?php echo $getstatssearch['user'];?>&start_date=<?php echo $_GET['start_date']?>&end_date=<?php echo $_GET['end_date']?>&period=search">
                             <?php $user_icon = explode(",",$getstatssearch['image']); echo "<div class='circle name-circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>

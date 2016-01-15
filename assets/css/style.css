@@ -841,6 +841,11 @@ margin-bottom: 10px;
 .modal-open .modal {
 z-index: 99999;
 	}
+
+.active-f {
+background-color:#f2dede;
+}
+
 ul.nav.nav-tabs.dashboard {
 	border-bottom: none;
 	margin-top: 0;
