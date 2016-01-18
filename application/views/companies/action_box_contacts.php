@@ -84,7 +84,7 @@
 	        	 
                 
                 	<button type="button" class="btn btn-default" data-dismiss="modal" style="display:none;">Close</button>
-                <button type="submit" class="btn btn-sm btn-primary btn-block ladda-button submit_btn disable_no_source disable_no_si" edit-btn="editbtn152353" loading-display="loading-display-152353" data-style="expand-right" data-size="1">
+                <button type="submit" class="btn btn-sm btn-info btn-block ladda-button submit_btn disable_no_source disable_no_si" edit-btn="editbtn152353" loading-display="loading-display-152353" data-style="expand-right" data-size="1">
                     <span class="ladda-label">Send Email</span>
                 </button>
                 
