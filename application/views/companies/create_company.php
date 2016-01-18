@@ -11,7 +11,7 @@ $hidden = array('create_company_form'=>'1','user_id'=>$current_user['id']);
 echo form_open('',$attributes,$hidden); 
 ?>
 <div class="form-group">
-	<label class="control-label col-sm-2" for="name">Name:</label>
+	<label class="control-label col-sm-2" for="name">Name</label>
 	<div class="col-sm-10">
 	  <input type="text" class="form-control" name="name" id="name" placeholder="" value="<?php echo isset($_POST['name'])?$_POST['name']:''; ?>">
 	</div>
