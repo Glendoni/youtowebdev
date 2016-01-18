@@ -219,7 +219,7 @@
                 
                 
                 <div class="col-md-12 target_sectors">
-                    <label for="sectors" class="control-label editbox_target_sectors">Target Sectors</label>
+                    <label for="sectors" class="control-label">Target Sectors</label>
                     <div class="tag-holder">
                     <?php   
                     foreach ($target_sectors_list as $key => $value): ?>
@@ -232,7 +232,7 @@
             
                 </div>
                     <div class="col-md-12" style="margin-top:10px;">
-                    <label for="sectors" class="control-label editbox_other_sectors">Other Sectors</label>
+                    <label for="sectors" class="control-label">Other Sectors</label>
                     <div class="tag-holder">
                     <?php   
                     foreach ($not_target_sectors_list as $key => $value): ?>
