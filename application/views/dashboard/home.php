@@ -644,7 +644,7 @@
                             <strong>Name</strong>
                         </div>
                         <div class="col-xs-2 col-md-2 text-center hide-overflow">
-                            <strong>Companies</strong>
+                            <strong>Company</strong>
                         </div>
                         <div class="col-xs-3 col-md-2 text-center hide-overflow">
                             <strong>Contacted</strong>
@@ -656,10 +656,10 @@
                            <strong>Intent</strong>
                         </div>
                         <div class="col-md-1 hidden-xs text-center hide-overflow">
-                           <strong>Proposals</strong>
+                           <strong>Proposal</strong>
                         </div>
                         <div class="col-md-2 hidden-xs text-center hide-overflow"> 
-                           <strong>Customers</strong>
+                           <strong>Customer</strong>
                         </div>
                         <div class="col-md-2 hidden-xs text-center hide-overflow">
                            <strong>Other</strong></br>
