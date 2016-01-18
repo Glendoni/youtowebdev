@@ -1239,3 +1239,8 @@ h2.company-header{
     float: right;
     
 }
+.contacted_percentage{
+        color: #fff;
+    border-color: #020202;
+    background-color: #000000;
+}

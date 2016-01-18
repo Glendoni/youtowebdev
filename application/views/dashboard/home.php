@@ -550,11 +550,12 @@
 <div class="panel panel-default">
 <div class="panel-heading">
 
-<h3 class="panel-title pull-left">Campaigns Summary</h3>
+<h3 class="panel-title pull-left">Campaign Summary</h3>
 <?php if ($current_user['permission'] == 'admin'): ?>
 <ul class="nav nav-tabs dashboard pull-right" role="tablist">
 <li role="presentation" class="active"><button href="#campaign_user" aria-controls="campaign_user" role="tab" data-toggle="tab" class="btn btn-primary btn-xs pull-right" style="margin-right:10px;">My Campaigns</button></li>
                 <li role="presentation"><button href="#campaign_team" aria-controls="campaign_team" role="tab" data-toggle="tab" class="btn btn-primary btn-xs pull-right" style="margin-right:10px;">Team Campaigns</button></li>
+
               </ul>
 
 <?php endif; ?>
@@ -576,7 +577,7 @@
 <div class="small-text-unsuitable"><?php if ($get_user_campaign->campaign_unsuitable > "0") {echo "Includes ".$get_user_campaign->campaign_unsuitable." marked as unsuitable";} else {}?></div>
 </div>
 <div class="col-sm-2 mobile-hide">
-<div class="circle-responsive cyan-circle ">
+<div class="circle-responsive cyan-circle contacted_percentage">
 <div class="circle-content mega">
 <div class="large-number"><?php echo $get_user_campaign->contacted; ?><span style="font-size:32px;">%</span></div>
 <div class="small-text">Contacted</div>
