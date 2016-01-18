@@ -39,11 +39,13 @@ class Contacts_model extends CI_Model {
 
 	function create_contact($first_name,$last_name,$email,$role,$company_id,$created_by,$phone=NULL,$linkedin_id)
 	{
+    
+        $role = rtrim($role," "); // removes empty space on rightside of string ltrim removes empty space on the left before string
         $contact->first_name = $first_name; // please read the below note
         $contact->last_name = $last_name;
         $contact->email = !empty($email)?$email:NULL;
         $contact->phone = !empty($phone)?$phone:NULL;
-        $contact->role = !empty($role)?$role:NULL;
+        $contact->role =  ltrim($role);
         $contact->company_id = $company_id;
         $contact->created_by = $created_by;
         $contact->linkedin_id = $linkedin_id;
@@ -61,10 +63,13 @@ class Contacts_model extends CI_Model {
 	    return $rows;
     }
 
-    function update($post){
-    	$contact->first_name   = $post['first_name']; // please read the below note
+    function update($post)
+    {
+
+        $role = rtrim($post['role']," "); // removes empty space on rightside of string ltrim removes empty space on the left before string
+        $contact->first_name   = $post['first_name']; // please read the below note
     	$contact->last_name = $post['last_name'];
-        $contact->role = $post['role'];
+        $contact->role = ltrim($role);
         $contact->email = !empty($post['email'])?$post['email']:NULL;
         $contact->phone = !empty($post['phone'])?$post['phone']:NULL;
         $linkedin_id = $post['linkedin_id'];
