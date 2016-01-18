@@ -537,7 +537,7 @@
             <?php if (isset($_GET['user'])) { ?>
              <input type="hidden" name="user" value="<?php echo $_GET['user'];?>"> <?php
              };?>
-            <button type="submit" class="btn btn-primary btn-block">Search</button>
+            <button type="submit" class="btn btn-primary btn-block btn-warning">Search</button>
             </div>
             </form>
           </div>
