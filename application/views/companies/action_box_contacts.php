@@ -175,7 +175,7 @@
 
 	      	
 	      	<div class="modal-footer">
-	        	<button type="submit" class="btn btn-sm btn-primary btn-block">Save</button>
+	        	<button type="submit" class="btn btn-sm btn-warning btn-block">Save</button>
 	      	</div>
 	      	<?php echo form_close(); ?>
         </div>

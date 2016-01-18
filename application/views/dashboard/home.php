@@ -195,10 +195,10 @@
                             </a>
                             </div>
                             <div class="col-xs-1 col-md-1 text-center">
-                            <a href = "?search=2&user=<?php echo $stat['user'];?>&period=week"><span class="badge" style="background-color:#45AE7C;"><?php echo $stat['deals'];?></a></span>
+                            <a href = "?search=2&user=<?php echo $stat['user'];?>&period=week"><span class="badge" style="background-color:#428bca;"><?php echo $stat['deals'];?></a></span>
                             </div>
                             <div class="col-xs-2 col-md-1 text-center"> 
-                            <?php echo $stat['proposals'];?>
+                            <?php echo '<div class="badge" style="background-color:#45AE7C;">'.$stat['proposals'].'</div>';?>
                             </div>
                             <div class="col-xs-2 col-md-2 text-center"> 
                             <?php echo $stat['demobookedcount'];?> / <?php echo $stat['democount'];?>
