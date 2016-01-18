@@ -1244,3 +1244,10 @@ h2.company-header{
     border-color: #020202;
     background-color: #000000;
 }
+.editbox_other_sectors{
+    color:#3071A9;
+}
+
+.editbox_target_sectors{
+     color:#689F38;
+}
