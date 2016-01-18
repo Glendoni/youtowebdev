@@ -267,10 +267,10 @@
                             </a>
                             </div>
                             <div class="col-xs-2 col-md-1 text-center">
-                            <a href = "?search=2&user=<?php echo $lastweekstat['user'];?>&period=lastweek"><span class="badge" style="background-color:#45AE7C;"><?php echo $lastweekstat['deals'];?></a></span>
+                            <a href = "?search=2&user=<?php echo $lastweekstat['user'];?>&period=lastweek"><span class="badge" style="background-color:#428bca;"><?php echo $lastweekstat['deals'];?></a></span>
                             </div>
                             <div class="col-xs-2 col-md-1 text-center"> 
-                              <?php echo $lastweekstat['proposals'];?>
+                              <?php echo '<div class="badge" style="background-color:#45AE7C;">'.$lastweekstat['proposals'].'</div>';?>
                               </div>
                          
                             <div class="col-xs-2 col-md-2 text-center"> 
@@ -340,10 +340,10 @@
                             </a>
                             </div>
                             <div class="col-xs-2 col-md-1 text-center">
-                            <a href = "?search=2&user=<?php echo $thismonthstat['user'];?>&period=month"><span class="badge" style="background-color:#45AE7C;"><?php echo $thismonthstat['deals'];?></a></span>
+                            <a href = "?search=2&user=<?php echo $thismonthstat['user'];?>&period=month"><span class="badge" style="background-color:#428bca;"><?php echo $thismonthstat['deals'];?></a></span>
                             </div>
                             <div class="col-xs-2 col-md-1 text-center"> 
-                              <?php echo $thismonthstat['proposals'];?>
+                              <?php echo '<div class="badge" style="background-color:#45AE7C;">'.$thismonthstat['proposals'].'</div>';?>
                               </div>
                           
                             <div class="col-xs-2 col-md-2 text-center"> 
@@ -412,10 +412,10 @@
                             </a>
                             </div>
                             <div class="col-xs-2 col-md-1 text-center">
-                            <a href = "?search=2&user=<?php echo $lastmonthstat['user'];?>&period=lastmonth"><span class="badge" style="background-color:#45AE7C;"><?php echo $lastmonthstat['deals'];?></a></span>
+                            <a href = "?search=2&user=<?php echo $lastmonthstat['user'];?>&period=lastmonth"><span class="badge" style="background-color:#428bca;"><?php echo $lastmonthstat['deals'];?></a></span>
                             </div>
                               <div class="col-xs-2 col-md-1 text-center"> 
-                              <?php echo $lastmonthstat['proposals'];?>
+                              <?php echo '<div class="badge" style="background-color:#45AE7C;">'.$lastmonthstat['proposals'].'</div>';?>
                               </div>
                               <div class="col-xs-2 col-md-2 text-center"> 
                             <?php echo $lastmonthstat['demobookedcount'];?> / <?php echo $lastmonthstat['democount'];?>
