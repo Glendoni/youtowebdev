@@ -103,13 +103,16 @@ class Users_model extends MY_Model {
 		$image = $initials.','.$fgcolour.','.$bgcolour;
 		//$this->load->library('encrypt');
 
+        $role = rtrim($data['role']," "); // removes empty space on rightside of string ltrim removes empty space on the left before string
+        
+        
 		$data = array(
 			'name' => $data['name'],
 			'email' => $data['email'],
 			'phone' => !empty($data['phone'])?$data['phone']:Null,
 			'mobile' => !empty($data['mobile'])?$data['mobile']:Null,
 			'linkedin' => !empty($data['linkedin'])?$data['linkedin']:Null,
-			'role' => !empty($data['role'])?$data['role']:Null,
+			'role' => !empty($data['role'])? ltrim($role):Null,
 			'updated_at' => date('Y-m-d H:i:s'),
 			'updated_by' => $user_id,
 			'image' => $image,
