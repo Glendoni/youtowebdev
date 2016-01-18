@@ -7,14 +7,14 @@
 
 
 <?php if($contact->email): ?>
-<button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#send-email<?php echo $contact->id; ?>">
+<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#send-email<?php echo $contact->id; ?>">
    Send Email 
 </button>
 <?php endif;?>
 <?php if (!empty($contact->eff_to)): ?>
 <span class="label label-danger">Left Company</span>
 <?php else: ?>
-<button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#editContact_<?php echo $contact->id; ?>">
+<button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#editContact_<?php echo $contact->id; ?>">
  Edit 
 </button>
 <?php endif; ?><!--END IF EFF-TO COMPLETED-->
@@ -84,7 +84,7 @@
 	        	 
                 
                 	<button type="button" class="btn btn-default" data-dismiss="modal" style="display:none;">Close</button>
-                <button type="submit" class="btn btn-sm btn-info btn-block ladda-button submit_btn disable_no_source disable_no_si" edit-btn="editbtn152353" loading-display="loading-display-152353" data-style="expand-right" data-size="1">
+                <button type="submit" class="btn btn-sm btn-primary btn-block ladda-button submit_btn disable_no_source disable_no_si" edit-btn="editbtn152353" loading-display="loading-display-152353" data-style="expand-right" data-size="1">
                     <span class="ladda-label">Send Email</span>
                 </button>
                 
