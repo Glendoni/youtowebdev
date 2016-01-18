@@ -569,7 +569,7 @@
 
 <div class="col-sm-2 mobile-hide">
 <div class="circle-responsive black-circle <?php echo empty($this->session->userdata('pipeline'))? 'active':'';?>"><div class="circle-content mega">
-<div class="large-number"><?php echo number_format($get_user_campaign->campaign_total); ?></div> <div class="small-text">Company
+<div class="large-number"><?php echo number_format($get_user_campaign->campaign_total); ?></div> <div class="small-text">Companies
 </div>
 
 </div>
@@ -593,7 +593,7 @@
 <div class="circle-responsive prospect-circle <?php if ($this->session->userdata('pipeline')=='prospect'): echo 'active';else: endif; ?>">
 <div class="circle-content mega">
 <div class="large-number"><?php echo $get_user_campaign->campaign_prospects; ?></div>
-<div class="small-text"><?php if ($get_user_campaign->campaign_prospects <> "1") {echo "Prospect";} else { echo "Prospect";}?></div></div>
+<div class="small-text"><?php if ($get_user_campaign->campaign_prospects <> "1") {echo "Prospects";} else { echo "Prospect";}?></div></div>
 </div>
 <?php if ($get_user_campaign->campaign_prospects>0): ?>
 <?php else: endif; ?>
@@ -617,7 +617,7 @@
 <div class="circle-responsive proposal-circle <?php if ($this->session->userdata('pipeline')=='proposal'): echo 'active';else: endif; ?>">
 <div class="circle-content mega">
 <div class="large-number"><?php echo $get_user_campaign->campaign_proposals; ?></div>
-<div class="small-text"><?php if ($get_user_campaign->campaign_proposals <> "1") {echo "Proposal";} else { echo "Proposal";}?></div></div>
+<div class="small-text"><?php if ($get_user_campaign->campaign_proposals <> "1") {echo "Proposals";} else { echo "Proposal";}?></div></div>
 </div>
 <?php if ($get_user_campaign->campaign_proposals>0): ?>
 <?php else: endif; ?>
