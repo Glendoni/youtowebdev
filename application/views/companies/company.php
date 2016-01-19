@@ -308,7 +308,10 @@ endif; ?>
 	      <tbody>
 	      	<?php foreach ($addresses as $address): ?>
 	      	<tr>
-				<td class="col-md-6"><?php echo $address->address;?></td>
+				<td class="col-md-6">
+                 <a target="_blank" href="http://www.google.com/maps/place/<?=array_reverse(explode(',',$address->address))[0]; ?>">
+                       <?=$address->address; ?>
+                 </a></td>
 				<td class="col-md-3"><?php echo $address->type;?></td>
 				<td class="col-md-2"><?php echo $address->phone; ?></td>
 				<td  class="col-md-3">

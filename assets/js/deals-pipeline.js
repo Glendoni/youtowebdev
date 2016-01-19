@@ -35,9 +35,7 @@ $(' <div class="col-md-3 reduced-padding"><div class="colum-header"><h2>'+mon[(m
 
 //$(' <div class="column col-md-2" placement="sc'+date+'"><h2>'+mon[(mm-1)]+'<br/>SHOULD</h2></div>').appendTo('#pipeline_content'); 
 //$(' <div class="column col-md-2" placement="wc'+date+'"><h2>'+mon[(mm-1)]+'<br/>WILL</h2></div>').appendTo('#pipeline_content');
-                $(' <div class="col-md-3 reduced-padding"><div class="column wc'+date+'"  placement="wc'+date+'"></div></div>').appendTo('#pipeline_content');
-$(' <div class="col-md-3 reduced-padding"><div class="column sc'+date+'"  placement="sc'+date+'"></div></div>').appendTo('#pipeline_content'); 
- 
+                $(' <div class="col-md-3 reduced-padding"><div class="column wc'+date+'"  placement="wc'+date+'"></div></div> <div class="col-md-3 reduced-padding"><div class="column sc'+date+'"  placement="sc'+date+'"></div></div>').appendTo('#pipeline_content');
 }
 start = new Date(start.setDate(start.getDate() + 1)); //date increase by 1
 }
