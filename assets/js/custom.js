@@ -174,7 +174,7 @@ $(".show_si_box").slideDown(600);
     
     $('#action_type_completed').on('change',function(){
 
-        if($('#action_type_completed').val() == 16){
+        if($('#action_type_completed').val() == 16 ){
             $('.onInitialFee').addClass('col-md-2');
             $('.initialfee').show();
         }else{

@@ -677,7 +677,7 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 				            </div>    
 
 
-<!-- COMPLETED -->
+        <!-- COMPLETED -->
 				<div class="tab-pane fade in" id="completed">
 				   	<?php if (count($actions_completed) > 0): ?>
 						<ul class="list-group">

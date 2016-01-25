@@ -691,7 +691,7 @@ function get_actions_outstanding($company_id)
 						);
 
 		$query = $this->db->insert('actions', $actiondata);
-		return $this->db->insert_id();
+		 return $this->db->insert_id();
 
 	}
 	function add_to_zendesk($post){

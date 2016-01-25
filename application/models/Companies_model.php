@@ -227,7 +227,7 @@ class Companies_model extends CI_Model {
 		
 
 		
-		// TURNOVER
+		  // TURNOVER
 
 		//REMOVE COMMA ETC FROM TURNOVER
 		$turnover_from = preg_replace('/[^0-9]/','',$post['turnover_from']);
