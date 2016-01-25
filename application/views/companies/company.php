@@ -469,7 +469,25 @@ endif; ?>
 					</select>
 				</div>
 			</div>
-			<div class="col-sm-3 col-md-3">
+    
+    
+    <div class="col-sm-3 col-md-2 initialfee">
+						<div class="form-group ">
+							<label>Initial Fee</label>
+							 
+                            
+                            
+                             <div class="input-group">
+      
+      <input type="text" name="initialfee"  class="form-control"  placeholder="Amount">
+      <div class="input-group-addon">%</div>
+    </div>
+						</div>
+	                </div>
+    
+    
+    
+			<div class="col-sm-3 col-md-3  onInitialFee">
 
 			<?php if(isset($contacts) and !empty($contacts)) : ?>
 				<div class="form-group ">
@@ -485,7 +503,7 @@ endif; ?>
 			<?php endif; ?>
 			</div>
 				
-				 <div class="col-sm-3 col-md-3">
+				 <div class="col-sm-3 col-md-3 onInitialFee">
 					<div class="form-group ">
 						<label>Follow Up Action</label>
 
@@ -659,7 +677,7 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 				            </div>    
 
 
-<!-- COMPLETED -->
+        <!-- COMPLETED -->
 				<div class="tab-pane fade in" id="completed">
 				   	<?php if (count($actions_completed) > 0): ?>
 						<ul class="list-group">
@@ -685,6 +703,8 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 								<h4 style="margin:0;">
 									<a data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $action_completed->id ?>" aria-expanded="false" aria-controls="collapse<?php echo $action_completed->id ?>">
 									<?php echo $action_types_array[$action_completed->action_type_id]; ?>
+                                       
+                                      <?php if($action_completed->action_type_id == 16){echo  ' ' . $company['initial_rate'] .'%';} ?>
                                     </a>
 								<div class="mic-info">
 								Created By: <?php echo $action_completed->name;?> on <?php echo $created_date_formatted?>
