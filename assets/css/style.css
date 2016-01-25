@@ -90,6 +90,15 @@ body {
 	margin-top: 10px;
 }
 
+.panel-default>.panel-heading {
+    background-color: #2B4461;
+    color: #fff;
+}
+.panel-default>.panel-heading .badge {
+    color: #2B4461;
+    background-color: #ffffff;
+}
+
 .panel-primary {
 border-color: #f7f7f7;
 }

@@ -64,8 +64,21 @@
                              <?php foreach ($getuserplacements as $get_user_placements): ?>
                             <li class="user-stat-holder">
                             <div class="user-stat company"><a href="companies/company?id=<?php echo $get_user_placements['id'] ?>" <?php if(($current_user['new_window']=='t')): ?> target="_blank"<?php endif; ?>><?php echo $get_user_placements['name'];?></a></div>
+                        <?php if ($current_user['permission'] == 'admin'): ?>
+                            <div class="row">
+  <div class="col-sm-8 user-stat company action_date">
+<?php echo $get_user_placements['lead_name'];?>
+</div>
+  <div class="col-sm-4 user-stat company action_date">
+  <?php if(!empty($get_user_placements['initial_rate'])): ?>
+<?php echo $get_user_placements['initial_rate'];?>%
+<?php endif; ?>
+</div>
+</div>
+<?php endif; ?>
                             <div class="user-stat company action_date">
-                            <?php echo  date('D jS M y',strtotime($get_user_placements['actioned_at']));?></div>
+                            <?php echo  date('D jS M y',strtotime($get_user_placements['actioned_at']));?>
+                            </div>
                             </li>
                             <?php endforeach ?>
                             </div>
