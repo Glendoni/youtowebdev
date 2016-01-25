@@ -1628,6 +1628,26 @@ ORDER BY deals_pipeline.updated_at desc
         
     }
     
+    
+    public function get_company_from_id($id){
+       //Redundent function used temporarily for testing purposes only!
+
+        $this->db->select('*');
+        $this->db->from('companies');
+        
+        $this->db->where('companies.id',$id); 
+        $this->db->limit(1);
+
+        $query = $this->db->get();
+
+        foreach ($query->result() as $row)
+        {
+            return $row->name;
+        }
+
+          
+    }
+    
  
     
 }

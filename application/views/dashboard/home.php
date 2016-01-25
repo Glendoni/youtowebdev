@@ -10,6 +10,9 @@
                 <li><button href="companies/pipeline"role="tab" class="button btn btn-primary btn-sm deals_pipeline" style="margin-right:10px;" onclick="window.location ='companies/pipeline'">Deals Forecast</button></li>
                 <li role="presentation"><button href="#assigned" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Favourites','<?php echo $current_user['id'];?>')">Favourites</button></li>
                 <li role="presentation"><button href="#emailstats" aria-controls="emailstats" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Email Stats','<?php echo $current_user['id'];?>')">Email Engagement</button></li>
+                  
+                   <li role="presentation"><button href="#emailegagement" aria-controls="emailegagement" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Email Engagement','<?php echo $current_user['id'];?>')">Email Engagement 2</button></li>
+                  
               </ul>
 
           </div>
@@ -1194,6 +1197,39 @@
     </div>
           </div><!--END OF PANEL-->
           <!--END ASSIGNED-->
+
+
+
+          <!--ASSIGNED-->
+    <div role="tabpanel" class="tab-pane fade" id="emailegagement">
+    <!--START MARKETING STATS-->
+            <div class="panel panel-default">
+    <div class="panel-heading" id="contacts">
+    <h3 class="panel-title">Email Engagementssss<span class="badge pull-right"><?php echo count($marketing_actions); ?></span></h3>
+    </div>
+    <!-- /.panel-heading -->
+    <div class="panel-body" style="font-size:12px;">
+        <!--AUTO PILOT  -->
+        <div class="row record-holder-header mobile-hide">
+<div class="col-xs-8 col-sm-4 col-md-3"><strong>Company</strong></div>
+            <div class="col-xs-8 col-sm-4 col-md-2"><strong>Campaign</strong></div>
+<div class="col-xs-4 col-sm-1 col-md-1"><strong>Pipeline</strong></div>
+<div class="col-xs-6 col-sm-2 col-md-2"><strong>Contact</strong></div>
+<div class="col-xs-6 col-sm-3 col-md-2"><strong>Last Action</strong></div>
+<div class="col-xs-12 col-sm-2 col-md-1"><strong>Date</strong></div>
+</div>
+        <div id="stat"></div>   
+        
+         <!--AUTO PILOT END  -->
+
+
+    </div>
+    <!-- /.panel-body -->
+    </div>
+          </div><!--END OF PANEL-->
+          <!--END ASSIGNED-->
+
+
 
 
 </div><!--END TAB PANES-->

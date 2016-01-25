@@ -535,8 +535,8 @@ endif; ?>
 				            <?php echo count($actions_cancelled);?></span></a></li>
 							<?php else: ?>
 							<?php endif; ?>
-							<?php if (count($actions_marketing) > 0): ?>
-				            <li><a href="#marketing" data-toggle="tab">Marketing <span class="label label-default">
+							<?php if (count($actions_marketing) >= 0): ?>
+				            <li><a href="#marketing" data-toggle="tab">Marketing <span class="label label-default marketingAcitonCtn">
 				            <?php echo count($actions_marketing);?></span></a></li>
 							<?php else: ?>
 							<?php endif; ?>
@@ -889,8 +889,17 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 
 								<!-- MARKETING -->
 				             <div class="tab-pane fade in" id="marketing">
+                                 
+                                 <ul class="list-group statAction">
+                                    
+                                    
+                                 </ul>
+                                 
 							<?php if (count($actions_marketing) > 0): ?>
-								<ul class="list-group">
+								
+                                    
+                                    
+                                    
 								<?php foreach ($actions_marketing as $actions_marketing): 
 								 $created_date_formatted = date("l jS F y",strtotime($actions_marketing['date_sent']));
 								?>
@@ -933,7 +942,7 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 				                <?php endforeach ?>
 				                </ul>
 							<?php else: ?>
-								<div class="col-md-12">
+								<div class="col-md-12 actionMsg">
 									<h4 style="margin: 50px 0 40px 0; text-align: center;">No completed actions found for this company</h4>
 								</div>
 							<?php endif; ?>
