@@ -478,7 +478,7 @@ endif; ?>
                             
                             
 		<div class="input-group">
-      	<input type="text" name="initialfee"  class="form-control">
+      	<input type="number" step="0.01" name="initialfee" class="form-control">
 		<div class="input-group-addon">%</div>
 		</div>
 		</div>
