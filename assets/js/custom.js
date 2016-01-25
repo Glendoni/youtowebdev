@@ -107,7 +107,7 @@ $( document ).ready(function() {
  if( typeof idfk === 'undefined'){
      
  }else{
-            items.push( '<div class="row record-holder"><div class="col-xs-8 col-sm-4 col-md-3"><a href="companies/company?id='+idfk+'">'+val.company+'</a></div><div class="col-xs-8 col-sm-4 col-md-2"><a href="javascript:;">'+val.campaign+'</a></div><div class="col-xs-4 col-sm-1 col-md-1 text-right"><span class="label pipeline label-Prospect">#Prospect</span></div><div class="col-xs-6 col-sm-2 col-md-2"><a href="companies/company?id='+idfk+'#contacts">'+val.username+'</a></div><div class="col-xs-6 col-sm-3 col-md-2 align-right "> <span class="label label-primary">'+action+'</span><br>21/01/2016</div><div class="col-xs-12 col-sm-2 col-md-1 contact-phone">'+val.date+'</div></div>' );
+            items.push( '<div class="row record-holder"><div class="col-xs-8 col-sm-4 col-md-3"><a href="companies/company?id='+idfk+'">'+val.company+'</a></div><div class="col-xs-8 col-sm-4 col-md-2">'+val.campaign+'</div><div class="col-xs-4 col-sm-1 col-md-1 text-right"><span class="label pipeline label-Prospect">#Prospect</span></div><div class="col-xs-6 col-sm-2 col-md-2"><a href="companies/company?id='+idfk+'#contacts">'+val.username+'</a></div><div class="col-xs-6 col-sm-3 col-md-2 align-right "> <span class="label label-primary">'+action+'</span></div><div class="col-xs-12 col-sm-2 col-md-1 contact-phone">'+val.date+'</div></div>' );
      } 
      idfk = val.companyID;    
             });

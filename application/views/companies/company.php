@@ -477,16 +477,12 @@ endif; ?>
 							 
                             
                             
-                             <div class="input-group">
-      
-      <input type="text" name="initialfee"  class="form-control"  placeholder="Amount">
-      <div class="input-group-addon">%</div>
-    </div>
-						</div>
-	                </div>
-    
-    
-    
+		<div class="input-group">
+      	<input type="text" name="initialfee"  class="form-control">
+		<div class="input-group-addon">%</div>
+		</div>
+		</div>
+		</div>
 			<div class="col-sm-3 col-md-3  onInitialFee">
 
 			<?php if(isset($contacts) and !empty($contacts)) : ?>
