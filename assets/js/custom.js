@@ -170,6 +170,19 @@ var company_source = $("select[name=company_source]").val();
 if (company_source=='8') {
 $(".show_si_box").slideDown(600);
 }
+    
+    
+    $('#action_type_completed').on('change',function(){
+
+        if($('#action_type_completed').val() == 16){
+            $('.onInitialFee').addClass('col-md-2');
+            $('.initialfee').show();
+        }else{
+            $('.onInitialFee').removeClass('col-md-2');
+            $('.initialfee').hide();
+        }
+
+    })
 });
      
     ////////////////THE HOLY GRAIL

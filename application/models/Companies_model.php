@@ -465,7 +465,8 @@ class Companies_model extends CI_Model {
 			   pr.id, --f42
 			   C.source_explanation, --f43
 			   UC.name, --f44
-			   UU.name --f45
+			   UU.name, --f45
+               C.initial_rate --f46
 			   )) "JSON output" 
 			   
 
@@ -662,7 +663,8 @@ class Companies_model extends CI_Model {
 			     pr.id,
 			     C.source_explanation,
 			     UC.name, 
-			     UU.name
+			     UU.name,
+                 C.initial_rate
 
 		order by C.id 
 
@@ -1093,6 +1095,7 @@ $this->update_pipline($post,$user_id);
 				'updated_at' => date('Y-m-d H:i:s'),
 				'lead_source_id'=>$source,
 				'source_explanation'=>!empty($post['source_explanation'])?$post['source_explanation']:NULL,
+                'initial_rate'=>!empty($post['initial_rate'])?$post['initial_rate']:NULL,
 				'source_date'=>$source_date,
 				);
 

@@ -646,10 +646,22 @@ function get_actions_outstanding($company_id)
 			);
 			$query = $this->db->insert('actions', $planneddata);
 		}
-		return $this->db->insert_id();
+		return $this->db->insert_id();    
 	}
 
 	function company_updated_to_customer($post){
+        
+        if(isset($post['initialfee'])){
+            $data = array(
+            
+            'initial_rate'  => (!empty($post['initialfee'])?$post['initialfee']:NULL)
+                );
+            $this->db->where('id', $post['company_id']);
+            $this->db->update('companies', $data); 
+            
+            
+        }
+        
 		$actiondata = array(
 					'company_id' 	=> $post['company_id'],
 					'user_id' 		=> $post['user_id'],
