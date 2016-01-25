@@ -118,9 +118,7 @@ class Marketing extends MY_Controller {
         
         $words = array( 'Limited', 'LIMITED', 'LTD','ltd','Ltd' );
         
-        $comp_name_replace_words =  str_replace($words, '',$comp_name);
-        $comp_name_trim_left =ltrim($comp_name_replace_words);
-        $comp_name = rtrim($comp_name_trim_left);
+        
         
           
         

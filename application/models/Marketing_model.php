@@ -70,7 +70,13 @@ to_char(identifies.sent_at, 'DD/MM/YYYY') as Date ,send.event_text as sent,
     
     
     public function actions_performed($comp_name){
-         
+        
+        
+      $trading_name =  $comp_name['trading_name'];
+         $comp_name =  $comp_name['name'];
+          
+          file_put_contents('glen.txt','This is the nameddddd '.$comp_name);
+        
         $dbconn = pg_connect("host=ec2-79-125-118-138.eu-west-1.compute.amazonaws.com port=5522 dbname=d7fvbgmrpjg4ba user=ucvie36u7gtubf password=p6lgogrt7mg89411qujnepsgfkf")
     or die('Could not connect: ' . pg_last_error());
         
@@ -92,7 +98,7 @@ to_char(identifies.sent_at, 'DD/MM/YYYY') as Date ,send.event_text as sent,
 		WHERE identifies.sent_at >= '2016-01-20' 
 		AND  _open.campaign IS NOT null
         AND  identifies.company IS NOT null
-		AND identifies.company='$comp_name'
+		AND identifies.company='$comp_name' OR identifies.company='$trading_name'
 		ORDER BY identifies.company
 		 ";
         

@@ -132,7 +132,7 @@ $( document ).ready(function() {
             var  i = 0 
 
             $.each( data, function( key, val ) {
-i++;
+
                if(val[6] == "unsubscribe"){
 
                 action =  '<span class="label label-danger">Unsubscribed</span>';
@@ -143,9 +143,11 @@ i++;
                 action  = '<span class="label label-success">Opened</span>';   
             } 
      
+                if( val.campaign !== null ){
+                    i++;
      $( '<li class="list-group-item"><div class="row"><div class="col-xs-6 col-md-7"><h4 style="margin:0;">'+val.campaign+'<div class="mic-info">'+val.date+' by fix</div></h4></div><!--END COL-MD-4--><div class="col-xs-6 col-md-5" style="text-align:right;"><span class="label label-primary" style="font-size:11px;  ">'+val.username+'</span> '+action+' </div></div></li>' ).prependTo('#marketing ul');
-     
-     
+      
+       }
             });
             
             
@@ -153,6 +155,7 @@ i++;
             
             $(items.join( "" )).prependTo('#marketing ul');
             
+          
             if(i) $('#outstanding h4,.actionMsg h4').hide();
            // $('.statAction').html() //update email engagement listings with data pushed to our database from autopilot via Segment
             //$('.eventcount').html(items.length); //update engagement counter
