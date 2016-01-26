@@ -417,13 +417,13 @@ endif; ?>
 <div class="row record-holder">
 <div class="col-xs-12 col-md-2 contact-name"><?php echo ucfirst($contact->first_name).' '.ucfirst($contact->last_name); ?></div>
 <div class="col-xs-12 col-md-2 contact-role"><?php echo ucfirst($contact->role); ?></div>
-<div class="col-xs-12 col-md-3 contact-email"><?php echo $contact->email; ?>
+<div class="col-xs-12 col-md-3 contact-email"><?php echo $contact->email; ?>&nbsp;
 	<?php if (!empty($contact->email_opt_out_date)): ?>
 		<span class="label label-danger contact-opt-out">Email Marketing Opt-Out</span>
 	<?php endif;?>
 </div>
 <div class="col-xs-12 col-md-2 contact-phone">
-	<?php echo $contact->phone; ?>
+	<?php echo $contact->phone; ?>&nbsp;
 </div>
 				<div class="col-md-3">
 		      	<div class="pull-right mobile-left actionsactionscontact-options">

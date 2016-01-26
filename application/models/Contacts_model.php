@@ -43,7 +43,7 @@ function get_contacts_s($company_id)
 		//$this->db->or_where('eff_to', null);
     
     
-    $sql = "SELECT contacts.*, usr_created_by.name as created_by,  usr_updated_by.name as updated_by, to_char(contacts.updated_at, 'DD/MM/YYYY') as contact_updated_at
+    $sql = "SELECT contacts.*, usr_created_by.name as created_by,  usr_updated_by.name as updated_by, to_char(contacts.updated_at, 'DD/MM/YYYY') as contact_updated_at, to_char(contacts.created_at, 'DD/MM/YYYY') as contact_created_at
 FROM contacts
 LEFT JOIN users as usr_updated_by  ON contacts.updated_by=usr_updated_by.id
 LEFT JOIN users as usr_created_by  ON contacts.created_by=usr_created_by.id
