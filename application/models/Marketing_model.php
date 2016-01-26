@@ -82,7 +82,7 @@ to_char(identifies.sent_at, 'DD/MM/YYYY') as Date ,send.event_text as sent,
         
         
        $query =  "select DISTINCT  identifies.company,CONCAT(identifies.first_name,' ',identifies.last_name) as username, 
-to_char(identifies.sent_at, 'DD/MM/YYYY') as Date ,send.event_text as sent,
+to_char(identifies.sent_at, 'DAY DDth MONTH') as Date ,send.event_text as sent,
  _open.event_text as opened, click.event_text as click, unsubscribe.event_text as opened, send.campaign
 		From autopilot_baselist.identifies 
 		LEFT JOIN  autopilot_baselist.tracks
