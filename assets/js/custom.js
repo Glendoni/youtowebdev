@@ -177,7 +177,8 @@ $(".show_si_box").slideDown(600);
             $('.initialfee input').attr('required', 'required');
         }else{
             $('.onInitialFee').removeClass('col-md-2');
-             $('.initialfee input').removeAttr('required');
+           
+             $('.initialfee input').val('').removeAttr('required');
             $('.initialfee').hide();
              
             
