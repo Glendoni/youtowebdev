@@ -1205,7 +1205,7 @@
     <!--START MARKETING STATS-->
             <div class="panel panel-default">
     <div class="panel-heading" id="contacts">
-    <h3 class="panel-title">Email Engagementssss<span class="badge pull-right"><?php echo count($marketing_actions); ?></span></h3>
+    <h3 class="panel-title">Email Engagement<span class="badge pull-right eventcount"><?php echo count($marketing_actions); ?></span></h3>
     </div>
     <!-- /.panel-heading -->
     <div class="panel-body" style="font-size:12px;">
