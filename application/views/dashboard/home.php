@@ -4,15 +4,11 @@
               <!-- Nav tabs -->
               <ul class="nav nav-tabs dashboard" role="tablist">
                 <li role="presentation" class="active"><button href="#team_stats" aria-controls="team_stats" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Stats','<?php echo $current_user['id'];?>')">Stats</button></li>
-
                 <li role="presentation"><button href="#calls" aria-controls="calls" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Calls & Meetings','<?php echo $current_user['id'];?>')">Actions</button></li>
                 <li role="presentation"><button href="#pipeline" aria-controls="pipeline" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Pipeline','<?php echo $current_user['id'];?>')">Pipeline</button></li>
                 <li><button href="companies/pipeline"role="tab" class="button btn btn-primary btn-sm deals_pipeline" style="margin-right:10px;" onclick="window.location ='companies/pipeline'">Deals Forecast</button></li>
                 <li role="presentation"><button href="#assigned" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Favourites','<?php echo $current_user['id'];?>')">Favourites</button></li>
-               
-                  
-                   <li role="presentation"><button href="#emailegagement" aria-controls="emailegagement" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Email Engagement','<?php echo $current_user['id'];?>')">Email Engagement</button></li>
-                  
+                <li role="presentation"><button href="#emailegagement" aria-controls="emailegagement" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Email Engagement','<?php echo $current_user['id'];?>')">Email Engagement</button></li>
               </ul>
 
           </div>
@@ -20,8 +16,7 @@
         <div class="row">
           
 <div class="col-sm-9 col-sm-push-3">
-
-          <!-- Tab panes -->
+<!-- Tab panes -->
 <div class="tab-content">
 <div role="tabpanel" class="tab-pane fade in active" id="team_stats">
 <?php if ($_GET['search']==2) { ?>
@@ -69,8 +64,21 @@
                              <?php foreach ($getuserplacements as $get_user_placements): ?>
                             <li class="user-stat-holder">
                             <div class="user-stat company"><a href="companies/company?id=<?php echo $get_user_placements['id'] ?>" <?php if(($current_user['new_window']=='t')): ?> target="_blank"<?php endif; ?>><?php echo $get_user_placements['name'];?></a></div>
+                        <?php if ($current_user['permission'] == 'admin'): ?>
+                            <div class="row">
+  <div class="col-sm-8 user-stat company action_date">
+<?php echo $get_user_placements['lead_name'];?>
+</div>
+  <div class="col-sm-4 user-stat company action_date">
+  <?php if(!empty($get_user_placements['initial_rate'])): ?>
+<?php echo $get_user_placements['initial_rate'];?>%
+<?php endif; ?>
+</div>
+</div>
+<?php endif; ?>
                             <div class="user-stat company action_date">
-                            <?php echo  date('D jS M y',strtotime($get_user_placements['actioned_at']));?></div>
+                            <?php echo  date('D jS M y',strtotime($get_user_placements['actioned_at']));?>
+                            </div>
                             </li>
                             <?php endforeach ?>
                             </div>
@@ -1210,28 +1218,21 @@
     <!-- /.panel-heading -->
     <div class="panel-body" style="font-size:12px;">
         <!--AUTO PILOT  -->
-        <div class="row record-holder-header mobile-hide">
+<div class="row record-holder-header mobile-hide">
 <div class="col-xs-8 col-sm-4 col-md-3"><strong>Company</strong></div>
-            <div class="col-xs-8 col-sm-4 col-md-2"><strong>Campaign</strong></div>
+<div class="col-xs-8 col-sm-4 col-md-2"><strong>Campaign</strong></div>
 <div class="col-xs-4 col-sm-1 col-md-1"><strong>Pipeline</strong></div>
 <div class="col-xs-6 col-sm-2 col-md-2"><strong>Contact</strong></div>
 <div class="col-xs-6 col-sm-3 col-md-2"><strong>Last Action</strong></div>
 <div class="col-xs-12 col-sm-2 col-md-1"><strong>Date</strong></div>
 </div>
-        <div id="stat"></div>   
-        
-         <!--AUTO PILOT END  -->
-
-
-    </div>
-    <!-- /.panel-body -->
-    </div>
-          </div><!--END OF PANEL-->
-          <!--END ASSIGNED-->
-
-
-
-
+<div id="stat"></div>   
+<!--AUTO PILOT END  -->
+</div>
+<!-- /.panel-body -->
+</div>
+</div><!--END OF PANEL-->
+<!--END ASSIGNED-->
 </div><!--END TAB PANES-->
 </div><!--END-COL-SM-9-->
 <div class="col-sm-3 col-sm-pull-9">

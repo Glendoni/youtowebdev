@@ -443,8 +443,9 @@ function get_actions_outstanding($company_id)
 		$end_date = $dates['end_date'];
 		$search_user_id = $dates['search_user_id'];
 		if (!empty($search_user_id)) {
-			$sql = "select distinct c.name, a.actioned_at, c.id, u.name as username from companies c 
+			$sql = "select distinct c.name, a.actioned_at, c.id, u.name as username, ls.name as lead_name, c.initial_rate from companies c 
 			 inner join actions a on c.id = a.company_id
+			 left join lead_sources ls on c.lead_source_id = ls.id
 			 left join users u on a.created_by = u.id where a.action_type_id = '16' and a.user_id = '$search_user_id' AND a.created_at > '$start_date' AND a.created_at < '$end_date' order by a.actioned_at asc";
 			$query = $this->db->query($sql);
 			if($query){
@@ -651,7 +652,7 @@ function get_actions_outstanding($company_id)
 
 	function company_updated_to_customer($post){
         
-        if(isset($post['initialfee'])){
+        if(isset($post['initialfee']) && is_numeric($post['initialfee'])){
             $data = array(
             
             'initial_rate'  => (!empty($post['initialfee'])?$post['initialfee']:NULL)

@@ -57,7 +57,7 @@
 <div class="small-text" style="font-weight:300; font-size:9px; max-width:80%; margin-left:auto; margin-right:auto;"><?php if ($current_campaign_stats->campaign_unsuitable > "0") {echo "Includes ".$current_campaign_stats->campaign_unsuitable." marked as unsuitable";} else {}?></div>
 </div>
 <div class="col-sm-2 mobile-hide">
-<div class="circle-responsive cyan-circle ">
+<div class="circle-responsive cyan-circle contacted_percentage">
 <div class="circle-content mega">
 <div class="large-number"><?php echo $current_campaign_stats->contacted; ?>%</div>
 <div class="small-text">Contacted</div>
