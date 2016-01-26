@@ -258,7 +258,7 @@ class Companies extends MY_Controller {
         //    $this->data['companieshack'] = $this->Companies_model->hackmorgages($this->input->get('id'));
 			$company = $this->process_search_result($raw_search_results);
            // $this->data['companieshack'] = $this->Companies_model->hackmorgages($this->input->get('id'));
-			$this->data['contacts'] = $this->Contacts_model->get_contacts($this->input->get('id'));
+			$this->data['contacts'] = $this->Contacts_model->get_contacts_s($this->input->get('id'));
             $address = $this->Companies_model->get_addresses($this->input->get('id'));
             foreach ($address as $row)
             {

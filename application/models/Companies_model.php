@@ -1210,18 +1210,35 @@ $this->update_pipline($post,$user_id);
 
 	function get_addresses($company_id)
 	{
-		$data = array(
-			'company_id' => $company_id,
-			);
-		$this->db->select('addresses.id AS addressid, addresses.address as address,addresses.phone, addresses.type,addresses.created_by, c.id as countryid, c.name, addresses.company_id', FALSE);
-		$this->db->join('countries c', 'c.id = addresses.country_id');
-		$this->db->order_by('type asc');
+		 
+		$sql = "SELECT addresses.id AS addressid, f.name as created_by_user, e.name as updated_by_user, addresses.address as address,addresses.phone, to_char(addresses.updated_at, 'DD/MM/YYYY') as addresses_updated_at, to_char(addresses.created_at, 'DD/MM/YYYY') as addresses_created_at,  addresses.type,addresses.created_by, c.id as countryid, c.name, addresses.company_id
 
-		echo $query = $this->db->get_where('addresses', $data);
-		return $query->result_object();
+        FROM addresses
+        LEFT JOIN countries as c ON c.id = addresses.country_id
+        LEFT JOIN users as f ON f.id = addresses.created_by
+        LEFT JOIN users as e ON e.id = addresses.updated_by
+        
+        
+       WHERE addresses.company_id=".$company_id."
+        
+        ORDER BY type ASC
+        
+        
+        ";
+		
+        
+        
+        
+    
+  
+     $result = $this->db->query($sql);
+      return    $result->result();
+        
+        
+     
 	}
 
-	function create_address($post,$user_id)
+	function create_address($post)
 	{
        	$address->address = $post['address']; // please read the below note
     	$address->country_id = $post['country_id'];

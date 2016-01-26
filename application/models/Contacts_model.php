@@ -36,7 +36,28 @@ class Contacts_model extends CI_Model {
 		return $query->result();
 	}
 
+function get_contacts_s($company_id)
+	{
+		$data = array('company_id' => $company_id);
+		//$this->db->where('eff_to >', 'now()');
+		//$this->db->or_where('eff_to', null);
+    
+    
+    $sql = "SELECT contacts.*, usr_created_by.name as created_by,  usr_updated_by.name as updated_by, to_char(contacts.updated_at, 'DD/MM/YYYY') as contact_updated_at
+FROM contacts
+LEFT JOIN users as usr_updated_by  ON contacts.updated_by=usr_updated_by.id
+LEFT JOIN users as usr_created_by  ON contacts.created_by=usr_created_by.id
+WHERE contacts.company_id=".$company_id;
+    
+  
+     $result = $this->db->query($sql);
+      return    $result->result();
+	}
 
+    
+    
+    
+    
 	function create_contact($first_name,$last_name,$email,$role,$company_id,$created_by,$phone=NULL,$linkedin_id)
 	{
     
