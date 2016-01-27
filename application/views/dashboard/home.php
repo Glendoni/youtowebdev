@@ -207,7 +207,7 @@
                              <span class="badge tw-deals-total" style="background-color:#428bca;">0</span>
                         </div>
                         <div class="col-xs-2 col-md-1 text-center hide-overflow">
-                           <span class="badge tw-proposals-total" style="background-color:#428bca;">0</span>
+                           <span class="badge tw-proposals-total" style="background-color:#45AE7C;">0</span>
                         </div>
                         <div class="col-xs-2 col-md-2 text-center hide-overflow" >
                           <span class="tw-demobookedcount-total" >4</span> /
@@ -318,7 +318,7 @@
                              <span class="badge lw-deals-total" style="background-color:#428bca;">0</span>
                         </div>
                         <div class="col-xs-2 col-md-1 text-center hide-overflow">
-                           <span class="badge lw-proposals-total" style="background-color:#428bca;">0</span>
+                           <span class="badge lw-proposals-total" style="background-color:#45AE7C;">0</span>
                         </div>
                         <div class="col-xs-2 col-md-2 text-center hide-overflow" >
                           <span class="lw-demobookedcount-total" >16</span> /
@@ -433,7 +433,7 @@
                              <span class="badge tm-deals-total" style="background-color:#428bca;">0</span>
                         </div>
                         <div class="col-xs-2 col-md-1 text-center hide-overflow">
-                           <span class="badge tm-proposals-total" style="background-color:#428bca;">0</span>
+                           <span class="badge tm-proposals-total" style="background-color:#45AE7C;">0</span>
                         </div>
                         <div class="col-xs-2 col-md-2 text-center hide-overflow" >
                           <span class="tm-demobookedcount-total" >16</span> /
@@ -547,7 +547,7 @@
                              <span class="badge lm-deals-total" style="background-color:#428bca;">0</span>
                         </div>
                         <div class="col-xs-2 col-md-1 text-center hide-overflow">
-                           <span class="badge lm-proposals-total" style="background-color:#428bca;">0</span>
+                           <span class="badge lm-proposals-total" style="background-color:#45AE7C;">0</span>
                         </div>
                         <div class="col-xs-2 col-md-2 text-center hide-overflow" >
                           <span class="lm-demobookedcount-total" >16</span> /
