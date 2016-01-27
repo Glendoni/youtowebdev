@@ -16,7 +16,7 @@ class Login extends MY_Controller {
 		}
 
 		if($this->session->userdata('logged_in')){
-			$not_redirectable = array("http://staging-baselist.herokuapp.com/", "http://baselist.herokuapp.com/", "http://baselist/","http://staging-baselist.herokuapp.com/Marketing/loaddata","https://staging-baselist.herokuapp.com/Marketing/loaddata","http://baselist.herokuapp.com/Marketing/loaddata","http://localhost:8888/baselist/Marketing/loaddata");
+			$not_redirectable = array("http://staging-baselist.herokuapp.com/", "http://baselist.herokuapp.com/", "http://baselist/","http://staging-baselist.herokuapp.com/Marketing/loaddata","https://staging-baselist.herokuapp.com/Marketing/loaddata","https://staging-baselist.herokuapp.com/Marketing/autopilotActions/undefined","http://baselist.herokuapp.com/Marketing/loaddata","http://localhost:8888/baselist/Marketing/loaddata");
 			if($this->session->userdata('last_page') and (!in_array($this->session->userdata('last_page'),$not_redirectable)) and !$this->is_ajax_request()){
 				redirect($this->session->userdata('last_page'));
 			}else{
