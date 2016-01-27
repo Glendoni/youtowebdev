@@ -81,6 +81,29 @@ $(".source_explanation").prop('required',false);
 
 $( document ).ready(function() {
     
+    
+    
+    
+    var mycolumnArray = ["tw","lw","tm","lm"];
+var mycolumnArrayLength = mycolumnArray.length;
+
+
+var myStringArray = ["deals","proposals","demobookedcount","democount","meetingbooked","meetingcount","salescall","introcall","pipelinecount","key_review_added","key_review_occuring","duediligence"];
+var arrayLength = myStringArray.length;
+ 
+var total; 
+var list;
+for (var s = 0; s < mycolumnArrayLength; s++) {
+
+for (var i = 0; i < arrayLength; i++) {
+
+list = 	getlisttotal(myStringArray[i], mycolumnArray[s])
+ //console.log(myStringArray[i])
+};
+ 
+ //console.log(myStringArray[i] + mycolumnArray[i])
+};
+    
         $.ajax({
         type: "GET",
             dataType: "json",
@@ -255,3 +278,21 @@ $(window).load(function(){
       handle: ".modal-header"
   });
 });
+
+
+function getlisttotal(col,item){
+ 
+var lm = 0;
+$('.'+item+'-'+col).each(function(){
+
+lm  = (lm+parseInt($(this).text()));
+
+});
+
+$('.'+item+'-'+col+'-total').text(lm);
+//console.log('This is the result '+ lm + ' for column ' + col)
+return lm;
+
+}
+
+
