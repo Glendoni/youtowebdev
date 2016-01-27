@@ -597,13 +597,13 @@
                             <span class="lm-demobookedcount"><?php echo $lastmonthstat['demobookedcount'];?></span> / <span class="lm-democount"><?php echo $lastmonthstat['democount'];?></span>
                             </div>
                             <div class="col-xs-1 col-md-1 text-center">
-                            <span class="lm-demobookedcount"><?php echo $lastmonthstat['meetingbooked'];?></span> / <span class="lm-meetingcount"><?php echo $lastmonthstat['meetingcount'];?></span>
+                            <span class="lm-meetingbooked"><?php echo $lastmonthstat['meetingbooked'];?></span> / <span class="lm-meetingcount"><?php echo $lastmonthstat['meetingcount'];?></span>
                             </div>
                             <div class="col-xs-2 col-md-2 text-center"> 
-                            <span class="lm-demobookedcount"><?php echo $lastmonthstat['salescall'];?></span> / <span class="lm-introcall"><?php echo $lastmonthstat['introcall'];?></span>
+                            <span class="lm-salescall"><?php echo $lastmonthstat['salescall'];?></span> / <span class="lm-introcall"><?php echo $lastmonthstat['introcall'];?></span>
                             </div>
                             <div class="col-md-1 hidden-xs text-center">
-                              <span class="lm-demobookedcount"><?php echo $lastmonthstat['pipelinecount'];?></span>
+                              <span class="lm-pipelinecount"><?php echo $lastmonthstat['pipelinecount'];?></span>
                             </div>
                             <div class="col-md-2 hidden-xs text-center">
                               <span class="lm-key_review_added"><?php echo $lastmonthstat['key_review_added'];?></span> / <span class="lm-key_review_occuring"><?php echo $lastmonthstat['key_review_occuring'];?></span>
@@ -659,7 +659,7 @@
                             </a>
                             </div>
                             <div class="col-xs-2 col-md-1 text-center">
-                            <a href = "?search=2&user=<?php echo $getstatssearch['user'];?>&start_date=<?php echo $_GET['start_date']?>&end_date=<?php echo $_GET['end_date']?>&period=search"><span class="badge" style="background-color:#45AE7C;"><?php echo $getstatssearch['deals'];?></a></span>
+                            <a href = "?search=2&user=<?php echo $getstatssearch['user'];?>&start_date=<?php echo $_GET['start_date']?>&end_date=<?php echo $_GET['end_date']?>&period=search"><span class="badge" style="background-color:#45AE7C;"><?php echo $getstatssearch['deals'];?></span></a>
                             </div>
                                   <div class="col-xs-2 col-md-1 text-center"> 
                               <?php echo $getstatssearch['proposals'];?>
