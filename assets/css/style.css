@@ -1266,3 +1266,19 @@ h2.company-header{
  display:none;
     
 }
+
+.dashboardTotalheaders{
+ 
+    padding: 15px 0px 22px 0px;
+    background: #f6f6f6; /*Default colour*/
+    background: -webkit-linear-gradient(#f6f6f6, #EFEFEF);
+
+
+}
+
+.dashboardTotalheaders .stat-total{
+    
+    font-weight: 600;
+    
+}
+

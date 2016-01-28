@@ -199,44 +199,42 @@
                         </div>
                         </div>
                           
-                                <div class="row list-group-item">
+                                <div class="row list-group-item dashboardTotalheaders">
                         <div class="col-xs-2 col-md-1 hide-overflow"> 
                             <strong>Totals</strong>
                         </div>
-                        <div class="col-xs-2 col-md-1 text-center hide-overflow">
-                             <span class="badge tw-deals-total" style="background-color:#428bca;">0</span>
+                        <div class="col-xs-1 col-md-1 text-center hide-overflow">
+                             <span class="badge tw-deals-total stat-total" style="background-color:#428bca;">0</span>
                         </div>
                         <div class="col-xs-2 col-md-1 text-center hide-overflow">
-                           <span class="badge tw-proposals-total" style="background-color:#45AE7C;">0</span>
+                           <span class="badge tw-proposals-total stat-total" style="background-color:#45AE7C;">0</span>
                         </div>
                         <div class="col-xs-2 col-md-2 text-center hide-overflow" >
-                          <span class="tw-demobookedcount-total" >4</span> /
-                             <span class="tw-democount-total"  >0</span>
+                          <span class="tw-demobookedcount-total stat-total" >4</span> /
+                             <span class="tw-democount-total stat-total"  >0</span>
                         </div>
-                        <div class="col-xs-1 col-md-1 text-center hide-overflow">
-                           <span class="tw-meetingbooked-total" >0</span> /  
-                            <span class="tw-meetingbooked-total" >0</span>
+                        <div class="col-xs-2 col-md-1 text-center hide-overflow">
+                           <span class="tw-meetingbooked-total stat-total" >0</span> /  
+                            <span class="tw-meetingbooked-total stat-total" >0</span>
                         </div>
                        
                         <div class="col-md-2 hidden-xs text-center hide-overflow">
-                           <span class="tw-salescall-total" >1</span> / 
-                            <span class="tw-introcall-total">0</span>
+                           <span class="tw-salescall-total stat-total" >1</span> / 
+                            <span class="tw-introcall-total stat-total">0</span>
                         </div>
                         <div class="col-md-1 hidden-xs text-center hide-overflow"> 
-                          <span class="tw-pipelinecount-total">0</span> 
+                          <span class="tw-pipelinecount-total stat-total">0</span> 
                         </div>
                         <div class="col-md-2 hidden-xs text-center hide-overflow">
-                          <span class="tw-key_review_added-total">0</span> / 
-                            <span class="tw-key_review_occuring-total">5</span>
+                          <span class="tw-key_review_added-total stat-total">0</span> / 
+                            <span class="tw-key_review_occuring-total stat-total">5</span>
                         </div>
-                                    
-                                    
+                    
                                      <div class="col-xs-2 col-md-1 text-center hide-overflow"> 
-                          <span class="tw-duediligence-total">0</span>
-                            
+                          <span class="tw-duediligence-total stat-total">0</span>
+         
                         </div>
-                              <p>&nbsp;</p>    
-                        </div>
+                          </div>
                           
                           
                         <?php foreach ($stats as $stat): ?>
@@ -310,43 +308,43 @@
                            <strong>DueDil</strong>
                         </div>
                         </div>
-                                          <div class="row list-group-item">
+                                          <div class="row list-group-item dashboardTotalheaders">
                         <div class="col-xs-2 col-md-1 hide-overflow"> 
                             <strong>Totals</strong>
                         </div>
                         <div class="col-xs-2 col-md-1 text-center hide-overflow">
-                             <span class="badge lw-deals-total" style="background-color:#428bca;">0</span>
+                             <span class="badge lw-deals-total stat-total" style="background-color:#428bca;">0</span>
                         </div>
                         <div class="col-xs-2 col-md-1 text-center hide-overflow">
-                           <span class="badge lw-proposals-total" style="background-color:#45AE7C;">0</span>
+                           <span class="badge lw-proposals-total stat-total" style="background-color:#45AE7C;">0</span>
                         </div>
                         <div class="col-xs-2 col-md-2 text-center hide-overflow" >
-                          <span class="lw-demobookedcount-total" >16</span> /
-                             <span class="lw-democount-total"  >0</span>
+                          <span class="lw-demobookedcount-total stat-total" >16</span> /
+                             <span class="lw-democount-total stat-total"  >0</span>
                         </div>
                         <div class="col-xs-1 col-md-1 text-center hide-overflow">
-                           <span class="lw-meetingbooked-total" >0</span> /  
-                            <span class="lw-meetingcount-total" >0</span>
+                           <span class="lw-meetingbooked-total stat-total" >0</span> /  
+                            <span class="lw-meetingcount-total stat-total" >0</span>
                         </div>
                        
                         <div class="col-md-2 hidden-xs text-center hide-overflow">
-                           <span class="lw-salescall-total" >1</span> / 
-                            <span class="lw-introcall-total">0</span>
+                           <span class="lw-salescall-total stat-total" >1</span> / 
+                            <span class="lw-introcall-total stat-total">0</span>
                         </div>
                         <div class="col-md-1 hidden-xs text-center hide-overflow"> 
-                          <span class="lw-pipelinecount-total">0</span> 
+                          <span class="lw-pipelinecount-total stat-total">0</span> 
                         </div>
                         <div class="col-md-2 hidden-xs text-center hide-overflow">
-                          <span class="lw-key_review_added-total">0</span> / 
-                            <span class="lw-key_review_occuring-total">5</span>
+                          <span class="lw-key_review_added-total stat-total">0</span> / 
+                            <span class="lw-key_review_occuring-total stat-total">5</span>
                         </div>
                                     
                                     
                                      <div class="col-xs-2 col-md-1 text-center hide-overflow"> 
-                          <span class="lw-duediligence-total">0</span>
+                          <span class="lw-duediligence-total stat-total">0</span>
                             
                         </div>
-                              <p>&nbsp;</p>    
+                                 
                         </div>
                           
                           
@@ -425,43 +423,43 @@
                         </div>
                         </div>
                           
-                          <div class="row list-group-item">
+                          <div class="row list-group-item dashboardTotalheaders">
                         <div class="col-xs-2 col-md-1 hide-overflow"> 
                             <strong>Totals</strong>
                         </div>
                         <div class="col-xs-2 col-md-1 text-center hide-overflow">
-                             <span class="badge tm-deals-total" style="background-color:#428bca;">0</span>
+                             <span class="badge tm-deals-total stat-total" style="background-color:#428bca;">0</span>
                         </div>
                         <div class="col-xs-2 col-md-1 text-center hide-overflow">
-                           <span class="badge tm-proposals-total" style="background-color:#45AE7C;">0</span>
+                           <span class="badge tm-proposals-total stat-total" style="background-color:#45AE7C;">0</span>
                         </div>
                         <div class="col-xs-2 col-md-2 text-center hide-overflow" >
-                          <span class="tm-demobookedcount-total" >16</span> /
-                             <span class="tm-democount-total"  >0</span>
+                          <span class="tm-demobookedcount-total stat-total" >16</span> /
+                             <span class="tm-democount-total stat-total"  >0</span>
                         </div>
                         <div class="col-xs-1 col-md-1 text-center hide-overflow">
-                           <span class="tm-meetingbooked-total" >0</span> /  
-                            <span class="tm-meetingcount-total" >0</span>
+                           <span class="tm-meetingbooked-total stat-total" >0</span> /  
+                            <span class="tm-meetingcount-total stat-total" >0</span>
                         </div>
                        
                         <div class="col-md-2 hidden-xs text-center hide-overflow">
-                           <span class="tm-salescall-total" >1</span> / 
-                            <span class="tm-introcall-total">0</span>
+                           <span class="tm-salescall-total stat-total" >1</span> / 
+                            <span class="tm-introcall-total stat-total">0</span>
                         </div>
                         <div class="col-md-1 hidden-xs text-center hide-overflow"> 
-                          <span class="tm-pipelinecount-total">0</span> 
+                          <span class="tm-pipelinecount-total stat-total">0</span> 
                         </div>
                         <div class="col-md-2 hidden-xs text-center hide-overflow">
-                          <span class="tm-key_review_added-total">0</span> / 
-                            <span class="tm-key_review_occuring-total">5</span>
+                          <span class="tm-key_review_added-total stat-total">0</span> / 
+                            <span class="tm-key_review_occuring-total stat-total">5</span>
                         </div>
                                     
                                     
                                      <div class="col-xs-2 col-md-1 text-center hide-overflow"> 
-                          <span class="tm-duediligence-total">0</span>
+                          <span class="tm-duediligence-total stat-total">0</span>
                             
                         </div>
-                              <p>&nbsp;</p>    
+                                
                         </div>
                           
                           
@@ -539,43 +537,43 @@
                         </div>
                         </div>
                           
-                             <div class="row list-group-item">
+                             <div class="row list-group-item dashboardTotalheaders">
                         <div class="col-xs-2 col-md-1 hide-overflow"> 
                             <strong>Totals</strong>
                         </div>
                         <div class="col-xs-2 col-md-1 text-center hide-overflow">
-                             <span class="badge lm-deals-total" style="background-color:#428bca;">0</span>
+                             <span class="badge lm-deals-total stat-total" style="background-color:#428bca;">0</span>
                         </div>
                         <div class="col-xs-2 col-md-1 text-center hide-overflow">
-                           <span class="badge lm-proposals-total" style="background-color:#45AE7C;">0</span>
+                           <span class="badge lm-proposals-total stat-total" style="background-color:#45AE7C;">0</span>
                         </div>
                         <div class="col-xs-2 col-md-2 text-center hide-overflow" >
-                          <span class="lm-demobookedcount-total" >16</span> /
-                             <span class="lm-democount-total"  >0</span>
+                          <span class="lm-demobookedcount-total stat-total" >16</span> /
+                             <span class="lm-democount-total stat-total"  >0</span>
                         </div>
                         <div class="col-xs-1 col-md-1 text-center hide-overflow">
-                           <span class="lm-meetingbooked-total" >0</span> /  
-                            <span class="lm-meetingcount-total" >0</span>
+                           <span class="lm-meetingbooked-total stat-total" >0</span> /  
+                            <span class="lm-meetingcount-total stat-total" >0</span>
                         </div>
                        
                         <div class="col-md-2 hidden-xs text-center hide-overflow">
-                           <span class="lm-salescall-total" >1</span> / 
-                            <span class="lm-introcall-total">0</span>
+                           <span class="lm-salescall-total stat-total" >1</span> / 
+                            <span class="lm-introcall-total stat-total">0</span>
                         </div>
                         <div class="col-md-1 hidden-xs text-center hide-overflow"> 
-                          <span class="lm-pipelinecount-total">0</span> 
+                          <span class="lm-pipelinecount-total stat-total">0</span> 
                         </div>
                         <div class="col-md-2 hidden-xs text-center hide-overflow">
-                          <span class="lm-key_review_added-total">0</span> / 
-                            <span class="lm-key_review_occuring-total">5</span>
+                          <span class="lm-key_review_added-total stat-total">0</span> / 
+                            <span class="lm-key_review_occuring-total stat-total">5</span>
                         </div>
                                     
                                     
                                      <div class="col-xs-2 col-md-1 text-center hide-overflow"> 
-                          <span class="lm-duediligence-total">0</span>
+                          <span class="lm-duediligence-total stat-total">0</span>
                             
                         </div>
-                              <p>&nbsp;</p>    
+ 
                         </div>
                           
                           

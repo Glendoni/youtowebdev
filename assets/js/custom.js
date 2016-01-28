@@ -83,26 +83,26 @@ $( document ).ready(function() {
     
     
     
-    
+    //counts the totals in team stats columns
     var mycolumnArray = ["tw","lw","tm","lm"];
-var mycolumnArrayLength = mycolumnArray.length;
+    var mycolumnArrayLength = mycolumnArray.length;
 
 
 var myStringArray = ["deals","proposals","demobookedcount","democount","meetingbooked","meetingcount","salescall","introcall","pipelinecount","key_review_added","key_review_occuring","duediligence"];
-var arrayLength = myStringArray.length;
- 
-var total; 
-var list;
-for (var s = 0; s < mycolumnArrayLength; s++) {
+    var arrayLength = myStringArray.length;
 
-for (var i = 0; i < arrayLength; i++) {
+    var total; 
+    var list;
+    for (var s = 0; s < mycolumnArrayLength; s++) {
 
-list = 	getlisttotal(myStringArray[i], mycolumnArray[s])
- //console.log(myStringArray[i])
-};
+        for (var i = 0; i < arrayLength; i++) {
+
+            list = 	getlisttotal(myStringArray[i], mycolumnArray[s])
+
+        };
  
- //console.log(myStringArray[i] + mycolumnArray[i])
-};
+    };
+    ////////End stats counter//////////////////////
     
         $.ajax({
         type: "GET",
@@ -281,7 +281,7 @@ $(window).load(function(){
 
 
 function getlisttotal(col,item){
- 
+ //used to count team stat column totals
 var lm = 0;
 $('.'+item+'-'+col).each(function(){
 
@@ -290,7 +290,6 @@ lm  = (lm+parseInt($(this).text()));
 });
 
 $('.'+item+'-'+col+'-total').text(lm);
-//console.log('This is the result '+ lm + ' for column ' + col)
 return lm;
 
 }
