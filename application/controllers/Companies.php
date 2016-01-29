@@ -272,7 +272,7 @@ class Companies extends MY_Controller {
             
             $this->data['deals_pipline'] = $this->Companies_model->get_deals_pipeline($this->input->get('id'),$this->data['current_user']['id'],false);
 			
-            $this->data['campaigns'] = $this->Campaigns_model->get_campaigns($this->input->get('id'));
+            //$this->data['campaigns'] = $this->Campaigns_model->get_campaigns($this->input->get('id'));
             $this->data['created_by_name'] = $this->Users_model->get_user($user_id);
 			$option_contacts =  array();
 			foreach ($this->data['contacts'] as $contact) {

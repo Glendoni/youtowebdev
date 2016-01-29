@@ -909,108 +909,96 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 				            
 
 
-								<!-- MARKETING -->
-				             <div class="tab-pane fade in" id="marketing">
-                                 
-                                 <ul class="list-group statAction">
-                                    
-                                    
-                                 </ul>
-                                 
-							<?php if (count($actions_marketing) > 0): ?>
-								
-                                    
-                                    
-                                    
-								<?php foreach ($actions_marketing as $actions_marketing): 
-								 $created_date_formatted = date("l jS F y",strtotime($actions_marketing['date_sent']));
-								?>
-						<li class="list-group-item">
-								<div class="row">				                 
-								<div class="col-xs-6 col-md-7">
-								<h4 style="margin:0;">
-								<?php echo $actions_marketing['campaign_name'];?><?php if (isset($actions_marketing['sent_id'])) {?><a href="http://www.sonovate.com/?p=<?php echo $actions_marketing['sent_id'];?>" style="padding-left:10px;" target="_blank"><i class="fa fa-eye"></i></a><?php;}?>
-								<div class="mic-info">
-								<?php echo $created_date_formatted?> by <?php echo $actions_marketing['email'];?>
-								</div>
-								</h4>
-								</div><!--END COL-MD-4-->
-								<div class="col-xs-6 col-md-5" style="text-align:right;">
-								<?php if($actions_marketing['first_name']):?><span class="label label-primary" style="font-size:11px;  "><?php echo $actions_marketing['first_name']." ". $actions_marketing['last_name']; ?></span>
-								<?php endif; ?>
-
-								<?php
-								if (($actions_marketing['opened']>'0') || ($actions_marketing['clicked']>'0')): ?>
-								<span class="label label-success">Opened</span>
-								<?php else: ?>
-								<span class="label label-danger">Not Opened</span>
-								<?php endif; ?>
-								<?php
-								if (($actions_marketing['clicked']>'0')): ?>
-								<span class="label label-success">Clicked</span>
-								<?php else: ?>
-								<span class="label label-warning">Not Clicked</span>
-								<?php endif; ?>
-								<?php
-								if (($actions_marketing['unsubscribed']>'0')): ?>
-								<span class="label label-danger">Unsubscribed</span>
-								<?php else: ?>
-								<?php endif; ?>
-			
-				                        </div>
-				                      
-				                        </div>
-				                </li>
-				                <?php endforeach ?>
-				                </ul>
-							<?php else: ?>
-								<div class="col-md-12 actionMsg">
-									<h4 style="margin: 50px 0 40px 0; text-align: center;">No completed actions found for this company</h4>
-								</div>
-							<?php endif; ?>
-				            </div>
-				            <div class="tab-pane fade in" id="comments">
-							<div class="col-md-12">
-
-				            
-
-							<?php if (count($comments) > 0): ?>
-							<ul class="list-group">
-	        				<?php foreach ($comments as $comment):
-							
-							?>
-							<li class="list-group-item">
-							<div class="row">
-							<div class="col-xs-10 col-md-11">
-                                <div>
-                                    <div class="mic-info">
-                                        By: <?php echo $system_users[$comment->user_id]?> on <?php echo date("j M Y",strtotime($comment->created_at));?>
-                                    </div>
+<!-- MARKETING -->
+<div class="tab-pane fade in" id="marketing">
+    <ul class="list-group statAction">
+        <?php if (count($actions_marketing) > 0): ?>
+            <?php foreach ($actions_marketing as $actions_marketing): 
+                $created_date_formatted = date("l jS F y",strtotime($actions_marketing['date_sent']));
+                ?>
+                <li class="list-group-item">
+                    <div class="row">				                 
+                        <div class="col-xs-6 col-md-7">
+                            <h4 style="margin:0;">
+                                <?php echo $actions_marketing['campaign_name'];?><?php if (isset($actions_marketing['sent_id'])) {?><a href="http://www.sonovate.com/?p=<?php echo $actions_marketing['sent_id'];?>" style="padding-left:10px;" target="_blank"><i class="fa fa-eye"></i></a><?php;}?>
+                                <div class="mic-info">
+                                    <?php echo $created_date_formatted?> by <?php echo $actions_marketing['email'];?>
                                 </div>
-                                <div class="comment-text" style="margin-top:10px;">
-                                    <?php echo $comment->comments; ?>
-                                </div>
-                          
-	                        </div>
-	                        </div>
-	                        </li>
-	        			<?php endforeach ?>
-	        			</ul>
-	        		<?php else: ?>
+                            </h4>
+                        </div><!--END COL-MD-4-->
+                        <div class="col-xs-6 col-md-5" style="text-align:right;">
+                            <?php if($actions_marketing['first_name']):?><span class="label label-primary" style="font-size:11px;  "><?php echo $actions_marketing['first_name']." ". $actions_marketing['last_name']; ?></span>
+                            <?php endif; ?>
+                            <?php
+                            if (($actions_marketing['opened']>'0') || ($actions_marketing['clicked']>'0')): ?>
+                                <span class="label label-success">Opened</span>
+                            <?php else: ?>
+                                <span class="label label-danger">Not Opened</span>
+                            <?php endif; ?>
+                            <?php
+                            if (($actions_marketing['clicked']>'0')): ?>
+                                <span class="label label-success">Clicked</span>
+                            <?php else: ?>
+                                <span class="label label-warning">Not Clicked</span>
+                            <?php endif; ?>
+                            <?php
+                            if (($actions_marketing['unsubscribed']>'0')): ?>
+                                <span class="label label-danger">Unsubscribed</span>
+                            <?php else: ?>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </li>
+            <?php endforeach ?>
+            <?php else: ?>
+            <div class="col-md-12 actionMsg">
+            <h4 style="margin: 50px 0 40px 0; text-align: center;">No completed actions found for this company</h4>
+            </div>
+        <?php endif; ?>
+    </ul>
+</div>
+<div class="tab-pane fade in" id="comments">
+<div class="col-md-12">
 
-	        		<div style="margin:10px 0;">
-					<h4 style="margin: 50px 0 40px 0; text-align: center;">No Comments</h4>
-					</div>
-					<?php endif; ?>
-					</div>
-					<?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'],'done'=>'1','campaign_id' => $campaign_id,);
-					echo form_open(site_url().'actions/create', 'name="create" class="" role=""',$hidden); ?>
-		            	<input type="hidden" name="action_type_completed" value="7">
-		            	<div class="col-md-10">					
-	                    <input id="btn-input" type="text" class="form-control input-md" name="comment" placeholder="Type your comment here...">
-	                    </div>
-	                    <div class="col-md-2">	
-	                        <button class="btn btn-primary btn-md btn-block" id="btn-chat">
+
+
+<?php if (count($comments) > 0): ?>
+<ul class="list-group">
+<?php foreach ($comments as $comment):
+
+?>
+<li class="list-group-item">
+<div class="row">
+<div class="col-xs-10 col-md-11">
+<div>
+    <div class="mic-info">
+        By: <?php echo $system_users[$comment->user_id]?> on <?php echo date("j M Y",strtotime($comment->created_at));?>
+    </div>
+</div>
+<div class="comment-text" style="margin-top:10px;">
+    <?php echo $comment->comments; ?>
+</div>
+
+</div>
+</div>
+</li>
+<?php endforeach ?>
+</ul>
+<?php else: ?>
+
+<div style="margin:10px 0;">
+<h4 style="margin: 50px 0 40px 0; text-align: center;">No Comments</h4>
+</div>
+<?php endif; ?>
+</div>
+<?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'],'done'=>'1','campaign_id' => $campaign_id,);
+echo form_open(site_url().'actions/create', 'name="create" class="" role=""',$hidden); ?>
+<input type="hidden" name="action_type_completed" value="7">
+<div class="col-md-10">					
+<input id="btn-input" type="text" class="form-control input-md" name="comment" placeholder="Type your comment here...">
+</div>
+<div class="col-md-2">	
+<button class="btn btn-primary btn-md btn-block" id="btn-chat">
 	                            Comment
 	                        </button>
 	                    </div>

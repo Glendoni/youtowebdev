@@ -1376,21 +1376,22 @@
     <!--START MARKETING STATS-->
             <div class="panel panel-default">
     <div class="panel-heading" id="contacts">
-    <h3 class="panel-title">Email Engagement<span class="badge pull-right eventcount"><?php echo count($marketing_actions); ?></span></h3>
+    <h3 class="panel-title">Email Engagement<span class="badge pull-right eventcount"></span></h3>
     </div>
     <!-- /.panel-heading -->
     <div class="panel-body" style="font-size:12px;">
         <!--AUTO PILOT  -->
-<div class="row record-holder-header mobile-hide">
-<div class="col-xs-8 col-sm-4 col-md-3"><strong>Company</strong></div>
-<div class="col-xs-8 col-sm-4 col-md-2"><strong>Campaign</strong></div>
-<div class="col-xs-4 col-sm-1 col-md-1"><strong>Pipeline</strong></div>
-<div class="col-xs-6 col-sm-2 col-md-2"><strong>Contact</strong></div>
-<div class="col-xs-6 col-sm-3 col-md-2"><strong>Last Action</strong></div>
-<div class="col-xs-12 col-sm-2 col-md-1"><strong>Date</strong></div>
-</div>
-<div id="stat"></div>   
-<!--AUTO PILOT END  -->
+        <div class="row record-holder-header mobile-hide">
+            <div class="col-xs-8 col-sm-4 col-md-3"><strong>Company</strong></div>
+            <div class="col-xs-8 col-sm-4 col-md-2"><strong>Campaign</strong></div>
+            <div class="col-xs-4 col-sm-1 col-md-1"><strong>Pipeline</strong></div>
+            <div class="col-xs-6 col-sm-2 col-md-2"><strong>Contact</strong></div>
+            <div class="col-xs-6 col-sm-3 col-md-2"><strong>Last Action</strong></div>
+            <div class="col-xs-12 col-sm-2 col-md-1"><strong>Date</strong></div>
+        </div>
+        
+        <div id="stat"></div>   
+        <!--AUTO PILOT END  -->
 </div>
 <!-- /.panel-body -->
 </div>
@@ -1399,24 +1400,7 @@
 </div><!--END TAB PANES-->
 </div><!--END-COL-SM-9-->
 <div class="col-sm-3 col-sm-pull-9">
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h3 class="panel-title">My Campaigns <span class="badge pull-right"><?php echo count($private_campaigns); ?></span></h3>
-              </div>
-              <div class="panel-body" style="padding:0;">
-                  <!-- PRIVATE SEARCHES -->
-                  <?php foreach ($private_campaigns as $campaign):?>
-                  <a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $campaign->id; ?>" class="load-saved-search" <?php echo strlen($campaign->name) > 33 ? 'title="'.$campaign->name.'"':"" ?>>
-                  <div class="row">
-                  <div class="col-xs-10" style="overflow:hidden"><?php echo $campaign->name;?></br><small style="font-weight:300;"><?php echo date('D jS M y',strtotime($campaign->created_at));?></small></div>
-
-
-                  <div class="col-xs-1"><b><?php echo $campaign->campaigncount; ?></b></div>
-                  </div>
-                  </a>
-                  <?php endforeach; ?>
-              </div>
-            </div>
+          
             <div class="panel panel-default">
               <div class="panel-heading">
                 <h3 class="panel-title">Recent Campaigns <span class="badge pull-right"><?php echo count($shared_campaigns); ?></span></h3>    
