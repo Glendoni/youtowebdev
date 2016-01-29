@@ -116,7 +116,7 @@ class Marketing extends MY_Controller {
        $comp_name =  $this->Companies_model->get_company_from_id($id);
     
         
-        $words = array( 'Limited', 'LIMITED', 'LTD','ltd','Ltd' );
+        $words = array( 'Limited', 'LIMITED', 'LTD','ltd','Ltd', '\'' );
         
         
         
