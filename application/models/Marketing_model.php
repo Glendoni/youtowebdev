@@ -26,24 +26,24 @@ to_char(identifies.sent_at, 'DD/MM/YYYY') as Date ,send.event_text as sent,
 		WHERE identifies.sent_at >= '2016-01-20' 
 		AND  _open.campaign IS NOT null
         AND  identifies.company IS NOT null
+        
+        LIMIT 200
         ";
         $result = pg_query($query) or die('Query failed: ' . pg_last_error());
- 
+ $words = array( 'Limited', 'LIMITED', 'LTD','ltd','Ltd','\'' );
             while ($row = pg_fetch_array($result)) 
             {
 
-             
-                 //echo  $row[0]." - ".$row[1]." - ".$row[2]." - ".$row[3]." - ".$row[4]." - ". $row[5]."<br>"; 
-                if($row[0] ){
-                $get_companyID  = $this->getuserdetails($row[0]);
-            //
-                
+              $comapnyrow  =  str_replace($words, '',ltrim($row[0])) ;
+                //echo  $comapnyrow ." - ".$row[1]." - ".$row[2]." - ".$row[3]." - ".$row[4]." - ". $row[5]."\n"; 
+                if($comapnyrow){
+                    
+                $get_companyID  = $this->getuserdetails(ltrim($comapnyrow));
+                    
                  if($get_companyID) $resultArray[]['companyID'] =   $get_companyID; 
                 
                     $resultArray[] = $row; 
-                    
-               
-                
+                     
                 }
                 
             } 
