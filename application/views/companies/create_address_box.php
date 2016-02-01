@@ -13,9 +13,15 @@
                 <div class="col-md-12">
                         <div class="form-group">
                             <label for="name" class="control-label">Address*</label>                            
-                            <input type="text" name="address" value="<?php echo isset($address->address)?$address->address:''; ?>" class="form-control">
+                            <input type="text" name="address" value="<?php echo isset($address->address)?$address->address:''; ?>" class="form-control popUpAddress">
                         </div>
                 </div>
+                     <div class="col-md-12 copyRegAddr">
+                        <div class="form-group">
+                            <label for="phone" class="control-label">Copy Registered Address</label>                            
+                            <input type="checkbox" name="copymainaddr" id="copymainaddr"  >
+                        </div>
+                    </div>
                  <div class="col-md-6">
                         <div class="form-group">
                         <?php  
@@ -35,9 +41,14 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="phone" class="control-label">Phone</label>                            
-                            <input type="text" name="phone" value="<?php echo isset($address->phone)?$address->phone:''; ?>" maxlength="50" class="form-control">
+                            <input type="text"  name="phone" value="<?php echo isset($address->phone)?$address->phone:''; ?>" maxlength="50" class="form-control popUpPhone">
                         </div>
                     </div>
+                    
+                    
+                    
+                    
+                     
             </div>
             </div>
             <div class="modal-footer">

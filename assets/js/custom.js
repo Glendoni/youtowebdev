@@ -190,7 +190,7 @@ $(".show_si_box").slideDown(600);
     })
 });
      
-    //////////////THE HOLY GRAIL
+    //////////////Controls pipline pick date
         var d = new Date();
         d.setMonth(d.getMonth()+11);   //change retruned months here
       var   montheval =""+d.getMonth()+"" ;
@@ -254,5 +254,18 @@ function getlisttotal(col,item){
     return lm;
 
 }
+ 
+$('.tradingType').on('change', function() {
+ var trAddress =  $(this).val(); 
+if(trAddress === "Registered Address"){ $('.tradingTypeOptions').show(); } else{ $('.tradingTypeOptions, .addrTrading').hide(); $(".def").prop("checked", true); $('.tradingAddress').val('')}
+}); 
+$('.tradingArr').on('change', function() {
+ var trAddress =  $(this).val(); 
+if(trAddress == 2){ $('.addrTrading').show(); } else{ $('.addrTrading').hide(); $('#tradingAddress').val('')  }
+});
 
+if($('.popUpAddress').val() && $('.mainAddrType').text() != 'Trading Address'){$('.copyRegAddr').hide() }
+$('#copymainaddr').click(function(){
+if($(this).prop("checked")){ $('.popUpAddress').val($('.mainAddress').text()) }else{ $('.popUpAddress').val('') }
+})
 

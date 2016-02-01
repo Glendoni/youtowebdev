@@ -77,7 +77,7 @@ echo form_open('',$attributes,$hidden);
     </div>
 </div>
 <hr>
-<h3>Address</h3>
+<h3> Address</h3>
 <div class=" form-group ">
     <label for="address" class="control-label col-sm-2">Address</label>
     <div class="col-sm-10">                            
@@ -105,8 +105,31 @@ echo form_open('',$attributes,$hidden);
 <div class=" form-group ">
     <label for="type" class="control-label col-sm-2">Type</label>
     <div class="col-sm-10">                            
-<?php echo form_dropdown('address_types', $address_types, (isset($address->type)?$address->type:'') ,'class="form-control"' );?>    </div>
+<?php echo form_dropdown('address_types', $address_types, (isset($address->type)?$address->type:'') ,'class="form-control tradingType"' );?>    </div>
 	</div>
+  <div class="tradingTypeOptions">  
+   <div class="form-group">
+        <label class="col-sm-2 control-label">Trading/Registered Address</label>
+        <div class="col-sm-10">
+            <label class="radio-inline"> <input type="radio" name="tradingArr" class="tradingArr" value="1" > The Same  </label>
+            <label class="radio-inline"> <input type="radio" name="tradingArr" class="tradingArr" value="2"> Not The Same </label>
+            <label class="radio-inline"> <input type="radio" name="tradingArr" class="tradingArr def"  checked="checked" value="3"> Fill Out Later </label>
+        </div>
+    </div>
+      
+    </div>
+
+<div class="addrTrading">
+    <hr>
+<h3>Trading Address</h3>
+<div class=" form-group ">
+    <label for="address" class="control-label col-sm-2">Address</label>
+    <div class="col-sm-10">                            
+    	<input type="text" name="tradingAddress" value="<?php echo isset($_POST['tradingAddress'])?$_POST['tradingAddress']:''; ?>" id="tradingAddress" maxlength="200" class="form-control">
+    </div>
+</div>
+
+    </div>
 
 <!-- <div class=" form-group ">
     <label for="turnover" class="control-label col-sm-2">Turnover</label>

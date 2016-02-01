@@ -93,78 +93,6 @@ class Companies_model extends CI_Model {
 		return 	$arrayNamesPipelineSearch;
 	}
 
-	// not in use
-	// function get_company_by_id($id)
-	// {
-
-	// 	$this->db->select('companies.*,addresses.address');
-	// 	$this->db->from('companies');
-	// 	$this->db->join('addresses','addresses.company_id = companies.id','left');
-	// 	$this->db->join('operates','operates.company_id = companies.id AND operates.active = True','left');
-	// 	$this->db->join('sectors','sectors.id = operates.sector_id','left');
-		
-	// 	$this->db->where('companies.id', $id);
-	// 	$this->db->where('companies.active', 'True');
-	// 	$this->db->group_by('companies.id,addresses.address');
-	// 	$this->db->order_by("companies.name", "asc");
-
-
-	// 	// Employee count
-	// 	$this->db->select('(SELECT "count" FROM "emp_counts" WHERE "emp_counts"."company_id" = "companies"."id" ORDER BY "emp_counts"."created_at" DESC LIMIT 1) as emp_count', FALSE, FALSE);
-
-	// 	// Sectors the company is in 
-	// 	$this->db->select("(SELECT string_agg(S.name, ',') FROM sectors S,operates O WHERE O.company_id = companies.id AND S.id = O.sector_id  AND O.active = 'True') as company_sectors", FALSE, FALSE);
-	// 	$this->db->select("(SELECT array_to_string(array_agg(S.id), ',')  FROM sectors S,operates O WHERE O.company_id = companies.id AND S.id = O.sector_id  AND O.active = 'True'  ) as company_sectors_ids", FALSE, FALSE);
-	// 	// Linkedin connectioins ( need improvement , can be done once a month to another table)
-	// 	$this->db->select("(SELECT count(*) FROM connections C,employees E WHERE E.company_id = companies.id AND C.employee_id = E.id ) as company_connections", FALSE, FALSE);
-
-	// 	// Assign to
-	// 	$this->db->select("(SELECT Ad.name FROM users Ad WHERE Ad.id = companies.user_id ) as company_assigned_to", FALSE, FALSE);
-	// 	$this->db->select("(SELECT Ad.image FROM users Ad WHERE Ad.id = companies.user_id ) as company_assigned_to_image", FALSE, FALSE);
-	// 	$this->db->select("(SELECT Ad.id FROM users Ad WHERE Ad.id = companies.user_id ) as company_assigned_to_id", FALSE, FALSE);
-
-
-	// 	// Build query 
-	// 	$query = $this->db->get();
-	// 	print $query;
-	// 	die;
-	// 	// Run query  
-	// 	$query->result();
-
-	// 	// Place query result into variable
-	// 	$companies = $query;
-
-	// 	foreach ($companies->result_object as $key => $company) {
-	// 		// Select fields 
-	// 		$this->db->select("to_char(mortgages.eff_from, 'DD/Mon/YYYY') AS eff_from , providers.name, mortgages.stage ",FALSE);
-	// 		$this->db->from('mortgages');
-	// 		$this->db->where('mortgages.company_id',$company->id);
-	// 		$this->db->join('providers','providers.id = mortgages.provider_id','left');
-	// 		$this->db->group_by(array('providers.name', 'mortgages.stage' , 'mortgages.eff_from'));
-	// 		$this->db->order_by('mortgages.eff_from');
-	// 		$mortgages = $this->db->get(); 
-
-
-	// 		// Get result as array 
-	// 		$mortgages2 = $mortgages->result_array();
-
-	// 		// Place the result array on the current object
-	// 		$companies->result_object[$key]->mortgages = $mortgages2;
-
-	// 		$this->db->select('turnovers.turnover');
-	// 		$this->db->from('turnovers');
-	// 		$this->db->where('turnovers.company_id',$company->id);
-	// 		$this->db->order_by('turnovers.eff_from','desc');
-	// 		$this->db->limit(1);
-	// 		$turnovers = $this->db->get(); 
-	// 		$turnovers_array = $turnovers->result_array();
-
-	// 		$companies->result_object[$key]->turnover = $turnovers_array[0]['turnover'];
-
-	// 	}
-
-	// 	return $companies;
-	// }
 
 	function get_last_imported(){
 		$this->db->select('companies.name,companies.id');
@@ -314,19 +242,6 @@ class Companies_model extends CI_Model {
 				}
 			}	
 		}
-
-		
-		// EMP COUNT
-		// if((isset($post['employees_to']) and !empty($post['employees_to'])) and (isset($post['employees_from']) and !empty($post['employees_from'])) ) 
-		// {
-		// 	$emp_count_sql = 'select company_id  from emp_counts where count > '.$post['employees_from'].'  and count < '.$post['employees_to'].'  ';
-		// }
-
-		// MORTGAGE
-		// if (!empty($post['mortgage_to']) && !empty($post['mortgage_from']))
-		// {
-		// 	$mortgage_sql = 'select company_id  from mortgages where mortgages.stage = \''.MORTGAGES_OUTSTANDING.'\' and EXTRACT (doy from mortgages.eff_from) - EXTRACT (doy from now()) BETWEEN '.$post['mortgage_from'].' AND '.$post['mortgage_to'].'  ';
-		// }
 
 		// SECTORS
 		if( isset($post['sectors']) && !empty($post['sectors']) && $post['sectors'] !== '0' )
@@ -721,247 +636,7 @@ class Companies_model extends CI_Model {
 
 		return $query->result_array();
 	}
-	// NOT IN USE
-	// function search_companies($post)
-	// {
-	// 	// Select query
-	// 	$this->db->select('companies.*,addresses.address,turnovers.turnover,turnovers.currency,turnovers.method as turnover_method');
-	// 	$this->db->from('companies');
-	// 	$this->db->join('addresses','addresses.company_id = companies.id','left');
-	// 	$this->db->join('emp_counts','emp_counts.company_id = companies.id','left');
-	// 	$this->db->join('mortgages','mortgages.company_id = companies.id','left');
-	// 	$this->db->where('companies.active', 'True');
-	// 	$this->db->order_by("companies.name", "asc");
-		
-	// 	$this->db->join('turnovers','turnovers.company_id = companies.id','left');
-		
-		
-		
-	// 	// $this->db->select("( SELECT T.turnover as turnover FROM turnovers T WHERE T.company_id = companies.id ORDER BY T.eff_from DESC  LIMIT 1) as turnover ",FALSE,FALSE);
-	// 	// $this->db->select("( SELECT T.currency as currency FROM turnovers T WHERE T.company_id = companies.id ORDER BY T.eff_from DESC  LIMIT 1) as currency ",FALSE,FALSE);
-	// 	// $this->db->select("( SELECT T.method as method FROM turnovers T WHERE T.company_id = companies.id ORDER BY T.eff_from DESC  LIMIT 1) as turnover_method ",FALSE,FALSE);
-		
-	// 	// Employee count
-	// 	$this->db->select('(SELECT "count" FROM "emp_counts" WHERE "emp_counts"."company_id" = "companies"."id" ORDER BY "emp_counts"."created_at" DESC LIMIT 1) as emp_count', FALSE, FALSE);
-
-	// 	// Sectors the company is in 
-	// 	$this->db->select("(SELECT string_agg(S.name, ',') FROM sectors S,operates O WHERE O.company_id = companies.id AND S.id = O.sector_id  AND O.active = 'True' ) as company_sectors", FALSE, FALSE);
-	// 	$this->db->select("(SELECT array_to_string(array_agg(S.id), ',')  FROM sectors S,operates O WHERE O.company_id = companies.id AND S.id = O.sector_id  AND O.active = 'True'  ) as company_sectors_ids", FALSE, FALSE);
-
-	// 	// Linkedin connectioins ( need improvement , can be done once a month to another table)
-	// 	$this->db->select("(SELECT count(*) FROM connections C,employees E WHERE E.company_id = companies.id AND C.employee_id = E.id ) as company_connections", FALSE, FALSE);
-
-	// 	// Campaigns
-	// 	// $this->db->select("(SELECT ARRAY['CM.id', 'CM.name'] FROM campaigns CM,targets TA WHERE TA.company_id = companies.id AND TA.campaign_id = CM.id ) as company_campaigns", FALSE, FALSE);
-
-	// 	// Assign to
-	// 	$this->db->select("(SELECT Ad.name FROM users Ad WHERE Ad.id = companies.user_id ) as company_assigned_to", FALSE, FALSE);
-	// 	$this->db->select("(SELECT Ad.id FROM users Ad WHERE Ad.id = companies.user_id ) as company_assigned_to_id", FALSE, FALSE);
 	
-	// 	// Group by variable to be set during filtering 
-	// 	$group_by = array('companies.id',
-	// 						'companies.user_id',	
-	// 						'companies.linkedin_id',
-	// 						'companies.registration',
-	// 						'companies.name',
-	// 						'companies.url',
-	// 						'companies.ddlink',	
-	// 						'companies.contract',	
-	// 						'companies.perm',	
-	// 						'companies.active',
-	// 						'companies.on_base',
-	// 						'companies.eff_from',	
-	// 						'companies.eff_to',	
-	// 						'customer_from',
-	// 						'companies.created_at',	
-	// 						'companies.updated_at',	
-	// 						'address',
-	// 						'turnover',	
-	// 						'currency',
-	// 						'turnover_method',
-	// 						'emp_count',
-	// 						'company_sectors',
-	// 						'company_connections',
-	// 						'company_assigned_to'
-	// 						);
-		
-	// 	//FILTER QUERY 
-
-	// 	// AGENCY NAME
-	// 	if (isset($post['agency_name']) && strlen($post['agency_name'])) 
-	// 	{
-	// 		$this->db->like('companies.name', $post['agency_name']); 
-	// 		$this->db->order_by("companies.name", "asc");
-	// 	}
-
-	// 	// TURNOVER
-	// 		// Defautl values
-	// 		if(empty($turnover_from) && !empty($turnover_to))
-	// 		{
-	// 			$turnover_from = '0';
-	// 		}
-
-	// 		if(empty($turnover_to) && !empty($turnover_from))
-	// 		{
-	// 			$turnover_to = '100000000';
-	// 		}
-	// 		// set from in query
-	// 	if(isset($turnover_from) && (!empty($turnover_from)) ) 
-	// 	{
-	// 		$this->db->where('turnovers.turnover >', $turnover_from);
-	// 	}
-	// 		// set to in query
-	// 	if(isset($turnover_to) && (!empty($turnover_to)) )
-	// 	{
-	// 		$this->db->where('turnovers.turnover <', $turnover_to);
-	// 	}
-	// 		// order by turnover
-	// 	if(isset($turnover_from) || isset($turnover_to)) 
-	// 	{
-	// 		array_push($group_by,"turnovers.turnover");
-	// 		$this->db->order_by("turnovers.turnover", "asc");
-	// 	}
-
-
-	// 	// EMPLOYEES COUNT
-	// 		// Defautl values
-	// 		if(empty($post['employees_from']) && !empty($post['employees_to']))
-	// 		{
-	// 			$post['employees_from'] = '0';
-	// 		}
-
-	// 		if(empty($post['employees_to']) && !empty($post['employees_from']))
-	// 		{
-	// 			$post['employees_to'] = '1000';
-	// 		}
-	// 	if(isset($post['employees_from']) && (!empty($post['employees_from'])) )
-	// 	{
-	// 		$this->db->where('emp_counts.count >', $post['employees_from']);
-	// 	}	
-
-	// 	if(isset($post['employees_to']) && (!empty($post['employees_to'])) )
-	// 	{
-	// 		$this->db->where('emp_counts.count <', $post['employees_to']);
-	// 	}
-
-	// 	if(isset($post['employees_to']) || isset($post['employees_from'])) 
-	// 	{
-	// 		array_push($group_by,"emp_counts.count");
-	// 		$this->db->order_by("emp_counts.count", "asc");
-	// 	}
-		
-
-	// 	// COMPANY AGE
-	// 		// Defautl values
-	// 		if(empty($post['company_age_from']) && !empty($post['company_age_to']))
-	// 		{
-	// 			$post['company_age_from'] = 1;
-	// 		}
-
-	// 		if(empty($post['company_age_to']) && !empty($post['company_age_from']))
-	// 		{
-	// 			$post['company_age_to'] = 4;
-	// 		}
-		
-	// 	if(isset($post['company_age_from']) && (!empty($post['company_age_from'])) )
-	// 	{
-	// 		$company_age_from = date("m-d-Y", strtotime("-".$post['company_age_from']." year"));
-	// 		$this->db->where('companies.eff_from <=', $company_age_from);
-	// 	}
-	// 	if(isset($post['company_age_to']) && (!empty($post['company_age_to'])) )
-	// 	{
-	// 		$company_age_to = date("m-d-Y", strtotime("-".$post['company_age_to']." year"));
-	// 		$this->db->where('companies.eff_from >=', $company_age_to);
-	// 	}
-	// 	if(isset($post['company_age_to']) || isset($post['company_age_from'])) 
-	// 	{
-	// 		// array_push($group_by,"companies.eff_from");
-	// 		$this->db->order_by("companies.eff_from", "desc");
-	// 	}
-
-	// 	// SECTORS
-
-	// 	if( isset($post['sectors']) && (!in_array("0", $post['sectors'])) )
-	// 	{	
-	// 		$this->db->join('operates','operates.company_id = companies.id AND operates.active = True','left');
-	// 		$this->db->join('sectors','sectors.id = operates.sector_id','left');
-	// 		$this->db->where_in('operates.sector_id',$post['sectors']);
-	// 		array_push($group_by,"operates.id"); 
-	// 	}
-
-	// 	// MORTGAGES
-	// 	// Defautl values
-	// 		if(empty($post['mortgage_from']) && !empty($post['mortgage_to']))
-	// 		{
-	// 			$post['mortgage_from'] = 0;
-	// 		}
-
-	// 		if(empty($post['mortgage_to']) && !empty($post['mortgage_from']))
-	// 		{
-	// 			$post['mortgage_to'] = 365;
-	// 		}
-
-	// 	if (!empty($post['mortgage_to']) && !empty($post['mortgage_from']))
-	// 	{
-	// 		$this->db->where('mortgages.stage', MORTGAGES_OUTSTANDING);
-	// 		$mortgage_end_from = $post['mortgage_from'];
-	// 		$mortgage_end_to = $post['mortgage_to'];
-	// 		$mortgage_endsql = "EXTRACT (doy from mortgages.eff_from) - EXTRACT (doy from now()) BETWEEN $mortgage_end_from AND $mortgage_end_to ";
-	// 		$this->db->where($mortgage_endsql,'',FALSE);
-	// 		array_push($group_by,"mortgages.id");
-	// 		$this->db->order_by('(EXTRACT (doy from mortgages.eff_from) - EXTRACT (doy from now()))','asc');
-	// 	}
-
-
-	// 	// Providers
-	// 	if(isset($post['providers']) && (!empty($post['providers'])) )
-	// 	{
-	// 		$this->db->join('providers','providers.id = mortgages.provider_id','left');
-	// 		$this->db->where('providers.id', $post['providers']);
-	// 		array_push($group_by,"providers.id"); 
-	// 	}
-
-	// 	// Set order by from variable
-	// 	$this->db->group_by($group_by); 
-		
-	// 	// Build query 
-	// 	$query = $this->db->get();
-
-	// 	// Run query  
-	// 	$query->result();
-
-
-	// 	// Place query result into variable
-	// 	$companies = $query;
-		
-	// 	// Flush memory cache: as we won't be repeating this query we should not keep it in memory :) 
-	// 	$this->db->flush_cache();
-		
-	// 	// Populate mortgages for each company as array and make the assign to initials.
-	// 	foreach ($companies->result_object as $key => $company) {
-	// 		// Select fields 
-	// 		$this->db->select("to_char(mortgages.eff_from, 'dd/mm/yy') AS eff_from , providers.name, mortgages.stage ",FALSE);
-	// 		$this->db->from('mortgages');
-	// 		$this->db->where('mortgages.company_id',$company->id);
-	// 		$this->db->join('providers','providers.id = mortgages.provider_id','left');
-	// 		$this->db->group_by(array('providers.name', 'mortgages.stage' , 'mortgages.eff_from'));
-	// 		$this->db->order_by('mortgages.eff_from','desc');
-	// 		$this->db->order_by('mortgages.stage','asc');
-			
-	// 		$mortgages = $this->db->get(); 
-
-
-	// 		// Get result as array 
-	// 		$mortgages2 = $mortgages->result_array();
-
-	// 		// Place the result array on the current object
-	// 		$companies->result_object[$key]->mortgages = $mortgages2;
-
-			
-	// 	}
-		
-	// 	return  $companies;
-	// }
 
 	function assign_company($company_id,$user_id)
 	{
@@ -1021,36 +696,15 @@ class Companies_model extends CI_Model {
 			$turnover_status = $this->db->affected_rows();
 		}
         
-        
              if(isset($post['remove_pipeline']) || $post['remove_pipeline'] == true ){
                  
                  $this->delete_pipeline($post);     
-             } 
-        
-        
-        
+             }
         
         	if(isset($post['pipeline_status']) && $post['pipeline_status'] != 0 && $post['pipeline_month'] !=0 )
 		{
-
-              
-                
-
                 $status = 1;
-                
-               // $check = $this->check_if_pipeline_exist($post['company_id'])? 'Yes' : 'No';
-                
-        
-                
-                
-                
-$this->update_pipline($post,$user_id);  
-                
-                
-//file_put_contents('apitext.txt', 'company ID '.$post['company_id']. ' Pipeline Status: '.$post['pipeline_status'].' Pipeline month '.$pipeline_month. ' User Id/ updated by '.$user_id. ' Status '.$status.  PHP_EOL   , FILE_APPEND);   
-                
-       
-                
+                $this->update_pipline($post,$user_id);         
                 
 		}
         
@@ -1144,10 +798,6 @@ $this->update_pipline($post,$user_id);
 		return true;
 		
 	}
-
-
-    
-    
     
 
 	function create_company($post){
@@ -1182,10 +832,51 @@ $this->update_pipline($post,$user_id);
 			$this->db->insert('addresses', $address);
 			$new_company_address_id = $this->db->insert_id(); 
 		}
+        
+        if(isset($post['tradingArr'])){
+            
+            if($post['tradingArr'] == 1) { //the same so copy
+                
+                
+                	$address = array(
+				'company_id' => $new_company_id,
+				'country_id' => $post['country_id'],
+				'address' => $post['address'],
+				'lat' => !empty($post['lat'])?$post['lat']:NULL,
+				'lng' => !empty($post['lng'])?$post['lng']:NULL,
+				'type' => "Trading Address",
+				'created_by'=> $post['user_id'],
+
+				);
+               
+                $this->db->insert('addresses', $address);
+            }
+            
+            
+            if($post['tradingArr'] == 2){
+                
+                
+                   $address = array(
+				'company_id' => $new_company_id,
+				'country_id' => $post['country_id'],
+				'address' => $post['tradingAddress'],
+				'lat' => !empty($post['lat'])?$post['lat']:NULL,
+				'lng' => !empty($post['lng'])?$post['lng']:NULL,
+				'type' => "Trading Address",
+				'created_by'=> $post['user_id'],
+
+				);
+            
+             $this->db->insert('addresses', $address);
+        }
+        
 		if($new_company_id and $new_company_address_id) return TRUE;
 		return FALSE;
 	}
 
+    
+    }
+    
 	// This is an example of inserting 
 	function insert_entry()
 	{
@@ -1217,25 +908,11 @@ $this->update_pipline($post,$user_id);
         LEFT JOIN countries as c ON c.id = addresses.country_id
         LEFT JOIN users as f ON f.id = addresses.created_by
         LEFT JOIN users as e ON e.id = addresses.updated_by
-        
-        
-       WHERE addresses.company_id=".$company_id."
-        
-        ORDER BY type ASC
-        
-        
-        ";
-		
-        
-        
-        
-    
+        WHERE addresses.company_id=".$company_id."
+        ORDER BY type ASC";
   
-     $result = $this->db->query($sql);
-      return    $result->result();
-        
-        
-     
+        $result = $this->db->query($sql);
+        return    $result->result();
 	}
 
 	function create_address($post)
@@ -1352,10 +1029,7 @@ $this->update_pipline($post,$user_id);
                     return array('row_id' => $row->id);
                 } 
                   
-              }
-              
-           
-                  
+              }    
                   
 	}
         
@@ -1363,63 +1037,48 @@ $this->update_pipline($post,$user_id);
     @ Insert Company Charges from Company House API Record
     @ Author: Glen Small
     */
-    public function insert_charges_CH($response, $company_id,$user_id){
-        
-        
-
-        
-        
-          $this->load->helper('inflector');
+    public function insert_charges_CH($response, $company_id,$user_id)
+    {
+           
+        $this->load->helper('inflector');
         $provider  = '';
         $provider = $response['items'][0]['persons_entitled'][0]['name'];
          $provider_id = $this->providerCheck($provider);
-        
-        
-        
-        
-        //API TESTER WRITES TO FILE
-    $filecontent =  'company_id : '.$company_id.' provider_id: '.$provider_id.' ref: '.$response['items'][0]['etag'].' type: '.$response['items'][0]['classification']['description'].' stage: '.$response['items'][0]['status'].' eff_from: '.date('Y-m-d').' user: '.$user_id; 
     
- // file_put_contents('apitext.txt', $filecontent, FILE_APPEND);    
-  
-       
- if($provider_id){
-        $mortgages = array(
-				'company_id' => $company_id,
-                'provider_id' => $provider_id,
-				'ref' => $response['items'][0]['etag'],
-                'stage' =>  $response['items'][0]['status'],
-                'eff_from' => $response['items'][0]['transactions'][0]['delivered_on'],
-                'created_at' =>   date('Y-m-d'),	
-				'created_by' => $user_id
-			 
-				);
-			$this->db->insert('mortgages', $mortgages);
-    }        
+        if($provider_id){
+            $mortgages = array(
+                    'company_id' => $company_id,
+                    'provider_id' => $provider_id,
+                    'ref' => $response['items'][0]['etag'],
+                    'stage' =>  $response['items'][0]['status'],
+                    'eff_from' => $response['items'][0]['transactions'][0]['delivered_on'],
+                    'created_at' =>   date('Y-m-d'),	
+                    'created_by' => $user_id
+
+                    );
+                $this->db->insert('mortgages', $mortgages);
+        }        
              
     }  
     
     
-    public function providerCheck($name){
-            
-    $q = '
-     SELECT id,name,provider_id
-     FROM provider_checks
-     WHERE name ilike \''.$name.'\'
-     LIMIT 1
-    ';
-    $result = $this->db->query($q);
+    public function providerCheck($name)
+    {
+        $q = '
+         SELECT id,name,provider_id
+         FROM provider_checks
+         WHERE name ilike \''.$name.'\'
+         LIMIT 1
+        ';
+        $result = $this->db->query($q);
               if( $result->num_rows()){
-
-               foreach ($result->result() as $row)
-                {
-                    return $row->provider_id;
-                } 
-                    }else{
-
+                   foreach ($result->result() as $row)
+                    {
+                        return $row->provider_id;
+                    } 
+             }else{
                   return false;
-
-              }
+            }
     }
     
     public function hackmorgages($id){
@@ -1442,8 +1101,6 @@ $this->update_pipline($post,$user_id);
           
     }
     
-
-    
     public function delete_pipeline($post){
         
         //remove_pipeline
@@ -1452,24 +1109,13 @@ $this->update_pipline($post,$user_id);
         
     }
     
-       
-    
     public function update_pipline($post, $user_id){
-        
-       //$dateObj   = DateTime::createFromFormat('!m', $post['pipeline_month']);
-    //$monthName = $dateObj->format('m'); // March 
-    //$pipeline_month =  date('Y').'-'.$monthName.'-01';   
-   $pipeline_month = $post['pipeline_month'];
-        
-        
-     //file_put_contents('apitext.txt', 'Pipeline month zzz: '.$pipeline_month. PHP_EOL  , FILE_APPEND);
-        
-        $action = $this->check_if_pipeline_exist($post['company_id'], $pipeline_month ,$post['pipeline_status']);
-        
    
-    
+                $pipeline_month = $post['pipeline_month'];
         
-                    if($action){
+                $action = $this->check_if_pipeline_exist($post['company_id'], $pipeline_month ,$post['pipeline_status']);
+        
+            if($action){
 
                         $this->db->where('company_id', $post['company_id']);
                         $this->db->update('deals_pipeline', array('eff_to' => date('Y-m-d H:i:s')));
@@ -1487,7 +1133,7 @@ $this->update_pipline($post,$user_id);
 
                         return $this->db->affected_rows();
 
-                    }else{
+                }else{
 
                             $pipeline = array(
                             'company_id' => $post['company_id'],
@@ -1499,83 +1145,58 @@ $this->update_pipline($post,$user_id);
                         $this->db->insert('deals_pipeline', $pipeline);
                         $pipeline = $this->db->affected_rows();
 
-                    }
-
-            
-        
-          /*
-            
-                
-                */
-        
+                 }
+ 
         
         
     }
-    
-    
-    
-    
+        
     public function check_if_pipeline_exist($id =0, $pipeline_month, $pipeline_status){
-    
-    file_put_contents('apitext.txt', 'Pipeline month: '.$pipeline_month.' Pipleine: '.$pipeline_status. PHP_EOL  , FILE_APPEND);
-       
-              
-    $q = "
-     SELECT company_id
-     FROM deals_pipeline
-    WHERE company_id=".$id."
-    AND status LIKE '".$pipeline_status."'
-    AND eff_to IS NULL
-    LIMIT 1
-    ";
-        
-        
-         file_put_contents('apitext.txt', $q. PHP_EOL  , FILE_APPEND);
-    $result = $this->db->query($q);
-   
-        if($result->num_rows()){ 
-        
-            
-       //  file_put_contents('apitext.txt', 'check_if_pipeline_exist test true xxxxx: '. $pipeline_month. PHP_EOL  , FILE_APPEND);
-            
+
+        $q = "
+         SELECT company_id
+         FROM deals_pipeline
+        WHERE company_id=".$id."
+        AND status LIKE '".$pipeline_status."'
+        AND eff_to IS NULL
+        LIMIT 1
+        ";
+
+        $result = $this->db->query($q);
+
+            if($result->num_rows()){ 
                 return true ;
-        }else{
-            
-          // file_put_contents('apitext.txt', 'check_if_pipeline_exist test false xxxxx: PM: '.$pipeline_month .  PHP_EOL  , FILE_APPEND);
-                 return  false;
-        }
+            }else{
+
+              return  false;
+            }
     }
     
 
     
-    public function get_deals_pipeline($id =0, $user_id = 1, $mode = 2){
-    
-       //file_put_contents('apitext.txt', 'Pipeline update id: '.$id.' User Id '.$user_id.' mode '.$mode. PHP_EOL  , FILE_APPEND);
-       
-    //$id = 343738;               
-    $q = '
-    SELECT deals_pipeline.*, users.name
-FROM deals_pipeline
-LEFT JOIN users
-ON deals_pipeline.user_id=users.id
-    WHERE deals_pipeline.company_id='.$id.'
-     AND deals_pipeline.eff_to IS NULL
-     LIMIT 1
-    ';
-    $result = $this->db->query($q);
+    public function get_deals_pipeline($id =0, $user_id = 1, $mode = 2)
+    {
+                  
+        $q = '
+        SELECT deals_pipeline.*, users.name
+        FROM deals_pipeline
+        LEFT JOIN users
+        ON deals_pipeline.user_id=users.id
+        WHERE deals_pipeline.company_id='.$id.'
+        AND deals_pipeline.eff_to IS NULL
+        LIMIT 1
+        ';
+        $result = $this->db->query($q);
               if( $result->num_rows()){
 
                foreach ($result->result() as $row)
                 {
                     return $row;
-//file_put_contents('apitext.txt', 'Pipeline check id run: '.$row->company_id.' User Id '.$user_id.' mode '.$mode. PHP_EOL  , FILE_APPEND);
-                } 
+               } 
                     }else{
 
                   return false;
-                  
-                  //echo 'Not found';
-
+             
               }
 
         return array();
@@ -1584,18 +1205,18 @@ ON deals_pipeline.user_id=users.id
  
     public function get_pipline_deals(){
         
-  $q = '
-    SELECT *,deals_pipeline.eff_from as efffrom, companies.name as companyname, users.name as owner
-FROM deals_pipeline
-LEFT JOIN companies
-ON deals_pipeline.company_id=companies.id
-LEFT JOIN users
-ON deals_pipeline.user_id=users.id
-WHERE deals_pipeline.eff_to IS NULL 
-ORDER BY deals_pipeline.updated_at desc
-';
- $result = $this->db->query($q);
-      return    $result->result();
+        $q = '
+        SELECT *,deals_pipeline.eff_from as efffrom, companies.name as companyname, users.name as owner
+        FROM deals_pipeline
+        LEFT JOIN companies
+        ON deals_pipeline.company_id=companies.id
+        LEFT JOIN users
+        ON deals_pipeline.user_id=users.id
+        WHERE deals_pipeline.eff_to IS NULL 
+        ORDER BY deals_pipeline.updated_at desc
+        ';
+        $result = $this->db->query($q);
+        return    $result->result();
     }
     
     
@@ -1632,22 +1253,7 @@ ORDER BY deals_pipeline.updated_at desc
     return  $user;
     
     }
-    public function creat_pipeline($post, $user_id){
-        /*
-               $pipeline = array(
-				'company_id' => $post[],
-                'user_id' => $post[],
-				'status' => $post[],
-                'month_due' =>  post[],
-                'created_by' => $user_id,
-               
-				);
-			$this->db->insert('deals_pipeline', $pipeline);
-        
-        */
-        
-    }
-    
+    public function creat_pipeline($post, $user_id){}
     
     public function get_company_from_id($id){
        //Redundent function used temporarily for testing purposes only!

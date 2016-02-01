@@ -13,7 +13,6 @@ class Companies extends MY_Controller {
 		$refresh_search_results = $this->session->flashdata('refresh');
 		$saved_search = $this->session->userdata('saved_search_id');
 
-		// print_r($this->input->post());
 		if($this->input->post('submit') and !$refresh_search_results and !$ajax_refresh and !$saved_search )
 		{ 
 			
@@ -40,7 +39,7 @@ class Companies extends MY_Controller {
 				$raw_search_results = $this->Companies_model->search_companies_sql($this->input->post());
 				
 				$result = $this->process_search_result($raw_search_results);
-				// var_dump($result);
+			 
 				if(empty($result))
 				{
 					$this->session->unset_userdata('companies');
@@ -115,7 +114,8 @@ class Companies extends MY_Controller {
 		$this->load->view('layouts/default_layout', $this->data);
 
 	}
-	public function _valid_name(){
+	public function _valid_name()
+    {
 		$result_name = $this->Companies_model->get_company_by_name($this->input->post('name'));
 	
 		if(empty($result_name)){
@@ -125,7 +125,8 @@ class Companies extends MY_Controller {
 			return FALSE;
 		}
 	}
-	public function _valid_registration(){
+	public function _valid_registration()
+    {
 		if($this->input->post('registration')){
 			$result_registration = $this->Companies_model->get_company_by_registration($this->input->post('registration'));
 			if(!empty($result_registration)){
@@ -135,7 +136,8 @@ class Companies extends MY_Controller {
 		}
 		return TRUE;
 	}
-	public function create_company(){
+	public function create_company()
+    {
         
 		if($this->input->post('create_company_form')){
 			$this->load->library('form_validation');
@@ -155,6 +157,10 @@ class Companies extends MY_Controller {
 			$this->form_validation->set_rules('lat', 'latitude', 'xss_clean');
 			$this->form_validation->set_rules('lng', 'longitude', 'xss_clean');
 			$this->form_validation->set_rules('type', 'type', 'xss_clean');
+            $this->form_validation->set_rules('trading_same_as_address', 'trading_same_as_address', 'xss_clean');
+            
+            
+            
 			if($this->form_validation->run())
 			{
 				$result = $this->Companies_model->create_company($this->input->post());
@@ -185,8 +191,6 @@ class Companies extends MY_Controller {
 		$this->data['main_content'] = 'companies/deals_pipeline';
 		$this->data['full_container'] = True;
 		$this->load->view('layouts/single_page_layout', $this->data);
-        
-        
         
     }
     
@@ -243,15 +247,7 @@ class Companies extends MY_Controller {
 			$monthArr[] = date('M y', mktime(0, 0, 0, $x, 1));
 			}
 
-
-
-            
-          // $monthArr  = array(0=>'Please select', 1 => 'January',2 => 'Feburary',3 => 'March',4 => 'April',5 => 'May',6 => 'June',7 => 'July',8 => 'August',9 => 'September',10 => 'October',11 => 'November',12 => 'December'); //Move will be moved to a new array file.
- 
            $deals_pipeline_statusArr  = array(0=>'Please select', 1 => 'Should Close',2 => 'Will Close'); //Move will be moved to a new array file.
-            
-            
-            
 			$this->load->model('Email_templates_model');
 			$this->data['email_templates'] = $this->Email_templates_model->get_all();
 			$raw_search_results = $this->Companies_model->search_companies_sql(FALSE,$this->input->get('id'));            
@@ -268,10 +264,7 @@ class Companies extends MY_Controller {
                 }
             }
 			$this->data['addresses'] = $address;
-            
-            
             $this->data['deals_pipline'] = $this->Companies_model->get_deals_pipeline($this->input->get('id'),$this->data['current_user']['id'],false);
-			
             //$this->data['campaigns'] = $this->Campaigns_model->get_campaigns($this->input->get('id'));
             $this->data['created_by_name'] = $this->Users_model->get_user($user_id);
 			$option_contacts =  array();
@@ -306,11 +299,10 @@ class Companies extends MY_Controller {
 	}
     
     
-    public function hackmorgages(){
+    public function hackmorgages()
+    {
         // this is a redunudent function
         $compohack =  $this->Companies_model->hackmorgages(346339);
-        
-        //echo $compohack->name;    
     }
     
 	public function edit()
@@ -319,7 +311,6 @@ class Companies extends MY_Controller {
 		{
 
 			$post = $this->input->post();
-//file_put_contents('apitext.txt', 'Pipeline Status: '.$post['pipeline_status'].' Pipeline month '.$post['pipeline_month']  , FILE_APPEND); 
 			// We need to clean the post and validate the post fields *pending*
 			$result = $this->Companies_model->update_details($this->input->post(),$this->data['current_user']['id']);
 			$this->refresh_search_results();
@@ -330,7 +321,8 @@ class Companies extends MY_Controller {
 		}
 	}
 
-    public function create_address(){
+    public function create_address()
+    {
 		if($this->input->post('create_address')){
 			$this->load->library('form_validation');
 			$this->form_validation->set_rules('phone', 'phone', 'xss_clean');
@@ -407,7 +399,7 @@ class Companies extends MY_Controller {
 	}
 
 
-public function autocomplete() 
+    public function autocomplete() 
     {
         
         $callCH = false;
@@ -428,7 +420,6 @@ public function autocomplete()
             
             $response= $response."<li class='autocomplete-item split-heading autocomplete-no-results'><i class='fa fa-times'></i> No Companies Found</li>";
           $callCH = true;
-           // $responsed=  $response.$this->getCompanyHouseDetails(08245800);
             
 		}
         $words = array( 'Limited', 'LIMITED', 'LTD','ltd','Ltd' );
@@ -458,17 +449,10 @@ public function autocomplete()
  		foreach ($query->result() as $row):
             $response= $response."<a href='". base_url() . "companies/company?id=" . $row->id . "#contacts'><li class='autocomplete-item autocomplete-contact'><strong>" . str_replace($words, ' ',$row->name). "</strong><br><small>".$row->company_name."</small></li></a>";
            //
-     
-        
         endforeach;
-        
-    
-        
         $response= $response."</ul></div>";
         $this->output->set_content_type('application/json');
 		$this->output->set_output(json_encode(array('html'=> $response, 'callCH'=> $callCH))); //callCH = return true or false (default) call company house function
-        
-        
        // $responsed=  $this->getCompanyHouseDetails(08245800);
     }
     	public function getCompany() 
@@ -483,8 +467,6 @@ public function autocomplete()
             );
             
             if($this->input->post('postal_code')){  
-
-                // file_put_contents('glen.txt', 'this has ran');
 
                 $this->load->library('form_validation');
                 $this->form_validation->set_rules('registration', 'registration', 'xss_clean');
@@ -503,8 +485,6 @@ public function autocomplete()
                         
                      exit();
                     }
-                   
-                    
                     
                         file_put_contents('apitext.txt', 'Initial stage two'.PHP_EOL, FILE_APPEND);            
                         $chargesResponse = $this->getCompanyHouseCharges($this->input->post('registration'));
@@ -579,22 +559,18 @@ public function autocomplete()
         
     }
     
-    public function dragupdate(){
-      $post =  $this->input->post();
-        
-        
+    public function dragupdate()
+    {
+        $post =  $this->input->post();    
         $user = $this->data['current_user']['id'];
-				 $pipeline = $this->Companies_model->update_pipline_from_drag_and_drop($post,$user);
-        
-        
+        $pipeline = $this->Companies_model->update_pipline_from_drag_and_drop($post,$user);
+
         echo $pipeline;
         
     }
     
-    
-    public function drag(){
-      //$post =  $this->input->post();
-        
+    public function drag()
+    {
 				$pipeline = $this->Companies_model->get_pipline_deals();
         
         echo json_encode($pipeline);
