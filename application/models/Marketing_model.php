@@ -94,7 +94,7 @@ to_char(identifies.sent_at, 'DD/MM/YYYY') as Date ,send.event_text as sent,
 		WHERE identifies.sent_at >= '2016-01-20' 
 		AND  _open.campaign IS NOT null
         AND  identifies.company IS NOT null
-		AND identifies.company='$comp_name' OR identifies.company='$trading_name'
+		AND identifies.company LIKE '$comp_name%' OR identifies.company='$trading_name%'
 		ORDER BY identifies.company
 		 ";
         

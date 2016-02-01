@@ -120,7 +120,7 @@ class Marketing extends MY_Controller {
         
         
         
-          
+           $comp_name = str_replace($words, '', $comp_name );
         
         //echo trim($comp_name);
         header('Content-Type: application/json');
