@@ -4,11 +4,12 @@
               <!-- Nav tabs -->
               <ul class="nav nav-tabs dashboard" role="tablist">
                 <li role="presentation" class="active"><button href="#team_stats" aria-controls="team_stats" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Stats','<?php echo $current_user['id'];?>')">Stats</button></li>
+
                 <li role="presentation"><button href="#calls" aria-controls="calls" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Calls & Meetings','<?php echo $current_user['id'];?>')">Actions</button></li>
                 <li role="presentation"><button href="#pipeline" aria-controls="pipeline" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Pipeline','<?php echo $current_user['id'];?>')">Pipeline</button></li>
                 <li><button href="companies/pipeline"role="tab" class="button btn btn-primary btn-sm deals_pipeline" style="margin-right:10px;" onclick="window.location ='companies/pipeline'">Deals Forecast</button></li>
                 <li role="presentation"><button href="#assigned" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Favourites','<?php echo $current_user['id'];?>')">Favourites</button></li>
-                <li role="presentation"><button href="#emailegagement" aria-controls="emailegagement" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Email Engagement','<?php echo $current_user['id'];?>')">Email Engagement</button></li>
+                <li role="presentation"><button href="#emailstats" aria-controls="emailstats" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Email Stats','<?php echo $current_user['id'];?>')">Email Engagement</button></li>
               </ul>
 
           </div>
@@ -16,7 +17,8 @@
         <div class="row">
           
 <div class="col-sm-9 col-sm-push-3">
-<!-- Tab panes -->
+
+          <!-- Tab panes -->
 <div class="tab-content">
 <div role="tabpanel" class="tab-pane fade in active" id="team_stats">
 <?php if ($_GET['search']==2) { ?>
@@ -64,21 +66,8 @@
                              <?php foreach ($getuserplacements as $get_user_placements): ?>
                             <li class="user-stat-holder">
                             <div class="user-stat company"><a href="companies/company?id=<?php echo $get_user_placements['id'] ?>" <?php if(($current_user['new_window']=='t')): ?> target="_blank"<?php endif; ?>><?php echo $get_user_placements['name'];?></a></div>
-                        <?php if ($current_user['permission'] == 'admin'): ?>
-                            <div class="row">
-  <div class="col-sm-8 user-stat company action_date">
-<?php echo $get_user_placements['lead_name'];?>
-</div>
-  <div class="col-sm-4 user-stat company action_date">
-  <?php if(!empty($get_user_placements['initial_rate'])): ?>
-<?php echo $get_user_placements['initial_rate'];?>%
-<?php endif; ?>
-</div>
-</div>
-<?php endif; ?>
                             <div class="user-stat company action_date">
-                            <?php echo  date('D jS M y',strtotime($get_user_placements['actioned_at']));?>
-                            </div>
+                            <?php echo  date('D jS M y',strtotime($get_user_placements['actioned_at']));?></div>
                             </li>
                             <?php endforeach ?>
                             </div>
@@ -198,45 +187,6 @@
                            <strong>DueDil</strong>
                         </div>
                         </div>
-                          
-                                <div class="row list-group-item dashboardTotalheaders">
-                        <div class="col-xs-2 col-md-1 hide-overflow"> 
-                            <strong>Totals</strong>
-                        </div>
-                        <div class="col-xs-1 col-md-1 text-center hide-overflow">
-                             <span class="badge tw-deals-total stat-total" style="background-color:#428bca;">0</span>
-                        </div>
-                        <div class="col-xs-2 col-md-1 text-center hide-overflow">
-                           <span class="badge tw-proposals-total stat-total" style="background-color:#45AE7C;">0</span>
-                        </div>
-                        <div class="col-xs-2 col-md-2 text-center hide-overflow" >
-                          <span class="tw-demobookedcount-total stat-total" >4</span> /
-                             <span class="tw-democount-total stat-total"  >0</span>
-                        </div>
-                        <div class="col-xs-2 col-md-1 text-center hide-overflow">
-                           <span class="tw-meetingbooked-total stat-total" >0</span> /  
-                            <span class="tw-meetingbooked-total stat-total" >0</span>
-                        </div>
-                       
-                        <div class="col-md-2 hidden-xs text-center hide-overflow">
-                           <span class="tw-salescall-total stat-total" >1</span> / 
-                            <span class="tw-introcall-total stat-total">0</span>
-                        </div>
-                        <div class="col-md-1 hidden-xs text-center hide-overflow"> 
-                          <span class="tw-pipelinecount-total stat-total">0</span> 
-                        </div>
-                        <div class="col-md-2 hidden-xs text-center hide-overflow">
-                          <span class="tw-key_review_added-total stat-total">0</span> / 
-                            <span class="tw-key_review_occuring-total stat-total">5</span>
-                        </div>
-                    
-                                     <div class="col-xs-2 col-md-1 text-center hide-overflow"> 
-                          <span class="tw-duediligence-total stat-total">0</span>
-         
-                        </div>
-                          </div>
-                          
-                          
                         <?php foreach ($stats as $stat): ?>
                           <div class="row list-group-item stats-row active-<?php echo $stat['active'];?>">
                             <div class="col-xs-2 col-md-1"> 
@@ -245,28 +195,28 @@
                             </a>
                             </div>
                             <div class="col-xs-1 col-md-1 text-center">
-                            <a href = "?search=2&user=<?php echo $stat['user'];?>&period=week"><span class="badge tw-deals" style="background-color:#428bca;"><?php echo $stat['deals'];?></span></a>
+                            <a href = "?search=2&user=<?php echo $stat['user'];?>&period=week"><span class="badge" style="background-color:#428bca;"><?php echo $stat['deals'];?></a></span>
                             </div>
                             <div class="col-xs-2 col-md-1 text-center"> 
-                            <?php echo '<div class="badge tw-proposals" style="background-color:#45AE7C;">'.$stat['proposals'].'</div>';?>
+                            <?php echo '<div class="badge" style="background-color:#45AE7C;">'.$stat['proposals'].'</div>';?>
                             </div>
                             <div class="col-xs-2 col-md-2 text-center"> 
-                            <span class="tw-demobookedcount"><?php echo $stat['demobookedcount'];?></span> / <span class="democount"><?php echo $stat['democount'];?></span>
+                            <?php echo $stat['demobookedcount'];?> / <?php echo $stat['democount'];?>
                             </div>
                             <div class="col-xs-2 col-md-1 text-center">
-                            <span class="meetingbooked"><?php echo $stat['meetingbooked'];?></span> / <span class="meetingcount"><?php echo $stat['meetingcount'];?></span>
+                            <?php echo $stat['meetingbooked'];?> / <?php echo $stat['meetingcount'];?>
                             </div>
                             <div class="col-xs-2 col-md-2 text-center"> 
-                            <span class="tw-salescall"><?php echo $stat['salescall'];?></span> / <span class="tw-introcall"><?php echo $stat['introcall'];?></span>
+                            <?php echo $stat['salescall'];?> / <?php echo $stat['introcall'];?>
                             </div>
                             <div class="col-md-1 hidden-xs text-center">
-                              <span class="tw-pipelinecount"><?php echo $stat['pipelinecount'];?></span>
+                              <?php echo $stat['pipelinecount'];?>
                             </div>
                             <div class="col-md-2 hidden-xs text-center">
-                              <span class="key_review_added"><?php echo $stat['key_review_added'];?></span> / <span class="tw-key_review_occuring"><?php echo $stat['key_review_occuring'];?></span>
+                              <?php echo $stat['key_review_added'];?> / <?php echo $stat['key_review_occuring'];?>
                             </div>
                             <div class="col-md-1 hidden-xs text-center">
-                                <span class="tw-duediligence"><?php echo $stat['duediligence'];?></span>
+                              <?php echo $stat['duediligence'];?>
                             </div>
                           </div> <!--END ROW-->    
                       <?php endforeach ?>
@@ -308,46 +258,6 @@
                            <strong>DueDil</strong>
                         </div>
                         </div>
-                                          <div class="row list-group-item dashboardTotalheaders">
-                        <div class="col-xs-2 col-md-1 hide-overflow"> 
-                            <strong>Totals</strong>
-                        </div>
-                        <div class="col-xs-2 col-md-1 text-center hide-overflow">
-                             <span class="badge lw-deals-total stat-total" style="background-color:#428bca;">0</span>
-                        </div>
-                        <div class="col-xs-2 col-md-1 text-center hide-overflow">
-                           <span class="badge lw-proposals-total stat-total" style="background-color:#45AE7C;">0</span>
-                        </div>
-                        <div class="col-xs-2 col-md-2 text-center hide-overflow" >
-                          <span class="lw-demobookedcount-total stat-total" >16</span> /
-                             <span class="lw-democount-total stat-total"  >0</span>
-                        </div>
-                        <div class="col-xs-1 col-md-1 text-center hide-overflow">
-                           <span class="lw-meetingbooked-total stat-total" >0</span> /  
-                            <span class="lw-meetingcount-total stat-total" >0</span>
-                        </div>
-                       
-                        <div class="col-md-2 hidden-xs text-center hide-overflow">
-                           <span class="lw-salescall-total stat-total" >1</span> / 
-                            <span class="lw-introcall-total stat-total">0</span>
-                        </div>
-                        <div class="col-md-1 hidden-xs text-center hide-overflow"> 
-                          <span class="lw-pipelinecount-total stat-total">0</span> 
-                        </div>
-                        <div class="col-md-2 hidden-xs text-center hide-overflow">
-                          <span class="lw-key_review_added-total stat-total">0</span> / 
-                            <span class="lw-key_review_occuring-total stat-total">5</span>
-                        </div>
-                                    
-                                    
-                                     <div class="col-xs-2 col-md-1 text-center hide-overflow"> 
-                          <span class="lw-duediligence-total stat-total">0</span>
-                            
-                        </div>
-                                 
-                        </div>
-                          
-                          
                         <?php foreach ($lastweekstats as $lastweekstat): ?>
                         <div class="row list-group-item stats-row active-<?php echo $lastweekstat['active'];?>">
 
@@ -357,29 +267,29 @@
                             </a>
                             </div>
                             <div class="col-xs-2 col-md-1 text-center">
-                            <a href = "?search=2&user=<?php echo $lastweekstat['user'];?>&period=lastweek"><span class="badge lw-deals" style="background-color:#428bca;"><?php echo $lastweekstat['deals'];?></span></a>
+                            <a href = "?search=2&user=<?php echo $lastweekstat['user'];?>&period=lastweek"><span class="badge" style="background-color:#428bca;"><?php echo $lastweekstat['deals'];?></a></span>
                             </div>
                             <div class="col-xs-2 col-md-1 text-center"> 
-                              <?php echo '<div class="badge lw-proposals" style="background-color:#45AE7C;">'.$lastweekstat['proposals'].'</div>';?>
+                              <?php echo '<div class="badge" style="background-color:#45AE7C;">'.$lastweekstat['proposals'].'</div>';?>
                               </div>
                          
                             <div class="col-xs-2 col-md-2 text-center"> 
-                            <span class="lw-demobookedcount"><?php echo $lastweekstat['demobookedcount'];?></span> / <span class="lw-democount"><?php echo $lastweekstat['democount'];?></span>
+                            <?php echo $lastweekstat['demobookedcount'];?> / <?php echo $lastweekstat['democount'];?>
                             </div>
                             <div class="col-xs-1 col-md-1 text-center">
-                            <span class="lw-meetingbooked"><?php echo $lastweekstat['meetingbooked'];?></span> / <span class="lw-meetingcount"><?php echo $lastweekstat['meetingcount'];?></span>
+                            <?php echo $lastweekstat['meetingbooked'];?> / <?php echo $lastweekstat['meetingcount'];?>
                             </div>
                             <div class="col-xs-2 col-md-2 text-center"> 
-                            <span class="lw-salescall"><?php echo $lastweekstat['salescall'];?></span> / <span class="lw-introcall"><?php echo $lastweekstat['introcall'];?></span>
+                            <?php echo $lastweekstat['salescall'];?> / <?php echo $lastweekstat['introcall'];?>
                             </div>
                             <div class="col-md-1 hidden-xs text-center">
-                              <span class="lw-pipelinecount"><?php echo $lastweekstat['pipelinecount'];?></span>
+                              <?php echo $lastweekstat['pipelinecount'];?>
                             </div>
                             <div class="col-md-2 hidden-xs text-center">
-                              <span class="lw-key_review_added"><?php echo $lastweekstat['key_review_added'];?></span> / <span class="lw-key_review_occuring"><?php echo $lastweekstat['key_review_occuring'];?></span>
+                              <?php echo $lastweekstat['key_review_added'];?> / <?php echo $lastweekstat['key_review_occuring'];?>
                             </div>
                             <div class="col-md-1 hidden-xs text-center">
-                              <span class="lw-duediligence"><?php echo $lastweekstat['duediligence'];?></span>
+                              <?php echo $lastweekstat['duediligence'];?>
                             </div>
                           </div> <!--END ROW-->    
                       <?php endforeach ?>
@@ -422,48 +332,6 @@
                            <strong>DueDil</strong>
                         </div>
                         </div>
-                          
-                          <div class="row list-group-item dashboardTotalheaders">
-                        <div class="col-xs-2 col-md-1 hide-overflow"> 
-                            <strong>Totals</strong>
-                        </div>
-                        <div class="col-xs-2 col-md-1 text-center hide-overflow">
-                             <span class="badge tm-deals-total stat-total" style="background-color:#428bca;">0</span>
-                        </div>
-                        <div class="col-xs-2 col-md-1 text-center hide-overflow">
-                           <span class="badge tm-proposals-total stat-total" style="background-color:#45AE7C;">0</span>
-                        </div>
-                        <div class="col-xs-2 col-md-2 text-center hide-overflow" >
-                          <span class="tm-demobookedcount-total stat-total" >16</span> /
-                             <span class="tm-democount-total stat-total"  >0</span>
-                        </div>
-                        <div class="col-xs-1 col-md-1 text-center hide-overflow">
-                           <span class="tm-meetingbooked-total stat-total" >0</span> /  
-                            <span class="tm-meetingcount-total stat-total" >0</span>
-                        </div>
-                       
-                        <div class="col-md-2 hidden-xs text-center hide-overflow">
-                           <span class="tm-salescall-total stat-total" >1</span> / 
-                            <span class="tm-introcall-total stat-total">0</span>
-                        </div>
-                        <div class="col-md-1 hidden-xs text-center hide-overflow"> 
-                          <span class="tm-pipelinecount-total stat-total">0</span> 
-                        </div>
-                        <div class="col-md-2 hidden-xs text-center hide-overflow">
-                          <span class="tm-key_review_added-total stat-total">0</span> / 
-                            <span class="tm-key_review_occuring-total stat-total">5</span>
-                        </div>
-                                    
-                                    
-                                     <div class="col-xs-2 col-md-1 text-center hide-overflow"> 
-                          <span class="tm-duediligence-total stat-total">0</span>
-                            
-                        </div>
-                                
-                        </div>
-                          
-                          
-                          
                         <?php foreach ($thismonthstats as $thismonthstat): ?>
                           <div class="row list-group-item stats-row active-<?php echo $thismonthstat['active'];?>">
                             <div class="col-xs-2 col-md-1">
@@ -472,29 +340,29 @@
                             </a>
                             </div>
                             <div class="col-xs-2 col-md-1 text-center">
-                            <a href = "?search=2&user=<?php echo $thismonthstat['user'];?>&period=month"><span class="badge tm-deals" style="background-color:#428bca;"><?php echo $thismonthstat['deals'];?></span></a>
+                            <a href = "?search=2&user=<?php echo $thismonthstat['user'];?>&period=month"><span class="badge" style="background-color:#428bca;"><?php echo $thismonthstat['deals'];?></a></span>
                             </div>
                             <div class="col-xs-2 col-md-1 text-center"> 
-                              <?php echo '<div class="badge tm-proposals" style="background-color:#45AE7C;">'.$thismonthstat['proposals'].'</div>';?>
+                              <?php echo '<div class="badge" style="background-color:#45AE7C;">'.$thismonthstat['proposals'].'</div>';?>
                               </div>
                           
                             <div class="col-xs-2 col-md-2 text-center"> 
-                            <span class="tm-demobookedcount"><?php echo $thismonthstat['demobookedcount'];?></span> / <span class="tm-democount"><?php echo $thismonthstat['democount'];?></span>
+                            <?php echo $thismonthstat['demobookedcount'];?> / <?php echo $thismonthstat['democount'];?>
                             </div>
                             <div class="col-xs-1 col-md-1 text-center">
-                            <span class="tm-meetingbooked"><?php echo $thismonthstat['meetingbooked'];?></span> / <span class="tm-meetingcount"><?php echo $thismonthstat['meetingcount'];?></span>
+                            <?php echo $thismonthstat['meetingbooked'];?> / <?php echo $thismonthstat['meetingcount'];?>
                             </div>
                             <div class="col-xs-2 col-md-2 text-center"> 
-                            <span class="tm-salescall"><?php echo $thismonthstat['salescall'];?></span> / <span class="tm-introcall"><?php echo $thismonthstat['introcall'];?></span>
+                            <?php echo $thismonthstat['salescall'];?> / <?php echo $thismonthstat['introcall'];?>
                             </div>
                             <div class="col-md-1 hidden-xs text-center">
-                              <span class="tm-pipelinecount"><?php echo $thismonthstat['pipelinecount'];?></span>
+                              <?php echo $thismonthstat['pipelinecount'];?>
                             </div>
                             <div class="col-md-2 hidden-xs text-center">
-                              <span class="tm-key_review_added"><?php echo $thismonthstat['key_review_added'];?></span> / <span class="tm-key_review_occuring"><?php echo $thismonthstat['key_review_occuring'];?></span>
+                              <?php echo $thismonthstat['key_review_added'];?> / <?php echo $thismonthstat['key_review_occuring'];?>
                             </div>
                             <div class="col-md-1 hidden-xs text-center">
-                              <span class="tm-duediligence"><?php echo $thismonthstat['duediligence'];?></span>
+                              <?php echo $thismonthstat['duediligence'];?>
                             </div>
                           </div> <!--END ROW-->    
                       <?php endforeach ?>
@@ -536,48 +404,6 @@
                            <strong>DueDil</strong>
                         </div>
                         </div>
-                          
-                             <div class="row list-group-item dashboardTotalheaders">
-                        <div class="col-xs-2 col-md-1 hide-overflow"> 
-                            <strong>Totals</strong>
-                        </div>
-                        <div class="col-xs-2 col-md-1 text-center hide-overflow">
-                             <span class="badge lm-deals-total stat-total" style="background-color:#428bca;">0</span>
-                        </div>
-                        <div class="col-xs-2 col-md-1 text-center hide-overflow">
-                           <span class="badge lm-proposals-total stat-total" style="background-color:#45AE7C;">0</span>
-                        </div>
-                        <div class="col-xs-2 col-md-2 text-center hide-overflow" >
-                          <span class="lm-demobookedcount-total stat-total" >16</span> /
-                             <span class="lm-democount-total stat-total"  >0</span>
-                        </div>
-                        <div class="col-xs-1 col-md-1 text-center hide-overflow">
-                           <span class="lm-meetingbooked-total stat-total" >0</span> /  
-                            <span class="lm-meetingcount-total stat-total" >0</span>
-                        </div>
-                       
-                        <div class="col-md-2 hidden-xs text-center hide-overflow">
-                           <span class="lm-salescall-total stat-total" >1</span> / 
-                            <span class="lm-introcall-total stat-total">0</span>
-                        </div>
-                        <div class="col-md-1 hidden-xs text-center hide-overflow"> 
-                          <span class="lm-pipelinecount-total stat-total">0</span> 
-                        </div>
-                        <div class="col-md-2 hidden-xs text-center hide-overflow">
-                          <span class="lm-key_review_added-total stat-total">0</span> / 
-                            <span class="lm-key_review_occuring-total stat-total">5</span>
-                        </div>
-                                    
-                                    
-                                     <div class="col-xs-2 col-md-1 text-center hide-overflow"> 
-                          <span class="lm-duediligence-total stat-total">0</span>
-                            
-                        </div>
- 
-                        </div>
-                          
-                          
-                          
                         <?php foreach ($lastmonthstats as $lastmonthstat): ?>
                           <div class="row list-group-item stats-row active-<?php echo $lastmonthstat['active'];?>">
                             <div class="col-xs-2 col-md-1">
@@ -586,28 +412,28 @@
                             </a>
                             </div>
                             <div class="col-xs-2 col-md-1 text-center">
-                            <a href = "?search=2&user=<?php echo $lastmonthstat['user'];?>&period=lastmonth"><span class="badge lm-deals" style="background-color:#428bca;"><?php echo $lastmonthstat['deals'];?></span></a>
+                            <a href = "?search=2&user=<?php echo $lastmonthstat['user'];?>&period=lastmonth"><span class="badge" style="background-color:#428bca;"><?php echo $lastmonthstat['deals'];?></a></span>
                             </div>
                               <div class="col-xs-2 col-md-1 text-center"> 
-                              <?php echo '<div class="badge lm-proposals" style="background-color:#45AE7C;">'.$lastmonthstat['proposals'].'</div>';?>
+                              <?php echo '<div class="badge" style="background-color:#45AE7C;">'.$lastmonthstat['proposals'].'</div>';?>
                               </div>
                               <div class="col-xs-2 col-md-2 text-center"> 
-                            <span class="lm-demobookedcount"><?php echo $lastmonthstat['demobookedcount'];?></span> / <span class="lm-democount"><?php echo $lastmonthstat['democount'];?></span>
+                            <?php echo $lastmonthstat['demobookedcount'];?> / <?php echo $lastmonthstat['democount'];?>
                             </div>
                             <div class="col-xs-1 col-md-1 text-center">
-                            <span class="lm-meetingbooked"><?php echo $lastmonthstat['meetingbooked'];?></span> / <span class="lm-meetingcount"><?php echo $lastmonthstat['meetingcount'];?></span>
+                            <?php echo $lastmonthstat['meetingbooked'];?> / <?php echo $lastmonthstat['meetingcount'];?>
                             </div>
                             <div class="col-xs-2 col-md-2 text-center"> 
-                            <span class="lm-salescall"><?php echo $lastmonthstat['salescall'];?></span> / <span class="lm-introcall"><?php echo $lastmonthstat['introcall'];?></span>
+                            <?php echo $lastmonthstat['salescall'];?> / <?php echo $lastmonthstat['introcall'];?>
                             </div>
                             <div class="col-md-1 hidden-xs text-center">
-                              <span class="lm-pipelinecount"><?php echo $lastmonthstat['pipelinecount'];?></span>
+                              <?php echo $lastmonthstat['pipelinecount'];?>
                             </div>
                             <div class="col-md-2 hidden-xs text-center">
-                              <span class="lm-key_review_added"><?php echo $lastmonthstat['key_review_added'];?></span> / <span class="lm-key_review_occuring"><?php echo $lastmonthstat['key_review_occuring'];?></span>
+                              <?php echo $lastmonthstat['key_review_added'];?> / <?php echo $lastmonthstat['key_review_occuring'];?>
                             </div>
                             <div class="col-md-1 hidden-xs text-center">
-                              <span class="lm-duediligence"><?php echo $lastmonthstat['duediligence'];?></span>
+                              <?php echo $lastmonthstat['duediligence'];?>
                             </div>
                           </div> <!--END ROW-->    
                       <?php endforeach ?>
@@ -657,7 +483,7 @@
                             </a>
                             </div>
                             <div class="col-xs-2 col-md-1 text-center">
-                            <a href = "?search=2&user=<?php echo $getstatssearch['user'];?>&start_date=<?php echo $_GET['start_date']?>&end_date=<?php echo $_GET['end_date']?>&period=search"><span class="badge" style="background-color:#45AE7C;"><?php echo $getstatssearch['deals'];?></span></a>
+                            <a href = "?search=2&user=<?php echo $getstatssearch['user'];?>&start_date=<?php echo $_GET['start_date']?>&end_date=<?php echo $_GET['end_date']?>&period=search"><span class="badge" style="background-color:#45AE7C;"><?php echo $getstatssearch['deals'];?></a></span>
                             </div>
                                   <div class="col-xs-2 col-md-1 text-center"> 
                               <?php echo $getstatssearch['proposals'];?>
@@ -1370,37 +1196,27 @@
           <!--END ASSIGNED-->
 
 
-
-          <!--ASSIGNED-->
-    <div role="tabpanel" class="tab-pane fade" id="emailegagement">
-    <!--START MARKETING STATS-->
-            <div class="panel panel-default">
-    <div class="panel-heading" id="contacts">
-    <h3 class="panel-title">Email Engagement<span class="badge pull-right eventcount"></span></h3>
-    </div>
-    <!-- /.panel-heading -->
-    <div class="panel-body" style="font-size:12px;">
-        <!--AUTO PILOT  -->
-        <div class="row record-holder-header mobile-hide">
-            <div class="col-xs-8 col-sm-4 col-md-3"><strong>Company</strong></div>
-            <div class="col-xs-8 col-sm-4 col-md-2"><strong>Campaign</strong></div>
-            <div class="col-xs-4 col-sm-1 col-md-1"><strong>Pipeline</strong></div>
-            <div class="col-xs-6 col-sm-2 col-md-2"><strong>Contact</strong></div>
-            <div class="col-xs-6 col-sm-3 col-md-2"><strong>Last Action</strong></div>
-            <div class="col-xs-12 col-sm-2 col-md-1"><strong>Date</strong></div>
-        </div>
-        
-        <div id="stat"></div>   
-        <!--AUTO PILOT END  -->
-</div>
-<!-- /.panel-body -->
-</div>
-</div><!--END OF PANEL-->
-<!--END ASSIGNED-->
 </div><!--END TAB PANES-->
 </div><!--END-COL-SM-9-->
 <div class="col-sm-3 col-sm-pull-9">
-          
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">My Campaigns <span class="badge pull-right"><?php echo count($private_campaigns); ?></span></h3>
+              </div>
+              <div class="panel-body" style="padding:0;">
+                  <!-- PRIVATE SEARCHES -->
+                  <?php foreach ($private_campaigns as $campaign):?>
+                  <a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $campaign->id; ?>" class="load-saved-search" <?php echo strlen($campaign->name) > 33 ? 'title="'.$campaign->name.'"':"" ?>>
+                  <div class="row">
+                  <div class="col-xs-10" style="overflow:hidden"><?php echo $campaign->name;?></br><small style="font-weight:300;"><?php echo date('D jS M y',strtotime($campaign->created_at));?></small></div>
+
+
+                  <div class="col-xs-1"><b><?php echo $campaign->campaigncount; ?></b></div>
+                  </div>
+                  </a>
+                  <?php endforeach; ?>
+              </div>
+            </div>
             <div class="panel panel-default">
               <div class="panel-heading">
                 <h3 class="panel-title">Recent Campaigns <span class="badge pull-right"><?php echo count($shared_campaigns); ?></span></h3>    
@@ -1425,4 +1241,3 @@
             </div>
           </div><!--END COL-3-->
 </div><!--END ROW-->
-
