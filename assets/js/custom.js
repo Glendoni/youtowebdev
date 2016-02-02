@@ -192,7 +192,9 @@ $(".show_si_box").slideDown(600);
      
     //////////////Controls pipline pick date
         var d = new Date();
-        d.setMonth(d.getMonth()+11);   //change retruned months here
+    var n = d.getMonth();
+
+        d.setMonth(d.getMonth()+(11-n));   //change retruned months here
       var   montheval =""+d.getMonth()+"" ;
       montheval =  montheval.substr(1, 1) ? d.getMonth() : '0'+d.getMonth() ;
       monthevalconcat = d.getFullYear()+"-"+(montheval)+"-01";

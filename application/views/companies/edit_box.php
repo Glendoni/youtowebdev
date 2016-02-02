@@ -11,7 +11,7 @@
             <div class="row">
                         <div class="col-sm-12">
             <div id="action-error" class="no-source-pipeline alert alert-warning" role="alert" style="display:none">
-            <strong>Source & Class Required</strong><br> Please add a Source & Class to this company.
+            <strong>Source & Class Required</strong><br> Please add a Source &amp; Class to this company.
             </div>
             </div>
             <div class="col-sm-6 col-md-6">
@@ -51,19 +51,10 @@
                    <p style="
     font-size: 12px;
 "> 
-                <?php //print_r($deals_pipline); 
-    
-    
-    
-    
-    
-            
+                <?php 
         echo ucfirst($deals_pipeline_status[$deals_pipline->status]).' In '.date("F", strtotime($deals_pipline->eff_from)). '<br/> by: '.$deals_pipline->name ;
-            
             ?>
                     </p>      </div>
-                    
-                    
                        <div class="col-xs-6 col-sm-6 col-md-4" >
                             <label for="exampleSelect1">Delete</label>
                            
