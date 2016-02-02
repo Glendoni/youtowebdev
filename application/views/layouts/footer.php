@@ -66,6 +66,9 @@
 // AJAX SEARCH AUTOCOMPlETE
 function ajaxSearch() {
     var input_data = $('#agency_name').val();
+    
+   input_data =  input_data.replace("'", "&#39;");
+    
     if (input_data.length < 1) {
 $('#suggestions').hide();
 $('#agency_name').removeClass('autocomplete-live');

@@ -3,7 +3,7 @@
   <div class="col-lg-12">
     <div class="panel panel-green">
         <div class="panel-heading profile-heading">
-            <h3>Settings</h3>
+            <h3>Email Settings</h3>
         </div>
         <!-- /.panel-heading -->
         <div class="panel-body">
@@ -19,7 +19,7 @@
                 <div class="form-group col-md-12">
                   <button class="btn btn-sm btn-warning btn-block" name="update_profile">Save</button>
                 </div>
-            </form>
+         <?php echo form_close(); ?>
         </div>
         <!-- /.panel-body -->
     </div>

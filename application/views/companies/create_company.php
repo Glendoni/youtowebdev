@@ -1,20 +1,30 @@
-<div class="row ">
-<div class="panel-body">
-<div class="col-md-8 col-md-offset-2">
-<div  class="mainbox ">
-<h2 class="page-header">
-Create Company
-</h2>
-<?php  
+<div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-default">
+        <div class="panel-heading profile-heading">
+            <h3>Create Company</h3>
+        </div>
+        <!-- /.panel-heading -->
+        <div class="panel-body">
+       <?php  
 $attributes = array('name' => 'create_company_form', 'class'=>'form-horizontal');
 $hidden = array('create_company_form'=>'1','user_id'=>$current_user['id']);
 echo form_open('',$attributes,$hidden); 
 ?>
 <div class="form-group">
-	<label class="control-label col-sm-2" for="name">Name</label>
-	<div class="col-sm-10">
-	  <input type="text" class="form-control" name="name" id="name" placeholder="" value="<?php echo isset($_POST['name'])?$_POST['name']:''; ?>">
+	
+	<div class="col-sm-6">
+        <label class="control-label" for="name">Company Name</label>
+	  <input type="text" class="form-control"  required="required" name="name" id="name" placeholder="" value="<?php echo isset($_POST['name'])?$_POST['name']:''; ?>">
 	</div>
+    
+    
+    <div class="col-sm-6">
+        <label for="emp_count" class="control-label">Class</label>
+    <?php
+    echo form_dropdown('company_class', $companies_classes, (isset($_POST['company_class'])?$_POST['company_class']:'') ,'class="form-control"');
+    ?>
+    </div>
 </div>
 <!--<div class="form-group">
 	<label class="control-label col-sm-2" for="linkedin_id">Linkedin ID:</label>
@@ -69,28 +79,35 @@ echo form_open('',$attributes,$hidden);
     </div>
 </div>-->
 <div class=" form-group ">
-	<label for="emp_count" class="control-label col-sm-2">Class</label>
-	<div class="col-sm-10">
-    <?php
-    echo form_dropdown('company_class', $companies_classes, (isset($_POST['company_class'])?$_POST['company_class']:'') ,'class="form-control"');
-    ?>
-    </div>
+	
+	
 </div>
-<hr>
-<h3> Address</h3>
+ 
+ 
 <div class=" form-group ">
-    <label for="address" class="control-label col-sm-2">Address</label>
-    <div class="col-sm-10">                            
-    	<input type="text" name="address" value="<?php echo isset($_POST['address'])?$_POST['address']:''; ?>" id="address" maxlength="200" class="form-control">
+   
+    <div class="col-sm-12"> 
+         <label for="address" class="control-label ">Address</label>
+    	<input type="text" name="address" required="required" value="<?php echo isset($_POST['address'])?$_POST['address']:''; ?>" id="address" maxlength="200" class="form-control">
     </div>
 </div>
 <div class=" form-group ">
-	<label for="emp_count" class="control-label col-sm-2">Country</label>
-	<div class="col-sm-10">
+	
+	<div class="col-sm-6">
+        <label for="emp_count" class="control-label">Country</label>
     <?php
     echo form_dropdown('country_id', $country_options, (isset($post['country_options'])?$post['country_options']:'') ,'class="form-control"');
     ?>
     </div>
+    
+   
+    <div class="col-sm-6">  
+         <label for="type" class="control-label">Type</label>
+<?php echo form_dropdown('address_types', $address_types, (isset($address->type)?$address->type:'') ,'class="form-control tradingType"' );?>    
+    </div>
+    
+    
+    
 </div>
 <!--<div class="form-group">
 	<label class="control-label col-sm-2" for="phone">Latitude:</label>
@@ -102,15 +119,16 @@ echo form_open('',$attributes,$hidden);
 	  <input type="text" class="form-control" name="lng"  value="<?php echo isset($_POST['lng'])?$_POST['lng']:''; ?>">
 	</div>
 </div>-->
+            
+          
 <div class=" form-group ">
-    <label for="type" class="control-label col-sm-2">Type</label>
-    <div class="col-sm-10">                            
-<?php echo form_dropdown('address_types', $address_types, (isset($address->type)?$address->type:'') ,'class="form-control tradingType"' );?>    </div>
+    
 	</div>
   <div class="tradingTypeOptions">  
    <div class="form-group">
-        <label class="col-sm-2 control-label">Trading/Registered Address</label>
-        <div class="col-sm-10">
+        
+        <div class="col-sm-6">
+            <label class="control-label">Trading/Registered Address </label>
             <label class="radio-inline"> <input type="radio" name="tradingArr" class="tradingArr" value="1" > The Same  </label>
             <label class="radio-inline"> <input type="radio" name="tradingArr" class="tradingArr" value="2"> Not The Same </label>
             <label class="radio-inline"> <input type="radio" name="tradingArr" class="tradingArr def"  checked="checked" value="3"> Fill Out Later </label>
@@ -130,6 +148,9 @@ echo form_open('',$attributes,$hidden);
 </div>
 
     </div>
+            
+            <p>&nbsp;&nbsp;&nbsp;</p>
+           
 
 <!-- <div class=" form-group ">
     <label for="turnover" class="control-label col-sm-2">Turnover</label>
@@ -150,6 +171,9 @@ echo form_open('',$attributes,$hidden);
 <div class="form-group">
 	<label class="control-label col-sm-2">Sectors</label>
 	<div class="col-sm-10">
+
+
+
 	<?php 	
 	foreach ($sectors_list as $key => $value): ?>
 		<span class="button-checkbox">
@@ -159,16 +183,26 @@ echo form_open('',$attributes,$hidden);
 	<?php endforeach ?>
 	</div>
 </div> -->
-<hr style="margin-top:10px;">
+ 
 <div class="form-group"> 
-	<div class="col-sm-offset-2 col-sm-10">
-	  <button type="submit" class="btn btn-primary">Submit</button>
-	</div>
+	<div class="modal-footer">
+	        	<button type="submit" class="btn btn-sm btn-warning btn-block">Submit</button>
+	      	</div>
 </div>
 
 
 <?php echo form_close(); ?>
+        </div>
+        <!-- /.panel-body -->
+        
+       
+    </div>
+    <!-- /.panel -->
+  </div>
+    
 </div>
-</div>
-</div>
-</div>
+
+
+
+
+ 

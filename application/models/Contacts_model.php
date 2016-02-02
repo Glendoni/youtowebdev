@@ -62,8 +62,8 @@ WHERE contacts.company_id=".$company_id;
 	{
     
         $role = rtrim($role," "); // removes empty space on rightside of string ltrim removes empty space on the left before string
-        $contact->first_name = $first_name; // please read the below note
-        $contact->last_name = $last_name;
+        $contact->first_name = str_replace('\'', '&#39;', rtrim($first_name)); // please read the below note
+        $contact->last_name = str_replace('\'', '&#39;', ltrim($last_name));
         $contact->email = !empty($email)?$email:NULL;
         $contact->phone = !empty($phone)?$phone:NULL;
         $contact->role =  ltrim($role);
@@ -88,8 +88,8 @@ WHERE contacts.company_id=".$company_id;
     {
 
         $role = rtrim($post['role']," "); // removes empty space on rightside of string ltrim removes empty space on the left before string
-        $contact->first_name   = $post['first_name']; // please read the below note
-    	$contact->last_name = $post['last_name'];
+        $contact->first_name   = str_replace('\'', '&#39;',rtrim($post['first_name'])); // please read the below note
+    	$contact->last_name = str_replace('\'', '&#39;',ltrim($post['last_name']));
         $contact->role = ltrim($role);
         $contact->email = !empty($post['email'])?$post['email']:NULL;
         $contact->phone = !empty($post['phone'])?$post['phone']:NULL;

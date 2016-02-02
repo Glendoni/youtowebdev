@@ -257,11 +257,11 @@ function getlisttotal(col,item){
  
 $('.tradingType').on('change', function() {
  var trAddress =  $(this).val(); 
-if(trAddress === "Registered Address"){ $('.tradingTypeOptions').show(); } else{ $('.tradingTypeOptions, .addrTrading').hide(); $(".def").prop("checked", true); $('.tradingAddress').val('')}
+if(trAddress === "Registered Address"){ $('.tradingTypeOptions').show(); } else{ $('.tradingTypeOptions, .addrTrading').hide(); $(".def").prop("checked", true); $('.tradingAddress').val('');   }
 }); 
 $('.tradingArr').on('change', function() {
  var trAddress =  $(this).val(); 
-if(trAddress == 2){ $('.addrTrading').show(); } else{ $('.addrTrading').hide(); $('#tradingAddress').val('')  }
+if(trAddress == 2){ $('.addrTrading').show();  $('#tradingAddress').attr('Required', 'Required')  } else{ $('.addrTrading').hide(); $('#tradingAddress').val(''); $('#tradingAddress').removeAttr('Required', 'Required')   }
 });
 
 if($('.popUpAddress').val() && $('.mainAddrType').text() != 'Trading Address'){$('.copyRegAddr').hide() }

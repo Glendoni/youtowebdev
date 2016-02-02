@@ -801,8 +801,10 @@ class Companies_model extends CI_Model {
     
 
 	function create_company($post){
-		$company = array(
-			'name' => $post['name'],
+		$postName = str_replace('\'', '&#39;', $post['name']);
+        
+        $company = array(
+			'name' => $postName,
 			'registration' => !empty($post['registration'])?$post['registration']:NULL,
 			// 'ddlink' => !empty($post['ddlink'])?$post['ddlink']:NULL,
 			'phone' => !empty($post['phone'])?$post['phone']:NULL,
@@ -995,6 +997,7 @@ class Companies_model extends CI_Model {
 		  $this->load->helper('inflector');
         
         $postName = str_replace('"', '&quot;', $post['name']);
+          $postName = str_replace('\'', '&#39;', $postName);
         
     $company = array(
         'name' => humanize($postName),

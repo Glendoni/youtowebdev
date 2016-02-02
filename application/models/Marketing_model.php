@@ -27,7 +27,7 @@ to_char(identifies.sent_at, 'DD/MM/YYYY') as Date ,send.event_text as sent,
 		AND  _open.campaign IS NOT null
         AND  identifies.company IS NOT null
         
-        LIMIT 200
+        LIMIT 20
         ";
         $result = pg_query($query) or die('Query failed: ' . pg_last_error());
  $words = array( 'Limited', 'LIMITED', 'LTD','ltd','Ltd','\'' );
