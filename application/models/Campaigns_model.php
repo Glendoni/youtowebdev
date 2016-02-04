@@ -768,13 +768,13 @@ $query = $this->db->query($sql);
 }
 
 
-function get_campaign_owner($id)
+function get_campaign_owner($user_id)
 	{
-	$sql = "select u.image, u.name as \"username\"
+	echo $sql = "select u.image, u.name as \"username\"
 				from campaigns CP
 				LEFT JOIN users u
 				on CP.user_id = u.id
-				where CP.id = $id group by 1,2 limit 1";
+				where CP.id = $user_id group by 1,2 limit 1";
 		$query = $this->db->query($sql);
 		    return $query->result(); /* returns an object */
 }
