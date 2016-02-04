@@ -167,7 +167,7 @@ class Campaigns_model extends MY_Model {
 			   pr.id, --f42
 			   C.source_explanation, --f43
 			   UC.name, --f44
-               C.initial_rate --f46
+			   UU.name --f45
 			   )) "JSON output" 
 			  
 
@@ -350,8 +350,7 @@ class Campaigns_model extends MY_Model {
 			     pr.id,
 			     C.source_explanation,
 			     UC.name, 
-			     UU.name,
-                 C.initial_rate
+			     UU.name
 
 
 		order by C.id 
@@ -768,13 +767,13 @@ $query = $this->db->query($sql);
 }
 
 
-function get_campaign_owner($user_id)
+function get_campaign_owner($id)
 	{
-	echo $sql = "select u.image, u.name as \"username\"
+	$sql = "select u.image, u.name as \"username\"
 				from campaigns CP
 				LEFT JOIN users u
 				on CP.user_id = u.id
-				where CP.id = $user_id group by 1,2 limit 1";
+				where CP.id = $id group by 1,2 limit 1";
 		$query = $this->db->query($sql);
 		    return $query->result(); /* returns an object */
 }
