@@ -167,7 +167,7 @@ class Campaigns_model extends MY_Model {
 			   pr.id, --f42
 			   C.source_explanation, --f43
 			   UC.name, --f44
-			   UU.name --f45
+               C.initial_rate --f46
 			   )) "JSON output" 
 			  
 
@@ -350,7 +350,8 @@ class Campaigns_model extends MY_Model {
 			     pr.id,
 			     C.source_explanation,
 			     UC.name, 
-			     UU.name
+			     UU.name,
+                 C.initial_rate
 
 
 		order by C.id 
