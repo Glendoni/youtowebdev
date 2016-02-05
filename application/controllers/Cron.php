@@ -10,6 +10,7 @@ class Cron extends CI_Controller {
     $this->load->helper('date');
     $this->load->model('Cron_model');
 
+
     }
  
     function update_marketing_clicks()

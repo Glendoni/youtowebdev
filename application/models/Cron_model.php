@@ -1,11 +1,18 @@
 <?php
 class Cron_model extends CI_Model {
+
+
 	function connect_to_wordpress_database()  {
+	
+
 	}
+
+
 	function update_marketing_clicks()
 	{
 	$con = mysqli_connect("137.117.165.135","baselist","OzzyElmo$1","sonovate_finance");
 	//$con = mysqli_connect("localhost","root","root","sonovate");
+
 	// Check connection
 	if (mysqli_connect_errno())
 	{
@@ -14,10 +21,11 @@ class Cron_model extends CI_Model {
 
 
 	//GET NEW CAMPAIGNS
-	$add_new_campaigns_sql = 'select distinct a.campaign_id as "Campaign ID",
-								p.post_title as "Campaign Name",
-								pm2.meta_value as "Sent By",
-								from_unixtime(pm.meta_value) as "Sent At"
+	$add_new_campaigns_sql = '	select distinct
+									a.campaign_id as "Campaign ID",
+									p.post_title as "Campaign Name",
+									pm2.meta_value as "Sent By",
+									from_unixtime(pm.meta_value) as "Sent At"
 								from sf_mymail_subscribers s
 								inner join sf_mymail_actions a on
 									a.subscriber_id = s.id
@@ -114,130 +122,57 @@ $unix_date = time() - 345600; //CHECK FOR LAST FOUR DAYS
 	$this->db->query($update_prospects);
 	}
 
-
 function remove_contacts_from_marketing() {
-	
-	$con = mysqli_connect("137.117.165.135","baselist","OzzyElmo$1","sonovate_finance");
-	//$con = mysqli_connect("localhost","root","root","sonovate");
+	$this->db->select('email');
+	$query = $this->db->get('contacts where email_opt_out_date is not null and email is not null and email_opt_out_date > current_date  - interval \'3\' day;');
 
-	// Check connection
-	if (mysqli_connect_errno())
-	{
-	echo "Failed to connect to MySQL: " . mysqli_connect_error();
-	}
-	 $select_contacts_sql = "select con.email, con.email_opt_out_date, u.name from contacts con left join users u on con.email_opt_out_user = u.id where con.email_opt_out_date is not null and con.email is not null and con.eff_to is NULL";
-	$select_contacts = $this->db->query($select_contacts_sql);
-	if ($select_contacts->num_rows() > 0)
-	{
-	//REMOVE ALL BEFORE RE-ADDING THOSE STILL UNSUBSCRIBED//
-	$delete_all = "delete from sf_mymail_subscriber_fields where meta_key = 'unsubscribed-via-baselist'";
-	mysqli_query($con, $delete_all);
-		$delete_101 =  "delete from sf_mymail_lists_subscribers where list_id = '101'";		
-	mysqli_query($con, $delete_101);
+foreach ($query->result() as $row)
+{
+    $email = $row->email;
+    $ch = curl_init();
 
-   	foreach ($select_contacts->result() as $row)
-   	{
-	$contact_email = $row->email;
-	$contact_date = $row->email_opt_out_date;
-	$opt_out_name = $row->name;
-	$sql = "select s.id, s.email from sf_mymail_subscribers s where email = '$contact_email'";
-	$result = mysqli_query($con, $sql);
-	if (mysqli_num_rows($result) > 0) {
-    // output data of each row
-    while($row = mysqli_fetch_assoc($result)) {
-	echo $delete =  "delete from sf_mymail_lists_subscribers where subscriber_id = '". $row["id"]."' ";		
-	mysqli_query($con, $delete);
- 	$update = "insert into sf_mymail_subscriber_fields (subscriber_id, meta_key, meta_value) values ('". $row["id"]."','unsubscribed-via-baselist','".$contact_date." by ".$opt_out_name."');";
- 	mysqli_query($con, $update);
-	$add = "insert into sf_mymail_lists_subscribers (list_id, subscriber_id, added) values ('101','". $row["id"]."','".time()."');";
- 	mysqli_query($con, $add);
-    }
-	} 
-	else {}
-   	} //END FOR EACH
-   	}
-   	//MYSQL CLOSE
-	mysqli_close($con);
-	echo "Complete";
-   }
+curl_setopt($ch, CURLOPT_URL, "https://api2.autopilothq.com/v1/contact/".$email."");
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+curl_setopt($ch, CURLOPT_HEADER, FALSE);
 
-   function remove_customer_contacts_from_marketing() {
-	
-	$con = mysqli_connect("137.117.165.135","baselist","OzzyElmo$1","sonovate_finance");
-	//$con = mysqli_connect("localhost","root","root","sonovate");
-	// Check connection
-	if (mysqli_connect_errno())
-	{
-	echo "Failed to connect to MySQL: " . mysqli_connect_error();
-	}
-	 $select_contacts_sql = "select con.email, c.customer_from from contacts con left join companies c on con.company_id = c.id where c.pipeline ilike 'Customer' and c.customer_from is not null and con.email is not null";
-	$select_contacts = $this->db->query($select_contacts_sql);
-	if ($select_contacts->num_rows() > 0)
-	{
-	//REMOVE ALL BEFORE RE-ADDING THOSE STILL CUSTOMERS//
-	$delete_all = "delete from sf_mymail_subscriber_fields where meta_key = 'customer-on-baselist'";
-	mysqli_query($con, $delete_all);
-	$delete_121 = "delete from sf_mymail_lists_subscribers where list_id = '121';";		
-	mysqli_query($con, $delete_121);
-	$update_timestamp = "update sf_mymail_lists set updated = UNIX_TIMESTAMP () where id = '121';";	
-	mysqli_query($con, $update_timestamp);
-	 
-   	foreach ($select_contacts->result() as $row)
-   	{
-        $contact_email = $row->email;
-        $autopilotUnsubscribe[] = $row->email;
-        $contact_date = $row->customer_from;
-        $sql = "select s.id, s.email from sf_mymail_subscribers s where email = '$contact_email'";
-        $result = mysqli_query($con, $sql);
-        if (mysqli_num_rows($result) > 0) {
-            // output data of each row
-            while($row = mysqli_fetch_assoc($result)) {
-            $delete =  "delete from sf_mymail_lists_subscribers where subscriber_id = '". $row["id"]."' and list_id not in (select id from sf_mymail_lists where parent_id ='121')";		
-            mysqli_query($con, $delete);
-            $add = "insert into sf_mymail_lists_subscribers (list_id, subscriber_id, added) values ('121','". $row["id"]."','".time()."');";
-            mysqli_query($con, $add);
-        }
-    } 
-    else {}
-   	} //END FOR EACH
-        
-        $this->trigger_autopilot_unsubscribe($autopilotUnsubscribe);
-   	}
+curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+  "autopilotapikey:ed278f3d19a5453fb807125aa945a81a"
+));
 
-	$select_contacts_sql = "select con.email, a.actioned_at from contacts con left join companies c on con.company_id = c.id inner join actions a on a.company_id = c.id where a.action_type_id = '8' and c.pipeline ilike 'Proposal' and con.email is not null";
-	$select_contacts = $this->db->query($select_contacts_sql);
-	if ($select_contacts->num_rows() > 0)
-	{
-        //REMOVE ALL BEFORE RE-ADDING THOSE STILL PROSPECTS//
-        $delete_all = "delete from sf_mymail_subscriber_fields where meta_key = 'proposal-on-baselist'";
-        mysqli_query($con, $delete_all);
-        $delete_122 = "delete from sf_mymail_lists_subscribers where list_id = '122'; update sf_mymail_lists set updated = UNIX_TIMESTAMP () where id = '122';";		
-        mysqli_query($con, $delete_122);
-        $update_timestamp = "update sf_mymail_lists set updated = UNIX_TIMESTAMP () where id = '122';";	
-        mysqli_query($con, $update_timestamp);
-        foreach ($select_contacts->result() as $row)
-        {
-            $contact_email = $row->email;
-            $contact_date = $row->customer_from;
-            $sql = "select s.id, s.email from sf_mymail_subscribers s where email = '$contact_email'";
-            $result = mysqli_query($con, $sql);
-            if (mysqli_num_rows($result) > 0) {
-                // output data of each row
-                while($row = mysqli_fetch_assoc($result)) {
-                    $delete =  "delete from sf_mymail_lists_subscribers where subscriber_id = '". $row["id"]."'";	mysqli_query($con, $delete);
-                    $add = "insert into sf_mymail_lists_subscribers (list_id, subscriber_id, added) values ('122','". $row["id"]."','".time()."');";
-                    mysqli_query($con, $add);
-                }
-            } 
-            else {}
-        } //END FOR EACH
-   	}
-   	//MYSQL CLOSE
-	mysqli_close($con);
-	echo "Complete";
-   }
-    
-    
+$response = curl_exec($ch);
+curl_close($ch);
+$contact = json_decode($response);
+$contactactemail = $contact->Email;
+if (!empty($contactactemail)) {
+
+//UNSUBSCRIBE//
+$ch2 = curl_init();
+curl_setopt($ch2, CURLOPT_URL, "https://api2.autopilothq.com/v1/contact");
+curl_setopt($ch2, CURLOPT_RETURNTRANSFER, TRUE);
+curl_setopt($ch2, CURLOPT_HEADER, FALSE);
+
+curl_setopt($ch2, CURLOPT_POST, TRUE);
+
+curl_setopt($ch2, CURLOPT_POSTFIELDS, "{
+  \"contact\": {
+    \"unsubscribed\": \"Yes\",
+    \"Email\": \"".$email."\"
+  }
+}");
+
+curl_setopt($ch2, CURLOPT_HTTPHEADER, array(
+  "autopilotapikey: ed278f3d19a5453fb807125aa945a81a",
+  "Content-Type: application/json"
+));
+$response2 = curl_exec($ch2);
+curl_close($ch2);
+echo $email."updated";
+
+}
+}
+
+}
+
        public function trigger_autopilot_unsubscribe($email, $status = "true"){
          
             if(is_array($email){
@@ -257,6 +192,6 @@ function remove_contacts_from_marketing() {
             }
           }
     }
-    
+
 
 }
