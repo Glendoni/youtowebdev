@@ -173,7 +173,7 @@ echo $email."updated";
 
 }
 
-       public function trigger_autopilot_unsubscribe($email, $status = "true"){
+       /*public function trigger_autopilot_unsubscribe($email, $status = "true"){
          
             if(is_array($email){
                 if(count($email)){
@@ -188,10 +188,11 @@ echo $email."updated";
 
                     $seglist =  $this->Autopilotapi_model->connect_post('v1/contact',$json_post_fields);
 
-                  }
-            }
-          }
-    }
+                }
+            	}
+				}
+   				}
+   				*/
 
 
 }
