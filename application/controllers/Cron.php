@@ -15,7 +15,7 @@ class Cron extends CI_Controller {
  
     function update_marketing_clicks()
     {
-        $this->Cron_model->update_marketing_clicks();
+        // $this->Cron_model->update_marketing_clicks();
     }
     function daily_data_clean_up()
     {
@@ -27,7 +27,7 @@ class Cron extends CI_Controller {
     }
     function remove_customer_contacts_from_marketing()
     {
-        $this->Cron_model->remove_customer_contacts_from_marketing();
+        //$this->Cron_model->remove_customer_contacts_from_marketing();
     }
 
 
