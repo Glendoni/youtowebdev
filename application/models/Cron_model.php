@@ -118,8 +118,9 @@ $unix_date = time() - 345600; //CHECK FOR LAST FOUR DAYS
 
 	function prospects_not_in_sector() {
 	//REMOVE PROSPECT FROM COMPANIES NOT IN TARGET SECTOR
-	$update_prospects = "update companies set pipeline = null where pipeline ilike 'Prospect' and id not in (select company_id from operates where active = 't' and sector_id in (select id from sectors where target = 't'))";
+	$update_prospects = "update companies set pipeline = null where pipeline ilike 'Prospect' and id not in (select company_id from operates where active = 't' and sector_id in (select id from sectors where target = 't')); update companies set pipeline = 'Prospect' where pipeline is null and id in (select company_id from operates where active = 't' and sector_id in (select id from sectors where target = 't'))";
 	$this->db->query($update_prospects);
+
 	}
 
 function remove_contacts_from_marketing() {
