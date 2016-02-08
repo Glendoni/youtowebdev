@@ -107,6 +107,7 @@ class Users_model extends MY_Model {
         
         
 		$data = array(
+			
 			'name' => $data['name'],
 			'email' => $data['email'],
 			'phone' => !empty($data['phone'])?$data['phone']:Null,
@@ -117,7 +118,9 @@ class Users_model extends MY_Model {
 			'updated_by' => $user_id,
 			'image' => $image,
 			//'gmail_account' => $data['gmail_account'],
-			'new_window' => $data['new_window']
+			'new_window' => $data['new_window'],
+			'permission' => !empty($data['permission'])?$data['permission']:Null,
+
 
 			);
 
