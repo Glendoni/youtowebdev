@@ -2,7 +2,7 @@
   <div class="col-lg-12">
     <div class="panel panel-default">
         <div class="panel-heading profile-heading">
-            <h3>Create Company</h3>
+            <h3>Add Company</h3>
         </div>
         <!-- /.panel-heading -->
         <div class="panel-body">
