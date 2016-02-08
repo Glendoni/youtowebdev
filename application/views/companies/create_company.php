@@ -78,7 +78,11 @@ echo form_open('',$attributes,$hidden);
         </span>
     </div>
 </div>-->
-
+<div class=" form-group ">
+	
+	
+</div>
+ 
  
 <div class=" form-group ">
    
@@ -99,38 +103,54 @@ echo form_open('',$attributes,$hidden);
    
     <div class="col-sm-6">  
          <label for="type" class="control-label">Type</label>
-
 <?php echo form_dropdown('address_types', $address_types, (isset($address->type)?$address->type:'') ,'class="form-control tradingType"' );?>    
     </div>
     
     
     
 </div>
+<!--<div class="form-group">
+	<label class="control-label col-sm-2" for="phone">Latitude:</label>
+	<div class="col-sm-3">
+	  <input type="text" class="form-control" name="lat"  value="<?php echo isset($_POST['lat'])?$_POST['lat']:''; ?>">
+	</div>
+	<label class="control-label col-sm-2" for="phone">Longitude:</label>
+	<div class="col-sm-3">
+	  <input type="text" class="form-control" name="lng"  value="<?php echo isset($_POST['lng'])?$_POST['lng']:''; ?>">
+	</div>
+</div>-->
+            
+          
+<div class=" form-group ">
+    
+	</div>
   <div class="tradingTypeOptions">  
    <div class="form-group">
         
         <div class="col-sm-6">
-            <label class="control-label">Trading Address</label>
-            <div>
-            <label class="radio-inline"> <input type="radio" name="tradingArr" class="tradingArr" value="1" >Same As Registered Address</label><br>
-            <label class="radio-inline"> <input type="radio" name="tradingArr" class="tradingArr" value="2">Enter New Address</label><br>
-            <label class="radio-inline"> <input type="radio" name="tradingArr" class="tradingArr def"  checked="checked" value="3">Leave Blank</label>
-            </div>        
+            <label class="control-label">Trading/Registered Address </label>
+            <label class="radio-inline"> <input type="radio" name="tradingArr" class="tradingArr" value="1" > The Same  </label>
+            <label class="radio-inline"> <input type="radio" name="tradingArr" class="tradingArr" value="2"> Not The Same </label>
+            <label class="radio-inline"> <input type="radio" name="tradingArr" class="tradingArr def"  checked="checked" value="3"> Fill Out Later </label>
         </div>
     </div>
-    <div class="col-sm-12 addrTrading">
-<div class=" form-group ">
-    <label for="address" class="control-label">Enter Trading Address</label>
-    <input type="text" name="tradingAddress" value="<?php echo isset($_POST['tradingAddress'])?$_POST['tradingAddress']:''; ?>" id="tradingAddress" maxlength="200" class="form-control">
-</div>
-</div>
-</div>
+      
     </div>
 
+<div class="addrTrading">
+    <hr>
+<h3>Trading Address</h3>
+<div class=" form-group ">
+    <label for="address" class="control-label col-sm-2">Address</label>
+    <div class="col-sm-10">                            
+    	<input type="text" name="tradingAddress" value="<?php echo isset($_POST['tradingAddress'])?$_POST['tradingAddress']:''; ?>" id="tradingAddress" maxlength="200" class="form-control">
+    </div>
+</div>
 
-
-
-                       
+    </div>
+            
+            <p>&nbsp;&nbsp;&nbsp;</p>
+           
 
 <!-- <div class=" form-group ">
     <label for="turnover" class="control-label col-sm-2">Turnover</label>
