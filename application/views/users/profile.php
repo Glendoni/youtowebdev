@@ -42,6 +42,23 @@
 >New Tab</option>
                   </select>
                 </div>
+    <?php if (ENVIRONMENT  =='staging' || ENVIRONMENT  =='development'){?>
+                <div class="form-group col-md-6">  
+                  <label>Role Type</label>
+
+                  <select name="permission" class="form-control">
+                  <option value="admin" <?php if(($current_user['permission']=='admin')): ?> selected="selected"<?php endif; ?>
+>Admin</option>
+                  <option value="" <?php if(($current_user['permission']=='')): ?> selected="selected"<?php endif; ?>
+>Normal User</option>
+                  </select>
+
+                </div>
+<?php };?>
+
+
+
+
                 <div class="form-group col-md-12">
                 <hr>
                 </div>
