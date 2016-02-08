@@ -1113,25 +1113,12 @@ class Companies_model extends CI_Model {
     }
     
     public function update_pipline($post, $user_id){
-<<<<<<< Updated upstream
    
                 $pipeline_month = $post['pipeline_month'];
         
                 $action = $this->check_if_pipeline_exist($post['company_id'], $pipeline_month ,$post['pipeline_status']);
         
             if($action){
-=======
-    //$dateObj   = DateTime::createFromFormat('!m', $post['pipeline_month']);
-    //$monthName = $dateObj->format('m'); // March 
-    //$pipeline_month =  date('Y').'-'.$monthName.'-'.date('d');   
-		$months_to_add = $post['pipeline_month'];
-		$ts = mktime(0, 0, 0, date("n") + $months_to_add);
-		$pipeline_month = date("Y-m-01", $ts);
-
-        $action = $this->check_if_pipeline_exist($post['company_id'], $pipeline_month ,$post['pipeline_status']);
-					
-					if($action){
->>>>>>> Stashed changes
 
                         $this->db->where('company_id', $post['company_id']);
                         $this->db->update('deals_pipeline', array('eff_to' => date('Y-m-d H:i:s')));
