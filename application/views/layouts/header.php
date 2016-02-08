@@ -87,7 +87,11 @@
 
             <ul class="nav navbar-top-links navbar-right">
             <li class="dropdown">
+<<<<<<< HEAD
               <a href="#" class="dropdown-toggle user-profile" data-toggle="dropdown">
+=======
+               <a href="#" class="dropdown-toggle user-profile" data-toggle="dropdown">
+>>>>>>> version3.11
                     <?php $user_icon = explode(",", ($current_user['image'])); echo "<div class='circle' style='float: left;margin-top: 0px;margin-right: 10px;width: 20px;height: 20px;border-radius: 15px;font-size: 8px;line-height: 20px;text-align: center;font-weight: 700;background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
                     <?php echo $current_user['name'] ?> <b class="caret"></b>
                     <?php if ($current_user['permission'] == 'admin'): ?>
@@ -110,10 +114,10 @@
                         <li class="divider"></li>
                         <?php if ($current_user['permission'] == 'admin'): ?>
                 <li>
-                    <a href="<?php echo base_url(); ?>companies/create_company" ><i class="fa fa-plus-circle"></i> create company</a>
+                    <a href="<?php echo base_url(); ?>companies/create_company" ><i class="fa fa-plus-circle"></i> Add Company</a>
                 </li>
                 <li>
-                    <a href="<?php echo base_url(); ?>email_templates/" ><i class="fa fa-envelope"></i> email templates</a>
+                    <a href="<?php echo base_url(); ?>email_templates/" ><i class="fa fa-envelope"></i> Manage Email Templates</a>
                 </li>
                 <li class="divider"></li>
                 <?php endif; ?>
