@@ -1,0 +1,11 @@
+{
+    "name": "vendor/package",
+    "type": "codeigniter-library",
+    "description":"baselist",
+    "license": "MIT",
+    "require": {
+        "compwright/codeigniter-installers": "*",
+        "ext-memcached": "*",
+        "shlikhota/postgresdb-php":"*"
+    }
+}
