@@ -14,7 +14,6 @@
     
     <?php if (ENVIRONMENT  =='staging'){?>
     <link rel="icon" type="image/png" href="<?php echo asset_url();?>images/favicon-staging.jpg">
-
     <?php
 } else {?>
 
@@ -76,7 +75,7 @@
 <div class="col-sm-3 col-md-3">
 <a class="navbar-brand" href="/" ><img src="<?php echo asset_url();?>images/baselist-logotype-black-transparent-bg.png" style="width:120px;">
 <?php if (isset($current_user)): ?>
-<div style="font-size: 10px;font-weight: 300;text-align: right;float: right;line-height: 40px;padding-left: 5px;">Version 3.0</div>
+<div style="font-size: 10px;font-weight: 300;text-align: right;float: right;line-height: 40px;padding-left: 5px;">Version 3.1</div>
 <?php endif; ?>
 </a>
 </div>
