@@ -337,12 +337,12 @@ function get_actions_outstanding($company_id)
 		from companies c
 		inner join actions a on
 		c.id = a.company_id
-		and a.id = 	(
-		SELECT MAX(id) 
-		FROM actions z 
-		WHERE z.company_id = a.company_id and z.action_type_id = '16' 
-		order by a.actioned_at desc
-		) left join users u on a.created_by = u.id where a.action_type_id = '16'   $start_date_sql order by a.created_at desc";
+		-- SELECT id 
+		-- FROM actions z 
+		-- WHERE z.company_id = a.company_id and z.action_type_id = '16' 
+		-- order by a.actioned_at desc limit 1
+		-- )
+		left join users u on a.created_by = u.id where a.action_type_id = '16'   $start_date_sql order by a.created_at desc";
 		$query = $this->db->query($sql);
 		if($query){
 			return $query->result_array();
@@ -368,12 +368,13 @@ function get_actions_outstanding($company_id)
 		from companies c
 		inner join actions a on
 		c.id = a.company_id
-		and a.id = 	(
-		SELECT MAX(id) 
-		FROM actions z 
-		WHERE z.company_id = a.company_id and z.action_type_id = '16' 
-		order by a.actioned_at desc
-		) left join users u on a.created_by = u.id where a.created_by = '$user_id' and a.action_type_id = '16' and (c.pipeline ilike '%customer%') $start_date_sql order by a.created_at desc";
+		-- and a.id = 	(
+		-- SELECT MAX(id) 
+		-- FROM actions z 
+		-- WHERE z.company_id = a.company_id and z.action_type_id = '16' 
+		-- order by a.actioned_at desc
+		-- )
+		left join users u on a.created_by = u.id where a.created_by = '$user_id' and a.action_type_id = '16' and (c.pipeline ilike '%customer%') $start_date_sql order by a.created_at desc";
 		$query = $this->db->query($sql);
 		if($query){
 			return $query->result_array();

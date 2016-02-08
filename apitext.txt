@@ -153,6 +153,7 @@ Pipeline month: 2016-02-01 Pipleine: 2
     LIMIT 1
     
 check_if_pipeline_exist test false xxxxx: PM: 2016-02-01
+<<<<<<< Updated upstream
 Initial stage two
 Initial stage two
 Initial stage three
@@ -212,16 +213,23 @@ Pipeline month: 2016-01-01 Pipleine: 2
     
 check_if_pipeline_exist test false xxxxx: PM: 2016-01-01
 Pipeline month zzz: 2015-12-01
+=======
+>>>>>>> Stashed changes
 Pipeline month: 2015-12-01 Pipleine: 2
 
      SELECT company_id
      FROM deals_pipeline
+<<<<<<< Updated upstream
     WHERE company_id=154537
+=======
+    WHERE company_id=65347
+>>>>>>> Stashed changes
     AND status LIKE '2'
     AND eff_to IS NULL
     LIMIT 1
     
 check_if_pipeline_exist test false xxxxx: PM: 2015-12-01
+<<<<<<< Updated upstream
 Pipeline month zzz: 2016-01-01
 Pipeline month: 2016-01-01 Pipleine: 1
 
@@ -242,3 +250,5 @@ Pipeline month: 2016-01-01 Pipleine: 1
     AND eff_to IS NULL
     LIMIT 1
     
+=======
+>>>>>>> Stashed changes
