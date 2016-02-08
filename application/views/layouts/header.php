@@ -14,7 +14,6 @@
     
     <?php if (ENVIRONMENT  =='staging'){?>
     <link rel="icon" type="image/png" href="<?php echo asset_url();?>images/favicon-staging.jpg">
-
     <?php
 } else {?>
 
