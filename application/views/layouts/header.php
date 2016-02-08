@@ -108,7 +108,7 @@
                         <li class="divider"></li>
                         <?php if ($current_user['permission'] == 'admin'): ?>
                 <li>
-                    <a href="<?php echo base_url(); ?>companies/create_company" ><i class="fa fa-plus-circle"></i> add company</a>
+                    <a href="<?php echo base_url(); ?>companies/create_company" ><i class="fa fa-plus-circle"></i> create company</a>
                 </li>
                 <li>
                     <a href="<?php echo base_url(); ?>email_templates/" ><i class="fa fa-envelope"></i> email templates</a>
