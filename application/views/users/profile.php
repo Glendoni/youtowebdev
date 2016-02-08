@@ -8,10 +8,6 @@
         <!-- /.panel-heading -->
         <div class="panel-body">
             <?php echo form_open_multipart('');?>
-            <div class="col-md-12">
-            <h4 style="font-weight:700;">About Me</h4>
-            <hr>
-            </div>
             <div class="form-group col-md-6">            
                 <label>Full Name *</label>
                 <input type="text" class="form-control" name="name" value="<?php echo $current_user['name'] ?>" >
@@ -36,17 +32,9 @@
                   <label>LinkedIn username</label>
                   <input type="text" class="form-control" name="linkedin" value="<?php echo $current_user['linkedin'] ?>" > 
                 </div>
-                
-
-            <div class="col-md-12">
-            <hr>
-            <h4 style="font-weight:700;">Configuration</h4>
-                        <hr>
-
-            </div>
-
-<div class="form-group col-md-6">  
+                <div class="form-group col-md-6">  
                   <label>Open Companies in...</label>
+
 <select name="new_window" class="form-control">
                   <option value="0" <?php if(($current_user['new_window']=='f')): ?> selected="selected"<?php endif; ?>
 >Same Tab</option>
@@ -68,6 +56,12 @@
                 </div>
 <?php };?>
 
+
+
+
+                <div class="form-group col-md-12">
+                <hr>
+                </div>
                 <?php 
                   $user_icon = explode(",", ($current_user['image'])); 
                   $backgroundcolour = $user_icon[1]; 
