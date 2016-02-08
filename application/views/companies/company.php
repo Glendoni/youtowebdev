@@ -64,6 +64,12 @@ endif; ?>
         </span>
 	<?php else: ?>
 	<?php endif; ?>
+	<?php if($deals_pipline->eff_from): ?>
+		<span class="label pipeline" style="background-color:#999; margin-left:5px;">
+		<?php echo ucfirst($deals_pipeline_status[$deals_pipline->status]);?> | <?php echo date("F y", strtotime($deals_pipline->eff_from));?>
+		</span>
+	<?php else: ?>
+	<?php endif; ?>
 	</div><!--END ROW-->
 	<!-- POPUP BOXES -->
 	<?php $this->load->view('companies/edit_box.php',array('company'=>$company)); ?>

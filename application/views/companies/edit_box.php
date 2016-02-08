@@ -42,6 +42,7 @@
     
                 <?php if($deals_pipline->eff_from){ ?>
                 <div class="col-sm-6 col-md-3 pipeline_text"  > 
+<<<<<<< Updated upstream
                     
                      
                      <div class="col-xs-6 col-sm-6 col-md-8" style="
@@ -52,6 +53,18 @@
     font-size: 12px;
 "> 
                 <?php 
+=======
+                     <div class="col-xs-6 col-sm-6 col-md-8" style="right: 14px;" >
+                        <label for="pipeline_text">Pipeline Status</label>
+                <p style="font-size: 12px;"> 
+                <?php //print_r($deals_pipline); 
+    
+    
+    
+    
+    
+            
+>>>>>>> Stashed changes
         echo ucfirst($deals_pipeline_status[$deals_pipline->status]).' In '.date("F", strtotime($deals_pipline->eff_from)). '<br/> by: '.$deals_pipline->name ;
             ?>
                     </p>      </div>
