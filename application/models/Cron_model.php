@@ -144,9 +144,7 @@ $response = curl_exec($ch);
 curl_close($ch);
 $contact = json_decode($response);
 $contactactemail = $contact->Email;
-$unsubscribestatus = $contact->unsubscribed;
-
-if ((!empty($contactactemail)) && (empty($unsubscribestatus))) {
+if (!empty($contactactemail)) {
 
 //UNSUBSCRIBE//
 $ch2 = curl_init();
