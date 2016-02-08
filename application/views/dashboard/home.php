@@ -1420,7 +1420,7 @@
             </div>
             <div class="panel panel-default">
               <div class="panel-heading">
-                <h3 class="panel-title">Recent Campaigns <span class="badge pull-right"><?php echo count($shared_campaigns); ?></span></h3>    
+                <h3 class="panel-title">Recent Campaigns <span class="badge pull-right"><?php //echo count($shared_campaigns); ?></span></h3>    
               </div>
               <div class="panel-body" style="padding:0;">
               <div id="campaignList">
@@ -1431,7 +1431,7 @@
                   <div class="col-xs-1"><span class="label label-info" style="margin-right:3px;background-color: <?php echo $bg_colour; ?>;font-size:8px; color: <?php echo $bg_colour_text;?>"><b><?php echo $bg_colour_name; ?></b>
                     </span></div>
                   <div class="col-xs-9" style="max-height:15px;overflow:hidden"><?php echo $campaign->name;?></div>
-                  <div class="col-xs-1" style="padding: 0 0 0 5px;"><b><?php echo $campaign->campaigncount; ?></b></div>
+                  <div class="col-xs-1" style="padding: 0 0 0 5px;"><b><?php //echo $campaign->campaigncount; ?></b></div>
                   </div>
                   </a>
                     <?php endforeach; ?>
