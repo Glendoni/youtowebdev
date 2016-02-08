@@ -337,6 +337,7 @@ function get_actions_outstanding($company_id)
 		from companies c
 		inner join actions a on
 		c.id = a.company_id
+		-- and a.id = 	(
 		-- SELECT id 
 		-- FROM actions z 
 		-- WHERE z.company_id = a.company_id and z.action_type_id = '16' 
