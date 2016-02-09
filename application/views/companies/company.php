@@ -449,7 +449,7 @@ endif; ?>
 		<!--ACTIONS-->
 		<div class="col-md-12" id="add_action">
 		<div class="panel panel-info ">
-		  <div class="panel-heading">Actions</div>
+		  <div class="panel-heading">Add Action</div>
 		  <div class="panel-body">
 		   <?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'],'done'=>'1','campaign_id' => $campaign_id, 'class_check' => $companies_classes[$company['class']],'source_check' => $company['source'],'sector_check' => count($company['sectors']),);
 			echo form_open(site_url().'actions/create', 'name="create" class="form" role="form"',$hidden); ?>
@@ -536,7 +536,7 @@ endif; ?>
 			<div class="col-md-12" >
 		<div class="panel panel-default " id="actions">
 			<div class="panel-heading">
-			Action History
+			Actions
 			</div>
 			<div class="panel-body">
 
