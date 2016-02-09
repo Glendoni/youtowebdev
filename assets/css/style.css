@@ -306,7 +306,7 @@ border-bottom: 1px dashed #ddd;
 }
 
 .list-group-item.delayed {
-	color: #a94442;
+	/*color: #a94442;*/
 	background-color: #f2dede;
 	border-color: #ebccd1;
 }
