@@ -126,31 +126,27 @@ echo form_open('',$attributes,$hidden);
 	</div>
   <div class="tradingTypeOptions">  
    <div class="form-group">
-        
         <div class="col-sm-6">
-            <label class="control-label">Trading/Registered Address </label>
-            <label class="radio-inline"> <input type="radio" name="tradingArr" class="tradingArr" value="1" > The Same  </label>
-            <label class="radio-inline"> <input type="radio" name="tradingArr" class="tradingArr" value="2"> Not The Same </label>
-            <label class="radio-inline"> <input type="radio" name="tradingArr" class="tradingArr def"  checked="checked" value="3"> Fill Out Later </label>
+            <label class="control-label">Add Trading Address</label> </br>
+          <input type="radio" name="tradingArr" class="tradingArr" value="1" > The Same</br>
+          <input type="radio" name="tradingArr" class="tradingArr" value="2"> Not The Same</br>
+          <input type="radio" name="tradingArr" class="tradingArr def"  checked="checked" value="3"> Fill Out Later 
         </div>
     </div>
       
     </div>
 
 <div class="addrTrading">
-    <hr>
-<h3>Trading Address</h3>
 <div class=" form-group ">
-    <label for="address" class="control-label col-sm-2">Address</label>
-    <div class="col-sm-10">                            
-    	<input type="text" name="tradingAddress" value="<?php echo isset($_POST['tradingAddress'])?$_POST['tradingAddress']:''; ?>" id="tradingAddress" maxlength="200" class="form-control">
+
+    <div class="col-sm-6">  
+    <label for="address" class="control-label">Trading Address</label>
+        <input type="text" name="tradingAddress" value="<?php echo isset($_POST['tradingAddress'])?$_POST['tradingAddress']:''; ?>" id="tradingAddress" maxlength="200" class="form-control">
     </div>
-</div>
+    </div>
 
     </div>
-            
-            <p>&nbsp;&nbsp;&nbsp;</p>
-           
+                       
 
 <!-- <div class=" form-group ">
     <label for="turnover" class="control-label col-sm-2">Turnover</label>
