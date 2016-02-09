@@ -78,12 +78,12 @@
 
 <?php if (isset($current_user)): ?>
         <?php if (ENVIRONMENT  =='staging'){?>
-<div style="font-size: 10px;font-weight: 300;text-align: right;float: right;line-height: 40px;padding-left: 5px;">Staging</div>
+<div style="font-size: 10px;font-weight: 600;text-align: right;float: right;line-height: 40px;padding-left: 5px;">Staging</div>
 <?php
 } else {?>
 <?php
 }; ?>
-<div style="font-size: 10px;font-weight: 600;text-align: right;float: right;line-height: 40px;padding-left: 5px;">Version 3.1</div>
+<div style="font-size: 10px;font-weight: 300;text-align: right;float: right;line-height: 40px;padding-left: 5px;">Version 3.1</div>
 <?php endif; ?>
 </a>
 </div>
