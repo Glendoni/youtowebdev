@@ -36,8 +36,7 @@
 						</div>	
 						<?php else: ?>	
 						<?php endif;?>
-					<?php foreach($current_campaign_owners as $current_campaign_owner): echo "<div style='text-align: center;font-weight: 300; font-size:12px;'>Owned by <b>".$current_campaign_owner->username."</b></div>"; endforeach ?>	
-
+					<?php foreach($current_campaign_owners as $current_campaign_owner): echo "<div style='text-align: center;font-weight: 300; font-size:12px;'>Owned by <b>".$current_campaign_owner->username."</b> | Created on <b>".date('jS F Y',strtotime($current_campaign_stats->created))."</b></div>"; endforeach ?>	
 					<?php if(!empty($current_campaign_stats->description)): ?>
 						<p style="font-size:14px"><?php echo $current_campaign_stats->description; ?></p>
 					<?php endif;?>
