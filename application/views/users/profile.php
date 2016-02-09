@@ -37,36 +37,12 @@
                   <label>LinkedIn username</label>
                   <input type="text" class="form-control" name="linkedin" value="<?php echo $current_user['linkedin'] ?>" > 
                 </div>
-                <div class="form-group col-md-6">  
-                  <label>Open Companies in...</label>
 
-<select name="new_window" class="form-control">
-                  <option value="0" <?php if(($current_user['new_window']=='f')): ?> selected="selected"<?php endif; ?>
->Same Tab</option>
-                  <option value="1" <?php if(($current_user['new_window']=='t')): ?> selected="selected"<?php endif; ?>
->New Tab</option>
-                  </select>
-                </div>
-    <?php if (ENVIRONMENT  =='staging' || ENVIRONMENT  =='development'){?>
-                <div class="form-group col-md-6">  
-                  <label>Role Type</label>
-
-                  <select name="permission" class="form-control">
-                  <option value="admin" <?php if(($current_user['permission']=='admin')): ?> selected="selected"<?php endif; ?>
->Admin</option>
-                  <option value="" <?php if(($current_user['permission']=='')): ?> selected="selected"<?php endif; ?>
->Normal User</option>
-                  </select>
-
-                </div>
-<?php };?>
- 
-
-
-
-                <div class="form-group col-md-12">
+                <div class="col-md-12">
                 <hr>
-                </div>
+            <h4 style="font-weight:700;">UX Configuration</h4>
+            <hr>
+            </div>
                 <?php 
                   $user_icon = explode(",", ($current_user['image'])); 
                   $backgroundcolour = $user_icon[1]; 
@@ -79,10 +55,41 @@
                 <div class="form-group col-md-6">  
                   <label>Foreground Colour</label>
                 <input type="color" name="user-bg" class="form-control" onchange="clickColor(0, -1, -1, 5)" value="<?php echo $foregroundcolour;?>"></div>
-                <div class="form-group col-md-12">
+                <div class="form-group col-md-6">  
+                  <label>Open Companies in...</label>
+
+<select name="new_window" class="form-control">
+                  <option value="0" <?php if(($current_user['new_window']=='f')): ?> selected="selected"<?php endif; ?>
+>Same Tab</option>
+                  <option value="1" <?php if(($current_user['new_window']=='t')): ?> selected="selected"<?php endif; ?>
+>New Tab</option>
+                  </select>
+                </div>
+    
+
+<?php if (ENVIRONMENT  =='staging' || ENVIRONMENT  =='development'){?>
+
+<div class="col-md-12">
+                <hr>
+            <h4 style="font-weight:700;">Testing</h4>
+            <hr>
+            </div>
+
+                <div class="form-group col-md-6">  
+                  <label>Role Type</label>
+
+                  <select name="permission" class="form-control">
+                  <option value="admin" <?php if(($current_user['permission']=='admin')): ?> selected="selected"<?php endif; ?>
+>Admin</option>
+                  <option value="" <?php if(($current_user['permission']=='')): ?> selected="selected"<?php endif; ?>
+>Normal User</option>
+                  </select>
+
+                </div>
+                <div class="col-md-12">
                 <hr>
                 </div>
-
+<?php };?>
                 <!--<div class="form-group col-md-6">            
                 <label>Gmail Account</label>
                 <input type="text" class="form-control" name="gmail_account" value="<?php echo $current_user['gmail_account'] ?>" >
