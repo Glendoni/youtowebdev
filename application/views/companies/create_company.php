@@ -177,7 +177,7 @@ echo form_open('',$attributes,$hidden);
  
 <div class="form-group"> 
 	<div class="modal-footer">
-	        	<button type="submit" class="btn btn-sm btn-warning btn-block">Submit</button>
+	        	<button type="submit" class="btn btn-primary btn-block">Add Company</button>
 	      	</div>
 </div>
 
