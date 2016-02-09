@@ -78,11 +78,6 @@ echo form_open('',$attributes,$hidden);
         </span>
     </div>
 </div>-->
-<div class=" form-group ">
-	
-	
-</div>
- 
  
 <div class=" form-group ">
    
