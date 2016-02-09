@@ -983,7 +983,8 @@ a li.autocomplete-item:hover {
 }
 /* ADD TO CALL */
 a.btn.btn-default.btn-xs.add-to-calendar {
-	margin-top: 5px;
+	margin-left: 5px;
+	font-size: 10px;
 }
 /* CAMPAIGN LINK */
 .campaign-link {

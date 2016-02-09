@@ -913,7 +913,7 @@
                         // die;
                       ?>
                           <div class="row list-group-item <?php if( strtotime($action->planned_at) < strtotime('today')  ) { echo ' delayed';} ?> " style="font-size:12px;">
-                            <div class="col-md-4"> 
+                            <div class="col-md-3"> 
                               <a href="<?php echo site_url();?>companies/company?id=<?php echo $action->company_id;?>" <?php if(($current_user['new_window']=='t')): ?> target="_blank"<?php endif; ?>>
                                   <?php $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' );echo str_replace($words, ' ',$action->company_name); ?>
 
@@ -925,10 +925,10 @@
                             <div class="col-md-2">
                               <?php echo $action_types_array[$action->action_type_id]; ?>
                             </div>
-                            <div class="col-md-2 text-center">
+                            <div class="col-md-3 text-center">
                             <?php echo date("H:i",strtotime($action->planned_at));?>
                               <strong><?php echo date("d/m/y",strtotime($action->planned_at));?></strong>
-                              <div style="clear:both;"><small><a class="btn btn-default btn-xs add-to-calendar" href="http://www.google.com/calendar/event?action=TEMPLATE&text=<?php echo urlencode($action_types_array[$action->action_type_id].' | '.$action->company_name); ?>&dates=<?php echo date("Ymd\\THi00",strtotime($action->planned_at));?>/<?php echo date("Ymd\\THi00\\Z",strtotime($action->planned_at));?>&details=<?php echo $contact_details_for_calendar;?><?php echo urlencode('http://baselist.herokuapp.com/companies/company?id='.$action->company_id);?>%0D%0DAny changes made to this event are not updated in Baselist."target="_blank" rel="nofollow">Add to Calendar</a></small></div>
+                              <small><a class="btn btn-default btn-xs add-to-calendar" href="http://www.google.com/calendar/event?action=TEMPLATE&text=<?php echo urlencode($action_types_array[$action->action_type_id].' | '.$action->company_name); ?>&dates=<?php echo date("Ymd\\THi00",strtotime($action->planned_at));?>/<?php echo date("Ymd\\THi00\\Z",strtotime($action->planned_at));?>&details=<?php echo $contact_details_for_calendar;?><?php echo urlencode('http://baselist.herokuapp.com/companies/company?id='.$action->company_id);?>%0D%0DAny changes made to this event are not updated in Baselist."target="_blank" rel="nofollow">Add to Calendar</a></small>
                             </div>
                             <div class="col-md-4" style="text-align:right;">
                               <?php $hidden = array('action_id' => $action->action_id , 'user_id' => $current_user['id'], 'action_do' => 'completed', 'outcome' => '' , 'company_id' => $action->company_id);
@@ -941,7 +941,7 @@
                                </form>
                             </div>
                           </div>
-                          <div class="row list-group-item" id="action_outcome_box_<?php echo $action->action_id ?>" style="display:none;">
+                          <div class="list-group-item" id="action_outcome_box_<?php echo $action->action_id ?>" style="display:none;">
                           
                           <label>Outcome</label>
                           <textarea class="form-control" name="outcome" rows="3" style="margin-bottom:5px;"></textarea>
