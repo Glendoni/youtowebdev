@@ -8,7 +8,12 @@
         <!-- /.panel-heading -->
         <div class="panel-body">
             <?php echo form_open_multipart('');?>
-            <div class="form-group col-md-6">            
+            <div class="col-md-12">
+            <h4 style="font-weight:700;">About Me</h4>
+            <hr>
+            </div>
+            <div class="form-group col-md-6">
+
                 <label>Full Name *</label>
                 <input type="text" class="form-control" name="name" value="<?php echo $current_user['name'] ?>" >
                 </div>
