@@ -22,7 +22,7 @@ class Dashboard extends MY_Controller {
 		// Add options
 		// array_unshift($providers_options,'All');
 
-		$this->data['pending_actions'] = $this->Actions_model->get_pending_actions($this->get_current_user_id());
+		//$this->data['pending_actions'] = $this->Actions_model->get_pending_actions($this->get_current_user_id());
 		$this->data['assigned_companies'] = $this->Actions_model->get_assigned_companies($this->get_current_user_id());
 		$this->data['action_types_array'] = $this->Actions_model->get_action_types_array();
 		$this->data['stats'] = $this->Actions_model->get_recent_stats('week');

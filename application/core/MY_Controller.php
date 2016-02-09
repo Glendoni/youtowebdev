@@ -42,7 +42,8 @@ class MY_Controller extends CI_Controller {
 		$this->load->model('Actions_model');
 		$this->load->model('Companies_model');
 		$this->load->model('Contacts_model');
-		
+				$this->data['pending_actions'] = $this->Actions_model->get_pending_actions($this->get_current_user_id());
+
 		// $this->load->helper('mobile');
 		
 		// loging checking and redirect

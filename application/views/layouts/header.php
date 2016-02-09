@@ -86,16 +86,16 @@
             <?php if (isset($current_user)): ?>
 
             <ul class="nav navbar-top-links navbar-right">
+            <li><a class="btn btn-primary btn-sm btn-actions" type="button" href="<?php echo site_url();?>dashboard#calls">
+  My Activity <span class="badge"><?php echo count($pending_actions); ?></span>
+</a>
+            </li>
             <li class="dropdown">
+
                <a href="#" class="dropdown-toggle user-profile" data-toggle="dropdown">
 
                     <?php $user_icon = explode(",", ($current_user['image'])); echo "<div class='circle' style='float: left;margin-top: 0px;margin-right: 10px;width: 20px;height: 20px;border-radius: 15px;font-size: 8px;line-height: 20px;text-align: center;font-weight: 700;background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
-                    <?php echo $current_user['name'] ?> <b class="caret"></b>
-                    <?php if ($current_user['permission'] == 'admin'): ?>
-                    <div style="text-align: right;width: 100%;padding-right: 15px;font-size: 9px; font-weight:700;">Admin</div>
-                    <?php endif; ?>
-
-</a>
+                    <?php echo $current_user['name'] ?> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <a href="<?php echo site_url(); ?>users/profile"><i class="fa fa-fw fa-user"></i> Profile</a>

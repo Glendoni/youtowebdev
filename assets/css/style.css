@@ -117,6 +117,16 @@ border-color: #f7f7f7;
 color:#fff;
 text-decoration: underline;
 }
+
+a.btn-actions {
+    min-height: auto !important;
+    color: #fff !important;
+    font-weight: 600;
+    }
+    a.btn-actions:hover {
+    	background-color: #285e8e !important;
+    color: #fff !important;
+    }
 .circle
     {
 width: 30px;

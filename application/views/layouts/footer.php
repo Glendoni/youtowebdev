@@ -485,6 +485,26 @@ $('.toggle').click(function (event) {
 });
     
 </script>
+
+<script type="text/javascript">
+        
+        $(document).ready(function() {
+        
+            // Javascript to enable link to tab
+var hash = document.location.hash;
+var prefix = "tab_";
+if (hash) {
+    $('.nav-tabs [href='+hash.replace(prefix,"")+']').tab('show');
+} 
+
+// Change hash for page-reload
+$('.nav-tabs ').on('shown.bs.tab', function (e) {
+    window.location.hash = e.target.hash.replace("#", "#" + prefix);
+});
+        
+        });
+        
+        </script>
 <!--COMBINE MULTIPLE JS FILES-->
 <hr>
 <?php if (isset($current_user)): ?>
