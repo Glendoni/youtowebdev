@@ -957,7 +957,7 @@ a li.autocomplete-item:hover {
 	padding: 10px 5px;
 	font-size: 12px;
 	display: block;
-	    border-bottom: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
 }
 .load-saved-search:hover {
 	background-color: #DEFFE2;
@@ -974,7 +974,7 @@ a li.autocomplete-item:hover {
 /* Desktops and laptops ----------- */
 @media only screen and (min-width : 768px) {
 	.modal-dialog {
-		width: 700px !important;
+	width: 700px !important;
 	}
 }
 
