@@ -123,9 +123,9 @@ echo form_open('',$attributes,$hidden);
    <div class="form-group">
         <div class="col-sm-6">
             <label class="control-label">Add Trading Address</label> </br>
-          <input type="radio" name="tradingArr" class="tradingArr" value="1" > The Same</br>
-          <input type="radio" name="tradingArr" class="tradingArr" value="2"> Not The Same</br>
-          <input type="radio" name="tradingArr" class="tradingArr def"  checked="checked" value="3"> Fill Out Later 
+          <input type="radio" name="tradingArr" class="tradingArr" value="1" > The Same as Registered</br>
+          <input type="radio" name="tradingArr" class="tradingArr" value="2"> Add New</br>
+          <input type="radio" name="tradingArr" class="tradingArr def"  checked="checked" value="3"> Complete Later
         </div>
     </div>
       
