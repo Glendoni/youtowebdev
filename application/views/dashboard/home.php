@@ -1409,7 +1409,7 @@
                   <?php foreach ($private_campaigns as $campaign):?>
                   <a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $campaign->id; ?>" class="load-saved-search" <?php echo strlen($campaign->name) > 33 ? 'title="'.$campaign->name.'"':"" ?>>
                   <div class="row">
-                  <div class="col-xs-10" style="overflow:hidden"><?php echo $campaign->name;?></br><small style="font-weight:300;"><?php echo date('D jS M y',strtotime($campaign->created_at));?></small></div>
+                  <div class="col-xs-10" style="overflow:hidden"><?php echo $campaign->name;?></br><small style="font-weight:300;"><?php echo date('jS F Y',strtotime($campaign->created_at));?></small></div>
 
 
                   <div class="col-xs-1"><b><?php echo $campaign->campaigncount; ?></b></div>
