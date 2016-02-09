@@ -1436,7 +1436,7 @@
                   </a>
                     <?php endforeach; ?>
               </div><!--END CAMPAIGN LIST-->
-                            <button type="submit" class="btn btn-success btn-block" id="loadMore">Load More</button>
+          <!--<button type="submit" class="btn btn-success btn-block" id="loadMore">Load More</button>-->
 
               </div>
             </div>

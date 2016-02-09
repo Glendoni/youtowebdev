@@ -274,8 +274,8 @@ class MY_Controller extends CI_Controller {
 			'exclude'=>'Exclude'
 			);	
 		// CAMPAIGN TABLE WITH CRITERIA FIELDS
-		$this->data['shared_searches'] = $this->Campaigns_model->get_all_shared_searches($this->get_current_user_id());
-		$this->data['private_searches'] = $this->Campaigns_model->get_all_private_searches($this->get_current_user_id());
+		//$this->data['shared_searches'] = $this->Campaigns_model->get_all_shared_searches($this->get_current_user_id());
+		//$this->data['private_searches'] = $this->Campaigns_model->get_all_private_searches($this->get_current_user_id());
 
 		// CAMPAIGN TABLE WITHOUT CRITERIA FIELDS
 		$this->data['shared_campaigns'] = $this->Campaigns_model->get_all_shared_campaigns($this->get_current_user_id());

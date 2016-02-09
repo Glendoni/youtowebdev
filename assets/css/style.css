@@ -963,13 +963,13 @@ a li.autocomplete-item:hover {
 	background-color: #DEFFE2;
 }
 
-#campaignList a{ display:none;
+/*#campaignList a{ display:none;
 }
 
 .no-padding {
 	padding: 0;
 	display: block;
-}
+}*/
 
 /* Desktops and laptops ----------- */
 @media only screen and (min-width : 768px) {
