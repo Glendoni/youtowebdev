@@ -505,10 +505,13 @@ if (hash) {
 
 // Change hash for page-reload
 $('.nav-tabs ').on('shown.bs.tab', function (e) {
-    window.location.hash = e.target.hash.replace("#", "#" + prefix);
+    //window.location.hash = e.target.hash.replace("#", "#" + prefix);
 });
         
         });
+    
+    
+    function ga(){}
         
         </script>
 <!--COMBINE MULTIPLE JS FILES-->
