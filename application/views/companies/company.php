@@ -448,7 +448,7 @@ endif; ?>
 
 		<!--ACTIONS-->
 		<div class="col-md-12" id="add_action">
-		<div class="panel panel-info ">
+		<div class="panel panel-default ">
 		  <div class="panel-heading">Add Action</div>
 		  <div class="panel-body">
 		   <?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'],'done'=>'1','campaign_id' => $campaign_id, 'class_check' => $companies_classes[$company['class']],'source_check' => $company['source'],'sector_check' => count($company['sectors']),);
