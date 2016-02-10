@@ -94,7 +94,7 @@
             <?php if (isset($current_user)): ?>
 
             <ul class="nav navbar-top-links navbar-right">
-            <li><a class="btn btn-primary btn-sm btn-actions" type="button" href="<?php echo site_url();?>dashboard#calls">
+            <li><a class="btn btn-primary btn-sm btn-actions tr-actions" type="button" href="<?php echo site_url();?>dashboard#calls">
   My Activity <span class="badge"><?php echo count($pending_actions); ?></span>
 </a>
             </li>

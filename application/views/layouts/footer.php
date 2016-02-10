@@ -489,6 +489,12 @@ $('.toggle').click(function (event) {
 <script type="text/javascript">
         
         $(document).ready(function() {
+            
+            
+                        $('.tr-actions').click(function(){
+$('.c-a-m').trigger('click');
+});
+
         
             // Javascript to enable link to tab
 var hash = document.location.hash;
