@@ -4,7 +4,7 @@
               <!-- Nav tabs -->
               <ul class="nav nav-tabs dashboard" role="tablist">
                 <li role="presentation" class="active"><button href="#team_stats" aria-controls="team_stats" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Stats','<?php echo $current_user['id'];?>')">Stats</button></li>
-                <li role="presentation"><button href="#calls" aria-controls="calls" role="tab" data-toggle="tab" class="btn btn-primary btn-sm c-a-m" style="margin-right:10px;" >Actions</button></li>
+                <li role="presentation"><button href="#calls" aria-controls="calls" role="tab" data-toggle="tab" class="btn btn-primary btn-sm c-a-m" style="margin-right:10px;" >My Activity</button></li>
                 <li role="presentation"><button href="#pipeline" aria-controls="pipeline" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Pipeline','<?php echo $current_user['id'];?>')">Pipeline</button></li>
                 <li><button href="companies/pipeline"role="tab" class="button btn btn-primary btn-sm deals_pipeline" style="margin-right:10px;" onclick="window.location ='companies/pipeline'">Deals Forecast</button></li>
                 <li role="presentation"><button href="#assigned" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Favourites','<?php echo $current_user['id'];?>')">Favourites</button></li>
@@ -892,7 +892,7 @@
 
     <div role="tabpanel" class="tab-pane fade" id="calls"><div class="panel panel-default">
               <div class="panel-heading">
-              <h3 class="panel-title">My Activity<span class="badge pull-right"><?php echo count($pending_actions); ?></span></h3>
+              <h3 class="panel-title">Actions<span class="badge pull-right"><?php echo count($pending_actions); ?></span></h3>
               </div>
              
               <div class="panel-body no-padding">
