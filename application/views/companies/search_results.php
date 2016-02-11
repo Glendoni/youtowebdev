@@ -58,8 +58,8 @@
 <div class="col-sm-2 mobile-hide">
 <div class="circle-responsive cyan-circle contacted_percentage">
 <div class="circle-content mega">
-<div class="large-number"><?php echo $current_campaign_stats->contacted; ?></div>
-<div class="small-text">Contacted</div>
+<div class="large-number"><?php echo $current_campaign_stats->contacted; ?><span style="font-size:18px;">%</small></div>
+<div class="small-text">Contacted </div>
 
 
 </div>

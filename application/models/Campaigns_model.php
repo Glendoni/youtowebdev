@@ -590,12 +590,8 @@ U.image image,
 C.name \"campaign name\" ,
 C.description description ,
 count(distinct T.company_id) campaign_total,
-CASE when count( CASE when CO.pipeline <> 'Unsuitable' then CO.id END) = 0 then 0 
-else count(distinct CASE when CO.pipeline <> 'Unsuitable' then CO.id END) END::numeric \"%\",
-
-
-
-
+round (100 * count(distinct (CASE when A.created_at > C.created_at AND CO.pipeline <> 'Unsuitable' then A.company_id else null END ))::numeric  / CASE when count(distinct CASE when CO.pipeline <> 'Unsuitable' then CO.id END) = 0 then 0 
+else count(distinct CASE when CO.pipeline <> 'Unsuitable' then CO.id END) END::numeric) \"%\",
 CASE when count(distinct CASE when CO.pipeline ilike 'Prospect' then CO.id END) = 0 then 0 
 else count(distinct CASE when CO.pipeline ilike 'Prospect' then CO.id END) END campaign_prospects,
 CASE when count(distinct CASE when CO.pipeline ilike 'Intent' or CO.pipeline ilike 'Qualified' then CO.id END) = 0 then 0 
@@ -643,7 +639,6 @@ ON C.company_id = T.company_id
 JOIN CAMPAIGNS CA
 ON T.campaign_id = CA.id
 where 
-
 EC.created_at > C.created_at
 group by 1
 )   T2
