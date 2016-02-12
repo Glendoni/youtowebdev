@@ -173,6 +173,10 @@ echo $email."updated";
 
 }
 }
+    
+    
+  
+    
 
 }
 
@@ -196,6 +200,163 @@ echo $email."updated";
 				}
    				}
    				*/
+public function generate_segment_events(){
+    
+    
+    
+           $dbconn = pg_connect("host=ec2-79-125-118-138.eu-west-1.compute.amazonaws.com port=5522 dbname=d7fvbgmrpjg4ba user=ucvie36u7gtubf password=p6lgogrt7mg89411qujnepsgfkf")
+    or die('Could not connect: ' . pg_last_error());
 
+// Performing SQL query
+$query = "select DISTINCT  identifies.company, identifies.id as un_ids,CONCAT(identifies.first_name,' ',identifies.last_name) as username, 
+to_char(identifies.sent_at, 'YYYY-MM-DD') as Date ,send.event_text as sent,
+ _open.event_text as opened, click.event_text as click, unsubscribe.event_text as unsubscribed, send.campaign as campaign_name, identifies.email as sent_email
+		From autopilot_baselist.identifies 
+		LEFT JOIN  autopilot_baselist.tracks
+		ON tracks.user_id  = identifies.user_id 
+		LEFT JOIN  autopilot_baselist.send
+		ON tracks.id  = send.id 
+		LEFT JOIN  autopilot_baselist._open
+		ON send.user_id = _open.user_id 
+        LEFT JOIN  autopilot_baselist.click
+		ON _open.user_id = click.user_id 
+		LEFT JOIN  autopilot_baselist.unsubscribe
+		ON _open.user_id = unsubscribe.user_id 
+		WHERE identifies.sent_at >= '2016-01-20' 
+		AND  _open.campaign IS NOT null
+        AND  identifies.company IS NOT null
+        LIMIT 3000
+        ";
+        $result = pg_query($query) or die('Query failed: ' . pg_last_error());
+ $words = array( 'Limited', 'LIMITED', 'LTD','ltd','Ltd','\'' );
+            while ($row = pg_fetch_array($result)) 
+            {
+
+              $companyrow  =  str_replace($words, '',ltrim($row[0])) ;
+                //echo  $comapnyrow ." - ".$row[1]." - ".$row[2]." - ".$row[3]." - ".$row[4]." - ". $row[5]."\n"; 
+                if($companyrow){
+                    
+                $get_companyID  = $this->getuserdetails(ltrim($companyrow));
+                    
+                 if($get_companyID) $resultArray[]['companyID'] =   $get_companyID; 
+                
+                    $resultArray[] = $row; 
+                    
+                //array_push($resultArray , array('emailsent = > '$row['sent_email'] )
+                    
+                    
+                     
+                }
+                
+            } 
+        
+        $marketing_events = $resultArray;
+        //$theOutcomeArr = array('click'=>2, 'unsubscribe'=>3);
+        $query = '';
+        foreach($marketing_events as $marketing)
+        {
+            if($marketing['unsubscribed']){
+                $theoutcome = 4;
+            }elseif($marketing['click']){
+                $theoutcome = 2;
+            }else{
+                $theoutcome = 1;
+            }
+            if($marketing['sent']){
+                 $contactid =  $this->Marketing_model->getemailusercompanyid($marketing['sent_email']); 
+                 $contactidd =  $this->Marketing_model->getemailuserid($marketing['sent_email']); 
+                 //echo  $query;
+               // echo $contactid.'<br>';
+                if($contactidd){
+                    
+           //$email_user_id =  $this->Users_model->get_user_by_email($marketing['sent_email']);
+                    
+                $this->db->select('sent_id');
+                $query = $this->db->get('email_campaigns');
+                $get_next_num =  $query->num_rows();
+                    
+                $this->db->select('sent_id');
+                $this->db->where('sent_id',$marketing['un_ids']);
+                $queryone = $this->db->get('email_campaigns');
+
+                if ($queryone->num_rows() != true){
+
+                    $email_campaign =   array(
+                    'id' =>  $get_next_num,
+                    'sent_id' => $marketing['un_ids'],
+                    'name' => $marketing['campaign_name'],
+                    'date_sent' => $marketing['date'],
+                    'created_by' => 1 
+                    );
+
+                    $this->db->insert('email_campaigns', $email_campaign);
+                    //$email_campaign_last_email_id = $this->db->affected_rows();
+                }
+                    //find the campign id
+                    $campaignID   = $this->get_campaign_name($marketing['campaign_name']);
+                 
+                $this->db->select('email_campaign_id');    
+                $queryfour = $this->db->get('email_actions');
+                $this->db->where('ap_email_campaign_id',$marketing['un_ids']);
+                $get_next_num_two =  $queryfour->num_rows();                    
+
+                $this->db->select('ap_email_campaign_id');
+                $this->db->where('ap_email_campaign_id',$marketing['un_ids']);
+                $querytwo = $this->db->get('email_actions');                    
+
+                // 'contact_id' => $query? $query : null,
+                if ($campaignID){
+                  if(!$get_next_num_two){
+                    $email_actions = array(
+                    'id'=> $get_next_num_two,
+                    'ap_email_campaign_id'=> $campaignID,
+                    'sent_action_id' => 1,
+                    'contact_id' => $contactidd,
+                    'email_action_type' => $theoutcome,
+                    'action_time' => $marketing['date'],
+                        'created_at' => $marketing['date'],
+                    'created_by' => 1 
+
+                    );
+                    
+                    $this->db->insert('email_actions', $email_actions);   
+             }
+
+                }
+
+                
+                }
+            }
+        }
+            //}
+        
+    }
+    
+    
+       public function getuserdetails($string){
+         
+        $query   =  $this->Companies_model->get_autocomplete($string);
+         if($query->num_rows()){
+
+            foreach ($query->result() as $row):
+            return  $row->id ;
+             endforeach;
+             }else{
+
+              return false;     
+         }
+    } 
+    
+    public function get_campaign_name($campaign){
+        
+            $this->db->select('id');
+            $this->db->where('name',$campaign);
+            $query = $this->db->get('email_campaigns');
+
+            foreach ($query->result() as $row):
+                return  $row->id ;
+            endforeach;
+            return false;     
+    }
 
 }

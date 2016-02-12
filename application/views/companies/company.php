@@ -555,7 +555,7 @@ endif; ?>
 							<?php endif; ?>
 							<?php if (count($actions_marketing) >= 0): ?>
 				            <li><a href="#marketing" data-toggle="tab">Marketing <span class="label label-default marketingAcitonCtn">
-				            <?php echo count($actions_marketing);?></span></a></li>
+				            <?php //echo count($actions_marketing);?>0</span></a></li>
 							<?php else: ?>
 							<?php endif; ?>
 				            <li><a href="#comments" data-toggle="tab"> Comments <span class="label label-success"><?php echo count($comments);?></span></a></li>
@@ -914,43 +914,7 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 <div class="tab-pane fade in" id="marketing">
     <ul class="list-group statAction">
         <?php if (count($actions_marketing) > 0): ?>
-            <?php foreach ($actions_marketing as $actions_marketing): 
-                $created_date_formatted = date("l jS F y",strtotime($actions_marketing['date_sent']));
-                ?>
-                <li class="list-group-item">
-                    <div class="row">				                 
-                        <div class="col-xs-6 col-md-7">
-                            <h4 style="margin:0;">
-                                <?php echo $actions_marketing['campaign_name'];?><?php if (isset($actions_marketing['sent_id'])) {?><a href="http://www.sonovate.com/?p=<?php echo $actions_marketing['sent_id'];?>" style="padding-left:10px;" target="_blank"><i class="fa fa-eye"></i></a><?php;}?>
-                                <div class="mic-info">
-                                    <?php echo $created_date_formatted?> by <?php echo $actions_marketing['email'];?>
-                                </div>
-                            </h4>
-                        </div><!--END COL-MD-4-->
-                        <div class="col-xs-6 col-md-5" style="text-align:right;">
-                            <?php if($actions_marketing['first_name']):?><span class="label label-primary" style="font-size:11px;  "><?php echo $actions_marketing['first_name']." ". $actions_marketing['last_name']; ?></span>
-                            <?php endif; ?>
-                            <?php
-                            if (($actions_marketing['opened']>'0') || ($actions_marketing['clicked']>'0')): ?>
-                                <span class="label label-success">Opened</span>
-                            <?php else: ?>
-                                <span class="label label-danger">Not Opened</span>
-                            <?php endif; ?>
-                            <?php
-                            if (($actions_marketing['clicked']>'0')): ?>
-                                <span class="label label-success">Clicked</span>
-                            <?php else: ?>
-                                <span class="label label-warning">Not Clicked</span>
-                            <?php endif; ?>
-                            <?php
-                            if (($actions_marketing['unsubscribed']>'0')): ?>
-                                <span class="label label-danger">Unsubscribed</span>
-                            <?php else: ?>
-                            <?php endif; ?>
-                        </div>
-                    </div>
-                </li>
-            <?php endforeach ?>
+           
             <?php else: ?>
             <div class="col-md-12 actionMsg">
             <h4 style="margin: 50px 0 40px 0; text-align: center;">No completed actions found for this company</h4>

@@ -30,6 +30,9 @@ class Cron extends CI_Controller {
         //$this->Cron_model->remove_customer_contacts_from_marketing();
     }
 
-
+    function retrieve_segment_events(){
+        
+        $this->Cron_model->generate_segment_events();
+    }
 
 }
