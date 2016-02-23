@@ -201,13 +201,10 @@ echo $email."updated";
    				}
    				*/
 public function generate_segment_events(){
-    
-    
-    
-           $dbconn = pg_connect("host=ec2-79-125-118-138.eu-west-1.compute.amazonaws.com port=5522 dbname=d7fvbgmrpjg4ba user=ucvie36u7gtubf password=p6lgogrt7mg89411qujnepsgfkf")
-    or die('Could not connect: ' . pg_last_error());
-
-// Performing SQL query
+            $this->load->model('Marketing_model');
+    //connection to external heroku database
+           $dbconn = pg_connect("host=ec2-79-125-118-138.eu-west-1.compute.amazonaws.com port=5522 dbname=d7fvbgmrpjg4ba user=ucvie36u7gtubf password=p6lgogrt7mg89411qujnepsgfkf")or die('Could not connect: ' . pg_last_error());
+// Performing SQL query on multiple heroku tables created by Autopilot
 $query = "select DISTINCT  identifies.company, identifies.id as un_ids,CONCAT(identifies.first_name,' ',identifies.last_name) as username, 
 to_char(identifies.sent_at, 'YYYY-MM-DD') as Date ,send.event_text as sent,
  _open.event_text as opened, click.event_text as click, unsubscribe.event_text as unsubscribed, send.campaign as campaign_name, identifies.email as sent_email
@@ -222,65 +219,40 @@ to_char(identifies.sent_at, 'YYYY-MM-DD') as Date ,send.event_text as sent,
 		ON _open.user_id = click.user_id 
 		LEFT JOIN  autopilot_baselist.unsubscribe
 		ON _open.user_id = unsubscribe.user_id 
-		WHERE identifies.sent_at >= '2016-01-20' 
+		WHERE identifies.sent_at >= '2016-01-10' 
 		AND  _open.campaign IS NOT null
         AND  identifies.company IS NOT null
         LIMIT 3000
         ";
         $result = pg_query($query) or die('Query failed: ' . pg_last_error());
- $words = array( 'Limited', 'LIMITED', 'LTD','ltd','Ltd','\'' );
+        $words = array( 'Limited', 'LIMITED', 'LTD','ltd','Ltd','\'' ); // no harm in checking
             while ($row = pg_fetch_array($result)) 
             {
 
               $companyrow  =  str_replace($words, '',ltrim($row[0])) ;
-                //echo  $comapnyrow ." - ".$row[1]." - ".$row[2]." - ".$row[3]." - ".$row[4]." - ". $row[5]."\n"; 
                 if($companyrow){
-                    
                 $get_companyID  = $this->getuserdetails(ltrim($companyrow));
-                    
                  if($get_companyID) $resultArray[]['companyID'] =   $get_companyID; 
-                
                     $resultArray[] = $row; 
-                    
-                //array_push($resultArray , array('emailsent = > '$row['sent_email'] )
-                    
-                    
-                     
                 }
-                
             } 
-        
         $marketing_events = $resultArray;
         //$theOutcomeArr = array('click'=>2, 'unsubscribe'=>3);
         $query = '';
         foreach($marketing_events as $marketing)
         {
-            if($marketing['unsubscribed']){
-                $theoutcome = 4;
-            }elseif($marketing['click']){
-                $theoutcome = 2;
-            }else{
-                $theoutcome = 1;
-            }
-            if($marketing['sent']){
-                 $contactid =  $this->Marketing_model->getemailusercompanyid($marketing['sent_email']); 
-                 $contactidd =  $this->Marketing_model->getemailuserid($marketing['sent_email']); 
-                 //echo  $query;
-               // echo $contactid.'<br>';
-                if($contactidd){
-                    
-           //$email_user_id =  $this->Users_model->get_user_by_email($marketing['sent_email']);
-                    
-                $this->db->select('sent_id');
-                $query = $this->db->get('email_campaigns');
-                $get_next_num =  $query->num_rows();
-                    
-                $this->db->select('sent_id');
-                $this->db->where('sent_id',$marketing['un_ids']);
-                $queryone = $this->db->get('email_campaigns');
-
+            //Marketing events change to accomodate original procedure   // tested ok.
+            if($marketing['unsubscribed']){$theoutcome = 4;}elseif($marketing['click']){$theoutcome = 2;}else{$theoutcome = 1;}
+            $contactidd =  $this->Marketing_model->getemailuserid($marketing['sent_email']); // tested ok.
+              if($contactidd){ //if true proceed
+                //Unfortunately we need to re-run the query to limit the record set and return the relevant entry basised on the un_ids            
+               $queryone = $this->db->query("SELECT sent_id FROM email_campaigns WHERE sent_id='".$marketing['un_ids']."' ");  
+                //if the un_ids has been found then skip this event as the entry already exist
                 if ($queryone->num_rows() != true){
-
+                    //echo $marketing['un_ids']; //tested ok   
+                    $queryr = $this->db->query("SELECT sent_id FROM email_campaigns");        
+                    $get_next_num =  $queryr->num_rows(); // tested ok.
+                      //echo $get_next_num.'<br>'; //tested ok
                     $email_campaign =   array(
                     'id' =>  $get_next_num,
                     'sent_id' => $marketing['un_ids'],
@@ -290,73 +262,50 @@ to_char(identifies.sent_at, 'YYYY-MM-DD') as Date ,send.event_text as sent,
                     );
 
                     $this->db->insert('email_campaigns', $email_campaign);
-                    //$email_campaign_last_email_id = $this->db->affected_rows();
                 }
-                    //find the campign id
-                    $campaignID   = $this->get_campaign_name($marketing['campaign_name']);
-                 
-                $this->db->select('email_campaign_id');    
-                $queryfour = $this->db->get('email_actions');
-                $this->db->where('ap_email_campaign_id',$marketing['un_ids']);
-                $get_next_num_two =  $queryfour->num_rows();                    
-
-                $this->db->select('ap_email_campaign_id');
-                $this->db->where('ap_email_campaign_id',$marketing['un_ids']);
-                $querytwo = $this->db->get('email_actions');                    
-
-                // 'contact_id' => $query? $query : null,
+                   //find the company id baised on the campaign name and insert FK into  the emails action table
+                $campaignID   = $this->get_campaign_name($marketing['campaign_name']); //tested ok
+                 $sql =  "SELECT email_campaign_id FROM email_actions WHERE sent_action_id='".$marketing['un_ids']."' ";
+                  //echo $sql;
+                   $querye = $this->db->query($sql);
+              $get_next_num_two =  $querye->num_rows();  //tested ok 
                 if ($campaignID){
-                  if(!$get_next_num_two){
+                    //if $get_next_num_two does not exist then add the entry event and details into the email_actions table
+                  if(!$get_next_num_two)
+                  {
                     $email_actions = array(
                     'id'=> $get_next_num_two,
-                    'ap_email_campaign_id'=> $campaignID,
-                    'sent_action_id' => 1,
+                    'email_campaign_id'=> $campaignID,
+                    'sent_action_id' => $marketing['un_ids'], // 
                     'contact_id' => $contactidd,
                     'email_action_type' => $theoutcome,
                     'action_time' => $marketing['date'],
-                        'created_at' => $marketing['date'],
+                    'created_at' => $marketing['date'],
                     'created_by' => 1 
-
                     );
-                    
                     $this->db->insert('email_actions', $email_actions);   
-             }
-
-                }
-
-                
-                }
-            }
-        }
-            //}
-        
+                 }
+                } 
+              } //contactdd end
+        } 
     }
-    
-    
-       public function getuserdetails($string){
-         
+       public function getuserdetails($string){ //gets comapny id based on company name 
+         $this->load->model('Companies_model');
         $query   =  $this->Companies_model->get_autocomplete($string);
          if($query->num_rows()){
-
             foreach ($query->result() as $row):
             return  $row->id ;
              endforeach;
              }else{
-
               return false;     
          }
     } 
-    
-    public function get_campaign_name($campaign){
-        
-            $this->db->select('id');
-            $this->db->where('name',$campaign);
-            $query = $this->db->get('email_campaigns');
-
-            foreach ($query->result() as $row):
-                return  $row->id ;
-            endforeach;
-            return false;     
+      public function get_campaign_name($campaign){ //checks campaign name and if exist returns the ID 
+            $query = $this->db->query("SELECT id FROM email_campaigns WHERE name='".$campaign."'  ");
+                     foreach ($query->result_array() as $row)
+                     {
+                         return $row['id'];
+                     }
+     return false;          
     }
-
 }

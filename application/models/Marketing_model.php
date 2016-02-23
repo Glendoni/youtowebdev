@@ -93,18 +93,21 @@ to_char(identifies.sent_at, 'YYYY-MM-DD') as Date ,send.event_text as sent,
          public function getemailuserid($email){
         
         
-            $this->db->select('*');
-            $this->db->where('email',$email);
-             $this->db->limit(1);
-            $query = $this->db->get('contacts');
-
-            foreach ($query->result() as $row):
-            return  $row->id ;
-            endforeach;
-
-
-            return false;     
-         
+ 
+             
+             
+             
+             
+             
+             
+             $query = $this->db->query("SELECT * FROM contacts WHERE email='".$email."' LIMIT 1 ");
+                     
+                     foreach ($query->result_array() as $row)
+                     {
+                         return $row['id'];
+             
+                     }
+             
         
         
     }

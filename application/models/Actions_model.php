@@ -102,6 +102,8 @@ ec.id = ea.email_campaign_id
 where (ea.email_action_type = '2' or ea.email_action_type = '3' or ea.email_action_type = '4' or ea.email_action_type = '1' ) and c.pipeline not in ('proposal','customer')  
 AND ea.created_at >= '2016-01-01 09:10:50.36656' 
 AND ec.name IS NOT null
+AND ea.email_action_type !=4
+ORDER BY Date DESC
   limit 100 ";
     
 $query = $this->db->query($sql);

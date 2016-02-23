@@ -117,19 +117,8 @@ class Marketing extends MY_Controller {
     
     public function autopilotActions($id){
         
-        
-       $comp_name =  $this->Companies_model->get_company_from_id($id);
-    
-        
-        $words = array( 'Limited', 'LIMITED', 'LTD','ltd','Ltd', '\'' );
-        
-        
-        
-           $comp_name = str_replace($words, '', $comp_name );
-        
-        //echo trim($comp_name);
         header('Content-Type: application/json');
-       //$marketing_events = $this->Marketing_model->actions_performed_new($comp_name);
+       
         $marketing_events  = $this->Actions_model->get_actions_marketing($id);
         
         echo json_encode($marketing_events);
