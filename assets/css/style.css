@@ -1291,16 +1291,13 @@ h2.company-header{
 .dashboardTotalheaders .stat-total{
     
     font-weight: 600;
-    
 }
-
-  .addrTrading{display:none;}
-
+  .addrTrading{display:none;
+}
 .circle-responsive_campiagns{
         border-radius: 0%;
     
 }
-
 .prospect-circle_campaign {
     /* background: transparent !important;    */
     color: #C062D0 !important;
