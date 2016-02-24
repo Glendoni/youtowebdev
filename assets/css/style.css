@@ -557,7 +557,7 @@ h2.company-header a:hover {
     color: #C062D0 !important;
     border-color: #C062D0 !important;
     border-width: 2px;
-    border-style: solid;
+    
 }
 .Prospect {
 	background-color: #C062D0 !important;
@@ -568,7 +568,7 @@ h2.company-header a:hover {
     color: #FFA03C !important;
     border-color: #FFA03C !important;
     border-width: 2px;
-    border-style: solid;
+    
 }
 .Intent {
 	background-color: #FFA03C !important;
@@ -583,7 +583,7 @@ h2.company-header a:hover {
     color: #148CD2 !important;
     border-color: #148CD2 !important;
     border-width: 2px;
-    border-style: solid;
+    
 }
 .Customer {
 	background-color: #148CD2 !important;
@@ -594,7 +594,7 @@ h2.company-header a:hover {
     color: #45AE7C !important;
     border-color: #45AE7C !important;
     border-width: 2px;
-    border-style: solid;
+   
 }
 .Proposal {
 	background-color: #45AE7C !important;
