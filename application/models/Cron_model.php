@@ -206,7 +206,7 @@ public function generate_segment_events(){
            $dbconn = pg_connect("host=ec2-79-125-118-138.eu-west-1.compute.amazonaws.com port=5522 dbname=d7fvbgmrpjg4ba user=ucvie36u7gtubf password=p6lgogrt7mg89411qujnepsgfkf")or die('Could not connect: ' . pg_last_error());
 // Performing SQL query on multiple heroku tables created by Autopilot
 $query = "select DISTINCT  identifies.company, identifies.id as un_ids,CONCAT(identifies.first_name,' ',identifies.last_name) as username, 
-to_char(identifies.sent_at, 'YYYY-MM-DD') as Date ,send.event_text as sent,
+to_char(identifies.sent_at, 'YYYY-MM-DD') as Date ,send.event_text as sent, identifies.received_at as event_time,
  _open.event_text as opened, click.event_text as click, unsubscribe.event_text as unsubscribed, send.campaign as campaign_name, identifies.email as sent_email
 		From autopilot_baselist.identifies 
 		LEFT JOIN  autopilot_baselist.tracks
@@ -243,6 +243,10 @@ to_char(identifies.sent_at, 'YYYY-MM-DD') as Date ,send.event_text as sent,
         {
             //Marketing events change to accomodate original procedure   // tested ok.
             if($marketing['unsubscribed']){$theoutcome = 4;}elseif($marketing['click']){$theoutcome = 2;}else{$theoutcome = 1;}
+            
+            
+            
+            
             $contactidd =  $this->Marketing_model->getemailuserid($marketing['sent_email']); // tested ok.
               if($contactidd){ //if true proceed
                 //Unfortunately we need to re-run the query to limit the record set and return the relevant entry basised on the un_ids            
@@ -279,7 +283,7 @@ to_char(identifies.sent_at, 'YYYY-MM-DD') as Date ,send.event_text as sent,
                     'sent_action_id' => $marketing['un_ids'], // 
                     'contact_id' => $contactidd,
                     'email_action_type' => $theoutcome,
-                    'action_time' => $marketing['date'],
+                    'action_time' => $marketing['event_time'],
                     'created_at' => $marketing['date'],
                     'created_by' => 1 
                     );
