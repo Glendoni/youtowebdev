@@ -243,20 +243,15 @@ to_char(identifies.sent_at, 'YYYY-MM-DD') as Date ,send.event_text as sent, iden
         {
             //Marketing events change to accomodate original procedure   // tested ok.
             if($marketing['unsubscribed']){$theoutcome = 4;}elseif($marketing['click']){$theoutcome = 2;}else{$theoutcome = 1;}
-            
-            
-            
-            
+            //Check if the contact exist on the system in the contacts table.
             $contactidd =  $this->Marketing_model->getemailuserid($marketing['sent_email']); // tested ok.
-              if($contactidd){ //if true proceed
+              if($contactidd){ //if contact = true proceed
                 //Unfortunately we need to re-run the query to limit the record set and return the relevant entry basised on the un_ids            
                $queryone = $this->db->query("SELECT sent_id FROM email_campaigns WHERE sent_id='".$marketing['un_ids']."' ");  
                 //if the un_ids has been found then skip this event as the entry already exist
-                if ($queryone->num_rows() != true){
-                    //echo $marketing['un_ids']; //tested ok   
+                if ($queryone->num_rows() != true){//tested ok   
                     $queryr = $this->db->query("SELECT sent_id FROM email_campaigns");        
                     $get_next_num =  $queryr->num_rows(); // tested ok.
-                      //echo $get_next_num.'<br>'; //tested ok
                     $email_campaign =   array(
                     'id' =>  $get_next_num,
                     'sent_id' => $marketing['un_ids'],
@@ -264,13 +259,11 @@ to_char(identifies.sent_at, 'YYYY-MM-DD') as Date ,send.event_text as sent, iden
                     'date_sent' => $marketing['date'],
                     'created_by' => 1 
                     );
-
                     $this->db->insert('email_campaigns', $email_campaign);
                 }
                    //find the company id baised on the campaign name and insert FK into  the emails action table
                 $campaignID   = $this->get_campaign_name($marketing['campaign_name']); //tested ok
                  $sql =  "SELECT email_campaign_id FROM email_actions WHERE sent_action_id='".$marketing['un_ids']."' ";
-                  //echo $sql;
                    $querye = $this->db->query($sql);
               $get_next_num_two =  $querye->num_rows();  //tested ok 
                 if ($campaignID){
