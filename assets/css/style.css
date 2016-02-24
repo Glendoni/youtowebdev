@@ -743,6 +743,7 @@ li.autocomplete-company {
 	    border-bottom: 1px #e7e7e7 solid;
     border-right: 1px #e7e7e7 solid;
        background-color: #fff;
+        cursor: default;
 }
 li.autocomplete-contact { 
 	padding: 10px 20px;
@@ -1294,4 +1295,48 @@ h2.company-header{
 }
 
   .addrTrading{display:none;}
+
+.circle-responsive_campiagns{
+        border-radius: 0%;
+    
+}
+
+.prospect-circle_campaign {
+    /* background: transparent !important;    */
+    color: #C062D0 !important;
+    /* border-color: #C062D0 !important; */
+    border-width: 2px;
+    /* border-style: solid; */
+}
+
+.proposal-circle_campaign {
+    /* background: transparent !important;    */
+    color: #45AE7C !important;
+    /* border-color: #C062D0 !important; */
+    border-width: 2px;
+    /* border-style: solid; */
+}
+.intent-circle_campaign {
+    background: transparent !important;
+    color: #FFA03C !important;
+    /* border-color: #FFA03C !important; */
+    /* border-width: 2px; */
+    /* border-style: solid; */
+}
+.customer-circle-campaign {
+    background: transparent !important;
+    color: #148CD2 !important;
+    /* border-color: #148CD2 !important; */
+    /* border-width: 2px; */
+    /* border-style: solid; */
+}
+.black-circle-campaign {
+	color: #262626;
+}
+.campaign .circle-content{
+padding-top:30%
+}
+.contacted_percentage_campaign{
+    color:#4C4C4C;
+}
 
