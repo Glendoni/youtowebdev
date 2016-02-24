@@ -45,10 +45,10 @@
 						<div><a class="btn btn-info btn-xs" href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $current_campaign_id; ?>">Refresh</a></div>
 
 						
-<div class="row" style="margin-bottom: 20px;">
+<div class="row campaign" style="margin-bottom: 20px;">
 <div class="col-sm-2 mobile-hide">
 <a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $current_campaign_stats->campaign_id; ?>">
-<div class="circle-responsive black-circle <?php echo empty($this->session->userdata('pipeline'))? 'active':'';?>"><div class="circle-content mega">
+<div class="circle-responsive_campiagns black-circle-campaign  <?php echo empty($this->session->userdata('pipeline'))? 'active':'';?>"><div class="circle-content mega">
 <div class="large-number"><?php echo number_format($current_campaign_stats->campaign_total); ?></div> <div class="small-text"><?php if ($companies_count<> "1") {echo "Companies in</br>$results_type";} else { echo "Company in</br>$results_type";}?></div>
 </div>
 </div>
@@ -56,7 +56,7 @@
 <div class="small-text" style="font-weight:300; font-size:9px; max-width:80%; margin-left:auto; margin-right:auto;"><?php if ($current_campaign_stats->campaign_unsuitable > "0") {echo "Includes ".$current_campaign_stats->campaign_unsuitable." marked as unsuitable";} else {}?></div>
 </div>
 <div class="col-sm-2 mobile-hide">
-<div class="circle-responsive cyan-circle contacted_percentage">
+<div class="circle-responsive_campiagns cyan-circle contacted_percentage_campaign">
 <div class="circle-content mega">
 <div class="large-number"><?php echo $current_campaign_stats->contacted; ?><span style="font-size:18px;">%</small></div>
 <div class="small-text">Contacted </div>
@@ -70,7 +70,7 @@
 <?php if ($current_campaign_stats->campaign_prospects>0): ?>
 <a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $current_campaign_stats->campaign_id; ?>&pipeline=prospect">
 <?php else: endif; ?>
-<div class="circle-responsive prospect-circle <?php if ($this->session->userdata('pipeline')=='prospect'): echo 'Prospect active';else: endif; ?>
+<div class="circle-responsive_campiagns prospect-circle_campaign <?php if ($this->session->userdata('pipeline')=='prospect'): echo 'Prospect active';else: endif; ?>
 ">
 <div class="circle-content mega">
 <div class="large-number"><?php echo $current_campaign_stats->campaign_prospects; ?></div>
@@ -83,7 +83,7 @@
 <?php if ($current_campaign_stats->campaign_intent>0): ?>
 <a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $current_campaign_stats->campaign_id; ?>&pipeline=intent">
 <?php else: endif; ?>
-<div class="circle-responsive intent-circle <?php if ($this->session->userdata('pipeline')=='intent'): echo 'Intent active';else: endif; ?>">
+<div class="circle-responsive_campiagns intent-circle_campaign <?php if ($this->session->userdata('pipeline')=='intent'): echo 'Intent active';else: endif; ?>">
 <div class="circle-content mega">
 <div class="large-number"><?php echo $current_campaign_stats->campaign_intent; ?></div>
 <div class="small-text">Intent & Qualified</div></div>
@@ -96,7 +96,7 @@
 <?php if ($current_campaign_stats->campaign_proposals>0): ?>
 <a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $current_campaign_stats->campaign_id; ?>&pipeline=proposal">
 <?php else: endif; ?>
-<div class="circle-responsive proposal-circle <?php if ($this->session->userdata('pipeline')=='proposal'): echo 'active';else: endif; ?>">
+<div class="circle-responsive_campiagns proposal-circle_campaign <?php if ($this->session->userdata('pipeline')=='proposal'): echo 'active';else: endif; ?>">
 <div class="circle-content mega">
 <div class="large-number"><?php echo $current_campaign_stats->campaign_proposals; ?></div>
 <div class="small-text"><?php if ($current_campaign_stats->campaign_proposals <> "1") {echo "Proposals";} else { echo "Proposal";}?></div></div>
@@ -109,7 +109,7 @@
 <?php if ($current_campaign_stats->campaign_customers>0): ?>
 <a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $current_campaign_stats->campaign_id; ?>&pipeline=customer">
 <?php else: endif; ?>
-<div class="circle-responsive customer-circle <?php if ($this->session->userdata('pipeline')=='customer'): echo 'active';else: endif; ?>">
+<div class="circle-responsive_campiagns customer-circle-campaign <?php if ($this->session->userdata('pipeline')=='customer'): echo 'active';else: endif; ?>">
 <div class="circle-content mega">
 <div class="large-number"><?php echo $current_campaign_stats->campaign_customers; ?></div>
 <div class="small-text"><?php if ($current_campaign_stats->campaign_customers <> "1") {echo "Customers";} else { echo "Customer";}?></div></div>
