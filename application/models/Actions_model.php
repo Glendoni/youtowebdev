@@ -67,7 +67,7 @@ return $query->result_object();
 
 function get_marketing_actions($user_id)
 	{
-$sql = "select distinct ec.name as campaign, c.id as company_id, ec.ap_sent_id, c.name as company, c.pipeline, con.first_name, con.last_name, CONCAT(con.last_name, ' ', con.first_name)  as username,to_char(ea.created_at, 'DD-MM-YYYY') as Date, ea.created_at, ea.email_action_type, ea.link as url from companies c
+$sql = "select distinct ec.name as campaign, c.id as company_id, c.name as company, c.pipeline, con.first_name, con.last_name, CONCAT(con.last_name, ' ', con.first_name)  as username,to_char(ea.created_at, 'DD-MM-YYYY') as Date, ea.created_at, ea.email_action_type, ea.link as url from companies c
 left join contacts con on
 c.id = con.company_id
 left join email_actions ea on 
@@ -92,7 +92,7 @@ return $query->result_object();
     
     function get_marketing_actions_two($user_id)
 	{
-$sql = "select  ec.name as campaign, c.id as company_id, ec.ap_sent_id, ea.email_action_type as action, c.name as company, c.pipeline, con.first_name, con.last_name, CONCAT(con.last_name, ' ', con.first_name)  as username,to_char(ea.action_time, 'DD-MM-YYYY') as Date, ea.created_at, ea.email_action_type, ea.link as url from companies c
+$sql = "select  ec.name as campaign, c.id as company_id, ea.email_action_type as action, c.name as company, c.pipeline, con.first_name, con.last_name, CONCAT(con.last_name, ' ', con.first_name)  as username,to_char(ea.action_time, 'DD-MM-YYYY') as Date, ea.created_at, ea.email_action_type, ea.link as url from companies c
 left join contacts con on
 c.id = con.company_id
 left join email_actions ea on 

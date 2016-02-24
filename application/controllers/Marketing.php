@@ -88,10 +88,7 @@ class Marketing extends MY_Controller {
     public function loaddata(){
       
         header('Content-Type: application/json');
-    
-         //print file_get_contents('application/cache/autopilot_segment_events');
-        //$this->generate_segment_events();
-        //echo $this->Marketing_model->autopilot_segment(); // $this->get_current_user_id()));
+     
    echo json_encode($this->Actions_model->get_marketing_actions_two($this->get_current_user_id()));
          
     }
@@ -120,7 +117,7 @@ class Marketing extends MY_Controller {
         header('Content-Type: application/json');
        
         $marketing_events  = $this->Actions_model->get_actions_marketing($id);
-        
+    
         echo json_encode($marketing_events);
     }
     
