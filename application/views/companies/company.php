@@ -154,11 +154,8 @@ endif; ?>
 			<?php endif; ?>
 			<?php if (isset($company['linkedin_id'])): ?>
 			<a class="btn  btn-info btn-sm btn-block linkedin" href="https://www.linkedin.com/company/<?php echo $company['linkedin_id'] ?>"  target="_blank">LinkedIn</a>
-			
-               
             <?php else: ?>
-              <a class="btn  btn-primary btn-sm btn-block" href="https://www.linkedin.com/company/<?php echo  str_replace(' ', '-',$company['name']) ?>"  target="_blank">Search LinkedIn</a>
-          
+              <a class="btn  btn-primary btn-sm btn-block" href="https://www.linkedin.com/company/<?php echo  str_replace(' ', '-',$company['name']) ?>"  target="_blank">Search LinkedIn Profile</a>
             <?php endif; ?>
 					<?php if (isset($company['url'])): ?>
 		<a class="btn btn-default btn-sm btn-block btn-url" href="<?php $parsed = parse_url($company['url']); if (empty($parsed['scheme'])) { echo 'http://' . ltrim($company['url'], '/'); }else{ echo $company['url']; } ?>" target="_blank">
@@ -168,8 +165,6 @@ endif; ?>
 			<?php if (isset($company['registration'])): ?>
 			<a class="btn  btn-info btn-sm btn-block companieshouse" href="https://beta.companieshouse.gov.uk/company/<?php echo $company['registration'] ?>" target="_blank">Companies House</a>
 			<?php endif; ?>
-
-
 		<?php endif; ?>
         </div><!--CLOSE COL-MD-3-->
 		<div class="col-md-12">
