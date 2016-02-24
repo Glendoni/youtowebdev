@@ -144,15 +144,6 @@
 	                </div>
 	                <div class="col-md-6">
 	                    <div class="form-group">
-						<label for="eff_to" class="control-label">Status</label>   
-                        <select name="eff_to" class="form-control">
-                            <option value="0" selected="">Active</option>
-                            <option value="1">Left</option>
-                        </select>
-						</div>
-	                </div>
-	                <div class="col-md-6">
-	                    <div class="form-group">
 						<label for="marketing" class="control-label">Opt-Out of Email Marketing </label>   
                         <select name="marketing_opt_out" class="form-control">
                             <option value="0" <?php if(empty($contact->email_opt_out_date)): ?>selected=""<?php endif; ?>>No</option>
@@ -162,6 +153,15 @@
                         <?php if(!empty($contact->email_opt_out_date)): ?>
 						<input type="hidden" name="opt_out_check" value="<?php echo $contact->email_opt_out_date; ?>" />
                         <?php endif; ?>
+						</div>
+	                </div>
+                      <div class="col-md-6">
+	                    <div class="form-group">
+						<label for="eff_to" class="control-label">Status</label>   
+                        <select name="eff_to" class="form-control">
+                            <option value="0" selected="">Active</option>
+                            <option value="1">Left</option>
+                        </select>
 						</div>
 	                </div>
 				 </div>
