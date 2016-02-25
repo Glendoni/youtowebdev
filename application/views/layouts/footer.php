@@ -94,85 +94,11 @@ $('#agency_name').addClass('autocomplete-live');
 });
     }
 }
-function  getCompany(input_data){
-    // 08245800
-     $.ajax({
-            type: "GET",
-            url: "<?php echo base_url(); ?>companies/getCompanyHouseDetails/"+input_data,
-            //data: post_data,
-            success: function(data) {
-             var obj =   $.parseJSON(data);
-                
-            var i = 0;
-            var text = "";
-                var preview = [];
-            var out = [];
-            while ( obj.items[i]) {
-                if(obj.items[i].company_status == 'active' ){
-             out += '<a href="javascript:;" company_number="'+obj.items[i].company_number+'" title="'+obj.items[i].title+'" postal_code="'+obj.items[i].address.postal_code+'" address_line_1="'+obj.items[i].address.address_line_1+'" locality="'+obj.items[i].address.locality+'" snippet="'+obj.items[i].snippet+'" company_type="'+obj.items[i].company_type+'" company_status="'+obj.items[i].company_status+'" description="'+obj.items[i].description+'" date_of_creation="'+obj.items[i].date_of_creation+'" class="companyHouseRegNum"><li class="autocomplete-item autocomplete-company toLowerCase ch_drop_title"><strong>' + ucwords(obj.items[i].title) + '</strong><br><small>Add to Baselist</small></li></a>';  
-                     
-                
-                preview += '<a target="_blank" href="https://beta.companieshouse.gov.uk/company/'+obj.items[i].company_number+'"><li class="autocomplete-item autocomplete-contact preview_slogan" > View at Companies House   <i class="fa fa-external-link"></i><br><small>&nbsp;</small></li></a>'; 
-                }
-               i++;
-                if (i === 7) { break; }
-            }    
-  
-                            $('#suggestions').show();
-            $('#autoSuggestionsList').addClass('auto_list');
-            $('#autoSuggestionsList').html('<div class="autocomplete-full-holder"><div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 clearfix no-padding"><ul class="autocomplete-holder"><li class="autocomplete-item split-heading"><i class="fa fa-caret-square-o-down"></i> Companies</li>'+out+'</ul></div><div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 no-padding"><ul class="autocomplete-holder"><li class="autocomplete-item split-heading autocomplete-no-results"><i class="fa fa-times"></i> Preview</li>'+preview+'</ul></div></div>');
-                
-                if(i == 0){
-    
-   $('#autoSuggestionsList').html('<div class="autocomplete-full-holder"><div class="col-xs-12 col-sm-12 col-md-5 col-lg-12 no-padding"><ul class="autocomplete-holder"><li class="autocomplete-item split-heading autocomplete-no-results"><i class="fa fa-times"></i> No records found</li></ul></div></div>');
-}
-            $('#agency_name').addClass('autocomplete-live');
-                             saveCompanyHandler();
-            }
-            }); 
-}
-    function saveCompanyHandler(){
-        $('.ch_drop_title').css('background','#7fe3d5');
-        $('.ch_drop_title').css('color' ,'#2d2d2d');
-        $('.ch_drop_title strong').css('font-weight' ,'300'); 
-        $('.companyHouseRegNum').click(function(){
-           var mode =  "create";
-                var user_id  =  <?php echo $current_user['id']; ?> ; 
-                var data = {
-                "registration": $(this).attr('company_number'),
-                "date_of_creation": $(this).attr('date_of_creation'),
-                "name": $(this).attr('title'),
-                "postal_code": $(this).attr('postal_code'),
-                "address": $(this).attr('snippet'),
-                "user_id" : user_id,
-                "company_status": $(this).attr('company_status'),
-                "address_line_1": $(this).attr('address_line_1'),
-                "company_type": $(this).attr('company_type'),
-                "description": $(this).attr('description'),
-                "date_of_creation": $(this).attr('date_of_creation'),
-                };
-            bootbox.confirm("Are you sure want to add this company?", function(result) {
-                if(result){
-                data = $.param(data);
-                    $.ajax({
-                        type: "POST",
-                        dataType: "json",
-                        url: "<?php echo base_url(); ?>companies/getCompany",
-                        data: data,
-                        success: function (data) {
-                        if(data.status == 200){
-                            // alert('redirect');
-                            //var milliseconds = 2000;
-                            //if ((new Date().getTime() - start) > milliseconds){
-                            window.location.href = "<?php echo base_url(); ?>companies/company?id="+data.message;
-                            } 
-                        }
-                    });
-                }else{
-                }                
-            })
-        }); 
-    }; 
+function getCompany(input_data){$.ajax({type:"GET",url:"<?php echo base_url(); ?>companies/getCompanyHouseDetails/"+input_data,success:function(data){var obj=$.parseJSON(data);var i=0;var text="";var preview=[];var out=[];while(obj.items[i]){if(obj.items[i].company_status=='active'){out+='<a href="javascript:;" company_number="'+obj.items[i].company_number+'" title="'+obj.items[i].title+'" postal_code="'+obj.items[i].address.postal_code+'" address_line_1="'+obj.items[i].address.address_line_1+'" locality="'+obj.items[i].address.locality+'" snippet="'+obj.items[i].snippet+'" company_type="'+obj.items[i].company_type+'" company_status="'+obj.items[i].company_status+'" description="'+obj.items[i].description+'" date_of_creation="'+obj.items[i].date_of_creation+'" class="companyHouseRegNum"><li class="autocomplete-item autocomplete-company toLowerCase ch_drop_title"><strong>'+ucwords(obj.items[i].title)+'</strong><br><small>Add to Baselist</small></li></a>';preview+='<a target="_blank" href="https://beta.companieshouse.gov.uk/company/'+obj.items[i].company_number+'"><li class="autocomplete-item autocomplete-contact preview_slogan" > View at Companies House   <i class="fa fa-external-link"></i><br><small>&nbsp;</small></li></a>';}
+i++;if(i===7){break;}}
+$('#suggestions').show();$('#autoSuggestionsList').addClass('auto_list');$('#autoSuggestionsList').html('<div class="autocomplete-full-holder"><div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 clearfix no-padding"><ul class="autocomplete-holder"><li class="autocomplete-item split-heading"><i class="fa fa-caret-square-o-down"></i> Companies</li>'+out+'</ul></div><div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 no-padding"><ul class="autocomplete-holder"><li class="autocomplete-item split-heading autocomplete-no-results"><i class="fa fa-times"></i> Preview</li>'+preview+'</ul></div></div>');if(i==0){$('#autoSuggestionsList').html('<div class="autocomplete-full-holder"><div class="col-xs-12 col-sm-12 col-md-5 col-lg-12 no-padding"><ul class="autocomplete-holder"><li class="autocomplete-item split-heading autocomplete-no-results"><i class="fa fa-times"></i> No records found</li></ul></div></div>');}
+$('#agency_name').addClass('autocomplete-live');saveCompanyHandler();}});}
+function saveCompanyHandler(){$('.ch_drop_title').css('background','#7fe3d5');$('.ch_drop_title').css('color','#2d2d2d');$('.ch_drop_title strong').css('font-weight','300');$('.companyHouseRegNum').click(function(){var mode="create";var user_id=<?php echo $current_user['id'];?>;var data={"registration":$(this).attr('company_number'),"date_of_creation":$(this).attr('date_of_creation'),"name":$(this).attr('title'),"postal_code":$(this).attr('postal_code'),"address":$(this).attr('snippet'),"user_id":user_id,"company_status":$(this).attr('company_status'),"address_line_1":$(this).attr('address_line_1'),"company_type":$(this).attr('company_type'),"description":$(this).attr('description'),"date_of_creation":$(this).attr('date_of_creation'),};bootbox.confirm("Are you sure want to add this company?",function(result){if(result){data=$.param(data);$.ajax({type:"POST",dataType:"json",url:"<?php echo base_url(); ?>companies/getCompany",data:data,success:function(data){if(data.status==200){window.location.href="<?php echo base_url(); ?>companies/company?id="+data.message;}}});}else{}})});};
     function ucwords (str) {
     return (str + '').replace(/^([a-z])|\s+([a-z])/g, function ($1) {
         return $1.toUpperCase();
