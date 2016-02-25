@@ -284,15 +284,11 @@ endif; ?>
 		Locations
 		<div class="pull-right">
             
-            
-        <?php   if(count($addresses) < 2 ) : ?>
 		<div class="btn-group">
-		<button  class="btn btn-primary edit-btn btn-xs" data-toggle="modal" id="create_address_<?php echo $company['id']; ?>"  data-target="#create_address_<?php echo $company['id']; ?>" >
-        <span class="ladda-label"> Add Address </span>
-		</button>
+            <button  class="btn btn-primary edit-btn btn-xs" data-toggle="modal" id="create_address_<?php echo $company['id']; ?>"  data-target="#create_address_<?php echo $company['id']; ?>" >
+            <span class="ladda-label"> Add Address </span>
+            </button>
 		</div>
-            
-           <?php endif; ?> 
             
 		</div>
 		</div>
