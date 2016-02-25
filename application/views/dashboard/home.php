@@ -742,7 +742,7 @@
 
 
 <div class="col-sm-2 mobile-hide">
-<div class="circle-responsive black-circle <?php echo empty($this->session->userdata('pipeline'))? 'active':'';?>"><div class="circle-content mega">
+<div class="circle-responsive_campiagns black-circle-campaign  <?php echo empty($this->session->userdata('pipeline'))? 'active':'';?>"><div class="circle-content mega">
 <div class="large-number"><?php echo number_format($get_user_campaign->campaign_total); ?></div> <div class="small-text">Companies
 </div>
 
@@ -751,7 +751,7 @@
 <div class="small-text-unsuitable"><?php if ($get_user_campaign->campaign_unsuitable > "0") {echo "Includes ".$get_user_campaign->campaign_unsuitable." marked as unsuitable";} else {}?></div>
 </div>
 <div class="col-sm-2 mobile-hide">
-<div class="circle-responsive cyan-circle contacted_percentage">
+<div class="circle-responsive_campiagns cyan-circle contacted_percentage_campaign">
 <div class="circle-content mega">
 <div class="large-number"><?php echo $get_user_campaign->contacted; ?><span style="font-size:32px;">%</span></div>
 <div class="small-text">Contacted</div>
