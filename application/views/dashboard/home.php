@@ -251,10 +251,10 @@
                             <?php echo '<div class="badge tw-proposals" style="background-color:#45AE7C;">'.$stat['proposals'].'</div>';?>
                             </div>
                             <div class="col-xs-2 col-md-2 text-center"> 
-                            <span class="tw-demobookedcount"><?php echo $stat['demobookedcount'];?></span> / <span class="democount"><?php echo $stat['democount'];?></span>
+                            <span class="tw-demobookedcount"><?php echo $stat['demobookedcount'];?></span> / <span class="tw-democount"><?php echo $stat['democount'];?></span>
                             </div>
                             <div class="col-xs-2 col-md-1 text-center">
-                            <span class="meetingbooked"><?php echo $stat['meetingbooked'];?></span> / <span class="meetingcount"><?php echo $stat['meetingcount'];?></span>
+                            <span class="tw-meetingbooked"><?php echo $stat['meetingbooked'];?></span> / <span class="tw-meetingcount"><?php echo $stat['meetingcount'];?></span>
                             </div>
                             <div class="col-xs-2 col-md-2 text-center"> 
                             <span class="tw-salescall"><?php echo $stat['salescall'];?></span> / <span class="tw-introcall"><?php echo $stat['introcall'];?></span>
@@ -263,7 +263,7 @@
                               <span class="tw-pipelinecount"><?php echo $stat['pipelinecount'];?></span>
                             </div>
                             <div class="col-md-2 hidden-xs text-center">
-                              <span class="key_review_added"><?php echo $stat['key_review_added'];?></span> / <span class="tw-key_review_occuring"><?php echo $stat['key_review_occuring'];?></span>
+                              <span class="tw-key_review_added"><?php echo $stat['key_review_added'];?></span> / <span class="tw-key_review_occuring"><?php echo $stat['key_review_occuring'];?></span>
                             </div>
                             <div class="col-md-1 hidden-xs text-center">
                                 <span class="tw-duediligence"><?php echo $stat['duediligence'];?></span>
