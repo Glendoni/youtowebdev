@@ -162,14 +162,14 @@ public function generate_segment_events()
     //connection to external heroku database
     $dbconn = pg_connect("host=ec2-79-125-118-138.eu-west-1.compute.amazonaws.com port=5522 dbname=d7fvbgmrpjg4ba user=ucvie36u7gtubf password=p6lgogrt7mg89411qujnepsgfkf")or die('Could not connect: ' . pg_last_error());
     // Performing SQL query on multiple heroku tables created by Autopilot
-    $query = "select DISTINCT  identifies.company, identifies.id as un_ids,CONCAT(identifies.first_name,' ',identifies.last_name) as username, 
+    $query = "select DISTINCT  identifies.company, identifies.id as un_ids,CONCAT(identifies.first_name,' ',identifies.last_name) as username, send.sent_by as owneremail,
     to_char(identifies.sent_at, 'YYYY-MM-DD') as Date ,send.event_text as sent, identifies.received_at as event_time,
     _open.event_text as opened, click.event_text as click, unsubscribe.event_text as unsubscribed, send.campaign as campaign_name, identifies.email as sent_email
     From autopilot_baselist.identifies 
     LEFT JOIN  autopilot_baselist.tracks
     ON tracks.user_id  = identifies.user_id 
     LEFT JOIN  autopilot_baselist.send
-    ON tracks.id  = send.id 
+    ON tracks.anonymous_id  = send.anonymous_id 
     LEFT JOIN  autopilot_baselist._open
     ON send.user_id = _open.user_id 
     LEFT JOIN  autopilot_baselist.click
@@ -195,11 +195,16 @@ public function generate_segment_events()
     } 
     $marketing_events = $resultArray;
     //$theOutcomeArr = array('click'=>2, 'unsubscribe'=>3);
+    
+      
+    
     $query = '';
     foreach($marketing_events as $marketing){
+       
         //Marketing events change to accomodate original procedure   // tested ok.
         if($marketing['unsubscribed']){
             $theoutcome = 4;
+            $createdBy = $marketing['created_by'];
         }elseif($marketing['click']){
             $theoutcome = 2;
         }else{
@@ -207,9 +212,10 @@ public function generate_segment_events()
         }
         //Check if the contact exist on the system in the contacts table.
         $contactidd =  $this->Marketing_model->getemailuserid($marketing['sent_email']); // tested ok.
-
         if($contactidd){ //if contact = true proceed
-            $created_by = $this->Marketing_model->getcampaignowner($marketing['campaign_name']); 
+        
+            $created_by = $this->Marketing_model->getcampaignowner($marketing['owneremail']); 
+          
             //Unfortunately we need to re-run the query to limit the record set and return the relevant entry basised on the un_ids            
             $queryone = $this->db->query("SELECT sent_id FROM email_campaigns WHERE sent_id='".$marketing['un_ids']."' ");  
             //if the un_ids has been found then skip this event as the entry already exist
@@ -221,7 +227,7 @@ public function generate_segment_events()
                 'sent_id' => $marketing['un_ids'],
                 'name' => $marketing['campaign_name'],
                 'date_sent' => $marketing['date'],
-                'created_by' => $created_by ? $created_by : 1
+                'created_by' => $created_by 
                 );
                 $this->db->insert('email_campaigns', $email_campaign);
             }
@@ -240,7 +246,7 @@ public function generate_segment_events()
                     'email_action_type' => $theoutcome,
                     'action_time' => $marketing['event_time'],
                     'created_at' => $marketing['date'],
-                    'created_by' => $created_by ? $created_by : 1
+                    'created_by' => $created_by 
                     );
                     $this->db->insert('email_actions', $email_actions);   
                 }

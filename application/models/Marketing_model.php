@@ -75,12 +75,16 @@ public function getemailuserid($email)
     }
 }
     
-public function getcampaignowner($id)
+public function getcampaignowner($email)
 {
-$query = $this->db->query("SELECT name, created_by FROM campaigns WHERE name='".$id."' LIMIT 1 ");
+    
+   
+$query = $this->db->query("SELECT id FROM users WHERE email='".$email."' LIMIT 1 ");
     foreach ($query->result_array() as $row){
-        return  $row['created_by'];
+        return  $row['id'];
     }
+    
+     return 1; // Return Nick
 }
 
 public function getuserdetailss($email = 0)
