@@ -76,6 +76,7 @@ $(".source_explanation").prop('required',false);
 //}
 //});
 $( document ).ready(function() {
+    if($('.mainAddrType').length > 1) $('.copyRegAddr').remove(); // Removes add copy address check button if more than 1 address exist 
 //counts the totals in team stats columns
 var mycolumnArray = ["tw","lw","tm","lm"];
 var mycolumnArrayLength = mycolumnArray.length;
