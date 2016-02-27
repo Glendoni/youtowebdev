@@ -24,7 +24,7 @@
             if(dd == 01){
 //console.log(mon[(mm-1)]); 
                 $(' <div class="col-md-3 reduced-padding"><div class="colum-header"><h2>'+mon[(mm-1)]+' <span class="header-bold pipeline_will">Will </span> <span class="pcountwc'+date+' pipeListCounter"></span></h2> </div></div>').appendTo('#pipeline_labels'); 
-$(' <div class="col-md-3 reduced-padding"><div class="colum-header"><h2>'+mon[(mm-1)]+' <span class="header-bold pipeline_should">Should</span> <span class="pcountsc'+date+' pipeListCounter"></span></div> </h2></div>').appendTo('#pipeline_labels'); 
+$(' <div class="col-md-3 reduced-padding"><div class="colum-header"><h2>'+mon[(mm-1)]+' <span class="header-bold pipeline_should">Intent</span> <span class="pcountsc'+date+' pipeListCounter"></span></div> </h2></div>').appendTo('#pipeline_labels'); 
 
 //$(' <div class="column col-md-2" placement="sc'+date+'"><h2>'+mon[(mm-1)]+'<br/>SHOULD</h2></div>').appendTo('#pipeline_content'); 
 //$(' <div class="column col-md-2" placement="wc'+date+'"><h2>'+mon[(mm-1)]+'<br/>WILL</h2></div>').appendTo('#pipeline_content');
@@ -106,8 +106,8 @@ start = new Date(start.setDate(start.getDate() + 1)); //date increase by 1
                                 disc = data[key]['image'].split(",");
                               //console.log(disc[1]);  
                     res = data[key]['companyname'].replace(/Limited|Ltd|ltd/gi, function myFunction(x){return ''});
-     $('<div class="portlet ui-widget ui-widget-content ui-helper-clearfix ui-corner-all" company_id="'+data[key]['company_id'] +'"> <div class="circle name-circle pipe-user" style="background-color:'+disc[1]+'; color:'+disc[2]+';">'+disc[0]+'</div><div class="portlet-content"><a target="_blank" href="../companies/company?id='+data[key]['company_id'] +'" style="color:#000; float:right; margin-top: -7px;"><i class="glyphicon glyphicon-edit"></i></a> </div><div class="portlet-header ui-sortable-handle ui-widget-header ui-corner-all">'+ res +
-         '</div> ').appendTo("[placement="+placement_holder_prefix+data[key]['efffrom']+"]" );
+     $('<div class="portlet ui-widget ui-widget-content ui-helper-clearfix ui-corner-all" company_id="'+data[key]['company_id'] +'"> <div class="circle name-circle pipe-user" style="background-color:'+disc[1]+'; color:'+disc[2]+';margin-right: 20px;">'+disc[0]+'</div><div class="portlet-content"><a target="_blank" href="../companies/company?id='+data[key]['company_id'] +'" style="color:#000; float:right; margin-top: -7px;"><i class="glyphicon glyphicon-edit"></i></a> </div><div class="portlet-header ui-sortable-handle ui-widget-header ui-corner-all">'+ res +
+         '</div><span class="label pipeline label-'+data[key]['pipeline']+'">#'+data[key]['pipeline']+'</span> ').appendTo("[placement="+placement_holder_prefix+data[key]['efffrom']+"]" );
                                     jsonBinder(); //binds listeners to JSON  generated elements retruned back from the server           
                                 addListQuantity();
                         }
