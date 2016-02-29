@@ -83,7 +83,7 @@ $query = $this->db->query($sql);
     foreach ($query->result_array() as $row){
         return  $row['id'];
     }
-    echo $sql;
+    //echo $sql;
      return 1; // Return Nick 3 returns RL 31 returns GS
 }
 
