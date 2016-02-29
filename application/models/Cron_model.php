@@ -179,7 +179,7 @@ public function generate_segment_events()
     WHERE identifies.sent_at >= '2016-01-10' 
     AND  _open.campaign IS NOT null
     AND  identifies.company IS NOT null
-    LIMIT 3000
+    LIMIT 300
     ";
     $result = pg_query($query) or die('Query failed: ' . pg_last_error());
     $words = array( 'Limited', 'LIMITED', 'LTD','ltd','Ltd','\'' ); // no harm in checking
