@@ -102,6 +102,8 @@ function get_marketing_actions_two($user_id)
     limit 200";
         //AND ea.created_by = $user_id 
     $query = $this->db->query($sql);
+    
+    echo $sql;
     return $query->result_object();
     
 }

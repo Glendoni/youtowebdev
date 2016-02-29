@@ -78,12 +78,12 @@ public function getemailuserid($email)
 public function getcampaignowner($email)
 {
     
-   
-$query = $this->db->query("SELECT id FROM users WHERE email='".$email."' LIMIT 1 ");
+   $sql = "SELECT id FROM users WHERE email='".$email."' LIMIT 1 ";
+$query = $this->db->query($sql);
     foreach ($query->result_array() as $row){
         return  $row['id'];
     }
-    
+    echo $sql;
      return 1; // Return Nick 3 returns RL 31 returns GS
 }
 
