@@ -176,10 +176,10 @@ public function generate_segment_events()
     ON _open.user_id = click.user_id 
     LEFT JOIN  autopilot_baselist.unsubscribe
     ON _open.user_id = unsubscribe.user_id 
-    WHERE identifies.sent_at >= '2016-01-10' 
+    WHERE identifies.sent_at >= '2016-02-28' 
     AND  _open.campaign IS NOT null
     AND  identifies.company IS NOT null
-    LIMIT 300
+    LIMIT  30000
     ";
     $result = pg_query($query) or die('Query failed: ' . pg_last_error());
     $words = array( 'Limited', 'LIMITED', 'LTD','ltd','Ltd','\'' ); // no harm in checking

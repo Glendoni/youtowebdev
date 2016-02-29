@@ -36,7 +36,7 @@ class Cron extends CI_Controller {
 
     function retrieve_segment_events()
     {
-        
         $this->Cron_model->generate_segment_events();
     }
+
 }

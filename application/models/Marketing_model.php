@@ -84,7 +84,7 @@ $query = $this->db->query("SELECT id FROM users WHERE email='".$email."' LIMIT 1
         return  $row['id'];
     }
     
-     return 1; // Return Nick
+     return 1; // Return Nick 3 returns RL 31 returns GS
 }
 
 public function getuserdetailss($email = 0)
