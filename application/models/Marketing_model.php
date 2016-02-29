@@ -84,7 +84,7 @@ $query = $this->db->query($sql);
         return  $row['id'];
     }
     //echo $sql;
-     return 1; // Return Nick 3 returns RL 31 returns GS
+     return 3; // Return Nick 3 returns RL 31 returns GS
 }
 
 public function getuserdetailss($email = 0)

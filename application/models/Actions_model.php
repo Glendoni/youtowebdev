@@ -86,7 +86,7 @@ function get_marketing_actions($user_id)
     
 function get_marketing_actions_two($user_id)
 {
-    $sql = "select  ec.name as campaign, c.id as company_id, ea.email_action_type as action, c.name as company, c.pipeline, con.first_name, con.last_name, CONCAT(con.last_name, ' ', con.first_name)  as username,to_char(ea.action_time, 'DD-MM-YYYY') as Date, ea.created_at, ea.email_action_type, ea.link as url from companies c
+    $sql = "select c.id as company_id, to_char(ea.action_time, 'DD-MM-YYYY') as Date,ec.name as campaign, ea.email_action_type as action, c.name as company, c.pipeline, con.first_name, con.last_name, CONCAT(con.last_name, ' ', con.first_name)  as username, ea.created_at, ea.email_action_type, ea.link as url from companies c
     left join contacts con on
     c.id = con.company_id
     left join email_actions ea on 
@@ -94,11 +94,11 @@ function get_marketing_actions_two($user_id)
     left join email_campaigns ec on 
     ec.id = ea.email_campaign_id
     where (ea.email_action_type = '2' or ea.email_action_type = '3' or ea.email_action_type = '4' or ea.email_action_type = '1' ) and c.pipeline not in ('proposal','customer')  
-    AND ea.action_time >= '2016-01-01 09:10:50.36656' 
+    
     AND ec.name IS NOT null
     AND ea.email_action_type !=4
     AND ea.created_by = $user_id
-    ORDER BY ea.action_time DESC
+ORDER BY ea.action_time DESC
     limit 200";
         //AND ea.created_by = $user_id 
     $query = $this->db->query($sql);

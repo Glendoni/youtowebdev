@@ -176,7 +176,7 @@ public function generate_segment_events()
     ON _open.user_id = click.user_id 
     LEFT JOIN  autopilot_baselist.unsubscribe
     ON _open.user_id = unsubscribe.user_id 
-    WHERE identifies.sent_at >= '2016-02-28' 
+    WHERE identifies.sent_at >= '2016-02-10' 
     AND  _open.campaign IS NOT null
     AND  identifies.company IS NOT null
     LIMIT  30000
@@ -217,7 +217,7 @@ public function generate_segment_events()
             $created_by = $this->Marketing_model->getcampaignowner($marketing['owneremail']); 
           
             //Unfortunately we need to re-run the query to limit the record set and return the relevant entry basised on the un_ids            
-            $queryone = $this->db->query("SELECT sent_id FROM email_campaigns WHERE sent_id='".$marketing['un_ids']."' ");  
+            $queryone = $this->db->query("SELECT sent_id FROM email_campaigns WHERE name='".$marketing['campaign_name']."' ");  
             //if the un_ids has been found then skip this event as the entry already exist
             if (!$queryone->num_rows()){//tested ok   
                 $queryr = $this->db->query("SELECT sent_id FROM email_campaigns");        
@@ -233,12 +233,16 @@ public function generate_segment_events()
             }
             //find the company id baised on the campaign name and insert FK into  the emails action table
             $campaignID   = $this->get_campaign_name($marketing['campaign_name']); //tested ok
-            $sql =  "SELECT email_campaign_id FROM email_actions WHERE sent_action_id='".$marketing['un_ids']."' ";
+            $sql =  "SELECT email_campaign_id FROM email_actions WHERE contact_id='".$contactidd."' AND email_campaign_id=".$campaignID." AND email_action_type=".$theoutcome."  ";
+           
             $querye = $this->db->query($sql);
             $get_next_num_two =  $querye->num_rows();  //tested ok 
+            
+            //echo $get_next_num_two;
+            
             if ($campaignID){
             //if $get_next_num_two does not exist then add the entry event and details into the email_actions table
-                if(!$get_next_num_two){
+                if($get_next_num_two != true){
                     $email_actions = array(
                     'email_campaign_id'=> $campaignID,
                     'sent_action_id' => $marketing['un_ids'], // 
@@ -251,6 +255,9 @@ public function generate_segment_events()
                     $this->db->insert('email_actions', $email_actions);   
                 }
             } 
+            
+            
+            
         } //contactdd end
     } 
  }
