@@ -91,7 +91,7 @@ $('.us-initial-rate').each(function(){
 });
 val = val/count_lines;
 //console.log(parseFloat( val.toFixed(3) ));
-$('.us-initial-rate-total').text(parseFloat( val.toFixed(3) )+'%');
+$('.us-initial-rate-total').text('Avg '+ parseFloat( val.toFixed(3) )+'%');
     
     if($('.mainAddrType').length > 1) $('.copyRegAddr').remove(); // Removes add copy address check button if more than 1 address exist 
 //counts the totals in team stats columns

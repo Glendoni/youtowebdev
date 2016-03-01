@@ -46,10 +46,10 @@
                       <div class="col-md-12">
                       <div class="row list-group-item">
                          <div class="col-md-3">
-                           <strong>Deals</strong><div class="pull-right"><span class="us-initial-rate-total" style="
-    margin-right: 4px;
-    font-size: 12px;
-"></span><span class="badge" style="background-color:#428bca;"><?php echo count($getuserplacements)?></span></div>
+                           <strong>Deals</strong>
+                             <div class="pull-right"> 
+                                 <span class="badge" style="background-color:#428bca;"><?php echo count($getuserplacements);?></span>
+                             </div>
                         </div>
                           
                          <div class="col-md-3">
@@ -60,6 +60,12 @@
                           </div>
                           <div class="col-md-3"> 
                            <strong>Demos</strong><div class="pull-right"><span class="badge badge-warning"><?php echo count($getuserdemos)?></span></div>
+                        </div>
+                           <div class="col-md-12"> 
+                          <span class="us-initial-rate-total" style="
+    margin-right: 4px;
+    font-size: 12px;
+"></span>
                         </div>
                         </div>
                           <div class="row list-group-item">
