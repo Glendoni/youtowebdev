@@ -76,6 +76,23 @@ $(".source_explanation").prop('required',false);
 //}
 //});
 $( document ).ready(function() {
+    
+    
+var sum =0;
+var val = 0;
+var count_lines  = $('.us-initial-rate').length;
+    //loop thru totals
+$('.us-initial-rate').each(function(){
+    if(parseInt($(this).text())){
+      val = parseInt($(this).text()) + val;
+    }else{
+      count_lines -1;
+    }
+});
+val = val/count_lines;
+//console.log(parseFloat( val.toFixed(3) ));
+$('.us-initial-rate-total').text(parseFloat( val.toFixed(3) )+'%');
+    
     if($('.mainAddrType').length > 1) $('.copyRegAddr').remove(); // Removes add copy address check button if more than 1 address exist 
 //counts the totals in team stats columns
 var mycolumnArray = ["tw","lw","tm","lm"];
@@ -114,6 +131,9 @@ $('.eventcount').html(items.length); //update engagement counter
 }
 
 });
+    
+    
+    
 }
 if(autopilotEmailCompany[1]){ 
 var myParam = window.location.href.split("id=");
