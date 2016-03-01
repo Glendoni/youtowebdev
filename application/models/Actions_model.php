@@ -93,13 +93,15 @@ function get_marketing_actions_two($user_id)
     ea.contact_id = con.id
     left join email_campaigns ec on 
     ec.id = ea.email_campaign_id
-    where (ea.email_action_type = '2' or ea.email_action_type = '3' or ea.email_action_type = '4' or ea.email_action_type = '1' ) and c.pipeline not in ('proposal','customer')  
+    where (ea.email_action_type = '2' or ea.email_action_type = '3' or ea.email_action_type = '4' or ea.email_action_type = '1' ) and c.pipeline not in ('proposal','customer')  and ec.created_by = $user_id
     
     AND ec.name IS NOT null
     AND ea.email_action_type !=4
-    AND ea.created_by = $user_id
+   
 ORDER BY ea.action_time DESC
     limit 200";
+    
+    //echo $sql;
         //AND ea.created_by = $user_id 
     $query = $this->db->query($sql);
     
