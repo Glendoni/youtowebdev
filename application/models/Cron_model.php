@@ -176,7 +176,7 @@ public function generate_segment_events()
     ON _open.user_id = click.user_id 
     LEFT JOIN  autopilot_baselist.unsubscribe
     ON _open.user_id = unsubscribe.user_id 
-    WHERE identifies.sent_at >= '2015-01-22' 
+    WHERE identifies.sent_at >= '2016-02-22' 
     AND  _open.campaign IS NOT null
     AND  identifies.company IS NOT null
     LIMIT  300000
