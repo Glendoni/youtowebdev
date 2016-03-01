@@ -46,8 +46,12 @@
                       <div class="col-md-12">
                       <div class="row list-group-item">
                          <div class="col-md-3">
-                           <strong>Deals</strong><div class="pull-right"><span class="badge" style="background-color:#428bca;"><?php echo count($getuserplacements)?></span></div>
+                           <strong>Deals</strong><div class="pull-right"><span class="us-initial-rate-total" style="
+    margin-right: 4px;
+    font-size: 12px;
+"></span><span class="badge" style="background-color:#428bca;"><?php echo count($getuserplacements)?></span></div>
                         </div>
+                          
                          <div class="col-md-3">
                            <strong>Proposals</strong><div class="pull-right"><span class="badge badge-warning" style="background-color:#45AE7C;"><?php echo count($getuserproposals)?></span></div>
                         </div>
@@ -71,10 +75,10 @@
 </div>
   <div class="col-sm-4 user-stat company action_date">
   <?php if(!empty($get_user_placements['initial_rate'])): ?>
-<?php echo $get_user_placements['initial_rate'];?>%
+<?php echo '<span class="us-initial-rate">'.$get_user_placements['initial_rate'].'</span>';?>%
 <?php endif; ?>
 </div>
-</div>
+</div> 
 <?php endif; ?>
                             <div class="user-stat company action_date">
                             <?php echo  date('D jS M y',strtotime($get_user_placements['actioned_at']));?>
@@ -215,7 +219,7 @@
                         </div>
                         <div class="col-xs-2 col-md-1 text-center hide-overflow">
                            <span class="tw-meetingbooked-total stat-total" >0</span> /  
-                            <span class="tw-meetingbooked-total stat-total" >0</span>
+                            <span class="tw-meetingcount-total stat-total" >0</span>
                         </div>
                        
                         <div class="col-md-2 hidden-xs text-center hide-overflow">
