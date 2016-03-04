@@ -263,9 +263,13 @@ border-bottom: 1px dashed #ddd;
 	font-weight: normal;
 	font-size: 10px;
 }
-
-
-
+.label-overdue {
+	background-color: #FF7575;
+}
+.btn-overdue {
+		background-color: #FF7575;
+		color:#fff;
+}
 .nav-second-level > li{
 	border-top: 1px solid #ddd;
 	background: #fff;

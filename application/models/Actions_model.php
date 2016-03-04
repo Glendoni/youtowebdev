@@ -215,8 +215,11 @@ function get_assigned_companies($user_id)
     return $query->result_object();
 
 }
-function get_recent_stats($period)
-{
+function get_recent_stats($period, $team_type)
+{   
+    if(!empty($team_type)){
+        $team_type_sql = "and u.market = '$team_type'";
+    }
     $dates = $this->dates($period);
     $start_date = $dates['start_date'];
     $end_date = $dates['end_date'];
@@ -234,7 +237,7 @@ function get_recent_stats($period)
     sum(case when action_type_id = '22' AND a.planned_at > '$start_date' AND a.planned_at < '$end_date' then 1 else 0 end) key_review_occuring,
     sum(case when (action_type_id = '8') AND a.created_at > '$start_date' AND a.created_at < '$end_date' then 1 else 0 end) proposals,
     Sum(case when action_type_id = '19' and a.id = 	(SELECT MAX(id) FROM actions z WHERE z.company_id = a.company_id and z.action_type_id = '19' order by a.actioned_at desc) AND (a.comments ilike '%intent%' or a.comments ilike '%qualified%') AND a.created_at > '$start_date' AND a.created_at < '$end_date' THEN 1 ELSE 0 END) AS pipelinecount
-    from actions A INNER JOIN companies C on A.company_id = C.id INNER JOIN users U on A.user_id = U.id group by U.id,U.name,a.cancelled_at, u.department HAVING cancelled_at is null and u.department = 'sales' and (u.active = 't' or sum(case when (action_type_id = '16') AND a.created_at > '$start_date' AND a.created_at < '$end_date' then 1 else 0 end) >0) order by deals desc,proposals desc,meetingbooked desc, introcall desc, name desc";
+    from actions A INNER JOIN companies C on A.company_id = C.id INNER JOIN users U on A.user_id = U.id group by U.id,U.name,a.cancelled_at, u.department HAVING cancelled_at is null and u.department = 'sales' and (u.active = 't' or sum(case when (action_type_id = '16') AND a.created_at > '$start_date' AND a.created_at < '$end_date' then 1 else 0 end) >0) $team_type_sql order by deals desc,proposals desc,meetingbooked desc, introcall desc, name desc";
     $query = $this->db->query($sql);
     if($query){
         return $query->result_array();

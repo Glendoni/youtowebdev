@@ -947,7 +947,7 @@
                                </form>
                                <?php $hidden = array('action_id' => $action->action_id , 'user_id' => $current_user['id'] , 'action_do' => 'cancelled','outcome' => '' , 'company_id' => $action->company_id);
                                echo form_open(site_url().'actions/edit', 'name="cancel_action"  class="cancel_action" style="display:inline-block;" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action->action_id.'" role="form"',$hidden); ?>
-                               <button class="btn btn-xs btn-danger" >Cancel</button>
+                               <button class="btn btn-xs btn-overdue" >Cancel</button>
                                </form>
                             </div>
                           </div>
