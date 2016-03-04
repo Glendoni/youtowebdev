@@ -75,9 +75,11 @@ $(".source_explanation").prop('required',false);
 //$(".disable_no_si").removeAttr('disabled', 'disabled');
 //}
 //});
-$( document ).ready(function() {
+
+
+function getDealAvg(){
     
-    
+       var avg;
 var sum =0;
 var val = 0;
 var count_lines  = $('.us-initial-rate').length;
@@ -91,8 +93,16 @@ $('.us-initial-rate').each(function(){
 });
 val = val/count_lines;
 //console.log(parseFloat( val.toFixed(3) ));
-$('.us-initial-rate-total').text('Avg '+ parseFloat( val.toFixed(3) )+'%');
     
+    avg = val ? 'Avg '+ parseFloat( val.toFixed(3) )+'%' : 'Avg 0%';
+   $('.us-initial-rate-total').text(avg);
+}
+
+$( document ).ready(function() {
+    
+
+    getDealAvg(); //Get Deal Average used for user stats
+ 
     if($('.mainAddrType').length > 1) $('.copyRegAddr').remove(); // Removes add copy address check button if more than 1 address exist 
 //counts the totals in team stats columns
 var mycolumnArray = ["tw","lw","tm","lm"];
