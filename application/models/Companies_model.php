@@ -308,10 +308,16 @@ class Companies_model extends CI_Model {
 		//CHECK IF NOT 0
 		foreach($_POST['pipeline'] as $result) {
 		}
-		if(isset($_POST['pipeline']) && (!empty($_POST['pipeline'])) && ($_POST['pipeline'] !== 'none') && $result !== '0')
-		{		
+		if(isset($_POST['pipeline']) && (!empty($_POST['pipeline'])) /*&& ($_POST['pipeline'] !== 'none')*/ && $result !== '0')
+		{
+		if (in_array('none', $_POST['pipeline'])) {
+		$pipelines = "pipeline = '".implode("' \n   OR pipeline = '",$_POST['pipeline'])."'";
+		$pipeline_sql = "select id from companies where pipeline is null or  ".$pipelines;
+		}
+		else {
 		$pipelines = "pipeline = '".implode("' \n   OR pipeline = '",$_POST['pipeline'])."'";
 		$pipeline_sql = "select id from companies where ".$pipelines;
+		}
 		}
 
 		// -- Data to Display a Company's details
@@ -402,7 +408,6 @@ class Companies_model extends CI_Model {
 		if(isset($pipeline_sql)) $sql = $sql.' JOIN ( '.$pipeline_sql.' ) pipeline ON C.id = pipeline.id';
 		if(isset($company_id) && $company_id !== False) $sql = $sql.' JOIN ( select id from companies where id = '.$company_id.' ) company ON C.id = company.id';
 		if(isset($emp_count_sql)) $sql = $sql.' JOIN ( '.$emp_count_sql.' ) company ON C.id = company.company_id';
-
 		$sql = $sql.' LEFT JOIN 
 		(-- TT1 
 		select T.company_id "company id",

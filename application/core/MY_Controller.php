@@ -251,7 +251,7 @@ class MY_Controller extends CI_Controller {
 		$this->data['class_options'] = array(0=>'All') + $class_options;
 		$this->data['class_default'] ='0';
 
-		$this->data['pipeline_options'] = array('0'=>'All') + $pipeline_options_search;
+		$this->data['pipeline_options'] = array('0'=>'All', 'none'=>'None') + $pipeline_options_search;
 		$this->data['pipeline_default'] ='0';
 
 
