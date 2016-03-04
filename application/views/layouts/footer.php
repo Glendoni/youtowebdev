@@ -50,12 +50,34 @@
 <!--FORMAT NUMBERS WITH COMMAS (ADD CLASS NUMBER TO INPUT)-->
     <script type="text/javascript" src="<?php echo asset_url();?>js/format-numbers.js"></script>
  <script src="<?php echo asset_url();?>js/bootbox.js"></script>
+<!--EMAIL DUPLICATE CHECK-->
+ <script type="text/javascript">
+    $(document).ready(function() {
+        /// make loader hidden in start
+    $('#loading1').hide();
+     $('#email').blur(function(){
+        var email_val = $("#email").val();
+        var filter = /^[a-zA-Z0-9]+[a-zA-Z0-9_.-]+[a-zA-Z0-9_-]+@[a-zA-Z0-9]+[a-zA-Z0-9.-]+[a-zA-Z0-9]+.[a-z]{2,4}$/;
+        if(filter.test(email_val)){
+            // show loader
+            $('#loading').show();
+            $.post("<?php echo site_url()?>contacts/email_check", {
+                email: email_val
+            }, function(response){
+                $('#loading').hide();
+                $('#message').html('').html(response.message).show().delay(6000).fadeOut();
+            });
+            return false;
+        }
+    });
+    
+    });  
+</script>
 
 <!--AUTO COMPLETE-->
 
 
 <style>
-
     .toLowerCase{ text-transform:capitalize;}
 </style>
 
@@ -296,6 +318,7 @@ $(".contacted-show").hide();
   ga('send', 'pageview');
 
 </script>
+   
 <?php endif; ?>
 <script type="text/javascript">
 $('.toggle').click(function (event) {

@@ -30,8 +30,17 @@
                 </div>
                 <div class="col-md-6">
                 <div class=" form-group ">
-                    <label for="email" class="control-label">Email</label>                            
-                    <input type="email" name="email" value="" id="email" maxlength="50" class="form-control">
+                    <label for="email" class="control-label">Email</label>     
+                    
+
+
+
+
+
+
+                    <input type="text" name="email" value="" id="email" maxlength="50" class="form-control">
+    <?php echo validation_errors(); ?>    
+    <label id="message"></label>
                 </div>
                 </div>
                 <div class="col-md-6">

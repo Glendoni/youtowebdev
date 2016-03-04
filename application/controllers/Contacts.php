@@ -5,8 +5,25 @@ class Contacts extends MY_Controller {
 	function __construct() 
 	{
 		parent::__construct();
-		
+		// load database
+        $this->load->database();
+        // load form validation library
+        $this->load->library('form_validation');
 	}
+
+ public function email_check()
+    {
+        // allow only Ajax request    
+        if($this->input->is_ajax_request()) {
+        // grab the email value from the post variable.
+        $email = $this->input->post('email');
+        if(!$this->form_validation->is_unique($email,'contacts.email')) {
+        // set the json object as output                 
+         $this->output->set_content_type('application/json')->set_output(json_encode(array('message' => 'There is already a contact with this email.')));
+            }
+   
+        }
+    }
 
 	public function create_contact(){
 		if($this->input->post('create_contact'))
