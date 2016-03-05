@@ -57,7 +57,7 @@
 
         $("#email").bind('keyup paste', function() {
         var email_val = $("#email").val();
-        var filter = /^[a-zA-Z0-9]+[a-zA-Z0-9_.-]+[a-zA-Z0-9_-]+@[a-zA-Z0-9]+[a-zA-Z0-9.-]+[a-zA-Z0-9]+.[a-z]{2,4}$/;
+        var filter = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9]+.[a-z]/;
         if(filter.test(email_val)){
             // show loader
             $.post("<?php echo site_url()?>contacts/email_check", {
@@ -68,9 +68,7 @@
     } else {
     $(".addcontact").prop("disabled", true);
     }
-
-
-                $('#message').html('').html(response.message).show();
+            $('#message').html('').html(response.message).show();
             });
             return false;
 
