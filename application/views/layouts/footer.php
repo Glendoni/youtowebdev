@@ -54,20 +54,26 @@
  <script type="text/javascript">
     $(document).ready(function() {
         /// make loader hidden in start
-    $('#loading1').hide();
-     $('#email').blur(function(){
+
+        $("#email").bind('keyup paste', function() {
         var email_val = $("#email").val();
         var filter = /^[a-zA-Z0-9]+[a-zA-Z0-9_.-]+[a-zA-Z0-9_-]+@[a-zA-Z0-9]+[a-zA-Z0-9.-]+[a-zA-Z0-9]+.[a-z]{2,4}$/;
         if(filter.test(email_val)){
             // show loader
-            $('#loading').show();
             $.post("<?php echo site_url()?>contacts/email_check", {
                 email: email_val
             }, function(response){
-                $('#loading').hide();
-                $('#message').html('').html(response.message).show().delay(6000).fadeOut();
+        if (response.message==null) {
+    $(".addcontact").prop("disabled", false);
+    } else {
+    $(".addcontact").prop("disabled", true);
+    }
+
+
+                $('#message').html('').html(response.message).show();
             });
             return false;
+
         }
     });
     

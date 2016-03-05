@@ -6,7 +6,7 @@
                 <h4 class="modal-title" id="myModalLabel"><?php echo isset($company['name'])?$company['name']:''; ?></h4>
             </div>
             <?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'],'create_contact'=>'1', 'page_number' => (isset($current_page_number))? $current_page_number:'');
-				echo form_open(site_url().'contacts/create_contact',array('onSubmit'=>'return validateContactForm();','name' => 'create_contact', 'class'=>'create_contact','role'=>"form" ),$hidden); ?>
+				echo form_open(site_url().'contacts/create_contact',array('onSubmit'=>'return validateContactForm();','name' => 'create_contact', 'class'=>'create_contact','role'=>"form",'autocomplete'=>"off" ),$hidden); ?>
             <div class="modal-body">
                 <div class="row">
                 <div class="alert alert-danger" id="error_box" style="display:none;" role="alert"></div>
@@ -30,15 +30,9 @@
                 </div>
                 <div class="col-md-6">
                 <div class=" form-group ">
-                    <label for="email" class="control-label">Email</label>     
-                    
+                    <label for="email" class="control-label">Email</label>
 
-
-
-
-
-
-                    <input type="text" name="email" value="" id="email" maxlength="50" class="form-control">
+                    <input type="text" name="email" value="" id="email" maxlength="50" class="form-control" autocomplete="off" >
     <?php echo validation_errors(); ?>    
     <label id="message"></label>
                 </div>
@@ -58,8 +52,8 @@
             </div>
             </div>
             <div class="modal-footer">
-            	<button type="submit" class="btn btn-sm btn-primary btn-block ladda-button submit_btn" edit-btn="editbtn<?php echo $company['id']; ?>" loading-display="loading-display-<?php echo $company['id']; ?>" data-style="expand-right" data-size="1">
-		        	<span class="ladda-label"> Add Contact </span>
+            	<button type="submit" class="btn btn-sm btn-primary btn-block ladda-button submit_btn addcontact" edit-btn="editbtn<?php echo $company['id']; ?>" loading-display="loading-display-<?php echo $company['id']; ?>" data-style="expand-right" data-size="1">
+		        	<span class="ladda-label">Add Contact </span>
 		    	</button>                
                 
             </div>
