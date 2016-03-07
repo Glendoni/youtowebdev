@@ -1,6 +1,6 @@
 ////////////////THE HOLY GRAIL
     var d = new Date();
-      d.setMonth(d.getMonth()+2);   //change retruned months here
+      d.setMonth(d.getMonth()+3);   //change retruned months here
       var   montheval =""+d.getMonth()+"" ;
       montheval =  montheval.substr(1, 1) ? d.getMonth() : '0'+d.getMonth() ;
       monthevalconcat = d.getFullYear()+"-"+(montheval)+"-01";
@@ -17,18 +17,18 @@
     var end = new Date(monthevalconcat); //yyyy-mm-dd
     var mon =['January','February','March','April','May','June','July','August','September','October','November','December' ];
         while(start <= end){
-            var mm = ((start.getMonth()+1)>=10)?(start.getMonth()+1):'0'+(start.getMonth()+1);
+            var mm = ((start.getMonth()+2)>=10)?(start.getMonth()+2):'0'+(start.getMonth()+1);
             var dd = ((start.getDate())>=10)? (start.getDate()) : '0' + (start.getDate());
             var yyyy = start.getFullYear();
             var date = yyyy +"-"+mm+"-"+dd; //yyyy-mm-dd
             if(dd == 01){
 //console.log(mon[(mm-1)]); 
-                $(' <div class="col-md-3 reduced-padding"><div class="colum-header"><h2>'+mon[(mm-1)]+' <span class="header-bold pipeline_will">Will </span> <span class="pcountwc'+date+' pipeListCounter"></span></h2> </div></div>').appendTo('#pipeline_labels'); 
-$(' <div class="col-md-3 reduced-padding"><div class="colum-header"><h2>'+mon[(mm-1)]+' <span class="header-bold pipeline_should">Intent</span> <span class="pcountsc'+date+' pipeListCounter"></span></div> </h2></div>').appendTo('#pipeline_labels'); 
+                $(' <div class="col-md-2 reduced-padding"><div class="colum-header"><h2>'+mon[(mm-1)]+' <span class="header-bold pipeline_will">Will </span> <span class="pcountwc'+date+' pipeListCounter"></span></h2> </div></div>').appendTo('#pipeline_labels'); 
+$(' <div class="col-md-2 reduced-padding"><div class="colum-header"><h2>'+mon[(mm-1)]+' <span class="header-bold pipeline_should">Intent</span> <span class="pcountsc'+date+' pipeListCounter"></span></div> </h2></div>').appendTo('#pipeline_labels'); 
 
 //$(' <div class="column col-md-2" placement="sc'+date+'"><h2>'+mon[(mm-1)]+'<br/>SHOULD</h2></div>').appendTo('#pipeline_content'); 
 //$(' <div class="column col-md-2" placement="wc'+date+'"><h2>'+mon[(mm-1)]+'<br/>WILL</h2></div>').appendTo('#pipeline_content');
-                $('<div class="col-md-3 reduced-padding"><div class="column wc'+date+' wc"  placement="wc'+date+'"></div></div> <div class="col-md-3 reduced-padding"><div class="column sc'+date+' sc"  placement="sc'+date+'"></div></div>').appendTo('#pipeline_content');
+                $('<div class="col-md-2 reduced-padding"><div class="column wc'+date+' wc"  placement="wc'+date+'"></div></div> <div class="col-md-2 reduced-padding"><div class="column sc'+date+' sc"  placement="sc'+date+'"></div></div>').appendTo('#pipeline_content');
 }
 start = new Date(start.setDate(start.getDate() + 1)); //date increase by 1
 }
