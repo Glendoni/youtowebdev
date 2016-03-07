@@ -168,13 +168,13 @@ html {
 
 .split-label {
         text-align: center;
-    padding: 2px;
-    font-size: 11px;
+    padding: 4px;
+    font-size: 9px;
     margin: 0;
 }
 .c_name {
-    font-size: 18px;
-    padding:10px 5px;
+    font-size: 16px;
+    padding:20px 5px;
     text-align: center;
     font-weight: 300}
 
