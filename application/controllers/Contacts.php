@@ -19,7 +19,8 @@ class Contacts extends MY_Controller {
         $email = $this->input->post('email');
         if(!$this->form_validation->is_unique($email,'contacts.email')) {
         // set the json object as output                 
-         $this->output->set_content_type('application/json')->set_output(json_encode(array('message' => 'There is already a contact with this email.')));
+         $this->output->set_content_type('application/json')->set_output(json_encode(array('message' => '<b>Note:</b> There is already a contact with this email.')));
+
             }
    
         }

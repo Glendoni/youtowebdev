@@ -19,25 +19,29 @@ function  dragg(str){
     }   
 }
 </script> 
-<div class="row">
+<style type="text/css">
+    html, body {
+  height: 100%;}
+</style>
+<!--<div class="row">
   <div class="col-sm-9 col-sm-offset-3 " style="margin-bottom:20px;">
-      <!-- Nav tabs -->
       <ul class="nav nav-tabs dashboard" role="tablist">
         <li><button role="tab" class="button btn btn-primary btn-sm deals_pipeline" style="margin-right:10px;" onclick="window.location ='<?php echo base_url(); ?>dashboard'">Dashboard</button></li>
       </ul>
   </div>
   <div class="col-sm-9 col-sm-push-3"></div>
-</div>
-<div  class="mainboxs " style="overflow:hidden;">
-    <div class="row ">
+</div>-->
+<div  class="mainboxs " style="overflow: hidden; margin-top: -20px;">
+<div  class="column delete" placement="delete" aria-hidden="true"></div>
+
+    <!--<div class="row ">
         <div class="col-md-2">
-            <div  class="column delete" placement="delete" aria-hidden="true"></div>
         </div>
         <div class="col-md-8">
             <h2 class="company-header">Deals Forecast</h2>
         </div>
         <div class="col-md-2"></div>
-    </div>
+    </div>-->
     <div class="row" style="margin-top:20px;">
         <div class="col-md-12">
             <div id="pipeline_labels"></div>

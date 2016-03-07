@@ -33,9 +33,9 @@
                     <label for="email" class="control-label">Email</label>
 
                     <input type="text" name="email" value="" id="email" maxlength="50" class="form-control" autocomplete="off" >
-    <?php echo validation_errors(); ?>    
-    <label id="message"></label>
-                </div>
+    <?php echo validation_errors(); ?>  
+    <div id="message" class="alert alert-warning" role="alert">...</div>
+                  </div>
                 </div>
                 <div class="col-md-6">
                 <div class=" form-group ">

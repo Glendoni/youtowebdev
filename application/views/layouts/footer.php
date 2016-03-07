@@ -53,8 +53,8 @@
 <!--EMAIL DUPLICATE CHECK-->
  <script type="text/javascript">
     $(document).ready(function() {
+            $('#message').hide();
         /// make loader hidden in start
-
         $("#email").bind('keyup paste', function() {
         var email_val = $("#email").val();
         var filter = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9]+.[a-z]/;
@@ -63,12 +63,12 @@
             $.post("<?php echo site_url()?>contacts/email_check", {
                 email: email_val
             }, function(response){
-        if (response.message==null) {
-    $(".addcontact").prop("disabled", false);
-    } else {
-    $(".addcontact").prop("disabled", true);
-    }
-            $('#message').html('').html(response.message).show();
+        //if (response.message==null) {
+            //$(".addcontact").prop("disabled", false);
+            //} else {
+            // $(".addcontact").prop("disabled", true);
+            //}
+                            $('#message').html('').html(response.message).show().delay(4000).fadeOut();
             });
             return false;
 

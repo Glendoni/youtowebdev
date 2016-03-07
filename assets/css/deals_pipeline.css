@@ -19,8 +19,7 @@ html {
 }
 
 .portlet {
-    padding: 15px 10px;
-    width: 100%;
+    padding: 0;    width: 100%;
     margin: auto;
     background-color: rgba(255, 255, 255, 0.96)!important;
         border-radius: 2px;
@@ -90,7 +89,8 @@ html {
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
     padding: 1px 10px 8px;
-    border-bottom: 1px #CAD1DB solid
+    border-bottom: 1px #CAD1DB solid;
+    padding: 8px;
 }
 
 .p-holder {
@@ -103,29 +103,28 @@ html {
 }
 
 .header-bold {
-    font-weight: 300;
-    text-transform: capitalize
+    font-weight: 700;
+        text-transform: capitalize
 }
 
 .delete {
-    border-radius: 50%;
     width: 60px;
     background: url(../images/bin.svg) center no-repeat #FB6174;
-    background-size: 25px;
-    height: 60px;
-    margin-left: 30px;
+    background-size: 22px;
+    height: 34px;
+    margin-left: 5px;
     padding-top: 0;
-    transition: width 2s
+    transition: width 2s;
+    padding: 0;
 }
 
 .delete .portlet-placeholder {
-    border-radius: 50%;
-    width: 80px;
+    width: 60px;
     background: url(../images/bin.svg) center no-repeat #FB6174;
     background-size: 25px;
-    height: 80px;
-    margin-left: -10px;
-    margin-top: 0
+    height: 50px;
+    padding-top: 0;
+    transition: width 2s;
 }
 
 .ui-widget-header {
@@ -133,13 +132,55 @@ html {
 }
 
 #pipeline_labels h2 {
-    font-size: 1.4em;
+    font-size: 16px;
     color: #FFF;
     text-transform: capitalize;
-    letter-spacing: 2px;
     font-family: inherit;
     text-align: center;
-    font-weight: 500;
+    font-weight:300;
+        margin: 0;
+}
+
+.badge.wc {
+    border-radius: 0 4px 0 0;
+   background-color: #00c8ac;
+    color: #fff;
+    font-size: 11px;
+    padding: 10px 15px;
+    right: 5px;
+    position: absolute;
+    height: 97%;
+    margin-top: -8px;
+}
+
+.badge.sc {
+    border-radius: 0 4px 0 0;
+    background-color: #ff8c00;
+    color: #fff;
+    font-size: 11px;
+    padding: 10px 15px;
+    right: 5px;
+    position: absolute;
+    height: 97%;
+    margin-top: -8px;
+}
+
+
+.split-label {
+        text-align: center;
+    padding: 2px;
+    font-size: 11px;
+}
+.c_name {
+    font-size: 18px;
+    padding:10px 5px;
+    text-align: center;
+    font-weight: 300}
+
+.label-Unknown {
+    background-color: #999;
+    color: #fff;
+    text-transform: lowercase;
 }
 
 .wc {
