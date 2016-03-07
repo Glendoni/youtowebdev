@@ -74,16 +74,53 @@
                              <?php foreach ($getuserplacements as $get_user_placements): ?>
                             <li class="user-stat-holder">
                             <div class="user-stat company"><a href="companies/company?id=<?php echo $get_user_placements['id'] ?>" <?php if(($current_user['new_window']=='t')): ?> target="_blank"<?php endif; ?>><?php echo $get_user_placements['name'];?></a></div>
-                        <?php if ($current_user['permission'] == 'admin'): ?>
+                        <?php 
+    
+    
+    if ($current_user['permission'] == 'admin' || $get_user_placements['created_by'] == $current_user['id']  ):  ?>
                             <div class="row">
   <div class="col-sm-8 user-stat company action_date">
 <?php echo $get_user_placements['lead_name'];?>
+     
 </div>
+                                
+                                
   <div class="col-sm-4 user-stat company action_date">
   <?php if(!empty($get_user_placements['initial_rate'])): ?>
 <?php echo '<span class="us-initial-rate">'.$get_user_placements['initial_rate'].'</span>';?>%
 <?php endif; ?>
 </div>
+                                 
+                                
+                                
+                                
+    <div class="col-sm-8 user-stat company action_date">
+        <?php //echo $get_user_placements['compid'];
+        
+      $sql =  "select   ls.id, s.name as nm,o.company_id from companies c 
+         inner join actions a on c.id = a.company_id
+         left join lead_sources ls on c.lead_source_id = ls.id
+        left join operates o on a.company_id=   o.company_id
+        left join sectors s on o.sector_id = s.id 
+         where o.company_id='".$get_user_placements['compid']."' AND o.active=TRUE
+         GROUP BY s.name,ls.id,o.company_id";
+   if(false){
+        $query = $this->db->query($sql);
+                echo '<strong>Source</strong><br>';
+                foreach ($query->result_array() as $row)
+                {
+                    echo $row['nm'].'<br>';
+        
+                }
+}
+        
+        
+        ?>
+    </div>
+                                
+                                
+                                
+                                
 </div> 
 <?php endif; ?>
                             <div class="user-stat company action_date">
