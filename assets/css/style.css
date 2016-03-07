@@ -624,6 +624,7 @@ h2.company-header a:hover {
 }
 .label-Prospect {
 	background-color: #C062D0;
+		color: #fff;
  	padding-left: 5px;
  	padding-right: 5px;
   	margin-top: 10px;
@@ -646,6 +647,7 @@ h2.company-header a:hover {
 }
 .label-Qualified {
 	background-color: #FFA03C;
+	color: #fff;
  	padding-left: 5px;
  	padding-right: 5px;
   	margin-top: 10px;
@@ -659,6 +661,7 @@ h2.company-header a:hover {
 }
 .label-Customer {
 	background-color: #148CD2;
+	color: #fff;
  	padding-left: 5px;
  	padding-right: 5px;
   	margin-top: 10px;
@@ -668,6 +671,7 @@ h2.company-header a:hover {
 }
 .label-Proposal {
 	background-color: #45AE7C;
+	color: #fff;
  	padding-left: 5px;
  	padding-right: 5px;
   	margin-top: 10px;
@@ -675,7 +679,8 @@ h2.company-header a:hover {
     text-transform: lowercase;
 }
 .label-Unsuitable {
-	background-color: #B80000 ;
+	background-color: #B80000;
+	color: #fff;
  	padding-left: 5px;
  	padding-right: 5px;
   	margin-top: 10px;
@@ -683,6 +688,7 @@ h2.company-header a:hover {
 }
 .label-Lost {
 	background-color: #8C4600 ;
+	color: #fff;
  	padding-left: 5px;
  	padding-right: 5px;
   	margin-top: 10px;
