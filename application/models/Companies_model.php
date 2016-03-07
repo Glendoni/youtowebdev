@@ -1221,7 +1221,7 @@ class Companies_model extends CI_Model {
         LEFT JOIN users
         ON deals_pipeline.user_id=users.id
         WHERE deals_pipeline.eff_to IS NULL 
-        ORDER BY deals_pipeline.updated_at desc
+        ORDER BY users.id ASC,deals_pipeline.updated_at DESC 
         ';
         $result = $this->db->query($q);
         return    $result->result();
