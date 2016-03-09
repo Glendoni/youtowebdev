@@ -123,6 +123,8 @@ function get_actions_outstanding($company_id)
     $this->db->join('contacts c', 'c.id = a.contact_id', 'left');
     $this->db->join('users u', 'a.user_id = u.id', 'left');
     $this->db->join('companies comp', 'a.company_id = comp.id', 'left');
+    $this->db->join('action_types at', 'a.action_type_id = at.id', 'left');
+
 
     $this->db->order_by('a.actioned_at desc, a.cancelled_at desc,a.planned_at desc');
     $query = $this->db->get_where('actions a', $data);
