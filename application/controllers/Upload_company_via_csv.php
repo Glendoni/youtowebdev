@@ -1,7 +1,7 @@
 <?php ini_set('memory_limit', '128M');
 
 ;
-    if ( ! defined('BASEPATH')) //exit('No direct script access allowed');
+    if ( ! defined('BASEPATH')); //exit('No direct script access allowed');
 
 class Upload_company_via_csv extends MY_Controller {
 	
