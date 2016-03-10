@@ -1,8 +1,4 @@
-<?php ini_set('memory_limit', '564M');
-
-;
-    if ( ! defined('BASEPATH')); //exit('No direct script access allowed');
-
+<?php if ( ! defined('BASEPATH')); //exit('No direct script access allowed');
 class Upload_company_via_csv extends MY_Controller {
 	
     //public $DB1;
@@ -130,7 +126,7 @@ class Upload_company_via_csv extends MY_Controller {
     
     public function ipp()
     {
-    $query = $this->db->query("SELECT * FROM companies WHERE created_at >= '2016-03-08'  LIMIT 599");
+    $query = $this->db->query("SELECT * FROM companies WHERE created_at >= '2016-03-08'  LIMIT 100");
         echo  $query->num_rows();
           foreach ($query->result_array() as $row)
           {
