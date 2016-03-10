@@ -76,8 +76,8 @@ class Upload_company_via_csv extends MY_Controller {
             'Authorization: Basic RWFpN0V2N0JOSk1wcDlkcThUTWxkdHZzOXBDSzRTdmt0UGpzVjduWDo='
           ]
         );
-
-        $result = curl_exec($ch);
+         
+            $result = curl_exec($ch);
         // Check for errors
         if($result === FALSE){
 
