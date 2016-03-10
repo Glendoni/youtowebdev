@@ -114,33 +114,25 @@ class Upload_company_via_csv extends MY_Controller {
                //echo $value['status'].'<br>'; //stage
                //echo $value['transactions'][0]['delivered_on'].'<br>'; //eff_from
                //echo  '<br><br>';//
-                           
+                        print_r($rtnOutput);   
                              return true;
-                       }else{
-                           return false; 
-                       }
+                       } 
            }
         }
-        
+        return false; 
     }
     
     public function ipp($lmt = 100 ,$oft= 0)
     {
-        
-        
-      
         $sql = "SELECT registration,id FROM companies WHERE  created_at >= '2016-03-10' ORDER BY id LIMIT ".$lmt."  OFFSET ".$oft."   ";
     $query = $this->db->query($sql);
-    
-        echo $sql.'<br>';
-            echo  $query->num_rows();
+        //echo $sql.'<br>';
+            //echo  $query->num_rows();
           foreach ($query->result_array() as $row)
           {          
-              echo $row['registration'].' ' .$row['id'] .'  - ';
-            echo  $this->getCompanyHouseChargesApi($row['registration'],$row['id']) ? 'Found' : ' Not found' .'<br>';
+              //echo $row['registration'].' ' .$row['id'] .'  - ';
+           $this->getCompanyHouseChargesApi($row['registration'],$row['id'])  ;
           } 
-        
-     
         //unlink('companies.csv');
     }
     
