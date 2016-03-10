@@ -23,7 +23,7 @@ class Upload_company_via_csv extends MY_Controller {
                 $csv_file = CSV_PATH . "companies.csv"; 
                 if (($handle = fopen($csv_file, "r")) !== FALSE) {
                     fgetcsv($handle);   
-                    while (($data = fgetcsv($handle, 4, ",")) !== FALSE) {
+                    while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
                         $num = count($data);
                         for ($c=0; $c < $num; $c++) {
                             $col[$c] = $data[$c];
