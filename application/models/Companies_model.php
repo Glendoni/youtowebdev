@@ -1073,7 +1073,7 @@ class Companies_model extends CI_Model {
     public function insert_charges_CSV($response)
     {
            
-        $this->load->helper('inflector');
+        
         $provider  = '';
         $provider = $response['provider_str'];
         

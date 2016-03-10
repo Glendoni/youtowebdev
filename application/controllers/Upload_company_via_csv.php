@@ -103,10 +103,10 @@ class Upload_company_via_csv extends MY_Controller {
                                 'created_by' => 1 
                               );
                            //send querry to model for futhur checking
-                           //echo $output['ref'];
+                          //echo $output['ref'];
                            $this->Companies_model->insert_charges_CSV($output);
                    
-                //echo  $output['company_id'];
+               // echo  $output['company_id'];
                 // $this->Companies_model->insert_charges_CSV($output);
                 // echo $id .'<br>';
                //echo   $value['persons_entitled'][0]['name']. '<br>'. $value['etag'].'<br>';  //prividers_id
@@ -124,14 +124,19 @@ class Upload_company_via_csv extends MY_Controller {
         }
     }
     
-    public function ipp()
+    public function ipp($lmt = 100 ,$oft= 0)
     {
-    $query = $this->db->query("SELECT * FROM companies WHERE created_at >= '2016-03-08'  LIMIT 300");
-       
+        
+        
+      
+        $sql = "SELECT registration,id FROM companies WHERE  created_at >= '2016-03-10' ORDER BY id LIMIT ".$lmt."  OFFSET ".$oft."   ";
+    $query = $this->db->query($sql);
+    
+       //echo $sql;
           foreach ($query->result_array() as $row)
-          {
-              //echo $row['registration'].' ' .$row['id'] .'<br>';
-              $this->getCompanyHouseChargesApi($row['registration'],$row['id']);
+          {          
+              echo $row['registration'].' ' .$row['id'] .'<br>';
+             $this->getCompanyHouseChargesApi($row['registration'],$row['id']);
           } 
         
          echo  $query->num_rows();
