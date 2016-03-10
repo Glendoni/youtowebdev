@@ -116,7 +116,7 @@ class Upload_company_via_csv extends MY_Controller {
                //echo  '<br><br>';//
                        }
            }
-            return $rtnOutput;
+            return true;
        }else{
             
             return false;
@@ -136,8 +136,8 @@ class Upload_company_via_csv extends MY_Controller {
             echo  $query->num_rows();
           foreach ($query->result_array() as $row)
           {          
-              echo $row['registration'].' ' .$row['id'] .'<br>';
-             $this->getCompanyHouseChargesApi($row['registration'],$row['id']);
+              echo $row['registration'].' ' .$row['id'] .'  - <br>';
+            echo  $this->getCompanyHouseChargesApi($row['registration'],$row['id']);
           } 
         
      
