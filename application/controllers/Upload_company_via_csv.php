@@ -114,14 +114,14 @@ class Upload_company_via_csv extends MY_Controller {
                //echo $value['status'].'<br>'; //stage
                //echo $value['transactions'][0]['delivered_on'].'<br>'; //eff_from
                //echo  '<br><br>';//
+                           
+                             return true;
+                       }else{
+                           return false; 
                        }
            }
-            return true;
-       }else{
-            
-            return false;
-            
         }
+        
     }
     
     public function ipp($lmt = 100 ,$oft= 0)
@@ -136,8 +136,8 @@ class Upload_company_via_csv extends MY_Controller {
             echo  $query->num_rows();
           foreach ($query->result_array() as $row)
           {          
-              echo $row['registration'].' ' .$row['id'] .'  - <br>';
-            echo  $this->getCompanyHouseChargesApi($row['registration'],$row['id']);
+              echo $row['registration'].' ' .$row['id'] .'  - ';
+            echo  $this->getCompanyHouseChargesApi($row['registration'],$row['id']) ? 'Found' : ' Not found' .'<br>';
           } 
         
      
