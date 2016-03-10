@@ -62,7 +62,7 @@ class Upload_company_via_csv extends MY_Controller {
     }
     
 
-    private function getCompanyHouseChargesApi($id,$compID)
+    public function getCompanyHouseChargesApi($id,$compID)
     {
         
        // return  $id;
@@ -128,20 +128,20 @@ class Upload_company_via_csv extends MY_Controller {
         }
     }
     
-    function ipp()
+    public function ipp()
     {
-      $query = $this->db->query("SELECT * FROM companies WHERE created_at >= '2016-03-10'  LIMIT 599");
-        //echo  $query->num_rows();
+    $query = $this->db->query("SELECT * FROM companies WHERE created_at >= '2016-03-08'  LIMIT 599");
+        echo  $query->num_rows();
           foreach ($query->result_array() as $row)
           {
               //echo $row['registration'].' ' .$row['id'] .'<br>';
               $this->getCompanyHouseChargesApi($row['registration'],$row['id']);
           } 
-        unlink('companies.csv');
+        //unlink('companies.csv');
     }
     
     
- private function runMorgageCheck($ref)
+ public function runMorgageCheck($ref)
  {
      $sql = "SELECT ref FROM mortgages WHERE ref='".$ref."' ";
      //echo $sql;
