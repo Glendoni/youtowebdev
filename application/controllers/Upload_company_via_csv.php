@@ -58,7 +58,7 @@ class Upload_company_via_csv extends MY_Controller {
     }
     
 
-    public function getCompanyHouseChargesApi($id,$compID)
+    public function getCompanyHouseChargesApi($id,$compID,$debug)
     {
         
        // return  $id;
@@ -114,7 +114,9 @@ class Upload_company_via_csv extends MY_Controller {
                //echo $value['status'].'<br>'; //stage
                //echo $value['transactions'][0]['delivered_on'].'<br>'; //eff_from
                //echo  '<br><br>';//
-                        print_r($rtnOutput);   
+                           if($debug){
+                        print_r($rtnOutput); 
+                           }
                              return true;
                        } 
            }
@@ -122,17 +124,20 @@ class Upload_company_via_csv extends MY_Controller {
         return false; 
     }
     
-    public function ipp($lmt = 100 ,$oft= 0)
+    public function ipp($lmt = 100 ,$oft= 0, $debug = false)
     {
-        $sql = "SELECT registration,id FROM companies WHERE  created_at >= '2016-03-10' ORDER BY id LIMIT ".$lmt."  OFFSET ".$oft."   ";
+        
+        $sql = "SELECT registration,id FROM companies WHERE  created_at >= '".date('Y-m-d')."' ORDER BY id LIMIT ".$lmt."  OFFSET ".$oft."   ";
     $query = $this->db->query($sql);
-        //echo $sql.'<br>';
+         echo $sql.'<br>';
             //echo  $query->num_rows();
           foreach ($query->result_array() as $row)
           {          
               //echo $row['registration'].' ' .$row['id'] .'  - ';
-           $this->getCompanyHouseChargesApi($row['registration'],$row['id'])  ;
+           $this->getCompanyHouseChargesApi($row['registration'],$row['id'],$debug)  ;
           } 
+        
+          echo "Update to table completed!!";
         //unlink('companies.csv');
     }
     
