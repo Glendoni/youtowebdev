@@ -132,14 +132,15 @@ class Upload_company_via_csv extends MY_Controller {
         $sql = "SELECT registration,id FROM companies WHERE  created_at >= '2016-03-10' ORDER BY id LIMIT ".$lmt."  OFFSET ".$oft."   ";
     $query = $this->db->query($sql);
     
-       //echo $sql;
+        echo $sql.'<br>';
+            echo  $query->num_rows();
           foreach ($query->result_array() as $row)
           {          
               echo $row['registration'].' ' .$row['id'] .'<br>';
-             $this->getCompanyHouseChargesApi($row['registration'],$row['id']);
+             //$this->getCompanyHouseChargesApi($row['registration'],$row['id']);
           } 
         
-         echo  $query->num_rows();
+     
         //unlink('companies.csv');
     }
     
