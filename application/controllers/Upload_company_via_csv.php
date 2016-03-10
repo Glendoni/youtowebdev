@@ -1,4 +1,4 @@
-<?php ini_set('memory_limit', '264M');
+<?php ini_set('memory_limit', '564M');
 
 ;
     if ( ! defined('BASEPATH')); //exit('No direct script access allowed');
