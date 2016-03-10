@@ -179,7 +179,7 @@ $( '<li class="list-group-item"><div class="row"><div class="col-xs-6 col-md-7">
 });
 $('.marketingAcitonCtn').text(parseInt($('.marketingAcitonCtn').text()) + i);
 $(items.join( "" )).prependTo('#marketing ul');
-if(i) $('#outstanding h4,.actionMsg h4').hide();
+//if(i) $('#outstanding h4,.actionMsg h4').hide();
 }
 });
 }

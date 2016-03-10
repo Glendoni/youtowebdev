@@ -1070,8 +1070,44 @@ class Companies_model extends CI_Model {
     }  
     
     
+    public function insert_charges_CSV($response)
+    {
+           
+        $this->load->helper('inflector');
+        $provider  = '';
+        $provider = $response['provider_str'];
+        
+        file_put_contents('pop.txt', $provider.PHP_EOL, FILE_APPEND);
+        
+        
+         $provider_id = $this->providerCheck($provider);
+    
+        if($provider_id){
+            $mortgages = array(
+                    'company_id' => $response['company_id'],
+                    'provider_id' => $provider_id,
+                    'ref' => $response['etag'],
+                    'stage' =>  $response['status'],
+                    'eff_from' => $response['eff_from'],
+                    'created_at' =>   date('Y-m-d'),	
+                    'created_by' => $response['created_by']
+
+                    );
+                $this->db->insert('mortgages', $mortgages);
+        }        
+             
+    }
+    
+    
+    
     public function providerCheck($name)
     {
+        
+        //$name = 'ABN AMRO COMMERCIAL FINANCE PLC';
+        
+        
+        
+        
         $q = '
          SELECT id,name,provider_id
          FROM provider_checks
@@ -1079,6 +1115,10 @@ class Companies_model extends CI_Model {
          LIMIT 1
         ';
         $result = $this->db->query($q);
+            $last = $this->db->last_query();
+         //file_put_contents('pop.txt', $last.PHP_EOL, FILE_APPEND);
+        
+        
               if( $result->num_rows()){
                    foreach ($result->result() as $row)
                     {
@@ -1099,7 +1139,13 @@ class Companies_model extends CI_Model {
         $this->db->where('companies.id',$id); 
         $this->db->limit(1);
 
+        
+    
+        
         $query = $this->db->get();
+        
+        
+    
 
         foreach ($query->result() as $row)
         {
