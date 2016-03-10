@@ -137,7 +137,7 @@ class Upload_company_via_csv extends MY_Controller {
           foreach ($query->result_array() as $row)
           {          
               echo $row['registration'].' ' .$row['id'] .'<br>';
-             //$this->getCompanyHouseChargesApi($row['registration'],$row['id']);
+             $this->getCompanyHouseChargesApi($row['registration'],$row['id']);
           } 
         
      
