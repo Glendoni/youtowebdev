@@ -116,6 +116,7 @@ class Upload_company_via_csv extends MY_Controller {
                //echo  '<br><br>';//
                            if($debug){
                         print_r($rtnOutput); 
+                               echo '<br>';
                            }
                              return true;
                        } 
@@ -129,15 +130,15 @@ class Upload_company_via_csv extends MY_Controller {
         
         $sql = "SELECT registration,id FROM companies WHERE  created_at >= '".date('Y-m-d')."' ORDER BY id LIMIT ".$lmt."  OFFSET ".$oft."   ";
     $query = $this->db->query($sql);
-         echo $sql.'<br>';
-            //echo  $query->num_rows();
+         if($debug) echo $sql.'<br>';
+            if($debug) 'Number of rows being checked - '.  $query->num_rows();
           foreach ($query->result_array() as $row)
           {          
-              //echo $row['registration'].' ' .$row['id'] .'  - ';
+             if($debug) echo $row['registration'].' ' .$row['id'] .'  - <br> ';
            $this->getCompanyHouseChargesApi($row['registration'],$row['id'],$debug)  ;
           } 
-        
-          echo "Update to table completed!!";
+         if($debug) echo 'Query has finished<br>';
+          echo "<h2>Update to table completed!!</h2>";
         //unlink('companies.csv');
     }
     
