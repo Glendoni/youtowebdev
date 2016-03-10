@@ -126,13 +126,15 @@ class Upload_company_via_csv extends MY_Controller {
     
     public function ipp()
     {
-    $query = $this->db->query("SELECT * FROM companies WHERE created_at >= '2016-03-08'  LIMIT 100");
-        echo  $query->num_rows();
+    $query = $this->db->query("SELECT * FROM companies WHERE created_at >= '2016-03-08'  LIMIT 300");
+       
           foreach ($query->result_array() as $row)
           {
               //echo $row['registration'].' ' .$row['id'] .'<br>';
               $this->getCompanyHouseChargesApi($row['registration'],$row['id']);
           } 
+        
+         echo  $query->num_rows();
         //unlink('companies.csv');
     }
     
