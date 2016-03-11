@@ -169,6 +169,9 @@ $search_default = $this->input->post('agency_name');
                         <div class="dropdown dropdown-lg ">
                             <button href="#credits" type="button" class="toggle btn btn-default dropdown-toggle large-search-height" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
                         </div>
+                        <?php if (isset($_POST['main_search'])): ?>
+                                    <a href="<?php echo site_url();?>" class="loading-btn btn btn-danger " value="Go" name="submit" style="width: 100%; padding-top:11px;">X</a>
+                                    <?php endif; ?>
                         
                     <input type="submit" class="loading-btn btn btn-warning " value="Go" name="submit" style="width: 100%;">
                         <?php if (validation_errors()): ?>
@@ -179,7 +182,7 @@ $search_default = $this->input->post('agency_name');
                     </div>
                 </div>
             </div>
-<?php if (isset($_POST['main_search'])): ?>
+<!--<?php if (isset($_POST['main_search'])): ?>
                                     <div class='form-row'>
                                         <div class="col-md-12 form-group ">
                                             <a class="btn btn-block clear-fields" href="<?php echo site_url();?>">
@@ -187,7 +190,7 @@ $search_default = $this->input->post('agency_name');
                                             </a>
                                         </div>
                                     </div>
-                                    <?php endif; ?>
+                                    <?php endif; ?>-->
             <?php if (!isset($_GET['id']) && (isset($_POST['main_search']) || (isset($_GET['search'])))) : ?>
                                 <!--         <div class="col-md-12 no-padding" style="margin-top:20px;">
                                             <a class="btn btn-block clear-fields" href="<?php echo site_url();?>">
