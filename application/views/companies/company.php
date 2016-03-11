@@ -212,6 +212,25 @@ endif; ?>
 				}
 			}
 			?>
+
+
+						<?php if (isset($company['perm'])): ?>
+
+<p class="details" style="margin-bottom:0; text-align:centre;"><b>Permanent</b></p>
+
+			<?php endif; ?>
+								
+
+									<?php if (isset($company['contract'])): ?>
+
+
+			<p class="details" style="margin-bottom:0; text-align:centre;"><b>Contract</b></p>
+						<?php endif; ?>
+
+			</div>
+
+
+
 		</div>
 		</div>
 </div>
