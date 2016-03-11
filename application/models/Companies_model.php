@@ -741,6 +741,7 @@ class Companies_model extends CI_Model {
 			{$source = NULL;$source_date = NULL;}
 		
 		$company = array(
+				'name' => !empty($post['reg_name'])?$post['reg_name']:NULL,
 				'trading_name' => !empty($post['trading_name'])?$post['trading_name']:NULL,
 				'phone' => !empty($post['phone'])?$post['phone']:NULL,
 				'linkedin_id' => (isset($post['linkedin_id']) and !empty($post['linkedin_id']))?$post['linkedin_id']:NULL,

@@ -5,7 +5,20 @@
                  echo form_open(site_url().'companies/edit', 'name="edit_company" class="edit_company" role="form"',$hidden); ?>
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title" id="myModalLabel"><?php echo $company['name']; ?></h4>
+                                        <?php if ($current_user['permission'] == 'admin'): ?>
+                                            <h4 class="modal-title" id="myModalLabel">
+<input type="text" name="reg_name" value="<?php echo isset($company['name'])?$company['name']:''; ?>" id="trading_name" class="form-control" style="padding: 0;border: none;box-shadow: none;font-size: 18px;max-width: 500px;">
+</h4>
+                                            
+                <?php else: ?>
+                                <h4 class="modal-title" id="myModalLabel">
+<?php echo $company['name']; ?>
+<input type="hidden" name="reg_name" value="<?php echo $company['name']; ?>" id="reg_name" class="hidden" >                          
+
+</h4>
+
+                                <?php endif; ?>
+
             </div>
             <div class="modal-body">
             <div class="row">
