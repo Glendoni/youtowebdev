@@ -73,7 +73,7 @@
 <!-- Brand and toggle get grouped for better mobile display -->
 <!--<div class="navbar-header">-->
 <div class="col-sm-3 col-md-3">
-<a class="navbar-brand" href="/" ><img src="<?php echo asset_url();?>images/baselist-logotype-black-transparent-bg.png" style="width:120px;">
+<a class="navbar-brand" href="<?php echo site_url();?>" ><img src="<?php echo asset_url();?>images/baselist-logotype-black-transparent-bg.png" style="width:120px;">
 
 
 <?php if (isset($current_user)): ?>
