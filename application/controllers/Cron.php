@@ -38,5 +38,15 @@ class Cron extends CI_Controller {
     {
         $this->Cron_model->generate_segment_events();
     }
-
+  function csvreader()
+  {
+    $this->Cron_model->csvreader();
+  }
+    
+    
+    
+     function ipp($lmt = 100 ,$oft= 0,$debug = false)
+  {
+    $this->Cron_model->ipp($lmt,$oft,$debug);
+  }
 }
