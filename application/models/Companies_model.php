@@ -1261,7 +1261,8 @@ class Companies_model extends CI_Model {
     public function get_pipline_deals(){
         
         $q = '
-        SELECT *,deals_pipeline.eff_from as efffrom, companies.name as companyname, users.name as owner
+        SELECT *,deals_pipeline.eff_from as efffrom, companies.name as companyname, users.name as owner, 
+    to_char(deals_pipeline.updated_at, \'DDth Month YY\') as pipeline_date
         FROM deals_pipeline
         LEFT JOIN companies
         ON deals_pipeline.company_id=companies.id
