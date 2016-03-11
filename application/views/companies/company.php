@@ -396,44 +396,44 @@ endif; ?>
 		<div class="panel-body">
 		<?php if(isset($contacts) and !empty($contacts)) : ?>
 
-<div class="row record-holder-header mobile-hide">
-<div class="col-xs-12 col-md-2"><strong>Name</strong></div>
-<div class="col-xs-12 col-md-2"><strong>Role</strong></div>
-<div class="col-xs-12 col-md-3"><strong>Email</strong></div>
-<div class="col-xs-12 col-md-2"><strong>Phone</strong></div>
-<div class="col-md-3">
-	<div class=" pull-right ">
+			<table class="table table-hover">
+	      <thead>
+	        <tr>
+	          	<th class="col-md-2">Name</th>
+	          	<th class="col-md-2">Role</th>
+	          	<th class="col-md-3">Email</th>
+				<th class="col-md-2">Phone</th>
+				<th class="col-md-3"><div class=" pull-right ">
 		<strong>Actions</strong>
-	</div>
-</div>
-</div>
+	</div></th>
 
 
-
+	        </tr>
+	      </thead>
+	      <tbody>
 <?php foreach ($contacts as $contact): ?>
-<div class="row record-holder">
-<div class="col-xs-12 col-md-2 contact-name"><?php echo ucfirst($contact->first_name).' '.ucfirst($contact->last_name); ?></div>
-<div class="col-xs-12 col-md-2 contact-role"><?php echo ucfirst($contact->role); ?></div>
-<div class="col-xs-12 col-md-3 contact-email"><?php echo $contact->email; ?>&nbsp;
+	      	<tr>
+				<td class="col-md-2">
+				<?php echo ucfirst($contact->first_name).' '.ucfirst($contact->last_name); ?>
+				</td>
+				<td class="col-md-2"><?php echo ucfirst($contact->role); ?></td>
+				<td class="col-md-3"><?php echo $contact->email; ?>&nbsp;
 	<?php if (!empty($contact->email_opt_out_date)): ?>
 		<span class="label label-danger contact-opt-out">Email Marketing Opt-Out</span>
-	<?php endif;?>
-</div>
-<div class="col-xs-12 col-md-2 contact-phone">
-	<?php echo $contact->phone; ?>&nbsp;
-</div>
-				<div class="col-md-3">
-		      	<div class="pull-right mobile-left actionsactionscontact-options">
+	<?php endif;?></td>
+				<td  class="col-md-2"><?php echo $contact->phone; ?></td>
+								<td  class="col-md-3"><div class="pull-right mobile-left actionsactionscontact-options">
 				<?php if ($company['pipeline']=='Blacklisted'): ?>
 				<?php else: ?>
 	            <?php $this->load->view('companies/action_box_contacts.php',array('contact'=>$contact)); ?>
 	        	<?php endif; ?>
-	            </div>
-	            </div>
-	            </div>
+	            </div></td>
 
+        	</tr>
+			<?php endforeach; ?>  
+	      </tbody>
+	    </table>
 
-			<?php endforeach; ?>
 	    <?php else: ?>
 			<div class="alert alert-info" style="margin-top:10px;">
                 None
