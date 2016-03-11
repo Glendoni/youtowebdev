@@ -13,7 +13,7 @@ $(window).load(function(){
     $(".alert-success").fadeTo(500, 0).slideUp(500, function(){
     $(this).remove(); 
     });
-    }, 5000);
+    }, 2000);
 });
 $('#action_type_completed').change(function(){
 var source_check = $("input[name=source_check]").val();
