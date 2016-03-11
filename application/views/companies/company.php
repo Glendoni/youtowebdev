@@ -65,6 +65,7 @@ endif; ?>
 	<?php else: ?>
 	<?php endif; ?>
 	</div><!--END ROW-->
+	
 	<!-- POPUP BOXES -->
 	<?php $this->load->view('companies/edit_box.php',array('company'=>$company)); ?>
 	<?php $this->load->view('companies/create_contact_box.php',array('company'=>$company)); ?>
@@ -79,63 +80,86 @@ endif; ?>
 	<div class="panel-body">
     	<div class="row"><!--FINISHED AT THE END OF PANEL-->
 		<div class="col-sm-9">
-		<div class="row padding-bottom">
-		<?php if (isset($company['trading_name'])): ?>
-		<div class="col-md-6" style="margin-bottom:10px;">
+		<div class="row">
+<div class="col-sm-12 action-details">
+<div class="row"> 
+<div class="col-md-6 col-lg-6 col-sm-6">
+<div><strong>Last Contact</strong></div>
+<div>
+<?php if (empty($company['actioned_at1'])): ?>
+Never
+<?php else: ?>
+<div class="action_type"><?php echo $company['action_name1']." by ".$company['action_user1']; ?></div>
+<div class="action_date_list">
+<?php echo date("l jS F Y",strtotime($company['actioned_at1']));?>
+<?php
+$now = time (); // or your date as well
+$your_date = strtotime($company['actioned_at1']);
+$datediff = abs($now - $your_date);
+$days_since = floor($datediff/(60*60*24));
+if ($company['actioned_at1'] > 0){
+	echo " (".$days_since." days ago)";
+	} else {
+	echo " (".$days_since." day ago)";;
+	}
+?></div>
+
+<?php endif; ?>
+
+</div>
+</div>
+<div class="col-md-6 col-lg-6 col-sm-6">
+<div><strong> Next Contact</strong></div>
+<?php if (empty($company['planned_at2'])): ?>
+	None
+<?php else: ?>
+	<div class="action_type"><?php echo $company['action_name2']." by ".$company['action_user2']; ?></div>
+
+	<div class="action_date_list">
+<?php echo date("l jS F Y",strtotime($company['planned_at2']));?>
+</div>
+<?php
+$now = time (); // or your date as well
+$your_date = strtotime($company['planned_at2']);
+$days_since = floor($datediff/(60*60*24));
+if ($your_date < $now){; ?>
+<div><span class="label label-danger" style="font-size:11px;">Overdue</span></div><?php } else {}
+?>
+<?php endif; ?>
+
+</div>
+</div><!--END ROW-->
+<hr>
+</div>
+
+	<?php if (isset($company['trading_name'])): ?>
+		<div class="col-md-6">
 				<label>Registered Name</label>
 				<p style="margin-bottom:0;">	
 				<?php echo $company['name']; ?>
 				</p>
 		</div><!--END NAME-->
-		<div class="col-md-6" style="margin-bottom:10px;">
+		<div class="col-md-6">
 				<label>Trading Name</label>
 				<p style="margin-bottom:0;">	
 				<?php echo $company['trading_name']; ?>
 				</p>
 		</div><!--END TRADING NAME-->
 		<?php else: ?>
-				<div class="col-sm-12" style="margin-bottom:10px;">
+				<div class="col-md-6">
 				<label>Registered Name</label>
-				<p style="margin-bottom:0;">	
+				<p style="margin-bottom:10px;">	
 				<?php echo $company['name']; ?>
 				</p>
 		</div><!--END NAME-->
 		<?php endif; ?>
-		</div>
-		<div class="row padding-bottom">
-		<div class="col-xs-6 col-md-3">
-			<label>Company Number</label>
-			<p>	
-			 <!--COMPANY NUMBER IF APPLICABLE-->
-			<?php echo isset($company['registration'])?$company['registration']:''; ?>
-         	</p>
-        	</div>
-
-        	<div class="col-xs-6  col-md-3">
-        	<label>Founded</label>
-			<p>	
-				<?php echo isset($company['eff_from'])?$company['eff_from']:''; ?>
-			</p>
-		</div>
-	
+		<div class="col-md-6">
+				<label>Registered Address</label>
+				<p style="margin-bottom:10px;">
+                <?php echo isset($company['address'])?'<a href="http://maps.google.com/?q='.urlencode($company['address']).'" target="_blank">'.$company['address'].'<span style="    line-height: 15px;font-size: 10px;padding-left: 5px;"><i class="fa fa-external-link"></i></span></a>':'-'; ?>  
+				</p>
+		</div><!--END ADDRESS-->
 		
-        <div class="col-xs-6 col-md-3">
-        		<label>Phone</label>
-        		<p>
-        		<?php echo isset($company['phone'])?$company['phone']:''; ?>                
-           		</p>
-			</div><!--END PHONE NUMBER-->
-		<div class="col-xs-6  col-md-3">
-				<label>Class</label>
-				<p>	
-		            <!--CLASS IF APPLICABLE-->
-		            <?php if (isset($company['class'])): ?>
-						<span class="label label-info"><?php echo $companies_classes[$company['class']] ?></span>	
-					<?php else: ?>
-						-
-		            <?php endif; ?>
-	            </p>
-			</div>
 
 		</div><!--END ROW-->
         </div><!--CLOSE MD-9-->
