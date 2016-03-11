@@ -214,26 +214,16 @@ endif; ?>
 			?>
 
 
-						<?php if (isset($company['perm'])): ?>
-
+<?php if (isset($company['perm'])): ?>
 <p class="details" style="margin-bottom:0; text-align:centre;"><b>Permanent</b></p>
-
-			<?php endif; ?>
-								
-
-									<?php if (isset($company['contract'])): ?>
-
-
-			<p class="details" style="margin-bottom:0; text-align:centre;"><b>Contract</b></p>
-						<?php endif; ?>
-
-			</div>
-
-
-
-		</div>
-		</div>
+<?php endif; ?>
+<?php if (isset($company['contract'])): ?>
+<p class="details" style="margin-bottom:0; text-align:centre;"><b>Contract</b></p>
+<?php endif; ?>
 </div>
+		</div>
+		</div>
+		</div>
 		<div class="col-md-12">
 			<hr>
 		</div>
@@ -422,9 +412,7 @@ endif; ?>
 	          	<th class="col-md-2">Role</th>
 	          	<th class="col-md-3">Email</th>
 				<th class="col-md-2">Phone</th>
-				<th class="col-md-3"><div class=" pull-right ">
-		<strong>Actions</strong>
-	</div></th>
+				<th class="col-md-3"></th>
 
 
 	        </tr>
