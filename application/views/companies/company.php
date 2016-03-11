@@ -44,14 +44,16 @@ endif; ?>
 
 	
 	<?php if (isset($company['trading_name'])): ?>
-	<h5 class="trading-header">
+<h5 class="trading-header">
 <?php echo $company['trading_name'];?>
 </h5>
 	<?php endif; ?>
 	</div><!--END ROW-->
 
 	<div class="row" style="margin-top:5px; text-align:center;">
+	<?php if(!empty($company['pipeline'])): ?>
 	<span class="label pipeline label-<?php echo str_replace(' ', '', $company['pipeline']); ?>">#<?php echo $company['pipeline']?>
+	<?php endif; ?>
 	<?php if (isset($company['customer_from'])&&($company['pipeline']=='Customer')):?>
 		from <?php echo date("d/m/y",strtotime($company['customer_from']));?>
 		<?php endif; ?>
@@ -65,7 +67,7 @@ endif; ?>
 	<?php else: ?>
 	<?php endif; ?>
 	</div><!--END ROW-->
-	
+
 	<!-- POPUP BOXES -->
 	<?php $this->load->view('companies/edit_box.php',array('company'=>$company)); ?>
 	<?php $this->load->view('companies/create_contact_box.php',array('company'=>$company)); ?>
