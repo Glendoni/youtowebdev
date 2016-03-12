@@ -120,8 +120,6 @@ start = new Date(start.setDate(start.getDate() + 1)); //date increase by 1
                                 }
                               else {
                                   var datechanged = data[key]['pipeline_date_updated'];
-
-
 }
 
                     res = data[key]['companyname'].replace(/Limited|Ltd|ltd/gi, function myFunction(x){return ''});

@@ -209,6 +209,9 @@
                     <div class="tab-content">
                       <div class="tab-pane fade <?php if (($_GET['period'] == 'week') ||  (empty($_GET['period'])) && ($_GET['search'] !=='3')): ?>active in <?php endif; ?>" id="this">
                       <div class="col-md-12">
+                      No Finance
+                      </div>
+                      <div class="col-md-12">
                       <div class="row list-group-item">
                         <div class="col-xs-2 col-md-1 hide-overflow"> 
                             <strong>Name</strong>
@@ -243,7 +246,7 @@
                         </div>
                         </div>
                           
-                                <div class="row list-group-item dashboardTotalheaders">
+                        <div class="row list-group-item dashboardTotalheaders">
                         <div class="col-xs-2 col-md-1 hide-overflow"> 
                             <strong>Totals</strong>
                         </div>
@@ -274,9 +277,8 @@
                             <span class="tw-key_review_occuring-total stat-total">5</span>
                         </div>
                     
-                                     <div class="col-xs-2 col-md-1 text-center hide-overflow"> 
+                          <div class="col-xs-2 col-md-1 text-center hide-overflow"> 
                           <span class="tw-duediligence-total stat-total">0</span>
-         
                         </div>
                           </div>
                           
@@ -970,11 +972,11 @@
                               <?php echo $action_types_array[$action->action_type_id]; ?>
                             </div>
                             <div class="col-md-3 text-center">
-                            <?php echo date("H:i",strtotime($action->planned_at));?>
-                              <strong><?php echo date("d/m/y",strtotime($action->planned_at));?></strong>
-                              <small><a class="btn btn-default btn-xs add-to-calendar" href="http://www.google.com/calendar/event?action=TEMPLATE&text=<?php echo urlencode($action_types_array[$action->action_type_id].' | '.$action->company_name); ?>&dates=<?php echo date("Ymd\\THi00",strtotime($action->planned_at));?>/<?php echo date("Ymd\\THi00\\Z",strtotime($action->planned_at));?>&details=<?php echo $contact_details_for_calendar;?><?php echo urlencode('http://baselist.herokuapp.com/companies/company?id='.$action->company_id);?>%0D%0DAny changes made to this event are not updated in Baselist."target="_blank" rel="nofollow">Add to Calendar</a></small>
+                            <?php echo $action->duedate;?>
+                              
                             </div>
                             <div class="col-md-4" style="text-align:right;">
+                            <a class="btn btn-default btn-xs add-to-calendar" href="http://www.google.com/calendar/event?action=TEMPLATE&text=<?php echo urlencode($action_types_array[$action->action_type_id].' | '.$action->company_name); ?>&dates=<?php echo date("Ymd\\THi00",strtotime($action->planned_at));?>/<?php echo date("Ymd\\THi00\\Z",strtotime($action->planned_at));?>&details=<?php echo $contact_details_for_calendar;?><?php echo urlencode('http://baselist.herokuapp.com/companies/company?id='.$action->company_id);?>%0D%0DAny changes made to this event are not updated in Baselist.%0D%23baselist"target="_blank" rel="nofollow">Add to Calendar</a>
                               <?php $hidden = array('action_id' => $action->action_id , 'user_id' => $current_user['id'], 'action_do' => 'completed', 'outcome' => '' , 'company_id' => $action->company_id);
                                echo form_open(site_url().'actions/edit', 'name="completed_action"  class="completed_action" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action->action_id.'" style="display:inline-block;" role="form"',$hidden); ?>
                                <button class="btn btn-xs btn-success">Completed</button> 
