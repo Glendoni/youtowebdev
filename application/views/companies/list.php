@@ -48,9 +48,11 @@
 </h5>
 	<?php endif; ?>
 			</div>
-			<div class="col-sm-12" style="margin-top:5px; text-align:center;">
+			<div class="col-sm-12" style="margin-top:5px; margin-bottom: 15px; text-align:center;">
+<?php if(isset($company['pipeline'])): ?>
 	<span class="label pipeline label-<?php echo str_replace(' ', '', $company['pipeline']); ?>">#<?php echo $company['pipeline']?>
-	<?php if (isset($company['customer_from'])&&($company['pipeline']=='Customer')):?>
+	<?php endif; ?>
+		<?php if (isset($company['customer_from'])&&($company['pipeline']=='Customer')):?>
 		from <?php echo date("d/m/y",strtotime($company['customer_from']));?>
 		<?php endif; ?>
 		</span>
@@ -61,8 +63,6 @@
         </span>
 	<?php else: ?>
 	<?php endif; ?>
-
-	<hr>
 	</div>
 		<div class="col-sm-9">
 		<div class="row">
@@ -254,6 +254,16 @@ if ($your_date < $now){; ?>
 				}
 			}
 			?>
+									<?php if (isset($company['perm'])): ?>
+
+<p class="details" style="margin-bottom:0; text-align:centre;"><b>Permanent</b></p>
+
+			<?php endif; ?>
+								<?php if (isset($company['contract'])): ?>
+
+
+			<p class="details" style="margin-bottom:0; text-align:centre;"><b>Contract</b></p>
+						<?php endif; ?>
 		</div>
 		</div>
 		<div class="col-md-12">

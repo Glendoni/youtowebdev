@@ -73,7 +73,7 @@
 <!-- Brand and toggle get grouped for better mobile display -->
 <!--<div class="navbar-header">-->
 <div class="col-sm-3 col-md-3">
-<a class="navbar-brand" href="/" ><img src="<?php echo asset_url();?>images/baselist-logotype-black-transparent-bg.png" style="width:120px;">
+<a class="navbar-brand" href="<?php echo site_url();?>" ><img src="<?php echo asset_url();?>images/baselist-logotype-black-transparent-bg.png" style="width:120px;">
 
 
 <?php if (isset($current_user)): ?>
@@ -83,7 +83,7 @@
 } else {?>
 <?php
 }; ?>
-<div style="font-size: 10px;font-weight: 300;text-align: right;float: right;line-height: 40px;padding-left: 5px;">Version 3.2</div>
+<div style="font-size: 10px;font-weight: 300;text-align: right;float: right;line-height: 40px;padding-left: 5px;">Version 3.3</div>
 <?php endif; ?>
 </a>
 </div>
@@ -169,6 +169,9 @@ $search_default = $this->input->post('agency_name');
                         <div class="dropdown dropdown-lg ">
                             <button href="#credits" type="button" class="toggle btn btn-default dropdown-toggle large-search-height" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
                         </div>
+                        <?php if (isset($_POST['main_search'])): ?>
+                                    <a href="<?php echo site_url();?>" class="loading-btn btn btn-danger " value="Go" name="submit" style="width: 100%; padding-top:11px;">X</a>
+                                    <?php endif; ?>
                         
                     <input type="submit" class="loading-btn btn btn-warning " value="Go" name="submit" style="width: 100%;">
                         <?php if (validation_errors()): ?>
@@ -179,7 +182,7 @@ $search_default = $this->input->post('agency_name');
                     </div>
                 </div>
             </div>
-<?php if (isset($_POST['main_search'])): ?>
+<!--<?php if (isset($_POST['main_search'])): ?>
                                     <div class='form-row'>
                                         <div class="col-md-12 form-group ">
                                             <a class="btn btn-block clear-fields" href="<?php echo site_url();?>">
@@ -187,7 +190,7 @@ $search_default = $this->input->post('agency_name');
                                             </a>
                                         </div>
                                     </div>
-                                    <?php endif; ?>
+                                    <?php endif; ?>-->
             <?php if (!isset($_GET['id']) && (isset($_POST['main_search']) || (isset($_GET['search'])))) : ?>
                                 <!--         <div class="col-md-12 no-padding" style="margin-top:20px;">
                                             <a class="btn btn-block clear-fields" href="<?php echo site_url();?>">

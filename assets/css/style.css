@@ -828,15 +828,17 @@ margin-bottom: 10px;
 	font-weight: 500;
 }
 .alert-success {
-	
-	    color: #fff;
+	color: #fff;
     background-color: #559959;
     margin-bottom: 0;
     border: none;
     border-radius: 0;
         -webkit-box-shadow: 0 8px 6px -6px #999;
     -moz-box-shadow: 0 8px 6px -6px #999;
-    box-shadow: 0 8px 6px -6px #999;	
+    box-shadow: 0 8px 6px -6px #999;
+    padding-top: 25px;
+        padding-bottom: 15px;
+    height: 67px;
 }
 .alert-danger {
     color: #fff;
@@ -853,11 +855,11 @@ margin-bottom: 10px;
     }
 .top-alert {
 	position: fixed;
-    top: 67px;
+    /*top: 67px;*/
+    top:0;
     left: 0;
     width: 100%;
-    z-index: 100;
-    
+    z-index: 9999;
 }
 
 .bottom-alert {
@@ -866,7 +868,6 @@ margin-bottom: 10px;
     left: 0;
     width: 100%;
     z-index: 9999;
-    margin-bottom: -20px;
 }
 .modal-open .modal {
 z-index: 99999;
@@ -990,12 +991,12 @@ a li.autocomplete-item:hover {
 }
 
 #single-page {
-	padding-top: 110px;
+	padding-top: 85px;
 }
 /* ADD TO CALL */
 a.btn.btn-default.btn-xs.add-to-calendar {
-	margin-left: 5px;
-	font-size: 10px;
+	/*margin-left: 5px;
+	font-size: 10px;*/
 }
 /* CAMPAIGN LINK */
 .campaign-link {
