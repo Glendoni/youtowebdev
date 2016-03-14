@@ -12,7 +12,7 @@
             <div class="bottom-alert">
 <div class="return_to_campaign">
 
-<a class="btn btn-default btn-sm" href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $_GET['campaign_id']; ?>" role="button">Return to Campaign</a>
+<a class="btn btn-default btn-sm" href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $_GET['campaign_id']; ?>#<?php echo $_GET['id']; ?>" role="button">Return to Campaign</a>
 </div>
 </div>
 <?php endif; ?>
