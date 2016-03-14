@@ -195,7 +195,7 @@ function get_comments($company_id)
 
 function get_pending_actions($user_id)
 {		
-    $this->db->select("actions.company_id, actions.id as action_id,comments,planned_at,action_type_id,name as company_name,contacts.first_name,contacts.last_name,contacts.phone,contacts.email, to_char(planned_at, 'DD/MM/YY at HH24:MI') as duedate ");
+    $this->db->select("actions.company_id, actions.id as action_id,comments,planned_at,action_type_id,name as company_name,contacts.first_name,contacts.last_name,contacts.phone,contacts.email, to_char(planned_at, 'HH24:MI DD/MM/YY') as duedate ");
     $this->db->where('actions.user_id',$user_id);
     $this->db->where('actioned_at',NULL);
     $this->db->where('cancelled_at',NULL);
