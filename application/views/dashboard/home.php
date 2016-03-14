@@ -209,7 +209,6 @@
                     <div class="tab-content">
                       <div class="tab-pane fade <?php if (($_GET['period'] == 'week') ||  (empty($_GET['period'])) && ($_GET['search'] !=='3')): ?>active in <?php endif; ?>" id="this">
                       <div class="col-md-12">
-                      No Finance
                       </div>
                       <div class="col-md-12">
                       <div class="row list-group-item">
