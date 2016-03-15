@@ -78,7 +78,7 @@ function get_marketing_actions($user_id)
     ec.id = ea.email_campaign_id
     where (ea.email_action_type = '2' or ea.email_action_type = '3') and c.pipeline not in ('proposal','customer') and ec.created_by = $user_id 
     AND ea.created_at >= '2016-01-01 09:10:50.36656' 
-      limit 1000 ";
+      limit 1 ";
     $query = $this->db->query($sql);
     return $query->result_object();
     
