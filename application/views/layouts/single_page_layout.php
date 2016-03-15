@@ -9,8 +9,7 @@
         </div>
     <?php endif; ?>
     <?php if (!empty($_GET['campaign_id'])):   ?>
-            <div class="top-alert">
-
+            <div class="bottom-alert">
 <div class="return_to_campaign">
 
 <a class="btn btn-default btn-sm" href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $_GET['campaign_id']; ?>" role="button">Return to Campaign</a>

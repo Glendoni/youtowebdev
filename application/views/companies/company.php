@@ -44,14 +44,16 @@ endif; ?>
 
 	
 	<?php if (isset($company['trading_name'])): ?>
-	<h5 class="trading-header">
+<h5 class="trading-header">
 <?php echo $company['trading_name'];?>
 </h5>
 	<?php endif; ?>
 	</div><!--END ROW-->
 
 	<div class="row" style="margin-top:5px; text-align:center;">
+	<?php if(!empty($company['pipeline'])): ?>
 	<span class="label pipeline label-<?php echo str_replace(' ', '', $company['pipeline']); ?>">#<?php echo $company['pipeline']?>
+	<?php endif; ?>
 	<?php if (isset($company['customer_from'])&&($company['pipeline']=='Customer')):?>
 		from <?php echo date("d/m/y",strtotime($company['customer_from']));?>
 		<?php endif; ?>
@@ -65,6 +67,7 @@ endif; ?>
 	<?php else: ?>
 	<?php endif; ?>
 	</div><!--END ROW-->
+
 	<!-- POPUP BOXES -->
 	<?php $this->load->view('companies/edit_box.php',array('company'=>$company)); ?>
 	<?php $this->load->view('companies/create_contact_box.php',array('company'=>$company)); ?>
@@ -79,63 +82,86 @@ endif; ?>
 	<div class="panel-body">
     	<div class="row"><!--FINISHED AT THE END OF PANEL-->
 		<div class="col-sm-9">
-		<div class="row padding-bottom">
-		<?php if (isset($company['trading_name'])): ?>
-		<div class="col-md-6" style="margin-bottom:10px;">
+		<div class="row">
+<div class="col-sm-12 action-details">
+<div class="row"> 
+<div class="col-md-6 col-lg-6 col-sm-6">
+<div><strong>Last Contact</strong></div>
+<div>
+<?php if (empty($company['actioned_at1'])): ?>
+Never
+<?php else: ?>
+<div class="action_type"><?php echo $company['action_name1']." by ".$company['action_user1']; ?></div>
+<div class="action_date_list">
+<?php echo date("l jS F Y",strtotime($company['actioned_at1']));?>
+<?php
+$now = time (); // or your date as well
+$your_date = strtotime($company['actioned_at1']);
+$datediff = abs($now - $your_date);
+$days_since = floor($datediff/(60*60*24));
+if ($company['actioned_at1'] > 0){
+	echo " (".$days_since." days ago)";
+	} else {
+	echo " (".$days_since." day ago)";;
+	}
+?></div>
+
+<?php endif; ?>
+
+</div>
+</div>
+<div class="col-md-6 col-lg-6 col-sm-6">
+<div><strong> Next Contact</strong></div>
+<?php if (empty($company['planned_at2'])): ?>
+	None
+<?php else: ?>
+	<div class="action_type"><?php echo $company['action_name2']." by ".$company['action_user2']; ?></div>
+
+	<div class="action_date_list">
+<?php echo date("l jS F Y",strtotime($company['planned_at2']));?>
+</div>
+<?php
+$now = time (); // or your date as well
+$your_date = strtotime($company['planned_at2']);
+$days_since = floor($datediff/(60*60*24));
+if ($your_date < $now){; ?>
+<div><span class="label label-danger" style="font-size:11px;">Overdue</span></div><?php } else {}
+?>
+<?php endif; ?>
+
+</div>
+</div><!--END ROW-->
+<hr>
+</div>
+
+	<?php if (isset($company['trading_name'])): ?>
+		<div class="col-md-6">
 				<label>Registered Name</label>
 				<p style="margin-bottom:0;">	
 				<?php echo $company['name']; ?>
 				</p>
 		</div><!--END NAME-->
-		<div class="col-md-6" style="margin-bottom:10px;">
+		<div class="col-md-6">
 				<label>Trading Name</label>
 				<p style="margin-bottom:0;">	
 				<?php echo $company['trading_name']; ?>
 				</p>
 		</div><!--END TRADING NAME-->
 		<?php else: ?>
-				<div class="col-sm-12" style="margin-bottom:10px;">
+				<div class="col-md-6">
 				<label>Registered Name</label>
-				<p style="margin-bottom:0;">	
+				<p style="margin-bottom:10px;">	
 				<?php echo $company['name']; ?>
 				</p>
 		</div><!--END NAME-->
 		<?php endif; ?>
-		</div>
-		<div class="row padding-bottom">
-		<div class="col-xs-6 col-md-3">
-			<label>Company Number</label>
-			<p>	
-			 <!--COMPANY NUMBER IF APPLICABLE-->
-			<?php echo isset($company['registration'])?$company['registration']:''; ?>
-         	</p>
-        	</div>
-
-        	<div class="col-xs-6  col-md-3">
-        	<label>Founded</label>
-			<p>	
-				<?php echo isset($company['eff_from'])?$company['eff_from']:''; ?>
-			</p>
-		</div>
-	
+		<div class="col-md-6">
+				<label>Registered Address</label>
+				<p style="margin-bottom:10px;">
+                <?php echo isset($company['address'])?'<a href="http://maps.google.com/?q='.urlencode($company['address']).'" target="_blank">'.$company['address'].'<span style="    line-height: 15px;font-size: 10px;padding-left: 5px;"><i class="fa fa-external-link"></i></span></a>':'-'; ?>  
+				</p>
+		</div><!--END ADDRESS-->
 		
-        <div class="col-xs-6 col-md-3">
-        		<label>Phone</label>
-        		<p>
-        		<?php echo isset($company['phone'])?$company['phone']:''; ?>                
-           		</p>
-			</div><!--END PHONE NUMBER-->
-		<div class="col-xs-6  col-md-3">
-				<label>Class</label>
-				<p>	
-		            <!--CLASS IF APPLICABLE-->
-		            <?php if (isset($company['class'])): ?>
-						<span class="label label-info"><?php echo $companies_classes[$company['class']] ?></span>	
-					<?php else: ?>
-						-
-		            <?php endif; ?>
-	            </p>
-			</div>
 
 		</div><!--END ROW-->
         </div><!--CLOSE MD-9-->
@@ -212,9 +238,18 @@ endif; ?>
 				}
 			}
 			?>
-		</div>
-		</div>
+
+
+<?php if (isset($company['perm'])): ?>
+<p class="details" style="margin-bottom:0; text-align:centre;"><b>Permanent</b></p>
+<?php endif; ?>
+<?php if (isset($company['contract'])): ?>
+<p class="details" style="margin-bottom:0; text-align:centre;"><b>Contract</b></p>
+<?php endif; ?>
 </div>
+		</div>
+		</div>
+		</div>
 		<div class="col-md-12">
 			<hr>
 		</div>
@@ -396,44 +431,42 @@ endif; ?>
 		<div class="panel-body">
 		<?php if(isset($contacts) and !empty($contacts)) : ?>
 
-<div class="row record-holder-header mobile-hide">
-<div class="col-xs-12 col-md-2"><strong>Name</strong></div>
-<div class="col-xs-12 col-md-2"><strong>Role</strong></div>
-<div class="col-xs-12 col-md-3"><strong>Email</strong></div>
-<div class="col-xs-12 col-md-2"><strong>Phone</strong></div>
-<div class="col-md-3">
-	<div class=" pull-right ">
-		<strong>Actions</strong>
-	</div>
-</div>
-</div>
+			<table class="table table-hover">
+	      <thead>
+	        <tr>
+	          	<th class="col-md-2">Name</th>
+	          	<th class="col-md-2">Role</th>
+	          	<th class="col-md-3">Email</th>
+				<th class="col-md-2">Phone</th>
+				<th class="col-md-3"></th>
 
 
-
+	        </tr>
+	      </thead>
+	      <tbody>
 <?php foreach ($contacts as $contact): ?>
-<div class="row record-holder">
-<div class="col-xs-12 col-md-2 contact-name"><?php echo ucfirst($contact->first_name).' '.ucfirst($contact->last_name); ?></div>
-<div class="col-xs-12 col-md-2 contact-role"><?php echo ucfirst($contact->role); ?></div>
-<div class="col-xs-12 col-md-3 contact-email"><?php echo $contact->email; ?>&nbsp;
+	      	<tr>
+				<td class="col-md-2">
+				<?php echo ucfirst($contact->first_name).' '.ucfirst($contact->last_name); ?>
+				</td>
+				<td class="col-md-2"><?php echo ucfirst($contact->role); ?></td>
+				<td class="col-md-3"><?php echo $contact->email; ?>&nbsp;
 	<?php if (!empty($contact->email_opt_out_date)): ?>
 		<span class="label label-danger contact-opt-out">Email Marketing Opt-Out</span>
-	<?php endif;?>
-</div>
-<div class="col-xs-12 col-md-2 contact-phone">
-	<?php echo $contact->phone; ?>&nbsp;
-</div>
-				<div class="col-md-3">
-		      	<div class="pull-right mobile-left actionsactionscontact-options">
+	<?php endif;?></td>
+				<td  class="col-md-2"><?php echo $contact->phone; ?></td>
+								<td  class="col-md-3"><div class="pull-right mobile-left actionsactionscontact-options">
 				<?php if ($company['pipeline']=='Blacklisted'): ?>
 				<?php else: ?>
 	            <?php $this->load->view('companies/action_box_contacts.php',array('contact'=>$contact)); ?>
 	        	<?php endif; ?>
-	            </div>
-	            </div>
-	            </div>
+	            </div></td>
 
+        	</tr>
+			<?php endforeach; ?>  
+	      </tbody>
+	    </table>
 
-			<?php endforeach; ?>
 	    <?php else: ?>
 			<div class="alert alert-info" style="margin-top:10px;">
                 None
@@ -608,7 +641,7 @@ endif; ?>
                             <?php endif; ?>
 								<?php if(strtotime($action_outstanding->planned_at) > $now and !isset($action_outstanding->actioned_at)) : ?>
 								<span class="label label-warning"><?php echo $planned_date_formatted ?> </span> 
-								<span style="margin-top:0; margin-left:3px;"><small><a class="btn btn-default btn-xs add-to-calendar" href="http://www.google.com/calendar/event?action=TEMPLATE&text=<?php echo urlencode($action_types_array[$action_outstanding->action_type_id].' | '.$action_outstanding->company_name); ?>&dates=<?php echo date("Ymd\\THi00",strtotime($action_outstanding->planned_at));?>/<?php echo date("Ymd\\THi00\\Z",strtotime($action_outstanding->planned_at));?>&details=<?php echo $contact_details_for_calendar;?>%0D%0D<?php echo urlencode('http://baselist.herokuapp.com/companies/company?id='.$action_outstanding->company_id);?>%0D%0DAny changes made to this event are not updated in Baselist."target="_blank" rel="nofollow" style="margin-top:0; font-size:10px;">Add to Calendar</a></small></span>
+								<span style="margin-top:0; margin-left:3px;"><small><a class="btn btn-default btn-xs add-to-calendar" href="http://www.google.com/calendar/event?action=TEMPLATE&text=<?php echo urlencode($action_types_array[$action_outstanding->action_type_id].' | '.$action_outstanding->company_name); ?>&dates=<?php echo date("Ymd\\THi00",strtotime($action_outstanding->planned_at));?>/<?php echo date("Ymd\\THi00\\Z",strtotime($action_outstanding->planned_at));?>&details=<?php echo $contact_details_for_calendar;?><?php echo urlencode('http://baselist.herokuapp.com/companies/company?id='.$action_outstanding->company_id);?>%0D%0DAny changes made to this event are not updated in Baselist. %0D%23baselist"target="_blank" rel="nofollow" style="margin-top:0; font-size:10px;">Add to Calendar</a></small></span>
 
 
 								<?php $hidden = array('action_id' => $action_outstanding->action_id , 'user_id' => $current_user['id'] , 'action_do' => 'cancelled','outcome' => '' ,'company_id' => $company['id'],'campaign_id' => $campaign_id,); echo form_open(site_url().'actions/edit', 'name="cancel_action"  class="cancel_action pull-right" style="margin-left:5px;" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action_outstanding->action_id.'" role="form"',$hidden); ?>
@@ -621,7 +654,7 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 
 
 								<?php elseif(strtotime($action_outstanding->planned_at) < $now and !isset($action_outstanding->actioned_at)):?>
-								<span class="label label-overdue" style="margin-left:10px;"><?php echo $planned_date_formatted ?> </span><span style="margin-top:0; margin-left:3px;"><small><a class="btn btn-default btn-xs add-to-calendar" href="http://www.google.com/calendar/event?action=TEMPLATE&text=<?php echo urlencode($action_types_array[$action_outstanding->action_type_id].' | '.$action_outstanding->company_name); ?>&dates=<?php echo date("Ymd\\THi00",strtotime($action_outstanding->planned_at));?>/<?php echo date("Ymd\\THi00\\Z",strtotime($action_outstanding->planned_at));?>&details=<?php echo $contact_details_for_calendar;?>%0D%0D<?php echo urlencode('http://baselist.herokuapp.com/companies/company?id='.$action_outstanding->company_id);?>%0D%0DAny changes made to this event are not updated in Baselist."target="_blank" rel="nofollow" style="margin-top:0; font-size:10px;">Add to Calendar</a></small></span>
+								<span class="label label-overdue" style="margin-left:10px;"><?php echo $planned_date_formatted ?> </span><span style="margin-top:0; margin-left:3px;"><small><a class="btn btn-default btn-xs add-to-calendar" href="http://www.google.com/calendar/event?action=TEMPLATE&text=<?php echo urlencode($action_types_array[$action_outstanding->action_type_id].' | '.$action_outstanding->company_name); ?>&dates=<?php echo date("Ymd\\THi00",strtotime($action_outstanding->planned_at));?>/<?php echo date("Ymd\\THi00\\Z",strtotime($action_outstanding->planned_at));?>&details=<?php echo $contact_details_for_calendar;?><?php echo urlencode('http://baselist.herokuapp.com/companies/company?id='.$action_outstanding->company_id);?>%0D%0DAny changes made to this event are not updated in Baselist. %0D%23baselist"target="_blank" rel="nofollow" style="margin-top:0; font-size:10px;">Add to Calendar</a></small></span>
 <!--CANCELLED BUTTON-->
 <?php $hidden = array('action_id' => $action_outstanding->action_id , 'user_id' => $current_user['id'] , 'action_do' => 'cancelled','outcome' => '' ,'company_id' => $company['id'],'campaign_id' => $campaign_id, ); echo form_open(site_url().'actions/edit', 'name="cancel_action"  class="cancel_action pull-right" style="margin-left:5px;" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action_outstanding->action_id.'" role="form"',$hidden); ?><button class="btn btn-danger btn-sm"><i class="fa fa-trash-o fa-sm"></i> </button>
 <?php echo form_close(); ?>
