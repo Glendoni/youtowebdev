@@ -61,19 +61,27 @@ class Campaigns_model extends MY_Model {
 		function get_all_private_campaigns($user_id)
 	{
 
-		$this->db->distinct();
-		$this->db->select('c.name,c.id,c.user_id,c.shared,count(distinct(t.company_id)) as campaigncount,c.created_at');
+				$this->db->distinct();
+		$this->db->select('c.name,c.id,c.user_id,u.name as searchcreatedby,u.image,c.shared, c.created_at');
 		$this->db->from('campaigns c');
+		$this->db->join('users u', 'c.user_id = u.id');
 		$this->db->join('targets t', 'c.id = t.campaign_id');
 		$this->db->join('companies comp', 't.company_id = comp.id');
-		$this->db->where('c.criteria IS NULL', null, false);
+		// Apply this to find saved searches only
+		$this->db->where('criteria IS NULL', null, false);
+		$this->db->where('u.active', 'True');
+		$this->db->where('c.shared', 'True');
+		$this->db->where('comp.active', 'True');
 		$this->db->where('c.user_id', $user_id);
-		$this->db->where("(c.eff_to IS NULL OR c.eff_to > '".date('Y-m-d')."')",null, false);
-		$this->db->group_by("1,2,3"); 
 		$this->db->order_by("c.created_at", "desc");
-
-		echo $query = $this->db->get();
+		//$this->db->limit(20);
+		$this->db->where("(c.eff_to IS NULL OR c.eff_to > '".date('Y-m-d')."')",null, false); 
+		$this->db->group_by("1,2,3,4,5");
+				$this->db->limit(20);
+ 
+		$query = $this->db->get();
 		return $query->result();
+
 	}
 
 	function get_campaigns_for_user($user_id)

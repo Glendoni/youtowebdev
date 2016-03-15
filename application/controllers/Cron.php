@@ -44,8 +44,43 @@ class Cron extends CI_Controller {
   }
     
     
+    //AUTOPILOT
+     //This should maybe once or twice a day -  Checks and adds email campaign list to database from AP RUN first
+    function create_email_campaign_listing() 
+    {
+      $this->Cron_model->create_email_campaign_listing();  
+    }
+    function update_email_events()  //Call this function every 5mins
+    {
+      $this->Cron_model->update_email_events();  
+    }
     
-     function ipp($lmt = 100 ,$oft= 0,$debug = false)
+    //CSV
+     function ippone($lmt = 100 ,$oft= 0,$debug = false)
+  {
+    $this->Cron_model->ipp($lmt,$oft,$debug);
+  }
+       function ipptwo($lmt = 200 ,$oft= 100,$debug = false)
+  {
+    $this->Cron_model->ipp($lmt,$oft,$debug);
+  }
+       function ippthree($lmt = 300 ,$oft= 200,$debug = false)
+  {
+    $this->Cron_model->ipp($lmt,$oft,$debug);
+  }
+       function ippfour($lmt = 400 ,$oft= 300,$debug = false)
+  {
+    $this->Cron_model->ipp($lmt,$oft,$debug);
+  }
+       function ippfive($lmt = 500 ,$oft= 400,$debug = false)
+  {
+    $this->Cron_model->ipp($lmt,$oft,$debug);
+  }
+       function ippsix($lmt = 600 ,$oft= 500,$debug = false)
+  {
+    $this->Cron_model->ipp($lmt,$oft,$debug);
+  }
+         function ippseven($lmt = 700 ,$oft= 600,$debug = false)
   {
     $this->Cron_model->ipp($lmt,$oft,$debug);
   }

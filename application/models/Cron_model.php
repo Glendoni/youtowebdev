@@ -1,6 +1,12 @@
 <?php
 class Cron_model extends CI_Model {
 
+    
+    
+function __construct() {
+		parent::__construct();
+           $this->load->helper('date');
+	}
 
 function connect_to_wordpress_database()  {
     
@@ -207,6 +213,7 @@ public function generate_segment_events()
         }else{
             $theoutcome = 1;
         }
+        
         //Check if the contact exist on the system in the contacts table.
         $contactidd =  $this->Marketing_model->getemailuserid($marketing['sent_email']); // tested ok.
         if($contactidd){ //if contact = true proceed
@@ -241,19 +248,17 @@ public function generate_segment_events()
             //if $get_next_num_two does not exist then add the entry event and details into the email_actions table
                 if($get_next_num_two != true){
                     $email_actions = array(
-                    'email_campaign_id'=> $campaignID,
-                    'sent_action_id' => $marketing['un_ids'], // 
-                    'contact_id' => $contactidd,
-                    'email_action_type' => $theoutcome,
-                    'action_time' => $marketing['event_time'],
-                    'created_at' => $marketing['date'],
-                    'created_by' => $created_by 
+                        'email_campaign_id'=> $campaignID,
+                        'sent_action_id' => $marketing['un_ids'], // 
+                        'contact_id' => $contactidd,
+                        'email_action_type' => $theoutcome,
+                        'action_time' => $marketing['event_time'],
+                        'created_at' => $marketing['date'],
+                        'created_by' => $created_by 
                     );
                     $this->db->insert('email_actions', $email_actions);   
                 }
             } 
-            
-            
             
         } //contactdd end
     } 
@@ -595,6 +600,261 @@ public function get_campaign_name($campaign)
                   
 	}
     
+    // AUTOPILOT NEW
+    public function update_email_events()  //Call this function every 5mins
+	{
+       
+        $query = $this->db->query("SELECT id,name, updated_at, sent_id FROM email_campaigns WHERE  date_sent >= '2016-03-01' AND id > 479 ORDER BY updated_at ASC LIMIT 1  ");
+
+        foreach ($query->result_array() as $row)
+        {
+            if($row['id']){
+
+                $now = time(); 
+                $human = unix_to_human($now, TRUE, eu);
+                $data = array(
+                    'updated_at' => $human
+                );
+
+                $this->db->where('id', $row['id']);
+                $this->db->update('email_campaigns', $data);  
+
+                 $this->getContactListDetails($row['id'],$row['sent_id'],$row['name']);
+            }
+       }
+
+    }
     
+    //This should run every hour or more -  Checks and adds email campaign list to database from AP RUN first
+    function create_email_campaign_listing()
+    {
+            
+        $objv =   $this->getCompanyHouseDetails("https://api2.autopilothq.com/v1/lists");
+        $i = 0;
+        $words = array('\'');
+
+        foreach($objv as $itemv  => $valuev){
+
+           foreach($valuev as $itemvr  => $valuevr){
+
+               //$title = str_replace($words, '',$valuevr['title']);
+                    $title =  htmlspecialchars($valuevr['title'], ENT_QUOTES);  
+                    $sql = "SELECT id,name,contact_list  from email_campaigns where name='".$title."'  LIMIT 1";
+                    $query = $this->db->query($sql);
+                    $row = $query->row(); 
+
+                        $numrows = $query->num_rows();
+                   if (!$numrows) {
+                       // insert new entry anme and contact list id
+                       // echo 'insert '. $valuevr['title'] . ' list id' .$valuevr['list_id'];
+                        $camp_id  = $this->get_last_row_id_email_campaign();        
+                        $now = time(); 
+                        $human = unix_to_human($now, TRUE, eu);
+                       
+                       $contactList = array(
+                        'id' => $camp_id,
+                        'name' => $title,
+                              'date_sent' => date('Y-m-d'),
+                            'updated_at' => $human , 
+                        'sent_id' => $valuevr['list_id']
+                        );
+                       
+                        $this->db->insert('email_campaigns',   $contactList);
+                       
+                     }elseif(!$row->sent_id){
+
+                        $contactList = array(
+                                     'sent_id' => $valuevr['list_id']
+                                );
+                       
+                        $this->db->where('name',$row->name);
+                        $this->db->update('email_campaigns',   $contactList);
+
+                    }else{
+                       //do do nthing
+
+                    }
+             }
+        }
+        
+    }
+    
+    function get_last_row_id_email_campaign(){
+        
+        $query = $this->db->query("SELECT id from email_campaigns ORDER BY id DESC LIMIT 1");
+        $row = $query->row(); 
+        return $row->id+1;
+    }
+    
+    public function getContactListDetails($campaign_id = 480,$contact_list = "contactlist_07D36C5F-DFF1-4606-B34E-7137BECC8870",$campaign_title = "MCU: Mar 2016"){
+        
+        $query = $this->db->query("SELECT id from email_actions ORDER BY id DESC LIMIT 1");
+        $row = $query->row(); 
+        $last_row_id =  $row->id;
+
+        $obj = $this->test('https://api2.autopilothq.com/v1/list/'.$contact_list.'/contacts/');
+
+        $objCont = $obj['contacts'] ;
+         foreach($objCont as $objr =>$item ){
+
+            $event = 3;
+
+             $objMailR = $item['mail_received'];
+             foreach($objMailR as $itemr => $valuedr  ){
+                $entDate = date("Y-m-d H:i:s", (substr($valuer, 0, 10)));
+            };
+            $objMailO= $item['mail_opened'];
+             foreach($objMailO as $itemo => $valueo  ){
+                 $entDate = date("Y-m-d H:i:s", (substr($valueo, 0, 10)));
+                 $event = 1;
+            };  
+
+             $objMailC= $item['mail_clicked'];
+             foreach($objMailC as $itemc => $valuec  ){
+                $entDate = date("Y-m-d H:i:s", (substr($valuec, 0, 10)));
+                 $event = 2;
+            }; 
+             $objMailU = $item['mail_unsubscribed'];
+             foreach($objMailU as $itemu => $valueu  ){
+
+                 $entDate = date("Y-m-d H:i:s", (substr($valueu, 0, 10)));
+                  $event = 4;
+            };
+              $output[] =  '<h2>Page Visits</h2>';
+             $pageVitits = $item['anywhere_page_visits'];
+             foreach($pageVitits as $itempv => $valuepv  ){
+
+            };
+
+            
+             $campaign_name = $valuevr['campaign_name'];
+
+               $campaign_name_exist =  $this->check_campaign_ref($campaign_title);
+            $check_if_email_exist  = $this->getemailuserid($item['Email']);
+
+           if($check_if_email_exist && $campaign_title  != 'Removed Via Baselist' &&   $event != 3) {
+                                                            
+               
+                $sent_email = $item['Email'];
+                $email_campaign_id = $this->get_campaign_id($campaign_title);
+              if($email_campaign_id)   $companyFinder = $this->companyFinder($check_if_email_exist ,$email_campaign_id ,$event) ;                                                               
+
+                        $contactList = array(
+                            'id' => $last_row_id++,
+                            'email_campaign_id' => $email_campaign_id,
+                            'sent_action_id' => $contact_list,
+                            'contact_id' => $check_if_email_exist , 
+                            'email_action_type' => $event,
+                            'action_time' => $entDate,
+                            'created_by' => 1
+                        );
+                            $this->db->insert('email_actions',   $contactList);                    
+           }
+        }
+    }
+     
+    //find the company id baised on the campaign name and insert FK into  the emails action table
+    public function companyFinder($contactidd,$campaignID,$event)
+    {
+          $sql =  "SELECT email_campaign_id FROM email_actions WHERE contact_id=".$contactidd." AND email_campaign_id=".$campaignID." AND email_action_type=".$event."  ";
+            $querye = $this->db->query($sql);
+      return  $querye->num_rows();  //tested ok 
+    }
+
+    public function get_campaign_id($campaign)
+    { //checks campaign name and if exist returns the ID 
+        $words  = array('\'');
+        $campaign =  str_replace($words, '', $campaign);
+
+        $sql = "SELECT id FROM email_campaigns WHERE name='".$campaign."'  ";
+        $query = $this->db->query($sql);
+        foreach ($query->result_array() as $row){
+            return $row['id'];
+        }
+        return false;          
+    }
+
+    public function check_campaign_ref($campaign_name)
+    {
+         $words  = array('\'');
+        $campaign_name =  str_replace($words, '', $campaign_name);
+           $queryone = $this->db->query("SELECT sent_id FROM email_campaigns WHERE name='".$campaign_name."' "); 
+        if($queryone->num_rows()){
+            return false;
+        }
+        return true;
+    }
+    
+    public function getemailuserid($email)
+    {
+        $sql =  "SELECT * FROM contacts WHERE email='".$email."' LIMIT 1 ";
+        $query = $this->db->query($sql);
+
+        foreach ($query->result_array() as $row){
+            return $row['id'];
+        }
+        return false;
+    }
+        
+    public function getCompanyHouseDetails($url = 0) 
+	{
+ 
+            $server_output = array();
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL,$url);
+            curl_setopt($ch, CURLOPT_GET, 2);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            $headers = array();
+            $headers[] = 'autopilotapikey: ed278f3d19a5453fb807125aa945a81a';
+            $headers[] = 'Content-Type: application/json';
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+            $server_output = curl_exec ($ch);
+            $result  = json_decode($server_output, true);
+             return  $result; 
+            curl_close ($ch); 
+         
+         
+         
+     }
+    
+    
+    
+    
+    public function test($url = 0){
+        
+        
+        $curl = curl_init();
+
+            curl_setopt_array($curl, array(
+              CURLOPT_URL => $url,
+              CURLOPT_RETURNTRANSFER => true,
+              CURLOPT_ENCODING => "",
+              CURLOPT_MAXREDIRS => 10,
+              CURLOPT_TIMEOUT => 30,
+              CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+              CURLOPT_CUSTOMREQUEST => "GET",
+              CURLOPT_HTTPHEADER => array(
+                "autopilotapikey: ed278f3d19a5453fb807125aa945a81a",
+                "cache-control: no-cache",
+                "content-type: application/json",
+                "postman-token: 57861545-5cf1-95d1-c82d-035b6fc32a51"
+              ),
+            ));
+
+            $response = curl_exec($curl);
+
+
+            $err = curl_error($curl);
+
+            curl_close($curl);
+
+            if ($err) {
+              echo "cURL Error #:" . $err;
+            } else {
+              $result  = json_decode($response, true);
+                         return  $result; 
+                }
+    
+    }
     
 }
