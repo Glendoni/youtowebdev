@@ -645,7 +645,7 @@ public function get_campaign_name($campaign)
                                         
                                        //echo $actionsLastNum .' -- '.$itemr. ' -- '.$entDate;
                                         //    echo '<br>';
-                                        print_r($contactList) 
+                                        print_r($contactList) ;
                                     }
                                  }
                           }
