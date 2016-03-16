@@ -802,34 +802,44 @@ public function get_campaign_name($campaign)
     { //checks campaign name and if exist returns the ID 
 
         $sql = "SELECT id FROM email_campaigns WHERE sent_id='".$campaign."'  ";
-        $query = $this->db->query($sql);
-         foreach ($query->result_array() as $row)
-         {
-            return $row['id'];
-         }
-        return false;          
+        $query = $this->db->query($sql);    
+            if ($query->num_rows() > 0){
+                   $row = $query->row(); 
+                   return $row->id;
+                }else{
+                return false;
+            }         
     }
     
     public function check_campaign_ref($campaign_name)
     {
         $queryone = $this->db->query("SELECT sent_id FROM email_campaigns WHERE sent_id='".$campaign_name."' LIMIT 1 "); 
-        if($queryone->num_rows()){
-            return false; 
-        }
-        return true;
+              
+            if ($query->num_rows() > 0){
+                   $row = $query->row(); 
+                   return false;
+        
+                }else{
+                return false;
+            }
         
     }
     
     public function getemailuserid($email)
-{
+    {
     $sql =  "SELECT * FROM contacts WHERE email='".$email."' LIMIT 1 ";
-    $query = $this->db->query($sql);
-  
-    foreach ($query->result_array() as $row){
-        return $row['id'];
-    }
-        return false;
+    $query = $this->db->query($sql);     
+            if ($query->num_rows() > 0){
+                   $row = $query->row(); 
+                   return $row->id;
+        
+                }else{
+                return false;
+            }
+        
+            
 }
+ 
     
 
 // NEW AUTOPILOT END
