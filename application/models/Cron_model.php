@@ -601,7 +601,7 @@ public function get_campaign_name($campaign)
 	}
     
 // NEW AUTOPILOT START
-    function get_contact_list($bookmark = true) //inserts email campaign listing
+    public function get_contact_list($bookmark = false) //inserts email campaign listing
     {
         
         $objv =   $this->getCompanyHouseDetails("https://api2.autopilothq.com/v1/contacts/".$bookmark);
