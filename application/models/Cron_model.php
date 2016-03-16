@@ -601,13 +601,13 @@ public function get_campaign_name($campaign)
 	}
     
 // NEW AUTOPILOT START
-    public function get_contact_list($bookmark = true) //inserts email campaign listing
+    public function get_contact_list($bookmark = '') //inserts email campaign listing
     {
         
      
         $objv =   $this->getCompanyHouseDetails("https://api2.autopilothq.com/v1/contacts/".$bookmark);
         
-           echo  'This is get_contact_list after initial objv';
+           echo  'This is get_contact_list after initial objv change to false';
         exit();
         $i = 0;
         $actionsLastNumId = $camp_id  = $this->get_last_row_id_email_campaign();  
@@ -798,7 +798,8 @@ public function get_campaign_name($campaign)
     
     
      public function getCompanyHouseDetails($url = 0) 
-	{$curl = curl_init();
+	{
+         $curl = curl_init();
         curl_setopt_array($curl, array(
             CURLOPT_URL => $url,
             CURLOPT_RETURNTRANSFER => true,
