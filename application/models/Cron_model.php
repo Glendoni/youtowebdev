@@ -607,8 +607,6 @@ public function get_campaign_name($campaign)
      
         $objv =   $this->getCompanyHouseDetails("https://api2.autopilothq.com/v1/contacts/".$bookmark);
         
-           echo  'This is get_contact_list after initial objv change to false';
-        exit();
         $i = 0;
         $actionsLastNumId = $camp_id  = $this->get_last_row_id_email_campaign();  
         $bookmark = $objv;
@@ -643,10 +641,11 @@ public function get_campaign_name($campaign)
                                         );
                                         
                                        // echo $entDate;
-                                       $this->db->insert('email_campaigns',   $contactList);
-                                       echo $actionsLastNum .' -- '.$itemr. ' -- '.$entDate;
+                                       //$this->db->insert('email_campaigns',   $contactList);
+                                        
+                                       //echo $actionsLastNum .' -- '.$itemr. ' -- '.$entDate;
                                         //    echo '<br>';
-                                        //print_r($contactList) 
+                                        print_r($contactList) 
                                     }
                                  }
                           }
@@ -712,7 +711,7 @@ public function get_campaign_name($campaign)
                                             'action_time' => $entDate,
                                             'created_by' => 1
                                         );
-                                        $this->db->insert('email_actions',   $contactList);   
+                                        //$this->db->insert('email_actions',   $contactList);   
                                     }                                     
                                 }   
                             }
@@ -845,11 +844,5 @@ public function get_campaign_name($campaign)
          return  $result; 
         curl_close ($ch); 
          
-     }
-
-
-
-
-
-   
+     }   
 }
