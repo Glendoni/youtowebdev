@@ -813,33 +813,19 @@ public function get_campaign_name($campaign)
     public function get_campaign_id($campaign)
     { //checks campaign name and if exist returns the ID 
 
-        //$sql = "SELECT id FROM email_campaigns WHERE sent_id='".$campaign."'  ";
-        $sql = "SELECT id FROM email_campaigns   ";
-       // $query = $this->db->query($sql);  
-        //$row = $query->row(); 
-            //if ($query->num_rows() > 0){
-       // $this->load->database();           
-              //     return $row->id;
-                //}
-               $this->db->select('id');
-         $this->db->from('email_campaigns');
-    $this->db->where('sent_id', $campaign );
-        $this->db->limit(1);
-        $queryf = $this->db->get();
+        $sql = "SELECT id FROM email_campaigns WHERE sent_id='".$campaign."'  ";
+$query = $this->db->query($sql);
+        
+        foreach ($query->result_array() as $row)
+        {
+            return $row['id'];
 
-    if ($queryf->num_rows())
-    {
-        $rowf = $queryf->row_array();
-        return  $rowf['id'];
-    }
+        }
+ return false;
         
         
-        
-        
-        
-        
-        return false;
-        
+       
+        $query->free_result();
     
         
         
