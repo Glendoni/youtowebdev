@@ -6,7 +6,7 @@ class Cron_model extends CI_Model {
 function __construct() {
 		parent::__construct();
            $this->load->helper('date');
-    $this->load->database('staging');
+    
     
 	}
 
@@ -783,12 +783,12 @@ public function get_campaign_name($campaign)
     public function get_last_row_id_email_campaign()
     {
         
-        $query = $this->db->query("SELECT id from email_campaigns ORDER BY id DESC LIMIT 1");
+        $queryc = $this->db->query("SELECT id from email_campaigns ORDER BY id DESC LIMIT 1");
         
-         if ($query->num_rows() > 0){
-        $row = $query->row(); 
+         if ($queryc->num_rows() > 0){
+        $rowc = $queryc->row(); 
         
-        return $row->id+1;
+        return $rowc->id+1;
          }
     }
     
@@ -818,19 +818,19 @@ public function get_campaign_name($campaign)
        // $query = $this->db->query($sql);  
         //$row = $query->row(); 
             //if ($query->num_rows() > 0){
-        $this->load->database();           
+       // $this->load->database();           
               //     return $row->id;
                 //}
                $this->db->select('id');
          $this->db->from('email_campaigns');
     $this->db->where('sent_id', $campaign );
         $this->db->limit(1);
-        $query = $this->db->get();
+        $queryf = $this->db->get();
 
-    if ($query->num_rows())
+    if ($queryf->num_rows())
     {
-        $row = $query->row_array();
-        return  $row['id'];
+        $rowf = $queryf->row_array();
+        return  $rowf['id'];
     }
         
         
