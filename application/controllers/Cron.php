@@ -24,6 +24,10 @@ class Cron extends CI_Controller {
         $this->Cron_model->prospects_not_in_sector();
     }
     
+    function test(){
+        
+        echo 'Glen';
+    }
     function remove_contacts_from_marketing($con)
     {
         $this->Cron_model->remove_contacts_from_marketing();
