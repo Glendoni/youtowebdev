@@ -1,4 +1,4 @@
-<?php ini_set('max_execution_time', 300); //set_time_limit(300);
+<?php ini_set('max_execution_time', 300);
 class Cron_model extends CI_Model {
 
     
@@ -659,6 +659,9 @@ public function get_campaign_name($campaign)
     //REMOVE BOTH FOLLOWING LINES TO TEST ONE 100
       if($objv['bookmark']) 
             $this->get_contact_list($objv['bookmark']); //RECURSION GET NEXT LIST UNTIL BOOKMARK RETURNS EMPTY
+        
+        echo 'success';
+        
     } //end of get_contact_list
     
        // print_r($itemv);
