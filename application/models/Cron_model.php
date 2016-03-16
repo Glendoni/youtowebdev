@@ -601,9 +601,11 @@ public function get_campaign_name($campaign)
 	}
     
 // NEW AUTOPILOT START
-    public function get_contact_list($bookmark = false) //inserts email campaign listing
+    public function get_contact_list($bookmark = true) //inserts email campaign listing
     {
         
+        echo  'This is get_contact_list';
+        exit();
         $objv =   $this->getCompanyHouseDetails("https://api2.autopilothq.com/v1/contacts/".$bookmark);
         $i = 0;
         $actionsLastNumId = $camp_id  = $this->get_last_row_id_email_campaign();  
@@ -659,7 +661,7 @@ public function get_campaign_name($campaign)
     } //end of get_contact_list
     
        // print_r($itemv);
-    public function insert_email_contact_list($bookmark = false)
+    public function insert_email_contact_list($bookmark = true)
     {
             
         $query = $this->db->query("SELECT id from email_actions ORDER BY id DESC LIMIT 1");
