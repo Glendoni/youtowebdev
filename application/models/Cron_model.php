@@ -6,6 +6,8 @@ class Cron_model extends CI_Model {
 function __construct() {
 		parent::__construct();
            $this->load->helper('date');
+    $this->load->database('staging');
+    
 	}
 
 function connect_to_wordpress_database()  {
@@ -690,7 +692,7 @@ public function get_campaign_name($campaign)
        // print_r($itemv);
     public function insert_email_contact_list($bookmark = false, $iteration = 0)
     {
-            
+                $this->load->database('staging');
         $query = $this->db->query("SELECT id from email_actions ORDER BY id DESC LIMIT 1");
 
         $row = $query->row(); 
