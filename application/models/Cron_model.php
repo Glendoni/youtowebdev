@@ -692,7 +692,7 @@ public function get_campaign_name($campaign)
        // print_r($itemv);
     public function insert_email_contact_list($bookmark = false, $iteration = 0)
     {
-              
+              $this->load->database('remote');
         $query = $this->db->query("SELECT id from email_actions ORDER BY id DESC LIMIT 1");
 
         $row = $query->row(); 
