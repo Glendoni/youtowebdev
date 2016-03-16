@@ -46,13 +46,13 @@ class Cron extends CI_Controller {
     
     //AUTOPILOT
      //This should maybe once or twice a day -  Checks and adds email campaign list to database from AP RUN first
-    function create_email_campaign_listing() 
+    function get_contact_list() 
     {
-      $this->Cron_model->create_email_campaign_listing();  
+      $this->Cron_model->get_contact_list();  
     }
-    function update_email_events()  //Call this function every 5mins
+    function insert_email_contact_list()  //Call this function every 5mins
     {
-      $this->Cron_model->update_email_events();  
+      $this->Cron_model->insert_email_contact_list();  
     }
     
     //CSV
