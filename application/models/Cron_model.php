@@ -818,7 +818,7 @@ public function get_campaign_name($campaign)
        // $query = $this->db->query($sql);  
         //$row = $query->row(); 
             //if ($query->num_rows() > 0){
-                   
+        $this->load->database();           
               //     return $row->id;
                 //}
                $this->db->select('id');
