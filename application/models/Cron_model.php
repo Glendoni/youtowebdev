@@ -692,7 +692,7 @@ public function get_campaign_name($campaign)
        // print_r($itemv);
     public function insert_email_contact_list($bookmark = false, $iteration = 0)
     {
-                $this->load->database('staging');
+              
         $query = $this->db->query("SELECT id from email_actions ORDER BY id DESC LIMIT 1");
 
         $row = $query->row(); 
@@ -813,14 +813,36 @@ public function get_campaign_name($campaign)
     public function get_campaign_id($campaign)
     { //checks campaign name and if exist returns the ID 
 
-        $sql = "SELECT id FROM email_campaigns WHERE sent_id='".$campaign."'  ";
-        $query = $this->db->query($sql);  
-        $row = $query->row(); 
-            if ($query->num_rows() > 0){
+        //$sql = "SELECT id FROM email_campaigns WHERE sent_id='".$campaign."'  ";
+        $sql = "SELECT id FROM email_campaigns   ";
+       // $query = $this->db->query($sql);  
+        //$row = $query->row(); 
+            //if ($query->num_rows() > 0){
                    
-                   return $row->id;
-                }
-                return false;
+              //     return $row->id;
+                //}
+               $this->db->select('id');
+         $this->db->from('email_campaigns');
+    $this->db->where('sent_id', $campaign );
+        $this->db->limit(1);
+        $query = $this->db->get();
+
+    if ( $query->num_rows() > 0 )
+    {
+        $row = $query->row_array();
+        return  $row['id'];
+    }
+        
+        
+        
+        
+        
+        
+        return false;
+        
+    
+        
+        
                    
     }
     
