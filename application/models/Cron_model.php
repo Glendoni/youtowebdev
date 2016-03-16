@@ -782,19 +782,29 @@ public function get_campaign_name($campaign)
     {
         
         $query = $this->db->query("SELECT id from email_campaigns ORDER BY id DESC LIMIT 1");
+        
+         if ($query->num_rows() > 0){
         $row = $query->row(); 
+        
         return $row->id+1;
+         }
     }
     
     
     //find the company id baised on the campaign name and insert FK into  the emails action table
     //contact id, campaign identifier, email event
-    public function compaignFinder($contactidd,$campaignID,$event)
+    public function compaignFinder($contactid,$campaignID,$event)
     {
         
-        $sql =  "SELECT email_campaign_id FROM email_actions WHERE contact_id=".$contactidd." AND sent_action_id='".$campaignID."' AND email_action_type=".$event."  ";
+        $sql =  "SELECT email_campaign_id FROM email_actions WHERE contact_id=".$contactid." AND sent_action_id='".$campaignID."' AND email_action_type=".$event."  ";
         $querye = $this->db->query($sql);
-        return  $querye->num_rows();  //tested ok 
+       
+        if ($querye->num_rows() > 0){
+        return  true;  //tested ok 
+            
+        }
+        
+        return false;
         
     }
     
@@ -802,9 +812,10 @@ public function get_campaign_name($campaign)
     { //checks campaign name and if exist returns the ID 
 
         $sql = "SELECT id FROM email_campaigns WHERE sent_id='".$campaign."'  ";
-        $query = $this->db->query($sql);    
+        $query = $this->db->query($sql);  
+        $row = $query->row(); 
             if ($query->num_rows() > 0){
-                   $row = $query->row(); 
+                   
                    return $row->id;
                 }
                 return false;
@@ -814,9 +825,9 @@ public function get_campaign_name($campaign)
     public function check_campaign_ref($campaign_name)
     {
         $query = $this->db->query("SELECT sent_id FROM email_campaigns WHERE sent_id='".$campaign_name."' LIMIT 1 "); 
-              
-            if ($query->num_rows() > 0){
                    $row = $query->row(); 
+            if ($query->num_rows() > 0){
+              
                    return false;
         
                 }
@@ -825,10 +836,11 @@ public function get_campaign_name($campaign)
     
     public function getemailuserid($email)
     {
-    $sql =  "SELECT * FROM contacts WHERE email='".$email."' LIMIT 1 ";
-    $query = $this->db->query($sql);     
+    $sql =  "SELECT id FROM contacts WHERE email='".$email."' LIMIT 1 ";
+    $query = $this->db->query($sql); 
+         $row = $query->row(); 
             if ($query->num_rows() > 0){
-                   $row = $query->row(); 
+                  
                    return $row->id;
         
                 }else{
