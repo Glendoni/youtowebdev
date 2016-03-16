@@ -797,7 +797,7 @@ public function get_campaign_name($campaign)
     //contact id, campaign identifier, email event
     public function compaignFinder($contactid,$campaignID,$event)
     {
-        
+        $querye = array();
         $sql =  "SELECT email_campaign_id FROM email_actions WHERE contact_id=".$contactid." AND sent_action_id='".$campaignID."' AND email_action_type=".$event."  ";
         $querye = $this->db->query($sql);
        
@@ -812,20 +812,21 @@ public function get_campaign_name($campaign)
     
     public function get_campaign_id($campaign)
     { //checks campaign name and if exist returns the ID 
-
+$queryc = array();
         $sql = "SELECT id FROM email_campaigns WHERE sent_id='".$campaign."'  ";
-$query = $this->db->query($sql);
+$queryc = $this->db->query($sql);
         
-        foreach ($query->result_array() as $row)
+        foreach ($queryc->result_array() as $row)
         {
             return $row['id'];
 
         }
+        $queryc->free_result();
  return false;
         
         
        
-        $query->free_result();
+        
     
         
         
