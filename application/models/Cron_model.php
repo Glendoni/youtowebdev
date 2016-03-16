@@ -667,6 +667,9 @@ public function get_campaign_name($campaign)
         $row = $query->row(); 
         $last_row_id =  $row->id;
         $objv =   $this->getCompanyHouseDetails("https://api2.autopilothq.com/v1/contacts/".$bookmark);
+        
+        exit();
+        
         $i = 0;
         $actionsLastNumId = $camp_id  = $this->get_last_row_id_email_campaign();  
         $bookmark = $objv;
