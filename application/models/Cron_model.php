@@ -827,7 +827,7 @@ public function get_campaign_name($campaign)
         $this->db->limit(1);
         $query = $this->db->get();
 
-    if ( $query->num_rows() > 0 )
+    if ($query->num_rows())
     {
         $row = $query->row_array();
         return  $row['id'];
@@ -850,7 +850,7 @@ public function get_campaign_name($campaign)
     {
         $query = $this->db->query("SELECT sent_id FROM email_campaigns WHERE sent_id='".$campaign_name."' LIMIT 1 "); 
                    $row = $query->row(); 
-            if ($query->num_rows() > 0){
+            if ($query->num_rows()){
               
                    return false;
         
