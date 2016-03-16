@@ -806,23 +806,21 @@ public function get_campaign_name($campaign)
             if ($query->num_rows() > 0){
                    $row = $query->row(); 
                    return $row->id;
-                }else{
+                }
                 return false;
-            }         
+                   
     }
     
     public function check_campaign_ref($campaign_name)
     {
-        $queryone = $this->db->query("SELECT sent_id FROM email_campaigns WHERE sent_id='".$campaign_name."' LIMIT 1 "); 
+        $query = $this->db->query("SELECT sent_id FROM email_campaigns WHERE sent_id='".$campaign_name."' LIMIT 1 "); 
               
             if ($query->num_rows() > 0){
                    $row = $query->row(); 
                    return false;
         
-                }else{
-                return false;
-            }
-        
+                }
+                return true;
     }
     
     public function getemailuserid($email)
