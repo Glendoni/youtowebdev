@@ -601,13 +601,15 @@ public function get_campaign_name($campaign)
 	}
     
 // NEW AUTOPILOT START
-    public function get_contact_list($bookmark = '') //inserts email campaign listing
+    public function get_contact_list($bookmark = false, $iteration = 0) //inserts email campaign listing
     {
         
-     
+     $bookmark = $bookmark ? $bookmark : file_get_contents('autopilotBook.txt');
         $objv =   $this->getCompanyHouseDetails("https://api2.autopilothq.com/v1/contacts/".$bookmark);
         
-        $i = 0;
+        echo $bookmark;
+        
+        $i = $iteration;
         $actionsLastNumId = $camp_id  = $this->get_last_row_id_email_campaign();  
         $bookmark = $objv;
             // THIS IS WHERE THE SHIT HAPPENS
@@ -617,6 +619,7 @@ public function get_campaign_name($campaign)
                        foreach($mail as $mailItem => $value){
                            $objMailR = $item[$mailItem];
                            foreach($objMailR as $itemr => $valuedr  ){
+                               
                              if($itemr){
                                    $entDate = date("Y-m-d", (substr($valuedr, 0, 10)));
                                 //echo  $this->check_campaign_ref($itemr) ? 'No ' : 'YEs';
@@ -641,42 +644,64 @@ public function get_campaign_name($campaign)
                                         );
                                         
                                        // echo $entDate;
-                                       //$this->db->insert('email_campaigns',   $contactList);
+                                       $this->db->insert('email_campaigns', $contactList);
                                         
                                        //echo $actionsLastNum .' -- '.$itemr. ' -- '.$entDate;
                                         //    echo '<br>';
-                                        print_r($contactList) ;
+                                        //print_r($contactList) ;
                                     }
                                  }
                           }
+                               
+                               
                         }   
-                           
+                         
                        }
+                     
                    }
+                
+                    $i++; 
+                
+      
+                //echo $objv['bookmark'];
+             break;
             }
          
-    
+    echo $i;
     //REMOVE BOTH FOLLOWING LINES TO TEST ONE 100
-      if($objv['bookmark']) 
-            $this->get_contact_list($objv['bookmark']); //RECURSION GET NEXT LIST UNTIL BOOKMARK RETURNS EMPTY
         
-        echo 'success';
+        if($i == 6){
+            
+            file_put_contents('autopilotBook.txt',$objv['bookmark']);
+        }
+        
+        if(!$objv['bookmark'])
+             file_put_contents('autopilotBook.txt','');
+        
+        if($i <6)
+       if($objv['bookmark']) 
+            $this->get_contact_list($objv['bookmark'],$i); //RECURSION GET NEXT LIST UNTIL BOOKMARK RETURNS EMPTY
+        
+       
         
     } //end of get_contact_list
     
+ 
        // print_r($itemv);
-    public function insert_email_contact_list($bookmark = true)
+    public function insert_email_contact_list($bookmark = false, $iteration = 0)
     {
             
         $query = $this->db->query("SELECT id from email_actions ORDER BY id DESC LIMIT 1");
 
         $row = $query->row(); 
         $last_row_id =  $row->id;
+        
+         $bookmark = $bookmark ? $bookmark : file_get_contents('autopilotBook.txt');
         $objv =   $this->getCompanyHouseDetails("https://api2.autopilothq.com/v1/contacts/".$bookmark);
         
-        exit();
         
-        $i = 0;
+        
+        $i = $iteration;
         $actionsLastNumId = $camp_id  = $this->get_last_row_id_email_campaign();  
         $bookmark = $objv;
             // THIS IS WHERE THE SHIT HAPPENS
@@ -702,9 +727,9 @@ public function get_campaign_name($campaign)
     
                              $campaignID = $check_if_email_exist.'-'.$value.'-'.$itemr.'-'.$valuedr;                       //email id,event id, batch number, unix date          
                              
-            if(!$this->compaignFinder($check_if_email_exist,$campaignID,$value) && $email_campaign_id != false){    
+                                if(!$this->compaignFinder($check_if_email_exist,$campaignID,$value) && $email_campaign_id != false){    
                                  //email id,event id, batch number, unix date   
-                                        echo '<h1>'.$email_campaign_id.'</h1>'.$itemr.'-'.$valuedr.' ---- '.$entDate.'<br>'.$item['Email'].' <br> contact ID'. $check_if_email_exist. ' <br> Last inserted ID ' .$last_row_id++ . '<br> envent ID - '.$value ;                         
+                                       // echo '<h1>'.$email_campaign_id.'</h1>'.$itemr.'-'.$valuedr.' ---- '.$entDate.'<br>'.$item['Email'].' <br> contact ID'. $check_if_email_exist. ' <br> Last inserted ID ' .$last_row_id++ . '<br> envent ID - '.$value ;                         
                                         $contactList = array(
                                             'id' => $last_row_id++,
                                             'email_campaign_id' =>  $email_campaign_id,
@@ -714,7 +739,7 @@ public function get_campaign_name($campaign)
                                             'action_time' => $entDate,
                                             'created_by' => 1
                                         );
-                                        //$this->db->insert('email_actions',   $contactList);   
+                                        $this->db->insert('email_actions',   $contactList);   
                                     }                                     
                                 }   
                             }
@@ -733,10 +758,23 @@ public function get_campaign_name($campaign)
                        */
                      // echo $bookmark. '<br>';
             }
+                
+                   $i++; 
+                //echo $objv['bookmark'];
+             break;
         }
-    
+       // echo $i;
+         if($i == 4){
+            
+            file_put_contents('autopilotBook.txt',$objv['bookmark']);
+        }
+        if(!$objv['bookmark'])
+             file_put_contents('autopilotBook.txt','');
+        
+        if($i <4)
+       if($objv['bookmark']) 
     if($objv['bookmark'])
-          $this->insert_email_contact_list($objv['bookmark']); //RECURSION GET NEXT LIST UNTIL BOOKMARK RETURNS EMPTY
+          $this->insert_email_contact_list($objv['bookmark'],$i); //RECURSION GET NEXT LIST UNTIL BOOKMARK RETURNS EMPTY
     
     }
     
@@ -806,8 +844,7 @@ public function get_campaign_name($campaign)
             CURLOPT_URL => $url,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 264,
+            CURLOPT_TIMEOUT => 30,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "GET",
             CURLOPT_HTTPHEADER => array(
