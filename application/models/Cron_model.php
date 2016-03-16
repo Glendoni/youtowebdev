@@ -1,4 +1,4 @@
-<?php
+<?php set_time_limit(300);
 class Cron_model extends CI_Model {
 
     
