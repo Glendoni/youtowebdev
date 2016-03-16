@@ -607,7 +607,7 @@ public function get_campaign_name($campaign)
      
         $objv =   $this->getCompanyHouseDetails("https://api2.autopilothq.com/v1/contacts/".$bookmark);
         
-           echo  'This is get_contact_list';
+           echo  'This is get_contact_list after initial objv';
         exit();
         $i = 0;
         $actionsLastNumId = $camp_id  = $this->get_last_row_id_email_campaign();  
