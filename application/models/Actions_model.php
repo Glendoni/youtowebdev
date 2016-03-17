@@ -97,6 +97,7 @@ function get_marketing_actions_two($user_id)
     
     AND ec.name IS NOT null
     AND ea.email_action_type !=4
+      AND ec.name !=pending
    
 ORDER BY ea.action_time DESC
     limit 200";

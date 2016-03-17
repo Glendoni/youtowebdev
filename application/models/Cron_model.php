@@ -606,13 +606,13 @@ public function get_campaign_name($campaign)
     public function get_contact_list($bookmark = false, $iteration = 0) //inserts email campaign listing
     {
         
-     $bookmark = $bookmark ? $bookmark : file_get_contents('autopilotBook.txt');
+     $bookmark = $bookmark ? $bookmark : file_get_contents('autopilotBookEc.txt');
         $objv =   $this->getCompanyHouseDetails("https://api2.autopilothq.com/v1/contacts/".$bookmark);
         
         echo $bookmark;
         
         $i = $iteration;
-        $actionsLastNumId = $camp_id  = $this->get_last_row_id_email_campaign();  
+       // $actionsLastNumId = $camp_id  = $this->get_last_row_id_email_campaign();  
         $bookmark = $objv;
             // THIS IS WHERE THE SHIT HAPPENS
             foreach($objv as $itemv  => $valuev){
@@ -637,7 +637,6 @@ public function get_campaign_name($campaign)
                                         $now = time(); 
                                         $human = unix_to_human($now, TRUE, eu);
                                         $contactList = array(
-                                            'id' => $actionsLastNum,
                                             'sent_id' => $itemr,
                                             'date_sent' => $entDate,
                                             'updated_at' => $human,
@@ -646,7 +645,12 @@ public function get_campaign_name($campaign)
                                         );
                                         
                                        // echo $entDate;
-                                       $this->db->insert('email_campaigns', $contactList);
+                                        $this->db->insert('email_campaigns', $contactList);
+                                //file_put_contents('mailToNick.txt',$contactList['sent_id'],FILE_APPEND);
+                                        
+                                        //echo 'New contact list '.$contactList['sent_id'];
+                                        
+                                         file_put_contents('mailToNick.txt',$itemr.PHP_EOL,FILE_APPEND);
                                         
                                        //echo $actionsLastNum .' -- '.$itemr. ' -- '.$entDate;
                                         //    echo '<br>';
@@ -672,15 +676,15 @@ public function get_campaign_name($campaign)
     echo $i;
     //REMOVE BOTH FOLLOWING LINES TO TEST ONE 100
         
-        if($i == 6){
+        if($i == 14){
             
-            file_put_contents('autopilotBook.txt',$objv['bookmark']);
+            file_put_contents('autopilotBookEc.txt',$objv['bookmark']);
         }
         
         if(!$objv['bookmark'])
-             file_put_contents('autopilotBook.txt','');
+             file_put_contents('autopilotBookEc.txt','');
         
-        if($i <6)
+        if($i <14)
        if($objv['bookmark']) 
             $this->get_contact_list($objv['bookmark'],$i); //RECURSION GET NEXT LIST UNTIL BOOKMARK RETURNS EMPTY
         
@@ -692,15 +696,9 @@ public function get_campaign_name($campaign)
        // print_r($itemv);
     public function insert_email_contact_list($bookmark = false, $iteration = 0)
     {
-        $query = $this->db->query("SELECT id from email_actions ORDER BY id DESC LIMIT 1");
-
-        $row = $query->row(); 
-        $last_row_id =  $row->id;
         
-         $bookmark = $bookmark ? $bookmark : file_get_contents('autopilotBook.txt');
+         $bookmark = $bookmark ? $bookmark : file_get_contents('autopilotBookEa.txt');
         $objv =   $this->getCompanyHouseDetails("https://api2.autopilothq.com/v1/contacts/".$bookmark);
-        
-        
         
         $i = $iteration;
         $actionsLastNumId = $camp_id  = $this->get_last_row_id_email_campaign();  
@@ -726,13 +724,16 @@ public function get_campaign_name($campaign)
                                  
                                      $check_if_email_exist  = $this->getemailuserid($item['Email']);  
     
-                             $campaignID = $check_if_email_exist.'-'.$value.'-'.$itemr.'-'.$valuedr;                       //email id,event id, batch number, unix date          
+                             $campaignID = $check_if_email_exist.'-'.$value.'-'.$email_campaign_id.'-'.$valuedr;             
+                                     //email id,event id, no longer batch number replaced with campaign id, unix date          
                              
                                 if(!$this->compaignFinder($check_if_email_exist,$campaignID,$value) && $email_campaign_id != false){    
                                  //email id,event id, batch number, unix date   
                                        // echo '<h1>'.$email_campaign_id.'</h1>'.$itemr.'-'.$valuedr.' ---- '.$entDate.'<br>'.$item['Email'].' <br> contact ID'. $check_if_email_exist. ' <br> Last inserted ID ' .$last_row_id++ . '<br> envent ID - '.$value ;                         
-                                        $contactList = array(
-                                            'id' => $last_row_id++,
+                                    //echo   $campaignID.'<br>'; 
+                                    
+                                    $contactList = array(
+                                           
                                             'email_campaign_id' =>  $email_campaign_id,
                                             'sent_action_id' => $campaignID,
                                             'contact_id' => $check_if_email_exist , 
@@ -740,7 +741,10 @@ public function get_campaign_name($campaign)
                                             'action_time' => $entDate,
                                             'created_by' => 1
                                         );
-                                        $this->db->insert('email_actions',   $contactList);   
+                                       $this->db->insert('email_actions',   $contactList);   
+                                    
+                                    
+                                    
                                     }                                     
                                 }   
                             }
@@ -765,14 +769,14 @@ public function get_campaign_name($campaign)
              break;
         }
        // echo $i;
-         if($i == 4){
+         if($i == 8){
             
-            file_put_contents('autopilotBook.txt',$objv['bookmark']);
+            file_put_contents('autopilotBookEa.txt',$objv['bookmark']);
         }
         if(!$objv['bookmark'])
-             file_put_contents('autopilotBook.txt','');
+             file_put_contents('autopilotBookEa.txt','');
         
-        if($i <4)
+        if($i <8)
        if($objv['bookmark']) 
     if($objv['bookmark'])
           $this->insert_email_contact_list($objv['bookmark'],$i); //RECURSION GET NEXT LIST UNTIL BOOKMARK RETURNS EMPTY
@@ -889,24 +893,38 @@ $queryc = $this->db->query($sql);
         return  $result; 
         }
     }
-         public function _getCompanyHouseDetails($url = 0) 
-	{
- 
-        $server_output = array();
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL,$url);
-        curl_setopt($ch, CURLOPT_GET, 2);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-         curl_setopt($ch, CURLOPT_MAXREDIRS, 10);
-         curl_setopt($ch, CURLOPT_TIMEOUT, 464);
-        $headers = array();
-        $headers[] = 'autopilotapikey: ed278f3d19a5453fb807125aa945a81a';
-        $headers[] = 'Content-Type: application/json';
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        $server_output = curl_exec ($ch);
-        $result  = json_decode($server_output, true);
-         return  $result; 
-        curl_close ($ch); 
-         
-     }   
+  
+    
+    
+    public function email_new_batch(){
+        //this file contains new batch email campaigns id
+        //$output  = file_get_contents('mailToNick.txt');
+        
+    $this->load->library('email');
+    $filename = 'mailToNick.txt';
+    $contents = file($filename);
+
+    foreach($contents as $line) {
+        $a[] = $line.PHP_EOL;
+    }
+    $msg =  join($a);
+
+    if($msg) 
+    echo $msg;
+    $this->email->from('gsmall@sonovate.com', 'sonvavate Glen');
+    $this->email->to('nharriman@sonovate.com'); 
+    $this->email->subject('New Autoplot Batch IDs');
+    $this->email->message($msg);	
+
+    $this->email->send();
+
+    //echo $this->email->print_debugger();
+    file_put_contents('mailToNick.txt', '');    
+    // print_r($trimmed);
+
+    }
+    
+    
+    
+    
 }
