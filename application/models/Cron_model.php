@@ -714,9 +714,12 @@ public function get_campaign_name($campaign)
                            foreach($objMailR as $itemr => $valuedr  ){
                           
                              if($itemr){
-                                   $entDate = date("Y-m-d", (substr($valuedr, 0, 10)));
+                                   $entDate = date("Y-m-d H:i:s", (substr($valuedr, 0, 10)));
                                 //echo  $this->check_campaign_ref($itemr) ? 'No ' : 'YEs';
                                  //$bookmark = $itemr; 
+                                 
+                                 
+                                 
                                   $email_campaign_id = $this->get_campaign_id($itemr);
                                 $check_if_email_exist  = $this->getemailuserid($item['Email']);
                                     
