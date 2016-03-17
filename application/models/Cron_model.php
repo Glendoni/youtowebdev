@@ -692,7 +692,6 @@ public function get_campaign_name($campaign)
        // print_r($itemv);
     public function insert_email_contact_list($bookmark = false, $iteration = 0)
     {
-              $this->load->database('remote');
         $query = $this->db->query("SELECT id from email_actions ORDER BY id DESC LIMIT 1");
 
         $row = $query->row(); 
@@ -815,22 +814,16 @@ public function get_campaign_name($campaign)
 $queryc = array();
         $sql = "SELECT id FROM email_campaigns WHERE sent_id='".$campaign."'  ";
 $queryc = $this->db->query($sql);
-        
+        if ($queryc->num_rows()){
         foreach ($queryc->result_array() as $row)
         {
             return $row['id'];
 
         }
+    }
         $queryc->free_result();
  return false;
-        
-        
-       
-        
-    
-        
-        
-                   
+                  
     }
     
     public function check_campaign_ref($campaign_name)
