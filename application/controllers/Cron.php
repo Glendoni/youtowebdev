@@ -88,4 +88,9 @@ class Cron extends CI_Controller {
   {
     $this->Cron_model->ipp($lmt,$oft,$debug);
   }
+    
+    function email_new_batch(){
+       $this->Cron_model->email_new_batch(); 
+        
+    }
 }
