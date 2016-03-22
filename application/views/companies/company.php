@@ -149,6 +149,7 @@ if ($your_date < $now){; ?>
 				<?php echo $company['trading_name']; ?>
 				</p>
 		</div><!--END TRADING NAME-->
+            
 		<?php else: ?>
 				<div class="col-md-6">
 				<label>Registered Name</label>
@@ -165,6 +166,14 @@ if ($your_date < $now){; ?>
 		</div><!--END ADDRESS-->
 		
 
+            <?php if($company['phone']){ ?>
+            	<div class="col-md-6">
+				<label>Phone</label>
+				<p style="margin-bottom:0;">	
+				<?php echo $company['phone']; ?>
+				</p>
+		</div><!--END TRADING NAME-->
+            <?php } ?>
 		</div><!--END ROW-->
         </div><!--CLOSE MD-9-->
 
