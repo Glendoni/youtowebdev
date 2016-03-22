@@ -79,7 +79,8 @@ function get_marketing_actions($user_id)
     left join email_campaigns ec on 
     ec.id = ea.email_campaign_id
     where (ea.email_action_type = '2' or ea.email_action_type = '3') and c.pipeline not in ('proposal','customer') and ec.created_by = $user_id 
-      limit 1 ";
+    AND ea.created_at >= '2016-01-01 09:10:50.36656' 
+      limit 1000 ";
     $query = $this->db->query($sql);
     return $query->result_object();
     
@@ -95,10 +96,11 @@ function get_marketing_actions_two($user_id)
     left join email_campaigns ec on 
     ec.id = ea.email_campaign_id
     where (ea.email_action_type = '2' or ea.email_action_type = '3' or ea.email_action_type = '4' or ea.email_action_type = '1' ) and c.pipeline not in ('proposal','customer')  and ec.created_by = $user_id
+    
     AND ec.name IS NOT null
     AND ea.email_action_type !=4
-    AND ec.name !='pending'
-    ORDER BY ea.action_time DESC
+   
+ORDER BY ea.action_time DESC
     limit 200";
     
     //echo $sql;
@@ -196,7 +198,7 @@ function get_comments($company_id)
 
 function get_pending_actions($user_id)
 {		
-    $this->db->select("actions.company_id, actions.id as action_id,comments,planned_at,action_type_id,name as company_name,contacts.first_name,contacts.last_name,contacts.phone,contacts.email, to_char(planned_at, 'HH24:MI DD/MM/YY') as duedate ");
+    $this->db->select("actions.company_id, actions.id as action_id,comments,planned_at,action_type_id,name as company_name,contacts.first_name,contacts.last_name,contacts.phone,contacts.email, to_char(planned_at, 'DD/MM/YY at HH24:MI') as duedate ");
     $this->db->where('actions.user_id',$user_id);
     $this->db->where('actioned_at',NULL);
     $this->db->where('cancelled_at',NULL);
