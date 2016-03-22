@@ -1,10 +1,11 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4a6e0c8d5753f1cd1ea4294d942c525f",
+    "hash": "5dff8eb21e0b77a3874d5e520a76a5ad",
+    "content-hash": "25a3b2ff73aa8e4c20cd83f01de45370",
     "packages": [
         {
             "name": "compwright/codeigniter-installers",
@@ -62,16 +63,16 @@
         },
         {
             "name": "shlikhota/postgresdb-php",
-            "version": "1.0.5",
+            "version": "1.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/shlikhota/postgresdb-php.git",
-                "reference": "6cf10dc0bf588630162b8682f773e097f81611ee"
+                "reference": "d2cb3bc52c629be8e10096769fa66dc10ddd6e68"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/shlikhota/postgresdb-php/zipball/6cf10dc0bf588630162b8682f773e097f81611ee",
-                "reference": "6cf10dc0bf588630162b8682f773e097f81611ee",
+                "url": "https://api.github.com/repos/shlikhota/postgresdb-php/zipball/d2cb3bc52c629be8e10096769fa66dc10ddd6e68",
+                "reference": "d2cb3bc52c629be8e10096769fa66dc10ddd6e68",
                 "shasum": ""
             },
             "require": {
@@ -108,7 +109,7 @@
                 "postgresql",
                 "psql"
             ],
-            "time": "2015-03-18 22:27:43"
+            "time": "2016-02-07 13:33:07"
         }
     ],
     "packages-dev": [],

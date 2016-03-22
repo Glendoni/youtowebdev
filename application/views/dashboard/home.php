@@ -278,7 +278,7 @@
                     
                           <div class="col-xs-2 col-md-1 text-center hide-overflow"> 
                           <span class="tw-duediligence-total stat-total">0</span>
-         </div>
+                  </div>
                           </div>
                           
                           
