@@ -78,6 +78,9 @@ h1 {
         <div class="panel-heading profile-heading" style="
     background-color: #FC6F65;
 ">
+            <h3 style="
+    float: right;
+">Return to Tags</h3>
             <h3>Create Category</h3>
         </div>
         <!-- /.panel-heading -->
@@ -126,7 +129,63 @@ echo form_open('/add_category',$attributes,$hidden);
 
 <?php echo form_close(); ?>
             
- <div class="row">
+
+
+
+
+
+            
+        </div>
+        <!-- /.panel-body -->
+        
+       
+    </div>
+    <!-- /.panel -->
+      
+      
+      
+      
+      
+       <div class="row">
+  <div class="col-lg-12">
+      <div class="panel-heading profile-heading" style="
+    background-color: #FC6F65;
+">
+             
+            <h3>Category List</h3>
+        </div>
+        
+        <div class="row" style="text-align:center;">
+           <div class="col-sm-12"> 
+             <div class="col-sm-2">Number of Tags</div>
+  <div class="col-sm-4">Parent Category</div>
+     <div class="col-sm-3">Sub Category</div>       
+  <div class="col-sm-3">Edit</div>
+               
+               
+               
+                           <div class="col-sm-2">20</div>
+  <div class="col-sm-4">Residential</div>
+     <div class="col-sm-3">-</div>       
+  <div class="col-sm-3">Edit</div>
+               
+</div>
+        </div>
+        
+      </div>
+           </div>
+      
+      <p>&nbsp;</p>
+      
+      
+      
+      
+      
+      
+      
+      
+      <!-- SUB CATEGORY -->
+       <div class="row">
   <div class="col-lg-12">
     <div class="panel panel-default">
         <div class="panel-heading profile-heading" style="
@@ -237,17 +296,6 @@ echo form_open('/add_category',$attributes,$hidden);
     });
   
 </script>
-
-
-
-
-            
-        </div>
-        <!-- /.panel-body -->
-        
-       
-    </div>
-    <!-- /.panel -->
   </div>
     
 </div>
