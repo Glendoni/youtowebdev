@@ -38,6 +38,7 @@ function get_actions($company_id)
     left join companies c on con.company_id = c.id
     left join users u on ec.created_by = u.id
     where c.id = '$company_id'
+    AND ec.name != 'pending'
     union all
     select distinct
     c.id,
@@ -76,7 +77,7 @@ function get_marketing_actions($user_id)
     ea.contact_id = con.id
     left join email_campaigns ec on 
     ec.id = ea.email_campaign_id
-    where (ea.email_action_type = '2' or ea.email_action_type = '3') and c.pipeline not in ('proposal','customer') and ec.created_by = $user_id 
+    where (ea.email_action_type = '2' or ea.email_action_type = '3') and c.pipeline not in ('proposal','customer') and ec.created_by = $user_id
       limit 1 ";
     $query = $this->db->query($sql);
     return $query->result_object();
@@ -95,7 +96,7 @@ function get_marketing_actions_two($user_id)
     where (ea.email_action_type = '2' or ea.email_action_type = '3' or ea.email_action_type = '4' or ea.email_action_type = '1' ) and c.pipeline not in ('proposal','customer')  and ec.created_by = $user_id
     AND ec.name IS NOT null
     AND ea.email_action_type !=4
-    AND ec.name !='pending'
+    AND ec.name != 'pending'
     ORDER BY ea.action_time DESC
     limit 200";
     
@@ -171,6 +172,7 @@ function get_actions_marketing($company_id)
     left join companies c on con.company_id = c.id
     left join users u on ec.created_by = u.id
     where c.id = '$company_id'
+    AND ec.name != 'pending'
     group by 1,2,3,4,5,6,7,8,ea.email_action_type order by date_sent asc";
     $query = $this->db->query($sql);
     if($query){
