@@ -38,6 +38,7 @@ function get_actions($company_id)
     left join companies c on con.company_id = c.id
     left join users u on ec.created_by = u.id
     where c.id = '$company_id'
+    AND  ec.name !='pending'
     union all
     select distinct
     c.id,
@@ -61,6 +62,7 @@ function get_actions($company_id)
     left join users u on a.user_id = u.id
     left join contacts con on a.contact_id = con.id
     where c.id = '$company_id'
+
     ORDER BY 10 desc";
             $query = $this->db->query($sql);
     return $query->result_object();
@@ -171,6 +173,7 @@ function get_actions_marketing($company_id)
     left join companies c on con.company_id = c.id
     left join users u on ec.created_by = u.id
     where c.id = '$company_id'
+     AND ec.name !='pending'
     group by 1,2,3,4,5,6,7,8,ea.email_action_type order by date_sent asc";
     $query = $this->db->query($sql);
     if($query){
