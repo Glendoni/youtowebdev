@@ -2,11 +2,13 @@
 
 class Tagging extends MY_Controller {
 	public $userid;
-    
+    public $jqScript;
 	function __construct() {
 		parent::__construct();
 		// Some models are already been loaded on MY_Controller
         $this->userid = $this->data['current_user']['id']; 
+        
+        $this->jqScript =  '<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>' ;
         //$this->input->get('id')
         ///$this->input->post(),$this->data['current_user']['id']
 		 $this->load->model('Tagging_model');
@@ -19,7 +21,7 @@ $this->load->helper('url');
       $call_taggin_js_file =    asset_url().'js/tagging.js';
    //echo file_exists(base_url().'assets/tagging.js');
        $this->data['test'] =   $call_taggin_js_file ;
-       $this->data['jq'] =  '<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>' ;
+       $this->data['jq'] = $this->jqScript;
        $this->data['so'] =  $this->Tagging_model->add_category();
        	$this->data['main_content'] = 'tagging/home';
 		$this->load->view('layouts/default_layout', $this->data);	
@@ -79,14 +81,10 @@ $this->load->helper('url');
               exit();
 		}
             
-
-
-        
-        
         
          $call_taggin_js_file =    asset_url().'js/tagging.js';
    //echo file_exists(base_url().'assets/tagging.js');
-         $this->data['jq'] =  '<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>' ;
+         $this->data['jq'] =  $this->jqScript;
        $this->data['test'] =   $call_taggin_js_file ;
         $post= array();
         $post['userID'] = $this->userid;
@@ -126,9 +124,9 @@ $this->load->helper('url');
  echo $this->Tagging_model->$route($id); 
     }
     
- function _checkDate(){
+ function test(){
      
-    echo  $this->Tagging_model->check_if_date_in_past(date('Y-m-d'));
+    echo  $this->Tagging_model->show_category();
      
  }
 

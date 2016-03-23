@@ -12,20 +12,10 @@ class Tagging_model extends MY_Model {
     public function add_category($post,$userID)
     {
          
-        
-        
-       
-      //  return $this->data['current_user']['id'];
-        
-        //$status = substr($post['monthupdate'], 0, 2);
-            //$newmonth =   str_replace($status, '', $post['monthupdate']); 
-        
-        
-        
-        
     $data = array(
           'created_at' => date('Y-m-d H:i:s'),
         'name' => quotes_to_entities($post['name']),
+        'master_category_id' => $post['create_category'] ? $post['create_category'] : NULL,
            'eff_from' => $post['eff_from'],
            'eff_to' => $post['eff_to'] ? $post['eff_to'] : NULL,
           'created_by' => $userID
@@ -37,9 +27,9 @@ class Tagging_model extends MY_Model {
          return $post['userID'];
        
     }
-    public function show_category($id)
+    public function show_category()
     {
-   $sql = "SELECT * 
+   /*$sql = "SELECT * 
 FROM tags t
 LEFT JOIN tag_categories tc
 ON t.category_id = tc.id
@@ -47,6 +37,11 @@ LEFT JOIN company_tags ct
 ON tc.id= ct.tag_id
 LEFT JOIN contact_tags con
 ON tc.id = con.tag_id";
+
+*/
+        
+        $sql = 'SELECT * FROM tag_categories';
+        
         
       $query = $this->db->query($sql);
       return json_encode($query->result_array());

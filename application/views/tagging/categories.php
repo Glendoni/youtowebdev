@@ -65,67 +65,68 @@ h1 {
         
         text-transform: capitalize;
     }
+    
+    .cr_switch_title{
+        display:;
+        
+    }
 </style>
 <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
 
 
 
-
+<!-- Parent Category-->
 
 <div class="row">
   <div class="col-lg-12">
-    <div class="panel panel-default">
-        <div class="panel-heading profile-heading" style="
-    background-color: #FC6F65;
-">
-            <h3 style="
-    float: right;
-">Return to Tags</h3>
-            <h3>Create Category</h3>
+    <div class="panel panel-default cr_switch create">
+        <div class="panel-heading profile-heading" style="background-color: #FC6F65;">
+            <h3 style="float: right;" class="cr_switch_title">Add Sub Section</h3>
+            <h3 class="tagtitle">Create Category</h3>
         </div>
         <!-- /.panel-heading -->
         <div class="panel-body">
-       <?php  
-$attributes = array( 'class'=>'form-horizontal');
-$hidden = array('create_category'=>'1','user_id'=>$current_user['id']);
-echo form_open('/add_category',$attributes,$hidden); 
-?>
-<div class="form-group">
-	
-	<div class="col-sm-6">
-        <label class="control-label" for="name">Category Name</label>
-	  <input type="text" class="form-control"  required="required" name="name" id="name" placeholder="" value="<?php echo isset($_POST['name'])?$_POST['name']:''; ?>"><span class="catError" id="catName"></span>
-	</div>
-    
-    
-    <div class="col-sm-3">
-        <label for="emp_count" class="control-label">Effective From</label>
-    <?php
-        
-        $catStatus = array('opt1'=>'active','opt2'=>'non-active' );
-    //echo form_dropdown('company_class', $catStatus, (isset($_POST['company_class'])?$_POST['company_class']:'') ,'class="form-control"');
-    ?>
-         <input type="text" class="form-control follow-up-date planned_at" required="required"  data-date-format="YYYY/MM/DD H:m" name="eff_from" placeholder="date"><span class="catError" id="eff_from"></span>
-    </div>
-    
-    
-      <div class="col-sm-3">
-        <label for="emp_count" class="control-label">Effective to (optional)</label>
-    <?php
-        
-        $catStatus = array('opt1'=>'active','opt2'=>'non-active' );
-   // echo form_dropdown('company_class', $catStatus, (isset($_POST['company_class'])?$_POST['company_class']:'') ,'class="form-control"');
-    ?>
-          <input type="text" class="form-control follow-up-date planned_at" data-date-format="YYYY/MM/DD H:m" name="eff_to" placeholder=""><span class="catError" id="eff_to"></span>
-    </div>
-</div>
+            <?php  
+            $attributes = array( 'class'=>'form-horizontal new_category');
+            $hidden = array('user_id'=>$current_user['id']);
+            echo form_open('/add_category',$attributes,$hidden); 
+            ?>
+            <div class="form-group">
 
- 
-<div class="form-group"> 
-	<div class="modal-footer">
-	        	<button type="submit" class="btn btn-primary btn-block">Add Category</button>
-	      	</div>
-</div>
+                <div class="col-sm-6">
+                    <label class="control-label itemName" for="name" >Category Name</label>
+                    <input type="text" class="form-control"  required="required" name="name" id="name" placeholder="" value="<?php echo isset($_POST['name'])?$_POST['name']:''; ?>"><span class="catError catName"></span>
+                </div>
+
+                <div class="col-sm-3">
+                    <label for="emp_count" class="control-label">Effective From</label>
+                    <?php
+
+                    $catStatus = array('opt1'=>'active','opt2'=>'non-active' );
+                    //echo form_dropdown('company_class', $catStatus, (isset($_POST['company_class'])?$_POST['company_class']:'') ,'class="form-control"');
+                    ?>
+                    <input type="text" class="form-control follow-up-date planned_at" required="required"  data-date-format="YYYY/MM/DD H:m" name="eff_from" placeholder="date"><span class="catError eff_from"></span>
+                </div>
+
+
+                <div class="col-sm-3">
+                    <label for="emp_count" class="control-label">Effective to (optional)</label>
+                    <?php
+
+                    $catStatus = array('opt1'=>'active','opt2'=>'non-active' );
+                    // echo form_dropdown('company_class', $catStatus, (isset($_POST['company_class'])?$_POST['company_class']:'') ,'class="form-control"');
+                    ?>
+                    <input type="text" class="form-control follow-up-date planned_at" data-date-format="YYYY/MM/DD H:m" name="eff_to" placeholder="">
+                    <span class="catError eff_to"></span>
+                </div>
+            </div>
+
+
+            <div class="form-group"> 
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary btn-block">Add Category</button>
+                </div>
+            </div>
 
 <?php echo form_close(); ?>
             
@@ -143,105 +144,58 @@ echo form_open('/add_category',$attributes,$hidden);
     <!-- /.panel -->
       
       
-      
-      
-      
-       <div class="row">
-  <div class="col-lg-12">
-      <div class="panel-heading profile-heading" style="
-    background-color: #FC6F65;
-">
-             
-            <h3>Category List</h3>
-        </div>
-        
-        <div class="row" style="text-align:center;">
-           <div class="col-sm-12"> 
-             <div class="col-sm-2">Number of Tags</div>
-  <div class="col-sm-4">Parent Category</div>
-     <div class="col-sm-3">Sub Category</div>       
-  <div class="col-sm-3">Edit</div>
-               
-               
-               
-                           <div class="col-sm-2">20</div>
-  <div class="col-sm-4">Residential</div>
-     <div class="col-sm-3">-</div>       
-  <div class="col-sm-3">Edit</div>
-               
+    </div>
 </div>
+
+
+
+    <div class="row">
+    <div class="col-lg-12">
+        <div class="panel-heading profile-heading" style=" background-color: #FC6F65;">
+
+        <h3>Category List</h3>
         </div>
+ 
+            
+            <div class="col-sm-12"> 
+             <table class="table table-hover">
+  <thead>
+    <tr>
+      <th>#</th>
         
-      </div>
-           </div>
+      <th>Category</th>
+      <th>Sub Category</th>
+    <th>Sub Category 2</th>
+        <th>Edit</th>
+    </tr>
+  </thead>
+  <tbody id="tagCatList" >
+ 
+  
+  </tbody>
+</table>
+
+            </div>
+            
+            
+            
+            
+            
+            
+        </div>
+
+    </div>
+    </div>
       
       <p>&nbsp;</p>
+      <div  ></div>
       
       
       
       
       
       
-      
-      
-      <!-- SUB CATEGORY -->
-       <div class="row">
-  <div class="col-lg-12">
-    <div class="panel panel-default">
-        <div class="panel-heading profile-heading" style="
-    background-color: #FC6F65;
-">
-            <h3>Create Sub Category</h3>
-        </div>
-        <!-- /.panel-heading -->
-        <div class="panel-body">
-       <?php  
-$attributes = array( 'class'=>'form-horizontal');
-$hidden = array('create_contact_form'=>'1','user_id'=>$current_user['id']);
-echo form_open('/add_category',$attributes,$hidden); 
-?>
-<div class="form-group">
-	
-	<div class="col-sm-6">
-        <label class="control-label" for="name">Sub Category Name</label>
-	  <input type="text" class="form-control"  required="required" name="name" id="name" placeholder="" value="<?php echo isset($_POST['name'])?$_POST['name']:''; ?>">
-	</div>
-    
-    
-    <div class="col-sm-3">
-        <label for="emp_count" class="control-label">Effective From</label>
-    <?php
-        
-        $catStatus = array('opt1'=>'active','opt2'=>'non-active' );
-    //echo form_dropdown('company_class', $catStatus, (isset($_POST['company_class'])?$_POST['company_class']:'') ,'class="form-control"');
-    ?>
-         <input type="text" class="form-control follow-up-date planned_at" data-date-format="YYYY/MM/DD H:m" name="planned_at" placeholder="">
-    </div>
-    
-    
-      <div class="col-sm-3">
-        <label for="emp_count" class="control-label">Effective to (optional)</label>
-    <?php
-        
-        $catStatus = array('opt1'=>'active','opt2'=>'non-active' );
-   // echo form_dropdown('company_class', $catStatus, (isset($_POST['company_class'])?$_POST['company_class']:'') ,'class="form-control"');
-    ?>
-          <input type="text" class="form-control follow-up-date planned_at" data-date-format="YYYY/MM/DD H:m" name="planned_at" placeholder="">
-    </div>
-</div>
-
-     <div class="form-group"> 
-	<div class="modal-footer">
-	        	<button type="submit" class="btn btn-primary btn-block">Add Sub Category</button>
-	      	</div>
-</div>
-
-<?php echo form_close(); ?>
-            
-            
-        </div>
-        
-      </div>
+ 
     
 <div id="container" style="margin-top:10px;">
   <h1>Sonovate Tagging</h1>
@@ -294,6 +248,7 @@ echo form_open('/add_category',$attributes,$hidden);
         });
 
     });
+    
   
 </script>
   </div>
