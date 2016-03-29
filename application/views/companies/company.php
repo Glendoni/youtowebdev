@@ -125,7 +125,7 @@ $now = time (); // or your date as well
 $your_date = strtotime($company['planned_at2']);
 $days_since = floor($datediff/(60*60*24));
 if ($your_date < $now){; ?>
-<div><span class="label label-danger" style="font-size:11px;">Overdue</span></div><?php } else {}
+<div><span class="label label-danger" style="font-size:10px;">Overdue</span></div><?php } else {}
 ?>
 <?php endif; ?>
 
@@ -137,13 +137,14 @@ if ($your_date < $now){; ?>
 	<?php if (isset($company['trading_name'])): ?>
 		<div class="col-md-6">
 				<label>Registered Name</label>
-				<p style="margin-bottom:0;">	
+				<p>	
+	
 				<?php echo $company['name']; ?>
 				</p>
 		</div><!--END NAME-->
 		<div class="col-md-6">
 				<label>Trading Name</label>
-				<p style="margin-bottom:0;">	
+				<p>	
 				<?php echo $company['trading_name']; ?>
 				</p>
 		</div><!--END TRADING NAME-->
@@ -158,7 +159,8 @@ if ($your_date < $now){; ?>
 		<?php endif; ?>
 		<div class="col-md-6">
 				<label>Registered Address</label>
-				<p style="margin-bottom:10px;">
+				<p>	
+
                 <?php echo isset($company['address'])?'<a href="http://maps.google.com/?q='.urlencode($company['address']).'" target="_blank">'.$company['address'].'<span style="    line-height: 15px;font-size: 10px;padding-left: 5px;"><i class="fa fa-external-link"></i></span></a>':'-'; ?>  
 				</p>
 		</div><!--END ADDRESS-->
@@ -208,7 +210,41 @@ if ($your_date < $now){; ?>
 		<div class="col-md-12">
 			<hr>
 		</div>
+<div class="row padding-bottom">
+		<div class="col-xs-6 col-md-3 centre" style="margin-top:10px;">
+			<label>Company Number</label>
+			<p>	
+			 <!--COMPANY NUMBER IF APPLICABLE-->
+			<?php echo isset($company['registration'])?$company['registration']:''; ?>
+         	</p>
+        	</div>
 
+        	<div class="col-xs-6 col-md-3 centre" style="margin-top:10px;">
+        	<label>Founded</label>
+			<p>	
+				<?php echo isset($company['eff_from'])?$company['eff_from']:''; ?>
+			</p>
+		</div>
+
+        <div class="col-xs-6 col-md-3 centre" style="margin-top:10px;">
+        		<label>Phone</label>
+        		<p>
+        		<?php echo isset($company['phone'])?$company['phone']:''; ?>                
+           		</p>
+			</div><!--END PHONE NUMBER-->
+		<div class="col-xs-6 col-md-3 centre" style="margin-top:10px;">
+				<label>Class</label>
+				<p>	
+		            <!--CLASS IF APPLICABLE-->
+		            <?php if (isset($company['class'])): ?>
+						<span class="label label-info"><?php echo $companies_classes[$company['class']] ?></span>	
+					<?php else: ?>
+						-
+		            <?php endif; ?>
+	            </p>
+			</div>
+
+		</div>
 		<div class="row">
 		<div class="col-xs-12">
 		<!-- TURNOVER -->
@@ -296,7 +332,7 @@ if ($your_date < $now){; ?>
 	    			<?php else: ?>
 						<?php echo $mortgage['name']; ?>
 					<?php endif; ?>
-				<div style="font-size:11px;">
+				<div style="font-size:10px;">
 				<?php echo $mortgage['type']; ?>
 				</div>
 				</td>
@@ -646,7 +682,7 @@ if ($your_date < $now){; ?>
 
 							<div class="col-xs-12 col-md-5">
 							<!--SHOW CONTACT NAME-->
-                            <?php if($action_outstanding->contact_id):?><span class="label label-primary" style="font-size:11px; margin:0 10px;  "><?php echo $action_outstanding->first_name.' '.$action_outstanding->last_name; ?></span>
+                            <?php if($action_outstanding->contact_id):?><span class="label label-primary" style="font-size:10px; margin:0 10px;  "><?php echo $action_outstanding->first_name.' '.$action_outstanding->last_name; ?></span>
                             <?php endif; ?>
 								<?php if(strtotime($action_outstanding->planned_at) > $now and !isset($action_outstanding->actioned_at)) : ?>
 								<span class="label label-warning"><?php echo $planned_date_formatted ?> </span> 
@@ -673,7 +709,7 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 <?php $hidden = array('action_id' => $action_outstanding->action_id , 'user_id' => $current_user['id'], 'action_do' => 'completed', 'outcome' => '' ,'company_id' => $company['id'],'campaign_id' => $campaign_id,); echo form_open(site_url().'actions/edit', 'name="completed_action"  class="completed_action pull-right" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action_outstanding->action_id.'" style="display:inline-block;" role="form"',$hidden); ?>
 <button class="btn btn-success btn-sm"><i class="fa fa-check fa-sm"></i> </button><?php echo form_close(); ?>
 <?php elseif($action_outstanding->actioned_at): ?>
-<span class="label label-success pull-right" style="font-size:11px; margin-left:10px;">Completed on <?php echo $action_outstandinged_date_formatted ?></span><?php endif; ?>
+<span class="label label-success pull-right" style="font-size:10px; margin-left:10px;">Completed on <?php echo $action_outstandinged_date_formatted ?></span><?php endif; ?>
 
                             
                             </div>
@@ -690,7 +726,7 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 											<table style="width:100%">
 											<tr>
 											<td style="width:35%"><hr/></td>
-											<td style="width:20%;vertical-align:middle; text-align: center; font-size:11px; color: #222;"> Outcome </td>
+											<td style="width:20%;vertical-align:middle; text-align: center; font-size:10px; color: #222;"> Outcome </td>
 											<td style="width:35%"><hr/></td>
 											</tr>
 											</table>
@@ -757,9 +793,9 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 											</div><!--END COL-MD-5-->
 											<div class="col-xs-4 col-md-6" style="text-align:right;">
 											<!--SHOW CONTACT NAME-->
-											<?php if($action_completed->contact_id):?><span class="label label-primary" style="font-size:11px; margin-left:10px;  "><?php echo $action_completed->first_name.' '.$action_completed->last_name; ?></span>
+											<?php if($action_completed->contact_id):?><span class="label label-primary" style="font-size:10px; margin-left:10px;  "><?php echo $action_completed->first_name.' '.$action_completed->last_name; ?></span>
 											<?php endif; ?>
-											<span class="label label-success" style="font-size:11px; margin-left:10px;">Completed on <?php echo date("l jS F y",strtotime($action_completed->actioned_at))." @ ".date("H:i",strtotime($action_completed->actioned_at)); ?></span>
+											<span class="label label-success" style="font-size:10px; margin-left:10px;">Completed on <?php echo date("l jS F y",strtotime($action_completed->actioned_at))." @ ".date("H:i",strtotime($action_completed->actioned_at)); ?></span>
 											</div>
 											<div class="col-md-12">
 											<div id="collapse<?php echo $action_completed->id ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<?php echo $action_completed->id ?>">
@@ -825,9 +861,9 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 											</div><!--END COL-MD-6-->
 											<div class="col-xs-4 col-md-6" style="text-align:right;">
 											<!--SHOW CONTACT NAME-->
-											<?php if($action_cancelled->contact_id):?><span class="label label-primary" style="font-size:11px; margin-left:10px;  "><?php echo $option_contacts[$action_cancelled->contact_id]; ?></span>
+											<?php if($action_cancelled->contact_id):?><span class="label label-primary" style="font-size:10px; margin-left:10px;  "><?php echo $option_contacts[$action_cancelled->contact_id]; ?></span>
 											<?php endif; ?>
-											<span class="label label-danger" style="font-size:11px; margin-left:10px;">Cancelled on <?php echo $cancelled_at_formatted ?></span>
+											<span class="label label-danger" style="font-size:10px; margin-left:10px;">Cancelled on <?php echo $cancelled_at_formatted ?></span>
 											</div>
 											<div class="col-md-12">
 											<div id="collapse<?php echo $action_cancelled->id ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<?php echo $action_cancelled->id ?>">
@@ -839,7 +875,7 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 											<table style="width:100%">
 											<tr>
 											<td style="width:35%"><hr/></td>
-											<td style="width:20%;vertical-align:middle; text-align: center; font-size:11px; color: #222;"> Outcome </td>
+											<td style="width:20%;vertical-align:middle; text-align: center; font-size:10px; color: #222;"> Outcome </td>
 											<td style="width:35%"><hr/></td>
 											</tr>
 											</table>
@@ -902,7 +938,7 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 											</div><!--END COL-MD-6-->
 											<div class="col-xs-4 col-md-6" style="text-align:right;">
 											<!--SHOW CONTACT NAME-->
-											<?php if($get_action->contact_id):?><span class="label label-primary" style="font-size:11px; margin-left:10px;  "><?php echo $get_action->first_name.' '.$get_action->last_name; ?></span>
+											<?php if($get_action->contact_id):?><span class="label label-primary" style="font-size:10px; margin-left:10px;  "><?php echo $get_action->first_name.' '.$get_action->last_name; ?></span>
 											<?php endif; ?>
 											</div>
 											<div class="col-md-12">
@@ -915,7 +951,7 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 											<table style="width:100%">
 											<tr>
 											<td style="width:35%"><hr/></td>
-											<td style="width:20%;vertical-align:middle; text-align: center; font-size:11px; color: #222;"> Outcome </td>
+											<td style="width:20%;vertical-align:middle; text-align: center; font-size:10px; color: #222;"> Outcome </td>
 											<td style="width:35%"><hr/></td>
 											</tr>
 											</table>

@@ -110,7 +110,7 @@ $now = time (); // or your date as well
 $your_date = strtotime($company['planned_at2']);
 $days_since = floor($datediff/(60*60*24));
 if ($your_date < $now){; ?>
-<div><span class="label label-danger" style="font-size:11px;">Overdue</span></div><?php } else {}
+<div><span class="label label-danger" style="font-size:10px;">Overdue</span></div><?php } else {}
 ?>
 <?php endif; ?>
 
@@ -295,7 +295,7 @@ if ($your_date < $now){; ?>
 	    			<?php else: ?>
 						<?php echo $mortgage['name']; ?>
 					<?php endif; ?>
-				<div style="font-size:11px;">
+				<div style="font-size:10px;">
 				<?php echo $mortgage['type']; ?>
 				</div>
 					</td>
