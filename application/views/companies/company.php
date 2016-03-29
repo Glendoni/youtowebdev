@@ -215,7 +215,7 @@ if ($your_date < $now){; ?>
 		<div class="col-xs-4 col-sm-3 centre">
 			<strong><span style="text-transform: capitalize"><?php echo isset($company['turnover_method'])?$company['turnover_method']:'';?></span> Turnover</strong>
 			<p class="details" style="margin-bottom:5px;">
-				<?php echo isset($company['turnover'])? '£'.number_format (round($company['turnover'],-3)):'Unknown';?>
+				<?php echo isset($company['turnover'])? '£'.number_format (round($company['turnover'],-3)):'';?>
 			</p>
         </div>
 		<!-- CONTACTS -->
