@@ -164,14 +164,14 @@ if ($your_date < $now){; ?>
 		</div><!--END ADDRESS-->
 		
 
-            <?php if($company['phone']){ ?>
+            
             	<div class="col-md-6">
 				<label>Phone</label>
 				<p style="margin-bottom:0;">	
 				<?php echo $company['phone']; ?>
 				</p>
 		</div><!--END TRADING NAME-->
-            <?php } ?>
+            
 		</div><!--END ROW-->
         </div><!--CLOSE MD-9-->
 		<div class="col-sm-3">
