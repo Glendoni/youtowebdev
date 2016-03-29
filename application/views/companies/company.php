@@ -369,7 +369,7 @@ if ($your_date < $now){; ?>
             
 		<div class="btn-group">
             <button  class="btn btn-primary edit-btn btn-xs" data-toggle="modal" id="create_address_<?php echo $company['id']; ?>"  data-target="#create_address_<?php echo $company['id']; ?>" >
-            <span class="ladda-label"> Add Address </span>
+            <span class="ladda-label"> Add Location </span>
             </button>
 		</div>
             
