@@ -196,10 +196,12 @@
                     <?php else: ?>
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs" role="tablist">
-                      <li <?php if (($_GET['period'] == 'week') ||  (empty($_GET['period'])) && ($_GET['search'] !=='3')): ?>class="active"<?php endif; ?>><a href="#this" role="tab" data-toggle="tab">This Week</a></li>
-                      <li <?php if ($_GET['period'] == 'lastweek'): ?>class="active"<?php endif; ?>><a href="#lastweek" role="tab" data-toggle="tab">Last Week</a></li>
-                      <li <?php if ($_GET['period'] == 'month'): ?>class="active"<?php endif; ?>><a href="#currentmonth" role="tab" data-toggle="tab">This Month</a></li>
                       <li <?php if ($_GET['period'] == 'lastmonth'): ?>class="active"<?php endif; ?>><a href="#lastmonth" role="tab" data-toggle="tab">Last Month</a></li>
+                      <li <?php if ($_GET['period'] == 'month'): ?>class="active"<?php endif; ?>><a href="#currentmonth" role="tab" data-toggle="tab">This Month</a></li>
+                      <li <?php if ($_GET['period'] == 'lastweek'): ?>class="active"<?php endif; ?>><a href="#lastweek" role="tab" data-toggle="tab">Last Week</a></li>
+                      <li <?php if (($_GET['period'] == 'week') ||  (empty($_GET['period'])) && ($_GET['search'] !=='3')): ?>class="active"<?php endif; ?>><a href="#this" role="tab" data-toggle="tab">This Week</a></li>
+                      
+                      
 
                       <?php if ($_GET['search'] == '3'): ?>
                       <li <?php if ($_GET['search'] == '3'): ?>class="active"<?php endif; ?>><a href="#searchresults" role="tab" data-toggle="tab">Search Results</a></li>

@@ -47,7 +47,7 @@
 	      	</div>
             <div class="modal-footer">
             <div><small>
-            <?php echo $address->addresses_updated_at? '<b>Last Updated:</b> - '.$address->addresses_updated_at. ' '.$address->updated_by_user : ''; ?></small></div><div><small><b>Record Created:</b> <?php echo $address->addresses_created_at; ?>  - <?php echo $address->created_by_user; ?></small></div>
+            <?php echo $address->addresses_updated_at? '<b>Last Updated:</b> - '.$address->addresses_updated_at. ' '.$address->updated_by_user : ''; ?></small></div><div><small><b>Address Created:</b> <?php echo $address->addresses_created_at; ?>  - <?php echo $address->created_by_user; ?></small></div>
                 
             </div>
 	      	<?php echo form_close(); ?>

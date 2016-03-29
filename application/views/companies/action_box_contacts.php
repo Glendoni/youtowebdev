@@ -175,7 +175,7 @@
             <div class="modal-footer">
             <div><small>
              <?php echo $contact->updated_by? '<b>Last Updated:</b>'. $contact->contact_updated_at.' - '.$contact->updated_by  : ''; ?></small></div><div><small>
-                <b>Record Created:</b> <?php echo $contact->contact_created_at; ?> - <?php echo $contact->created_by; ?></small></div>
+                <b>Contact Created:</b> <?php echo $contact->contact_created_at; ?> - <?php echo $contact->created_by; ?></small></div>
                 
             </div>
 	      	<?php echo form_close(); ?>

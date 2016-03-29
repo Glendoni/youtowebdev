@@ -83,13 +83,13 @@
 } else {?>
 <?php
 }; ?>
-<div style="font-size: 10px;font-weight: 300;text-align: right;float: right;line-height: 40px;padding-left: 5px;">Version 3.3</div>
+<div style="font-size: 10px;font-weight: 300;text-align: right;float: right;line-height: 40px;padding-left: 5px;">Version 3.4</div>
 <?php endif; ?>
 </a>
 </div>
 
 
-            <div class="col-sm-3 col-sm-push-6">
+            <div class="col-sm-4 col-sm-push-5">
             <!-- Top Menu Items -->
             <?php if (isset($current_user)): ?>
 
@@ -148,7 +148,7 @@ $search_default = $company['name'];
 $search_default = $this->input->post('agency_name');
 }?>
 
-    <div class="col-sm-6 col-md-6 col-sm-pull-3 large-form-holder clearfix">
+    <div class="col-sm-5 col-md-5 col-sm-pull-4 large-form-holder clearfix">
             <div class="" id="adv-search">
              <?php echo form_open(site_url().'companies', 'id="main_search" novalidate="novalidate" name="main_search" class="" role="form"'); ?>
                 <?php echo form_hidden('main_search','1');?>

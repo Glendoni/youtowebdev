@@ -262,7 +262,7 @@
             </div>
             <div class="modal-footer">
             <div><small><b>Last Updated:</b>
-            <?php echo isset($company['updated_at'])?date("d/m/Y",strtotime($company['updated_at']))." - ".$company['updated_by_name']:'Never'; ?></small></div><div><small><b>Record Created:</b> <?php echo date("d/m/Y",strtotime($company['created_at']));?> - <?php echo $created_by_name['name']; ?></small></div>
+            <?php echo isset($company['updated_at'])?date("d/m/Y",strtotime($company['updated_at']))." - ".$company['updated_by_name']:'Never'; ?></small></div><div><small><b>Company Created:</b> <?php echo date("d/m/Y",strtotime($company['created_at']));?> - <?php echo $created_by_name['name']; ?></small></div>
                 
             </div>
             <?php echo form_close(); ?>
