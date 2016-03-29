@@ -41,10 +41,17 @@ $this->load->helper('url');
             $name = $this->input->post('name'); 
             $eff_from = $this->input->post('eff_from');
             $eff_to = $this->input->post('eff_to');
+            
+            $master_cat_id =  $this->input->post('masterID')?  $this->input->post('itemid') : ''; 
+            
             $msg = false;
             $checkEffTo =true;
             
-            $checkName = $this->Tagging_model->checkCategoryName($name);
+            if($route != 'addTag') {
+            $checkName = $this->Tagging_model->checkCategoryName($name,$master_cat_id);
+            }else{
+                $checkName = $this->Tagging_model->checkTagName($name,$master_cat_id);
+            }
             $checkEffFrom = $this->Tagging_model->check_if_date_in_past(date('Y-m-d',strtotime($this->input->post('eff_from'))));
             
             if($eff_to){
@@ -52,29 +59,65 @@ $this->load->helper('url');
             }
             
             //Codeignighter does not support pre date check validation
-            if(!$checkName){
-                 $msg['catName'] = 'This name is already taken!';
-            } 
-             if(!$name){
-                 $msg['catName'] = 'This name field is required!';
+           
+           
+              if(!$name){
+                 $msg['catName'] = 'This field is required!';
             } 
            
-            if(!$checkEffFrom){
-                $msg['eff_from'] = 'dates cannot be set in the past';
+             if(!$this->input->post('eff_from')){
+                    $msg['eff_from'] = 'This field is required!';
+                }
+            
+            
+                if(!$route){
+                $msg['missing_action'] = $route;
             } 
-            if(isset( $checkEffTo)){
-            if(!$checkEffTo){
-                $msg['eff_to'] = 'dates cannot be set in the past';
-            } }
-    
-            if(!$msg){
-                   $this->Tagging_model->add_category($this->input->post(),$this->userid);
-                    
-                    echo json_encode(array('success' =>$rap ));         
-             }
+            
+            
+            if($route != 'edit'){
+                if(!$checkName){
+                     $msg['catName'] = 'This name is already taken!';
+                } 
+
+                if(!$checkEffFrom){
+                    $msg['eff_from'] = 'dates cannot be set in the past';
+                }
+
+                if(isset( $checkEffTo)){
+                if(!$checkEffTo){
+                    $msg['eff_to'] = 'dates cannot be set in the past';
+                } }
                 
-		 
-			if($msg){
+            }
+    
+            if(!$msg ){
+               
+                if($route == 'create') { 
+                    $this->Tagging_model->add_category($this->input->post(),$this->userid); 
+                }
+                if($route == 'edit') {
+                    $this->Tagging_model->update_category($this->input->post(),$this->userid); 
+                }
+                 if($route == 'sub') {
+                    $this->Tagging_model->create_sub($this->input->post(),$this->userid); 
+                }
+                 if($route == 'addTag') {
+                    $this->Tagging_model->add_tag($this->input->post(),$this->userid); 
+                }
+                if($route == 'editTag') {
+                    $this->Tagging_model->edit_tag($this->input->post(),$this->userid); 
+                }
+                
+                 if($route == 'deleteTag') {
+                    $this->Tagging_model->delete_tag($this->input->post(),$this->userid); 
+                }
+                
+                
+                
+                
+                    echo json_encode(array('success' =>$rap ));         
+             }else{
                  echo json_encode(array('error' =>$msg )); 
              }
             
@@ -82,17 +125,25 @@ $this->load->helper('url');
 		}
             
         
-         $call_taggin_js_file =    asset_url().'js/tagging.js';
-   //echo file_exists(base_url().'assets/tagging.js');
-         $this->data['jq'] =  $this->jqScript;
-       $this->data['test'] =   $call_taggin_js_file ;
-        $post= array();
-        $post['userID'] = $this->userid;
-        if($route){
-         //echo $this->Tagging_model->$route($post);
-        }
-       $this->data['main_content'] = 'tagging/categories';
-       $this->load->view('layouts/default_layout', $this->data);  
+            $call_taggin_js_file =    asset_url().'js/tagging.js';
+            //echo file_exists(base_url().'assets/tagging.js');
+            $this->data['jq'] =  $this->jqScript;
+            $this->data['test'] =   $call_taggin_js_file ;
+            $post= array();
+            $post['userID'] = $this->userid;
+            if($route){
+            //echo $this->Tagging_model->$route($post);
+            }
+            $this->data['main_content'] = 'tagging/categories';
+            $this->load->view('layouts/default_layout', $this->data);  
+        
+    }
+    
+    
+    public function update(){
+        
+        
+        
         
     }
     
@@ -117,14 +168,47 @@ $this->load->helper('url');
  echo $this->Tagging_model->$route($post); 
     }
     
-    public function distroy($id,$route)
+    
+    
+
+    
+    
+    public function distroy($id)
     {
-        $post= array();
-        $post['userID'] = $this->userid;
- echo $this->Tagging_model->$route($id); 
+       
+            echo $this->Tagging_model->delete_tag($id); 
     }
     
- function test(){
+    
+    
+    
+    
+    
+    
+    
+    
+ function test($id =false){
+     //echo 'Glen';
+    echo  $this->Tagging_model->show_category($id);
+     
+ }
+    
+    
+    function gettags($id){
+        
+        //Get main tag listing
+        echo  $this->Tagging_model->getEditTags($id); 
+        
+        
+    }
+    function showtags($id){
+        
+        
+        echo  $this->Tagging_model->show_tag($id); 
+        
+        
+    }
+     function _test(){ //loads data
      
     echo  $this->Tagging_model->show_category();
      
