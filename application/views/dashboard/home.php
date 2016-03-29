@@ -200,7 +200,7 @@
                       <li <?php if ($_GET['period'] == 'month'): ?>class="active"<?php endif; ?>><a href="#currentmonth" role="tab" data-toggle="tab">This Month</a></li>
                       <li <?php if ($_GET['period'] == 'lastweek'): ?>class="active"<?php endif; ?>><a href="#lastweek" role="tab" data-toggle="tab">Last Week</a></li>
                       <li <?php if (($_GET['period'] == 'week') ||  (empty($_GET['period'])) && ($_GET['search'] !=='3')): ?>class="active"<?php endif; ?>><a href="#this" role="tab" data-toggle="tab">This Week</a></li>
-                      
+
                       
 
                       <?php if ($_GET['search'] == '3'): ?>
@@ -982,7 +982,7 @@
                                echo form_open(site_url().'actions/edit', 'name="completed_action"  class="completed_action" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action->action_id.'" style="display:inline-block;" role="form"',$hidden); ?>
                                <button class="btn btn-xs btn-success">Completed</button> 
                                </form>
-                               <?php $hidden = array('action_id' => $action->action_id , 'user_id' => $current_user['id'] , 'action_do' => 'cancelled','outcome' => '' , 'company_id' => $action->company_id);
+                               <?php $hidden = array('action_id' => $action->action_id , 'user_id' => $current_user['id'] , 'action_do' => 'cancelled','outcome' => '' , 'company_id' => $action->company_id,'page' => 'home' ,);
                                echo form_open(site_url().'actions/edit', 'name="cancel_action"  class="cancel_action" style="display:inline-block;" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action->action_id.'" role="form"',$hidden); ?>
                                <button class="btn btn-xs btn-overdue" >Cancel</button>
                                </form>
