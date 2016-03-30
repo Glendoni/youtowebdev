@@ -195,7 +195,7 @@ if ($your_date < $now){; ?>
 		<?php $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' );
 		$name_no_ltd = str_replace($words, '',$company['name']); ?>
 
-              <a class="btn  btn-primary btn-sm btn-block" href="https://www.linkedin.com/vsearch/f?type=all&keywords=<?php echo  urlencode($name_no_ltd) ?>"  target="_blank">Search LinkedIn Profile</a>
+              <a class="btn  btn-primary btn-sm btn-block" href="https://www.linkedin.com/vsearch/f?type=all&keywords=<?php echo  urlencode($name_no_ltd) ?>"  target="_blank">Search LinkedIn</a>
             <?php endif; ?>
 					<?php if (isset($company['url'])): ?>
 		<a class="btn btn-default btn-sm btn-block btn-url" href="<?php $parsed = parse_url($company['url']); if (empty($parsed['scheme'])) { echo 'http://' . ltrim($company['url'], '/'); }else{ echo $company['url']; } ?>" target="_blank">
