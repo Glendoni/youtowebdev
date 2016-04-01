@@ -188,12 +188,7 @@ function populate(){
 })
                         
         } 
-    })     
-             
-             
-             
-         
-             
+    })               
              
 }
 
@@ -211,28 +206,18 @@ function gettags(){
            
                 $('#fetags').append('<li class="addedTag tag'+val['tag_id']+' " style="float:left;"><span class="tagName"></span>'+val['name']+'<span class="tagRemove" data-tag="'+val['tag_id']+'">x</span></li>');
                   $('.tafixed').show()
-             })
-             
-           
-             
-                 
+             })        
                       
                        del_ini() 
-           
-        }
-                    
-                 
-                 
                        
+                        if(!$('.addedTag').length)  $('.tadefault').show() +  $('.txtline').show() 
+                    }
         
         })
     
     
     
 }
-
-
-
 
   function scScroll(){
            $('.list-group-item').mouseenter(function(){

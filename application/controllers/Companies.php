@@ -620,7 +620,7 @@ $this->load->helper('url');
     public function tag_categories($route =false)
     {
     if (!$current_user['permission'] == 'admin'){
-        exit('wrong access permission ')
+        exit('wrong access permission ');
     } 
         if($this->input->post() != NULL){
             
