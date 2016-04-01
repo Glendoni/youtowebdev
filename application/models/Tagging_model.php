@@ -17,31 +17,22 @@ class Tagging_model extends MY_Model {
         
          $data = array(
           'updated_at' => date('Y-m-d H:i:s'),
-        'name' => quotes_to_entities($post['name']),
+        'name' => quotes_to_entities(ucwords($post['name'])),
         'master_category_id' => $itemid,
            'eff_from' => $post['eff_from'],
            'eff_to' => $post['eff_to'] ? $post['eff_to'] : NULL,
           'updated_by' => $userID
        );
        
-      
-        
-       $this->db->insert('tag_categories', $data);
-        
-        
+       $this->db->insert('tag_categories', $data);   
     }
-    
-    
-    
-    
-    
     
     public function add_category($post,$userID)
     {
          
     $data = array(
           'created_at' => date('Y-m-d H:i:s'),
-        'name' => quotes_to_entities($post['name']),
+        'name' => quotes_to_entities(ucwords($post['name'])),
         'master_category_id' => $post['create_category'] ? $post['create_category'] : NULL,
            'eff_from' => $post['eff_from'],
            'eff_to' => $post['eff_to'] ? trim($post['eff_to']) : NULL,
@@ -71,7 +62,6 @@ ORDER BY t.name';
 
     }
     
-    
     function getEditTags($id= false){
         
         $sql = 'SELECT   tc.name as name, t.id, t.eff_from, t.eff_to, t.name  as sub_name, t.id as sub_master_id, t.id as tag_id, t.category_id FROM tag_categories tc
@@ -79,11 +69,8 @@ LEFT JOIN tags t
 ON tc.id = t.category_id
  WHERE t.category_id ='.$id;
         
-        
          $query = $this->db->query($sql);
       return json_encode($query->result_array()); 
-        
-        
         
     }
     
@@ -95,7 +82,7 @@ ON tc.id = t.category_id
         
          $data = array(
           'updated_at' => date('Y-m-d H:i:s'),
-        'name' => quotes_to_entities($post['name']),
+        'name' => quotes_to_entities(ucwords($post['name'])),
         'master_category_id' => $master ? $master : NULL,
            'eff_from' => trim($post['eff_from']),
            'eff_to' => trim($post['eff_to']) ? trim($post['eff_to']) : NULL,
@@ -103,12 +90,9 @@ ON tc.id = t.category_id
        );
        
         $this->db->where('id', quotes_to_entities($itemid));  
-        
-       $this->db->update('tag_categories', $data);
-        
-        
+        $this->db->update('tag_categories', $data); 
     }
-    public function delete_category($id)
+    public function _delete_category($id)
     {
 
     }
@@ -121,7 +105,7 @@ ON tc.id = t.category_id
         
         $data = array(
           'category_id' => $itemid,
-         'name' => quotes_to_entities($post['name']),
+         'name' => quotes_to_entities(ucwords($post['name'])),
            'tag_type' =>  1,
            'created_at' => date('Y-m-d'),
            'eff_from' =>  trim($post['eff_from']),
@@ -129,10 +113,7 @@ ON tc.id = t.category_id
           'created_by' => $userId
        );
         
-         
-       
        $this->db->insert('tags', $data);
-        
     }
     
     public function edit_tag($post,$userId)
@@ -154,38 +135,35 @@ ON tc.id = t.category_id
     }
     public function show_tag($id)
     {
-
+        
         $sql = 'SELECT t.id as tag_id, 
         t.name , 
         tc.id as tac_sub_cat_id,
-    tc.name as sub_cat_name,
-    tcn.id as sub_parent_cat_id ,
+        tc.name as sub_cat_name,
+        tcn.id as sub_parent_cat_id ,
         tcn.name as parent_cat_name , 
-          t.tag_type, 
-         t.eff_from,
-         t.eff_to as eff_to
+        t.tag_type, 
+        t.eff_from,
+        t.eff_to as eff_to
         FROM tags t
-LEFT JOIN tags tt
-ON  t.category_id = tt.id
-LEFT JOIN tag_categories tc
-ON t.category_id  = tc.id
+        LEFT JOIN tags tt
+        ON  t.category_id = tt.id
+        LEFT JOIN tag_categories tc
+        ON t.category_id  = tc.id
 
-LEFT JOIN tag_categories tcn
-ON tc.master_category_id = tcn.id
+        LEFT JOIN tag_categories tcn
+        ON tc.master_category_id = tcn.id
 
-LEFT JOIN company_tags ct
-ON t.id = ct.tag_id
+        
 
-LEFT JOIN contact_tags cont
-ON t.id = cont.tag_id
-
-WHERE t.tag_type=1 
-AND t.category_id='.$id;
+        WHERE t.tag_type=1 
+        AND t.category_id='.$id;
  
         $query = $this->db->query($sql);
       return json_encode($query->result_array());  
         
     }
+    
     public function update_tag($post)
     {
      $itemid = $post['itemid'];
@@ -202,13 +180,13 @@ AND t.category_id='.$id;
         
        $this->db->update('tags', $data);
     }
+    
     public function delete_tag($id)
     {
-$this->db->delete('tags', array('id' => $id)); 
+        $this->db->delete('tags', array('id' => $id)); 
         
         return json_encode(array('success' => 'ok'));
     }
-    
       //contact Tags
     public function add_contact_tag($post)
     {
@@ -223,15 +201,15 @@ $this->db->delete('tags', array('id' => $id));
        
        $this->db->insert('contact_tags', $data);
     }
-    public function show_contact_tag($id)
+    public function _show_contact_tag($id)
     {
 
     }
-    public function update_contact_tag($post)
+    public function _update_contact_tag($post)
     {
 
     }
-    public function delete_contact_tag($id)
+    public function _delete_contact_tag($id)
     {
 
     }
@@ -250,38 +228,36 @@ $this->db->delete('tags', array('id' => $id));
        
        $this->db->insert('company_tags', $data);
     }
-    public function show_company_tag($id)
+    public function _show_company_tag($id)
     {
 
     }
-    public function update_company_tag($post)
+    public function _update_company_tag($post)
     {
 
     }
-    public function delete_company_tag($id)
+    public function _delete_company_tag($id)
     {
 
     }
     
-        public function checkCategoryName($cat_name, $master_cat_id =false){ //Check if category tag exist
-        $master_cat_id = $master_cat_id ?  'AND master_category_id='.quotes_to_entities($master_cat_id) :  '' ;
+    public function checkCategoryName($cat_name, $master_cat_id =false){ //Check if category tag exist
+    $master_cat_id = $master_cat_id ?  'AND master_category_id='.quotes_to_entities($master_cat_id) :  '' ;
 
-        $query = $this->db->query("SELECT name FROM tag_categories WHERE name  ilike '".quotes_to_entities($cat_name)."' ".$master_cat_id."  LIMIT 1");
+    $query = $this->db->query("SELECT name FROM tag_categories WHERE name  ilike '".quotes_to_entities($cat_name)."' ".$master_cat_id."  LIMIT 1");
 
-        if ($query->num_rows() > 0)
-        {
+    if ($query->num_rows() > 0)
+    {
 
-        return false;
-        }
-        return true;
-        }
-    
-    
+    return false;
+    }
+    return true;
+    }
+
     
     public function checkTagName($cat_name, $master_cat_id =false){ //Check if category tag exist
         
        
-
         $query = $this->db->query("SELECT name FROM tags WHERE name  ilike '".quotes_to_entities($cat_name)."' AND category_id=".$master_cat_id."  LIMIT 1 ");
 
         if ($query->num_rows() > 0)
@@ -292,10 +268,8 @@ $this->db->delete('tags', array('id' => $id));
         return true;
         }
     
-    
-    
-     
-     public function getCategoryName($cat_name){ //Check if category tag exist
+     public function getCategoryName($cat_name)
+     { //Check if category tag exist
         
         $query = $this->db->query("SELECT name FROM tag_categories WHERE name  ilike '".quotes_to_entities($cat_name)."'  LIMIT 1");
        
@@ -307,14 +281,16 @@ $this->db->delete('tags', array('id' => $id));
         
                 }
         
-     return false;
-            }
-    public function check_if_date_in_past($newDate){
+        return false;
+    }
+    
+    public function check_if_date_in_past($newDate)
+    {
          
-         $datetime1 = new DateTime(date('Y-m-d'));
-$datetime2 = new DateTime($newDate);
-$interval = $datetime1->diff($datetime2);
-$int =  $interval->format('%R%a');
+        $datetime1 = new DateTime(date('Y-m-d'));
+        $datetime2 = new DateTime($newDate);
+        $interval = $datetime1->diff($datetime2);
+        $int =  $interval->format('%R%a');
      
          if($int[0] === '-'){
              
@@ -324,45 +300,151 @@ $int =  $interval->format('%R%a');
              
               return true ; 
          }
-         
-    
-         
      }
         
-        public function feReadTag(){
-            
-           $sql = 'SELECT t.id as tag_id, 
-      
+    public function feReadTag()
+    {
+
+        
+        $sql = 'SELECT  DISTINCT
+        tc.id as cat_id, 
+        tcn.name as parent_cat_name ,
+        tcn.id as sub_parent_cat_id ,
         tc.id as tac_sub_cat_id,
-    tc.name as sub_cat_name,
-    tcn.id as sub_parent_cat_id ,
-        tcn.name as parent_cat_name , 
-          t.tag_type, 
-         t.eff_from,
-         t.eff_to as eff_to,
-           t.name , 
-         ct.company_id
+        tc.name as sub_cat_name,
+          
+        t.id as tag_id, 
+        t.tag_type, 
+        t.eff_from,
+        t.eff_to as eff_to,
+        t.name
         FROM tags t
-LEFT JOIN tags tt
-ON  t.category_id = tt.id
-LEFT JOIN tag_categories tc
-ON t.category_id  = tc.id
+        LEFT JOIN tags tt
+        ON  t.category_id = tt.id
+        LEFT JOIN tag_categories tc
+        ON t.category_id  = tc.id
+        LEFT JOIN tag_categories tcn
+        ON tc.master_category_id = tcn.id
+        '; 
 
-LEFT JOIN tag_categories tcn
-ON tc.master_category_id = tcn.id
-
-LEFT JOIN company_tags ct
-ON t.id = ct.tag_id
-
-LEFT JOIN contact_tags cont
-ON t.id = cont.tag_id
-
-WHERE t.tag_type=1 
-AND t.category_id=43'; 
          $query = $this->db->query($sql);
-      return json_encode($query->result_array()); 
+           $query =   $query->result_array();
+
+        return json_encode($query); 
+
+    }
+    
+    function fegetcategories()
+    {
+        
+        $sql = 'SELECT name as  par_name FROM tag_categories  WHERE master_category_id IS NULL'; 
+
+        $query = $this->db->query($sql);
+
+        $query = $query->result_array();
+
+        return json_encode($query); 
+        
+    }
+    
+    
+     function fegettags()
+    {
+        
+        $sql = 'SELECT t.name, ct.id as tag_id FROM company_tags  ct
+LEFT JOIN tags t
+ON ct.tag_id= t.id
+WHERE ct.company_id=154537 AND  ct.eff_to >= DATE(NOW()) OR  ct.eff_to IS NULL'; 
+ 
+        $query = $this->db->query($sql);
+
+        $query = $query->result_array();
+
+        return json_encode($query); 
+        
+    }
+    
+    
+    function feAddTag($post, $userID)
+    {
+        
+        $getTagEffFromDate  = $this->getTagEffFromDate($post['tagid']);
+        $checkForDuplicateEntry = $this->checkForDuplicateEntry($post['tagid'],$post['companyID']);
+        
+        if($checkForDuplicateEntry){
+        
+            $arrSql = array(
+            'tag_id' => $post['tagid'],
+                 'eff_from' => $getTagEffFromDate,
+                 'created_by' => $userID,
+                'company_id' => $post['companyID']
+            );
+            $this->db->insert('company_tags', $arrSql);
+            return json_encode(array('success' => 'ok'));
+        }else{
+            
+           return json_encode(array('error' => 'This Company tag already exist')); 
             
         }
+    }
+    
+    
+    function getTagEffFromDate($id)
+    {
+        
+        $query = $this->db->query("SELECT eff_from FROM tags WHERE id='".$id."' LIMIT 1");
+            if($query->num_rows() > 0){
+                $row = $query->row(); 
+                return $row->eff_from;
+            }
+    }
+    
+    function checkForDuplicateEntry($id,$compID)
+    {
+        
+     $sql = 'SELECT id, eff_to, updated_by FROM company_tags
+        WHERE tag_id='.$id.'
+         AND company_id ='.$compID.'
+         ORDER by eff_to DESC
+         LIMIT 1
+         ';
+        
+        $query = $this->db->query($sql);
+        if($query->num_rows() > 0){
+            
+         
+            
+            $row = $query->row();
+            
+            
+               if($row->eff_to >= date('Y-m-d')   ||  $row->eff_to == ''){
+                   
+            return false;
+               }else{
+                   
+                   return true;
+               }
+        }else{
+           return  true;
+        }
+    }
+        
+        
+    function feDeleteTag($post,$userID){
+        $id = $post['datatagid'];
+        $comp_id =  $post['comp_id'];
+        $data = array(
+            'eff_to' => date('Y-m-d', strtotime('-2 day', strtotime(date('Y-m-d')))),
+            'updated_by' =>$userID,
+            'updated_at' =>date('Y-m-d'),
+            'company_id' => $comp_id
+            );
+
+$this->db->where('id', $id);
+        
+$this->db->update('company_tags', $data); 
+             return json_encode(array('success' => $id));
+    }
     
     
 }

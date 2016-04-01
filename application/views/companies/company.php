@@ -522,6 +522,9 @@ if ($your_date < $now){; ?>
 		<!-- /.panel-body -->
 		</div>
 		</div>
+        
+        
+
 
 		<!--ACTIONS-->
 		<div class="col-md-12" id="add_action">
@@ -610,6 +613,159 @@ if ($your_date < $now){; ?>
 		  </div>
 		</div>
 		</div>
+        
+                  <!-- TAGGING  START-->
+        
+        <div class="tag-tabs">
+  <div class="col-lg-12">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+			Tagging
+			</div>
+        <!-- /.panel-heading -->
+        <div class="panel-body">
+               
+         <div>
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active activein"><a href="#cat1"  class="cat1" aria-controls="cat1" role="tab" data-toggle="tab"> </a></li>
+    <li role="presentation"><a href="#cat2" class="cat2" aria-controls="cat2" role="tab" data-toggle="tab"> </a></li>
+    <li role="presentation"><a href="#cat3"  class="cat3" aria-controls="cat3" role="tab" data-toggle="tab"> </a></li>
+    <li role="presentation"><a href="#cat4"  class="cat4" aria-controls="cat4" role="tab" data-toggle="tab"> </a></li>
+      <li role="presentation"><a href="#cat5"  class="cat5" aria-controls="cat5" role="tab" data-toggle="tab"> </a></li>
+    <li role="presentation"><a href="#cat6"  class="cat6" aria-controls="cat6" role="tab" data-toggle="tab"> </a></li>
+  </ul>
+
+  <!-- Tab panes -->
+             <div class=" col-lg-12 tafixed">
+                  <p align="center" style="
+    margin-left: 35px;
+">Tags</p>
+              
+             </div>
+             <div class="tadefault col-lg-12">
+                 
+                    <p>Tags are used to provide <span>Sonovate</span> with a better insigt into current and potential clients. Tags are snippets of text that describe a company's business. Tags are snippets of text that describe a company's business.  </p>
+                </div>
+             
+             <div class="col-lg-6">
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="cat1">    
+        <div class="col-lg-5">  
+            <div id="" class="tagContainer"> 
+                <ul class="list-group main">
+                </ul>
+            </div>
+        </div>
+    <div class="col-lg-5">  
+        <div id="" class="tagContainer"> 
+            <ul class="list-group sub">
+            </ul>
+        </div>
+    </div>
+ 
+</div>
+<div role="tabpanel" class="tab-pane" id="cat2">
+    <div class="col-lg-5">  
+        <div id="" class="tagContainer"> 
+            <ul class="list-group main">
+            </ul>
+        </div>
+    </div>
+    <div class="col-lg-5">  
+        <div id="" class="tagContainer"> 
+            <ul class="list-group sub">
+            </ul>
+        </div>
+    </div>
+   
+</div>
+<div role="tabpanel" class="tab-pane" id="cat3">
+    <div class="col-lg-6">  
+        <div id="" class="tagContainer"> 
+            <ul class="list-group main">
+            </ul>
+        </div>
+    </div>
+    <div class="col-lg-5">  
+        <div id="" class="tagContainer"> 
+            <ul class="list-group sub">
+            </ul>
+        </div>
+    </div>
+    
+</div>
+<div role="tabpanel" class="tab-pane" id="cat4">
+    <div class="col-lg-6">  
+        <div id="" class="tagContainer"> 
+            <ul class="list-group main">
+            </ul>
+        </div>
+    </div>
+    <div class="col-lg-5">  
+        <div id="" class="tagContainer"> 
+            <ul class="list-group sub">
+            </ul>
+        </div>
+    </div>
+    
+</div>
+<div role="tabpanel" class="tab-pane" id="cat5">
+    <div class="col-lg-6">  
+        <div id="" class="tagContainer"> 
+            <ul class="list-group main">
+            </ul>
+        </div>
+    </div>
+    <div class="col-lg-5">  
+        <div id="" class="tagContainer"> 
+            <ul class="list-group sub">
+            </ul>
+        </div>
+    </div>
+   
+</div>
+<div role="tabpanel" class="tab-pane" id="cat6">
+    <div class="col-lg-6">  
+        <div id="" class="tagContainer"> 
+            <ul class="list-group main">
+            </ul>
+        </div>
+    </div>
+    <div class="col-lg-5">  
+        <div id="" class="tagContainer"> 
+            <ul class="list-group sub">
+            </ul>
+        </div>
+    </div>
+   
+</div>
+</div>
+             </div>    
+</div>   
+            <div class="col-lg-6"> 
+                
+                <h4 class="ta"></h4>
+            
+             
+                <ul id="fetags">
+                    
+                    </ul>
+                
+                </div></div>
+       
+        </div>   
+        </div>
+       
+    </div>
+        
+        
+        <!--TAGGING END -->
+        
+        
+        
+        
 			<div class="col-md-12" >
 		<div class="panel panel-default " id="actions">
 			<div class="panel-heading">
@@ -1053,8 +1209,29 @@ echo form_open(site_url().'actions/create', 'name="create" class="" role=""',$hi
 			<!--END TABS-->
 		  	</div>
 		</div>
+        
+        
+            
+
+    <!-- /.panel -->
+    
+  </div>
+        
 	</div>
+    
+    
+    
+    
+    
+    
 </div><!--CLOSE ROW-->
+    
+    
+    
+
+
+    
+    
 </div>
     
     
@@ -1064,3 +1241,4 @@ echo form_open(site_url().'actions/create', 'name="create" class="" role=""',$hi
     
     
 </div>
+ 

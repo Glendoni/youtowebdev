@@ -15,10 +15,6 @@ $('.tagName').each(function(e,i){
   //arr.push()
 })
 
-
-
-
-
 // display all values
 for (var i = 0; i < arr.length; i++) {
     console.log(arr[i]);
@@ -36,33 +32,21 @@ function reverseString(str) {
 }
 
 
-
-
-
-
 function editName(){
     
         $('.cr_switch form').on('submit',function(event){
-            
-           
-           
         event.preventDefault()
         // $( this ).off( event );
-       
-            
- 
-        
-         
         var obj =  $(this).serialize();
             var url = false;
             
         if($(".cr_switch").hasClass('create')){
-            url = "categories/create";
+            url = "tag_categories/create";
               }else if($(".cr_switch").hasClass('edit_cat')){
-            url = "categories/edit";   
+            url = "tag_categories/edit";   
     
         }else if($(".cr_switch").hasClass('add_tag')){
-            url = "categories/addTag";   
+            url = "tag_categories/addTag";   
     
         }else{
             
@@ -70,11 +54,11 @@ function editName(){
         }
             
         if($(".cr_switch").hasClass('create_sub') ){
-            url = "categories/sub";   
+            url = "tag_categories/sub";   
           }
             
             if($(".cr_switch").hasClass('edit_tag') ){
-            url = "categories/editTag";   
+            url = "tag_categories/editTag";   
           }
         
        // alert(url);
@@ -119,9 +103,7 @@ function editName(){
 
 }
 
- 
-
-function loadCatList(test = 'test'){
+function loadCatList(test = 'tag_cat'){
     //console.log('Whhhhhy');
     $('#tagCatList').html('');
              $.ajax({
@@ -153,7 +135,7 @@ function loadCatList(test = 'test'){
                 }
                    
                 
-                items.push('<tr><th scope="row">'+(key +1)+'</th><td>'+main +'</td><td>'+sub+'</td><td>-</td><td > '+editBtn+' </td></tr>');  
+                items.push('<tr><th scope="row">'+(key +1)+'</th><td>'+main +'</td><td colspan="2">'+sub+'</td><td> '+editBtn+' </td></tr>');  
                 
            
             });
@@ -246,9 +228,6 @@ function getTags(id = false){
 }
 
 
-
-
-
     function tagRemove(){
 
         $('.tagRemove').on('click',function(){
@@ -309,11 +288,8 @@ $(".cr_switch").addClass('edit_tag');
     }) 
 
     $( this ).off( event );
-
-  
     
 }
-
 
 
 function btn(){
@@ -350,8 +326,6 @@ $('.addTagBtn').hide();
         $('.tagtitle').html('Add Sub Category To: <strong>'+edit[1]+'<strong>');
         $("html, body").animate({ scrollTop: 0 }, "slow");
     })
-
-        
             
             $('.edit').click(function(e){
                 $('.addTagBtn').hide();
@@ -369,8 +343,6 @@ $('.addTagBtn').hide();
                 $('.tagstitle').html('&nbsp;');
                 $('.tags li').hide();
                     edit = edit.split('_');
-            
-        
 
             $('input').val('');
 
@@ -389,9 +361,6 @@ $('.tagtitle').html('Edit Sub Category Of: <strong>'+edit[1]+'</strong>')
             $('#name').val(edit[1]);
         }
 
-
-
-
         $('#eff_from').val(edit[2]);
         if(edit[3] != 'null') {$('#eff_to').val(edit[3])}
         console.log(edit[3]); 
@@ -405,47 +374,21 @@ $('.tagtitle').html('Edit Sub Category Of: <strong>'+edit[1]+'</strong>')
     swticher()
    
 }
-
-
-
-
-
 function categoryListings(){
-    
-  
+     
    $( ".cr_switch_titlerss" ).click(function(e){
 
       e.preventDefault();
        
        //alert('Glen')
     })  
-    
 
 }
-
- 
-
-    function rta(){ // deal with setting up the inteface and manging changes
-        
-        
-          
+    function rta(){ // deal with setting up the inteface and manging changes      
         $( ".cr_switch_title" ).click(function(){
          
       $('#sender').attr("disabled", false)
-       $('input').attr("disabled", false)
-       
-       
-        //$(".cr_switch").removeClass("create");
-        //$(".cr_switch").removeClass('create_sub');
-          //$(".cr_switch").removeClass('add_tag');
-       
-       //$('.cr_switch').addClass("create_sub");
-              
-        //$('input').val('');
-        
-    //$(".cr_switch").toggleClass("create");
-    //$('.cr_switch').toggleClass("create_sub");
-               
+       $('input').attr("disabled", false)         
   
     if( $('.edit').hasClass('edit_cat')){
        
@@ -460,18 +403,9 @@ function categoryListings(){
     $('.edit').removeClass('create_sub');
        
        }
-       
-
  
-       
-// btn()
-
-    }); 
-
-        
+    });  
     }  
-
-
 function addTag(){
     
     var tagCatId  = $('.addTagBtn').attr('tag-cat-id');
@@ -519,15 +453,9 @@ function swticher(){
     
     $('#sender').attr("disabled", 'disable')
      $('input').attr("disabled", 'disable')
-      
-   
-     
+    
     $('.edit').addClass('edit_cat');
  
-    
-    
-    
-     
          $('.cr_switch_titler').click(function(){
              
               $('.addTagBtn').show();
@@ -537,16 +465,6 @@ function swticher(){
       $('.tagtitle').html('&nbsp;');
               $('.addTagBtn').attr("disabled", false);
 
-           
-            // alert();
-             
-    //$('.edit').toggleClass('create_sub');
-          
-             
-               //  $(".cr_switch").removeClass('create');
-    //$(".cr_switch").removeClass('edit_cat');
-      //        $(".cr_switch").removeClass('add_tag');
-    //$(".tagtitle").html('');
              
              var subID =  $(this).attr('sub-data');
              var tag_title = $(this).text();
@@ -576,5 +494,24 @@ function swticher(){
                 $("html, body").animate({ scrollTop: 272 }, "fast");
          })
 }
+
+$(document).ready(function(){
+  
+    
+//Teporary Hack to make list visible 
+
+ 
+    
+     loadCatList()
+      //categoryListings();
+
+ //rta()
+
+ 
+    
+  
+
+    
+})
 
 

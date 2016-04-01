@@ -50,6 +50,27 @@
 <!--FORMAT NUMBERS WITH COMMAS (ADD CLASS NUMBER TO INPUT)-->
     <script type="text/javascript" src="<?php echo asset_url();?>js/format-numbers.js"></script>
  <script src="<?php echo asset_url();?>js/bootbox.js"></script>
+
+
+<script src="<?php echo asset_url();?>js/fe_tagging.js"></script>
+
+ 
+<SCRIPT>
+    
+$(document).ready(function(){
+    
+$('#myTabs a').click(function (e) {
+  e.preventDefault()
+  $(this).tab('show')
+})
+    
+    
+})
+
+</SCRIPT>
+
+
+
 <!--EMAIL DUPLICATE CHECK-->
  <script type="text/javascript">
     $(document).ready(function() {
