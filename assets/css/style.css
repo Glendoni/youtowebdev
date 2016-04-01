@@ -1499,3 +1499,14 @@ span.tagRemove:hover { color: #222222; }
     border-left-color: #ccc;
     
 }
+
+.indicator {
+float:right;
+color:green;
+    display:none;
+}
+
+.indicatorshow{
+   float:right;
+color:green; 
+}

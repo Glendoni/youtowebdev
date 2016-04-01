@@ -5,6 +5,8 @@ $(document).ready(function(){
         
         $('.active').removeClass('activein');
         $('.tadefault').hide()
+        
+        $('.indicatorshow').hide();
         $('.main .list-group-item').show()
        $('.sub .list-group-item').hide()  
     })
@@ -134,6 +136,12 @@ function populate(){
            //scScroll()
         
             $('.list-group-item').dblclick(function(){
+               
+               
+               if($(this).parents('.main').length){
+                   $('.indicatorshow').text('');
+                $(this).prepend('<span class="indicatorshow">o</span>');
+               }
                
               $('.tadefault').hide()
                 var subid = $(this).attr('data');
