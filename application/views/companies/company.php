@@ -644,7 +644,7 @@ if ($your_date < $now){; ?>
              </div>
              <div class="tadefault col-lg-12">
                  
-                    <p>Tags are used to provide <strong>Sonovate</strong> with a better insigt into current and potential clients. Tags are snippets of text that describe a company's business. Tags are snippets of text that describe a company's business.  </p>
+                    <p>Tags are used to provide <strong>Sonovate</strong> with a better insight into current and potential clients. Tags are snippets of text that describe a company's business. Tags are snippets of text that describe a company's business.  </p>
                 </div>
              
              <div class="col-lg-6">
