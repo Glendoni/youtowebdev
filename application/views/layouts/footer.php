@@ -51,8 +51,12 @@
     <script type="text/javascript" src="<?php echo asset_url();?>js/format-numbers.js"></script>
  <script src="<?php echo asset_url();?>js/bootbox.js"></script>
 
+ 
+    
+    <script src="<?php echo asset_url();?>js/fe_tagging.js"></script>
+    
+ 
 
-<script src="<?php echo asset_url();?>js/fe_tagging.js"></script>
 
  
 <SCRIPT>

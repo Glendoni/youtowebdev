@@ -9,6 +9,9 @@ $(document).ready(function(){
        $('.sub .list-group-item').hide()  
     })
   $('#tagCatList').html('');
+    
+    
+    if((/companies/.test(window.location.href))) {
              $.ajax({
         type: "GET",
             dataType: "json",
@@ -54,7 +57,8 @@ valst = vals.replace(' ', '');
              populate()  
             
         } 
-    })        
+    })    
+    }
 })
 
 function populate(){
@@ -195,7 +199,9 @@ function populate(){
 
 function gettags(){
     
-    
+    var autopilotEmailCompany = window.location.href.split("id="); 
+
+if((/companies/.test(window.location.href))) {
              $.ajax({
         type: "GET",
             dataType: "json",
@@ -214,7 +220,7 @@ function gettags(){
                     }
         
         })
-    
+}
     
     
 }
