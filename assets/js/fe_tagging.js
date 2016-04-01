@@ -221,7 +221,7 @@ if((/companies/.test(window.location.href))) {
             dataType: "json",
         url: 'fe_get_tag',
         success: function(data) {
-            console.log(data)
+            //console.log(data)
              $.each( data, function( key, val ) {
            
                 $('#fetags').append('<li class="addedTag tag'+val['tag_id']+' " style="float:left;"><span class="tagName"></span>'+val['name']+'<span class="tagRemove" data-tag="'+val['tag_id']+'">x</span></li>');
