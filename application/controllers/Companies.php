@@ -619,7 +619,9 @@ $this->load->helper('url');
     //Add Categories
     public function tag_categories($route =false)
     {
-    
+    if (!$current_user['permission'] == 'admin'){
+        exit('wrong access permission ')
+    } 
         if($this->input->post() != NULL){
             
             $this->form_validation->set_rules('name', 'Name', 'required');
