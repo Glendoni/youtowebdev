@@ -6,7 +6,7 @@
         <div class="modal-content">
         	<div class="modal-header">
 	        	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-	        	<h4 class="modal-title">Edit Address</h4>
+	        	<h4 class="modal-title">Edit Location</h4>
 	      	</div>
 	      	<?php $hidden = array('address_id' => $address->addressid , 'user_id' => $current_user['id'],'update_address'=>'1','company_id'=>$address->company_id );
 				 echo form_open(site_url().'companies/update_address', 'name="update_address" class="form" role="form"',$hidden); ?>
@@ -43,11 +43,11 @@
 				 </div>
 	      	</div>
 	      	<div class="modal-footer">
-	        	<button type="submit" class="btn btn-sm btn-warning btn-block">Save</button>
+	        	<button type="submit" class="btn btn-sm btn-warning btn-block">Add Location</button>
 	      	</div>
             <div class="modal-footer">
             <div><small>
-            <?php echo $address->addresses_updated_at? '<b>Last Updated:</b> - '.$address->addresses_updated_at. ' '.$address->updated_by_user : ''; ?></small></div><div><small><b>Record Created:</b> <?php echo $address->addresses_created_at; ?>  - <?php echo $address->created_by_user; ?></small></div>
+            <?php echo $address->addresses_updated_at? '<b>Last Updated:</b> - '.$address->addresses_updated_at. ' '.$address->updated_by_user : ''; ?></small></div><div><small><b>Address Created:</b> <?php echo $address->addresses_created_at; ?>  - <?php echo $address->created_by_user; ?></small></div>
                 
             </div>
 	      	<?php echo form_close(); ?>

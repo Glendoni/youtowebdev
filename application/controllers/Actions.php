@@ -183,8 +183,10 @@ else
 				}else{
 					$this->set_message_error(validation_errors());
 				}
+
 				redirect('companies/company?id='.$this->input->post('company_id').$campaign_redirect.'#actions','location');
 			}
+
 			else if($this->input->post('action_do') == 'cancelled')
 			{	
 				$outcome = $this->input->post('outcome');
@@ -197,7 +199,11 @@ else
 				{
 					$this->set_message_warning('Error while canceling action');
 				}
+			if (empty($this->input->post('page'))) {
 				redirect('companies/company?id='.$this->input->post('company_id'),'location');
+			}
+			else
+			{redirect('/dashboard#calls','location');}
 			}
 		}
 	}

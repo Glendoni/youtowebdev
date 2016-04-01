@@ -1,6 +1,6 @@
 
 <?php if($contact->linkedin_id): ?>
-<a href="https://www.linkedin.com/profile/view?id=<?php echo $contact->linkedin_id; ?>" target="_blank" type="button" class="btn btn-xs" style="background-color:#0077b5; color:#fff;">
+<a href="<?php echo $contact->linkedin_id; ?>" target="_blank" type="button" class="btn btn-xs" style="background-color:#0077b5; color:#fff;">
     <i class="fa fa-linkedin-square"></i> LinkedIn
 </a>
 <?php endif;?>
@@ -139,7 +139,7 @@
 	                <div class="col-md-6">
 	                    <div class="form-group">
 	                        <label for="linkedin_id" class="control-label">LinkedIn ID</label>                            
-	                        <input type="text" name="linkedin_id" value="<?php echo isset($contact->linkedin_id)?$contact->linkedin_id:''; ?>" maxlength="50" class="form-control">
+	                        <input type="text" name="linkedin_id" value="<?php echo isset($contact->linkedin_id)?$contact->linkedin_id:''; ?>" maxlength="200" class="form-control">
 	                    </div>
 	                </div>
 	                <div class="col-md-6">
@@ -175,7 +175,7 @@
             <div class="modal-footer">
             <div><small>
              <?php echo $contact->updated_by? '<b>Last Updated:</b>'. $contact->contact_updated_at.' - '.$contact->updated_by  : ''; ?></small></div><div><small>
-                <b>Record Created:</b> <?php echo $contact->contact_created_at; ?> - <?php echo $contact->created_by; ?></small></div>
+                <b>Contact Created:</b> <?php echo $contact->contact_created_at; ?> - <?php echo $contact->created_by; ?></small></div>
                 
             </div>
 	      	<?php echo form_close(); ?>

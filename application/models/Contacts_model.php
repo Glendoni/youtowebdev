@@ -43,11 +43,11 @@ function get_contacts_s($company_id)
 		//$this->db->or_where('eff_to', null);
     
     
-    $sql = "SELECT contacts.*, usr_created_by.name as created_by,  usr_updated_by.name as updated_by, to_char(contacts.updated_at, 'DD/MM/YYYY') as contact_updated_at, to_char(contacts.created_at, 'DD/MM/YYYY') as contact_created_at
+$sql = "SELECT contacts.*, usr_created_by.name as created_by,  usr_updated_by.name as updated_by, to_char(contacts.updated_at, 'DD/MM/YYYY') as contact_updated_at, to_char(contacts.created_at, 'DD/MM/YYYY') as contact_created_at
 FROM contacts
 LEFT JOIN users as usr_updated_by  ON contacts.updated_by=usr_updated_by.id
 LEFT JOIN users as usr_created_by  ON contacts.created_by=usr_created_by.id
-WHERE contacts.company_id=".$company_id;
+WHERE contacts.company_id=".$company_id." order by last_name asc";
     
   
      $result = $this->db->query($sql);
@@ -69,15 +69,17 @@ WHERE contacts.company_id=".$company_id;
         $contact->role =  ltrim($role);
         $contact->company_id = $company_id;
         $contact->created_by = $created_by;
-        $contact->linkedin_id = $linkedin_id;
-        $parts = explode("&",$linkedin_id); 
-		$li_id = $parts['0']; 
-        if(strpos($linkedin_id, '&') !== false) {
-		$revised_linkedin_id = str_replace(array('.', ','), '' , preg_replace('/[^0-9,..]/i', '', $li_id));
-		} else {
-		$revised_linkedin_id = str_replace(array('.', ','), '' , preg_replace('/[^0-9,..]/i', '', $li_id));
-		}
-        $contact->linkedin_id = !empty($revised_linkedin_id)?$revised_linkedin_id:NULL;
+        //$contact->linkedin_id = $linkedin_id;
+        $parts = explode("?",$linkedin_id); 
+		$li_id = $parts['0'];
+		$contact->linkedin_id = $li_id;
+
+        //if(strpos($linkedin_id, '&') !== false) {
+		//$revised_linkedin_id = str_replace(array('.', ','), '' , preg_replace('/[^0-9,..]/i', '', $li_id));
+		//} else {
+		//$revised_linkedin_id = str_replace(array('.', ','), '' , preg_replace('/[^0-9,..]/i', '', $li_id));
+		//}
+        //$contact->linkedin_id = !empty($revised_linkedin_id)?$revised_linkedin_id:NULL;
 		$this->db->insert('contacts', $contact);
         $new_id = $this->db->insert_id();
         $rows = $this->db->affected_rows();
@@ -94,13 +96,13 @@ WHERE contacts.company_id=".$company_id;
         $contact->email = !empty($post['email'])?$post['email']:NULL;
         $contact->phone = !empty($post['phone'])?$post['phone']:NULL;
         $linkedin_id = $post['linkedin_id'];
-        $parts = explode("&",$linkedin_id); 
+        $parts = explode("?",$linkedin_id); 
 		$li_id = $parts['0']; 
-        if(strpos($linkedin_id, '&') !== false) {
-		$revised_linkedin_id = str_replace(array('.', ','), '' , preg_replace('/[^0-9,..]/i', '', $li_id));
-		} else {
-		$revised_linkedin_id = str_replace(array('.', ','), '' , preg_replace('/[^0-9,..]/i', '', $li_id));
-		}
+        //if(strpos($linkedin_id, '&') !== false) {
+		//$revised_linkedin_id = str_replace(array('.', ','), '' , preg_replace('/[^0-9,..]/i', '', $li_id));
+		//} else {
+		//$revised_linkedin_id = str_replace(array('.', ','), '' , preg_replace('/[^0-9,..]/i', '', $li_id));
+		//}
 		if($post['eff_to'] == 1) {
         $contact->eff_to = date('Y-m-d');
 		}
@@ -115,7 +117,8 @@ WHERE contacts.company_id=".$company_id;
 		$contact->email_opt_out_user = $post['user_id'];
 
 		};
-		$contact->linkedin_id = (!empty($revised_linkedin_id)?$revised_linkedin_id:NULL);
+		//$contact->linkedin_id = (!empty($revised_linkedin_id)?$revised_linkedin_id:NULL);
+		$contact->linkedin_id = $li_id;
         $contact->updated_by = $post['user_id'];
         $contact->updated_at = date('Y-m-d H:i:s');
         $this->db->where('id', $post['contact_id']);
