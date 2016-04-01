@@ -210,8 +210,14 @@ function gettags(){
     var autopilotEmailCompany = window.location.href.split("id="); 
 
 if((/companies/.test(window.location.href))) {
+    
+    
+     var myParam = window.location.href.split("id=");
+    
+     var para = {'companyID': myParam[1]};
              $.ajax({
-        type: "GET",
+        type: "POST",
+            data: para,
             dataType: "json",
         url: 'fe_get_tag',
         success: function(data) {

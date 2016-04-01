@@ -806,7 +806,7 @@ echo $this->Tagging_model->$route($post);
   function fe_get_tag()
     {
        
-        echo   $this->Tagging_model->fegettags();
+        echo   $this->Tagging_model->fegettags($this->input->post(), $this->userid);
         
     }
     function fe_add_tag()

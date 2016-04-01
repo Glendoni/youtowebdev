@@ -312,7 +312,6 @@ ON tc.id = t.category_id
         tcn.id as sub_parent_cat_id ,
         tc.id as tac_sub_cat_id,
         tc.name as sub_cat_name,
-          
         t.id as tag_id, 
         t.tag_type, 
         t.eff_from,
@@ -325,6 +324,13 @@ ON tc.id = t.category_id
         ON t.category_id  = tc.id
         LEFT JOIN tag_categories tcn
         ON tc.master_category_id = tcn.id
+        WHERE tc.eff_from <= DATE(NOW()) 
+        AND t.eff_from <= DATE(NOW()) 
+        AND  (tc.eff_to >= DATE(NOW()) or  tc.eff_to IS NULL) 
+	 AND  (t.eff_to >= DATE(NOW()) or  t.eff_to IS NULL)  
+        
+        
+        
         '; 
 
          $query = $this->db->query($sql);
@@ -348,20 +354,26 @@ ON tc.id = t.category_id
     }
     
     
-     function fegettags()
+     function fegettags($post, $userID)
     {
         
-        $sql = 'SELECT t.name, ct.id as tag_id FROM company_tags  ct
-LEFT JOIN tags t
-ON ct.tag_id= t.id
-WHERE ct.company_id=154537 AND  ct.eff_to >= DATE(NOW()) OR  ct.eff_to IS NULL'; 
- 
+        $sql = 'SELECT t.name, ct.id as tag_id 
+        FROM company_tags  ct
+        LEFT JOIN tags t
+        ON ct.tag_id= t.id
+        LEFT JOIN tag_categories tc
+        ON t.category_id = tc.id
+        WHERE ct.company_id='.$post['companyID'].' 
+        AND ct.eff_from <= DATE(NOW()) 
+        AND ct.eff_to IS NULL 
+        AND t.eff_from <= DATE(NOW()) 
+        AND t.eff_to IS NULL'; 
+         
         $query = $this->db->query($sql);
 
         $query = $query->result_array();
 
-        return json_encode($query); 
-        
+        return json_encode($query);    
     }
     
     
