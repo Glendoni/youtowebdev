@@ -127,7 +127,7 @@
                     <a href="<?php echo base_url(); ?>email_templates/" ><i class="fa fa-envelope"></i> Manage Email Templates</a>
                 </li>
                           <li>
-                    <a href="<?php echo base_url(); ?>tagging" ><i class="fa fa-plus-circle"></i> Tagging</a>
+                    <a href="<?php echo base_url(); ?>tagging/tag_categories" ><i class="fa fa-plus-circle"></i> Tagging</a>
                 </li>
                 <li class="divider"></li>
                 <?php endif; ?>
