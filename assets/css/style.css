@@ -1398,4 +1398,104 @@ span.tagRemove {
 
 span.tagRemove:hover { color: #222222; }
 
+.tagContainer{     
+    overflow-y: scroll !important;
+    padding-top: 0px;
+    margin-top: 0px;
+}
+ 
+.sub_group{
+    
+    display:none;
+}
+.sub{
+    
+        padding-left: 59px;
+    
+}
 
+.italicFont{
+    
+    font-style: italic;
+}
+.tagContainer li{
+    
+    line-height: 0px;
+    
+}
+.tag-tabs .nav-tabs>li {
+    float: left;
+    margin-bottom: -1px;
+    background: aliceblue;
+}
+
+.tag-tabs .nav-tabs>li.active>a, .tag-tabs .nav-tabs>li.active>a:hover, .tag-tabs .nav-tabs>li.active>a:focus {
+    background-color: #428BCA;
+    color: #fff;
+}
+    .ta{text-align: center; display:none;}
+    
+ .tag-tabs .nav-tabs>li.activein>a, .tag-tabs .nav-tabs>li.activein>a:hover, .tag-tabs .nav-tabs>li.activein>a:focus {
+    background-color: #F0F8FF;
+    color: #020202;
+}   
+    .tagName{
+        
+        text-transform: capitalize;
+    }
+    
+.stop-scrolling {
+  height: 100% !important;
+  overflow: hidden ;
+}
+    
+ body.noscroll
+{
+    position: fixed; 
+    overflow-y: scroll;
+    width: 100%;
+}
+    
+    #cat1 .list-group-item{
+        
+        display:none;
+    }
+    
+    .tadefault{
+        color: darkgrey;
+        font-weight: 100;
+        font-size: 1.2em;
+        padding-top: 30px;
+        display:none;
+         text-align: center;
+    }
+    
+    
+     
+    
+    .tadefault span{
+        display:none;
+        color:#428BCA;
+        
+    }
+.tafixed{
+    
+    display:none;
+}
+    .addedTag{
+    margin:1px;
+    background:#2B4461;
+    color:#fff;
+    font-size:11px;
+}
+#fetags, .tagContainer{ 
+ min-height:200px !important; 
+}
+#fetags{
+    
+   
+        height: 200px;
+    border: solid thin #ffffff;
+    border-left-color: #ccc;
+    
+}

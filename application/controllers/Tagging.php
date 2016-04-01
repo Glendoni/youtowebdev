@@ -8,28 +8,33 @@ class Tagging extends MY_Controller {
 		// Some models are already been loaded on MY_Controller
         $this->userid = $this->data['current_user']['id']; 
         
-        $this->jqScript =  '<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>' ;
+        $this->jqScript =  '<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>' ;
         //$this->input->get('id')
         ///$this->input->post(),$this->data['current_user']['id']
 		 $this->load->model('Tagging_model');
 $this->load->helper('url');
+        $this->load->helper('form');
         $this->load->library('form_validation');
 	}
 	
    function index()
 {
-      $call_taggin_js_file =    asset_url().'js/tagging.js';
-   //echo file_exists(base_url().'assets/tagging.js');
-       $this->data['test'] =   $call_taggin_js_file ;
-       $this->data['jq'] = $this->jqScript;
-       $this->data['so'] =  $this->Tagging_model->add_category();
-       	$this->data['main_content'] = 'tagging/home';
-		$this->load->view('layouts/default_layout', $this->data);	
+    $call_taggin_js_file =    asset_url().'js/tagging.js';
+            //echo file_exists(base_url().'assets/tagging.js');
+            $this->data['jq'] =  $this->jqScript;
+            $this->data['test'] =   $call_taggin_js_file ;
+            $post= array();
+            $post['userID'] = $this->userid;
+            if($route){
+            //echo $this->Tagging_model->$route($post);
+            }
+            $this->data['main_content'] = 'tagging/home';
+            $this->load->view('layouts/default_layout', $this->data); 
        
 }	
     
     //Add Categories
-    public function categories($route =false)
+    public function tag_categories($route =false)
     {
     
         if($this->input->post() != NULL){
@@ -69,11 +74,9 @@ $this->load->helper('url');
                     $msg['eff_from'] = 'This field is required!';
                 }
             
-            
-                if(!$route){
+            if(!$route){
                 $msg['missing_action'] = $route;
             } 
-            
             
             if($route != 'edit'){
                 if(!$checkName){
@@ -113,9 +116,6 @@ $this->load->helper('url');
                     $this->Tagging_model->delete_tag($this->input->post(),$this->userid); 
                 }
                 
-                
-                
-                
                     echo json_encode(array('success' =>$rap ));         
              }else{
                  echo json_encode(array('error' =>$msg )); 
@@ -134,18 +134,13 @@ $this->load->helper('url');
             if($route){
             //echo $this->Tagging_model->$route($post);
             }
-            $this->data['main_content'] = 'tagging/categories';
+            $this->data['main_content'] = 'tagging/home';
             $this->load->view('layouts/default_layout', $this->data);  
+         
         
     }
     
-    
-    public function update(){
-        
-        
-        
-        
-    }
+   
     
     public function tags($route,$post)
     {
@@ -153,90 +148,95 @@ $this->load->helper('url');
     $post= array();
     $post['userID'] = $this->userid;
 
-    //  print_r($this->post());
-
     $this->data['main_content'] = 'tagging/tags';
     $this->load->view('layouts/default_layout', $this->data); 
-    //echo $this->Tagging_model->$route($post); 
+    
     }
 
-    public function contacts($post,$route)
-    {
-    $post= array();
-    $post['userID'] = $this->userid;
+public function contacts($post,$route)
+{
+$post= array();
+$post['userID'] = $this->userid;
 
-    echo $this->Tagging_model->$route($post); 
-    }
-    
-    
-    
-
-    
+echo $this->Tagging_model->$route($post); 
+}
     
     public function distroy($id)
     {
        
-            echo $this->Tagging_model->delete_tag($id); 
+     echo $this->Tagging_model->delete_tag($id); 
     }
     
     
-    
-    
-    
-    
-    
-    
-    
- function test($id =false){
+ function test($id =false)
+ {
      //echo 'Glen';
     echo  $this->Tagging_model->show_category($id);
      
  }
     
     
-    function gettags($id){
-        
+    function gettags($id)
+    {
         //Get main tag listing
         echo  $this->Tagging_model->getEditTags($id); 
         
-        
     }
-    function showtags($id){
-        
+    
+    function showtags($id)
+    {
         
         echo  $this->Tagging_model->show_tag($id); 
-        
-        
+          
     }
-     function _test(){ //loads data
+     function tag_cat($id =false){ //loads tag category: used to get tab headers
      
-    echo  $this->Tagging_model->show_category();
+     echo  $this->Tagging_model->show_category($id);
      
  }
     
+    function fe_tag_index()
+    {
+        
+             $frontend_taging_js =    asset_url().'js/fe_tagging.js';
+        
+        $this->data['fetagging'] =  $frontend_taging_js;
+         $this->data['main_content'] = 'tagging/test';
+        $this->load->view('layouts/default_layout', $this->data); 
+        
+    }
     
-    function fe_read_tag(){
+    function fe_read_tag()
+    {
        
-        
-        echo  $this->Tagging_model->feReadTag();
+        echo   $this->Tagging_model->feReadTag();
         
     }
+    
+    function fe_read_cat()
+    {
+       
+        echo   $this->Tagging_model->fegetcategories();
+        
+    }
+    function fe_get_tag()
+    {
+       
+        echo   $this->Tagging_model->fegettags();
+        
+    }
+    
 
-    function fe_add_tag(){
-        
-        
+    function fe_add_tag()
+    {
+        echo    $this->Tagging_model->feAddTag($this->input->post(), $this->userid);  
     }
     
-    function fe_delete_tag(){
+    function fe_delete_tag()
+    {
+        
+       echo  $this->Tagging_model->feDeleteTag($this->input->post(), $this->userid);
         
         
-        
-        
-    }
-    
-    
-    
-    
-    
-    
+    }    
 }
