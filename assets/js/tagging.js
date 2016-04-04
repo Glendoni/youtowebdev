@@ -184,7 +184,7 @@ function removeTag(tagid){
             dataType: "json",
         url: tagid,
         success: function(data) {
-            alert(data);
+            //alert(data);
             return 'ok';
         }
                  
@@ -305,6 +305,7 @@ $('.addTagBtn').hide();
          $('#name').val('');
       $('#eff_from').val('');
      $('#eff_to').val('');
+           defaultEffToDate()
         $('.addTagBtn').attr("disabled", 'disable');
          $('.tagstitle').html('&nbsp;');
                 $('.tags li').hide();
@@ -419,6 +420,7 @@ function addTag(){
          $('#name').val('');
       $('#eff_from').val('');
      $('#eff_to').val('');
+       defaultEffToDate()
          $('#sender').attr("disabled", false)
        $('input').attr("disabled", false)
         $(".cr_switch").removeClass('create');
@@ -514,4 +516,22 @@ $(document).ready(function(){
     
 })
 
+function defaultEffToDate(){
+    
+ var d = new Date();
 
+var month = d.getMonth()+1;
+var day = d.getDate();
+
+var output = d.getFullYear() + '-' +
+(month<10 ? '0' : '') + month + '-' +
+(day<10 ? '0' : '') + day;
+
+$("#eff_from").val(output);
+
+$('#eff_from').datetimepicker({
+    language: 'en',
+    format: 'dd-MM-yyyy'
+});
+    
+}

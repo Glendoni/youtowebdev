@@ -123,10 +123,31 @@ function populate(){
                               
                           }
                       }
+                   
+                   
+                   
+                 
+                  
+                   
+                   if(val['parent_cat_name'] == null){
+                       
+                     // console.log(val['category_name']+' '+val['name'])
+                      
+                      
+                     parentcatname =   val['category_name'].replace(' ', '')
+                      $('.main_'+parentcatname).append('<li class="list-group-item parent sub_group sub'+val['tac_sub_cat_id']+' " sub="'+val['tag_id']+'">'+val['name']+'</li>');  
+                       
+                   }
+                   
+                   
+                   
+                   if(val['parent_cat_name']){
                  parentcatname =   val['parent_cat_name'].replace(' ', '')
               
               
                   $('.sub_'+parentcatname).append('<li class="list-group-item sub_group sub'+val['tac_sub_cat_id']+' " sub="'+val['tag_id']+'">'+val['name']+'</li>');  
+                       
+                   }
                    
                   
                    
@@ -135,12 +156,14 @@ function populate(){
             
            //scScroll()
         
-            $('.list-group-item').dblclick(function(){
+            $('.list-group-item').click(function(){
                
                
                if($(this).parents('.main').length){
                    $('.indicatorshow').text('');
+                     if(!$(this).hasClass('parent')){
                 $(this).prepend('<span class="indicatorshow">o</span>');
+                     }
                }
                
               $('.tadefault').hide()
@@ -152,9 +175,10 @@ function populate(){
                 }
                  del_ini()
             if(!$(this).hasClass('sub_group')){
+                 $('.parent').removeClass('sub_group');
                 $('.sub_group').hide();
                 $('.sub'+subid).show("slide", { direction: "left" }, 200);
-              
+               $('.parent').addClass('sub_group');
             }else{
                     var myParam = window.location.href.split("id=");
                 var sub = $(this).attr('sub');

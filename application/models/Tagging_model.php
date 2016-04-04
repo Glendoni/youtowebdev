@@ -316,6 +316,7 @@ ON tc.id = t.category_id
         t.tag_type, 
         t.eff_from,
         t.eff_to as eff_to,
+        tc.name as category_name,
         t.name
         FROM tags t
         LEFT JOIN tags tt

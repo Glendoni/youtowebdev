@@ -1399,7 +1399,7 @@ span.tagRemove {
 span.tagRemove:hover { color: #222222; }
 
 .tagContainer{     
-    overflow-y: scroll !important;
+    /* overflow-y: scroll !important; */
     padding-top: 0px;
     margin-top: 0px;
 }
