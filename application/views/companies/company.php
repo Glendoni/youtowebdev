@@ -523,98 +523,7 @@ if ($your_date < $now){; ?>
 		</div>
 		</div>
         
-        
-
-
-		<!--ACTIONS-->
-		<div class="col-md-12" id="add_action">
-		<div class="panel panel-default ">
-		  <div class="panel-heading">Add Action</div>
-		  <div class="panel-body">
-		   <?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'],'done'=>'1','campaign_id' => $campaign_id, 'class_check' => $companies_classes[$company['class']],'source_check' => $company['source'],'sector_check' => count($company['sectors']),);
-			echo form_open(site_url().'actions/create', 'name="create" class="form" role="form"',$hidden); ?>
-			<!--THE BELOW PASSES THE CLASS FIELD ACROSS PURELY FOR VALIDATION - IF THERE IS A BETTER WAY OF DOING THIS THEN IT NEEDS TO BE HERE-->
-			
-			<!--VALIDATION ERROR IF NO ACTION IS SELECTED-->
-
-			<div id="action-error" class="no-source alert alert-warning" role="alert" style="display:none">
-            <strong>Source Required.</strong><br> To add a Deal or Proposal, please add a Source to this company.
-            </div>
-
-<div class="row">
-			<div class="col-sm-3 col-md-3">
-				<div class="form-group ">
-					<label>New Actions</label>
-					<select id="action_type_completed" name="action_type_completed" class="form-control" onchange="commentChange()">
-						<option value="">--- Select an Action ---</option>
-						<?php foreach($action_types_done as $action ): ?>
-						  <option value="<?php echo $action->id; ?>"><?php echo $action->name; ?></option>
-						<?php endforeach; ?>
-					</select>
-				</div>
-			</div>
-    
-    
-    <div class="col-sm-3 col-md-2 initialfee">
-						<div class="form-group ">
-							<label>Initial Fee</label>
-							 
-                            
-                            
-		<div class="input-group">
-      	<input type="number" step="0.01" name="initialfee" class="form-control">
-		<div class="input-group-addon">%</div>
-		</div>
-		</div>
-		</div>
-			<div class="col-sm-3 col-md-3  onInitialFee">
-
-			<?php if(isset($contacts) and !empty($contacts)) : ?>
-				<div class="form-group ">
-					<label>Contact</label>
-					<select name="contact_id" class="form-control">
-						<option value="">--- Select a Contact ---</option>
-						<?php foreach($contacts as $contact ): ?>
-						  <option value="<?php echo $contact->id; ?>"><?php echo ucfirst($contact->first_name).' '.ucfirst($contact->last_name); ?></option>
-						<?php endforeach; ?>
-					</select>
-				</div>
-			
-			<?php endif; ?>
-			</div>
-				
-				 <div class="col-sm-3 col-md-3 onInitialFee">
-					<div class="form-group ">
-						<label>Follow Up Action</label>
-
-						<select id="action_type_planned" name="action_type_planned" class="form-control" onchange="dateRequired()">
-						<option value="">--- No Follow Up ---</option>
-							<?php foreach($action_types_planned as $action ): ?>
-							  <option value="<?php echo $action->id; ?>"><?php echo $action->name; ?></option>
-							<?php endforeach; ?>
-						</select>
-					</div>
-	                </div>
-	                <div class="col-sm-3 col-md-3">
-						<div class="form-group " >
-							<label>Follow Up Date</label>
-							<input type="text" class="form-control follow-up-date" id="planned_at" data-date-format="YYYY/MM/DD H:m" name="planned_at" placeholder="">
-						</div>
-	                </div>
-			<div class="col-sm-12 col-md-12">
-				<div class="form-group ">
-					<label>Outcome</label>
-<textarea class="form-control completed-details" name="comment" rows="3" required="required"></textarea>
-				</div>
-				<button type="submit" name="no contno con" class="btn btn-primary form-control disable_no_source">Add Action</button>
-			</div>
-			<?php echo form_close(); ?>
-			</div>
-		  </div>
-		</div>
-		</div>
-        
-                  <!-- TAGGING  START-->
+        <!-- TAGGING  START-->
         
         <div class="tag-tabs">
   <div class="col-lg-12">
@@ -760,6 +669,97 @@ if ($your_date < $now){; ?>
         
         
         <!--TAGGING END -->
+
+
+		<!--ACTIONS-->
+		<div class="col-md-12" id="add_action">
+		<div class="panel panel-default ">
+		  <div class="panel-heading">Add Action</div>
+		  <div class="panel-body">
+		   <?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'],'done'=>'1','campaign_id' => $campaign_id, 'class_check' => $companies_classes[$company['class']],'source_check' => $company['source'],'sector_check' => count($company['sectors']),);
+			echo form_open(site_url().'actions/create', 'name="create" class="form" role="form"',$hidden); ?>
+			<!--THE BELOW PASSES THE CLASS FIELD ACROSS PURELY FOR VALIDATION - IF THERE IS A BETTER WAY OF DOING THIS THEN IT NEEDS TO BE HERE-->
+			
+			<!--VALIDATION ERROR IF NO ACTION IS SELECTED-->
+
+			<div id="action-error" class="no-source alert alert-warning" role="alert" style="display:none">
+            <strong>Source Required.</strong><br> To add a Deal or Proposal, please add a Source to this company.
+            </div>
+
+<div class="row">
+			<div class="col-sm-3 col-md-3">
+				<div class="form-group ">
+					<label>New Actions</label>
+					<select id="action_type_completed" name="action_type_completed" class="form-control" onchange="commentChange()">
+						<option value="">--- Select an Action ---</option>
+						<?php foreach($action_types_done as $action ): ?>
+						  <option value="<?php echo $action->id; ?>"><?php echo $action->name; ?></option>
+						<?php endforeach; ?>
+					</select>
+				</div>
+			</div>
+    
+    
+    <div class="col-sm-3 col-md-2 initialfee">
+						<div class="form-group ">
+							<label>Initial Fee</label>
+							 
+                            
+                            
+		<div class="input-group">
+      	<input type="number" step="0.01" name="initialfee" class="form-control">
+		<div class="input-group-addon">%</div>
+		</div>
+		</div>
+		</div>
+			<div class="col-sm-3 col-md-3  onInitialFee">
+
+			<?php if(isset($contacts) and !empty($contacts)) : ?>
+				<div class="form-group ">
+					<label>Contact</label>
+					<select name="contact_id" class="form-control">
+						<option value="">--- Select a Contact ---</option>
+						<?php foreach($contacts as $contact ): ?>
+						  <option value="<?php echo $contact->id; ?>"><?php echo ucfirst($contact->first_name).' '.ucfirst($contact->last_name); ?></option>
+						<?php endforeach; ?>
+					</select>
+				</div>
+			
+			<?php endif; ?>
+			</div>
+				
+				 <div class="col-sm-3 col-md-3 onInitialFee">
+					<div class="form-group ">
+						<label>Follow Up Action</label>
+
+						<select id="action_type_planned" name="action_type_planned" class="form-control" onchange="dateRequired()">
+						<option value="">--- No Follow Up ---</option>
+							<?php foreach($action_types_planned as $action ): ?>
+							  <option value="<?php echo $action->id; ?>"><?php echo $action->name; ?></option>
+							<?php endforeach; ?>
+						</select>
+					</div>
+	                </div>
+	                <div class="col-sm-3 col-md-3">
+						<div class="form-group " >
+							<label>Follow Up Date</label>
+							<input type="text" class="form-control follow-up-date" id="planned_at" data-date-format="YYYY/MM/DD H:m" name="planned_at" placeholder="">
+						</div>
+	                </div>
+			<div class="col-sm-12 col-md-12">
+				<div class="form-group ">
+					<label>Outcome</label>
+<textarea class="form-control completed-details" name="comment" rows="3" required="required"></textarea>
+				</div>
+				<button type="submit" name="no contno con" class="btn btn-primary form-control disable_no_source">Add Action</button>
+			</div>
+			<?php echo form_close(); ?>
+			</div>
+		  </div>
+		</div>
+		</div>
+        
+                  
         
         
         

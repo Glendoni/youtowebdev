@@ -150,12 +150,8 @@ ON tc.id = t.category_id
         ON  t.category_id = tt.id
         LEFT JOIN tag_categories tc
         ON t.category_id  = tc.id
-
         LEFT JOIN tag_categories tcn
         ON tc.master_category_id = tcn.id
-
-        
-
         WHERE t.tag_type=1 
         AND t.category_id='.$id;
  
