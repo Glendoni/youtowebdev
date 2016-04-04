@@ -65,7 +65,7 @@ h1 {
                     $catStatus = array('opt1'=>'active','opt2'=>'non-active' );
                     //echo form_dropdown('company_class', $catStatus, (isset($_POST['company_class'])?$_POST['company_class']:'') ,'class="form-control"');
                     ?>
-                    <input type="text" class="form-control follow-up-date planned_at" required="required" id="eff_from" data-date-format="YYYY-MM-DD" name="eff_from" placeholder="date"><span class="catError eff_from"></span>
+                    <input type="text" class="form-control follow-up-date planned_at" required="required" id="eff_from" data-date-format="DD-MM-YYYY" name="eff_from" placeholder="date"><span class="catError eff_from"></span>
                 </div>
 
 
@@ -76,7 +76,7 @@ h1 {
                     $catStatus = array('opt1'=>'active','opt2'=>'non-active' );
                     // echo form_dropdown('company_class', $catStatus, (isset($_POST['company_class'])?$_POST['company_class']:'') ,'class="form-control"');
                     ?>
-                    <input type="text" class="form-control follow-up-date planned_at" data-date-format="YYYY-MM-DD" id="eff_to" name="eff_to" placeholder="optional">
+                    <input type="text" class="form-control follow-up-date planned_at" data-date-format="DD-MM-YYYY" id="eff_to" name="eff_to" placeholder="optional">
                     <span class="catError eff_to"></span>
                 </div>
             </div>
