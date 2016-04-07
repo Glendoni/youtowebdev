@@ -325,6 +325,7 @@ ON tc.id = t.category_id
         AND t.eff_from <= DATE(NOW()) 
         AND  (tc.eff_to >= DATE(NOW()) or  tc.eff_to IS NULL) 
 	 AND  (t.eff_to >= DATE(NOW()) or  t.eff_to IS NULL)  
+   order by category_name desc
         
         
         

@@ -534,38 +534,49 @@ if ($your_date < $now){; ?>
         <!-- /.panel-heading -->
         <div class="panel-body">
                
-         <div>
+	<div>
+
 
   <!-- Nav tabs -->
-  <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active activein"><a href="#cat1"  class="cat1" aria-controls="cat1" role="tab" data-toggle="tab"> </a></li>
+  <!--<ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#cat1"  class="cat1" aria-controls="cat1" role="tab" data-toggle="tab"> </a></li>
     <li role="presentation"><a href="#cat2" class="cat2" aria-controls="cat2" role="tab" data-toggle="tab"> </a></li>
     <li role="presentation"><a href="#cat3"  class="cat3" aria-controls="cat3" role="tab" data-toggle="tab"> </a></li>
     <li role="presentation"><a href="#cat4"  class="cat4" aria-controls="cat4" role="tab" data-toggle="tab"> </a></li>
       <li role="presentation"><a href="#cat5"  class="cat5" aria-controls="cat5" role="tab" data-toggle="tab"> </a></li>
     <li role="presentation"><a href="#cat6"  class="cat6" aria-controls="cat6" role="tab" data-toggle="tab"> </a></li>
-  </ul>
+  </ul>-->
 
   <!-- Tab panes -->
-             <div class=" col-lg-12 tafixed">
+             <!-- <div class=" col-lg-12 tafixed">
                   <p align="center" style="margin-left: 35px;">Tags</p>
               
              </div>
-             <div class="tadefault col-lg-12">
+            <div class="tadefault col-lg-12">
                  
-                    <p>Tags are used to provide <strong>Sonovate</strong> with a better insight into current and potential clients. Tags are snippets of text that describe a company's business. Tags are snippets of text that describe a company's business.  </p>
-                </div>
+                    <p>Tags are used to provide <strong>Sonovate</strong> with a better insight into current and potential clients </p>
+                </div>-->
              
-             <div class="col-lg-6">
+             <div class="col-lg-6 no-padding">
+    <div class="row tag-search-holder ">
+    <div class="col-sm-12">         
+	<form id="live-search" action="" method="post">
+    <fieldset>
+        <input type="text" class="form-control tag-search-form"  id="filter" value="" />
+        <span id="filter-count" class="label label-count label-success"></span>
+    </fieldset>
+</form>
+  </div>
+        </div>
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="cat1">    
-        <div class="col-lg-5">  
+        <div class="col-lg-6 no-padding">  
             <div id="" class="tagContainer"> 
                 <ul class="list-group main">
                 </ul>
             </div>
         </div>
-    <div class="col-lg-5">  
+    <div class="col-lg-6">  
         <div id="" class="tagContainer"> 
             <ul class="list-group sub">
             </ul>

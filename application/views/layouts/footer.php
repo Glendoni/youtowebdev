@@ -388,6 +388,37 @@ $('.nav-tabs ').on('shown.bs.tab', function (e) {
       });    
     function ga(){}
         </script>
+
+    <script type="text/javascript">//<![CDATA[
+$(window).load(function(){
+$(document).ready(function(){
+    $("#filter").keyup(function(){
+ 
+        // Retrieve the input field text and reset the count to zero
+        var filter = $(this).val(), count = 0;
+ 
+        // Loop through the comment list
+        $("ul.main_ProductType li").each(function(){
+ 
+            // If the list item does not contain the text phrase fade it out
+            if ($(this).text().search(new RegExp(filter, "i")) < 0) {
+                $(this).fadeOut();
+ 
+            // Show the list item if the phrase matches and increase the count by 1
+            } else {
+                $(this).show();
+                count++;
+            }
+        });
+ 
+        // Update the count
+        var numberItems = count;
+        $("#filter-count").text(count+" Found");
+    });
+});
+});//]]> 
+
+</script>
 <!--COMBINE MULTIPLE JS FILES-->
 <hr>
 <?php if (isset($current_user)): ?>

@@ -13,8 +13,8 @@ class Companies extends MY_Controller {
         $this->jqScript =  '<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>' ;
         //$this->input->get('id')
         ///$this->input->post(),$this->data['current_user']['id']
-		 $this->load->model('Tagging_model');
-$this->load->helper('url');
+		$this->load->model('Tagging_model');
+		$this->load->helper('url');
         $this->load->helper('form');
         $this->load->library('form_validation');
 	}

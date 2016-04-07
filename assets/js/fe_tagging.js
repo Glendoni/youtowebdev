@@ -102,7 +102,7 @@ function populate(){
 
                  // console.log(vals);
                   sort = vals.split('_');
-                  $('.main_'+sort[1].replace(' ', '')).append('<li class="list-group-item" data="'+sort[2]+'">'+sort[0]+'</li>');   
+                  $('.main_'+sort[1].replace(' ', '')).append('<li class="list-group-item folder" data="'+sort[2]+'">'+sort[0]+'</li>');   
                  })
               // $('.tadefault').show();
              $('.tadefix').hide();
@@ -135,7 +135,7 @@ function populate(){
                       
                       
                      parentcatname =   val['category_name'].replace(' ', '')
-                      $('.main_'+parentcatname).append('<li class="list-group-item parent sub_group sub'+val['tac_sub_cat_id']+' " sub="'+val['tag_id']+'">'+val['name']+'</li>');  
+                      $('.main_'+parentcatname).append('<li class="list-group-item parent sub_group sub'+val['tac_sub_cat_id']+' tag" sub="'+val['tag_id']+'">'+val['name']+'</li>');  
                        
                    }
                    
@@ -145,7 +145,7 @@ function populate(){
                  parentcatname =   val['parent_cat_name'].replace(' ', '')
               
               
-                  $('.sub_'+parentcatname).append('<li class="list-group-item sub_group sub'+val['tac_sub_cat_id']+' " sub="'+val['tag_id']+'">'+val['name']+'</li>');  
+                  $('.sub_'+parentcatname).append('<li class="list-group-item sub_group sub'+val['tac_sub_cat_id']+' inner tag" sub="'+val['tag_id']+'">'+val['name']+'</li>');  
                        
                    }
                    
@@ -158,11 +158,10 @@ function populate(){
         
             $('.list-group-item').click(function(){
                
-               
                if($(this).parents('.main').length){
                    $('.indicatorshow').text('');
                      if(!$(this).hasClass('parent')){
-                $(this).prepend('<span class="indicatorshow">o</span>');
+                $(this).prepend('<span class="indicatorshow"></span>');
                      }
                }
                
@@ -183,7 +182,6 @@ function populate(){
                     var myParam = window.location.href.split("id=");
                 var sub = $(this).attr('sub');
                 
-                   $(this).animate({backgroundColor: "#fff"}, 'slow');
                  $(this).addClass('subActive');
                     //JS JASON WITH POST PARAMETER
                      var para = {'tagid': sub, 'companyID': myParam[1]};
