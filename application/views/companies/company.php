@@ -526,7 +526,7 @@ if ($your_date < $now){; ?>
         <!-- TAGGING  START-->
         
         <div class="tag-tabs">
-  <div class="col-lg-12">
+  <div class="col-md-12">
     <div class="panel panel-default">
         <div class="panel-heading">
 			Tagging
@@ -557,7 +557,7 @@ if ($your_date < $now){; ?>
                     <p>Tags are used to provide <strong>Sonovate</strong> with a better insight into current and potential clients </p>
                 </div>-->
              
-             <div class="col-lg-6 no-padding">
+             <div class="col-sm-6 no-padding">
     <div class="row tag-search-holder ">
     <div class="col-sm-12">         
 	<form id="live-search" action="" method="post">
@@ -570,13 +570,13 @@ if ($your_date < $now){; ?>
         </div>
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="cat1">    
-        <div class="col-lg-6 no-padding">  
+        <div class="col-sm-6 no-padding">  
             <div id="" class="tagContainer"> 
                 <ul class="list-group main">
                 </ul>
             </div>
         </div>
-    <div class="col-lg-6">  
+    <div class="col-sm-6">  
         <div id="" class="tagContainer"> 
             <ul class="list-group sub">
             </ul>
@@ -585,13 +585,13 @@ if ($your_date < $now){; ?>
  
 </div>
 <div role="tabpanel" class="tab-pane" id="cat2">
-    <div class="col-lg-5">  
+    <div class="col-sm-5">  
         <div id="" class="tagContainer"> 
             <ul class="list-group main">
             </ul>
         </div>
     </div>
-    <div class="col-lg-5">  
+    <div class="col-sm-5">  
         <div id="" class="tagContainer"> 
             <ul class="list-group sub">
             </ul>
@@ -662,7 +662,7 @@ if ($your_date < $now){; ?>
 </div>
              </div>    
 </div>   
-            <div class="col-lg-6"> 
+            <div class="col-sm-6"> 
                 
                 <h4 class="ta"></h4>
             
