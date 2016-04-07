@@ -19,14 +19,7 @@ $('.tagName').each(function(e,i){
 for (var i = 0; i < arr.length; i++) {
     console.log(arr[i]);
 }
-
-
-function glen(){
-    
-    alert('Glen');
-}
-
-
+ 
 function reverseString(str) {
     return str.split('').reverse().join('');
 }
@@ -123,9 +116,12 @@ function loadCatList(test = 'tag_cat'){
                  main = '<a href="javascript:;" sub-data="'+val.id+'" class="cr_switch_titler">'+val.name+'</a>';
                 
                 if(val.sub_name != null ) {
+                    
+                    
+                    
                      
                     sub = '<a href="javascript:;" sub-data="'+val.sub_master_id+'" class="cr_switch_titler">'+val.sub_name+'</a>';
-                 editBtn = '<button class="edit edit_cat" tag-data="'+val.sub_master_id+'_'+val.name+'_'+val.cat_eff_from+'_'+val.cat_eff_to+'_'+val.sub_name+'_'+val.id+'" >Edit</button> <button sub-data="'+val.id+'_'+val.name+'_'+val.id+'" class="addSubCatOne">Add New Sub</button> ';
+                 editBtn = '<button class="edit edit_cat" tag-data="'+val.sub_master_id+'_'+val.name+'_'+dateTransformer(val.cat_eff_from)+'_'+dateTransformer(val.cat_eff_to)+'_'+val.sub_name+'_'+val.id+'" >Edit</button> <button sub-data="'+val.id+'_'+val.name+'_'+val.id+'" class="addSubCatOne">Add New Sub</button> ';
                     swticher()
                 }else{
                     editBtn = '-';
@@ -533,5 +529,18 @@ $('#eff_from').datetimepicker({
     language: 'en',
     format: 'dd-MM-yyyy'
 });
+    
+}
+
+function dateTransformer(dateTransform){
+    if(dateTransform){
+    var incomingDate  = dateTransform.split('-');
+    
+    return incomingDate[2]+'-'+incomingDate[1]+'-'+incomingDate[0];
+    }
+    
+    return '';
+    
+    
     
 }

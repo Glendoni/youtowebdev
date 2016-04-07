@@ -15,12 +15,16 @@ class Tagging_model extends MY_Model {
        
          $itemid = $post['itemid'];
         
+        
+        $eff_from = $this->dateTrasnformer($post['eff_from']);
+            $eff_to  = $this->dateTrasnformer($post['eff_to']);
+        
          $data = array(
           'updated_at' => date('Y-m-d H:i:s'),
         'name' => quotes_to_entities(ucwords($post['name'])),
         'master_category_id' => $itemid,
-           'eff_from' => $post['eff_from'],
-           'eff_to' => $post['eff_to'] ? $post['eff_to'] : NULL,
+           'eff_from' => $eff_from,
+           'eff_to' => $eff_to ? $eff_to : NULL,
           'updated_by' => $userID
        );
        
@@ -30,12 +34,15 @@ class Tagging_model extends MY_Model {
     public function add_category($post,$userID)
     {
          
+        
+        $eff_from = $this->dateTrasnformer($post['eff_from']);
+            $eff_to  = $this->dateTrasnformer($post['eff_to']); 
     $data = array(
           'created_at' => date('Y-m-d H:i:s'),
         'name' => quotes_to_entities(ucwords($post['name'])),
         'master_category_id' => $post['create_category'] ? $post['create_category'] : NULL,
-           'eff_from' => $post['eff_from'],
-           'eff_to' => $post['eff_to'] ? trim($post['eff_to']) : NULL,
+           'eff_from' => $eff_from,
+           'eff_to' => $eff_to ? trim($eff_to) : NULL,
           'created_by' => $userID
        );
        
@@ -80,12 +87,16 @@ ON tc.id = t.category_id
         $itemid = $post['itemid'];
         $master = $post['masterID'];
         
+        
+        $eff_from = $this->dateTrasnformer($post['eff_from']);
+            $eff_to  = $this->dateTrasnformer($post['eff_to']); 
+        
          $data = array(
           'updated_at' => date('Y-m-d H:i:s'),
         'name' => quotes_to_entities(ucwords($post['name'])),
         'master_category_id' => $master ? $master : NULL,
-           'eff_from' => trim($post['eff_from']),
-           'eff_to' => trim($post['eff_to']) ? trim($post['eff_to']) : NULL,
+           'eff_from' => trim($eff_from),
+           'eff_to' => trim($eff_to) ? trim($eff_to) : NULL,
           'updated_by' => $userID
        );
        
@@ -103,13 +114,17 @@ ON tc.id = t.category_id
         
          $itemid = $post['itemid'];
         
+        
+         $eff_from = $this->dateTrasnformer($post['eff_from']);
+            $eff_to  = $this->dateTrasnformer($post['eff_to']); 
+        
         $data = array(
           'category_id' => $itemid,
          'name' => quotes_to_entities(ucwords($post['name'])),
            'tag_type' =>  1,
            'created_at' => date('Y-m-d'),
-           'eff_from' =>  trim($post['eff_from']),
-           'eff_to' =>  trim($post['eff_to']) ? trim($post['eff_to']) : NULL,
+           'eff_from' =>  trim($eff_from),
+           'eff_to' =>  trim($eff_to) ? trim($eff_to) : NULL,
           'created_by' => $userId
        );
         
@@ -119,12 +134,15 @@ ON tc.id = t.category_id
     public function edit_tag($post,$userId)
     {
         
+        $eff_from = $this->dateTrasnformer($post['eff_from']);
+            $eff_to  = $this->dateTrasnformer($post['eff_to']); 
+        
          $itemid = $post['itemid'];
         $master = $post['masterID'];
         $data = array(
          'name' => quotes_to_entities($post['name']),
-           'eff_from' =>  trim($post['eff_from']),
-           'eff_to' => trim($post['eff_to']) ? trim($post['eff_to']) : NULL,
+           'eff_from' =>  trim($eff_from),
+           'eff_to' => trim($eff_to) ? trim($eff_to) : NULL,
           'updated_by' => $userId
        );
         
@@ -164,11 +182,15 @@ ON tc.id = t.category_id
     {
      $itemid = $post['itemid'];
         
+        
+         $eff_from = $this->dateTrasnformer($post['eff_from']);
+            $eff_to  = $this->dateTrasnformer($post['eff_to']); 
+        
          $data = array(
           'updated_at' => date('Y-m-d H:i:s'),
         'name' => quotes_to_entities($post['name']),
-           'eff_from' => $post['eff_from'],
-           'eff_to' => $post['eff_to'] ? $post['eff_to'] : NULL,
+           'eff_from' => $eff_from,
+           'eff_to' => $eff_to ? $eff_to : NULL,
           'updated_by' => $userID
        );
        
@@ -456,5 +478,19 @@ $this->db->update('company_tags', $data);
              return json_encode(array('success' => $id));
     }
     
+    function dateTrasnformer($dateTransform){
+        
+        if($dateTransform){
+        $dd = explode('-', $dateTransform);
+
+return  $dd[2].'-'.$dd[1].'-'.$dd[0];
+            
+            
+        }
+        
+          return null;
+        
+    }
     
+  
 }
