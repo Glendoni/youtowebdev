@@ -480,7 +480,7 @@ $this->db->update('company_tags', $data);
     
     function dateTrasnformer($dateTransform){
         
-        if($dateTransform){
+        if(trim($dateTransform)){
         $dd = explode('-', $dateTransform);
 
 return  $dd[2].'-'.$dd[1].'-'.$dd[0];

@@ -207,10 +207,10 @@ function getTags(id = false){
               // console.log(val[key])
                
                if(val.eff_to != null ){
-                   eff_to = val.eff_to;
+                   eff_to = dateTransformer(val.eff_to);
                }
              
-    $('.tags').prepend('<li class="addedTag" tag-data="'+val.tag_id+'_'+val.name+'_'+val.tac_sub_cat_id+'_'+val.sub_cat_name+'_'+val.sub_parent_cat_id+'_'+val.parent_cat_name+'_'+val.eff_from+'_'+eff_to+' " ><span class="tagName" ></span>'+val.name+' <span  class="tagRemove">x</span><input type="hidden" name="tags[]" value="'+val.name+'"></li>')
+    $('.tags').prepend('<li class="addedTag" tag-data="'+val.tag_id+'_'+val.name+'_'+val.tac_sub_cat_id+'_'+val.sub_cat_name+'_'+val.sub_parent_cat_id+'_'+val.parent_cat_name+'_'+dateTransformer(val.eff_from)+'_'+eff_to+' " ><span class="tagName" ></span>'+val.name+' <span  class="tagRemove">x</span><input type="hidden" name="tags[]" value="'+val.name+'"></li>')
      
             });
                
