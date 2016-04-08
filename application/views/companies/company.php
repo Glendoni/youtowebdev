@@ -570,7 +570,7 @@ if ($your_date < $now){; ?>
         </div>
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="cat1">    
-        <div class="col-sm-6 no-padding">  
+        <div class="col-sm-12 no-padding">  
             <div id="" class="tagContainer"> 
                 <ul class="list-group main">
                 </ul>
@@ -662,7 +662,7 @@ if ($your_date < $now){; ?>
 </div>
              </div>    
 </div>   
-            <div class="col-sm-6"> 
+            <div class="col-sm-6 subcont"> 
                 
                 <h4 class="ta"></h4>
             
@@ -670,6 +670,9 @@ if ($your_date < $now){; ?>
                 <ul id="fetags">
                     
                     </ul>
+                
+                
+                
                 
                 </div></div>
        
