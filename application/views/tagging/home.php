@@ -76,7 +76,7 @@ h1 {
                     $catStatus = array('opt1'=>'active','opt2'=>'non-active' );
                     // echo form_dropdown('company_class', $catStatus, (isset($_POST['company_class'])?$_POST['company_class']:'') ,'class="form-control"');
                     ?>
-                    <input type="text" class="form-control follow-up-date planned_at" data-date-format="DD-MM-YYYY" id="eff_to" name="eff_to" placeholder="optional">
+                    <input type="text" class="form-control follow-up-date planned_at" data-date-format="DD-MM-YYYY" id="eff_to" name="eff_to" placeholder="Date">
                     <span class="catError eff_to"></span>
                 </div>
             </div>
@@ -126,7 +126,7 @@ h1 {
     <div class="col-lg-12">
         <div class="panel-heading profile-heading" style=" background-color: #FC6F65;">
 
-        <h3>Category List</h3>
+        <h3>Category</h3>
         </div>
  
             
@@ -136,7 +136,7 @@ h1 {
     <tr>
       <th>#</th>
         
-      <th>Main Category</th>
+      <th>MaCategory</th>
       <th colspan="2">Sub Category</th>
     
         <th colspan="2">Edit</th>
