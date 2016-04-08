@@ -134,9 +134,9 @@ h1 {
              <table class="table table-hover">
   <thead>
     <tr>
-      <th>#</th>
+      <th>Category</th>
         
-      <th>MaCategory</th>
+      <th>&nbsp;</th>
       <th colspan="2">Sub Category</th>
     
         <th colspan="2">Edit</th>

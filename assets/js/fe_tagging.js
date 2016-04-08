@@ -1,5 +1,7 @@
 $(document).ready(function(){
     
+  
+    
      gettags();
     $('.nav-tabs').click(function(){
         
@@ -19,19 +21,7 @@ $(document).ready(function(){
             dataType: "json",
         url: 'fe_read_cat',
         success: function(data) {
-            var action;
-            var items = [];
-             var idfk;
-            var sub;
-            var editBtn;
-            var main;
-            var category =[] ;
-            var sub_cat = [];
-            var parcat;
-              var parcatId = [];
-            var el;
-              var elId;
-            var valst;
+            var action , items = [],idfk,sub, editBtn,main, category =[],sub_cat = [],parcat, parcatId = [], el,elId,valst;
              var i=1;
             $.each( data, function( key, val ) {
                 if (val['par_name']  ){
@@ -70,25 +60,7 @@ function populate(){
             dataType: "json",
         url: 'fe_read_tag',
         success: function(data) {
-            var action;
-            var items = [];
-             var idfk;
-            var sub;
-            var editBtn;
-            var main;
-            
-            var sort; 
-            var category =[] ;
-            var sub_cat = [];
-            var parcat;
-              var parcatId = [];
-            var el;
-              var elId;
-             var i=1;
-            var vale;
-           var italicFont;
-             var subActive; 
-             var parentcatname;
+            var action,items = [],idfk,sub,editBtn,main,sort, category =[] ,sub_cat = [],parcat,parcatId = [],el,elId,i=1,vale,italicFont,subActive, parentcatname;
             var myParam = window.location.href.split("id=");
             $.each( data, function( key, val ) {
                 
@@ -160,6 +132,7 @@ $('.subcont').prepend('<div class="col-sm-12 '+val['sub_cat_name']+' fetagsholde
                })
                 del_ini();
             gettags()
+            tagSearch();
            //scScroll()
         
             $('.list-group-item').click(function(){
@@ -213,6 +186,7 @@ $('.subcont').prepend('<div class="col-sm-12 '+val['sub_cat_name']+' fetagsholde
                                   $( ".sub_group").unbind( "subActive" ); 
                                 
                                 //console.error(data['error']);
+                               
                                 
                             }else if (data['success']){
                                    $('.ta').show();
@@ -223,6 +197,7 @@ $('.subcont').prepend('<div class="col-sm-12 '+val['sub_cat_name']+' fetagsholde
                                    $('.sub_group').removeClass('subActive');
                                   $( ".sub_group").unbind( "subActive" );      
                                   del_ini();
+                                tagSearch();
                               
                             }
                                 
@@ -370,4 +345,50 @@ return plainDate;
     
     
 }
+ function tagSearch(){
+     
+        $("#filter").keyup(function(){
+            
+            
+              //alert()
+            
+   $('#filter-count').show();
+        // Retrieve the input field text and reset the count to zero
+        var filter = $(this).val(), count = 0;
+ 
+        // Loop through the comment list
+        $("ul.main_ProductType li").each(function(e,t){
+            
+            
+           
+            // If the list item does not contain the text phrase fade it out
+            if ($(this).text().search(new RegExp(filter, "i")) < 0) {
+                $(this).fadeOut();
+                
+                
+                
+               
+ 
+            // Show the list item if the phrase matches and increase the count by 1
+            } else {
+                $(this).show();
+                count++;
+                
+                 if($('#filter').val() === ''){
+                 console.log('pete')
+              $('.sub_group').hide();
+                     $('.parent').show();
+                      $(this).val(), count = 0;
+                     $('#filter-count').hide();
+               }
+            }
+        });
+        // Update the count
+        var numberItems = count;
+        $("#filter-count").text(count+" Found");
+    });
+     
+     
+ }
+
  

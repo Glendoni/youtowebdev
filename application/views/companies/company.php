@@ -562,7 +562,7 @@ if ($your_date < $now){; ?>
     <div class="col-sm-12">         
 	<form id="live-search" action="" method="post">
     <fieldset>
-        <input type="text" class="form-control tag-search-form"  id="filter" value="" />
+        <input type="text" class="form-control tag-search-form" placeholder="Search Tags" id="filter" value="" />
         <span id="filter-count" class="label label-count label-success"></span>
     </fieldset>
 </form>
@@ -572,7 +572,7 @@ if ($your_date < $now){; ?>
     <div role="tabpanel" class="tab-pane active" id="cat1">    
         <div class="col-sm-12 no-padding">  
             <div id="" class="tagContainer"> 
-                <ul class="list-group main">
+                <ul class="list-group main main_ProductType">
                 </ul>
             </div>
         </div>

@@ -110,6 +110,7 @@ function loadCatList(test = 'tag_cat'){
             var sub;
             var editBtn;
             var main;
+            var subBtn;
             $.each( data, function( key, val ) {
                   idfk = val.company_id;
           // val.action 
@@ -121,7 +122,10 @@ function loadCatList(test = 'tag_cat'){
                     
                      
                     sub = '<a href="javascript:;" sub-data="'+val.sub_master_id+'" class="cr_switch_titler">'+val.sub_name+'</a>';
-                 editBtn = '<button class="edit edit_cat" tag-data="'+val.sub_master_id+'_'+val.name+'_'+dateTransformer(val.cat_eff_from)+'_'+dateTransformer(val.cat_eff_to)+'_'+val.sub_name+'_'+val.id+'" >Edit</button> <button sub-data="'+val.id+'_'+val.name+'_'+val.id+'" class="addSubCatOne">Add New Sub</button> ';
+                 editBtn = '<button class="edit edit_cat" tag-data="'+val.sub_master_id+'_'+val.name+'_'+dateTransformer(val.cat_eff_from)+'_'+dateTransformer(val.cat_eff_to)+'_'+val.sub_name+'_'+val.id+'" >Edit</button>  ';
+                    
+                    subBtn = '<button sub-data="'+val.id+'_'+val.name+'_'+val.id+'" class="addSubCatOne">Add New Sub</button>';
+                    
                     swticher()
                 }else{
                     editBtn = '-';
@@ -131,7 +135,7 @@ function loadCatList(test = 'tag_cat'){
                 }
                    
                 
-                items.push('<tr><th scope="row">'+(key +1)+'</th><td>'+main +'</td><td colspan="2">'+sub+'</td><td> '+editBtn+' </td></tr>');  
+                items.push('<tr><td>'+main +'</td><th scope="row">'+subBtn+'</th><td colspan="2">'+sub+'</td><td> '+editBtn+' </td></tr>');  
                 
            
             });
