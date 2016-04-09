@@ -54,21 +54,27 @@ valst = vals.replace(' ', '');
 })
 
 function populate(){
-    
+     var tagcont = [];
              $.ajax({
         type: "GET",
             dataType: "json",
         url: 'fe_read_tag',
         success: function(data) {
+            data = data.sort()
+            
             var action,items = [],idfk,sub,editBtn,main,sort, category =[] ,sub_cat = [],parcat,parcatId = [],el,elId,i=1,vale,italicFont,subActive, parentcatname;
             var myParam = window.location.href.split("id=");
+           
             $.each( data, function( key, val ) {
                 
                     el = val['sub_cat_name']+'_'+val['parent_cat_name']+'_'+val['tac_sub_cat_id'];
                 
                 if(!$('.subcont div').hasClass('fetagsholder'+val['tac_sub_cat_id'])){
-$('.subcont').prepend('<div class="col-sm-12 '+val['sub_cat_name']+' fetagsholder'+val['tac_sub_cat_id']+'" ><strong>'+val['sub_cat_name']+'</strong><ul class="fetags'+val['tac_sub_cat_id']+'"></ul><br><hr /> </div>'); 
+tagcont.push('<div class="col-sm-12 '+val['sub_cat_name']+' fetagsholder'+val['tac_sub_cat_id']+'" ><strong>'+val['sub_cat_name']+'</strong><ul class="fetags'+val['tac_sub_cat_id']+'"></ul><br><hr /> </div>'); 
             }
+                
+                
+                
                 
                 
               
@@ -77,25 +83,31 @@ $('.subcont').prepend('<div class="col-sm-12 '+val['sub_cat_name']+' fetagsholde
                 vale = val;
                 //console.log(val['cat_id'])
             if($.inArray(el, category) === -1) category.push(el);
+                
+                
+                
+             
             })
-            
+            tagcont = tagcont.sort();
+             $('.subcont').prepend(jQuery.unique(tagcont).join(''));  
+ category = category.sort()
               $.each( category, function( key, vals ) {
 
                  // console.log(vals);
                   sort = vals.split('_');
-                  
-                  
-                 
-                  $('.main_'+sort[1].replace(' ', '')).append('<li class="list-group-item folder" data="'+sort[2]+'"> <span class="folIcon indicatorshow"></span>'+sort[0]+'</li>');   
-                  
-                  
-                    $('.main_'+sort[1].replace(' ', '')).append('<ul class="subtags sub_'+sort[2]+'" ></ul></div></li>');  
+                   $('.main_'+sort[1].replace(' ', '')).append('<li class="list-group-item folder" data="'+sort[2]+'"> <span class="folIcon indicatorshow"></span>'+sort[0]+'</li>');   
+                   $('.main_'+sort[1].replace(' ', '')).append('<ul class="subtags sub_'+sort[2]+'" ></ul>');  
                   
                // console.warn('sub_'+sort[2]);
                  })
               // $('.tadefault').show();
              $('.tadefix').hide();
+            
+        
                $.each( data, function( key, val ) {
+                   
+                  
+                   
                       if(val['company_id'] != null ){
                      italicFont  = 'italicFont';
                           if(myParam[1]==val['company_id']){
@@ -127,7 +139,7 @@ $('.subcont').prepend('<div class="col-sm-12 '+val['sub_cat_name']+' fetagsholde
                        
                    }
                    
-                  
+                  console.log($('.main_'+val['cat_id']+' .sub_'+val['cat_id']+ ' li').length);
                    
                })
                 del_ini();
@@ -189,15 +201,20 @@ $('.subcont').prepend('<div class="col-sm-12 '+val['sub_cat_name']+' fetagsholde
                                
                                 
                             }else if (data['success']){
+                                
+                                  gettags();
                                    $('.ta').show();
-                               $('.fetags'+par_sub_id).append('<li class="addedTag tag'+$('.subActive').attr('sub')+'" style="float:left;"><span class="tagName"></span>'+$('.subActive').text()+'<span class="tagRemove" data-tag="'+$('.subActive').attr('sub')+'">x</span><input type="hidden" name="tags[]" value=""></li>');
+                              // $('.fetags'+par_sub_id).append('<li class="addedTag tag'+$('.subActive').attr('sub')+'" style="float:left;"><span class="tagName"></span>'+$('.subActive').text()+'<span class="tagRemove" data-tag="'+$('.subActive').attr('sub')+'">x</span><input type="hidden" name="tags[]" value=""></li>');
                             
                                     $('.tadefault').hide();
                                 $('.tafixed').show();
                                    $('.sub_group').removeClass('subActive');
-                                  $( ".sub_group").unbind( "subActive" );      
-                                  del_ini();
+                                  $( ".sub_group").unbind( "subActive" );  
+                                
+                                
+                                 
                                 tagSearch();
+                                 del_ini();
                               
                             }
                                 
@@ -233,7 +250,7 @@ if((/companies/.test(window.location.href))) {
             //console.log(data)
             
             
-             
+              $('.addedTag').remove();
              $.each( data, function( key, val ) {
           // console.log(val['parent_tag_id'])
            
@@ -277,6 +294,8 @@ if((/companies/.test(window.location.href))) {
 function del_ini(){
    
       $('.tagRemove').click(function(){
+          
+          $('.tagRemove').on('click.disabled', false);
                  var myParam = window.location.href.split("id=");
              var dataTag =  $(this).attr('data-tag');
           
@@ -296,6 +315,9 @@ function del_ini(){
                               //alert($('.addedTag').length);
                            $('.sub li').hide()
  $('.addedTag').length ? $('.ta').show()+ $('.tadefault').hide() +$('.tafixed').show() :  $('.tadefault').show() + $('.ta').hide() + $('.tafixed').hide();
+                           
+                        
+                        $('.tagRemove').off('click.disabled');
                        }
                        });       
              })  
@@ -348,8 +370,7 @@ return plainDate;
  function tagSearch(){
      
         $("#filter").keyup(function(){
-            
-            
+            $('.indicatorshow').hide();
               //alert()
             
    $('#filter-count').show();
@@ -378,6 +399,7 @@ return plainDate;
                  console.log('pete')
               $('.sub_group').hide();
                      $('.parent').show();
+                     
                       $(this).val(), count = 0;
                      $('#filter-count').hide();
                }
