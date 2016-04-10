@@ -70,7 +70,7 @@ function populate(){
                     el = val['sub_cat_name']+'_'+val['parent_cat_name']+'_'+val['tac_sub_cat_id'];
                 
                 if(!$('.subcont div').hasClass('fetagsholder'+val['tac_sub_cat_id'])){
-tagcont.push('<div class="col-sm-12 '+val['sub_cat_name']+' fetagsholder'+val['tac_sub_cat_id']+'" ><strong>'+val['sub_cat_name']+'</strong><ul class="fetags'+val['tac_sub_cat_id']+'"></ul><br><hr /> </div>'); 
+tagcont.push('<div class="col-xs-12 '+val['sub_cat_name']+' fetagsholder'+val['tac_sub_cat_id']+' added-tag-holder"><div class="category-name-holder" >'+val['sub_cat_name']+'</div><ul class="fetags'+val['tac_sub_cat_id']+' sub_ul"></ul></div>'); 
             }
                 
                 
@@ -256,7 +256,7 @@ if((/companies/.test(window.location.href))) {
            
            // console.log('fetags'+val['parent_tag_id'])
            
-           $('.fetags'+val['parent_tag_id']).append('<li class="addedTag tag'+val['tag_id']+' " style="float:left;"><span class="tagName"></span>'+val['name']+'<span class="tagRemove" data-tag="'+val['tag_id']+'">x</span></li>');
+           $('.fetags'+val['parent_tag_id']).append('<li class="addedTag tag'+val['tag_id']+' " style="float:left;"><span class="tagName"></span>'+val['name']+'<span class="tagRemove" data-tag="'+val['tag_id']+'"></span></li>');
            
            
            //console.log('<li class="addedTag tag'+val['tag_id']+' " style="float:left;"><span class="tagName"></span>'+val['name']+'<span class="tagRemove" data-tag="'+val['tag_id']+'">x</span></li>');
