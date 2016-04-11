@@ -70,7 +70,7 @@ function populate(){
                     el = val['sub_cat_name']+'_'+val['parent_cat_name']+'_'+val['tac_sub_cat_id'];
                 
                 if(!$('.subcont div').hasClass('fetagsholder'+val['tac_sub_cat_id'])){
-tagcont.push('<div class="col-xs-12 '+val['sub_cat_name'].replace(' ','')+' fetagsholder'+val['tac_sub_cat_id']+' added-tag-holder"><div class="category-name-holder" >'+val['sub_cat_name']+'</div><ul class="fetags'+val['tac_sub_cat_id']+' sub_ul"></ul></div>'); 
+tagcont.push('<div class="col-xs-12 '+val['sub_cat_name'].replace(/\s/gi, "")+' fetagsholder'+val['tac_sub_cat_id']+' added-tag-holder"><div class="category-name-holder" >'+val['sub_cat_name']+'</div><ul class="fetags'+val['tac_sub_cat_id']+' sub_ul"></ul></div>'); 
             }
                 
                 
@@ -498,7 +498,7 @@ var capture
 var apendParName;
  
 $('.category-name-holder').each(function(){
-apendParName = $(this).text().replace(' ','');
+apendParName = $(this).text().replace(/\s/gi, "");
 $('.'+ apendParName+ ' .sub_ul').each(function(){
  capture  = $('.'+ apendParName+ ' .sub_ul').text()
 if(!capture){
