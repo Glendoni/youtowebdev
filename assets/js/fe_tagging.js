@@ -498,7 +498,7 @@ var capture
 var apendParName;
  
 $('.category-name-holder').each(function(){
-apendParName = $(this).text()
+apendParName = $(this).text().trim();
 $('.'+ apendParName+ ' .sub_ul').each(function(){
  capture  = $('.'+ apendParName+ ' .sub_ul').text()
 if(!capture){
