@@ -494,6 +494,22 @@ if(test ==  $(this).attr('sub')){
     
 })
 
+var capture
+var apendParName;
+ 
+$('.category-name-holder').each(function(){
+apendParName = $(this).text()
+$('.'+ apendParName+ ' .sub_ul').each(function(){
+ capture  = $('.'+ apendParName+ ' .sub_ul').text()
+if(!capture){
+$('.'+ apendParName).hide();
+}else{
+    
+    $('.'+ apendParName).show();
+}
+})
+})
+
 }
 
  
