@@ -557,7 +557,7 @@ if ($your_date < $now){; ?>
                     <p>Tags are used to provide <strong>Sonovate</strong> with a better insight into current and potential clients </p>
                 </div>-->
              
-	<div class="col-sm-4 no-padding">
+	<div class="col-sm-6 no-padding">
 		<div class="row tag-search-holder ">
     <div class="col-sm-12">         
 	<form id="live-search" action="" method="post">
@@ -662,7 +662,7 @@ if ($your_date < $now){; ?>
 </div>
              </div>    
 </div>   
-            <div class="col-sm-8 subcont"> 
+            <div class="col-sm-6 subcont"> 
                 
                 <h4 class="ta"></h4>
             
