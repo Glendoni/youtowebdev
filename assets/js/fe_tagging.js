@@ -256,7 +256,7 @@ if((/companies/.test(window.location.href))) {
            
            // console.log('fetags'+val['parent_tag_id'])
            
-           $('.fetags'+val['parent_tag_id']).append('<li class="addedTag tag'+val['tag_id']+' " style="float:left;"><span class="tagName"></span>'+val['name']+'<span class="tagRemove" data-tag="'+val['tag_id']+'"></span></li>');
+           $('.fetags'+val['parent_tag_id']).append('<li class="addedTag tag'+val['tag_id']+' " style="float:left;"><span class="tagName"></span>'+val['name']+'<span class="tagRemove" data-tag="'+val['tag_id']+'">x</span></li>');
            
            
            //console.log('<li class="addedTag tag'+val['tag_id']+' " style="float:left;"><span class="tagName"></span>'+val['name']+'<span class="tagRemove" data-tag="'+val['tag_id']+'">x</span></li>');

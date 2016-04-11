@@ -1566,9 +1566,9 @@ margin-bottom: 10px;
   top: 10px;
 }
 
-		.tagRemove::after {
-			  font-family: FontAwesome;
-  	content: '\f00d';
+.tagRemove {
+	font-weight: 700;
+	border-radius: 3px;
 }
 
 .stop-scrolling {
