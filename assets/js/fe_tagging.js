@@ -135,7 +135,7 @@ tagcont.push('<div class="col-xs-12 '+val['sub_cat_name']+' fetagsholder'+val['t
                  parentcatname =   val['parent_cat_name'].replace(' ', '')
               
               
-                  $('.sub_'+val['cat_id']).append('<li class="list-group-item sub_group sub'+val['tac_sub_cat_id']+' inner tag" par-sub-id="'+val['cat_id']+'" sub="'+val['tag_id']+'">'+val['name']+' </li>');  
+                  $('.sub_'+val['cat_id']).append('<li class="list-group-item sub_group sub'+val['tac_sub_cat_id']+' inner tag" par-sub-id="'+val['cat_id']+'" sub="'+val['tag_id']+'">'+val['name']+'<span class="pull-right label label-master-category">'+val['category_name']+'</span> </li>');  
                        
                    }
                    

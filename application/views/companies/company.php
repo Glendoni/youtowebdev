@@ -576,15 +576,15 @@ if ($your_date < $now){; ?>
                 </ul>
             </div>
         </div>
-    <div class="col-sm-6">  
+    <!--<div class="col-sm-6">  
         <div id="" class="tagContainer"> 
             <ul class="list-group sub">
             </ul>
         </div>
-    </div>
+    </div>-->
  
 </div>
-<div role="tabpanel" class="tab-pane" id="cat2">
+<!--<div role="tabpanel" class="tab-pane" id="cat2">
     <div class="col-sm-5">  
         <div id="" class="tagContainer"> 
             <ul class="list-group main">
@@ -658,7 +658,7 @@ if ($your_date < $now){; ?>
         </div>
     </div>
    
-</div>
+</div>-->
 </div>
              </div>    
 </div>   
