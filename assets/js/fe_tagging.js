@@ -128,7 +128,7 @@ tagcont.push('<div class="col-xs-12 '+val['sub_cat_name']+' fetagsholder'+val['t
                       
                      parentcatname =   val['category_name'].replace(' ', '');
                        
-                      $('.main_'+parentcatname).append('<li class="list-group-item parent sub_group sub'+val['tac_sub_cat_id']+' tag" sub="'+val['tag_id']+'"> '+val['name']+'</li>');  
+                      $('.main_'+parentcatname).append('<li class="list-group-item parent  sub_group sub'+val['tac_sub_cat_id']+' tag" cat_id='+val['tac_sub_cat_id']+' sub="'+val['tag_id']+'"> '+val['name']+'</li>');  
                       
                    }
                    if(val['parent_cat_name']){
@@ -266,10 +266,9 @@ if((/companies/.test(window.location.href))) {
              })        
                       
                        del_ini() 
-                       
+                       unHighlightActiveSubITems()
                         if(!$('.addedTag').length)  $('.tadefault').show() +  $('.txtline').show() 
                     }
-        
         })
 }
     
@@ -316,7 +315,7 @@ function del_ini(){
                            $('.sub li').hide()
  $('.addedTag').length ? $('.ta').show()+ $('.tadefault').hide() +$('.tafixed').show() :  $('.tadefault').show() + $('.ta').hide() + $('.tafixed').hide();
                            
-                        
+                        unHighlightActiveSubITems();
                         $('.tagRemove').off('click.disabled');
                        }
                        });       
@@ -412,5 +411,89 @@ return plainDate;
      
      
  }
+
+function unHighlightActiveSubITems(){
+    
+    $('.sub_group').css('color' , '#999');
+    var parid;
+    var tagSecGroup;
+    var subName;
+    var subItemName;
+    var subID;
+    var subAttr;
+    var tagSegGroup;
+var apendParName;
+    $('.sub_group').each(function(){
+    parid = $(this).attr('par-sub-id');
+        if(parid){
+            //console.log(parid + ' -  ' +$(this).text()  + ' -  ' + $(this).attr('sub') );
+            subName = $(this).text().trim();
+            subID = $(this).attr('sub');
+            subAttr = $(this).attr('sub');
+            tagSegGroup = 'fetagsholder'+parid
+
+ apendParName = $(this).find('span').text();
+
+            $('.'+tagSegGroup+ ' .addedTag').each(function(i,e){
+                //console.log('glennnn' + $(this).text());
+                subItemName = $(this).text().slice(0,-1);
+
+                if(subItemName == subName.replace(apendParName, '')){
+            
+                    $('.sub_group').each(function(){
+                        if($(this).attr('sub') == subAttr){
+                            //console.log($(this).attr('sub'));
+                            $(this).css('color', 'rgb(212, 212, 212)');
+                        }
+                    })
+                }
+            })
+        }
+    })
+    
+    
+var parid;
+var subid;
+var parsubid;
+var parname;
+var test;
+var testr;
+$('.parent').each(function(){ 
+if($(this).attr('cat_id')){
+  parid = $(this).attr('cat_id');
+parname = $(this).text();
+test = $(this).attr('sub')
+//console.log('parent ' + $(this).text())
+$('.fetagsholder'+parid+ ' .addedTag').each(function(){ 
+ 
+ //console.log('-'+parname+ '-' + $(this).text().slice(0,-1)+'-');
+
+if(parname.trim() == $(this).text().slice(0,-1)){
+   //console.log(parid + parname+ ' - ' + $(this).text().slice(0,-1)+ ' ' + test);
+
+
+
+$('.sub'+parid).each(function(){
+//console.log($(this).attr('cat_id'))
+if(test ==  $(this).attr('sub')){
+
+ $(this).css('color', 'rgb(212, 212, 212)');
+}
+
+
+})
+
+ 
+
+
+}
+ 
+})
+}
+    
+    
+})
+
+}
 
  

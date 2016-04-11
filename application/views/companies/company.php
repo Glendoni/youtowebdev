@@ -574,7 +574,9 @@ if ($your_date < $now){; ?>
             <div id="" class="tagContainer"> 
                 <ul class="list-group main main_ProductType">
                 </ul>
+                
             </div>
+         
         </div>
     <!--<div class="col-sm-6">  
         <div id="" class="tagContainer"> 

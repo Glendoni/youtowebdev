@@ -498,22 +498,11 @@ function swticher(){
 }
 
 $(document).ready(function(){
-  
-    
 //Teporary Hack to make list visible 
-
- 
-    
      loadCatList()
       //categoryListings();
 
  //rta()
-
- 
-    
-  
-
-    
 })
 
 function defaultEffToDate(){
