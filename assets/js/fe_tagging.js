@@ -182,11 +182,14 @@ tagcont.push('<div class="col-xs-12 '+subcatName+' fetagsholder'+val['tac_sub_ca
                $('.parent').addClass('sub_group');
             }else{
                     var myParam = window.location.href.split("id=");
+                
+                
+              var   param =  checkUrlParam(myParam);
                 var sub = $(this).attr('sub');
                   var par_sub_id = $(this).attr('par-sub-id');
                  $(this).addClass('subActive');
                     //JS JASON WITH POST PARAMETER
-                     var para = {'tagid': sub, 'companyID': myParam[1]};
+                     var para = {'tagid': sub, 'companyID': param};
                       $.ajax({
                         type: "POST",
                           data: para,
@@ -241,11 +244,24 @@ function gettags(){
     var autopilotEmailCompany = window.location.href.split("id="); 
 
 if((/companies/.test(window.location.href))) {
+
+
+
+
+
     
     
-     var myParam = window.location.href.split("id=");
+     //var myParam = window.location.href.split("id=");
     
-     var para = {'companyID': myParam[1]};
+    
+    var param;
+    var para  = window.location.href.split("?id=");
+
+   param =  checkUrlParam(para);
+    
+    
+    
+     var para = {'companyID': param};
              $.ajax({
         type: "POST",
             data: para,
@@ -523,5 +539,31 @@ $('.'+ apendParName).hide();
 })
 
 }
+
+
+function checkUrlParam(para){
+    var param;
+    param = para[1]
+if(isInt(param)){
+console.log('user came from search')
+return param = para[1]
+ 
+}else{
+
+console.log('user came from campaign')
+param  = param[1].split('&');
+
+return param = param[0];
+}
+    
+    
+}
+
+
+
+function isInt(n) {
+   return n % 1 === 0;
+}
+
 
  
