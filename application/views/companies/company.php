@@ -562,7 +562,8 @@ if ($your_date < $now){; ?>
 	<form id="live-search" action="" method="post">
     <fieldset>
         <input type="text" class="form-control tag-search-form" placeholder="Search Tags" id="filter" value="" />
-        <span id="filter-count" class="label label-count label-success"></span>
+        <div><span id="filter-count" class="filter-count label label-count label-success" style="right: 71px;"></span> 
+            <span  class="filter-count filter-count-cancel label label-count label-danger"></span></div>
     </fieldset>
 </form>
   </div>

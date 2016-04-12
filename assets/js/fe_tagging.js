@@ -396,7 +396,7 @@ return plainDate;
             $('.indicatorshow').hide();
               //alert()
             
-   $('#filter-count').show();
+   $('.filter-count').show();
         // Retrieve the input field text and reset the count to zero
         var filter = $(this).val(), count = 0;
  
@@ -419,18 +419,28 @@ return plainDate;
                 count++;
                 
                  if($('#filter').val() === ''){
-                 console.log('pete')
+             
               $('.sub_group').hide();
                      $('.parent').show();
                      
                       $(this).val(), count = 0;
-                     $('#filter-count').hide();
+                     $('.filter-count').hide();
                }
             }
         });
         // Update the count
         var numberItems = count;
         $("#filter-count").text(count+" Found");
+            
+            $('.filter-count-cancel').html('<span class="run">Cancel</span>');
+            
+            
+        $('.run').click(function(){
+            $('#filter').val('');
+            $('.filter-count').hide();
+            $('#filter').trigger('keydown');
+            $('#filter').trigger('keyup');
+        })
     });
      
      
