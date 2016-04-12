@@ -60,8 +60,9 @@ function populate(){
             dataType: "json",
         url: 'fe_read_tag',
         success: function(data) {
-            data = data.sort()
-            
+    $(".loading_div").hide();
+
+            data = data.sort()  
             var action,items = [],idfk,sub,editBtn,main,sort, category =[] ,sub_cat = [],parcat,parcatId = [],el,elId,i=1,vale,italicFont,subActive, parentcatname;
             var myParam = window.location.href.split("id=");
            var subcatName;

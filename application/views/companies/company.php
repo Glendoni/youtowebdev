@@ -533,7 +533,6 @@ if ($your_date < $now){; ?>
 			</div>
         <!-- /.panel-heading -->
         <div class="panel-body">
-               
 	<div>
 
 
@@ -571,6 +570,21 @@ if ($your_date < $now){; ?>
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="cat1">    
         <div class="col-sm-12 no-padding">  
+
+<div class="loading_div sk-circle">
+  <div class="sk-circle1 sk-child"></div>
+  <div class="sk-circle2 sk-child"></div>
+  <div class="sk-circle3 sk-child"></div>
+  <div class="sk-circle4 sk-child"></div>
+  <div class="sk-circle5 sk-child"></div>
+  <div class="sk-circle6 sk-child"></div>
+  <div class="sk-circle7 sk-child"></div>
+  <div class="sk-circle8 sk-child"></div>
+  <div class="sk-circle9 sk-child"></div>
+  <div class="sk-circle10 sk-child"></div>
+  <div class="sk-circle11 sk-child"></div>
+  <div class="sk-circle12 sk-child"></div>
+</div>
             <div id="" class="tagContainer"> 
                 <ul class="list-group main main_ProductType">
                 </ul>
