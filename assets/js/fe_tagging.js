@@ -317,10 +317,13 @@ function del_ini(){
           
           $('.tagRemove').on('click.disabled', false);
                  var myParam = window.location.href.split("id=");
+          
+          
+          var param =  checkUrlParam(myParam);
              var dataTag =  $(this).attr('data-tag');
           
                    //JS JASON WITH POST PARAMETER
-                    var para = {'datatagid':dataTag, 'comp_id': myParam[1]};
+                    var para = {'datatagid':dataTag, 'comp_id': param};
                      $.ajax({
                        type: "POST",
                          data: para,
