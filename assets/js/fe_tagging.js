@@ -390,59 +390,43 @@ return plainDate;
     
 }
  function tagSearch(){
-     
-        $("#filter").keyup(function(){
+    $("#filter").keyup(function(){
             $('.indicatorshow').hide();
-              //alert()
-            
-   $('.filter-count').show();
-        // Retrieve the input field text and reset the count to zero
-        var filter = $(this).val(), count = 0;
- 
-        // Loop through the comment list
-        $("ul.main_ProductType li").each(function(e,t){
-            
-            
-           
-            // If the list item does not contain the text phrase fade it out
-            if ($(this).text().search(new RegExp(filter, "i")) < 0) {
-                $(this).fadeOut();
-                
-                
-                
-               
- 
-            // Show the list item if the phrase matches and increase the count by 1
-            } else {
-                $(this).show();
-                count++;
-                
-                 if($('#filter').val() === ''){
-             
-              $('.sub_group').hide();
-                     $('.parent').show();
-                     
-                      $(this).val(), count = 0;
-                     $('.filter-count').hide();
-               }
-            }
-        });
-        // Update the count
-        var numberItems = count;
-        $("#filter-count").text(count+" Found");
-            
+            $('.filter-count').show();
+            // Retrieve the input field text and reset the count to zero
+                var filter = $(this).val(), count = 0;
+                // Loop through the comment list
+            $("ul.main_ProductType li").each(function(e,t){
+                    // If the list item does not contain the text phrase fade it out
+                    if ($(this).text().search(new RegExp(filter, "i")) < 0) {
+                        $(this).fadeOut();
+                    // Show the list item if the phrase matches and increase the count by 1
+                    }else{
+                        $(this).show();
+                        count++;
+                        if($('#filter').val() === ''){
+
+                        $('.sub_group').hide();
+                        $('.parent').show();
+
+                        $(this).val(), count = 0;
+                        $('.filter-count').hide();
+                    }
+                 }
+            });
+            // Update the count
+            var numberItems = count;
+            $("#filter-count").text(count+" Found");
+
             $('.filter-count-cancel').html('<span class="run">Cancel</span>');
-            
-            
-        $('.run').click(function(){
-            $('#filter').val('');
-            $('.filter-count').hide();
-            $('#filter').trigger('keydown');
-            $('#filter').trigger('keyup');
-        })
+
+            $('.run').click(function(){
+                $('#filter').val('');
+                $('.filter-count').hide();
+                $('#filter').trigger('keydown');
+                $('#filter').trigger('keyup');
+            })
     });
-     
-     
  }
 
 function unHighlightActiveSubITems(){
@@ -455,27 +439,20 @@ function unHighlightActiveSubITems(){
     var subID;
     var subAttr;
     var tagSegGroup;
-var apendParName;
+    var apendParName;
     $('.sub_group').each(function(){
     parid = $(this).attr('par-sub-id');
         if(parid){
-            //console.log(parid + ' -  ' +$(this).text()  + ' -  ' + $(this).attr('sub') );
             subName = $(this).text().trim();
             subID = $(this).attr('sub');
             subAttr = $(this).attr('sub');
             tagSegGroup = 'fetagsholder'+parid
-
- apendParName = $(this).find('span').text();
-
+            apendParName = $(this).find('span').text();
             $('.'+tagSegGroup+ ' .addedTag').each(function(i,e){
-                //console.log('glennnn' + $(this).text());
                 subItemName = $(this).text().slice(0,-1);
-
                 if(subItemName == subName.replace(apendParName, '')){
-            
                     $('.sub_group').each(function(){
                         if($(this).attr('sub') == subAttr){
-                            //console.log($(this).attr('sub'));
                             $(this).css('color', 'rgb(212, 212, 212)');
                         }
                     })
@@ -492,77 +469,49 @@ var parname;
 var test;
 var testr;
 $('.parent').each(function(){ 
-if($(this).attr('cat_id')){
-  parid = $(this).attr('cat_id');
-parname = $(this).text();
-test = $(this).attr('sub')
-//console.log('parent ' + $(this).text())
-$('.fetagsholder'+parid+ ' .addedTag').each(function(){ 
- 
- //console.log('-'+parname+ '-' + $(this).text().slice(0,-1)+'-');
-
-if(parname.trim() == $(this).text().slice(0,-1)){
-   //console.log(parid + parname+ ' - ' + $(this).text().slice(0,-1)+ ' ' + test);
-
-
-
-$('.sub'+parid).each(function(){
-//console.log($(this).attr('cat_id'))
-if(test ==  $(this).attr('sub')){
-
- $(this).css('color', 'rgb(212, 212, 212)');
-}
-
-
-})
-
- 
-
-
-}
- 
-})
-}
-    
-    
+    if($(this).attr('cat_id')){
+        parid = $(this).attr('cat_id');
+        parname = $(this).text();
+        test = $(this).attr('sub')
+        $('.fetagsholder'+parid+ ' .addedTag').each(function(){ 
+        if(parname.trim() == $(this).text().slice(0,-1)){
+            $('.sub'+parid).each(function(){
+                if(test ==  $(this).attr('sub')){
+                    $(this).css('color', 'rgb(212, 212, 212)');
+                }
+            })
+        }
+        })
+    }
 })
 
 var capture
 var apendParName;
  
-$('.category-name-holder').each(function(){
-apendParName = $(this).text().replace(/\s/gi, "");
-    
-    
-   
-                    apendParName = apendParName.replace('(', '');
-                    apendParName = apendParName.replace(')', '');
-    
-    
-$('.'+ apendParName+ ' .sub_ul').each(function(){
- capture  = $('.'+ apendParName+ ' .sub_ul').text()
-if(!capture){
-$('.'+ apendParName).hide();
-}else{
-    
-    $('.'+ apendParName).show();
-}
-})
-})
+    $('.category-name-holder').each(function(){
+        apendParName = $(this).text().replace(/\s/gi, "");
+        apendParName = apendParName.replace('(', '');
+        apendParName = apendParName.replace(')', '');
 
+        $('.'+ apendParName+ ' .sub_ul').each(function(){
+            capture  = $('.'+ apendParName+ ' .sub_ul').text()
+            if(!capture){
+            $('.'+ apendParName).hide();
+            }else{
+                $('.'+ apendParName).show();
+            }
+        })
+    });
 }
 
 
 function checkUrlParam(para){
     var param;
-    param = para[1]
+    param = para[1];
 if(isInt(param)){
-console.log('user came from search')
-return param = para[1]
  
+return param = para[1];
 }else{
-
-console.log('user came from campaign')
 param  = param.split('&');
 
 return param = param[0];

@@ -196,9 +196,9 @@
                     <?php else: ?>
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs" role="tablist">
-                      <li <?php if ($_GET['period'] == 'lastmonth'): ?>class="active"<?php endif; ?>><a href="#lastmonth" role="tab" data-toggle="tab">Last Month</a></li>
-                      <li <?php if ($_GET['period'] == 'month'): ?>class="active"<?php endif; ?>><a href="#currentmonth" role="tab" data-toggle="tab">This Month</a></li>
-                      <li <?php if ($_GET['period'] == 'lastweek'): ?>class="active"<?php endif; ?>><a href="#lastweek" role="tab" data-toggle="tab">Last Week</a></li>
+                      <li <?php if ($_GET['period'] == 'lastmonth'): ?>class="active"<?php endif; ?>><a href="#lastmonth" class="stats" role="tab" data-toggle="tab">Last Month</a></li>
+                      <li <?php if ($_GET['period'] == 'month'): ?>class="active"<?php endif; ?>><a href="#currentmonth"  class="stats" role="tab" data-toggle="tab">This Month</a></li>
+                      <li <?php if ($_GET['period'] == 'lastweek'): ?>class="active"<?php endif; ?>><a href="#lastweek"  class="stats" role="tab" data-toggle="tab">Last Week</a></li>
                       <li <?php if (($_GET['period'] == 'week') ||  (empty($_GET['period'])) && ($_GET['search'] !=='3')): ?>class="active"<?php endif; ?>><a href="#this" role="tab" data-toggle="tab">This Week</a></li>
 
                       
@@ -394,42 +394,9 @@
                                  
                         </div>
                           
+                          <div id="tslastweek" ></div>
                           
-                        <?php foreach ($lastweekstats as $lastweekstat): ?>
-                        <div class="row list-group-item stats-row active-<?php echo $lastweekstat['active'];?>">
-
-                            <div class="col-xs-2 col-md-1"> 
-                            <a href = "?search=2&user=<?php echo $lastweekstat['user'];?>&period=lastweek">
-                            <?php $user_icon = explode(",",$lastweekstat['image']); echo "<div class='circle name-circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
-                            </a>
-                            </div>
-                            <div class="col-xs-2 col-md-1 text-center">
-                            <a href = "?search=2&user=<?php echo $lastweekstat['user'];?>&period=lastweek"><span class="badge lw-deals" style="background-color:#428bca;"><?php echo $lastweekstat['deals'];?></span></a>
-                            </div>
-                            <div class="col-xs-2 col-md-1 text-center"> 
-                              <?php echo '<div class="badge lw-proposals" style="background-color:#45AE7C;">'.$lastweekstat['proposals'].'</div>';?>
-                              </div>
-                         
-                            <div class="col-xs-2 col-md-2 text-center"> 
-                            <span class="lw-demobookedcount"><?php echo $lastweekstat['demobookedcount'];?></span> / <span class="lw-democount"><?php echo $lastweekstat['democount'];?></span>
-                            </div>
-                            <div class="col-xs-1 col-md-1 text-center">
-                            <span class="lw-meetingbooked"><?php echo $lastweekstat['meetingbooked'];?></span> / <span class="lw-meetingcount"><?php echo $lastweekstat['meetingcount'];?></span>
-                            </div>
-                            <div class="col-xs-2 col-md-2 text-center"> 
-                            <span class="lw-salescall"><?php echo $lastweekstat['salescall'];?></span> / <span class="lw-introcall"><?php echo $lastweekstat['introcall'];?></span>
-                            </div>
-                            <div class="col-md-1 hidden-xs text-center">
-                              <span class="lw-pipelinecount"><?php echo $lastweekstat['pipelinecount'];?></span>
-                            </div>
-                            <div class="col-md-2 hidden-xs text-center">
-                              <span class="lw-key_review_added"><?php echo $lastweekstat['key_review_added'];?></span> / <span class="lw-key_review_occuring"><?php echo $lastweekstat['key_review_occuring'];?></span>
-                            </div>
-                            <div class="col-md-1 hidden-xs text-center">
-                              <span class="lw-duediligence"><?php echo $lastweekstat['duediligence'];?></span>
-                            </div>
-                          </div> <!--END ROW-->    
-                      <?php endforeach ?>
+                  
                       </div><!--END COL-MD-12-->
                     </div><!--END THIS TAB-->
 
@@ -509,42 +476,10 @@
                                 
                         </div>
                           
+                          <div id="tscurrentmonth"></div>
                           
-                          
-                        <?php foreach ($thismonthstats as $thismonthstat): ?>
-                          <div class="row list-group-item stats-row active-<?php echo $thismonthstat['active'];?>">
-                            <div class="col-xs-2 col-md-1">
-                            <a href = "?search=2&user=<?php echo $thismonthstat['user'];?>&period=month">
-                            <?php $user_icon = explode(",",$thismonthstat['image']); echo "<div class='circle name-circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
-                            </a>
-                            </div>
-                            <div class="col-xs-2 col-md-1 text-center">
-                            <a href = "?search=2&user=<?php echo $thismonthstat['user'];?>&period=month"><span class="badge tm-deals" style="background-color:#428bca;"><?php echo $thismonthstat['deals'];?></span></a>
-                            </div>
-                            <div class="col-xs-2 col-md-1 text-center"> 
-                              <?php echo '<div class="badge tm-proposals" style="background-color:#45AE7C;">'.$thismonthstat['proposals'].'</div>';?>
-                              </div>
-                          
-                            <div class="col-xs-2 col-md-2 text-center"> 
-                            <span class="tm-demobookedcount"><?php echo $thismonthstat['demobookedcount'];?></span> / <span class="tm-democount"><?php echo $thismonthstat['democount'];?></span>
-                            </div>
-                            <div class="col-xs-1 col-md-1 text-center">
-                            <span class="tm-meetingbooked"><?php echo $thismonthstat['meetingbooked'];?></span> / <span class="tm-meetingcount"><?php echo $thismonthstat['meetingcount'];?></span>
-                            </div>
-                            <div class="col-xs-2 col-md-2 text-center"> 
-                            <span class="tm-salescall"><?php echo $thismonthstat['salescall'];?></span> / <span class="tm-introcall"><?php echo $thismonthstat['introcall'];?></span>
-                            </div>
-                            <div class="col-md-1 hidden-xs text-center">
-                              <span class="tm-pipelinecount"><?php echo $thismonthstat['pipelinecount'];?></span>
-                            </div>
-                            <div class="col-md-2 hidden-xs text-center">
-                              <span class="tm-key_review_added"><?php echo $thismonthstat['key_review_added'];?></span> / <span class="tm-key_review_occuring"><?php echo $thismonthstat['key_review_occuring'];?></span>
-                            </div>
-                            <div class="col-md-1 hidden-xs text-center">
-                              <span class="tm-duediligence"><?php echo $thismonthstat['duediligence'];?></span>
-                            </div>
-                          </div> <!--END ROW-->    
-                      <?php endforeach ?>
+                          <div id="thismonthstats"></div>
+                 
                       </div><!--END COL-MD-12-->
                     </div><!--END THIS TAB-->
 
@@ -624,40 +559,8 @@
                         </div>
                           
                           
-                          
-                        <?php foreach ($lastmonthstats as $lastmonthstat): ?>
-                          <div class="row list-group-item stats-row active-<?php echo $lastmonthstat['active'];?>">
-                            <div class="col-xs-2 col-md-1">
-                            <a href = "?search=2&user=<?php echo $lastmonthstat['user'];?>&period=lastmonth"> 
-                            <?php $user_icon = explode(",",$lastmonthstat['image']); echo "<div class='circle name-circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
-                            </a>
-                            </div>
-                            <div class="col-xs-2 col-md-1 text-center">
-                            <a href = "?search=2&user=<?php echo $lastmonthstat['user'];?>&period=lastmonth"><span class="badge lm-deals" style="background-color:#428bca;"><?php echo $lastmonthstat['deals'];?></span></a>
-                            </div>
-                              <div class="col-xs-2 col-md-1 text-center"> 
-                              <?php echo '<div class="badge lm-proposals" style="background-color:#45AE7C;">'.$lastmonthstat['proposals'].'</div>';?>
-                              </div>
-                              <div class="col-xs-2 col-md-2 text-center"> 
-                            <span class="lm-demobookedcount"><?php echo $lastmonthstat['demobookedcount'];?></span> / <span class="lm-democount"><?php echo $lastmonthstat['democount'];?></span>
-                            </div>
-                            <div class="col-xs-1 col-md-1 text-center">
-                            <span class="lm-meetingbooked"><?php echo $lastmonthstat['meetingbooked'];?></span> / <span class="lm-meetingcount"><?php echo $lastmonthstat['meetingcount'];?></span>
-                            </div>
-                            <div class="col-xs-2 col-md-2 text-center"> 
-                            <span class="lm-salescall"><?php echo $lastmonthstat['salescall'];?></span> / <span class="lm-introcall"><?php echo $lastmonthstat['introcall'];?></span>
-                            </div>
-                            <div class="col-md-1 hidden-xs text-center">
-                              <span class="lm-pipelinecount"><?php echo $lastmonthstat['pipelinecount'];?></span>
-                            </div>
-                            <div class="col-md-2 hidden-xs text-center">
-                              <span class="lm-key_review_added"><?php echo $lastmonthstat['key_review_added'];?></span> / <span class="lm-key_review_occuring"><?php echo $lastmonthstat['key_review_occuring'];?></span>
-                            </div>
-                            <div class="col-md-1 hidden-xs text-center">
-                              <span class="lm-duediligence"><?php echo $lastmonthstat['duediligence'];?></span>
-                            </div>
-                          </div> <!--END ROW-->    
-                      <?php endforeach ?>
+                             <div id="tslastmonth"></div>
+               
                       </div><!--END COL-MD-12-->
                     </div><!--END THIS TAB-->
 

@@ -101,50 +101,58 @@ $( document ).ready(function() {
     
 
     getDealAvg(); //Get Deal Average used for user stats
- 
-    if($('.mainAddrType').length > 1) $('.copyRegAddr').remove(); // Removes add copy address check button if more than 1 address exist 
-//counts the totals in team stats columns
-var mycolumnArray = ["tw","lw","tm","lm"];
-var mycolumnArrayLength = mycolumnArray.length;
-var myStringArray = ["deals","proposals","demobookedcount","democount","meetingbooked","meetingcount","salescall","introcall","pipelinecount","key_review_added","key_review_occuring","duediligence"];
-var arrayLength = myStringArray.length;
+    
+    
+    
+        
 
-var total; 
-var list;
-for (var s = 0; s < mycolumnArrayLength; s++) {
-for (var i = 0; i < arrayLength; i++) {
-list = 	getlisttotal(myStringArray[i], mycolumnArray[s]);
-};
-};
+    
+    
+    
+    
+
 ////////End stats counter//////////////////////
 var autopilotEmailCompany = window.location.href.split("id="); 
 
 if((/dashboard/.test(window.location.href))) {
-$.ajax({
-type: "GET",
-dataType: "json",
-url: "Marketing/loaddata",
-success: function(data) {
-var action;
-var items = [];
-var idfk;
-$.each( data, function( key, val ) {
-idfk = val.company_id;
-if(val.action == "4"){ action =  'Un-subscribed'; }else if(val.action == "2"){ action =  'Clicked'; }else{action  = 'Opened';}  
-if( typeof idfk !== 'undefined'){
-var company = val.company.replace(/Limited|Ltd|ltd|limited/gi, function myFunction(x){return ''});
-var pipeline = val.pipeline.charAt(0).toUpperCase() + val.pipeline.slice(1);    
-items.push( '<div class="row record-holder"><div class="col-xs-8 col-sm-4 col-md-3"><a href="companies/company?id='+idfk+'">'+company+'</a></div><div class="col-xs-8 col-sm-4 col-md-2">'+val.campaign+'</div><div class="col-xs-4 col-sm-1 col-md-1 text-right"><span class="label pipeline label-'+pipeline+'">#'+pipeline+'</span></div><div class="col-xs-6 col-sm-2 col-md-2"><a href="companies/company?id='+idfk+'#contacts">'+val.username+'</a></div><div class="col-xs-6 col-sm-3 col-md-2 align-right "> <span class="label label-primary">'+action+'</span></div><div class="col-xs-12 col-sm-2 col-md-2 contact-phone">'+val.date+'</div></div>' );
-} 
-}); 
-$('#stat').html(items.join( "" ));
-$('.eventcount').html(items.length); //update engagement counter
-}
+    $.ajax({
+    type: "GET",
+    dataType: "json",
+    url: "Marketing/loaddata",
+    success: function(data) {
+    var action;
+    var items = [];
+    var idfk;
+    $.each( data, function( key, val ) {
+        idfk = val.company_id;
+        if(val.action == "4"){ action =  'Un-subscribed'; }else if(val.action == "2"){ action =  'Clicked'; }else{action  = 'Opened';}  
+        if( typeof idfk !== 'undefined'){
+        var company = val.company.replace(/Limited|Ltd|ltd|limited/gi, function myFunction(x){return ''});
+        var pipeline = val.pipeline.charAt(0).toUpperCase() + val.pipeline.slice(1);    
+        items.push( '<div class="row record-holder"><div class="col-xs-8 col-sm-4 col-md-3"><a href="companies/company?id='+idfk+'">'+company+'</a></div><div class="col-xs-8 col-sm-4 col-md-2">'+val.campaign+'</div><div class="col-xs-4 col-sm-1 col-md-1 text-right"><span class="label pipeline label-'+pipeline+'">#'+pipeline+'</span></div><div class="col-xs-6 col-sm-2 col-md-2"><a href="companies/company?id='+idfk+'#contacts">'+val.username+'</a></div><div class="col-xs-6 col-sm-3 col-md-2 align-right "> <span class="label label-primary">'+action+'</span></div><div class="col-xs-12 col-sm-2 col-md-2 contact-phone">'+val.date+'</div></div>' );
+        } 
+    }); 
+    $('#stat').html(items.join( "" ));
+    $('.eventcount').html(items.length); //update engagement counter
+    }
 
-});
-    
-    
-    
+    });
+        
+    //GET TEAM STATS VIA JSON
+   $.ajax({
+        type: "GET",
+            dataType: "json",
+        url: "dashboard/getTeamStats",
+        success: function(data) {
+            $.each( data, function( key, val ) {
+        //key = tslastweek, tscurrentmonth , tslastmonth
+               $('#ts'+key).html(val);
+            })  
+           tsTotalConfig();
+        }
+    });
+     //GET TEAM STATS END
+  
 }
 if(autopilotEmailCompany[1]){ 
 var myParam = window.location.href.split("id=");
@@ -205,6 +213,30 @@ $('.initialfee').hide();
 
 })
 });
+
+
+function tsTotalConfig(){
+    
+     
+    if($('.mainAddrType').length > 1) $('.copyRegAddr').remove(); // Removes add copy address check button if more than 1 address exist 
+//counts the totals in team stats columns
+var mycolumnArray = ["tw","lw","tm","lm"];
+var mycolumnArrayLength = mycolumnArray.length;
+var myStringArray = ["deals","proposals","demobookedcount","democount","meetingbooked","meetingcount","salescall","introcall","pipelinecount","key_review_added","key_review_occuring","duediligence"];
+var arrayLength = myStringArray.length;
+
+var total; 
+var list;
+for (var s = 0; s < mycolumnArrayLength; s++) {
+for (var i = 0; i < arrayLength; i++) {
+list = 	getlisttotal(myStringArray[i], mycolumnArray[s]);
+};
+};
+    
+    
+}
+
+
 //////////////Controls pipline pick date
 var d = new Date();
 var n = d.getMonth();
