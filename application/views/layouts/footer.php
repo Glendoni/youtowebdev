@@ -52,7 +52,7 @@
  <script src="<?php echo asset_url();?>js/bootbox.js"></script>
 
  
-    
+ 
     <script src="<?php echo asset_url();?>js/fe_tagging.js"></script>
     
  

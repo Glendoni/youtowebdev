@@ -22,14 +22,18 @@ class Dashboard extends MY_Controller {
 		// Add options
 		// array_unshift($providers_options,'All');
 
-		//$this->data['pending_actions'] = $this->Actions_model->get_pending_actions($this->get_current_user_id());
+		$this->data['pending_actions'] = $this->Actions_model->get_pending_actions($this->get_current_user_id());
 		$this->data['assigned_companies'] = $this->Actions_model->get_assigned_companies($this->get_current_user_id());
 		$this->data['action_types_array'] = $this->Actions_model->get_action_types_array();
+        
+        
+        
 		$this->data['stats'] = $this->Actions_model->get_recent_stats('week');
-		$this->data['lastweekstats'] = $this->Actions_model->get_recent_stats('lastweek');
-		$this->data['thismonthstats'] = $this->Actions_model->get_recent_stats('thismonth');
-		$this->data['lastmonthstats'] = $this->Actions_model->get_recent_stats('lastmonth');
-		$this->data['getstatssearch'] = $this->Actions_model->get_recent_stats('search');
+		//$this->data['lastweekstats'] = $this->Actions_model->get_recent_stats('lastweek');
+		//$this->data['thismonthstats'] = $this->Actions_model->get_recent_stats('thismonth');
+		//$this->data['lastmonthstats'] = $this->Actions_model->get_recent_stats('lastmonth');
+		//$this->data['getstatssearch'] = $this->Actions_model->get_recent_stats('search');
+        
 		$this->data['pipelinecontacted'] = $this->Actions_model->get_pipeline_contacted();
 		$this->data['pipelinecontactedindividual'] = $this->Actions_model->get_pipeline_contacted_individual($this->get_current_user_id());
 		$this->data['pipelineproposal'] = $this->Actions_model->get_pipeline_proposal($this->get_current_user_id());
@@ -45,10 +49,59 @@ class Dashboard extends MY_Controller {
 		$this->data['dates'] = $this->Actions_model->dates();
 		$this->data['campaignsummary'] = $this->Campaigns_model->get_user_campaigns($this->get_current_user_id());
 		$this->data['teamcampaignsummary'] = $this->Campaigns_model->get_team_campaigns();
+         
+        
 		$this->data['userimage'] = $this->Users_model->get_user_image();
+        
+       
 		//$this->data['marketing_actions'] = $this->Actions_model->get_marketing_actions($this->get_current_user_id());
 		$this->data['main_content'] = 'dashboard/home';
 		$this->load->view('layouts/default_layout', $this->data);	
 	}
+    
+   
+     function getTeamStats(){ //json request
+        	
+       $output =  array(
+          'lastweek' => $this->lastweek(),
+        'currentmonth' => $this->currentmonth(),
+            'lastmonth'=> $this->lastmonths()
+           );
+         
+         //header('Content-Type: application/json');
+         echo json_encode($output);  
+         
+         
+         
+         
+    }
+    
+    
+    
+    function lastweek(){
+        $this->data['lastweekstats'] = $this->Actions_model->get_recent_stats('lastweek');
+        
+        return  $this->load->view('dashboard/lastweek', $this->data, true);	
+        //echo json_encode(array('stats' => $lastweek));  
+    }
+    
+    
+       function currentmonth(){
+       $this->data['thismonthstats'] = $this->Actions_model->get_recent_stats('thismonth');
+        
+       return  $this->load->view('dashboard/thismonth', $this->data, true);	
+        //echo json_encode(array('stats' => $thismonth)); 
+        //return   array('stats' => $thismonth));  
+    }
+    
+    
+    
+       function lastmonths(){
+           //$this->data['lastmonthstats'] = array();
+       $this->data['lastmonthstats'] = $this->Actions_model->get_recent_stats('lastmonth');
+        
+        return $this->load->view('dashboard/lastmonth', $this->data, true);	
+        //echo json_encode(array('stats' => $lastmonth));  
+    }
 
 }
