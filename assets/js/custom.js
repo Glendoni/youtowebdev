@@ -102,7 +102,7 @@ $( document ).ready(function() {
 
     getDealAvg(); //Get Deal Average used for user stats
     
-    
+   if((/companies/.test(window.location.href))) { 
     
 document.getElementById('amount').onkeypress = function(e) { e.preventDefault(); };
 
@@ -117,7 +117,7 @@ if(document.addEventListener)
 
     
     
-    
+   }
     
 
 ////////End stats counter//////////////////////
