@@ -733,12 +733,12 @@ if ($your_date < $now){; ?>
     
     <div class="col-sm-3 col-md-2 initialfee">
 						<div class="form-group ">
-							<label>Initial Fee</label>
+							<label>Initial Fee e.g (0.03)</label>
 							 
                             
                             
 		<div class="input-group">
-      	<input type="number" step="0.01" name="initialfee" class="form-control">
+      	<input type="number" step="0.01" name="initialfee" placeholder="0.03" min="0" class="form-control" id="amount" >
 		<div class="input-group-addon">%</div>
 		</div>
 		</div>

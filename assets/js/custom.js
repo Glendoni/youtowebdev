@@ -104,7 +104,16 @@ $( document ).ready(function() {
     
     
     
-        
+document.getElementById('amount').onkeypress = function(e) { e.preventDefault(); };
+
+document.getElementById('amount').onkeydown = function(e) {
+    if(e.keyCode != 38 && e.keyCode != 40)
+        e.preventDefault();
+};
+
+if(document.addEventListener)
+    document.getElementById('amount').addEventListener('contextmenu',function(e) { e.preventDefault();
+},false);
 
     
     
@@ -200,18 +209,25 @@ $(".show_si_box").slideDown(600);
 }
 $('#action_type_completed').on('change',function(){
 
-if($('#action_type_completed').val() == 16 ){
-$('.onInitialFee').addClass('col-md-2');
-$('.initialfee').show();
-$('.initialfee input').attr('required', 'required');
-}else{
-$('.onInitialFee').removeClass('col-md-2');
-
-$('.initialfee input').val('').removeAttr('required');
-$('.initialfee').hide();
-}
+    if($('#action_type_completed').val() == 16 ){
+        $('.onInitialFee').addClass('col-md-2');
+        $('.initialfee').show();
+        $('.initialfee input').attr('required', 'required');
+    }else{
+        $('.onInitialFee').removeClass('col-md-2');
+        $('.initialfee input').val('').removeAttr('required');
+        $('.initialfee').hide();
+    }
 
 })
+
+
+
+
+
+
+
+
 });
 
 
