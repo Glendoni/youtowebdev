@@ -738,7 +738,7 @@ if ($your_date < $now){; ?>
                             
                             
 		<div class="input-group">
-      	<input type="number" step="0.01" name="initialfee" placeholder="0.03" min="0" class="form-control" id="amount" >
+      	<input type="number" step="0.01" name="initialfee" placeholder="0.03" min="0.01" class="form-control" id="amount" >
 		<div class="input-group-addon">%</div>
 		</div>
 		</div>
