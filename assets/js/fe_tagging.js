@@ -197,7 +197,6 @@ tagcont.push('<div class="col-xs-12 '+subcatName+' fetagsholder'+val['tac_sub_ca
                         url: "fe_add_tag",
                         success: function(data) { 
                             if(data['error']){
-                                 
                                  $('.addedTag').remove();
                                 gettags();
                            subActive = $('.subActive').text();
@@ -564,7 +563,7 @@ return param = para[1]
 }else{
 
 console.log('user came from campaign')
-param  = param[1].split('&');
+param  = param.split('&');
 
 return param = param[0];
 }
