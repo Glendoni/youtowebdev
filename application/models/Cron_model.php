@@ -639,7 +639,7 @@ public function get_campaign_name($campaign)
 
                //$title = str_replace($words, '',$valuevr['title']);
                     $title =  htmlspecialchars($valuevr['title'], ENT_QUOTES);  
-                    $sql = "SELECT id,name,contact_list  from email_campaigns where name='".$title."'  LIMIT 1";
+                    $sql = "SELECT id,name  from email_campaigns where name='".$title."'  LIMIT 1";
                     $query = $this->db->query($sql);
                     $row = $query->row(); 
 

@@ -1771,3 +1771,6 @@ display:none;
             transform: scale(1);
   }
 }
+.run {
+	cursor: pointer;
+}

@@ -119,7 +119,7 @@ DO NOt REMOVE
     
     
     //This should run every hour or more -  Checks and adds email campaign list to database from AP
-    function create_email_campaign_listing()
+    function create_email_campaign_listing1()
     {
             
           $objv =   $this->getCompanyHouseDetails("https://api2.autopilothq.com/v1/lists");
