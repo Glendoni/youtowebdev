@@ -508,7 +508,7 @@ console.log('jinn'+param[1])
 
     }
      
-    console.log('saver'+param[0])
+     
     return param = param[0];   
     
 }
