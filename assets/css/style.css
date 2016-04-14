@@ -319,8 +319,8 @@ border-bottom: 1px dashed #ddd;
 	/*background-color: #f2dede;*/
 	/*border-color: #ebccd1;*/
 
-    background-color: rgba(242, 222, 222, 0.12);
-    border-color: rgba(235, 204, 209, 0.29);
+background-color: rgba(242, 222, 222, 0.36);
+    border-color: rgba(235, 204, 209, 0.56);
 }
 
 .pipeline-update {
@@ -1460,6 +1460,7 @@ li.folder {
 .inner.tag {
 	display: none;
 	    list-style-type: none;
+    border-bottom: solid thin #f5f5f5;
 }
 
 .tag {
