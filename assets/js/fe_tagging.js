@@ -76,22 +76,12 @@ function populate(){
                     subcatName = subcatName.replace('(', '');
                     subcatName = subcatName.replace(')', '');
 tagcont.push('<div class="col-xs-12 '+subcatName+' fetagsholder'+val['tac_sub_cat_id']+' added-tag-holder"><div class="category-name-holder" >'+val['sub_cat_name']+'</div><ul class="fetags'+val['tac_sub_cat_id']+' sub_ul"></ul></div>'); 
-            }
-                
-                
-                
-                
-                
-              
+            }          
 //console.warn('qqqqqqqqqsub_'+val['sub_cat_name']);
                 
                 vale = val;
                 //console.log(val['cat_id'])
             if($.inArray(el, category) === -1) category.push(el);
-                
-                
-                
-             
             })
             tagcont = tagcont.sort();
              $('.subcont').prepend(jQuery.unique(tagcont).join(''));  
@@ -152,7 +142,7 @@ tagcont.push('<div class="col-xs-12 '+subcatName+' fetagsholder'+val['tac_sub_ca
             tagSearch();
            //scScroll()
         
-            $('.list-group-item').click(function(){
+            $('.tagContainer .list-group-item').click(function(){
                if($(this).parents('.main').length){
                        $('.activeMain .folIcon').removeClass('indicatorshow');
                $('.list-group-item').removeClass('activeMain');
@@ -431,7 +421,10 @@ return plainDate;
 
 function unHighlightActiveSubITems(){
     
-    $('.sub_group').css('color' , '#999');
+    $('.sub_group').css('opacity' , '1.0');
+    
+     $('.sub_group').css(' color' , 'rgba(0, 0, 0, 0.53)');
+ 
     var parid;
     var tagSecGroup;
     var subName;
@@ -453,7 +446,7 @@ function unHighlightActiveSubITems(){
                 if(subItemName == subName.replace(apendParName, '')){
                     $('.sub_group').each(function(){
                         if($(this).attr('sub') == subAttr){
-                            $(this).css('color', 'rgb(212, 212, 212)');
+                            $(this).css('opacity', '0.6');
                         }
                     })
                 }
