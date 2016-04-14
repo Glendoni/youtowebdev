@@ -733,7 +733,7 @@ if ($your_date < $now){; ?>
     
     <div class="col-sm-3 col-md-2 initialfee">
 						<div class="form-group ">
-							<label>Initial Fee e.g (0.03)</label>
+							<label>Initial Fee</label>
 							 
                             
                             
