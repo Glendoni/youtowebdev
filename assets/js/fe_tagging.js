@@ -1,7 +1,4 @@
 $(document).ready(function(){
-    
-  
-    
      gettags();
     $('.nav-tabs').click(function(){
         
@@ -51,7 +48,19 @@ valst = vals.replace(' ', '');
         } 
     })    
     }
-})
+    
+    $('.nav').click(function(){
+ var dataval;
+        $('.subtags .tag').hide()
+        $('.folder').each(function(){
+           dataval =  $(this).attr('data');
+            if($(this).hasClass('activeMain')){
+                $('.sub_'+ dataval+' .tag').show();
+             }
+        });
+    });
+     
+}); //Document End
 
 function populate(){
      var tagcont = [];
@@ -138,34 +147,45 @@ tagcont.push('<div class="col-xs-12 '+subcatName+' fetagsholder'+val['tac_sub_ca
                    
                })
                 del_ini();
-            gettags()
+            gettags();
             tagSearch();
            //scScroll()
         
             $('.tagContainer .list-group-item').click(function(){
                if($(this).parents('.main').length){
                        $('.activeMain .folIcon').removeClass('indicatorshow');
+                   
+                   
+                   if($(this).hasClass('parent')){
+                       
+                          $('.subtags .tag').hide();
+                       
+                   }
+                  
                $('.list-group-item').removeClass('activeMain');
                    $('.folIcon').removeClass('indicatorshow');
                      if(!$(this).hasClass('parent')){
                  //        $('.folIcon .indicatorshow').hide();
+                         
+                       
                          $(this).addClass('activeMain');
                           $('.activeMain .folIcon').addClass('indicatorshow').show();
                          //console.warn('i was clicked')
                      }
                }
                
-              $('.tadefault').hide()
+              $('.tadefault').hide();
                 var subid = $(this).attr('data');
                $('sub_group').removeClass('subActive');
                 
                 if(!$(this).closest(".main").length ){
                     $(this).addClass('subActive');
                 }
-                 del_ini()
+                 del_ini();
             if(!$(this).hasClass('sub_group')){
                  $('.parent').removeClass('sub_group');
                 $('.sub_group').hide();
+                
     //$('.subtags').hide()
                 
                 $('.sub'+subid).show("slide", { direction: "left" }, 200);
@@ -232,46 +252,21 @@ function gettags(){
     
     var autopilotEmailCompany = window.location.href.split("id="); 
 
-if((/companies/.test(window.location.href))) {
-
-
-
-
-
-    
-    
-     //var myParam = window.location.href.split("id=");
-    
-    
+if((/companies/.test(window.location.href))) {    
     var param;
     var para  = window.location.href.split("?id=");
-
    param =  checkUrlParam(para);
-    
-    
-    
      var para = {'companyID': param};
              $.ajax({
         type: "POST",
             data: para,
             dataType: "json",
         url: 'fe_get_tag',
-        success: function(data) {
-            //console.log(data)
-            
-            
+        success: function(data) {  
               $('.addedTag').remove();
-             $.each( data, function( key, val ) {
-          // console.log(val['parent_tag_id'])
-           
-           // console.log('fetags'+val['parent_tag_id'])
-           
+             $.each( data, function( key, val) {
            $('.fetags'+val['parent_tag_id']).append('<li class="addedTag tag'+val['tag_id']+' " style="float:left;"><span class="tagName"></span>'+val['name']+'<span class="tagRemove" data-tag="'+val['tag_id']+'">x</span></li>');
            
-           
-           //console.log('<li class="addedTag tag'+val['tag_id']+' " style="float:left;"><span class="tagName"></span>'+val['name']+'<span class="tagRemove" data-tag="'+val['tag_id']+'">x</span></li>');
-          
-                //$('#fetags').append('<li class="addedTag tag'+val['tag_id']+' " style="float:left;"><span class="tagName"></span>'+val['name']+'<span class="tagRemove" data-tag="'+val['tag_id']+'">x</span></li>');
                   $('.tafixed').show()
              })        
                       
@@ -306,8 +301,6 @@ function del_ini(){
           
           $('.tagRemove').on('click.disabled', false);
                  var myParam = window.location.href.split("id=");
-          
-          
           var param =  checkUrlParam(myParam);
              var dataTag =  $(this).attr('data-tag');
           
@@ -470,7 +463,7 @@ $('.parent').each(function(){
         if(parname.trim() == $(this).text().slice(0,-1)){
             $('.sub'+parid).each(function(){
                 if(test ==  $(this).attr('sub')){
-                    $(this).css('color', 'rgb(212, 212, 212)');
+                      $(this).css('opacity', '0.6');
                 }
             })
         }
@@ -512,8 +505,6 @@ return param = param[0];
     
     
 }
-
-
 
 function isInt(n) {
    return n % 1 === 0;
