@@ -573,9 +573,9 @@ class Campaigns_model extends MY_Model {
 		return $query->result();
 	}
 
-function get_campaign_pipeline($id)
+function get_campaign_pipeline($id,$private=false)
 	{
-$sql = "select campaign_id ,\"campaign name\",
+$sql = "select campaign_id ,campaignname,datecreated,\"campaign name\",
 description,
 image,
 \"created\",
@@ -596,6 +596,8 @@ C.id campaign_id,
 C.created_at::date \"created\",
 U.image image,
 C.name \"campaign name\" ,
+C.name \"campaignname\" ,
+C.created_at \"datecreated\",
 C.description description ,
 count(distinct T.company_id) campaign_total,
 round (100 * count(distinct (CASE when A.created_at > C.created_at AND CO.pipeline <> 'Unsuitable' then A.company_id else null END ))::numeric  / CASE when count(distinct CASE when CO.pipeline <> 'Unsuitable' then CO.id END) = 0 then 0 
@@ -652,8 +654,21 @@ group by 1
 )   T2
 ON T1.id = T2.id
 order by 3 desc";
+    
+    
 		$query = $this->db->query($sql);
-		    return $query->result(); /* returns an object */
+    
+    
+    if($private){
+		
+          $row = $query->row(); 
+              return $row;
+    }else{
+       return $query->result(); /* returns an object */
+    return $row;
+    }
+    
+    
 }
 
 function get_user_campaigns($user_id)
@@ -785,6 +800,45 @@ function get_campaign_owner($id)
 				where CP.id = $id group by 1,2 limit 1";
 		$query = $this->db->query($sql);
 		    return $query->result(); /* returns an object */
+}
+    
+    
+         function private_campaigns_new($user_id)
+	{
+		$this->db->distinct();
+		$this->db->select('c.name,c.id as id,c.user_id as userid,u.name as searchcreatedby,u.image as image,c.shared, c.created_at');
+		$this->db->from('campaigns c');
+		$this->db->join('users u', 'c.user_id = u.id');
+		$this->db->join('targets t', 'c.id = t.campaign_id');
+		$this->db->join('companies comp', 't.company_id = comp.id');
+		// Apply this to find saved searches only
+		$this->db->where('criteria IS NULL', null, false);
+		$this->db->where('u.active', 'True');
+		$this->db->where('c.shared', 'True');
+		$this->db->where('comp.active', 'True');
+		$this->db->where('c.user_id', $user_id);
+		$this->db->order_by("c.created_at", "desc");
+		//$this->db->limit(20);
+		$this->db->where("(c.eff_to IS NULL OR c.eff_to > '".date('Y-m-d')."')",null, false); 
+		$this->db->group_by("1,2,3,4,5");
+				$this->db->limit(20);
+ 
+		$query = $this->db->get();
+		//print_r($query->result());
+                    foreach ($query->result_array() as $row)
+                    {
+                        
+                        $get_campaign_pipeline_new  =  $this->get_campaign_pipeline($row['id'],true);
+                       $output[] = array('id' => $row['id'],
+                                        'name' =>   $get_campaign_pipeline_new->campaignname,
+                                       'image' => $get_campaign_pipeline_new->image,
+                                         'datecreated' => date('d-m-Y', strtotime($get_campaign_pipeline_new->datecreated)),
+                                       'percentage' => $get_campaign_pipeline_new->contacted
+                                       );
+                    }        
+            
+            return $output;          
+            
 }
 
 }

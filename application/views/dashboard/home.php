@@ -1356,16 +1356,20 @@
               </div>
               <div class="panel-body" style="padding:0;">
                   <!-- PRIVATE SEARCHES -->
-                  <?php foreach ($private_campaigns as $campaign):?>
-                  <?php $user_icon = explode(",", $campaign->image);$bg_colour = $user_icon[1];$bg_colour_text = $user_icon[2];$bg_colour_name = $user_icon[0];?>
-                    <a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $campaign->id; ?>" class="load-saved-search" <?php echo strlen($campaign->name) > 36 ? 'title="'.$campaign->name.'"':"" ?>><div class="row">
+                 
+                  
+                  <?php foreach ($private_campaigns_new as $campaign):?>
+                  <?php $user_icon = explode(",", $campaign['image']);$bg_colour = $user_icon[1];$bg_colour_text = $user_icon[2];$bg_colour_name = $user_icon[0];?>
+                    <a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $campaign['id']; ?>" class="load-saved-search" <?php echo strlen($campaign['name']) > 36 ? 'title="'.$campaign['name'].'"':"" ?>><div class="row">
                   <div class="col-xs-1"><span class="label label-info" style="margin-right:3px;background-color: <?php echo $bg_colour; ?>;font-size:8px; color: <?php echo $bg_colour_text;?>"><b><?php echo $bg_colour_name; ?></b>
                     </span></div>
-                  <div class="col-xs-9" style="max-height:15px;overflow:hidden"><?php echo $campaign->name;?></div>
-                  <div class="col-xs-1" style="padding: 0 0 0 5px;"><b><?php //echo $campaign->campaigncount; ?></b></div>
+                  <div class="col-xs-9" style="max-height:30px;overflow:hidden"><?php echo $campaign['name'];?><br><span style="font-size:9px;"><?php echo 'Created: '. $campaign['datecreated'];?></span></div>
+                  <div class="col-xs-1" style="padding: 0 0 0 0px; font-size: 11px;"><?php echo $campaign['percentage']; ?>%</div>
                   </div>
                   </a>
                   <?php endforeach; ?>
+                  
+                  
               </div>
             </div>
             <div class="panel panel-default">
