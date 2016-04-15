@@ -49,6 +49,10 @@ class Dashboard extends MY_Controller {
 		$this->data['dates'] = $this->Actions_model->dates();
 		$this->data['campaignsummary'] = $this->Campaigns_model->get_user_campaigns($this->get_current_user_id());
 		$this->data['teamcampaignsummary'] = $this->Campaigns_model->get_team_campaigns();
+        $this->data['private_campaigns_new'] = $this->Campaigns_model->private_campaigns_new($this->get_current_user_id());
+
+        
+        
          
         
 		$this->data['userimage'] = $this->Users_model->get_user_image();
