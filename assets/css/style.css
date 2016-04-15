@@ -319,8 +319,8 @@ border-bottom: 1px dashed #ddd;
 	/*background-color: #f2dede;*/
 	/*border-color: #ebccd1;*/
 
-background-color: rgba(242, 222, 222, 0.36);
-    border-color: rgba(235, 204, 209, 0.56);
+    background-color: rgba(242, 222, 222, 0.63);
+    border-color: rgba(235, 204, 209, 0.56)
 }
 
 .pipeline-update {
