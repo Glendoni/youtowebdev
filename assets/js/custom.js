@@ -100,133 +100,110 @@ $('.us-initial-rate-total').text(avg);
 $( document ).ready(function() {
     
 
-    getDealAvg(); //Get Deal Average used for user stats
-    
-   if((/companies/.test(window.location.href))) { 
-    
-document.getElementById('amount').onkeypress = function(e) { e.preventDefault(); };
+     getDealAvg(); //Get Deal Average used for user stats
+      
 
-document.getElementById('amount').onkeydown = function(e) {
-    if(e.keyCode != 38 && e.keyCode != 40)
-        e.preventDefault();
-};
 
-if(document.addEventListener)
-    document.getElementById('amount').addEventListener('contextmenu',function(e) { e.preventDefault();
-},false);
+    ////////End stats counter//////////////////////
+    var autopilotEmailCompany = window.location.href.split("id="); 
 
-    
-    
-   }
-    
+    if((/dashboard/.test(window.location.href))) {
+        $.ajax({
+        type: "GET",
+        dataType: "json",
+        url: "Marketing/loaddata",
+        success: function(data) {
+        var action;
+        var items = [];
+        var idfk;
+        $.each( data, function( key, val ) {
+            idfk = val.company_id;
+            if(val.action == "4"){ action =  'Un-subscribed'; }else if(val.action == "2"){ action =  'Clicked'; }else{action  = 'Opened';}  
+            if( typeof idfk !== 'undefined'){
+            var company = val.company.replace(/Limited|Ltd|ltd|limited/gi, function myFunction(x){return ''});
+            var pipeline = val.pipeline.charAt(0).toUpperCase() + val.pipeline.slice(1);    
+            items.push( '<div class="row record-holder"><div class="col-xs-8 col-sm-4 col-md-3"><a href="companies/company?id='+idfk+'">'+company+'</a></div><div class="col-xs-8 col-sm-4 col-md-2">'+val.campaign+'</div><div class="col-xs-4 col-sm-1 col-md-1 text-right"><span class="label pipeline label-'+pipeline+'">#'+pipeline+'</span></div><div class="col-xs-6 col-sm-2 col-md-2"><a href="companies/company?id='+idfk+'#contacts">'+val.username+'</a></div><div class="col-xs-6 col-sm-3 col-md-2 align-right "> <span class="label label-primary">'+action+'</span></div><div class="col-xs-12 col-sm-2 col-md-2 contact-phone">'+val.date+'</div></div>' );
+            } 
+        }); 
+        $('#stat').html(items.join( "" ));
+        $('.eventcount').html(items.length); //update engagement counter
+        }
 
-////////End stats counter//////////////////////
-var autopilotEmailCompany = window.location.href.split("id="); 
+        });
 
-if((/dashboard/.test(window.location.href))) {
+        //GET TEAM STATS VIA JSON
+       $.ajax({
+            type: "GET",
+                dataType: "json",
+            url: "dashboard/getTeamStats",
+            success: function(data) {
+                $.each( data, function( key, val ) {
+            //key = tslastweek, tscurrentmonth , tslastmonth
+                   $('#ts'+key).html(val);
+                })  
+               tsTotalConfig();
+            }
+        });
+         //GET TEAM STATS END
+
+    }
+    if(autopilotEmailCompany[1]){ 
+    var myParam = window.location.href.split("id=");
+    var action ;
     $.ajax({
     type: "GET",
     dataType: "json",
-    url: "Marketing/loaddata",
+    url: "../Marketing/autopilotActions/"+myParam[1],
     success: function(data) {
     var action;
     var items = [];
-    var idfk;
-    $.each( data, function( key, val ) {
-        idfk = val.company_id;
-        if(val.action == "4"){ action =  'Un-subscribed'; }else if(val.action == "2"){ action =  'Clicked'; }else{action  = 'Opened';}  
-        if( typeof idfk !== 'undefined'){
-        var company = val.company.replace(/Limited|Ltd|ltd|limited/gi, function myFunction(x){return ''});
-        var pipeline = val.pipeline.charAt(0).toUpperCase() + val.pipeline.slice(1);    
-        items.push( '<div class="row record-holder"><div class="col-xs-8 col-sm-4 col-md-3"><a href="companies/company?id='+idfk+'">'+company+'</a></div><div class="col-xs-8 col-sm-4 col-md-2">'+val.campaign+'</div><div class="col-xs-4 col-sm-1 col-md-1 text-right"><span class="label pipeline label-'+pipeline+'">#'+pipeline+'</span></div><div class="col-xs-6 col-sm-2 col-md-2"><a href="companies/company?id='+idfk+'#contacts">'+val.username+'</a></div><div class="col-xs-6 col-sm-3 col-md-2 align-right "> <span class="label label-primary">'+action+'</span></div><div class="col-xs-12 col-sm-2 col-md-2 contact-phone">'+val.date+'</div></div>' );
-        } 
-    }); 
-    $('#stat').html(items.join( "" ));
-    $('.eventcount').html(items.length); //update engagement counter
-    }
-
-    });
-        
-    //GET TEAM STATS VIA JSON
-   $.ajax({
-        type: "GET",
-            dataType: "json",
-        url: "dashboard/getTeamStats",
-        success: function(data) {
-            $.each( data, function( key, val ) {
-        //key = tslastweek, tscurrentmonth , tslastmonth
-               $('#ts'+key).html(val);
-            })  
-           tsTotalConfig();
+    var idfks;
+    var  i = 0 
+    $.each( data, function( key, val ) {              
+        switch (val.action) {
+            case '1':
+            action  = '<span class="label label-success">Opened</span>'; 
+            break;
+            case '4':    
+            action  = '<span class="label label-success">Unsubscribed</span>'; 
+            break;
+            case '2':
+            action =  '<span class="label label-success">Clicked</span>';
+            break;
+        }
+        if( val.campaign !== null ){
+            if(val.action != '3'){
+                i++;
+                $( '<li class="list-group-item"><div class="row"><div class="col-xs-6 col-md-7"><h4 style="margin:0;">'+val.campaign_name+'<div class="mic-info">'+val.date+ ' by '+val.email+
+                '</div></h4></div><!--END COL-MD-4--><div class="col-xs-6 col-md-5" style="text-align:right;"><span class="label label-primary" style="font-size:11px;  ">'+val.first_name+ ' '+ val.last_name+
+                '</span> '+action+' </div></div></li>' ).prependTo('#marketing ul');
+            }
         }
     });
-     //GET TEAM STATS END
-  
-}
-if(autopilotEmailCompany[1]){ 
-var myParam = window.location.href.split("id=");
-var action ;
-$.ajax({
-type: "GET",
-dataType: "json",
-url: "../Marketing/autopilotActions/"+myParam[1],
-success: function(data) {
-var action;
-var items = [];
-var idfks;
-var  i = 0 
-$.each( data, function( key, val ) {              
-switch (val.action) {
-case '1':
-action  = '<span class="label label-success">Opened</span>'; 
-break;
-case '4':    
-action  = '<span class="label label-success">Unsubscribed</span>'; 
-break;
-case '2':
-action =  '<span class="label label-success">Clicked</span>';
-break;
-}
-if( val.campaign !== null ){
-if(val.action != '3'){
-i++;
-$( '<li class="list-group-item"><div class="row"><div class="col-xs-6 col-md-7"><h4 style="margin:0;">'+val.campaign_name+'<div class="mic-info">'+val.date+ ' by '+val.email+
-'</div></h4></div><!--END COL-MD-4--><div class="col-xs-6 col-md-5" style="text-align:right;"><span class="label label-primary" style="font-size:11px;  ">'+val.first_name+ ' '+ val.last_name+
-'</span> '+action+' </div></div></li>' ).prependTo('#marketing ul');
-}
-}
-});
-$('.marketingAcitonCtn').text(parseInt($('.marketingAcitonCtn').text()) + i);
-$(items.join( "" )).prependTo('#marketing ul');
-//if(i) $('#outstanding h4,.actionMsg h4').hide();
-}
-});
-}
-var source_explanation = $("input[name=source_explanation]").val();
-var company_source = $("select[name=company_source]").val();
-if (company_source=='8') {
-$(".show_si_box").slideDown(600);
-}
-$('#action_type_completed').on('change',function(){
-
-    if($('#action_type_completed').val() == 16 ){
-        $('.onInitialFee').addClass('col-md-2');
-        $('.initialfee').show();
-        $('.initialfee input').attr('required', 'required');
-    }else{
-        $('.onInitialFee').removeClass('col-md-2');
-        $('.initialfee input').val('').removeAttr('required');
-        $('.initialfee').hide();
+    $('.marketingAcitonCtn').text(parseInt($('.marketingAcitonCtn').text()) + i);
+    $(items.join( "" )).prependTo('#marketing ul');
+    //if(i) $('#outstanding h4,.actionMsg h4').hide();
     }
+    });
+    }
+    var source_explanation = $("input[name=source_explanation]").val();
+    var company_source = $("select[name=company_source]").val();
+    if (company_source=='8') {
+    $(".show_si_box").slideDown(600);
+    }
+    $('#action_type_completed').on('change',function(){
 
-})
+        if($('#action_type_completed').val() == 16 ){
+            $('.onInitialFee').addClass('col-md-2');
+            $('.initialfee').show();
+            $('.initialfee input').attr('required', 'required');
+        }else{
+            $('.onInitialFee').removeClass('col-md-2');
+            $('.initialfee input').val('').removeAttr('required');
+            $('.initialfee').hide();
+        }
 
-
-
-
-
-
-
+    })
 
 });
 
