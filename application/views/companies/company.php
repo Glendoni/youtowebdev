@@ -54,10 +54,39 @@ endif; ?>
 	<?php if(!empty($company['pipeline'])): ?>
 	<span class="label pipeline label-<?php echo str_replace(' ', '', $company['pipeline']); ?>">#<?php echo $company['pipeline']?>
 	<?php endif; ?>
-	<?php if (isset($company['customer_from'])&&($company['pipeline']=='Customer')):?>
+        <?php if (isset($company['customer_from'])&&($company['pipeline']=='Customer')):?>
 		from <?php echo date("d/m/y",strtotime($company['customer_from']));?>
+        
+        
+        
+         <?php  
+        
+        $number  = $company['initial_rate'];
+         if($number < 5 && strpos($number,".") != true ){ //if single digit less than 5 then acc
+        $number  =  str_pad($number, 4, ".00", STR_PAD_RIGHT);
+    }elseif($number < 5 && strpos($number,".") == true){
+        $number =  str_pad($number, 4, "00", STR_PAD_RIGHT);
+       
+    }elseif(!strpos($number,".")){
+        $number =  $number /100;
+        $number =  str_pad($number, 3, "0", STR_PAD_LEFT);
+        
+         //echo $number;
+    }else{
+
+
+    } 
+    
+  
+        echo $number ? '<span class="initial_rate_found">  - (@'.$number.'%)</span>' : '<span class="initial_rate_not_found">(Rate Not Set)</span>' ;  ?>
+        
+        
+        
+        
 		<?php endif; ?>
 		</span>
+       
+        
 	<?php if(isset($company['assigned_to_name'])): ?>
 		<span class="label label-assigned"
 		<?php $user_icon = explode(",", ($company['image']));echo "style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'";?>>
@@ -66,7 +95,7 @@ endif; ?>
         </span>
 	<?php else: ?>
 	<?php endif; ?>
-	</div><!--END ROW-->
+	 </div><!--END ROW-->
 
 	<!-- POPUP BOXES -->
 	<?php $this->load->view('companies/edit_box.php',array('company'=>$company)); ?>

@@ -694,10 +694,10 @@ function create($post)
 }
 
 function company_updated_to_customer($post){
-
+ 
     if(isset($post['initialfee']) && is_numeric($post['initialfee'])){
         $data = array(
-        'initial_rate'  => (!empty($post['initialfee'])?$post['initialfee']:NULL)
+        'initial_rate'  => (!empty($post['initialfee'])? $this->calIntRate($post['initialfee']):NULL)
             );
         $this->db->where('id', $post['company_id']);
         $this->db->update('companies', $data); 
@@ -790,5 +790,25 @@ function delete_campaign($id,$user_id)
         return True;
     } 
 }
+    
+  function calIntRate($number){
+  
+    if($number < 5 && strpos($number,".") != true ){ //if single digit less than 5 then acc
+        $number  =  str_pad($number, 4, ".00", STR_PAD_RIGHT);
+    }elseif($number < 5 && strpos($number,".") == true){
+        $number =  str_pad($number, 4, "00", STR_PAD_RIGHT);
+       
+    }elseif(!strpos($number,".")){
+        $number =  $number /100;
+        $number =  str_pad($number, 3, "0", STR_PAD_LEFT);
+        
+         //echo $number;
+    }else{
+
+
+    } 
+    
+   return  $number;
+    }
 
 }

@@ -495,7 +495,7 @@ function checkUrlParam(para){
     var param;
         param = para[1];
     if(isInt(param)){
-console.log('jinn'+param[1])
+//console.log('jinn'+param[1])
         return param = para[1];
     }else{
         param  = param.split('&');

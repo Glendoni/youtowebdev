@@ -1775,3 +1775,8 @@ display:none;
             transform: scale(1);
   }
 }
+
+
+.initial_rate_found,.initial_rate_not_found{
+    font-style: italic;
+}
