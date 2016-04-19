@@ -32,7 +32,7 @@ class Dashboard extends MY_Controller {
 		//$this->data['lastweekstats'] = $this->Actions_model->get_recent_stats('lastweek');
 		//$this->data['thismonthstats'] = $this->Actions_model->get_recent_stats('thismonth');
 		//$this->data['lastmonthstats'] = $this->Actions_model->get_recent_stats('lastmonth');
-		//$this->data['getstatssearch'] = $this->Actions_model->get_recent_stats('search');
+		if($_GET['search']) $this->data['getstatssearch'] = $this->Actions_model->get_recent_stats('search');
         
 		$this->data['pipelinecontacted'] = $this->Actions_model->get_pipeline_contacted();
 		$this->data['pipelinecontactedindividual'] = $this->Actions_model->get_pipeline_contacted_individual($this->get_current_user_id());
