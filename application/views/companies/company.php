@@ -78,7 +78,7 @@ endif; ?>
     } 
     
   
-        echo $number ? '<span class="initial_rate_found">  - (@'.$number.'%)</span>' : '<span class="initial_rate_not_found">(Rate Not Set)</span>' ;  ?>
+        echo $number ? '<span class="initial_rate_found">  - &#64;'.$number.'%</span>' : '<span class="initial_rate_not_found">(Rate Not Set)</span>' ;  ?>
         
         
         
@@ -107,7 +107,7 @@ endif; ?>
 
     
    
-<div class="panel panel-primary" style="padding-top: 30px;">
+<div class="panel panel-primary" style="padding-top: 30px;" >
 	<div class="panel-body">
     	<div class="row"><!--FINISHED AT THE END OF PANEL-->
 		<div class="col-sm-9">
