@@ -99,11 +99,49 @@ $('.us-initial-rate-total').text(avg);
 
 $( document ).ready(function() {
     
+    $('#add_action_request').click(function(e){
 
+        var check  = /^\d+\.\d{0,2}?/.test($('#amount').val());
+        if(check === false){ 
+            $('#amount').val('')
+            var elements = document.getElementsByTagName("INPUT");
+            for (var i = 0; i < elements.length; i++) {
+                elements[i].oninvalid = function (e) {
+                    if (!e.target.validity.valid) {
+                        switch (e.srcElement.id) {
+                            case "amount":
+                            e.target.setCustomValidity("Decimal number required");
+                            break;
+                        }
+                    }
+                };
+                elements[i].oninput = function (e) {
+                }
+            };
+        }else{
+       // console.log('Check me out '+check); 
+            e.target.setCustomValidity("");  
+            var elements = document.getElementsByTagName("INPUT");
+            for (var i = 0; i < elements.length; i++) {
+                elements[i].oninvalid = function (e) {
+                    if (!e.target.validity.valid) {
+                        switch (e.srcElement.id) {
+                            case "amount":
+                            e.target.setCustomValidity("");
+                            break;
+                        }
+                    }
+                };
+                elements[i].oninput = function (e) {
+                e.target.setCustomValidity("");
+                $('#amount').trigger('click');
+              }
+            }
+            e.target.setCustomValidity("");
+        }
+});
+    
      getDealAvg(); //Get Deal Average used for user stats
-      
-
-
     ////////End stats counter//////////////////////
     var autopilotEmailCompany = window.location.href.split("id="); 
 
@@ -197,6 +235,7 @@ $( document ).ready(function() {
             $('.onInitialFee').addClass('col-md-2');
             $('.initialfee').show();
             $('.initialfee input').attr('required', 'required');
+            checkInitialFee()
         }else{
             $('.onInitialFee').removeClass('col-md-2');
             $('.initialfee input').val('').removeAttr('required');
@@ -206,7 +245,6 @@ $( document ).ready(function() {
     })
 
 });
-
 
 function tsTotalConfig(){
     

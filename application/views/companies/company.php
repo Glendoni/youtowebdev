@@ -60,25 +60,11 @@ endif; ?>
         
         
          <?php  
-        
-        $number  = $company['initial_rate'];
-         if($number < 5 && strpos($number,".") != true ){ //if single digit less than 5 then acc
-        $number  =  str_pad($number, 4, ".00", STR_PAD_RIGHT);
-    }elseif($number < 5 && strpos($number,".") == true){
-        $number =  str_pad($number, 4, "00", STR_PAD_RIGHT);
-       
-    }elseif(!strpos($number,".")){
-        $number =  $number /100;
-        $number =  str_pad($number, 3, "0", STR_PAD_LEFT);
-        
-         //echo $number;
-    }else{
-
-
-    } 
-    
-  
-        echo $number ? '<span class="initial_rate_found">  - &#64;'.$number.'%</span>' : '<span class="initial_rate_not_found">(Rate Not Set)</span>' ;  ?>
+            $number  = $company['initial_rate'];
+ 
+        //$number = 5.00;
+       $number =  preg_match('[-+]?([0-9]*\.[0]+|[0]+', $number) ? false : $number;
+        echo $number ? '<span class="initial_rate_found">  - &#64;'.$number.'%</span>' : '<span class="initial_rate_not_found"> - Rate Not Set</span>' ;  ?>
         
         
         
@@ -767,7 +753,7 @@ if ($your_date < $now){; ?>
                             
                             
 		<div class="input-group">
-      	<input type="number" step="0.01" name="initialfee" placeholder="0.00" min="0.01" class="form-control" id="amount" >
+      	<input type="number" step="0.01" name="initialfee" placeholder="0.00" min="0.01" max="9.99" class="form-control" id="amount" >
 		<div class="input-group-addon">%</div>
 		</div>
 		</div>
@@ -811,7 +797,7 @@ if ($your_date < $now){; ?>
 					<label>Outcome</label>
 <textarea class="form-control completed-details" name="comment" rows="3" required="required"></textarea>
 				</div>
-				<button type="submit" name="no contno con" class="btn btn-primary form-control disable_no_source">Add Action</button>
+				<button type="submit" name="no contno con" class="btn btn-primary form-control disable_no_source" id="add_action_request">Add Action</button>
 			</div>
 			<?php echo form_close(); ?>
 			</div>
