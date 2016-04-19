@@ -252,6 +252,43 @@ DO NOt REMOVE
         
         
     }
+    
+    
+     public function getCustomListDetails($campaign_id = 480,$contact_list = "contactlist_07D36C5F-DFF1-4606-B34E-7137BECC8870",$campaign_title = "MCU: Mar 2016"){
+        
+       
+
+            $obj = $this->test('https://api2.autopilothq.com/v1/contact/person_000D6E15-40F0-4951-9447-BC063AD453BB');
+
+            $objCont = $obj['custom_fields'] ;
+         foreach($objCont as $objr =>$item ){
+              
+             if($item['value'] == 'Downloaded'){
+                 
+                 echo $item['value'] . '----' .$item['kind'].'<br>';
+                 
+             }
+             
+             //echo $item['value'].'<br>';
+             
+
+
+
+foreach($item as $custkey => $custItem){
+                 //echo $custkey['value'].'<br>';
+                 if($custkey == 'Downloaded'){
+                   // echo  $custkey.'-----'.$custItem;  
+                 }
+             }
+             
+
+          
+        }
+
+
+        
+        
+    }
      
     //find the company id baised on the campaign name and insert FK into  the emails action table
     public function companyFinder($contactidd,$campaignID,$event){
