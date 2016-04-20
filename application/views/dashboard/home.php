@@ -599,48 +599,95 @@
                            <strong>DueDil</strong>
                         </div>
                         </div>
-                        <?php foreach ($getstatssearch as $getstatssearch): ?>
-                          <div class="row list-group-item stats-row active-<?php echo $getstatssearch['active'];?>">
+                         
+                             <div class="row list-group-item dashboardTotalheaders">
+                        <div class="col-xs-2 col-md-1 hide-overflow"> 
+                            <strong>Totals</strong>
+                        </div>
+                        <div class="col-xs-2 col-md-1 text-center hide-overflow">
+                             <span class="badge sr-deals-total stat-total" style="background-color:#428bca;">0</span>
+                        </div>
+                        <div class="col-xs-2 col-md-1 text-center hide-overflow">
+                           <span class="badge sr-proposals-total stat-total" style="background-color:#45AE7C;">0</span>
+                        </div>
+                        <div class="col-xs-2 col-md-2 text-center hide-overflow" >
+                          <span class="sr-demobookedcount-total stat-total" >16</span> /
+                             <span class="sr-democount-total stat-total"  >0</span>
+                        </div>
+                        <div class="col-xs-1 col-md-1 text-center hide-overflow">
+                           <span class="sr-meetingbooked-total stat-total" >0</span> /  
+                            <span class="sr-meetingcount-total stat-total" >0</span>
+                        </div>
+                       
+                        <div class="col-md-2 hidden-xs text-center hide-overflow">
+                           <span class="sr-salescall-total stat-total" >1</span> / 
+                            <span class="sr-introcall-total stat-total">0</span>
+                        </div>
+                        <div class="col-md-1 hidden-xs text-center hide-overflow"> 
+                          <span class="sr-pipelinecount-total stat-total">0</span> 
+                        </div>
+                        <div class="col-md-2 hidden-xs text-center hide-overflow">
+                          <span class="sr-key_review_added-total stat-total">0</span> / 
+                            <span class="sr-key_review_occuring-total stat-total">5</span>
+                        </div>
+                                    
+                                    
+                                     <div class="col-xs-2 col-md-1 text-center hide-overflow"> 
+                          <span class="sr-duediligence-total stat-total">0</span>
+                            
+                        </div>
+                                
+                        </div>
+                         
+                         
+                         
+                         
+                         
+                         
+                         
+                         
+        <?php foreach ($getstatssearch as $getstatssearch): ?>
+                  <div class="row list-group-item stats-row active-<?php echo $lastmonthstat['active'];?>">
                             <div class="col-xs-2 col-md-1">
-                            <a href = "?search=2&user=<?php echo $getstatssearch['user'];?>&start_date=<?php echo $_GET['start_date']?>&end_date=<?php echo $_GET['end_date']?>&period=search">
+                            <a href = "?search=2&user=<?php echo $getstatssearch['user'];?>&period=lastmonth"> 
                             <?php $user_icon = explode(",",$getstatssearch['image']); echo "<div class='circle name-circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
                             </a>
                             </div>
                             <div class="col-xs-2 col-md-1 text-center">
-                            <a href = "?search=2&user=<?php echo $getstatssearch['user'];?>&start_date=<?php echo $_GET['start_date']?>&end_date=<?php echo $_GET['end_date']?>&period=search"><span class="badge" style="background-color:#45AE7C;"><?php echo $getstatssearch['deals'];?></span></a>
+                            <a href = "?search=2&user=<?php echo $getstatssearch['user'];?>&period=lastmonth"><span class="badge sr-deals" style="background-color:#428bca;"><?php echo $getstatssearch['deals'];?></span></a>
                             </div>
-                                  <div class="col-xs-2 col-md-1 text-center"> 
-                              <?php echo $getstatssearch['proposals'];?>
+                              <div class="col-xs-2 col-md-1 text-center"> 
+                              <?php echo '<div class="badge lm-proposals" style="background-color:#45AE7C;">'.$getstatssearch['proposals'].'</div>';?>
                               </div>
-                                <div class="col-xs-2 col-md-2 text-center"> 
-                            <?php echo $getstatssearch['demobookedcount'];?> / <?php echo $getstatssearch['democount'];?>
+                              <div class="col-xs-2 col-md-2 text-center"> 
+                            <span class="sr-demobookedcount"><?php echo $getstatssearch['demobookedcount'];?></span> / <span class="sr-democount"><?php echo $getstatssearch['democount'];?></span>
                             </div>
                             <div class="col-xs-1 col-md-1 text-center">
-                            <?php echo $getstatssearch['meetingbooked'];?> / <?php echo $getstatssearch['meetingcount'];?>
+                            <span class="sr-meetingbooked"><?php echo $getstatssearch['meetingbooked'];?></span> / <span class="sr-meetingcount"><?php echo $getstatssearch['meetingcount'];?></span>
                             </div>
                             <div class="col-xs-2 col-md-2 text-center"> 
-                            <?php echo $getstatssearch['salescall'];?> / <?php echo $getstatssearch['introcall'];?>
+                            <span class="sr-salescall"><?php echo $getstatssearch['salescall'];?></span> / <span class="sr-introcall"><?php echo $getstatssearch['introcall'];?></span>
                             </div>
                             <div class="col-md-1 hidden-xs text-center">
-                              <?php echo $getstatssearch['pipelinecount'];?>
+                              <span class="sr-pipelinecount"><?php echo $getstatssearch['pipelinecount'];?></span>
                             </div>
                             <div class="col-md-2 hidden-xs text-center">
-                              <?php echo $getstatssearch['key_review_added'];?> / <?php echo $getstatssearch['key_review_occuring'];?>
+                              <span class="sr-key_review_added"><?php echo $getstatssearch['key_review_added'];?></span> / <span class="sr-key_review_occuring"><?php echo $getstatssearch['key_review_occuring'];?></span>
                             </div>
                             <div class="col-md-1 hidden-xs text-center">
-                              <?php echo $getstatssearch['duediligence'];?>
+                              <span class="sr-duediligence"><?php echo $getstatssearch['duediligence'];?></span>
                             </div>
                           </div> <!--END ROW-->    
-                      <?php endforeach ?>
-                      </div><!--END COL-MD-12-->
-                    </div><!--END THIS TAB-->
+      <?php endforeach ?>
+      </div><!--END COL-MD-12-->
+    </div><!--END THIS TAB-->
 
-                    </div>
-                    <?php endif ?>
-                  </div>
-              </div>
+    </div>
+    <?php endif ?>
+  </div>
+</div>
 
-          </div><!--END PANEL-->
+</div><!--END PANEL-->
 
           <div class="panel panel-default">
           <div class="panel-heading">

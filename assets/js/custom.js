@@ -251,7 +251,7 @@ function tsTotalConfig(){
      
     if($('.mainAddrType').length > 1) $('.copyRegAddr').remove(); // Removes add copy address check button if more than 1 address exist 
 //counts the totals in team stats columns
-var mycolumnArray = ["tw","lw","tm","lm"];
+var mycolumnArray = ["tw","lw","tm","lm","sr"];
 var mycolumnArrayLength = mycolumnArray.length;
 var myStringArray = ["deals","proposals","demobookedcount","democount","meetingbooked","meetingcount","salescall","introcall","pipelinecount","key_review_added","key_review_occuring","duediligence"];
 var arrayLength = myStringArray.length;
