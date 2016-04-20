@@ -793,21 +793,11 @@ function delete_campaign($id,$user_id)
     
   function calIntRate($number){
   
-    if($number < 8 && strpos($number,".") != true ){ //if single digit less than 5 then acc
-        $number  =  str_pad($number, 4, ".00", STR_PAD_RIGHT);
-    }elseif($number < 5 && strpos($number,".") == true){
-        $number =  str_pad($number, 4, "00", STR_PAD_RIGHT);
-       
-    }elseif(!strpos($number,".")){
+    
         $number =  $number /100;
         $number =  str_pad($number, 3, "0", STR_PAD_LEFT);
         
-         //echo $number;
-    }else{
-
-
-    } 
-    
+   
    return  $number;
     }
 

@@ -611,7 +611,7 @@
                            <span class="badge sr-proposals-total stat-total" style="background-color:#45AE7C;">0</span>
                         </div>
                         <div class="col-xs-2 col-md-2 text-center hide-overflow" >
-                          <span class="sr-demobookedcount-total stat-total" >16</span> /
+                          <span class="sr-demobookedcount-total stat-total" >0</span> /
                              <span class="sr-democount-total stat-total"  >0</span>
                         </div>
                         <div class="col-xs-1 col-md-1 text-center hide-overflow">
@@ -628,7 +628,7 @@
                         </div>
                         <div class="col-md-2 hidden-xs text-center hide-overflow">
                           <span class="sr-key_review_added-total stat-total">0</span> / 
-                            <span class="sr-key_review_occuring-total stat-total">5</span>
+                            <span class="sr-key_review_occuring-total stat-total">0</span>
                         </div>
                                     
                                     

@@ -64,7 +64,12 @@ endif; ?>
  
         //$number = 5.00;
        $number =  preg_match('[-+]?([0-9]*\.[0]+|[0]+', $number) ? false : $number;
-        echo $number ? '<span class="initial_rate_found">  - &#64;'.$number.'%</span>' : '<span class="initial_rate_not_found"> - Rate Not Set</span>' ;  ?>
+
+
+
+
+
+        echo $number ? '<span class="initial_rate_found">  - &#64;'.($number*100).'%</span>' : '<span class="initial_rate_not_found"> - Rate Not Set</span>' ;  ?>
         
         
         
@@ -984,7 +989,7 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 									<a data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $action_completed->id ?>" aria-expanded="false" aria-controls="collapse<?php echo $action_completed->id ?>">
 									<?php echo $action_types_array[$action_completed->action_type_id]; ?>
                                        
-                                      <?php if($action_completed->action_type_id == 16){echo  ' ' . $company['initial_rate'] .'%';} ?>
+                                      <?php if($action_completed->action_type_id == 16){echo  ' ' . ($company['initial_rate']*100) .'%';} ?>
                                     </a>
 								<div class="mic-info">
 								Created By: <?php echo $action_completed->name;?> on <?php echo $created_date_formatted?>
