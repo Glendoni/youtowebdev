@@ -141,7 +141,7 @@ function setupdateintialrate($debug = false){
     function updateInitialValues($initialRates,$debug){
         
         if(!$debug){
-        return '0.0'.str_replace('.','',$initialRates). ' - original '. $initialRates.'<br>' ;
+        return  $initialRates. ' - original '. str_replace(0,'',$initialRates).'<br>' ;
         }else{
               $initialRatesMinusZeros =  str_replace(0,'',$initialRates);
         $newvalue = '0.0'.str_replace('.','',$initialRatesMinusZeros);
