@@ -65,10 +65,6 @@ endif; ?>
         //$number = 5.00;
        $number =  preg_match('[-+]?([0-9]*\.[0]+|[0]+', $number) ? false : $number;
 
-
-
-
-
         echo $number ? '<span class="initial_rate_found">  - &#64;'.($number*100).'%</span>' : '<span class="initial_rate_not_found"> - Rate Not Set</span>' ;  ?>
         
         

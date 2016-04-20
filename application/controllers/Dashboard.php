@@ -108,4 +108,51 @@ class Dashboard extends MY_Controller {
         //echo json_encode(array('stats' => $lastmonth));  
     }
 
+/*
+By: Glen 20/04/2016
+The two function below are to be used to reformat legacy inital_fee
+values into the new decimal point format.
+
+Pre Check using the url dashboard/setupdateintialrate
+
+This will return a list containing the current values that do not conform to
+the new format distinctly grouped 
+
+On the left is the new format on the right the original
+
+
+If happy with the result set hit append the word true after the url: dashboard/setupdateintialrate/true
+
+This will run through the values and change them programatically
+
+*/
+function setupdateintialrate($debug = false){
+
+        $query = $this->db->query("SELECT DISTINCT initial_rate FROM companies");
+        
+        foreach ($query->result_array() as $row)
+        {
+           if(strlen($row['initial_rate']) <= 9 && $row['initial_rate'] == true)
+            echo  $this->updateInitialValues($row['initial_rate'],$debug);
+            
+        }
+}
+    
+    function updateInitialValues($initialRates,$debug){
+        
+        if(!$debug){
+        return '0.0'.str_replace('.','',$initialRates). ' - original '. $initialRates.'<br>' ;
+        }else{
+              $initialRatesMinusZeros =  str_replace(0,'',$initialRates);
+        $newvalue = '0.0'.str_replace('.','',$initialRatesMinusZeros);
+        $data = array(
+                       'initial_rate' => $newvalue
+                    );
+
+        $this->db->where('initial_rate', $initialRates);
+        $this->db->update('companies', $data);
+        }
+    }
+
+
 }

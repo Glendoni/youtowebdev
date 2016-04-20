@@ -56,6 +56,15 @@
 	<?php endif; ?>
 		<?php if (isset($company['customer_from'])&&($company['pipeline']=='Customer')):?>
 		from <?php echo date("d/m/y",strtotime($company['customer_from']));?>
+        
+         <?php  
+            $number  = $company['initial_rate'];
+ 
+        //$number = 5.00;
+       $number =  preg_match('[-+]?([0-9]*\.[0]+|[0]+', $number) ? false : $number;
+
+        echo $number ? '<span class="initial_rate_found">  - &#64;'.($number*100).'%</span>' : '<span class="initial_rate_not_found"> - Rate Not Set</span>' ;  ?>
+        
 		<?php endif; ?>
 		</span>
 		<?php if(isset($company['assigned_to_name'])): ?>
