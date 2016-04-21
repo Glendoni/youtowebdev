@@ -110,6 +110,9 @@ class Dashboard extends MY_Controller {
 
 /*
 By: Glen 20/04/2016
+
+ONE OFF FUNCTION TO REFORMAT LEGACY INITIAL RATES
+
 The two function below are to be used to reformat legacy inital_fee
 values into the new decimal point format.
 
@@ -125,7 +128,7 @@ If happy with the result set hit append the word true after the url: dashboard/s
 
 This will run through the values and change them programatically
 
-*/
+
 function setupdateintialrate($debug = false){
 
         $query = $this->db->query("SELECT DISTINCT initial_rate FROM companies");
@@ -153,6 +156,6 @@ function setupdateintialrate($debug = false){
         $this->db->update('companies', $data);
         }
     }
-
+*/
 
 }
