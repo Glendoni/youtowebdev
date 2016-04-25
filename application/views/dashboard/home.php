@@ -74,7 +74,7 @@
                         <?php 
     
     
-    if ($current_user['permission'] == 'admin' || $get_user_placements['created_by'] == $current_user['id']  ):  ?>
+    if ($current_user['permission'] == 'admin' || $get_user_placements['created_by'] == $current_user['id']):  ?>
                             <div class="row">
   <div class="col-sm-8 user-stat company action_date">
 <?php echo $get_user_placements['lead_name'];?>
@@ -84,13 +84,10 @@
                                 
   <div class="col-sm-4 user-stat company action_date">
   <?php if(!empty($get_user_placements['initial_rate'])): ?>
-<?php echo '<span class="us-initial-rate">'.$get_user_placements['initial_rate'].'</span>';?>%
+<?php echo '<span class="us-initial-rate">'.($get_user_placements['initial_rate']*100).'</span>';?>%
 <?php endif; ?>
 </div>
-                                 
-                                
-                                
-                                
+                             
     <div class="col-sm-8 user-stat company action_date">
         <?php //echo $get_user_placements['compid'];
         
@@ -654,7 +651,7 @@
                             </a>
                             </div>
                             <div class="col-xs-2 col-md-1 text-center">
-                            <a href = "?search=2&user=<?php echo $getstatssearch['user'];?>&period=lastmonth"><span class="badge sr-deals" style="background-color:#428bca;"><?php echo $getstatssearch['deals'];?></span></a>
+                            <a href = "?search=2&user=<?php echo $getstatssearch['user'];?>&start_date=<?php echo $_GET['start_date']?>&end_date=<?php echo $_GET['end_date']?>&period=search"><span class="badge sr-deals" style="background-color:#428bca;"><?php echo $getstatssearch['deals'];?></span></a>
                             </div>
                               <div class="col-xs-2 col-md-1 text-center"> 
                               <?php echo '<div class="badge lm-proposals" style="background-color:#45AE7C;">'.$getstatssearch['proposals'].'</div>';?>
