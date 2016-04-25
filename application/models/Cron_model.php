@@ -692,7 +692,7 @@ public function get_campaign_name($campaign)
     
     public function getContactListDetails($campaign_id = 480,$contact_list = "contactlist_07D36C5F-DFF1-4606-B34E-7137BECC8870",$campaign_title = "MCU: Mar 2016"){
         
-        $query = $this->db->query("SELECT id from email_actions ORDER BY id DESC LIMIT 1");
+        $query = $this->db->query("SELECT id from email_actions ORDER BY id DESC LIMIT 5");
         $row = $query->row(); 
         $last_row_id =  $row->id;
 
@@ -832,12 +832,14 @@ foreach($download as $tagkey => $tagvalue){
 
        private function addToTags($name, $compId){ //
            
-           echo $name;
+           echo 'Tag Name'.$name .'<br>';
             $query = $this->db->query("SELECT * FROM tags  WHERE name='".quotes_to_entities(ucwords($name))."' LIMIT 1");
           if ($query->num_rows() > 0){
                 $row = $query->row(); 
                 return $row->id;
             }else{
+
+echo 'Tag To Add to ttAgs'.$name .'<br>';
                 return $this->addTag($name); //send AP QVname and gets new id of newly inserted item 
             }
         }
@@ -847,6 +849,8 @@ foreach($download as $tagkey => $tagvalue){
             if($env == 'staging'){ $envCatID = 11; }
             if($env == 'production'){ $envCatID = 11; }
             if($env == 'development'){ $envCatID = 90; }
+
+echo $envCatID.'--------';
 if(!$env) echo 'NO EVN'; exit();
             $data = array(
                 'category_id' => $envCatID,
