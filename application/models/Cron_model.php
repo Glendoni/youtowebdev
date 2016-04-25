@@ -862,6 +862,8 @@ echo $envCatID.'--------';
                 'created_by' => 1
             );
             $this->db->insert('tags', $data);
+
+print_r($data);
             return $this->db->insert_id();
 //}
         }
