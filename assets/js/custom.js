@@ -235,7 +235,7 @@ $( document ).ready(function() {
             $('.onInitialFee').addClass('col-md-2');
             $('.initialfee').show();
             $('.initialfee input').attr('required', 'required');
-            checkInitialFee()
+            //checkInitialFee()
         }else{
             $('.onInitialFee').removeClass('col-md-2');
             $('.initialfee input').val('').removeAttr('required');

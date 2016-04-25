@@ -737,7 +737,7 @@ if ($your_date < $now){; ?>
 			<div class="col-sm-3 col-md-3">
 				<div class="form-group ">
 					<label>New Actions</label>
-					<select id="action_type_completed" name="action_type_completed" class="form-control" onchange="commentChange()">
+					<select id="action_type_completed" name="action_type_completed" class="form-control" >
 						<option value="">--- Select an Action ---</option>
 						<?php foreach($action_types_done as $action ): ?>
 						  <option value="<?php echo $action->id; ?>"><?php echo $action->name; ?></option>
