@@ -844,8 +844,10 @@ foreach($download as $tagkey => $tagvalue){
     
         private function addTag($name){
             $env = ENVIRONMENT;
-            if($env == 'staging'){ $envCatID = 11 }
-            if($env == 'production'){ $envCatID = 11 }
+            if($env == 'staging'){ $envCatID = 11; }
+            if($env == 'production'){ $envCatID = 11; }
+            if($env == 'development'){ $envCatID = 90; }
+if(!$env) echo 'NO EVN'; exit();
             $data = array(
                 'category_id' => $envCatID,
                 'name' => quotes_to_entities(ucwords($name)),
