@@ -6,6 +6,7 @@ class Cron_model extends CI_Model {
 function __construct() {
 		parent::__construct();
            $this->load->helper('date');
+    $this->load->helper('string');
 	}
 
 function connect_to_wordpress_database()  {
@@ -604,7 +605,7 @@ public function get_campaign_name($campaign)
     public function update_email_events()  //Call this function every 5mins
 	{
        
-        $query = $this->db->query("SELECT id,name, updated_at, sent_id FROM email_campaigns WHERE  date_sent >= '2016-03-01' AND id > 479 ORDER BY updated_at ASC LIMIT 1  ");
+        $query = $this->db->query("SELECT id,name, updated_at, sent_id FROM email_campaigns WHERE  date_sent >= '2016-04-01' AND id > 479 ORDER BY updated_at ASC LIMIT 1  ");
 
         foreach ($query->result_array() as $row)
         {
@@ -620,6 +621,9 @@ public function get_campaign_name($campaign)
                 $this->db->update('email_campaigns', $data);  
 
                  $this->getContactListDetails($row['id'],$row['sent_id'],$row['name']);
+                
+               // echo $row['id'].' - '.$row['sent_id'].' '.$row['name'];
+              
             }
        }
 
@@ -725,25 +729,53 @@ public function get_campaign_name($campaign)
              foreach($pageVitits as $itempv => $valuepv  ){
 
             };
+              foreach($item['custom_fields'] as $itemt => $valuet){
+                  
+                  
+                    if($valuet['value'] == 'Downloaded'){
+                        
+                      
+                        $download[$valuet['kind']] =  $valuet['kind'] ;
+                   // if($debug) echo  '<br>'; 
+                    }
+                }
 
             
              $campaign_name = $valuevr['campaign_name'];
 
                $campaign_name_exist =  $this->check_campaign_ref($campaign_title);
-            $check_if_email_exist  = $this->getemailuserid($item['Email']);
+            
+             
+             
+$check_if_email_exist  = $this->getemailuserid($item['Email']);
+             
+             
+            
 
-           if($check_if_email_exist && $campaign_title  != 'Removed Via Baselist' &&   $event != 3) {
-                                                            
-               
-                $sent_email = $item['Email'];
+           if($check_if_email_exist->id && $campaign_title  != 'Removed Via Baselist' &&   $event != 3) {
+
+ //echo 'iddddddddd  '.$item['Email'].' ---- '.$check_if_email_exist->id;
+foreach($download as $tagkey => $tagvalue){
+    
+ 
+                $tagid = $this->addToTags($tagvalue,$check_if_email_exist->company_id);
+    //echo 'I raaaaan'.$tagid ;
+                if($tagid){
+                    
+                    $this->attachTagToCompany($tagid,$check_if_email_exist->company_id);
+                      
+                }   
+            }
+
+               $sent_email = $item['Email'];
                 $email_campaign_id = $this->get_campaign_id($campaign_title);
-              if($email_campaign_id)   $companyFinder = $this->companyFinder($check_if_email_exist ,$email_campaign_id ,$event) ;                                                               
+              if($email_campaign_id)   $companyFinder = $this->companyFinder($check_if_email_exist->id ,$email_campaign_id ,$event) ;                                                               
 
                         $contactList = array(
                             'id' => $last_row_id++,
                             'email_campaign_id' => $email_campaign_id,
                             'sent_action_id' => $contact_list,
-                            'contact_id' => $check_if_email_exist , 
+                            'contact_id' => $check_if_email_exist->id , 
                             'email_action_type' => $event,
                             'action_time' => $entDate,
                             'created_by' => 1
@@ -787,14 +819,62 @@ public function get_campaign_name($campaign)
     
     public function getemailuserid($email)
     {
-        $sql =  "SELECT * FROM contacts WHERE email='".$email."' LIMIT 1 ";
+        $sql =  "SELECT id,company_id FROM contacts WHERE email='".$email."' LIMIT 1 ";
         $query = $this->db->query($sql);
 
-        foreach ($query->result_array() as $row){
-            return $row['id'];
-        }
-        return false;
+         if ($query->num_rows() > 0){
+                $row = $query->row(); 
+                return $row;
+            }else{
+                return false; //send AP QVname and gets new id of newly inserted item 
+            }
     }
+
+       private function addToTags($name, $compId){ //
+           
+           echo $name;
+            $query = $this->db->query("SELECT * FROM tags  WHERE name='".quotes_to_entities(ucwords($name))."' LIMIT 1");
+          if ($query->num_rows() > 0){
+                $row = $query->row(); 
+                return $row->id;
+            }else{
+                return $this->addTag($name); //send AP QVname and gets new id of newly inserted item 
+            }
+        }
+    
+        private function addTag($name){
+            $env = ENVIRONMENT;
+            if($env == 'staging'){ $envCatID = 11 }
+            if($env == 'production'){ $envCatID = 11 }
+            $data = array(
+                'category_id' => $envCatID,
+                'name' => quotes_to_entities(ucwords($name)),
+                'tag_type' =>  1,
+                'created_at' => date('Y-m-d'),
+                'eff_from' => date('Y-m-d'),
+                'eff_to' => NULL,
+                'created_by' => 1
+            );
+            $this->db->insert('tags', $data);
+            return $this->db->insert_id();
+        }
+    
+      private  function attachTagToCompany($tagid,$companyID){
+            $query = $this->db->query("SELECT * FROM company_tags  WHERE tag_id =".$tagid." AND company_id=".$companyID." LIMIT 1");
+            if ($query->num_rows() > 0){
+            }else{
+            $data = array(
+                'tag_id' => $tagid,
+                'company_id' => $companyID,
+                'created_at' => date('Y-m-d'),
+                'eff_from' => date('Y-m-d'),
+                'created_by' => 1
+            );
+            $this->db->insert('company_tags', $data);  
+            }   
+        }
+
+
         
     public function getCompanyHouseDetails($url = 0) 
 	{

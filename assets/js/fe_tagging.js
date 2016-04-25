@@ -99,7 +99,10 @@ tagcont.push('<div class="col-xs-12 '+subcatName+' fetagsholder'+val['tac_sub_ca
 
                  // console.log(vals);
                   sort = vals.split('_');
-                   $('.main_'+sort[1].replace(' ', '')).append('<li class="list-group-item folder" data="'+sort[2]+'"> <span class="folIcon indicatorshow"></span>'+sort[0]+'</li>');   
+                  
+                  if(sort[0] != 'Downloads'){
+                   $('.main_'+sort[1].replace(' ', '')).append('<li class="list-group-item folder" data="'+sort[2]+'"> <span class="folIcon indicatorshow"></span>'+sort[0]+'</li>'); 
+                  }
                    $('.main_'+sort[1].replace(' ', '')).append('<ul class="subtags sub_'+sort[2]+'" ></ul>');  
                   
                // console.warn('sub_'+sort[2]);
@@ -143,7 +146,7 @@ tagcont.push('<div class="col-xs-12 '+subcatName+' fetagsholder'+val['tac_sub_ca
                        
                    }
                    
-                  console.log($('.main_'+val['cat_id']+' .sub_'+val['cat_id']+ ' li').length);
+                  //console.log($('.main_'+val['cat_id']+' .sub_'+val['cat_id']+ ' li').length);
                    
                })
                 del_ini();
@@ -254,7 +257,11 @@ function gettags(){
 
 if((/companies/.test(window.location.href))) {    
     var param;
+    var preventtagRemove;
     var para  = window.location.href.split("?id=");
+    var parent_tag_name;
+ 
+    
    param =  checkUrlParam(para);
      var para = {'companyID': param};
              $.ajax({
@@ -265,9 +272,17 @@ if((/companies/.test(window.location.href))) {
         success: function(data) {  
               $('.addedTag').remove();
              $.each( data, function( key, val) {
-           $('.fetags'+val['parent_tag_id']).append('<li class="addedTag tag'+val['tag_id']+' " style="float:left;"><span class="tagName"></span>'+val['name']+'<span class="tagRemove" data-tag="'+val['tag_id']+'">x</span></li>');
+              parent_tag_name =    val['parent_tag_name'].replace(' ', '');
+                if(parent_tag_name != 'Downloads'){
+                    preventtagRemove = '<span class="tagRemove" data-tag="'+val['tag_id']+'">x</span>';  
+                }
+                 //indicatorshow  =  '<span class="folIcon indicatorshow"></span>';
+           $('.fetags'+val['parent_tag_id']).append('<li class="addedTag tag'+val['tag_id']+' " style="float:left;"><span class="tagName"></span>'+val['name']+ preventtagRemove+'</li>');
            
                   $('.tafixed').show()
+
+                preventtagRemove = '';
+
              })        
                       
                        del_ini() 
