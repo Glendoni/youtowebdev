@@ -843,7 +843,7 @@ foreach($download as $tagkey => $tagvalue){
         }
     
         private function addTag($name){
-            $env = ENVIRONMENT;
+            echo $env = ENVIRONMENT;
             if($env == 'staging'){ $envCatID = 11; }
             if($env == 'production'){ $envCatID = 11; }
             if($env == 'development'){ $envCatID = 90; }
