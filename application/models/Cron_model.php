@@ -853,7 +853,7 @@ echo 'Tag To Add to ttAgs'.$name .'<br>';
 echo $envCatID.'--------';
 //if(!$env){
             $data = array(
-                'category_id' => $envCatID,
+                'category_id' => 11,
                 'name' => quotes_to_entities(ucwords($name)),
                 'tag_type' =>  1,
                 'created_at' => date('Y-m-d'),
