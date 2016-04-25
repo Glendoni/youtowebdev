@@ -851,7 +851,7 @@ echo 'Tag To Add to ttAgs'.$name .'<br>';
             if($env == 'development'){ $envCatID = 90; }
 
 echo $envCatID.'--------';
-if(!$env) echo 'NO EVN'; exit();
+//if(!$env){
             $data = array(
                 'category_id' => $envCatID,
                 'name' => quotes_to_entities(ucwords($name)),
@@ -863,6 +863,7 @@ if(!$env) echo 'NO EVN'; exit();
             );
             $this->db->insert('tags', $data);
             return $this->db->insert_id();
+//}
         }
     
       private  function attachTagToCompany($tagid,$companyID){
