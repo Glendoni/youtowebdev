@@ -846,8 +846,7 @@ echo 'Tag To Add to ttAgs'.$name .'<br>';
     
         private function addTag($name){
             echo $env = ENVIRONMENT;
-            if($env == 'staging'){ $envCatID = 11; }
-            if($env == 'production'){ $envCatID = 11; }
+            $envCatID = 11;
             if($env == 'development'){ $envCatID = 90; }
 
 echo $envCatID.'--------';
