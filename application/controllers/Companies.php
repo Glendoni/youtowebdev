@@ -536,9 +536,10 @@ class Companies extends MY_Controller {
     
     public function getCompanyHouseDetails($id = 0) 
 	{
-          // id could be either the company name or number
-            $words = array(' ', '&#39;', '\'', '  ', ' \'');
+          
+            $words = array(' ', '&#39;', '\'', '  ',  ' \'');
             $id = str_replace($words, '', trim($id));
+     
             $server_output = array();
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL,"https://api.companieshouse.gov.uk/search/companies?q=".$id);

@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <link rel="apple-touch-icon-precomposed" sizes="180x180" href="<?php echo asset_url();?>images/apple-icon.png" />
 
-    <title><?php echo (isset($page_title))? $page_title: 'Baselist'; ?></title>
+    <title><?php echo (isset($page_title))? html_entity_decode ($page_title): 'Baselist'; ?></title>
     
     <?php if (ENVIRONMENT  =='staging'){?>
     <link rel="icon" type="image/png" href="<?php echo asset_url();?>images/favicon-staging.jpg">
@@ -147,7 +147,7 @@
 <!--TOP SEARCH BAR-->
 <?php if (isset($_GET['id'])) { 
 $company = $companies[0];
-$search_default = $company['name'];
+$search_default = html_entity_decode ($company['name']);
 } else {
 $search_default = $this->input->post('agency_name');
 }?>
