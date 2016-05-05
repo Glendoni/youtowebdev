@@ -115,13 +115,14 @@ $('#myTabs a').click(function (e) {
 function ajaxSearch() {
     var input_data = $('#agency_name').val();
     
-   //input_data =  input_data.replace("\'", "&#39;");
+   input_data =  input_data.replace("'", "&#39;");
     //input_data =  input_data.replace("&", "&amp;");
     
     if (input_data.length < 1) {
 $('#suggestions').hide();
 $('#agency_name').removeClass('autocomplete-live');
     } else {
+        input_data =  input_data.replace("\'", "");
 var post_data = {
     'search_data': input_data,
     '<?php echo $this->security->get_csrf_token_name(); ?>': '<?php echo $this->security->get_csrf_hash(); ?>'
@@ -140,6 +141,7 @@ $('#autoSuggestionsList').html(data.html);
 $('#agency_name').addClass('autocomplete-live');
           if (data.callCH ===true) { 
           // alert('I worked');
+              input_data =  input_data.replace("\'", "");
          getCompany(input_data);     
        }
     }
@@ -148,8 +150,10 @@ $('#agency_name').addClass('autocomplete-live');
 }
 function getCompany(input_data){
     
-    input_data = input_data.replace('\'', ''); 
-    input_data = input_data.replace('&', ''); 
+     input_data =  input_data.replace(" ", "");
+    
+     input_data = input_data.replace('\'', ''); 
+    input_data = input_data.replace('&#39;', '');
     $.ajax({type:"GET",url:"<?php echo base_url(); ?>companies/getCompanyHouseDetails/"+input_data,success:function(data){var obj=$.parseJSON(data);var i=0;var text="";var preview=[];var out=[];while(obj.items[i]){if(obj.items[i].company_status=='active'){out+='<a href="javascript:;" company_number="'+obj.items[i].company_number+'" title="'+obj.items[i].title+'" postal_code="'+obj.items[i].address.postal_code+'" address_line_1="'+obj.items[i].address.address_line_1+'" locality="'+obj.items[i].address.locality+'" snippet="'+obj.items[i].snippet+'" company_type="'+obj.items[i].company_type+'" company_status="'+obj.items[i].company_status+'" description="'+obj.items[i].description+'" date_of_creation="'+obj.items[i].date_of_creation+'" class="companyHouseRegNum"><li class="autocomplete-item autocomplete-company toLowerCase ch_drop_title"><strong>'+ucwords(obj.items[i].title)+'</strong><br><small>Add to Baselist</small></li></a>';preview+='<a target="_blank" href="https://beta.companieshouse.gov.uk/company/'+obj.items[i].company_number+'"><li class="autocomplete-item autocomplete-contact preview_slogan" > View at Companies House   <i class="fa fa-external-link"></i><br><small>&nbsp;</small></li></a>';}
 i++;if(i===7){break;}}
 $('#suggestions').show();$('#autoSuggestionsList').addClass('auto_list');$('#autoSuggestionsList').html('<div class="autocomplete-full-holder"><div class="col-xs-7 col-sm-7 col-md-7 col-lg-7 clearfix no-padding"><ul class="autocomplete-holder"><li class="autocomplete-item split-heading"><i class="fa fa-caret-square-o-down"></i> Companies</li>'+out+'</ul></div><div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 no-padding"><ul class="autocomplete-holder"><li class="autocomplete-item split-heading autocomplete-no-results"><i class="fa fa-times"></i> Preview</li>'+preview+'</ul></div></div>');if(i==0){$('#autoSuggestionsList').html('<div class="autocomplete-full-holder"><div class="col-xs-12 col-sm-12 col-md-5 col-lg-12 no-padding"><ul class="autocomplete-holder"><li class="autocomplete-item split-heading autocomplete-no-results"><i class="fa fa-times"></i> No records found</li></ul></div></div>');}
