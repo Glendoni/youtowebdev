@@ -93,7 +93,7 @@ $('.us-initial-rate').each(function(){
 });
 val = val/count_lines;
 //console.log(parseFloat( val.toFixed(3) ));
-avg = val ? 'Avg '+ parseFloat( val )+'%' : '';
+avg = val ? 'Avg '+ parseFloat( val ).toFixed(2)+'%' : '';
 $('.us-initial-rate-total').text(avg);
 }
 
