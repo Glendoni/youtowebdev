@@ -604,8 +604,8 @@ round (100 * count(distinct (CASE when A.created_at > C.created_at AND CO.pipeli
 else count(distinct CASE when CO.pipeline <> 'Unsuitable' then CO.id END) END::numeric) \"%\",
 CASE when count(distinct CASE when CO.pipeline ilike 'Prospect' then CO.id END) = 0 then 0 
 else count(distinct CASE when CO.pipeline ilike 'Prospect' then CO.id END) END campaign_prospects,
-CASE when count(distinct CASE when CO.pipeline ilike 'Intent' or CO.pipeline ilike 'Qualified' then CO.id END) = 0 then 0 
-else count(distinct CASE when CO.pipeline ilike 'Intent' or CO.pipeline ilike 'Qualified' then CO.id END) END campaign_intent,
+CASE when count(distinct CASE when CO.pipeline ilike 'Intent' then CO.id END) = 0 then 0 
+else count(distinct CASE when CO.pipeline ilike 'Intent' then CO.id END) END campaign_intent,
 CASE when count(distinct CASE when CO.pipeline ilike 'Proposal' then CO.id END) = 0 then 0
 else count(distinct CASE when CO.pipeline ilike 'Proposal' then CO.id END)  END campaign_proposals,
 	CASE when count(distinct CASE when CO.pipeline ilike 'Unsuitable' then CO.id END) = 0 then 0
@@ -694,8 +694,8 @@ CASE when count(distinct CASE when CO.pipeline ilike 'Lost' then CO.id END) = 0 
 else count(distinct CASE when CO.pipeline ilike 'Lost' then CO.id END) END campaign_lost,
 CASE when count(distinct CASE when CO.pipeline ilike 'Prospect' then CO.id END) = 0 then 0 
 else count(distinct CASE when CO.pipeline ilike 'Prospect' then CO.id END) END campaign_prospects,
-CASE when count(distinct CASE when CO.pipeline ilike 'Intent' or CO.pipeline ilike 'Qualified' then CO.id END) = 0 then 0 
-else count(distinct CASE when CO.pipeline ilike 'Intent' or CO.pipeline ilike 'Qualified' then CO.id END) END campaign_intent,
+CASE when count(distinct CASE when CO.pipeline ilike 'Intent' then CO.id END) = 0 then 0 
+else count(distinct CASE when CO.pipeline ilike 'Intent' then CO.id END) END campaign_intent,
 CASE when count(distinct CASE when CO.pipeline ilike 'Proposal' then CO.id END) = 0 then 0
 else count(distinct CASE when CO.pipeline ilike 'Proposal' then CO.id END)  END campaign_proposals,
 	CASE when count(distinct CASE when CO.pipeline ilike 'Unsuitable' then CO.id END) = 0 then 0
@@ -752,8 +752,8 @@ CASE when count(distinct CASE when CO.pipeline ilike 'Lost' then CO.id END) = 0 
 else count(distinct CASE when CO.pipeline ilike 'Lost' then CO.id END) END campaign_lost,
 CASE when count(distinct CASE when CO.pipeline ilike 'Prospect' then CO.id END) = 0 then 0 
 else count(distinct CASE when CO.pipeline ilike 'Prospect' then CO.id END) END campaign_prospects,
-CASE when count(distinct CASE when CO.pipeline ilike 'Intent' or CO.pipeline ilike 'Qualified' then CO.id END) = 0 then 0 
-else count(distinct CASE when CO.pipeline ilike 'Intent' or CO.pipeline ilike 'Qualified' then CO.id END) END campaign_intent,
+CASE when count(distinct CASE when CO.pipeline ilike 'Intent' then CO.id END) = 0 then 0 
+else count(distinct CASE when CO.pipeline ilike 'Intent' then CO.id END) END campaign_intent,
 CASE when count(distinct CASE when CO.pipeline ilike 'Proposal' then CO.id END) = 0 then 0
 else count(distinct CASE when CO.pipeline ilike 'Proposal' then CO.id END)  END campaign_proposals,
 	CASE when count(distinct CASE when CO.pipeline ilike 'Unsuitable' then CO.id END) = 0 then 0

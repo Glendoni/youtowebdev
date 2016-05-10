@@ -85,7 +85,7 @@
 <div class="circle-responsive_campiagns intent-circle_campaign <?php if ($this->session->userdata('pipeline')=='intent'): echo 'Intent active';else: endif; ?>">
 <div class="circle-content mega">
 <div class="large-number"><?php echo $current_campaign_stats->campaign_intent; ?></div>
-<div class="small-text">Intent & Qualified</div></div>
+<div class="small-text">Intent</div></div>
 </div>
 <?php if ($current_campaign_stats->campaign_intent>0): ?>
 </a>
