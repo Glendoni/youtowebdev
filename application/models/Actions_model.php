@@ -18,7 +18,7 @@ function get_actions1($company_id)
 
 function get_actions($company_id)
 {
-            $sql = "select distinct
+             $sql = "select distinct
     c.id,
     ec.id as id,
     ec.name as campaign_name,
@@ -508,7 +508,7 @@ function dates($period)
         if (!empty($_GET['start_date'])) {
             $start_date = date('Y-m-d 00:00:00',strtotime($_GET['start_date']));
         } else {
-            $start_date = date('Y-m-d 23:59:59',strtotime('first day of this month'));
+            $start_date = date('Y-m-d 00:00:00',strtotime('first day of this month'));
         }
         if (!empty($_GET['end_date'])) {
             $end_date = date('Y-m-d 23:59:59',strtotime($_GET['end_date']));
