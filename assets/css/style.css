@@ -15,6 +15,9 @@ a.anchor {
   top: -90px; 
   visibility: hidden; }
 
+.ladda-label .fa .fa-star-o {
+	color: red;
+}
 .assigned-star {
 	color: #FFA03C;
     border: none;
