@@ -110,7 +110,7 @@
 	      		<?php  
                             
 			echo form_label('Title', 'title_options');
-						echo form_dropdown('title_options', $title_options, (isset($address->type)?$address->type:'') ,'class="form-control"' );?>
+						echo form_dropdown('title', $title_options, (isset($contact->title)?$contact->title:'0') ,'class="form-control"' );?>
 						</div>
 						</div>
 

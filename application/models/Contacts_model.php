@@ -71,7 +71,7 @@ WHERE contacts.company_id=".$company_id." order by last_name asc";
     
     
     
-	function create_contact($title,$first_name,$last_name,$email,$role,$company_id,$created_by,$phone=NULL,$linkedin_id)
+	function create_contact($first_name,$last_name,$email,$role,$company_id,$created_by,$phone=NULL,$linkedin_id,$title)
 	{
     
         $role = rtrim($role," "); // removes empty space on rightside of string ltrim removes empty space on the left before string
@@ -112,6 +112,8 @@ WHERE contacts.company_id=".$company_id." order by last_name asc";
         $linkedin_id = $post['linkedin_id'];
         $parts = explode("?",$linkedin_id); 
 		$li_id = $parts['0']; 
+		$contact->title = !empty($post['title'])?$post['title']:NULL;
+
         //if(strpos($linkedin_id, '&') !== false) {
 		//$revised_linkedin_id = str_replace(array('.', ','), '' , preg_replace('/[^0-9,..]/i', '', $li_id));
 		//} else {

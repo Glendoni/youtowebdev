@@ -42,7 +42,7 @@ class Contacts extends MY_Controller {
 
 			if($this->form_validation->run())
 			{
-				echo $rows_affected = $this->Contacts_model->create_contact($this->input->post('first_name'),$this->input->post('last_name'),$this->input->post('email'),$this->input->post('role'),$this->input->post('company_id'),$this->input->post('user_id'),$this->input->post('phone'),$this->input->post('linkedin_id'));
+				echo $rows_affected = $this->Contacts_model->create_contact($this->input->post('first_name'),$this->input->post('last_name'),$this->input->post('email'),$this->input->post('role'),$this->input->post('company_id'),$this->input->post('user_id'),$this->input->post('phone'),$this->input->post('linkedin_id'),$this->input->post('title'));
 				if($rows_affected  > 0)
 				{
 					$this->output->set_status_header('200');
@@ -92,7 +92,7 @@ class Contacts extends MY_Controller {
 				if($rows_affected)
 				{
 					$this->set_message_success('Contact has been updated.');
-					redirect('/companies/company?id='.$this->input->post('company_id'));
+					redirect('/companies/company?id='.$this->input->post('company_id').'#contacts');
 					// $this->refresh_search_results();
 				}
 				else
@@ -105,7 +105,7 @@ class Contacts extends MY_Controller {
 			{
 				
 				$this->set_message_error(validation_errors());
-				redirect('/companies/company?id='.$this->input->post('company_id'));
+				redirect('/companies/company?id='.$this->input->post('company_id').'#contacts');
 			}
 		}
 	}
