@@ -210,7 +210,14 @@ class MY_Controller extends CI_Controller {
 			$pipeline_options_search = $this->Companies_model->get_companies_pipeline_search();
 			$this->session->set_userdata('companies_pipeline_search',$pipeline_options_search);
 		}
-
+		if($this->session->userdata('contact_titles'))
+		{
+			$title_options = $this->session->userdata('contact_titles');
+		}else
+		{
+			$title_options = $this->Contacts_model->get_contact_titles();
+			$this->session->set_userdata('contact_titles',$title_options);
+		}
 
 
 		// Pass variables to template views 
@@ -220,6 +227,7 @@ class MY_Controller extends CI_Controller {
 		$this->data['country_options'] = $this->Companies_model->get_countries_options();
 		$this->data['company_sources'] =  array(0=> '--- Select a Source ---') + $this->Companies_model->get_company_sources();
 		$this->data['show_sources'] =  $show_sources;
+
 
 
 		// Pipeline
@@ -253,6 +261,11 @@ class MY_Controller extends CI_Controller {
 
 		$this->data['pipeline_options'] = array('0'=>'All', 'none'=>'None') + $pipeline_options_search;
 		$this->data['pipeline_default'] ='0';
+
+		$this->data['title_options'] = array(0=>'--') +  $title_options;
+		$this->data['pipeline_default'] ='0';
+
+
 
 
 		//$providers_options = array(-1=>'No current provider') + $providers_options_top + $providers_options;

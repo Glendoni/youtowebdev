@@ -10,13 +10,22 @@
             <div class="modal-body">
                 <div class="row">
                 <div class="alert alert-danger" id="error_box" style="display:none;" role="alert"></div>
-                <div class="col-md-6">
+                <div class="col-md-2">
+                        <div class="form-group">
+                <?php  
+                            
+            echo form_label('Title', 'title_options');
+                        echo form_dropdown('title', $title_options, (isset($address->type)?$address->type:'') ,'class="form-control"' );?>
+                        </div>
+                        </div>
+
+                <div class="col-md-5">
                 <div class="form-group">
                     <label for="name" class="control-label">First Name*</label>                            
                     <input type="text" name="first_name" value="<?php echo isset($contact->first_name)?$contact->first_name:''; ?>" maxlength="50" class="form-control">
                 </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-5">
                 <div class="form-group">
                     <label for="name" class="control-label">Last Name*</label>                            
                     <input type="text" name="last_name" value="<?php echo isset($contact->last_name)?$contact->last_name:''; ?>" maxlength="50" class="form-control">

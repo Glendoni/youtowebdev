@@ -7,6 +7,19 @@ class Contacts_model extends CI_Model {
 		return $query->result();
 	}
 
+	function get_contact_titles()
+	{
+		$arrayNames = array(
+			'Mr' => 'Mr',
+			'Mrs' => 'Mrs',
+			'Miss' => 'Miss',
+			'Ms' => 'Ms',
+			'Sir' => 'Sir',
+			'Dr' => 'Dr'
+			);
+		return 	$arrayNames;
+	}
+
 	function get_contact_by_id($id)
 	{
 		$query = $this->db->get_where('contacts',array('id'=>$id));	
@@ -58,10 +71,11 @@ WHERE contacts.company_id=".$company_id." order by last_name asc";
     
     
     
-	function create_contact($first_name,$last_name,$email,$role,$company_id,$created_by,$phone=NULL,$linkedin_id)
+	function create_contact($title,$first_name,$last_name,$email,$role,$company_id,$created_by,$phone=NULL,$linkedin_id)
 	{
     
         $role = rtrim($role," "); // removes empty space on rightside of string ltrim removes empty space on the left before string
+		$contact->title = $title;
         $contact->first_name = str_replace('\'', '&#39;', rtrim($first_name)); // please read the below note
         $contact->last_name = str_replace('\'', '&#39;', ltrim($last_name));
         $contact->email = !empty($email)?$email:NULL;
