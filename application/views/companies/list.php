@@ -52,7 +52,7 @@
 			</div>
 			<div class="col-sm-12" style="margin-top:5px; margin-bottom: 15px; text-align:center;">
 <?php if(isset($company['pipeline'])): ?>
-	<span class="label pipeline label-<?php echo str_replace(' ', '', $company['pipeline']); ?>">#<?php echo $company['pipeline']?>
+	<span class="label pipeline label-<?php echo str_replace(' ', '', $company['pipeline']); ?>"><?php echo $company['pipeline']?>
 	<?php endif; ?>
 		<?php if (isset($company['customer_from'])&&($company['pipeline']=='Customer')):?>
 		from <?php echo date("d/m/y",strtotime($company['customer_from']));?>
