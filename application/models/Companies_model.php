@@ -84,8 +84,8 @@ class Companies_model extends CI_Model {
 	{
 		$arrayNamesPipelineSearch = array(
 			'Prospect' => 'Prospect',
-			'Intent' => 'Intent',
 			'Qualified' => 'Qualified',
+			'Intent' => 'Intent',
 			'Proposal' => 'Proposal',
 			'Customer' => 'Customer',
 			'Unsuitable' => 'Unsuitable',
