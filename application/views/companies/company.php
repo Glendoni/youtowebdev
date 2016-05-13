@@ -7,7 +7,7 @@ endif; ?>
 			<?php endif; ?>
 <?php //hide core page content if no company is found ?>
 <?php if (isset($company['id'])): ?>
-<div class="page-results-list">
+<div class="page-results-list" id="parent">
 <div class="top-info-holder">
     <div class="row">
 		<?php if (isset($company['parent_name'])): ?>
@@ -99,7 +99,7 @@ endif; ?>
 
     
    
-<div class="panel panel-primary" style="padding-top: 30px;" >
+<div class="panel panel-primary" style="padding-top: 30px;"  >
 	<div class="panel-body">
     	<div class="row"><!--FINISHED AT THE END OF PANEL-->
 		<div class="col-sm-9">
@@ -266,7 +266,7 @@ if ($your_date < $now){; ?>
 			</div>
 
 		</div>
-		<div class="row">
+		<div class="row" >
 		<div class="col-xs-12">
 		<!-- TURNOVER -->
 		<div class="col-xs-4 col-sm-3 centre">
@@ -769,7 +769,7 @@ if ($your_date < $now){; ?>
 			<?php if(isset($contacts) and !empty($contacts)) : ?>
 				<div class="form-group ">
 					<label>Contact</label>
-					<select name="contact_id" class="form-control">
+					<select name="contact_id" class="form-control actionContact">
 						<option value="">--- Select a Contact ---</option>
 						<?php foreach($contacts as $contact ): ?>
 						  <option value="<?php echo $contact->id; ?>"><?php echo ucfirst($contact->first_name).' '.ucfirst($contact->last_name); ?></option>
@@ -912,7 +912,7 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 
 
 <!--COMPLETED BUTTON-->
-<?php $hidden = array('action_id' => $action_outstanding->action_id , 'user_id' => $current_user['id'], 'action_do' => 'completed', 'outcome' => '' ,'company_id' => $company['id'],'campaign_id' => $campaign_id,); echo form_open(site_url().'actions/edit', 'name="completed_action"  class="completed_action pull-right" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action_outstanding->action_id.'" style="display:inline-block;" role="form"',$hidden); ?>
+<?php $hidden = array('action_id' => $action_outstanding->action_id, 'user_id' => $current_user['id'], 'action_do' => 'completed', 'outcome' => '' ,'company_id' => $company['id'],'campaign_id' => $campaign_id,); echo form_open(site_url().'actions/edit', 'name="completed_action"  class="completed_action pull-right" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action_outstanding->action_id.'" style="display:inline-block;" role="form"',$hidden); ?>
 <button class="btn btn-success btn-sm"><i class="fa fa-check fa-sm"></i> </button><?php echo form_close(); ?>
 <?php elseif($action_outstanding->actioned_at): ?>
 <span class="label label-success pull-right" style="font-size:10px; margin-left:10px;">Completed on <?php echo $action_outstandinged_date_formatted ?></span><?php endif; ?>
@@ -1000,9 +1000,15 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 											<div class="col-xs-4 col-md-6" style="text-align:right;">
 											<!--SHOW CONTACT NAME-->
 											<?php if($action_completed->contact_id):?><span class="label label-primary" style="font-size:10px; margin-left:10px;  "><?php echo $action_completed->first_name.' '.$action_completed->last_name; ?></span>
+                                                
+                                                
+                                                
+                                                
 											<?php endif; ?>
 											<span class="label label-success" style="font-size:10px; margin-left:10px;">Completed on <?php echo date("l jS F y",strtotime($action_completed->actioned_at))." @ ".date("H:i",strtotime($action_completed->actioned_at)); ?></span>
-											</div>
+                                                
+                                                <span class="label label-info addActionToCallback" data-action="<?php echo $action_completed->id ?>" style="font-size:10px; margin-left:10px;">Add Action</span>
+                                               </div>
 											<div class="col-md-12">
 											<div id="collapse<?php echo $action_completed->id ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<?php echo $action_completed->id ?>">
 											<?php if (!empty($action_completed->comments)):?>
@@ -1067,7 +1073,7 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 											</div><!--END COL-MD-6-->
 											<div class="col-xs-4 col-md-6" style="text-align:right;">
 											<!--SHOW CONTACT NAME-->
-											<?php if($action_cancelled->contact_id):?><span class="label label-primary" style="font-size:10px; margin-left:10px;  "><?php echo $option_contacts[$action_cancelled->contact_id]; ?></span>
+											<?php if($action_cancelled->contact_id):?><span class="label label-primary" style="font-size:10px; margin-left:10px;"><?php echo $option_contacts[$action_cancelled->contact_id]; ?></span>
 											<?php endif; ?>
 											<span class="label label-danger" style="font-size:10px; margin-left:10px;">Cancelled on <?php echo $cancelled_at_formatted ?></span>
 											</div>
@@ -1148,7 +1154,7 @@ echo form_open(site_url().'actions/edit', 'name="completed_action"  class="compl
 											<?php endif; ?>
 											</div>
 											<div class="col-md-12">
-											<div id="collapse<?php echo $get_action->id ?>all" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<?php echo $get_action->id ?>">
+											<div id="collapse<?php echo $get_action->id   ?>all" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<?php echo $get_action->id ?>">
 											<?php if (!empty($get_action->comments)):?>
 											<div class="comment-text speech" >
 											<div class="triangle-isosceles top">
@@ -1258,37 +1264,194 @@ echo form_open(site_url().'actions/create', 'name="create" class="" role=""',$hi
 				</div>
 			<!--END TABS-->
 		  	</div>
-		</div>
-        
-        
-            
+		</div>  
 
     <!-- /.panel -->
     
   </div>
         
 	</div>
-    
-    
-    
-    
-    
-    
 </div><!--CLOSE ROW-->
     
-    
-    
+    <style>
 
 
+</style>
+  
+
+
+ <div class="row" id="parent">
+<div class="col-md-12 child" id="stickMenu" >
     
     
+    
+    
+		<div class="panel panel-default " id="actions">
+			<div class="panel-heading">
+			Actions
+			</div>
+			<div class="panel-body">
+
+				<div class="row">
+                    <!--  <div class="col-sm-1 col-md-1 ">
+                       
+                          <a href="#" class="btn btn-default btn-circle"><i class="fa fa-user"></i></a><br><br>
+                          <a href="#" class="btn btn-default btn-circle"><i class="fa fa-user"></i></a><br><br>
+                         <a href="#" class="btn btn-default btn-circle"><i class="fa fa-user"></i></a><br><br>
+                          <a href="#" class="btn btn-default btn-circle"><i class="fa fa-user"></i></a>
+                         
+                         
+                  
+                    </div>-->
+                    
+                    <div class="col-md-1" id="leftCol">
+              
+              	<ul class="nav nav-stacked actionNav sticky " style="list-style: none; padding-top:30px; overflow: hidden;" id="sidebar">
+                 
+                    
+                    <li class="active" title="Select All"><a href="javascript:;" class="btn btn-default btn-circle actionAll" data="All"><span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span></a></li>
+                    
+                    
+                     <li class="" title="Click to View Completed Actions"><a href="javascript:;" class="btn btn-default btn-circle" data="actions_completed"><span class="glyphicon glyphicon-ok
+" aria-hidden="true"></span></a></li>
+                    
+                    <li class="" title="Click to View Outstanding Actions"><a href="javascript:;" class="btn btn-default btn-circle" data="actions_outstanding"><span class="glyphicon glyphicon-time" aria-hidden="true"></span></a></li>
+                    
+                    <li class="" title="Click to View Cancelled Actions"><a href="javascript:;" class="btn btn-default btn-circle" data="actions_cancelled"><span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span></a></li>
+                    
+                    <li class="" title="Click to View Marketing Actions"><a href="javascript:;" class="btn btn-default btn-circle" data="actions_marketing"><span class="glyphicon glyphicon-envelope
+" aria-hidden="true"></span></a></li>
+<!--
+        <li class="active"><a href="javascript:;" class="btn btn-default btn-circle" data="Callback"><i class="fa fa-user"></i></a></li>
+
+        <li class=""><a href="javascript:;" class="btn btn-default btn-circle" data="Deal"><i class="fa fa-user"></i></a></li>
+        <li class=""><a href="javascript:;" class="btn btn-default btn-circle" data="AttemptedCall"><i class="fa fa-user"></i></a></li>
+      <li class="active"><a href="javascript:;" class="btn btn-default btn-circle" data="Call"><i class="fa fa-user"></i></a></li>
+
+      <li class=""><a href="javascript:;" class="btn btn-default btn-circle" data="Email"><i class="fa fa-user"></i></a></li>
+      <li class=""><a href="javascript:;" class="btn btn-default btn-circle" data="Demo"><i class="fa fa-user"></i></a></li>
+
+-->
+                    <li class="" title="Click to View Comments"><a href="javascript:;" class="btn btn-default btn-circle comment" data="Comment"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a></li>
+               
+              	</ul>
+              
+      		</div>
+                    
+                    
+
+                
+                    
+                    
+                    
+                    
+                    
+                    
+				    <div class="col-sm-1 col-md-8">
+                        
+                        
+                        <div id="marketing_action">
+                        <ul></ul>
+                        
+                        </div>
+                        
+
+	<!-- Timeline -->
+    		<!--===================================================-->
+    		<div class="timeline">
+    
+    			<!-- Timeline header -->
+ 
+                    <div class="timeline-header">
+    				<div class="timeline-header-title bg-dark actiontitle"  style="margin-top:10px;">History</div>
+                        <div class="timeline-header-title bg-dark showCommentAddBtn" style="float:right; margin-left:11px; margin-top:10px;">  <span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span></div>
+                        <div class="timeline-header-title bg-dark showText" style="float:right;  margin-top:10px;">Text</div>
+                         
+    			</div>
+                
+                <div class="timeline-entry showCommentAddForm" style="display: block;">
+                    <div class="timeline-stat"> </div>
+                    
+                    
+                    <div class="timeline-label showCommentAddForm"> <div class="mar-no pad-btm"><span class="label label-warning"></span><div class="" style="float:right; margin-top:0; margin-left:3px;"></div></div>
+                    
+                    
+                        
+        <form action="http://localhost:8888/baselist/actions/create" name="create" class="showCommentAddForm" id="actionSendComment" role="" method="post" accept-charset="utf-8">
+<input type="hidden" name="company_id" value="154537" id="comcompany_id" >
+<input type="hidden" name="user_id" value="31"  >
+<input type="hidden" name="done" value="1"  >
+<input type="hidden" name="campaign_id" value="" id="comcampaign_id">
+<input type="hidden" name="action_type_completed" id="comaction_type_completed" value="7">
+<div class="col-md-10">					
+<input id="btn-input" type="text" class="form-control input-md" name="comment" id="commentcontent" placeholder="Type your comment here...">
 </div>
-    
-    
+<div class="col-md-2">	
+<input type="submit" class="btn btn-primary btn-md btn-block" id="btn-chat">
+	                          
+	                    </div>
+			            </form>
+                        
+                    </div>
+                
+                
+                
+                
+                </div>
+                
+                
+                    <div class="timeline_inner"></div>
+
+                    </div>
+
+                </div>
+       
+
+                </div>
+            </div>
+    </div>
+     </div>
+</div>
+
     <?php //hide core page END ?>
        <?php endif; ?>
+ </div>
+   
+<script>
+$('#sidebar').affix({
+      offset: {
+        top: 245
+      }
+});
+
+var $body   = $(document.body);
+var navHeight = $('.actions').outerHeight(true) + 10;
+
+$body.scrollspy({
+	target: '#leftCol',
+	offset: navHeight
+});
+    
+</script>
+<script>
+ function show() {
+            var offset = $(".child").offset();
+            var posY = offset.top - $(window).scrollTop();
+            var posX = offset.left - $(window).scrollLeft(); 
+            //console.log("top:" + posY + ", left:" + posX);
+//console.warn($(window).scrollTop())
+        if(posY < 0){
+
+        $('.sticky').addClass('affix');
+
+        }else{
+
+           // $('#sidebar').hide();
+ $('.sticky').removeClass('affix');
+        }
+}
+
  
-    
-    
-</div>
+
+</script>
  

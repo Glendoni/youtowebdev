@@ -217,6 +217,10 @@ $( document ).ready(function() {
                 '</span> '+action+' </div></div></li>' ).prependTo('#marketing ul');
             }
         }
+            //$('#sidebar').hide();
+        
+        show();
+        $(window).scroll(show);
     });
     $('.marketingAcitonCtn').text(parseInt($('.marketingAcitonCtn').text()) + i);
     $(items.join( "" )).prependTo('#marketing ul');

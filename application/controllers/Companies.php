@@ -309,7 +309,7 @@ class Companies extends MY_Controller {
 			$this->data['hide_side_nav'] = True;
 			$this->data['main_content'] = 'companies/company';
 			$this->data['full_container'] = True;
-			$this->load->view('layouts/single_page_layout', $this->data);
+            $this->load->view('layouts/single_page_layout', $this->data);
 		}
 		else
 		{
@@ -425,8 +425,8 @@ class Companies extends MY_Controller {
         $callCH = false;
         $search_data = trim($this->input->post("search_data"));
 		$response = "<div class='autocomplete-full-holder'><div class='col-md-6 clearfix no-padding'><ul class='autocomplete-holder'>";
-        
-        
+       
+        $search_data  = str_replace('\'', '',$search_data);
         $query = $this->Companies_model->get_autocomplete($search_data);
         
         
@@ -537,7 +537,7 @@ class Companies extends MY_Controller {
     public function getCompanyHouseDetails($id = 0) 
 	{
           
-            $words = array(' ', '&#39;', '\'', '  ',  ' \'');
+            $words = array(' ', '&#39\;', '\'', '  ',  ' \'');
             $id = str_replace($words, '', trim($id));
      
             $server_output = array();
@@ -561,7 +561,6 @@ class Companies extends MY_Controller {
         curl_setopt($ch, CURLOPT_URL,"https://api.companieshouse.gov.uk/company/".$id."/charges");
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
         curl_setopt($ch, CURLOPT_HTTPHEADER, [
             'Accept: application/json',
             'Content-Type: application/json;',
@@ -823,5 +822,139 @@ echo $this->Tagging_model->$route($post);
         
     }    
     
+    // NEW AJAX/JSON ACTIONS FUNCTIONS
+       public function autopilotActions($id =154537){
+        
+        header('Content-Type: application/json');
+       
+        $marketing_events  = (array)$this->Actions_model->get_actions_marketing($id);
+    
+        echo json_encode($marketing_events);
+    }
+    
+    function getAction($id = 154537 ){
+        
+        //$query[]['actions'] = $this->Actions_model->get_actions(154537); //$this->input->get('id')
+        $query[]['actions_outstanding'] = $this->Actions_model->get_actions_outstanding($id);
+        
+        $query[]['actions_completed'] = $this->Actions_model->get_actions_completed($id);
+        
+        $query[]['action_types_array'] = (array)$this->Actions_model->get_action_types_array();
+        
+        $query[]['actions_cancelled'] = $this->Actions_model->get_actions_cancelled($id);
+        
+         $query[]['comments'] = $this->Actions_model->get_comments_two($id);
+         //$query['op'] = $this->Actions_model->get_actions_outstanding(154537);
+         //$query['op'] = $this->Actions_model->get_actions(154537);
+         //$query['op'] = $this->Actions_model->get_actions(154537);
+      
+        //echo count( $get_actions);
+        
+        
+        //echo 'init'.$query['actions_outstanding']['initial_rate'];
+        
+        
+        //print_r($query);       
+        
+        //$query[]['initial_fee']['initial_rate']  =  $query[0]['actions_outstanding'][0]->initial_rate;
+    // print_r($query[0]['actions_outstanding'][0]->company_id);        
+        //print_r( $query);
+        ///$get_actions = $get_actions[0];
+        
+        foreach($query  as $key => $value){
+       
+                $action[][] = $value; 
+             
+        }
+        
+        $action[] = $query[0]['actions_outstanding'][0]->initial_rate;
+         //$action['initial_fee']['initial_rate']  =  ($initial_rate/100);
+    //echo '<pre>'; print_r($action); echo '</pre>';
+        header('Content-Type: application/json');
+       echo json_encode($action);
+        
+        
+   
+//unset($get_actions->id);
+  //      unset($get_actions->campaign_name);
+        
+        
+        //$get_actions = array('getAction' =>$get_actions);
+        
+     
+        //echo json_encode($get_actions);
+        
+    }
+    
+    
+    function getCompletedActions($id = 154537){
+        
+        
+        $actions =  $this->Actions_model->get_follow_up_actions($id);
+        
+        echo json_encode($actions);
+        
+        
+    }
+    
+    function uniDelete(){
+        
+        $action_outstanding = '2016-05-20 15:46:00';
+        $planned_at = '2016-05-20 15:46:00';
+        
+     echo date("Ymd\\THi00",strtotime($action_outstanding));
+        
+        $contact_details_for_calendar = 'Get-news';
+        $action_type_id =1234;
+        $company_name = 'Sonovate';
+        $company_id = 154537;
+        $planned_at = '2016-05-20 15:46:00';
+        
+        
+        
+            
+ echo  $google =  addslashes('<a class="btn btn-default btn-xs add-to-calendar" href="http://www.google.com/calendar/event?action=TEMPLATE&text='. urlencode($action_type_id.' | '.$company_name).'&dates='.date("Ymd\\THi00",strtotime($planned_at)) .'/'.date("Ymd\\THi00\\Z",strtotime($planned_at)).'&details='.$contact_details_for_calendar. urlencode('http://baselist.herokuapp.com/companies/company?id='.$company_id).'%0D%0DAny changes made to this event are not updated in Baselist. %0D%23baselist"target="_blank" rel="nofollow" style="margin-top:0; font-size:10px;" ">Add to Calendar</a>');
+        
+        
+        
+                 echo  $ip = '<a class="btn btn-default btn-xs add-to-calendar" href="http://www.google.com/calendar/event?action=TEMPLATE&amp;text=Callback+%7C+Sonovate+Limited&amp;dates=20160429T170600/20160429T170600Z&amp;details=Meeting+with+Matt+Boyle%0Amboyle%40sonovate.com+%0D%0Dhttp%3A%2F%2Fbaselist.herokuapp.com%2Fcompanies%2Fcompany%3Fid%3D154537%0D%0DAny changes made to this event are not updated in Baselist. %0D%23baselist" target="_blank" rel="nofollow" style="margin-top:0; font-size:10px;">Add to Calendar</a>';
+        
+        
+        //&dates='.date('Ymd\\THi00',strtotime($planned_at)).'/'.date("Ymd\\THi00\\Z",strtotime($planned_at)). $contact_details_for_calendar. urlencode('http://baselist.herokuapp.com/companies/company?//id='.$company_id).'%0D%0DAny changes made to this event are not updated in Baselist. %0D%23baselist\"target=\"_blank\" rel=\"nofollow\" style=\"margin-top:0; font-size:10px;\"
+         
+        echo '<script text="text/javascript">
+        
+        var str = "'.$action_outstanding.'";
+        var Sonovate;
+        str = str.replace(/-/g, "");
+        str = str.replace(/ /g, "T");
+        str = str.replace(/:/g, ""); 
+        //console.log("&dates="+str+"/"+str );
+
+
+var  action_type_id = 123;
+var  company_name = Sonovate;
+
+        var google = <a class="btn btn-default btn-xs add-to-calendar" href="http://www.google.com/calendar/event?action=TEMPLATE&amp;text=Callback+%7C+Sonovate+Limited&amp;dates=20160429T170600/20160429T170600Z&amp;details=Meeting+with+Matt+Boyle%0Amboyle%40sonovate.com+%0D%0Dhttp%3A%2F%2Fbaselist.herokuapp.com%2Fcompanies%2Fcompany%3Fid%3D154537%0D%0DAny changes made to this event are not updated in Baselist. %0D%23baselist" target="_blank" rel="nofollow" style="margin-top:0; font-size:10px;">Add to Calendar</a>";
+        
+         console.log(google)
+        
+        
+       
+ 
+        
+        </script>';
+        
+        
+        
+    
+        
+        exit();
+        
+           
+    }
+    //exit();
+
     
 }
+ 

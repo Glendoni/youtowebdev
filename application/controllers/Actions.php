@@ -207,4 +207,61 @@ else
 			}
 		}
 	}
+    
+    
+    public function addActionsComment(){
+        $rqst = $this->input->post();
+        
+    $output =     array('call'=>$rqst, 'pattern'=>'Wake up');
+        
+        $this->Actions_model->create($this->input->post());
+        echo   json_encode($rqst);
+        
+         
+    }
+    
+     public function addActionsCallback(){
+        $rqst = $this->input->post();
+        
+    $output =     array('call'=>$rqst, 'pattern'=>'Wake up');
+        
+        $this->Actions_model->create($this->input->post());
+        echo   json_encode($output);
+        
+         
+    }
+    
+    
+    
+    public function addOutcome(){
+        
+       $rap = $this->input->post();
+                    //set_action_state($action_id,$user_id,$state,$outcome);
+         //$rap = json_decode($rap);
+        
+        
+        $user_id = $this->data['current_user']['id'];
+       $action_id = $rap['outcomeActionId'];
+        $outcome = $rap['outcome'];
+        $state = $rap['status'];
+        $result  =  $this->Actions_model->set_action_state($action_id,$user_id,$state,$outcome);
+        $output = array(
+     'action' => $action_id,
+            'user_id' =>$user_id ,
+            'state' => $state,
+            'result' => $result,
+            'outcome' => $outcome
+        
+        );
+            echo json_encode($output);
+    }
+    
+    function removeOutsandingaction(){
+        
+       // $this->Actions_model->create();
+        $rap = $this->input->post('big');
+                     
+                      echo json_encode(array('glen' =>$rap ));
+    }
+    
 }

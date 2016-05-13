@@ -18,7 +18,8 @@ function get_actions1($company_id)
 
 function get_actions($company_id)
 {
-             $sql = "select distinct
+
+    $sql = "select distinct
     c.id,
     ec.id as id,
     ec.name as campaign_name,
@@ -62,7 +63,7 @@ function get_actions($company_id)
     left join users u on a.user_id = u.id
     left join contacts con on a.contact_id = con.id
     where c.id = '$company_id'
-    ORDER BY 10 desc";
+    ORDER BY 10 desc LIMIT 10";
             $query = $this->db->query($sql);
     return $query->result_object();
     
@@ -114,7 +115,7 @@ function get_actions_outstanding($company_id)
     $data = array(
         'a.company_id' => $company_id,
         );
-    $this->db->select('a.company_id, a.id "action_id",a.comments,a.planned_at,a.action_type_id,u.name ,c.first_name,c.last_name,c.phone,c.email,a.user_id,c.id "contact_id",a.created_at as "created_at",a.actioned_at as "actioned_at",a.planned_at as "planned_at", u.image , comp.name as "company_name", ');
+    $this->db->select('a.company_id, a.id "action_id",a.comments,a.planned_at,a.action_type_id,u.name ,c.first_name,c.last_name,c.phone,comp.initial_rate,c.email,a.user_id,c.id "contact_id",a.created_at as "created_at",a.actioned_at as "actioned_at",a.planned_at, u.image ,comp.name as "company_name",');
     $this->db->where('a.planned_at IS NOT NULL', null);
     $this->db->where('a.actioned_at IS NULL', null);
     $this->db->where('a.cancelled_at IS NULL', null);
@@ -123,10 +124,9 @@ function get_actions_outstanding($company_id)
     $this->db->join('users u', 'a.user_id = u.id', 'left');
     $this->db->join('companies comp', 'a.company_id = comp.id', 'left');
     $this->db->join('action_types at', 'a.action_type_id = at.id', 'left');
-
-
     $this->db->order_by('a.actioned_at desc, a.cancelled_at desc,a.planned_at desc');
     $query = $this->db->get_where('actions a', $data);
+   //echo $this->db->last_query();
     return $query->result_object();
 }
 
@@ -136,15 +136,33 @@ function get_actions_completed($company_id)
     $data = array(
         'a.company_id' => $company_id,
         );
-    $this->db->select('a.created_at,a.actioned_at,a.action_type_id,a.comments,a.outcome,a.id,u.image,u.name,c.first_name,c.last_name,a.contact_id", ');
+    $this->db->select('a.created_at,a.actioned_at,a.action_type_id,a.comments,a.outcome,a.id,u.image,u.name,c.first_name,c.last_name,a.contact_id,a.follow_up_action_id, a.planned_at", ');
     $this->db->join('contacts c', 'c.id = a.contact_id', 'left');
     $this->db->join('users u', 'a.user_id = u.id', 'left');
     $this->db->where('actioned_at IS NOT NULL', null);
+    $this->db->where('follow_up_action_id', null);
     $this->db->where_not_in('action_type_id', $category_exclude);
     $this->db->order_by('actioned_at desc,planned_at desc');
     $query = $this->db->get_where('actions a', $data);
     return $query->result_object();
 }
+    
+function get_follow_up_actions($company_id) //Added by glen this has only one dependency located in the companies controller
+{
+    $category_exclude = array('7', '20');
+    $data = array(
+        'a.company_id' => $company_id,
+        );
+    $this->db->select('a.created_at,a.actioned_at,a.action_type_id,a.comments,a.outcome,a.id,u.image,u.name,c.first_name,c.last_name,a.contact_id,a.follow_up_action_id, a.planned_at", ');
+    $this->db->join('contacts c', 'c.id = a.contact_id', 'left');
+    $this->db->join('users u', 'a.user_id = u.id', 'left');
+    $this->db->where('follow_up_action_id IS NOT NULL', null);
+    $this->db->where_not_in('action_type_id', $category_exclude);
+    $this->db->order_by('actioned_at desc,planned_at desc');
+    $query = $this->db->get_where('actions a', $data);
+    return $query->result_object();
+}    
+    
 
 function get_actions_cancelled($company_id)
 {
@@ -176,7 +194,7 @@ function get_actions_marketing($company_id)
     group by 1,2,3,4,5,6,7,8,ea.email_action_type order by date_sent asc";
     $query = $this->db->query($sql);
     if($query){
-        return $query->result_array();
+        return $query->result_array(); 
     }else{
         return [];
     }
@@ -193,6 +211,22 @@ function get_comments($company_id)
     return $query->result_object();
 }
 
+    
+    
+    function get_comments_two($company_id)
+{
+    $sql = "SELECT a.*, u.name as created_by 
+FROM actions a
+LEFT JOIN users u
+ON a.created_by = u.id
+WHERE a.action_type_id =7 
+AND a.company_id='$company_id'";
+         $query = $this->db->query($sql);
+    return $query->result_object();
+}
+    
+    
+    
 function get_pending_actions($user_id)
 {		
     $this->db->select("actions.company_id, actions.id as action_id,comments,planned_at,action_type_id,name as company_name,contacts.first_name,contacts.last_name,contacts.phone,contacts.email, to_char(planned_at, 'HH24:MI DD/MM/YY') as duedate ");
@@ -669,6 +703,7 @@ function create($post)
         'action_type_id'=> (isset($post['action_type_completed'])?$post['action_type_completed']:$post['action_type']),
         'actioned_at'	=> date('Y-m-d H:i:s'),
         'created_at' 	=> date('Y-m-d H:i:s'),
+        'follow_up_action_id' =>(isset($post['follow_up_action_id'])?$post['follow_up_action_id']:NULL),
         );
     $query = $this->db->insert('actions', $completeddata);
     //END TEST
@@ -684,8 +719,9 @@ function create($post)
         'contact_id'    => (!empty($post['contact_id'])?$post['contact_id']:NULL),
         'created_by'	=> $post['user_id'],
         'action_type_id'=> $post['action_type_planned'],
-        'actioned_at'	=> NULL,
+        'actioned_at'	=>  NULL,
         'created_at' 	=> date('Y-m-d H:i:s'),
+        'follow_up_action_id' =>(isset($post['follow_up_action_id'])?$post['follow_up_action_id']:NULL),
         );
         $query = $this->db->insert('actions', $planneddata);
 
