@@ -756,8 +756,7 @@ class Companies_model extends CI_Model {
 				'updated_at' => date('Y-m-d H:i:s'),
 				'lead_source_id'=>$source,
 				'source_explanation'=>!empty($post['source_explanation'])?$post['source_explanation']:NULL,
-                'initial_rate'=>!empty($post['initial_rate'])?$post['initial_rate']:NULL,
-				'source_date'=>$source_date? $source_date :  null,
+                'source_date'=>$source_date? $source_date :  null,
 				);
 
 		$this->db->select('id,pipeline');
