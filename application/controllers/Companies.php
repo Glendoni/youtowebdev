@@ -446,9 +446,15 @@ class Companies extends MY_Controller {
         foreach ($query->result() as $row):
         	if(!empty($row->user)) { 
         		$user_icon = explode(",", $row->image);
-        		$assigned_label = " <span class='label label-primary' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$row->user."</span>";};
+        		$assigned_label = " <span class='label label-primary pull-right' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$row->user."</span>";} else {$assigned_label="";};
+
+		if($row->active=='f') { 
+		$response= $response."<li class='autocomplete-item autocomplete-company inactive'><strong>" . str_replace($words, ' ',$row->name). "</strong><div style='min-height:14px'><small>Company no longer active.<span class='label label-danger pull-right'>Inactive</span></small></div></li>";} 
+
+		else {$response= $response."<a href='". base_url() . "companies/company?id=" . $row->id . "'><li class='autocomplete-item autocomplete-company'><strong>" . str_replace($words, ' ',$row->name). "</strong><div style='min-height:14px'><small>".$row->pipeline." ".$assigned_label."</small></div></li></a>";};
+	
         	 
-		$response= $response."<a href='". base_url() . "companies/company?id=" . $row->id . "'><li class='autocomplete-item autocomplete-company'><strong>" . str_replace($words, ' ',$row->name). "</strong><br><small>".$row->pipeline." ".$assigned_label."</small></li></a>";
+		
          //$callCH = false;
         endforeach;
         $response= $response."</ul></div>";
