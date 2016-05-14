@@ -1307,6 +1307,7 @@
     <h3 class="panel-title">Email Engagement<span class="badge pull-right"><?php echo count($marketing_actions); ?></span></h3>
     </div>
     <!-- /.panel-heading -->
+    
     <div class="panel-body" style="font-size:12px;">
 <?php if(!empty($marketing_actions)) : ?>
 <div class="row record-holder-header mobile-hide">

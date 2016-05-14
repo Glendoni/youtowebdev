@@ -22,7 +22,9 @@
 		<h2 class="company-header">
 		<a href="<?php echo site_url();?>companies/company?id=<?php echo $company['id'];?>
 				<?php echo !empty($current_campaign_id)?'&campaign_id='.$current_campaign_id:''; ?>" <?php if(($current_user['new_window']=='t')): ?> target="_blank"<?php endif; ?>>
-		<?php $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' );echo str_replace($words, ' ',$company['name']); ?></a>
+	<?php $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' );echo str_replace($words, ' ',$company['name']); ?></a>
+
+<?php echo $company['id'];?>
 	<?php if(isset($company['assigned_to_name']) and !empty($company['assigned_to_name'])): ?>
 		<?php if($company['assigned_to_id'] == $current_user['id']) : ?>	
 			<?php  $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'], 'page_number' => (isset($current_page_number))? $current_page_number:'');
@@ -33,6 +35,9 @@
 			<?php echo form_close(); ?>
 		<?php endif; ?>
 	<?php else: ?>
+
+
+
 	<?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'], 'page_number' => (isset($current_page_number))? $current_page_number:'');
 	echo form_open(site_url().'companies/assignto',array('name' => 'assignto', 'class'=>'assign-to-form', 'style'=>'display: inline;'),$hidden); ?>
 	<button type="submit" assignto="<?php echo $current_user['name']; ?>" class="unassigned-star ladda-button" data-style="expand-right" data-size="1">
@@ -67,10 +72,12 @@
         
 		<?php endif; ?>
 		</span>
-		<?php if(isset($company['assigned_to_name'])): ?>
+		    
+	<?php if(isset($company['assigned_to_name'])): ?>
 		<span class="label label-assigned"
 		<?php $user_icon = explode(",", ($company['image']));echo "style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'";?>>
-        <i class="fa fa-star"></i> <?php echo $company['assigned_to_name']; ?>
+        <i class="fa fa-star"></i>
+<?php echo $company['assigned_to_name']; ?>
         </span>
 	<?php else: ?>
 	<?php endif; ?>
