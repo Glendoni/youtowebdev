@@ -407,7 +407,6 @@ $(document).ready(function(){
 
 </script>
 <!--COMBINE MULTIPLE JS FILES-->
-<hr>
 <?php if (isset($current_user)): ?>
 <div class="col-lg-12">    
 <ul class="nav nav-pills nav-justified">
