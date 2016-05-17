@@ -817,7 +817,7 @@ if ($your_date < $now){; ?>
         
         
 			<div class="col-md-12" >
-		<div class="panel panel-default " id="actions">
+		<div class="panel panel-default " id="actions" style="display:none;">
 			<div class="panel-heading">
 			Actions
 			</div>
