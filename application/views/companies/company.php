@@ -1301,28 +1301,37 @@ echo form_open(site_url().'actions/create', 'name="create" class="" role=""',$hi
                           <a href="#" class="btn btn-default btn-circle"><i class="fa fa-user"></i></a>
                          
                          
-                  
+                  actions_completed
+actions_outstanding
+
+actions_cancelled
+
+actions_marketing
+
+Comment
                     </div>-->
                     
                     <div class="col-md-1" id="leftCol">
               
-              	<ul class="nav nav-stacked actionNav sticky " style="list-style: none; padding-top:30px; overflow: hidden;" id="sidebar">
+              	<ul class="nav nav-stacked actionNav sticky  " style="list-style: none; padding-top:30px; " id="sidebar">
                  
                     
-                    <li class="active" title="Select All"><a href="javascript:;" class="btn btn-default btn-circle actionAll" data="All"><span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span></a></li>
+                    <li class="active activeMenu"><a href="javascript:;" class="btn btn-default btn-circle actionAll hint--top-right"  data-hint="All" data="All"><span class="glyphicon glyphicon-dashboard" aria-hidden="true"></a><span class="actionMenuQty qtyAll" aria-hidden="true"></span></li>
                     
+                     <li class="" ><a href="javascript:;" class="btn btn-default btn-circle hint--top-right" data-hint="Completed" data="actions_completed"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></a><span class="actionMenuQty qtyactions_completed" aria-hidden="true"></span></li>
                     
-                     <li class="" title="Click to View Completed Actions"><a href="javascript:;" class="btn btn-default btn-circle" data="actions_completed"><span class="glyphicon glyphicon-ok
-" aria-hidden="true"></span></a></li>
+                    <li class="" ><a href="javascript:;" class="btn btn-default btn-circle hint--top-right"  data-hint="Outstanding" data="actions_outstanding"><span class="glyphicon glyphicon-time" aria-hidden="true"></span></a><span class="actionMenuQty qtyactions_outstanding" aria-hidden="true"></span></li>
                     
-                    <li class="" title="Click to View Outstanding Actions"><a href="javascript:;" class="btn btn-default btn-circle" data="actions_outstanding"><span class="glyphicon glyphicon-time" aria-hidden="true"></span></a></li>
+                    <li class=""><a href="javascript:;" class="btn btn-default btn-circle hint--top-right"  data-hint="Cancelled" data="actions_cancelled"><span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span></a><span class="actionMenuQty qtyactions_cancelled" aria-hidden="true"></span></li>
                     
-                    <li class="" title="Click to View Cancelled Actions"><a href="javascript:;" class="btn btn-default btn-circle" data="actions_cancelled"><span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span></a></li>
-                    
-                    <li class="" title="Click to View Marketing Actions"><a href="javascript:;" class="btn btn-default btn-circle" data="actions_marketing"><span class="glyphicon glyphicon-envelope
-" aria-hidden="true"></span></a></li>
+                    <li class="" ><a href="javascript:;" class="btn btn-default btn-circle hint--top-right" data-hint="Marketing" data="actions_marketing"><span class="glyphicon glyphicon-envelope
+                        " aria-hidden="true"></span></a><span class="actionMenuQty qtyactions_marketing" aria-hidden="true"></span></li>
 <!--
-        <li class="active"><a href="javascript:;" class="btn btn-default btn-circle" data="Callback"><i class="fa fa-user"></i></a></li>
+        
+hint--bottom-right
+
+
+<li class="active"><a href="javascript:;" class="btn btn-default btn-circle" data="Callback"><i class="fa fa-user"></i></a></li>
 
         <li class=""><a href="javascript:;" class="btn btn-default btn-circle" data="Deal"><i class="fa fa-user"></i></a></li>
         <li class=""><a href="javascript:;" class="btn btn-default btn-circle" data="AttemptedCall"><i class="fa fa-user"></i></a></li>
@@ -1332,7 +1341,7 @@ echo form_open(site_url().'actions/create', 'name="create" class="" role=""',$hi
       <li class=""><a href="javascript:;" class="btn btn-default btn-circle" data="Demo"><i class="fa fa-user"></i></a></li>
 
 -->
-                    <li class="" title="Click to View Comments"><a href="javascript:;" class="btn btn-default btn-circle comment" data="Comment"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a></li>
+                    <li class="" ><a href="javascript:;" class="btn btn-default btn-circle comment hint--top-right" data-hint="Comments" data="Comment"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a><span class="actionMenuQty qtyComment" aria-hidden="true"><span>1000</span></span></li>
                
               	</ul>
               
@@ -1364,7 +1373,7 @@ echo form_open(site_url().'actions/create', 'name="create" class="" role=""',$hi
  
                     <div class="timeline-header">
     				<div class="timeline-header-title bg-dark actiontitle"  style="margin-top:10px;">History</div>
-                        <div class="timeline-header-title bg-dark showCommentAddBtn" style="float:right; margin-left:11px; margin-top:10px;">  <span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span></div>
+                        <div class="timeline-header-title bg-dark showCommentAddBtn hint--top-right"  data-hint="Add Comment" style="float:right; margin-left:11px; margin-top:10px;">  <span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span></div>
                         <div class="timeline-header-title bg-dark showText" style="float:right;  margin-top:10px;">Text</div>
                          
     			</div>
