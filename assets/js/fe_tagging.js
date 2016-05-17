@@ -1,5 +1,7 @@
 $(document).ready(function(){
+      if((/companies/.test(window.location.href))) {
      gettags();
+      }
     $('.nav-tabs').click(function(){
         
         $('.active').removeClass('activein');

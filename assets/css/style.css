@@ -2202,6 +2202,17 @@ body {
     background-color: #000000;
     color: #fff;
 }
+
+.timeline-icon {
+    border-radius: 50%;
+    box-shadow: 0 0 0 7px #ebeef0;
+    display: block;
+    margin: 0 auto;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    width: 35px;
+}
 /*! Hint.css - v2.2.1 - 2016-03-26
 * http://kushagragour.in/lab/hint/
 * Copyright (c) 2016 Kushagra Gour; Licensed  */
