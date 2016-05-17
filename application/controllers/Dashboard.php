@@ -67,14 +67,13 @@ class Dashboard extends MY_Controller {
      function getTeamStats(){ //json request
         	
        $output =  array(
-          'lastweek' => $this->lastweek(),
-        'currentmonth' => $this->currentmonth(),
-            'lastmonth'=> $this->lastmonths()
+//'lastweek' => $this->lastweek(),
+       // 'currentmonth' => $this->currentmonth(),
+          //  'lastmonth'=> $this->lastmonths()
            );
          
          //header('Content-Type: application/json');
-         echo json_encode($output);  
-         
+         //
          
          
          

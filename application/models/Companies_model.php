@@ -964,7 +964,7 @@ class Companies_model extends CI_Model {
        //$search_data = str_replace("'","&#39;", $search_data);  
         $search_data = pg_escape_string($search_data);
         //$search_data = str_replace('&#39;',"", $search_data);  
-		$query1 = $this->db->query("select linkedin_id, c.name,c.id, c.pipeline, u.name as user, u.image as image, user_id from companies c left join  users u on u.id = c.user_id where c.eff_to IS NULL and c.active = 'true' and (REPLACE(c.name, '''', '') ilike '".$search_data."%' or REPLACE(c.trading_name, '''', '') ilike'".$search_data."%') order by name asc limit 7 ");
+		$query1 = $this->db->query("select linkedin_id, c.name,c.id, c.pipeline, u.name as user, u.image as image, user_id, c.active from companies c left join  users u on u.id = c.user_id where c.eff_to IS NULL and (REPLACE(c.name, '''', '') ilike '".$search_data."%' or REPLACE(c.trading_name, '''', '') ilike'".$search_data."%') order by c.active desc, name asc limit 10 ");
 
 	    if ($query1->num_rows() > 0)
 			{
@@ -972,7 +972,7 @@ class Companies_model extends CI_Model {
 			}
 		else 
 			{
-			return $this->db->query("select c.name,c.id, c.pipeline, u.name as user, u.image as image, user_id from companies c left join  users u on u.id = c.user_id where c.eff_to IS NULL and c.active = 'true' and ((REPLACE(c.name, '''', '') ilike '%".$search_data."%' or REPLACE(c.trading_name, '''', '') ilike '%".$search_data."%' or c.registration ilike '".$search_data."%' or regexp_replace(c.phone, E'[^0-9]', '', '') ilike regexp_replace('".$search_data."%', E'[^0-9%]', '', ''))) order by c.name asc limit 7 ");
+			return $this->db->query("select c.name,c.id, c.pipeline, u.name as user, u.image as image, user_id, c.active from companies c left join  users u on u.id = c.user_id where c.eff_to IS NULL and ((REPLACE(c.name, '''', '') ilike '%".$search_data."%' or REPLACE(c.trading_name, '''', '') ilike '%".$search_data."%' or c.registration ilike '".$search_data."%' or regexp_replace(c.phone, E'[^0-9]', '', '') ilike regexp_replace('".$search_data."%', E'[^0-9%]', '', ''))) order by c.active desc, name asc limit 10");
 			}
 	}
 	    function get_autocomplete_contact($search_data) {
@@ -995,7 +995,7 @@ class Companies_model extends CI_Model {
         
         
      
-                   $q = '
+$q = '
      SELECT id
      FROM companies
      WHERE registration=\''.$post['registration'].'\'

@@ -757,13 +757,23 @@ li.autocomplete-company {
 	    border-bottom: 1px #e7e7e7 solid;
     border-right: 1px #e7e7e7 solid;
        background-color: #fff;
-        cursor: default;
+       transition: background-color 0.4s ease;
+
+}
+
+li.autocomplete-company.inactive {
+color: #ccc;
+cursor: not-allowed;
+}
+li.autocomplete-company.inactive:hover {
+background-color: #F44336;
 }
 li.autocomplete-contact { 
 	padding: 10px 20px;
-	    border-bottom: 1px #e7e7e7 solid;
+	border-bottom: 1px #e7e7e7 solid;
     border-left: 1px #e7e7e7 solid;
     background-color: #fff;
+    transition: background-color 0.4s ease;
 }
 .autocomplete-holder a {
 	color: #555;
