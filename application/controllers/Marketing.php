@@ -108,7 +108,7 @@ class Marketing extends MY_Controller {
             curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
             $server_output = curl_exec ($ch);
             $result  = json_decode($server_output, true);
-             return  $result; 
+            return  $result; 
             curl_close ($ch); 
      }
     
