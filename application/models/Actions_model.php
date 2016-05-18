@@ -192,7 +192,8 @@ function get_actions_marketing($company_id)
     left join users u on ec.created_by = u.id
     where c.id = '$company_id'
     AND ec.name != 'pending'
-    group by 1,2,3,4,5,6,7,8,ea.email_action_type order by date_sent asc";
+    AND ea.action_time >= '2016-01-01'
+    group by 1,2,3,4,5,6,7,8,ea.email_action_type order by date_sent desc LIMIT 100";
     $query = $this->db->query($sql);
     if($query){
         return $query->result_array(); 
@@ -212,8 +213,6 @@ function get_comments($company_id)
     return $query->result_object();
 }
 
-    
-    
     function get_comments_two($company_id)
 {
     $sql = "SELECT a.*, u.name as created_by 
