@@ -579,7 +579,8 @@ if ($your_date < $now){;
                  
                     <p>Tags are used to provide <strong>Sonovate</strong> with a better insight into current and potential clients </p>
                 </div>-->
-             
+   
+
 	<div class="col-sm-6 no-padding">
 		<div class="row tag-search-holder ">
     <div class="col-sm-12">         
@@ -819,459 +820,7 @@ if ($your_date < $now){;
         
         
         
-			<div class="col-md-12" >
-		<div class="panel panel-default " id="actions" style="display:none;">
-			<div class="panel-heading">
-			Actions
-			</div>
-			<div class="panel-body">
-
-				<div class="row">
-				    <div class="col-sm-12 col-md-12">
-				        <!-- Nav tabs -->
-				        <ul class="nav nav-tabs">
-							<li><a href="#all" data-toggle="tab">All <span class="label label-primary">
-							<?php echo count($get_actions);?></span></a></li>
-				            <li class="active"><a href="#outstanding" data-toggle="tab">Outstanding <span class="label label-warning"><?php echo count($actions_outstanding);?></span></a></li>
-				            <li><a href="#completed" data-toggle="tab">Completed <span class="label label-success"><?php echo count($actions_completed);?></span></a></li>
-				            <?php if (count($actions_cancelled) > 0): ?>
-				            <li><a href="#cancelled" data-toggle="tab">Cancelled <span class="label label-danger">
-				            <?php echo count($actions_cancelled);?></span></a></li>
-							<?php else: ?>
-							<?php endif; ?>
-							<?php if (count($actions_marketing) >= 0): ?>
-				            <li><a href="#marketing" data-toggle="tab">Marketing <span class="label label-default marketingAcitonCtn">
-				            <?php //echo count($actions_marketing);?>0</span></a></li>
-							<?php else: ?>
-							<?php endif; ?>
-				            <li><a href="#comments" data-toggle="tab"> Comments <span class="label label-success"><?php echo count($comments);?></span></a></li>
-				        </ul>
-				        <!-- Tab panes -->
-				        <div class="tab-content">
-
-
-				        							
-
-				        <!-- OUTSTANDING -->
-<div class="tab-pane fade in active" id="outstanding">
-		<?php if (count($actions_outstanding) > 0): ?>
-				<ul class="list-group">
-								<?php foreach ($actions_outstanding as $action_outstanding): 
-								 $created_date_formatted = date("l jS F y",strtotime($action_outstanding->created_at))." @ ".date("H:i",strtotime($action_outstanding->created_at));
-								 $actioned_date_formatted = date("l jS F y",strtotime($action_outstanding->actioned_at))." @ ".date("H:i",strtotime($action_outstanding->actioned_at));
-								 $planned_date_formatted = date("l jS F y",strtotime($action_outstanding->planned_at))." @ ".date("H:i",strtotime($action_outstanding->planned_at));
-								 $cancelled_at_formatted = date(" jS F y",strtotime($action_outstanding->cancelled_at))." @ ".date("H:i",strtotime($action_outstanding->cancelled_at));
-								 $now = date(time());
-								?>
-					<li class="list-group-item">
-						<div class="row">
-							<div class="col-xs-2 col-md-1 profile-heading">
-								<?php $user_icon = explode(",", ($action_outstanding->image)); echo "<div class='circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
-							</div>
-							<div class="col-xs-10 col-md-6">
-								<h4 style="margin:0;">
-									<a data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $action_outstanding->action_id ?>" aria-expanded="false" aria-controls="collapse<?php echo $action_outstanding->action_id ?>">
-								<?php echo $action_types_array[$action_outstanding->action_type_id]; ?><?php if(strtotime($action_outstanding->planned_at) < $now and !isset($action_outstanding->actioned_at)):?>
-								<?php endif ?>
-									</a>
-								</h4>
-								<?php if( strtotime($action_outstanding->planned_at ) < strtotime('now') ) {?>
-                                    <span class="label label-overdue">Overdue</span>
-                                    <?php }; ?>
-								<div class="mic-info">
-								Created By: <?php echo $system_users[$action_outstanding->user_id]?> on <?php echo $created_date_formatted?>
-								</div>
-								 <?php if(!empty($action_outstanding->first_name)) : $contact_details_for_calendar = urlencode('Meeting with '.$action_outstanding->first_name.' '.$action_outstanding->last_name).'%0A'.urlencode($action_outstanding->email.' '.$action_outstanding->phone).'%0D%0D';?>
-                              <?php endif ?>
-
-								
-       							
-							</div><!--END COL-MD-6-->
-
-
-							<div class="col-xs-12 col-md-5">
-							<!--SHOW CONTACT NAME-->
-                            <?php if($action_outstanding->contact_id):?><span class="label label-primary" style="font-size:10px; margin:0 10px;  "><?php echo $action_outstanding->first_name.' '.$action_outstanding->last_name; ?></span>
-                            <?php endif; ?>
-								<?php if(strtotime($action_outstanding->planned_at) > $now and !isset($action_outstanding->actioned_at)) : ?>
-								<span class="label label-warning"><?php echo $planned_date_formatted ?> </span> 
-								<span style="margin-top:0; margin-left:3px;"><small><a class="btn btn-default btn-xs add-to-calendar" href="http://www.google.com/calendar/event?action=TEMPLATE&text=<?php echo urlencode($action_types_array[$action_outstanding->action_type_id].' | '.$action_outstanding->company_name); ?>&dates=<?php echo date("Ymd\\THi00",strtotime($action_outstanding->planned_at));?>/<?php echo date("Ymd\\THi00\\Z",strtotime($action_outstanding->planned_at));?>&details=<?php echo $contact_details_for_calendar;?><?php echo urlencode('http://baselist.herokuapp.com/companies/company?id='.$action_outstanding->company_id);?>%0D%0DAny changes made to this event are not updated in Baselist. %0D%23baselist"target="_blank" rel="nofollow" style="margin-top:0; font-size:10px;">Add to Calendar</a></small></span>
-
-
-								<?php $hidden = array('action_id' => $action_outstanding->action_id , 'user_id' => $current_user['id'] , 'action_do' => 'cancelled','outcome' => '' ,'company_id' => $company['id'],'campaign_id' => $campaign_id,); echo form_open(site_url().'actions/edit', 'name="cancel_action"  class="cancel_action pull-right" style="margin-left:5px;" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action_outstanding->action_id.'" role="form"',$hidden); ?>
-<button class="btn btn-danger btn-sm" ><i class="fa fa-trash-o fa-sm"></i> </button>
-<?php echo form_close(); ?>
-
-<?php $hidden = array('action_id' => $action_outstanding->action_id , 'user_id' => $current_user['id'], 'action_do' => 'completed', 'outcome' => '' ,'action_type_id_outcome' =>'','company_id' => $company['id'],'campaign_id' => $campaign_id,);
-echo form_open(site_url().'actions/edit', 'name="completed_action"  class="completed_action pull-right" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action_outstanding->action_id.'" style="display:inline-block;" role="form"',$hidden); ?><button class="btn btn-success btn-sm"><i class="fa fa-check fa-sm"></i> </button>
-<?php echo form_close(); ?>
-
-
-								<?php elseif(strtotime($action_outstanding->planned_at) < $now and !isset($action_outstanding->actioned_at)):?>
-								<span class="label label-overdue" style="margin-left:10px;"><?php echo $planned_date_formatted ?> </span><span style="margin-top:0; margin-left:3px;"><small><a class="btn btn-default btn-xs add-to-calendar" href="http://www.google.com/calendar/event?action=TEMPLATE&text=<?php echo urlencode($action_types_array[$action_outstanding->action_type_id].' | '.$action_outstanding->company_name); ?>&dates=<?php echo date("Ymd\\THi00",strtotime($action_outstanding->planned_at));?>/<?php echo date("Ymd\\THi00\\Z",strtotime($action_outstanding->planned_at));?>&details=<?php echo $contact_details_for_calendar;?><?php echo urlencode('http://baselist.herokuapp.com/companies/company?id='.$action_outstanding->company_id);?>%0D%0DAny changes made to this event are not updated in Baselist. %0D%23baselist"target="_blank" rel="nofollow" style="margin-top:0; font-size:10px;">Add to Calendar</a></small></span>
-<!--CANCELLED BUTTON-->
-<?php $hidden = array('action_id' => $action_outstanding->action_id , 'user_id' => $current_user['id'] , 'action_do' => 'cancelled','outcome' => '' ,'company_id' => $company['id'],'campaign_id' => $campaign_id, ); echo form_open(site_url().'actions/edit', 'name="cancel_action"  class="cancel_action pull-right" style="margin-left:5px;" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action_outstanding->action_id.'" role="form"',$hidden); ?><button class="btn btn-danger btn-sm"><i class="fa fa-trash-o fa-sm"></i> </button>
-<?php echo form_close(); ?>
-
-
-<!--COMPLETED BUTTON-->
-<?php $hidden = array('action_id' => $action_outstanding->action_id, 'user_id' => $current_user['id'], 'action_do' => 'completed', 'outcome' => '' ,'company_id' => $company['id'],'campaign_id' => $campaign_id,); echo form_open(site_url().'actions/edit', 'name="completed_action"  class="completed_action pull-right" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action_outstanding->action_id.'" style="display:inline-block;" role="form"',$hidden); ?>
-<button class="btn btn-success btn-sm"><i class="fa fa-check fa-sm"></i> </button><?php echo form_close(); ?>
-<?php elseif($action_outstanding->actioned_at): ?>
-<span class="label label-success pull-right" style="font-size:10px; margin-left:10px;">Completed on <?php echo $action_outstandinged_date_formatted ?></span><?php endif; ?>
-
-                            
-                            </div>
-									  			
-				                              
-				                           
-							<div class="col-xs-12">
-											<div id="collapse<?php echo $action_outstanding->action_id ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<?php echo $action_outstanding->action_id ?>">
-											<?php if (!empty($action_outstanding->comments)):?>
-											<div class="comment-text speech" >
-											<div class="triangle-isosceles top">
-											<?php echo $action_outstanding->comments ?>
-											<?php if (!empty($action_outstanding->outcome)):?>
-											<table style="width:100%">
-											<tr>
-											<td style="width:35%"><hr/></td>
-											<td style="width:20%;vertical-align:middle; text-align: center; font-size:10px; color: #222;"> Outcome </td>
-											<td style="width:35%"><hr/></td>
-											</tr>
-											</table>
-											<?php echo $action_outstanding->outcome ?>
-											<?php endif; ?>
-											</div>
-											</div>
-											<?php endif; ?>
-											</div>
-											
-											<div id="action_outcome_box_<?php echo $action_outstanding->action_id ?>" style="display:none;">
-											<hr>
-										
-											<textarea class="form-control" name="outcome" placeholder="Add action outcome" rows="3" style="margin-bottom:5px;"></textarea>
-											<button class="btn btn-primary btn-block">Add Outcome</button>
-
-											</div>
-											</div><!--END ACTIONS-->   
-				                        </div><!--END ROW-->
-				                </li>
-				                <?php endforeach ?>
-				                </ul>
-							<?php else: ?>
-								<div class="col-md-12">
-									<h4 style="margin: 50px 0 40px 0; text-align: center;">No Outstanding Actions</h4>
-								</div>
-							<?php endif; ?>
-				            </div>    
-
-
-        <!-- COMPLETED -->
-				<div class="tab-pane fade in" id="completed">
-				   	<?php if (count($actions_completed) > 0): ?>
-						<ul class="list-group">
-								<?php foreach ($actions_completed as $action_completed): 
-								 $created_date_formatted = date("l jS F y",strtotime($action_completed->created_at))." @ ".date("H:i",strtotime($action_completed->created_at));
-								 $actioned_date_formatted = date("l jS F y",strtotime($action_completed->actioned_at))." @ ".date("H:i",strtotime($action_completed->actioned_at));
-								 $now = date(time());
-								?>
-				
-						<?php if ($action_completed->action_type_id == 19): ?>
-									<?php $arr = explode(' ',trim($action_completed->comments));$pipeline_updated = $arr[3];?><li class="list-group-item pipeline-update <?php echo $pipeline_updated;?>"><?php echo $action_completed->comments ?>
-				                                on <?php echo date("l jS F y",strtotime($action_completed->created_at))." @ ".date("H:i",strtotime($action_completed->created_at)); ?></li>
-									<?php else: ?>
-						<li class="list-group-item">
-							<div class="row" style="padding: 15px 0">
-								<div class="col-md-12 ">
-									<div class="col-xs-2 col-md-1 profile-heading">
-										<span>
-										<?php $user_icon = explode(",", ($action_completed->image)); echo "<div class='circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
-										</span>
-									</div>
-							<div class="col-xs-6 col-md-5">
-								<h4 style="margin:0;">
-									<a data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $action_completed->id ?>" aria-expanded="false" aria-controls="collapse<?php echo $action_completed->id ?>">
-									<?php echo $action_types_array[$action_completed->action_type_id]; ?>
-                                       
-                                      <?php if($action_completed->action_type_id == 16){echo  ' ' . ($company['initial_rate']*100) .'%';} ?>
-                                    </a>
-								<div class="mic-info">
-								Created By: <?php echo $action_completed->name;?> on <?php echo $created_date_formatted?>
-											</div>
-											</h4>
-											</div><!--END COL-MD-5-->
-											<div class="col-xs-4 col-md-6" style="text-align:right;">
-											<!--SHOW CONTACT NAME-->
-											<?php if($action_completed->contact_id):?><span class="label label-primary" style="font-size:10px; margin-left:10px;  "><?php echo $action_completed->first_name.' '.$action_completed->last_name; ?></span>
-                                                
-                                                
-                                                
-                                                
-											<?php endif; ?>
-											<span class="label label-success" style="font-size:10px; margin-left:10px;">Completed on <?php echo date("l jS F y",strtotime($action_completed->actioned_at))." @ ".date("H:i",strtotime($action_completed->actioned_at)); ?></span>
-                                                
-                                                <span class="label label-info addActionToCallback" data-action="<?php echo $action_completed->id ?>" style="font-size:10px; margin-left:10px;">Add Action</span>
-                                               </div>
-											<div class="col-md-12">
-											<div id="collapse<?php echo $action_completed->id ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<?php echo $action_completed->id ?>">
-											<?php if (!empty($action_completed->comments)):?>
-											<div class="comment-text speech" >
-											<div class="triangle-isosceles top">
-											<?php echo nl2br($action_completed->comments) ?>
-											<?php if (!empty($action_completed->outcome)):?>
-											<hr>
-											<?php echo $action_completed->outcome ?>
-											<?php endif; ?>
-											</div>
-											</div>
-											<?php endif; ?>
-											</div>
-											<div id="action_outcome_box_<?php echo $action_completed->id ?>" style="display:none;">
-											<hr>
-											<textarea class="form-control" name="outcome" placeholder="Add action outcome" rows="3" style="margin-bottom:5px;"></textarea>
-											<button class="btn btn-primary btn-block"><i class="fa fa-check fa-sm"></i> Send</button>
-
-											</div>
-											</div><!--END ACTIONS-->   
-				                        </div>
-				                        </div>
-				                </li>
-				            <?php endif; ?><!--END LOOP IF STATEMENT RE. PIPELINE UPDATES-->
-
-				                <?php endforeach ?>
-
-				                </ul>
-							<?php else: ?>
-								<div class="col-md-12">
-									<h4 style="margin: 50px 0 40px 0; text-align: center;">No completed actions found for this company</h4>
-								</div>
-							<?php endif; ?>
-				            </div>
-				            								<!-- CANCELLED -->
-
-				            <div class="tab-pane fade in" id="cancelled">
-						<?php if (count($actions_cancelled) > 0): ?>
-								<ul class="list-group">
-								<?php foreach ($actions_cancelled as $action_cancelled): 
-								 $created_date_formatted = date("l jS F y",strtotime($action_cancelled->created_at))." @ ".date("H:i",strtotime($action_cancelled->created_at));
-								 $cancelled_at_formatted = date(" jS F y",strtotime($action_cancelled->cancelled_at))." @ ".date("H:i",strtotime($action_cancelled->cancelled_at));
-								?>
-				                <li class="list-group-item">
-					<div class="row" style="padding: 15px 0">
-						<div class="col-md-12 ">
-							<div class="col-xs-2 col-md-1 profile-heading">
-								<span>
-										<?php $user_icon = explode(",", ($action_cancelled->image)); echo "<div class='circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
-										</span>
-							</div>
-							<div class="col-xs-6 col-md-5">
-								<h4 style="margin:0;">
-									<a data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $action_cancelled->id ?>" aria-expanded="false" aria-controls="collapse<?php echo $action_cancelled->id ?>">
-									<?php echo $action_types_array[$action_cancelled->action_type_id]; ?>
-                                    </a>
-								<div class="mic-info">
-								Created By: <?php echo $system_users[$action_cancelled->user_id]?> on <?php echo $created_date_formatted?>
-											</div>
-											</h4>
-											</div><!--END COL-MD-6-->
-											<div class="col-xs-4 col-md-6" style="text-align:right;">
-											<!--SHOW CONTACT NAME-->
-											<?php if($action_cancelled->contact_id):?><span class="label label-primary" style="font-size:10px; margin-left:10px;"><?php echo $option_contacts[$action_cancelled->contact_id]; ?></span>
-											<?php endif; ?>
-											<span class="label label-danger" style="font-size:10px; margin-left:10px;">Cancelled on <?php echo $cancelled_at_formatted ?></span>
-											</div>
-											<div class="col-md-12">
-											<div id="collapse<?php echo $action_cancelled->id ?>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<?php echo $action_cancelled->id ?>">
-											<?php if (!empty($action_cancelled->comments)):?>
-											<div class="comment-text speech" >
-											<div class="triangle-isosceles top">
-											<?php echo $action_cancelled->comments ?>
-											<?php if (!empty($action_cancelled->outcome)):?>
-											<table style="width:100%">
-											<tr>
-											<td style="width:35%"><hr/></td>
-											<td style="width:20%;vertical-align:middle; text-align: center; font-size:10px; color: #222;"> Outcome </td>
-											<td style="width:35%"><hr/></td>
-											</tr>
-											</table>
-											<?php echo $action_cancelled->outcome ?>
-											<?php endif; ?>
-											</div>
-											</div>
-											<?php endif; ?>
-											</div>
-											
-											<div id="action_outcome_box_<?php echo $action_cancelled->id ?>" style="display:none;">
-											<hr>
-											<textarea class="form-control" name="outcome" placeholder="Add action outcome" rows="3" style="margin-bottom:5px;"></textarea>
-											<button class="btn btn-primary btn-block"><i class="fa fa-check fa-sm"></i> Send</button>
-
-											</div>
-											</div><!--END ACTIONS-->   
-				                        </div>
-				                        </div>
-				                </li>
-				                <?php endforeach ?>
-				                </ul>
-							<?php else: ?>
-								<div class="col-md-12">
-									<h4 style="margin: 50px 0 40px 0; text-align: center;">No completed actions found for this company</h4>
-								</div>
-							<?php endif; ?>
-				            </div>
-
-				            <!--ALL ACTIONS -->
-
-				<div class="tab-pane fade in" id="all">
-				<?php if (count($get_actions) > 0): ?>
-					<ul class="list-group">
-					<?php foreach ($get_actions as $get_action):?>
-						<?php if ($get_action->action_type_id == 19): ?>
-									<?php $arr = explode(' ',trim($get_action->comments));$pipeline_updated = $arr[3];?><li class="list-group-item pipeline-update <?php echo $pipeline_updated;?>"><?php echo $get_action->comments ?>
-				                                on <?php echo date("l jS F y",strtotime($get_action->actioned_at))." @ ".date("H:i",strtotime($get_action->actioned_at)); ?></li>
-									<?php else: ?>
-
-					<li class="list-group-item">
-					<div class="row" style="padding: 15px 0">
-						<div class="col-md-12 ">
-							<div class="col-xs-2 col-md-1 profile-heading">
-								<span>
-									<?php $user_icon = explode(",", ($get_action->image)); echo "<div class='circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
-								</span>
-							</div>
-							<div class="col-xs-6 col-md-5">
-								<h4 style="margin:0;"><?php if ($get_action->action_type_id <> 20): ?><a data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $get_action->id ?>all" aria-expanded="false" aria-controls="collapse<?php echo $get_action->id ?>all"><?php echo $get_action->campaign_name; ?></a>
-                                    <?php else: ?>
-                                    	<div style="margin-right: 10px;margin-top: -15px;font-size: 10px;float: left;"><span class="label label-default">Marketing</span></div>
-                                    	<?php echo $get_action->campaign_name; ?>
-                                    <?php endif; ?>
-
-								<div class="mic-info">
-								Created By: <?php echo $get_action->name?> on <?php echo date('l jS F y',strtotime($get_action->created_at));?>
-											</div>
-											</h4>
-											</div><!--END COL-MD-6-->
-											<div class="col-xs-4 col-md-6" style="text-align:right;">
-											<!--SHOW CONTACT NAME-->
-											<?php if($get_action->contact_id):?><span class="label label-primary" style="font-size:10px; margin-left:10px;  "><?php echo $get_action->first_name.' '.$get_action->last_name; ?></span>
-											<?php endif; ?>
-											</div>
-											<div class="col-md-12">
-											<div id="collapse<?php echo $get_action->id   ?>all" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<?php echo $get_action->id ?>">
-											<?php if (!empty($get_action->comments)):?>
-											<div class="comment-text speech" >
-											<div class="triangle-isosceles top">
-											<?php echo $get_action->comments ?>
-											<?php if (!empty($action_cancelled->outcome)):?>
-											<table style="width:100%">
-											<tr>
-											<td style="width:35%"><hr/></td>
-											<td style="width:20%;vertical-align:middle; text-align: center; font-size:10px; color: #222;"> Outcome </td>
-											<td style="width:35%"><hr/></td>
-											</tr>
-											</table>
-											<?php echo $action_cancelled->outcome ?>
-											<?php endif; ?>
-											</div>
-											</div>
-											<?php endif; ?>
-											</div>
-											
-											<div id="action_outcome_box_<?php echo $get_action->id ?>" style="display:none;">
-											<hr>
-											
-
-											</div>
-											</div><!--END ACTIONS-->   
-				                        </div>
-				                        </div>
-				                </li>
-								<?php endif; ?><!--END LOOP IF STATEMENT RE. PIPELINE UPDATES-->
-
-				                <?php endforeach ?>
-				                </ul>
-							<?php else: ?>
-								<div class="col-md-12">
-									<h4 style="margin: 50px 0 40px 0; text-align: center;">No completed actions found for this company</h4>
-								</div>
-							<?php endif; ?>
-				            </div>
-
-				            <!--ALL ACTIONS-->
-
-				            
-
-
-<!-- MARKETING -->
-<div class="tab-pane fade in" id="marketing">
-    <ul class="list-group statAction">
-        <?php if (count($actions_marketing) > 0): ?>
-           
-            <?php else: ?>
-            <div class="col-md-12 actionMsg">
-            <h4 style="margin: 50px 0 40px 0; text-align: center;">No completed actions found for this company</h4>
-            </div>
-        <?php endif; ?>
-    </ul>
-</div>
-<div class="tab-pane fade in" id="comments">
-<div class="col-md-12">
-
-
-
-<?php if (count($comments) > 0): ?>
-<ul class="list-group">
-<?php foreach ($comments as $comment):
-
-?>
-<li class="list-group-item">
-<div class="row">
-<div class="col-xs-10 col-md-11">
-<div>
-    <div class="mic-info">
-        By: <?php echo $system_users[$comment->user_id]?> on <?php echo date("j M Y",strtotime($comment->created_at));?>
-    </div>
-</div>
-<div class="comment-text" style="margin-top:10px;">
-    <?php echo $comment->comments; ?>
-</div>
-
-</div>
-</div>
-</li>
-<?php endforeach ?>
-</ul>
-<?php else: ?>
-
-<div style="margin:10px 0;">
-<h4 style="margin: 50px 0 40px 0; text-align: center;">No Comments</h4>
-</div>
-<?php endif; ?>
-</div>
-<?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'],'done'=>'1','campaign_id' => $campaign_id,);
-echo form_open(site_url().'actions/create', 'name="create" class="" role=""',$hidden); ?>
-<input type="hidden" name="action_type_completed" value="7">
-<div class="col-md-10">					
-<input id="btn-input" type="text" class="form-control input-md" name="comment" placeholder="Type your comment here...">
-</div>
-<div class="col-md-2">	
-<button class="btn btn-primary btn-md btn-block" id="btn-chat">
-	                            Comment
-	                        </button>
-	                    </div>
-			            </form>
-				            </div>
-				        </div>
-				        <!-- End Tab Content -->
-				    </div>
-				</div>
-			<!--END TABS-->
-		  	</div>
-		</div>  
-
-    <!-- /.panel -->
-    
-  </div>
+			
         
 	</div>
 </div><!--CLOSE ROW-->
@@ -1296,23 +845,6 @@ echo form_open(site_url().'actions/create', 'name="create" class="" role=""',$hi
 			<div class="panel-body">
 
 				<div class="row">
-                    <!--  <div class="col-sm-1 col-md-1 ">
-                       
-                          <a href="#" class="btn btn-default btn-circle"><i class="fa fa-user"></i></a><br><br>
-                          <a href="#" class="btn btn-default btn-circle"><i class="fa fa-user"></i></a><br><br>
-                         <a href="#" class="btn btn-default btn-circle"><i class="fa fa-user"></i></a><br><br>
-                          <a href="#" class="btn btn-default btn-circle"><i class="fa fa-user"></i></a>
-                         
-                         
-                  actions_completed
-actions_outstanding
-
-actions_cancelled
-
-actions_marketing
-
-Comment
-                    </div>-->
                     
                     <div class="col-md-1" id="leftCol">
               
@@ -1321,29 +853,16 @@ Comment
                     
                     <li class="active activeMenu"><a href="javascript:;" class="btn btn-default btn-circle actionAll hint--top-right"  data-hint="All" data="All"><span class="glyphicon glyphicon-dashboard" aria-hidden="true"></a><span class="actionMenuQty qtyAll" aria-hidden="true"></span></li>
                     
+                     <li class="" ><a href="javascript:;" class="btn btn-default btn-circle hint--top-right"  data-hint="Outstanding" data="actions_outstanding"><span class="glyphicon glyphicon-time" aria-hidden="true"></span></a><span class="actionMenuQty qtyactions_outstanding" aria-hidden="true"></span></li>    
+                        
                      <li class="" ><a href="javascript:;" class="btn btn-default btn-circle hint--top-right" data-hint="Completed" data="actions_completed"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></a><span class="actionMenuQty qtyactions_completed" aria-hidden="true"></span></li>
                     
-                    <li class="" ><a href="javascript:;" class="btn btn-default btn-circle hint--top-right"  data-hint="Outstanding" data="actions_outstanding"><span class="glyphicon glyphicon-time" aria-hidden="true"></span></a><span class="actionMenuQty qtyactions_outstanding" aria-hidden="true"></span></li>
+                        <li class="" ><a href="javascript:;" class="btn btn-default btn-circle hint--top-right" data-hint="Marketing" data="actions_marketing"><span class="glyphicon glyphicon-envelope
+                        " aria-hidden="true"></span></a><span class="actionMenuQty qtyactions_marketing" aria-hidden="true"></span></li>
+                   
                     
                     <li class=""><a href="javascript:;" class="btn btn-default btn-circle hint--top-right"  data-hint="Cancelled" data="actions_cancelled"><span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span></a><span class="actionMenuQty qtyactions_cancelled" aria-hidden="true"></span></li>
-                    
-                    <li class="" ><a href="javascript:;" class="btn btn-default btn-circle hint--top-right" data-hint="Marketing" data="actions_marketing"><span class="glyphicon glyphicon-envelope
-                        " aria-hidden="true"></span></a><span class="actionMenuQty qtyactions_marketing" aria-hidden="true"></span></li>
-<!--
-        
-hint--bottom-right
 
-
-<li class="active"><a href="javascript:;" class="btn btn-default btn-circle" data="Callback"><i class="fa fa-user"></i></a></li>
-
-        <li class=""><a href="javascript:;" class="btn btn-default btn-circle" data="Deal"><i class="fa fa-user"></i></a></li>
-        <li class=""><a href="javascript:;" class="btn btn-default btn-circle" data="AttemptedCall"><i class="fa fa-user"></i></a></li>
-      <li class="active"><a href="javascript:;" class="btn btn-default btn-circle" data="Call"><i class="fa fa-user"></i></a></li>
-
-      <li class=""><a href="javascript:;" class="btn btn-default btn-circle" data="Email"><i class="fa fa-user"></i></a></li>
-      <li class=""><a href="javascript:;" class="btn btn-default btn-circle" data="Demo"><i class="fa fa-user"></i></a></li>
-
--->
                     <li class="" ><a href="javascript:;" class="btn btn-default btn-circle comment hint--top-right" data-hint="Comments" data="Comment"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a><span class="actionMenuQty qtyComment" aria-hidden="true"><span>1000</span></span></li>
                
               	</ul>
@@ -1415,6 +934,8 @@ hint--bottom-right
                     <div class="timeline_inner"></div>
 
                     </div>
+                        
+                        <div class="row"><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><p class="noactionmsg">No Actions</p></div></div>
 
                 </div>
        
@@ -1444,8 +965,6 @@ $body.scrollspy({
 	offset: navHeight
 });
     
-</script>
-<script>
  function show() {
             var offset = $(".child").offset();
             var posY = offset.top - $(window).scrollTop();
@@ -1462,8 +981,6 @@ $body.scrollspy({
  $('.sticky').removeClass('affix');
         }
 }
-
- 
 
 </script>
  
