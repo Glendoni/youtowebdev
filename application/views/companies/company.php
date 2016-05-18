@@ -615,89 +615,9 @@ if ($your_date < $now){; ?>
             </div>
          
         </div>
-    <!--<div class="col-sm-6">  
-        <div id="" class="tagContainer"> 
-            <ul class="list-group sub">
-            </ul>
-        </div>
-    </div>-->
  
 </div>
-<!--<div role="tabpanel" class="tab-pane" id="cat2">
-    <div class="col-sm-5">  
-        <div id="" class="tagContainer"> 
-            <ul class="list-group main">
-            </ul>
-        </div>
-    </div>
-    <div class="col-sm-5">  
-        <div id="" class="tagContainer"> 
-            <ul class="list-group sub">
-            </ul>
-        </div>
-    </div>
-   
-</div>
-<div role="tabpanel" class="tab-pane" id="cat3">
-    <div class="col-lg-6">  
-        <div id="" class="tagContainer"> 
-            <ul class="list-group main">
-            </ul>
-        </div>
-    </div>
-    <div class="col-lg-5">  
-        <div id="" class="tagContainer"> 
-            <ul class="list-group sub">
-            </ul>
-        </div>
-    </div>
-    
-</div>
-<div role="tabpanel" class="tab-pane" id="cat4">
-    <div class="col-lg-6">  
-        <div id="" class="tagContainer"> 
-            <ul class="list-group main">
-            </ul>
-        </div>
-    </div>
-    <div class="col-lg-5">  
-        <div id="" class="tagContainer"> 
-            <ul class="list-group sub">
-            </ul>
-        </div>
-    </div>
-    
-</div>
-<div role="tabpanel" class="tab-pane" id="cat5">
-    <div class="col-lg-6">  
-        <div id="" class="tagContainer"> 
-            <ul class="list-group main">
-            </ul>
-        </div>
-    </div>
-    <div class="col-lg-5">  
-        <div id="" class="tagContainer"> 
-            <ul class="list-group sub">
-            </ul>
-        </div>
-    </div>
-   
-</div>
-<div role="tabpanel" class="tab-pane" id="cat6">
-    <div class="col-lg-6">  
-        <div id="" class="tagContainer"> 
-            <ul class="list-group main">
-            </ul>
-        </div>
-    </div>
-    <div class="col-lg-5">  
-        <div id="" class="tagContainer"> 
-            <ul class="list-group sub">
-            </ul>
-        </div>
-    </div>
-   
-</div>-->
+
 </div>
              </div>    
 </div>   
@@ -819,15 +739,9 @@ if ($your_date < $now){; ?>
         
 			
         
-	</div>
-</div><!--CLOSE ROW-->
+
+
     
-    <style>
-
-
-</style>
-  
-
 
  <div class="row" id="parent">
 <div class="col-md-12 child" id="stickMenu" >
@@ -850,7 +764,7 @@ if ($your_date < $now){; ?>
                     
                     <li class="active activeMenu"><a href="javascript:;" class="btn btn-default btn-circle actionAll hint--top-right"  data-hint="All" data="All"><span class="glyphicon glyphicon-dashboard" aria-hidden="true"></a><span class="actionMenuQty qtyAll" aria-hidden="true"></span></li>
                     
-                     <li class="" ><a href="javascript:;" class="btn btn-default btn-circle hint--top-right"  data-hint="Outstanding" data="actions_outstanding"><span class="glyphicon glyphicon-time" aria-hidden="true"></span></a><span class="actionMenuQty qtyactions_outstanding" aria-hidden="true"></span></li>    
+                     <li class="" ><a href="javascript:;" class="btn btn-default btn-circle hint--top-right"  data-hint="Scheduled" data="actions_outstanding"><span class="glyphicon glyphicon-time" aria-hidden="true"></span></a><span class="actionMenuQty qtyactions_outstanding" aria-hidden="true"></span></li>    
                         
                      <li class="" ><a href="javascript:;" class="btn btn-default btn-circle hint--top-right" data-hint="Completed" data="actions_completed"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></a><span class="actionMenuQty qtyactions_completed" aria-hidden="true"></span></li>
                     
@@ -860,7 +774,7 @@ if ($your_date < $now){; ?>
                     
                     <li class=""><a href="javascript:;" class="btn btn-default btn-circle hint--top-right"  data-hint="Cancelled" data="actions_cancelled"><span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span></a><span class="actionMenuQty qtyactions_cancelled" aria-hidden="true"></span></li>
 
-                    <li class="" ><a href="javascript:;" class="btn btn-default btn-circle comment hint--top-right" data-hint="Comments" data="Comment"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a><span class="actionMenuQty qtyComment" aria-hidden="true"><span>1000</span></span></li>
+                  
                
               	</ul>
               
@@ -893,7 +807,7 @@ if ($your_date < $now){; ?>
                     <div class="timeline-header">
     				<div class="timeline-header-title bg-dark actiontitle"  style="margin-top:10px;">History</div>
                         <div class="timeline-header-title bg-dark showCommentAddBtn hint--top-right"  data-hint="Add Comment" style="float:right; margin-left:11px; margin-top:10px;">  <span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span></div>
-                        <div class="timeline-header-title bg-dark showText" style="float:right;  margin-top:10px;">Text</div>
+                        <div class="timeline-header-title bg-dark showText" style="float:right;  margin-top:10px;">Hide/Text</div>
                          
     			</div>
                 
@@ -942,7 +856,8 @@ if ($your_date < $now){; ?>
     </div>
      </div>
 </div>
-
+        	</div>
+</div><!--CLOSE ROW-->
     <?php //hide core page END ?>
        <?php endif; ?>
  </div>
