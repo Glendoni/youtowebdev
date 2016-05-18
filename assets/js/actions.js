@@ -82,8 +82,8 @@ function getActionData(scope = false){ //get all actions in multidimentional jso
                 bindPillerTitles();
                 removeOutsandingAction();
                 mainMenuQty()
-                $('.follow-up-date').datepicker();
-
+                //$('.follow-up-date').datepicker();
+$('.actiondate').datetimepicker();
                 $('.form .actionContact').clone().prependTo('.actionForm');
 
                 //bindfollowUpInfoBtn(); 
@@ -506,16 +506,34 @@ $('.qtyactions_outstanding').css({'background': '#d9534f','color': '#ffffff', 'f
 
 }
  
-        if(parseInt($(".qtyAll").text()) == 0){
-
-$('#sidebar').hide();
-            $('.timeline').hide();
-
-}
+   intefaceVisibility();
         
 
     } 
      
+
+function intefaceVisibility(){
+    
+         if(parseInt($(".qtyAll").text()) == 0){
+
+$('#sidebar').hide();
+ $('.timeline').hide();
+             $('.noactionmsg').show();
+
+}else{
+ $('#sidebar').show();
+ $('.timeline').show(); 
+     $('.noactionmsg').hide();
+    
+    
+}
+    
+    
+}
+
+
+
+
      function stickMenu(){
       
             $('.sticky li a').click(function(){
@@ -630,33 +648,58 @@ $('#sidebar').hide();
             console.log(actionType)
          var icon;
               switch (actionType){
-                    case 'Email':
-                       // console.info('actions-- '+actionType + action['image']);
+                      
+                      
+                    case 'Attempted Call':
+                        icon = '<div class="timeline-icon bg-success"><i class="fa fa-thumbs-up fa-lg"></i></div>';
+                    break;
+                       case 'Callback':case 'Call':case 'Called Us':
+                         icon = '<div class="timeline-icon label-info "style="color: white;"><i class="fa fa-phone fa-lg"></i></div>';
+                    break;
+                    case 'Campaign - Lack of Info':
                            icon = '<div class="timeline-icon bg-info"><i class="fa fa-envelope fa-lg"></i></div>';
                     break;
-                    case 'Callback':case 'Call':
-                         icon = '<div class="timeline-icon label-info "style="color: white;"><i class="fa fa-phone fa-lg"></i></div>';
-                    
-                    break;
-                    case 'Pipeline Update':
-                    break;
-                      case 'Comment':
-                      
-                      icon = '<div class="timeline-icon bg-success"><i class="fa fa-comment fa-lg"></i></div>'  ;
-                    break;
-                    case 'actions_cancelled':
-                    break;
-                    case 'comments':
-                        icon = '<div class="timeline-icon label-info "style="color: white;"><i class="fa fa-phone fa-lg"></i></div>';
+                    case 'Check-In Call':
+                        icon = '<div class="timeline-icon bg-info"><i class="fa fa-envelope fa-lg"></i></div>';
                     break;
                     case 'Deal':
-                        icon = '<div class="timeline-icon bg-success"><i class="fa fa-thumbs-up fa-lg"></i></div>'  ;
+                        icon = '<div class="timeline-icon bg-success"><i class="fa fa-thumbs-up fa-lg"></i></div>';
                     break;
-                      case 'Called Us':
-                        icon = '<div class="timeline-icon bg-success"><i class="fa fa-thumbs-up fa-lg"></i></div>'  ;
+                    case 'Demo':
+                        icon = '<div class="timeline-icon bg-success"><i class="fa fa-thumbs-up fa-lg"></i></div>';
                     break;
-                  case 'Web Form - Demo Requested':
-                        icon = '<div class="timeline-icon bg-success"><i class="fa fa-thumbs-up fa-lg"></i></div>'  ;
+                    case 'Email':
+                        icon = '<div class="timeline-icon bg-info"><i class="fa fa-envelope fa-lg"></i></div>';
+                    break;
+                    case 'InMail':
+                        icon = '<div class="timeline-icon bg-info"><i class="fa fa-envelope fa-lg"></i></div>';
+                    break;
+                       case 'Intro Call':
+                        icon = '<div class="timeline-icon bg-success"><i class="fa fa-thumbs-up fa-lg"></i></div>';
+                    break;
+                    case 'Meeting':
+                        icon = '<div class="timeline-icon bg-success"><i class="fa fa-thumbs-up fa-lg"></i></div>';
+                    break;
+                    case 'Met at Event':
+                        icon = '<div class="timeline-icon bg-success"><i class="fa fa-thumbs-up fa-lg"></i></div>';
+                    break;
+                      case 'Proposal Sent':
+                        icon = '<div class="timeline-icon bg-success"><i class="fa fa-thumbs-up fa-lg"></i></div>';
+                    break;
+                    case 'Quote Requested':
+                        icon = '<div class="timeline-icon bg-success"><i class="fa fa-thumbs-up fa-lg"></i></div>';
+                    break;
+                    case 'Sales Ledger Due Diligence':
+                        icon = '<div class="timeline-icon bg-success"><i class="fa fa-thumbs-up fa-lg"></i></div>';
+                    break;
+                    case 'Comment':
+                        icon = '<div class="timeline-icon bg-success"><i class="fa fa-comment fa-lg"></i></div>';
+                    break;
+                    case 'Web Form - Demo Requested':
+                        icon = '<div class="timeline-icon bg-success"><i class="fa fa-thumbs-up fa-lg"></i></div>';
+                    break;
+                      case 'Web Form - Call Me Requested':
+                        icon = '<div class="timeline-icon bg-success"><i class="fa fa-thumbs-up fa-lg"></i></div>';
                     break;
                     default: 
                         icon = '<div class="timeline-icon bg-info"><i class="fa fa-envelope fa-lg"></i></div>';
@@ -913,7 +956,7 @@ $('#sidebar').hide();
                                             '<input type="hidden" name="sector_check" value="'+sector_check+'" >'+  
                                         '<div class="form-group form-inline actionForm">'+
                                         '<input type="hidden" name="action_type_planned" value="11" >'+
-                                            '<input type="text" class="form-control follow-up-date planned_at" data-date-format="YYYY/MM/DD H:m" name="planned_at" placeholder="Follow Up Date">'+
+                                            '<input type="text" class="form-control actiondate" data-date-format="YYYY/MM/DD H:m" name="planned_at" placeholder="Follow Up Date">'+
                                         '</div>'+
                                         '<div class="form-group">'+
                                             ' <textarea class="form-control box'+action['action_id']+'" name="comment" placeholder="Add outcome"  rows="3" required="required"></textarea>'+
