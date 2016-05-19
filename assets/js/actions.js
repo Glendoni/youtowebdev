@@ -449,7 +449,7 @@ function getemailengagement(){
                         $( '<li class="list-group-item"><div class="row"><div class="col-xs-6 col-md-7"><h4 style="margin:0;">'+val.campaign_name+'<div class="mic-info">'+val.date+ ' by '+val.email+
                         '</div></h4></div><!--END COL-MD-4--><div class="col-xs-6 col-md-5" style="text-align:right;"><span class="label label-primary" style="font-size:11px;  ">'+val.first_name+ ' '+ val.last_name+
                         '</span> '+action+' </div></div></li>' ).prependTo('#marketing_action ul'); */
-                $('.timeline_inner').append('<div class="timeline-entry   actionIdactions_marketing" style="dislay:none;"> <div class="timeline-stat"> <div class="timeline-icon label-danger " style="color: white;"><i class="fa fa-comment fa-lg"></i></div><div class="timeline-time ">'+val.date+  ' </div></div><div class="timeline-label"> <div class="mar-no pad-btm"><h4 class="mar-no pad-btm"><a href="javascript:;" class="text-danger"> '+val.campaign_name+' <span class"eeprefix">(Outbound Marketing)</span> </a>   </h4>'+'<span class="label label-warning">'+val.date+'</span></div><div style="float:right; margin-top:-4px; margin-left:3px;">'+action+'</div>'+contactName+'<div class="actionMsgText"><span class="actionMsg commentsComment">what a laugh</span><hr></div><div> <div class="mic-info"> by '+val.email+'</div></div></div>')
+                $('.timeline_inner').append('<div class="timeline-entry   actionIdactions_marketing" style="dislay:none;"> <div class="timeline-stat"> <div class="timeline-icon label-primary " style="color: white;"><i class="fa fa-envelope-o fa-lg"></i></div><div class="timeline-time ">'+val.date+  ' </div></div><div class="timeline-label"> <div class="mar-no pad-btm"><h4 class="mar-no pad-btm"><a href="javascript:;" class="text-danger"> '+val.campaign_name+' <span class"eeprefix">(Inbound Marketing)</span> </a>   </h4>'+'<span class="label label-warning">'+val.date+'</span></div><div style="float:right; margin-top:-4px; margin-left:3px;">'+action+'</div>'+contactName+'<div class="actionMsgText"><span class="actionMsg commentsComment">what a laugh</span><hr></div><div> <div class="mic-info"> by '+val.email+'</div></div></div>')
                     }
                 }
                     //$('#sidebar').hide();
@@ -632,7 +632,7 @@ $('#sidebar').hide();
                         icon = '<div class="timeline-icon bg-success"><i class="fa fa-thumbs-up fa-lg"></i></div>';
                     break;
                        case 'Callback':case 'Call':case 'Called Us':
-                         icon = '<div class="timeline-icon label-info "style="color: white;"><i class="fa fa-phone fa-lg"></i></div>';
+                         icon = '<div class="timeline-icon label-info "style="color: white;"><i class="fa fa-phone"></i></div>';
                     break;
                     case 'Campaign - Lack of Info':
                            icon = '<div class="timeline-icon bg-info"><i class="fa fa-envelope fa-lg"></i></div>';
@@ -806,13 +806,16 @@ $('#sidebar').hide();
         // if(actionType == 'actions_outstanding') alert()
          
          
-            if(kp == 'actions_outstanding'  ){
+            if(kp == 'actions_outstanding'  ){ //if outstanding
              
                 showOutstandingForm = 'showOutstandingForm';
+ icon = '<div class="timeline-icon label-danger "style="color: white;"><i class="fa fa-phone"></i></div>';
                 
             }
          
-         header = '<a href="javascript:;" class="text-danger '+showOutstandingForm+' pillerTitle" data-hint="'+actionType+'" data="'+actionId+'">'+(actionTypeOverwrite ? actionTypeOverwrite : actionType)+'  </a> ';
+        
+         
+         header = '<a href="javascript:;" class="text-danger '+showOutstandingForm+' pillerTitle" data-name="'+actionType+'" data="'+actionId+'">'+(actionTypeOverwrite ? actionTypeOverwrite : actionType)+'  </a> ';
          
         if( actions_cancelled == '' && typeof action['action_id'] != 'undefined' || actions_outstanding == true &&  actions_cancelled == '' && typeof action['action_id'] != 'undefined' ){ 
 
