@@ -261,7 +261,7 @@ if((/companies/.test(window.location.href))) {
     var param;
     var preventtagRemove;
     var para  = window.location.href.split("?id=");
-    var parent_tag_name;
+    var parent_tag_name = [];
  
     
    param =  checkUrlParam(para);
@@ -274,6 +274,7 @@ if((/companies/.test(window.location.href))) {
         success: function(data) {  
               $('.addedTag').remove();
              $.each( data, function( key, val) {
+        if(val['parent_tag_name'] != null){
               parent_tag_name =    val['parent_tag_name'].replace(' ', '');
                 if(parent_tag_name != 'Downloads'){
                     preventtagRemove = '<span class="tagRemove" data-tag="'+val['tag_id']+'">x</span>';  
@@ -283,7 +284,9 @@ if((/companies/.test(window.location.href))) {
            
                   $('.tafixed').show()
 
+        }
                 preventtagRemove = '';
+        
 
              })        
                       
