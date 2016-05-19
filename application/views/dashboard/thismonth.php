@@ -21,9 +21,6 @@
                             <div class="col-xs-2 col-md-2 text-center"> 
                             <span class="tm-salescall"><?php echo $thismonthstat['salescall'];?></span> / <span class="tm-introcall"><?php echo $thismonthstat['introcall'];?></span>
                             </div>
-                            <div class="col-md-1 hidden-xs text-center">
-                              <span class="tm-pipelinecount"><?php echo $thismonthstat['pipelinecount'];?></span>
-                            </div>
                             <div class="col-md-2 hidden-xs text-center">
                               <span class="tm-key_review_added"><?php echo $thismonthstat['key_review_added'];?></span> / <span class="tm-key_review_occuring"><?php echo $thismonthstat['key_review_occuring'];?></span>
                             </div>
