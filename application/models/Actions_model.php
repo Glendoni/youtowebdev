@@ -259,7 +259,45 @@ function get_recent_stats($period, $team_type)
     $dates = $this->dates($period);
     $start_date = $dates['start_date'];
     $end_date = $dates['end_date'];
-    $sql = "select U.name, U.id as user, U.image, U.active as active,
+    
+    
+    
+   $sql = "select U.name, 
+       U.id as user, 
+       U.image, 
+       U.active as active, 
+       sum(CASE when action_type_id in (4) and A.actioned_at between '$start_date' and '$end_date' then 1 else 0 END ) introcall, 
+       sum(CASE when action_type_id in (4,5,11,17) and A.actioned_at between '$start_date' and '$end_date' then 1 else 0 END) salescall, 
+       sum(CASE when action_type_id in (5,11) and A.actioned_at between '$start_date' and '$end_date' then 1 else 0 END) callcount, 
+       sum(CASE when action_type_id in (10,12) and A.actioned_at between '$start_date' and '$end_date' then 1 else 0 END) meetingcount, 
+       sum(CASE when action_type_id in (9,15) and A.actioned_at between '$start_date' and '$end_date' then 1  else 0 END) democount, 
+       sum(CASE when action_type_id in (9,15) and A.created_at between '$start_date' and '$end_date' then 1  else 0 END) demobookedcount, 
+       sum(CASE when action_type_id in (10,12) and A.created_at between '$start_date' and '$end_date' then 1  else 0 END) meetingbooked, 
+       sum(CASE when action_type_id in (16) and A.created_at between '$start_date' and '$end_date' then 1  else 0 END) deals, 
+       sum(CASE when action_type_id in (25) and A.created_at between '$start_date' and '$end_date' then 1  else 0 END) duediligence, 
+       sum(CASE when action_type_id in (22) and A.created_at between '$start_date' and '$end_date' then 1  else 0 END) key_review_added, 
+       sum(CASE when action_type_id in (22) and A.actioned_at between '$start_date' and '$end_date' then 1  else 0 END) key_review_occuring, 
+       sum(CASE when action_type_id in (8) and A.actioned_at between '$start_date' and '$end_date' then 1 else 0 END) proposals
+       
+from ACTIONS A
+
+JOIN COMPANIES C 
+on A.company_id = C.id 
+
+JOIN USERS U 
+on A.user_id = U.id
+
+where U.department = 'sales'
+and U.active = 't'
+and A.cancelled_at is null
+
+group by 1,2,3,4
+    
+order by deals desc nulls last, proposals desc";
+    
+    
+    
+    $sqlOld = "select U.name, U.id as user, U.image, U.active as active,
     sum(case when action_type_id = '4' AND actioned_at > '$start_date' AND actioned_at < '$end_date' then 1 else 0 end) introcall,
     sum(case when (action_type_id = '4' or action_type_id = '5' or action_type_id = '11' or action_type_id = '17')  AND actioned_at > '$start_date' AND actioned_at < '$end_date' then 1 else 0 end) salescall,
     sum(case when (action_type_id = '5' OR action_type_id = '11') AND actioned_at > '$start_date' AND actioned_at < '$end_date' then 1 else 0 end) callcount,
@@ -274,6 +312,9 @@ function get_recent_stats($period, $team_type)
     sum(case when (action_type_id = '8') AND a.created_at > '$start_date' AND a.created_at < '$end_date' then 1 else 0 end) proposals,
     Sum(case when action_type_id = '19' and a.id = 	(SELECT MAX(id) FROM actions z WHERE z.company_id = a.company_id and z.action_type_id = '19' order by a.actioned_at desc) AND (a.comments ilike '%intent%' or a.comments ilike '%qualified%') AND a.created_at > '$start_date' AND a.created_at < '$end_date' THEN 1 ELSE 0 END) AS pipelinecount
     from actions A INNER JOIN companies C on A.company_id = C.id INNER JOIN users U on A.user_id = U.id group by U.id,U.name,a.cancelled_at, u.department HAVING cancelled_at is null and u.department = 'sales' and (u.active = 't' or sum(case when (action_type_id = '16') AND a.created_at > '$start_date' AND a.created_at < '$end_date' then 1 else 0 end) >0) $team_type_sql order by deals desc,proposals desc,meetingbooked desc, introcall desc, name desc";
+    
+    
+    
     $query = $this->db->query($sql);
     if($query){
         return $query->result_array();
