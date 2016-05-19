@@ -76,6 +76,7 @@ function getActionData(scope = false){ //get all actions in multidimentional jso
                 //$('.follow-up-date').datepicker();
 $('.actiondate').datetimepicker();
                 $('.form .actionContact').clone().prependTo('.actionForm');
+                $('.form #action_type_planned').clone().prependTo('.formOutcome');
 
                 //bindfollowUpInfoBtn(); 
 
@@ -256,7 +257,7 @@ function bindAddCallBackToCompletedAction(){
     var followup = [];
     var contactDetails = [];
     var actionOutcome = [];
-    var overdueStatus = [];
+    var overdueStatus = []
     var cancellation = '';
         $.ajax({
           type: "POST",
@@ -369,7 +370,7 @@ function bindAddCallBackToCompletedAction(){
            // $('.textarea'+dat).toggle(false);
             } else {
            if ($(this).hasClass('showOutstandingForm')){
-                 $('.box'+dat).toggle(true);
+                 //$('.box'+dat).toggle(true);
            }
                 $('.piller'+dat).toggle(true);
             }
@@ -554,9 +555,7 @@ $('#sidebar').hide();
                              $('.pipeline').show();
                        }
                   if($('.qty'+showtext).text() != 0){
-// alert($('.qty'+showtext).text());
-                         
-               
+ 
            
                 if(action == 'Marketing'){
                             $('.showText').hide();
@@ -765,6 +764,7 @@ $('#sidebar').hide();
          var created_by  = [];
          var actionId = [];
          var showOutstandingForm = [];
+         var getUrlIdParam = GetUrlParamID();
          if(typeof action['name'] !== 'undefined'  && action['name'] !== null &&  action['name'] !== 'null'   ){
             created_by = action['name'];
          }else{
@@ -844,11 +844,15 @@ $('#sidebar').hide();
 
         if(action['action_id'])                                                                                                                                          
             textbox= '<div class="form-group callbackActionTextBox  box'+action['action_id']+'" style="display:none">'+
-                '<form action="Actions/addOutcome" class="outcomeform" data="'+action['action_id']+'" ><textarea class="form-control box'+action['action_id']+'  textarea'+action['action_id']+' " name="outcome" placeholder="Add outcome" rows="2" style="margin-bottom:5px;"></textarea>'+
-                '<input type="hidden" name="outcomeActionId" value="'+action['action_id']+'" /><input type="hidden" name="status" id="callBackActionStatus'+action['action_id']+'" value="" /> <input type="submit" class="btn btn-primary btn-block actionSubmit box'+action['action_id']+' submit'+action['action_id']+'" "  style="float:right;" value="Add Outcome"></form><br /></div>';
+                '<form action="Actions/addOutcome" class="outcomeform" data="'+action['action_id']+'" >'+
+                '<textarea class="form-control box'+action['action_id']+'  textarea'+action['action_id']+' " name="outcome" placeholder="Add outcome" rows="1" style="margin-bottom:5px;"></textarea>'+
+                '<label>Add Follow up Action</label><div class="form-group form-inline actionForm formOutcome">'+
+                                            '<input type="text" class="form-control actiondate" data-date-format="YYYY/MM/DD H:m" name="planned_at" required="required" placeholder="Follow Up Date">'+
+                                        '</div>'+
+                '<input type="hidden" name="outcomeActionId" value="'+action['action_id']+'" /><input type="hidden" name="company_id" value="'+getUrlIdParam+'" /> <input type="hidden" name="status" id="callBackActionStatus'+action['action_id']+'" value="" /> <input type="submit" class="btn btn-primary btn-block actionSubmit box'+action['action_id']+' submit'+action['action_id']+'" "  style="float:right;" value="Save"></form><br /></div>';
 
         //console.log('box_'+action['action_id'])
-        overdueStatus = '<span class="label label-danger overdueAction ">Overdue</span>' ;
+        overdueStatus = '<span class="label label-danger overdueAction ">Overdue</span>';
         var dateCompare = (new Date() - Date.parse(action['planned_at'])) >= 1000 * 60 * 30;
        
         if(dateCompare == false && typeof action['planned_at'] != 'undefined'){
@@ -915,11 +919,11 @@ $('#sidebar').hide();
                                             '<input type="hidden" name="source_check" value="'+source_check+'" >'+
                                             '<input type="hidden" name="sector_check" value="'+sector_check+'" >'+  
                                         '<div class="form-group form-inline actionForm">'+
-                                        '<input type="hidden" name="action_type_planned" value="11" >'+
-                                            '<input type="text" class="form-control actiondate" data-date-format="YYYY/MM/DD H:m" name="planned_at" placeholder="Follow Up Date">'+
+                                        '<input type="hidden" name="action_type_planned" required="required" value="11" >'+
+                                            '<input type="text" class="form-control actiondate" data-date-format="YYYY/MM/DD H:m" name="planned_at" required="required" placeholder="Follow Up Date">'+
                                         '</div>'+
                                         '<div class="form-group">'+
-                                            ' <textarea class="form-control box'+action['action_id']+'" name="comment" placeholder="Add outcome"  rows="3" required="required"></textarea>'+
+                                            ' <textarea class="form-control box'+action['action_id']+'" name="comment" placeholder="Add outcome"  required="required" rows="3" required="required"></textarea>'+
                                         '</div>'+
                                         '<div class="form-group">'+
                                             ' <input type="submit" class="btn btn-primary btn-block" value="Add Outcome">'+
@@ -944,7 +948,7 @@ $('#sidebar').hide();
              
              actionType = kp;         
          }else{
-        
+
          }
          
          

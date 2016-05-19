@@ -98,17 +98,7 @@ $('#myTabs a').click(function (e) {
        
     }); //end document.write
      
-     
-    
-     
-     
-     
-     
-     
-     
 
-        
- 
 </script>
 
 <!--AUTO COMPLETE-->

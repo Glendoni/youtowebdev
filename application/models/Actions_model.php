@@ -696,7 +696,7 @@ function get_action_types_planned()
 }
 
 // UPDATES
-function set_action_state($action_id,$user_id,$state,$outcome)
+function set_action_state($action_id,$user_id,$state,$outcome,$post)
 
 {
     if($state == 'completed'){
@@ -719,11 +719,36 @@ function set_action_state($action_id,$user_id,$state,$outcome)
     
     $this->db->where('id',$action_id);
     $this->db->update('actions',$data);
+    
+    
     if($this->db->affected_rows() !== 1){
         $this->addError($this->db->_error_message());
-        return False;
+        return false;
     }else{
-        return True;
+        
+        
+              if ($post['action_type_planned']>0) {
+            $planneddata = array(
+            'company_id' 	=> $post['company_id'],
+            'user_id' 		=> $user_id,
+            'comments'		=> (!empty($outcome)?$outcome:NULL),
+            'planned_at'	=> $post['planned_at'],
+            'contact_id'    => (!empty($post['contact_id'])?$post['contact_id']:NULL),
+            'created_by'	=> $user_id,
+            'action_type_id'=> $post['action_type_planned'],
+            'actioned_at'	=>  NULL,
+            'created_at' 	=> date('Y-m-d H:i:s'),
+            'followup_action_id' =>(isset($post['followup_action_id'])?$post['followup_action_id']:NULL),
+        );
+        $query = $this->db->insert('actions', $planneddata);
+        
+        
+        }
+        
+        
+        
+        
+        return true;
     } 
     
 }

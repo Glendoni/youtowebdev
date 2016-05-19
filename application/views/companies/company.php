@@ -782,17 +782,8 @@ if ($your_date < $now){;
               	</ul>
               
       		</div>
-                    
-                    
-
-                
-                    
-                    
-                    
-                    
-                    
-                    
-				    <div class="col-sm-1 col-md-8">
+                  
+				    <div class="col-sm-1 col-md-10">
                         
                         
                         <div id="marketing_action">

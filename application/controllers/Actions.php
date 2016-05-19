@@ -235,16 +235,14 @@ else
     
     public function addOutcome(){
         
-       $rap = $this->input->post();
+       $inputpost = $this->input->post();
                     //set_action_state($action_id,$user_id,$state,$outcome);
          //$rap = json_decode($rap);
-        
-        
         $user_id = $this->data['current_user']['id'];
-       $action_id = $rap['outcomeActionId'];
-        $outcome = $rap['outcome'];
-        $state = $rap['status'];
-        $result  =  $this->Actions_model->set_action_state($action_id,$user_id,$state,$outcome);
+       $action_id = $inputpost['outcomeActionId'];
+        $outcome = $inputpost['outcome'];
+        $state = 'completed';
+        $result  =  $this->Actions_model->set_action_state($action_id,$user_id,$state,$outcome,$inputpost);
         $output = array(
      'action' => $action_id,
             'user_id' =>$user_id ,
@@ -255,6 +253,11 @@ else
         );
             echo json_encode($output);
     }
+    
+  
+    
+    
+    
     
     function removeOutsandingaction(){
         
