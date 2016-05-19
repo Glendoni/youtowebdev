@@ -22,9 +22,6 @@
                             <div class="col-xs-2 col-md-2 text-center"> 
                             <span class="lw-salescall"><?php echo $lastweekstat['salescall'];?></span> / <span class="lw-introcall"><?php echo $lastweekstat['introcall'];?></span>
                             </div>
-                            <div class="col-md-1 hidden-xs text-center">
-                              <span class="lw-pipelinecount"><?php echo $lastweekstat['pipelinecount'];?></span>
-                            </div>
                             <div class="col-md-2 hidden-xs text-center">
                               <span class="lw-key_review_added"><?php echo $lastweekstat['key_review_added'];?></span> / <span class="lw-key_review_occuring"><?php echo $lastweekstat['key_review_occuring'];?></span>
                             </div>

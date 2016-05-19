@@ -51,13 +51,7 @@ class Dashboard extends MY_Controller {
 		$this->data['teamcampaignsummary'] = $this->Campaigns_model->get_team_campaigns();
         $this->data['private_campaigns_new'] = $this->Campaigns_model->private_campaigns_new($this->get_current_user_id());
 
-        
-        
-         
-        
 		$this->data['userimage'] = $this->Users_model->get_user_image();
-        
-       
 		//$this->data['marketing_actions'] = $this->Actions_model->get_marketing_actions($this->get_current_user_id());
 		$this->data['main_content'] = 'dashboard/home';
 		$this->load->view('layouts/default_layout', $this->data);	
@@ -72,11 +66,8 @@ class Dashboard extends MY_Controller {
             'lastmonth'=> $this->lastmonths()
            );
          
-         //header('Content-Type: application/json');
-         echo json_encode($output);  
-         
-         
-         
+         header('Content-Type: application/json');
+         echo json_encode($output); 
          
     }
     

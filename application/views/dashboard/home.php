@@ -232,9 +232,7 @@
                            <strong>Call Activity</strong><br>
                            <Small>Total Calls/Intro</Small>
                         </div>
-                        <div class="col-md-1 hidden-xs text-center hide-overflow">
-                           <strong>Pipeline Added</strong>
-                        </div>
+                       
                         <div class="col-md-2 hidden-xs text-center hide-overflow"> 
                            <strong>Review Months</strong><br>
                            <Small>Added/Occuring</Small>
@@ -266,9 +264,6 @@
                         <div class="col-md-2 hidden-xs text-center hide-overflow">
                            <span class="tw-salescall-total stat-total" >1</span> / 
                             <span class="tw-introcall-total stat-total">0</span>
-                        </div>
-                        <div class="col-md-1 hidden-xs text-center hide-overflow"> 
-                          <span class="tw-pipelinecount-total stat-total">0</span> 
                         </div>
                         <div class="col-md-2 hidden-xs text-center hide-overflow">
                           <span class="tw-key_review_added-total stat-total">0</span> / 
@@ -302,9 +297,6 @@
                             </div>
                             <div class="col-xs-2 col-md-2 text-center"> 
                             <span class="tw-salescall"><?php echo $stat['salescall'];?></span> / <span class="tw-introcall"><?php echo $stat['introcall'];?></span>
-                            </div>
-                            <div class="col-md-1 hidden-xs text-center">
-                              <span class="tw-pipelinecount"><?php echo $stat['pipelinecount'];?></span>
                             </div>
                             <div class="col-md-2 hidden-xs text-center">
                               <span class="tw-key_review_added"><?php echo $stat['key_review_added'];?></span> / <span class="tw-key_review_occuring"><?php echo $stat['key_review_occuring'];?></span>
@@ -341,9 +333,6 @@
                            <strong>Call Activity</strong><br>
                            <Small>Total Calls/Intro</Small>
                         </div>
-                        <div class="col-md-1 hidden-xs text-center hide-overflow">
-                           <strong>Pipeline Added</strong>
-                        </div>
                         <div class="col-md-2 hidden-xs text-center hide-overflow"> 
                            <strong>Review Months</strong><br>
                            <Small>Added/Occuring</Small>
@@ -374,9 +363,6 @@
                         <div class="col-md-2 hidden-xs text-center hide-overflow">
                            <span class="lw-salescall-total stat-total" >1</span> / 
                             <span class="lw-introcall-total stat-total">0</span>
-                        </div>
-                        <div class="col-md-1 hidden-xs text-center hide-overflow"> 
-                          <span class="lw-pipelinecount-total stat-total">0</span> 
                         </div>
                         <div class="col-md-2 hidden-xs text-center hide-overflow">
                           <span class="lw-key_review_added-total stat-total">0</span> / 
@@ -422,9 +408,7 @@
                            <strong>Call Activity</strong><br>
                            <Small>Total Calls/Intro</Small>
                         </div>
-                        <div class="col-md-1 hidden-xs text-center hide-overflow">
-                           <strong>Pipeline Added</strong>
-                        </div>
+                        
                         <div class="col-md-2 hidden-xs text-center hide-overflow"> 
                            <strong>Review Months</strong><br>
                            <Small>Added/Occuring</Small>
@@ -456,9 +440,6 @@
                         <div class="col-md-2 hidden-xs text-center hide-overflow">
                            <span class="tm-salescall-total stat-total" >1</span> / 
                             <span class="tm-introcall-total stat-total">0</span>
-                        </div>
-                        <div class="col-md-1 hidden-xs text-center hide-overflow"> 
-                          <span class="tm-pipelinecount-total stat-total">0</span> 
                         </div>
                         <div class="col-md-2 hidden-xs text-center hide-overflow">
                           <span class="tm-key_review_added-total stat-total">0</span> / 
@@ -504,9 +485,6 @@
                            <strong>Call Activity</strong><br>
                            <Small>Total Calls/Intro</Small>
                         </div>
-                        <div class="col-md-1 hidden-xs text-center hide-overflow">
-                           <strong>Pipeline Added</strong>
-                        </div>
                         <div class="col-md-2 hidden-xs text-center hide-overflow"> 
                            <strong>Review Months</strong><br>
                            <Small>Added/Occuring</Small>
@@ -538,9 +516,6 @@
                         <div class="col-md-2 hidden-xs text-center hide-overflow">
                            <span class="lm-salescall-total stat-total" >1</span> / 
                             <span class="lm-introcall-total stat-total">0</span>
-                        </div>
-                        <div class="col-md-1 hidden-xs text-center hide-overflow"> 
-                          <span class="lm-pipelinecount-total stat-total">0</span> 
                         </div>
                         <div class="col-md-2 hidden-xs text-center hide-overflow">
                           <span class="lm-key_review_added-total stat-total">0</span> / 
@@ -584,9 +559,6 @@
                         <div class="col-xs-2 col-md-2 text-center hide-overflow"> 
                            <strong>Call Activity</strong><br>
                            <Small>Total Calls/Intro</Small>
-                        </div>
-                        <div class="col-md-1 hidden-xs text-center hide-overflow">
-                           <strong>Pipeline Added</strong>
                         </div>
                         <div class="col-md-2 hidden-xs text-center hide-overflow"> 
                            <strong>Review Months</strong><br>

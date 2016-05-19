@@ -20,9 +20,6 @@
                             <div class="col-xs-2 col-md-2 text-center"> 
                             <span class="lm-salescall"><?php echo $lastmonthstat['salescall'];?></span> / <span class="lm-introcall"><?php echo $lastmonthstat['introcall'];?></span>
                             </div>
-                            <div class="col-md-1 hidden-xs text-center">
-                              <span class="lm-pipelinecount"><?php echo $lastmonthstat['pipelinecount'];?></span>
-                            </div>
                             <div class="col-md-2 hidden-xs text-center">
                               <span class="lm-key_review_added"><?php echo $lastmonthstat['key_review_added'];?></span> / <span class="lm-key_review_occuring"><?php echo $lastmonthstat['key_review_occuring'];?></span>
                             </div>
