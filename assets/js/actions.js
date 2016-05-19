@@ -623,7 +623,7 @@ $('#sidebar').hide();
          
      }
      function getIcon(actionType){
-            console.log(actionType)
+          
          var icon;
               switch (actionType){
                       
@@ -885,7 +885,7 @@ $('#sidebar').hide();
     
         classCompleted = 'outcome'+action['action_id'];
 
-        console.info(parseInt(action['followup_action_id']));
+         
         if(parseInt(action['action_type_id']) == 11  && actionTypeName == 'Callback' && isNaN(action['followup_action_id']) == false &&   action['followup_action_id'] != null){
 
  
