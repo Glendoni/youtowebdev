@@ -1,17 +1,12 @@
-$(document).ready(function(){
+var $;
+$(document).ready(function () {
 
-        $('.timeline-header .showText').click(function(){
-            
-            $('.callbackActionTextBox').toggle(false);
+        $('.timeline-header .showText').click(function () {
             var activeMenu =  $('.activeMenu').attr('data');
-                   var status =  $('.actionMsg').css('display'); 
+            var status = $('.actionMsg').css('display'); 
+            $('.callbackActionTextBox').toggle(false);
             
-        
-            if(status == 'block' || status == 'inline'){
-                $('.actionMsg').hide();  
-                $('.showText').text('Show/Comment');
-
-            }else{
+            if (status === 'block' || status === 'inline') { $('.actionMsg').hide();  $('.showText').text('Show/Comment');} else {
                 $('.actionMsg').show();
                 $('.showText').text('Hide/Comment');
             }
@@ -21,14 +16,12 @@ $(document).ready(function(){
            // $('.showText').hide();
   
             $('.showCommentAddForm').hide();
-       
-
        $('.showCommentAddBtn').on('click', function(){
            
             var blockStatus  = $('.showCommentAddForm').css('display');
-            if(blockStatus === "block"){
+            if (blockStatus === "block"){
                 $('.showCommentAddForm').toggle(false);
-            }else{
+            } else {
                  $('.showCommentAddForm').toggle(true);
             }
         });
@@ -64,7 +57,7 @@ $(document).ready(function(){
       
   });
 function getActionData(scope = false){ //get all actions in multidimentional json array
-        if((/companies/.test(window.location.href))) {
+        if ((/companies/.test(window.location.href))) {
         $.ajax({
             type: "GET",
             url: "../companies/getAction/",
@@ -118,11 +111,11 @@ function writeactions(data, scope = false){
 
             $.each( obj, function( k, val ) {
 
-                if( val[0]['action_types_array'] !== 'undefined'){
+                if ( val[0]['action_types_array'] !== 'undefined'){
                         action_types_array  =   val[0]['action_types_array'];
                 }
 
-               if(typeof action_types_array !== 'undefined'){
+               if (typeof action_types_array !== 'undefined'){
                    action_types_list  = action_types_array; 
                    //console.log(pipeline);
                 }   
@@ -174,7 +167,7 @@ function writeactions(data, scope = false){
                                         pipeline = false;
                                     }
 
-                            if(typeof actionType !== 'undefined'){
+                            if (typeof actionType !== 'undefined'){
 
                                 icon =  getIcon(actionType);
 
@@ -213,22 +206,22 @@ function writeactions(data, scope = false){
             
                 $('.textarea'+dat).attr('placeholder', 'Add outcome');
 
-            if($('#callBackActionStatus'+dat).val() == 'cancelled'){
+            if ($('#callBackActionStatus'+dat).val() == 'cancelled'){
                 $('#callBackActionStatus'+dat).val('completed'); 
-            }else{ 
+            } else { 
                     $('#callBackActionStatus'+dat).val('completed');
 
                     $('.actionMsg'+dat).toggle(true);
                     $('.outcomeMsg'+dat).toggle(true);
                     $('#callBackActionStatus'+dat).val('completed');
 
-                    if(blockStatus === "block"){
+                    if (blockStatus === "block"){
                         $('.box'+dat).toggle(false);
 
                         $('.actionMsg'+dat).toggle(false);
                         $('.outcomeMsg'+dat).toggle(false);
                         $('#callBackActionStatus'+dat).val('');
-                    }else{
+                    } else {
                         $('.box'+dat).toggle(true);
                     }
             }
@@ -283,18 +276,18 @@ function bindAddCallBackToCompletedAction(){
                         if(action['action_type_id'] == 11  && action['followup_action_id'] != null && action['followup_action_id'] != null ){
 
                             followUpCompleteddate = '<span class="label label-warning" style="margin-right: 10px;">Follow up planned: '+ formattDate(action['planned_at'])+' </span>';
-                           if(action['cancelled_at'] != null){
+                           if (action['cancelled_at'] != null){
                                      cancellation = '<span class="label label-danger" style="margin-left: 5px;">Cancelled: '+formattDate(action['cancelled_at'])+ '</span>';
                            }
                        }
 
-                      if(action['action_type_id'] == 11  && action['followup_action_id'] != null && action['planned_at'] == null && typeof action['planned_at'] != 'undefined' && typeof action['planned_at'] != null){
+                      if (action['action_type_id'] == 11  && action['followup_action_id'] != null && action['planned_at'] == null && typeof action['planned_at'] != 'undefined' && typeof action['planned_at'] != null){
                                 followup = '<span class="label label-warning" style="margin-right: 10px;"> Follow Up Action:  '+formattDate(action['planned_at'])+' </span>';
                             }
 
-                      if(action['action_type_id'] == 11  && action['followup_action_id'] != null && typeof action['planned_at'] != 'undefined' && typeof action['planned_at'] != null){
+                      if (action['action_type_id'] == 11  && action['followup_action_id'] != null && typeof action['planned_at'] != 'undefined' && typeof action['planned_at'] != null){
 
-                          if(action['first_name'] != null){
+                          if (action['first_name'] != null){
 
                              contactDetails = ' <span class="label label-primary"style="float: right;"> '+action['first_name']+' '+action['last_name']+' </span><br>';
 
@@ -302,18 +295,18 @@ function bindAddCallBackToCompletedAction(){
 
                       }
 
-                       if(action['action_type_id'] == 11 ){
+                       if (action['action_type_id'] == 11 ){
 
                             overdueStatus = '<span class="label label-danger">Overdue</span>' ;
                           var dateCompare = (new Date() - Date.parse(action['planned_at'])) >= 1000 * 60 * 30;
                             
-                          if(dateCompare == false && typeof action['planned_at'] != 'undefined'){
+                          if (dateCompare == false && typeof action['planned_at'] != 'undefined'){
                                 overdueStatus = '';
                           }
 
-                         if(typeof action['outcome'] == 'undefined'  || action['outcome'] == null){
+                         if (typeof action['outcome'] == 'undefined'  || action['outcome'] == null){
                              actionOutcome = ''
-                         }else{ 
+                         } else { 
                              actionOutcome = '<strong>Outcome: </strong>'+action['outcome'];
 
                          }           
@@ -368,14 +361,14 @@ function bindAddCallBackToCompletedAction(){
             var dat = $(this).attr('data');
             var blockStatus  = $('.piller'+dat).css('display');
             
-            if(blockStatus === "inline"){
+            if (blockStatus === "inline"){
                 $('.piller'+dat).toggle(false);
                 $('.box'+dat).toggle(false);
               
                 
            // $('.textarea'+dat).toggle(false);
-            }else{
-           if($(this).hasClass('showOutstandingForm')){
+            } else {
+           if ($(this).hasClass('showOutstandingForm')){
                  $('.box'+dat).toggle(true);
            }
                 $('.piller'+dat).toggle(true);
@@ -388,9 +381,9 @@ function bindAddCallBackToCompletedAction(){
           $('.removeOutsandingAction').click(function(){
              var dat = $(this).attr('data');
                 $('.textarea'+dat).attr('placeholder', 'Add cancellation reason'); 
-              if($('#callBackActionStatus'+dat).val() == 'completed'){
+              if ($('#callBackActionStatus'+dat).val() == 'completed'){
                  $('#callBackActionStatus'+dat).val('cancelled');   
-              }else{ 
+              } else { 
                 $('#callBackActionStatus'+dat).val('cancelled'); 
                 $('.actionMsg'+dat).toggle(true);
                 $('.outcomeMsg'+dat).toggle(true);
@@ -400,7 +393,7 @@ function bindAddCallBackToCompletedAction(){
                      $('.actionMsg'+dat).toggle(false);
                      $('.outcomeMsg'+dat).toggle(false);
                      $('#callBackActionStatus'+dat).val('');
-                }else{
+                } else {
                      $('.outcome'+dat+ ' .box'+dat).toggle(true);
                  }
               }
@@ -438,18 +431,18 @@ function getemailengagement(){
                 }
 
 
-                  if(val.first_name != null){
+                  if (val.first_name != null){
                       contactName = '<div class="label label-primary hint--top-right"   data-hint="Name" style="float:right; margin-top:0; ">'+val.first_name+ ' '+ val.last_name+'</div>';
                         }
 
-                if( val.campaign !== null ){
-                    if(val.action != '3'){
+                if ( val.campaign !== null ){
+                    if (val.action != '3'){
                         i++;
                         /*
                         $( '<li class="list-group-item"><div class="row"><div class="col-xs-6 col-md-7"><h4 style="margin:0;">'+val.campaign_name+'<div class="mic-info">'+val.date+ ' by '+val.email+
                         '</div></h4></div><!--END COL-MD-4--><div class="col-xs-6 col-md-5" style="text-align:right;"><span class="label label-primary" style="font-size:11px;  ">'+val.first_name+ ' '+ val.last_name+
                         '</span> '+action+' </div></div></li>' ).prependTo('#marketing_action ul'); */
-                $('.timeline_inner').append('<div class="timeline-entry   actionIdactions_marketing" style="dislay:none;"> <div class="timeline-stat"> <div class="timeline-icon label-primary " style="color: white;"><i class="fa fa-envelope-o fa-lg"></i></div><div class="timeline-time ">'+val.date+  ' </div></div><div class="timeline-label"> <div class="mar-no pad-btm"><h4 class="mar-no pad-btm"><a href="javascript:;" class="text-danger"> '+val.campaign_name+' <span class"eeprefix">(Inbound Marketing)</span> </a>   </h4>'+'<span class="label label-warning">'+val.date+'</span></div><div style="float:right; margin-top:-4px; margin-left:3px;">'+action+'</div>'+contactName+'<div class="actionMsgText"><span class="actionMsg commentsComment">what a laugh</span><hr></div><div> <div class="mic-info"> by '+val.email+'</div></div></div>')
+                $('.timeline_inner').append('<div class="timeline-entry   actionIdactions_marketing" style="dislay:none;"> <div class="timeline-stat"> <div class="timeline-icon label-primary " style="color: white;"><i class="fa fa-envelope-o fa-lg"></i></div><div class="timeline-time ">'+val.date+  ' </div></div><div class="timeline-label"> <div class="mar-no pad-btm"><h4 class="mar-no pad-btm"><a href="javascript:;" class="text-danger"> '+val.campaign_name+' <span class"eeprefix">(Outbound Marketing)</span> </a>   </h4>'+'<span class="label label-warning">'+val.date+'</span></div><div style="float:right; margin-top:-4px; margin-left:3px;">'+action+'</div>'+contactName+'<div class="actionMsgText"><span class="actionMsg commentsComment">what a laugh</span><hr></div><div> <div class="mic-info"> by '+val.email+'</div></div></div>')
                     }
                 }
                     //$('#sidebar').hide();
@@ -489,7 +482,7 @@ function getemailengagement(){
 
 
 var overdueStatus = $(".overdueAction").length;
-if(overdueStatus){
+if (overdueStatus){
 $('.qtyactions_outstanding').css({'background': '#d9534f','color': '#ffffff', 'font-weight' : '600'});
  
 
