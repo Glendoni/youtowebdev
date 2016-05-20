@@ -77,8 +77,15 @@ function getActionData(scope = false){ //get all actions in multidimentional jso
 $('.actiondate').datetimepicker();
                 $('.form .actionContact').clone().prependTo('.actionForm');
                 $('.form #action_type_planned').clone().prependTo('.formOutcome');
+               
 
+$('select[name="action_type_planned"]').addClass('action_type_planned');
                 //bindfollowUpInfoBtn(); 
+
+
+ $('.outcomeform .actionContact ').prop('disabled', false);
+$('.outcomeform .actionContact').attr("disabled", "disabled");
+$('.outcomeform .actiondate').attr("disabled", "disabled"); 
 
             } //end success
         });   
@@ -201,11 +208,30 @@ function writeactions(data, scope = false){
 }
     function callbackActionTextBox(){
         $('.callbackAction').on('click', function(){
-
+ 
             var dat = $(this).attr('data');
-              var blockStatus  = $('.box'+dat).css('display');
-            
-                $('.textarea'+dat).attr('placeholder', 'Add outcome');
+            var blockStatus  = $('.box'+dat).css('display');
+            var username;
+            var listName =[];
+            var usernameID = [];
+
+             $('#formcallback'+dat+' select > option').each(function(){
+             username  = $('.actionMsg'+dat+' span').text();
+            username  = username.replace(' ','');
+            listName = this.text.replace(' ','');
+            usernameID = parseInt(this.value);
+                if(username){
+                    if(username.replace(' ', '') === listName){
+
+                    $('#formcallback'+dat+' .actionContact option[value='+usernameID+']').prop('selected','selected');
+
+                    }
+
+                }
+            })
+
+
+            $('.textarea'+dat).attr('placeholder', 'Add outcome');
 
             if ($('#callBackActionStatus'+dat).val() == 'cancelled'){
                 $('#callBackActionStatus'+dat).val('completed'); 
@@ -443,7 +469,7 @@ function getemailengagement(){
                         $( '<li class="list-group-item"><div class="row"><div class="col-xs-6 col-md-7"><h4 style="margin:0;">'+val.campaign_name+'<div class="mic-info">'+val.date+ ' by '+val.email+
                         '</div></h4></div><!--END COL-MD-4--><div class="col-xs-6 col-md-5" style="text-align:right;"><span class="label label-primary" style="font-size:11px;  ">'+val.first_name+ ' '+ val.last_name+
                         '</span> '+action+' </div></div></li>' ).prependTo('#marketing_action ul'); */
-                $('.timeline_inner').append('<div class="timeline-entry   actionIdactions_marketing" style="dislay:none;"> <div class="timeline-stat"> <div class="timeline-icon label-primary " style="color: white;"><i class="fa fa-envelope-o fa-lg"></i></div><div class="timeline-time ">'+val.date+  ' </div></div><div class="timeline-label"> <div class="mar-no pad-btm"><h4 class="mar-no pad-btm"><a href="javascript:;" class="text-danger"> '+val.campaign_name+' <span class"eeprefix">(Outbound Marketing)</span> </a>   </h4>'+'<span class="label label-warning">'+val.date+'</span></div><div style="float:right; margin-top:-4px; margin-left:3px;">'+action+'</div>'+contactName+'<div class="actionMsgText"><span class="actionMsg commentsComment">what a laugh</span><hr></div><div> <div class="mic-info"> by '+val.email+'</div></div></div>')
+                $('.timeline_inner').append('<div class="timeline-entry   actionIdactions_marketing" style="dislay:none;"> <div class="timeline-stat"> <div class="timeline-icon label-primary " style="color: white;"><i class="fa fa-envelope-o fa-lg"></i></div><div class="timeline-time ">'+val.date+  ' </div></div><div class="timeline-label"> <div class="mar-no pad-btm"><h4 class="mar-no pad-btm"><a href="javascript:;" class="text-danger"> '+val.campaign_name+' <span class"eeprefix">(Outbound Marketing)</span> </a>   </h4>'+'<span class="label label-warning">'+val.date+'</span></div><div style="float:right; margin-top:-4px; margin-left:3px;">'+action+'</div>'+contactName+'<div class="actionMsgText"><span class="actionMsg commentsComment"></span><hr></div><div> <div class="mic-info"> by '+val.email+'</div></div></div>')
                     }
                 }
                     //$('#sidebar').hide();
@@ -489,9 +515,70 @@ $('.qtyactions_outstanding').css({'background': '#d9534f','color': '#ffffff', 'f
 
 }
  
-   intefaceVisibility();
-     $('.actionMsg').show();    
+                       intefaceVisibility();
+                         $('.actionMsg').show();  
 
+
+
+
+                    $('.formOutcome .action_type_planned').change(function(){
+
+
+
+
+
+                        var followupOutcomeShowHide  = $(this).val();
+                        var bun = $(this).closest("form").attr('data');
+                                    var boxeval ;
+                        formBox  = '.box'+bun;
+
+                          
+
+
+                        if(followupOutcomeShowHide){
+                            
+                                        //alert($(formBox+' .actiondate').attr('disabled'));
+
+                        $(formBox+' .actionContact ').prop('disabled', true);
+                        $(formBox+' .actionContact').removeAttr("disabled");
+                        $(formBox+' .actiondate').removeAttr("disabled");
+                            boxeval = $(formBox+' .actiondate').attr('disabled');
+
+                        var username;
+                        var listName =[];
+                        var usernameID =  [] ;
+                            
+                           
+         
+
+                       
+                             $('.box'+bun+' select > option').each(function(){
+ //alert($('.box'+bun+'  .actionContact').text())
+                                 usernameID = this.value;
+                             username  = $('.piller'+bun+' span').text();
+                            username  = username.replace(' ','');
+                            listName = this.text.replace(' ','');
+
+                            if(username.replace(' ', '') === listName){
+                                
+                                if(!$('.outcome'+bun+' .actionContact').val())
+                                    $('.box'+bun+'  .actionContact option[value='+parseInt(usernameID)+']').prop('selected','selected');
+
+                             }
+                            })
+                        }else{
+                            $(formBox+' .actiondate').val("");
+                           $('.outcome'+bun+' .actionContact option[value=]').attr('selected','selected');
+                            $(formBox+' .actionContact ').prop('disabled', false);
+                            $(formBox+' .actionContact').attr("disabled", "disabled");
+                            $(formBox+' .actiondate').attr("disabled", "disabled");
+                        }
+                    })
+
+        
+        
+       
+        
     } 
 function intefaceVisibility(){
     
@@ -619,12 +706,12 @@ $('#sidebar').hide();
          var icon;
               switch (actionType){
                       
-                      
+                      //Quote to : 
                     case 'Attempted Call':
                         icon = '<div class="timeline-icon bg-success"><i class="fa fa-thumbs-up fa-lg"></i></div>';
                     break;
                        case 'Callback':case 'Call':case 'Called Us':
-                         icon = '<div class="timeline-icon label-info "style="color: white;"><i class="fa fa-phone"></i></div>';
+                         icon = '<div class="timeline-icon label-info "style="color: white;"><i class="fa fa-phone fa-lg"></i></div>';
                     break;
                     case 'Campaign - Lack of Info':
                            icon = '<div class="timeline-icon bg-info"><i class="fa fa-envelope fa-lg"></i></div>';
@@ -633,7 +720,7 @@ $('#sidebar').hide();
                         icon = '<div class="timeline-icon bg-info"><i class="fa fa-envelope fa-lg"></i></div>';
                     break;
                     case 'Deal':
-                        icon = '<div class="timeline-icon bg-success"><i class="fa fa-thumbs-up fa-lg"></i></div>';
+                        icon = '<div class="timeline-icon bg-success"><i class="fa fa-thumbs-o-up  fa-lg"></i></div>';
                     break;
                     case 'Demo':
                         icon = '<div class="timeline-icon bg-success"><i class="fa fa-thumbs-up fa-lg"></i></div>';
@@ -657,7 +744,7 @@ $('#sidebar').hide();
                         icon = '<div class="timeline-icon bg-success"><i class="fa fa-thumbs-up fa-lg"></i></div>';
                     break;
                     case 'Quote Requested':
-                        icon = '<div class="timeline-icon bg-success"><i class="fa fa-thumbs-up fa-lg"></i></div>';
+                        icon = '<div class="timeline-icon bg-success"><i class="fa fa-sticky-note fa-lg"></i></div>';
                     break;
                     case 'Sales Ledger Due Diligence':
                         icon = '<div class="timeline-icon bg-success"><i class="fa fa-thumbs-up fa-lg"></i></div>';
@@ -802,13 +889,23 @@ $('#sidebar').hide();
             if(kp == 'actions_outstanding'  ){ //if outstanding
              
                 showOutstandingForm = 'showOutstandingForm';
- icon = '<div class="timeline-icon label-danger "style="color: white;"><i class="fa fa-phone"></i></div>';
+                
+                
+                if(action['planned_at'] )
+                  var  timestamp =  Date.now();
+                 
+                 var timestamp2 = new Date(''+action['planned_at']+''.replace(' ', 'T')).getTime();
+              
+if(timestamp2 < timestamp && action['action_type_id'] == 11 )
+      icon = '<div class="timeline-icon label-danger "style="color: white;"><i class="fa fa-phone"></i></div>';          
+                
+ 
                 
             }
          
         
          
-         header = '<a href="javascript:;" class="text-danger '+showOutstandingForm+' pillerTitle" data-name="'+actionType+'" data="'+actionId+'">'+(actionTypeOverwrite ? actionTypeOverwrite : actionType)+'  </a> ';
+    header = '<a href="javascript:;" class="text-danger '+showOutstandingForm+' pillerTitle" data-name="'+actionType+'" data="'+actionId+'">'+(actionTypeOverwrite ? actionTypeOverwrite : actionType)+'  </a> ';
          
         if( actions_cancelled == '' && typeof action['action_id'] != 'undefined' || actions_outstanding == true &&  actions_cancelled == '' && typeof action['action_id'] != 'undefined' ){ 
 
@@ -838,18 +935,15 @@ $('#sidebar').hide();
 
         calenderbtn = '<small>'+calendarBtnDetail +' </small><span class="btn btn-default btn-xs label label-success callbackAction callbackActionOutcome hint--top-right"  data-hint="Add Action Outcome" style="font-size:10px; margin:0 0px;" data="'+action['action_id']+'">Add Outcome</span> <span class="btn btn-default btn-xs label label-danger removeOutsandingAction hint--top-right"  data-hint="Cancel Callback Action" data="'+action['action_id']+'" >Remove</span>';
 
-
-            
-          
-
-        if(action['action_id'])                                                                                                                                          
+         if(action['action_id'])                                                                                                                                          
             textbox= '<div class="form-group callbackActionTextBox  box'+action['action_id']+'" style="display:none">'+
                 '<form action="Actions/addOutcome" class="outcomeform" data="'+action['action_id']+'" >'+
-                '<textarea class="form-control box'+action['action_id']+'  textarea'+action['action_id']+' " name="outcome" placeholder="Add outcome" rows="1" style="margin-bottom:5px;"></textarea>'+
-                '<label>Add Follow up Action</label><div class="form-group form-inline actionForm formOutcome">'+
+                '<textarea class="form-control box'+action['action_id']+'  textarea'+action['action_id']+' " name="outcome" placeholder="Add outcome" required="required" rows="1" style="margin-bottom:5px;"></textarea>'+
+                ' <div class="form-group form-inline actionForm formOutcome">'+
                                             '<input type="text" class="form-control actiondate" data-date-format="YYYY/MM/DD H:m" name="planned_at" required="required" placeholder="Follow Up Date">'+
                                         '</div>'+
-                '<input type="hidden" name="outcomeActionId" value="'+action['action_id']+'" /><input type="hidden" name="company_id" value="'+getUrlIdParam+'" /> <input type="hidden" name="status" id="callBackActionStatus'+action['action_id']+'" value="" /> <input type="submit" class="btn btn-primary btn-block actionSubmit box'+action['action_id']+' submit'+action['action_id']+'" "  style="float:right;" value="Save"></form><br /></div>';
+                '<input type="hidden" name="outcomeActionId" value="'+action['action_id']+'" /><input type="hidden" name="company_id" value="'+getUrlIdParam+'" /> <input type="hidden" name="status" id="callBackActionStatus'+action['action_id']+'" value="" />'+
+                '<input type="submit" class="btn btn-primary btn-block actionSubmit box'+action['action_id']+' submit'+action['action_id']+'" "  style="float:right;" value="Save"></form><br /></div>';
 
         //console.log('box_'+action['action_id'])
         overdueStatus = '<span class="label label-danger overdueAction ">Overdue</span>';
@@ -897,19 +991,19 @@ $('#sidebar').hide();
                 if(actionType === 'Callback'){
                       
              
-                   var company_id =    $("form input[name='company_id']").val()
-                    var user_id =   $("form input[name='user_id']").val()
-                    var done =   $("form input[name='done']").val()
-                    var campaign_id =   $("form input[name='campaign_id']").val()
-                    var class_check =   $("form input[name='class_check']").val()
-                    var source_check =    $("form input[name='source_check']").val()
-                    var sector_check =    $("form input[name='sector_check']").val()
+                   var company_id =    $("form input[name='company_id']").val();
+                    var user_id =   $("form input[name='user_id']").val();
+                    var done =   $("form input[name='done']").val();
+                    var campaign_id =   $("form input[name='campaign_id']").val();
+                    var class_check =   $("form input[name='class_check']").val();
+                    var source_check =    $("form input[name='source_check']").val();
+                    var sector_check =    $("form input[name='sector_check']").val();
                     
                     calenderbtn = '<span class="label label-primary callbackAction appendCallbackContacts followupactionBtn'+action['id']+' " style="font-size:10px; margin:0 0px;" data="'+action['id']+'">+ Follow Up Action</span>';
                   
                   textbox= '<div class="form-group callbackActionTextBox callbackContacts box'+action['id']+'" style="display:none">'+
                                 '<div class="row"><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">'+
-                                    '<form   action="Actions/addActionsCallback" id="formcallback'+action['id']+'" class="" role="form" data="'+action['action_id']+'" >'+
+                                    '<form   action="Actions/addActionsCallback" id="formcallback'+action['id']+'" class="callbackForm" role="form" data="'+action['action_id']+'" >'+
                                             '<input type="hidden" name="company_id" value="'+company_id+'">'+
                                             '<input type="hidden" name="user_id" value="'+user_id+'" >'+
                                             '<input type="hidden" name="followup_action_id" value="'+action['id']+'" >'+
@@ -923,7 +1017,7 @@ $('#sidebar').hide();
                                             '<input type="text" class="form-control actiondate" data-date-format="YYYY/MM/DD H:m" name="planned_at" required="required" placeholder="Follow Up Date">'+
                                         '</div>'+
                                         '<div class="form-group">'+
-                                            ' <textarea class="form-control box'+action['action_id']+'" name="comment" placeholder="Add outcome"  required="required" rows="3" required="required"></textarea>'+
+                                            ' <textarea class="form-control box'+action['action_id']+'" name="comment" placeholder="Add outcome"  required="required" rows="2" required="required"></textarea>'+
                                         '</div>'+
                                         '<div class="form-group">'+
                                             ' <input type="submit" class="btn btn-primary btn-block" value="Add Outcome">'+
@@ -960,8 +1054,7 @@ $('#sidebar').hide();
         if(actionTypeName == 'Pipeline Update' ){
               actions  = '<div class="timeline-entry actionId'+actionType+' '+classCompleted+'" > <div class="timeline-label pipe"> <div class="mar-no pad-btm" ><h4 class="mar-no pad-btm">'+header+' <span class="classActions" style="margin-top:0; margin-left:3px;">'+calenderbtn+outcomeRemove+ kpStr+'</span></h4>'+overdueStatus+'</div><div class="actionMsgText"></div></div></div>';  
          }
-         
-         
+     
         return actions;
        }
           

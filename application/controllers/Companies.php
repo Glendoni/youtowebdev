@@ -895,8 +895,6 @@ echo $this->Tagging_model->$route($post);
         //$query[]['actions'] = $this->Actions_model->get_actions(154537); //$this->input->get('id')
         $query[]['actions_outstanding'] = $this->Actions_model->get_actions_outstanding($id);
         
-    
-        
         $query[]['action_types_array'] = (array)$this->Actions_model->get_action_types_array();
             $query[]['actions_completed'] = $this->Actions_model->get_actions_completed($id);
         $query[]['actions_cancelled'] = $this->Actions_model->get_actions_cancelled($id);

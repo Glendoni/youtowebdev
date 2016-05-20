@@ -694,7 +694,7 @@ public function get_campaign_name($campaign)
         
         $query = $this->db->query("SELECT id from email_actions ORDER BY id DESC LIMIT 5");
         $row = $query->row(); 
-        $last_row_id =  $row->id;
+        $last_row_id =  $row->id; //last row id
 
         $obj = $this->test('https://api2.autopilothq.com/v1/list/'.$contact_list.'/contacts/');
 
@@ -730,13 +730,8 @@ public function get_campaign_name($campaign)
 
             };
               foreach($item['custom_fields'] as $itemt => $valuet){
-                  
-                  
                     if($valuet['value'] == 'Downloaded'){
-                        
-                      
-                        $download[$valuet['kind']] =  $valuet['kind'] ;
-                   // if($debug) echo  '<br>'; 
+                        $download[$valuet['kind']] =  $valuet['kind'];
                     }
                 }
 
@@ -748,18 +743,18 @@ public function get_campaign_name($campaign)
              
              
 $check_if_email_exist  = $this->getemailuserid($item['Email']);
+
              
-             
-            
+echo 'This is the user email'.$check_if_email_exist->id;
 
            if($check_if_email_exist->id && $campaign_title  != 'Removed Via Baselist' &&   $event != 3) {
 
- //echo 'iddddddddd  '.$item['Email'].' ---- '.$check_if_email_exist->id;
+ 
 foreach($download as $tagkey => $tagvalue){
     
  
                 $tagid = $this->addToTags($tagvalue,$check_if_email_exist->company_id);
-    //echo 'I raaaaan'.$tagid ;
+    
                 if($tagid){
                     
                     $this->attachTagToCompany($tagid,$check_if_email_exist->company_id);
