@@ -241,7 +241,7 @@ else
         $user_id = $this->data['current_user']['id'];
        $action_id = $inputpost['outcomeActionId'];
         $outcome = $inputpost['outcome'];
-        $state = 'completed';
+        $state = $inputpost['status'];
         $result  =  $this->Actions_model->set_action_state($action_id,$user_id,$state,$outcome,$inputpost);
         $output = array(
      'action' => $action_id,

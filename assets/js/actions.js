@@ -74,7 +74,9 @@ function getActionData(scope = false){ //get all actions in multidimentional jso
                 removeOutsandingAction();
                 mainMenuQty()
                 //$('.follow-up-date').datepicker();
-$('.actiondate').datetimepicker();
+                var dateToday = new Date();
+$('.actiondate').datetimepicker({ minDate: dateToday });
+               
                 $('.form .actionContact').clone().prependTo('.actionForm');
                 $('.form #action_type_planned').clone().prependTo('.formOutcome');
                
@@ -83,9 +85,9 @@ $('select[name="action_type_planned"]').addClass('action_type_planned');
                 //bindfollowUpInfoBtn(); 
 
 
- $('.outcomeform .actionContact ').prop('disabled', false);
-$('.outcomeform .actionContact').attr("disabled", "disabled");
-$('.outcomeform .actiondate').attr("disabled", "disabled"); 
+// $('.outcomeform .actionContact ').prop('disabled', false);
+//$('.outcomeform .actionContact').attr("disabled", "disabled");
+//$('.outcomeform .actiondate').attr("disabled", "disabled"); 
 
             } //end success
         });   
@@ -233,6 +235,17 @@ function writeactions(data, scope = false){
 
             $('.textarea'+dat).attr('placeholder', 'Add outcome');
 
+          if(!$(this).hasClass('appendCallbackContacts')){
+    $('.box'+dat+'  .action_type_planned option[value=]').prop('selected','selected');
+    $('.box'+dat+'  .actionContact option[value=]').prop('selected','selected');    
+    $('.box'+dat+' .actionContact ').prop('disabled', false);
+    $('.box'+dat+' .actionContact').attr("disabled", "disabled");
+    $('.box'+dat+' .actiondate').attr("disabled", "disabled");
+    $('.box'+dat+' .actiondate').val("");
+    $('.box'+dat+' .actionContact option[value=]').attr('selected','selected');
+    $('.box'+dat+' .formOutcome').show();
+            
+        }
             if ($('#callBackActionStatus'+dat).val() == 'cancelled'){
                 $('#callBackActionStatus'+dat).val('completed'); 
             } else { 
@@ -408,6 +421,16 @@ function bindAddCallBackToCompletedAction(){
           $('.removeOutsandingAction').click(function(){
              var dat = $(this).attr('data');
                 $('.textarea'+dat).attr('placeholder', 'Add cancellation reason'); 
+    $('.box'+dat+' .formOutcome').hide();
+    $('.box'+dat+'  .action_type_planned option[value=]').prop('selected','selected');
+    $('.box'+dat+'  .actionContact option[value=]').prop('selected','selected');    
+    $('.box'+dat+' .actionContact ').prop('disabled', false);
+    $('.box'+dat+' .actionContact').attr("disabled", "disabled");
+    $('.box'+dat+' .actiondate').attr("disabled", "disabled");
+    $('.box'+dat+' .actiondate').val("");
+    $('.box'+dat+' .actionContact option[value=]').attr('selected','selected');
+
+              
               if ($('#callBackActionStatus'+dat).val() == 'completed'){
                  $('#callBackActionStatus'+dat).val('cancelled');   
               } else { 
@@ -469,7 +492,7 @@ function getemailengagement(){
                         $( '<li class="list-group-item"><div class="row"><div class="col-xs-6 col-md-7"><h4 style="margin:0;">'+val.campaign_name+'<div class="mic-info">'+val.date+ ' by '+val.email+
                         '</div></h4></div><!--END COL-MD-4--><div class="col-xs-6 col-md-5" style="text-align:right;"><span class="label label-primary" style="font-size:11px;  ">'+val.first_name+ ' '+ val.last_name+
                         '</span> '+action+' </div></div></li>' ).prependTo('#marketing_action ul'); */
-                $('.timeline_inner').append('<div class="timeline-entry   actionIdactions_marketing" style="dislay:none;"> <div class="timeline-stat"> <div class="timeline-icon label-primary " style="color: white;"><i class="fa fa-envelope-o fa-lg"></i></div><div class="timeline-time ">'+val.date+  ' </div></div><div class="timeline-label"> <div class="mar-no pad-btm"><h4 class="mar-no pad-btm"><a href="javascript:;" class="text-danger"> '+val.campaign_name+' <span class"eeprefix">(Outbound Marketing)</span> </a>   </h4>'+'<span class="label label-warning">'+val.date+'</span></div><div style="float:right; margin-top:-4px; margin-left:3px;">'+action+'</div>'+contactName+'<div class="actionMsgText"><span class="actionMsg commentsComment"></span><hr></div><div> <div class="mic-info"> by '+val.email+'</div></div></div>')
+                $('.timeline_inner').append('<div class="timeline-entry   actionIdactions_marketing" style="dislay:none;"> <div class="timeline-stat"> <div class="timeline-icon label-primary " style="color: white;"><i class="fa fa-envelope-o fa-lg"></i></div></div><div class="timeline-label"> <div class="mar-no pad-btm"><h4 class="mar-no pad-btm"><a href="javascript:;" class="text-danger"> '+val.campaign_name+' <span class"eeprefix">(Outbound Marketing)</span> </a>   </h4>'+'<span class="label label-warning">'+val.date+'</span></div><div style="float:right; margin-top:-4px; margin-left:3px;">'+action+'</div>'+contactName+'<div class="actionMsgText"><span class="actionMsg commentsComment"></span><hr></div><div> <div class="mic-info"> by '+val.email+'</div></div></div>')
                     }
                 }
                     //$('#sidebar').hide();
@@ -569,6 +592,9 @@ $('.qtyactions_outstanding').css({'background': '#d9534f','color': '#ffffff', 'f
                         }else{
                             $(formBox+' .actiondate').val("");
                            $('.outcome'+bun+' .actionContact option[value=]').attr('selected','selected');
+
+$('.box'+bun+'  .actionContact option[value=]').prop('selected','selected');
+
                             $(formBox+' .actionContact ').prop('disabled', false);
                             $(formBox+' .actionContact').attr("disabled", "disabled");
                             $(formBox+' .actiondate').attr("disabled", "disabled");
@@ -711,7 +737,7 @@ $('#sidebar').hide();
                         icon = '<div class="timeline-icon bg-success"><i class="fa fa-thumbs-up fa-lg"></i></div>';
                     break;
                        case 'Callback':case 'Call':case 'Called Us':
-                         icon = '<div class="timeline-icon label-info "style="color: white;"><i class="fa fa-phone fa-lg"></i></div>';
+                         icon = '<div class="timeline-icon label-danger "style="color: white;"><i class="fa fa-phone fa-lg"></i></div>';
                     break;
                     case 'Campaign - Lack of Info':
                            icon = '<div class="timeline-icon bg-info"><i class="fa fa-envelope fa-lg"></i></div>';
@@ -750,7 +776,7 @@ $('#sidebar').hide();
                         icon = '<div class="timeline-icon bg-success"><i class="fa fa-thumbs-up fa-lg"></i></div>';
                     break;
                     case 'Comment':
-                        icon = '<div class="timeline-icon bg-success"><i class="fa fa-comment fa-lg"></i></div>';
+                        icon = '<div class="timeline-icon bg-primary"><i class="fa fa-comment fa-lg"></i></div>';
                     break;
                     case 'Web Form - Demo Requested':
                         icon = '<div class="timeline-icon bg-success"><i class="fa fa-thumbs-up fa-lg"></i></div>';
@@ -850,6 +876,7 @@ $('#sidebar').hide();
          var followupAlert = [];
          var created_by  = [];
          var actionId = [];
+         var status = 'Created'
          var showOutstandingForm = [];
          var getUrlIdParam = GetUrlParamID();
          if(typeof action['name'] !== 'undefined'  && action['name'] !== null &&  action['name'] !== 'null'   ){
@@ -882,6 +909,11 @@ $('#sidebar').hide();
          
          if(!actions_cancelled){
             badge = '<span class="circle" style="float: left;margin-top: 0px;margin-right: 10px;width: 20px;height: 20px;border-radius: 15px;font-size: 8px;line-height: 20px;text-align: center;font-weight: 700;background-color:'+actionImg[1]+'; color:'+actionImg[2]+';">'+actionImg[0]+'</span>';
+             
+             
+            icon = '<div class="timeline-icon" style="font-weight: 700; font-size: 0.7em;background-color:'+actionImg[1]+'; color:'+actionImg[2]+';">'+actionImg[0]+'</div>';  
+             
+             
          }
         // if(actionType == 'actions_outstanding') alert()
          
@@ -960,7 +992,7 @@ if(timestamp2 < timestamp && action['action_type_id'] == 11 )
         outcomeRemove ='<span class=" btn btn-default btn-xs label label-success" style="font-size:10px; margin:0 0px;">Add Outcome</span> <span class="btn btn-default btn-xs label label-danger">Remove</span>';
 
         if((actions_cancelled)){
-            outcomeRemove ='<span class="label label-danger" style="font-size:10px; margin:0 0px;">Cancelled on '+action['cancelled_at']+'</span>';
+            outcomeRemove ='<span class="label label-danger" style="font-size:10px; margin:0 0px;">Cancelled: '+action['cancelled_at']+'</span>';
             badge = '';   
             overdueStatus = '';
         }
@@ -1035,11 +1067,13 @@ if(timestamp2 < timestamp && action['action_type_id'] == 11 )
            
                
          }else if(kp == 'actions_cancelled'){
+              status ='Cancelled';
              
+              created_by = '';  
              actionType = kp;
              
                   }else if(kp == 'actions_outstanding'){
-             
+            
              actionType = kp;         
          }else{
 
@@ -1049,7 +1083,7 @@ if(timestamp2 < timestamp && action['action_type_id'] == 11 )
        
          
       if(actionTypeName != 'Pipeline Update')   
-            actions  = '<div class="timeline-entry actionId'+actionType+'  '+classCompleted+'"> <div class="timeline-stat"> '+icon+'<div class="timeline-time ">'+formattDate(createdAt, true)+'</div></div><div class="timeline-label"> <div class="mar-no pad-btm"><h4 class="mar-no pad-btm">'+header+deal+badge+'  <span class="label label-warning">'+planned_at+'</span>'+overdueStatus+'<span class="classActions" style="float:right; margin-top:0; margin-left:3px;">'+calenderbtn+outcomeRemove+ kpStr+'</span></h4></div><div class="actionMsgText">'+tagline+'</div>'+textbox+'<div class="mic-info"> Created: '+created_by+' on '+formattDate(createdAt, true)+followupAlert+' </div></div></div>';
+            actions  = '<div class="timeline-entry actionId'+actionType+'  '+classCompleted+'"> <div class="timeline-stat"> '+icon+'</div><div class="timeline-label"> <div class="mar-no pad-btm"><h4 class="mar-no pad-btm">'+header+deal+'  <span class="label label-warning">'+planned_at+'</span>'+overdueStatus+'<span class="classActions" style="float:right; margin-top:0; margin-left:3px;">'+calenderbtn+outcomeRemove+ kpStr+'</span></h4></div><div class="actionMsgText">'+tagline+'</div>'+textbox+'<div class="mic-info"> '+status+': '+created_by+' - '+formattDate(createdAt, true)+followupAlert+' </div></div></div>';
          
         if(actionTypeName == 'Pipeline Update' ){
               actions  = '<div class="timeline-entry actionId'+actionType+' '+classCompleted+'" > <div class="timeline-label pipe"> <div class="mar-no pad-btm" ><h4 class="mar-no pad-btm">'+header+' <span class="classActions" style="margin-top:0; margin-left:3px;">'+calenderbtn+outcomeRemove+ kpStr+'</span></h4>'+overdueStatus+'</div><div class="actionMsgText"></div></div></div>';  

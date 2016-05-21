@@ -735,19 +735,7 @@ if ($your_date < $now){;
 		</div>
 		</div>
         
-                  
-        
-        
-        
-        
-			
-        
-
-
-    
-
- <div class="row" id="parent">
-<div class="col-md-12 child" id="stickMenu" >
+          <div class="col-md-12 child" id="stickMenu" >
     
     
     
@@ -848,7 +836,19 @@ if ($your_date < $now){;
                 </div>
             </div>
     </div>
-     </div>
+     </div>        
+        
+        
+        
+        
+			
+        
+
+
+    
+
+ <div class="row" id="parent">
+
 </div>
         	</div>
 </div><!--CLOSE ROW-->
