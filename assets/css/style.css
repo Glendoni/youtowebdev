@@ -2196,16 +2196,16 @@ body {
     font-size: 11px;
 }
 .actionMenuQty {
-    margin-left: 23px;
+        margin-left: 23px;
     margin-top: -14px;
     position: absolute;
     font-size: 9px;
-    background: #f6f6f6;
+  
     border-radius: 50%;
     padding: 4px;
-    width: 17px;
+    width: 20px;
     text-align: center;
-    color: #000;
+    color: #2B4461;
 }
 .actionNav .nav>li>a:hover, .nav>li>a:focus {
     text-decoration: none;
@@ -2284,8 +2284,20 @@ background-color:#2B4461;
 }
 #stickMenu .actionNav .nav>li>a:hover, .nav>li>a:focus {
  
-    background-color: #2B4461;
+    background-color: #f6f6f6;
 }
+#stickMenu .actionNav .nav>li>a{
+    
+        background: #428BCA;
+}
+
+
+#stickMenu .nav>li>a {
+    
+    color: #428BCA;
+    
+}
+
 /*! Hint.css - v2.2.1 - 2016-03-26
 * http://kushagragour.in/lab/hint/
 * Copyright (c) 2016 Kushagra Gour; Licensed  */

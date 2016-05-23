@@ -610,7 +610,7 @@ $('.box'+bun+'  .actionContact option[value=]').prop('selected','selected');
                     })
 
         if(showSchduledMenu){
-         $('.actionNav a[data="actions_outstanding"]').trigger('click')
+      //   $('.actionNav a[data="actions_outstanding"]').trigger('click')
         }
         
     } 
