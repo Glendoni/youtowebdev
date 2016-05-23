@@ -242,12 +242,14 @@ else
        $action_id = $inputpost['outcomeActionId'];
         $outcome = $inputpost['outcome'];
         $state = $inputpost['status'];
+        $atp = $inputpost['action_type_planned'];
         $result  =  $this->Actions_model->set_action_state($action_id,$user_id,$state,$outcome,$inputpost);
         $output = array(
      'action' => $action_id,
             'user_id' =>$user_id ,
             'state' => $state,
             'result' => $result,
+            'action_type_planned' => $atp ? $atp : false,
             'outcome' => $outcome
         
         );

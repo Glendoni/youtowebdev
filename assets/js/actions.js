@@ -67,12 +67,12 @@ function getActionData(scope = false){ //get all actions in multidimentional jso
 
                 //ADD ALL AFTER LOAD BINGING HERE
                 callbackActionTextBox();
-                getemailengagement();
+                getemailengagement(scope);
                 bindAddCallBackToCompletedAction();
                 add_outcome();
                 bindPillerTitles();
                 removeOutsandingAction();
-                mainMenuQty()
+                mainMenuQty(scope)
                 //$('.follow-up-date').datepicker();
                 var dateToday = new Date();
 $('.actiondate').datetimepicker({ minDate: dateToday });
@@ -284,10 +284,12 @@ function writeactions(data, scope = false){
                         url: urll,
                         success: function(data) {
                          getActionData(true);
+                        
+                          
                         }
                     }); 
             
-                $('.actionAll').trigger('click');
+               // $('.actionAll').trigger('click');
         })
     } 
 function bindAddCallBackToCompletedAction(){
@@ -380,7 +382,13 @@ function bindAddCallBackToCompletedAction(){
                     url: "../"+url,
                     success: function(data) {
 
-                        getActionData();
+                        
+                        
+                        if(data.action_type_planned){
+                        getActionData(true);
+                        }else{
+                          getActionData();  
+                        }
 
                         var submittedFormId = data.followup_action_id;
 
@@ -452,7 +460,7 @@ function bindAddCallBackToCompletedAction(){
          //getActionData();
          
      }
-function getemailengagement(){
+function getemailengagement(scope){
      //actionresults =  actionresult.join();
     var myParam = window.location.href.split("id=");
     var action ;
@@ -505,7 +513,7 @@ function getemailengagement(){
             
             $(items.join( "" )).prependTo('#marketing_action ul');
             //if(i) $('#outstanding h4,.actionMsg h4').hide();
-            mainMenuQty()
+            mainMenuQty(scope)
             
                 
         }
@@ -513,7 +521,7 @@ function getemailengagement(){
 
     });
 }
-    function mainMenuQty(){
+    function mainMenuQty(showSchduledMenu = false){
 
         var action;
         var qtyaction;
@@ -601,9 +609,9 @@ $('.box'+bun+'  .actionContact option[value=]').prop('selected','selected');
                         }
                     })
 
-        
-        
-       
+        if(showSchduledMenu){
+         $('.actionNav a[data="actions_outstanding"]').trigger('click')
+        }
         
     } 
 function intefaceVisibility(){

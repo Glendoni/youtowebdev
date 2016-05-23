@@ -2275,6 +2275,17 @@ border-radius:15px 3px 15px 6px;
 border-radius: 10%;
     
 }
+#stickMenu .hint--top-left:before, .hint--top-right:before, .hint--top:before {
+    border-top-color: #2B4461;
+}
+
+#stickMenu  [data-hint]:after {
+background-color:#2B4461;
+}
+#stickMenu .actionNav .nav>li>a:hover, .nav>li>a:focus {
+ 
+    background-color: #2B4461;
+}
 /*! Hint.css - v2.2.1 - 2016-03-26
 * http://kushagragour.in/lab/hint/
 * Copyright (c) 2016 Kushagra Gour; Licensed  */
