@@ -23,7 +23,7 @@ class Dashboard extends MY_Controller {
 		// array_unshift($providers_options,'All');
 
 		$this->data['pending_actions'] = $this->Actions_model->get_pending_actions($this->get_current_user_id());
-		$this->data['assigned_companies'] = $this->Actions_model->get_assigned_companies($this->get_current_user_id());
+		//$this->data['assigned_companies'] = $this->Actions_model->get_assigned_companies($this->get_current_user_id());
 		$this->data['action_types_array'] = $this->Actions_model->get_action_types_array();
         
         
@@ -98,6 +98,23 @@ class Dashboard extends MY_Controller {
         return $this->load->view('dashboard/lastmonth', $this->data, true);	
         //echo json_encode(array('stats' => $lastmonth));  
     }
+    
+    
+    
+function refactorFavourites($order =false){
+    
+    
+    
+    $output = (array)$this->Actions_model->get_assigned_companies_ajax($this->get_current_user_id(),$order);
+    
+  //echo '<pre>'; print_r($output); echo '</pre>';
+    
+    
+    echo json_encode($output);
+}    
+    
+    
+    
 
 /*
 By: Glen 20/04/2016

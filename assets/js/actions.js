@@ -978,7 +978,7 @@ if(timestamp2 < timestamp && action['action_type_id'] == 11 )
          if(action['action_id'])                                                                                                                                          
             textbox= '<div class="form-group callbackActionTextBox  box'+action['action_id']+'" style="display:none">'+
                 '<form action="Actions/addOutcome" class="outcomeform" data="'+action['action_id']+'" >'+
-                '<textarea class="form-control box'+action['action_id']+'  textarea'+action['action_id']+' " name="outcome" placeholder="Add outcome" required="required" rows="1" style="margin-bottom:5px;"></textarea>'+
+                '<textarea class="form-control box'+action['action_id']+'  textarea'+action['action_id']+' " name="outcome" placeholder="Add outcome" required="required" rows="2" style="margin-bottom:5px;"></textarea>'+
                 ' <div class="form-group form-inline actionForm formOutcome">'+
                                             '<input type="text" class="form-control actiondate" data-date-format="YYYY/MM/DD H:m" name="planned_at" required="required" placeholder="Follow Up Date">'+
                                         '</div>'+

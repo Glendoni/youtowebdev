@@ -259,7 +259,7 @@ function gettags(){
 
 if((/companies/.test(window.location.href))) {    
     var param;
-    var preventtagRemove;
+    var preventtagRemove = [];
     var para  = window.location.href.split("?id=");
     var parent_tag_name = [];
  

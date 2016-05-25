@@ -1231,18 +1231,25 @@
 <!--ASSIGNED-->
     <div role="tabpanel" class="tab-pane fade" id="assigned"><div class="panel panel-default">
               <div class="panel-heading">
-              <h3 class="panel-title">Favourites<span class="badge pull-right"><?php echo count($assigned_companies); ?></span></h3>
+                  
+              <h3 class="panel-title">Favourites</h3>
+                    <span class="badge pull-right sortform" style="margin-top: -22px; margin-left: 5px;">
+                 <form><lable>Arrange By:</lable>
+                     <select type="dropdown" name="" >
+                         <option value>Select</option>
+                         <option value>Company</option>
+                         <option value="1">Pipeline</option>
+                      
+                     </select></form>
+                  </span>
+                <span class="badge pull-right favouritesCount" style="margin-top: -20px;"><?php echo count($assigned_companies); ?></span>    
               </div>
 <div class="panel-body" style="padding:0;">
 
 
-                    <?php if(empty($assigned_companies)) : ?>
-                    <div class="col-md-12">
-                      <div style="margin:10px 0;">
-                      <h4 style="margin: 50px 0 40px 0; text-align: center;">You have no recent activity.</h4>
-                      </div>
-                      </div>
-                    <?php else: ?>
+                    <?php   if(empty($assigned_companies)) :  ?>
+                    
+                    <?php    else: ?>
 
                     <?php foreach ($assigned_companies as $assigned):?>
 

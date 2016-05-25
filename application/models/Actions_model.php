@@ -246,11 +246,31 @@ function get_assigned_companies($user_id)
     
     $this->db->where('user_id',$user_id);
     $this->db->where('active','t');
-    $this->db->order_by("assign_date", "desc"); 
+    $this->db->order_by("name asc, assign_date desc"); 
     $query = $this->db->get('companies');
     return $query->result_object();
 
 }
+    
+function get_assigned_companies_ajax($user_id, $order = false)
+{	
+       
+    
+    $orderby = 'name asc, assign_date desc';
+    if($order)
+        $orderby = 'pipeline asc, assign_date desc';
+    
+    $sql = "SELECT id, name, pipeline
+    FROM companies
+    WHERE user_id=".$user_id."
+    AND active='t'
+    Order BY ".$orderby."
+    ";
+
+    $query = $this->db->query($sql);
+    return $query->result_object();
+}
+    
 function get_recent_stats($period, $team_type)
 {   
     if(!empty($team_type)){
