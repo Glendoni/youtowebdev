@@ -7,7 +7,7 @@
         <!-- /.panel-heading -->
         <div class="panel-body">
        <?php  
-$attributes = array('name' => 'create_company_form', 'class'=>'form-horizontal');
+$attributes = array('name' => 'create_company_form', 'class'=>'form-horizontal create_company_form');
 $hidden = array('create_company_form'=>'1','user_id'=>$current_user['id']);
 echo form_open('',$attributes,$hidden); 
 ?>
@@ -22,7 +22,7 @@ echo form_open('',$attributes,$hidden);
     <div class="col-sm-6">
         <label for="emp_count" class="control-label">Class</label>
     <?php
-    echo form_dropdown('company_class', $companies_classes, (isset($_POST['company_class'])?$_POST['company_class']:'') ,'class="form-control"');
+    echo form_dropdown('company_class', $companies_classes, (isset($_POST['company_class'])?$_POST['company_class']:'') ,'class="form-control company_class"');
     ?>
     </div>
 </div>
@@ -82,8 +82,8 @@ echo form_open('',$attributes,$hidden);
 <div class=" form-group ">
    
     <div class="col-sm-12"> 
-         <label for="address" class="control-label ">Address</label>
-    	<input type="text" name="address" required="required" value="<?php echo isset($_POST['address'])?$_POST['address']:''; ?>" id="address" maxlength="200" class="form-control">
+         <label for="address" class="control-label cr_address ">Address</label>
+    	<input type="text" name="address" required="required" value="<?php echo isset($_POST['address'])?$_POST['address']:''; ?>" id="address" maxlength="200" class="form-control cr_address">
     </div>
 </div>
 <div class=" form-group ">
@@ -119,7 +119,7 @@ echo form_open('',$attributes,$hidden);
 <div class=" form-group ">
     
 	</div>
-  <div class="tradingTypeOptions">  
+  <div class="tradingTypeOptions cr_address">  
    <div class="form-group">
         <div class="col-sm-6">
             <label class="control-label">Add Trading Address</label> </br>
@@ -131,7 +131,7 @@ echo form_open('',$attributes,$hidden);
       
     </div>
 
-<div class="addrTrading">
+<div class="addrTrading cr_address_trading">
 <div class=" form-group ">
 
     <div class="col-sm-6">  

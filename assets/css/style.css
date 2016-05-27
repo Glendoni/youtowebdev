@@ -459,6 +459,40 @@ border-right: 1px solid #e7e7e7;
 	color: #fff;
 }
 
+/* COMAPNY PAGE QUICK VIEW SLIDE*/
+
+
+
+
+.quickview_bar {
+	background-color: rgba(255, 255, 255, 0.88);
+    color: #000;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    text-align: center;
+    border-bottom: 2px solid rgba(248,248,249, .5);
+}
+.quickview_bar .btn {
+	background-color: transparent;
+	border-color: #fff;
+	color: #fff;
+}
+
+.qvSlidebtn{
+    
+    float:right;
+    
+}
+
+.qvlink{
+    
+    list-style: none;
+}
+
+/* END  - COMAPNY PAGE QUICK VIEW SLIDE*/
+
+
+
 /*ACTION COMMENTS BOX*/
 .mic-info { color: #666666;font-size: 11px;margin-top: 5px; }
 
@@ -2297,6 +2331,15 @@ background-color:#2B4461;
     color: #428BCA;
     
 }
+
+.qvRecentCompanies, .qvOverdueActions{
+    
+    list-style: none;
+    
+    
+}
+ 
+
 
 
 .sortform{ display:none;}

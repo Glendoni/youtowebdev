@@ -604,7 +604,7 @@ public function get_campaign_name($campaign)
     public function update_email_events()  //Call this function every 5mins
 	{
        
-        $query = $this->db->query("SELECT id,name, updated_at, sent_id FROM email_campaigns WHERE  date_sent >= '2016-04-01' AND id > 479 ORDER BY updated_at ASC LIMIT 1  ");
+        $query = $this->db->query("SELECT id,name, updated_at, sent_id FROM email_campaigns WHERE  date_sent >= '2016-04-01' AND id > 479 ORDER BY updated_at ASC LIMIT 1");
 
         foreach ($query->result_array() as $row)
         {
@@ -621,7 +621,7 @@ public function get_campaign_name($campaign)
 
                  $this->getContactListDetails($row['id'],$row['sent_id'],$row['name']);
                 
-               // echo $row['id'].' - '.$row['sent_id'].' '.$row['name'];
+             echo $row['id'].' - '.$row['sent_id'].' '.$row['name'];
               
             }
        }
@@ -757,7 +757,7 @@ public function get_campaign_name($campaign)
                      $tagid = $this->addToTags($tagvalue,$check_if_email_exist->company_id);
 
                         if($tagid){
-// echo 'attachTagToCompany_ : '.$check_if_email_exist->company_id . 'Email '.$item['Email'].' Email Contact ID:  ' .$check_if_email_exist->id.' Tag ID: ' .$tagid . '<b<b></b>r>';
+ //echo 'attachTagToCompany_ : '.$check_if_email_exist->company_id . 'Email '.$item['Email'].' Email Contact ID:  ' .$check_if_email_exist->id.' Tag ID: ' .$tagid . '<b<b></b>r>';
 
                             $this->attachTagToCompany($tagid,$check_if_email_exist->company_id);
 
@@ -876,7 +876,7 @@ public function get_campaign_name($campaign)
             $query = $this->db->query("SELECT * FROM company_tags  WHERE tag_id =".$tagid." AND company_id=".$companyID." LIMIT 1");
             if ($query->num_rows() >=1){
             }else{
-//echo 'Add tag to company ' .$tagid . '  ----- ' . $companyID .'<br><br>';       
+echo 'Add tag to company ' .$tagid . '  ----- ' . $companyID .'<br><br>';       
             $data = array(
                 'tag_id' => $tagid,
                 'company_id' => $companyID,

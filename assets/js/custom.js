@@ -77,27 +77,46 @@ $(".source_explanation").prop('required',false);
 //});
 
 
-function getDealAvg(){
-    
-       var avg;
-var sum =0;
-var val = 0;
-var count_lines  = $('.us-initial-rate').length;
-    //loop thru totals
-$('.us-initial-rate').each(function(){
-    if(parseFloat($(this).text())){
-      val = parseFloat($(this).text()) + val;
-    }else{
-      count_lines -1;
+    function getDealAvg(){
+
+               var avg;
+        var sum =0;
+        var val = 0;
+        var count_lines  = $('.us-initial-rate').length;
+            //loop thru totals
+        $('.us-initial-rate').each(function(){
+            if(parseFloat($(this).text())){
+              val = parseFloat($(this).text()) + val;
+            }else{
+              count_lines -1;
+            }
+            });
+        val = val/count_lines;
+        //console.log(parseFloat( val.toFixed(3) ));
+        avg = val ? 'Avg '+ parseFloat( val ).toFixed(2)+'%' : '';
+        $('.us-initial-rate-total').text(avg);
     }
-});
-val = val/count_lines;
-//console.log(parseFloat( val.toFixed(3) ));
-avg = val ? 'Avg '+ parseFloat( val ).toFixed(2)+'%' : '';
-$('.us-initial-rate-total').text(avg);
-}
+
+  if((/companies\/create_company/.test(window.location.href))) {
+        
+        $('.company_class').change(function(){
+            if($(this).val()  == 'PreStartUpWithoutAddress'){
+                $('.cr_address, .cr_address_trading').hide();
+                $('#address').removeAttr('required');
+            }else{
+                    if(typeof $('#address').attr('required') === 'undefined'){
+                        $('#address').attr('required', 'required');
+                    }
+                $('.cr_address').show();
+            }
+         }) 
+    }
 
 $( document ).ready(function() {
+    
+  
+    
+    
     
     $('#add_action_request').click(function(e){
 
@@ -182,8 +201,20 @@ $( document ).ready(function() {
                tsTotalConfig();
             }
         });
-         //GET TEAM STATS END
+         //GET TEAM STATS END 
 
+            getUserFavourites();   
+        
+        
+        
+        $('.sortform form select').change(function(){
+ 
+  getUserFavourites(); 
+
+})
+        
+        
+        
     }
     if(autopilotEmailCompany[1]){ 
     var myParam = window.location.href.split("id=");
@@ -191,7 +222,7 @@ $( document ).ready(function() {
     $.ajax({
     type: "GET",
     dataType: "json",
-    url: "../Marketing/autopilotActions/"+myParam[1],
+    url: "../Marketing/autopilotActions/"+GetUrlParamID(),
     success: function(data) {
     var action;
     var items = [];
@@ -248,7 +279,47 @@ $( document ).ready(function() {
 
     })
 
+ 
+    
 });
+
+
+function getUserFavourites(){
+    
+    var order = $('.sortform form select').val();
+    var pipeline = [];
+        var favourites = [];
+        $.ajax({
+            type: "GET",
+                dataType: "json",
+            url: "dashboard/refactorFavourites/"+order,
+            success: function(data) {
+                
+                $.each( data, function( key, val ) {
+                    pipeline =   val.pipeline ? val.pipeline : '';
+                    favourites.push('<a href="http://localhost:8888/baselist/companies/company?id='+val.id+'" class="load-saved-search"> <div class="row"> <div class="col-xs-8">'+val.name+'</div><div class="col-xs-4"> <span class="label label-'+pipeline+'" style="margin-top: 3px;"> '+pipeline+' </span> </div></div></a>');     
+                    })  
+ $('#assigned .panel-body').html('');
+                    $('#assigned .panel-body').prepend(favourites.join(""));
+
+                    var favouritesCount =  $('#assigned .panel-body a').length;
+
+                    if(favouritesCount != 0){
+                    var favouritesCount = $('#assigned .panel-body a').length;
+                    $('.favouritesCount').text(favouritesCount);
+ $('.sortform').show();
+                    }else{
+
+                    $('.sortform').hide();
+                    $('.favouritesCount').text(0);
+                    $('#assigned .panel-body').prepend('<div class="col-md-12"> <div style="margin:10px 0;"> <h4 style="margin: 50px 0 40px 0; text-align: center;">You have no recent activity.</h4> </div></div>');
+
+                    }
+            }
+        });  
+    
+}
+
 
 function tsTotalConfig(){
     

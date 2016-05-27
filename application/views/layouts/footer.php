@@ -53,10 +53,7 @@
     <script type="text/javascript" src="<?php echo asset_url();?>js/format-numbers.js"></script>
    <script type="text/javascript" src="<?php echo asset_url();?>js/actions.js"></script>
  <script src="<?php echo asset_url();?>js/bootbox.js"></script>
-
- 
- 
-    <script src="<?php echo asset_url();?>js/fe_tagging.js"></script>
+<script src="<?php echo asset_url();?>js/fe_tagging.js"></script>
     
  
 
@@ -64,7 +61,115 @@
  
 <script type="text/javascript">
     
+    function mysql_to_unix(date) {
+    return Math.floor(new Date(date).getTime() / 1000);
+}
+    
 $(document).ready(function(){
+    
+        //QUICKVIEW SLIDE
+ 
+           $('.qvlink  li a').on('click', function(){
+        var location = $(this).attr('data');
+    $.scrollTo('#'+location, 1000, { easing: 'easeInOutExpo', offset: -100, 'axis': 'y' });
+               $(".qv").slideToggle();        
+               
+    })
+       
+          $(".qvSlidebtn").click(function(){
+        $(".qv").slideToggle();
+              
+    });
+    
+    
+    
+  
+    var operations = [];
+    var repLimited = [];
+    var name = [];
+            $.ajax({
+            type: "GET",
+                dataType: "json",
+            url: "<?php echo base_url(); ?>Actions/operations_read",
+            success: function(data) {
+               
+
+  
+                 $.each( data.operations, function( key, val ) {
+
+                    repLimited = ['Limited'];
+                     
+                   name =  val.name.replace(repLimited, '');
+                     
+                     
+        $('.qvRecentCompanies').append('<li><a href="<?php echo base_url();?>companies/company?id='+val.comp_id+'"   >'+name+'</a></li>');
+                 });
+                
+                
+                 $.each( data.outstanding, function( key, val ) {
+                                var dateCompare = (new Date() - Date.parse(val.planned_at))  <= 1000 * 60 * 30;;
+
+                                if(dateCompare == false && typeof val.planned_at != 'undefined'){
+
+                                        $('.qvOverdueActions').append('<li>'+val.planned_at+'</li>');
+                                }else{
+
+                                      $('.qvActionsDueToday').append('<li>'+val.planned_at+'</li>');
+                                }
+        
+                });
+                
+                
+          
+                
+                
+         $(' .compa').hover(function(){
+ var i=0;
+var comp  = $(this).attr('comp');
+ var href = [];
+var nextcampid = [];
+ $('.compa').each(function(){
+//alert(i)
+if($(this).attr('comp') == comp){
+ 
+i= 2;
+}else if(i == 2){
+ 
+//alert( 'Thi is the next camp '+$(this).attr('comp'));
+
+nextcampid   = $(this).attr('comp');
+
+if(!$(this).hasClass('nextcampaign')){
+$(this).addClass('nextcampaign');
+href = $('a[comp='+ comp +']').attr('href');
+
+$('a[comp='+ comp +']').attr('href', '');
+
+$('a[comp='+ comp +']').attr('href', href+'&nextcamp&'+ nextcampid);
+}
+
+ i=777;
+}
+i = i;
+})
+
+});          
+                   
+                
+                //'<li><a href="companies/company?id='+val.page+'" />'+val.company+'</a></li>
+     
+                //$('.eventcount').html(items.length); //update engagement counter
+            }
+    
+        });
+         
+    
+
+    
+   // alert(GetUrlParamID())
+    
+    
+    // END QUICKVIEW SLIDE VIEW
     
 $('#myTabs a').click(function (e) {
   e.preventDefault()
@@ -165,179 +270,246 @@ function saveCompanyHandler(){$('.ch_drop_title').css('background','#7fe3d5');$(
     });
 }
     $( document ).ready(function() {
-// Datetime picker
-$('#start_date').datetimepicker();
-$('#end_date').datetimepicker();
-$('#planned_at').datetimepicker();
-$('.planned_at').datetimepicker();
-$('#actioned_at').datetimepicker();
-$('.button-checkbox').each(function () {
-// Settings
-var $widget = $(this),
-    $button = $widget.find('button'),
-    $checkbox = $widget.find('input:checkbox'),
-    color = $button.data('color'),
-    settings = {
-on: {
-    //icon: 'glyphicon glyphicon-check'
-},
-off: {
-    //icon: 'glyphicon glyphicon-unchecked'
-}
-    };
-// Event Handlers
-$button.on('click', function () {
-    $checkbox.prop('checked', !$checkbox.is(':checked'));
-    $checkbox.triggerHandler('change');
-    updateDisplay();
-});
-$checkbox.on('change', function () {
-    updateDisplay();
-});
-// Actions
-function updateDisplay() {
-    var isChecked = $checkbox.is(':checked');
-    // Set the button's state
-    $button.data('state', (isChecked) ? "on" : "off");
-    // Set the button's icon
-    $button.find('.state-icon')
-.removeClass()
-.addClass('state-icon ' + settings[$button.data('state')].icon);
-    // Update the button's color
-    if (isChecked) {
-$button
-    .removeClass('btn-default')
-    .addClass('btn-' + color + ' active');
-    }
-    else {
-$button
-    .removeClass('btn-' + color + ' active')
-    .addClass('btn-default');
-    }
-}
-// Initialization
-function init() {
-    updateDisplay();
-    // Inject the icon if applicable
-    if ($button.find('.state-icon').length == 0) {
-$button.prepend('<i class="state-icon ' + settings[$button.data('state')].icon + '"></i> ');
-    }
-}
-init();
-    });
-    $('.assign-to-form .ladda-button').click(function(e){
-var btn = $(this);
-var form = btn.closest('form');
-var url = form.attr('action');
-var textbtn = btn.find('span.ladda-label');
-var name = btn.attr('assignto');
-e.preventDefault();
-var l = Ladda.create(this);
-l.start();
-$.post(url, form.serialize(),
-  function(response){
-    
-  })
-.always(function() { 
-    if(typeof name != 'undefined'){
-    textbtn.text('Watched by '+name ); 
-}else{
-    textbtn.text('No Longer Watching');
-    form.closest('.panel').children('.panel-heading').hide();
-}  
-    l.stop(); 
-    btn.attr('disabled','disabled'); 
-});
-return false;
-    });
+            // Datetime picker
+            $('#start_date').datetimepicker();
+            $('#end_date').datetimepicker();
+            $('#planned_at').datetimepicker();
+            $('.planned_at').datetimepicker();
+            $('#actioned_at').datetimepicker();
+            $('.button-checkbox').each(function () {
+            // Settings
+            var $widget = $(this),
+            $button = $widget.find('button'),
+            $checkbox = $widget.find('input:checkbox'),
+            color = $button.data('color'),
+            settings = {
+            on: {
+            //icon: 'glyphicon glyphicon-check'
+            },
+            off: {
+            //icon: 'glyphicon glyphicon-unchecked'
+            }
+            };
+            // Event Handlers
+            $button.on('click', function () {
+            $checkbox.prop('checked', !$checkbox.is(':checked'));
+            $checkbox.triggerHandler('change');
+            updateDisplay();
+            });
+            $checkbox.on('change', function () {
+            updateDisplay();
+            });
+            // Actions
+            function updateDisplay() {
+            var isChecked = $checkbox.is(':checked');
+            // Set the button's state
+            $button.data('state', (isChecked) ? "on" : "off");
+            // Set the button's icon
+            $button.find('.state-icon')
+            .removeClass()
+            .addClass('state-icon ' + settings[$button.data('state')].icon);
+            // Update the button's color
+            if (isChecked) {
+            $button
+            .removeClass('btn-default')
+            .addClass('btn-' + color + ' active');
+            }
+            else {
+            $button
+            .removeClass('btn-' + color + ' active')
+            .addClass('btn-default');
+            }
+            }
+            // Initialization
+            function init() {
+            updateDisplay();
+            // Inject the icon if applicable
+            if ($button.find('.state-icon').length == 0) {
+            $button.prepend('<i class="state-icon ' + settings[$button.data('state')].icon + '"></i> ');
+            }
+            }
+            init();
+            });
+            
+        
+        
+        
+        
+        
+        
+        $('.assign-to-form .ladda-button').click(function(e){
+                
+            
+               
+            var btn = $(this);
+            var form = btn.closest('form');
+            var url = form.attr('action');
+            var textbtn = btn.find('span.ladda-label');
+            var name = btn.attr('assignto');
+            e.preventDefault();
+            var l = Ladda.create(this);
+            l.start();
+            $.post(url, form.serialize(),
+            function(response){
+                whenFravoriteIsClicked()
+            })
+            .always(function() { 
+            if(typeof name != 'undefined'){
+            //textbtn.text('Watched by '+name ); 
+             
+            }else{
+            //textbtn.text('No Longer Watching');
+            //form.closest('.panel').children('.panel-heading').hide();
+            }  
+            l.stop(); 
+            //btn.attr('disabled','disabled'); 
+            });
+            return false;
+        });
+        
+        
+        function whenFravoriteIsClicked(){
+            
+                var favType  = $('.assign-to-form').attr('action');
+                var favTypeEval = favType.search('assignto');
+                var  userBackgroundColor = []; 
+                var  userColor = $('.user-profile div').css('color'); 
+                var  current_user_name = $('#current_user_name').text(); //current_user_name
+                var actUrl = [];
+        
+            if(typeof $('.top-info-holder .label-assigned').css('background-color') == 'undefined'){
+                userBackgroundColor = $('.user-profile div').css('background-color'); 
+                $('.top-info-holder .assign-to-form i').css('color', userBackgroundColor);  
+                
+                $('.top-info-holder .piplineUdate').append('<span class="label label-assigned" style="background-color:'+userBackgroundColor+'; color:'+userColor+';"><i class="fa fa-star"></i>'+current_user_name+'</span>');    
+               actUrl = favType.replace('assignto', 'unassign');
 
-    // reset button on page load
-    $('.submit_btn').button('reset');
-    // on click action
-    // VALIDATION FOR CONTACT FORM 
-    $('.submit_btn').click(function(e){
+            }else if($('.top-info-holder  .label-assigned').css('display') == 'none' && favTypeEval >= 1 ){
+                 userBackgroundColor = $('.user-profile div').css('background-color'); 
+                $('.top-info-holder .label-assigned').show();
+                $('.top-info-holder .assign-to-form i').css('color', userBackgroundColor);
+                actUrl = favType.replace('assignto', 'unassign'); 
+                
+            }else{
 
-var btn = $(this);
-var form = btn.closest('form');
-var url = form.attr('action');
-var loading_display_id = btn.attr('loading-display');
-var loading_display = $('#'+loading_display_id);
-loading_display.attr('style','display:block;');
-e.preventDefault();
-btn.button('loading');
-$.post(url, form.serialize(),
-  function(response){
-    btn.removeClass('btn-primary').addClass('btn-success').text('Saving...');
-  })
-.fail(function(response) {
-    var error = jQuery.parseJSON(response.responseText)
-    console.log(error['error']);
-    form.find('#error_box').html(error['error']);
-    form.find('#error_box').show();
-    btn.addClass('btn-primary').removeClass('btn-success').text('Save');
-    btn.button('reset');
-})
-.success(function(){
-    location.reload(true); 
-})
-.always(function() {  
-    
-});
-return true;
-    });
-    // reset button on load 
-    $('.loading-btn').button('reset');
-    // Click function  
-    $('.loading-btn').click(function () {
-    var btn = $(this)
-    btn.button('loading')
-    });
+                $('.top-info-holder .label-assigned').hide();
+                $('.top-info-holder  .assign-to-form i').css('color', '#DCDCDC'); 
+
+                    actUrl = favType.replace('unassign', 'assignto');    
+            }
+            
+            $('.top-info-holder  .assign-to-form').attr('action', actUrl);
+        }
+        
+        
+
+            // reset button on page load
+            $('.submit_btn').button('reset');
+            // on click action
+            // VALIDATION FOR CONTACT FORM 
+            $('.submit_btn').click(function(e){
+
+            var btn = $(this);
+            var form = btn.closest('form');
+            var url = form.attr('action');
+            var loading_display_id = btn.attr('loading-display');
+            var loading_display = $('#'+loading_display_id);
+            loading_display.attr('style','display:block;');
+            e.preventDefault();
+            btn.button('loading');
+            $.post(url, form.serialize(),
+            function(response){
+            btn.removeClass('btn-primary').addClass('btn-success').text('Saving...');
+            })
+            .fail(function(response) {
+            var error = jQuery.parseJSON(response.responseText)
+            console.log(error['error']);
+            form.find('#error_box').html(error['error']);
+            form.find('#error_box').show();
+            btn.addClass('btn-primary').removeClass('btn-success').text('Save');
+            btn.button('reset');
+            })
+            .success(function(){
+            location.reload(true); 
+            })
+            .always(function() {  
+
+            });
+            return true;
+            });
+            // reset button on load 
+            $('.loading-btn').button('reset');
+            // Click function  
+            $('.loading-btn').click(function () {
+            var btn = $(this)
+            btn.button('loading')
+            });
+            // Email pop up form 
+            $('.template_selector').change(function() {
+            form = $(this).closest("form");
+            form.find(".info_box").hide();
+            form.find(".template_"+$(this).val()).show();
+            });
+        
+           fravoriteIcon();
+        
+}); //end of document ready
     // Email pop up form 
-    $('.template_selector').change(function() {
-form = $(this).closest("form");
-form.find(".info_box").hide();
-form.find(".template_"+$(this).val()).show();
-    });
-    });
-// Email pop up form 
-// function validate_form_email(form){
-//     if(form.)
-//     return false;
-// }
-function validateActionForm(form){
-    $(form).siblings().hide();
-    var outcome_box_id = $(form).attr('outcome-box');
-    var outcome_box = $('#'+outcome_box_id);
-    console.log(outcome_box.find('textarea').val());
-    if(!outcome_box.find('textarea').val())
-    {
-outcome_box.show('slow');
-outcome_box.children('textarea').focus();
-outcome_box.children('button').click(function() {
-    $(form).submit();
-});
-return false;
+    // function validate_form_email(form){
+    //     if(form.)
+    //     return false;
+    // }
+    function fravoriteIcon(){
+    
+    if(typeof $('.top-info-holder .label-assigned').css('background-color') != 'undefined'){
+    var  userBackgroundColor = $('.user-profile div').css('background-color'); $('.assign-to-form i').css('color', userBackgroundColor);
+    }else{
+        
+       $('.assign-to-form i').css('color', '#DCDCDC'); 
+        
     }
-    else
-    {
-$(form).find('input[name="outcome"]').val(outcome_box.find('textarea').val());
-return true;
-    }
+        
+        
+        
+    
 }
-    </script>
-<script type="text/javascript" src="<?php echo asset_url();?>js/custom.js"></script>
-    <script type="text/javascript">
-$(document).ready(function(){
-    $(".include-exclude-drop").change(function(){
-$( ".include-exclude-drop option:selected").each(function(){
-    if($(this).val()=="exclude"){
-$(".contacted-show").show();
-    }
-    if($(this).val()=="include"){
-$(".contacted-show").hide();
-    }
-});
+    
+    
+
+    function validateActionForm(form){
+        $(form).siblings().hide();
+        var outcome_box_id = $(form).attr('outcome-box');
+        var outcome_box = $('#'+outcome_box_id);
+        console.log(outcome_box.find('textarea').val());
+        if(!outcome_box.find('textarea').val())
+        {
+    outcome_box.show('slow');
+    outcome_box.children('textarea').focus();
+    outcome_box.children('button').click(function() {
+        $(form).submit();
     });
+    return false;
+        }
+        else
+        {
+    $(form).find('input[name="outcome"]').val(outcome_box.find('textarea').val());
+    return true;
+        }
+    }
+        </script>
+    <script type="text/javascript" src="<?php echo asset_url();?>js/custom.js"></script>
+        <script type="text/javascript">
+    $(document).ready(function(){
+        $(".include-exclude-drop").change(function(){
+    $( ".include-exclude-drop option:selected").each(function(){
+        if($(this).val()=="exclude"){
+    $(".contacted-show").show();
+        }
+        if($(this).val()=="include"){
+    $(".contacted-show").hide();
+        }
+    });
+        });
 });
     </script>
  <?php //if(ENVIRONMENT !== 'production'): ?>
@@ -405,7 +577,27 @@ $(document).ready(function(){
 });
 });//]]> 
 
+   
         
+         function GetUrlParamID(){
+var para = window.location.href.split("id=");
+    var param;
+        param = para[1];
+    if(isInt(param)){
+//console.log('jinn'+param[1])
+        return param = para[1];
+    }else{
+        param  = param.split('&');
+
+    if(!isInt(param)){
+        param  = param[0].split('#');  
+
+    }
+
+
+    }
+    return param = param[0]; 
+} 
 
 </script>
 <!--COMBINE MULTIPLE JS FILES-->

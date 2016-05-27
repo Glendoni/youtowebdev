@@ -104,7 +104,7 @@
                <a href="#" class="dropdown-toggle user-profile" data-toggle="dropdown">
 
                     <?php $user_icon = explode(",", ($current_user['image'])); echo "<div class='circle' style='float: left;margin-top: 0px;margin-right: 10px;width: 20px;height: 20px;border-radius: 15px;font-size: 8px;line-height: 20px;text-align: center;font-weight: 700;background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
-                    <?php echo $current_user['name'] ?> <b class="caret"></b></a>
+                   <span id="current_user_name"> <?php echo $current_user['name'] ?></span> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <a href="<?php echo site_url(); ?>users/profile"><i class="fa fa-fw fa-user"></i> Profile</a>

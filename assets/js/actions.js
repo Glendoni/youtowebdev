@@ -1147,25 +1147,7 @@ if(day == 1 || day == 21 || day == 31) dateSuffix = 'st';
     } 
      
      
- function GetUrlParamID(){
-var para = window.location.href.split("id=");
-    var param;
-        param = para[1];
-    if(isInt(param)){
-//console.log('jinn'+param[1])
-        return param = para[1];
-    }else{
-        param  = param.split('&');
-
-    if(!isInt(param)){
-        param  = param[0].split('#');  
-
-    }
-
-
-    }
-    return param = param[0]; 
-}        
+       
 
 
 
