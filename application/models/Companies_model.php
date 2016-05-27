@@ -40,6 +40,7 @@ class Companies_model extends CI_Model {
 		$arrayNames = array(
 			'Unknown' => 'Unknowns',
 			'PreStartUp' => 'Pre-Start Up',
+            'PreStartUpWithoutAddress' => 'Pre-Start Up Without Address',
 			'StartUp' => 'Start Up',
 			'UsingFinance' => 'Using Finance',
 			'PermOnly' => 'Perm Only',
@@ -830,7 +831,7 @@ class Companies_model extends CI_Model {
 			$address = array(
 				'company_id' => $new_company_id,
 				'country_id' => $post['country_id'],
-				'address' => $post['address'],
+				'address' => !empty($post['address'])?$post['address']:'',
 				'lat' => !empty($post['lat'])?$post['lat']:NULL,
 				'lng' => !empty($post['lng'])?$post['lng']:NULL,
 				'type' => !empty($post['type'])?$post['type']:"Registered Address",
@@ -844,7 +845,6 @@ class Companies_model extends CI_Model {
         if(isset($post['tradingArr'])){
             
             if($post['tradingArr'] == 1) { //the same so copy
-                
                 
                 	$address = array(
 				'company_id' => $new_company_id,
