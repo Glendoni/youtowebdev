@@ -174,17 +174,24 @@ class Companies extends MY_Controller {
 			$this->form_validation->set_rules('company_class', 'company_class', 'xss_clean');
 			$this->form_validation->set_rules('eff_from','eff_from','xss_clean');
 			// address
-			$this->form_validation->set_rules('country_id', 'country_id', 'xss_clean|required');
-			$this->form_validation->set_rules('address', 'address', 'xss_clean|required');
+			$this->form_validation->set_rules('country_id', 'country_id', 'xss_clean');
+			$this->form_validation->set_rules('address', 'address', 'xss_clean'); 
+            // removed required to allow pre startup w/n address
 			$this->form_validation->set_rules('lat', 'latitude', 'xss_clean');
 			$this->form_validation->set_rules('lng', 'longitude', 'xss_clean');
 			$this->form_validation->set_rules('type', 'type', 'xss_clean');
             $this->form_validation->set_rules('trading_same_as_address', 'trading_same_as_address', 'xss_clean');
-            
-            
-            
+
 			if($this->form_validation->run())
 			{
+                if($this->input->post('company_class')){   
+                }else{
+                     if(!$this->input->post('address')){ // 
+                        
+                        $this->set_message_error('Error in the database while creating company');
+                        redirect('/companies/create_company','location');
+                    } 
+            }
 				$result = $this->Companies_model->create_company($this->input->post());
 				if($result == TRUE) {
 					$this->set_message_success('New company successfully created');
@@ -260,19 +267,28 @@ class Companies extends MY_Controller {
 	
 	public function company()
 	{
+        
+         
+        
+        
+        
+        
+        
+        
 		if($this->input->get('id'))
 		{
-
-
+ 
+            $inputID = $this->input->get('id');
+           $this->Actions_model->operations_store_check($inputID, $this->data['current_user']['id'], 1);
+        
             
             $company_id = array(
                    'selected_company_id'  => $this->input->get('id')
                );
 
-$this->session->set_userdata($company_id);
+                $this->session->set_userdata($company_id);
             
-            
-            
+            //END
             
             
 			$months = array();
