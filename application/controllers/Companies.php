@@ -278,8 +278,8 @@ class Companies extends MY_Controller {
 		if($this->input->get('id'))
 		{
  
-            $inputID = $this->input->get('id');
-           $this->Actions_model->operations_store_check($inputID, $this->data['current_user']['id'], 1);
+            //$inputID = $this->input->get('id');
+           //$this->Actions_model->operations_store_check($inputID, $this->data['current_user']['id'], 1);
         
             
             $company_id = array(

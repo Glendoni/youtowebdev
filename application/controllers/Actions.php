@@ -264,9 +264,44 @@ else
     function removeOutsandingaction(){
         
        // $this->Actions_model->create();
-        $rap = $this->input->post('big');
-                     
-                      echo json_encode(array('glen' =>$rap ));
+       // $rap = $this->input->post('big');
+         //             echo json_encode(array('glen' =>$rap ));
+    }
+    
+    
+    function operations_store(){
+         
+  //$result  = $this->Actions_model->operations_store_get($this->data['current_user']['id']);
+        
+    //  print_r($result);
+        
+        
+        
+    //echo $this->Actions_model->operations_store_delete(154537);
+       // echo json_encode();
+    }
+    
+    
+    function operations_read(){
+        
+        //$this->load->library('session');
+        header('Content-Type: application/json');
+       // $input['operations']  =  $this->Actions_model->operations_store_get($this->data['current_user']['id']);   //$this->input->post();
+          // $input['outstanding']  =   $this->qvActions();  
+    
+        
+    //echo $this->session->userdata('selected_company_id');
+           
+       // echo  json_encode($input);
+    
+    }
+    
+    
+    function qvActions(){
+        
+        return   $this->Actions_model->get_actions_outstanding(154537,5);
+        
+        
     }
     
 }
