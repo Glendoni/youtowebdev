@@ -55,7 +55,7 @@ endif; ?>
 	<?php endif; ?>
 	</div><!--END ROW-->
 
-	<div class="row" style="margin-top:5px; text-align:center;">
+	<div class="row piplineUdate" style="margin-top:5px; text-align:center;">
 	<?php if(!empty($company['pipeline'])): ?>
 	<span class="label pipeline label-<?php echo str_replace(' ', '', $company['pipeline']); ?>"><?php echo $company['pipeline']?>
 	<?php endif; ?>
@@ -331,7 +331,7 @@ if ($your_date < $now){;
 		
 		<div class="col-md-12">
 		<div class="panel panel-default">
-		<div class="panel-heading">
+		<div class="panel-heading" id="qvfinancials">
 		Financials
 		</div>
 		<!-- /.panel-heading -->
@@ -552,7 +552,7 @@ if ($your_date < $now){;
         <div class="tag-tabs" id="tags-anchor">
   <div class="col-md-12">
     <div class="panel panel-default">
-        <div class="panel-heading">
+        <div class="panel-heading" id="qvTags">
 			Tags
 			</div>
         <!-- /.panel-heading -->
@@ -854,9 +854,28 @@ if ($your_date < $now){;
 </div><!--CLOSE ROW-->
     <?php //hide core page END ?>
        <?php endif; ?>
+    
+    
+    <div class="bottom-alert">
+
+</div>
+    
+    
  </div>
    
 <script>
+    //QUICKVIEW SLIDE
+ 
+  
+    
+    
+    
+    //QUICKVIEW SLIDE VIEW
+    
+    
+    
+    
+    
 $('#sidebar').affix({
       offset: {
         top: 245
