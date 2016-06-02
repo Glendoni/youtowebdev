@@ -710,6 +710,10 @@ h2.company-header a:hover {
     margin: auto;
 
 }
+.modal-body .label-Customer {
+	font-size: 14px;
+	font-weight: 600;
+}
 .label-Proposal {
 	background-color: #45AE7C;
 	color: #fff;
@@ -717,6 +721,10 @@ h2.company-header a:hover {
  	padding-right: 5px;
   	margin-top: 10px;
     margin: auto;
+}
+.modal-body .label-Proposal {
+	font-size: 14px;
+	font-weight: 600;
 }
 .label-Unsuitable {
 	background-color: #B80000;
