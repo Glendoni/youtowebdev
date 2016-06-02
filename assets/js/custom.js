@@ -297,7 +297,7 @@ function getUserFavourites(){
                 
                 $.each( data, function( key, val ) {
                     pipeline =   val.pipeline ? val.pipeline : '';
-                    favourites.push('<a href="http://localhost:8888/baselist/companies/company?id='+val.id+'" class="load-saved-search"> <div class="row"> <div class="col-xs-8">'+val.name+'</div><div class="col-xs-4"> <span class="label label-'+pipeline+'" style="margin-top: 3px;"> '+pipeline+' </span> </div></div></a>');     
+                    favourites.push('<a href="./companies/company?id='+val.id+'" class="load-saved-search"> <div class="row"> <div class="col-xs-8">'+val.name+'</div><div class="col-xs-4"> <span class="label label-'+pipeline+'" style="margin-top: 3px;"> '+pipeline+' </span> </div></div></a>');     
                     })  
  $('#assigned .panel-body').html('');
                     $('#assigned .panel-body').prepend(favourites.join(""));
