@@ -1232,17 +1232,20 @@
     <div role="tabpanel" class="tab-pane fade" id="assigned"><div class="panel panel-default">
               <div class="panel-heading">
                   
-              <h3 class="panel-title">Favourites</h3>
-                    <span class="badge pull-right sortform" style="margin-top: -22px; margin-left: 5px;">
-                 <form><lable>Arrange By:</lable>
-                     <select type="dropdown" name="" >
-                         <option value>Select</option>
+              <h3 class="panel-title">Favourites
+              <span class="badge pull-right favouritesCount" style=""><?php echo count($assigned_companies); ?></span>    
+                    <span class="pull-right sortform" style="">
+                                  <form class="form-inline">
+<small style="color:#fff;">Arrange By:</small>
+                     <select type="dropdown" name="" class="form-control" style="height:auto; font-size:11px; margin-right:10px;">
                          <option value>Company</option>
                          <option value="1">Pipeline</option>
                       
+                     </select>
+                      
                      </select></form>
                   </span>
-                <span class="badge pull-right favouritesCount" style="margin-top: -20px;"><?php echo count($assigned_companies); ?></span>    
+                </h3>
               </div>
 <div class="panel-body" style="padding:0;">
 
