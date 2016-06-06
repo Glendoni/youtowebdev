@@ -1,7 +1,9 @@
 <?php if(empty($companies)): ?>
 	<div class="alert alert-warning">No companies found</div>
 <?php else: ?>
-<?php  foreach ( $companies as $company):  ?>
+
+
+<?php $i = 0; foreach ( $companies as $company):  ?>
 <?php $this->load->view('companies/edit_box.php',array('company'=>$company)); ?>
 <?php $this->load->view('companies/create_contact_box.php',array('company'=>$company)); ?>
 <!--ANCHOR OFFSET-->
@@ -9,7 +11,7 @@
 <div class="panel <?php if(isset($company['assigned_to_name'])): ?> panel-primary <?php else: ?> panel-default <?php endif; ?> company">
 	<div class="panel-body">
     <div class="row">
-		<div class="col-sm-12">
+		<div class="col-sm-12 ">
 				<?php if (isset($company['parent_name'])): ?>
 			<div class="subsidiary">
 			<span class="label label-danger"><a href="<?php echo site_url();?>companies/company?id=<?php echo $company['parent_id'];?>"  <?php if(($current_user['new_window']=='t')): ?> target="_blank"<?php endif; ?>>Subsidiary of <?php echo $company['parent_name'];?> <i class="fa fa-external-link"></i></a></span>
@@ -20,14 +22,23 @@
 			</div>
 		<?php endif; ?>
 		<h2 class="company-header">
-		<a href="<?php echo site_url();?>companies/company?id=<?php echo $company['id'];?>
-				<?php echo !empty($current_campaign_id)?'&campaign_id='.$current_campaign_id:''; ?>" <?php if(($current_user['new_window']=='t')): ?> target="_blank"<?php endif; ?>>
-	<?php $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' );echo str_replace($words, ' ',$company['name']); ?></a>
+		
+            
+            
+            
+            <a href="<?php echo site_url();?>companies/company?id=<?php echo $company['id'];?>
+				<?php echo !empty($current_campaign_id)?'&campaign_id='.$current_campaign_id:''; ?>" <?php if(($current_user['new_window']=='t')): ?> target="_blank"<?php endif; ?> class="compa"  data-camp="pos<?php echo $i++ ; ?>" comp="<?php echo $company['id'];?>">
+	<?php $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' );echo str_replace($words, ' ',$company['name']); ?><?php echo $i++ ; ?></a>
+            
+            
+            
+            
+            
 	<?php if(isset($company['assigned_to_name']) and !empty($company['assigned_to_name'])): ?>
 		<?php if($company['assigned_to_id'] == $current_user['id']) : ?>	
 			<?php  $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'], 'page_number' => (isset($current_page_number))? $current_page_number:'');
 			echo form_open('companies/unassign',array('name' => 'assignto', 'class'=>'assign-to-form', 'style'=>'display: inline;'),$hidden); ?>
-			<button type="submit" class="assigned-star ladda-button" data-style="expand-right" data-size="1">
+			<button type="submit" class="assigned-star ladda-button" data-style="expand-right"  data-size="1">
 <i class="fa fa-star"></i>
 </button>
 			<?php echo form_close(); ?>
@@ -38,9 +49,14 @@
 
 	<?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'], 'page_number' => (isset($current_page_number))? $current_page_number:'');
 	echo form_open(site_url().'companies/assignto',array('name' => 'assignto', 'class'=>'assign-to-form', 'style'=>'display: inline;'),$hidden); ?>
-	<button type="submit" assignto="<?php echo $current_user['name']; ?>" class="unassigned-star ladda-button" data-style="expand-right" data-size="1">
+	<button type="submit" assignto="<?php echo $current_user['name']; ?>" class="unassigned-star ladda-button" data="<? echo $company['id']; ?>" data-style="expand-right" data-size="1">
+        
+        <?php //echo '<h2> '. $company['id']. ' </h2>'; ?>
+        
+        
 <i class="fa fa-star"></i>
 </button>
+    
 	<?php echo form_close(); ?>
 	<?php endif; ?>
 </h2>
@@ -53,7 +69,7 @@
 </h5>
 	<?php endif; ?>
 			</div>
-			<div class="col-sm-12" style="margin-top:5px; margin-bottom: 15px; text-align:center;">
+			<div class="col-sm-12 " style="margin-top:5px; margin-bottom: 15px; text-align:center;">
 <?php if(isset($company['pipeline'])): ?>
 	<span class="label pipeline label-<?php echo str_replace(' ', '', $company['pipeline']); ?>"><?php echo $company['pipeline']?>
 	<?php endif; ?>
