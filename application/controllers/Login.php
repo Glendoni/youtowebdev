@@ -14,9 +14,12 @@ class Login extends MY_Controller {
 			$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|callback_check_database');
 			$this->form_validation->run();
 		}
-
+        
+        
+        $baseUrl = base_url();
+ 
 		if($this->session->userdata('logged_in')){
-			$not_redirectable = array("http://staging-baselist.herokuapp.com/", "http://baselist.herokuapp.com/", "http://baselist/","http://staging-baselist.herokuapp.com/Marketing/loaddata","https://staging-baselist.herokuapp.com/Marketing/loaddata","https://staging-baselist.herokuapp.com/Marketing/autopilotActions/undefined","https://baselist.herokuapp.com/Marketing/autopilotActions/undefined","http://baselist.herokuapp.com/Marketing/loaddata","http://localhost:8888/baselist/Marketing/loaddata","https://baselist.herokuapp.com/companies/autocomplete/","https://staging-baselist.herokuapp.com/companies/autocomplete/");
+			$not_redirectable = array("http://staging-baselist.herokuapp.com/", "http://baselist.herokuapp.com/", "http://baselist/","http://staging-baselist.herokuapp.com/Marketing/loaddata","https://staging-baselist.herokuapp.com/Marketing/loaddata","https://staging-baselist.herokuapp.com/Marketing/autopilotActions/undefined","https://baselist.herokuapp.com/Marketing/autopilotActions/undefined","http://baselist.herokuapp.com/Marketing/loaddata","http://localhost:8888/baselist/Marketing/loaddata","https://baselist.herokuapp.com/companies/autocomplete/","https://staging-baselist.herokuapp.com/companies/autocomplete/","https://staging-baselist.herokuapp.com/Actions/operations_read/","https://baselist.herokuapp.com/Actions/operations_read/", $baseUrl.'Actions/operations_read');
 			if($this->session->userdata('last_page') and (!in_array($this->session->userdata('last_page'),$not_redirectable)) and !$this->is_ajax_request()){
 				redirect($this->session->userdata('last_page'));
 			}else{
