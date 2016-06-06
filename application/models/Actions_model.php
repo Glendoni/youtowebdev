@@ -109,13 +109,13 @@ function get_marketing_actions_two($user_id)
     
 }
     
-function get_actions_outstanding($company_id)
+function get_actions_outstanding($company_id,$limit =100)
 {
     $category_exclude = array('7', '20');
     $data = array(
         'a.company_id' => $company_id,
         );
-    $this->db->select('a.company_id, a.id "action_id",a.followup_action_id,a.comments,a.planned_at,a.action_type_id,u.name ,c.first_name,c.last_name,c.phone,comp.initial_rate,c.email,a.user_id,c.id "contact_id",a.created_at as "created_at",a.actioned_at as "actioned_at",a.planned_at, u.image ,comp.name as "company_name",');
+    $this->db->select('a.company_id, a.id "action_id",a.followup_action_id,a.comments,a.planned_at,a.action_type_id,u.name ,c.first_name,c.last_name,c.phone,comp.initial_rate,c.email,a.user_id,c.id "contact_id",a.created_at as "created_at",a.actioned_at as "actioned_at", at.name as actionType, a.planned_at, u.image ,comp.name as "company_name",');
     $this->db->where('a.planned_at IS NOT NULL', null);
     $this->db->where('a.actioned_at IS NULL', null);
     $this->db->where('a.cancelled_at IS NULL', null);
@@ -125,6 +125,7 @@ function get_actions_outstanding($company_id)
     $this->db->join('companies comp', 'a.company_id = comp.id', 'left');
     $this->db->join('action_types at', 'a.action_type_id = at.id', 'left');
     $this->db->order_by('a.actioned_at desc, a.cancelled_at desc,a.planned_at desc');
+     $this->db->limit($limit);
     $query = $this->db->get_where('actions a', $data);
    //echo $this->db->last_query();
     return $query->result_object();
@@ -765,9 +766,6 @@ function set_action_state($action_id,$user_id,$state,$outcome,$post)
         
         }
         
-        
-        
-        
         return true;
     } 
     
@@ -922,5 +920,77 @@ function delete_campaign($id,$user_id)
    
    return  $number;
     }
+    
+    function operations_store($comp_id,$user_id,$operation){
+         $actiondata = array(
+        'company_id' 	=> $comp_id,
+        'user_id' 		=> $user_id,
+        'operation' => $operation,
+        'created_at' 	=> date('Y-m-d H:i:s'),
+        );
 
+    $query = $this->db->insert('operations', $actiondata);
+    return $this->db->insert_id();
+        
+        
+    }
+    
+    function  operations_store_check($comp_id,$user_id,$operation){
+        
+        $query = $this->db->query("SELECT   id  FROM operations WHERE user_id=".$user_id." AND company_id=".$comp_id."   LIMIT 1");
+        
+     if ($query->num_rows() < 1 ){
+     //echo 'Hi Mate';
+             $query = $this->db->query("SELECT   *  FROM operations WHERE user_id=".$user_id."   ORDER BY id ASC");
+             $row = $query->row();
+
+                if ($query->num_rows() <=6 && $comp_id != $row->comp_id)
+                {
+                    $this->operations_store($comp_id,$user_id,$operation);
+                    //return   $row ;
+                }
+
+                if ($query->num_rows() > 5){
+                    
+                    $this->operations_store_delete($row->id);
+
+                    //return $row->id;
+                }
+
+         }
+        
+    }
+    
+     function  operations_store_get($user_id,$comp_id){
+        
+        $query = $this->db->query("SELECT ops.user_id, c.id as comp_id, c.name FROM operations ops
+LEFT JOIN companies c
+ON ops.company_id =c.id
+WHERE ops.user_id=".$user_id." 
+AND company_id != ".$comp_id."
+ORDER BY ops.id");
+       
+             return   $query->result_array(); 
+         
+        
+        
+    }
+    
+    
+    
+    function operations_store_delete($id){
+      
+        echo $id;
+        $this->db->where('id', $id);
+        $this->db->delete('operations');
+        
+     
+        
+        
+    }
+    
+
+    
+    
+     
 }

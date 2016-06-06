@@ -184,7 +184,7 @@ ON tc.id = t.category_id
         
         
          $eff_from = $this->dateTrasnformer($post['eff_from']);
-            $eff_to  = $this->dateTrasnformer($post['eff_to']); 
+         $eff_to  = $this->dateTrasnformer($post['eff_to']); 
         
          $data = array(
           'updated_at' => date('Y-m-d H:i:s'),
