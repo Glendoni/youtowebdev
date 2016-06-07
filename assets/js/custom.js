@@ -101,12 +101,16 @@ $(".source_explanation").prop('required',false);
         
         $('.company_class').change(function(){
             if($(this).val()  == 'PreStartUpWithoutAddress'){
-                $('.cr_address, .cr_address_trading').hide();
+                $('.cr_address, .cr_address_trading').hide();   
+                
+                $('.tradingType').prop( "disabled", true );
+
                 $('#address').removeAttr('required');
             }else{
                     if(typeof $('#address').attr('required') === 'undefined'){
                         $('#address').attr('required', 'required');
                     }
+                 $('.tradingType').prop( "disabled", false );
                 $('.cr_address').show();
             }
          }) 
