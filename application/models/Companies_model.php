@@ -835,6 +835,7 @@ class Companies_model extends CI_Model {
 				'lat' => !empty($post['lat'])?$post['lat']:NULL,
 				'lng' => !empty($post['lng'])?$post['lng']:NULL,
 				'type' => !empty($post['type'])?$post['type']:"Registered Address",
+                'created_at' 	=> date('Y-m-d H:i:s'),
 				'created_by'=> $post['user_id'],
 
 				);
@@ -853,6 +854,7 @@ class Companies_model extends CI_Model {
 				'lat' => !empty($post['lat'])?$post['lat']:NULL,
 				'lng' => !empty($post['lng'])?$post['lng']:NULL,
 				'type' => "Trading Address",
+                'created_at' 	=> date('Y-m-d H:i:s'),
 				'created_by'=> $post['user_id'],
 
 				);
@@ -871,6 +873,7 @@ class Companies_model extends CI_Model {
 				'lat' => !empty($post['lat'])?$post['lat']:NULL,
 				'lng' => !empty($post['lng'])?$post['lng']:NULL,
 				'type' => "Trading Address",
+                'created_at' 	=> date('Y-m-d H:i:s'),    
 				'created_by'=> $post['user_id'],
 
 				);
