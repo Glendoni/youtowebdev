@@ -86,7 +86,7 @@ WHERE contacts.company_id=".$company_id." order by last_name asc";
         //$contact->linkedin_id = $linkedin_id;
         $parts = explode("?",$linkedin_id); 
 		$li_id = $parts['0'];
-		$contact->linkedin_id = $li_id;
+		$contact->linkedin_id = !empty($li_id)?$li_id:NULL;;
 
         //if(strpos($linkedin_id, '&') !== false) {
 		//$revised_linkedin_id = str_replace(array('.', ','), '' , preg_replace('/[^0-9,..]/i', '', $li_id));
