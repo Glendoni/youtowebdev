@@ -132,7 +132,7 @@ if ($company['actioned_at1'] > 0){
 </div>
 </div>
 <div class="col-md-6 col-lg-6 col-sm-6">
-<div><strong> Schduled</strong></div>
+<div><strong> Schedule</strong></div>
 <?php if (empty($company['planned_at2'])): ?>
 	None
 <?php else: ?>
