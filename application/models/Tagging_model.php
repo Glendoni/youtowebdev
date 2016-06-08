@@ -119,13 +119,13 @@ ON tc.id = t.category_id
             $eff_to  = $this->dateTrasnformer($post['eff_to']); 
         
         $data = array(
-          'category_id' => $itemid,
-         'name' => quotes_to_entities(ucwords($post['name'])),
+           'category_id' => $itemid,
+           'name' => quotes_to_entities(ucwords($post['name'])),
            'tag_type' =>  1,
            'created_at' => date('Y-m-d'),
            'eff_from' =>  trim($eff_from),
            'eff_to' =>  trim($eff_to) ? trim($eff_to) : NULL,
-          'created_by' => $userId
+           'created_by' => $userId
        );
         
        $this->db->insert('tags', $data);
@@ -401,14 +401,14 @@ ON tc.id = t.category_id
     function feAddTag($post, $userID)
     {
         
-        $getTagEffFromDate  = $this->getTagEffFromDate($post['tagid']);
+        //$getTagEffFromDate  = $this->getTagEffFromDate($post['tagid']); //removed. No need to keep full track of original date added
         $checkForDuplicateEntry = $this->checkForDuplicateEntry($post['tagid'],$post['companyID']);
         
         if($checkForDuplicateEntry){
         
             $arrSql = array(
             'tag_id' => $post['tagid'],
-                 'eff_from' => $getTagEffFromDate,
+                 'eff_from' => date('Y-m-d'),
                  'created_by' => $userID,
                 'company_id' => $post['companyID']
             );
