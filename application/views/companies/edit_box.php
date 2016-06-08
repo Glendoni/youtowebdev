@@ -158,7 +158,7 @@
                     </div>
                 </div>
 
-                <div class="col-sm-6 col-md-3">
+                <div class="col-sm-6 col-md-3" style="display:none;">
                     <div class="row">
                         <div class="col-xs-6 col-sm-6 col-md-6" style="padding-right:2px;">
                             <div class=" form-group ">
