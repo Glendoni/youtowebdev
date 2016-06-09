@@ -61,122 +61,164 @@
  
 <script type="text/javascript">
     
+    
+   
+    
+    
+    
+    
+    
+    
+    
     function mysql_to_unix(date) {
     return Math.floor(new Date(date).getTime() / 1000);
 }
     
 $(document).ready(function(){
-    
+    bindFavorites()
         //QUICKVIEW SLIDE
  
-           $('.qvlink  li a').on('click', function(){
+    $('.qvlink  li a').on('click', function(){
         var location = $(this).attr('data');
-    $.scrollTo('#'+location, 1000, { easing: 'easeInOutExpo', offset: -100, 'axis': 'y' });
-               $(".qv").slideToggle();        
+        $.scrollTo('#'+location, 1000, { easing: 'easeInOutExpo', offset: -100, 'axis': 'y' });
+        $(".qv").slideToggle();        
                
     })
        
-          $(".qvSlidebtn").click(function(){
+    $(".qvSlidebtn").click(function(){
         $(".qv").slideToggle();
               
     });
     
-    
-    
-  
+
     var operations = [];
     var repLimited = [];
     var name = [];
-            $.ajax({
-            type: "GET",
-                dataType: "json",
-            url: "<?php echo base_url(); ?>Actions/operations_read",
-            success: function(data) {
-               
+        $.ajax({
+        type: "GET",
+        dataType: "json",
+        url: "<?php echo base_url(); ?>Actions/operations_read",
+        success: function(data){
+                    $.each( data.operations, function( key, val ) {
+                        repLimited = ['Limited'];
+                        name =  val.name.replace(repLimited, '');
+                        $('.qvRecentCompanies').append('<li><a href="<?php echo base_url();?>companies/company?id='+val.comp_id+'"   >'+name+'</a></li>');
+                    });
 
-  
-                 $.each( data.operations, function( key, val ) {
+                    $.each( data.outstanding, function( key, val ) {
+                        var dateCompare = (new Date() - Date.parse(val.planned_at))  <= 1000 * 60 * 30;;
+                        if(dateCompare == false && typeof val.planned_at != 'undefined'){
 
-                    repLimited = ['Limited'];
-                     
-                   name =  val.name.replace(repLimited, '');
-                     
-                     
-        $('.qvRecentCompanies').append('<li><a href="<?php echo base_url();?>companies/company?id='+val.comp_id+'"   >'+name+'</a></li>');
-                 });
-                
-                
-                 $.each( data.outstanding, function( key, val ) {
-                                var dateCompare = (new Date() - Date.parse(val.planned_at))  <= 1000 * 60 * 30;;
+                            $('.qvOverdueActions').append('<li>'+val.planned_at+'</li>');
 
-                                if(dateCompare == false && typeof val.planned_at != 'undefined'){
+                        }else{
 
-                                        $('.qvOverdueActions').append('<li>'+val.planned_at+'</li>');
-                                }else{
+                            $('.qvActionsDueToday').append('<li>'+val.planned_at+'</li>');
 
-                                      $('.qvActionsDueToday').append('<li>'+val.planned_at+'</li>');
+                        }
+                    });
+
+                    $(' .compa').hover(function(){
+                            var i=0;
+                            var comp  = $(this).attr('comp');
+                            var href = [];
+                            var nextcampid = [];
+                            $('.compa').each(function(){
+                                if($(this).attr('comp') == comp){
+                                i= 2;
+                                }else if(i == 2){
+                                    nextcampid   = $(this).attr('comp');
+
+                                    if(!$(this).hasClass('nextcampaign')){
+                                        $(this).addClass('nextcampaign');
+                                        href = $('a[comp='+ comp +']').attr('href');
+
+                                        $('a[comp='+ comp +']').attr('href', '');
+
+                                        $('a[comp='+ comp +']').attr('href', href+'&nextcamp&'+ nextcampid);
+                                    }
+
+                                    i=777;
                                 }
-        
-                });
-                
-                
-          
-                
-                
-         $(' .compa').hover(function(){
- var i=0;
-var comp  = $(this).attr('comp');
- var href = [];
-var nextcampid = [];
- $('.compa').each(function(){
-//alert(i)
-if($(this).attr('comp') == comp){
+                                i = i;
+                            })
+
+                    });          
+
+                }
+
+            });
  
-i= 2;
-}else if(i == 2){
- 
-//alert( 'Thi is the next camp '+$(this).attr('comp'));
-
-nextcampid   = $(this).attr('comp');
-
-if(!$(this).hasClass('nextcampaign')){
-$(this).addClass('nextcampaign');
-href = $('a[comp='+ comp +']').attr('href');
-
-$('a[comp='+ comp +']').attr('href', '');
-
-$('a[comp='+ comp +']').attr('href', href+'&nextcamp&'+ nextcampid);
-}
-
- i=777;
-}
-i = i;
-})
-
-});          
-                   
-                
-                //'<li><a href="companies/company?id='+val.page+'" />'+val.company+'</a></li>
-     
-                //$('.eventcount').html(items.length); //update engagement counter
-            }
     
+        $('#myTabs a').click(function (e) {
+          e.preventDefault()
+          $(this).tab('show')
         });
-         
-    
-
-    
-   // alert(GetUrlParamID())
-    
-    
-    // END QUICKVIEW SLIDE VIEW
-    
-$('#myTabs a').click(function (e) {
-  e.preventDefault()
-  $(this).tab('show')
-})
 
 })
+
+bindFavorites();
+
+function bindFavorites(){
+
+    $('form .unassigned-star').click(function(e){
+
+        e.preventDefault();
+        var btnData  = $(this).attr('data');
+
+        if($('.favForm'+btnData+' button').hasClass('unassigned-star')){
+
+            var userBackgroundColor = []; 
+            var userBackgroundColor = $('.user-profile div').css('background-color'); 
+            var userColor = $('.user-profile div').css('color'); 
+            var current_user_name = $('#current_user_name').text(); //current_user_name
+            var actUrl = [];
+
+            var favformAttr  = $('.favForm'+btnData).attr('action');
+            var url = favformAttr.replace('unassign','assignto');
+            var addFav = $('.favForm'+btnData).serialize();
+
+            $('.star_assigned'+ btnData).css('color',userBackgroundColor);
+            $('.label-assigned'+btnData).append('<span class="label label-assigned " id="label-assigned'+btnData+'" style="background-color:'+userBackgroundColor+'; color:'+userColor+';"><i class="fa fa-star"></i>'+current_user_name+'</span>');
+
+            $(this).hide();             
+            $(this).unbind( "click" );
+
+            //disable click temporary to stop user hitting the button whilst processing
+            $.post(url,addFav, function(response){
+                bindFavorites();
+            })
+
+            $(this).addClass('assigned-star');
+            $(this).removeClass('unassigned-star');
+            $(this).show();
+
+         }
+
+
+    });
+
+
+    $('form .assigned-star').click(function(e){
+        e.preventDefault();
+        var btnData  = $(this).attr('data');
+        if($('.favForm'+ btnData +' button').hasClass('assigned-star')){
+            var favformAttr  = $('.favForm'+btnData).attr('action');
+            var url = favformAttr.replace('assignto', 'unassign');
+            var addFav = $('.favForm'+btnData).serialize();
+            $(this).unbind( "click" );
+            
+            $.post(url,addFav,function(response){
+                bindFavorites();
+            })
+
+            $('.star_assigned'+ btnData).css('color','#DCDCDC');
+            $('#label-assigned'+ btnData).remove()
+        }
+        $(this).addClass('unassigned-star');
+        $(this).removeClass('assigned-star');
+    });    
+    }
 </script>
 
 
@@ -184,6 +226,7 @@ $('#myTabs a').click(function (e) {
 <!--EMAIL DUPLICATE CHECK-->
  <script type="text/javascript">
     $(document).ready(function() {
+         
             $('#message').hide();
         /// make loader hidden in start
         $("#email").bind('keyup paste', function() {
@@ -253,9 +296,8 @@ $('#agency_name').addClass('autocomplete-live');
 }
 function getCompany(input_data){
     
-     input_data =  input_data.replace(" ", "");
-    
-     input_data = input_data.replace('\'', ''); 
+    input_data =  input_data.replace(" ", "");
+    input_data = input_data.replace('\'', ''); 
     input_data = input_data.replace('&#39;', ''); 
     
     
@@ -338,9 +380,7 @@ function saveCompanyHandler(){$('.ch_drop_title').css('background','#7fe3d5');$(
         
         
         $('.assign-to-form .ladda-button').click(function(e){
-                
-            
-               
+             
             var btn = $(this);
             var form = btn.closest('form');
             var url = form.attr('action');
@@ -352,6 +392,8 @@ function saveCompanyHandler(){$('.ch_drop_title').css('background','#7fe3d5');$(
             $.post(url, form.serialize(),
             function(response){
                 whenFravoriteIsClicked()
+
+
             })
             .always(function() { 
             if(typeof name != 'undefined'){
@@ -369,12 +411,12 @@ function saveCompanyHandler(){$('.ch_drop_title').css('background','#7fe3d5');$(
         
         
         function whenFravoriteIsClicked(){
-            
+           
                 var favType  = $('.assign-to-form').attr('action');
                 var favTypeEval = favType.search('assignto');
-                var  userBackgroundColor = []; 
-                var  userColor = $('.user-profile div').css('color'); 
-                var  current_user_name = $('#current_user_name').text(); //current_user_name
+                var userBackgroundColor = []; 
+                var userColor = $('.user-profile div').css('color'); 
+                var current_user_name = $('#current_user_name').text(); //current_user_name
                 var actUrl = [];
         
             if(typeof $('.top-info-holder .label-assigned').css('background-color') == 'undefined'){
@@ -393,8 +435,8 @@ function saveCompanyHandler(){$('.ch_drop_title').css('background','#7fe3d5');$(
             }else{
 
                 $('.top-info-holder .label-assigned').hide();
-                $('.top-info-holder  .assign-to-form i').css('color', '#DCDCDC'); 
-
+                $('.top-info-holder .assign-to-form i').css('color', '#DCDCDC');
+                
                     actUrl = favType.replace('unassign', 'assignto');    
             }
             

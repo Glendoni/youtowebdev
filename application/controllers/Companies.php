@@ -262,7 +262,7 @@ class Companies extends MY_Controller {
 				// redirect('/companies?page_num='.$this->input->post('page_number'),'refresh');
 			}
 		}
-		return True;
+		echo json_encode(array());
 	}
 	
 	public function company()

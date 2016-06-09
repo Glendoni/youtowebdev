@@ -26,22 +26,42 @@ endif; ?>
        // &#39;
          
         ?>
+
+
+
+
+
+
+
 	<?php if(isset($company['assigned_to_name']) and !empty($company['assigned_to_name'])): ?>
 		<?php if($company['assigned_to_id'] == $current_user['id']) : ?>	
 			<?php  $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'], 'page_number' => (isset($current_page_number))? $current_page_number:'');
 			echo form_open('companies/unassign',array('name' => 'assignto', 'class'=>'assign-to-form', 'style'=>'display: inline;'),$hidden); ?>
 			<button type="submit" class="assigned-star ladda-button" data-style="expand-right" data-size="1">
-<i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
 </button>
 			<?php echo form_close(); ?>
 		<?php endif; ?>
 	<?php else: ?>
-	<?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'], 'page_number' => (isset($current_page_number))? $current_page_number:'');
+	
+        
+        
+        
+        
+    <?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'], 'page_number' => (isset($current_page_number))? $current_page_number:'');
 	echo form_open(site_url().'companies/assignto',array('name' => 'assignto', 'class'=>'assign-to-form', 'style'=>'display: inline;'),$hidden); ?>
 	<button type="submit" assignto="<?php echo $current_user['name']; ?>" class="unassigned-star ladda-button" data-style="expand-right" data-size="1">
 <i class="fa fa-star"></i>
 </button>
 	<?php echo form_close(); ?>
+
+
+
+
+
+
+
+
 	<?php endif; ?>
 </h2>
 

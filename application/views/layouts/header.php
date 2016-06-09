@@ -97,7 +97,7 @@
             <?php if(count($pending_actions)>0){?>
             <li><a class="btn btn-primary btn-sm btn-actions tr-actions" type="button" href="<?php echo site_url();?>dashboard#calls">
   My Activity <span class="badge"><?php echo count($pending_actions); ?></span>
-</a><span id="recent_companies_visited">recent</span>
+</a><span id="recent_companies_visited"></span>
                 
             </li><?php } else {};?>
             <li class="dropdown">
