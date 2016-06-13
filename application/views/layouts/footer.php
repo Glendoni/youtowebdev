@@ -1,4 +1,5 @@
- <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+ <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" 
+      aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog small-modal">
             <div class="modal-content">
             
@@ -15,7 +16,8 @@
                 
                 <div class="modal-footer">
                 <div class="col-sm-4">
-                    <button type="button" class="btn btn-default confirm_delete_cancel btn-block" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-default confirm_delete_cancel btn-block" 
+                            data-dismiss="modal">Cancel</button>
                     </div>
                     <div class="col-sm-8">
                     <a class="btn btn-warning btn-ok btn-block confirm_ch_add btn-warning">Add</a>
@@ -61,17 +63,219 @@
  
 <script type="text/javascript">
     
+    
+   
+    
+    
+    
+    
+    
+    
+    
     function mysql_to_unix(date) {
     return Math.floor(new Date(date).getTime() / 1000);
 }
     
 $(document).ready(function(){
-    
+    bindFavorites()
         //QUICKVIEW SLIDE
+            var operations = [];
+            var repLimited = [];
+            var name = [];
+            $.ajax({
+            type: "GET",
+                dataType: "json",
+            url: "<?php echo base_url(); ?>Actions/operations_read",
+            success: function(data) {
+  //dont know what the fucks up with the replace array function not working ?????? Must investigate 
+                 $.each( data.operations, function( key, val ) {
+
+                    repLimited = ['Limited','ltd', 'LTD'];
+                    name =  val.name 
+                    repLimited =   name.replace('Limited', "");
+                    repLimited =   repLimited.replace('ltd', "");
+                    repLimited =   repLimited.replace('Ltd', "");
+                    repLimited =   repLimited.replace('LTD', "");
+       
+                    $('.tr-actions').append('<li><a href="<?php echo base_url();?>companies/company?id='+val.comp_id+'"   >'+repLimited+'</a></li>');
+
+                 })
+                        
+              }
+         });
+    
+
+ if(!(/companies\/company/.test(window.location.href))) {
+     
+    $('.pageQvNav').remove();
+    $('.recentlyVisited').css('width', '100%');
+    $('.recentlyVisited').css('border', 'none');
+    $('.pageQvNav').css('border', 'none');
+    $('.myActiveDiv').css('min-width', '249px');
+
+     
+ }
+
+
+
+    
+    if((/campaign_id/.test(window.location.href))) {
+        $.urlParam = function(name){
+        var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+    if (results==null){
+       return null;
+    }
+    else{
+       return results[1] || 0;
+    }
+}
+        
+      var campaign_id  =   $.urlParam('campaign_id');
+      var para = ({'company_id':GetUrlParamID()});
+                          $.ajax({
+                            type: "POST",
+                              data: para,
+                                dataType: "json",
+                             url: "<?php echo site_url();?>Companies/campaign_page_getter",
+                   success: function(data) {
+                   if(typeof data.Previous != null){
+                        $('.return_to_campaign').prepend('<a class="btn btn-default btn-sm" href="<?php echo site_url();?>companies/company?id='+data.Previous+'&campaign_id='+campaign_id+'" role="button">Previous</a>');
+                    }
+                    
+                    if(data.NextId){
+                        $('.return_to_campaign').append('<a class="btn btn-default btn-sm" href="<?php echo site_url();?>companies/company?id='+data.NextId+'&campaign_id='+campaign_id+'" role="button">Next</a>');
+                    }
+               }
+        });
+            
+    }
+    
  
-           $('.qvlink  li a').on('click', function(){
+    $('.qvlink  li a').on('click', function(){
         var location = $(this).attr('data');
-    $.scrollTo('#'+location, 1000, { easing: 'easeInOutExpo', offset: -100, 'axis': 'y' });
+        $.scrollTo('#'+location, 1000, { easing: 'easeInOutExpo', offset: -100, 'axis': 'y' });
+        $(".qv").slideToggle();        
+               
+    })
+       
+    $(".qvSlidebtn").click(function(){
+        $(".qv").slideToggle();
+              
+    });
+    
+
+    var operations = [];
+    var repLimited = [];
+    var name = [];
+        $.ajax({
+        type: "GET",
+        dataType: "json",
+        url: "<?php echo base_url(); ?>Actions/operations_read",
+        success: function(data){
+                    $.each( data.operations, function( key, val ) {
+                        repLimited = ['Limited'];
+                        name =  val.name.replace(repLimited, '');
+                        $('.qvRecentCompanies').append('<li><a href="<?php echo base_url();?>companies/company?id='+val.comp_id+'"   >'+name+'</a></li>');
+                    });
+
+                    $.each( data.outstanding, function( key, val ) {
+                        var dateCompare = (new Date() - Date.parse(val.planned_at))  <= 1000 * 60 * 30;
+                        if(dateCompare == false && typeof val.planned_at != 'undefined'){
+
+                            $('.qvOverdueActions').append('<li>'+val.planned_at+'</li>');
+
+                        }else{
+
+                            $('.qvActionsDueToday').append('<li>'+val.planned_at+'</li>');
+
+                        }
+                    });
+
+                    $(' .compa').hover(function(){
+                            var i=0;
+                            var comp  = $(this).attr('comp');
+                            var href = [];
+                            var nextcampid = [];
+                            $('.compa').each(function(){
+                                if($(this).attr('comp') == comp){
+                                i= 2;
+                                }else if(i == 2){
+                                    nextcampid   = $(this).attr('comp');
+
+                                    if(!$(this).hasClass('nextcampaign')){
+                                        $(this).addClass('nextcampaign');
+                                        href = $('a[comp='+ comp +']').attr('href');
+
+                                        $('a[comp='+ comp +']').attr('href', '');
+
+                                        $('a[comp='+ comp +']').attr('href', href+'&nextcamp&'+ nextcampid);
+                                    }
+
+                                    i=777;
+                                }
+                                i = i;
+                            })
+
+                    });          
+
+                }
+
+            });
+ 
+    
+        $('#myTabs a').click(function (e) {
+          e.preventDefault()
+          $(this).tab('show')
+        });
+
+})
+
+bindFavorites();
+
+function bindFavorites(){
+
+    $('form .unassigned-star').click(function(e){
+
+        e.preventDefault();
+        var btnData  = $(this).attr('data');
+
+        if($('.favForm'+btnData+' button').hasClass('unassigned-star')){
+
+            var userBackgroundColor = []; 
+            var userBackgroundColor = $('.user-profile div').css('background-color'); 
+            var userColor = $('.user-profile div').css('color'); 
+            var current_user_name =  $(".user-profile span").text(); //current_user_name
+            var actUrl = [];
+
+            var favformAttr  = $('.favForm'+btnData).attr('action');
+            var url = favformAttr.replace('unassign','assignto');
+            var addFav = $('.favForm'+btnData).serialize();
+
+            $('.star_assigned'+ btnData).css('color',userBackgroundColor);
+            $('.label-assigned'+btnData).append('<span class="label label-assigned " id="label-assigned'+btnData+'" style="background-color:'+userBackgroundColor+'; color:'+userColor+';"><i class="fa fa-star"></i>'+current_user_name+'</span>');
+
+            $(this).hide();             
+            $(this).unbind( "click" );
+
+            //disable click temporary to stop user hitting the button whilst processing
+            $.post(url,addFav, function(response){
+                bindFavorites();
+            })
+
+            $(this).addClass('assigned-star');
+            $(this).removeClass('unassigned-star');
+            $(this).show();
+
+         }
+
+
+    });
+
+    
+    
+           $('.qvlink  li a').on('click', function(){
+            var location = $(this).attr('data');
+                $.scrollTo('#'+location, 1000, { easing: 'easeInOutExpo', offset: -100, 'axis': 'y' });
                $(".qv").slideToggle();        
                
     })
@@ -80,103 +284,27 @@ $(document).ready(function(){
         $(".qv").slideToggle();
               
     });
-    
-    
-    
-  
-    var operations = [];
-    var repLimited = [];
-    var name = [];
-            $.ajax({
-            type: "GET",
-                dataType: "json",
-            url: "<?php echo base_url(); ?>Actions/operations_read",
-            success: function(data) {
-               
 
-  
-                 $.each( data.operations, function( key, val ) {
+    $('form .assigned-star').click(function(e){
+        e.preventDefault();
+        var btnData  = $(this).attr('data');
+        if($('.favForm'+ btnData +' button').hasClass('assigned-star')){
+            var favformAttr  = $('.favForm'+btnData).attr('action');
+            var url = favformAttr.replace('assignto', 'unassign');
+            var addFav = $('.favForm'+btnData).serialize();
+            $(this).unbind( "click" );
+            
+            $.post(url,addFav,function(response){
+                bindFavorites();
+            })
 
-                    repLimited = ['Limited'];
-                     
-                   name =  val.name.replace(repLimited, '');
-                     
-                     
-        $('.qvRecentCompanies').append('<li><a href="<?php echo base_url();?>companies/company?id='+val.comp_id+'"   >'+name+'</a></li>');
-                 });
-                
-                
-                 $.each( data.outstanding, function( key, val ) {
-                                var dateCompare = (new Date() - Date.parse(val.planned_at))  <= 1000 * 60 * 30;;
-
-                                if(dateCompare == false && typeof val.planned_at != 'undefined'){
-
-                                        $('.qvOverdueActions').append('<li>'+val.planned_at+'</li>');
-                                }else{
-
-                                      $('.qvActionsDueToday').append('<li>'+val.planned_at+'</li>');
-                                }
-        
-                });
-                
-                
-          
-                
-                
-         $(' .compa').hover(function(){
- var i=0;
-var comp  = $(this).attr('comp');
- var href = [];
-var nextcampid = [];
- $('.compa').each(function(){
-//alert(i)
-if($(this).attr('comp') == comp){
- 
-i= 2;
-}else if(i == 2){
- 
-//alert( 'Thi is the next camp '+$(this).attr('comp'));
-
-nextcampid   = $(this).attr('comp');
-
-if(!$(this).hasClass('nextcampaign')){
-$(this).addClass('nextcampaign');
-href = $('a[comp='+ comp +']').attr('href');
-
-$('a[comp='+ comp +']').attr('href', '');
-
-$('a[comp='+ comp +']').attr('href', href+'&nextcamp&'+ nextcampid);
-}
-
- i=777;
-}
-i = i;
-})
-
-});          
-                   
-                
-                //'<li><a href="companies/company?id='+val.page+'" />'+val.company+'</a></li>
-     
-                //$('.eventcount').html(items.length); //update engagement counter
-            }
-    
-        });
-         
-    
-
-    
-   // alert(GetUrlParamID())
-    
-    
-    // END QUICKVIEW SLIDE VIEW
-    
-$('#myTabs a').click(function (e) {
-  e.preventDefault()
-  $(this).tab('show')
-})
-
-})
+            $('.star_assigned'+ btnData).css('color','#DCDCDC');
+            $('#label-assigned'+ btnData).remove()
+        }
+        $(this).addClass('unassigned-star');
+        $(this).removeClass('assigned-star');
+    });    
+    }
 </script>
 
 
@@ -184,6 +312,7 @@ $('#myTabs a').click(function (e) {
 <!--EMAIL DUPLICATE CHECK-->
  <script type="text/javascript">
     $(document).ready(function() {
+         
             $('#message').hide();
         /// make loader hidden in start
         $("#email").bind('keyup paste', function() {
@@ -253,9 +382,8 @@ $('#agency_name').addClass('autocomplete-live');
 }
 function getCompany(input_data){
     
-     input_data =  input_data.replace(" ", "");
-    
-     input_data = input_data.replace('\'', ''); 
+    input_data =  input_data.replace(" ", "");
+    input_data = input_data.replace('\'', ''); 
     input_data = input_data.replace('&#39;', ''); 
     
     
@@ -338,9 +466,7 @@ function saveCompanyHandler(){$('.ch_drop_title').css('background','#7fe3d5');$(
         
         
         $('.assign-to-form .ladda-button').click(function(e){
-                
-            
-               
+             
             var btn = $(this);
             var form = btn.closest('form');
             var url = form.attr('action');
@@ -352,6 +478,8 @@ function saveCompanyHandler(){$('.ch_drop_title').css('background','#7fe3d5');$(
             $.post(url, form.serialize(),
             function(response){
                 whenFravoriteIsClicked()
+
+
             })
             .always(function() { 
             if(typeof name != 'undefined'){
@@ -369,12 +497,12 @@ function saveCompanyHandler(){$('.ch_drop_title').css('background','#7fe3d5');$(
         
         
         function whenFravoriteIsClicked(){
-            
+           
                 var favType  = $('.assign-to-form').attr('action');
                 var favTypeEval = favType.search('assignto');
-                var  userBackgroundColor = []; 
-                var  userColor = $('.user-profile div').css('color'); 
-                var  current_user_name = $('#current_user_name').text(); //current_user_name
+                var userBackgroundColor = []; 
+                var userColor = $('.user-profile div').css('color'); 
+                var current_user_name = $(".user-profile span").text(); //current_user_name
                 var actUrl = [];
         
             if(typeof $('.top-info-holder .label-assigned').css('background-color') == 'undefined'){
@@ -393,8 +521,8 @@ function saveCompanyHandler(){$('.ch_drop_title').css('background','#7fe3d5');$(
             }else{
 
                 $('.top-info-holder .label-assigned').hide();
-                $('.top-info-holder  .assign-to-form i').css('color', '#DCDCDC'); 
-
+                $('.top-info-holder .assign-to-form i').css('color', '#DCDCDC');
+                
                     actUrl = favType.replace('unassign', 'assignto');    
             }
             
@@ -462,10 +590,10 @@ function saveCompanyHandler(){$('.ch_drop_title').css('background','#7fe3d5');$(
     function fravoriteIcon(){
     
     if(typeof $('.top-info-holder .label-assigned').css('background-color') != 'undefined'){
-    var  userBackgroundColor = $('.user-profile div').css('background-color'); $('.assign-to-form i').css('color', userBackgroundColor);
+    //var  userBackgroundColor = $('.user-profile div').css('background-color'); $('.assign-to-form i').css('color', userBackgroundColor);
     }else{
         
-       $('.assign-to-form i').css('color', '#DCDCDC'); 
+       //$('.assign-to-form i').css('color', '#DCDCDC'); 
         
     }
         

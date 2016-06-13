@@ -206,14 +206,9 @@ $( document ).ready(function() {
             }
         });
          //GET TEAM STATS END 
-
             getUserFavourites();   
-        
-        
-        
         $('.sortform form select').change(function(){
- 
-  getUserFavourites(); 
+            getUserFavourites(); 
 
 })
         
@@ -301,22 +296,23 @@ function getUserFavourites(){
                 
                 $.each( data, function( key, val ) {
                     pipeline =   val.pipeline ? val.pipeline : '';
-                    favourites.push('<a href="./companies/company?id='+val.id+'" class="load-saved-search"> <div class="row"> <div class="col-xs-8">'+val.name+'</div><div class="col-xs-4"> <span class="label label-'+pipeline+'" style="margin-top: 3px;"> '+pipeline+' </span> </div></div></a>');     
-                    })  
- $('#assigned .panel-body').html('');
+                    favourites.push('<a href="companies/company?id='+val.id+'" class="load-saved-search"> <div class="row"> <div class="col-xs-8">'+val.name+'</div><div class="col-xs-4"> <span class="label label-'+pipeline+'" style="margin-top: 3px;"> '+pipeline+' </span> </div></div></a>');     
+                }) 
+                
+                    $('#assigned .panel-body').html('');
                     $('#assigned .panel-body').prepend(favourites.join(""));
 
                     var favouritesCount =  $('#assigned .panel-body a').length;
 
                     if(favouritesCount != 0){
-                    var favouritesCount = $('#assigned .panel-body a').length;
-                    $('.favouritesCount').text(favouritesCount);
- $('.sortform').show();
+                        var favouritesCount = $('#assigned .panel-body a').length;
+                        $('.favouritesCount').text(favouritesCount);
+                        $('.sortform').show();
                     }else{
 
-                    $('.sortform').hide();
-                    $('.favouritesCount').text(0);
-                    $('#assigned .panel-body').prepend('<div class="col-md-12"> <div style="margin:10px 0;"> <h4 style="margin: 50px 0 40px 0; text-align: center;">You have no recent activity.</h4> </div></div>');
+                        $('.sortform').hide();
+                        $('.favouritesCount').text(0);
+                        $('#assigned .panel-body').prepend('<div class="col-md-12"> <div style="margin:10px 0;"> <h4 style="margin: 50px 0 40px 0; text-align: center;">You have no recent activity.</h4> </div></div>');
 
                     }
             }
@@ -329,18 +325,18 @@ function tsTotalConfig(){
     
      
     if($('.mainAddrType').length > 1) $('.copyRegAddr').remove(); // Removes add copy address check button if more than 1 address exist 
-//counts the totals in team stats columns
-var mycolumnArray = ["tw","lw","tm","lm","sr"];
-var mycolumnArrayLength = mycolumnArray.length;
-var myStringArray = ["deals","proposals","demobookedcount","democount","meetingbooked","meetingcount","salescall","introcall","pipelinecount","key_review_added","key_review_occuring","duediligence"];
-var arrayLength = myStringArray.length;
+        //counts the totals in team stats columns
+        var mycolumnArray = ["tw","lw","tm","lm","sr"];
+        var mycolumnArrayLength = mycolumnArray.length;
+        var myStringArray = ["deals","proposals","demobookedcount","democount","meetingbooked","meetingcount","salescall","introcall","pipelinecount","key_review_added","key_review_occuring","duediligence"];
+        var arrayLength = myStringArray.length;
 
-var total; 
-var list;
-for (var s = 0; s < mycolumnArrayLength; s++) {
-for (var i = 0; i < arrayLength; i++) {
-list = 	getlisttotal(myStringArray[i], mycolumnArray[s]);
-};
+        var total; 
+        var list;
+        for (var s = 0; s < mycolumnArrayLength; s++) {
+        for (var i = 0; i < arrayLength; i++) {
+            list = 	getlisttotal(myStringArray[i], mycolumnArray[s]);
+        };
 };
     
     
@@ -410,7 +406,7 @@ if(trAddress === "Registered Address"){ $('.tradingTypeOptions').show(); } else{
 }); 
 $('.tradingArr').on('change', function() {
 var trAddress =  $(this).val(); 
-if(trAddress == 2){ $('.addrTrading').show();  $('#tradingAddress').attr('Required', 'Required')  } else{ $('.addrTrading').hide(); $('#tradingAddress').val(''); $('#tradingAddress').removeAttr('Required', 'Required')   }
+if(trAddress == 2){ $('.addrTrading').show();  $('#tradingAddress').attr('Required', 'Required');  } else{ $('.addrTrading').hide(); $('#tradingAddress').val(''); $('#tradingAddress').removeAttr('Required', 'Required');   }
 });
 if($('.popUpAddress').val() && $('.mainAddrType').text() != 'Trading Address'){$('.copyRegAddr').hide() }
 $('#copymainaddr').click(function(){

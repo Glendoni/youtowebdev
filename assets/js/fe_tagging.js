@@ -1,5 +1,5 @@
 $(document).ready(function(){
-      if((/companies/.test(window.location.href))) {
+      if((/companies\/company/.test(window.location.href))) {
      gettags();
       }
     $('.nav-tabs').click(function(){
@@ -14,7 +14,7 @@ $(document).ready(function(){
   $('#tagCatList').html('');
     
     
-    if((/companies/.test(window.location.href))) {
+    if((/companies\/company/.test(window.location.href))) {
              $.ajax({
         type: "GET",
             dataType: "json",
@@ -86,9 +86,8 @@ function populate(){
                     subcatName = val['sub_cat_name'].replace(/\s/gi, "");
                     subcatName = subcatName.replace('(', '');
                     subcatName = subcatName.replace(')', '');
-tagcont.push('<div class="col-xs-12 '+subcatName+' fetagsholder'+val['tac_sub_cat_id']+' added-tag-holder"><div class="category-name-holder" >'+val['sub_cat_name']+'</div><ul class="fetags'+val['tac_sub_cat_id']+' sub_ul"></ul></div>'); 
+                    tagcont.push('<div class="col-xs-12 '+subcatName+' fetagsholder'+val['tac_sub_cat_id']+' added-tag-holder"><div class="category-name-holder" >'+val['sub_cat_name']+'</div><ul class="fetags'+val['tac_sub_cat_id']+' sub_ul"></ul></div>'); 
             }          
-//console.warn('qqqqqqqqqsub_'+val['sub_cat_name']);
                 
                 vale = val;
                 //console.log(val['cat_id'])

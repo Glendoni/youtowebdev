@@ -21,37 +21,46 @@
 			<span class="label label-danger"><a href="https://beta.companieshouse.gov.uk/company/<?php echo $company['parent_registration'];?>" target="_blank">Parent Registration: <?php echo $company['parent_registration'];?> <i class="fa fa-external-link"></i></a></span>
 			</div>
 		<?php endif; ?>
-		<h2 class="company-header">
-		  <a href="<?php echo site_url();?>companies/company?id=<?php echo $company['id'];?>
-				<?php echo !empty($current_campaign_id)?'&campaign_id='.$current_campaign_id:''; ?>" <?php if(($current_user['new_window']=='t')): ?> target="_blank"<?php endif; ?> class="compa"  data-camp="pos<?php echo $i++ ; ?>" comp="<?php echo $company['id'];?>">
-	<?php $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' );echo str_replace($words, ' ',$company['name']); ?><?php //echo $i++ ; ?></a>
             
-	<?php if(isset($company['assigned_to_name']) and !empty($company['assigned_to_name'])): ?>
+            
+            
+<h2 class="company-header">
+		  <a href="<?php echo site_url();?>companies/company?id=<?php echo $company['id'];?><?php echo !empty($current_campaign_id)?'&campaign_id='.$current_campaign_id:''; ?>" <?php if(($current_user['new_window']=='t')): ?> target="_blank"<?php endif; ?> class="compa"  data-camp="pos<?php echo $i++ ; ?>" comp="<?php echo $company['id'];?>"><?php $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' );echo str_replace($words, ' ',$company['name']); ?></a>
+
+         <!-- THIS IS ME -->    
+       <?php $bgcolor =  explode(',',$current_user['image']) ?>
+            <?php if(isset($company['assigned_to_name']) and !empty($company['assigned_to_name'])): ?>
 		<?php if($company['assigned_to_id'] == $current_user['id']) : ?>	
 			<?php  $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'], 'page_number' => (isset($current_page_number))? $current_page_number:'');
-			echo form_open('companies/unassign',array('name' => 'assignto', 'class'=>'assign-to-form', 'style'=>'display: inline;'),$hidden); ?>
-			<button type="submit" class="assigned-star ladda-button" data-style="expand-right"  data-size="1">
-<i class="fa fa-star"></i>
-</button>
+			echo form_open('companies/unassign',array('name' => 'assignto', 'class'=>'assign-to-form favForm'.$company['id'].'', 'style'=>'display: inline;'),$hidden); ?>
+    
+   
+    
+			<button type="submit" class="assigned-star ladda-button" data-style="expand-right" data="<? echo $company['id']; ?>"  style="color:<?php echo $bgcolor[1]; ?>;" data-size="1">
+              
+                <i class="fa fa-star star_assigned<? echo $company['id']; ?>"></i>
+            </button>
 			<?php echo form_close(); ?>
+     
 		<?php endif; ?>
-	<?php else: ?>
-
-
-
-	<?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'], 'page_number' => (isset($current_page_number))? $current_page_number:'');
-	echo form_open(site_url().'companies/assignto',array('name' => 'assignto', 'class'=>'assign-to-form', 'style'=>'display: inline;'),$hidden); ?>
-	<button type="submit" assignto="<?php echo $current_user['name']; ?>" class="unassigned-star ladda-button" data="<? echo $company['id']; ?>" data-style="expand-right" data-size="1">
+	
+            <?php else: ?>
+    
+            <?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'], 'page_number' => (isset($current_page_number))? $current_page_number:'');
+	   echo form_open(site_url().'companies/assignto',array('name' => 'assignto', 'class'=>'assign-to-form favForm'.$company['id'].'', 'style'=>'display: inline;'),$hidden); ?>
+	<button type="submit" assignto="<?php echo $current_user['name']; ?>" class="unassigned-star ladda-button" data="<? echo $company['id']; ?>" data-style="expand-right"  data-size="1">
         
         <?php //echo '<h2> '. $company['id']. ' </h2>'; ?>
         
-        
-<i class="fa fa-star"></i>
-</button>
+        <i class="fa fa-star star_assigned<? echo $company['id']; ?>" style="color:#DCDCDC;"></i>
+    </button>
     
 	<?php echo form_close(); ?>
 	<?php endif; ?>
 </h2>
+            
+            
+             <!-- THIS IS ME END-->    
 
 
 
@@ -61,7 +70,7 @@
 </h5>
 	<?php endif; ?>
 			</div>
-			<div class="col-sm-12 " style="margin-top:5px; margin-bottom: 15px; text-align:center;">
+			<div class="col-sm-12 label-assigned<?php echo $company['id'];?>" style="margin-top:5px; margin-bottom: 15px; text-align:center;">
 <?php if(isset($company['pipeline'])): ?>
 	<span class="label pipeline label-<?php echo str_replace(' ', '', $company['pipeline']); ?>"><?php echo $company['pipeline']?>
 	<?php endif; ?>
@@ -80,9 +89,9 @@
 		</span>
 		    
 	<?php if(isset($company['assigned_to_name'])): ?>
-		<span class="label label-assigned"
+		<span class="label label-assigned " id="label-assigned<?php echo $company['id'];?>"
 		<?php $user_icon = explode(",", ($company['image']));echo "style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'";?>>
-        <i class="fa fa-star"></i>
+        <i class="fa fa-star"  style="color:<?php echo $user_icon[2]; ?>;"></i>
 <?php echo $company['assigned_to_name']; ?>
         </span>
 	<?php else: ?>

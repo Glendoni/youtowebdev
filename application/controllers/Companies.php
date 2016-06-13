@@ -222,8 +222,7 @@ class Companies extends MY_Controller {
 		$this->load->view('layouts/single_page_layout', $this->data);
         
     }
-    
-    
+
 	public function assignto()
 	{
 		if($this->input->post('company_id') && $this->input->post('user_id'))
@@ -262,24 +261,16 @@ class Companies extends MY_Controller {
 				// redirect('/companies?page_num='.$this->input->post('page_number'),'refresh');
 			}
 		}
-		return True;
+		echo json_encode(array());
 	}
 	
 	public function company()
 	{
-        
-         
-        
-        
-        
-        
-        
-        
-		if($this->input->get('id'))
+        if($this->input->get('id'))
 		{
  
-            //$inputID = $this->input->get('id');
-           //$this->Actions_model->operations_store_check($inputID, $this->data['current_user']['id'], 1);
+            $inputID = $this->input->get('id');
+           $this->Actions_model->operations_store_check($inputID, $this->data['current_user']['id'], 1);
         
             
             $company_id = array(
@@ -300,9 +291,9 @@ class Companies extends MY_Controller {
            $deals_pipeline_statusArr  = array(0=>'Please select', 1 => 'Should Close',2 => 'Will Close'); //Move will be moved to a new array file.
 			$this->load->model('Email_templates_model');
 			$this->data['email_templates'] = $this->Email_templates_model->get_all();
-			$raw_search_results = $this->Companies_model->search_companies_sql(FALSE,$this->input->get('id'));            
+$raw_search_results = $this->Companies_model->search_companies_sql(FALSE,$this->input->get('id'));
           $this->data['companieshack'] = $this->Companies_model->hackmorgages($this->input->get('id'));
-			$company = $this->process_search_result($raw_search_results);
+$company = $this->process_search_result($raw_search_results);
             $this->data['companieshack'] = $this->Companies_model->hackmorgages($this->input->get('id'));
 			$this->data['contacts'] = $this->Contacts_model->get_contacts_s($this->input->get('id'));
             $address = $this->Companies_model->get_addresses($this->input->get('id'));
@@ -347,8 +338,7 @@ class Companies extends MY_Controller {
 			redirect('/dashboard','refresh');
 		}
 	}
-    
-    
+        
     public function hackmorgages()
     {
         // this is a redunudent function
@@ -447,7 +437,6 @@ class Companies extends MY_Controller {
 			}
 		}
 	}
-
 
     public function autocomplete() 
     {
@@ -631,15 +620,10 @@ class Companies extends MY_Controller {
 				$pipeline = $this->Companies_model->get_pipline_deals();
         
         echo json_encode($pipeline);
-    }
-    
-    
+    }    
     
     //TAGGING
-    
-   
-	 
-	
+
    function _index()
 {
       $call_taggin_js_file =    asset_url().'js/tagging.js';
@@ -916,8 +900,6 @@ echo $this->Tagging_model->$route($post);
         $query[]['actions_cancelled'] = $this->Actions_model->get_actions_cancelled($id);
         
          $query[]['comments'] = $this->Actions_model->get_comments_two($id);
-        
-        
         foreach($query  as $key => $value){
             
        
@@ -949,7 +931,83 @@ echo $this->Tagging_model->$route($post);
     }
     
     
+    function _aptester(){
+ 
+$fname  = 'Glendon';
+$var =   1234;
+$keyName = 'Test--Field--To--Add';
+ 
+$curl = curl_init();
+
+curl_setopt_array($curl, array(
+  CURLOPT_URL => "https://api2.autopilothq.com/v1/contact",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "POST",
+  CURLOPT_POSTFIELDS => "{ \n    \"contact\": {\n        \"FirstName\": \"".$fname."\",\n        \"LastName\": \"Small\",\n        \"Email\": \"glendonsmall@yahoo.co.uk\",\n        \"custom\": {\n            \"integer--".$keyName."\": ".$var."\n        }\n\n  }\n\n}",
+  CURLOPT_HTTPHEADER => array(
+    "autopilotapikey: ed278f3d19a5453fb807125aa945a81a",
+    "cache-control: no-cache",
+    "content-type: application/json",
+    "postman-token: db292a51-dcf8-f6df-333c-1730394da55c"
+  ),
+));
+
+$response = curl_exec($curl);
+$err = curl_error($curl);
+
+curl_close($curl);
+
+if ($err) {
+  echo "cURL Error #:" . $err;
+} else {
+  echo $response;
+}
+
+}
+    
+function campaign_page_getter(){
 
     
+     $company_id = $this->input->post('company_id');
+
+    $session_result = $this->session->userdata('companies');
+		$search_results_in_session = unserialize($session_result);
+		$campaign = $this->session->userdata('campaign_id');
+		$companies_array = $search_results_in_session;
+		// if campaign exist set this variables
+			// get companies from recent result or get it from session
+			$companies_array_chunk = array_chunk($companies_array, RESULTS_PER_PAGE);
+			$current_page_number = $this->input->get('page_num') ? $this->input->get('page_num') : 1;
+			$pages_count = ceil(count($companies_array)/RESULTS_PER_PAGE);
+            //$prev = array();
+            $i = 0 ;
+                foreach($companies_array_chunk[($current_page_number-1)] as $key=>$item){
+                       // echo $i;
+                    if($i ==1){
+                        $data['NextId'] = $item['id'];
+                    $i = 0;
+                        
+                    }
+                    if($item['id'] == $company_id){
+                        $data['Current'] = $item['id'];
+                        $data['Previous'] = $prev;
+                        $i = 1;
+                    }
+                        $prev = $item['id'];
+
+}
+                    echo json_encode($data);
+             //echo '<pre>'; print_r($data); echo '</pre>';
+            //echo '<pre>'; print_r($companies_array_chunk[($current_page_number-1)]); echo '</pre>';
+            exit();
+
+
+ 
+    
+}
 }
  

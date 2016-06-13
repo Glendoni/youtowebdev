@@ -116,7 +116,7 @@ class Marketing extends MY_Controller {
         
         header('Content-Type: application/json');
        
-        $marketing_events  = $this->Actions_model->get_actions_marketing($id);
+        $marketing_events  = $this->Actions_model->get_actions_marketing($this->session->userdata('selected_company_id'));
     
         echo json_encode($marketing_events);
     }
