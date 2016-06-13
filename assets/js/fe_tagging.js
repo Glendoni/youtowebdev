@@ -1,5 +1,5 @@
 $(document).ready(function(){
-      if((/companies/.test(window.location.href))) {
+      if((/companies\/company/.test(window.location.href))) {
      gettags();
       }
     $('.nav-tabs').click(function(){
@@ -14,7 +14,7 @@ $(document).ready(function(){
   $('#tagCatList').html('');
     
     
-    if((/companies/.test(window.location.href))) {
+    if((/companies\/company/.test(window.location.href))) {
              $.ajax({
         type: "GET",
             dataType: "json",

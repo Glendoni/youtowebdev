@@ -37,8 +37,13 @@ endif; ?>
 		<?php if($company['assigned_to_id'] == $current_user['id']) : ?>	
 			<?php  $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'], 'page_number' => (isset($current_page_number))? $current_page_number:'');
 			echo form_open('companies/unassign',array('name' => 'assignto', 'class'=>'assign-to-form', 'style'=>'display: inline;'),$hidden); ?>
-			<button type="submit" class="assigned-star ladda-button" data-style="expand-right" data-size="1">
-                    <i class="fa fa-star"></i>
+        
+        
+        
+        <?php $bgcolor =  explode(',',$current_user['image']) ?>
+        
+			<button type="submit" class="assigned-star ladda-button" data-style="expand-right" data-size="1"   style="color:<?php echo $bgcolor[1]; ?>;">
+                    <i class="fa fa-star "></i>
 </button>
 			<?php echo form_close(); ?>
 		<?php endif; ?>
@@ -51,7 +56,7 @@ endif; ?>
     <?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'], 'page_number' => (isset($current_page_number))? $current_page_number:'');
 	echo form_open(site_url().'companies/assignto',array('name' => 'assignto', 'class'=>'assign-to-form', 'style'=>'display: inline;'),$hidden); ?>
 	<button type="submit" assignto="<?php echo $current_user['name']; ?>" class="unassigned-star ladda-button" data-style="expand-right" data-size="1">
-<i class="fa fa-star"></i>
+<i class="fa fa-star"  style="color:#DCDCDC;"></i>
 </button>
 	<?php echo form_close(); ?>
 
@@ -895,7 +900,7 @@ if ($your_date < $now){;
     
     
     
-    
+ 
 $('#sidebar').affix({
       offset: {
         top: 245
@@ -903,27 +908,28 @@ $('#sidebar').affix({
 });
 
 var $body   = $(document.body);
-var navHeight = $('.actions').outerHeight(true) + 10;
+var $navHeight = $('.actions').outerHeight(true) + 10;
 
-$body.scrollspy({
+body.scrollspy({
 	target: '#leftCol',
 	offset: navHeight
 });
     
  function show() {
+ 
             var offset = $(".child").offset();
             var posY = offset.top - $(window).scrollTop();
             var posX = offset.left - $(window).scrollLeft(); 
             //console.log("top:" + posY + ", left:" + posX);
 //console.warn($(window).scrollTop())
         if(posY < 0){
-
-        $('.sticky').addClass('affix');
-
+ 
+            $('.sticky').addClass('affix');
+ 
         }else{
-
-           // $('#sidebar').hide();
- $('.sticky').removeClass('affix');
+   
+            // $('#sidebar').hide();
+            $('.sticky').removeClass('affix');
         }
 }
 

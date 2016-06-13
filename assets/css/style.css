@@ -19,20 +19,20 @@ a.anchor {
 	color: red;
 }
 .assigned-star {
-	color: #FFA03C;
+	/*color: #FFA03C;*/
     border: none;
     background: none;
     font-size: 34px;
 
 }
 .unassigned-star{
-	color: #DCDCDC;
+	/*color: #DCDCDC; */
     border: none;
     background: none;
     font-size: 34px;
 }
 .unassigned-star .ladda-label {
-	color: #FFA03C;
+	/*color: #FFA03C; */
 
 }
 .assigned-star .ladda-label {
@@ -2334,16 +2334,41 @@ background-color:#2B4461;
 
 .qvRecentCompanies, .qvOverdueActions{
     
-    list-style: none;
-    
-    
+    list-style: none; 
 }
- 
+
+.sortform{ 
+    display:none;
+}
+
+.contActive a{  
+ width:50%;
+ cursor:pointer;
+  text-decoration:none;
+    font-weight: 500;
+    line-height: 1px;
+    color: #333;
+    white-space: nowrap;
+}
+.contActive li a:hover{ background: #f5f5f5;  }
+.contActive li{ height: 24px;  }
+
+#sublinkMenu a:hover{
+    text-decoration: none;
+    background-color: #f0ad4e !important;
+}
+
+.sublinkMenu>li>a:hover, .sublinkMenu>li>a:focus {
+    text-decoration: none;
+    background-color: #f0ad4e;
+}
+a.sublinkMenu:hover{
+    text-decoration: none;
+    background-color: #f0ad4e !important;
+}
 
 
-
-.sortform{ display:none;}
-/*! Hint.css - v2.2.1 - 2016-03-26
+/*! Hint.css - v2.2.1 - 2016-03-26 //#2b4461
 * http://kushagragour.in/lab/hint/
 * Copyright (c) 2016 Kushagra Gour; Licensed  */
 

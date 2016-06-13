@@ -961,13 +961,13 @@ function delete_campaign($id,$user_id)
         
     }
     
-     function  operations_store_get($user_id,$comp_id){
+     function  operations_store_get($user_id,$comp_id=0){
         
         $query = $this->db->query("SELECT ops.user_id, c.id as comp_id, c.name FROM operations ops
 LEFT JOIN companies c
 ON ops.company_id =c.id
 WHERE ops.user_id=".$user_id." 
-AND company_id != ".$comp_id."
+
 ORDER BY ops.id");
        
              return   $query->result_array(); 
@@ -980,7 +980,7 @@ ORDER BY ops.id");
     
     function operations_store_delete($id){
       
-        echo $id;
+        //echo $id;
         $this->db->where('id', $id);
         $this->db->delete('operations');
         

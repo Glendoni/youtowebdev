@@ -44,8 +44,7 @@ class Marketing_events extends MY_Controller {
                                 
                                 $this->db->where('id', $row['id']);
                                 $this->db->update('email_campaigns', $data);  
-
-                                 $this->getContactListDetails($row['id'],$row['sent_id'],$row['name']);
+                                $this->getContactListDetails($row['id'],$row['sent_id'],$row['name']);
                             }
             
                     }

@@ -75,7 +75,7 @@ WHERE contacts.company_id=".$company_id." order by last_name asc";
 	{
     
         $role = rtrim($role," "); // removes empty space on rightside of string ltrim removes empty space on the left before string
-		$contact->title = $title;
+		$contact->title = !empty(trim($title))?trim($title):NULL;
         $contact->first_name = str_replace('\'', '&#39;', rtrim($first_name)); // please read the below note
         $contact->last_name = str_replace('\'', '&#39;', ltrim($last_name));
         $contact->email = !empty($email)?$email:NULL;
@@ -86,7 +86,7 @@ WHERE contacts.company_id=".$company_id." order by last_name asc";
         //$contact->linkedin_id = $linkedin_id;
         $parts = explode("?",$linkedin_id); 
 		$li_id = $parts['0'];
-		$contact->linkedin_id = !empty($li_id)?$li_id:NULL;;
+		$contact->linkedin_id = !empty($li_id)?$li_id:NULL;
 
         //if(strpos($linkedin_id, '&') !== false) {
 		//$revised_linkedin_id = str_replace(array('.', ','), '' , preg_replace('/[^0-9,..]/i', '', $li_id));
@@ -104,12 +104,13 @@ WHERE contacts.company_id=".$company_id." order by last_name asc";
     {
 
         $role = rtrim($post['role']," "); // removes empty space on rightside of string ltrim removes empty space on the left before string
+        $contact->title = !empty(trim($title))?trim($title):NULL;
         $contact->first_name   = str_replace('\'', '&#39;',rtrim($post['first_name'])); // please read the below note
     	$contact->last_name = str_replace('\'', '&#39;',ltrim($post['last_name']));
         $contact->role = ltrim($role);
         $contact->email = !empty($post['email'])?$post['email']:NULL;
         $contact->phone = !empty($post['phone'])?$post['phone']:NULL;
-        $linkedin_id = $post['linkedin_id'];
+        $linkedin_id = !empty($post['linkedin_id'])?$post['linkedin_id']:NULL;
         $parts = explode("?",$linkedin_id); 
 		$li_id = $parts['0']; 
 		$contact->title = !empty($post['title'])?$post['title']:NULL;
@@ -134,7 +135,7 @@ WHERE contacts.company_id=".$company_id." order by last_name asc";
 
 		};
 		//$contact->linkedin_id = (!empty($revised_linkedin_id)?$revised_linkedin_id:NULL);
-		$contact->linkedin_id = $li_id;
+		$contact->linkedin_id =  !empty($li_id)?$li_id:NULL;
         $contact->updated_by = $post['user_id'];
         $contact->updated_at = date('Y-m-d H:i:s');
         $this->db->where('id', $post['contact_id']);

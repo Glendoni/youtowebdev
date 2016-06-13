@@ -1,6 +1,10 @@
 var $;
 $(document).ready(function () {
+ 
+  if ((/companies\/company/.test(window.location.href))) {
 
+
+   
         $('.timeline-header .showText').click(function () {
             var activeMenu =  $('.activeMenu').attr('data');
             var status = $('.actionMsg').css('display'); 
@@ -42,10 +46,7 @@ $(document).ready(function () {
                       
                      getActionData('comment',true);
                       $('.actionAll').trigger('click');
-                      
-                      
                        $('.showCommentAddForm').hide();
-                      
                   }
                   });
               
@@ -55,9 +56,11 @@ $(document).ready(function () {
         
         getActionData(); //Get actions
       
+  }
+      
   });
 function getActionData(scope = false){ //get all actions in multidimentional json array
-        if ((/companies/.test(window.location.href))) {
+        if ((/companies\/company/.test(window.location.href))) {
         $.ajax({
             type: "GET",
             url: "../companies/getAction/",
@@ -460,8 +463,8 @@ function bindAddCallBackToCompletedAction(){
          //getActionData();
          
      }
-function getemailengagement(scope){
-     //actionresults =  actionresult.join();
+    function getemailengagement(scope){
+     
     var myParam = window.location.href.split("id=");
     var action ;
     $.ajax({
@@ -505,10 +508,10 @@ function getemailengagement(scope){
                 }
                     //$('#sidebar').hide();
 
-                //  show();
+          
                 //$(window).scroll(show);
             });
-            
+       
             $('.marketingAcitonCtn').text(parseInt($('.marketingAcitonCtn').text()) + i);
             
             $(items.join( "" )).prependTo('#marketing_action ul');
@@ -1145,22 +1148,6 @@ if(day == 1 || day == 21 || day == 31) dateSuffix = 'st';
         
  return (showtime? time.join(":")+suffix : '') + " " + date.join(" ") + " " ; 
     } 
-     
-     
-       
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /**
  * Copyright (c) 2007-2015 Ariel Flesler - aflesler<a>gmail<d>com | http://flesler.blogspot.com
