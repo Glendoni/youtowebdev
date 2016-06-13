@@ -1237,7 +1237,7 @@
                     <span class="badge pull-right sortform" style="margin-top: -22px; margin-left: 5px;">
                  <form><lable>Arrange By:</lable>
                      <select type="dropdown" name="" >
-                         <option value>Select</option>
+                        
                          <option value>Company</option>
                          <option value="1">Pipeline</option>
                       
