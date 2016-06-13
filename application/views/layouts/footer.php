@@ -138,14 +138,16 @@ $(document).ready(function(){
                                 dataType: "json",
                              url: "<?php echo site_url();?>Companies/campaign_page_getter",
                    success: function(data) {
-                   if(typeof data.Previous != null){
-                        $('.return_to_campaign').prepend('<a class="btn btn-default btn-sm" href="<?php echo site_url();?>companies/company?id='+data.Previous+'&campaign_id='+campaign_id+'" role="button">Previous</a>');
-                    }
-                    
-                    if(data.NextId){
-                        $('.return_to_campaign').append('<a class="btn btn-default btn-sm" href="<?php echo site_url();?>companies/company?id='+data.NextId+'&campaign_id='+campaign_id+'" role="button">Next</a>');
-                    }
-               }
+
+                       if(data.Previous !== null){
+
+                            $('.return_to_campaign').prepend('<a class="btn btn-default btn-sm" href="<?php echo site_url();?>companies/company?id='+data.Previous+'&campaign_id='+campaign_id+'" role="button">Previous</a>');
+                        }
+
+                        if(data.NextId){
+                            $('.return_to_campaign').append('<a class="btn btn-default btn-sm" href="<?php echo site_url();?>companies/company?id='+data.NextId+'&campaign_id='+campaign_id+'" role="button">Next</a>');
+                        }
+                   }
         });
             
     }
@@ -398,6 +400,11 @@ function saveCompanyHandler(){$('.ch_drop_title').css('background','#7fe3d5');$(
     });
 }
     $( document ).ready(function() {
+        
+            $('body').click(function(){
+                $('#suggestions').hide();
+            });
+        
             // Datetime picker
             $('#start_date').datetimepicker();
             $('#end_date').datetimepicker();
