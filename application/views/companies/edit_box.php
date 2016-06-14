@@ -235,7 +235,7 @@
                     </div>
             
                 </div>
-                    <div class="col-md-12" style="margin-top:10px;">
+                    <div class="col-md-12 other_sectors" style="margin-top:10px;">
                     <label for="sectors" class="control-label">Other Sectors</label>
                     <div class="tag-holder">
                     <?php   

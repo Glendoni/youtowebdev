@@ -352,10 +352,39 @@ a.btn.btn-block.clear-fields {
     color: #000;
 }
 
+
+.target_sectors .btn.btn-checkbox.btn-primary.active {
+	background-color: #428bca;;
+	border-color: #fff;
+}
+
+
+
+/*
 .target_sectors .btn.btn-checkbox.btn-primary.active {
 	background-color: #689F38;
 	border-color: #33691E;
 }
+
+*/
+.other_sectors .btn.btn-checkbox.btn-primary.active {
+	background-color: #000;
+	border-color: #999;
+}
+
+.other_sectors .btn-default:hover, .other_sectors .btn-default:focus, .other_sectors .btn-default:active,  .other_sectors .btn-default.active,  .other_sectors .open>.dropdown-toggle.btn-default {
+    color: #fff;
+    background-color: #000;
+    border-color: #adadad;
+}
+
+
+.target_sectors .btn-default:hover, .target_sectors .btn-default:focus, .target_sectors .btn-default:active,  .target_sectors .btn-default.active,  .target_sectors .open>.dropdown-toggle.btn-default {
+  	background-color: #428bca;;
+	border-color: #fff;
+    color: #fff;
+}
+
 
 .btn-checkbox {
 	font-size:11px !important;
@@ -668,7 +697,7 @@ h2.company-header a:hover {
     margin: auto;
 }
 .label-Prospect {
-	    background-color: #cccccc;
+	    background-color: #7c7a7a;
 	color: #fff;
  	padding-left: 5px;
  	padding-right: 5px;
@@ -2367,6 +2396,8 @@ a.sublinkMenu:hover{
     background-color: #f0ad4e !important;
 }
 
+
+ 
 
 /*! Hint.css - v2.2.1 - 2016-03-26 //#2b4461
 * http://kushagragour.in/lab/hint/
