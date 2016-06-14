@@ -389,12 +389,13 @@ class Companies_model extends CI_Model {
 			   C.source_explanation, --f43
 			   UC.name, --f44
 			   UU.name, --f45
-               C.initial_rate --f46
+               C.initial_rate, --f46
+                C.customer_to --f47
 			   )) "JSON output" 
 			   
 
 
-		from (select * from COMPANIES where active = \'TRUE\' ';
+		from (select * from COMPANIES where active = \'TRUE\' OR active = \'FALSE\' AND initial_rate IS NOT  null AND zendesk_id IS NOT NULL AND active IS false ';
 		if(isset($contacted_in)) $sql = $sql.' AND id in ('.$contacted_in.')';
 		$sql = $sql.') C ';
 
@@ -586,7 +587,8 @@ class Companies_model extends CI_Model {
 			     C.source_explanation,
 			     UC.name, 
 			     UU.name,
-                 C.initial_rate
+                 C.initial_rate,   
+                 C.customer_to
 
 		order by C.id 
 

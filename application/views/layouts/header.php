@@ -100,7 +100,7 @@
         <li class="dropdown">
 <a class="btn btn-primary btn-sm btn-actions  " onclick="location.href='<?php echo site_url();?>dashboard#calls'" style="top: 48px; z-index: 555555555555; background: #428bca;">Schedule <?php echo count($pending_actions); ?></a>
         <a href="#" class="dropdown-toggle user-profile sublinkMenu" data-toggle="dropdown" style="
-    margin: -3px -13px;
+    margin: -3px -13px; background: #efefef;
 "> <span id="current_user_name"> </span></span> <b class="caret"></b>
             
             

@@ -2396,8 +2396,10 @@ a.sublinkMenu:hover{
     background-color: #f0ad4e !important;
 }
 
-
- 
+.cancelledPill{
+    background:#d9534f;
+    margin-left:5px !important;
+}
 
 /*! Hint.css - v2.2.1 - 2016-03-26 //#2b4461
 * http://kushagragour.in/lab/hint/
