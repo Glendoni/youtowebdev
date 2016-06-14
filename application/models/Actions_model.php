@@ -2,6 +2,7 @@
 class Actions_model extends MY_Model {
 	
 
+
 	// GETS
 
 function get_actions1($company_id)

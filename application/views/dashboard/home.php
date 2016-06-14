@@ -8,14 +8,12 @@
                 <li role="presentation"><button href="#pipeline" aria-controls="pipeline" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Pipeline','<?php echo $current_user['id'];?>')">Pipeline</button></li>
                    <li role="presentation"><button href="#assigned" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Favourites','<?php echo $current_user['id'];?>')">Favourites</button></li>
                 <li><button href="companies/pipeline"role="tab" class="button btn btn-primary btn-sm deals_pipeline" style="margin-right:10px;" onclick="window.location ='companies/pipeline'">Deals Forecast</button></li>
-                <li role="presentation"><button href="#emailegagement" aria-controls="emailegagement" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Email Engagement','<?php echo $current_user['id'];?>')">Email Engagement</button></li>
-                   
+                <li role="presentation"><button href="#emailegagement" aria-controls="emailegagement" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Email Engagement','<?php echo $current_user['id'];?>')">Email Engagement</button></li>    
               </ul>
 
           </div>
         </div>
-        <div class="row">
-          
+<div class="row">          
 <div class="col-sm-9 col-sm-push-3">
 <!-- Tab panes -->
 <div class="tab-content">
@@ -242,7 +240,7 @@
                            <strong>DueDil</strong>
                         </div>
                         </div>
-                          
+                    
                         <div class="row list-group-item dashboardTotalheaders">
                         <div class="col-xs-2 col-md-1 hide-overflow"> 
                             <strong>Totals</strong>
@@ -684,6 +682,73 @@
           </div>
         </div><!--END PANEL-->
 
+<div class="tab-content mobile-hide">
+<div class="panel panel-default">
+<div class="panel-heading">
+<h3 class="panel-title">Tagging Summary</h3>
+</div>
+<div class="panel-body">
+
+<div class="col-md-12">
+                      <div class="row list-group-item">
+
+                        <div class="col-xs-2 col-md-2 hide-overflow"> 
+                            <strong>Name</strong>
+                        </div>
+                        <div class="col-xs-2 col-md-2 text-center hide-overflow">
+                            <strong>Last 7 Days</strong>
+                        </div>
+                        <div class="col-xs-2 col-md-2 text-center hide-overflow">
+                            <strong>Last 30 Days</strong>
+                        </div>
+                        <div class="col-xs-2 col-md-2 text-center hide-overflow">
+                            <strong>Last 100 Days</strong><br>
+                        </div>
+                        <div class="col-xs-2 col-md-2 text-center hide-overflow">
+                            <strong>Days Since Last Tag</strong><br>
+                        </div>
+                      </div>
+                    
+                      <?php foreach ($tagssummary as $tagsummary): ?>
+                    <div class="row list-group-item stats-row" style="font-size:12px;">
+                      <div class="col-xs-2 col-md-2" style="padding-top: 9px;">
+                            <?php $user_icon = explode(",",$tagsummary['image']); echo "<div class='circle name-circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
+                      </div>
+                            <div class="col-xs-2 col-md-2 text-center" style="padding-top: 9px;">
+                            <?php echo $tagsummary['7days'];?>
+                            </div>
+                             <div class="col-xs-2 col-md-2 text-center" style="padding-top: 9px;">
+                            <?php echo $tagsummary['30days'];?>
+                            </div>
+                             <div class="col-xs-2 col-md-2 text-center" style="padding-top: 9px;">
+                            <?php echo $tagsummary['100days'];?>
+                            </div>
+                            <div class="col-xs-2 col-md-2 text-center" style="padding-top: 9px;">
+
+<?php if ($tagsummary['lasttag'] < 1): ?>
+
+        Today
+
+<?php elseif ($tagsummary['lasttag'] <2): ?>
+
+        1 Day
+
+<?php else: echo $tagsummary['lasttag']." Days" ?>
+
+    
+
+<?php endif; ?>
+                            </div>
+                          </div> <!--END ROW-->    
+      <?php endforeach ?>
+
+
+
+</div>
+</div>
+</div>
+</div>
+
         <?php foreach($campaignsummary as $get_user_campaign)
         {?>
 
@@ -694,8 +759,8 @@
 <h3 class="panel-title pull-left">Campaign Summary</h3>
 <?php if ($current_user['permission'] == 'admin'): ?>
 <ul class="nav nav-tabs dashboard" role="tablist">
-<li role="presentation" class="active"><button href="#campaign_user" aria-controls="campaign_user" role="tab" data-toggle="tab" class="btn btn-primary btn-xs pull-right" style="margin-right:10px; margin-left:10px;">My Campaigns</button></li>
-                <li role="presentation"><button href="#campaign_team" aria-controls="campaign_team" role="tab" data-toggle="tab" class="btn btn-primary btn-xs pull-right" style="margin-right:10px;">Team Campaigns</button></li>
+<li role="presentation" class="active"><button href="#campaign_user" aria-controls="campaign_user" role="tab" data-toggle="tab" class="btn btn-primary btn-xs pull-right" style="margin-right:10px; margin-left:10px;    font-size: 10px;">My Campaigns</button></li>
+<li role="presentation"><button href="#campaign_team" aria-controls="campaign_team" role="tab" data-toggle="tab" class="btn btn-primary btn-xs pull-right" style="margin-right:10px;    font-size: 10px;">Team Campaigns</button></li>
 
               </ul>
 
