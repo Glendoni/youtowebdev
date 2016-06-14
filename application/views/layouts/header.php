@@ -83,21 +83,17 @@
 } else {?>
 <?php
 }; ?>
-<div style="font-size: 10px;font-weight: 300;text-align: right;float: right;line-height: 40px;padding-left: 5px;">Version 3.10</div>
+<div style="font-size: 10px;font-weight: 300;text-align: right;float: right;line-height: 40px;padding-left: 5px;">Version 3.91</div>
 <?php endif; ?>
 </a>
 </div>
-
-
-            <div class="col-sm-4 col-sm-push-5">
+<div class="col-sm-4 col-sm-push-5">
             <!-- Top Menu Items -->
             <?php if (isset($current_user)): ?>
 
             <ul class="nav navbar-top-links navbar-right">
             <?php if(count($pending_actions)>0){?>
-            <li><a class="btn btn-primary btn-sm btn-actions tr-actions" type="button" href="<?php echo site_url();?>dashboard#calls">
-  Schedule <span class="badge"><?php echo count($pending_actions); ?></span>
-</a>
+            <li><a class="btn btn-primary btn-sm btn-actions tr-actions" type="button" href="<?php echo site_url();?>dashboard#calls">Schedule <span class="badge"><?php echo count($pending_actions); ?></span></a>
             </li><?php } else {};?>
             <li class="dropdown">
 
