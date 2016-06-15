@@ -83,76 +83,19 @@
 } else {?>
 <?php
 }; ?>
-<div style="font-size: 10px;font-weight: 300;text-align: right;float: right;line-height: 40px;padding-left: 5px;">Version 3.10</div>
+<div style="font-size: 10px;font-weight: 300;text-align: right;float: right;line-height: 40px;padding-left: 5px;">Version 3.91</div>
 <?php endif; ?>
 </a>
 </div>
-
-
-            <div class="col-sm-4 col-sm-push-5">
+<div class="col-sm-4 col-sm-push-5">
             <!-- Top Menu Items -->
             <?php if (isset($current_user)): ?>
 
-            <ul class=" nav navbar-top-links navbar-right " >
+            <ul class="nav navbar-top-links navbar-right">
             <?php if(count($pending_actions)>0){?>
- 
-      
-
-        <li class="dropdown ">
-<a class="btn btn-primary btn-sm btn-actions " onclick="location.href='<?php echo site_url();?>dashboard#calls'" style="top: 48px; z-index: 555555555555;"> My Activity <?php echo count($pending_actions); ?></a>
-        <a href="#" class="dropdown-toggle user-profile sublinkMenu" data-toggle="dropdown" style="
-    margin: -3px -13px;
-"> <span id="current_user_name"> </span></span> <b class="caret"></b>
-            
-            
-            </a>
-        <ul class="dropdown-menu contActive">
-            <li> 
-                <div style="min-width:479px; padding:0px 10px;" class="myActiveDiv ">  
-                    <div style="float:left; padding: 0px 5px; width: 60%;  border: solid thin #fff; border-right-color: #e1e1e1;" class="recentlyVisited">
-                    <p class="recent_visited_header"  style="margin-left: 18px;"><strong>Recently Visited</strong></p> 
-                    <ul class="tr-actions " style="
-                    padding: 0px;
-                    "></ul>
-                    </div>  
-                    <div style="float:left; padding: 0px 0px; width: 30%;  " class="pageQvNav">
-                    <p class="recent_visited_header" style="    margin-left: 41px;">
-                    <strong>Page Sections</strong>
-                    </p> 
-                    <ul class="qvlink" style="margin-left: -15px;">
-                    <li><a href"javascript:;"  data="qvfinancials"><i class="fa fa-money" aria-hidden="true"></i> Financials</a></li>
-                    <li><a href"javascript:;"  data="addresses"><i class="fa fa-globe" aria-hidden="true"></i> Locations</a></li>
-                    <li><a href"javascript:;"  data="contacts"><i class="fa fa-user" aria-hidden="true"></i> Contacts</a></li>
-                    <li><a href"javascript:;"  data="qvTags"><i class="fa fa-tags" aria-hidden="true"></i> Tags</a></li>
-                    <li><a href"javascript:;"  data="add_action"><i class="fa fa-calendar" aria-hidden="true"></i> Add Action</a></li>
-                    <li><a href"javascript:;"  data="actions"><i class="fa fa-info-circle" aria-hidden="true"></i> Actions</a></li>
-                    </ul>
-
-                    </div>
-                      <!-- 
-                    <div style="float:left; padding: 0px 10px; width: 30%;  " class="campaignsCont">
-                 
-                        <p class="recent_visited_header" style="margin-left: 32px;" >
-                        <strong>Campaign</strong>
-                    </p> 
-                   
-<div class="col-xs-2 col-sm-2 col-md-12 col-lg-12 campaignsNav">
-                        <span  class="previousCampaign"><a href="javascript:;">Previous Campaign</a><br /></span>
-                        <span  class="currentCampaign"><a href="javascript:;">Return to Campaign</a><br /></span>
-                        <span class="nextCampaign"><a href="javascript:;" >Next Campaign</a><br /></span>
-                    </div>
-
-                    </div>
--->
-                </div>
-            </li>
-        </ul>
-        </li>
-
-
-
-<?php } else {};?>
- 
+            <li><a class="btn btn-primary btn-sm btn-actions tr-actions" type="button" href="<?php echo site_url();?>dashboard#calls">
+  Schedule <span class="badge"><?php echo count($pending_actions); ?></span></a>
+            </li><?php } else {};?>
             <li class="dropdown">
 
                <a href="#" class="dropdown-toggle user-profile" data-toggle="dropdown">

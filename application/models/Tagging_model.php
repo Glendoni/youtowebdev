@@ -8,6 +8,36 @@ class Tagging_model extends MY_Model {
          $this->load->helper('date');
         $this->load->helper('string');
 	}
+
+
+function get_tagging_stats()
+{
+
+$sql = "select 
+       U.name \"person\", 
+       U.image,
+       count(CASE when CT.created_at >= current_date - 7 then 1 END) \"7days\",
+     count(CASE when CT.created_at >= current_date - 30 then 1 END) \"30days\",
+     count(CASE when CT.created_at >= current_date - 100 then 1 END) \"100days\",
+     min(current_date - CT.created_at::date) \"lasttag\"
+ 
+from COMPANY_TAGS CT
+
+JOIN USERS U
+ON CT.created_by = U.id
+
+where CT.eff_to is null
+and CT.company_id > 100
+and U.department = 'sales' 
+and U.eff_to is null
+
+group by 1,2
+
+order by 3 desc,1 desc";
+    $query = $this->db->query($sql);
+    return $query->result_array();
+}
+
     
     
     public function create_sub($post,$userID)
