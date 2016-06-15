@@ -96,7 +96,15 @@
         </span>
 	<?php else: ?>
 	<?php endif; ?>
+                
+               <?php if($company['customer_to']){  ?>
+            <span class="label pipeline label-<?php echo str_replace(' ', '', $company['pipeline']); ?> cancelledPill">
+                Cancelled <?php echo date('d/m/Y',strtotime($company['customer_to'])); ?>
+            </span>
+    <?php } ?>
 	</div>
+        
+        
 		<div class="col-sm-9">
 		<div class="row">
 <div class="col-sm-12 action-details">
