@@ -812,9 +812,7 @@ if ($your_date < $now){;
                     
                     
                     <div class="timeline-label showCommentAddForm"> <div class="mar-no pad-btm"><span class="label label-warning"></span><div class="" style="float:right; margin-top:0; margin-left:3px;"></div></div>
-                    
-                    
-                        
+                      
         <form action="http://localhost:8888/baselist/actions/create" name="create" class="showCommentAddForm" id="actionSendComment" role="" method="post" accept-charset="utf-8">
 <input type="hidden" name="company_id" value="154537" id="comcompany_id" >
 <input type="hidden" name="user_id" value="31"  >
@@ -831,13 +829,7 @@ if ($your_date < $now){;
 			            </form>
                         
                     </div>
-                
-                
-                
-                
                 </div>
-                
-                
                     <div class="timeline_inner"></div>
 
                     </div>
@@ -852,14 +844,6 @@ if ($your_date < $now){;
     </div>
      </div>        
         
-        
-        
-        
-			
-        
-
-
-    
 
  <div class="row" id="parent">
 
@@ -878,49 +862,10 @@ if ($your_date < $now){;
  </div>
    
 <script>
-    //QUICKVIEW SLIDE
  
-  
     
-    
-    
-    //QUICKVIEW SLIDE VIEW
-    
-    
-    
-    
- 
-$('#sidebar').affix({
-      offset: {
-        top: 245
-      }
-});
 
-var $body   = $(document.body);
-var $navHeight = $('.actions').outerHeight(true) + 10;
-
-body.scrollspy({
-	target: '#leftCol',
-	offset: navHeight
-});
     
- function show() {
- 
-            var offset = $(".child").offset();
-            var posY = offset.top - $(window).scrollTop();
-            var posX = offset.left - $(window).scrollLeft(); 
-            //console.log("top:" + posY + ", left:" + posX);
-//console.warn($(window).scrollTop())
-        if(posY < 0){
- 
-            $('.sticky').addClass('affix');
- 
-        }else{
-   
-            // $('#sidebar').hide();
-            $('.sticky').removeClass('affix');
-        }
-}
 
 </script>
  

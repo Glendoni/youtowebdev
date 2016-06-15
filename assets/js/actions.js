@@ -473,6 +473,7 @@ function bindAddCallBackToCompletedAction(){
      
     var myParam = window.location.href.split("id=");
     var action ;
+        var i = [];
     $.ajax({
         type: "GET",
         dataType: "json",
@@ -522,9 +523,13 @@ function bindAddCallBackToCompletedAction(){
             
             $(items.join( "" )).prependTo('#marketing_action ul');
             //if(i) $('#outstanding h4,.actionMsg h4').hide();
-            mainMenuQty(scope)
-            
-                
+
+ 
+            if(i < 1){
+             $('a[data="actions_marketing"]').attr('disabled', true);
+            }
+
+            mainMenuQty(scope);        
         }
 
 
@@ -537,48 +542,38 @@ function bindAddCallBackToCompletedAction(){
         var i =0;
         $('.nav-stacked li a').each(function(){
             action  = $(this).attr('data');
-            
             qtyaction = $('.actionId'+action).length;
             $('.qty'+action).text(qtyaction);
-            //console.debug($('.actionId'+action).length)
+                //console.debug($('.actionId'+action).length);
+            
+            console.log(qtyaction  + ' ====='+action )
+            if(qtyaction < 1 && action != 'All' && action != 'actions_marketing' ){
+            console.log('actionId'+action)
+            $('a[data="'+action+'"]').attr('disabled', true);
+            }
+            
             i = (qtyaction+i);
-
+            action = '';
         })
        
         $('.qtyAll').text(i)
 
-
-var overdueStatus = $(".overdueAction").length;
-if (overdueStatus){
-$('.qtyactions_outstanding').css({'background': '#d9534f','color': '#ffffff', 'font-weight' : '600'});
- 
-
-}
- 
+        var overdueStatus = $(".overdueAction").length;
+        if (overdueStatus){
+            $('.qtyactions_outstanding').css({'background': '#d9534f','color': '#ffffff', 'font-weight' : '600'});
+        }
                        intefaceVisibility();
                          $('.actionMsg').show();  
 
-
-
-
                     $('.formOutcome .action_type_planned').change(function(){
-
-
-
-
 
                         var followupOutcomeShowHide  = $(this).val();
                         var bun = $(this).closest("form").attr('data');
                                     var boxeval ;
                         formBox  = '.box'+bun;
 
-                          
-
-
-                        if(followupOutcomeShowHide){
+                          if(followupOutcomeShowHide){
                             
-                                        //alert($(formBox+' .actiondate').attr('disabled'));
-
                         $(formBox+' .actionContact ').prop('disabled', true);
                         $(formBox+' .actionContact').removeAttr("disabled");
                         $(formBox+' .actiondate').removeAttr("disabled");
@@ -588,10 +583,6 @@ $('.qtyactions_outstanding').css({'background': '#d9534f','color': '#ffffff', 'f
                         var listName =[];
                         var usernameID =  [] ;
                             
-                           
-         
-
-                       
                              $('.box'+bun+' select > option').each(function(){
  //alert($('.box'+bun+'  .actionContact').text())
                                  usernameID = this.value;
@@ -603,7 +594,6 @@ $('.qtyactions_outstanding').css({'background': '#d9534f','color': '#ffffff', 'f
                                 
                                 if(!$('.outcome'+bun+' .actionContact').val())
                                     $('.box'+bun+'  .actionContact option[value='+parseInt(usernameID)+']').prop('selected','selected');
-
                              }
                             })
                         }else{

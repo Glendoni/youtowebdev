@@ -119,8 +119,7 @@ $(".source_explanation").prop('required',false);
 $( document ).ready(function() {
     
   
-    
-    
+$(window).scroll(show);
     
     $('#add_action_request').click(function(e){
 
@@ -249,8 +248,8 @@ $( document ).ready(function() {
         }
             //$('#sidebar').hide();
         
-        show();
-        $(window).scroll(show);
+       // show();
+       // $(window).scroll(show);
     });
     $('.marketingAcitonCtn').text(parseInt($('.marketingAcitonCtn').text()) + i);
     $(items.join( "" )).prependTo('#marketing ul');
@@ -321,28 +320,38 @@ function getUserFavourites(){
 }
 
 
-function tsTotalConfig(){
-    
-     
-    if($('.mainAddrType').length > 1) $('.copyRegAddr').remove(); // Removes add copy address check button if more than 1 address exist 
-        //counts the totals in team stats columns
-        var mycolumnArray = ["tw","lw","tm","lm","sr"];
-        var mycolumnArrayLength = mycolumnArray.length;
-        var myStringArray = ["deals","proposals","demobookedcount","democount","meetingbooked","meetingcount","salescall","introcall","pipelinecount","key_review_added","key_review_occuring","duediligence"];
-        var arrayLength = myStringArray.length;
+    function tsTotalConfig(){
 
-        var total; 
-        var list;
-        for (var s = 0; s < mycolumnArrayLength; s++) {
-        for (var i = 0; i < arrayLength; i++) {
-            list = 	getlisttotal(myStringArray[i], mycolumnArray[s]);
+
+        if($('.mainAddrType').length > 1) $('.copyRegAddr').remove(); // Removes add copy address check button if more than 1 address exist 
+            //counts the totals in team stats columns
+            var mycolumnArray = ["tw","lw","tm","lm","sr"];
+            var mycolumnArrayLength = mycolumnArray.length;
+            var myStringArray = ["deals","proposals","demobookedcount","democount","meetingbooked","meetingcount","salescall","introcall","pipelinecount","key_review_added","key_review_occuring","duediligence"];
+            var arrayLength = myStringArray.length;
+            var total; 
+            var list;
+            for (var s = 0; s < mycolumnArrayLength; s++) {
+            for (var i = 0; i < arrayLength; i++) {
+                list = 	getlisttotal(myStringArray[i], mycolumnArray[s]);
+            };
         };
-};
-    
-    
-}
 
 
+    }
+
+    function show() {
+
+        var offset = $(".child").offset();
+        var posY = offset.top - $(window).scrollTop();
+        var posX = offset.left - $(window).scrollLeft();
+        
+        if(posY < 0){
+            $('.sticky').addClass('affix');
+        }else{
+            $('.sticky').removeClass('affix');
+        }
+    }
 //////////////Controls pipline pick date
 var d = new Date();
 var n = d.getMonth();

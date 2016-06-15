@@ -62,15 +62,7 @@
 
  
 <script type="text/javascript">
-    
-    
    
-    
-    
-    
-    
-    
-    
     
     function mysql_to_unix(date) {
     return Math.floor(new Date(date).getTime() / 1000);
@@ -79,10 +71,10 @@
 $(document).ready(function(){
     bindFavorites()
         //QUICKVIEW SLIDE
-            var operations = [];
-            var repLimited = [];
-            var name = [];
-            $.ajax({
+        var operations = [];
+        var repLimited = [];
+        var name = [];
+        $.ajax({
             type: "GET",
                 dataType: "json",
             url: "<?php echo base_url(); ?>Actions/operations_read",
@@ -116,9 +108,6 @@ $(document).ready(function(){
      
  }
 
-
-
-    
     if((/campaign_id/.test(window.location.href))) {
         $.urlParam = function(name){
         var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
@@ -137,18 +126,17 @@ $(document).ready(function(){
                               data: para,
                                 dataType: "json",
                              url: "<?php echo site_url();?>Companies/campaign_page_getter",
-                   success: function(data) {
+                            success: function(data) {
 
-                       if(data.Previous !== null){
+                               if(data.Previous !== null){
+                                    $('.return_to_campaign').prepend('<a class="btn btn-default btn-sm" href="<?php echo site_url();?>companies/company?id='+data.Previous+'&campaign_id='+campaign_id+'" role="button">Previous</a>');
+                                }
 
-                            $('.return_to_campaign').prepend('<a class="btn btn-default btn-sm" href="<?php echo site_url();?>companies/company?id='+data.Previous+'&campaign_id='+campaign_id+'" role="button">Previous</a>');
-                        }
-
-                        if(data.NextId){
-                            $('.return_to_campaign').append('<a class="btn btn-default btn-sm" href="<?php echo site_url();?>companies/company?id='+data.NextId+'&campaign_id='+campaign_id+'" role="button">Next</a>');
-                        }
-                   }
-        });
+                                if(data.NextId){
+                                    $('.return_to_campaign').append('<a class="btn btn-default btn-sm" href="<?php echo site_url();?>companies/company?id='+data.NextId+'&campaign_id='+campaign_id+'" role="button">Next</a>');
+                                }
+                            }
+                        });
             
     }
     
