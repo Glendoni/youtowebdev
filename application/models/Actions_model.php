@@ -2,6 +2,7 @@
 class Actions_model extends MY_Model {
 	
 
+
 	// GETS
 
 function get_actions1($company_id)
@@ -868,13 +869,14 @@ function add_to_zendesk($post)
     foreach ($query->result() as $row){
       $company_name= $row->name;
       $company_url= str_replace("http://"," ",str_replace("www.", "", $row->url));
+    $company_registration= $row->registration;
     }
     $ch = curl_init();
     $username = 'dchapple@sonovate.com';
     $password = '25Million';
     curl_setopt($ch, CURLOPT_URL, "https://sonovate.zendesk.com/api/v2/organizations.json");
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
-    $body = '{"organization": {"name": "'.$company_name.'","domain_names": ["'.$company_url.'"]}}';
+    $body = '{"organization": {"name": "'.$company_name.'","domain_names": ["'.$company_url.'"],"company_registration": ["'.$company_registration.'"]}}';
 
     curl_setopt($ch, CURLOPT_POSTFIELDS,$body);
     curl_setopt($ch, CURLOPT_USERPWD, $username . ":" . $password);
