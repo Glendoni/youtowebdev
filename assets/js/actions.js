@@ -160,6 +160,12 @@ function writeactions(data, scope = false){
                                 case 'actions_completed':
                                     //console.info('actions_completed-- '+actionType+ action['image']);
                                           //console.log('  waaaaaarn '+action['comments'])
+                                    
+                                      if(action['initial_rate']){
+                                    initial_fee = (parseFloat(action['initial_rate']*100).toFixed(1));
+
+                                            //initial_fee.push(initial_fee);
+                                } 
                                             pipeline =  action['comments'];   
                                 break;
                                 case 'actions_cancelled':

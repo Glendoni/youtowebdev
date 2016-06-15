@@ -861,21 +861,16 @@ echo $this->Tagging_model->$route($post);
          $id = $this->session->userdata('selected_company_id');
         //$query[]['actions'] = $this->Actions_model->get_actions(154537); //$this->input->get('id')
         $query[]['actions_outstanding'] = $this->Actions_model->get_actions_outstanding($id);
-        
     
-        
         $query[]['action_types_array'] = (array)$this->Actions_model->get_action_types_array();
             $query[]['actions_completed'] = $this->Actions_model->get_actions_completed($id);
         $query[]['actions_cancelled'] = $this->Actions_model->get_actions_cancelled($id);
         
-         $query[]['comments'] = $this->Actions_model->get_comments_two($id);
-        
+        $query[]['comments'] = $this->Actions_model->get_comments_two($id);
         
         foreach($query  as $key => $value){
             
-       
                 $action[][] = $value; 
-           
         }
         if($query[0]['actions_outstanding'][0]->initial_rate){
         $action['initial_rate'] = $query[0]['actions_outstanding'][0]->initial_rate;
@@ -884,7 +879,7 @@ echo $this->Tagging_model->$route($post);
          //$action['initial_fee']['initial_rate']  =  ($initial_rate/100);
   // echo '<pre>'; print_r($action); echo '</pre>';
         header('Content-Type: application/json');
-      echo json_encode($action);
+        echo json_encode($action);
  
     }
     
@@ -901,113 +896,64 @@ echo $this->Tagging_model->$route($post);
         
          $query[]['comments'] = $this->Actions_model->get_comments_two($id);
         foreach($query  as $key => $value){
-            
+            $action[][] = $value; 
+        }
        
-                $action[][] = $value; 
-           
+         if($query[0]['actions_completed'][0]->initial_rate){
+        $action['initial_rate'] = $query[0]['actions_completed'][0]->initial_rate;
         }
-        
-         
-        if($query[0]['actions_outstanding'][0]->initial_rate){
-        $action['initial_rate'] = $query[0]['actions_outstanding'][0]->initial_rate;
-        }
-        
          //$action['initial_fee']['initial_rate']  =  ($initial_rate/100);
-  echo '<pre>'; print_r($action); echo '</pre>';
+        // echo '<pre>'; print_r($action); echo '</pre>';
         header('Content-Type: application/json');
-  //    echo json_encode($action);
+        echo json_encode($action);
  
     }
     
     
     function getCompletedActions($id = 154537){
-         $id = $this->session->userdata('selected_company_id');
         
+        $id = $this->session->userdata('selected_company_id');
         $actions =  $this->Actions_model->get_follow_up_actions($id);
-        
-        echo json_encode($actions);
-        
-        
+        echo json_encode($actions);  
     }
     
     
-    function _aptester(){
- 
-$fname  = 'Glendon';
-$var =   1234;
-$keyName = 'Test--Field--To--Add';
- 
-$curl = curl_init();
-
-curl_setopt_array($curl, array(
-  CURLOPT_URL => "https://api2.autopilothq.com/v1/contact",
-  CURLOPT_RETURNTRANSFER => true,
-  CURLOPT_ENCODING => "",
-  CURLOPT_MAXREDIRS => 10,
-  CURLOPT_TIMEOUT => 30,
-  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-  CURLOPT_CUSTOMREQUEST => "POST",
-  CURLOPT_POSTFIELDS => "{ \n    \"contact\": {\n        \"FirstName\": \"".$fname."\",\n        \"LastName\": \"Small\",\n        \"Email\": \"glendonsmall@yahoo.co.uk\",\n        \"custom\": {\n            \"integer--".$keyName."\": ".$var."\n        }\n\n  }\n\n}",
-  CURLOPT_HTTPHEADER => array(
-    "autopilotapikey: ed278f3d19a5453fb807125aa945a81a",
-    "cache-control: no-cache",
-    "content-type: application/json",
-    "postman-token: db292a51-dcf8-f6df-333c-1730394da55c"
-  ),
-));
-
-$response = curl_exec($curl);
-$err = curl_error($curl);
-
-curl_close($curl);
-
-if ($err) {
-  echo "cURL Error #:" . $err;
-} else {
-  echo $response;
-}
-
-}
-    
-function campaign_page_getter(){
+    function campaign_page_getter(){
 
     
-     $company_id = $this->input->post('company_id');
+         $company_id = $this->input->post('company_id');
 
-    $session_result = $this->session->userdata('companies');
-		$search_results_in_session = unserialize($session_result);
-		$campaign = $this->session->userdata('campaign_id');
-		$companies_array = $search_results_in_session;
-		// if campaign exist set this variables
-			// get companies from recent result or get it from session
-			$companies_array_chunk = array_chunk($companies_array, RESULTS_PER_PAGE);
-			$current_page_number = $this->input->get('page_num') ? $this->input->get('page_num') : 1;
-			$pages_count = ceil(count($companies_array)/RESULTS_PER_PAGE);
-            //$prev = array();
-            $i = 0 ;
-                foreach($companies_array_chunk[($current_page_number-1)] as $key=>$item){
-                       // echo $i;
-                    if($i ==1){
-                        $data['NextId'] = $item['id'];
-                    $i = 0;
-                        
-                    }
-                    if($item['id'] == $company_id){
-                        $data['Current'] = $item['id'];
-                        $data['Previous'] = $prev;
-                        $i = 1;
-                    }
-                        $prev = $item['id'];
+        $session_result = $this->session->userdata('companies');
+            $search_results_in_session = unserialize($session_result);
+            $campaign = $this->session->userdata('campaign_id');
+            $companies_array = $search_results_in_session;
+            // if campaign exist set this variables
+                // get companies from recent result or get it from session
+                $companies_array_chunk = array_chunk($companies_array, RESULTS_PER_PAGE);
+                $current_page_number = $this->input->get('page_num') ? $this->input->get('page_num') : 1;
+                $pages_count = ceil(count($companies_array)/RESULTS_PER_PAGE);
+                //$prev = array();
+                $i = 0 ;
+                    foreach($companies_array_chunk[($current_page_number-1)] as $key=>$item){
+                           // echo $i;
+                        if($i ==1){
+                            $data['NextId'] = $item['id'];
+                        $i = 0;
 
-}
-                    echo json_encode($data);
-             //echo '<pre>'; print_r($data); echo '</pre>';
-            //echo '<pre>'; print_r($companies_array_chunk[($current_page_number-1)]); echo '</pre>';
-            exit();
+                        }
+                        if($item['id'] == $company_id){
+                            $data['Current'] = $item['id'];
+                            $data['Previous'] = $prev;
+                            $i = 1;
+                        }
+                            $prev = $item['id'];
 
+        }
+                        echo json_encode($data);
+                 //echo '<pre>'; print_r($data); echo '</pre>';
+                //echo '<pre>'; print_r($companies_array_chunk[($current_page_number-1)]); echo '</pre>';
+                exit();
 
- 
-    
-}
+    }
 }
  

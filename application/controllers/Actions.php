@@ -98,15 +98,15 @@ class Actions extends MY_Controller {
 
                             }else if($post['action_type_completed']=='8'){
                                 // proposal sent to company 
-                                $result = $this->Companies_model->update_company_to_proposal($company_id);
-                                if(empty($result)){
-                                    $this->set_message_warning('Error while updating company.');
-                                }else{
+                                //$result = $this->Companies_model->update_company_to_proposal($company_id);
+                                //if(empty($result)){
+                                  //  $this->set_message_warning('Error while updating company.');
+                                //}else{
                                     // action model, update register an action for the proposal
                                     $result = $this->Actions_model->company_updated_to_proposal($post); 
                                     $result1 = $this->Actions_model->add_to_zendesk($post); 
                                     if(empty($result)) $this->set_message_warning('Error while updating action for the company.');
-                                }
+                                //}
                             }
                             $this->set_message_success('Action successfully inserted');
                             redirect('companies/company?id='.$this->input->post('company_id').$campaign_redirect.'#actions','location');
