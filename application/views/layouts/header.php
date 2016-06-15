@@ -83,7 +83,7 @@
 } else {?>
 <?php
 }; ?>
-<div style="font-size: 10px;font-weight: 300;text-align: right;float: right;line-height: 40px;padding-left: 5px;">Version 3.9.1</div>
+<div style="font-size: 10px;font-weight: 300;text-align: right;float: right;line-height: 40px;padding-left: 5px;">Version 3.10</div>
 <?php endif; ?>
 </a>
 </div>
