@@ -1,9 +1,9 @@
 <?php
 class Actions_model extends MY_Model {
-	
+    
 
 
-	// GETS
+    // GETS
 
 function get_actions1($company_id)
 {
@@ -231,7 +231,7 @@ AND a.company_id='$company_id'";
     
     
 function get_pending_actions($user_id)
-{		
+{       
     $this->db->select("actions.company_id, actions.id as action_id,comments,planned_at,action_type_id,name as company_name,contacts.first_name,contacts.last_name,contacts.phone,contacts.email, to_char(planned_at, 'HH24:MI DD/MM/YY') as duedate ");
     $this->db->where('actions.user_id',$user_id);
     $this->db->where('actioned_at',NULL);
@@ -245,7 +245,7 @@ function get_pending_actions($user_id)
 
 }
 function get_assigned_companies($user_id)
-{	
+{   
     
     $this->db->where('user_id',$user_id);
     $this->db->where('active','t');
@@ -256,7 +256,7 @@ function get_assigned_companies($user_id)
 }
     
 function get_assigned_companies_ajax($user_id, $order = false)
-{	
+{   
        
     
     $orderby = 'name asc, assign_date desc';
@@ -333,7 +333,7 @@ order by deals desc nulls last, proposals desc";
     sum(case when action_type_id = '22' AND a.created_at > '$start_date' AND a.created_at < '$end_date' then 1 else 0 end) key_review_added,
     sum(case when action_type_id = '22' AND a.planned_at > '$start_date' AND a.planned_at < '$end_date' then 1 else 0 end) key_review_occuring,
     sum(case when (action_type_id = '8') AND a.created_at > '$start_date' AND a.created_at < '$end_date' then 1 else 0 end) proposals,
-    Sum(case when action_type_id = '19' and a.id = 	(SELECT MAX(id) FROM actions z WHERE z.company_id = a.company_id and z.action_type_id = '19' order by a.actioned_at desc) AND (a.comments ilike '%intent%' or a.comments ilike '%qualified%') AND a.created_at > '$start_date' AND a.created_at < '$end_date' THEN 1 ELSE 0 END) AS pipelinecount
+    Sum(case when action_type_id = '19' and a.id =  (SELECT MAX(id) FROM actions z WHERE z.company_id = a.company_id and z.action_type_id = '19' order by a.actioned_at desc) AND (a.comments ilike '%intent%' or a.comments ilike '%qualified%') AND a.created_at > '$start_date' AND a.created_at < '$end_date' THEN 1 ELSE 0 END) AS pipelinecount
     from actions A INNER JOIN companies C on A.company_id = C.id INNER JOIN users U on A.user_id = U.id group by U.id,U.name,a.cancelled_at, u.department HAVING cancelled_at is null and u.department = 'sales' and (u.active = 't' or sum(case when (action_type_id = '16') AND a.created_at > '$start_date' AND a.created_at < '$end_date' then 1 else 0 end) >0) $team_type_sql order by deals desc,proposals desc,meetingbooked desc, introcall desc, name desc";
     
     
@@ -366,7 +366,7 @@ function get_pipeline_contacted()
         from companies c
         inner join actions a on
         c.id = a.company_id
-        and a.id = 	(
+        and a.id =  (
         SELECT MAX(id) 
         FROM actions z 
         WHERE z.company_id = a.company_id and z.action_type_id = '19' and c.pipeline not in ('Customer','customer','Proposal','proposal','Lost','lost')
@@ -401,7 +401,7 @@ function get_pipeline_contacted_individual($user_id)
         from companies c
         inner join actions a on
         c.id = a.company_id
-        and a.id = 	(
+        and a.id =  (
         SELECT MAX(id) 
         FROM actions z 
         WHERE z.company_id = a.company_id and z.action_type_id = '19' 
@@ -426,7 +426,7 @@ function get_pipeline_proposal()
         $start_date_sql = "a.created_at > NOW() - INTERVAL '60 days'";
     }
     $sql = "select
-    c.id as company_id,a.comments,c.name as company_name,a.id,a.created_at,c.pipeline,u.name as username from companies c inner join actions a on c.id = a.company_id and a.id = 	(
+    c.id as company_id,a.comments,c.name as company_name,a.id,a.created_at,c.pipeline,u.name as username from companies c inner join actions a on c.id = a.company_id and a.id =    (
     SELECT MAX(id) 
     FROM actions z 
     WHERE z.company_id = a.company_id and z.action_type_id = '19' 
@@ -450,7 +450,7 @@ function get_pipeline_proposal_individual($user_id)
     else {
         $start_date_sql = "a.created_at > NOW() - INTERVAL '60 days'";}
         $sql = "select
-        c.id as company_id,a.comments,c.name as company_name,a.id,a.created_at,c.pipeline,u.name as username from companies c inner join actions a on c.id = a.company_id and a.id = 	(
+        c.id as company_id,a.comments,c.name as company_name,a.id,a.created_at,c.pipeline,u.name as username from companies c inner join actions a on c.id = a.company_id and a.id =    (
         SELECT MAX(id) 
         FROM actions z 
         WHERE z.company_id = a.company_id and z.action_type_id = '19' 
@@ -475,7 +475,7 @@ function get_pipeline_customer()
     from companies c
     inner join actions a on
     c.id = a.company_id
-    and a.id = 	(
+    and a.id =  (
     SELECT MAX(id) 
     FROM actions z 
     WHERE z.company_id = a.company_id and z.action_type_id = '16' 
@@ -507,7 +507,7 @@ function get_pipeline_customer_individual($user_id)
     from companies c
     inner join actions a on
     c.id = a.company_id
-    and a.id = 	(
+    and a.id =  (
     SELECT MAX(id) 
     FROM actions z 
     WHERE z.company_id = a.company_id and z.action_type_id = '16' 
@@ -536,7 +536,7 @@ function get_pipeline_lost()
     from companies c
     inner join actions a on
     c.id = a.company_id
-    and a.id = 	(
+    and a.id =  (
     SELECT MAX(id) 
     FROM actions z 
     WHERE z.company_id = a.company_id and z.action_type_id = '19' 
@@ -565,7 +565,7 @@ function get_pipeline_lost_individual($user_id)
     from companies c
     inner join actions a on
     c.id = a.company_id
-    and a.id = 	(
+    and a.id =  (
     SELECT MAX(id) 
     FROM actions z 
     WHERE z.company_id = a.company_id and z.action_type_id = '19' 
@@ -692,7 +692,7 @@ function get_action_types_array()
     foreach($query->result() as $row)
     {
       $array[$row->id] = $row->name;
-    } 	
+    }   
     return $array;
 
 }
@@ -712,7 +712,7 @@ function get_action_types_done()
 
 
 function get_action_types_planned()
-{	
+{   
     $this->db->order_by('name', 'asc'); 
     $query = $this->db->get_where('action_types',array('type'=>'Planned'));
     return $query->result_object();
@@ -752,15 +752,15 @@ function set_action_state($action_id,$user_id,$state,$outcome,$post)
         
               if ($post['action_type_planned']>0) {
             $planneddata = array(
-            'company_id' 	=> $post['company_id'],
-            'user_id' 		=> $user_id,
-            'comments'		=> (!empty($outcome)?$outcome:NULL),
-            'planned_at'	=> $post['planned_at'],
+            'company_id'    => $post['company_id'],
+            'user_id'       => $user_id,
+            'comments'      => (!empty($outcome)?$outcome:NULL),
+            'planned_at'    => $post['planned_at'],
             'contact_id'    => (!empty($post['contact_id'])?$post['contact_id']:NULL),
-            'created_by'	=> $user_id,
+            'created_by'    => $user_id,
             'action_type_id'=> $post['action_type_planned'],
-            'actioned_at'	=>  NULL,
-            'created_at' 	=> date('Y-m-d H:i:s'),
+            'actioned_at'   =>  NULL,
+            'created_at'    => date('Y-m-d H:i:s'),
             'followup_action_id' =>(isset($post['followup_action_id'])?$post['followup_action_id']:NULL),
         );
         $query = $this->db->insert('actions', $planneddata);
@@ -780,15 +780,15 @@ function create($post)
 
     //TEST - COMPLETED ACTION ONLY
     $completeddata = array(
-        'company_id' 	=> $post['company_id'],
-        'user_id' 		=> $post['user_id'],
-        'comments'		=> (isset($post['comment'])?$post['comment']:NULL),
-        'planned_at'	=> NULL,
+        'company_id'    => $post['company_id'],
+        'user_id'       => $post['user_id'],
+        'comments'      => (isset($post['comment'])?$post['comment']:NULL),
+        'planned_at'    => NULL,
         'contact_id'    => (!empty($post['contact_id'])?$post['contact_id']:NULL),
-        'created_by'	=> $post['user_id'],
+        'created_by'    => $post['user_id'],
         'action_type_id'=> (isset($post['action_type_completed'])?$post['action_type_completed']:$post['action_type']),
-        'actioned_at'	=> date('Y-m-d H:i:s'),
-        'created_at' 	=> date('Y-m-d H:i:s'),
+        'actioned_at'   => date('Y-m-d H:i:s'),
+        'created_at'    => date('Y-m-d H:i:s'),
         'followup_action_id' =>(isset($post['followup_action_id'])?$post['followup_action_id']:NULL),
         );
     $query = $this->db->insert('actions', $completeddata);
@@ -798,15 +798,15 @@ function create($post)
     if ($post['action_type_planned']>0) {
 
         $planneddata = array(
-        'company_id' 	=> $post['company_id'],
-        'user_id' 		=> $post['user_id'],
-        'comments'		=> (isset($post['comment'])?$post['comment']:NULL),
-        'planned_at'	=> $post['planned_at'],
+        'company_id'    => $post['company_id'],
+        'user_id'       => $post['user_id'],
+        'comments'      => (isset($post['comment'])?$post['comment']:NULL),
+        'planned_at'    => $post['planned_at'],
         'contact_id'    => (!empty($post['contact_id'])?$post['contact_id']:NULL),
-        'created_by'	=> $post['user_id'],
+        'created_by'    => $post['user_id'],
         'action_type_id'=> $post['action_type_planned'],
-        'actioned_at'	=>  NULL,
-        'created_at' 	=> date('Y-m-d H:i:s'),
+        'actioned_at'   =>  NULL,
+        'created_at'    => date('Y-m-d H:i:s'),
         'followup_action_id' =>(isset($post['followup_action_id'])?$post['followup_action_id']:NULL),
         );
         $query = $this->db->insert('actions', $planneddata);
@@ -826,15 +826,15 @@ function company_updated_to_customer($post){
         
     }
     $actiondata = array(
-                'company_id' 	=> $post['company_id'],
-                'user_id' 		=> $post['user_id'],
-                'comments'		=> 'Pipeline changed to Customer',
-                'planned_at'	=> (!empty($post['planned_at'])? date('Y-m-d H:i:s',strtotime($post['planned_at'])):NULL),
+                'company_id'    => $post['company_id'],
+                'user_id'       => $post['user_id'],
+                'comments'      => 'Pipeline changed to Customer',
+                'planned_at'    => (!empty($post['planned_at'])? date('Y-m-d H:i:s',strtotime($post['planned_at'])):NULL),
                 'contact_id'    => (!empty($post['contact_id'])?$post['contact_id']:NULL),
-                'created_by'	=> $post['user_id'],
+                'created_by'    => $post['user_id'],
                 'action_type_id'=> '19',
-                'actioned_at'	=> date('Y-m-d H:i:s'),
-                'created_at' 	=> date('Y-m-d H:i:s'),
+                'actioned_at'   => date('Y-m-d H:i:s'),
+                'created_at'    => date('Y-m-d H:i:s'),
                 );
     $query = $this->db->insert('actions', $actiondata);
     return $this->db->insert_id();
@@ -844,15 +844,15 @@ function company_updated_to_customer($post){
 function company_updated_to_proposal($post)
 {
     $actiondata = array(
-        'company_id' 	=> $post['company_id'],
-        'user_id' 		=> $post['user_id'],
-        'comments'		=> 'Pipeline changed to Proposal',
-        'planned_at'	=> (!empty($post['planned_at'])? date('Y-m-d H:i:s',strtotime($post['planned_at'])):NULL),
+        'company_id'    => $post['company_id'],
+        'user_id'       => $post['user_id'],
+        'comments'      => 'Pipeline changed to Proposal',
+        'planned_at'    => (!empty($post['planned_at'])? date('Y-m-d H:i:s',strtotime($post['planned_at'])):NULL),
         'contact_id'    => (!empty($post['contact_id'])?$post['contact_id']:NULL),
-        'created_by'	=> $post['user_id'],
+        'created_by'    => $post['user_id'],
         'action_type_id'=> '19',
-        'actioned_at'	=> date('Y-m-d H:i:s'),
-        'created_at' 	=> date('Y-m-d H:i:s'),
+        'actioned_at'   => date('Y-m-d H:i:s'),
+        'created_at'    => date('Y-m-d H:i:s'),
         );
 
     $query = $this->db->insert('actions', $actiondata);
@@ -862,10 +862,10 @@ function company_updated_to_proposal($post)
     
 function add_to_zendesk($post)
 {
-		$company_id = $post['company_id'];
-		$this->db->where('id', $company_id);
-		$this->db->limit(1);
-		$query = $this->db->get('companies');
+        $company_id = $post['company_id'];
+        $this->db->where('id', $company_id);
+        $this->db->limit(1);
+        $query = $this->db->get('companies');
     foreach ($query->result() as $row){
       $company_name= $row->name;
       $company_url= str_replace("http://"," ",str_replace("www.", "", $row->url));
@@ -895,8 +895,8 @@ function add_to_zendesk($post)
     }
     curl_close($ch);
 
-}	
-	// DELETES
+}   
+    // DELETES
 function delete_campaign($id,$user_id)
 {
     $data = array(
@@ -926,10 +926,10 @@ function delete_campaign($id,$user_id)
     
     function operations_store($comp_id,$user_id,$operation){
          $actiondata = array(
-        'company_id' 	=> $comp_id,
-        'user_id' 		=> $user_id,
+        'company_id'    => $comp_id,
+        'user_id'       => $user_id,
         'operation' => $operation,
-        'created_at' 	=> date('Y-m-d H:i:s'),
+        'created_at'    => date('Y-m-d H:i:s'),
         );
 
     $query = $this->db->insert('operations', $actiondata);
