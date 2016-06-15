@@ -893,8 +893,8 @@ echo $this->Tagging_model->$route($post);
                 $action[][] = $value; 
            
         }
-        if($query[0]['actions_outstanding'][0]->initial_rate){
-        $action['initial_rate'] = $query[0]['actions_outstanding'][0]->initial_rate;
+        if($query[0]['actions_completed'][0]->initial_rate){
+        $action['initial_rate'] = $query[0]['actions_completed'][0]->initial_rate;
         }
         
          //$action['initial_fee']['initial_rate']  =  ($initial_rate/100);
