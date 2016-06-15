@@ -93,7 +93,8 @@
 
             <ul class="nav navbar-top-links navbar-right">
             <?php if(count($pending_actions)>0){?>
-            <li><a class="btn btn-primary btn-sm btn-actions tr-actions" type="button" href="<?php echo site_url();?>dashboard#calls">Schedule <span class="badge"><?php echo count($pending_actions); ?></span></a>
+            <li><a class="btn btn-primary btn-sm btn-actions tr-actions" type="button" href="<?php echo site_url();?>dashboard#calls">
+  Schedule <span class="badge"><?php echo count($pending_actions); ?></span></a>
             </li><?php } else {};?>
             <li class="dropdown">
 

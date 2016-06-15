@@ -710,9 +710,9 @@
                       </div>
                     
                       <?php foreach ($tagssummary as $tagsummary): ?>
-                    <div class="row list-group-item stats-row" style="font-size:12px;">
+                    <div class="row list-group-item stats-row" style="font-size:12px;    padding: 5px 0;">
                       <div class="col-xs-2 col-md-2" style="padding-top: 9px;">
-                            <?php $user_icon = explode(",",$tagsummary['image']); echo "<div class='circle name-circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
+                            <?php $user_icon = explode(",",$tagsummary['image']); echo "<div class='circle name-circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";    margin-top:-10px;'>".$user_icon[0]."</div>";?>
                       </div>
                             <div class="col-xs-2 col-md-2 text-center" style="padding-top: 9px;">
                             <?php echo $tagsummary['7days'];?>
