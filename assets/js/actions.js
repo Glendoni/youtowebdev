@@ -807,7 +807,7 @@ $('#sidebar').hide();
         var actionImg = []
         var actionsummary = [];
 
- console.warn(actionType  +  ' --- '+ action['image'] );
+    //console.warn(actionType  +  ' --- '+ action['image'] );
 
         if(comments != false ||typeof comments !== 'undefined' || actions_cancelled != '') {
 
@@ -816,11 +816,11 @@ $('#sidebar').hide();
 
                     if(comments  == false){
 
-                            if(!actions_cancelled || typeof action['image'] !== 'undefined' ){
+                            if(!actions_cancelled ){
                                 actionImg =   action['image'];
-                
+                if(typeof action['image'] !== 'undefined'){
                                 actionImg =   actionImg.split(',');
-
+                }
 
 
                             }
