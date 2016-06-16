@@ -546,9 +546,9 @@ function bindAddCallBackToCompletedAction(){
             $('.qty'+action).text(qtyaction);
                 //console.debug($('.actionId'+action).length);
             
-            console.log(qtyaction  + ' ====='+action )
+            //console.log(qtyaction  + ' ====='+action )
             if(qtyaction < 1 && action != 'All' && action != 'actions_marketing' ){
-            console.log('actionId'+action)
+            //console.log('actionId'+action)
             $('a[data="'+action+'"]').attr('disabled', true);
             }
             
@@ -819,7 +819,7 @@ $('#sidebar').hide();
                  actionImg = '-,#000,#ffffff';
             //console.warn(actionType);
             if(!actions_cancelled ){
-                
+                console.log(action['image']);
                 if(typeof action['image'] !== 'undefined'){
                         actionImg =   action['image'];
                         actionImg =   actionImg.split(',');
