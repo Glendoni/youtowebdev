@@ -807,22 +807,23 @@ $('#sidebar').hide();
         var actionImg = []
         var actionsummary = [];
 
+ console.warn(actionType  +  ' --- '+ action['image'] );
+
+        if(comments != false ||typeof comments !== 'undefined' || actions_cancelled != '') {
+
+                    var createdAt  = action['created_at'];
+                    var updated_at  = action['updated_at'];
+
+                    if(comments  == false){
+
+                            if(!actions_cancelled || typeof action['image'] !== 'undefined' ){
+                                actionImg =   action['image'];
+                
+                                actionImg =   actionImg.split(',');
 
 
-        if(comments != false || typeof action['image'] !== 'undefined' || actions_cancelled != '') {
 
-            var createdAt  = action['created_at'];
-            var updated_at  = action['updated_at'];
-
-            if(comments  == false){
-       
-            if(!actions_cancelled ){
-            actionImg =   action['image'];
-// console.warn(actionType);
- 
-            actionImg =   actionImg.split(',');
- 
-            }
+                            }
             }
             //console.debug(actionImg[0]);
 
@@ -917,7 +918,7 @@ $('#sidebar').hide();
          
          if(actionType == 'Deal') actionTypeOverwrite = actionType+'@'+initial_fee+'%';
          
-         if(!actions_cancelled){
+         if(!actions_cancelled || typeof actionImg !== 'undefined'){
             badge = '<span class="circle" style="float: left;margin-top: 0px;margin-right: 10px;width: 20px;height: 20px;border-radius: 15px;font-size: 8px;line-height: 20px;text-align: center;font-weight: 700;background-color:'+actionImg[1]+'; color:'+actionImg[2]+';">'+actionImg[0]+'</span>';
              
              
