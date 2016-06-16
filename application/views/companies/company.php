@@ -813,7 +813,7 @@ if ($your_date < $now){;
                     
                     <div class="timeline-label showCommentAddForm"> <div class="mar-no pad-btm"><span class="label label-warning"></span><div class="" style="float:right; margin-top:0; margin-left:3px;"></div></div>
                       
-        <form action="http://localhost:8888/baselist/actions/create" name="create" class="showCommentAddForm" id="actionSendComment" role="" method="post" accept-charset="utf-8">
+        <form action="<?php echo site_url(); ?>baselist/actions/create" name="create" class="showCommentAddForm" id="actionSendComment" role="" method="post" accept-charset="utf-8">
 <input type="hidden" name="company_id" value="154537" id="comcompany_id" >
 <input type="hidden" name="user_id" value="31"  >
 <input type="hidden" name="done" value="1"  >
