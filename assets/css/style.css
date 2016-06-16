@@ -632,9 +632,15 @@ h2.company-header a:hover {
 }
 .prospect-circle {
     background: transparent !important;
-    color: #C062D0 !important;
-    border-color: #C062D0 !important;
+  
     border-width: 2px;
+    
+}
+
+.prospect-circle, .prospect-circle_campaign{
+    
+      color: #7c7a7a !important;
+    border-color: #7c7a7a !important;
     
 }
 .Prospect {
@@ -1397,7 +1403,7 @@ h2.company-header{
 }
 .prospect-circle_campaign {
     /* background: transparent !important;    */
-    color: #C062D0 !important;
+    /* color: #C062D0 !important; */
     /* border-color: #C062D0 !important; */
     border-width: 2px;
     /* border-style: solid; */
