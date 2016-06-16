@@ -477,7 +477,7 @@ function bindAddCallBackToCompletedAction(){
     $.ajax({
         type: "GET",
         dataType: "json",
-        url: "../companies/autopilotActions/",
+        url: "../companies/autopilotActions/"+myParam,
         success: function(data) {
 
             var action;
@@ -815,10 +815,10 @@ $('#sidebar').hide();
             var updated_at  = action['updated_at'];
 
             if(comments  == false){
-            //console.warn(actionType);
+       
             if(!actions_cancelled ){
             actionImg =   action['image'];
-
+// console.warn(actionType);
  
             actionImg =   actionImg.split(',');
  
