@@ -70,7 +70,7 @@ function getActionData(scope = false){ //get all actions in multidimentional jso
 
                 //ADD ALL AFTER LOAD BINGING HERE
                 callbackActionTextBox();
-                //getemailengagement(scope);
+                getemailengagement(scope);
                 bindAddCallBackToCompletedAction();
                 add_outcome();
                 bindPillerTitles();
@@ -819,21 +819,29 @@ $('#sidebar').hide();
                             if(!actions_cancelled ){
                                 actionImg =   action['image'];
                 //if(typeof action['image'] !== 'undefined'){
-                                actionImg =   actionImg.split(',');
+                               
+
+ actionImg =   actionImg.split(',');
+                                
+                                
+                                console.info('========='+actionImg);
                 //}
-
-
                             }
+                        if(actionImg == ''){
+                            actionImg = '-,#000,#ffffff';
+                        }
+                        
+                 actionsummary = actionSummary(actionImg,icon,actionType,createdAt,initial_fee,pipeline,actions_outstanding,updated_at,actions_cancelled, comments,action,kp);         
             }
             //console.debug(actionImg[0]);
 
-            actionsummary = actionSummary(actionImg,icon,actionType,createdAt,initial_fee,pipeline,actions_outstanding,updated_at,actions_cancelled, comments,action,kp);
+      
         }
         //}
         //}
         //callbackActionTextBox();
         boxActionTextBox();
-
+actionImg = '';
         return   actionsummary;
      
      } 
@@ -890,6 +898,11 @@ $('#sidebar').hide();
          var status = 'Created'
          var showOutstandingForm = [];
          var getUrlIdParam = GetUrlParamID();
+         
+         
+   
+         
+         
          if(typeof action['name'] !== 'undefined'  && action['name'] !== null &&  action['name'] !== 'null'   ){
             created_by = action['name'];
          }else{
@@ -1012,6 +1025,7 @@ if(timestamp2 < timestamp && action['action_type_id'] == 11 )
             outcomeRemove ='<span class="label label-info boxAction" style="font-size:10px; margin:0 0px;" data="'+action['id']+'">Add Comment</span>';
             outcomeRemove = '';
             badge = ''; 
+            
  
         }
         if(actionType == 'Callback' && typeof action['action_id'] != 'undefined' || actionType == 'Call' && actions_outstanding == true && typeof action['action_id'] != 'undefined') 
