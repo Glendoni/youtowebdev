@@ -799,49 +799,46 @@ $('#sidebar').hide();
            return icon;
          
      }
-     function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeline =0,actions_outstanding=0,actions_cancelled=0,comments=0,kp=0){
+          function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeline =0,actions_outstanding=0,actions_cancelled=0,comments=0,kp=0){
          
 
-        var actionImg = [];
+   
         //var icon = '<div class="timeline-icon bg-success"><i class="fa fa-thumbs-up fa-lg"></i></div>'  ;
-        var actionImg = []
+        var actionImg = '';
         var actionsummary = [];
 
-    //console.warn(actionType  +  ' --- '+ action['image'] );
 
-        if(comments != false ||typeof comments !== 'undefined' || actions_cancelled != '') {
 
-                    var createdAt  = action['created_at'];
-                    var updated_at  = action['updated_at'];
+        if(comments != false || typeof action['image'] !== 'undefined' || actions_cancelled != '') {
 
-                    if(comments  == false){
+            var createdAt  = action['created_at'];
+            var updated_at  = action['updated_at'];
 
-                            if(!actions_cancelled ){
-                                actionImg =   action['image'];
-                //if(typeof action['image'] !== 'undefined'){
-                               
-
- actionImg =   actionImg.split(',');
-                                
-                                
-                                console.info('========='+actionImg);
-                //}
-                            }
-                        if(actionImg == ''){
-                            actionImg = '-,#000,#ffffff';
-                        }
-                        
-                 actionsummary = actionSummary(actionImg,icon,actionType,createdAt,initial_fee,pipeline,actions_outstanding,updated_at,actions_cancelled, comments,action,kp);         
+            if(comments  == false){
+                
+                 actionImg = '-,#000,#ffffff';
+            //console.warn(actionType);
+            if(!actions_cancelled ){
+                
+                if(typeof action['image'] !== 'undefined'){
+                        actionImg =   action['image'];
+                        actionImg =   actionImg.split(',');
+                }
+            }
             }
             //console.debug(actionImg[0]);
 
-      
+            
+             
+                        
+                // actionsummary = actionSummary(actionImg,icon,actionType,createdAt,initial_fee,pipeline,actions_outstanding,updated_at,actions_cancelled, comments,action,kp); 
+            actionsummary = actionSummary(actionImg,icon,actionType,createdAt,initial_fee,pipeline,actions_outstanding,updated_at,actions_cancelled, comments,action,kp);
         }
         //}
         //}
         //callbackActionTextBox();
         boxActionTextBox();
-actionImg = '';
+
         return   actionsummary;
      
      } 

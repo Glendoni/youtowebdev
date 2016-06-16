@@ -971,7 +971,7 @@ LEFT JOIN companies c
 ON ops.company_id =c.id
 WHERE ops.user_id=".$user_id." 
 
-ORDER BY ops.id");
+ORDER BY ops.id DESC");
        
              return   $query->result_array(); 
          
