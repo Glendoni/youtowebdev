@@ -912,7 +912,7 @@ echo $this->Tagging_model->$route($post);
     
     function getCompletedActions($id = 154537){
         
-        $id = $this->session->userdata('selected_company_id');
+        //$id = $this->session->userdata('selected_company_id');
         $actions =  $this->Actions_model->get_follow_up_actions($id);
         echo json_encode($actions);  
     }
