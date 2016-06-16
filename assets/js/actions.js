@@ -818,7 +818,10 @@ $('#sidebar').hide();
             //console.warn(actionType);
             if(!actions_cancelled ){
             actionImg =   action['image'];
+
+if(actionImg){
             actionImg =   actionImg.split(',');
+}
             }
             }
             //console.debug(actionImg[0]);
