@@ -864,7 +864,20 @@ if ($your_date < $now){;
 <script>
  
     
+    function stickyActionsMenu() {
+      
+                var offset = $(".child").offset();
+                var posY = offset.top - $(window).scrollTop();
+                var posX = offset.left - $(window).scrollLeft();
 
+                if(posY < 0){
+                    $('.sticky').addClass('affix');
+                }else{
+                    $('.sticky').removeClass('affix');
+                }
+
+        
+    }
     
 
 </script>

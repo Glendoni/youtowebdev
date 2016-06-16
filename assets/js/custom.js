@@ -118,8 +118,8 @@ $(".source_explanation").prop('required',false);
 
 $( document ).ready(function() {
     
-  
-$(window).scroll(show);
+   
+       $(window).scroll(stickyActionsMenu);
     
     $('#add_action_request').click(function(e){
 
@@ -340,18 +340,7 @@ function getUserFavourites(){
 
     }
 
-    function show() {
 
-        var offset = $(".child").offset();
-        var posY = offset.top - $(window).scrollTop();
-        var posX = offset.left - $(window).scrollLeft();
-        
-        if(posY < 0){
-            $('.sticky').addClass('affix');
-        }else{
-            $('.sticky').removeClass('affix');
-        }
-    }
 //////////////Controls pipline pick date
 var d = new Date();
 var n = d.getMonth();
