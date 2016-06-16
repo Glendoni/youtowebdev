@@ -802,7 +802,7 @@ $('#sidebar').hide();
      function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeline =0,actions_outstanding=0,actions_cancelled=0,comments=0,kp=0){
          
 
-        var actionImg;
+        var actionImg = [];
         //var icon = '<div class="timeline-icon bg-success"><i class="fa fa-thumbs-up fa-lg"></i></div>'  ;
         var actionImg = []
         var actionsummary = [];
@@ -819,9 +819,9 @@ $('#sidebar').hide();
             if(!actions_cancelled ){
             actionImg =   action['image'];
 
-if(actionImg){
+ 
             actionImg =   actionImg.split(',');
-}
+ 
             }
             }
             //console.debug(actionImg[0]);
