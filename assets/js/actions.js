@@ -820,7 +820,9 @@ $('#sidebar').hide();
             //console.warn(actionType);
             if(!actions_cancelled ){
                 console.log(action['image']);
-                if(typeof action['image'] !== 'undefined' || action['image'] != null){
+               
+                
+                if(typeof action['image'] !== 'undefined' && action['image'] != null){
                         actionImg =   action['image'];
                         actionImg =   actionImg.split(',');
                 }
