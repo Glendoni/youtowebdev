@@ -819,7 +819,7 @@ $('#sidebar').hide();
                  actionImg = '-,#000,#ffffff';
             //console.warn(actionType);
             if(!actions_cancelled ){
-                console.log(action['image']);
+                //console.log(action['image']);
                
                 
                 if(typeof action['image'] !== 'undefined' && action['image'] != null){
