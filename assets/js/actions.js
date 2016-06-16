@@ -70,7 +70,7 @@ function getActionData(scope = false){ //get all actions in multidimentional jso
 
                 //ADD ALL AFTER LOAD BINGING HERE
                 callbackActionTextBox();
-                getemailengagement(scope);
+                //getemailengagement(scope);
                 bindAddCallBackToCompletedAction();
                 add_outcome();
                 bindPillerTitles();
