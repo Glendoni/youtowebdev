@@ -799,69 +799,48 @@ $('#sidebar').hide();
            return icon;
          
      }
-          function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeline =0,actions_outstanding=0,actions_cancelled=0,comments=0,kp=0){
-         
-
-   
-        //var icon = '<div class="timeline-icon bg-success"><i class="fa fa-thumbs-up fa-lg"></i></div>'  ;
-        var actionImg = '';
-        var actionsummary = [];
 
 
+function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeline =0,actions_outstanding=0,actions_cancelled=0,comments=0,kp=0){
 
-        if(comments != false || typeof action['image'] !== 'undefined' || actions_cancelled != '') {
+    var actionImg = '';
+    var actionsummary = [];
 
-            var createdAt  = action['created_at'];
-            var updated_at  = action['updated_at'];
+    if(comments != false || typeof action['image'] !== 'undefined' || actions_cancelled != '') {
+        var createdAt  = action['created_at'];
+        var updated_at  = action['updated_at'];
 
-            if(comments  == false){
-                
-                 actionImg = '-,#000,#ffffff';
-            //console.warn(actionType);
+        if(comments  == false){
+            actionImg = '-,#000,#ffffff';
             if(!actions_cancelled ){
-                //console.log(action['image']);
-               
-                
                 if(typeof action['image'] !== 'undefined' && action['image'] != null){
-                        actionImg =   action['image'];
-                        actionImg =   actionImg.split(',');
+                    actionImg =   action['image'];
+                    actionImg =   actionImg.split(',');
                 }
             }
-            }
-            //console.debug(actionImg[0]);
-
-            
-             
-                        
-                // actionsummary = actionSummary(actionImg,icon,actionType,createdAt,initial_fee,pipeline,actions_outstanding,updated_at,actions_cancelled, comments,action,kp); 
-            actionsummary = actionSummary(actionImg,icon,actionType,createdAt,initial_fee,pipeline,actions_outstanding,updated_at,actions_cancelled, comments,action,kp);
         }
-        //}
-        //}
-        //callbackActionTextBox();
+            actionsummary = actionSummary(actionImg,icon,actionType,createdAt,initial_fee,pipeline,actions_outstanding,updated_at,actions_cancelled, comments,action,kp);
+    }
         boxActionTextBox();
 
-        return   actionsummary;
-     
-     } 
-     function boxActionTextBox(){
-       $('.boxAction').on('click', function(){
+    return   actionsummary;
 
+} 
+
+
+    function boxActionTextBox(){
+        
+        $('.boxAction').on('click', function(){
             var dat = $(this).attr('data');
-           
-           
-             var blockStatus  = $('.boxcom'+dat).css('display');
-             
+            var blockStatus  = $('.boxcom'+dat).css('display');
             if(blockStatus === "block"){
                 $('.boxcom'+dat).toggle(false);
-       // console.log('true')
             }else{
-                //console.log('flase')
-                 $('.boxcom'+dat).toggle(true);
+                $('.boxcom'+dat).toggle(true);
             }
         })
- 
-     }
+
+    }
      function showmenu_(){
          
          
