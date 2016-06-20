@@ -896,7 +896,7 @@ if ($your_date < $now){;
 
                 if(posY < 0){
                     $('.sticky').addClass('affix');
-                    $('.affix').css('top', '157px')
+                    $('.affix').css('padding-top', '144px')
                 }else{
                     $('.sticky').removeClass('affix');
                 }
