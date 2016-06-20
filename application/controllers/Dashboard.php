@@ -2,9 +2,15 @@
 
 class Dashboard extends MY_Controller {
 	
+   
+    protected $userPermission;
+    
 	function __construct() {
 		parent::__construct();
 		// Some models are already been loaded on MY_Controller
+        
+       
+          $this->userPermission = $this->data['current_user']['permission']? $this->data['current_user']['permission'] :   $this->userMarket = $this->data['current_user']['market'];
 		
 	}
 	
@@ -28,7 +34,7 @@ class Dashboard extends MY_Controller {
         
         
         
-		$this->data['stats'] = $this->Actions_model->get_recent_stats('week');
+		$this->data['stats'] = $this->Actions_model->get_recent_stats('week', $this->userPermission);
 		//$this->data['lastweekstats'] = $this->Actions_model->get_recent_stats('lastweek');
 		//$this->data['thismonthstats'] = $this->Actions_model->get_recent_stats('thismonth');
 		//$this->data['lastmonthstats'] = $this->Actions_model->get_recent_stats('lastmonth');
@@ -74,7 +80,7 @@ class Dashboard extends MY_Controller {
     
     
     function lastweek(){
-        $this->data['lastweekstats'] = $this->Actions_model->get_recent_stats('lastweek');
+        $this->data['lastweekstats'] = $this->Actions_model->get_recent_stats('lastweek', $this->userPermission);
         
         return  $this->load->view('dashboard/lastweek', $this->data, true);	
         //echo json_encode(array('stats' => $lastweek));  
@@ -82,7 +88,7 @@ class Dashboard extends MY_Controller {
     
     
        function currentmonth(){
-       $this->data['thismonthstats'] = $this->Actions_model->get_recent_stats('thismonth');
+       $this->data['thismonthstats'] = $this->Actions_model->get_recent_stats('thismonth', $this->userPermission);
         
        return  $this->load->view('dashboard/thismonth', $this->data, true);	
         //echo json_encode(array('stats' => $thismonth)); 
@@ -93,7 +99,7 @@ class Dashboard extends MY_Controller {
     
        function lastmonths(){
            //$this->data['lastmonthstats'] = array();
-       $this->data['lastmonthstats'] = $this->Actions_model->get_recent_stats('lastmonth');
+       $this->data['lastmonthstats'] = $this->Actions_model->get_recent_stats('lastmonth', $this->userPermission);
         
         return $this->load->view('dashboard/lastmonth', $this->data, true);	
         //echo json_encode(array('stats' => $lastmonth));  
@@ -113,6 +119,16 @@ function refactorFavourites($order =false){
     echo json_encode($output);
 }    
     
+    
+    
+        
+    function testpear(){
+
+echo $this->userPermission;
+
+
+
+}
     
     
 

@@ -226,12 +226,15 @@ bindFavorites();
 function bindFavorites(){
 
     $('form .unassigned-star').click(function(e){
-
+ 
         e.preventDefault();
         var btnData  = $(this).attr('data');
 
         if($('.favForm'+btnData+' button').hasClass('unassigned-star')){
 
+            
+            
+            
             var userBackgroundColor = []; 
             var userBackgroundColor = $('.user-profile div').css('background-color'); 
             var userColor = $('.user-profile div').css('color'); 
@@ -277,6 +280,8 @@ function bindFavorites(){
     });
 
     $('form .assigned-star').click(function(e){
+        
+      
         e.preventDefault();
         var btnData  = $(this).attr('data');
         if($('.favForm'+ btnData +' button').hasClass('assigned-star')){
@@ -294,7 +299,9 @@ function bindFavorites(){
         }
         $(this).addClass('unassigned-star');
         $(this).removeClass('assigned-star');
-    });    
+    });  
+    
+    
     }
 </script>
 
@@ -461,7 +468,7 @@ function saveCompanyHandler(){$('.ch_drop_title').css('background','#7fe3d5');$(
         
         
         
-        $('.assign-to-form .ladda-button').click(function(e){
+        $('.assign-to-form .starbtn').click(function(e){
              
             var btn = $(this);
             var form = btn.closest('form');
@@ -493,36 +500,49 @@ function saveCompanyHandler(){$('.ch_drop_title').css('background','#7fe3d5');$(
         
         
         function whenFravoriteIsClicked(){
-           
+          
                 var favType  = $('.assign-to-form').attr('action');
                 var favTypeEval = favType.search('assignto');
+       
                 var userBackgroundColor = []; 
                 var userColor = $('.user-profile div').css('color'); 
                 var current_user_name = $(".user-profile span").text(); //current_user_name
-                var actUrl = [];
+                var actUrl = '';
         
-            if(typeof $('.top-info-holder .label-assigned').css('background-color') == 'undefined'){
-                userBackgroundColor = $('.user-profile div').css('background-color'); 
-                $('.top-info-holder .assign-to-form i').css('color', userBackgroundColor);  
+            if(favTypeEval >= 1 ){
                 
-                $('.top-info-holder .piplineUdate').append('<span class="label label-assigned" style="background-color:'+userBackgroundColor+'; color:'+userColor+';"><i class="fa fa-star"></i>'+current_user_name+'</span>');    
+                $('.label-assigned').remove();
+                
+                console.warn('greater or equal to 1');
+                userBackgroundColor = $('.user-profile div').css('background-color'); 
+                $('.assign-to-form i').css('color', userBackgroundColor);
+                $('.piplineUdate').append('<span class="label label-assigned" style="background-color:'+userBackgroundColor+'; color:'+userColor+';"><i class="fa fa-star"></i>'+current_user_name+'</span>');    
                actUrl = favType.replace('assignto', 'unassign');
+                
+                  // console.warn('asign unasign')
+                   
+                    // console.warn(actUrl)
 
-            }else if($('.top-info-holder  .label-assigned').css('display') == 'none' && favTypeEval >= 1 ){
+            }else if($('.label-assigned').css('display') == 'none' && favTypeEval < 1 ){
+
+ console.warn('Less or equal to 1');
                  userBackgroundColor = $('.user-profile div').css('background-color'); 
-                $('.top-info-holder .label-assigned').show();
-                $('.top-info-holder .assign-to-form i').css('color', userBackgroundColor);
+                $('.label-assigned').show();
+                $('.assign-to-form i').css('color', userBackgroundColor);
                 actUrl = favType.replace('assignto', 'unassign'); 
                 
             }else{
 
-                $('.top-info-holder .label-assigned').hide();
-                $('.top-info-holder .assign-to-form i').css('color', '#DCDCDC');
+                $('.label-assigned').hide();
+                $('.assign-to-form i').css('color', '#DCDCDC');
                 
                     actUrl = favType.replace('unassign', 'assignto');    
             }
             
-            $('.top-info-holder  .assign-to-form').attr('action', actUrl);
+            
+            
+              //console.warn(actUrl)
+            $('.assign-to-form').attr('action', actUrl);
         }
         
         

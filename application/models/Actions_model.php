@@ -283,9 +283,9 @@ function get_recent_stats($period, $team_type)
     $start_date = $dates['start_date'];
     $end_date = $dates['end_date'];
     
+   
     
-    
-   $sql = "select U.name, 
+   $sql[] = "select U.name, 
        U.id as user, 
        U.image, 
        U.active as active, 
@@ -313,12 +313,15 @@ on A.user_id = U.id
 where U.department = 'sales'
 and U.active = 't'
 and A.cancelled_at is null
-
-group by 1,2,3,4
+";
+  
+if($team_type != 'admin' && $period !='search'){  
+$sql[]  ="and U.market= '".$team_type."' ";
+} 
     
-order by deals desc nulls last, proposals desc";
+$sql[] = "group by 1,2,3,4 order by deals desc nulls last, proposals desc";
     
-    
+    $sql = join($sql);
     
     $sqlOld = "select U.name, U.id as user, U.image, U.active as active,
     sum(case when action_type_id = '4' AND actioned_at > '$start_date' AND actioned_at < '$end_date' then 1 else 0 end) introcall,

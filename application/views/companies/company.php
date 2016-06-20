@@ -12,19 +12,7 @@ endif; ?>
 <div class="page-results-list" id="parent">
     <breadcrumbscroll>
 <div class="top-info-holder">
-    <div class="row">
-		<?php if (isset($company['parent_name'])): ?>
-			<div class="subsidiary">
-			<span class="label label-danger"><a href="<?php echo site_url();?>companies/company?id=<?php echo $company['parent_id'];?>" target="_blank">Subsidiary of <?php echo $company['parent_name'];?> <i class="fa fa-external-link"></i></a></span>
-			</div>
-			<?php elseif (isset($company['parent_registration'])): ?>
-				<div class="subsidiary">
-			<span class="label label-danger"><a href="https://beta.companieshouse.gov.uk/company/<?php echo $company['parent_registration'];?>" target="_blank">Parent Registration: <?php echo $company['parent_registration'];?> <i class="fa fa-external-link"></i></a></span>
-			</div>
-		<?php endif; ?>
-        
-        
-      
+
 
 <!-- <breadcrumbscroll> -->
     
@@ -47,7 +35,7 @@ endif; ?>
         
         <?php $bgcolor =  explode(',',$current_user['image']) ?>
         
-			<button type="submit" class="assigned-star ladda-button" data-style="expand-right" data-size="1"   style="color:<?php echo $bgcolor[1]; ?>;">
+			<button type="submit" class="assigned-star ladda-button starbtn" data-style="expand-right" data-size="1"   style="color:<?php echo $bgcolor[1]; ?>;">
                     <i class="fa fa-star "></i>
             </button>
 			<?php echo form_close(); ?>
@@ -60,7 +48,7 @@ endif; ?>
         
     <?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'], 'page_number' => (isset($current_page_number))? $current_page_number:'');
 	echo form_open(site_url().'companies/assignto',array('name' => 'assignto', 'class'=>'assign-to-form', 'style'=>'display: inline;'),$hidden); ?>
-	<button type="submit" assignto="<?php echo $current_user['name']; ?>" class="unassigned-star ladda-button" data-style="expand-right" data-size="1">
+	<button type="submit" assignto="<?php echo $current_user['name']; ?>" class="unassigned-star ladda-button starbtn" data-style="expand-right" data-size="1">
 <i class="fa fa-star"  style="color:#DCDCDC;"></i>
 </button>
 	<?php echo form_close(); ?>
@@ -125,10 +113,28 @@ endif; ?>
 	<?php $this->load->view('companies/edit_box.php',array('company'=>$company)); ?>
 	<?php $this->load->view('companies/create_contact_box.php',array('company'=>$company)); ?>
 	<?php $this->load->view('companies/create_address_box.php',array('company'=>$company)); ?>
+        
+        
+            <div class="row">
+		<?php if (isset($company['parent_name'])): ?>
+			<div class="subsidiary">
+			<span class="label label-danger"><a href="<?php echo site_url();?>companies/company?id=<?php echo $company['parent_id'];?>" target="_blank">Subsidiary of <?php echo $company['parent_name'];?> <i class="fa fa-external-link"></i></a></span>
+			</div>
+			<?php elseif (isset($company['parent_registration'])): ?>
+				<div class="subsidiary">
+			<span class="label label-danger"><a href="https://beta.companieshouse.gov.uk/company/<?php echo $company['parent_registration'];?>" target="_blank">Parent Registration: <?php echo $company['parent_registration'];?> <i class="fa fa-external-link"></i></a></span>
+			</div>
+		<?php endif; ?>
+        
+        
+    </div>
+        
 
 	<!-- // POPUP BOXES -->
 </div><!--END TOP INFO HOLDER-->
 
+    
+    
       </breadcrumbscroll> 
    
 <div class="panel panel-primary" style="padding-top: 96px;"  >
@@ -890,7 +896,7 @@ if ($your_date < $now){;
 
                 if(posY < 0){
                     $('.sticky').addClass('affix');
-                    $('.affix').css('padding-top', '116px')
+                    $('.affix').css('padding-top', '146px')
                 }else{
                     $('.sticky').removeClass('affix');
                 }
