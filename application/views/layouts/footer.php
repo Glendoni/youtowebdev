@@ -525,7 +525,7 @@ function saveCompanyHandler(){$('.ch_drop_title').css('background','#7fe3d5');$(
 
             }else if($('.label-assigned').css('display') == 'none' && favTypeEval < 1 ){
 
- console.warn('Less or equal to 1');
+ //console.warn('Less or equal to 1');
                  userBackgroundColor = $('.user-profile div').css('background-color'); 
                 $('.label-assigned').show();
                 $('.assign-to-form i').css('color', userBackgroundColor);

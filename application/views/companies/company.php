@@ -891,12 +891,12 @@ if ($your_date < $now){;
     function stickyActionsMenu() {
       
                 var offset = $(".child").offset();
-                var posY = (offset.top) - ($(window).scrollTop()+150);
+                var posY = (offset.top) - ($(window).scrollTop()+100);
                 var posX = offset.left - $(window).scrollLeft();
 
                 if(posY < 0){
                     $('.sticky').addClass('affix');
-                    $('.affix').css('padding-top', '146px')
+                    $('.affix').css('padding-top', '116px')
                 }else{
                     $('.sticky').removeClass('affix');
                 }
