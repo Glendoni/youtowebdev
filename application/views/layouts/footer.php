@@ -143,8 +143,9 @@ $(document).ready(function(){
  
     $('.qvlink  li a').on('click', function(){
         var location = $(this).attr('data');
-        $.scrollTo('#'+location, 1000, { easing: 'easeInOutExpo', offset: -100, 'axis': 'y' });
-        $(".qv").slideToggle();        
+      //$('html, body').animate({scrollTop: $('#'+location).offset().top -280 }, 'slow');
+       // $(".qv").slideToggle();  
+               
                
     })
        
@@ -265,7 +266,7 @@ function bindFavorites(){
     
            $('.qvlink  li a').on('click', function(){
             var location = $(this).attr('data');
-                $.scrollTo('#'+location, 1000, { easing: 'easeInOutExpo', offset: -100, 'axis': 'y' });
+                $.scrollTo('#'+location, 1000, { easing: 'easeInOutExpo', offset: -190, 'axis': 'y' });
                $(".qv").slideToggle();        
                
     })

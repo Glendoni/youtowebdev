@@ -2438,6 +2438,127 @@ a.sublinkMenu:hover{
     margin-left:5px !important;
 }
 
+
+/*SCROLL BREADCRUMB*/
+
+
+ 
+breadcrumbscroll {
+  width: 100%;
+  height: 150px;
+  overflow: hidden;
+  position: fixed;
+  top: 72px;
+  left: 0;
+  z-index: 1;
+  background-color: #f8f8f8;
+  -webkit-transition: height 0.3s;
+  -moz-transition: height 0.3s;
+  -ms-transition: height 0.3s;
+  -o-transition: height 0.3s;
+  transition: height 0.3s; }
+  breadcrumbscroll h1#logo, breadcrumbscroll h2#logo  {
+   /* display: inline-block; */
+    height: 87px;
+    line-height: 150px;
+    /*float: left;*/
+    font-family: inherit;
+    font-size: 40px;
+    color: #333;
+    font-weight: 300;
+    -webkit-transition: all 0.1s;
+    -moz-transition: all 0.1s;
+    -ms-transition: all 0.1s;
+    -o-transition: all 0.1s;
+    transition: all 0.1s; }
+  breadcrumbscroll nav {
+    display: inline-block;
+    float: right; }
+    breadcrumbscroll nav a {
+      line-height: 150px;
+      margin-left: 20px;
+      color: #9fdbfc;
+      font-weight: 300;
+      font-size: 18px;
+      -webkit-transition: all 0.3s;
+      -moz-transition: all 0.3s;
+      -ms-transition: all 0.3s;
+      -o-transition: all 0.3s;
+      transition: all 0.3s; }
+      breadcrumbscroll nav a:hover {
+        color: #333; }
+  breadcrumbscroll.smaller {
+    height: 105px; }
+    breadcrumbscroll.smaller h1#logo,breadcrumbscroll.smaller h2#logo {
+      width: 100%;
+      height: 45px;
+      line-height: 75px;
+      font-size: 20px; }
+    breadcrumbscroll.smaller nav a {
+      line-height: 75px; }
+
+/* =Footer
+-------------------------------------------------------------- */
+/* =Extras
+-------------------------------------------------------------- */
+/*
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  content: "";
+  clear: both;
+  height: 0; }
+  */
+
+/* =Media Queries
+-------------------------------------------------------------- */
+@media all and (max-width: 660px) {
+  /* =Header
+  -------------------------------------------------------------- */
+  breadcrumbscroll h1#logo,   breadcrumbscroll h2#logo {
+    display: block;
+    float: none;
+    margin: 0 auto;
+    height: 100px;
+    line-height: 100px;
+    text-align: center; }
+  breadcrumbscroll nav {
+    display: block;
+    float: none;
+    height: 50px;
+    text-align: center;
+    margin: 0 auto; }
+    breadcrumbscroll nav a {
+      line-height: 50px;
+      margin: 0 10px; }
+  breadcrumbscroll.smaller {
+    height: 75px; }
+    breadcrumbscroll.smaller h1#logo,  breadcrumbscroll.smaller h2#logo {
+      height: 40px;
+      line-height: 40px;
+      font-size: 30px; }
+    breadcrumbscroll.smaller nav {
+      height: 35px; }
+      breadcrumbscroll.smaller nav a {
+        line-height: 35px; } }
+@media all and (max-width: 600px) {
+  .container {
+    width: 100%; }
+
+    }
+
+
+
+/*SCROLL BREADCRUMB END*/
+
+.affix{
+
+padding-top:150px;
+}
+.sticky
+{
+    padding-top:30px;
+}
 /*! Hint.css - v2.2.1 - 2016-03-26 //#2b4461
 * http://kushagragour.in/lab/hint/
 * Copyright (c) 2016 Kushagra Gour; Licensed  */

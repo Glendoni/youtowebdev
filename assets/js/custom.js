@@ -118,9 +118,9 @@ $(".source_explanation").prop('required',false);
 
 $( document ).ready(function() {
     
-   
+     if((/companies\/company/.test(window.location.href))) {
        $(window).scroll(stickyActionsMenu);
-    
+     }
     $('#add_action_request').click(function(e){
 
         var check  = /^\d+\.\d{0,2}?/.test($('#amount').val());

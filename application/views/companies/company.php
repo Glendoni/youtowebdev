@@ -1,3 +1,5 @@
+
+
 <?php  $company = $companies[0]; ?>
 <?php if (!empty($_GET['campaign_id'])): 
 $campaign_id = $_GET['campaign_id'];
@@ -8,6 +10,7 @@ endif; ?>
 <?php //hide core page content if no company is found ?>
 <?php if (isset($company['id'])): ?>
 <div class="page-results-list" id="parent">
+    <breadcrumbscroll>
 <div class="top-info-holder">
     <div class="row">
 		<?php if (isset($company['parent_name'])): ?>
@@ -19,7 +22,16 @@ endif; ?>
 			<span class="label label-danger"><a href="https://beta.companieshouse.gov.uk/company/<?php echo $company['parent_registration'];?>" target="_blank">Parent Registration: <?php echo $company['parent_registration'];?> <i class="fa fa-external-link"></i></a></span>
 			</div>
 		<?php endif; ?>
-	<h2 class="company-header">
+        
+        
+      
+
+<!-- <breadcrumbscroll> -->
+    
+       
+    
+
+	<h2 class="company-header" id="logo">
 		<?php $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' );
         
         echo html_entity_decode (str_replace($words, ' ',$company['name'])); 
@@ -55,6 +67,11 @@ endif; ?>
 
 	<?php endif; ?>
 </h2>
+    
+    
+   <!--  </breadcrumbscroll> /breadcrumbscroll -->
+    
+    
 
 <!--END ASSIGN-->
 
@@ -99,6 +116,7 @@ endif; ?>
         <i class="fa fa-star"></i>
 <?php echo $company['assigned_to_name']; ?>
         </span>
+      
 	<?php else: ?>
 	<?php endif; ?>
 	 </div><!--END ROW-->
@@ -111,9 +129,9 @@ endif; ?>
 	<!-- // POPUP BOXES -->
 </div><!--END TOP INFO HOLDER-->
 
-    
+      </breadcrumbscroll> 
    
-<div class="panel panel-primary" style="padding-top: 30px;"  >
+<div class="panel panel-primary" style="padding-top: 96px;"  >
 	<div class="panel-body">
     	<div class="row"><!--FINISHED AT THE END OF PANEL-->
 		<div class="col-sm-9">
@@ -764,7 +782,7 @@ if ($your_date < $now){;
                     
                     <div class="col-md-1" id="leftCol">
               
-              	<ul class="nav nav-stacked actionNav sticky  " style="list-style: none; padding-top:30px; " id="sidebar">
+              	<ul class="nav nav-stacked actionNav sticky  " style="list-style: none;  " id="sidebar">
                  
                     
                     <li class="active activeMenu"><a href="javascript:;" class="btn btn-default btn-circle actionAll hint--top-right"  data-hint="All" data="All"><span class="glyphicon glyphicon-dashboard" aria-hidden="true"></a><span class="actionMenuQty qtyAll" aria-hidden="true"></span></li>
@@ -867,11 +885,12 @@ if ($your_date < $now){;
     function stickyActionsMenu() {
       
                 var offset = $(".child").offset();
-                var posY = offset.top - $(window).scrollTop();
+                var posY = (offset.top) - ($(window).scrollTop()+150);
                 var posX = offset.left - $(window).scrollLeft();
 
                 if(posY < 0){
                     $('.sticky').addClass('affix');
+                    $('.affix').css('padding-top', '116px')
                 }else{
                     $('.sticky').removeClass('affix');
                 }
