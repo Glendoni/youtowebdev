@@ -89,7 +89,7 @@
 </div>
 
 
-            <div class="col-sm-4 col-sm-push-5">
+            <div class="col-sm-4 col-sm-push-5" style="margin-top: -32px;">
             <!-- Top Menu Items -->
             <?php if (isset($current_user)): ?>
 

@@ -2451,7 +2451,7 @@ breadcrumbscroll {
   height: auto;
   overflow: hidden;
   position: fixed;
-  top: 72px;
+  top: 39px;
   left: 0;
   padding-bottom: 5px;
   z-index: 1;
@@ -2460,7 +2460,8 @@ breadcrumbscroll {
   -moz-transition: height 0.3s;
   -ms-transition: height 0.3s;
   -o-transition: height 0.3s;
-  transition: height 0.3s; }
+  transition: height 0.3s;
+  }
   breadcrumbscroll h1#logo, breadcrumbscroll h2#logo  {
    /* display: inline-block; */
    height: 45px;
