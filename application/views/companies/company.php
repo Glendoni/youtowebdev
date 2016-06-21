@@ -109,10 +109,7 @@ endif; ?>
 	<?php endif; ?>
 	 </div><!--END ROW-->
 
-	<!-- POPUP BOXES -->
-	<?php $this->load->view('companies/edit_box.php',array('company'=>$company)); ?>
-	<?php $this->load->view('companies/create_contact_box.php',array('company'=>$company)); ?>
-	<?php $this->load->view('companies/create_address_box.php',array('company'=>$company)); ?>
+	
         
         
             <div class="row">
@@ -136,6 +133,11 @@ endif; ?>
     
     
       </breadcrumbscroll> 
+
+<!-- POPUP BOXES -->
+	<?php $this->load->view('companies/edit_box.php',array('company'=>$company)); ?>
+	<?php $this->load->view('companies/create_contact_box.php',array('company'=>$company)); ?>
+	<?php $this->load->view('companies/create_address_box.php',array('company'=>$company)); ?>
    
 <div class="panel panel-primary" style="padding-top: 30px;"  >
 	<div class="panel-body">
