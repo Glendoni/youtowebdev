@@ -137,7 +137,7 @@ endif; ?>
     
       </breadcrumbscroll> 
    
-<div class="panel panel-primary" style="padding-top: 96px;"  >
+<div class="panel panel-primary" style="padding-top: 30px;"  >
 	<div class="panel-body">
     	<div class="row"><!--FINISHED AT THE END OF PANEL-->
 		<div class="col-sm-9">
@@ -891,7 +891,7 @@ if ($your_date < $now){;
     function stickyActionsMenu() {
       
                 var offset = $(".child").offset();
-                var posY = (offset.top) - ($(window).scrollTop()+100);
+                var posY = (offset.top) - ($(window).scrollTop());
                 var posX = offset.left - $(window).scrollLeft();
 
                 if(posY < 0){

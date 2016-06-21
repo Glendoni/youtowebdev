@@ -421,8 +421,6 @@ lm  = (lm+parseInt($(this).text()));
 });
 $('.'+item+'-'+col+'-total').text(lm);
     
-       console.log(item+'-'+col+'-total'+lm)
-    
 return lm;
 }
 

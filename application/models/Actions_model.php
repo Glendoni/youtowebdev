@@ -319,7 +319,7 @@ function get_recent_stats($period, $team_type)
             $team_type = 'uf';
         } 
 
-        $sql[]  ="and U.market= '".$team_type."' ";
+        $sql[]  ="and U.market= '".trim($team_type)."' ";
         $sql[] = "group by 1,2,3,4 order by deals desc nulls last, proposals desc";
     
     $sql = join($sql);
