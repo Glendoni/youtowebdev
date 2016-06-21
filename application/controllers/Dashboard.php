@@ -34,11 +34,13 @@ class Dashboard extends MY_Controller {
         
         
         
-		$this->data['stats'] = $this->Actions_model->get_recent_stats('week', $this->userPermission);
+		$this->data['stats'] = $this->Actions_model->get_recent_stats('week', 'np');
+        $this->data['ustats'] = $this->Actions_model->get_recent_stats('week', $this->userPermission);
 		//$this->data['lastweekstats'] = $this->Actions_model->get_recent_stats('lastweek');
 		//$this->data['thismonthstats'] = $this->Actions_model->get_recent_stats('thismonth');
 		//$this->data['lastmonthstats'] = $this->Actions_model->get_recent_stats('lastmonth');
-		if($_GET['search']) $this->data['getstatssearch'] = $this->Actions_model->get_recent_stats('search');
+		if($_GET['search']) $this->data['getstatssearch'] = $this->Actions_model->get_recent_stats('search','np');
+        if($_GET['search']) $this->data['ugetstatssearch'] = $this->Actions_model->get_recent_stats('search', 'uf');
         
 		$this->data['pipelinecontacted'] = $this->Actions_model->get_pipeline_contacted();
 		$this->data['pipelinecontactedindividual'] = $this->Actions_model->get_pipeline_contacted_individual($this->get_current_user_id());
@@ -64,12 +66,12 @@ class Dashboard extends MY_Controller {
 	}
     
    
-     function getTeamStats(){ //json request
-        	
+     function getTeamStats($userGroup = 'np'){ //json request
+        	//$userGroup =  $this->userPermission;
        $output =  array(
-          'lastweek' => $this->lastweek(),
-        'currentmonth' => $this->currentmonth(),
-            'lastmonth'=> $this->lastmonths()
+        'lastweek' => $this->lastweek($userGroup),
+        'currentmonth' => $this->currentmonth($userGroup),
+        'lastmonth'=> $this->lastmonths($userGroup)
            );
          
          header('Content-Type: application/json');
@@ -79,17 +81,17 @@ class Dashboard extends MY_Controller {
     
     
     
-    function lastweek(){
-        $this->data['lastweekstats'] = $this->Actions_model->get_recent_stats('lastweek', $this->userPermission);
-        
+    function lastweek($userGroup){
+        $this->data['lastweekstats'] = $this->Actions_model->get_recent_stats('lastweek',$userGroup);
+        $this->data['prefix'] = $userGroup;
         return  $this->load->view('dashboard/lastweek', $this->data, true);	
         //echo json_encode(array('stats' => $lastweek));  
     }
     
     
-       function currentmonth(){
-       $this->data['thismonthstats'] = $this->Actions_model->get_recent_stats('thismonth', $this->userPermission);
-        
+       function currentmonth($userGroup){
+       $this->data['thismonthstats'] = $this->Actions_model->get_recent_stats('thismonth', $userGroup);
+        $this->data['prefix'] = $userGroup;
        return  $this->load->view('dashboard/thismonth', $this->data, true);	
         //echo json_encode(array('stats' => $thismonth)); 
         //return   array('stats' => $thismonth));  
@@ -97,10 +99,10 @@ class Dashboard extends MY_Controller {
     
     
     
-       function lastmonths(){
+       function lastmonths($userGroup){
            //$this->data['lastmonthstats'] = array();
-       $this->data['lastmonthstats'] = $this->Actions_model->get_recent_stats('lastmonth', $this->userPermission);
-        
+       $this->data['lastmonthstats'] = $this->Actions_model->get_recent_stats('lastmonth', $userGroup);
+        $this->data['prefix'] = $userGroup;
         return $this->load->view('dashboard/lastmonth', $this->data, true);	
         //echo json_encode(array('stats' => $lastmonth));  
     }

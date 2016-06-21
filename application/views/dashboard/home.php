@@ -176,486 +176,978 @@
                       </div><!--END PANEL-->
                       <?php };?>                
 
-
-                  <div class="panel panel-default">
-                  <div class="panel-heading">
-                    <h3 class="panel-title">Team Stats</h3>
-                  </div>
-                  <div class="panel-body" style="font-size:12px;">
-                  <div class="list-group">
-                    <?php if(empty($stats)) : ?>
-                    <div class="col-md-12">
-                      <div style="margin:10px 0;">
-                      <h4 style="margin: 50px 0 40px 0; text-align: center;">You have no recent activity.</h4>
-                      </div>
-                      </div>
-                    <?php else: ?>
-                    <!-- Nav tabs -->
-                    <ul class="nav nav-tabs" role="tablist">
-                      <li <?php if ($_GET['period'] == 'lastmonth'): ?>class="active"<?php endif; ?>><a href="#lastmonth" class="stats" role="tab" data-toggle="tab">Last Month</a></li>
-                      <li <?php if ($_GET['period'] == 'month'): ?>class="active"<?php endif; ?>><a href="#currentmonth"  class="stats" role="tab" data-toggle="tab">This Month</a></li>
-                      <li <?php if ($_GET['period'] == 'lastweek'): ?>class="active"<?php endif; ?>><a href="#lastweek"  class="stats" role="tab" data-toggle="tab">Last Week</a></li>
-                      <li <?php if (($_GET['period'] == 'week') ||  (empty($_GET['period'])) && ($_GET['search'] !=='3')): ?>class="active"<?php endif; ?>><a href="#this" role="tab" data-toggle="tab">This Week</a></li>
-
-                      
-
-                      <?php if ($_GET['search'] == '3'): ?>
-                      <li <?php if ($_GET['search'] == '3'): ?>class="active"<?php endif; ?>><a href="#searchresults" role="tab" data-toggle="tab">Search Results</a></li>
-                      <?php endif; ?>
-                    </ul>
-                    <!-- Tab panes -->
-                    <div class="tab-content">
-                      <div class="tab-pane fade <?php if (($_GET['period'] == 'week') ||  (empty($_GET['period'])) && ($_GET['search'] !=='3')): ?>active in <?php endif; ?>" id="this">
-                      <div class="col-md-12">
-                      </div>
-                      <div class="col-md-12">
-                      <div class="row list-group-item">
-                        <div class="col-xs-2 col-md-1 hide-overflow"> 
-                            <strong>Name</strong>
-                        </div>
-                        <div class="col-xs-2 col-md-1 text-center hide-overflow">
-                            <strong>Deals</strong>
-                        </div>
-                        <div class="col-xs-2 col-md-1 text-center hide-overflow">
-                            <strong>Proposals</strong>
-                        </div>
-                        <div class="col-xs-2 col-md-2 text-center hide-overflow">
-                            <strong>Demos</strong><br>
-                            <Small>Booked/Done</Small>
-                        </div>
-                        <div class="col-xs-1 col-md-1 text-center hide-overflow">
-                            <strong>Meetings</strong><br>
-                            <Small>Booked/Done</Small>
-                        </div>
-                        <div class="col-xs-2 col-md-2 text-center hide-overflow"> 
-                           <strong>Call Activity</strong><br>
-                           <Small>Total Calls/Intro</Small>
-                        </div>
-                       
-                        <div class="col-md-2 hidden-xs text-center hide-overflow"> 
-                           <strong>Review Months</strong><br>
-                           <Small>Added/Occuring</Small>
-                        </div>
-                        <div class="col-md-1 hidden-xs text-center hide-overflow">
-                           <strong>DueDil</strong>
-                        </div>
-                        </div>
-                    
-                        <div class="row list-group-item dashboardTotalheaders">
-                        <div class="col-xs-2 col-md-1 hide-overflow"> 
-                            <strong>Totals</strong>
-                        </div>
-                        <div class="col-xs-1 col-md-1 text-center hide-overflow">
-                             <span class="badge tw-deals-total stat-total" style="background-color:#428bca;">0</span>
-                        </div>
-                        <div class="col-xs-2 col-md-1 text-center hide-overflow">
-                           <span class="badge tw-proposals-total stat-total" style="background-color:#45AE7C;">0</span>
-                        </div>
-                        <div class="col-xs-2 col-md-2 text-center hide-overflow" >
-                          <span class="tw-demobookedcount-total stat-total" >4</span> /
-                             <span class="tw-democount-total stat-total"  >0</span>
-                        </div>
-                        <div class="col-xs-2 col-md-1 text-center hide-overflow">
-                           <span class="tw-meetingbooked-total stat-total" >0</span> /  
-                            <span class="tw-meetingcount-total stat-total" >0</span>
-                        </div>
-                       
-                        <div class="col-md-2 hidden-xs text-center hide-overflow">
-                           <span class="tw-salescall-total stat-total" >1</span> / 
-                            <span class="tw-introcall-total stat-total">0</span>
-                        </div>
-                        <div class="col-md-2 hidden-xs text-center hide-overflow">
-                          <span class="tw-key_review_added-total stat-total">0</span> / 
-                            <span class="tw-key_review_occuring-total stat-total">5</span>
-                        </div>
-                    
-                          <div class="col-xs-2 col-md-1 text-center hide-overflow"> 
-                          <span class="tw-duediligence-total stat-total">0</span>
-                  </div>
-                          </div>
-                          
-                          
-                        <?php foreach ($stats as $stat): ?>
-                          <div class="row list-group-item stats-row active-<?php echo $stat['active'];?>">
-                            <div class="col-xs-2 col-md-1"> 
-                            <a href = "?search=2&user=<?php echo $stat['user'];?>&period=week">
-                            <?php $user_icon = explode(",",$stat['image']); echo "<div class='circle name-circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
-                            </a>
-                            </div>
-                            <div class="col-xs-1 col-md-1 text-center">
-                            <a href = "?search=2&user=<?php echo $stat['user'];?>&period=week"><span class="badge tw-deals" style="background-color:#428bca;"><?php echo $stat['deals'];?></span></a>
-                            </div>
-                            <div class="col-xs-2 col-md-1 text-center"> 
-                            <?php echo '<div class="badge tw-proposals" style="background-color:#45AE7C;">'.$stat['proposals'].'</div>';?>
-                            </div>
-                            <div class="col-xs-2 col-md-2 text-center"> 
-                            <span class="tw-demobookedcount"><?php echo $stat['demobookedcount'];?></span> / <span class="tw-democount"><?php echo $stat['democount'];?></span>
-                            </div>
-                            <div class="col-xs-2 col-md-1 text-center">
-                            <span class="tw-meetingbooked"><?php echo $stat['meetingbooked'];?></span> / <span class="tw-meetingcount"><?php echo $stat['meetingcount'];?></span>
-                            </div>
-                            <div class="col-xs-2 col-md-2 text-center"> 
-                            <span class="tw-salescall"><?php echo $stat['salescall'];?></span> / <span class="tw-introcall"><?php echo $stat['introcall'];?></span>
-                            </div>
-                            <div class="col-md-2 hidden-xs text-center">
-                              <span class="tw-key_review_added"><?php echo $stat['key_review_added'];?></span> / <span class="tw-key_review_occuring"><?php echo $stat['key_review_occuring'];?></span>
-                            </div>
-                            <div class="col-md-1 hidden-xs text-center">
-                                <span class="tw-duediligence"><?php echo $stat['duediligence'];?></span>
-                            </div>
-                          </div> <!--END ROW-->    
-                      <?php endforeach ?>
-                      </div><!--END COL-MD-12-->
-                      </div><!--END THIS TAB-->
-
-                      <div class="tab-pane fade <?php if ($_GET['period'] == 'lastweek'): ?>active in <?php endif; ?>" id="lastweek">
-                      <div class="col-md-12">
-                      <div class="row list-group-item">
-                         <div class="col-xs-2 col-md-1 hide-overflow"> 
-                            <strong>Name</strong>
-                        </div>
-                        <div class="col-xs-2 col-md-1 text-center hide-overflow">
-                            <strong>Deals</strong>
-                        </div>
-                        <div class="col-xs-2 col-md-1 text-center hide-overflow">
-                            <strong>Proposals</strong>
-                        </div>
-                        <div class="col-xs-2 col-md-2 text-center hide-overflow">
-                            <strong>Demos</strong><br>
-                            <Small>Booked/Done</Small>
-                        </div>
-                        <div class="col-xs-1 col-md-1 text-center hide-overflow">
-                            <strong>Meetings</strong><br>
-                            <Small>Booked/Done</Small>
-                        </div>
-                        <div class="col-xs-2 col-md-2 text-center hide-overflow"> 
-                           <strong>Call Activity</strong><br>
-                           <Small>Total Calls/Intro</Small>
-                        </div>
-                        <div class="col-md-2 hidden-xs text-center hide-overflow"> 
-                           <strong>Review Months</strong><br>
-                           <Small>Added/Occuring</Small>
-                        </div>
-                        <div class="col-md-1 hidden-xs text-center hide-overflow">
-                           <strong>DueDil</strong>
-                        </div>
-                        </div>
-                                          <div class="row list-group-item dashboardTotalheaders">
-                        <div class="col-xs-2 col-md-1 hide-overflow"> 
-                            <strong>Totals</strong>
-                        </div>
-                        <div class="col-xs-2 col-md-1 text-center hide-overflow">
-                             <span class="badge lw-deals-total stat-total" style="background-color:#428bca;">0</span>
-                        </div>
-                        <div class="col-xs-2 col-md-1 text-center hide-overflow">
-                           <span class="badge lw-proposals-total stat-total" style="background-color:#45AE7C;">0</span>
-                        </div>
-                        <div class="col-xs-2 col-md-2 text-center hide-overflow" >
-                          <span class="lw-demobookedcount-total stat-total" >16</span> /
-                             <span class="lw-democount-total stat-total"  >0</span>
-                        </div>
-                        <div class="col-xs-1 col-md-1 text-center hide-overflow">
-                           <span class="lw-meetingbooked-total stat-total" >0</span> /  
-                            <span class="lw-meetingcount-total stat-total" >0</span>
-                        </div>
-                       
-                        <div class="col-md-2 hidden-xs text-center hide-overflow">
-                           <span class="lw-salescall-total stat-total" >1</span> / 
-                            <span class="lw-introcall-total stat-total">0</span>
-                        </div>
-                        <div class="col-md-2 hidden-xs text-center hide-overflow">
-                          <span class="lw-key_review_added-total stat-total">0</span> / 
-                            <span class="lw-key_review_occuring-total stat-total">5</span>
-                        </div>
-                                    
-                                    
-                                     <div class="col-xs-2 col-md-1 text-center hide-overflow"> 
-                          <span class="lw-duediligence-total stat-total">0</span>
-                            
-                        </div>
-                                 
-                        </div>
-                          
-                          <div id="tslastweek" ></div>
-                          
-                  
-                      </div><!--END COL-MD-12-->
-                    </div><!--END THIS TAB-->
+        <?php
+        //Level 0
+        ob_start();
+        ?>
+        <div class="panel panel-default ff">
+        <div class="panel-heading">
+        <h3 class="panel-title">First To Finance</h3>
+        </div>
+        <div class="panel-body" style="font-size:12px;">
+        <div class="list-group">
+        <?php if(empty($stats)) : ?>
+        <div class="col-md-12">
+        <div style="margin:10px 0;">
+        <h4 style="margin: 50px 0 40px 0; text-align: center;">You have no recent activity.</h4>
+        </div>
+        </div>
+        <?php else: ?>
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+        <li <?php if ($_GET['period'] == 'lastmonth'): ?>class="active"<?php endif; ?>><a href="#lastmonth" class="stats" role="tab" data-toggle="tab">Last Month</a></li>
+        <li <?php if ($_GET['period'] == 'month'): ?>class="active"<?php endif; ?>><a href="#currentmonth"  class="stats" role="tab" data-toggle="tab">This Month</a></li>
+        <li <?php if ($_GET['period'] == 'lastweek'): ?>class="active"<?php endif; ?>><a href="#lastweek"  class="stats" role="tab" data-toggle="tab">Last Week</a></li>
+        <li <?php if (($_GET['period'] == 'week') ||  (empty($_GET['period'])) && ($_GET['search'] !=='3')): ?>class="active"<?php endif; ?>><a href="#this" role="tab" data-toggle="tab">This Week</a></li>
 
 
-                      <div class="tab-pane fade <?php if ($_GET['period'] == 'month'): ?>active in <?php endif; ?>" id="currentmonth">
-                      <div class="col-md-12">
-                      <div class="row list-group-item">
-                         <div class="col-xs-2 col-md-1 hide-overflow"> 
-                            <strong>Name</strong>
-                        </div>
-                        <div class="col-xs-2 col-md-1 text-center hide-overflow">
-                            <strong>Deals</strong>
-                        </div>
-                        <div class="col-xs-2 col-md-1 text-center hide-overflow">
-                            <strong>Proposals</strong>
-                        </div>
-                        <div class="col-xs-2 col-md-2 text-center hide-overflow">
-                            <strong>Demos</strong><br>
-                            <Small>Booked/Done</Small>
-                        </div>
-                        <div class="col-xs-1 col-md-1 text-center hide-overflow">
-                            <strong>Meetings</strong><br>
-                            <Small>Booked/Done</Small>
-                        </div>
-                        <div class="col-xs-2 col-md-2 text-center hide-overflow"> 
-                           <strong>Call Activity</strong><br>
-                           <Small>Total Calls/Intro</Small>
-                        </div>
-                        
-                        <div class="col-md-2 hidden-xs text-center hide-overflow"> 
-                           <strong>Review Months</strong><br>
-                           <Small>Added/Occuring</Small>
-                        </div>
-                        <div class="col-md-1 hidden-xs text-center hide-overflow">
-                           <strong>DueDil</strong>
-                        </div>
-                        </div>
-                          
-                          <div class="row list-group-item dashboardTotalheaders">
-                        <div class="col-xs-2 col-md-1 hide-overflow"> 
-                            <strong>Totals</strong>
-                        </div>
-                        <div class="col-xs-2 col-md-1 text-center hide-overflow">
-                             <span class="badge tm-deals-total stat-total" style="background-color:#428bca;">0</span>
-                        </div>
-                        <div class="col-xs-2 col-md-1 text-center hide-overflow">
-                           <span class="badge tm-proposals-total stat-total" style="background-color:#45AE7C;">0</span>
-                        </div>
-                        <div class="col-xs-2 col-md-2 text-center hide-overflow" >
-                          <span class="tm-demobookedcount-total stat-total" >16</span> /
-                             <span class="tm-democount-total stat-total"  >0</span>
-                        </div>
-                        <div class="col-xs-1 col-md-1 text-center hide-overflow">
-                           <span class="tm-meetingbooked-total stat-total" >0</span> /  
-                            <span class="tm-meetingcount-total stat-total" >0</span>
-                        </div>
-                       
-                        <div class="col-md-2 hidden-xs text-center hide-overflow">
-                           <span class="tm-salescall-total stat-total" >1</span> / 
-                            <span class="tm-introcall-total stat-total">0</span>
-                        </div>
-                        <div class="col-md-2 hidden-xs text-center hide-overflow">
-                          <span class="tm-key_review_added-total stat-total">0</span> / 
-                            <span class="tm-key_review_occuring-total stat-total">5</span>
-                        </div>
-                                    
-                                    
-                                     <div class="col-xs-2 col-md-1 text-center hide-overflow"> 
-                          <span class="tm-duediligence-total stat-total">0</span>
-                            
-                        </div>
-                                
-                        </div>
-                          
-                          <div id="tscurrentmonth"></div>
-                          
-                          <div id="thismonthstats"></div>
-                 
-                      </div><!--END COL-MD-12-->
-                    </div><!--END THIS TAB-->
 
-                    <div class="tab-pane fade <?php if ($_GET['period'] == 'lastmonth'): ?>active in <?php endif; ?>" id="lastmonth">
-                      <div class="col-md-12">
-                      <div class="row list-group-item">
-                         <div class="col-xs-2 col-md-1 hide-overflow"> 
-                            <strong>Name</strong>
-                        </div>
-                        <div class="col-xs-2 col-md-1 text-center hide-overflow">
-                            <strong>Deals</strong>
-                        </div>
-                        <div class="col-xs-2 col-md-1 text-center hide-overflow">
-                            <strong>Proposals</strong>
-                        </div>
-                        <div class="col-xs-2 col-md-2 text-center hide-overflow">
-                            <strong>Demos</strong><br>
-                            <Small>Booked/Done</Small>
-                        </div>
-                        <div class="col-xs-1 col-md-1 text-center hide-overflow">
-                            <strong>Meetings</strong><br>
-                            <Small>Booked/Done</Small>
-                        </div>
-                        <div class="col-xs-2 col-md-2 text-center hide-overflow"> 
-                           <strong>Call Activity</strong><br>
-                           <Small>Total Calls/Intro</Small>
-                        </div>
-                        <div class="col-md-2 hidden-xs text-center hide-overflow"> 
-                           <strong>Review Months</strong><br>
-                           <Small>Added/Occuring</Small>
-                        </div>
-                        <div class="col-md-1 hidden-xs text-center hide-overflow">
-                           <strong>DueDil</strong>
-                        </div>
-                        </div>
-                          
-                             <div class="row list-group-item dashboardTotalheaders">
-                        <div class="col-xs-2 col-md-1 hide-overflow"> 
-                            <strong>Totals</strong>
-                        </div>
-                        <div class="col-xs-2 col-md-1 text-center hide-overflow">
-                             <span class="badge lm-deals-total stat-total" style="background-color:#428bca;">0</span>
-                        </div>
-                        <div class="col-xs-2 col-md-1 text-center hide-overflow">
-                           <span class="badge lm-proposals-total stat-total" style="background-color:#45AE7C;">0</span>
-                        </div>
-                        <div class="col-xs-2 col-md-2 text-center hide-overflow" >
-                          <span class="lm-demobookedcount-total stat-total" >16</span> /
-                             <span class="lm-democount-total stat-total"  >0</span>
-                        </div>
-                        <div class="col-xs-1 col-md-1 text-center hide-overflow">
-                           <span class="lm-meetingbooked-total stat-total" >0</span> /  
-                            <span class="lm-meetingcount-total stat-total" >0</span>
-                        </div>
-                       
-                        <div class="col-md-2 hidden-xs text-center hide-overflow">
-                           <span class="lm-salescall-total stat-total" >1</span> / 
-                            <span class="lm-introcall-total stat-total">0</span>
-                        </div>
-                        <div class="col-md-2 hidden-xs text-center hide-overflow">
-                          <span class="lm-key_review_added-total stat-total">0</span> / 
-                            <span class="lm-key_review_occuring-total stat-total">5</span>
-                        </div>
-                                    
-                                    
-                                     <div class="col-xs-2 col-md-1 text-center hide-overflow"> 
-                          <span class="lm-duediligence-total stat-total">0</span>
-                            
-                        </div>
- 
-                        </div>
-                          
-                          
-                             <div id="tslastmonth"></div>
-               
-                      </div><!--END COL-MD-12-->
-                    </div><!--END THIS TAB-->
+        <?php if ($_GET['search'] == '3'): ?>
+        <li <?php if ($_GET['search'] == '3'): ?>class="active"<?php endif; ?>><a href="#searchresults" role="tab" data-toggle="tab">Search Results</a></li>
+        <?php endif; ?>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content">
+        <div class="tab-pane fade <?php if (($_GET['period'] == 'week') ||  (empty($_GET['period'])) && ($_GET['search'] !=='3')): ?>active in <?php endif; ?>" id="this">
+        <div class="col-md-12">
+        </div>
+        <div class="col-md-12">
+        <div class="row list-group-item">
+        <div class="col-xs-2 col-md-1 hide-overflow"> 
+        <strong>Name</strong>
+        </div>
+        <div class="col-xs-2 col-md-1 text-center hide-overflow">
+        <strong>Deals</strong>
+        </div>
+        <div class="col-xs-2 col-md-1 text-center hide-overflow">
+        <strong>Proposals</strong>
+        </div>
+        <div class="col-xs-2 col-md-2 text-center hide-overflow">
+        <strong>Demos</strong><br>
+        <Small>Booked/Done</Small>
+        </div>
+        <div class="col-xs-1 col-md-1 text-center hide-overflow">
+        <strong>Meetings</strong><br>
+        <Small>Booked/Done</Small>
+        </div>
+        <div class="col-xs-2 col-md-2 text-center hide-overflow"> 
+        <strong>Call Activity</strong><br>
+        <Small>Total Calls/Intro</Small>
+        </div>
 
-                    <div class="tab-pane fade <?php if ($_GET['search'] == '3'): ?>active in <?php endif; ?>" id="searchresults">
-                     <div class="col-md-12">
-                      <div class="row list-group-item">
-                         <div class="col-xs-2 col-md-1 hide-overflow"> 
-                            <strong>Name</strong>
-                        </div>
-                        <div class="col-xs-2 col-md-1 text-center hide-overflow">
-                            <strong>Deals</strong>
-                        </div>
-                        <div class="col-xs-2 col-md-1 text-center hide-overflow">
-                            <strong>Proposals</strong>
-                        </div>
-                        <div class="col-xs-2 col-md-2 text-center hide-overflow">
-                            <strong>Demos</strong><br>
-                            <Small>Booked/Done</Small>
-                        </div>
-                        <div class="col-xs-1 col-md-1 text-center hide-overflow">
-                            <strong>Meetings</strong><br>
-                            <Small>Booked/Done</Small>
-                        </div>
-                        <div class="col-xs-2 col-md-2 text-center hide-overflow"> 
-                           <strong>Call Activity</strong><br>
-                           <Small>Total Calls/Intro</Small>
-                        </div>
-                        <div class="col-md-2 hidden-xs text-center hide-overflow"> 
-                           <strong>Review Months</strong><br>
-                           <Small>Added/Occuring</Small>
-                        </div>
-                        <div class="col-md-1 hidden-xs text-center hide-overflow">
-                           <strong>DueDil</strong>
-                        </div>
-                        </div>
-                         
-                             <div class="row list-group-item dashboardTotalheaders">
-                        <div class="col-xs-2 col-md-1 hide-overflow"> 
-                            <strong>Totals</strong>
-                        </div>
-                        <div class="col-xs-2 col-md-1 text-center hide-overflow">
-                             <span class="badge sr-deals-total stat-total" style="background-color:#428bca;">0</span>
-                        </div>
-                        <div class="col-xs-2 col-md-1 text-center hide-overflow">
-                           <span class="badge sr-proposals-total stat-total" style="background-color:#45AE7C;">0</span>
-                        </div>
-                        <div class="col-xs-2 col-md-2 text-center hide-overflow" >
-                          <span class="sr-demobookedcount-total stat-total" >0</span> /
-                             <span class="sr-democount-total stat-total"  >0</span>
-                        </div>
-                        <div class="col-xs-1 col-md-1 text-center hide-overflow">
-                           <span class="sr-meetingbooked-total stat-total" >0</span> /  
-                            <span class="sr-meetingcount-total stat-total" >0</span>
-                        </div>
-                       
-                        <div class="col-md-2 hidden-xs text-center hide-overflow">
-                           <span class="sr-salescall-total stat-total" >1</span> / 
-                            <span class="sr-introcall-total stat-total">0</span>
-                        </div>
-                        <div class="col-md-1 hidden-xs text-center hide-overflow"> 
-                          <span class="sr-pipelinecount-total stat-total">0</span> 
-                        </div>
-                        <div class="col-md-2 hidden-xs text-center hide-overflow">
-                          <span class="sr-key_review_added-total stat-total">0</span> / 
-                            <span class="sr-key_review_occuring-total stat-total">0</span>
-                        </div>
-                                    
-                                    
-                                     <div class="col-xs-2 col-md-1 text-center hide-overflow"> 
-                          <span class="sr-duediligence-total stat-total">0</span>
-                            
-                        </div>
-                                
-                        </div>
-                         
-                         
-                         
-                         
-                         
-                         
-                         
-                         
+        <div class="col-md-2 hidden-xs text-center hide-overflow"> 
+        <strong>Review Months</strong><br>
+        <Small>Added/Occuring</Small>
+        </div>
+        <div class="col-md-1 hidden-xs text-center hide-overflow">
+        <strong>DueDil</strong>
+        </div>
+        </div>
+
+        <div class="row list-group-item dashboardTotalheaders">
+        <div class="col-xs-2 col-md-1 hide-overflow"> 
+        <strong>Totals</strong>
+        </div>
+        <div class="col-xs-1 col-md-1 text-center hide-overflow">
+        <span class="badge tw-deals-total stat-total" style="background-color:#428bca;">0</span>
+        </div>
+        <div class="col-xs-2 col-md-1 text-center hide-overflow">
+        <span class="badge tw-proposals-total stat-total" style="background-color:#45AE7C;">0</span>
+        </div>
+        <div class="col-xs-2 col-md-2 text-center hide-overflow" >
+        <span class="tw-demobookedcount-total stat-total" >4</span> /
+        <span class="tw-democount-total stat-total"  >0</span>
+        </div>
+        <div class="col-xs-2 col-md-1 text-center hide-overflow">
+        <span class="tw-meetingbooked-total stat-total" >0</span> /  
+        <span class="tw-meetingcount-total stat-total" >0</span>
+        </div>
+
+        <div class="col-md-2 hidden-xs text-center hide-overflow">
+        <span class="tw-salescall-total stat-total" >1</span> / 
+        <span class="tw-introcall-total stat-total">0</span>
+        </div>
+        <div class="col-md-2 hidden-xs text-center hide-overflow">
+        <span class="tw-key_review_added-total stat-total">0</span> / 
+        <span class="tw-key_review_occuring-total stat-total">5</span>
+        </div>
+
+        <div class="col-xs-2 col-md-1 text-center hide-overflow"> 
+        <span class="tw-duediligence-total stat-total">0</span>
+        </div>
+        </div>
+
+
+        <?php foreach ($stats as $stat): ?>
+        <div class="row list-group-item stats-row active-<?php echo $stat['active'];?>">
+        <div class="col-xs-2 col-md-1"> 
+        <a href = "?search=2&user=<?php echo $stat['user'];?>&period=week">
+        <?php $user_icon = explode(",",$stat['image']); echo "<div class='circle name-circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
+        </a>
+        </div>
+        <div class="col-xs-1 col-md-1 text-center">
+        <a href = "?search=2&user=<?php echo $stat['user'];?>&period=week"><span class="badge tw-deals" style="background-color:#428bca;"><?php echo $stat['deals'];?></span></a>
+        </div>
+        <div class="col-xs-2 col-md-1 text-center"> 
+        <?php echo '<div class="badge tw-proposals" style="background-color:#45AE7C;">'.$stat['proposals'].'</div>';?>
+        </div>
+        <div class="col-xs-2 col-md-2 text-center"> 
+        <span class="tw-demobookedcount"><?php echo $stat['demobookedcount'];?></span> / <span class="tw-democount"><?php echo $stat['democount'];?></span>
+        </div>
+        <div class="col-xs-2 col-md-1 text-center">
+        <span class="tw-meetingbooked"><?php echo $stat['meetingbooked'];?></span> / <span class="tw-meetingcount"><?php echo $stat['meetingcount'];?></span>
+        </div>
+        <div class="col-xs-2 col-md-2 text-center"> 
+        <span class="tw-salescall"><?php echo $stat['salescall'];?></span> / <span class="tw-introcall"><?php echo $stat['introcall'];?></span>
+        </div>
+        <div class="col-md-2 hidden-xs text-center">
+        <span class="tw-key_review_added"><?php echo $stat['key_review_added'];?></span> / <span class="tw-key_review_occuring"><?php echo $stat['key_review_occuring'];?></span>
+        </div>
+        <div class="col-md-1 hidden-xs text-center">
+        <span class="tw-duediligence"><?php echo $stat['duediligence'];?></span>
+        </div>
+        </div> <!--END ROW-->    
+        <?php endforeach ?>
+        </div><!--END COL-MD-12-->
+        </div><!--END THIS TAB-->
+
+        <div class="tab-pane fade <?php if ($_GET['period'] == 'lastweek'): ?>active in <?php endif; ?>" id="lastweek">
+        <div class="col-md-12">
+        <div class="row list-group-item">
+        <div class="col-xs-2 col-md-1 hide-overflow"> 
+        <strong>Name</strong>
+        </div>
+        <div class="col-xs-2 col-md-1 text-center hide-overflow">
+        <strong>Deals</strong>
+        </div>
+        <div class="col-xs-2 col-md-1 text-center hide-overflow">
+        <strong>Proposals</strong>
+        </div>
+        <div class="col-xs-2 col-md-2 text-center hide-overflow">
+        <strong>Demos</strong><br>
+        <Small>Booked/Done</Small>
+        </div>
+        <div class="col-xs-1 col-md-1 text-center hide-overflow">
+        <strong>Meetings</strong><br>
+        <Small>Booked/Done</Small>
+        </div>
+        <div class="col-xs-2 col-md-2 text-center hide-overflow"> 
+        <strong>Call Activity</strong><br>
+        <Small>Total Calls/Intro</Small>
+        </div>
+        <div class="col-md-2 hidden-xs text-center hide-overflow"> 
+        <strong>Review Months</strong><br>
+        <Small>Added/Occuring</Small>
+        </div>
+        <div class="col-md-1 hidden-xs text-center hide-overflow">
+        <strong>DueDil</strong>
+        </div>
+        </div>
+        <div class="row list-group-item dashboardTotalheaders">
+        <div class="col-xs-2 col-md-1 hide-overflow"> 
+        <strong>Totals</strong>
+        </div>
+        <div class="col-xs-2 col-md-1 text-center hide-overflow">
+        <span class="badge lw-deals-total stat-total" style="background-color:#428bca;">0</span>
+        </div>
+        <div class="col-xs-2 col-md-1 text-center hide-overflow">
+        <span class="badge lw-proposals-total stat-total" style="background-color:#45AE7C;">0</span>
+        </div>
+        <div class="col-xs-2 col-md-2 text-center hide-overflow" >
+        <span class="lw-demobookedcount-total stat-total" >16</span> /
+        <span class="lw-democount-total stat-total"  >0</span>
+        </div>
+        <div class="col-xs-1 col-md-1 text-center hide-overflow">
+        <span class="lw-meetingbooked-total stat-total" >0</span> /  
+        <span class="lw-meetingcount-total stat-total" >0</span>
+        </div>
+
+        <div class="col-md-2 hidden-xs text-center hide-overflow">
+        <span class="lw-salescall-total stat-total" >1</span> / 
+        <span class="lw-introcall-total stat-total">0</span>
+        </div>
+        <div class="col-md-2 hidden-xs text-center hide-overflow">
+        <span class="lw-key_review_added-total stat-total">0</span> / 
+        <span class="lw-key_review_occuring-total stat-total">5</span>
+        </div>
+
+
+        <div class="col-xs-2 col-md-1 text-center hide-overflow"> 
+        <span class="lw-duediligence-total stat-total">0</span>
+
+        </div>
+
+        </div>
+
+        <div id="tslastweek" ></div>
+
+
+        </div><!--END COL-MD-12-->
+        </div><!--END THIS TAB-->
+
+
+        <div class="tab-pane fade <?php if ($_GET['period'] == 'month'): ?>active in <?php endif; ?>" id="currentmonth">
+        <div class="col-md-12">
+        <div class="row list-group-item">
+        <div class="col-xs-2 col-md-1 hide-overflow"> 
+        <strong>Name</strong>
+        </div>
+        <div class="col-xs-2 col-md-1 text-center hide-overflow">
+        <strong>Deals</strong>
+        </div>
+        <div class="col-xs-2 col-md-1 text-center hide-overflow">
+        <strong>Proposals</strong>
+        </div>
+        <div class="col-xs-2 col-md-2 text-center hide-overflow">
+        <strong>Demos</strong><br>
+        <Small>Booked/Done</Small>
+        </div>
+        <div class="col-xs-1 col-md-1 text-center hide-overflow">
+        <strong>Meetings</strong><br>
+        <Small>Booked/Done</Small>
+        </div>
+        <div class="col-xs-2 col-md-2 text-center hide-overflow"> 
+        <strong>Call Activity</strong><br>
+        <Small>Total Calls/Intro</Small>
+        </div>
+
+        <div class="col-md-2 hidden-xs text-center hide-overflow"> 
+        <strong>Review Months</strong><br>
+        <Small>Added/Occuring</Small>
+        </div>
+        <div class="col-md-1 hidden-xs text-center hide-overflow">
+        <strong>DueDil</strong>
+        </div>
+        </div>
+
+        <div class="row list-group-item dashboardTotalheaders">
+        <div class="col-xs-2 col-md-1 hide-overflow"> 
+        <strong>Totals</strong>
+        </div>
+        <div class="col-xs-2 col-md-1 text-center hide-overflow">
+        <span class="badge tm-deals-total stat-total" style="background-color:#428bca;">0</span>
+        </div>
+        <div class="col-xs-2 col-md-1 text-center hide-overflow">
+        <span class="badge tm-proposals-total stat-total" style="background-color:#45AE7C;">0</span>
+        </div>
+        <div class="col-xs-2 col-md-2 text-center hide-overflow" >
+        <span class="tm-demobookedcount-total stat-total" >16</span> /
+        <span class="tm-democount-total stat-total"  >0</span>
+        </div>
+        <div class="col-xs-1 col-md-1 text-center hide-overflow">
+        <span class="tm-meetingbooked-total stat-total" >0</span> /  
+        <span class="tm-meetingcount-total stat-total" >0</span>
+        </div>
+
+        <div class="col-md-2 hidden-xs text-center hide-overflow">
+        <span class="tm-salescall-total stat-total" >1</span> / 
+        <span class="tm-introcall-total stat-total">0</span>
+        </div>
+        <div class="col-md-2 hidden-xs text-center hide-overflow">
+        <span class="tm-key_review_added-total stat-total">0</span> / 
+        <span class="tm-key_review_occuring-total stat-total">5</span>
+        </div>
+
+
+        <div class="col-xs-2 col-md-1 text-center hide-overflow"> 
+        <span class="tm-duediligence-total stat-total">0</span>
+
+        </div>
+
+        </div>
+
+        <div id="tscurrentmonth"></div>
+
+        <div id="thismonthstats"></div>
+
+        </div><!--END COL-MD-12-->
+        </div><!--END THIS TAB-->
+
+        <div class="tab-pane fade <?php if ($_GET['period'] == 'lastmonth'): ?>active in <?php endif; ?>" id="lastmonth">
+        <div class="col-md-12">
+        <div class="row list-group-item">
+        <div class="col-xs-2 col-md-1 hide-overflow"> 
+        <strong>Name</strong>
+        </div>
+        <div class="col-xs-2 col-md-1 text-center hide-overflow">
+        <strong>Deals</strong>
+        </div>
+        <div class="col-xs-2 col-md-1 text-center hide-overflow">
+        <strong>Proposals</strong>
+        </div>
+        <div class="col-xs-2 col-md-2 text-center hide-overflow">
+        <strong>Demos</strong><br>
+        <Small>Booked/Done</Small>
+        </div>
+        <div class="col-xs-1 col-md-1 text-center hide-overflow">
+        <strong>Meetings</strong><br>
+        <Small>Booked/Done</Small>
+        </div>
+        <div class="col-xs-2 col-md-2 text-center hide-overflow"> 
+        <strong>Call Activity</strong><br>
+        <Small>Total Calls/Intro</Small>
+        </div>
+        <div class="col-md-2 hidden-xs text-center hide-overflow"> 
+        <strong>Review Months</strong><br>
+        <Small>Added/Occuring</Small>
+        </div>
+        <div class="col-md-1 hidden-xs text-center hide-overflow">
+        <strong>DueDil</strong>
+        </div>
+        </div>
+
+        <div class="row list-group-item dashboardTotalheaders">
+        <div class="col-xs-2 col-md-1 hide-overflow"> 
+        <strong>Totals</strong>
+        </div>
+        <div class="col-xs-2 col-md-1 text-center hide-overflow">
+        <span class="badge lm-deals-total stat-total" style="background-color:#428bca;">0</span>
+        </div>
+        <div class="col-xs-2 col-md-1 text-center hide-overflow">
+        <span class="badge lm-proposals-total stat-total" style="background-color:#45AE7C;">0</span>
+        </div>
+        <div class="col-xs-2 col-md-2 text-center hide-overflow" >
+        <span class="lm-demobookedcount-total stat-total" >16</span> /
+        <span class="lm-democount-total stat-total"  >0</span>
+        </div>
+        <div class="col-xs-1 col-md-1 text-center hide-overflow">
+        <span class="lm-meetingbooked-total stat-total" >0</span> /  
+        <span class="lm-meetingcount-total stat-total" >0</span>
+        </div>
+
+        <div class="col-md-2 hidden-xs text-center hide-overflow">
+        <span class="lm-salescall-total stat-total" >1</span> / 
+        <span class="lm-introcall-total stat-total">0</span>
+        </div>
+        <div class="col-md-2 hidden-xs text-center hide-overflow">
+        <span class="lm-key_review_added-total stat-total">0</span> / 
+        <span class="lm-key_review_occuring-total stat-total">5</span>
+        </div>
+
+
+        <div class="col-xs-2 col-md-1 text-center hide-overflow"> 
+        <span class="lm-duediligence-total stat-total">0</span>
+
+        </div>
+
+        </div>
+
+
+        <div id="tslastmonth"></div>
+
+        </div><!--END COL-MD-12-->
+        </div><!--END THIS TAB-->
+
+        <div class="tab-pane fade <?php if ($_GET['search'] == '3'): ?>active in <?php endif; ?>" id="searchresults">
+        <div class="col-md-12">
+        <div class="row list-group-item">
+        <div class="col-xs-2 col-md-1 hide-overflow"> 
+        <strong>Name</strong>
+        </div>
+        <div class="col-xs-2 col-md-1 text-center hide-overflow">
+        <strong>Deals</strong>
+        </div>
+        <div class="col-xs-2 col-md-1 text-center hide-overflow">
+        <strong>Proposals</strong>
+        </div>
+        <div class="col-xs-2 col-md-2 text-center hide-overflow">
+        <strong>Demos</strong><br>
+        <Small>Booked/Done</Small>
+        </div>
+        <div class="col-xs-1 col-md-1 text-center hide-overflow">
+        <strong>Meetings</strong><br>
+        <Small>Booked/Done</Small>
+        </div>
+        <div class="col-xs-2 col-md-2 text-center hide-overflow"> 
+        <strong>Call Activity</strong><br>
+        <Small>Total Calls/Intro</Small>
+        </div>
+        <div class="col-md-2 hidden-xs text-center hide-overflow"> 
+        <strong>Review Months</strong><br>
+        <Small>Added/Occuring</Small>
+        </div>
+        <div class="col-md-1 hidden-xs text-center hide-overflow">
+        <strong>DueDil</strong>
+        </div>
+        </div>
+
+        <div class="row list-group-item dashboardTotalheaders">
+        <div class="col-xs-2 col-md-1 hide-overflow"> 
+        <strong>Totals</strong>
+        </div>
+        <div class="col-xs-2 col-md-1 text-center hide-overflow">
+        <span class="badge sr-deals-total stat-total" style="background-color:#428bca;">0</span>
+        </div>
+        <div class="col-xs-2 col-md-1 text-center hide-overflow">
+        <span class="badge sr-proposals-total stat-total" style="background-color:#45AE7C;">0</span>
+        </div>
+        <div class="col-xs-2 col-md-2 text-center hide-overflow" >
+        <span class="sr-demobookedcount-total stat-total" >0</span> /
+        <span class="sr-democount-total stat-total"  >0</span>
+        </div>
+        <div class="col-xs-1 col-md-1 text-center hide-overflow">
+        <span class="sr-meetingbooked-total stat-total" >0</span> /  
+        <span class="sr-meetingcount-total stat-total" >0</span>
+        </div>
+
+        <div class="col-md-2 hidden-xs text-center hide-overflow">
+        <span class="sr-salescall-total stat-total" >1</span> / 
+        <span class="sr-introcall-total stat-total">0</span>
+        </div>
+       
+        <div class="col-md-2 hidden-xs text-center hide-overflow">
+        <span class="sr-key_review_added-total stat-total">0</span> / 
+        <span class="sr-key_review_occuring-total stat-total">0</span>
+        </div>
+
+
+        <div class="col-xs-2 col-md-1 text-center hide-overflow"> 
+        <span class="sr-duediligence-total stat-total">0</span>
+
+        </div>
+
+        </div>
+
+
+
+
+
+
+
+
         <?php foreach ($getstatssearch as $getstatssearch): ?>
-                  <div class="row list-group-item stats-row active-<?php echo $lastmonthstat['active'];?>">
-                            <div class="col-xs-2 col-md-1">
-                            <a href = "?search=2&user=<?php echo $getstatssearch['user'];?>&period=lastmonth"> 
-                            <?php $user_icon = explode(",",$getstatssearch['image']); echo "<div class='circle name-circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
-                            </a>
-                            </div>
-                            <div class="col-xs-2 col-md-1 text-center">
-                            <a href = "?search=2&user=<?php echo $getstatssearch['user'];?>&start_date=<?php echo $_GET['start_date']?>&end_date=<?php echo $_GET['end_date']?>&period=search"><span class="badge sr-deals" style="background-color:#428bca;"><?php echo $getstatssearch['deals'];?></span></a>
-                            </div>
-                              <div class="col-xs-2 col-md-1 text-center"> 
-                              <?php echo '<div class="badge lm-proposals" style="background-color:#45AE7C;">'.$getstatssearch['proposals'].'</div>';?>
-                              </div>
-                              <div class="col-xs-2 col-md-2 text-center"> 
-                            <span class="sr-demobookedcount"><?php echo $getstatssearch['demobookedcount'];?></span> / <span class="sr-democount"><?php echo $getstatssearch['democount'];?></span>
-                            </div>
-                            <div class="col-xs-1 col-md-1 text-center">
-                            <span class="sr-meetingbooked"><?php echo $getstatssearch['meetingbooked'];?></span> / <span class="sr-meetingcount"><?php echo $getstatssearch['meetingcount'];?></span>
-                            </div>
-                            <div class="col-xs-2 col-md-2 text-center"> 
-                            <span class="sr-salescall"><?php echo $getstatssearch['salescall'];?></span> / <span class="sr-introcall"><?php echo $getstatssearch['introcall'];?></span>
-                            </div>
-                            <div class="col-md-1 hidden-xs text-center">
-                              <span class="sr-pipelinecount"><?php echo $getstatssearch['pipelinecount'];?></span>
-                            </div>
-                            <div class="col-md-2 hidden-xs text-center">
-                              <span class="sr-key_review_added"><?php echo $getstatssearch['key_review_added'];?></span> / <span class="sr-key_review_occuring"><?php echo $getstatssearch['key_review_occuring'];?></span>
-                            </div>
-                            <div class="col-md-1 hidden-xs text-center">
-                              <span class="sr-duediligence"><?php echo $getstatssearch['duediligence'];?></span>
-                            </div>
-                          </div> <!--END ROW-->    
-      <?php endforeach ?>
-      </div><!--END COL-MD-12-->
-    </div><!--END THIS TAB-->
+        <div class="row list-group-item stats-row active-<?php echo $lastmonthstat['active'];?>">
+        <div class="col-xs-2 col-md-1">
+        <a href = "?search=2&user=<?php echo $getstatssearch['user'];?>&period=lastmonth"> 
+        <?php $user_icon = explode(",",$getstatssearch['image']); echo "<div class='circle name-circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
+        </a>
+        </div>
+        <div class="col-xs-2 col-md-1 text-center">
+        <a href = "?search=2&user=<?php echo $getstatssearch['user'];?>&start_date=<?php echo $_GET['start_date']?>&end_date=<?php echo $_GET['end_date']?>&period=search"><span class="badge sr-deals" style="background-color:#428bca;"><?php echo $getstatssearch['deals'];?></span></a>
+        </div>
+        <div class="col-xs-2 col-md-1 text-center"> 
+        <?php echo '<div class="badge lm-proposals" style="background-color:#45AE7C;">'.$getstatssearch['proposals'].'</div>';?>
+        </div>
+        <div class="col-xs-2 col-md-2 text-center"> 
+        <span class="sr-demobookedcount"><?php echo $getstatssearch['demobookedcount'];?></span> / <span class="sr-democount"><?php echo $getstatssearch['democount'];?></span>
+        </div>
+        <div class="col-xs-1 col-md-1 text-center">
+        <span class="sr-meetingbooked"><?php echo $getstatssearch['meetingbooked'];?></span> / <span class="sr-meetingcount"><?php echo $getstatssearch['meetingcount'];?></span>
+        </div>
+        <div class="col-xs-2 col-md-2 text-center"> 
+        <span class="sr-salescall"><?php echo $getstatssearch['salescall'];?></span> / <span class="sr-introcall"><?php echo $getstatssearch['introcall'];?></span>
+        </div>
+        
+        <div class="col-md-2 hidden-xs text-center">
+        <span class="sr-key_review_added"><?php echo $getstatssearch['key_review_added'];?></span> / <span class="sr-key_review_occuring"><?php echo $getstatssearch['key_review_occuring'];?></span>
+        </div>
+        <div class="col-md-1 hidden-xs text-center">
+        <span class="sr-duediligence"><?php echo $getstatssearch['duediligence'];?></span>
+        </div>
+        </div> <!--END ROW-->    
+        <?php endforeach ?>
+        </div><!--END COL-MD-12-->
+        </div><!--END THIS TAB-->
 
-    </div>
-    <?php endif ?>
-  </div>
-</div>
+        </div>
+        <?php endif ?>
+        </div>
+        </div>
 
-</div><!--END PANEL-->
+        </div><!--END PANEL-->  
+        <?php 
+        $out1 = ob_get_contents();
+        ob_end_clean();
+        ?> 
+        <?php
+        //Level 0
+        ob_start();
+        ?>
+        <div class="panel panel-default uf">
+        <div class="panel-heading">
+        <h3 class="panel-title">With Finance</h3>
+        </div>
+        <div class="panel-body" style="font-size:12px;">
+        <div class="list-group">
+        <?php if(empty($stats)) : ?>
+        <div class="col-md-12">
+        <div style="margin:10px 0;">
+        <h4 style="margin: 50px 0 40px 0; text-align: center;">You have no recent activity.</h4>
+        </div>
+        </div>
+        <?php else: ?>
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+        <li <?php if ($_GET['period'] == 'lastmonth'): ?>class="active"<?php endif; ?>><a href="#ulastmonth" class="stats" role="tab" data-toggle="tab">Last Month</a></li>
+        <li <?php if ($_GET['period'] == 'month'): ?>class="active"<?php endif; ?>><a href="#ucurrentmonth"  class="stats" role="tab" data-toggle="tab">This Month</a></li>
+        <li <?php if ($_GET['period'] == 'lastweek'): ?>class="active"<?php endif; ?>><a href="#ulastweek"  class="stats" role="tab" data-toggle="tab">Last Week</a></li>
+        <li <?php if (($_GET['period'] == 'week') ||  (empty($_GET['period'])) && ($_GET['search'] !=='3')): ?>class="active"<?php endif; ?>><a href="#uthis" role="tab" data-toggle="tab">This Week</a></li>
+
+
+
+        <?php if ($_GET['search'] == '3'): ?>
+        <li <?php if ($_GET['search'] == '3'): ?>class="active"<?php endif; ?>><a href="#usearchresults" role="tab" data-toggle="tab">Search Results</a></li>
+        <?php endif; ?>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content">
+        <div class="tab-pane fade <?php if (($_GET['period'] == 'week') ||  (empty($_GET['period'])) && ($_GET['search'] !=='3')): ?>active in <?php endif; ?>" id="uthis">
+        <div class="col-md-12">
+        </div>
+        <div class="col-md-12">
+        <div class="row list-group-item">
+        <div class="col-xs-2 col-md-1 hide-overflow"> 
+        <strong>Name</strong>
+        </div>
+        <div class="col-xs-2 col-md-1 text-center hide-overflow">
+        <strong>Deals</strong>
+        </div>
+        <div class="col-xs-2 col-md-1 text-center hide-overflow">
+        <strong>Proposals</strong>
+        </div>
+        <div class="col-xs-2 col-md-2 text-center hide-overflow">
+        <strong>Demos</strong><br>
+        <Small>Booked/Done</Small>
+        </div>
+        <div class="col-xs-1 col-md-1 text-center hide-overflow">
+        <strong>Meetings</strong><br>
+        <Small>Booked/Done</Small>
+        </div>
+        <div class="col-xs-2 col-md-2 text-center hide-overflow"> 
+        <strong>Call Activity</strong><br>
+        <Small>Total Calls/Intro</Small>
+        </div>
+
+        <div class="col-md-2 hidden-xs text-center hide-overflow"> 
+        <strong>Review Months</strong><br>
+        <Small>Added/Occuring</Small>
+        </div>
+        <div class="col-md-1 hidden-xs text-center hide-overflow">
+        <strong>DueDil</strong>
+        </div>
+        </div>
+
+        <div class="row list-group-item dashboardTotalheaders">
+        <div class="col-xs-2 col-md-1 hide-overflow"> 
+        <strong>Totals</strong>
+        </div>
+        <div class="col-xs-1 col-md-1 text-center hide-overflow">
+        <span class="badge tw-deals-total stat-total" style="background-color:#428bca;">0</span>
+        </div>
+        <div class="col-xs-2 col-md-1 text-center hide-overflow">
+        <span class="badge tw-proposals-total stat-total" style="background-color:#45AE7C;">0</span>
+        </div>
+        <div class="col-xs-2 col-md-2 text-center hide-overflow" >
+        <span class="tw-demobookedcount-total stat-total" >4</span> /
+        <span class="tw-democount-total stat-total"  >0</span>
+        </div>
+        <div class="col-xs-2 col-md-1 text-center hide-overflow">
+        <span class="tw-meetingbooked-total stat-total" >0</span> /  
+        <span class="tw-meetingcount-total stat-total" >0</span>
+        </div>
+
+        <div class="col-md-2 hidden-xs text-center hide-overflow">
+        <span class="tw-salescall-total stat-total" >1</span> / 
+        <span class="tw-introcall-total stat-total">0</span>
+        </div>
+        <div class="col-md-2 hidden-xs text-center hide-overflow">
+        <span class="tw-key_review_added-total stat-total">0</span> / 
+        <span class="tw-key_review_occuring-total stat-total">5</span>
+        </div>
+
+        <div class="col-xs-2 col-md-1 text-center hide-overflow"> 
+        <span class="tw-duediligence-total stat-total">0</span>
+        </div>
+        </div>
+
+
+        <?php foreach ($ustats as $stat): ?>
+        <div class="row list-group-item stats-row active-<?php echo $stat['active'];?>">
+        <div class="col-xs-2 col-md-1"> 
+        <a href = "?search=2&user=<?php echo $stat['user'];?>&period=week">
+        <?php $user_icon = explode(",",$stat['image']); echo "<div class='circle name-circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
+        </a>
+        </div>
+        <div class="col-xs-1 col-md-1 text-center">
+        <a href = "?search=2&user=<?php echo $stat['user'];?>&period=week"><span class="badge tw-deals" style="background-color:#428bca;"><?php echo $stat['deals'];?></span></a>
+        </div>
+        <div class="col-xs-2 col-md-1 text-center"> 
+        <?php echo '<div class="badge tw-proposals" style="background-color:#45AE7C;">'.$stat['proposals'].'</div>';?>
+        </div>
+        <div class="col-xs-2 col-md-2 text-center"> 
+        <span class="tw-demobookedcount"><?php echo $stat['demobookedcount'];?></span> / <span class="tw-democount"><?php echo $stat['democount'];?></span>
+        </div>
+        <div class="col-xs-2 col-md-1 text-center">
+        <span class="tw-meetingbooked"><?php echo $stat['meetingbooked'];?></span> / <span class="tw-meetingcount"><?php echo $stat['meetingcount'];?></span>
+        </div>
+        <div class="col-xs-2 col-md-2 text-center"> 
+        <span class="tw-salescall"><?php echo $stat['salescall'];?></span> / <span class="tw-introcall"><?php echo $stat['introcall'];?></span>
+        </div>
+        <div class="col-md-2 hidden-xs text-center">
+        <span class="tw-key_review_added"><?php echo $stat['key_review_added'];?></span> / <span class="tw-key_review_occuring"><?php echo $stat['key_review_occuring'];?></span>
+        </div>
+        <div class="col-md-1 hidden-xs text-center">
+        <span class="tw-duediligence"><?php echo $stat['duediligence'];?></span>
+        </div>
+        </div> <!--END ROW-->    
+        <?php endforeach ?>
+        </div><!--END COL-MD-12-->
+        </div><!--END THIS TAB-->
+
+        <div class="tab-pane fade <?php if ($_GET['period'] == 'lastweek'): ?>active in <?php endif; ?>" id="ulastweek">
+        <div class="col-md-12">
+        <div class="row list-group-item">
+        <div class="col-xs-2 col-md-1 hide-overflow"> 
+        <strong>Name</strong>
+        </div>
+        <div class="col-xs-2 col-md-1 text-center hide-overflow">
+        <strong>Deals</strong>
+        </div>
+        <div class="col-xs-2 col-md-1 text-center hide-overflow">
+        <strong>Proposals</strong>
+        </div>
+        <div class="col-xs-2 col-md-2 text-center hide-overflow">
+        <strong>Demos</strong><br>
+        <Small>Booked/Done</Small>
+        </div>
+        <div class="col-xs-1 col-md-1 text-center hide-overflow">
+        <strong>Meetings</strong><br>
+        <Small>Booked/Done</Small>
+        </div>
+        <div class="col-xs-2 col-md-2 text-center hide-overflow"> 
+        <strong>Call Activity</strong><br>
+        <Small>Total Calls/Intro</Small>
+        </div>
+        <div class="col-md-2 hidden-xs text-center hide-overflow"> 
+        <strong>Review Months</strong><br>
+        <Small>Added/Occuring</Small>
+        </div>
+        <div class="col-md-1 hidden-xs text-center hide-overflow">
+        <strong>DueDil</strong>
+        </div>
+        </div>
+        <div class="row list-group-item dashboardTotalheaders">
+        <div class="col-xs-2 col-md-1 hide-overflow"> 
+        <strong>Totals</strong>
+        </div>
+        <div class="col-xs-2 col-md-1 text-center hide-overflow">
+        <span class="badge ulw-deals-total stat-total" style="background-color:#428bca;">0</span>
+        </div>
+        <div class="col-xs-2 col-md-1 text-center hide-overflow">
+        <span class="badge ulw-proposals-total stat-total" style="background-color:#45AE7C;">0</span>
+        </div>
+        <div class="col-xs-2 col-md-2 text-center hide-overflow" >
+        <span class="ulw-demobookedcount-total stat-total" >0</span> /
+        <span class="ulw-democount-total stat-total"  >0</span>
+        </div>
+        <div class="col-xs-1 col-md-1 text-center hide-overflow">
+        <span class="ulw-meetingbooked-total stat-total" >0</span> /  
+        <span class="ulw-meetingcount-total stat-total" >0</span>
+        </div>
+
+        <div class="col-md-2 hidden-xs text-center hide-overflow">
+        <span class="ulw-salescall-total stat-total" >0</span> / 
+        <span class="ulw-introcall-total stat-total">0</span>
+        </div>
+        <div class="col-md-2 hidden-xs text-center hide-overflow">
+        <span class="ulw-key_review_added-total stat-total">0</span> / 
+        <span class="ulw-key_review_occuring-total stat-total">5</span>
+        </div>
+
+
+        <div class="col-xs-2 col-md-1 text-center hide-overflow"> 
+        <span class="ulw-duediligence-total stat-total">0</span>
+
+        </div>
+
+        </div>
+
+        <div id="utslastweek" ></div>
+
+
+        </div><!--END COL-MD-12-->
+        </div><!--END THIS TAB-->
+
+
+        <div class="tab-pane fade <?php if ($_GET['period'] == 'month'): ?>active in <?php endif; ?>" id="ucurrentmonth">
+        <div class="col-md-12">
+        <div class="row list-group-item">
+        <div class="col-xs-2 col-md-1 hide-overflow"> 
+        <strong>Name</strong>
+        </div>
+        <div class="col-xs-2 col-md-1 text-center hide-overflow">
+        <strong>Deals</strong>
+        </div>
+        <div class="col-xs-2 col-md-1 text-center hide-overflow">
+        <strong>Proposals</strong>
+        </div>
+        <div class="col-xs-2 col-md-2 text-center hide-overflow">
+        <strong>Demos</strong><br>
+        <Small>Booked/Done</Small>
+        </div>
+        <div class="col-xs-1 col-md-1 text-center hide-overflow">
+        <strong>Meetings</strong><br>
+        <Small>Booked/Done</Small>
+        </div>
+        <div class="col-xs-2 col-md-2 text-center hide-overflow"> 
+        <strong>Call Activity</strong><br>
+        <Small>Total Calls/Intro</Small>
+        </div>
+
+        <div class="col-md-2 hidden-xs text-center hide-overflow"> 
+        <strong>Review Months</strong><br>
+        <Small>Added/Occuring</Small>
+        </div>
+        <div class="col-md-1 hidden-xs text-center hide-overflow">
+        <strong>DueDil</strong>
+        </div>
+        </div>
+
+        <div class="row list-group-item dashboardTotalheaders">
+        <div class="col-xs-2 col-md-1 hide-overflow"> 
+        <strong>Totals</strong>
+        </div>
+        <div class="col-xs-2 col-md-1 text-center hide-overflow">
+        <span class="badge utm-deals-total stat-total" style="background-color:#428bca;">0</span>
+        </div>
+        <div class="col-xs-2 col-md-1 text-center hide-overflow">
+        <span class="badge utm-proposals-total stat-total" style="background-color:#45AE7C;">0</span>
+        </div>
+        <div class="col-xs-2 col-md-2 text-center hide-overflow" >
+        <span class="utm-demobookedcount-total stat-total" >16</span> /
+        <span class="utm-democount-total stat-total"  >0</span>
+        </div>
+        <div class="col-xs-1 col-md-1 text-center hide-overflow">
+        <span class="utm-meetingbooked-total stat-total" >0</span> /  
+        <span class="utm-meetingcount-total stat-total" >0</span>
+        </div>
+
+        <div class="col-md-2 hidden-xs text-center hide-overflow">
+        <span class="utm-salescall-total stat-total" >1</span> / 
+        <span class="utm-introcall-total stat-total">0</span>
+        </div>
+        <div class="col-md-2 hidden-xs text-center hide-overflow">
+        <span class="utm-key_review_added-total stat-total">0</span> / 
+        <span class="utm-key_review_occuring-total stat-total">5</span>
+        </div>
+
+
+        <div class="col-xs-2 col-md-1 text-center hide-overflow"> 
+        <span class="utm-duediligence-total stat-total">0</span>
+
+        </div>
+
+        </div>
+
+        <div id="utscurrentmonth"></div>
+
+        <div id="uthismonthstats"></div>
+
+        </div><!--END COL-MD-12-->
+        </div><!--END THIS TAB-->
+
+        <div class="tab-pane fade <?php if ($_GET['period'] == 'lastmonth'): ?>active in <?php endif; ?>" id="ulastmonth">
+        <div class="col-md-12">
+        <div class="row list-group-item">
+        <div class="col-xs-2 col-md-1 hide-overflow"> 
+        <strong>Name</strong>
+        </div>
+        <div class="col-xs-2 col-md-1 text-center hide-overflow">
+        <strong>Deals</strong>
+        </div>
+        <div class="col-xs-2 col-md-1 text-center hide-overflow">
+        <strong>Proposals</strong>
+        </div>
+        <div class="col-xs-2 col-md-2 text-center hide-overflow">
+        <strong>Demos</strong><br>
+        <Small>Booked/Done</Small>
+        </div>
+        <div class="col-xs-1 col-md-1 text-center hide-overflow">
+        <strong>Meetings</strong><br>
+        <Small>Booked/Done</Small>
+        </div>
+        <div class="col-xs-2 col-md-2 text-center hide-overflow"> 
+        <strong>Call Activity</strong><br>
+        <Small>Total Calls/Intro</Small>
+        </div>
+        <div class="col-md-2 hidden-xs text-center hide-overflow"> 
+        <strong>Review Months</strong><br>
+        <Small>Added/Occuring</Small>
+        </div>
+        <div class="col-md-1 hidden-xs text-center hide-overflow">
+        <strong>DueDil</strong>
+        </div>
+        </div>
+
+        <div class="row list-group-item dashboardTotalheaders">
+        <div class="col-xs-2 col-md-1 hide-overflow"> 
+        <strong>Totals</strong>
+        </div>
+        <div class="col-xs-2 col-md-1 text-center hide-overflow">
+        <span class="badge ulm-deals-total stat-total" style="background-color:#428bca;">0</span>
+        </div>
+        <div class="col-xs-2 col-md-1 text-center hide-overflow">
+        <span class="badge ulm-proposals-total stat-total" style="background-color:#45AE7C;">0</span>
+        </div>
+        <div class="col-xs-2 col-md-2 text-center hide-overflow" >
+        <span class="ulm-demobookedcount-total stat-total" >16</span> /
+        <span class="ulm-democount-total stat-total"  >0</span>
+        </div>
+        <div class="col-xs-1 col-md-1 text-center hide-overflow">
+        <span class="ulm-meetingbooked-total stat-total" >0</span> /  
+        <span class="ulm-meetingcount-total stat-total" >0</span>
+        </div>
+
+        <div class="col-md-2 hidden-xs text-center hide-overflow">
+        <span class="ulm-salescall-total stat-total" >1</span> / 
+        <span class="ulm-introcall-total stat-total">0</span>
+        </div>
+        <div class="col-md-2 hidden-xs text-center hide-overflow">
+        <span class="ulm-key_review_added-total stat-total">0</span> / 
+        <span class="ulm-key_review_occuring-total stat-total">5</span>
+        </div>
+
+
+        <div class="col-xs-2 col-md-1 text-center hide-overflow"> 
+        <span class="ulm-duediligence-total stat-total">0</span>
+
+        </div>
+
+        </div>
+
+
+        <div id="utslastmonth"></div>
+
+        </div><!--END COL-MD-12-->
+        </div><!--END THIS TAB-->
+
+        <div class="tab-pane fade <?php if ($_GET['search'] == '3'): ?>active in <?php endif; ?>" id="usearchresults">
+        <div class="col-md-12">
+        <div class="row list-group-item">
+        <div class="col-xs-2 col-md-1 hide-overflow"> 
+        <strong>Name</strong>
+        </div>
+        <div class="col-xs-2 col-md-1 text-center hide-overflow">
+        <strong>Deals</strong>
+        </div>
+        <div class="col-xs-2 col-md-1 text-center hide-overflow">
+        <strong>Proposals</strong>
+        </div>
+        <div class="col-xs-2 col-md-2 text-center hide-overflow">
+        <strong>Demos</strong><br>
+        <Small>Booked/Done</Small>
+        </div>
+        <div class="col-xs-1 col-md-1 text-center hide-overflow">
+        <strong>Meetings</strong><br>
+        <Small>Booked/Done</Small>
+        </div>
+        <div class="col-xs-2 col-md-2 text-center hide-overflow"> 
+        <strong>Call Activity</strong><br>
+        <Small>Total Calls/Intro</Small>
+        </div>
+        <div class="col-md-2 hidden-xs text-center hide-overflow"> 
+        <strong>Review Months</strong><br>
+        <Small>Added/Occuring</Small>
+        </div>
+        <div class="col-md-1 hidden-xs text-center hide-overflow">
+        <strong>DueDil</strong>
+        </div>
+        </div>
+
+        <div class="row list-group-item dashboardTotalheaders">
+        <div class="col-xs-2 col-md-1 hide-overflow"> 
+        <strong>Totals</strong>
+        </div>
+        <div class="col-xs-2 col-md-1 text-center hide-overflow">
+        <span class="badge usr-deals-total stat-total" style="background-color:#428bca;">0</span>
+        </div>
+        <div class="col-xs-2 col-md-1 text-center hide-overflow">
+        <span class="badge usr-proposals-total stat-total" style="background-color:#45AE7C;">0</span>
+        </div>
+        <div class="col-xs-2 col-md-2 text-center hide-overflow" >
+        <span class="usr-demobookedcount-total stat-total" >0</span> /
+        <span class="usr-democount-total stat-total"  >0</span>
+        </div>
+        <div class="col-xs-1 col-md-1 text-center hide-overflow">
+        <span class="usr-meetingbooked-total stat-total" >0</span> /  
+        <span class="usr-meetingcount-total stat-total" >0</span>
+        </div>
+
+        <div class="col-md-2 hidden-xs text-center hide-overflow">
+        <span class="usr-salescall-total stat-total" >1</span> / 
+        <span class="usr-introcall-total stat-total">0</span>
+        </div>
+        
+        <div class="col-md-2 hidden-xs text-center hide-overflow">
+        <span class="usr-key_review_added-total stat-total">0</span> / 
+        <span class="usr-key_review_occuring-total stat-total">0</span>
+        </div>
+        <div class="col-xs-2 col-md-1 text-center hide-overflow"> 
+        <span class="usr-duediligence-total stat-total">0</span>
+
+        </div>
+
+        </div>
+
+        <?php 
+           
+            foreach ($ugetstatssearch as $getstatssearch): ?>
+            
+            
+        <div class="row list-group-item stats-row active-<?php echo $lastmonthstat['active'];?>">
+        <div class="col-xs-2 col-md-1">
+        <a href = "?search=2&user=<?php echo $getstatssearch['user'];?>&period=lastmonth"> 
+        <?php $user_icon = explode(",",$getstatssearch['image']); echo "<div class='circle name-circle' style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
+        </a>
+        </div>
+        <div class="col-xs-2 col-md-1 text-center">
+        <a href = "?search=2&user=<?php echo $getstatssearch['user'];?>&start_date=<?php echo $_GET['start_date']?>&end_date=<?php echo $_GET['end_date']?>&period=search"><span class="badge usr-deals" style="background-color:#428bca;"><?php echo $getstatssearch['deals'];?></span></a>
+        </div>
+        <div class="col-xs-2 col-md-1 text-center"> 
+        <?php echo '<div class="badge ulm-proposals" style="background-color:#45AE7C;">'.$getstatssearch['proposals'].'</div>';?>
+        </div>
+        <div class="col-xs-2 col-md-2 text-center"> 
+        <span class="usr-demobookedcount"><?php echo $getstatssearch['demobookedcount'];?></span> / <span class="usr-democount"><?php echo $getstatssearch['democount'];?></span>
+        </div>
+        <div class="col-xs-1 col-md-1 text-center">
+        <span class="usr-meetingbooked"><?php echo $getstatssearch['meetingbooked'];?></span> / <span class="usr-meetingcount"><?php echo $getstatssearch['meetingcount'];?></span>
+        </div>
+        <div class="col-xs-2 col-md-2 text-center"> 
+        <span class="usr-salescall"><?php echo $getstatssearch['salescall'];?></span> / <span class="usr-introcall"><?php echo $getstatssearch['introcall'];?></span>
+        </div>
+      
+        <div class="col-md-2 hidden-xs text-center">
+        <span class="usr-key_review_added"><?php echo $getstatssearch['key_review_added'];?></span> / <span class="usr-key_review_occuring"><?php echo $getstatssearch['key_review_occuring'];?></span>
+        </div>
+        <div class="col-md-1 hidden-xs text-center">
+        <span class="usr-duediligence"><?php echo $getstatssearch['duediligence'];?></span>
+        </div>
+        </div> <!--END ROW-->    
+        <?php endforeach ?>
+        </div><!--END COL-MD-12-->
+        </div><!--END THIS TAB-->
+
+        </div>
+        <?php endif ?>
+        </div>
+        </div>
+
+        </div><!--END PANEL-->  
+
+        <?php 
+        $out2 = ob_get_contents();
+        ob_end_clean();
+
+        ?>
+        <?php 
+        if($current_user['market'] == 'uf'){
+            echo $out2 . $out1;
+        }else{
+            echo $out1.$out2;
+        } ;
+        ?>
+
+  
 
           <div class="panel panel-default">
           <div class="panel-heading">

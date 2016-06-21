@@ -200,6 +200,23 @@ $( document ).ready(function() {
                 $.each( data, function( key, val ) {
             //key = tslastweek, tscurrentmonth , tslastmonth
                    $('#ts'+key).html(val);
+                   
+                })  
+               tsTotalConfig();
+            }
+        });
+        
+        
+        
+           $.ajax({
+            type: "GET",
+                dataType: "json",
+            url: "dashboard/getTeamStats/uf",
+            success: function(data) {
+                $.each( data, function( key, val ) {
+            //key = tslastweek, tscurrentmonth , tslastmonth
+                   
+                    $('#uts'+key).html(val);
                 })  
                tsTotalConfig();
             }
@@ -319,13 +336,11 @@ function getUserFavourites(){
     
 }
 
-
     function tsTotalConfig(){
-
 
         if($('.mainAddrType').length > 1) $('.copyRegAddr').remove(); // Removes add copy address check button if more than 1 address exist 
             //counts the totals in team stats columns
-            var mycolumnArray = ["tw","lw","tm","lm","sr"];
+            var mycolumnArray = ["tw","lw","tm","lm","sr","utw","ulw","utm","ulm","usr"];
             var mycolumnArrayLength = mycolumnArray.length;
             var myStringArray = ["deals","proposals","demobookedcount","democount","meetingbooked","meetingcount","salescall","introcall","pipelinecount","key_review_added","key_review_occuring","duediligence"];
             var arrayLength = myStringArray.length;
@@ -389,15 +404,28 @@ $(".draggable-modal").draggable({
 handle: ".modal-header"
 });
 });
+
+
 function getlisttotal(col,item){
 //used to count team stat column totals
+    
+    
 var lm = 0;
+    
+    
 $('.'+item+'-'+col).each(function(){
+   
 lm  = (lm+parseInt($(this).text()));
+  
+    
 });
 $('.'+item+'-'+col+'-total').text(lm);
+    
+       console.log(item+'-'+col+'-total'+lm)
+    
 return lm;
 }
+
 $('.tradingType').on('change', function() {
 var trAddress =  $(this).val(); 
 if(trAddress === "Registered Address"){ $('.tradingTypeOptions').show(); } else{ $('.tradingTypeOptions, .addrTrading').hide(); $(".def").prop("checked", true); $('.tradingAddress').val('');   }

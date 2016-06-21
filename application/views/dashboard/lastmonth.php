@@ -1,4 +1,6 @@
-     <?php foreach ($lastmonthstats as $lastmonthstat): ?>
+<?php if($prefix == 'np'){ $prefix= 'lm'; }else{ $prefix= 'ulm'; } ?>     
+
+<?php foreach ($lastmonthstats as $lastmonthstat): ?>
                           <div class="row list-group-item stats-row active-<?php echo $lastmonthstat['active'];?>">
                             <div class="col-xs-2 col-md-1">
                             <a href = "?search=2&user=<?php echo $lastmonthstat['user'];?>&period=lastmonth"> 
@@ -6,25 +8,25 @@
                             </a>
                             </div>
                             <div class="col-xs-2 col-md-1 text-center">
-                            <a href = "?search=2&user=<?php echo $lastmonthstat['user'];?>&period=lastmonth"><span class="badge lm-deals" style="background-color:#428bca;"><?php echo $lastmonthstat['deals'];?></span></a>
+                            <a href = "?search=2&user=<?php echo $lastmonthstat['user'];?>&period=lastmonth"><span class="badge <?php echo $prefix; ?>-deals" style="background-color:#428bca;"><?php echo $lastmonthstat['deals'];?></span></a>
                             </div>
                               <div class="col-xs-2 col-md-1 text-center"> 
-                              <?php echo '<div class="badge lm-proposals" style="background-color:#45AE7C;">'.$lastmonthstat['proposals'].'</div>';?>
+                              <?php echo '<div class="badge '.$prefix.'-proposals" style="background-color:#45AE7C;">'.$lastmonthstat['proposals'].'</div>';?>
                               </div>
                               <div class="col-xs-2 col-md-2 text-center"> 
-                            <span class="lm-demobookedcount"><?php echo $lastmonthstat['demobookedcount'];?></span> / <span class="lm-democount"><?php echo $lastmonthstat['democount'];?></span>
+                            <span class="<?php echo $prefix; ?>-demobookedcount"><?php echo $lastmonthstat['demobookedcount'];?></span> / <span class="<?php echo $prefix; ?>-democount"><?php echo $lastmonthstat['democount'];?></span>
                             </div>
                             <div class="col-xs-1 col-md-1 text-center">
-                            <span class="lm-meetingbooked"><?php echo $lastmonthstat['meetingbooked'];?></span> / <span class="lm-meetingcount"><?php echo $lastmonthstat['meetingcount'];?></span>
+                            <span class="<?php echo $prefix; ?>-meetingbooked"><?php echo $lastmonthstat['meetingbooked'];?></span> / <span class="<?php echo $prefix; ?>-meetingcount"><?php echo $lastmonthstat['meetingcount'];?></span>
                             </div>
                             <div class="col-xs-2 col-md-2 text-center"> 
-                            <span class="lm-salescall"><?php echo $lastmonthstat['salescall'];?></span> / <span class="lm-introcall"><?php echo $lastmonthstat['introcall'];?></span>
+                            <span class="<?php echo $prefix; ?>-salescall"><?php echo $lastmonthstat['salescall'];?></span> / <span class="<?php echo $prefix; ?>-introcall"><?php echo $lastmonthstat['introcall'];?></span>
                             </div>
                             <div class="col-md-2 hidden-xs text-center">
-                              <span class="lm-key_review_added"><?php echo $lastmonthstat['key_review_added'];?></span> / <span class="lm-key_review_occuring"><?php echo $lastmonthstat['key_review_occuring'];?></span>
+                              <span class="<?php echo $prefix; ?>-key_review_added"><?php echo $lastmonthstat['key_review_added'];?></span> / <span class="<?php echo $prefix; ?>-key_review_occuring"><?php echo $lastmonthstat['key_review_occuring'];?></span>
                             </div>
                             <div class="col-md-1 hidden-xs text-center">
-                              <span class="lm-duediligence"><?php echo $lastmonthstat['duediligence'];?></span>
+                              <span class="<?php echo $prefix; ?>-duediligence"><?php echo $lastmonthstat['duediligence'];?></span>
                             </div>
                           </div> <!--END ROW-->    
                       <?php endforeach ?>

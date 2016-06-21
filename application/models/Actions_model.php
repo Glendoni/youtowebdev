@@ -276,15 +276,15 @@ function get_assigned_companies_ajax($user_id, $order = false)
     
 function get_recent_stats($period, $team_type)
 {   
+ $team_type =  trim($team_type) ;
+ 
     if(!empty($team_type)){
-        $team_type_sql = "and u.market = '$team_type'";
+        //$team_type_sql = "and u.market = '$team_type'";
     }
     $dates = $this->dates($period);
     $start_date = $dates['start_date'];
     $end_date = $dates['end_date'];
-    
-   
-    
+
    $sql[] = "select U.name, 
        U.id as user, 
        U.image, 
@@ -302,24 +302,25 @@ function get_recent_stats($period, $team_type)
        sum(CASE when action_type_id in (22) and A.actioned_at between '$start_date' and '$end_date' then 1  else 0 END) key_review_occuring, 
        sum(CASE when action_type_id in (8) and A.actioned_at between '$start_date' and '$end_date' then 1 else 0 END) proposals
        
-from ACTIONS A
+        from ACTIONS A
 
-JOIN COMPANIES C 
-on A.company_id = C.id 
+        JOIN COMPANIES C 
+        on A.company_id = C.id 
 
-JOIN USERS U 
-on A.user_id = U.id
+        JOIN USERS U 
+        on A.user_id = U.id
 
-where U.department = 'sales'
-and U.active = 't'
-and A.cancelled_at is null
-";
+        where U.department = 'sales'
+        and U.active = 't'
+        and A.cancelled_at is null
+        ";
   
-if($team_type != 'admin' && $period !='search'){  
-$sql[]  ="and U.market= '".$team_type."' ";
-} 
-    
-$sql[] = "group by 1,2,3,4 order by deals desc nulls last, proposals desc";
+        if($team_type == 'admin' ){  
+            $team_type = 'uf';
+        } 
+
+        $sql[]  ="and U.market= '".$team_type."' ";
+        $sql[] = "group by 1,2,3,4 order by deals desc nulls last, proposals desc";
     
     $sql = join($sql);
     
