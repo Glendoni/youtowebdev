@@ -29,7 +29,7 @@ else
 {
 $(".no-source").slideUp(600);
 //$(".no-source").hide();
-//$(".disable_no_source").removeAttr('disabled', 'disabled');
+//$(".disable_no_source").removeAttr('disabled', 'disabled'); 
 }
 });
 $(".pipeline-validation-check").change(function() {
@@ -299,7 +299,7 @@ $( document ).ready(function() {
 });
 
 
-function getUserFavourites(){
+function getUserFavourites(){ // Dashbord favorites
     
     var order = $('.sortform form select').val();
     var pipeline = [];

@@ -1004,7 +1004,7 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
          actionTypeName = actionType;
          
          if(action['first_name'] != null){
-             contactName = '<span class="label label-primary" style="float: right;" > '+action['first_name']+' '+action['last_name']+'</span>';  
+             contactName = '<span class="label" style="float: right; font-weight:bold; color:#666; padding-left: 40px;" > '+action['first_name']+' '+action['last_name']+'</span>';  
          }
          
          if(action['comments']){
