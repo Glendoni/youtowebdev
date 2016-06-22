@@ -225,8 +225,21 @@ $search_default = $this->input->post('agency_name');
                         <div class="dropdown dropdown-lg ">
                             <button href="#credits" type="button" class="toggle btn btn-default dropdown-toggle large-search-height" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
                         </div>
+                        
+                        
+                        
+                        
+ <a href="javscript:;" class="search_box_cancel btn btn-danger " value="Go" name="submit" style="width: 100%; padding-top:11px;">X</a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                         <?php if (isset($_POST['main_search'])): ?>
-                                    <a href="<?php echo site_url();?>" class="loading-btn btn btn-danger " value="Go" name="submit" style="width: 100%; padding-top:11px;">X</a>
+                                    <a href="<?php echo site_url();?>" class="loading-btn btn btn-danger  loading-btn-search" value="Go" name="submit" style="width: 100%; padding-top:11px;">X</a>
                                     <?php endif; ?>
                         
                     <input type="submit" class="loading-btn btn btn-warning " value="Go" name="submit" style="width: 100%;">

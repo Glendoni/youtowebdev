@@ -347,6 +347,10 @@ function bindFavorites(){
 function ajaxSearch() {
     var input_data = $('#agency_name').val();
     
+if(!$('.advanced-search').hasClass('show')){
+$('.search_box_cancel').show();
+    $('.loading-btn-search').hide();
+}
    input_data =  input_data.replace("'", "&#39;");
     //input_data =  input_data.replace("&", "&amp;");
     
@@ -367,7 +371,13 @@ $.ajax({
         //alert();
 // return success
 // console.log(data.html);
-$('#suggestions').show();
+
+        
+        
+        $('#suggestions').show();
+        
+        
+        
 $('#autoSuggestionsList').addClass('auto_list');
 $('#autoSuggestionsList').html(data.html);
 $('#agency_name').addClass('autocomplete-live');
@@ -401,6 +411,7 @@ function saveCompanyHandler(){$('.ch_drop_title').css('background','#7fe3d5');$(
         
             $('body').click(function(){
                 $('#suggestions').hide();
+                 $('.search_box_cancel').hide();
             });
         
             // Datetime picker
