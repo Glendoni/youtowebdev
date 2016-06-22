@@ -2463,12 +2463,13 @@ breadcrumbscroll {
   transition: height 0.3s;
   }
   breadcrumbscroll h1#logo, breadcrumbscroll h2#logo  {
-   /* display: inline-block; */
+   
    height: 45px;
       line-height: 60px;
       font-size: 20px;
-    /*float: left;*/
+   
     font-family: inherit;
+          padding-top: 5px;
  
     color: #333;
     font-weight: 300;
