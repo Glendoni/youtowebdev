@@ -1004,11 +1004,11 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
          actionTypeName = actionType;
          
          if(action['first_name'] != null){
-             contactName = '<span class="label" style="float: right; font-weight:bold; color:#666; padding-left: 40px;" > '+action['first_name']+' '+action['last_name']+'</span>';  
+             contactName = '<span class="label" style=" font-weight:bold; color:#666; padding-left: 0px;" > '+action['first_name']+' '+action['last_name']+'</span>';  
          }
          
          if(action['comments']){
-             tagline = '<span class="actionMsg piller'+actionId+' actionMsg'+actionId+  ' comments'+actionType+'"><strong>Comment: </strong>'+action['comments']+contactName+'</span><hr>'+outcome;
+             tagline = '<span class="actionMsg piller'+actionId+' actionMsg'+actionId+  ' comments'+actionType+'"><strong>Comment: </strong>'+action['comments']+'</span><hr>'+outcome;
          }
          
          if(actionType == 'Deal') actionTypeOverwrite = actionType+'@'+initial_fee+'%';
@@ -1043,7 +1043,7 @@ if(timestamp2 < timestamp && action['action_type_id'] == 11 )
          
         
          
-    header = '<a href="javascript:;" class="text-danger '+showOutstandingForm+' pillerTitle" data-name="'+actionType+'" data="'+actionId+'">'+(actionTypeOverwrite ? actionTypeOverwrite : actionType)+'  </a> ';
+    header = '<a href="javascript:;" class="text-danger '+showOutstandingForm+' pillerTitle" data-name="'+actionType+'" data="'+actionId+'">'+(actionTypeOverwrite ? actionTypeOverwrite : actionType)+ '</a> '+contactName;
          
         if( actions_cancelled == '' && typeof action['action_id'] != 'undefined' || actions_outstanding == true &&  actions_cancelled == '' && typeof action['action_id'] != 'undefined' ){ 
 

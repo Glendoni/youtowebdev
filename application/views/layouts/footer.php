@@ -81,16 +81,18 @@ $(document).ready(function(){
             success: function(data) {
   //dont know what the fucks up with the replace array function not working ?????? Must investigate 
                  $.each( data.operations, function( key, val ) {
-
+    
+                     if(val.name != null){
+                 
                     repLimited = ['Limited','ltd', 'LTD'];
                     name =  val.name 
                     repLimited =   name.replace('Limited', "");
                     repLimited =   repLimited.replace('ltd', "");
                     repLimited =   repLimited.replace('Ltd', "");
                     repLimited =   repLimited.replace('LTD', "");
-       
-                    $('.tr-actions').append('<li><a href="<?php echo base_url();?>companies/company?id='+val.comp_id+'"   >'+repLimited+'</a></li>');
-
+                    
+                    $('.tr-actions').append('<li><a href="<?php echo base_url();?>companies/company?id='+val.comp_id+'" >'+repLimited+'</a></li>');
+                     }
                  })
                         
               }

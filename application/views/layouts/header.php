@@ -111,9 +111,7 @@
                 <div style="min-width:479px; padding:0px 10px;" class="myActiveDiv ">  
                     <div style="float:left; padding: 0px 5px; width: 60%;  border: solid thin #fff; border-right-color: #e1e1e1;" class="recentlyVisited">
                     <p class="recent_visited_header"  style="margin-left: 18px;"><strong>Recently Visited</strong></p> 
-                    <ul class="tr-actions " style="
-                    padding: 0px;
-                    "></ul>
+                    <ul class="tr-actions" style="padding: 0px;"></ul>
                     </div>  
                     <div style="float:left; padding: 0px 0px; width: 30%;  " class="pageQvNav">
                     <p class="recent_visited_header" style="    margin-left: 41px;">
