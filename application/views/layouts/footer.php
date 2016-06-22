@@ -312,8 +312,12 @@ function bindFavorites(){
 <!--EMAIL DUPLICATE CHECK-->
  <script type="text/javascript">
     $(document).ready(function() {
-         
-            $('#message').hide();
+        
+        $('.search_box_cancel').click(function(){
+                $('#agency_name').val('');
+        })
+        
+        $('#message').hide();
         /// make loader hidden in start
         $("#email").bind('keyup paste', function() {
         var email_val = $("#email").val();
@@ -412,6 +416,7 @@ function saveCompanyHandler(){$('.ch_drop_title').css('background','#7fe3d5');$(
             $('body').click(function(){
                 $('#suggestions').hide();
                  $('.search_box_cancel').hide();
+
             });
         
             // Datetime picker
