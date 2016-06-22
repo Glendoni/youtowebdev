@@ -195,7 +195,7 @@
                 <div class="col-sm-6 col-md-3">
                     <div class=" form-group ">
                         <label for="url" class="control-label">Website</label>                            
-                        <input type="text" name="url" value="<?php echo isset($company['url'])?$company['url']:''; ?>" id="url" maxlength="50" class="form-control">
+                        <input type="text" name="url" value="<?php echo isset($company['url'])?$company['url']:''; ?>" id="url" maxlength="100" class="form-control">
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-3">
