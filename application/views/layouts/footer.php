@@ -513,7 +513,7 @@ function saveCompanyHandler(){$('.ch_drop_title').css('background','#7fe3d5');$(
                 
                 $('.label-assigned').remove();
                 
-                console.warn('greater or equal to 1');
+                //console.warn('greater or equal to 1');
                 userBackgroundColor = $('.user-profile div').css('background-color'); 
                 $('.assign-to-form i').css('color', userBackgroundColor);
                 $('.piplineUdate').append('<span class="label label-assigned" style="background-color:'+userBackgroundColor+'; color:'+userColor+';"><i class="fa fa-star"></i>'+current_user_name+'</span>');    

@@ -201,7 +201,7 @@
 <!--TOP SEARCH BAR-->
 <?php if (isset($_GET['id'])) { 
 $company = $companies[0];
-$search_default = html_entity_decode ($company['name']);
+$search_default = ''; //html_entity_decode ($company['name']);
 } else {
 $search_default = $this->input->post('agency_name');
 }?>
