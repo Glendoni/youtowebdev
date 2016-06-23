@@ -742,7 +742,7 @@ public function get_campaign_name($campaign)
                
                unset($download);
                  foreach($item['custom_fields'] as $itemt => $valuetr){
-                    if($valuetr['value'] === 'Downloaded'){
+                   if($valuetr['value'] == 'Downloaded' || $valuetr['value'] == 'downloaded'){
                         
 //echo '<br> downloaded check == '.$valuetr['value'].' Downloaded kind'.$valuetr['kind'].'<br>';
                         if($valuetr['kind']){

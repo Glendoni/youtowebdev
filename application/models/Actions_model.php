@@ -959,7 +959,7 @@ function delete_campaign($id,$user_id)
                                     (
                                     SELECT MAX(id) 
                                     FROM views z1 
-                                    WHERE z1.company_id = o.company_id and z1.user_id = ".$user_id." 
+                                    WHERE z1.company_id = o.company_id and z1.user_id = ".$user_id." and z1.company_id != ".$comp_id."
                                     order by o.id desc
                                     )
                                     order by 3 desc

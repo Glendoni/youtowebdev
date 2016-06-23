@@ -69,15 +69,23 @@
 }
     
 $(document).ready(function(){
+      
+    
+     var pageEval = [];
+    if((/companies\/company/.test(window.location.href))) {
+        pageEval = GetUrlParamID();
+    }
     bindFavorites()
         //QUICKVIEW SLIDE
         var operations = [];
         var repLimited = [];
         var name = [];
+    
+   
         $.ajax({
             type: "GET",
                 dataType: "json",
-            url: "<?php echo base_url(); ?>Actions/operations_read",
+            url: "<?php echo base_url(); ?>Actions/operations_read/"+pageEval,
             success: function(data) {
   //dont know what the fucks up with the replace array function not working ?????? Must investigate 
                  $.each( data.operations, function( key, val ) {
@@ -164,63 +172,6 @@ $(document).ready(function(){
     });
     
 
-    var operations = [];
-    var repLimited = [];
-    var name = [];
-        $.ajax({
-        type: "GET",
-        dataType: "json",
-        url: "<?php echo base_url(); ?>Actions/operations_read",
-        success: function(data){
-                    $.each( data.operations, function( key, val ) {
-                        repLimited = ['Limited'];
-                        name =  val.name.replace(repLimited, '');
-                        $('.qvRecentCompanies').append('<li><a href="<?php echo base_url();?>companies/company?id='+val.comp_id+'"   >'+name+'</a></li>');
-                    });
-
-                    $.each( data.outstanding, function( key, val ) {
-                        var dateCompare = (new Date() - Date.parse(val.planned_at))  <= 1000 * 60 * 30;
-                        if(dateCompare == false && typeof val.planned_at != 'undefined'){
-
-                            $('.qvOverdueActions').append('<li>'+val.planned_at+'</li>');
-
-                        }else{
-
-                            $('.qvActionsDueToday').append('<li>'+val.planned_at+'</li>');
-
-                        }
-                    });
-
-                    $(' .compa').hover(function(){
-                            var i=0;
-                            var comp  = $(this).attr('comp');
-                            var href = [];
-                            var nextcampid = [];
-                            $('.compa').each(function(){
-                                if($(this).attr('comp') == comp){
-                                i= 2;
-                                }else if(i == 2){
-                                    nextcampid   = $(this).attr('comp');
-
-                                    if(!$(this).hasClass('nextcampaign')){
-                                        $(this).addClass('nextcampaign');
-                                        href = $('a[comp='+ comp +']').attr('href');
-
-                                        $('a[comp='+ comp +']').attr('href', '');
-
-                                        $('a[comp='+ comp +']').attr('href', href+'&nextcamp&'+ nextcampid);
-                                    }
-
-                                    i=777;
-                                }
-                                i = i;
-                            })
-
-                    });          
-
-                }
-
-            });
  
     
         $('#myTabs a').click(function (e) {

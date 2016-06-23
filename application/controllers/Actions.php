@@ -262,11 +262,13 @@ class Actions extends MY_Controller {
     {
     }
     
-    function operations_read()
+    function operations_read($pageEval = false)
     {
         
+       $pageEval = $pageEval?  $this->session->userdata('selected_company_id') : 0;
+        
         header('Content-Type: application/json');
-        $input['operations']  =  $this->Actions_model->operations_store_get($this->data['current_user']['id'],  $this->session->userdata('selected_company_id'));
+        $input['operations']  =  $this->Actions_model->operations_store_get($this->data['current_user']['id'],  $pageEval);
         echo  json_encode($input);
     }
     
