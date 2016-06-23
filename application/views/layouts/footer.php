@@ -94,6 +94,13 @@ $(document).ready(function(){
                     $('.tr-actions').append('<li><a href="<?php echo base_url();?>companies/company?id='+val.comp_id+'" >'+repLimited+'</a></li>');
                      }
                  })
+ 
+                 
+                if(!data.operations.length){
+                    
+                  $('.recent_visited_header').html('<strong>No Recently Visited Companies</strong>'); 
+                    
+                }
                         
               }
          });

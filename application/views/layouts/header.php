@@ -89,129 +89,91 @@
 </div>
 
 
-            <div class="col-sm-4 col-sm-push-5" >
+    <div class="col-sm-4 col-sm-push-5" >
             <!-- Top Menu Items -->
             <?php if (isset($current_user)): ?>
 
-            <ul class=" nav navbar-top-links navbar-right " >
-            <?php if(count($pending_actions)>0){?>
- 
-      
+        <ul class=" nav navbar-top-links navbar-right " >
+                    <?php if(count($pending_actions)>0){?>
 
-        <li class="dropdown ">
- 
-        
-            
-            
-            <div class="btn-group">
-  <button type="button" class="btn btn-primary" onclick="location.href='<?php echo site_url();?>dashboard#calls'"><span class="myactivity">Schedule  <?php echo count($pending_actions); ?></span></button>
-  <button type="button" class="btn btn-warning dropdown-toggle sublinkMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-    <span class="caret"></span>
-    <span class="sr-only">Toggle Dropdown</span>
-  </button>
-  <ul class="dropdown-menu contActive" style="
-    margin-top: 14px;
-">
-    <li> 
-                <div style="min-width:479px; padding:0px 10px;" class="myActiveDiv ">  
-                    <div style="float:left; padding: 0px 5px; width: 60%;  border: solid thin #fff; border-right-color: #e1e1e1;" class="recentlyVisited">
-                    <p class="recent_visited_header"  style="margin-left: 18px;"><strong>Recently Visited</strong></p> 
-                    <ul class="tr-actions" style="padding: 0px;"></ul>
-                    </div>  
-                    <div style="float:left; padding: 0px 0px; width: 30%;  " class="pageQvNav">
-                    <p class="recent_visited_header" style="    margin-left: 41px;">
-                    <strong>Page Sections</strong>
-                    </p> 
-                    <ul class="qvlink" style="margin-left: -15px;">
-                    <li><a href"javascript:;"  data="qvfinancials"><i class="fa fa-money" aria-hidden="true"></i> Financials</a></li>
-                    <li><a href"javascript:;"  data="addresses"><i class="fa fa-globe" aria-hidden="true"></i> Locations</a></li>
-                    <li><a href"javascript:;"  data="contacts"><i class="fa fa-user" aria-hidden="true"></i> Contacts</a></li>
-                    <li><a href"javascript:;"  data="qvTags"><i class="fa fa-tags" aria-hidden="true"></i> Tags</a></li>
-                    <li><a href"javascript:;"  data="add_action"><i class="fa fa-calendar" aria-hidden="true"></i> Add Action</a></li>
-                    <li><a href"javascript:;"  data="actions"><i class="fa fa-info-circle" aria-hidden="true"></i> Actions</a></li>
-                    </ul>
+                    <li class="dropdown">
+                        <div class="btn-group">
+                                  <button type="button" class="btn btn-primary" onclick="location.href='<?php echo site_url();?>dashboard#calls'"><span class="myactivity">Schedule  <?php echo count($pending_actions); ?></span></button>
+                                  <button type="button" class="btn btn-primary dropdown-toggle sublinkMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                                    <span class="caret"></span>
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                  </button>
+                                  <ul class="dropdown-menu contActive" style="margin-top: 14px;">
+                                    <li> 
+                                                <div style="min-width:479px; padding:0px 10px;" class="myActiveDiv ">  
+                                                    <div style="float:left; padding: 0px 5px; width: 60%;  border: solid thin #fff; border-right-color: #e1e1e1;" class="recentlyVisited">
+                                                    <p class="recent_visited_header"  style="margin-left: 18px;"><strong>Recently Visited</strong></p> 
+                                                    <ul class="tr-actions" style="padding: 0px;"></ul>
+                                                    </div>  
+                                                    <div style="float:left; padding: 0px 0px; width: 30%;  " class="pageQvNav">
+                                                    <p class="recent_visited_header" style="    margin-left: 41px;">
+                                                    <strong>Page Sections</strong>
+                                                    </p> 
+                                                    <ul class="qvlink" style="margin-left: -15px;">
+                                                    <li><a href"javascript:;"  data="qvfinancials"><i class="fa fa-money" aria-hidden="true"></i> Financials</a></li>
+                                                    <li><a href"javascript:;"  data="addresses"><i class="fa fa-globe" aria-hidden="true"></i> Locations</a></li>
+                                                    <li><a href"javascript:;"  data="contacts"><i class="fa fa-user" aria-hidden="true"></i> Contacts</a></li>
+                                                    <li><a href"javascript:;"  data="qvTags"><i class="fa fa-tags" aria-hidden="true"></i> Tags</a></li>
+                                                    <li><a href"javascript:;"  data="add_action"><i class="fa fa-calendar" aria-hidden="true"></i> Add Action</a></li>
+                                                    <li><a href"javascript:;"  data="actions"><i class="fa fa-info-circle" aria-hidden="true"></i> Actions</a></li>
+                                                    </ul>
 
-                    </div>
-                      <!-- 
-                    <div style="float:left; padding: 0px 10px; width: 30%;  " class="campaignsCont">
-                 
-                        <p class="recent_visited_header" style="margin-left: 32px;" >
-                        <strong>Campaign</strong>
-                    </p> 
-                   
-<div class="col-xs-2 col-sm-2 col-md-12 col-lg-12 campaignsNav">
-                        <span  class="previousCampaign"><a href="javascript:;">Previous Campaign</a><br /></span>
-                        <span  class="currentCampaign"><a href="javascript:;">Return to Campaign</a><br /></span>
-                        <span class="nextCampaign"><a href="javascript:;" >Next Campaign</a><br /></span>
-                    </div>
+                                                    </div>
 
-                    </div>
--->
-                </div>
-            </li>
-  </ul>
-</div>
-            
-            
-            <!--
-            <a href="#" class="dropdown-toggle user-profile sublinkMenu" data-toggle="dropdown" style="
-    margin: -3px -13px;     background: rgba(240, 173, 78, 0.08);
-"> <span id="current_user_name"> </span></span> <b class="caret"></b>
-            
-            
-            </a>
-                
-                -->
-                
-                
-  
-        </li>
+                                                </div>
+                                            </li>
+                                  </ul>
+                        </div>
+                    </li>
 
 
 
-<?php } else {};?>
- 
-            <li class="dropdown">
+                    <?php } else {};?>
 
-               <a href="#" class="dropdown-toggle user-profile" data-toggle="dropdown">
+                        <li class="dropdown">
 
-                    <?php $user_icon = explode(",", ($current_user['image'])); echo "<div class='circle' style='float: left;margin-top: 0px;margin-right: 10px;width: 20px;height: 20px;border-radius: 15px;font-size: 8px;line-height: 20px;text-align: center;font-weight: 700;background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
-                   <span id="current_user_name"> <?php echo $current_user['name'] ?></span> <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="<?php echo site_url(); ?>users/profile"><i class="fa fa-fw fa-user"></i> Profile</a>
-                        </li>
-                        <!-- <li>
-                            <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
-                        </li> -->
-                        <li>
-                            <a href="<?php echo site_url(); ?>users/settings"><i class="fa fa-fw fa-envelope"></i> Email Settings</a>
-                        </li>
-                        <li>
-                            <a href="https://status.heroku.com/" target="_blank"><i class="fa fa-fw fa-tasks"></i> Hosting Status</a>
-                        </li>
-                        <li class="divider"></li>
-                        <?php if ($current_user['permission'] == 'admin'): ?>
-                <li>
-                    <a href="<?php echo base_url(); ?>companies/create_company" ><i class="fa fa-plus-circle"></i> Add Company</a>
-                </li>
-                <li>
-                    <a href="<?php echo base_url(); ?>email_templates/" ><i class="fa fa-envelope"></i> Manage Email Templates</a>
-                </li>
-                          <li>
-                    <a href="<?php echo base_url(); ?>tagging/tag_categories" ><i class="fa fa-plus-circle"></i> Tagging</a>
-                </li>
-                <li class="divider"></li>
-                <?php endif; ?>
-                        <li>
-                            <a href="<?php echo site_url(); ?>login/logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
+                                    <a href="#" class="dropdown-toggle user-profile" data-toggle="dropdown">
+                                    <?php $user_icon = explode(",", ($current_user['image'])); echo "<div class='circle' style='float: left;margin-top: 0px;margin-right: 10px;width: 20px;height: 20px;border-radius: 15px;font-size: 8px;line-height: 20px;text-align: center;font-weight: 700;background-color:".$user_icon[1]."; color:".$user_icon[2].";'>".$user_icon[0]."</div>";?>
+                                   <span id="current_user_name"> <?php echo $current_user['name'] ?></span> <b class="caret"></b>
+                                </a>
+
+                                <ul class="dropdown-menu">
+                                            <li>
+                                                <a href="<?php echo site_url(); ?>users/profile"><i class="fa fa-fw fa-user"></i> Profile</a>
+                                          </li>
+                                          <li>
+                                             <a href="<?php echo site_url(); ?>users/settings"><i class="fa fa-fw fa-envelope"></i> Email Settings</a>
+                                          </li>
+                                         <li>
+                                            <a href="https://status.heroku.com/" target="_blank"><i class="fa fa-fw fa-tasks"></i> Hosting Status</a>
+                                         </li>
+                                            <li class="divider"></li>
+                                            <?php if ($current_user['permission'] == 'admin'): ?>
+                                         <li>
+                                            <a href="<?php echo base_url(); ?>companies/create_company" ><i class="fa fa-plus-circle"></i> Add Company</a>
+                                        </li>
+                                        <li>
+                                            <a href="<?php echo base_url(); ?>email_templates/" ><i class="fa fa-envelope"></i> Manage Email Templates</a>
+                                        </li>
+                                        <li>
+                                            <a href="<?php echo base_url(); ?>tagging/tag_categories" ><i class="fa fa-plus-circle"></i> Tagging</a>
+                                        </li>
+                                    <li class="divider"></li>
+                                    <?php endif; ?>
+                                            <li>
+                                                <a href="<?php echo site_url(); ?>login/logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                                            </li>
+                             </ul>
+                    </li>
+        </ul>
             <?php endif; ?>
 
-            </div>
+ </div>
 
 
 
