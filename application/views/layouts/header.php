@@ -104,7 +104,7 @@
             
             
             <div class="btn-group">
-  <button type="button" class="btn btn-primary" onclick="location.href='<?php echo site_url();?>dashboard#calls'"><span class="myactivity">Scheduled  <?php echo count($pending_actions); ?></span></button>
+  <button type="button" class="btn btn-primary" onclick="location.href='<?php echo site_url();?>dashboard#calls'"><span class="myactivity">Schedule  <?php echo count($pending_actions); ?></span></button>
   <button type="button" class="btn btn-warning dropdown-toggle sublinkMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
     <span class="caret"></span>
     <span class="sr-only">Toggle Dropdown</span>
