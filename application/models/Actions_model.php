@@ -936,7 +936,7 @@ function delete_campaign($id,$user_id)
         'created_at'    => date('Y-m-d H:i:s'),
         );
 
-    $query = $this->db->insert('operations', $actiondata);
+    $query = $this->db->insert('views', $actiondata);
     return $this->db->insert_id();
         
         
@@ -944,37 +944,26 @@ function delete_campaign($id,$user_id)
     
     function  operations_store_check($comp_id,$user_id,$operation){
         
-        $query = $this->db->query("SELECT   id  FROM operations WHERE user_id=".$user_id." AND company_id=".$comp_id."   LIMIT 1");
+        //$query = $this->db->query("SELECT   id  FROM operations WHERE user_id=".$user_id." AND company_id=".$comp_id."   LIMIT 1");
         
-     if ($query->num_rows() < 1 ){
-     //echo 'Hi Mate';
-             $query = $this->db->query("SELECT   *  FROM operations WHERE user_id=".$user_id."   ORDER BY id ASC");
-             $row = $query->row();
-
-                if ($query->num_rows() <=6 && $comp_id != $row->comp_id)
-                {
-                    $this->operations_store($comp_id,$user_id,$operation);
-                    //return   $row ;
-                }
-
-                if ($query->num_rows() > 5){
-                    
-                    $this->operations_store_delete($row->id);
-
-                    //return $row->id;
-                }
-
-         }
+   $this->operations_store($comp_id,$user_id,$operation);
         
     }
     
      function  operations_store_get($user_id,$comp_id=0){
-        
-        $query = $this->db->query("SELECT ops.user_id, c.id as comp_id, c.name FROM operations ops
-                                        LEFT JOIN companies c
-                                        ON ops.company_id =c.id
-                                        WHERE ops.user_id=".$user_id." 
-                                        ORDER BY ops.id DESC");
+        //ops.user_id, c.id as comp_id, c.name 
+        $query = $this->db->query("select o.company_id as comp_id, c.name, o.id from companies c
+                                    INNER JOIN 
+                                    views o ON o.company_id = c.id 
+                                    AND o.id = 
+                                    (
+                                    SELECT MAX(id) 
+                                    FROM views z1 
+                                    WHERE z1.company_id = o.company_id and z1.user_id = ".$user_id." 
+                                    order by o.id desc
+                                    )
+                                    order by 3 desc
+                                    limit 6");
        
              return   $query->result_array();   
     }
@@ -985,7 +974,7 @@ function delete_campaign($id,$user_id)
       
         //echo $id;
         $this->db->where('id', $id);
-        $this->db->delete('operations');
+        $this->db->delete('views');
         
      
         

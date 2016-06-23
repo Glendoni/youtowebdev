@@ -89,7 +89,7 @@
 </div>
 
 
-            <div class="col-sm-4 col-sm-push-5" style="margin-top: -32px;">
+            <div class="col-sm-4 col-sm-push-5" >
             <!-- Top Menu Items -->
             <?php if (isset($current_user)): ?>
 
@@ -99,15 +99,20 @@
       
 
         <li class="dropdown ">
-<a class="btn btn-primary btn-sm btn-actions " onclick="location.href='<?php echo site_url();?>dashboard#calls'" style="top: 48px; z-index: 555555555555; background-color: #428bca;"> Schedule <?php echo count($pending_actions); ?></a>
-        <a href="#" class="dropdown-toggle user-profile sublinkMenu" data-toggle="dropdown" style="
-    margin: -3px -13px;     background: rgba(240, 173, 78, 0.08);
-"> <span id="current_user_name"> </span></span> <b class="caret"></b>
+ 
+        
             
             
-            </a>
-        <ul class="dropdown-menu contActive">
-            <li> 
+            <div class="btn-group">
+  <button type="button" class="btn btn-primary" onclick="location.href='<?php echo site_url();?>dashboard#calls'"><span class="myactivity">Scheduled  <?php echo count($pending_actions); ?></span></button>
+  <button type="button" class="btn btn-warning dropdown-toggle sublinkMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+    <span class="caret"></span>
+    <span class="sr-only">Toggle Dropdown</span>
+  </button>
+  <ul class="dropdown-menu contActive" style="
+    margin-top: 14px;
+">
+    <li> 
                 <div style="min-width:479px; padding:0px 10px;" class="myActiveDiv ">  
                     <div style="float:left; padding: 0px 5px; width: 60%;  border: solid thin #fff; border-right-color: #e1e1e1;" class="recentlyVisited">
                     <p class="recent_visited_header"  style="margin-left: 18px;"><strong>Recently Visited</strong></p> 
@@ -144,7 +149,22 @@
 -->
                 </div>
             </li>
-        </ul>
+  </ul>
+</div>
+            
+            
+            <!--
+            <a href="#" class="dropdown-toggle user-profile sublinkMenu" data-toggle="dropdown" style="
+    margin: -3px -13px;     background: rgba(240, 173, 78, 0.08);
+"> <span id="current_user_name"> </span></span> <b class="caret"></b>
+            
+            
+            </a>
+                
+                -->
+                
+                
+  
         </li>
 
 
