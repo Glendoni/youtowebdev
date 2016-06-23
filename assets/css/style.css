@@ -83,9 +83,10 @@ a.anchor {
 }
 
 .nav>li>a {
-	color:#000;
-	padding: 8px 10px;
+    color: #fff;
+    padding: 7px 10px;
 }
+
 
 .nav>li>a {
 	border-color: #eee #eee #ddd;
@@ -93,9 +94,9 @@ a.anchor {
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus
 {background-color: #f5f5f5;}
 .navbar-default .navbar-brand {
-	color: #111;
-	font-weight: bold;
-	margin-top: 10px;
+    color: #f7f7f7;
+    font-weight: bold;
+    margin-top: 5px;
 }
 
 .panel-default>.panel-heading {
@@ -256,11 +257,10 @@ border-bottom: 1px dashed #ddd;
 	color:#6DAD63;
 }
 .user-profile {
-	padding-top: 25px !important;
+    padding-top: 15px !important;
     height: 100%;
     padding-bottom: 20px !important;
 }
-
 .action_date {
 	font-weight:300;
 	font-size: 10px;
@@ -268,6 +268,13 @@ border-bottom: 1px dashed #ddd;
 
 .navbar-default .navbar-text small{
 	color: #777;
+}
+.navbar-default {
+    background-color: #22262e;
+    border-color: #e7e7e7;
+}
+ul.nav.navbar-top-links.navbar-right {
+    margin-top: 3px;
 }
 
 .label {
@@ -615,11 +622,13 @@ h2.company-header a:hover {
 	border-bottom: none;
 	text-align: center;
 	font-weight: 300;
-	margin-top: 14px;
+	margin-top: 0px;
+	font-size: 12px;
 }
 
 .top-info-holder {
 	margin-bottom: 0px;
+	padding: 0 15px;
 }
 
 /* LABELS */
@@ -878,7 +887,7 @@ li.autocomplete-contact {
     display: flex !important;
 }
 .btn-group .btn {
-    border-radius: 0;
+    /*border-radius: 0;*/
     margin-left: -1px;
 }
 .btn-group .btn:last-child {
@@ -898,7 +907,7 @@ li.autocomplete-contact {
     border-bottom-left-radius: 4px;
 }
 .large-search-height {
-  height: 44px;
+    height: 35px;
 }
 .large-search {
 font-size: 20px;
@@ -1018,7 +1027,7 @@ a li.autocomplete-item:hover {
     display: flex !important;
 }
 .btn-group .btn {
-    border-radius: 0;
+    /*border-radius: 0;*/
     margin-left: -1px;
 }
 .btn-group .btn:last-child {
@@ -1036,6 +1045,13 @@ a li.autocomplete-item:hover {
 .form-group .form-control:last-child {
     border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;
+}
+
+.btn-default .badge {
+	    color: #fff;
+    background-color: #999;
+    font-size: 8px;
+    padding: 4px 6px;
 }
 
 
@@ -2409,7 +2425,11 @@ background-color:#2B4461;
 .sortform{ 
     display:none;
 }
-
+.contActive {
+	    margin-top: 0px;
+    border-radius: 4px 1px 4px 4px;
+    z-index: 99999;
+}
 .contActive a{  
  width:50%;
  cursor:pointer;
@@ -2422,6 +2442,12 @@ background-color:#2B4461;
 .contActive li a:hover{ background: #f5f5f5;  }
 .contActive li{ height: 24px;  }
 
+.nav .open>a, .nav .open>a:hover, .nav .open>a:focus {
+	background-color: transparent;
+}
+.nav>li>a:hover, .nav>li>a:focus {
+	background-color: transparent;
+}
 #sublinkMenu a:hover{
     text-decoration: none;
     background-color: #f0ad4e !important;
@@ -2461,12 +2487,16 @@ breadcrumbscroll {
   -ms-transition: height 0.3s;
   -o-transition: height 0.3s;
   transition: height 0.3s;
+  padding: 15px 0;
+  box-sizing: border-box;
+	box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    border-bottom: 1px solid #ccc;
+    background-color: #fff;
   }
-  breadcrumbscroll h1#logo, breadcrumbscroll h2#logo  {
+  /*breadcrumbscroll h1#logo, breadcrumbscroll h2#logo  {
    
    height: 45px;
       line-height: 60px;
-      font-size: 20px;
    
     font-family: inherit;
           padding-top: 5px;
@@ -2478,6 +2508,8 @@ breadcrumbscroll {
     -ms-transition: all 0.1s;
     -o-transition: all 0.1s;
     transition: all 0.1s; }
+    */
+
   breadcrumbscroll nav {
     display: inline-block;
     float: right; }
@@ -2496,11 +2528,11 @@ breadcrumbscroll {
         color: #333; }
   breadcrumbscroll.smaller {
     height: auto; }
-    breadcrumbscroll.smaller h1#logo,breadcrumbscroll.smaller h2#logo {
+    /*breadcrumbscroll.smaller h1#logo,breadcrumbscroll.smaller h2#logo {
       width: 100%;
       height: 45px;
       line-height: 60px;
-      font-size: 20px; }
+      font-size: 20px; }*/
     breadcrumbscroll.smaller nav a {
       line-height: 75px; }
 
@@ -2556,10 +2588,13 @@ breadcrumbscroll {
 
 breadcrumbscroll .trading-header{
     
-    margin-top: 6px;
-    
+margin: 5px 0 3px 0;  
 }
 
+.piplineUdate .label {
+    padding: 1px 5px;
+        font-size: 9px;
+}
 
 /*SCROLL BREADCRUMB END*/
 

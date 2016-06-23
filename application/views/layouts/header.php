@@ -98,12 +98,12 @@
 
                     <li class="dropdown">
                         <div class="btn-group">
-                                  <button type="button" class="btn btn-primary" onclick="location.href='<?php echo site_url();?>dashboard#calls'"><span class="myactivity">Schedule  <?php echo count($pending_actions); ?></span></button>
-                                  <button type="button" class="btn btn-primary dropdown-toggle sublinkMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                                  <button type="button" class="btn btn-default" onclick="location.href='<?php echo site_url();?>dashboard#calls'"><span class="myactivity">Scheduled  <span class="badge"><?php echo count($pending_actions); ?></span></span></button>
+                                  <button type="button" class="btn btn-default dropdown-toggle sublinkMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                                     <span class="caret"></span>
                                     <span class="sr-only">Toggle Dropdown</span>
                                   </button>
-                                  <ul class="dropdown-menu contActive" style="margin-top: 14px;">
+                                  <ul class="dropdown-menu contActive">
                                     <li> 
                                                 <div style="min-width:479px; padding:0px 10px;" class="myActiveDiv ">  
                                                     <div style="float:left; padding: 0px 5px; width: 60%;  border: solid thin #fff; border-right-color: #e1e1e1;" class="recentlyVisited">

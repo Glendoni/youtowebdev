@@ -10,16 +10,13 @@ endif; ?>
 <?php //hide core page content if no company is found ?>
 <?php if (isset($company['id'])): ?>
 <div class="page-results-list" id="parent">
-    <breadcrumbscroll>
-<div class="top-info-holder">
+<breadcrumbscroll>
+<div class="row top-info-holder">
+<div class="col-md-12">
 
 
 <!-- <breadcrumbscroll> -->
-    
-       
-    
-
-	<h2 class="company-header" id="logo">
+    	<h2 class="company-header" id="logo">
 		<?php $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' );
         
         echo html_entity_decode (str_replace($words, ' ',$company['name'])); 
@@ -30,22 +27,13 @@ endif; ?>
 		<?php if($company['assigned_to_id'] == $current_user['id']) : ?>	
 			<?php  $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'], 'page_number' => (isset($current_page_number))? $current_page_number:'');
 			echo form_open('companies/unassign',array('name' => 'assignto', 'class'=>'assign-to-form', 'style'=>'display: inline;'),$hidden); ?>
-        
-        
-        
         <?php $bgcolor =  explode(',',$current_user['image']) ?>
-        
 			<button type="submit" class="assigned-star ladda-button starbtn" data-style="expand-right" data-size="1"   style="color:<?php echo $bgcolor[1]; ?>;">
-                    <i class="fa fa-star "></i>
+<i class="fa fa-star "></i>
             </button>
 			<?php echo form_close(); ?>
 		<?php endif; ?>
 	<?php else: ?>
-	
-        
-        
-        
-        
     <?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'], 'page_number' => (isset($current_page_number))? $current_page_number:'');
 	echo form_open(site_url().'companies/assignto',array('name' => 'assignto', 'class'=>'assign-to-form', 'style'=>'display: inline;'),$hidden); ?>
 	<button type="submit" assignto="<?php echo $current_user['name']; ?>" class="unassigned-star ladda-button starbtn" data-style="expand-right" data-size="1">
@@ -55,41 +43,26 @@ endif; ?>
 
 	<?php endif; ?>
 </h2>
-    
-    
-   <!--  </breadcrumbscroll> /breadcrumbscroll -->
-    
-    
-
-<!--END ASSIGN-->
-
-	
 	<?php if (isset($company['trading_name'])): ?>
 <h5 class="trading-header">
 <?php echo $company['trading_name'];?>
 </h5>
 	<?php endif; ?>
+   	<!--  </breadcrumbscroll> /breadcrumbscroll -->
+	<!--END ASSIGN-->
 	</div><!--END ROW-->
 
 	<div class="row piplineUdate" style="margin-top:5px; text-align:center;">
 	<?php if(!empty($company['pipeline'])): ?>
 	
 	<?php endif; ?>
-
     <span class="label pipeline label-<?php echo str_replace(' ', '', $company['pipeline']); ?>"><?php echo $company['pipeline']?>        
-
-            <?php if (isset($company['customer_from'])&&($company['pipeline']=='Customer')):?>
-            from <?php echo date("d/m/y",strtotime($company['customer_from']));?>
-
-             <?php  
-            $number  = $company['initial_rate'];
-
-            //$number = 5.00;
-           $number =  preg_match('[-+]?([0-9]*\.[0]+|[0]+', $number) ? false : $number;
-
-            echo $number ? '<span class="initial_rate_found">  - &#64;'.($number*100).'%</span>' : '<span class="initial_rate_not_found"> - Rate Not Set</span>' ;  ?>
-
-            <?php endif; ?>
+    <?php if (isset($company['customer_from'])&&($company['pipeline']=='Customer')):?> from <?php echo date("d/m/y",strtotime($company['customer_from']));?><?php  
+    $number  = $company['initial_rate'];
+	//$number = 5.00;
+	$number =  preg_match('[-+]?([0-9]*\.[0]+|[0]+', $number) ? false : $number;
+	echo $number ? '<span class="initial_rate_found">  - &#64;'.($number*100).'%</span>' : '<span class="initial_rate_not_found"> - Rate Not Set</span>' ;  ?>
+<?php endif; ?>
     </span>
 
     <?php if($company['customer_to']){  ?>
@@ -130,6 +103,8 @@ endif; ?>
 	<!-- // POPUP BOXES -->
 </div><!--END TOP INFO HOLDER-->
 
+</div><!--END TOP INFO HOLDER-->
+</breadcrumbscroll>
     
     
       </breadcrumbscroll> 
