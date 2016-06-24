@@ -279,7 +279,7 @@ function get_recent_stats($period, $team_type)
  $team_type =  trim($team_type) ;
  
     if(!empty($team_type)){
-        //$team_type_sql = "and u.market = '$team_type'";
+        $team_type_sql = "and u.market = '$team_type'";
     }
     $dates = $this->dates($period);
     $start_date = $dates['start_date'];
