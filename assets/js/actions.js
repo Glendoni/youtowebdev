@@ -254,7 +254,7 @@ function writeactions(data, scope = false){
                                 case 'actions_outstanding':
 
                                 if(action['initial_rate']){
-                                    initial_fee = (parseFloat(action['initial_rate']*100).toFixed(1));
+                                    initial_fee = (parseFloat(action['initial_rate']*100).toFixed(2));
                                 }                    
 
                                     actions_outstanding = action['action_id']?action['action_id'] : '';
@@ -266,7 +266,7 @@ function writeactions(data, scope = false){
                                           //console.log('  waaaaaarn '+action['comments'])
                                     
                                       if(action['initial_rate']){
-                                    initial_fee = (parseFloat(action['initial_rate']*100).toFixed(1));
+                                    initial_fee = (parseFloat(action['initial_rate']*100).toFixed(2));
 
                                             //initial_fee.push(initial_fee);
                                 } 
