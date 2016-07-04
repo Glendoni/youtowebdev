@@ -1792,7 +1792,7 @@
                   
               <h3 class="panel-title">Favourites</h3>
                     <span class="badge pull-right sortform" style="margin-top: -22px; margin-left: 5px;">
-                 <form><lable>Arrange By:</lable>
+                 <form><lable>Display By:</lable>
                      <select type="dropdown" name="" >
                         
                          <option value>Company</option>
