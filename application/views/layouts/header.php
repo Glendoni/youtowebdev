@@ -68,23 +68,21 @@
     <div id="wrapper">
         <!-- Navigation -->
 <!--<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">-->
-
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
+ <?php  $stag_distinct = ''; if (ENVIRONMENT  =='staging' || ENVIRONMENT  =='development'){ $stag_distinct = 'background:#5cb85c;'; }?>
+ <?php  if (ENVIRONMENT  =='development'){ $stag_distinct = 'background:#4d2332;'; }?>
+        
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0; <?php echo $stag_distinct; ?>">
 <!-- Brand and toggle get grouped for better mobile display -->
 <!--<div class="navbar-header">-->
 <div class="col-sm-3 col-md-3">
-
-
-
+ <a class="navbar-brand" href="<?php echo site_url();?>" ><img src="<?php echo asset_url();?>images/baselist-logotype-black-transparent-bg.png" style="width:120px;">
 <?php if (isset($current_user)): ?>
         <?php if (ENVIRONMENT  =='staging'){?>
-    <a class="navbar-brand" href="<?php echo site_url();?>" ><img src="<?php echo asset_url();?>images/baselist-logotype-black-transparent-bg.png" style="width:120px;">
 <div style="font-size: 10px;font-weight: 600;text-align: right;float: right;line-height: 40px;padding-left: 5px;">Staging</div>
 <?php
-} else {?>
-        <a class="navbar-brand" href="<?php echo site_url();?>" ><img src="<?php echo asset_url();?>images/baselist-logotype-black-transparent-bg.png" style="width:120px;">
-<?php
-}; ?>
+} ?>
+      
+ 
 <div style="font-size: 10px;font-weight: 300;text-align: right;float: right;line-height: 40px;padding-left: 5px;">Version 3.11</div>
 <?php endif; ?>
 </a>
@@ -210,11 +208,11 @@ $search_default = $this->input->post('agency_name');
                             <button href="#credits" type="button" class="toggle btn btn-default dropdown-toggle large-search-height" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
                         </div>
                         
-                            <a href="javscript:;" class="search_box_cancel btn btn-danger " value="Go" name="submit" style="width: 100%; padding-top:11px;">X</a>
+                            <a href="javscript:;" class="search_box_cancel btn btn-danger " value="Go" name="submit" style="width: 100%; padding-top:7px;">X</a>
                         
                         
                         <?php if (isset($_POST['main_search'])): ?>
-                                    <a href="<?php echo site_url();?>" class="loading-btn btn btn-danger  loading-btn-search" value="Go" name="submit" style="width: 100%; padding-top:11px;">X</a>
+                                    <a href="<?php echo site_url();?>" class="loading-btn btn btn-danger  loading-btn-search" value="Go" name="submit" style="width: 100%; padding-top:7px;">X</a>
                                     <?php endif; ?>
                         
                     <input type="submit" class="loading-btn btn btn-warning " value="Go" name="submit" style="width: 100%;">
