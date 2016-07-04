@@ -38,8 +38,7 @@ class Companies_model extends CI_Model {
 	function get_companies_classes()
 	{
 		$arrayNames = array(
-			'Unknown' => 'Unknowns',
-			'PreStartUp' => 'Pre-Start Up',
+	        'PreStartUp' => 'Pre-Start Up',
             'PreStartUpWithoutAddress' => 'Pre-Start Up Without Address',
 			'StartUp' => 'Start Up',
 			'UsingFinance' => 'Using Finance',

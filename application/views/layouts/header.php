@@ -73,17 +73,19 @@
 <!-- Brand and toggle get grouped for better mobile display -->
 <!--<div class="navbar-header">-->
 <div class="col-sm-3 col-md-3">
-<a class="navbar-brand" href="<?php echo site_url();?>" ><img src="<?php echo asset_url();?>images/baselist-logotype-black-transparent-bg.png" style="width:120px;">
+
 
 
 <?php if (isset($current_user)): ?>
         <?php if (ENVIRONMENT  =='staging'){?>
+    <a class="navbar-brand" href="<?php echo site_url();?>" ><img src="<?php echo asset_url();?>images/baselist-logotype-black-transparent-bg.png" style="width:120px;">
 <div style="font-size: 10px;font-weight: 600;text-align: right;float: right;line-height: 40px;padding-left: 5px;">Staging</div>
 <?php
 } else {?>
+        <a class="navbar-brand" href="<?php echo site_url();?>" ><img src="<?php echo asset_url();?>images/baselist-logotype-black-transparent-bg.png" style="width:120px;">
 <?php
 }; ?>
-<div style="font-size: 10px;font-weight: 300;text-align: right;float: right;line-height: 40px;padding-left: 5px;">Version 3.10</div>
+<div style="font-size: 10px;font-weight: 300;text-align: right;float: right;line-height: 40px;padding-left: 5px;">Version 3.11</div>
 <?php endif; ?>
 </a>
 </div>
@@ -98,7 +100,7 @@
 
                     <li class="dropdown">
                         <div class="btn-group">
-                                  <button type="button" class="btn btn-default" onclick="location.href='<?php echo site_url();?>dashboard#calls'"><span class="myactivity">Scheduled  <span class="badge"><?php echo count($pending_actions); ?></span></span></button>
+                                  <button type="button" class="btn btn-default" onclick="location.href='<?php echo site_url();?>dashboard&#35;calls'"><span class="myactivity">Scheduled  <span class="badge"><?php echo count($pending_actions); ?></span></span></button>
                                   <button type="button" class="btn btn-default dropdown-toggle sublinkMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                                     <span class="caret"></span>
                                     <span class="sr-only">Toggle Dropdown</span>
@@ -193,7 +195,7 @@ $search_default = $this->input->post('agency_name');
                                     
 
 
-                    <input name="agency_name" id="agency_name" type="text" onkeyup="ajaxSearch();" class="form-control large-search-height large-search" autocomplete="off" value="<?php echo trim($search_default);?>" placeholder="Search Baselist">
+                    <input name="agency_name" id="agency_name" type="text" onkeyup="ajaxSearch();" class="form-control large-search-height large-search" autocomplete="off" value="<?php echo trim($search_default);?>" placeholder="Search">
                     <div class="alert alert-warning alert-dismissible" style="display:none;" id="empty_form_error" role="alert">
                     <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 
@@ -208,16 +210,7 @@ $search_default = $this->input->post('agency_name');
                             <button href="#credits" type="button" class="toggle btn btn-default dropdown-toggle large-search-height" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
                         </div>
                         
-                        
-                        
-                        
- <a href="javscript:;" class="search_box_cancel btn btn-danger " value="Go" name="submit" style="width: 100%; padding-top:11px;">X</a>
-                        
-                        
-                        
-                        
-                        
-                        
+                            <a href="javscript:;" class="search_box_cancel btn btn-danger " value="Go" name="submit" style="width: 100%; padding-top:11px;">X</a>
                         
                         
                         <?php if (isset($_POST['main_search'])): ?>

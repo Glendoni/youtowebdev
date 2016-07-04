@@ -53,11 +53,22 @@ endif; ?>
 	</div><!--END ROW-->
 
 	<div class="row piplineUdate" style="margin-top:5px; text-align:center;">
+
+ 
+        
+        
+        
+        <span class="label pipeline btn-warning comp_details_edit_btn" data-toggle="modal" id="editbtn<?php echo $company['id']; ?>" data-target="#editModal<?php echo $company['id']; ?>">Edit        
+        </span>
+
+
+
+
 	<?php if(!empty($company['pipeline'])): ?>
 	
 	<?php endif; ?>
     <span class="label pipeline label-<?php echo str_replace(' ', '', $company['pipeline']); ?>"><?php echo $company['pipeline']?>        
-    <?php if (isset($company['customer_from'])&&($company['pipeline']=='Customer')):?> from <?php echo date("d/m/y",strtotime($company['customer_from']));?><?php  
+    <?php if (isset($company['customer_from'])&&($company['pipeline']=='Customer')):?>  <?php echo date("d/m/y",strtotime($company['customer_from']));?><?php  
     $number  = $company['initial_rate'];
 	//$number = 5.00;
 	$number =  preg_match('[-+]?([0-9]*\.[0]+|[0]+', $number) ? false : $number;
@@ -161,7 +172,7 @@ $now = time ();
 $your_date = strtotime($company['planned_at2']);
 if ($your_date < $now){; 
      $datediff = $now - $your_date;
-     $daysoverdue = floor($datediff/(60*60*24));?>
+     $daysoverdue = floor($datediff/(60*60*24))+1;?>
 <div><span class="label label-danger" style="font-size:10px;">
 <?php echo $daysoverdue; if ($daysoverdue > 1) {echo " Days";} else {echo " Day";};?>  Overdue </span></div>
 
@@ -680,7 +691,7 @@ if ($your_date < $now){;
 <div class="row">
 			<div class="col-sm-3 col-md-3">
 				<div class="form-group ">
-					<label>New Actions</label>
+					<label>New Action</label>
 					<select id="action_type_completed" name="action_type_completed" class="form-control" >
 						<option value="">--- Select an Action ---</option>
 						<?php foreach($action_types_done as $action ): ?>

@@ -8,10 +8,10 @@
                             </a>
                             </div>
                             <div class="col-xs-2 col-md-1 text-center">
-                            <a href = "?search=2&user=<?php echo $lastmonthstat['user'];?>&period=lastmonth"><span class="badge <?php echo $prefix; ?>-deals" style="background-color:#428bca;"><?php echo $lastmonthstat['deals'];?></span></a>
+                            <a href = "?search=2&user=<?php echo $lastmonthstat['user'];?>&period=lastmonth"><span class="<?php echo $prefix; ?>-deals" ><?php echo $lastmonthstat['deals'];?></span></a>
                             </div>
                               <div class="col-xs-2 col-md-1 text-center"> 
-                              <?php echo '<div class="badge '.$prefix.'-proposals" style="background-color:#45AE7C;">'.$lastmonthstat['proposals'].'</div>';?>
+                              <?php echo '<div class="'.$prefix.'-proposals">'.$lastmonthstat['proposals'].'</div>';?>
                               </div>
                               <div class="col-xs-2 col-md-2 text-center"> 
                             <span class="<?php echo $prefix; ?>-demobookedcount"><?php echo $lastmonthstat['demobookedcount'];?></span> / <span class="<?php echo $prefix; ?>-democount"><?php echo $lastmonthstat['democount'];?></span>

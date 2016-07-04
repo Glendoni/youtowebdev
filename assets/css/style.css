@@ -2629,6 +2629,33 @@ button .myactivity{
 .nav-tabs li a{
 color:#333;
 }
+
+.feTagfolderTotal{
+    float:left;
+}
+.comp_details_edit_btn{
+
+margin-right:5px;
+    cursor: pointer;
+}
+
+.tagNumPlaceholder{
+    
+      float: right;
+    background: #f0ad4e;
+    border-radius: 50%;
+    width: 20px;
+    text-align: center;
+    color: #fff;
+    
+}
+
+.tsDealTitle{
+color:#428bca;
+}
+.tsPropTitle{
+color:#45AE7C;
+}
 /*! Hint.css - v2.2.1 - 2016-03-26 //#2b4461
 * http://kushagragour.in/lab/hint/
 * Copyright (c) 2016 Kushagra Gour; Licensed  */
