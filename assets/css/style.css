@@ -377,6 +377,15 @@ a.btn.btn-block.clear-fields {
 }
 
 */
+
+.tsector{
+    
+    color: rgb(0, 0, 0);
+    border-color: rgb(204, 204, 204);
+    background: rgb(255, 255, 255);
+    
+}
+
 .other_sectors .btn.btn-checkbox.btn-primary.active {
 	background-color: #000;
 	border-color: #999;
@@ -384,7 +393,7 @@ a.btn.btn-block.clear-fields {
 
 .other_sectors .btn-default:hover, .other_sectors .btn-default:focus, .other_sectors .btn-default:active,  .other_sectors .btn-default.active,  .other_sectors .open>.dropdown-toggle.btn-default {
     color: #fff;
-    background-color: #000;
+    background-color: #cccccc;
     border-color: #adadad;
 }
 
@@ -2656,6 +2665,24 @@ color:#428bca;
 .tsPropTitle{
 color:#45AE7C;
 }
+.target_sectors .tsector:hover{
+    background-color: #cccccc;
+    border-color: #fff;
+    color:#000; 
+}
+.other_sectors .tsector:hover{
+    background-color: #cccccc;
+    border-color: #fff;
+    color:#fff; 
+}
+
+.target_sectors .btn-default:hover, .target_sectors .btn-default:focus, .target_sectors .btn-default:active, .target_sectors .btn-default.active, .target_sectors .open>.dropdown-toggle.btn-default {
+    background-color: #cccccc;
+    border-color: #fff;
+    color: #fff;
+}
+
+
 /*! Hint.css - v2.2.1 - 2016-03-26 //#2b4461
 * http://kushagragour.in/lab/hint/
 * Copyright (c) 2016 Kushagra Gour; Licensed  */

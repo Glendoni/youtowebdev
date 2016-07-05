@@ -120,6 +120,18 @@ $( document ).ready(function() {
     
      if((/companies\/company/.test(window.location.href))) {
        $(window).scroll(stickyActionsMenu);
+      
+         $('.other_sectors .button-checkbox .btn-checkbox, .target_sectors .button-checkbox .btn-checkbox').click(function(){
+             
+            if($(this).hasClass('btn-default')){
+                        $(this).addClass('tsector');
+                        $(this).removeClass('active');
+                        $(this).removeClass('btn-default');
+                    }
+            });
+         
+            $('.tsector').removeClass('tsector'); 
+       
      }
     $('#add_action_request').click(function(e){
 
