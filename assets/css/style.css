@@ -2667,7 +2667,7 @@ color:#45AE7C;
 }
 .target_sectors .tsector:hover{
     background-color: #cccccc;
-    border-color: #ccc
+    border-color: #cccccc;
     color:#fff; 
 }
 .other_sectors .tsector:hover{
