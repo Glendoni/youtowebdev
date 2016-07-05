@@ -232,6 +232,8 @@
 
                     </div>
             </div>
+    
+     <div class="row">
                     <div class="col-md-12 other_sectors" style="margin-top:10px;">
                         <label for="sectors" class="control-label">Other Sectors</label>
                         <div class="tag-holder">
@@ -246,6 +248,7 @@
 
                    
         </div>
+    </div>
         <div class="modal-loading-display text-center " id="loading-display-<?php echo $company['id']; ?>" style="display:none;">
             <span class="btn btn-default btn-lg" ><i class="fa fa-refresh fa-spin"></i></span>
         </div>
