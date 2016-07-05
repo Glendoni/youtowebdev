@@ -121,7 +121,7 @@ $( document ).ready(function() {
      if((/companies\/company/.test(window.location.href))) {
        $(window).scroll(stickyActionsMenu);
       
-         $('.other_sectors .button-checkbox .btn-checkbox, .target_sectors .button-checkbox .btn-checkbox').click(function(){
+         $('.other_sectors .button-checkbox .btn-checkbox, .target_sectors .button-checkbox .btn-checkbox').click(function(){ //Target sectors event visiual manager
              
             if($(this).hasClass('btn-default')){
                         $(this).addClass('tsector');
