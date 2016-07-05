@@ -2667,8 +2667,8 @@ color:#45AE7C;
 }
 .target_sectors .tsector:hover{
     background-color: #cccccc;
-    border-color: #fff;
-    color:#000; 
+    border-color: #000;
+    color:#fff; 
 }
 .other_sectors .tsector:hover{
     background-color: #cccccc;
@@ -2678,7 +2678,7 @@ color:#45AE7C;
 
 .target_sectors .btn-default:hover, .target_sectors .btn-default:focus, .target_sectors .btn-default:active, .target_sectors .btn-default.active, .target_sectors .open>.dropdown-toggle.btn-default {
     background-color: #cccccc;
-    border-color: #fff;
+    border-color: #000;
     color: #fff;
 }
 
