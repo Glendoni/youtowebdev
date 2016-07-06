@@ -35,7 +35,8 @@ function gettagscampList(param){
                                 $('.tagLists'+param).append('<li>'+val['name']+'</li>');
                             }
                        }
-                 })        
+                 })  
+if(!data.length) $('.tagLists'+param).hide();  
         
             }
         })
