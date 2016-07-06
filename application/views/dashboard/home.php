@@ -217,10 +217,10 @@
         <strong>Name</strong>
         </div>
         <div class="col-xs-2 col-md-1 text-center hide-overflow">
-        <strong>Deals</strong>
+        <strong class="tsDealTitle">Deals</strong>
         </div>
-        <div class="col-xs-2 col-md-1 text-center hide-overflow">
-        <strong>Proposals</strong>
+        <div class="col-xs-2 col-md-1 text-center hide-overflow" >
+        <strong class="tsPropTitle">Proposals</strong>
         </div>
         <div class="col-xs-2 col-md-2 text-center hide-overflow">
         <strong>Demos</strong><br>
@@ -249,10 +249,10 @@
         <strong>Totals</strong>
         </div>
         <div class="col-xs-1 col-md-1 text-center hide-overflow">
-        <span class="badge tw-deals-total stat-total" style="background-color:#428bca;">0</span>
+        <span class="tw-deals-total stat-total">0</span>
         </div>
         <div class="col-xs-2 col-md-1 text-center hide-overflow">
-        <span class="badge tw-proposals-total stat-total" style="background-color:#45AE7C;">0</span>
+        <span class="tw-proposals-total stat-total">0</span>
         </div>
         <div class="col-xs-2 col-md-2 text-center hide-overflow" >
         <span class="tw-demobookedcount-total stat-total" >4</span> /
@@ -286,10 +286,10 @@
         </a>
         </div>
         <div class="col-xs-1 col-md-1 text-center">
-        <a href = "?search=2&user=<?php echo $stat['user'];?>&period=week"><span class="badge tw-deals" style="background-color:#428bca;"><?php echo $stat['deals'];?></span></a>
+        <a href = "?search=2&user=<?php echo $stat['user'];?>&period=week"><span class="tw-deals"><?php echo $stat['deals'];?></span></a>
         </div>
         <div class="col-xs-2 col-md-1 text-center"> 
-        <?php echo '<div class="badge tw-proposals" style="background-color:#45AE7C;">'.$stat['proposals'].'</div>';?>
+        <?php echo '<div class="tw-proposals">'.$stat['proposals'].'</div>';?>
         </div>
         <div class="col-xs-2 col-md-2 text-center"> 
         <span class="tw-demobookedcount"><?php echo $stat['demobookedcount'];?></span> / <span class="tw-democount"><?php echo $stat['democount'];?></span>
@@ -318,10 +318,10 @@
         <strong>Name</strong>
         </div>
         <div class="col-xs-2 col-md-1 text-center hide-overflow">
-        <strong>Deals</strong>
+        <strong class="tsDealTitle">Deals</strong>
         </div>
-        <div class="col-xs-2 col-md-1 text-center hide-overflow">
-        <strong>Proposals</strong>
+        <div class="col-xs-2 col-md-1 text-center hide-overflow" >
+        <strong class="tsPropTitle">Proposals</strong>
         </div>
         <div class="col-xs-2 col-md-2 text-center hide-overflow">
         <strong>Demos</strong><br>
@@ -348,10 +348,10 @@
         <strong>Totals</strong>
         </div>
         <div class="col-xs-2 col-md-1 text-center hide-overflow">
-        <span class="badge lw-deals-total stat-total" style="background-color:#428bca;">0</span>
+        <span class="lw-deals-total stat-total">0</span>
         </div>
         <div class="col-xs-2 col-md-1 text-center hide-overflow">
-        <span class="badge lw-proposals-total stat-total" style="background-color:#45AE7C;">0</span>
+        <span class="lw-proposals-total stat-total">0</span>
         </div>
         <div class="col-xs-2 col-md-2 text-center hide-overflow" >
         <span class="lw-demobookedcount-total stat-total" >16</span> /
@@ -393,10 +393,10 @@
         <strong>Name</strong>
         </div>
         <div class="col-xs-2 col-md-1 text-center hide-overflow">
-        <strong>Deals</strong>
+        <strong class="tsDealTitle">Deals</strong>
         </div>
-        <div class="col-xs-2 col-md-1 text-center hide-overflow">
-        <strong>Proposals</strong>
+        <div class="col-xs-2 col-md-1 text-center hide-overflow" >
+        <strong class="tsPropTitle">Proposals</strong>
         </div>
         <div class="col-xs-2 col-md-2 text-center hide-overflow">
         <strong>Demos</strong><br>
@@ -425,10 +425,10 @@
         <strong>Totals</strong>
         </div>
         <div class="col-xs-2 col-md-1 text-center hide-overflow">
-        <span class="badge tm-deals-total stat-total" style="background-color:#428bca;">0</span>
+        <span class="tm-deals-total stat-total">0</span>
         </div>
         <div class="col-xs-2 col-md-1 text-center hide-overflow">
-        <span class="badge tm-proposals-total stat-total" style="background-color:#45AE7C;">0</span>
+        <span class="tm-proposals-total stat-total">0</span>
         </div>
         <div class="col-xs-2 col-md-2 text-center hide-overflow" >
         <span class="tm-demobookedcount-total stat-total" >16</span> /
@@ -470,10 +470,10 @@
         <strong>Name</strong>
         </div>
         <div class="col-xs-2 col-md-1 text-center hide-overflow">
-        <strong>Deals</strong>
+        <strong class="tsDealTitle">Deals</strong>
         </div>
-        <div class="col-xs-2 col-md-1 text-center hide-overflow">
-        <strong>Proposals</strong>
+        <div class="col-xs-2 col-md-1 text-center hide-overflow" >
+        <strong class="tsPropTitle">Proposals</strong>
         </div>
         <div class="col-xs-2 col-md-2 text-center hide-overflow">
         <strong>Demos</strong><br>
@@ -501,10 +501,10 @@
         <strong>Totals</strong>
         </div>
         <div class="col-xs-2 col-md-1 text-center hide-overflow">
-        <span class="badge lm-deals-total stat-total" style="background-color:#428bca;">0</span>
+        <span class="lm-deals-total stat-total">0</span>
         </div>
         <div class="col-xs-2 col-md-1 text-center hide-overflow">
-        <span class="badge lm-proposals-total stat-total" style="background-color:#45AE7C;">0</span>
+        <span class="lm-proposals-total stat-total">0</span>
         </div>
         <div class="col-xs-2 col-md-2 text-center hide-overflow" >
         <span class="lm-demobookedcount-total stat-total" >16</span> /
@@ -545,10 +545,10 @@
         <strong>Name</strong>
         </div>
         <div class="col-xs-2 col-md-1 text-center hide-overflow">
-        <strong>Deals</strong>
+        <strong class="tsDealTitle">Deals</strong>
         </div>
-        <div class="col-xs-2 col-md-1 text-center hide-overflow">
-        <strong>Proposals</strong>
+        <div class="col-xs-2 col-md-1 text-center hide-overflow" >
+        <strong class="tsPropTitle">Proposals</strong>
         </div>
         <div class="col-xs-2 col-md-2 text-center hide-overflow">
         <strong>Demos</strong><br>
@@ -576,10 +576,10 @@
         <strong>Totals</strong>
         </div>
         <div class="col-xs-2 col-md-1 text-center hide-overflow">
-        <span class="badge sr-deals-total stat-total" style="background-color:#428bca;">0</span>
+        <span class="sr-deals-total stat-total">0</span>
         </div>
         <div class="col-xs-2 col-md-1 text-center hide-overflow">
-        <span class="badge sr-proposals-total stat-total" style="background-color:#45AE7C;">0</span>
+        <span class="sr-proposals-total stat-total" >0</span>
         </div>
         <div class="col-xs-2 col-md-2 text-center hide-overflow" >
         <span class="sr-demobookedcount-total stat-total" >0</span> /
@@ -700,10 +700,10 @@
         <strong>Name</strong>
         </div>
         <div class="col-xs-2 col-md-1 text-center hide-overflow">
-        <strong>Deals</strong>
+        <strong class="tsDealTitle">Deals</strong>
         </div>
-        <div class="col-xs-2 col-md-1 text-center hide-overflow">
-        <strong>Proposals</strong>
+        <div class="col-xs-2 col-md-1 text-center hide-overflow" >
+        <strong class="tsPropTitle">Proposals</strong>
         </div>
         <div class="col-xs-2 col-md-2 text-center hide-overflow">
         <strong>Demos</strong><br>
@@ -732,10 +732,10 @@
         <strong>Totals</strong>
         </div>
         <div class="col-xs-1 col-md-1 text-center hide-overflow">
-        <span class="badge tw-deals-total stat-total" style="background-color:#428bca;">0</span>
+        <span class="tw-deals-total stat-total">0</span>
         </div>
         <div class="col-xs-2 col-md-1 text-center hide-overflow">
-        <span class="badge tw-proposals-total stat-total" style="background-color:#45AE7C;">0</span>
+        <span class="tw-proposals-total stat-total">0</span>
         </div>
         <div class="col-xs-2 col-md-2 text-center hide-overflow" >
         <span class="tw-demobookedcount-total stat-total" >4</span> /
@@ -769,10 +769,10 @@
         </a>
         </div>
         <div class="col-xs-1 col-md-1 text-center">
-        <a href = "?search=2&user=<?php echo $stat['user'];?>&period=week"><span class="badge tw-deals" style="background-color:#428bca;"><?php echo $stat['deals'];?></span></a>
+        <a href = "?search=2&user=<?php echo $stat['user'];?>&period=week"><span class="tw-deals"><?php echo $stat['deals'];?></span></a>
         </div>
         <div class="col-xs-2 col-md-1 text-center"> 
-        <?php echo '<div class="badge tw-proposals" style="background-color:#45AE7C;">'.$stat['proposals'].'</div>';?>
+        <?php echo '<div class="tw-proposals">'.$stat['proposals'].'</div>';?>
         </div>
         <div class="col-xs-2 col-md-2 text-center"> 
         <span class="tw-demobookedcount"><?php echo $stat['demobookedcount'];?></span> / <span class="tw-democount"><?php echo $stat['democount'];?></span>
@@ -801,10 +801,10 @@
         <strong>Name</strong>
         </div>
         <div class="col-xs-2 col-md-1 text-center hide-overflow">
-        <strong>Deals</strong>
+        <strong class="tsDealTitle">Deals</strong>
         </div>
-        <div class="col-xs-2 col-md-1 text-center hide-overflow">
-        <strong>Proposals</strong>
+        <div class="col-xs-2 col-md-1 text-center hide-overflow" >
+        <strong class="tsPropTitle">Proposals</strong>
         </div>
         <div class="col-xs-2 col-md-2 text-center hide-overflow">
         <strong>Demos</strong><br>
@@ -831,10 +831,10 @@
         <strong>Totals</strong>
         </div>
         <div class="col-xs-2 col-md-1 text-center hide-overflow">
-        <span class="badge ulw-deals-total stat-total" style="background-color:#428bca;">0</span>
+        <span class="ulw-deals-total stat-total">0</span>
         </div>
         <div class="col-xs-2 col-md-1 text-center hide-overflow">
-        <span class="badge ulw-proposals-total stat-total" style="background-color:#45AE7C;">0</span>
+        <span class="ulw-proposals-total stat-total">0</span>
         </div>
         <div class="col-xs-2 col-md-2 text-center hide-overflow" >
         <span class="ulw-demobookedcount-total stat-total" >0</span> /
@@ -876,10 +876,10 @@
         <strong>Name</strong>
         </div>
         <div class="col-xs-2 col-md-1 text-center hide-overflow">
-        <strong>Deals</strong>
+        <strong class="tsDealTitle">Deals</strong>
         </div>
-        <div class="col-xs-2 col-md-1 text-center hide-overflow">
-        <strong>Proposals</strong>
+        <div class="col-xs-2 col-md-1 text-center hide-overflow" >
+        <strong class="tsPropTitle">Proposals</strong>
         </div>
         <div class="col-xs-2 col-md-2 text-center hide-overflow">
         <strong>Demos</strong><br>
@@ -908,10 +908,10 @@
         <strong>Totals</strong>
         </div>
         <div class="col-xs-2 col-md-1 text-center hide-overflow">
-        <span class="badge utm-deals-total stat-total" style="background-color:#428bca;">0</span>
+        <span class="utm-deals-total stat-total">0</span>
         </div>
         <div class="col-xs-2 col-md-1 text-center hide-overflow">
-        <span class="badge utm-proposals-total stat-total" style="background-color:#45AE7C;">0</span>
+        <span class="utm-proposals-total stat-total">0</span>
         </div>
         <div class="col-xs-2 col-md-2 text-center hide-overflow" >
         <span class="utm-demobookedcount-total stat-total" >16</span> /
@@ -953,10 +953,10 @@
         <strong>Name</strong>
         </div>
         <div class="col-xs-2 col-md-1 text-center hide-overflow">
-        <strong>Deals</strong>
+        <strong class="tsDealTitle">Deals</strong>
         </div>
-        <div class="col-xs-2 col-md-1 text-center hide-overflow">
-        <strong>Proposals</strong>
+        <div class="col-xs-2 col-md-1 text-center hide-overflow" >
+        <strong class="tsPropTitle">Proposals</strong>
         </div>
         <div class="col-xs-2 col-md-2 text-center hide-overflow">
         <strong>Demos</strong><br>
@@ -984,10 +984,10 @@
         <strong>Totals</strong>
         </div>
         <div class="col-xs-2 col-md-1 text-center hide-overflow">
-        <span class="badge ulm-deals-total stat-total" style="background-color:#428bca;">0</span>
+        <span class="ulm-deals-total stat-total">0</span>
         </div>
         <div class="col-xs-2 col-md-1 text-center hide-overflow">
-        <span class="badge ulm-proposals-total stat-total" style="background-color:#45AE7C;">0</span>
+        <span class="ulm-proposals-total stat-total">0</span>
         </div>
         <div class="col-xs-2 col-md-2 text-center hide-overflow" >
         <span class="ulm-demobookedcount-total stat-total" >16</span> /
@@ -1028,10 +1028,10 @@
         <strong>Name</strong>
         </div>
         <div class="col-xs-2 col-md-1 text-center hide-overflow">
-        <strong>Deals</strong>
+        <strong class="tsDealTitle">Deals</strong>
         </div>
-        <div class="col-xs-2 col-md-1 text-center hide-overflow">
-        <strong>Proposals</strong>
+        <div class="col-xs-2 col-md-1 text-center hide-overflow" >
+        <strong class="tsPropTitle">Proposals</strong>
         </div>
         <div class="col-xs-2 col-md-2 text-center hide-overflow">
         <strong>Demos</strong><br>
@@ -1059,10 +1059,10 @@
         <strong>Totals</strong>
         </div>
         <div class="col-xs-2 col-md-1 text-center hide-overflow">
-        <span class="badge usr-deals-total stat-total" style="background-color:#428bca;">0</span>
+        <span class="usr-deals-total stat-total">0</span>
         </div>
         <div class="col-xs-2 col-md-1 text-center hide-overflow">
-        <span class="badge usr-proposals-total stat-total" style="background-color:#45AE7C;">0</span>
+        <span class="usr-proposals-total stat-total">0</span>
         </div>
         <div class="col-xs-2 col-md-2 text-center hide-overflow" >
         <span class="usr-demobookedcount-total stat-total" >0</span> /
@@ -1101,10 +1101,10 @@
         </a>
         </div>
         <div class="col-xs-2 col-md-1 text-center">
-        <a href = "?search=2&user=<?php echo $getstatssearch['user'];?>&start_date=<?php echo $_GET['start_date']?>&end_date=<?php echo $_GET['end_date']?>&period=search"><span class="badge usr-deals" style="background-color:#428bca;"><?php echo $getstatssearch['deals'];?></span></a>
+        <a href = "?search=2&user=<?php echo $getstatssearch['user'];?>&start_date=<?php echo $_GET['start_date']?>&end_date=<?php echo $_GET['end_date']?>&period=search"><span class="usr-deals"><?php echo $getstatssearch['deals'];?></span></a>
         </div>
         <div class="col-xs-2 col-md-1 text-center"> 
-        <?php echo '<div class="badge ulm-proposals" style="background-color:#45AE7C;">'.$getstatssearch['proposals'].'</div>';?>
+        <?php echo '<div class="ulm-proposals">'.$getstatssearch['proposals'].'</div>';?>
         </div>
         <div class="col-xs-2 col-md-2 text-center"> 
         <span class="usr-demobookedcount"><?php echo $getstatssearch['demobookedcount'];?></span> / <span class="usr-democount"><?php echo $getstatssearch['democount'];?></span>
@@ -1792,7 +1792,7 @@
                   
               <h3 class="panel-title">Favourites</h3>
                     <span class="badge pull-right sortform" style="margin-top: -22px; margin-left: 5px;">
-                 <form><lable>Arrange By:</lable>
+                 <form><lable>Display By:</lable>
                      <select type="dropdown" name="" >
                         
                          <option value>Company</option>
