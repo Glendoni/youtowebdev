@@ -8,10 +8,10 @@
                             </a>
                             </div>
                             <div class="col-xs-2 col-md-1 text-center">
-                            <a href = "?search=2&user=<?php echo $lastweekstat['user'];?>&period=lastweek"><span class="<?php echo $prefix; ?>-deals" ><?php echo $lastweekstat['deals'];?></span></a>
+                            <a href = "?search=2&user=<?php echo $lastweekstat['user'];?>&period=lastweek"><span class="badge <?php echo $prefix; ?>-deals" style="background-color:#428bca;"><?php echo $lastweekstat['deals'];?></span></a>
                             </div>
                             <div class="col-xs-2 col-md-1 text-center"> 
-                              <?php echo '<div class="lw-proposals" >'.$lastweekstat['proposals'].'</div>';?>
+                              <?php echo '<div class="badge lw-proposals" style="background-color:#45AE7C;">'.$lastweekstat['proposals'].'</div>';?>
                               </div>
                          
                             <div class="col-xs-2 col-md-2 text-center"> 
@@ -31,4 +31,5 @@
                             </div>
                           </div> <!--END ROW-->    
                       <?php endforeach ?>
+                     
                      

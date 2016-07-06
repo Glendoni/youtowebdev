@@ -1,7 +1,7 @@
 <!--<div class="assign-to-wrapper ">-->
-	<!--<button class="btn btn-warning btn-block btn-sm edit-btn" data-toggle="modal" id="editbtn<?php echo $company['id']; ?>"  data-target="#editModal<?php echo $company['id']; ?>">
+	<button class="btn btn-warning btn-block btn-sm edit-btn" data-toggle="modal" id="editbtn<?php echo $company['id']; ?>"  data-target="#editModal<?php echo $company['id']; ?>">
         <span class="ladda-label"> Edit </span>
-    </button> -->
+    </button>
     <!--
 	<?php if(isset($company['assigned_to_name']) and !empty($company['assigned_to_name'])): ?>
 		<?php if($company['assigned_to_id'] == $current_user['id']) : ?>	
