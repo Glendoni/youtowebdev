@@ -36,7 +36,7 @@ function gettagscampList(param){
                             }
                        }
                  })  
-if(!data.length) $('.tagLists'+param).hide();  
+if(data.length) $('.tagLists'+param).show();  
         
             }
         })
