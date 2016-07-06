@@ -349,7 +349,7 @@ if ($your_date < $now){; ?>
 			<?php endif; ?>
 			</div>
 		</div>
-
+ 
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <ul style="margin-left: -57px;" class="tagLists tagLists<?php echo $company['id'];?>"><li>Tags:</li> </ul>
         </div>

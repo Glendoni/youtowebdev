@@ -156,16 +156,15 @@ $( document ).ready(function() {
     
     
     
-    
-     if((/campaigns/.test(window.location.href))) { 
+   if((/campaigns/.test(window.location.href)) ||(/companies/.test(window.location.href))) { 
 
     var regArray = [];
     $('.company-header a').each(function(e,i){
         
         gettagscampList($(this).attr('comp').trim());
-          //console.warn($(this).attr('comp').trim());
+          console.warn($(this).attr('comp').trim());
 
-    })
+})
 
  }
     
