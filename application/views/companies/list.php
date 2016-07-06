@@ -59,6 +59,12 @@
 	<?php endif; ?>
 </h2>
             
+             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="
+    text-align: center;
+">
+            <ul id="taglists" class="tagLists tagLists<?php echo $company['id'];?>"><li></li> </ul>
+        </div>
+            
             
              <!-- THIS IS ME END-->    
 
@@ -225,7 +231,7 @@ if ($your_date < $now){; ?>
 		</div>
 		<div class="col-xs-6 col-md-3 centre" style="margin-top:10px;">
 			<label>Company Number</label>
-			<p>	
+			<p class="registration_number">	
 			 <!--COMPANY NUMBER IF APPLICABLE-->
 			<?php echo isset($company['registration'])?$company['registration']:''; ?>
          	</p>
@@ -348,7 +354,12 @@ if ($your_date < $now){; ?>
 			<?php endif; ?>
 			</div>
 		</div>
+
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <ul style="margin-left: -57px;" class="tagLists tagLists<?php echo $company['id'];?>"><li>Tags:</li> </ul>
         </div>
+        </div>
+
 	</div>
 <?php endforeach; ?>
 <?php endif; ?>

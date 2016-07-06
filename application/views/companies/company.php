@@ -58,7 +58,7 @@ endif; ?>
         
         
         
-        <span class="label pipeline btn-warning comp_details_edit_btn" data-toggle="modal" id="editbtn<?php echo $company['id']; ?>" data-target="#editModal<?php echo $company['id']; ?>">Edit        
+        <span class="label  btn-warning comp_details_edit_btn" data-toggle="modal" id="editbtn<?php echo $company['id']; ?>" data-target="#editModal<?php echo $company['id']; ?>">Edit        
         </span>
 
 
@@ -67,7 +67,7 @@ endif; ?>
 	<?php if(!empty($company['pipeline'])): ?>
 	
 	<?php endif; ?>
-    <span class="label pipeline label-<?php echo str_replace(' ', '', $company['pipeline']); ?>"><?php echo $company['pipeline']?>        
+    <span class="label  label-<?php echo str_replace(' ', '', $company['pipeline']); ?>"><?php echo $company['pipeline']?>        
     <?php if (isset($company['customer_from'])&&($company['pipeline']=='Customer')):?>  <?php echo date("d/m/y",strtotime($company['customer_from']));?><?php  
     $number  = $company['initial_rate'];
 	//$number = 5.00;
@@ -77,7 +77,7 @@ endif; ?>
     </span>
 
     <?php if($company['customer_to']){  ?>
-            <span class="label pipeline label-<?php echo str_replace(' ', '', $company['pipeline']); ?> cancelledPill">
+            <span class="label  label-<?php echo str_replace(' ', '', $company['pipeline']); ?> cancelledPill">
                 Cancelled <?php echo date('d/m/Y',strtotime($company['customer_to'])); ?>
             </span>
     <?php } ?>

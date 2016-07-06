@@ -8,6 +8,41 @@ function dateRequired()     {
     }
 }
 
+
+//console.warn(regArray.join());
+
+
+
+function gettagscampList(param){
+    
+   
+//console.debug(param)
+  //var param = 154537;
+    var parent_tag_name = [];
+     var para = {'companyID': param};
+             $.ajax({
+        type: "POST",
+            data: para,
+            dataType: "json",
+                 url: '../baselist/companies/fe_get_tag',
+            success: function(data) {  
+          
+                 $.each( data, function( key, val) {
+
+                       if(val['parent_tag_name'] != null){
+                              parent_tag_name =    val['parent_tag_name'].replace(' ', '');
+                            if(parent_tag_name != 'Downloads'){
+                                $('.tagLists'+param).append('<li>'+val['name']+'</li>');
+                            }
+                       }
+                 })        
+        
+            }
+        })
+    }
+
+
+
 $(window).load(function(){
     window.setTimeout(function() {
     $(".alert-success").fadeTo(500, 0).slideUp(500, function(){
@@ -117,6 +152,23 @@ $(".source_explanation").prop('required',false);
     }
 
 $( document ).ready(function() {
+    
+    
+    
+    
+     if((/campaigns/.test(window.location.href))) { 
+
+    var regArray = [];
+    $('.company-header a').each(function(e,i){
+        
+        gettagscampList($(this).attr('comp').trim());
+          //console.warn($(this).attr('comp').trim());
+
+    })
+
+ }
+    
+    
     
      if((/companies\/company/.test(window.location.href))) {
        $(window).scroll(stickyActionsMenu);

@@ -2682,7 +2682,49 @@ color:#45AE7C;
     color: #fff;
 }
 
+.popUpCreatedAt{
+    
+    float:left;
+}
 
+
+
+.tagLists li{
+    float: left;
+    padding: 0px 4px 0px 4px;
+    list-style: none;
+    background: #efefef;
+    border-radius: 2px;
+    font-size: 12px;
+    margin: 2px;
+    color: #000000;
+        border: solid thin #e3e3e3;
+}
+
+.tagLists li:first-child{
+    background: #ffffff;
+    font-weight: bold;
+    font-size: 13px;
+    color: #000;
+}
+
+#taglists{
+   display: inline-block; margin: 0;
+    padding: 0;         
+    /* For IE, the outcast */ 
+    zoom:1;         
+    *
+    display: inline;
+    
+    
+}
+
+
+#taglists li:first-child{
+    
+     border: none;
+    
+}
 /*! Hint.css - v2.2.1 - 2016-03-26 //#2b4461
 * http://kushagragour.in/lab/hint/
 * Copyright (c) 2016 Kushagra Gour; Licensed  */
