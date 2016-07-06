@@ -101,7 +101,7 @@ function populate(){
                 sort = vals.split('_');
 
                 if(sort[0] != 'Downloads'){
-                $('.main_'+sort[1].replace(' ', '')).append('<li class="list-group-item folder" glen data="'+sort[2]+'"> <span class="folIcon indicatorshow"></span>'+sort[0]+' <span class="tagNumPlaceholder tagNum_'+sort[2]+'"></span></li>'); 
+                $('.main_'+sort[1].replace(' ', '')).append('<li class="list-group-item folder" data="'+sort[2]+'"> <span class="folIcon indicatorshow"></span>'+sort[0]+'</li>'); 
                 }
                 $('.main_'+sort[1].replace(' ', '')).append('<ul class="subtags sub_'+sort[2]+'" ></ul>');  
  
@@ -235,20 +235,6 @@ function populate(){
 }
             })
 
-            var dataID;
-var liInCat; 
-
-$('.list-group-item').each(function(){
-dataID = $(this).attr('data');
-if(typeof dataID != 'undefined'){
-liInCat  = $('.sub_'+dataID+ ' li').length
-$('.tagNum_'+dataID).text(liInCat)
- 
-//console.log(dataID+ ' number of li in cat ' +liInCat);
-
-}
-})
-            
             } 
     })               
 
@@ -282,7 +268,7 @@ if((/companies/.test(window.location.href))) {
                     preventtagRemove = '<span class="tagRemove" data-tag="'+val['tag_id']+'">x</span>';  
                 }
                  //indicatorshow  =  '<span class="folIcon indicatorshow"></span>';
-           $('.fetags'+val['parent_tag_id']).append('<li class="addedTag tag'+val['tag_id']+' feTagfolderTotal" ><span class="tagName"></span>'+val['name']+ preventtagRemove+'</li>');
+           $('.fetags'+val['parent_tag_id']).append('<li class="addedTag tag'+val['tag_id']+' " style="float:left;"><span class="tagName"></span>'+val['name']+ preventtagRemove+'</li>');
            
                   $('.tafixed').show()
 

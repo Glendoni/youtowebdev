@@ -222,7 +222,7 @@ class MY_Controller extends CI_Controller {
 
 
 		// Pass variables to template views 
-		$this->data['companies_classes'] = array(NULL=>'--- Select Class ---') + $class_options;
+		$this->data['companies_classes'] = array('Unknown'=>'Unknown') + $class_options;
 		$this->data['companies_pipeline'] =  array(NULL=>'--- Select Pipeline ---') + $pipeline_options;		
 		$this->data['address_types'] =  $address_types;
 		$this->data['country_options'] = $this->Companies_model->get_countries_options();

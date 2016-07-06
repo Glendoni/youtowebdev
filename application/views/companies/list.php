@@ -238,16 +238,12 @@ if ($your_date < $now){; ?>
 			</p>
 		</div>
 
-  	<!-- CONTACTS -->
-		<div class="col-xs-6 col-sm-3 centre" style="margin-top:10px;">
-			<strong>Contacts</strong>			
-			<?php if (isset($company['contacts_count'])): ?>
-			<p class="details"><?php echo $company['contacts_count'];?> </p>
-			<?php else: ?>
-			<p class="details">0</p>
-			<?php endif; ?>
-		</div>
-            
+        <div class="col-xs-6 col-md-3 centre" style="margin-top:10px;">
+        		<label>Phone</label>
+        		<p>
+        		<?php echo isset($company['phone'])?$company['phone']:''; ?>                
+           		</p>
+			</div><!--END PHONE NUMBER-->
 		<div class="col-xs-6 col-md-3 centre" style="margin-top:10px;">
 				<label>Class</label>
 				<p>	
@@ -270,7 +266,15 @@ if ($your_date < $now){; ?>
 				<?php echo isset($company['turnover'])? '£'.number_format (round($company['turnover'],-3)):'';?>
 			</p>
         </div>
-	
+		<!-- CONTACTS -->
+		<div class="col-xs-6 col-sm-3 centre">
+			<strong>Contacts</strong>			
+			<?php if (isset($company['contacts_count'])): ?>
+			<p class="details"><?php echo $company['contacts_count'];?> </p>
+			<?php else: ?>
+			<p class="details">0</p>
+			<?php endif; ?>
+		</div>
 		<!-- EMPLOYEES -->
 		<div class="col-xs-6 col-sm-3 centre">
 			<strong>Employees</strong>

@@ -7,10 +7,10 @@
                             </a>
                             </div>
                             <div class="col-xs-2 col-md-1 text-center">
-                            <a href = "?search=2&user=<?php echo $thismonthstat['user'];?>&period=month"><span class="<?php echo $prefix; ?>-deals" ><?php echo $thismonthstat['deals'];?></span></a>
+                            <a href = "?search=2&user=<?php echo $thismonthstat['user'];?>&period=month"><span class="badge <?php echo $prefix; ?>-deals" style="background-color:#428bca;"><?php echo $thismonthstat['deals'];?></span></a>
                             </div>
                             <div class="col-xs-2 col-md-1 text-center"> 
-                              <?php echo '<div class="'.$prefix.'-proposals">'.$thismonthstat['proposals'].'</div>';?>
+                              <?php echo '<div class="badge '.$prefix.'-proposals" style="background-color:#45AE7C;">'.$thismonthstat['proposals'].'</div>';?>
                               </div>
                           
                             <div class="col-xs-2 col-md-2 text-center"> 

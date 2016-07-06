@@ -60,7 +60,9 @@ $sql = "SELECT contacts.*, usr_created_by.name as created_by,  usr_updated_by.na
 FROM contacts
 LEFT JOIN users as usr_updated_by  ON contacts.updated_by=usr_updated_by.id
 LEFT JOIN users as usr_created_by  ON contacts.created_by=usr_created_by.id
-WHERE contacts.company_id=".$company_id." order by eff_to desc, last_name asc";
+WHERE contacts.company_id=".$company_id." order by last_name asc";
+    
+  
      $result = $this->db->query($sql);
       return    $result->result();
 	}
