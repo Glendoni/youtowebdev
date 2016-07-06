@@ -36,7 +36,7 @@ $(document).ready(function(){
                  $.each( category, function( key, vals ) {
 
                     $('.cat'+(key+1)).text(vals).css('text-transform','uppercase');
-valst = vals.replace(' ', '');
+                    valst = vals.replace(' ', '');
                     $('#cat'+(key+1)+ ' .main').addClass('main_'+valst);
                     $('#cat'+(key+1)+ ' .sub').addClass('sub_'+valst);
                     $('#cat'+(key+1)+ ' .item').addClass('item_'+valst);
@@ -65,190 +65,193 @@ valst = vals.replace(' ', '');
 }); //Document End
 
 function populate(){
-     var tagcont = [];
-             $.ajax({
-        type: "GET",
-            dataType: "json",
-        url: 'fe_read_tag',
-        success: function(data) {
-    $(".loading_div").hide();
+    var tagcont = [];
+    $.ajax({
+    type: "GET",
+    dataType: "json",
+    url: 'fe_read_tag',
+    success: function(data) {
+            $(".loading_div").hide();
 
             data = data.sort()  
             var action,items = [],idfk,sub,editBtn,main,sort, category =[] ,sub_cat = [],parcat,parcatId = [],el,elId,i=1,vale,italicFont,subActive, parentcatname;
             var myParam = window.location.href.split("id=");
-           var subcatName;
+            var subcatName;
             $.each( data, function( key, val ) {
-                
-                    el = val['sub_cat_name']+'_'+val['parent_cat_name']+'_'+val['tac_sub_cat_id'];
-                
+
+                el = val['sub_cat_name']+'_'+val['parent_cat_name']+'_'+val['tac_sub_cat_id'];
+
                 if(!$('.subcont div').hasClass('fetagsholder'+val['tac_sub_cat_id'])){
-                    
-                    subcatName = val['sub_cat_name'].replace(/\s/gi, "");
-                    subcatName = subcatName.replace('(', '');
-                    subcatName = subcatName.replace(')', '');
-                    tagcont.push('<div class="col-xs-12 '+subcatName+' fetagsholder'+val['tac_sub_cat_id']+' added-tag-holder"><div class="category-name-holder" >'+val['sub_cat_name']+'</div><ul class="fetags'+val['tac_sub_cat_id']+' sub_ul"></ul></div>'); 
-            }          
-                
+
+                subcatName = val['sub_cat_name'].replace(/\s/gi, "");
+                subcatName = subcatName.replace('(', '');
+                subcatName = subcatName.replace(')', '');
+                tagcont.push('<div class="col-xs-12 '+subcatName+' fetagsholder'+val['tac_sub_cat_id']+' added-tag-holder"><div class="category-name-holder" >'+val['sub_cat_name']+'</div><ul class="fetags'+val['tac_sub_cat_id']+' sub_ul"></ul></div>'); 
+                }          
+
                 vale = val;
                 //console.log(val['cat_id'])
-            if($.inArray(el, category) === -1) category.push(el);
+                if($.inArray(el, category) === -1) category.push(el);
             })
             tagcont = tagcont.sort();
-             $('.subcont').prepend(jQuery.unique(tagcont).join(''));  
- category = category.sort()
-              $.each( category, function( key, vals ) {
+            $('.subcont').prepend(jQuery.unique(tagcont).join(''));  
+            category = category.sort()
+            $.each( category, function( key, vals ) {
+ 
+                sort = vals.split('_');
 
-                 // console.log(vals);
-                  sort = vals.split('_');
-                  
-                  if(sort[0] != 'Downloads'){
-                   $('.main_'+sort[1].replace(' ', '')).append('<li class="list-group-item folder" data="'+sort[2]+'"> <span class="folIcon indicatorshow"></span>'+sort[0]+'</li>'); 
-                  }
-                   $('.main_'+sort[1].replace(' ', '')).append('<ul class="subtags sub_'+sort[2]+'" ></ul>');  
-                  
-               // console.warn('sub_'+sort[2]);
-                 })
-              // $('.tadefault').show();
-             $('.tadefix').hide();
-            
-        
-               $.each( data, function( key, val ) {
-                   
-                  
-                   
-                      if(val['company_id'] != null ){
-                     italicFont  = 'italicFont';
-                          if(myParam[1]==val['company_id']){
-                         
-                          //console.log(val['ct_eff_to'])
-                          
-                          // showTagEval(val['ct_eff_to'])
-                            $('.tadefault').hide();
-                              $('.tadefix').show();
-                          //$('.addedTag').length ? $('.ta').show() + $('.tafixed').show() :   $('.tadefault').show() +$('.tafixed').hide();
-                              
-                          }
-                      }
-                   
-                   if(val['parent_cat_name'] == null){
-                       
-                     // console.log(val['category_name']+' '+val['name'])  
-                      
-                     parentcatname =   val['category_name'].replace(' ', '');
-                       
-                      $('.main_'+parentcatname).append('<li class="list-group-item parent  sub_group sub'+val['tac_sub_cat_id']+' tag" cat_id='+val['tac_sub_cat_id']+' sub="'+val['tag_id']+'"> '+val['name']+'</li>');  
-                      
-                   }
-                   if(val['parent_cat_name']){
-                 parentcatname =   val['parent_cat_name'].replace(' ', '')
-              
-              
-                  $('.sub_'+val['cat_id']).append('<li class="list-group-item sub_group sub'+val['tac_sub_cat_id']+' inner tag" par-sub-id="'+val['cat_id']+'" sub="'+val['tag_id']+'">'+val['name']+'<span class="pull-right label label-master-category">'+val['category_name']+'</span> </li>');  
-                       
-                   }
-                   
-                  //console.log($('.main_'+val['cat_id']+' .sub_'+val['cat_id']+ ' li').length);
-                   
-               })
-                del_ini();
+                if(sort[0] != 'Downloads'){
+                $('.main_'+sort[1].replace(' ', '')).append('<li class="list-group-item folder" glen data="'+sort[2]+'"> <span class="folIcon indicatorshow"></span>'+sort[0]+' <span class="tagNumPlaceholder tagNum_'+sort[2]+'"></span></li>'); 
+                }
+                $('.main_'+sort[1].replace(' ', '')).append('<ul class="subtags sub_'+sort[2]+'" ></ul>');  
+ 
+            })
+            // $('.tadefault').show();
+            $('.tadefix').hide();
+            $.each( data, function( key, val ) {
+                if(val['company_id'] != null ){
+                    italicFont  = 'italicFont';
+                    if(myParam[1]==val['company_id']){
+
+                        $('.tadefault').hide();
+                        $('.tadefix').show();
+                    }
+                }
+
+                if(val['parent_cat_name'] == null){
+
+                    parentcatname =   val['category_name'].replace(' ', '');
+                    $('.main_'+parentcatname).append('<li class="list-group-item parent  sub_group sub'+val['tac_sub_cat_id']+' tag" cat_id='+val['tac_sub_cat_id']+' sub="'+val['tag_id']+'"> '+val['name']+'</li>');  
+
+                }
+                if(val['parent_cat_name']){
+                parentcatname =   val['parent_cat_name'].replace(' ', '')
+                $('.sub_'+val['cat_id']).append('<li class="list-group-item sub_group sub'+val['tac_sub_cat_id']+' inner tag" par-sub-id="'+val['cat_id']+'" sub="'+val['tag_id']+'">'+val['name']+'<span class="pull-right label label-master-category">'+val['category_name']+'</span> </li>');  
+
+                }
+            //console.log($('.main_'+val['cat_id']+' .sub_'+val['cat_id']+ ' li').length);
+            })
+            del_ini();
             gettags();
             tagSearch();
-           //scScroll()
-        
+                   //scScroll()
+
             $('.tagContainer .list-group-item').click(function(){
-               if($(this).parents('.main').length){
-                       $('.activeMain .folIcon').removeClass('indicatorshow');
-                   
-                   
-                   if($(this).hasClass('parent')){
-                       
-                          $('.subtags .tag').hide();
-                       
-                   }
-                  
-               $('.list-group-item').removeClass('activeMain');
-                   $('.folIcon').removeClass('indicatorshow');
-                     if(!$(this).hasClass('parent')){
-                 //        $('.folIcon .indicatorshow').hide();
-                         
-                       
-                         $(this).addClass('activeMain');
-                          $('.activeMain .folIcon').addClass('indicatorshow').show();
-                         //console.warn('i was clicked')
-                     }
-               }
-               
-              $('.tadefault').hide();
+
+                if($(this).hasClass('folder') &&$(this).hasClass('activeMain')  ){
+                    $('.folder').removeClass('activeMain');
+                    $('.activeMain .folIcon').removeClass('indicatorshow');
+                       $('.sub_group').hide();
+ 
+                } else{               
+
+                if($(this).text() ==  $('.activeMain').text() || $(this).hasClass('folder')){
+
+                    $('.list-group-item').removeClass('activeMain');
+                    $('.folIcon').removeClass('indicatorshow');
+                }     
+
+                if($(this).parents('.main').length){
+                    $('.activeMain .folIcon').removeClass('indicatorshow');
+
+                    if($(this).hasClass('parent')){
+
+                        $('.subtags .tag').hide();
+                    }
+
+                    if(!$(this).hasClass('parent')){
+                    //$('.folIcon .indicatorshow').hide();
+
+                        $(this).addClass('activeMain');
+                        $('.activeMain .folIcon').addClass('indicatorshow').show();
+                    //console.warn('i was clicked')
+                    }
+                }
+
+                $('.tadefault').hide();
                 var subid = $(this).attr('data');
-               $('sub_group').removeClass('subActive');
-                
+                $('sub_group').removeClass('subActive');
+
                 if(!$(this).closest(".main").length ){
                     $(this).addClass('subActive');
                 }
-                 del_ini();
-            if(!$(this).hasClass('sub_group')){
-                 $('.parent').removeClass('sub_group');
-                $('.sub_group').hide();
-                
-    //$('.subtags').hide()
-                
-                $('.sub'+subid).show("slide", { direction: "left" }, 200);
-               $('.parent').addClass('sub_group');
-            }else{
+                del_ini();
+
+                if(!$(this).hasClass('sub_group')){
+                    $('.parent').removeClass('sub_group');
+                    $('.sub_group').hide();
+
+                //$('.subtags').hide()
+
+                    $('.sub'+subid).show("slide", { direction: "left" }, 200);
+                    $('.parent').addClass('sub_group');
+
+                }else{
                     var myParam = window.location.href.split("id=");
-                
-                
-              var   param =  checkUrlParam(myParam);
-                var sub = $(this).attr('sub');
-                  var par_sub_id = $(this).attr('par-sub-id');
-                 $(this).addClass('subActive');
+                    var   param =  checkUrlParam(myParam);
+                    var sub = $(this).attr('sub');
+                    var par_sub_id = $(this).attr('par-sub-id');
+                    $(this).addClass('subActive');
                     //JS JASON WITH POST PARAMETER
-                     var para = {'tagid': sub, 'companyID': param};
-                      $.ajax({
-                        type: "POST",
-                          data: para,
-                            dataType: "json",
-                        url: "fe_add_tag",
-                        success: function(data) { 
-                            if(data['error']){
-                                 $('.addedTag').remove();
-                                gettags();
-                           subActive = $('.subActive').text();
-                                
-                                $('.sub_group').removeClass('subActive');
-                                  $( ".sub_group").unbind( "subActive" ); 
-                                
-                                //console.error(data['error']);
-                               
-                                
-                            }else if (data['success']){
-                                
-                                  gettags();
-                                   $('.ta').show();
-                              // $('.fetags'+par_sub_id).append('<li class="addedTag tag'+$('.subActive').attr('sub')+'" style="float:left;"><span class="tagName"></span>'+$('.subActive').text()+'<span class="tagRemove" data-tag="'+$('.subActive').attr('sub')+'">x</span><input type="hidden" name="tags[]" value=""></li>');
-                            
-                                    $('.tadefault').hide();
-                                $('.tafixed').show();
-                                   $('.sub_group').removeClass('subActive');
-                                  $( ".sub_group").unbind( "subActive" );  
-                                
-                                
-                                 
-                                tagSearch();
-                                 del_ini();
-                              
-                            }
-                                
-                        }
-                    });
-                
-                
-            }
+                    var para = {'tagid': sub, 'companyID': param};
+                    $.ajax({
+                    type: "POST",
+                    data: para,
+                    dataType: "json",
+                    url: "fe_add_tag",
+                    success: function(data) { 
+                        if(data['error']){
+                        $('.addedTag').remove();
+                        gettags();
+                        subActive = $('.subActive').text();
+                        $('.sub_group').removeClass('subActive');
+                        $( ".sub_group").unbind( "subActive" ); 
+                        //console.error(data['error']);
+                        }else if (data['success']){
+                        gettags();
+                        $('.ta').show();
+                        // $('.fetags'+par_sub_id).append('<li class="addedTag tag'+$('.subActive').attr('sub')+'" style="float:left;"><span class="tagName"></span>'+$('.subActive').text()+'<span class="tagRemove" data-tag="'+$('.subActive').attr('sub')+'">x</span><input type="hidden" name="tags[]" value=""></li>');
+
+                        $('.tadefault').hide();
+                        $('.tafixed').show();
+                        $('.sub_group').removeClass('subActive');
+                        $( ".sub_group").unbind( "subActive" );  
+
+
+
+                    tagSearch();
+                    del_ini();
+
+                    }
+
+                }
+                });
+
+
+                }
+
+
+
+}
+            })
+
+            var dataID;
+var liInCat; 
+
+$('.list-group-item').each(function(){
+dataID = $(this).attr('data');
+if(typeof dataID != 'undefined'){
+liInCat  = $('.sub_'+dataID+ ' li').length
+$('.tagNum_'+dataID).text(liInCat)
+ 
+//console.log(dataID+ ' number of li in cat ' +liInCat);
+
+}
 })
-                        
-        } 
+            
+            } 
     })               
-             
+
 }
 
 
@@ -279,7 +282,7 @@ if((/companies/.test(window.location.href))) {
                     preventtagRemove = '<span class="tagRemove" data-tag="'+val['tag_id']+'">x</span>';  
                 }
                  //indicatorshow  =  '<span class="folIcon indicatorshow"></span>';
-           $('.fetags'+val['parent_tag_id']).append('<li class="addedTag tag'+val['tag_id']+' " style="float:left;"><span class="tagName"></span>'+val['name']+ preventtagRemove+'</li>');
+           $('.fetags'+val['parent_tag_id']).append('<li class="addedTag tag'+val['tag_id']+' feTagfolderTotal" ><span class="tagName"></span>'+val['name']+ preventtagRemove+'</li>');
            
                   $('.tafixed').show()
 
