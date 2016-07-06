@@ -59,12 +59,7 @@
 	<?php endif; ?>
 </h2>
             
-             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="
-    text-align: center;
-">
-            <ul id="taglists" class="tagLists tagLists<?php echo $company['id'];?>"><li></li> </ul>
-        </div>
-            
+        
             
              <!-- THIS IS ME END-->    
 
