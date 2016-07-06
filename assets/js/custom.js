@@ -24,7 +24,7 @@ function gettagscampList(param){
         type: "POST",
             data: para,
             dataType: "json",
-                 url: '../baselist/companies/fe_get_tag',
+                 url: 'companies/fe_get_tag',
             success: function(data) {  
           
                  $.each( data, function( key, val) {
