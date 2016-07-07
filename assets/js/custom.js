@@ -162,7 +162,7 @@ $( document ).ready(function() {
     $('.company-header a').each(function(e,i){
         
         gettagscampList($(this).attr('comp').trim());
-          console.warn($(this).attr('comp').trim());
+          //console.warn($(this).attr('comp').trim());
 
 })
 

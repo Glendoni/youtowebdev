@@ -146,12 +146,16 @@ if ($company['actioned_at1'] > 0){
 <?php echo date("l jS F Y",strtotime($company['planned_at2']));?>
 </div>
 <?php
-$now = time (); // or your date as well
-$your_date = strtotime($company['planned_at2']);
-$days_since = floor($datediff/(60*60*24));
-if ($your_date < $now){; ?>
-<div><span class="label label-danger" style="font-size:10px;">Overdue</span></div><?php } else {}
-?>
+$now = time ();
+    $compdate = explode('T',$company['planned_at2']);
+$your_date = strtotime($compdate[0]);
+if ($your_date < $now){; 
+     $datediff = $now - $your_date;
+     $daysoverdue = floor($datediff/(60*60*24));?>
+<div><span class="label label-danger" style="font-size:10px;">
+<?php   if ($daysoverdue > 1) {echo $daysoverdue." Days";} elseif($daysoverdue == 1){  echo $daysoverdue." Day";   }else{echo "";};?>  Overdue </span></div>
+
+<?php } else {}?>
 <?php endif; ?>
 
 </div>
