@@ -1,5 +1,4 @@
 
-
 <?php  $company = $companies[0]; ?>
 <?php if (!empty($_GET['campaign_id'])): 
 $campaign_id = $_GET['campaign_id'];
@@ -54,10 +53,6 @@ endif; ?>
 
 	<div class="row piplineUdate" style="margin-top:5px; text-align:center;">
 
- 
-        
-        
-        
         <span class="label  btn-warning comp_details_edit_btn" data-toggle="modal" id="editbtn<?php echo $company['id']; ?>" data-target="#editModal<?php echo $company['id']; ?>">Edit        
         </span>
 
@@ -143,6 +138,8 @@ Never
 <?php echo date("l jS F Y",strtotime($company['actioned_at1']));?>
 <?php
 $now = time (); // or your date as well
+
+
 $your_date = strtotime($company['actioned_at1']);
 $datediff = abs($now - $your_date);
 $days_since = floor($datediff/(60*60*24));
@@ -169,12 +166,13 @@ if ($company['actioned_at1'] > 0){
 </div>
 <?php
 $now = time ();
-$your_date = strtotime($company['planned_at2']);
+    $compdate = explode('T',$company['planned_at2']);
+$your_date = strtotime($compdate[0]);
 if ($your_date < $now){; 
      $datediff = $now - $your_date;
-     $daysoverdue = floor($datediff/(60*60*24))+1;?>
+     $daysoverdue = floor($datediff/(60*60*24));?>
 <div><span class="label label-danger" style="font-size:10px;">
-<?php echo $daysoverdue; if ($daysoverdue > 1) {echo " Days";} else {echo " Day";};?>  Overdue </span></div>
+<?php   if ($daysoverdue > 1) {echo $daysoverdue." Days";} elseif($daysoverdue == 1){  echo $daysoverdue." Day";   }else{echo "";};?>  Overdue </span></div>
 
 <?php } else {}?>
 <?php endif; ?>
