@@ -626,7 +626,7 @@
         <a href = "?search=2&user=<?php echo $getstatssearch['user'];?>&start_date=<?php echo $_GET['start_date']?>&end_date=<?php echo $_GET['end_date']?>&period=search"><span class="badge sr-deals" style="background-color:#428bca;"><?php echo $getstatssearch['deals'];?></span></a>
         </div>
         <div class="col-xs-2 col-md-1 text-center"> 
-        <?php echo '<div class="badge lm-proposals" style="background-color:#45AE7C;">'.$getstatssearch['proposals'].'</div>';?>
+        <?php echo '<div class="badge sr-proposals" style="background-color:#45AE7C;">'.$getstatssearch['proposals'].'</div>';?>
         </div>
         <div class="col-xs-2 col-md-2 text-center"> 
         <span class="sr-demobookedcount"><?php echo $getstatssearch['demobookedcount'];?></span> / <span class="sr-democount"><?php echo $getstatssearch['democount'];?></span>
@@ -1104,7 +1104,7 @@
         <a href = "?search=2&user=<?php echo $getstatssearch['user'];?>&start_date=<?php echo $_GET['start_date']?>&end_date=<?php echo $_GET['end_date']?>&period=search"><span class="badge usr-deals" style="background-color:#428bca;"><?php echo $getstatssearch['deals'];?></span></a>
         </div>
         <div class="col-xs-2 col-md-1 text-center"> 
-        <?php echo '<div class="badge ulm-proposals" style="background-color:#45AE7C;">'.$getstatssearch['proposals'].'</div>';?>
+        <?php echo '<div class="badge usr-proposals" style="background-color:#45AE7C;">'.$getstatssearch['proposals'].'</div>';?>
         </div>
         <div class="col-xs-2 col-md-2 text-center"> 
         <span class="usr-demobookedcount"><?php echo $getstatssearch['demobookedcount'];?></span> / <span class="usr-democount"><?php echo $getstatssearch['democount'];?></span>

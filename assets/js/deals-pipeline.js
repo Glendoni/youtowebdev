@@ -17,8 +17,8 @@
     var end = new Date(monthevalconcat); //yyyy-mm-dd
     var mon =['January','February','March','April','May','June','July','August','September','October','November','December' ];
         while(start <= end){
-            var mm = ((start.getMonth()+2)>=10)?(start.getMonth()+2):'0'+(start.getMonth()+1);
-            var dd = ((start.getDate())>=10)? (start.getDate()) : '0' + (start.getDate());
+            var mm = ((start.getMonth()+2)>=12)?(start.getMonth()+2):'0'+(start.getMonth()+1);
+            var dd = ((start.getDate())>=12)? (start.getDate()) : '0' + (start.getDate());
             var yyyy = start.getFullYear();
             var date = yyyy +"-"+mm+"-"+dd; //yyyy-mm-dd
             if(dd == 01){
