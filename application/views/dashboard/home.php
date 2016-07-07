@@ -579,7 +579,7 @@
         <span class="sr-deals-total stat-total">0</span>
         </div>
         <div class="col-xs-2 col-md-1 text-center hide-overflow">
-        <span class="sr-proposals-total stat-total" >10</span>
+        <span class="sr-proposals-total stat-total" >0</span>
         </div>
         <div class="col-xs-2 col-md-2 text-center hide-overflow" >
         <span class="sr-demobookedcount-total stat-total" >0</span> /
