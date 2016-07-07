@@ -249,31 +249,31 @@
         <strong>Totals</strong>
         </div>
         <div class="col-xs-1 col-md-1 text-center hide-overflow">
-        <span class="badge tw-deals-total stat-total" style="background-color:#428bca;">0</span>
+        <span class="badge utw-deals-total stat-total" style="background-color:#428bca;">0</span>
         </div>
         <div class="col-xs-2 col-md-1 text-center hide-overflow">
-        <span class="badge tw-proposals-total stat-total" style="background-color:#45AE7C;">0</span>
+        <span class="badge utw-proposals-total stat-total" style="background-color:#45AE7C;">0</span>
         </div>
         <div class="col-xs-2 col-md-2 text-center hide-overflow" >
-        <span class="tw-demobookedcount-total stat-total" >4</span> /
-        <span class="tw-democount-total stat-total"  >0</span>
+        <span class="utw-demobookedcount-total stat-total" >0</span> /
+        <span class="utw-democount-total stat-total"  >0</span>
         </div>
         <div class="col-xs-2 col-md-1 text-center hide-overflow">
-        <span class="tw-meetingbooked-total stat-total" >0</span> /  
-        <span class="tw-meetingcount-total stat-total" >0</span>
+        <span class="utw-meetingbooked-total stat-total" >0</span> /  
+        <span class="utw-meetingcount-total stat-total" >0</span>
         </div>
 
         <div class="col-md-2 hidden-xs text-center hide-overflow">
-        <span class="tw-salescall-total stat-total" >1</span> / 
-        <span class="tw-introcall-total stat-total">0</span>
+        <span class="utw-salescall-total stat-total" >0</span> / 
+        <span class="utw-introcall-total stat-total">0</span>
         </div>
         <div class="col-md-2 hidden-xs text-center hide-overflow">
-        <span class="tw-key_review_added-total stat-total">0</span> / 
-        <span class="tw-key_review_occuring-total stat-total">5</span>
+        <span class="utw-key_review_added-total stat-total">0</span> / 
+        <span class="utw-key_review_occuring-total stat-total">0</span>
         </div>
 
         <div class="col-xs-2 col-md-1 text-center hide-overflow"> 
-        <span class="tw-duediligence-total stat-total">0</span>
+        <span class="utw-duediligence-total stat-total">0</span>
         </div>
         </div>
 
