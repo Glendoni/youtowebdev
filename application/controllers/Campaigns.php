@@ -261,5 +261,6 @@ class Campaigns extends MY_Controller {
 		
 		redirect('/campaigns');
 	}
+    
 
 }

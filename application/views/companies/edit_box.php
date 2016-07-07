@@ -235,14 +235,16 @@
             <div class="modal-footer">
                 
             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-               <small class="popUpCreatedAt"><b>Last Updated:</b>
-                    <?php echo isset($company['updated_at'])?date("d/m/Y",strtotime($company['updated_at']))." - ".$company['updated_by_name']:'Never'; ?></small>
+               <small class="popUpCreatedAt">
+                    <b>Company Created:</b> <?php echo date("d/m/Y",strtotime($company['created_at']));?> - <?php echo $created_by_name['name']; ?>
+                   </small>
             </div>
                 
                 
                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                       <small>
-                          <b>Company Created:</b> <?php echo date("d/m/Y",strtotime($company['created_at']));?> - <?php echo $created_by_name['name']; ?>
+                      <b>Last Updated:</b>
+                    <?php echo isset($company['updated_at'])?date("d/m/Y",strtotime($company['updated_at']))." - ".$company['updated_by_name']:'Never'; ?>   
                 </small>
                    </div>
                 

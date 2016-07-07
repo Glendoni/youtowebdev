@@ -191,13 +191,14 @@
 
       
                 <small class="popUpCreatedAt">
-                    <?php echo $contact->updated_by? '<b>Last Updated:</b>'. $contact->contact_updated_at.' - '.$contact->updated_by  : ''; ?>
+                     <b>Contact Created:</b> <?php echo $contact->contact_created_at; ?>  <?php echo $contact->created_by; ?>
             </small> 
                
     </div>
       <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-          <small >
-                <b>Contact Created:</b> <?php echo $contact->contact_created_at; ?> - <?php echo $contact->created_by; ?></small>  
+          <small>
+              <?php echo $contact->updated_by? '<b>Last Updated:</b>'. $contact->contact_updated_at.' - '.$contact->updated_by  : ''; ?>
+               </small>  
                 
             </div>
 	      	<?php echo form_close(); ?>

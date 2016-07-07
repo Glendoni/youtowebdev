@@ -579,7 +579,7 @@
         <span class="sr-deals-total stat-total">0</span>
         </div>
         <div class="col-xs-2 col-md-1 text-center hide-overflow">
-        <span class="sr-proposals-total stat-total" >0</span>
+        <span class="sr-proposals-total stat-total" >10</span>
         </div>
         <div class="col-xs-2 col-md-2 text-center hide-overflow" >
         <span class="sr-demobookedcount-total stat-total" >0</span> /
@@ -623,10 +623,10 @@
         </a>
         </div>
         <div class="col-xs-2 col-md-1 text-center">
-        <a href = "?search=2&user=<?php echo $getstatssearch['user'];?>&start_date=<?php echo $_GET['start_date']?>&end_date=<?php echo $_GET['end_date']?>&period=search"><span class="badge sr-deals" style="background-color:#428bca;"><?php echo $getstatssearch['deals'];?></span></a>
+        <a href = "?search=2&user=<?php echo $getstatssearch['user'];?>&start_date=<?php echo $_GET['start_date']?>&end_date=<?php echo $_GET['end_date']?>&period=search"><span class="sr-deals"><?php echo $getstatssearch['deals'];?></span></a>
         </div>
         <div class="col-xs-2 col-md-1 text-center"> 
-        <?php echo '<div class="badge lm-proposals" style="background-color:#45AE7C;">'.$getstatssearch['proposals'].'</div>';?>
+        <?php echo '<div class=" sr-proposals" >'.$getstatssearch['proposals'].'</div>';?>
         </div>
         <div class="col-xs-2 col-md-2 text-center"> 
         <span class="sr-demobookedcount"><?php echo $getstatssearch['demobookedcount'];?></span> / <span class="sr-democount"><?php echo $getstatssearch['democount'];?></span>
@@ -1104,7 +1104,7 @@
         <a href = "?search=2&user=<?php echo $getstatssearch['user'];?>&start_date=<?php echo $_GET['start_date']?>&end_date=<?php echo $_GET['end_date']?>&period=search"><span class="usr-deals"><?php echo $getstatssearch['deals'];?></span></a>
         </div>
         <div class="col-xs-2 col-md-1 text-center"> 
-        <?php echo '<div class="ulm-proposals">'.$getstatssearch['proposals'].'</div>';?>
+        <?php echo '<div class="usr-proposals">'.$getstatssearch['proposals'].'</div>';?>
         </div>
         <div class="col-xs-2 col-md-2 text-center"> 
         <span class="usr-demobookedcount"><?php echo $getstatssearch['demobookedcount'];?></span> / <span class="usr-democount"><?php echo $getstatssearch['democount'];?></span>
