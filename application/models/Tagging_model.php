@@ -418,7 +418,7 @@ ON tc.id = t.category_id
         AND ct.eff_to IS NULL 
         AND t.eff_from <= DATE(NOW()) 
         AND t.eff_to IS NULL
-        ORDER BY t.name'; 
+        ORDER BY tc.name'; 
          
         $query = $this->db->query($sql);
 

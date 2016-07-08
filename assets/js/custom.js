@@ -34,21 +34,19 @@ function gettagscampList(param){
 
 
  //console.log(parent_tag_name_holder.indexOf('tagLists'+val['parent_tag_id']))
+//console.log(parent_tag_name_holder.indexOf(val['parent_tag_name']+val['parent_tag_id']) )
+if(parent_tag_name_holder.indexOf(val['parent_tag_name']) == -1){
 
-if(parent_tag_name_holder.indexOf('tagLists'+val['parent_tag_id']) == -1){
-
-
-
-parent_tag_name_holder.push('tagLists'+val['parent_tag_id']);
+    parent_tag_name_holder.push(val['parent_tag_name']);
     
-    $('.tagLists'+param).append('<div class="col-md-4 tag_display_holder"><div class="tag-display-header">'+val['parent_tag_name']+'</div><ul class="listTagSummary tagLists'+param+val['parent_tag_id']+'"></ul></div>') ;
+    $('.tagLists'+param).append('<div class="col-md-4 tag_display_holder"><div class="tag-display-header">'+val['parent_tag_name']+'</div><ul class="listTagSummary tagLists'+param+val['parent_tag_id']+'"></ul></div>');
                 //console.log("Needle found.");
     
 };
  
                 })
                 
-                
+                console.log(parent_tag_name_holder.join(""));
                 
                 // $('.tagLists'+param).append(parent_tag_name_holder.join(""));
               populateGetTagsCampList(data,param)
@@ -76,9 +74,9 @@ function populateGetTagsCampList(data,param){
                        if(val['parent_tag_name'] != null){
                               parent_tag_name =    val['parent_tag_name'].replace(' ', '');
                             //if(parent_tag_name != 'Downloads'){
-                                   console.log(val['name']);
-                                $('.tagLists'+param+val['parent_tag_id']).append('<li class="game">'+val['name']+'</li>');
-                                        parent_tag_name_holder.push(val['parent_tag_name']);
+                                   //console.log(val['name']);
+                                $('.tagLists'+param+val['parent_tag_id']).append('<li>'+val['name']+'</li>');
+                                        //parent_tag_name_holder.push(val['parent_tag_name']);
                               //  }
                        }
                  }) 
