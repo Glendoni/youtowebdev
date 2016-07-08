@@ -18,6 +18,7 @@ function gettagscampList(param){
    
 //console.debug(param)
   //var param = 154537;
+     var parent_tag_name_holder = [];
     var parent_tag_name = [];
      var para = {'companyID': param};
              $.ajax({
@@ -26,21 +27,66 @@ function gettagscampList(param){
             dataType: "json",
                  url: 'companies/fe_get_tag',
             success: function(data) {  
-          
-                 $.each( data, function( key, val) {
+                $.each( data, function( key, val) {
+                    
+                  
+                 //parent_tag_name_holder.push('<ul class="tagLists'+param+val['parent_tag_id']+'"><li>'+val['name']+'<li></ul>')  
+
+
+ //console.log(parent_tag_name_holder.indexOf('tagLists'+val['parent_tag_id']))
+
+if(parent_tag_name_holder.indexOf('tagLists'+val['parent_tag_id']) == -1){
+
+
+
+parent_tag_name_holder.push('tagLists'+val['parent_tag_id']);
+    
+    $('.tagLists'+param).append('<ul class="listTagSummary tagLists'+param+val['parent_tag_id']+'"><li>'+val['parent_tag_name']+'<li></ul>') ;
+                //console.log("Needle found.");
+    
+};
+ 
+                })
+                
+                
+                
+                // $('.tagLists'+param).append(parent_tag_name_holder.join(""));
+              populateGetTagsCampList(data,param)
+if(data.length) $('.tagLists'+param).show(); 
+                
+            
+               //console.log(parent_tag_name_holder.join())
+        
+            }
+                  
+        })
+    }
+
+
+
+
+function populateGetTagsCampList(data,param){
+    
+    
+      var parent_tag_name_holder = [];
+    var parent_tag_name = [];
+     var para = {'companyID': param};
+         $.each( data, function( key, val) {
 
                        if(val['parent_tag_name'] != null){
                               parent_tag_name =    val['parent_tag_name'].replace(' ', '');
                             if(parent_tag_name != 'Downloads'){
-                                $('.tagLists'+param).append('<li>'+val['name']+'</li>');
-                            }
+                                   console.log(val['name']);
+                                $('.tagLists'+param+val['parent_tag_id']).append('<li class="game">'+val['name']+'</li>');
+                                        parent_tag_name_holder.push(val['parent_tag_name']);
+                                }
                        }
-                 })  
-if(data.length) $('.tagLists'+param).show();  
-        
-            }
-        })
-    }
+                 }) 
+    
+    
+}
+
+
 
 
 
@@ -158,13 +204,12 @@ $( document ).ready(function() {
     
    if((/campaigns/.test(window.location.href)) ||(/companies/.test(window.location.href))) { 
 
-    var regArray = [];
-    $('.company-header a').each(function(e,i){
-        
-        gettagscampList($(this).attr('comp').trim());
-          //console.warn($(this).attr('comp').trim());
+            var regArray = [];
+            $('.company-header a').each(function(e,i){
 
-})
+                gettagscampList($(this).attr('comp').trim());
+                  //console.warn($(this).attr('comp').trim());
+            })
 
  }
     

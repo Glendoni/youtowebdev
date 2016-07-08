@@ -2690,30 +2690,31 @@ color:#45AE7C;
 
 
 .tagLists li{
-    float: left;
+    float:left;
     padding: 0px 4px 0px 4px;
     list-style: none;
-    background: #efefef;
+    background: #bff1ea;
     border-radius: 2px;
     font-size: 12px;
     margin: 2px;
     color: #000000;
-        border: solid thin #e3e3e3;
+      
 }
 
 .tagLists li:first-child{
-    background: #ffffff;
-    font-weight: bold;
+    clear: both;
+    background: #eee;
+    font-weight: 600;
     font-size: 13px;
     color: #000;
+      border: solid thin #e3e3e3;
+    padding-right: 1px;
 }
 
 #taglists{
    display: inline-block; margin: 0;
     padding: 0;         
-    /* For IE, the outcast */ 
-    zoom:1;         
-    *
+    
     display: inline;
     
     
