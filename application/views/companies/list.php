@@ -308,8 +308,6 @@ if ($your_date < $now){;
 		</div>
 		</div>
 	
-			<hr>
-
 	<div class="row">
 		<!-- TAGS -->
         <div class="tagLists tagLists<?php echo $company['id'];?>">
