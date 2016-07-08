@@ -249,31 +249,31 @@
         <strong>Totals</strong>
         </div>
         <div class="col-xs-1 col-md-1 text-center hide-overflow">
-        <span class="utw-deals-total stat-total">0</span>
+        <span class="tw-deals-total stat-total">0</span>
         </div>
         <div class="col-xs-2 col-md-1 text-center hide-overflow">
-        <span class="utw-proposals-total stat-total">0</span>
+        <span class="tw-proposals-total stat-total">0</span>
         </div>
         <div class="col-xs-2 col-md-2 text-center hide-overflow" >
-        <span class="utw-demobookedcount-total stat-total" >4</span> /
-        <span class="utw-democount-total stat-total"  >0</span>
+        <span class="tw-demobookedcount-total stat-total" >4</span> /
+        <span class="tw-democount-total stat-total"  >0</span>
         </div>
         <div class="col-xs-2 col-md-1 text-center hide-overflow">
-        <span class="utw-meetingbooked-total stat-total" >0</span> /  
-        <span class="utw-meetingcount-total stat-total" >0</span>
+        <span class="tw-meetingbooked-total stat-total" >0</span> /  
+        <span class="tw-meetingcount-total stat-total" >0</span>
         </div>
 
         <div class="col-md-2 hidden-xs text-center hide-overflow">
-        <span class="utw-salescall-total stat-total" >0</span> / 
-        <span class="utw-introcall-total stat-total">0</span>
+        <span class="tw-salescall-total stat-total" >0</span> / 
+        <span class="tw-introcall-total stat-total">0</span>
         </div>
         <div class="col-md-2 hidden-xs text-center hide-overflow">
-        <span class="utw-key_review_added-total stat-total">0</span> / 
-        <span class="utw-key_review_occuring-total stat-total">5</span>
+        <span class="tw-key_review_added-total stat-total">0</span> / 
+        <span class="tw-key_review_occuring-total stat-total">5</span>
         </div>
 
         <div class="col-xs-2 col-md-1 text-center hide-overflow"> 
-        <span class="utw-duediligence-total stat-total">0</span>
+        <span class="tw-duediligence-total stat-total">0</span>
         </div>
         </div>
 
@@ -732,31 +732,31 @@
         <strong>Totals</strong>
         </div>
         <div class="col-xs-1 col-md-1 text-center hide-overflow">
-        <span class="tw-deals-total stat-total">0</span>
+        <span class="utw-deals-total stat-total">0</span>
         </div>
         <div class="col-xs-2 col-md-1 text-center hide-overflow">
-        <span class="tw-proposals-total stat-total">0</span>
+        <span class="utw-proposals-total stat-total">0</span>
         </div>
         <div class="col-xs-2 col-md-2 text-center hide-overflow" >
-        <span class="tw-demobookedcount-total stat-total" >0</span> /
-        <span class="tw-democount-total stat-total"  >0</span>
+        <span class="utw-demobookedcount-total stat-total" >0</span> /
+        <span class="utw-democount-total stat-total"  >0</span>
         </div>
         <div class="col-xs-2 col-md-1 text-center hide-overflow">
-        <span class="tw-meetingbooked-total stat-total" >0</span> /  
-        <span class="tw-meetingcount-total stat-total" >0</span>
+        <span class="utw-meetingbooked-total stat-total" >0</span> /  
+        <span class="utw-meetingcount-total stat-total" >0</span>
         </div>
 
         <div class="col-md-2 hidden-xs text-center hide-overflow">
-        <span class="tw-salescall-total stat-total" >0</span> / 
-        <span class="tw-introcall-total stat-total">0</span>
+        <span class="utw-salescall-total stat-total" >0</span> / 
+        <span class="utw-introcall-total stat-total">0</span>
         </div>
         <div class="col-md-2 hidden-xs text-center hide-overflow">
-        <span class="tw-key_review_added-total stat-total">0</span> / 
-        <span class="tw-key_review_occuring-total stat-total">0</span>
+        <span class="utw-key_review_added-total stat-total">0</span> / 
+        <span class="utw-key_review_occuring-total stat-total">0</span>
         </div>
 
         <div class="col-xs-2 col-md-1 text-center hide-overflow"> 
-        <span class="tw-duediligence-total stat-total">0</span>
+        <span class="utw-duediligence-total stat-total">0</span>
         </div>
         </div>
 
@@ -769,25 +769,25 @@
         </a>
         </div>
         <div class="col-xs-1 col-md-1 text-center">
-        <a href = "?search=2&user=<?php echo $stat['user'];?>&period=week"><span class="tw-deals"><?php echo $stat['deals'];?></span></a>
+        <a href = "?search=2&user=<?php echo $stat['user'];?>&period=week"><span class="utw-deals"><?php echo $stat['deals'];?></span></a>
         </div>
         <div class="col-xs-2 col-md-1 text-center"> 
-        <?php echo '<div class="tw-proposals">'.$stat['proposals'].'</div>';?>
+        <?php echo '<div class="utw-proposals">'.$stat['proposals'].'</div>';?>
         </div>
         <div class="col-xs-2 col-md-2 text-center"> 
-        <span class="tw-demobookedcount"><?php echo $stat['demobookedcount'];?></span> / <span class="tw-democount"><?php echo $stat['democount'];?></span>
+        <span class="utw-demobookedcount"><?php echo $stat['demobookedcount'];?></span> / <span class="utw-democount"><?php echo $stat['democount'];?></span>
         </div>
         <div class="col-xs-2 col-md-1 text-center">
-        <span class="tw-meetingbooked"><?php echo $stat['meetingbooked'];?></span> / <span class="tw-meetingcount"><?php echo $stat['meetingcount'];?></span>
+        <span class="utw-meetingbooked"><?php echo $stat['meetingbooked'];?></span> / <span class="utw-meetingcount"><?php echo $stat['meetingcount'];?></span>
         </div>
         <div class="col-xs-2 col-md-2 text-center"> 
-        <span class="tw-salescall"><?php echo $stat['salescall'];?></span> / <span class="tw-introcall"><?php echo $stat['introcall'];?></span>
+        <span class="utw-salescall"><?php echo $stat['salescall'];?></span> / <span class="utw-introcall"><?php echo $stat['introcall'];?></span>
         </div>
         <div class="col-md-2 hidden-xs text-center">
-        <span class="tw-key_review_added"><?php echo $stat['key_review_added'];?></span> / <span class="tw-key_review_occuring"><?php echo $stat['key_review_occuring'];?></span>
+        <span class="utw-key_review_added"><?php echo $stat['key_review_added'];?></span> / <span class="utw-key_review_occuring"><?php echo $stat['key_review_occuring'];?></span>
         </div>
         <div class="col-md-1 hidden-xs text-center">
-        <span class="tw-duediligence"><?php echo $stat['duediligence'];?></span>
+        <span class="utw-duediligence"><?php echo $stat['duediligence'];?></span>
         </div>
         </div> <!--END ROW-->    
         <?php endforeach ?>
