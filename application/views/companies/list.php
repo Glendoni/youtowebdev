@@ -24,10 +24,9 @@
             
             
             
-<h2 class="company-header">
-		  <a href="<?php echo site_url();?>companies/company?id=<?php echo $company['id'];?><?php echo !empty($current_campaign_id)?'&campaign_id='.$current_campaign_id:''; ?>" <?php if(($current_user['new_window']=='t')): ?> target="_blank"<?php endif; ?> class="compa"  data-camp="pos<?php echo $i++ ; ?>" comp="<?php echo $company['id'];?>"><?php $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' );echo str_replace($words, ' ',$company['name']); ?></a>
-
-         <!-- THIS IS ME -->    
+			<h2 class="company-header">
+			<a href="<?php echo site_url();?>companies/company?id=<?php echo $company['id'];?><?php echo !empty($current_campaign_id)?'&campaign_id='.$current_campaign_id:''; ?>" <?php if(($current_user['new_window']=='t')): ?> target="_blank"<?php endif; ?> class="compa"  data-camp="pos<?php echo $i++ ; ?>" comp="<?php echo $company['id'];?>"><?php $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' );echo str_replace($words, ' ',$company['name']); ?></a>
+		<!-- THIS IS ME -->    
        <?php $bgcolor =  explode(',',$current_user['image']) ?>
             <?php if(isset($company['assigned_to_name']) and !empty($company['assigned_to_name'])): ?>
 		<?php if($company['assigned_to_id'] == $current_user['id']) : ?>	
@@ -308,9 +307,15 @@ if ($your_date < $now){;
 						<?php endif; ?>
 		</div>
 		</div>
-		<div class="col-md-12">
+	
 			<hr>
+
+	<div class="row">
+		<!-- TAGS -->
+        <div class="tagLists tagLists<?php echo $company['id'];?>">
+        </div>
 		</div>
+		<hr>
 
 		<div class="row">
             
@@ -353,14 +358,8 @@ if ($your_date < $now){;
 			<?php endif; ?>
 			</div>
 		</div>
- <hr />
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 tagLists tagLists<?php echo $company['id'];?>">
-            <div style="
-    font-weight: bold;
-    font-size: 13px;
-">Tags </div>
-        </div>
-        </div>
+ <hr>
+
 
 	</div>
 <?php endforeach; ?>
