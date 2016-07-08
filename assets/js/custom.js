@@ -75,11 +75,11 @@ function populateGetTagsCampList(data,param){
 
                        if(val['parent_tag_name'] != null){
                               parent_tag_name =    val['parent_tag_name'].replace(' ', '');
-                            if(parent_tag_name != 'Downloads'){
+                            //if(parent_tag_name != 'Downloads'){
                                    console.log(val['name']);
                                 $('.tagLists'+param+val['parent_tag_id']).append('<li class="game">'+val['name']+'</li>');
                                         parent_tag_name_holder.push(val['parent_tag_name']);
-                                }
+                              //  }
                        }
                  }) 
     
