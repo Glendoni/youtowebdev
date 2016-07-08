@@ -2687,29 +2687,41 @@ color:#45AE7C;
     float:left;
 }
 
-
-
+.listTagSummary {
+	padding: 0;
+}
+.tag-display-header {
+font-size: 12px;
+    font-weight: 700;
+    border-bottom: 1px #eee solid;
+    width: 100%;
+        margin-bottom: 10px;
+    margin-top: 10px;
+}
+.tag_display_holder {
+	margin-bottom: 10px;
+}
 .tagLists li{
     float:left;
-    padding: 0px 4px 0px 4px;
+    padding: 4px 8px;
     list-style: none;
-    background: #bff1ea;
     border-radius: 2px;
-    font-size: 12px;
+    font-size: 11px;
     margin: 2px;
     color: #000000;
+    border: 1px solid #d6d6d6;
       
 }
 
-.tagLists li:first-child{
+/*.tagLists li:first-child{
     clear: both;
     background: #eee;
     font-weight: 600;
-    font-size: 13px;
+    font-size: 12px;
     color: #000;
       border: solid thin #e3e3e3;
     padding-right: 1px;
-}
+}*/
 
 #taglists{
    display: inline-block; margin: 0;
