@@ -2691,15 +2691,12 @@ color:#45AE7C;
 	padding: 0;
 }
 .tag-display-header {
-font-size: 14px;
+font-size: 12px;
     font-weight: 700;
     border-bottom: 1px #eee solid;
     width: 100%;
         margin-bottom: 10px;
     margin-top: 10px;
-        text-transform: capitalize;
-        text-align: center;
-
 }
 .tag_display_holder {
 	margin-bottom: 10px;
