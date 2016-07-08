@@ -41,7 +41,7 @@ if(parent_tag_name_holder.indexOf('tagLists'+val['parent_tag_id']) == -1){
 
 parent_tag_name_holder.push('tagLists'+val['parent_tag_id']);
     
-    $('.tagLists'+param).append('<div class="col-md-3 tag_display_holder"><div class="tag-display-header">'+val['parent_tag_name']+'</div><ul class="listTagSummary tagLists'+param+val['parent_tag_id']+'"></ul></div>') ;
+    $('.tagLists'+param).append('<div class="col-md-4 tag_display_holder"><div class="tag-display-header">'+val['parent_tag_name']+'</div><ul class="listTagSummary tagLists'+param+val['parent_tag_id']+'"></ul></div>') ;
                 //console.log("Needle found.");
     
 };
