@@ -189,6 +189,17 @@ class Companies_model extends CI_Model {
 									where T1."max eff date" = T.eff_from 
 									and  T.turnover < '.$turnover_to.'
 			  						';
+                    
+                    
+                    		$turnover_sql = 'select T.company_id "company_id",
+									       T.turnover "turnover",
+									       T.method "turnover_method"       
+									from TURNOVERS T
+								
+									  
+									where  T.turnover between '.$turnover_from.'  and '.$turnover_to.'  ';
+                    
+                    
 			  						// removed this line "T.turnover = NULL or " as is was givin isues when searching for turnover from "0" Ex. 0-60000
 			  						// probably neeed to add something to show companies with no turnover details
 				}
