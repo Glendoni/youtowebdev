@@ -11,7 +11,7 @@
                             <a href = "?search=2&user=<?php echo $lastweekstat['user'];?>&period=lastweek"><span class="<?php echo $prefix; ?>-deals" ><?php echo $lastweekstat['deals'];?></span></a>
                             </div>
                             <div class="col-xs-2 col-md-1 text-center"> 
-                              <?php echo '<div class="lw-proposals" >'.$lastweekstat['proposals'].'</div>';?>
+                              <?php echo '<div class="'.$prefix.'-proposals" >'.$lastweekstat['proposals'].'</div>';?>
                               </div>
                          
                             <div class="col-xs-2 col-md-2 text-center"> 
