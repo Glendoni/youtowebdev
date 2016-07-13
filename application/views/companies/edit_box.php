@@ -184,7 +184,7 @@
                             </div>
                         </div>
                         <?php endif; ?>
-                        <div class="col-sm-6 col-md-6" style="display:none;">
+                        <div class="col-sm-6 col-md-6" >
                             <div class=" form-group ">
                                 <label for="trading_name" class="control-label">Trading Name</label>                            
                                 <input type="text" name="trading_name" value="<?php echo isset($company['trading_name'])?$company['trading_name']:''; ?>" id="trading_name" class="form-control">
