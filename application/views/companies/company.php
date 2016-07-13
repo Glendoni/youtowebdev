@@ -199,7 +199,7 @@ if ($your_date < $now){;
      $datediff = $now - $your_date;
      $daysoverdue = floor($datediff/(60*60*24));?>
 <div><span class="label label-danger" style="font-size:10px;">
-<?php   if ($daysoverdue > 1) {echo $daysoverdue." Days";} elseif($daysoverdue == 1){  echo $daysoverdue." Day";   }else{echo "";};?>  Overdue </span></div>
+<?php   if ($daysoverdue > 1) {echo $daysoverdue." Days Overdue";} elseif($daysoverdue == 1){  echo $daysoverdue." Day Overdue";   }else{echo "Due Today";};?>   </span></div>
 
 <?php } else {}?>
 <?php endif; ?>
