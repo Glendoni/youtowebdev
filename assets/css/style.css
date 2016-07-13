@@ -2602,7 +2602,7 @@ margin: 5px 0 3px 0;
 
 .piplineUdate .label {
     padding: 1px 5px;
-        font-size: 9px;
+        font-size: 11px;
 }
 
 /*SCROLL BREADCRUMB END*/
@@ -2644,8 +2644,9 @@ color:#333;
 }
 .comp_details_edit_btn{
 
-margin-right:5px;
+margin-right:11px;
     cursor: pointer;
+    padding-top: 4px;
 }
 
 .tagNumPlaceholder{
@@ -2792,6 +2793,20 @@ margin-top: -28px;
 
 .outcomeform textarea{
 display:none;
+}
+
+.piplineUdate .company-header,.trading-header{
+text-align:left;
+    
+}
+.piplineUdate .company-header{
+    
+ font-size: 2em;
+}
+
+.piplineUdate .subsidiary {
+	height: 1px;
+    
 }
 /*! Hint.css - v2.2.1 - 2016-03-26 //#2b4461
 * http://kushagragour.in/lab/hint/

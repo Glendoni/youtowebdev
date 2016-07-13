@@ -1,115 +1,142 @@
+        <?php  $company = $companies[0]; ?>
+            <?php if (!empty($_GET['campaign_id'])): 
+                    $campaign_id = $_GET['campaign_id'];
+                endif; ?>
+            <?php if (!isset($company['id'])): ?>
+                    <div class="alert alert-danger" role="alert">This company is no longer active.</div>
+            <?php endif; ?>
+            <?php //hide core page content if no company is found ?>
+                <?php if (isset($company['id'])): ?>
+                    <div class="page-results-list" id="parent">
+                    <breadcrumbscroll>
+                    <div class="row top-info-holder">
+                    <div class="col-md-9 piplineUdate" style="
+    padding-left: 31px;
+">
+                                <!-- <breadcrumbscroll> -->
+                                <h2 class="company-header" id="logo">
+                                    <?php $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' );
+                                        echo html_entity_decode (str_replace($words, ' ',$company['name'])); 
+                                    // &#39;
+                                    ?>
+                                       <?php if (isset($company['trading_name'])): ?>
+                                                        <h5 class="trading-header">
+                                                            <?php echo $company['trading_name'];?>
+                                                        </h5>
+                                                    <?php endif; ?>
+                                 </h2>
+                      
+                             
+                        
+                                <!--  </breadcrumbscroll> /breadcrumbscroll -->
+                                <!--END ASSIGN-->
 
-<?php  $company = $companies[0]; ?>
-<?php if (!empty($_GET['campaign_id'])): 
-$campaign_id = $_GET['campaign_id'];
-endif; ?>
-		<?php if (!isset($company['id'])): ?>
-<div class="alert alert-danger" role="alert">This company is no longer active.</div>
-			<?php endif; ?>
-<?php //hide core page content if no company is found ?>
-<?php if (isset($company['id'])): ?>
-<div class="page-results-list" id="parent">
-<breadcrumbscroll>
-<div class="row top-info-holder">
-<div class="col-md-12">
+                            
 
+                                        <?php if(!empty($company['pipeline'])): ?>
 
-<!-- <breadcrumbscroll> -->
-    	<h2 class="company-header" id="logo">
-		<?php $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' );
-        
-        echo html_entity_decode (str_replace($words, ' ',$company['name'])); 
-       // &#39;
+                                        <?php endif; ?>
+                                        <span class="label  label-<?php echo str_replace(' ', '', $company['pipeline']); ?>"><?php echo $company['pipeline']?>        
+                                        <?php if (isset($company['customer_from'])&&($company['pipeline']=='Customer')):?>  <?php echo date("d/m/y",strtotime($company['customer_from']));?><?php  
+                                        $number  = $company['initial_rate'];
+                                        //$number = 5.00;
+                                        $number =  preg_match('[-+]?([0-9]*\.[0]+|[0]+', $number) ? false : $number;
+                                        echo $number ? '<span class="initial_rate_found">  - &#64;'.($number*100).'%</span>' : '<span class="initial_rate_not_found"> - Rate Not Set</span>' ;  ?>
+                                        <?php endif; ?>
+                                        </span>
+
+                                        <?php if($company['customer_to']){  ?>
+                                        <span class="label  label-<?php echo str_replace(' ', '', $company['pipeline']); ?> cancelledPill">
+                                        Cancelled <?php echo date('d/m/Y',strtotime($company['customer_to'])); ?>
+                                        </span>
+                                        <?php } ?>
+
+                                        <?php if(isset($company['assigned_to_name'])): ?>
+                                        <span class="label label-assigned"
+                                        <?php $user_icon = explode(",", ($company['image']));echo "style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'";?>>
+                                        <i class="fa fa-star"></i>
+                                        <?php echo $company['assigned_to_name']; ?>
+                                        </span>
+
+                                        <?php else: ?>
+                                        <?php endif; ?>
+
+                          
+
+                        
+                        </div><!--END ROW-->
+
+               <!--END ROW-->
+ <div class="col-md-3">
+     
+     
+  
+           <div class="col-md-12" style="
+    min-height: 50px;
+">
+
+                       <!-- Fravorite Star -->
+                                                        <?php if(isset($company['assigned_to_name']) and !empty($company['assigned_to_name'])): ?>
+                                                            <?php if($company['assigned_to_id'] == $current_user['id']) : ?>	
+                                                                    <?php  $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'], 'page_number' => (isset($current_page_number))? $current_page_number:'');
+                                                                        echo form_open('companies/unassign',array('name' => 'assignto', 'class'=>'assign-to-form', 'style'=>'display: inline; padding-right: 12px;    float: right;'),$hidden); 
+                                                                    ?>
+                                                                                <?php $bgcolor =  explode(',',$current_user['image']) ?>
+                                                                                <button type="submit" class="assigned-star ladda-button starbtn" data-style="expand-right" data-size="1"   style="color:<?php echo $bgcolor[1]; ?>;">
+                                                                                    <i class="fa fa-star " style="font-size: 27px;"></i>
+                                                                                </button>
+                                                                    <?php echo form_close(); ?>
+                                                            <?php endif; ?>
+                                                        <?php else: ?>
+                                                        <?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'], 'page_number' => (isset($current_page_number))? $current_page_number:'');
+                                                        echo form_open(site_url().'companies/assignto',array('name' => 'assignto', 'class'=>'assign-to-form', 'style'=>'display: inline; padding-right: 12px; float: right;'),$hidden); ?>
+                                                                <button type="submit" assignto="<?php echo $current_user['name']; ?>" class="unassigned-star ladda-button starbtn" data-style="expand-right" data-size="1">
+                                                                    <i class="fa fa-star"  style="color:#DCDCDC; font-size: 27px;"></i>
+                                                                </button>
+                                                        <?php echo form_close(); ?>
+
+                                                        <?php endif; ?>
+
+                                                 
+                                                    <!-- Fravorite Star End -->
+          </div>
+     
+     
+         <div class="col-md-12" >
+                             
+
+            <span class="label  btn-warning comp_details_edit_btn" data-toggle="modal" id="editbtn<?php echo $company['id']; ?>" data-target="#editModal<?php echo $company['id']; ?>" style="
+    font-size: 12px;     float: right;
+">Edit</span>
          
-        ?>
-    <?php if(isset($company['assigned_to_name']) and !empty($company['assigned_to_name'])): ?>
-		<?php if($company['assigned_to_id'] == $current_user['id']) : ?>	
-			<?php  $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'], 'page_number' => (isset($current_page_number))? $current_page_number:'');
-			echo form_open('companies/unassign',array('name' => 'assignto', 'class'=>'assign-to-form', 'style'=>'display: inline;'),$hidden); ?>
-        <?php $bgcolor =  explode(',',$current_user['image']) ?>
-			<button type="submit" class="assigned-star ladda-button starbtn" data-style="expand-right" data-size="1"   style="color:<?php echo $bgcolor[1]; ?>;">
-<i class="fa fa-star "></i>
-            </button>
-			<?php echo form_close(); ?>
-		<?php endif; ?>
-	<?php else: ?>
-    <?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'], 'page_number' => (isset($current_page_number))? $current_page_number:'');
-	echo form_open(site_url().'companies/assignto',array('name' => 'assignto', 'class'=>'assign-to-form', 'style'=>'display: inline;'),$hidden); ?>
-	<button type="submit" assignto="<?php echo $current_user['name']; ?>" class="unassigned-star ladda-button starbtn" data-style="expand-right" data-size="1">
-<i class="fa fa-star"  style="color:#DCDCDC;"></i>
-</button>
-	<?php echo form_close(); ?>
+        </div>
 
-	<?php endif; ?>
-</h2>
-	<?php if (isset($company['trading_name'])): ?>
-<h5 class="trading-header">
-<?php echo $company['trading_name'];?>
-</h5>
-	<?php endif; ?>
-   	<!--  </breadcrumbscroll> /breadcrumbscroll -->
-	<!--END ASSIGN-->
-	</div><!--END ROW-->
-
-	<div class="row piplineUdate" style="margin-top:5px; text-align:center;">
-
-        <span class="label  btn-warning comp_details_edit_btn" data-toggle="modal" id="editbtn<?php echo $company['id']; ?>" data-target="#editModal<?php echo $company['id']; ?>">Edit        
-        </span>
-
-
-
-
-	<?php if(!empty($company['pipeline'])): ?>
-	
-	<?php endif; ?>
-    <span class="label  label-<?php echo str_replace(' ', '', $company['pipeline']); ?>"><?php echo $company['pipeline']?>        
-    <?php if (isset($company['customer_from'])&&($company['pipeline']=='Customer')):?>  <?php echo date("d/m/y",strtotime($company['customer_from']));?><?php  
-    $number  = $company['initial_rate'];
-	//$number = 5.00;
-	$number =  preg_match('[-+]?([0-9]*\.[0]+|[0]+', $number) ? false : $number;
-	echo $number ? '<span class="initial_rate_found">  - &#64;'.($number*100).'%</span>' : '<span class="initial_rate_not_found"> - Rate Not Set</span>' ;  ?>
-<?php endif; ?>
-    </span>
-
-    <?php if($company['customer_to']){  ?>
-            <span class="label  label-<?php echo str_replace(' ', '', $company['pipeline']); ?> cancelledPill">
-                Cancelled <?php echo date('d/m/Y',strtotime($company['customer_to'])); ?>
-            </span>
-    <?php } ?>
-        
-	<?php if(isset($company['assigned_to_name'])): ?>
-		<span class="label label-assigned"
-		<?php $user_icon = explode(",", ($company['image']));echo "style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'";?>>
-        <i class="fa fa-star"></i>
-<?php echo $company['assigned_to_name']; ?>
-        </span>
+     
       
-	<?php else: ?>
-	<?php endif; ?>
-	 </div><!--END ROW-->
-
-	
-        
-        
-            <div class="row">
-		<?php if (isset($company['parent_name'])): ?>
-			<div class="subsidiary">
-			<span class="label label-danger"><a href="<?php echo site_url();?>companies/company?id=<?php echo $company['parent_id'];?>" target="_blank">Subsidiary of <?php echo $company['parent_name'];?> <i class="fa fa-external-link"></i></a></span>
-			</div>
-			<?php elseif (isset($company['parent_registration'])): ?>
-				<div class="subsidiary">
-			<span class="label label-danger"><a href="https://beta.companieshouse.gov.uk/company/<?php echo $company['parent_registration'];?>" target="_blank">Parent Registration: <?php echo $company['parent_registration'];?> <i class="fa fa-external-link"></i></a></span>
-			</div>
-		<?php endif; ?>
-        
-        
+     
     </div>
-        
 
-	<!-- // POPUP BOXES -->
-</div><!--END TOP INFO HOLDER-->
 
-</div><!--END TOP INFO HOLDER-->
+
+        <div class="row">
+        <?php if (isset($company['parent_name'])): ?>
+        <div class="subsidiary">
+        <span class="label label-danger"><a href="<?php echo site_url();?>companies/company?id=<?php echo $company['parent_id'];?>" target="_blank">Subsidiary of <?php echo $company['parent_name'];?> <i class="fa fa-external-link"></i></a></span>
+        </div>
+        <?php elseif (isset($company['parent_registration'])): ?>
+        <div class="subsidiary">
+        <span class="label label-danger"><a href="https://beta.companieshouse.gov.uk/company/<?php echo $company['parent_registration'];?>" target="_blank">Parent Registration: <?php echo $company['parent_registration'];?> <i class="fa fa-external-link"></i></a></span>
+        </div>
+        <?php endif; ?>
+
+
+        </div>
+
+
+        <!-- // POPUP BOXES -->
+        </div><!--END TOP INFO HOLDER-->
+
+        </div><!--END TOP INFO HOLDER-->
 </breadcrumbscroll>
     
     

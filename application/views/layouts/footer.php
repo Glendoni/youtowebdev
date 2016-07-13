@@ -305,9 +305,6 @@ function bindFavorites(){
 
         if($('.favForm'+btnData+' button').hasClass('unassigned-star')){
 
-            
-            
-            
             var userBackgroundColor = []; 
             var userBackgroundColor = $('.user-profile div').css('background-color'); 
             var userColor = $('.user-profile div').css('color'); 
@@ -334,27 +331,19 @@ function bindFavorites(){
             $(this).show();
 
          }
-
-
     });
-
     
-    
-           $('.qvlink  li a').on('click', function(){
-            var location = $(this).attr('data');
-                $.scrollTo('#'+location, 1000, { easing: 'easeInOutExpo', offset: -190, 'axis': 'y' });
-               $(".qv").slideToggle();        
-               
+    $('.qvlink  li a').on('click', function(){
+        var location = $(this).attr('data');
+        $.scrollTo('#'+location, 1000, { easing: 'easeInOutExpo', offset: -190, 'axis': 'y' });
+        $(".qv").slideToggle();                   
     })
        
-          $(".qvSlidebtn").click(function(){
-        $(".qv").slideToggle();
-              
+    $(".qvSlidebtn").click(function(){
+        $(".qv").slideToggle();    
     });
 
     $('form .assigned-star').click(function(e){
-        
-      
         e.preventDefault();
         var btnData  = $(this).attr('data');
         if($('.favForm'+ btnData +' button').hasClass('assigned-star')){
@@ -373,9 +362,7 @@ function bindFavorites(){
         $(this).addClass('unassigned-star');
         $(this).removeClass('assigned-star');
     });  
-    
-    
-    }
+}
 </script>
 
 
