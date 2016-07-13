@@ -1468,7 +1468,10 @@
                           <div class="list-group-item" id="action_outcome_box_<?php echo $action->action_id ?>" style="display:none;">
                           
                           <label>Outcome</label>
-                          <textarea class="form-control" name="outcome" rows="3" style="margin-bottom:5px;"></textarea>
+                          <textarea class="form-control textarea<?php echo $action->action_id ?>" name="outcome" rows="3" style="display: none;"></textarea>
+
+ <div class="editor addOutcomeEditor" addoutcomeeditor="<?php echo $action->action_id ?>" style="margin-bottom: 5px; min-height: 70px;"></div>
+
                           <button class="btn btn-primary btn-block">Add Outcome</button>
                           
                           </div>
