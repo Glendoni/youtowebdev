@@ -214,6 +214,10 @@ $( document ).ready(function() {
     
     
      if((/companies\/company/.test(window.location.href))) {
+         
+        // var simplemde = new SimpleMDE({ element: $(".completed-details")[0] });
+         
+         //simplemde.value("Add **Outcomer**");
        $(window).scroll(stickyActionsMenu);
       
          $('.other_sectors .button-checkbox .btn-checkbox, .target_sectors .button-checkbox .btn-checkbox').click(function(){ //Target sectors event visiual manager

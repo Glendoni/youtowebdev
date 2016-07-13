@@ -1731,7 +1731,7 @@ margin-bottom: 10px;
 #fetags{
 	height: 200px;
     border: solid thin #ffffff;
-    border-left-color: #ccc;
+    /*border-left-color: #ccc; */
     
 }
 
@@ -2302,14 +2302,14 @@ body {
     font-size: 11px;
 }
 .actionMenuQty {
-        margin-left: 23px;
-    margin-top: -14px;
+      margin-left: 23px;
+    margin-top: -13px;
     position: absolute;
     font-size: 9px;
-  
     border-radius: 50%;
-    padding: 4px;
-    width: 20px;
+    padding: 3px;
+    height: 18px;
+    width: 17px;
     text-align: center;
     color: #2B4461;
 }
@@ -2748,6 +2748,50 @@ font-size: 12px;
 margin-bottom:5px;
 margin-top:6px;
 
+}
+.completed-details{
+    
+    display:none;
+}
+.btn-toolbarAction{
+     display:none; 
+    
+    
+}
+.editorAction{
+     height: 150px;
+overflow: scroll;
+    
+     overflow-x: hidden;
+    border: solid thin #ccc;
+    padding: 20px;    
+}
+
+.addOutcomeEditor{
+    
+     background: #fff;
+    padding: 7px 11px;
+    border: thin solid #ccc;
+    border-radius: 3px;
+    min-height: 55px;
+    
+    outline: 1px;
+    
+}
+.callbackForm textarea{
+    
+    visibility: hidden;
+    height: 0px;
+}
+
+.addOutcomeFollowupEditor{
+    
+margin-top: -28px;
+    
+}
+
+.outcomeform textarea{
+display:none;
 }
 /*! Hint.css - v2.2.1 - 2016-03-26 //#2b4461
 * http://kushagragour.in/lab/hint/

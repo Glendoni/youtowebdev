@@ -957,5 +957,13 @@ echo $this->Tagging_model->$route($post);
                 exit();
 
     }
+    
+    function pipert(){
+        
+        
+        	$this->data['main_content'] = 'companies/editor';
+		$this->load->view('layouts/default_layout', $this->data);	
+        
+    }
 }
  

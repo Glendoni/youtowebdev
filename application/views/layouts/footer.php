@@ -29,13 +29,19 @@
 </div>
     <!-- #wrapper -->
     <!-- jQuery Version 1.11.0 -->
+      
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-    <script type="text/javascript"  src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>    
+    <script type="text/javascript"  src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>   
+      
+      
+      
+		<script src="<?php echo asset_url();?>js/external/jquery.hotkeys.js"></script>
+    <script type="text/javascript" src="<?php echo asset_url();?>js/bootstrap.min.js"></script>
+    <script src="<?php echo asset_url();?>js/external/google-code-prettify/prettify.js"></script>
+
 
  
-    <!-- Bootstrap Core JavaScript -->
-    <script type="text/javascript" src="<?php echo asset_url();?>js/bootstrap.min.js"></script>
 
     <!-- Custom Theme JavaScript -->
     <script type="text/javascript"  src="<?php echo asset_url();?>js/sb-admin-2.js"></script>
@@ -56,10 +62,66 @@
    <script type="text/javascript" src="<?php echo asset_url();?>js/actions.js"></script>
  <script src="<?php echo asset_url();?>js/bootbox.js"></script>
 <script src="<?php echo asset_url();?>js/fe_tagging.js"></script>
+
+    <script src="<?php echo asset_url();?>js/bootstrap-wysiwyg.js"></script>
+
+<?PHP
+
+/*
+
+ <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+		<script src="<?php echo asset_url();?>js/external/jquery.hotkeys.js"></script>
+
+*/
+
+?>
+<script>
+  $(function(){
+    function initToolbarBootstrapBindings() {
+      var fonts = ['Serif', 'Sans', 'Arial', 'Arial Black', 'Courier', 
+            'Courier New', 'Comic Sans MS', 'Helvetica', 'Impact', 'Lucida Grande', 'Lucida Sans', 'Tahoma', 'Times',
+            'Times New Roman', 'Verdana'],
+            fontTarget = $('[title=Font]').siblings('.dropdown-menu');
+      $.each(fonts, function (idx, fontName) {
+          fontTarget.append($('<li><a data-edit="fontName ' + fontName +'" style="font-family:\''+ fontName +'\'">'+fontName + '</a></li>'));
+      });
+      $('a[title]').tooltip({container:'body'});
+    	$('.dropdown-menu input').click(function() {return false;})
+		    .change(function () {$(this).parent('.dropdown-menu').siblings('.dropdown-toggle').dropdown('toggle');})
+        .keydown('esc', function () {this.value='';$(this).change();});
+
+      $('[data-role=magic-overlay]').each(function () { 
+        var overlay = $(this), target = $(overlay.data('target')); 
+        overlay.css('opacity', 0).css('position', 'absolute').offset(target.offset()).width(target.outerWidth()).height(target.outerHeight());
+      });
+      if ("onwebkitspeechchange"  in document.createElement("input")) {
+        var editorOffset = $('#editor').offset();
+        $('#voiceBtn').css('position','absolute').offset({top: editorOffset.top, left: editorOffset.left+$('.editor').innerWidth()-35});
+      } else {
+        $('#voiceBtn').hide();
+      }
+	};
+	function showErrorAlert (reason, detail) {
+		var msg='';
+		if (reason==='unsupported-file-type') { msg = "Unsupported format " +detail; }
+		else {
+			console.log("error uploading file", reason, detail);
+		}
+		$('<div class="alert"> <button type="button" class="close" data-dismiss="alert">&times;</button>'+ 
+		 '<strong>File upload error</strong> '+msg+' </div>').prependTo('#alerts');
+	};
+    initToolbarBootstrapBindings();  
+	$('.editor').wysiwyg({ fileUploadError: showErrorAlert} );
+    window.prettyPrint && prettyPrint();
+  });
     
- 
+    
+    $('.editorAction, .btn-group a').on('keyup mouseleave click', function(){
 
+$('.completed-details').val($('.editorAction').html())
 
+});
+</script>
  
 <script type="text/javascript">
    
@@ -182,6 +244,57 @@ $(document).ready(function(){
 })
 
 bindFavorites();
+    
+    
+    
+    
+     
+    function initToolbarBootstrapBindings() {
+      var fonts = ['Serif', 'Sans', 'Arial', 'Arial Black', 'Courier', 
+            'Courier New', 'Comic Sans MS', 'Helvetica', 'Impact', 'Lucida Grande', 'Lucida Sans', 'Tahoma', 'Times',
+            'Times New Roman', 'Verdana'],
+            fontTarget = $('[title=Font]').siblings('.dropdown-menu');
+      $.each(fonts, function (idx, fontName) {
+          fontTarget.append($('<li><a data-edit="fontName ' + fontName +'" style="font-family:\''+ fontName +'\'">'+fontName + '</a></li>'));
+      });
+      $('a[title]').tooltip({container:'body'});
+    	$('.dropdown-menu input').click(function() {return false;})
+		    .change(function () {$(this).parent('.dropdown-menu').siblings('.dropdown-toggle').dropdown('toggle');})
+        .keydown('esc', function () {this.value='';$(this).change();});
+
+      $('[data-role=magic-overlay]').each(function () { 
+        var overlay = $(this), target = $(overlay.data('target')); 
+        overlay.css('opacity', 0).css('position', 'absolute').offset(target.offset()).width(target.outerWidth()).height(target.outerHeight());
+      });
+      if ("onwebkitspeechchange"  in document.createElement("input")) {
+        var editorOffset = $('#editor').offset();
+        $('#voiceBtn').css('position','absolute').offset({top: editorOffset.top, left: editorOffset.left+$('.editor').innerWidth()-35});
+      } else {
+        $('#voiceBtn').hide();
+      }
+	};
+	function showErrorAlert (reason, detail) {
+		var msg='';
+		if (reason==='unsupported-file-type') { msg = "Unsupported format " +detail; }
+		else {
+			console.log("error uploading file", reason, detail);
+		}
+		$('<div class="alert"> <button type="button" class="close" data-dismiss="alert">&times;</button>'+ 
+		 '<strong>File upload error</strong> '+msg+' </div>').prependTo('#alerts');
+	};
+    initToolbarBootstrapBindings();  
+	$('.editor').wysiwyg({ fileUploadError: showErrorAlert} );
+    window.prettyPrint && prettyPrint();
+ 
+   $('.editor').on('keyup mouseleave click', function(){
+var texteditor  = $(this).attr('addOutcomeEditor');
+$('.textarea'+texteditor).val($(this).html())
+
+});
+    
+    
+    
+    
 
 function bindFavorites(){
 
@@ -295,6 +408,10 @@ function bindFavorites(){
     }); //end document.write
      
 
+     
+     
+     
+     
 </script>
 
 <!--AUTO COMPLETE-->

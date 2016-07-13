@@ -1,6 +1,6 @@
 var $;
 $(document).ready(function () {
- 
+ bindTextEditor()
   if ((/companies\/company/.test(window.location.href))) {
 
 //BEGIN BREAD SCROLL
@@ -179,7 +179,7 @@ function getActionData(scope = false){ //get all actions in multidimentional jso
                 add_outcome();
                 bindPillerTitles();
                 removeOutsandingAction();
-                mainMenuQty(scope)
+                mainMenuQty(scope);
                 //$('.follow-up-date').datepicker();
                 var dateToday = new Date();
 $('.actiondate').datetimepicker({ minDate: dateToday });
@@ -323,7 +323,7 @@ function writeactions(data, scope = false){
 }
     function callbackActionTextBox(){
         $('.callbackAction').on('click', function(){
- 
+
             var dat = $(this).attr('data');
             var blockStatus  = $('.box'+dat).css('display');
             var username;
@@ -358,6 +358,8 @@ function writeactions(data, scope = false){
     $('.box'+dat+' .actionContact option[value=]').attr('selected','selected');
     $('.box'+dat+' .formOutcome').show();
             
+
+
         }
             if ($('#callBackActionStatus'+dat).val() == 'cancelled'){
                 $('#callBackActionStatus'+dat).val('completed'); 
@@ -378,6 +380,13 @@ function writeactions(data, scope = false){
                         $('.box'+dat).toggle(true);
                     }
             }
+            
+            
+            
+             
+            bindTextEditor()
+            
+            
         })
     }
     function add_outcome(){ //Redundent function
@@ -405,6 +414,54 @@ function writeactions(data, scope = false){
                // $('.actionAll').trigger('click');
         })
     } 
+
+
+
+
+
+function bindTextEditor(){
+    $(function(){
+    function initToolbarBootstrapBindings() {
+      var fonts = ['Serif', 'Sans', 'Arial', 'Arial Black', 'Courier', 
+            'Courier New', 'Comic Sans MS', 'Helvetica', 'Impact', 'Lucida Grande', 'Lucida Sans', 'Tahoma', 'Times',
+            'Times New Roman', 'Verdana'],
+            fontTarget = $('[title=Font]').siblings('.dropdown-menu');
+      $.each(fonts, function (idx, fontName) {
+          fontTarget.append($('<li><a data-edit="fontName ' + fontName +'" style="font-family:\''+ fontName +'\'">'+fontName + '</a></li>'));
+      });
+      $('a[title]').tooltip({container:'body'});
+    	$('.dropdown-menu input').click(function() {return false;})
+		    .change(function () {$(this).parent('.dropdown-menu').siblings('.dropdown-toggle').dropdown('toggle');})
+        .keydown('esc', function () {this.value='';$(this).change();});
+
+      $('[data-role=magic-overlay]').each(function () { 
+        var overlay = $(this), target = $(overlay.data('target')); 
+        overlay.css('opacity', 0).css('position', 'absolute').offset(target.offset()).width(target.outerWidth()).height(target.outerHeight());
+      });
+      if ("onwebkitspeechchange"  in document.createElement("input")) {
+        var editorOffset = $('#editor').offset();
+        $('#voiceBtn').css('position','absolute').offset({top: editorOffset.top, left: editorOffset.left+$('.editor').innerWidth()-35});
+      } else {
+        $('#voiceBtn').hide();
+      }
+	};
+	function showErrorAlert (reason, detail) {
+		var msg='';
+		if (reason==='unsupported-file-type') { msg = "Unsupported format " +detail; }
+		else {
+			console.log("error uploading file", reason, detail);
+		}
+		$('<div class="alert"> <button type="button" class="close" data-dismiss="alert">&times;</button>'+ 
+		 '<strong>File upload error</strong> '+msg+' </div>').prependTo('#alerts');
+	};
+    
+	$('.editor').wysiwyg({ fileUploadError: showErrorAlert} );
+    window.prettyPrint && prettyPrint();
+  });
+    
+    
+    
+}
 function bindAddCallBackToCompletedAction(){
     var followUpCompleteddate = [];
     var param =  $(this).serialize();
@@ -413,11 +470,12 @@ function bindAddCallBackToCompletedAction(){
     var actionOutcome = [];
     var overdueStatus = []
     var cancellation = '';
+  var getUrlIdParam = GetUrlParamID();
         $.ajax({
           type: "POST",
           data: param,
           dataType: "json",
-          url: "../companies/getCompletedActions",
+          url: "../companies/getCompletedActions/"+getUrlIdParam,
           success: function(data) {
                    var obj= data     
                    var i = 1 ;
@@ -722,8 +780,20 @@ $('.box'+bun+'  .actionContact option[value=]').prop('selected','selected');
         if(showSchduledMenu){
       //   $('.actionNav a[data="actions_outstanding"]').trigger('click')
         }
+      
+   $('.editor').on('keyup mouseleave click', function(){
+var texteditor  = $(this).attr('addOutcomeEditor');
+$('.textarea'+texteditor).val($(this).html())
+
+});
+        
+        
+        
         
     } 
+
+
+
 function intefaceVisibility(){
     
          if(parseInt($(".qtyAll").text()) == 0){
@@ -1011,11 +1081,11 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
          actionTypeName = actionType;
          
          if(action['first_name'] != null){
-             contactName = '<span class="label" style=" font-weight:bold; color:#666; padding-left: 0px;" > '+action['first_name']+' '+action['last_name']+'</span>';  
+             contactName = '<span class="label" style=" font-weight:bold; color:#666; padding-left: 0px; background:transparent;" > '+action['first_name']+' '+action['last_name']+'</span>';  
          }
          
          if(action['comments']){
-             tagline = '<span class="actionMsg piller'+actionId+' actionMsg'+actionId+  ' comments'+actionType+'"><strong>Comment: </strong>'+action['comments']+'</span><hr>'+outcome;
+             tagline = '<span class="actionMsg piller'+actionId+' actionMsg'+actionId+  ' comments'+actionType+'"><strong>Comment: </strong><br>'+action['comments']+'</span><hr>'+outcome;
          }
          
          if(actionType == 'Deal') actionTypeOverwrite = actionType+'@'+initial_fee+'%';
@@ -1083,7 +1153,7 @@ if(timestamp2 < timestamp && action['action_type_id'] == 11 )
          if(action['action_id'])                                                                                                                                          
             textbox= '<div class="form-group callbackActionTextBox  box'+action['action_id']+'" style="display:none">'+
                 '<form action="Actions/addOutcome" class="outcomeform" data="'+action['action_id']+'" >'+
-                '<textarea class="form-control box'+action['action_id']+'  textarea'+action['action_id']+' " name="outcome" placeholder="Add outcome" required="required" rows="2" style="margin-bottom:5px;"></textarea>'+
+                '<textarea class="form-control   textarea'+action['action_id']+'  " name="outcome" placeholder="Add outcome" required="required" rows="2" style="margin-bottom:5px;"></textarea><div class="editor addOutcomeEditor" addOutcomeEditor="'+action['action_id']+'" ></div>'+
                 ' <div class="form-group form-inline actionForm formOutcome">'+
                                             '<input type="text" class="form-control actiondate" data-date-format="YYYY/MM/DD H:m" name="planned_at" required="required" placeholder="Follow Up Date">'+
                                         '</div>'+
@@ -1163,9 +1233,10 @@ if(timestamp2 < timestamp && action['action_type_id'] == 11 )
                                             '<input type="text" class="form-control actiondate" data-date-format="YYYY/MM/DD H:m" name="planned_at" required="required" placeholder="Follow Up Date">'+
                                         '</div>'+
                                         '<div class="form-group">'+
-                                            ' <textarea class="form-control box'+action['action_id']+'" name="comment" placeholder="Add outcome"  required="required" rows="2" required="required"></textarea>'+
+                                            ' <textarea class="form-control  textarea'+action['id']+'" name="comment" placeholder="Add outcome"  required="required" rows="2" required="required"></textarea>'+
                                         '</div>'+
-                                        '<div class="form-group">'+
+                       '<div class="">'+
+                                        '<div class="form-group"><div class="editor addOutcomeEditor addOutcomeFollowupEditor" addoutcomeeditor="'+action['id']+'" ></div></div>'+
                                             ' <input type="submit" class="btn btn-primary btn-block" value="Add Outcome">'+
                                         '</div>'+
                                    '</form>'+
@@ -1197,7 +1268,7 @@ if(timestamp2 < timestamp && action['action_type_id'] == 11 )
        
          
       if(actionTypeName != 'Pipeline Update')   
-            actions  = '<div class="timeline-entry actionId'+actionType+'  '+classCompleted+'"> <div class="timeline-stat"> '+icon+'</div><div class="timeline-label"> <div class="mar-no pad-btm"><h4 class="mar-no pad-btm">'+header+deal+'  <span class="label label-warning">'+planned_at+'</span>'+overdueStatus+'<span class="classActions" style="float:right; margin-top:0; margin-left:3px;">'+calenderbtn+outcomeRemove+ kpStr+'</span></h4></div><div class="actionMsgText">'+tagline+'</div>'+textbox+'<div class="mic-info"> '+status+': '+created_by+' - '+formattDate(createdAt, true)+followupAlert+' </div></div></div>';
+            actions  = '<div class="timeline-entry actionId'+actionType+'  '+classCompleted+'"> <div class="timeline-stat"> '+icon+'</div><div class="timeline-label"> <div class="mar-no pad-btm"><h4 class="mar-no pad-btm">'+header+deal+'  <span class="label label-warning">'+planned_at+'</span>'+overdueStatus+'<span class="classActions" style="float:right; margin-top:0; margin-left:3px;">'+calenderbtn+outcomeRemove+ kpStr+'</span></h4></div><div class="actionMsgText" style="background: #fff; padding:0px 0px 0px 10px;">'+tagline+'</div>'+textbox+'<div class="mic-info"> '+status+': '+created_by+' - '+formattDate(createdAt, true)+followupAlert+' </div></div></div>';
          
         if(actionTypeName == 'Pipeline Update' ){
               actions  = '<div class="timeline-entry actionId'+actionType+' '+classCompleted+'" > <div class="timeline-stat"> '+icon+'</div> <div class="timeline-label pipe"> <div class="mar-no pad-btm" ><h4 class="mar-no pad-btm">'+header+' <span class="classActions" style="margin-top:0; margin-left:3px; float:right;">'+calenderbtn+outcomeRemove+ kpStr+'</span></h4>'+overdueStatus+'</div><div class="actionMsgText">'+action['comments']+'</div></div></div>';  
