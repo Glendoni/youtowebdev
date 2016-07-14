@@ -2486,7 +2486,7 @@ breadcrumbscroll {
   height: auto;
   overflow: hidden;
   position: fixed;
-  top: 39px;
+  top: 40px;
   left: 0;
   padding-bottom: 5px;
   z-index: 1;
@@ -2496,7 +2496,7 @@ breadcrumbscroll {
   -ms-transition: height 0.3s;
   -o-transition: height 0.3s;
   transition: height 0.3s;
-  padding: 15px 0;
+  padding: 20px 0;
   box-sizing: border-box;
 	box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     border-bottom: 1px solid #ccc;
@@ -2692,18 +2692,16 @@ color:#45AE7C;
 	padding: 0;
 }
 .tag-display-header {
-font-size: 12px;
     font-weight: 700;
-    
     width: 100%;
-        margin-bottom: 10px;
+    margin-bottom: 10px;
     margin-top: 10px;
 }
 .tag_display_holder {
 	margin-bottom: 10px;
 }
 .tagLists li{
-    float:left;
+    /*float:left;*/
     padding: 4px 8px;
     list-style: none;
     border-radius: 2px;
@@ -2711,7 +2709,7 @@ font-size: 12px;
     margin: 2px;
     color: #000000;
     border: 1px solid #d6d6d6;
-      
+    display:inline-block;
 }
 
 /*.tagLists li:first-child{
@@ -2800,8 +2798,8 @@ text-align:left;
     
 }
 .piplineUdate .company-header{
-    
- font-size: 2em;
+    font-size: 44px;
+    font-weight: 500;
 }
 
 .piplineUdate .subsidiary {

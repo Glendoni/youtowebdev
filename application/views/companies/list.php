@@ -65,7 +65,7 @@
 
 
 	<?php if (isset($company['trading_name'])): ?>
-	<h5 class="trading-header">
+	<h5 class="trading-header" style="text-align:center;">
 <?php echo $company['trading_name'];?>
 </h5>
 	<?php endif; ?>
@@ -106,9 +106,9 @@
         
         
 		<div class="col-sm-9">
-		<div class="row">
+		<div class="row padding-bottom">
 <div class="col-sm-12 action-details">
-<div class="row"> 
+<div class="row padding-bottom"> 
 <div class="col-md-6 col-lg-6 col-sm-6">
 <div><strong>Last Contact</strong></div>
 <div>
@@ -266,7 +266,7 @@ if ($your_date < $now){;
 
 		</div>
 		
-	<div class="row">
+	<div class="row padding-bottom">
 		<!-- TURNOVER -->
 		<div class="col-xs-6 col-sm-3 centre">
 			<strong><span style="text-transform: capitalize"><?php echo isset($company['turnover_method'])?$company['turnover_method']:'';?></span> Turnover</strong>
@@ -308,13 +308,12 @@ if ($your_date < $now){;
 		</div>
 		</div>
 	
-			<hr>
 
-	<div class="row">
+	<div class="row padding-bottom">
 		<!-- TAGS -->
         <div class="tagLists tagLists<?php echo $company['id'];?>">
         </div>
-		</div>
+	</div>
 		<hr>
 
 		<div class="row">
@@ -357,6 +356,7 @@ if ($your_date < $now){;
 	            </div>
 			<?php endif; ?>
 			</div>
+		</div>
 		</div>
  <hr>
 
