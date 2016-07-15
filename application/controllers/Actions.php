@@ -98,7 +98,11 @@ class Actions extends MY_Controller {
 
                             }else if($post['action_type_completed']=='8'){
                                 // proposal sent to company 
-                                //$result = $this->Companies_model->update_company_to_proposal($company_id);
+                                
+                                 if($this->Companies_model->company_select($company_id)){ //prevents proposal being updated if company is a customer
+                                
+                                        $result = $this->Companies_model->update_company_to_proposal($company_id);
+                                 }
                                 //if(empty($result)){
                                   //  $this->set_message_warning('Error while updating company.');
                                 //}else{

@@ -1348,9 +1348,9 @@ $q = '
             
               $words = array( 'Limited', 'LIMITED', 'LTD','ltd','Ltd' );
         
-        $comp_name_replace_words =  str_replace($words, '',$row->name);
-        $comp_name_trim_left =ltrim($comp_name_replace_words);
-        $comp_name = rtrim($comp_name_trim_left);
+                    $comp_name_replace_words =  str_replace($words, '',$row->name);
+                    $comp_name_trim_left =ltrim($comp_name_replace_words);
+                    $comp_name = rtrim($comp_name_trim_left);
             
             return   array('trading_name' => $row->trading_name, 'name' => $comp_name);
         }
@@ -1358,6 +1358,18 @@ $q = '
           
     }
     
- 
+ function company_select($id){
+     
+     $query = $this->db->query("SELECT * FROM companies WHERE id='".$id."' LIMIT 1");
+     
+         if ($query->num_rows() > 0)
+             {
+                $row = $query->row(); 
+     
+              if($row->pipeline == 'Customer') return false;
+     return true;
+             } 
+         }
+   
     
 }
