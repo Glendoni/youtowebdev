@@ -1731,7 +1731,7 @@ margin-bottom: 10px;
 #fetags{
 	height: 200px;
     border: solid thin #ffffff;
-    border-left-color: #ccc;
+    /*border-left-color: #ccc; */
     
 }
 
@@ -2302,14 +2302,14 @@ body {
     font-size: 11px;
 }
 .actionMenuQty {
-        margin-left: 23px;
-    margin-top: -14px;
+      margin-left: 23px;
+    margin-top: -13px;
     position: absolute;
     font-size: 9px;
-  
     border-radius: 50%;
-    padding: 4px;
-    width: 20px;
+    padding: 3px;
+    height: 18px;
+    width: 17px;
     text-align: center;
     color: #2B4461;
 }
@@ -2486,7 +2486,7 @@ breadcrumbscroll {
   height: auto;
   overflow: hidden;
   position: fixed;
-  top: 39px;
+  top: 40px;
   left: 0;
   padding-bottom: 5px;
   z-index: 1;
@@ -2496,7 +2496,7 @@ breadcrumbscroll {
   -ms-transition: height 0.3s;
   -o-transition: height 0.3s;
   transition: height 0.3s;
-  padding: 15px 0;
+  padding: 20px 0;
   box-sizing: border-box;
 	box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     border-bottom: 1px solid #ccc;
@@ -2602,7 +2602,7 @@ margin: 5px 0 3px 0;
 
 .piplineUdate .label {
     padding: 1px 5px;
-        font-size: 9px;
+        font-size: 11px;
 }
 
 /*SCROLL BREADCRUMB END*/
@@ -2644,8 +2644,9 @@ color:#333;
 }
 .comp_details_edit_btn{
 
-margin-right:5px;
+margin-right:11px;
     cursor: pointer;
+    padding-top: 4px;
 }
 
 .tagNumPlaceholder{
@@ -2682,7 +2683,129 @@ color:#45AE7C;
     color: #fff;
 }
 
+.popUpCreatedAt{
+    
+    float:left;
+}
 
+.listTagSummary {
+	padding: 0;
+}
+.tag-display-header {
+    font-weight: 700;
+    width: 100%;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+.tag_display_holder {
+	margin-bottom: 10px;
+}
+.tagLists li{
+    /*float:left;*/
+    padding: 4px 8px;
+    list-style: none;
+    border-radius: 2px;
+    font-size: 11px;
+    margin: 2px;
+    color: #000000;
+    border: 1px solid #d6d6d6;
+    display:inline-block;
+}
+
+/*.tagLists li:first-child{
+    clear: both;
+    background: #eee;
+    font-weight: 600;
+    font-size: 12px;
+    color: #000;
+      border: solid thin #e3e3e3;
+    padding-right: 1px;
+}*/
+
+#taglists{
+   display: inline-block; margin: 0;
+    padding: 0;         
+    
+    display: inline;
+    
+    
+}
+
+
+#taglists li:first-child{
+    
+     border: none;
+    
+}
+
+.tagLists{
+    display:none;
+    
+}
+
+.page-results-list hr{
+margin-bottom:5px;
+margin-top:6px;
+
+}
+.completed-details{
+    
+    display:none;
+}
+.btn-toolbarAction{
+     display:none; 
+    
+    
+}
+.editorAction{
+     height: 150px;
+overflow: scroll;
+    
+     overflow-x: hidden;
+    border: solid thin #ccc;
+    padding: 20px;    
+}
+
+.addOutcomeEditor{
+    
+     background: #fff;
+    padding: 7px 11px;
+    border: thin solid #ccc;
+    border-radius: 3px;
+    min-height: 55px;
+    
+    outline: 1px;
+    
+}
+.callbackForm textarea{
+    
+    visibility: hidden;
+    height: 0px;
+}
+
+.addOutcomeFollowupEditor{
+    
+margin-top: -28px;
+    
+}
+
+.outcomeform textarea{
+display:none;
+}
+
+.piplineUdate .company-header,.trading-header{
+text-align:left;
+    
+}
+.piplineUdate .company-header{
+    font-size: 44px;
+    font-weight: 500;
+}
+
+.piplineUdate .subsidiary {
+	height: 1px;
+    
+}
 /*! Hint.css - v2.2.1 - 2016-03-26 //#2b4461
 * http://kushagragour.in/lab/hint/
 * Copyright (c) 2016 Kushagra Gour; Licensed  */

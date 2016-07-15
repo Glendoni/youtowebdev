@@ -24,10 +24,9 @@
             
             
             
-<h2 class="company-header">
-		  <a href="<?php echo site_url();?>companies/company?id=<?php echo $company['id'];?><?php echo !empty($current_campaign_id)?'&campaign_id='.$current_campaign_id:''; ?>" <?php if(($current_user['new_window']=='t')): ?> target="_blank"<?php endif; ?> class="compa"  data-camp="pos<?php echo $i++ ; ?>" comp="<?php echo $company['id'];?>"><?php $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' );echo str_replace($words, ' ',$company['name']); ?></a>
-
-         <!-- THIS IS ME -->    
+			<h2 class="company-header">
+			<a href="<?php echo site_url();?>companies/company?id=<?php echo $company['id'];?><?php echo !empty($current_campaign_id)?'&campaign_id='.$current_campaign_id:''; ?>" <?php if(($current_user['new_window']=='t')): ?> target="_blank"<?php endif; ?> class="compa"  data-camp="pos<?php echo $i++ ; ?>" comp="<?php echo $company['id'];?>"><?php $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' );echo str_replace($words, ' ',$company['name']); ?></a>
+		<!-- THIS IS ME -->    
        <?php $bgcolor =  explode(',',$current_user['image']) ?>
             <?php if(isset($company['assigned_to_name']) and !empty($company['assigned_to_name'])): ?>
 		<?php if($company['assigned_to_id'] == $current_user['id']) : ?>	
@@ -59,13 +58,14 @@
 	<?php endif; ?>
 </h2>
             
+        
             
              <!-- THIS IS ME END-->    
 
 
 
 	<?php if (isset($company['trading_name'])): ?>
-	<h5 class="trading-header">
+	<h5 class="trading-header" style="text-align:center;">
 <?php echo $company['trading_name'];?>
 </h5>
 	<?php endif; ?>
@@ -106,9 +106,9 @@
         
         
 		<div class="col-sm-9">
-		<div class="row">
+		<div class="row padding-bottom">
 <div class="col-sm-12 action-details">
-<div class="row"> 
+<div class="row padding-bottom"> 
 <div class="col-md-6 col-lg-6 col-sm-6">
 <div><strong>Last Contact</strong></div>
 <div>
@@ -145,12 +145,16 @@ if ($company['actioned_at1'] > 0){
 <?php echo date("l jS F Y",strtotime($company['planned_at2']));?>
 </div>
 <?php
-$now = time (); // or your date as well
-$your_date = strtotime($company['planned_at2']);
-$days_since = floor($datediff/(60*60*24));
-if ($your_date < $now){; ?>
-<div><span class="label label-danger" style="font-size:10px;">Overdue</span></div><?php } else {}
-?>
+$now = time ();
+    $compdate = explode('T',$company['planned_at2']);
+$your_date = strtotime($compdate[0]);
+if ($your_date < $now){; 
+     $datediff = $now - $your_date;
+     $daysoverdue = floor($datediff/(60*60*24));?>
+<div><span class="label label-danger" style="font-size:10px;">
+<?php   if ($daysoverdue > 1) {echo $daysoverdue." Days";} elseif($daysoverdue == 1){  echo $daysoverdue." Day";   }else{echo "";};?>  Overdue </span></div>
+
+<?php } else {}?>
 <?php endif; ?>
 
 </div>
@@ -225,7 +229,7 @@ if ($your_date < $now){; ?>
 		</div>
 		<div class="col-xs-6 col-md-3 centre" style="margin-top:10px;">
 			<label>Company Number</label>
-			<p>	
+			<p class="registration_number">	
 			 <!--COMPANY NUMBER IF APPLICABLE-->
 			<?php echo isset($company['registration'])?$company['registration']:''; ?>
          	</p>
@@ -258,7 +262,7 @@ if ($your_date < $now){; ?>
 
 		</div>
 		
-	<div class="row">
+	<div class="row padding-bottom">
 		<!-- TURNOVER -->
 		<div class="col-xs-6 col-sm-3 centre">
 			<strong><span style="text-transform: capitalize"><?php echo isset($company['turnover_method'])?$company['turnover_method']:'';?></span> Turnover</strong>
@@ -307,9 +311,14 @@ if ($your_date < $now){; ?>
 						<?php endif; ?>
 		</div>
 		</div>
-		<div class="col-md-12">
-			<hr>
-		</div>
+	
+
+	<div class="row padding-bottom">
+		<!-- TAGS -->
+        <div class="tagLists tagLists<?php echo $company['id'];?>">
+        </div>
+	</div>
+		<hr>
 
 		<div class="row">
             
@@ -352,7 +361,10 @@ if ($your_date < $now){; ?>
 			<?php endif; ?>
 			</div>
 		</div>
-        </div>
+		</div>
+ <hr>
+
+
 	</div>
 <?php endforeach; ?>
 <?php endif; ?>

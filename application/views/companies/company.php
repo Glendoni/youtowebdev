@@ -1,107 +1,142 @@
-<?php  $company = $companies[0]; ?>
-<?php if (!empty($_GET['campaign_id'])): 
-$campaign_id = $_GET['campaign_id'];
-endif; ?>
-		<?php if (!isset($company['id'])): ?>
-<div class="alert alert-danger" role="alert">This company is no longer active.</div>
-			<?php endif; ?>
-<?php //hide core page content if no company is found ?>
-<?php if (isset($company['id'])): ?>
-<div class="page-results-list" id="parent">
-<breadcrumbscroll>
-<div class="row top-info-holder">
-<div class="col-md-12">
+        <?php  $company = $companies[0]; ?>
+            <?php if (!empty($_GET['campaign_id'])): 
+                    $campaign_id = $_GET['campaign_id'];
+                endif; ?>
+            <?php if (!isset($company['id'])): ?>
+                    <div class="alert alert-danger" role="alert">This company is no longer active.</div>
+            <?php endif; ?>
+            <?php //hide core page content if no company is found ?>
+                <?php if (isset($company['id'])): ?>
+                    <div class="page-results-list" id="parent">
+                    <breadcrumbscroll>
+                    <div class="row top-info-holder">
+                    <div class="col-md-9 piplineUdate" style="
+    padding-left: 31px;
+">
+                                <!-- <breadcrumbscroll> -->
+                                <h2 class="company-header" id="logo">
+                                    <?php $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' );
+                                        echo html_entity_decode (str_replace($words, ' ',$company['name'])); 
+                                    // &#39;
+                                    ?>
+                                       <?php if (isset($company['trading_name'])): ?>
+                                                        <h5 class="trading-header">
+                                                            <?php echo $company['trading_name'];?>
+                                                        </h5>
+                                                    <?php endif; ?>
+                                 </h2>
+                      
+                             
+                        
+                                <!--  </breadcrumbscroll> /breadcrumbscroll -->
+                                <!--END ASSIGN-->
 
+                            
 
-<!-- <breadcrumbscroll> -->
-    	<h2 class="company-header" id="logo">
-		<?php $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' );
-        
-        echo html_entity_decode (str_replace($words, ' ',$company['name'])); 
-       // &#39;
+                                        <?php if(!empty($company['pipeline'])): ?>
+
+                                        <?php endif; ?>
+                                        <span class="label  label-<?php echo str_replace(' ', '', $company['pipeline']); ?>"><?php echo $company['pipeline']?>        
+                                        <?php if (isset($company['customer_from'])&&($company['pipeline']=='Customer')):?>  <?php echo date("d/m/y",strtotime($company['customer_from']));?><?php  
+                                        $number  = $company['initial_rate'];
+                                        //$number = 5.00;
+                                        $number =  preg_match('[-+]?([0-9]*\.[0]+|[0]+', $number) ? false : $number;
+                                        echo $number ? '<span class="initial_rate_found">  - &#64;'.($number*100).'%</span>' : '<span class="initial_rate_not_found"> - Rate Not Set</span>' ;  ?>
+                                        <?php endif; ?>
+                                        </span>
+
+                                        <?php if($company['customer_to']){  ?>
+                                        <span class="label  label-<?php echo str_replace(' ', '', $company['pipeline']); ?> cancelledPill">
+                                        Cancelled <?php echo date('d/m/Y',strtotime($company['customer_to'])); ?>
+                                        </span>
+                                        <?php } ?>
+
+                                        <?php if(isset($company['assigned_to_name'])): ?>
+                                        <span class="label label-assigned"
+                                        <?php $user_icon = explode(",", ($company['image']));echo "style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'";?>>
+                                        <i class="fa fa-star"></i>
+                                        <?php echo $company['assigned_to_name']; ?>
+                                        </span>
+
+                                        <?php else: ?>
+                                        <?php endif; ?>
+
+                          
+
+                        
+                        </div><!--END ROW-->
+
+               <!--END ROW-->
+ <div class="col-md-3">
+     
+     
+  
+           <div class="col-md-12" style="
+    min-height: 50px;
+">
+
+                       <!-- Fravorite Star -->
+                                                        <?php if(isset($company['assigned_to_name']) and !empty($company['assigned_to_name'])): ?>
+                                                            <?php if($company['assigned_to_id'] == $current_user['id']) : ?>	
+                                                                    <?php  $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'], 'page_number' => (isset($current_page_number))? $current_page_number:'');
+                                                                        echo form_open('companies/unassign',array('name' => 'assignto', 'class'=>'assign-to-form', 'style'=>'display: inline; padding-right: 12px;    float: right;'),$hidden); 
+                                                                    ?>
+                                                                                <?php $bgcolor =  explode(',',$current_user['image']) ?>
+                                                                                <button type="submit" class="assigned-star ladda-button starbtn" data-style="expand-right" data-size="1"   style="color:<?php echo $bgcolor[1]; ?>;">
+                                                                                    <i class="fa fa-star " style="font-size: 27px;"></i>
+                                                                                </button>
+                                                                    <?php echo form_close(); ?>
+                                                            <?php endif; ?>
+                                                        <?php else: ?>
+                                                        <?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'], 'page_number' => (isset($current_page_number))? $current_page_number:'');
+                                                        echo form_open(site_url().'companies/assignto',array('name' => 'assignto', 'class'=>'assign-to-form', 'style'=>'display: inline; padding-right: 12px; float: right;'),$hidden); ?>
+                                                                <button type="submit" assignto="<?php echo $current_user['name']; ?>" class="unassigned-star ladda-button starbtn" data-style="expand-right" data-size="1">
+                                                                    <i class="fa fa-star"  style="color:#DCDCDC; font-size: 27px;"></i>
+                                                                </button>
+                                                        <?php echo form_close(); ?>
+
+                                                        <?php endif; ?>
+
+                                                 
+                                                    <!-- Fravorite Star End -->
+          </div>
+     
+     
+         <div class="col-md-12" >
+                             
+
+            <span class="label  btn-warning comp_details_edit_btn" data-toggle="modal" id="editbtn<?php echo $company['id']; ?>" data-target="#editModal<?php echo $company['id']; ?>" style="
+    font-size: 12px;     float: right;
+">Edit</span>
          
-        ?>
-    <?php if(isset($company['assigned_to_name']) and !empty($company['assigned_to_name'])): ?>
-		<?php if($company['assigned_to_id'] == $current_user['id']) : ?>	
-			<?php  $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'], 'page_number' => (isset($current_page_number))? $current_page_number:'');
-			echo form_open('companies/unassign',array('name' => 'assignto', 'class'=>'assign-to-form', 'style'=>'display: inline;'),$hidden); ?>
-        <?php $bgcolor =  explode(',',$current_user['image']) ?>
-			<button type="submit" class="assigned-star ladda-button starbtn" data-style="expand-right" data-size="1"   style="color:<?php echo $bgcolor[1]; ?>;">
-<i class="fa fa-star "></i>
-            </button>
-			<?php echo form_close(); ?>
-		<?php endif; ?>
-	<?php else: ?>
-    <?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'], 'page_number' => (isset($current_page_number))? $current_page_number:'');
-	echo form_open(site_url().'companies/assignto',array('name' => 'assignto', 'class'=>'assign-to-form', 'style'=>'display: inline;'),$hidden); ?>
-	<button type="submit" assignto="<?php echo $current_user['name']; ?>" class="unassigned-star ladda-button starbtn" data-style="expand-right" data-size="1">
-<i class="fa fa-star"  style="color:#DCDCDC;"></i>
-</button>
-	<?php echo form_close(); ?>
+        </div>
 
-	<?php endif; ?>
-</h2>
-	<?php if (isset($company['trading_name'])): ?>
-<h5 class="trading-header">
-<?php echo $company['trading_name'];?>
-</h5>
-	<?php endif; ?>
-   	<!--  </breadcrumbscroll> /breadcrumbscroll -->
-	<!--END ASSIGN-->
-	</div><!--END ROW-->
-
-	<div class="row piplineUdate" style="margin-top:5px; text-align:center;">
-	<?php if(!empty($company['pipeline'])): ?>
-	
-	<?php endif; ?>
-    <span class="label pipeline label-<?php echo str_replace(' ', '', $company['pipeline']); ?>"><?php echo $company['pipeline']?>        
-    <?php if (isset($company['customer_from'])&&($company['pipeline']=='Customer')):?> from <?php echo date("d/m/y",strtotime($company['customer_from']));?><?php  
-    $number  = $company['initial_rate'];
-	//$number = 5.00;
-	$number =  preg_match('[-+]?([0-9]*\.[0]+|[0]+', $number) ? false : $number;
-	echo $number ? '<span class="initial_rate_found">  - &#64;'.($number*100).'%</span>' : '<span class="initial_rate_not_found"> - Rate Not Set</span>' ;  ?>
-<?php endif; ?>
-    </span>
-
-    <?php if($company['customer_to']){  ?>
-            <span class="label pipeline label-<?php echo str_replace(' ', '', $company['pipeline']); ?> cancelledPill">
-                Cancelled <?php echo date('d/m/Y',strtotime($company['customer_to'])); ?>
-            </span>
-    <?php } ?>
-        
-	<?php if(isset($company['assigned_to_name'])): ?>
-		<span class="label label-assigned"
-		<?php $user_icon = explode(",", ($company['image']));echo "style='background-color:".$user_icon[1]."; color:".$user_icon[2].";'";?>>
-        <i class="fa fa-star"></i>
-<?php echo $company['assigned_to_name']; ?>
-        </span>
+     
       
-	<?php else: ?>
-	<?php endif; ?>
-	 </div><!--END ROW-->
-
-	
-        
-        
-            <div class="row">
-		<?php if (isset($company['parent_name'])): ?>
-			<div class="subsidiary">
-			<span class="label label-danger"><a href="<?php echo site_url();?>companies/company?id=<?php echo $company['parent_id'];?>" target="_blank">Subsidiary of <?php echo $company['parent_name'];?> <i class="fa fa-external-link"></i></a></span>
-			</div>
-			<?php elseif (isset($company['parent_registration'])): ?>
-				<div class="subsidiary">
-			<span class="label label-danger"><a href="https://beta.companieshouse.gov.uk/company/<?php echo $company['parent_registration'];?>" target="_blank">Parent Registration: <?php echo $company['parent_registration'];?> <i class="fa fa-external-link"></i></a></span>
-			</div>
-		<?php endif; ?>
-        
-        
+     
     </div>
-        
 
-	<!-- // POPUP BOXES -->
-</div><!--END TOP INFO HOLDER-->
 
-</div><!--END TOP INFO HOLDER-->
+
+        <div class="row">
+        <?php if (isset($company['parent_name'])): ?>
+        <div class="subsidiary">
+        <span class="label label-danger"><a href="<?php echo site_url();?>companies/company?id=<?php echo $company['parent_id'];?>" target="_blank">Subsidiary of <?php echo $company['parent_name'];?> <i class="fa fa-external-link"></i></a></span>
+        </div>
+        <?php elseif (isset($company['parent_registration'])): ?>
+        <div class="subsidiary">
+        <span class="label label-danger"><a href="https://beta.companieshouse.gov.uk/company/<?php echo $company['parent_registration'];?>" target="_blank">Parent Registration: <?php echo $company['parent_registration'];?> <i class="fa fa-external-link"></i></a></span>
+        </div>
+        <?php endif; ?>
+
+
+        </div>
+
+
+        <!-- // POPUP BOXES -->
+        </div><!--END TOP INFO HOLDER-->
+
+        </div><!--END TOP INFO HOLDER-->
 </breadcrumbscroll>
     
     
@@ -130,6 +165,8 @@ Never
 <?php echo date("l jS F Y",strtotime($company['actioned_at1']));?>
 <?php
 $now = time (); // or your date as well
+
+
 $your_date = strtotime($company['actioned_at1']);
 $datediff = abs($now - $your_date);
 $days_since = floor($datediff/(60*60*24));
@@ -156,12 +193,13 @@ if ($company['actioned_at1'] > 0){
 </div>
 <?php
 $now = time ();
-$your_date = strtotime($company['planned_at2']);
+    $compdate = explode('T',$company['planned_at2']);
+$your_date = strtotime($compdate[0]);
 if ($your_date < $now){; 
      $datediff = $now - $your_date;
      $daysoverdue = floor($datediff/(60*60*24));?>
 <div><span class="label label-danger" style="font-size:10px;">
-<?php echo $daysoverdue; if ($daysoverdue > 1) {echo " Days";} else {echo " Day";};?>  Overdue </span></div>
+<?php   if ($daysoverdue > 1) {echo $daysoverdue." Days Overdue";} elseif($daysoverdue == 1){  echo $daysoverdue." Day Overdue";   }else{echo "Due Today";};?>   </span></div>
 
 <?php } else {}?>
 <?php endif; ?>
@@ -204,12 +242,7 @@ if ($your_date < $now){;
 		
 
             
-            	<div class="col-md-6">
-				<label>Phone</label>
-				<p style="margin-bottom:0;">	
-				<?php echo $company['phone']; ?>
-				</p>
-		</div><!--END TRADING NAME-->
+            <!--END TRADING NAME-->
             
 		</div><!--END ROW-->
         </div><!--CLOSE MD-9-->
@@ -428,7 +461,7 @@ if ($your_date < $now){;
 	        </tr>
 	      </thead>
 	      <tbody>
-	      	<?php foreach ($addresses as $address): ?>
+	      	<?php foreach ($addresses as $address):?>
 	      	<tr>
 				<td class="col-md-6">
                  <a target="_blank" href="http://maps.google.com/?q=<?=$address->address; ?>" ><span class="mainAddress"><?=$address->address; ?></span><span style="line-height: 15px;font-size: 10px;padding-left: 5px;"><i class="fa fa-external-link"></i></span></a></td>
@@ -678,7 +711,7 @@ if ($your_date < $now){;
 <div class="row">
 			<div class="col-sm-3 col-md-3">
 				<div class="form-group ">
-					<label>New Actions</label>
+					<label>New Action</label>
 					<select id="action_type_completed" name="action_type_completed" class="form-control" >
 						<option value="">--- Select an Action ---</option>
 						<?php foreach($action_types_done as $action ): ?>
@@ -739,6 +772,80 @@ if ($your_date < $now){;
 				<div class="form-group ">
 					<label>Outcome</label>
 <textarea class="form-control completed-details" name="comment" rows="3" required="required"></textarea>
+            
+                    
+                         
+        <!---
+	Please read this before copying the toolbar:
+
+	* One of the best things about this widget is that it does not impose any styling on you, and that it allows you 
+	* to create a custom toolbar with the options and functions that are good for your particular use. This toolbar
+	* is just an example - don't just copy it and force yourself to use the demo styling. Create your own. Read 
+	* this page to understand how to customise it:
+    * https://github.com/mindmup/bootstrap-wysiwyg/blob/master/README.md#customising-
+	--->
+        <div id="alerts"></div>
+        <div class="btn-toolbar btn-toolbarAction" data-role="editor-toolbar" data-target="#editor">
+            <div class="btn-group">
+                <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font"><i class="icon-font"></i><b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                </ul>
+            </div>
+            <div class="btn-group">
+                <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font Size"><i class="icon-text-height"></i>&nbsp;<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a data-edit="fontSize 5"><font size="5">Huge</font></a>
+                    </li>
+                    <li><a data-edit="fontSize 3"><font size="2">Normal</font></a>
+                    </li>
+                    <li><a data-edit="fontSize 1"><font size="1">Small</font></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="btn-group">
+                <a class="btn" data-edit="bold" title="Bold (Ctrl/Cmd+B)"><i class="icon-bold"></i></a>
+                <a class="btn" data-edit="italic" title="Italic (Ctrl/Cmd+I)"><i class="icon-italic"></i></a>
+                <a class="btn" data-edit="strikethrough" title="Strikethrough"><i class="icon-strikethrough"></i></a>
+                <a class="btn" data-edit="underline" title="Underline (Ctrl/Cmd+U)"><i class="icon-underline"></i></a>
+            </div>
+            <div class="btn-group">
+                <a class="btn" data-edit="insertunorderedlist" title="Bullet list"><i class="icon-list-ul"></i></a>
+                <a class="btn" data-edit="insertorderedlist" title="Number list"><i class="icon-list-ol"></i></a>
+                <a class="btn" data-edit="outdent" title="Reduce indent (Shift+Tab)"><i class="icon-indent-left"></i></a>
+                <a class="btn" data-edit="indent" title="Indent (Tab)"><i class="icon-indent-right"></i></a>
+            </div>
+            <div class="btn-group">
+                <a class="btn" data-edit="justifyleft" title="Align Left (Ctrl/Cmd+L)"><i class="icon-align-left"></i></a>
+                <a class="btn" data-edit="justifycenter" title="Center (Ctrl/Cmd+E)"><i class="icon-align-center"></i></a>
+                <a class="btn" data-edit="justifyright" title="Align Right (Ctrl/Cmd+R)"><i class="icon-align-right"></i></a>
+                <a class="btn" data-edit="justifyfull" title="Justify (Ctrl/Cmd+J)"><i class="icon-align-justify"></i></a>
+            </div>
+            <div class="btn-group">
+                <a class="btn dropdown-toggle" data-toggle="dropdown" title="Hyperlink"><i class="icon-link"></i></a>
+                <div class="dropdown-menu input-append">
+                    <input class="span2" placeholder="URL" type="text" data-edit="createLink" />
+                    <button class="btn" type="button">Add</button>
+                </div>
+                <a class="btn" data-edit="unlink" title="Remove Hyperlink"><i class="icon-cut"></i></a>
+
+            </div>
+            <div class="btn-group">
+                <a class="btn" title="Insert picture (or just drag & drop)" id="pictureBtn"><i class="icon-picture"></i></a>
+                <input type="file" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage" />
+            </div>
+            <div class="btn-group">
+                <a class="btn" data-edit="undo" title="Undo (Ctrl/Cmd+Z)"><i class="icon-undo"></i></a>
+                <a class="btn" data-edit="redo" title="Redo (Ctrl/Cmd+Y)"><i class="icon-repeat"></i></a>
+            </div>
+            <input type="text" data-edit="inserttext" id="voiceBtn" x-webkit-speech="">
+        </div>
+
+        <div class="editor editorAction"></div>
+                                                                       
+                    
+                    
+                    
+                    
 				</div>
 				<button type="submit" name="no contno con" class="btn btn-primary form-control disable_no_source" id="add_action_request">Add Action</button>
 			</div>

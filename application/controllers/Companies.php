@@ -533,13 +533,13 @@ $company = $this->process_search_result($raw_search_results);
                      exit();
                     }
                     
-                        file_put_contents('apitext.txt', 'Initial stage two'.PHP_EOL, FILE_APPEND);            
+                       // file_put_contents('apitext.txt', 'Initial stage two'.PHP_EOL, FILE_APPEND);            
                         $chargesResponse = $this->getCompanyHouseCharges($this->input->post('registration'));
 
                         //file_put_contents('apitext.txt', 'This has ran retured a $chargesResponse condition bbb:'.$rows_affected, FILE_APPEND); 
 
                         if($chargesResponse){      
-                            file_put_contents('apitext.txt', 'Initial stage three'.PHP_EOL, FILE_APPEND); 
+                         //   file_put_contents('apitext.txt', 'Initial stage three'.PHP_EOL, FILE_APPEND); 
                             $this->Companies_model->insert_charges_CH($chargesResponse,$rows_affected,$this->data['current_user']['id']);      
                         }
                             echo json_encode(array('status' => 200, 'message' => $rows_affected));
@@ -956,6 +956,14 @@ echo $this->Tagging_model->$route($post);
                 //echo '<pre>'; print_r($companies_array_chunk[($current_page_number-1)]); echo '</pre>';
                 exit();
 
+    }
+    
+    function pipert(){
+        
+        
+        	$this->data['main_content'] = 'companies/editor';
+		$this->load->view('layouts/default_layout', $this->data);	
+        
     }
 }
  

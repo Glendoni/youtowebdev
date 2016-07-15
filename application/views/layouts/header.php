@@ -27,15 +27,27 @@
     <!-- MetisMenu CSS -->
     <!-- <link rel="stylesheet" type="text/css" media="screen" href="<?php echo asset_url();?>css/plugins/metisMenu/metisMenu.min.css" rel="stylesheet"> -->
 
+    
+    
+  
+   
+ 
+		<link href="https://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
+    
 
     <link rel="stylesheet" type="text/css" media="screen" href="<?php echo asset_url();?>css/bootstrap-datetimepicker.css">
     <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" type="text/css" media="screen" href="<?php echo asset_url();?>css/bootstrap.min.css" rel="stylesheet"> 
+    
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="<?php echo asset_url();?>css/bootstrap.min.css" rel="stylesheet">
+    
+    
+ 
     <!-- Bootstrap Core CSS -->
     <!-- <link href="<?php echo asset_url();?>css/font-awesome.min.css" rel="stylesheet"> -->
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" media="screen" href="<?php echo asset_url();?>css/sb-admin-2.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" media="screen" href="<?php echo asset_url();?>css/style.css" rel="stylesheet">
+ 
     <!-- Morris Charts CSS -->
     <link rel="stylesheet" type="text/css" media="screen" href="<?php echo asset_url();?>css/morris-5.1.css">
 
@@ -48,18 +60,22 @@
     <!-- Bootstrap Core CSS -->
     <!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet"> -->
 
-
+    <link rel="stylesheet" type="text/css" media="screen" href="<?php echo asset_url();?>css/style.css" rel="stylesheet">
     <!-- Custom Fonts -->
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-    
+  
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+      
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    
+    
 
+  
+  
 </head>
 
 <body>
@@ -68,22 +84,22 @@
     <div id="wrapper">
         <!-- Navigation -->
 <!--<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">-->
-
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
+ <?php  $stag_distinct = ''; if (ENVIRONMENT  =='staging' || ENVIRONMENT  =='development'){ $stag_distinct = 'background:#5cb85c;'; }?>
+ <?php  if (ENVIRONMENT  =='development'){ $stag_distinct = 'background:#4d2332;'; }?>
+        
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0; <?php echo $stag_distinct; ?>">
 <!-- Brand and toggle get grouped for better mobile display -->
 <!--<div class="navbar-header">-->
 <div class="col-sm-3 col-md-3">
-<a class="navbar-brand" href="<?php echo site_url();?>" ><img src="<?php echo asset_url();?>images/baselist-logotype-black-transparent-bg.png" style="width:120px;">
-
-
+ <a class="navbar-brand" href="<?php echo site_url();?>" ><img src="<?php echo asset_url();?>images/baselist-logotype-black-transparent-bg.png" style="width:120px;">
 <?php if (isset($current_user)): ?>
         <?php if (ENVIRONMENT  =='staging'){?>
 <div style="font-size: 10px;font-weight: 600;text-align: right;float: right;line-height: 40px;padding-left: 5px;">Staging</div>
 <?php
-} else {?>
-<?php
-}; ?>
-<div style="font-size: 10px;font-weight: 300;text-align: right;float: right;line-height: 40px;padding-left: 5px;">Version 3.10</div>
+} ?>
+      
+ 
+<div style="font-size: 10px;font-weight: 300;text-align: right;float: right;line-height: 40px;padding-left: 5px;">Version 3.12</div>
 <?php endif; ?>
 </a>
 </div>
@@ -98,7 +114,7 @@
 
                     <li class="dropdown">
                         <div class="btn-group">
-                                  <button type="button" class="btn btn-default" onclick="location.href='<?php echo site_url();?>dashboard#calls'"><span class="myactivity">Scheduled  <span class="badge"><?php echo count($pending_actions); ?></span></span></button>
+                                  <button type="button" class="btn btn-default" onclick="location.href='<?php echo site_url();?>dashboard&#35;calls'"><span class="myactivity">Scheduled  <span class="badge"><?php echo count($pending_actions); ?></span></span></button>
                                   <button type="button" class="btn btn-default dropdown-toggle sublinkMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                                     <span class="caret"></span>
                                     <span class="sr-only">Toggle Dropdown</span>
@@ -193,7 +209,7 @@ $search_default = $this->input->post('agency_name');
                                     
 
 
-                    <input name="agency_name" id="agency_name" type="text" onkeyup="ajaxSearch();" class="form-control large-search-height large-search" autocomplete="off" value="<?php echo trim($search_default);?>" placeholder="Search Baselist">
+                    <input name="agency_name" id="agency_name" type="text" onkeyup="ajaxSearch();" class="form-control large-search-height large-search" autocomplete="off" value="<?php echo trim($search_default);?>" placeholder="Search">
                     <div class="alert alert-warning alert-dismissible" style="display:none;" id="empty_form_error" role="alert">
                     <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 
@@ -208,20 +224,11 @@ $search_default = $this->input->post('agency_name');
                             <button href="#credits" type="button" class="toggle btn btn-default dropdown-toggle large-search-height" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
                         </div>
                         
-                        
-                        
-                        
- <a href="javscript:;" class="search_box_cancel btn btn-danger " value="Go" name="submit" style="width: 100%; padding-top:11px;">X</a>
-                        
-                        
-                        
-                        
-                        
-                        
+                            <a href="javscript:;" class="search_box_cancel btn btn-danger " value="Go" name="submit" style="width: 100%; padding-top:7px;">X</a>
                         
                         
                         <?php if (isset($_POST['main_search'])): ?>
-                                    <a href="<?php echo site_url();?>" class="loading-btn btn btn-danger  loading-btn-search" value="Go" name="submit" style="width: 100%; padding-top:11px;">X</a>
+                                    <a href="<?php echo site_url();?>" class="loading-btn btn btn-danger  loading-btn-search" value="Go" name="submit" style="width: 100%; padding-top:7px;">X</a>
                                     <?php endif; ?>
                         
                     <input type="submit" class="loading-btn btn btn-warning " value="Go" name="submit" style="width: 100%;">

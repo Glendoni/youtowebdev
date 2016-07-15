@@ -8,6 +8,86 @@ function dateRequired()     {
     }
 }
 
+
+//console.warn(regArray.join());
+
+
+
+function gettagscampList(param){
+    
+   
+//console.debug(param)
+  //var param = 154537;
+     var parent_tag_name_holder = [];
+    var parent_tag_name = [];
+     var para = {'companyID': param};
+             $.ajax({
+        type: "POST",
+            data: para,
+            dataType: "json",
+                 url: 'companies/fe_get_tag',
+            success: function(data) {  
+                $.each( data, function( key, val) {
+                    
+                  
+                 //parent_tag_name_holder.push('<ul class="tagLists'+param+val['parent_tag_id']+'"><li>'+val['name']+'<li></ul>')  
+
+
+ //console.log(parent_tag_name_holder.indexOf('tagLists'+val['parent_tag_id']))
+//console.log(parent_tag_name_holder.indexOf(val['parent_tag_name']+val['parent_tag_id']) )
+if(parent_tag_name_holder.indexOf(val['parent_tag_name']) == -1){
+
+    parent_tag_name_holder.push(val['parent_tag_name']);
+    
+    $('.tagLists'+param).append('<div class="col-xs-6 col-sm-3 centre tag_display_holder"><div class="tag-display-header">'+val['parent_tag_name']+'</div><ul class="listTagSummary tagLists'+param+val['parent_tag_id']+'"></ul></div>');
+                //console.log("Needle found.");
+    
+};
+ 
+                })
+                
+                console.log(parent_tag_name_holder.join(""));
+                
+                // $('.tagLists'+param).append(parent_tag_name_holder.join(""));
+              populateGetTagsCampList(data,param)
+if(data.length) $('.tagLists'+param).show(); 
+                
+            
+               //console.log(parent_tag_name_holder.join())
+        
+            }
+                  
+        })
+    }
+
+
+
+
+function populateGetTagsCampList(data,param){
+    
+    
+      var parent_tag_name_holder = [];
+    var parent_tag_name = [];
+     var para = {'companyID': param};
+         $.each( data, function( key, val) {
+
+                       if(val['parent_tag_name'] != null){
+                              parent_tag_name =    val['parent_tag_name'].replace(' ', '');
+                            //if(parent_tag_name != 'Downloads'){
+                                   //console.log(val['name']);
+                                $('.tagLists'+param+val['parent_tag_id']).append('<li>'+val['name']+'</li>');
+                                        //parent_tag_name_holder.push(val['parent_tag_name']);
+                              //  }
+                       }
+                 }) 
+    
+    
+}
+
+
+
+
+
 $(window).load(function(){
     window.setTimeout(function() {
     $(".alert-success").fadeTo(500, 0).slideUp(500, function(){
@@ -118,7 +198,26 @@ $(".source_explanation").prop('required',false);
 
 $( document ).ready(function() {
     
+    
+    
+   if((/campaigns/.test(window.location.href)) ||(/companies/.test(window.location.href))) { 
+
+            var regArray = [];
+            $('.company-header a').each(function(e,i){
+
+                gettagscampList($(this).attr('comp').trim());
+                  //console.warn($(this).attr('comp').trim());
+            })
+
+ }
+    
+    
+    
      if((/companies\/company/.test(window.location.href))) {
+         
+        // var simplemde = new SimpleMDE({ element: $(".completed-details")[0] });
+         
+         //simplemde.value("Add **Outcomer**");
        $(window).scroll(stickyActionsMenu);
       
          $('.other_sectors .button-checkbox .btn-checkbox, .target_sectors .button-checkbox .btn-checkbox').click(function(){ //Target sectors event visiual manager

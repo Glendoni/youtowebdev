@@ -190,13 +190,16 @@ class Companies_model extends CI_Model {
 									and  T.turnover < '.$turnover_to.'
 			  						';
                     
-                    	$turnover_sql = 'select T.company_id "company_id",
+                    
+                    		$turnover_sql = 'select T.company_id "company_id",
 									       T.turnover "turnover",
 									       T.method "turnover_method"       
 									from TURNOVERS T
 								
 									  
 									where  T.turnover between '.$turnover_from.'  and '.$turnover_to.'  ';
+                    
+                    
 			  						// removed this line "T.turnover = NULL or " as is was givin isues when searching for turnover from "0" Ex. 0-60000
 			  						// probably neeed to add something to show companies with no turnover details
 				}
@@ -1345,9 +1348,9 @@ $q = '
             
               $words = array( 'Limited', 'LIMITED', 'LTD','ltd','Ltd' );
         
-        $comp_name_replace_words =  str_replace($words, '',$row->name);
-        $comp_name_trim_left =ltrim($comp_name_replace_words);
-        $comp_name = rtrim($comp_name_trim_left);
+                    $comp_name_replace_words =  str_replace($words, '',$row->name);
+                    $comp_name_trim_left =ltrim($comp_name_replace_words);
+                    $comp_name = rtrim($comp_name_trim_left);
             
             return   array('trading_name' => $row->trading_name, 'name' => $comp_name);
         }
@@ -1355,6 +1358,18 @@ $q = '
           
     }
     
- 
+ function company_select($id){
+     
+     $query = $this->db->query("SELECT * FROM companies WHERE id='".$id."' LIMIT 1");
+     
+         if ($query->num_rows() > 0)
+             {
+                $row = $query->row(); 
+     
+              if($row->pipeline == 'Customer') return false;
+     return true;
+             } 
+         }
+   
     
 }

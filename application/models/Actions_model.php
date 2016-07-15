@@ -157,7 +157,7 @@ function get_follow_up_actions($company_id) //Added by glen this has only one de
     $data = array(
         'a.company_id' => $company_id,
         );
-    $this->db->select('a.created_at,a.actioned_at,a.action_type_id,a.comments,a.outcome,a.cancelled_at,a.id,u.image,u.name,c.first_name,c.last_name,a.contact_id,a.followup_action_id, a.planned_at", ');
+    $this->db->select('a.created_at,a.actioned_at,a.action_type_id,a.comments,a.outcome,a.cancelled_at,a.id,u.image,u.name,c.first_name,c.last_name,a.contact_id,a. followup_action_id, a.planned_at", ');
     $this->db->join('contacts c', 'c.id = a.contact_id', 'left');
     $this->db->join('users u', 'a.user_id = u.id', 'left');
     $this->db->where('followup_action_id IS NOT NULL', null);
@@ -726,6 +726,8 @@ function get_action_types_planned()
 function set_action_state($action_id,$user_id,$state,$outcome,$post)
 
 {
+    //$outcome =  htmlentities($outcome);
+    
     if($state == 'completed'){
         $data = array(
         'outcome' => (!empty($outcome)?$outcome:NULL),
