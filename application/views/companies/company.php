@@ -118,7 +118,12 @@
 
 
 
-        <div class="row">
+      
+
+
+        <!-- // POPUP BOXES -->
+        </div><!--END TOP INFO HOLDER-->
+  <div class="row">
         <?php if (isset($company['parent_name'])): ?>
         <div class="subsidiary">
         <span class="label label-danger"><a href="<?php echo site_url();?>companies/company?id=<?php echo $company['parent_id'];?>" target="_blank">Subsidiary of <?php echo $company['parent_name'];?> <i class="fa fa-external-link"></i></a></span>
@@ -131,11 +136,6 @@
 
 
         </div>
-
-
-        <!-- // POPUP BOXES -->
-        </div><!--END TOP INFO HOLDER-->
-
         </div><!--END TOP INFO HOLDER-->
 </breadcrumbscroll>
     
