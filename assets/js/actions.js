@@ -165,9 +165,11 @@ if ( typeof define === 'function' && define.amd ) {
   });
 function getActionData(scope = false){ //get all actions in multidimentional json array
         if ((/companies\/company/.test(window.location.href))) {
+            
+            var parid = GetUrlParamID();
         $.ajax({
             type: "GET",
-            url: "../companies/getAction/",
+            url: "../companies/getAction/"+parid,
             success: function(data) {
                 $('.timeline_inner').html('');
                 $('.timeline_inner').append(writeactions(data)); 

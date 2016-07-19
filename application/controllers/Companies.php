@@ -860,7 +860,7 @@ echo $this->Tagging_model->$route($post);
     
     function getAction($id = 154537 ){
         
-         $id = $this->session->userdata('selected_company_id');
+         //$id = $this->session->userdata('selected_company_id');
         //$query[]['actions'] = $this->Actions_model->get_actions(154537); //$this->input->get('id')
         $query[]['actions_outstanding'] = $this->Actions_model->get_actions_outstanding($id);
     
