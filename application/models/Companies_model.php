@@ -64,7 +64,7 @@ class Companies_model extends CI_Model {
 		$arrayNamesPipeline = array(
 			'Prospect' => 'Prospect',
 			'Intent' => 'Intent',
-			'Qualified' => 'Qualified',
+			//'Qualified' => 'Qualified',
 			'Unsuitable' => 'Unsuitable',
 			'Lost' => 'Lost'
 			);
@@ -84,7 +84,7 @@ class Companies_model extends CI_Model {
 	{
 		$arrayNamesPipelineSearch = array(
 			'Prospect' => 'Prospect',
-			'Qualified' => 'Qualified',
+			//'Qualified' => 'Qualified',
 			'Intent' => 'Intent',
 			'Proposal' => 'Proposal',
 			'Customer' => 'Customer',
@@ -125,7 +125,22 @@ class Companies_model extends CI_Model {
 		$this->db->update('companies', $pipelinedata);
 		return $this->db->affected_rows(); 
 	}
+    
+    
+    
+    
+    	function update_company_to_action($id, $actionName){ //new function to aid the refactor of pipeline from edit box
+		$pipelinedata = array('pipeline' => $actionName, 'updated_at' => date('Y-m-d H:i:s'));
+		$this->db->where('id', $id);
+		$this->db->update('companies', $pipelinedata);
+		return $this->db->affected_rows(); 
+	}
 
+    
+    
+    
+    
+    
      // $query = $this->db->query("YOUR QUERY");
 
 	function search_companies_sql($post,$company_id = False)

@@ -99,18 +99,25 @@ $('#action_type_completed').change(function(){
 var source_check = $("input[name=source_check]").val();
 var company_pipeline = $("input[name=company_pipeline]").val();
 
-if ((this.value == '16' || this.value == '8') && (!source_check)) 
+if ((this.value == '16' || this.value == '8' || this.value == '30') && (!source_check)) 
 {
-$(".no-source").slideDown(600);
-//$(".no-source").show();
-//$(".disable_no_source").attr('disabled', 'disabled');
+ 
+ 
+   $('#add_action .disable_no_source').prop('disabled', 'true') 
+    $('.sourceRequiredDropDownItem').text($('#action_type_completed option:selected').text());
+    $(".no-source").slideDown(600);
+    //$(".no-source").show();
+    //$(".disable_no_source").attr('disabled', 'disabled');
+    }
+    else
+    {
+    $(".no-source").slideUp(600);
+       
+ $('#add_action .disable_no_source').prop('disabled', '') 
+    //$(".no-source").hide();
+    //$(".disable_no_source").removeAttr('disabled', 'disabled'); 
 }
-else
-{
-$(".no-source").slideUp(600);
-//$(".no-source").hide();
-//$(".disable_no_source").removeAttr('disabled', 'disabled'); 
-}
+    
 });
 $(".pipeline-validation-check").change(function() {
 var company_source = $("select[name=company_source]").val();
@@ -213,7 +220,15 @@ $( document ).ready(function() {
     
     
     
+  
+        
+
      if((/companies\/company/.test(window.location.href))) {
+         
+         
+  
+         
+         // event.preventDefault()
          
         // var simplemde = new SimpleMDE({ element: $(".completed-details")[0] });
          
@@ -408,6 +423,26 @@ $( document ).ready(function() {
  
     
 });
+
+
+
+    
+    
+      function addActionChange(){
+        console.log('france')
+               $('.actionrequired').click(function(){
+
+
+console.log()
+                        if($('#action-error').css('display') != 'none'){
+                        event.preventDefault();
+                        }
+
+
+})
+               
+               
+}
 
 
 function getUserFavourites(){ // Dashbord favorites

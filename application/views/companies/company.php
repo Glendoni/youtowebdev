@@ -118,7 +118,12 @@
 
 
 
-        <div class="row">
+      
+
+
+        <!-- // POPUP BOXES -->
+        </div><!--END TOP INFO HOLDER-->
+  <div class="row">
         <?php if (isset($company['parent_name'])): ?>
         <div class="subsidiary">
         <span class="label label-danger"><a href="<?php echo site_url();?>companies/company?id=<?php echo $company['parent_id'];?>" target="_blank">Subsidiary of <?php echo $company['parent_name'];?> <i class="fa fa-external-link"></i></a></span>
@@ -131,11 +136,6 @@
 
 
         </div>
-
-
-        <!-- // POPUP BOXES -->
-        </div><!--END TOP INFO HOLDER-->
-
         </div><!--END TOP INFO HOLDER-->
 </breadcrumbscroll>
     
@@ -379,6 +379,22 @@ if ($your_date < $now){;
 		<div class="panel panel-default">
 		<div class="panel-heading" id="qvfinancials">
 		Financials
+            
+            <span><?php
+                /*  $number = 80020; //$company['turnover'] .'<br>';
+                if($number){
+                        if($number < 100000  ) {
+                         echo '£'.round(number_format($number),0);
+                        }else{                    
+                                 echo '£'. number_format(floor($number / 10) * 10);  
+
+                        }
+
+                       
+                }
+                
+                */
+                ?>
 		</div>
 		<!-- /.panel-heading -->
  
@@ -389,8 +405,8 @@ if ($your_date < $now){;
 			<thead>
 				<tr>
 					<th class="col-md-6">Mortgage Provider</th>
-					<th class="col-md-3" style="text-align:center;">Started</th>
-					<th class="col-md-3" style="text-align:center;">Status</th>
+					<td class="col-md-3">Started</th>
+					<th class="col-md-3">Status</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -406,10 +422,10 @@ if ($your_date < $now){;
 				<?php echo $mortgage['type']; ?>
 				</div>
 				</td>
-				<td class="col-md-3" style="text-align:center;">
+				<td class="col-md-3">
 				<?php $mortgages_start  = $mortgage['eff_from'];$date_pieces = explode("/", $mortgages_start);$formatted_mortgage_date = $date_pieces[2].'/'.$date_pieces[1].'/'.$date_pieces[0];echo date("F Y",strtotime($formatted_mortgage_date));?>
 				</td>
-				<td class="col-md-3" style="text-align:center;">
+				<td class="col-md-3">
 				<?php echo ucfirst($mortgage['stage']); ?><?php if(!empty($mortgage['eff_to'])){echo ' on '.$mortgage['eff_to'];} ?>
 				</td>
 
@@ -705,7 +721,7 @@ if ($your_date < $now){;
 			<!--VALIDATION ERROR IF NO ACTION IS SELECTED-->
 
 			<div id="action-error" class="no-source alert alert-warning" role="alert" style="display:none">
-            <strong>Source Required.</strong><br> To add a Deal or Proposal, please add a Source to this company.
+            <strong>Source Required.</strong><br> To add a <span class="sourceRequiredDropDownItem"></span>, please add a Source to this company.
             </div>
 
 <div class="row">
@@ -714,9 +730,16 @@ if ($your_date < $now){;
 					<label>New Action</label>
 					<select id="action_type_completed" name="action_type_completed" class="form-control" >
 						<option value="">--- Select an Action ---</option>
-						<?php foreach($action_types_done as $action ): ?>
+						<?php foreach($action_types_done as $action ): 
+                        
+                        if($action->id == 16 && $company['pipeline'] == 'Customer'|| $action->id == 29 && $company['pipeline'] == 'Customer' || $action->id == 30 && $company['pipeline'] == 'Customer' || $action->id == 31  && $company['pipeline'] == 'Customer'|| $action->id == 32 && $company['pipeline'] == 'Customer' ){ }else{
+                        
+                        ?>
+
+
 						  <option value="<?php echo $action->id; ?>"><?php echo $action->name; ?></option>
-						<?php endforeach; ?>
+						<?php 
+                        } endforeach; ?>
 					</select>
 				</div>
 			</div>
