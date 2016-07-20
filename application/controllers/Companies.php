@@ -879,7 +879,7 @@ echo $this->Tagging_model->$route($post);
         }
         
          //$action['initial_fee']['initial_rate']  =  ($initial_rate/100);
-  // echo '<pre>'; print_r($action); echo '</pre>';
+        // echo '<pre>'; print_r($action); echo '</pre>';
         header('Content-Type: application/json');
         echo json_encode($action);
  
@@ -965,5 +965,6 @@ echo $this->Tagging_model->$route($post);
 		$this->load->view('layouts/default_layout', $this->data);	
         
     }
+
 }
  

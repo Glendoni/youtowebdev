@@ -42,8 +42,18 @@ class Cron extends CI_Controller {
   {
     $this->Cron_model->csvreader();
   }
+
+function turnoverEmployees(){
     
     
+     $this->Cron_model->turnoverEmployees();
+}  
+    
+function turnoverCompanies(){
+    
+    
+     $this->Cron_model->turnoverCompanies();
+}     
     //AUTOPILOT
      //This should maybe once or twice a day -  Checks and adds email campaign list to database from AP RUN first
     function create_email_campaign_listing() 

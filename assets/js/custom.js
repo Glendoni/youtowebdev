@@ -46,7 +46,7 @@ if(parent_tag_name_holder.indexOf(val['parent_tag_name']) == -1){
  
                 })
                 
-                console.log(parent_tag_name_holder.join(""));
+                //console.log(parent_tag_name_holder.join(""));
                 
                 // $('.tagLists'+param).append(parent_tag_name_holder.join(""));
               populateGetTagsCampList(data,param)
@@ -103,7 +103,18 @@ if ((this.value == '16' || this.value == '8' || this.value == '30') && (!source_
 {
  
  
-   $('#add_action .disable_no_source').prop('disabled', 'true') 
+   $('#add_action .disable_no_source').prop('disabled', 'true');
+   
+    
+    if(this.value == '16' || this.value == '8'){ 
+        $('.completed-details').attr('required', 'required');
+         $('.addActionOutcome').show();
+        
+    }else{
+        $('.completed-details').prop('required', false);
+        $('.addActionOutcome').hide();
+    }
+    
     $('.sourceRequiredDropDownItem').text($('#action_type_completed option:selected').text());
     $(".no-source").slideDown(600);
     //$(".no-source").show();
@@ -111,11 +122,30 @@ if ((this.value == '16' || this.value == '8' || this.value == '30') && (!source_
     }
     else
     {
-    $(".no-source").slideUp(600);
-       
- $('#add_action .disable_no_source').prop('disabled', '') 
+    
+        $(".no-source").slideUp(600);
+
+        $('#add_action .disable_no_source').prop('disabled', '') ;
+        
+    if (this.value == '29' || this.value == '32' || this.value == '31' || this.value == '30'){ 
+         $('.completed-details').prop('required', false);
+         $('#add_action .disable_no_source').prop('disabled', false);
+         $('.addActionOutcome').hide();
+    }else{
+        
+         $('.completed-details').attr('required', 'required');
+         $('.addActionOutcome').show();
+    }
     //$(".no-source").hide();
     //$(".disable_no_source").removeAttr('disabled', 'disabled'); 
+if(!this.value){
+    
+    //alert();
+    $('#add_action .disable_no_source').prop('disabled', true);
+      $('.addActionOutcome').hide();
+}
+
+
 }
     
 });

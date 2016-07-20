@@ -182,6 +182,8 @@ function getActionData(scope = false){ //get all actions in multidimentional jso
                 bindPillerTitles();
                 removeOutsandingAction();
                 mainMenuQty(scope);
+                comments_decoder()
+
                 //$('.follow-up-date').datepicker();
                 var dateToday = new Date();
 $('.actiondate').datetimepicker({ minDate: dateToday });
@@ -204,8 +206,20 @@ $('select[name="action_type_planned"]').addClass('action_type_planned');
         $('.timeline-entry').show();
             
         }
-            
+            comments_decoder()   
      }
+
+
+function comments_decoder(){
+    
+                    $(".comment").each(function(){
+//console.log($(this).text());
+                    $(this).html($(this).text())
+})
+    
+    
+}
+
 function writeactions(data, scope = false){
 
     //dealTemplate()
@@ -319,7 +333,7 @@ function writeactions(data, scope = false){
 
      });  //loop end
        actionresult = actionresult.join("");
-
+comments_decoder()
            return actionresult;         
 
 }
@@ -522,7 +536,7 @@ function bindAddCallBackToCompletedAction(){
                          if (typeof action['outcome'] == 'undefined'  || action['outcome'] == null){
                              actionOutcome = ''
                          } else { 
-                             actionOutcome = '<strong>Outcome: </strong>'+action['outcome'];
+                             actionOutcome = '<strong>Outcome: </strong><span class="commentFUA">'+action['outcome']+'</span>';
 
                          }           
 
@@ -700,7 +714,8 @@ function bindAddCallBackToCompletedAction(){
              $('a[data="actions_marketing"]').attr('disabled', true);
             }
 
-            mainMenuQty(scope);        
+            mainMenuQty(scope);   
+         
         }
 
 
@@ -783,13 +798,20 @@ $('.box'+bun+'  .actionContact option[value=]').prop('selected','selected');
       //   $('.actionNav a[data="actions_outstanding"]').trigger('click')
         }
       
-   $('.editor').on('keyup mouseleave click', function(){
-var texteditor  = $(this).attr('addOutcomeEditor');
-$('.textarea'+texteditor).val($(this).html())
+            $('.editor').on('keyup mouseleave click', function(){
+            var texteditor  = $(this).attr('addOutcomeEditor');
+            $('.textarea'+texteditor).val($(this).html())
 
-});
-        
-        
+            });
+
+
+            //Handles action follow up actions output
+            $(".commentFUA").each(function(){
+            //console.log($(this).text());
+            var kip = $(this).text()
+            $(this).html(kip)
+            })
+    
         
         
     } 
@@ -891,6 +913,7 @@ $('#sidebar').hide();
                 
             })
             
+        
          }
     (function($) {
         $.fn.goTo = function() {
@@ -935,7 +958,7 @@ $('#sidebar').hide();
                     case 'Check-In Call':
                         icon = '<div class="timeline-icon bg-info"><i class="fa fa-envelope fa-lg"></i></div>';
                     break;
-                    case 'Deal':
+                    case 'Pipeline - Deal':
                         icon = '<div class="timeline-icon bg-success"><i class="fa fa-thumbs-o-up  fa-lg"></i></div>';
                     break;
                     case 'Demo':
@@ -1076,7 +1099,7 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
           }
          
          if(typeof action['outcome'] !== 'undefined'  && action['outcome'] !== null &&  action['outcome'] !== 'null'   ){
-             outcome = '<span class="actionMsg piller'+actionId+' outcomeMsg'+actionId+' comments'+actionType+'"><strong>Outcome: </strong>'+ action['outcome'] +'</span>'; 
+             outcome = '<span class="actionMsg piller'+actionId+' outcomeMsg'+actionId+' comments'+actionType+'"><strong>Outcome: </strong><span class="comment">'+ action['outcome'] +'</span></span>'; 
             
          } 
         
@@ -1087,10 +1110,10 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
          }
          
          if(action['comments']){
-             tagline = '<span class="actionMsg piller'+actionId+' actionMsg'+actionId+  ' comments'+actionType+'"><strong>Comment: </strong>'+action['comments']+'</span><hr>'+outcome;
+             tagline = '<span class="actionMsg piller'+actionId+' actionMsg'+actionId+  ' comments'+actionType+'"><strong>Comment: </strong><span class="comment">'+action['comments']+'</span></span><hr>'+outcome;
          }
          
-         if(actionType == 'Deal') actionTypeOverwrite = actionType+'@'+initial_fee+'%';
+         if(actionType == 'Pipeline - Deal') actionTypeOverwrite = actionType+'@'+initial_fee+'%';
          
          if(!actions_cancelled || typeof actionImg !== 'undefined'){
             badge = '<span class="circle" style="float: left;margin-top: 0px;margin-right: 10px;width: 20px;height: 20px;border-radius: 15px;font-size: 8px;line-height: 20px;text-align: center;font-weight: 700;background-color:'+actionImg[1]+'; color:'+actionImg[2]+';">'+actionImg[0]+'</span>';
@@ -1163,9 +1186,25 @@ if(timestamp2 < timestamp && action['action_type_id'] == 11 )
                 '<input type="submit" class="btn btn-primary btn-block actionSubmit box'+action['action_id']+' submit'+action['action_id']+'" "  style="float:right;" value="Save"></form><br /></div>';
 
         //console.log('box_'+action['action_id'])
-        overdueStatus = '<span class="label label-danger overdueAction ">Overdue</span>';
+            
+            
+        
+//var tm  = action['planned_at'];
+ 
+ 
+            
+var tm =  dateDiffChecker(action['planned_at']);
+
+if(tm > 1){ tm = tm + ' Days Overdue'; }else if(tm == 1){ tm  = tm + ' Day Overdue'; }else{ tm = tm +  ' Due Today'; } 
+            
+        overdueStatus = '<span class="label label-danger overdueAction ">'+tm +'</span>';
         var dateCompare = (new Date() - Date.parse(action['planned_at'])) >= 1000 * 60 * 30;
-       
+
+
+
+
+
+     
         if(dateCompare == false && typeof action['planned_at'] != 'undefined'){
             overdueStatus = '';
         }
@@ -1278,6 +1317,51 @@ if(timestamp2 < timestamp && action['action_type_id'] == 11 )
      
         return actions;
        }
+
+
+function dateDiffChecker(tm){
+
+tm = tm.split(' ');
+
+tm = tm[0].split('-');
+
+tm = tm[1]+'/'+tm[2]+'/'+tm[0];
+            
+            
+            
+            
+            
+            var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth()+1; //January is 0!
+var yyyy = today.getFullYear();
+
+if(dd<10) {
+    dd='0'+dd
+} 
+
+if(mm<10) {
+    mm='0'+mm
+} 
+
+today = mm+'/'+dd+'/'+yyyy;
+       
+        return  daydiff(parseDate(tm),parseDate(today));
+
+
+
+}
+
+function parseDate(str) {
+    var mdy = str.split('/');
+    return new Date(mdy[2], mdy[0]-1, mdy[1]);
+}
+
+function daydiff(first, second) {
+    return Math.round((second-first)/(1000*60*60*24));
+}
+
+
           
     function formattDate(createdAt, showtime = true){
         

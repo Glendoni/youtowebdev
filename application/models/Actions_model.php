@@ -788,7 +788,7 @@ function create($post)
     $completeddata = array(
         'company_id'    => $post['company_id'],
         'user_id'       => $post['user_id'],
-        'comments'      => (isset($post['comment'])?$post['comment']:NULL),
+        'comments'      => (isset($post['comment'])?htmlspecialchars($post['comment']):NULL),
         'planned_at'    => NULL,
         'contact_id'    => (!empty($post['contact_id'])?$post['contact_id']:NULL),
         'created_by'    => $post['user_id'],

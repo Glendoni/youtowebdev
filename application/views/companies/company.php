@@ -792,8 +792,8 @@ if ($your_date < $now){;
 						</div>
 	                </div>
 			<div class="col-sm-12 col-md-12">
-				<div class="form-group ">
-					<label>Outcome</label>
+				<div class="form-group addActionOutcome">
+					<label>Outcome<span style=" color: red;">*</span></label>
 <textarea class="form-control completed-details" name="comment" rows="3" required="required"></textarea>
             
                     
@@ -870,7 +870,7 @@ if ($your_date < $now){;
                     
                     
 				</div>
-				<button type="submit" name="no contno con" class="btn btn-primary form-control disable_no_source" id="add_action_request">Add Action</button>
+				<button type="submit" name="no contno con" class="btn btn-primary form-control disable_no_source " id="add_action_request" disabled="disabled">Add Action</button>
 			</div>
 			<?php echo form_close(); ?>
 			</div>
