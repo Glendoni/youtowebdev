@@ -112,7 +112,8 @@ if ((this.value == '16' || this.value == '8' || this.value == '32') && (!source_
         
     }else{
         $('.completed-details').prop('required', false);
-        $('.addActionOutcome').hide();
+        //$('.addActionOutcome').hide();
+           $('.addActionOutcome').show();
     }
     
     $('.sourceRequiredDropDownItem').text($('#action_type_completed option:selected').text());
@@ -130,7 +131,8 @@ if ((this.value == '16' || this.value == '8' || this.value == '32') && (!source_
     if (this.value == '31' || this.value == '34' || this.value == '33' || this.value == '32'){ 
          $('.completed-details').prop('required', false);
          $('#add_action .disable_no_source').prop('disabled', false);
-         $('.addActionOutcome').hide();
+         //$('.addActionOutcome').hide();
+           $('.addActionOutcome').show();
     }else{
         
          $('.completed-details').attr('required', 'required');

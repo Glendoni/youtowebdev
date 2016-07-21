@@ -126,16 +126,16 @@ class Actions extends MY_Controller {
                                 
                                 
                                 //}
-                            }else if($post['action_type_completed']=='29' || $post['action_type_completed']=='30' || $post['action_type_completed']=='31' || $post['action_type_completed']=='32'){
+                            }else if($post['action_type_completed']=='31' || $post['action_type_completed']=='32' || $post['action_type_completed']=='33' || $post['action_type_completed']=='34'){
                                 // proposal sent to company 
                                 
                                  if($this->Companies_model->company_select($company_id)){ //prevents proposal being updated if company is a customer
                                 
-                                      if($post['action_type_completed']=='29')    $actionName = 'Prospect'   ; 
+                                      if($post['action_type_completed']=='31')    $actionName = 'Prospect'   ; 
 
-                                            if($post['action_type_completed']=='30')    $actionName = 'Intent';
-                                            if($post['action_type_completed']=='31')    $actionName = 'Unsuitable';      
-                                            if($post['action_type_completed']=='32')    $actionName = 'Lost';      
+                                            if($post['action_type_completed']=='32')    $actionName = 'Intent';
+                                            if($post['action_type_completed']=='33')    $actionName = 'Unsuitable';      
+                                            if($post['action_type_completed']=='34')    $actionName = 'Lost';      
 
                                      
                                      

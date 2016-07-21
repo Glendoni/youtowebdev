@@ -2825,7 +2825,10 @@ font-size:15px;
     
     display:none;
 }
-
+.actionMsgText .Unsuitable, .actionMsgText .Lost, .actionMsgText .Intent,.actionMsgText .Prospect{
+background:none;
+color:#5f5f5f;
+}
 /*! Hint.css - v2.2.1 - 2016-03-26 //#2b4461
 * http://kushagragour.in/lab/hint/
 * Copyright (c) 2016 Kushagra Gour; Licensed  */
