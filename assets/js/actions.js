@@ -541,7 +541,7 @@ function bindAddCallBackToCompletedAction(){
                          }           
 
                             $('.outcomeMsg'+action['followup_action_id']).append('<div class="followcont" style="background: #fff; padding: 10px; margin-bottom: 5px; margin-top:5px;">'+followup+ ' ' +followUpCompleteddate+cancellation+contactDetails+
-                                                                                ' <span class="comments"><br><strong>Action: </strong>'+action['comments']+'<br>'+actionOutcome+
+                                                                                ' <span class="comments"><br><strong>Action: </strong><span class="commentFUA">'+action['comments']+'</span><br>'+actionOutcome+
                                                                                 '</span><hr /></div>'); 
                         }
                         followUpCompleteddate = '';

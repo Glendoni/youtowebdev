@@ -292,7 +292,7 @@ class Actions extends MY_Controller {
          //$rap = json_decode($rap);
         $user_id = $this->data['current_user']['id'];
        $action_id = $inputpost['outcomeActionId'];
-        $outcome = htmlentities($inputpost['outcome']);
+       $outcome = htmlentities(rtrim(preg_replace('/[\x00-\x1F\x80-\xFF]/', '',$inputpost['outcome'])));
         $state = $inputpost['status'];
         $atp = $inputpost['action_type_planned'];
         $result  =  $this->Actions_model->set_action_state($action_id,$user_id,$state,$outcome,$inputpost);
