@@ -947,4 +947,54 @@ echo 'Add tag to company ' .$tagid . '  ----- ' . $companyID .'<br><br>';
     
     }
     
+    function turnoverEmployees(){
+        
+     $query =    $this->db->query('with e as (
+                            select T1.company_id,
+                            T1.count "employees"
+                            from
+                            (-- T1
+                            select company_id,
+                            count,
+                            row_number() OVER (PARTITION BY company_id order by created_at desc) "rownum"
+                            from EMP_COUNTS
+                            ) T1
+                            where "rownum" = 1
+
+                            order by 1)
+                            update companies
+                            set employees = e.employees
+                            from e
+                            where id = e.company_id'); 
+        
+        
+                
+   echo   $query->num_rows();
+    }
+    function turnoverCompanies(){
+         
+      $query =       $this->db->query('with t as (
+                            select T1.company_id,
+                            T1.turnover "turnover",
+                            T1.method "method"
+                            from
+                            (-- T1
+                            select company_id,
+                            turnover,
+                            method,
+                            row_number() OVER (PARTITION BY company_id order by eff_from desc) "rownum"
+                            from TURNOVERS
+                            ) T1
+                            where "rownum" = 1
+                            order by 1
+                            )
+                            update companies
+                            set turnover = t.turnover
+                            from t
+                            where id = t.company_id');
+        
+   echo   $query->num_rows();
+ 
+    }
+
 }

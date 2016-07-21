@@ -180,6 +180,7 @@ function getActionData(scope = false){ //get all actions in multidimentional jso
                 bindPillerTitles();
                 removeOutsandingAction();
                 mainMenuQty(scope);
+                comments_decoder()
                 //$('.follow-up-date').datepicker();
                 var dateToday = new Date();
 $('.actiondate').datetimepicker({ minDate: dateToday });
@@ -202,8 +203,24 @@ $('select[name="action_type_planned"]').addClass('action_type_planned');
         $('.timeline-entry').show();
             
         }
-            
+           
      }
+
+
+
+
+
+
+function comments_decoder(){
+    
+                    $(".comment").each(function(){
+//console.log($(this).text());
+                    $(this).html($(this).text())
+})
+    
+    
+}
+
 function writeactions(data, scope = false){
 
     //dealTemplate()
@@ -317,7 +334,7 @@ function writeactions(data, scope = false){
 
      });  //loop end
        actionresult = actionresult.join("");
-
+comments_decoder()
            return actionresult;         
 
 }
@@ -520,12 +537,12 @@ function bindAddCallBackToCompletedAction(){
                          if (typeof action['outcome'] == 'undefined'  || action['outcome'] == null){
                              actionOutcome = ''
                          } else { 
-                             actionOutcome = '<strong>Outcome: </strong>'+action['outcome'];
+                         actionOutcome = '<strong>Outcome: </strong><span class="commentFUA">'+action['outcome']+'</span>';
 
                          }           
 
                             $('.outcomeMsg'+action['followup_action_id']).append('<div class="followcont" style="background: #fff; padding: 10px; margin-bottom: 5px; margin-top:5px;">'+followup+ ' ' +followUpCompleteddate+cancellation+contactDetails+
-                                                                                ' <span class="comments"><br><strong>Action: </strong>'+action['comments']+'<br>'+actionOutcome+
+                                                                                ' <span class="comments"><br><strong>Action: </strong><span class="commentFUA">'+action['comments']+'</span><br>'+actionOutcome+
                                                                                 '</span><hr /></div>'); 
                         }
                         followUpCompleteddate = '';
@@ -787,7 +804,12 @@ $('.textarea'+texteditor).val($(this).html())
 
 });
         
-        
+      //Handles action follow up actions output
+            $(".commentFUA").each(function(){
+            //console.log($(this).text());
+            var kip = $(this).text()
+            $(this).html(kip)
+            })   
         
         
     } 
@@ -1074,7 +1096,7 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
           }
          
          if(typeof action['outcome'] !== 'undefined'  && action['outcome'] !== null &&  action['outcome'] !== 'null'   ){
-             outcome = '<span class="actionMsg piller'+actionId+' outcomeMsg'+actionId+' comments'+actionType+'"><strong>Outcome: </strong>'+ action['outcome'] +'</span>'; 
+           outcome = '<span class="actionMsg piller'+actionId+' outcomeMsg'+actionId+' comments'+actionType+'"><strong>Outcome: </strong><span class="comment">'+ action['outcome'] +'</span></span>'; 
             
          } 
         
@@ -1085,7 +1107,7 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
          }
          
          if(action['comments']){
-             tagline = '<span class="actionMsg piller'+actionId+' actionMsg'+actionId+  ' comments'+actionType+'"><strong>Comment: </strong>'+action['comments']+'</span><hr>'+outcome;
+          tagline = '<span class="actionMsg piller'+actionId+' actionMsg'+actionId+  ' comments'+actionType+'"><strong>Comment: </strong><span class="comment">'+action['comments']+'</span></span><hr>'+outcome;
          }
          
          if(actionType == 'Deal') actionTypeOverwrite = actionType+'@'+initial_fee+'%';
