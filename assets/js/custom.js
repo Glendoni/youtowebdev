@@ -99,7 +99,7 @@ $('#action_type_completed').change(function(){
 var source_check = $("input[name=source_check]").val();
 var company_pipeline = $("input[name=company_pipeline]").val();
 
-if ((this.value == '16' || this.value == '8' || this.value == '30') && (!source_check)) 
+if ((this.value == '16' || this.value == '8' || this.value == '32') && (!source_check)) 
 {
  
  
@@ -127,7 +127,7 @@ if ((this.value == '16' || this.value == '8' || this.value == '30') && (!source_
 
         $('#add_action .disable_no_source').prop('disabled', '') ;
         
-    if (this.value == '29' || this.value == '32' || this.value == '31' || this.value == '30'){ 
+    if (this.value == '31' || this.value == '34' || this.value == '33' || this.value == '32'){ 
          $('.completed-details').prop('required', false);
          $('#add_action .disable_no_source').prop('disabled', false);
          $('.addActionOutcome').hide();

@@ -732,7 +732,7 @@ if ($your_date < $now){;
 						<option value="">--- Select an Action ---</option>
 						<?php foreach($action_types_done as $action ): 
                         
-                        if($action->id == 16 && $company['pipeline'] == 'Customer'|| $action->id == 29 && $company['pipeline'] == 'Customer' || $action->id == 30 && $company['pipeline'] == 'Customer' || $action->id == 31  && $company['pipeline'] == 'Customer'|| $action->id == 32 && $company['pipeline'] == 'Customer' ){ }else{
+                        if($action->id == 16 && $company['pipeline'] == 'Customer'|| $action->id == 31 && $company['pipeline'] == 'Customer' || $action->id == 32 && $company['pipeline'] == 'Customer' || $action->id == 33  && $company['pipeline'] == 'Customer'|| $action->id == 34 && $company['pipeline'] == 'Customer' ){ }else{
                         
                         ?>
 
