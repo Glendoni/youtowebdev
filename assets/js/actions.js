@@ -1166,14 +1166,10 @@ if(timestamp2 < timestamp && action['action_type_id'] == 11 )
         var detail = 'Meeting+with+'+contact+'%0A'+email+'+%0D%0D'+pageAddress; 
 
             
-            
-            
-            
-            
         calendarBtnDetail = '<a class="btn btn-default btn-xs add-to-calendar" href="http://www.google.com/calendar/event?action=TEMPLATE&amp;text='+msg+'&amp;dates='+ planned_at +'/'+ planned_at +'Z&amp;details='+detail+'%0D%0DAny changes made to this event are not updated in Baselist. %0D%23baselist" target="_blank" rel="nofollow" style="margin-top:0; font-size:10px;">Add to Calendar</a>';
 
 
-        calenderbtn = '<small>'+calendarBtnDetail +' </small><span class="btn btn-default btn-xs label label-success callbackAction callbackActionOutcome hint--top-right"  data-hint="Add Action Outcome" style="font-size:10px; margin:0 0px;" data="'+action['action_id']+'">Add Outcome</span> <span class="btn btn-default btn-xs label label-danger removeOutsandingAction hint--top-right"  data-hint="Cancel Callback Action" data="'+action['action_id']+'" >Remove</span>';
+        calenderbtn = '<small>'+calendarBtnDetail +' </small><span class="btn btn-default btn-xs label label-primary callbackAction callbackActionOutcome hint--top-right"  data-hint="Add Action Outcome" style="font-size:10px; margin:0 0px;" data="'+action['action_id']+'">Add Outcome</span> <span class="btn btn-default btn-xs label label-danger callbackAction removeOutsandingAction hint--top-right"  data-hint="Cancel Callback Action" data="'+action['action_id']+'" >Remove</span>';
 
          if(action['action_id'])                                                                                                                                          
             textbox= '<div class="form-group callbackActionTextBox  box'+action['action_id']+'" style="display:none">'+
@@ -1200,11 +1196,6 @@ if(tm > 1){ tm = tm + ' Days Overdue'; }else if(tm == 1){ tm  = tm + ' Day Overd
         overdueStatus = '<span class="label label-danger overdueAction ">'+tm +'</span>';
         var dateCompare = (new Date() - Date.parse(action['planned_at'])) >= 1000 * 60 * 30;
 
-
-
-
-
-     
         if(dateCompare == false && typeof action['planned_at'] != 'undefined'){
             overdueStatus = '';
         }

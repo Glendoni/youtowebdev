@@ -2760,12 +2760,12 @@ margin-top:6px;
     
 }
 .editorAction{
-     height: 150px;
+     height: 100px;
 overflow: scroll;
     
      overflow-x: hidden;
     border: solid thin #ccc;
-    padding: 20px;    
+    padding: 10px;    
 }
 
 .addOutcomeEditor{
@@ -2826,8 +2826,13 @@ font-size:15px;
     display:none;
 }
 .actionMsgText .Unsuitable, .actionMsgText .Lost, .actionMsgText .Intent,.actionMsgText .Prospect{
-background:none;
-color:#5f5f5f;
+background:none !important;
+color:#5f5f5f !important;
+}
+
+.actionMsgText .Prospect{
+background:none !important;
+color:#5f5f5f  !important;
 }
 /*! Hint.css - v2.2.1 - 2016-03-26 //#2b4461
 * http://kushagragour.in/lab/hint/
