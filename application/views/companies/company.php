@@ -138,7 +138,7 @@
 </breadcrumbscroll>
     
     
-      </breadcrumbscroll> 
+ 
 
 <!-- POPUP BOXES -->
 	<?php $this->load->view('companies/edit_box.php',array('company'=>$company)); ?>

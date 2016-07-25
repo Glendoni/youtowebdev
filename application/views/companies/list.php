@@ -8,7 +8,7 @@
 <?php $this->load->view('companies/create_contact_box.php',array('company'=>$company)); ?>
 <!--ANCHOR OFFSET-->
 <a class="anchor" id="<?php echo $company['id'];?>"></a>
-<div class="panel <?php if(isset($company['assigned_to_name'])): ?> panel-primary <?php else: ?> panel-default <?php endif; ?> company">
+<div class="panel <?php if(isset($company['assigned_to_name'])): ?> panel-primary <?php else: ?> panel-default <?php endif; ?> company companylistings">
 	<div class="panel-body">
     <div class="row">
 		<div class="col-sm-12 ">
