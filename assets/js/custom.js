@@ -100,14 +100,17 @@ if ((this.value == '16' || this.value == '8' || this.value == '32') && (!source_
  
  
    $('#add_action .disable_no_source').prop('disabled', 'true');
-   
+    $('.actionEvalPipeline').show()
     
     if(this.value == '16' || this.value == '8'){ 
         $('.completed-details').attr('required', 'required');
+        $('.actionEvalPipeline').show()
          $('.addActionOutcome').show();
         
     }else{
         $('.completed-details').prop('required', false);
+$('.actionEvalPipeline').hide()
+
         //$('.addActionOutcome').hide();
            $('.addActionOutcome').show();
     }
@@ -130,12 +133,14 @@ var actionArr = ['31','32','33','34'];
     if (actionArr.indexOf(this.value) >=0){ 
          $('.completed-details').prop('required', false);
          $('#add_action .disable_no_source').prop('disabled', false);
+        $('.actionEvalPipeline').hide()
          //$('.addActionOutcome').hide();
            $('.addActionOutcome').show();
     }else{
         
          $('.completed-details').attr('required', 'required');
          $('.addActionOutcome').show();
+           $('.actionEvalPipeline').show()
     }
     //$(".no-source").hide();
     //$(".disable_no_source").removeAttr('disabled', 'disabled'); 
@@ -523,7 +528,7 @@ $( document ).ready(function() {
                $('.actionrequired').click(function(){
 
 
-console.log()
+//console.log()
                         if($('#action-error').css('display') != 'none'){
                         event.preventDefault();
                         }

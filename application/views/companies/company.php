@@ -798,7 +798,7 @@ endif;
                         </div>
                         <div class="col-sm-12 col-md-12">
                             <div class="form-group addActionOutcome">
-                                <label>Comment<span style=" color: red;">*</span></label>
+                                <label>Comment<span class="actionEvalPipeline"style=" color: red;">*</span></label>
                                 <textarea class="form-control completed-details" name="comment" rows="3" required="required"></textarea>
 
                                 <!---
