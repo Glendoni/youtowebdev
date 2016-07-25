@@ -305,25 +305,25 @@ if ($your_date < $now){;
 			if(isset($company['sectors'])){
 				foreach ($company['sectors'] as $key => $name)
 				{
-				echo '<p class="details" style="margin-bottom:0; text-align:centre;">'.$name.'</p>';
+				echo '<p class="detailsTagFormat" style="margin-bottom:0; text-align:centre;">'.$name.'</p>';
 				}
 			}
 			?>
 									<?php if (isset($company['perm'])): ?>
 
-<p class="details" style="margin-bottom:0; text-align:centre;">Permanent</p>
+<p class="detailsTagFormat" style="margin-bottom:0; text-align:centre;">Permanent</p>
 
 			<?php endif; ?>
 								<?php if (isset($company['contract'])): ?>
 
 
-			<p class="details" style="margin-bottom:0; text-align:centre;">Contract</p>
+			<p class="detailsTagFormat" style="margin-bottom:0; text-align:centre;">Contract</p>
 						<?php endif; ?>
             
      
             <?php if ($company['perm'] == '' && $company['contract'] == '' && count($company['sectors']) ==0 ): ?>
 
-<p class="details" style="margin-bottom:0; text-align:centre;">-</p>
+<p class="detailsTagFormat" style="margin-bottom:0; text-align:centre;">-</p>
             
             
             <?php endif; ?>

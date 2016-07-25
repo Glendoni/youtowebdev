@@ -2839,7 +2839,9 @@ color:#5f5f5f  !important;
 }
 
  
-.companylistings .details p {
+
+
+.detailsTagFormat {
     font-size: 12px;
     padding: 4px 8px;
     list-style: none;
@@ -2847,26 +2849,12 @@ color:#5f5f5f  !important;
      min-width: 50px;
     text-align: center;
   margin-top:5px;
-    font-size: 14px;
+    font-size: 11px;
      margin-right: 2px;
     color: #000000;
     border: 1px solid #d6d6d6;
     display: inline-block;
 }
-
-.company .details p {
-    font-size: 12px;
-    padding: 4px 8px;
-    list-style: none;
-    border-radius: 2px;
-     min-width: 50px;
-    text-align: center;
-  margin-top:5px;
-    font-size: 14px;
-     margin-right: 2px;
-    color:  #000000;
- 
-    display: inline-block;
 }
 
 .classActions span,.add-to-calendar{
