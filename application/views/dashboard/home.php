@@ -1251,8 +1251,8 @@
 <h3 class="panel-title pull-left">Campaign Summary</h3>
 <?php if ($current_user['permission'] == 'admin'): ?>
 <ul class="nav nav-tabs dashboard" role="tablist">
-<li role="presentation" class="active"><button href="#campaign_user" aria-controls="campaign_user" role="tab" data-toggle="tab" class="btn btn-primary btn-xs pull-right" style="margin-right:10px; margin-left:10px;    font-size: 10px;">My Campaigns</button></li>
-<li role="presentation"><button href="#campaign_team" aria-controls="campaign_team" role="tab" data-toggle="tab" class="btn btn-primary btn-xs pull-right" style="margin-right:10px;    font-size: 10px;">Team Campaigns</button></li>
+<li role="presentation" class="active"><button href="#campaign_user" aria-controls="campaign_user" role="tab" data-toggle="tab" class="btn btn-primary btn-xs pull-right" style="margin-right:10px; margin-left:10px;    font-size: 10px;">My Campaign</button></li>
+<li role="presentation"><button href="#campaign_team" aria-controls="campaign_team" role="tab" data-toggle="tab" class="btn btn-primary btn-xs pull-right" style="margin-right:10px;    font-size: 10px;">Team Campaign</button></li>
 
               </ul>
 
@@ -1937,7 +1937,7 @@
 <div class="col-sm-3 col-sm-pull-9">
               <div class="panel panel-default">
               <div class="panel-heading">
-                <h3 class="panel-title">My Campaigns <span class="badge pull-right"><?php echo count($private_campaigns); ?></span></h3>
+                <h3 class="panel-title">My Campaign <span class="badge pull-right"><?php echo count($private_campaigns); ?></span></h3>
               </div>
               <div class="panel-body" style="padding:0;">
                   <!-- PRIVATE SEARCHES -->
@@ -1959,7 +1959,7 @@
             </div>
             <div class="panel panel-default">
               <div class="panel-heading">
-                <h3 class="panel-title">Recent Campaigns <span class="badge pull-right"><?php //echo count($shared_campaigns); ?></span></h3>    
+                <h3 class="panel-title">Recent Campaign<span class="badge pull-right"><?php //echo count($shared_campaigns); ?></span></h3>    
               </div>
               <div class="panel-body" style="padding:0;">
               <div id="campaignList">

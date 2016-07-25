@@ -703,7 +703,7 @@ function get_action_types_array()
 
 function get_action_types_done()
 {
-    $ignore = array('19','7','20'); //EXCLUDE PIPELINE TRACKING, COMMENT AND MARKETING//
+    $ignore = array('19','7','20','33'); //EXCLUDE PIPELINE TRACKING, COMMENT AND MARKETING//
     $data = array(
         'type' => 'Done',
         );

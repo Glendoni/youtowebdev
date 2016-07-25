@@ -283,9 +283,9 @@ if ($your_date < $now){;
             <div class="col-md-12">
 			<hr>
 		
-<div class="row padding-bottom">
-		<div class="col-xs-6 col-md-3" style="margin-top:10px;">
-			<label>Company Number</label>
+<div class="row  details">
+		<div class="col-xs-6 col-md-3 details" style="margin-top:10px; ">
+			<label>Company Number</label><br>
 			<p>	
 			 <!--COMPANY NUMBER IF APPLICABLE-->
 			<?php echo isset($company['registration'])?$company['registration']:''; ?>
@@ -293,26 +293,31 @@ if ($your_date < $now){;
         	</div>
 
         	<div class="col-xs-6 col-md-3" style="margin-top:10px;">
-        	<label>Founded</label>
+        	<label>Founded</label><br>
 			<p>	
 				<?php echo isset($company['eff_from'])?$company['eff_from']:''; ?>
 			</p>
 		</div>
 
         <div class="col-xs-6 col-md-3" style="margin-top:10px;">
-        		<label>Phone</label>
+        		<label>Phone</label><br>
         		<p>
-        		<?php echo isset($company['phone'])?$company['phone']:''; ?>                
+        		<?php echo isset($company['phone'])?$company['phone']:'-'; ?>                
            		</p>
 			</div><!--END PHONE NUMBER-->
 		<div class="col-xs-6 col-md-3" style="margin-top:10px;">
-				<label>Class</label>
+				<label>Class</label><br>
 				<p>	
 		            <!--CLASS IF APPLICABLE-->
-		            <?php if (isset($company['class'])): ?>
-						<span class="label label-info"><?php echo $companies_classes[$company['class']] ?></span>	
-					<?php else: ?>
-						-
+		          
+                  <?php if (isset($company['class']) && $company['class'] != 'Unknown' ): ?>
+					 <?php echo $companies_classes[$company['class']] ?> 	
+					<?php else: 
+                    
+                    echo '-';
+                    
+                    ?>
+						
 		            <?php endif; ?>
 	            </p>
 			</div>
@@ -321,50 +326,51 @@ if ($your_date < $now){;
             </div>
             
 		<div class="row" >
-		<div class="col-xs-12">
+		<div class="col-xs-12 details" >
 		<!-- TURNOVER -->
 		<div class="col-xs-4 col-sm-3">
-			<strong><span style="text-transform: capitalize"><?php echo isset($company['turnover_method'])?$company['turnover_method']:'';?></span> Turnover</strong>
+			<strong><span style="text-transform: capitalize"><?php echo isset($company['turnover_method'])?$company['turnover_method']:'';?></span> Turnover</strong><br>
 			<p class="details" style="margin-bottom:5px;">
-				<?php echo isset($company['turnover'])? '£'.number_format (round($company['turnover'],-3)):'';?>
+				<?php echo isset($company['turnover'])? '£'.number_format (round($company['turnover'],-3)):'-';?>
 			</p>
         </div>
 		<!-- CONTACTS -->
 		<div class="col-xs-4 col-sm-3">
-			<strong>Contacts</strong>			
+			<strong>Contacts</strong><br>			
 			<?php if (isset($company['contacts_count'])): ?>
 			<p class="details"><?php echo $company['contacts_count'];?> </p>
 			<?php else: ?>
-			<p class="details">0 </p>
+			<p class="details">-</p>
 			<?php endif; ?>
 		</div>
 		<!-- EMPLOYEES -->
 		<div class="col-xs-4 col-sm-3">
-			<strong>Employees</strong>
+			<strong>Employees</strong><br>
 			<?php if (isset($company['emp_count'])): ?>
 			<p class="details"><?php echo $company['emp_count'];?> </p>
 			<?php else: ?>
+            <p class="details">-</p>
 			<?php endif; ?>
 		</div>
 		<!-- SECTORS -->
 		<div class="col-xs-4 col-sm-3">
-			<strong>Sectors</strong> 
+			<strong>Sectors</strong><br>
 			<?php
 			if(isset($company['sectors'])){
 		
 				foreach ($company['sectors'] as $key => $name)
 				{
-				echo '<p class="details" style="margin-bottom:0; text-align:centre;">'.$name.'</p>';
+				echo '<p class="details detailsTagFormat" style="margin-bottom:5px; text-align:centre;">'.$name.'</p>';
 				}
 			}
 			?>
 
 
 <?php if (isset($company['perm'])): ?>
-<p class="details" style="margin-bottom:0; text-align:centre;"><b>Permanent</b></p>
+<p class="details" style="margin-bottom:0; text-align:centre;">Permanent</p>
 <?php endif; ?>
 <?php if (isset($company['contract'])): ?>
-<p class="details" style="margin-bottom:0; text-align:centre;"><b>Contract</b></p>
+<p class="details" style="margin-bottom:0; text-align:centre;">Contract</p>
 <?php endif; ?>
 </div>
 		</div>
@@ -482,29 +488,54 @@ if ($your_date < $now){;
 	        </tr>
 	      </thead>
 	      <tbody>
-	      	<?php foreach ($addresses as $address):?>
+	      	<?php
+              $ai =  0 ;
+              foreach ($addresses as $address):?>
+              
+              
+            <?php  if($address->address != 'Unknown' ): ?>
 	      	<tr>
 				<td class="col-md-6">
                  <a target="_blank" href="http://maps.google.com/?q=<?=$address->address; ?>" ><span class="mainAddress"><?=$address->address; ?></span><span style="line-height: 15px;font-size: 10px;padding-left: 5px;"><i class="fa fa-external-link"></i></span></a></td>
 				<td class="col-md-3 mainAddrType"><?php echo $address->type;?></td>
 				<td class="col-md-2 mainPhone"><?php echo $address->phone; ?></td>
 				<td  class="col-md-3">
-				<?php if ($address->type<>'Registered Address'): ?>
-		      	<div class=" pull-right ">
-	            <?php $this->load->view('companies/action_box_addresses.php',array('address'=>$address)); ?>
-	            </div>
-	            <?php else: ?>
-	        	<?php endif; ?>
+                <?php if ($address->type<>'Registered Address'): ?>
+                        <div class=" pull-right ">
+	                       <?php $this->load->view('companies/action_box_addresses.php',array('address'=>$address)); ?>
+	                   </div>
+                    
+                    
+	            <?php
+                      
+                    else: ?>
+	        	<?php endif;
+               $ai = ($ai+1);      
+endif;
+                     
+                    
+                    ?>
 	            </td>
         	</tr>
-			<?php endforeach; ?>  
+			<?php 
+              
+          
+              endforeach; ?>  
 	      </tbody>
 	    </table>
 	    <?php else: ?>
-			<div class="alert alert-info" style="margin-top:10px;">
-                No address data.
-            </div>
+			
+            
+        echo $ai ;
+            
+            
+            
+            
 		<?php endif; ?>
+
+
+<?php     if(!$ai) echo   '<div class="alert alert-info" style="margin-top:10px;">No address data.</div> ';
+            ?>
 
 		</div>
 		<!-- /.panel-body -->

@@ -39,7 +39,7 @@ if(parent_tag_name_holder.indexOf(val['parent_tag_name']) == -1){
 
     parent_tag_name_holder.push(val['parent_tag_name']);
     
-    $('.tagLists'+param).append('<div class="col-xs-6 col-sm-3 centre tag_display_holder"><div class="tag-display-header">'+val['parent_tag_name']+'</div><ul class="listTagSummary tagLists'+param+val['parent_tag_id']+'"></ul></div>');
+    $('.tagLists'+param).append('<div class="col-xs-6 col-sm-3  tag_display_holder"><div class="tag-display-header">'+val['parent_tag_name']+'</div><ul class="listTagSummary tagLists'+param+val['parent_tag_id']+'"></ul></div>');
                 //console.log("Needle found.");
     
 };
@@ -181,7 +181,7 @@ $(".no-source-pipeline").slideUp(600);
 $(".pipeline-validation-check").change(function() {
         var company_source = $("select[name=company_source]").val();
 
-            var companysourceArr = ['2','3','4','5','6','7','8','9','14','15']; //Source id to force user to enter special insight 
+            var companysourceArr ;//= ['2','3','4','5','6','7','8','9','14','15']; //Source id to force user to enter special insight 
 
 
         if (companysourceArr.indexOf(company_source) >=0) 

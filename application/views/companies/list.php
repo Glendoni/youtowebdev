@@ -223,70 +223,84 @@ if ($your_date < $now){;
 		</div>
  
 
-		<div class="row padding-bottom">
+		<div class="row details">
 				<div class="col-md-12">
 			<hr>
 		</div>
-		<div class="col-xs-6 col-md-3 centre" style="margin-top:10px;">
-			<label>Company Number</label>
+		<div class="col-xs-6 col-md-3 " style="margin-top:10px;">
+			<label>Company Number</label><br>
 			<p class="registration_number">	
 			 <!--COMPANY NUMBER IF APPLICABLE-->
 			<?php echo isset($company['registration'])?$company['registration']:''; ?>
          	</p>
         	</div>
 
-        	<div class="col-xs-6 col-md-3 centre" style="margin-top:10px;">
-        	<label>Founded</label>
+        	<div class="col-xs-6 col-md-3 " style="margin-top:10px;">
+        	<label>Founded</label><br>
 			<p>	
 				<?php echo isset($company['eff_from'])?$company['eff_from']:''; ?>
 			</p>
 		</div>
 
   	<!-- CONTACTS -->
-		<div class="col-xs-6 col-sm-3 centre" style="margin-top:10px;">
-			<strong>Contacts</strong>			
+		<div class="col-xs-6 col-sm-3 " style="margin-top:10px;">
+			<strong>Contacts</strong><br>			
 			<?php if (isset($company['contacts_count'])): ?>
 			<p class="details"><?php echo $company['contacts_count'];?> </p>
 			<?php else: ?>
-			<p class="details">0</p>
+			<p class="details">-</p>
 			<?php endif; ?>
 		</div>
             
-		<div class="col-xs-6 col-md-3 centre" style="margin-top:10px;">
-				<label>Class</label>
+		<div class="col-xs-6 col-md-3 " style="margin-top:10px;">
+				<label>Class</label><br>
 				<p>	
 		            <!--CLASS IF APPLICABLE-->
-		            <?php if (isset($company['class'])): ?>
-						<span class="label label-info"><?php echo $companies_classes[$company['class']] ?></span>	
-					<?php else: ?>
-						-
+		            <?php if (isset($company['class']) && $company['class'] != 'Unknown' ): ?>
+					 <?php echo $companies_classes[$company['class']] ?> 	
+					<?php else: 
+                    
+                    echo '-';
+                    
+                    ?>
+						
 		            <?php endif; ?>
 	            </p>
 			</div>
 
 		</div>
 		
-	<div class="row padding-bottom">
+	<div class="row details">
 		<!-- TURNOVER -->
-		<div class="col-xs-6 col-sm-3 centre">
-			<strong><span style="text-transform: capitalize"><?php echo isset($company['turnover_method'])?$company['turnover_method']:'';?></span> Turnover</strong>
+		<div class="col-xs-6 col-sm-3 ">
+			<strong><span style="text-transform: capitalize"><?php echo isset($company['turnover_method'])?$company['turnover_method']:'';?></span> Turnover</strong><br>
 			<p class="details" style="margin-bottom:5px;">
-				<?php echo isset($company['turnover'])? '£'.number_format (round($company['turnover'],-3)):'';?>
+				<?php echo isset($company['turnover'])? '£'.number_format (round($company['turnover'],-3)):'-';?>
 			</p>
         </div>
 	
-		<!-- EMPLOYEES -->
-		<div class="col-xs-6 col-sm-3 centre">
-			<strong>Employees</strong>
+	<!-- EMPLOYEES -->
+		<div class="col-xs-4 col-sm-3">
+			<strong>Employees</strong><br>
 			<?php if (isset($company['emp_count'])): ?>
 			<p class="details"><?php echo $company['emp_count'];?> </p>
 			<?php else: ?>
-			<!--<p class="details">Unknown</p>-->
+            <p class="details">-</p>
 			<?php endif; ?>
 		</div>
 		<!-- SECTORS -->
-		<div class="col-xs-6 col-sm-3 centre">
-			<strong>Sectors</strong> 
+        <?php if(isset($company['sectors'])){
+    
+    
+}else{
+    
+    
+    
+}
+        
+        ?>
+		<div class="col-xs-6 col-sm-4">
+			<strong>Sectors</strong> <br>
 			<?php 
 			if(isset($company['sectors'])){
 				foreach ($company['sectors'] as $key => $name)
@@ -297,14 +311,24 @@ if ($your_date < $now){;
 			?>
 									<?php if (isset($company['perm'])): ?>
 
-<p class="details" style="margin-bottom:0; text-align:centre;"><b>Permanent</b></p>
+<p class="details" style="margin-bottom:0; text-align:centre;">Permanent</p>
 
 			<?php endif; ?>
 								<?php if (isset($company['contract'])): ?>
 
 
-			<p class="details" style="margin-bottom:0; text-align:centre;"><b>Contract</b></p>
+			<p class="details" style="margin-bottom:0; text-align:centre;">Contract</p>
 						<?php endif; ?>
+            
+     
+            <?php if ($company['perm'] == '' && $company['contract'] == '' && count($company['sectors']) ==0 ): ?>
+
+<p class="details" style="margin-bottom:0; text-align:centre;">-</p>
+            
+            
+            <?php endif; ?>
+            
+            
 		</div>
 		</div>
 	
