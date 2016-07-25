@@ -2847,7 +2847,7 @@ color:#5f5f5f  !important;
      min-width: 50px;
     text-align: center;
   margin-top:5px;
-    font-size: 11px;
+    font-size: 14px;
      margin-right: 2px;
     color: #000000;
     border: 1px solid #d6d6d6;
@@ -2862,7 +2862,7 @@ color:#5f5f5f  !important;
      min-width: 50px;
     text-align: center;
   margin-top:5px;
-    font-size: 11px;
+    font-size: 14px;
      margin-right: 2px;
     color:  #000000;
  
@@ -2872,6 +2872,13 @@ color:#5f5f5f  !important;
 .classActions span,.add-to-calendar{
 width:100px;
 }
+
+
+
+.details  p.details {
+ 	font-size: inherit;
+ }
+
 
 
 /*! Hint.css - v2.2.1 - 2016-03-26 //#2b4461
