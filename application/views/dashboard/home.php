@@ -1467,7 +1467,7 @@
                           </div>
                           <div class="list-group-item" id="action_outcome_box_<?php echo $action->action_id ?>" style="display:none;">
                           
-                          <label>Outcome</label>
+                          <label>Comment<span class="actionEvalPipeline" style=" color: red;">*</span></label>
                           <textarea class="form-control textarea<?php echo $action->action_id ?>" name="outcome" rows="3" style="display: none;"></textarea>
 
  <div class="editor addOutcomeEditor" addoutcomeeditor="<?php echo $action->action_id ?>" style="margin-bottom: 5px; min-height: 70px;"></div>
@@ -1803,7 +1803,7 @@
                       
                      </select></form>
                   </span>
-                <span class="badge pull-right favouritesCount" style="margin-top: -20px;"><?php echo count($assigned_companies); ?></span>    
+                <span class="badge pull-right favouritesCount" style="margin-top: -19px; apdding:5px;"><?php echo count($assigned_companies); ?></span>    
               </div>
 <div class="panel-body" style="padding:0;">
 
