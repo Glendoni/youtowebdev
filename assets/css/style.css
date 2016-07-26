@@ -2873,7 +2873,10 @@ width:100px;
 .timeline-label{
 padding-top:0px;
 }
+.panel-primary .panel{
+box-shadow:none;
 
+}
 /*! Hint.css - v2.2.1 - 2016-03-26 //#2b4461
 * http://kushagragour.in/lab/hint/
 * Copyright (c) 2016 Kushagra Gour; Licensed  */
