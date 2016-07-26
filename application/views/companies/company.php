@@ -367,10 +367,10 @@ if ($your_date < $now){;
 
 
 <?php if (isset($company['perm'])): ?>
-<p class="details" style="margin-bottom:0; text-align:centre;">Permanent</p>
+<p class="details detailsTagFormat" style="margin-bottom:0; text-align:centre;">Permanent</p>
 <?php endif; ?>
 <?php if (isset($company['contract'])): ?>
-<p class="details" style="margin-bottom:0; text-align:centre;">Contract</p>
+<p class="details detailsTagFormat" style="margin-bottom:0; text-align:centre;">Contract</p>
 <?php endif; ?>
 </div>
 		</div>
@@ -1004,7 +1004,7 @@ endif;
 
                 if(posY < 0){
                     $('.sticky').addClass('affix');
-                    $('.affix').css('padding-top', '90px')
+                    $('.affix').css('padding-top', '120px')
                 }else{
                     $('.sticky').removeClass('affix');
                 }

@@ -2867,7 +2867,12 @@ width:100px;
  	font-size: inherit;
  }
 
-
+.classActions span, .add-to-calendar {
+    width: 100px;
+}
+.timeline-label{
+padding-top:0px;
+}
 
 /*! Hint.css - v2.2.1 - 2016-03-26 //#2b4461
 * http://kushagragour.in/lab/hint/

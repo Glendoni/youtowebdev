@@ -104,15 +104,20 @@ if ((this.value == '16' || this.value == '8' || this.value == '32') && (!source_
     
     if(this.value == '16' || this.value == '8'){ 
         $('.completed-details').attr('required', 'required');
-        $('.actionEvalPipeline').show()
+        $('.actionEvalPipeline').show();
          $('.addActionOutcome').show();
         
     }else{
         $('.completed-details').prop('required', false);
-$('.actionEvalPipeline').hide()
+        $('.actionEvalPipeline').hide();
 
         //$('.addActionOutcome').hide();
-           $('.addActionOutcome').show();
+      if (this.value ==32){ 
+                          $('.addActionOutcome').hide();
+                      }else{
+                           $('.addActionOutcome').show();
+
+                      }
     }
     
     $('.sourceRequiredDropDownItem').text($('#action_type_completed option:selected').text());
@@ -133,9 +138,16 @@ var actionArr = ['31','32','33','34'];
     if (actionArr.indexOf(this.value) >=0){ 
          $('.completed-details').prop('required', false);
          $('#add_action .disable_no_source').prop('disabled', false);
-        $('.actionEvalPipeline').hide()
-         //$('.addActionOutcome').hide();
-           $('.addActionOutcome').show();
+        $('.actionEvalPipeline').hide();
+
+                      if (this.value ==32){ 
+                          $('.addActionOutcome').hide();
+                      }else{
+                           $('.addActionOutcome').show();
+
+                      }
+         //
+          
     }else{
         
          $('.completed-details').attr('required', 'required');
