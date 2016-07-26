@@ -896,7 +896,7 @@ endif;
                     
                     <div class="col-md-1" id="leftCol">
               
-              	<ul class="nav nav-stacked actionNav sticky  " style="list-style: none;     z-index: 999;  " id="sidebar">
+              	<ul class="nav nav-stacked actionNav sticky  " style="list-style: none;     z-index: 999;  margin-bottom: auto; " id="sidebar">
                  
                     
                     <li class="active activeMenu"><a href="javascript:;" class="btn btn-default btn-circle actionAll hint--top-right"  data-hint="All" data="All"><span class="glyphicon glyphicon-dashboard" aria-hidden="true"></a><span class="actionMenuQty qtyAll" aria-hidden="true"></span></li>
@@ -1004,7 +1004,7 @@ endif;
 
                 if(posY < 0){
                     $('.sticky').addClass('affix');
-                    $('.affix').css('padding-top', '120px')
+                    $('.affix').css('padding-top', '100px')
                 }else{
                     $('.sticky').removeClass('affix');
                 }
