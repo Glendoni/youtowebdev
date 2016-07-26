@@ -25,7 +25,7 @@
     <div class="modal-body">
         <div class="row">
             <div class="col-sm-12">
-                <div id="action-error" class="no-source-pipeline alert alert-warning" role="alert" style="display:none">
+                <div id="action-errorss" class="no-source-pipeline alert alert-warning" role="alert" style="display:none">
                 <strong>Source & Class Required</strong><br> Please add a Source &amp; Class to this company.
                 </div>
             </div>
@@ -87,7 +87,7 @@
                 <div class=" form-group ">
                     <?php
                     echo form_label('Class', 'company_class');
-                    echo form_dropdown('company_class', $companies_classes, (isset($company['class'])?$company['class']:'') ,'class="form-control pipeline-validation-check"');
+                    echo form_dropdown('company_class', $companies_classes, (isset($company['class'])?$company['class']:'') ,'class="form-control"');
                     ?>
                 </div>
          </div>

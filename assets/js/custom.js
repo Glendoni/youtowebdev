@@ -216,10 +216,10 @@ $(".pipeline-validation-check").change(function() {
 
           var company_class = $("select[name=company_class]").val();
 
-        if (company_source==0 && company_class !='') 
+        if (company_source==0 ) 
         {
-            $(".no-source-pipeline").slideDown(600);
-            $(".disable_no_source").attr('disabled', 'disabled');
+            //$(".no-source-pipeline").slideDown(600);
+            //$(".disable_no_source").attr('disabled', 'disabled');
         }
         else
         {
