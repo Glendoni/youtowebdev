@@ -333,7 +333,11 @@ $( document ).ready(function() {
      if((/companies\/company/.test(window.location.href))) {
          
          
-  
+    if($('#source_explanation').val()){
+       
+       $('.show_si_box').show();
+       
+       }
          
          // event.preventDefault()
          
