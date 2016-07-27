@@ -350,8 +350,8 @@ if ($your_date < $now){;
 			<thead>
 				<tr>
 					<th class="col-md-6">Mortgage Provider</th>
-					<th class="col-md-3" style="text-align:center;">Started</th>
-					<th class="col-md-3" style="text-align:center;">Status</th>
+					<th class="col-md-3">Started</th>
+					<th class="col-md-3">Status</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -367,8 +367,8 @@ if ($your_date < $now){;
 				<?php echo $mortgage['type']; ?>
 				</div>
 					</td>
-					<td class="col-md-3" style="text-align:center;"><?php echo $mortgage['eff_from']; ?></td>
-					<td class="col-md-3" style="text-align:center;"><!--<span class="label label-<?php echo $mortgage['stage']==MORTGAGES_SATISFIED? 'default' : 'success' ?>">--><strong><?php echo $mortgage['stage']; ?></strong><?php if(!empty($mortgage['eff_to'])){echo ' on '.$mortgage['eff_to'];} ?></span></td>
+					<td class="col-md-3"><?php echo $mortgage['eff_from']; ?></td>
+					<td class="col-md-3"><!--<span class="label label-<?php echo $mortgage['stage']==MORTGAGES_SATISFIED? 'default' : 'success' ?>">--><strong><?php echo $mortgage['stage']; ?></strong><?php if(!empty($mortgage['eff_to'])){echo ' on '.$mortgage['eff_to'];} ?></span></td>
 
 				</tr>
 				<?php endforeach; ?>
