@@ -223,7 +223,7 @@ if ($your_date < $now){;
 		</div>
  
 
-		<div class="row details">
+		<div class="row details pad-bottom">
 				<div class="col-md-12">
 			<hr>
 		</div>
@@ -270,7 +270,7 @@ if ($your_date < $now){;
 
 		</div>
 		
-	<div class="row details">
+	<div class="row details pad-bottom">
 		<!-- TURNOVER -->
 		<div class="col-xs-6 col-sm-3 ">
 			<strong><span style="text-transform: capitalize"><?php echo isset($company['turnover_method'])?$company['turnover_method']:'';?></span> Turnover</strong><br>

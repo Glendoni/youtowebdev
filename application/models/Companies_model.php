@@ -858,7 +858,7 @@ class Companies_model extends CI_Model {
 			$address = array(
 				'company_id' => $new_company_id,
 				'country_id' => $post['country_id'],
-				'address' => !empty($post['address'])?$post['address']:'',
+				'address' => !empty($post['address'])?$post['address']:NULL,
 				'lat' => !empty($post['lat'])?$post['lat']:NULL,
 				'lng' => !empty($post['lng'])?$post['lng']:NULL,
 				'type' => !empty($post['type'])?$post['type']:"Registered Address",
@@ -877,7 +877,7 @@ class Companies_model extends CI_Model {
                 	$address = array(
 				'company_id' => $new_company_id,
 				'country_id' => $post['country_id'],
-				'address' => $post['address'],
+				'address' => !empty($post['address'])?$post['address']:NULL,
 				'lat' => !empty($post['lat'])?$post['lat']:NULL,
 				'lng' => !empty($post['lng'])?$post['lng']:NULL,
 				'type' => "Trading Address",
@@ -896,7 +896,7 @@ class Companies_model extends CI_Model {
                    $address = array(
 				'company_id' => $new_company_id,
 				'country_id' => $post['country_id'],
-				'address' => $post['tradingAddress'],
+				'address' => !empty($post['tradingAddress'])?$post['tradingAddress']:NULL,
 				'lat' => !empty($post['lat'])?$post['lat']:NULL,
 				'lng' => !empty($post['lng'])?$post['lng']:NULL,
 				'type' => "Trading Address",
@@ -955,7 +955,7 @@ class Companies_model extends CI_Model {
 
 	function create_address($post)
 	{
-       	$address->address = $post['address']; // please read the below note
+       	$address->address = !empty($post['address'])?$post['address']:NULL; // please read the below note
     	$address->country_id = $post['country_id'];
 		$address->type = $post['address_types'];
 		$address->phone = !empty($post['phone'])?$post['phone']:NULL;
@@ -971,7 +971,7 @@ class Companies_model extends CI_Model {
 
 	function update_address($post)
 	{
-    	$address->address   = $post['address']; // please read the below note
+    	$address->address   = !empty($post['address'])?$post['address']:NULL; // please read the below note
     	$address->country_id = $post['country_id'];
 		$address->type = $post['address_types'];
 		$address->phone = !empty($post['phone'])?$post['phone']:NULL;

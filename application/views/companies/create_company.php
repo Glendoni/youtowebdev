@@ -83,7 +83,7 @@ echo form_open('',$attributes,$hidden);
    
     <div class="col-sm-12"> 
          <label for="address" class="control-label cr_address ">Address</label>
-    	<input type="text" name="address" required="required" value="<?php echo isset($_POST['address'])?$_POST['address']:''; ?>" id="address" maxlength="200" class="form-control cr_address">
+    	<input type="text" name="address"  value="<?php echo isset($_POST['address'])?$_POST['address']:''; ?>" id="address" maxlength="200" class="form-control cr_address">
     </div>
 </div>
 <div class=" form-group ">

@@ -493,7 +493,7 @@ if ($your_date < $now){;
               foreach ($addresses as $address):?>
               
               
-            <?php  if($address->address != 'Unknown' ): ?>
+            <?php  if($address->address != 'Unknown' && $address->address != '' ): ?>
 	      	<tr>
 				<td class="col-md-6">
                  <a target="_blank" href="http://maps.google.com/?q=<?=$address->address; ?>" ><span class="mainAddress"><?=$address->address; ?></span><span style="line-height: 15px;font-size: 10px;padding-left: 5px;"><i class="fa fa-external-link"></i></span></a></td>

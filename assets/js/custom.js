@@ -112,12 +112,12 @@ if ((this.value == '16' || this.value == '8' || this.value == '32') && (!source_
         $('.actionEvalPipeline').hide();
 
         //$('.addActionOutcome').hide();
-      if (this.value ==32){ 
-                          $('.addActionOutcome').hide();
-                      }else{
+      //if (this.value ==32){ 
+                        //  $('.addActionOutcome').hide();
+                      //}else{
                            $('.addActionOutcome').show();
 
-                      }
+                      //}
     }
     
     $('.sourceRequiredDropDownItem').text($('#action_type_completed option:selected').text());
@@ -140,12 +140,12 @@ var actionArr = ['31','32','33','34'];
          $('#add_action .disable_no_source').prop('disabled', false);
         $('.actionEvalPipeline').hide();
 
-                      if (this.value ==32){ 
-                          $('.addActionOutcome').hide();
-                      }else{
+                      //if (this.value ==32){ 
+                        //  $('.addActionOutcome').hide();
+                      //}else{
                            $('.addActionOutcome').show();
 
-                      }
+                      //}
          //
           
     }else{
@@ -302,7 +302,7 @@ $(".pipeline-validation-check").change(function() {
                 $('#address').removeAttr('required');
             }else{
                     if(typeof $('#address').attr('required') === 'undefined'){
-                        $('#address').attr('required', 'required');
+                       // $('#address').attr('required', 'required');
                     }
                  $('.tradingType').prop( "disabled", false );
                 $('.cr_address').show();
