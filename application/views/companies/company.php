@@ -997,10 +997,10 @@ endif;
                 var offset = $(".child").offset();
                 var posY = (offset.top) - ($(window).scrollTop());
                 var posX = offset.left - $(window).scrollLeft();
-
+                var  breadcrumbHeightEval  =  $('.top-info-holder').height() +  20;
                 if(posY < 0){
                     $('.sticky').addClass('affix');
-                    $('.affix').css('padding-top', '100px')
+                    $('.affix').css('padding-top', + breadcrumbHeightEval +'px');
                 }else{
                     $('.sticky').removeClass('affix');
                 }

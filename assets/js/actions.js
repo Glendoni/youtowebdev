@@ -918,7 +918,7 @@ $('#sidebar').hide();
     (function($) {
         $.fn.goTo = function() {
         $('html, body').animate({
-        scrollTop: $(this).offset().top + 'px'
+        scrollTop: ($(this).offset().top)-200 + 'px'
         }, 'fast');
         return this; // for chaining...
         }
@@ -937,7 +937,7 @@ $('#sidebar').hide();
             //a[data='"+tech+"']
          $("a[data='actions_completed']" ).trigger('click');
           $('a[data='+actionId+']').trigger('click');
-            $('a[data='+actionId+']').goTo(20);
+            $('a[data='+actionId+']').goTo(0);
          
      }
      function getIcon(actionType){
