@@ -525,11 +525,7 @@ endif;
 	    </table>
 	    <?php else: ?>
 			
-            
-        echo $ai ;
-            
-            
-            
+    
             
 		<?php endif; ?>
 
