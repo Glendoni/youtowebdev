@@ -996,5 +996,5 @@ echo 'Add tag to company ' .$tagid . '  ----- ' . $companyID .'<br><br>';
    echo   $query->num_rows();
  
     }
-
+    
 }

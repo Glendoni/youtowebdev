@@ -25,14 +25,14 @@
     <div class="modal-body">
         <div class="row">
             <div class="col-sm-12">
-                <div id="action-error" class="no-source-pipeline alert alert-warning" role="alert" style="display:none">
+                <div id="action-errorss" class="no-source-pipeline alert alert-warning" role="alert" style="display:none">
                 <strong>Source & Class Required</strong><br> Please add a Source &amp; Class to this company.
                 </div>
             </div>
         </div>
                
         <div class="row">
-            <div class="col-sm-6 col-md-3" style="display:none;">
+            <div class="col-sm-6 col-md-2" style="display:none;">
                 <div class="row">
                     <div class="col-xs-6 col-sm-6 col-md-6" style="padding-right:2px;">
                         <div class=" form-group ">
@@ -63,9 +63,11 @@
                 </div>
             </div>
             
-            <div class="col-sm-6 col-md-3">
+            <div class="col-sm-6 col-md-2" style="display:none;">
                 <div class=" form-group ">
-                    <?php  
+                    <?php
+                    
+                    /*
                     if (($company['pipeline']=="Customer") || ($company['pipeline']=="Proposal")){ 
                             echo form_label('Pipeline', 'company_pipeline');?>
                             <span class="label pipeline-label label-<?php echo str_replace(' ', '', $company['pipeline']); ?>" style="display: block;clear: left;padding: 11px; margin:0;"><?php echo ucfirst($company['pipeline']); ?></span>
@@ -75,19 +77,21 @@
                                 echo form_label('Pipeline', 'company_pipeline');
                                 echo form_dropdown('company_pipeline', $companies_pipeline, (isset($company['pipeline'])?$company['pipeline']:'') ,'class="form-control pipeline-validation-check"' );
                         }; 
+                        
+                        */
                     ?>
                 </div>
             </div>
         
-          <div class="col-sm-6 col-md-3">
+          <div class="col-sm-6 col-md-2">
                 <div class=" form-group ">
                     <?php
                     echo form_label('Class', 'company_class');
-                    echo form_dropdown('company_class', $companies_classes, (isset($company['class'])?$company['class']:'') ,'class="form-control pipeline-validation-check"');
+                    echo form_dropdown('company_class', $companies_classes, (isset($company['class'])?$company['class']:'') ,'class="form-control"');
                     ?>
                 </div>
          </div>
-        <div class="col-sm-6 col-md-3">
+        <div class="col-sm-6 col-md-2">
             <div class=" form-group ">
                 <?php
                 echo form_label('Source', 'company_source');
@@ -97,32 +101,34 @@
                 <input type="hidden" name="original_source_date" value="<?php echo $company['source_date'];?>" />
             </div>
         </div>
-        <div class="col-sm-6 col-md-3">
+        <div class="col-sm-6 col-md-2">
             <div class=" form-group ">
                 <label for="url" class="control-label">Website</label>                            
                 <input type="text" name="url" value="<?php echo isset($company['url'])?$company['url']:''; ?>" id="url" maxlength="100" class="form-control">
             </div>
         </div>
-            
-            
-    </div>
-    <div class="row">
-             <div class="col-sm-6 col-md-3">
+             <div class="col-sm-6 col-md-2">
                         <div class=" form-group ">
                             <label for="linkedin_id" class="control-label">Linkedin ID</label>                            
                             <input type="text" name="linkedin_id" value="<?php echo isset($company['linkedin_id'])?$company['linkedin_id']:''; ?>" id="linkedin_id" maxlength="50" class="form-control">
                         </div>
                     </div>
-                    <div class="col-sm-6 col-md-3">
+            
+              <div class="col-sm-6 col-md-2">
                         <div class=" form-group ">
                             <label for="phone" class="control-label">Phone</label>                            
                             <input type="text" name="phone" value="<?php echo isset($company['phone'])?$company['phone']:''; ?>" id="phone" maxlength="50" class="form-control">
                         </div>
                     </div>
+            
+    </div>
+    <div class="row">
+            
+                  
                    
                        <!-- Recruitment Type -->
             
-                                <div class="col-sm-6 col-md-3">
+                                <div class="col-sm-6 col-md-4">
                                     <div class=" form-group ">
                                         <label for="url" class="control-label">Recruitment Type</label>
                                         <div class="tag-holder">  
@@ -140,7 +146,7 @@
 
               <!-- EFFECTIVE FROM -->
             
-            
+            <?php /* ?>
                                 <?php if($deals_pipline->eff_from){ ?>
 
                                         <div class="col-sm-6 col-md-3 pipeline_text"  > 
@@ -173,24 +179,26 @@
                                         </div>
 
                                 <?php } ?>
-            
-                <div class="row">
-                    <div class="col-md-12">
-                        <?php if (isset($company['emp_count']) == False ):?>
-                        <div class="col-sm-6 col-md-3">
+                                
+                                <?php */ ?>
+             <?php if (isset($company['emp_count']) == False ):?>
+                        <div class="col-sm-6 col-md-4">
                             <div class=" form-group">
                                 <label for="emp_count" class="control-label">Employees</label>                            
                                 <input type="text" name="emp_count" value="" id="emp_count" maxlength="50" class="form-control">
                             </div>
                         </div>
                         <?php endif; ?>
-                        <div class="col-sm-6 col-md-6" >
+               
+                    <div class="col-md-4">
+                       
+                         
                             <div class=" form-group ">
                                 <label for="trading_name" class="control-label">Trading Name</label>                            
                                 <input type="text" name="trading_name" value="<?php echo isset($company['trading_name'])?$company['trading_name']:''; ?>" id="trading_name" class="form-control">
-                            </div>
+                           
                         </div>
-                    </div>
+                    <div class="row"> </div>
                 </div>
         
                 <div class="col-md-12 target_sectors">

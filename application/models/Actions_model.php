@@ -703,7 +703,7 @@ function get_action_types_array()
 
 function get_action_types_done()
 {
-    $ignore = array('19','7','20'); //EXCLUDE PIPELINE TRACKING, COMMENT AND MARKETING//
+    $ignore = array('19','7','20','33'); //EXCLUDE PIPELINE TRACKING, COMMENT AND MARKETING//
     $data = array(
         'type' => 'Done',
         );
@@ -865,6 +865,25 @@ function company_updated_to_proposal($post)
     return $this->db->insert_id();
 
 }
+    
+function company_updated_to_action($post,$actionName)
+{
+    $actiondata = array(
+        'company_id'    => $post['company_id'],
+        'user_id'       => $post['user_id'],
+        'comments'      => 'Pipeline changed to '.$actionName,
+        'planned_at'    => (!empty($post['planned_at'])? date('Y-m-d H:i:s',strtotime($post['planned_at'])):NULL),
+        'contact_id'    => (!empty($post['contact_id'])?$post['contact_id']:NULL),
+        'created_by'    => $post['user_id'],
+        'action_type_id'=> '19',
+        'actioned_at'   => date('Y-m-d H:i:s'),
+        'created_at'    => date('Y-m-d H:i:s'),
+        );
+
+    $query = $this->db->insert('actions', $actiondata);
+    return $this->db->insert_id();
+
+}    
     
 function add_to_zendesk($post)
 {

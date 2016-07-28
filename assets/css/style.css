@@ -2536,7 +2536,9 @@ breadcrumbscroll {
       breadcrumbscroll nav a:hover {
         color: #333; }
   breadcrumbscroll.smaller {
-    height: auto; }
+    height: auto;
+    z-index: 3;
+}
     /*breadcrumbscroll.smaller h1#logo,breadcrumbscroll.smaller h2#logo {
       width: 100%;
       height: 45px;
@@ -2705,8 +2707,9 @@ color:#45AE7C;
     padding: 4px 8px;
     list-style: none;
     border-radius: 2px;
+    margin-top:5px;
     font-size: 11px;
-    margin: 2px;
+     margin-right: 2px;
     color: #000000;
     border: 1px solid #d6d6d6;
     display:inline-block;
@@ -2758,12 +2761,12 @@ margin-top:6px;
     
 }
 .editorAction{
-     height: 150px;
+     height: 100px;
 overflow: scroll;
     
      overflow-x: hidden;
     border: solid thin #ccc;
-    padding: 20px;    
+    padding: 10px;    
 }
 
 .addOutcomeEditor{
@@ -2774,6 +2777,8 @@ overflow: scroll;
     border-radius: 3px;
     min-height: 55px;
     
+    margin-bottom: 20px;
+
     outline: 1px;
     
 }
@@ -2805,6 +2810,77 @@ text-align:left;
 .piplineUdate .subsidiary {
 	height: 1px;
     
+}
+@media only screen and (min-width: 991px)
+#parent .modal-dialog {
+  
+    max-width: 1170px;
+}
+.panel-primary hr{
+border-top:#fff;
+}
+
+.sublinkMenu{
+font-size:15px;
+}
+
+.addActionOutcome{
+    
+    display:none;
+}
+.actionMsgText .Unsuitable, .actionMsgText .Lost, .actionMsgText .Intent,.actionMsgText .Prospect,.actionMsgText .Proposal{
+background:none !important;
+color:#5f5f5f !important;
+}
+
+.actionMsgText .Prospect{
+background:none !important;
+color:#5f5f5f  !important;
+}
+
+ 
+
+
+.detailsTagFormat {
+    font-size: 12px;
+    padding: 4px 8px;
+    list-style: none;
+    border-radius: 2px;
+     min-width: 50px;
+    text-align: center;
+  margin-top:5px;
+    font-size: 11px;
+     margin-right: 2px;
+    color: #000000;
+    border: 1px solid #d6d6d6;
+    display: inline-block;
+}
+}
+
+.classActions span,.add-to-calendar{
+width:100px;
+}
+
+
+
+.details  p.details {
+ 	font-size: inherit;
+ }
+
+.classActions span, .add-to-calendar {
+    width: 100px;
+}
+.timeline-label{
+padding-top:0px;
+}
+.panel-primary .panel{
+box-shadow:none;
+
+}
+
+.pad-bottom{
+    
+    margin-bottom:25px;
 }
 /*! Hint.css - v2.2.1 - 2016-03-26 //#2b4461
 * http://kushagragour.in/lab/hint/

@@ -71,9 +71,7 @@
      
      
   
-           <div class="col-md-12" style="
-    min-height: 50px;
-">
+           <div class="col-md-12" style="min-height: 50px;">
 
                        <!-- Fravorite Star -->
                                                         <?php if(isset($company['assigned_to_name']) and !empty($company['assigned_to_name'])): ?>
@@ -140,7 +138,7 @@
 </breadcrumbscroll>
     
     
-      </breadcrumbscroll> 
+ 
 
 <!-- POPUP BOXES -->
 	<?php $this->load->view('companies/edit_box.php',array('company'=>$company)); ?>
@@ -277,89 +275,102 @@ if ($your_date < $now){;
 			<?php endif; ?>
 		<?php endif; ?>
         </div><!--CLOSE COL-MD-3-->
-		<div class="col-md-12">
+		
+            
+            
+            
+            
+            <div class="col-md-12">
 			<hr>
-		</div>
-<div class="row padding-bottom">
-		<div class="col-xs-6 col-md-3 centre" style="margin-top:10px;">
-			<label>Company Number</label>
+		
+<div class="row  details">
+		<div class="col-xs-6 col-md-3 details" style="margin-top:10px; ">
+			<label>Company Number</label><br>
 			<p>	
 			 <!--COMPANY NUMBER IF APPLICABLE-->
 			<?php echo isset($company['registration'])?$company['registration']:''; ?>
          	</p>
         	</div>
 
-        	<div class="col-xs-6 col-md-3 centre" style="margin-top:10px;">
-        	<label>Founded</label>
+        	<div class="col-xs-6 col-md-3" style="margin-top:10px;">
+        	<label>Founded</label><br>
 			<p>	
 				<?php echo isset($company['eff_from'])?$company['eff_from']:''; ?>
 			</p>
 		</div>
 
-        <div class="col-xs-6 col-md-3 centre" style="margin-top:10px;">
-        		<label>Phone</label>
+        <div class="col-xs-6 col-md-3" style="margin-top:10px;">
+        		<label>Phone</label><br>
         		<p>
-        		<?php echo isset($company['phone'])?$company['phone']:''; ?>                
+        		<?php echo isset($company['phone'])?$company['phone']:'-'; ?>                
            		</p>
 			</div><!--END PHONE NUMBER-->
-		<div class="col-xs-6 col-md-3 centre" style="margin-top:10px;">
-				<label>Class</label>
+		<div class="col-xs-6 col-md-3" style="margin-top:10px;">
+				<label>Class</label><br>
 				<p>	
 		            <!--CLASS IF APPLICABLE-->
-		            <?php if (isset($company['class'])): ?>
-						<span class="label label-info"><?php echo $companies_classes[$company['class']] ?></span>	
-					<?php else: ?>
-						-
+		          
+                  <?php if (isset($company['class']) && $company['class'] != 'Unknown' ): ?>
+					 <?php echo $companies_classes[$company['class']] ?> 	
+					<?php else: 
+                    
+                    echo '-';
+                    
+                    ?>
+						
 		            <?php endif; ?>
 	            </p>
 			</div>
 
 		</div>
+            </div>
+            
 		<div class="row" >
-		<div class="col-xs-12">
+		<div class="col-xs-12 details" >
 		<!-- TURNOVER -->
-		<div class="col-xs-4 col-sm-3 centre">
-			<strong><span style="text-transform: capitalize"><?php echo isset($company['turnover_method'])?$company['turnover_method']:'';?></span> Turnover</strong>
+		<div class="col-xs-4 col-sm-3">
+			<strong><span style="text-transform: capitalize"><?php echo isset($company['turnover_method'])?$company['turnover_method']:'';?></span> Turnover</strong><br>
 			<p class="details" style="margin-bottom:5px;">
-				<?php echo isset($company['turnover'])? '£'.number_format (round($company['turnover'],-3)):'';?>
+				<?php echo isset($company['turnover'])? '£'.number_format (round($company['turnover'],-3)):'-';?>
 			</p>
         </div>
 		<!-- CONTACTS -->
-		<div class="col-xs-4 col-sm-3 centre">
-			<strong>Contacts</strong>			
+		<div class="col-xs-4 col-sm-3">
+			<strong>Contacts</strong><br>			
 			<?php if (isset($company['contacts_count'])): ?>
 			<p class="details"><?php echo $company['contacts_count'];?> </p>
 			<?php else: ?>
-			<p class="details">0 </p>
+			<p class="details">-</p>
 			<?php endif; ?>
 		</div>
 		<!-- EMPLOYEES -->
-		<div class="col-xs-4 col-sm-3 centre">
-			<strong>Employees</strong>
+		<div class="col-xs-4 col-sm-3">
+			<strong>Employees</strong><br>
 			<?php if (isset($company['emp_count'])): ?>
 			<p class="details"><?php echo $company['emp_count'];?> </p>
 			<?php else: ?>
+            <p class="details">-</p>
 			<?php endif; ?>
 		</div>
 		<!-- SECTORS -->
-		<div class="col-xs-4 col-sm-3 centre">
-			<strong>Sectors</strong> 
+		<div class="col-xs-4 col-sm-3">
+			<strong>Sectors</strong><br>
 			<?php
 			if(isset($company['sectors'])){
 		
 				foreach ($company['sectors'] as $key => $name)
 				{
-				echo '<p class="details" style="margin-bottom:0; text-align:centre;">'.$name.'</p>';
+				echo '<p class="details detailsTagFormat" style="margin-bottom:5px; text-align:centre;">'.$name.'</p>';
 				}
 			}
 			?>
 
 
 <?php if (isset($company['perm'])): ?>
-<p class="details" style="margin-bottom:0; text-align:centre;"><b>Permanent</b></p>
+<p class="details detailsTagFormat" style="margin-bottom:0; text-align:centre;">Permanent</p>
 <?php endif; ?>
 <?php if (isset($company['contract'])): ?>
-<p class="details" style="margin-bottom:0; text-align:centre;"><b>Contract</b></p>
+<p class="details detailsTagFormat" style="margin-bottom:0; text-align:centre;">Contract</p>
 <?php endif; ?>
 </div>
 		</div>
@@ -379,6 +390,22 @@ if ($your_date < $now){;
 		<div class="panel panel-default">
 		<div class="panel-heading" id="qvfinancials">
 		Financials
+            
+            <span><?php
+                /*  $number = 80020; //$company['turnover'] .'<br>';
+                if($number){
+                        if($number < 100000  ) {
+                         echo '£'.round(number_format($number),0);
+                        }else{                    
+                                 echo '£'. number_format(floor($number / 10) * 10);  
+
+                        }
+
+                       
+                }
+                
+                */
+                ?>
 		</div>
 		<!-- /.panel-heading -->
  
@@ -389,8 +416,8 @@ if ($your_date < $now){;
 			<thead>
 				<tr>
 					<th class="col-md-6">Mortgage Provider</th>
-					<th class="col-md-3" style="text-align:center;">Started</th>
-					<th class="col-md-3" style="text-align:center;">Status</th>
+					<td class="col-md-3">Started</th>
+					<th class="col-md-3">Status</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -406,10 +433,10 @@ if ($your_date < $now){;
 				<?php echo $mortgage['type']; ?>
 				</div>
 				</td>
-				<td class="col-md-3" style="text-align:center;">
+				<td class="col-md-3">
 				<?php $mortgages_start  = $mortgage['eff_from'];$date_pieces = explode("/", $mortgages_start);$formatted_mortgage_date = $date_pieces[2].'/'.$date_pieces[1].'/'.$date_pieces[0];echo date("F Y",strtotime($formatted_mortgage_date));?>
 				</td>
-				<td class="col-md-3" style="text-align:center;">
+				<td class="col-md-3">
 				<?php echo ucfirst($mortgage['stage']); ?><?php if(!empty($mortgage['eff_to'])){echo ' on '.$mortgage['eff_to'];} ?>
 				</td>
 
@@ -461,29 +488,50 @@ if ($your_date < $now){;
 	        </tr>
 	      </thead>
 	      <tbody>
-	      	<?php foreach ($addresses as $address):?>
+	      	<?php
+              $ai =  0 ;
+              foreach ($addresses as $address):?>
+              
+              
+            <?php  if($address->address != 'Unknown' && $address->address != '' ): ?>
 	      	<tr>
 				<td class="col-md-6">
                  <a target="_blank" href="http://maps.google.com/?q=<?=$address->address; ?>" ><span class="mainAddress"><?=$address->address; ?></span><span style="line-height: 15px;font-size: 10px;padding-left: 5px;"><i class="fa fa-external-link"></i></span></a></td>
 				<td class="col-md-3 mainAddrType"><?php echo $address->type;?></td>
 				<td class="col-md-2 mainPhone"><?php echo $address->phone; ?></td>
 				<td  class="col-md-3">
-				<?php if ($address->type<>'Registered Address'): ?>
-		      	<div class=" pull-right ">
-	            <?php $this->load->view('companies/action_box_addresses.php',array('address'=>$address)); ?>
-	            </div>
-	            <?php else: ?>
-	        	<?php endif; ?>
+                <?php if ($address->type<>'Registered Address'): ?>
+                        <div class=" pull-right ">
+	                       <?php $this->load->view('companies/action_box_addresses.php',array('address'=>$address)); ?>
+	                   </div>
+                    
+                    
+	            <?php
+                      
+                    else: ?>
+	        	<?php endif;
+               $ai = ($ai+1);      
+endif;
+                     
+                    
+                    ?>
 	            </td>
         	</tr>
-			<?php endforeach; ?>  
+			<?php 
+              
+          
+              endforeach; ?>  
 	      </tbody>
 	    </table>
 	    <?php else: ?>
-			<div class="alert alert-info" style="margin-top:10px;">
-                No address data.
-            </div>
+			
+    
+            
 		<?php endif; ?>
+
+
+<?php     if(!$ai) echo   '<div class="alert alert-info" style="margin-top:10px;">No address data.</div> ';
+            ?>
 
 		</div>
 		<!-- /.panel-body -->
@@ -496,7 +544,7 @@ if ($your_date < $now){;
 		<div class="col-md-12">
 		<div class="panel panel-default">
 		<div class="panel-heading" id="campaigns">
-		Campaigns
+		Campaign
 		</div>
 		<!-- /.panel-heading -->
 		<div class="panel-body">
@@ -596,97 +644,79 @@ if ($your_date < $now){;
         <!-- TAGGING  START-->
         
         <div class="tag-tabs" id="tags-anchor">
-  <div class="col-md-12">
-    <div class="panel panel-default">
-        <div class="panel-heading" id="qvTags">
-			Tags
-			</div>
-        <!-- /.panel-heading -->
-        <div class="panel-body">
-	<div>
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                    <div class="panel-heading" id="qvTags">Tags</div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                    <div>
 
 
-  <!-- Nav tabs -->
-  <!--<ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#cat1"  class="cat1" aria-controls="cat1" role="tab" data-toggle="tab"> </a></li>
-    <li role="presentation"><a href="#cat2" class="cat2" aria-controls="cat2" role="tab" data-toggle="tab"> </a></li>
-    <li role="presentation"><a href="#cat3"  class="cat3" aria-controls="cat3" role="tab" data-toggle="tab"> </a></li>
-    <li role="presentation"><a href="#cat4"  class="cat4" aria-controls="cat4" role="tab" data-toggle="tab"> </a></li>
-      <li role="presentation"><a href="#cat5"  class="cat5" aria-controls="cat5" role="tab" data-toggle="tab"> </a></li>
-    <li role="presentation"><a href="#cat6"  class="cat6" aria-controls="cat6" role="tab" data-toggle="tab"> </a></li>
-  </ul>-->
+                        <!-- Nav tabs -->
+                        <!--<ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#cat1"  class="cat1" aria-controls="cat1" role="tab" data-toggle="tab"> </a></li>
+                        <li role="presentation"><a href="#cat2" class="cat2" aria-controls="cat2" role="tab" data-toggle="tab"> </a></li>
+                        <li role="presentation"><a href="#cat3"  class="cat3" aria-controls="cat3" role="tab" data-toggle="tab"> </a></li>
+                        <li role="presentation"><a href="#cat4"  class="cat4" aria-controls="cat4" role="tab" data-toggle="tab"> </a></li>
+                        <li role="presentation"><a href="#cat5"  class="cat5" aria-controls="cat5" role="tab" data-toggle="tab"> </a></li>
+                        <li role="presentation"><a href="#cat6"  class="cat6" aria-controls="cat6" role="tab" data-toggle="tab"> </a></li>
+                        </ul>-->
 
-  <!-- Tab panes -->
-             <!-- <div class=" col-lg-12 tafixed">
-                  <p align="center" style="margin-left: 35px;">Tags</p>
-              
-             </div>
-            <div class="tadefault col-lg-12">
-                 
-                    <p>Tags are used to provide <strong>Sonovate</strong> with a better insight into current and potential clients </p>
-                </div>-->
-   
+                        <!-- Tab panes -->
+                        <!-- <div class=" col-lg-12 tafixed">
+                        <p align="center" style="margin-left: 35px;">Tags</p>
 
-	<div class="col-sm-6 no-padding">
-		<div class="row tag-search-holder ">
-    <div class="col-sm-12">         
-	<form id="live-search" action="" method="post">
-    <fieldset>
-        <input type="text" class="form-control tag-search-form" placeholder="Search Tags" id="filter" value="" />
-        <div><span id="filter-count" class="filter-count label label-count label-success" style="right: 71px;"></span> 
-            <span  class="filter-count filter-count-cancel label label-count label-danger"></span></div>
-    </fieldset>
-</form>
-  </div>
-        </div>
-  <div class="tab-content">
-    <div role="tabpanel" class="tab-pane active" id="cat1">    
-        <div class="col-sm-12 no-padding">  
+                        </div>
+                        <div class="tadefault col-lg-12">
 
-<div class="loading_div sk-circle">
-  <div class="sk-circle1 sk-child"></div>
-  <div class="sk-circle2 sk-child"></div>
-  <div class="sk-circle3 sk-child"></div>
-  <div class="sk-circle4 sk-child"></div>
-  <div class="sk-circle5 sk-child"></div>
-  <div class="sk-circle6 sk-child"></div>
-  <div class="sk-circle7 sk-child"></div>
-  <div class="sk-circle8 sk-child"></div>
-  <div class="sk-circle9 sk-child"></div>
-  <div class="sk-circle10 sk-child"></div>
-  <div class="sk-circle11 sk-child"></div>
-  <div class="sk-circle12 sk-child"></div>
-</div>
-            <div id="" class="tagContainer"> 
-                <ul class="list-group main main_ProductType">
-                </ul>
-                
+                        <p>Tags are used to provide <strong>Sonovate</strong> with a better insight into current and potential clients </p>
+                        </div>-->
+
+
+                        <div class="col-sm-6 no-padding">
+                            <div class="row tag-search-holder ">
+                                <div class="col-sm-12">         
+                                    <form id="live-search" action="" method="post">
+                                    <fieldset>
+                                    <input type="text" class="form-control tag-search-form" placeholder="Search Tags" id="filter" value="" />
+                                    <div><span id="filter-count" class="filter-count label label-count label-success" style="right: 71px;"></span> 
+                                    <span  class="filter-count filter-count-cancel label label-count label-danger"></span></div>
+                                    </fieldset>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="cat1">    
+                                    <div class="col-sm-12 no-padding">  
+                                        <div class="loading_div sk-circle">
+                                            <div class="sk-circle1 sk-child"></div>
+                                            <div class="sk-circle2 sk-child"></div>
+                                            <div class="sk-circle3 sk-child"></div>
+                                            <div class="sk-circle4 sk-child"></div>
+                                            <div class="sk-circle5 sk-child"></div>
+                                            <div class="sk-circle6 sk-child"></div>
+                                            <div class="sk-circle7 sk-child"></div>
+                                            <div class="sk-circle8 sk-child"></div>
+                                            <div class="sk-circle9 sk-child"></div>
+                                            <div class="sk-circle10 sk-child"></div>
+                                            <div class="sk-circle11 sk-child"></div>
+                                            <div class="sk-circle12 sk-child"></div>
+                                        </div>
+                                        <div id="" class="tagContainer"> 
+                                            <ul class="list-group main main_ProductType"></ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>    
+                </div>   
+                    <div class="col-sm-6 subcont"> 
+
+                    <h4 class="ta"></h4>
+                    <ul id="fetags"></ul>
+                    </div></div>
+                    </div>   
             </div>
-         
-        </div>
- 
-</div>
-
-</div>
-             </div>    
-</div>   
-            <div class="col-sm-6 subcont"> 
-                
-                <h4 class="ta"></h4>
-            
-             
-                <ul id="fetags">
-                    
-                    </ul>
-                
-                
-                
-                
-                </div></div>
-       
-        </div>   
-        </div>
-       
     </div>
         
         
@@ -705,152 +735,144 @@ if ($your_date < $now){;
 			<!--VALIDATION ERROR IF NO ACTION IS SELECTED-->
 
 			<div id="action-error" class="no-source alert alert-warning" role="alert" style="display:none">
-            <strong>Source Required.</strong><br> To add a Deal or Proposal, please add a Source to this company.
+                <strong>Source Required.</strong><br> To add a <span class="sourceRequiredDropDownItem"></span>&#44; please add a Source to this company.
             </div>
+            <div class="row">
+                        <div class="col-sm-3 col-md-3">
+                            <div class="form-group ">
+                                <label>New Action</label>
+                                <select id="action_type_completed" name="action_type_completed" class="form-control" >
+                                    <option value="">--- Select an Action ---</option>
+                                    <?php foreach($action_types_done as $action ): 
 
-<div class="row">
-			<div class="col-sm-3 col-md-3">
-				<div class="form-group ">
-					<label>New Action</label>
-					<select id="action_type_completed" name="action_type_completed" class="form-control" >
-						<option value="">--- Select an Action ---</option>
-						<?php foreach($action_types_done as $action ): ?>
-						  <option value="<?php echo $action->id; ?>"><?php echo $action->name; ?></option>
-						<?php endforeach; ?>
-					</select>
-				</div>
-			</div>
-    
-    
-    <div class="col-sm-3 col-md-2 initialfee">
-						<div class="form-group ">
-							<label>Initial Fee</label>
-							 
-                            
-                            
-		<div class="input-group">
-      	<input type="number" step="0.01" name="initialfee" placeholder="0.00" min="0.01" max="9.99" class="form-control" id="amount" >
-		<div class="input-group-addon">%</div>
-		</div>
-		</div>
-		</div>
-			<div class="col-sm-3 col-md-3  onInitialFee">
+                                    if($action->id == 16 && $company['pipeline'] == 'Customer'|| $action->id == 31 && $company['pipeline'] == 'Customer' || $action->id == 32 && $company['pipeline'] == 'Customer' || $action->id == 33  && $company['pipeline'] == 'Customer'|| $action->id == 34 && $company['pipeline'] == 'Customer' ){ }else{ ?>
+                                      <option value="<?php echo $action->id; ?>"><?php echo $action->name; ?></option>
+                                    <?php 
+                                    } endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-2 initialfee">
+                            <div class="form-group ">
+                                <label>Initial Fee</label>
+                                <div class="input-group">
+                                    <input type="number" step="0.01" name="initialfee" placeholder="0.00" min="0.01" max="9.99" class="form-control" id="amount" >
+                                    <div class="input-group-addon">%</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-3  onInitialFee">
+                            <?php if(isset($contacts) and !empty($contacts)) : ?>
+                                <div class="form-group ">
+                                    <label>Contact</label>
+                                    <select name="contact_id" class="form-control actionContact">
+                                        <option value="">--- Select a Contact ---</option>
+                                        <?php foreach($contacts as $contact ): ?>
+                                          <option value="<?php echo $contact->id; ?>"><?php echo ucfirst($contact->first_name).' '.ucfirst($contact->last_name); ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                         <div class="col-sm-3 col-md-3 onInitialFee">
+                            <div class="form-group ">
+                                <label>Follow Up Action</label>
 
-			<?php if(isset($contacts) and !empty($contacts)) : ?>
-				<div class="form-group ">
-					<label>Contact</label>
-					<select name="contact_id" class="form-control actionContact">
-						<option value="">--- Select a Contact ---</option>
-						<?php foreach($contacts as $contact ): ?>
-						  <option value="<?php echo $contact->id; ?>"><?php echo ucfirst($contact->first_name).' '.ucfirst($contact->last_name); ?></option>
-						<?php endforeach; ?>
-					</select>
-				</div>
-			
-			<?php endif; ?>
-			</div>
-				
-				 <div class="col-sm-3 col-md-3 onInitialFee">
-					<div class="form-group ">
-						<label>Follow Up Action</label>
+                                <select id="action_type_planned" name="action_type_planned" class="form-control" onchange="dateRequired()">
+                                <option value="">--- No Follow Up ---</option>
+                                    <?php foreach($action_types_planned as $action ): ?>
+                                      <option value="<?php echo $action->id; ?>"><?php echo $action->name; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-md-3">
+                            <div class="form-group " >
+                                <label>Follow Up Date</label>
+                                <input type="text" class="form-control follow-up-date" id="planned_at" data-date-format="YYYY/MM/DD H:m" name="planned_at" placeholder="">
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-12">
+                            <div class="form-group addActionOutcome">
+                                <label>Comment<span class="actionEvalPipeline"style=" color: red;">*</span></label>
+                                <textarea class="form-control completed-details" name="comment" rows="3" required="required"></textarea>
 
-						<select id="action_type_planned" name="action_type_planned" class="form-control" onchange="dateRequired()">
-						<option value="">--- No Follow Up ---</option>
-							<?php foreach($action_types_planned as $action ): ?>
-							  <option value="<?php echo $action->id; ?>"><?php echo $action->name; ?></option>
-							<?php endforeach; ?>
-						</select>
-					</div>
-	                </div>
-	                <div class="col-sm-3 col-md-3">
-						<div class="form-group " >
-							<label>Follow Up Date</label>
-							<input type="text" class="form-control follow-up-date" id="planned_at" data-date-format="YYYY/MM/DD H:m" name="planned_at" placeholder="">
-						</div>
-	                </div>
-			<div class="col-sm-12 col-md-12">
-				<div class="form-group ">
-					<label>Outcome</label>
-<textarea class="form-control completed-details" name="comment" rows="3" required="required"></textarea>
-            
-                    
-                         
-        <!---
-	Please read this before copying the toolbar:
+                                <!---
+                            Please read this before copying the toolbar:
 
-	* One of the best things about this widget is that it does not impose any styling on you, and that it allows you 
-	* to create a custom toolbar with the options and functions that are good for your particular use. This toolbar
-	* is just an example - don't just copy it and force yourself to use the demo styling. Create your own. Read 
-	* this page to understand how to customise it:
-    * https://github.com/mindmup/bootstrap-wysiwyg/blob/master/README.md#customising-
-	--->
-        <div id="alerts"></div>
-        <div class="btn-toolbar btn-toolbarAction" data-role="editor-toolbar" data-target="#editor">
-            <div class="btn-group">
-                <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font"><i class="icon-font"></i><b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                </ul>
-            </div>
-            <div class="btn-group">
-                <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font Size"><i class="icon-text-height"></i>&nbsp;<b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                    <li><a data-edit="fontSize 5"><font size="5">Huge</font></a>
-                    </li>
-                    <li><a data-edit="fontSize 3"><font size="2">Normal</font></a>
-                    </li>
-                    <li><a data-edit="fontSize 1"><font size="1">Small</font></a>
-                    </li>
-                </ul>
-            </div>
-            <div class="btn-group">
-                <a class="btn" data-edit="bold" title="Bold (Ctrl/Cmd+B)"><i class="icon-bold"></i></a>
-                <a class="btn" data-edit="italic" title="Italic (Ctrl/Cmd+I)"><i class="icon-italic"></i></a>
-                <a class="btn" data-edit="strikethrough" title="Strikethrough"><i class="icon-strikethrough"></i></a>
-                <a class="btn" data-edit="underline" title="Underline (Ctrl/Cmd+U)"><i class="icon-underline"></i></a>
-            </div>
-            <div class="btn-group">
-                <a class="btn" data-edit="insertunorderedlist" title="Bullet list"><i class="icon-list-ul"></i></a>
-                <a class="btn" data-edit="insertorderedlist" title="Number list"><i class="icon-list-ol"></i></a>
-                <a class="btn" data-edit="outdent" title="Reduce indent (Shift+Tab)"><i class="icon-indent-left"></i></a>
-                <a class="btn" data-edit="indent" title="Indent (Tab)"><i class="icon-indent-right"></i></a>
-            </div>
-            <div class="btn-group">
-                <a class="btn" data-edit="justifyleft" title="Align Left (Ctrl/Cmd+L)"><i class="icon-align-left"></i></a>
-                <a class="btn" data-edit="justifycenter" title="Center (Ctrl/Cmd+E)"><i class="icon-align-center"></i></a>
-                <a class="btn" data-edit="justifyright" title="Align Right (Ctrl/Cmd+R)"><i class="icon-align-right"></i></a>
-                <a class="btn" data-edit="justifyfull" title="Justify (Ctrl/Cmd+J)"><i class="icon-align-justify"></i></a>
-            </div>
-            <div class="btn-group">
-                <a class="btn dropdown-toggle" data-toggle="dropdown" title="Hyperlink"><i class="icon-link"></i></a>
-                <div class="dropdown-menu input-append">
-                    <input class="span2" placeholder="URL" type="text" data-edit="createLink" />
-                    <button class="btn" type="button">Add</button>
-                </div>
-                <a class="btn" data-edit="unlink" title="Remove Hyperlink"><i class="icon-cut"></i></a>
+                            * One of the best things about this widget is that it does not impose any styling on you, and that it allows you 
+                            * to create a custom toolbar with the options and functions that are good for your particular use. This toolbar
+                            * is just an example - don't just copy it and force yourself to use the demo styling. Create your own. Read 
+                            * this page to understand how to customise it:
+                            * https://github.com/mindmup/bootstrap-wysiwyg/blob/master/README.md#customising-
+                            --->
+                    <div id="alerts"></div>
+                    <div class="btn-toolbar btn-toolbarAction" data-role="editor-toolbar" data-target="#editor">
+                        <div class="btn-group">
+                            <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font"><i class="icon-font"></i><b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                            </ul>
+                        </div>
+                        <div class="btn-group">
+                            <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font Size"><i class="icon-text-height"></i>&nbsp;<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a data-edit="fontSize 5"><font size="5">Huge</font></a>
+                                </li>
+                                <li><a data-edit="fontSize 3"><font size="2">Normal</font></a>
+                                </li>
+                                <li><a data-edit="fontSize 1"><font size="1">Small</font></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="btn-group">
+                            <a class="btn" data-edit="bold" title="Bold (Ctrl/Cmd+B)"><i class="icon-bold"></i></a>
+                            <a class="btn" data-edit="italic" title="Italic (Ctrl/Cmd+I)"><i class="icon-italic"></i></a>
+                            <a class="btn" data-edit="strikethrough" title="Strikethrough"><i class="icon-strikethrough"></i></a>
+                            <a class="btn" data-edit="underline" title="Underline (Ctrl/Cmd+U)"><i class="icon-underline"></i></a>
+                        </div>
+                        <div class="btn-group">
+                            <a class="btn" data-edit="insertunorderedlist" title="Bullet list"><i class="icon-list-ul"></i></a>
+                            <a class="btn" data-edit="insertorderedlist" title="Number list"><i class="icon-list-ol"></i></a>
+                            <a class="btn" data-edit="outdent" title="Reduce indent (Shift+Tab)"><i class="icon-indent-left"></i></a>
+                            <a class="btn" data-edit="indent" title="Indent (Tab)"><i class="icon-indent-right"></i></a>
+                        </div>
+                        <div class="btn-group">
+                            <a class="btn" data-edit="justifyleft" title="Align Left (Ctrl/Cmd+L)"><i class="icon-align-left"></i></a>
+                            <a class="btn" data-edit="justifycenter" title="Center (Ctrl/Cmd+E)"><i class="icon-align-center"></i></a>
+                            <a class="btn" data-edit="justifyright" title="Align Right (Ctrl/Cmd+R)"><i class="icon-align-right"></i></a>
+                            <a class="btn" data-edit="justifyfull" title="Justify (Ctrl/Cmd+J)"><i class="icon-align-justify"></i></a>
+                        </div>
+                        <div class="btn-group">
+                            <a class="btn dropdown-toggle" data-toggle="dropdown" title="Hyperlink"><i class="icon-link"></i></a>
+                            <div class="dropdown-menu input-append">
+                                <input class="span2" placeholder="URL" type="text" data-edit="createLink" />
+                                <button class="btn" type="button">Add</button>
+                            </div>
+                            <a class="btn" data-edit="unlink" title="Remove Hyperlink"><i class="icon-cut"></i></a>
 
-            </div>
-            <div class="btn-group">
-                <a class="btn" title="Insert picture (or just drag & drop)" id="pictureBtn"><i class="icon-picture"></i></a>
-                <input type="file" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage" />
-            </div>
-            <div class="btn-group">
-                <a class="btn" data-edit="undo" title="Undo (Ctrl/Cmd+Z)"><i class="icon-undo"></i></a>
-                <a class="btn" data-edit="redo" title="Redo (Ctrl/Cmd+Y)"><i class="icon-repeat"></i></a>
-            </div>
-            <input type="text" data-edit="inserttext" id="voiceBtn" x-webkit-speech="">
-        </div>
+                        </div>
+                        <div class="btn-group">
+                            <a class="btn" title="Insert picture (or just drag & drop)" id="pictureBtn"><i class="icon-picture"></i></a>
+                            <input type="file" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage" />
+                        </div>
+                        <div class="btn-group">
+                            <a class="btn" data-edit="undo" title="Undo (Ctrl/Cmd+Z)"><i class="icon-undo"></i></a>
+                            <a class="btn" data-edit="redo" title="Redo (Ctrl/Cmd+Y)"><i class="icon-repeat"></i></a>
+                        </div>
+                        <input type="text" data-edit="inserttext" id="voiceBtn" x-webkit-speech="">
+                    </div>
 
-        <div class="editor editorAction"></div>
-                                                                       
-                    
-                    
-                    
-                    
-				</div>
-				<button type="submit" name="no contno con" class="btn btn-primary form-control disable_no_source" id="add_action_request">Add Action</button>
-			</div>
-			<?php echo form_close(); ?>
-			</div>
+                    <div class="editor editorAction"></div>
+
+
+
+
+
+                            </div>
+                            <button type="submit" name="no contno con" class="btn btn-primary form-control disable_no_source " id="add_action_request" disabled="disabled">Add Action</button>
+                        </div>
+                        <?php echo form_close(); ?>
+</div>
 		  </div>
 		</div>
 		</div>
@@ -870,7 +892,7 @@ if ($your_date < $now){;
                     
                     <div class="col-md-1" id="leftCol">
               
-              	<ul class="nav nav-stacked actionNav sticky  " style="list-style: none;     z-index: 999;  " id="sidebar">
+              	<ul class="nav nav-stacked actionNav sticky  " style="list-style: none;     z-index: 999;  margin-bottom: auto; " id="sidebar">
                  
                     
                     <li class="active activeMenu"><a href="javascript:;" class="btn btn-default btn-circle actionAll hint--top-right"  data-hint="All" data="All"><span class="glyphicon glyphicon-dashboard" aria-hidden="true"></a><span class="actionMenuQty qtyAll" aria-hidden="true"></span></li>
@@ -975,10 +997,10 @@ if ($your_date < $now){;
                 var offset = $(".child").offset();
                 var posY = (offset.top) - ($(window).scrollTop());
                 var posX = offset.left - $(window).scrollLeft();
-
+                var  breadcrumbHeightEval  =  $('.top-info-holder').height() +  20;
                 if(posY < 0){
                     $('.sticky').addClass('affix');
-                    $('.affix').css('padding-top', '90px')
+                    $('.affix').css('padding-top', + breadcrumbHeightEval +'px');
                 }else{
                     $('.sticky').removeClass('affix');
                 }

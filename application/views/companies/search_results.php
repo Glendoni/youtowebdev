@@ -73,7 +73,7 @@
 ">
 <div class="circle-content mega">
 <div class="large-number"><?php echo $current_campaign_stats->campaign_prospects; ?></div>
-<div class="small-text"><?php if ($current_campaign_stats->campaign_prospects <> "1") {echo "Prospects";} else { echo "Prospect";}?></div></div>
+<div class="small-text"><?php echo "Prospect";?></div></div>
 </div>
 <?php if ($current_campaign_stats->campaign_prospects>0): ?>
 </a><?php else: endif; ?>
@@ -98,7 +98,7 @@
 <div class="circle-responsive_campiagns proposal-circle_campaign <?php if ($this->session->userdata('pipeline')=='proposal'): echo 'active';else: endif; ?>">
 <div class="circle-content mega">
 <div class="large-number"><?php echo $current_campaign_stats->campaign_proposals; ?></div>
-<div class="small-text"><?php if ($current_campaign_stats->campaign_proposals <> "1") {echo "Proposals";} else { echo "Proposal";}?></div></div>
+<div class="small-text"><?php echo "Proposal"; ?></div></div>
 </div>
 <?php if ($current_campaign_stats->campaign_proposals>0): ?>
 </a>
@@ -111,7 +111,7 @@
 <div class="circle-responsive_campiagns customer-circle-campaign <?php if ($this->session->userdata('pipeline')=='customer'): echo 'active';else: endif; ?>">
 <div class="circle-content mega">
 <div class="large-number"><?php echo $current_campaign_stats->campaign_customers; ?></div>
-<div class="small-text"><?php if ($current_campaign_stats->campaign_customers <> "1") {echo "Customers";} else { echo "Customer";}?></div></div>
+<div class="small-text"><?php echo "Customer";?></div></div>
 </div>
 <?php if ($current_campaign_stats->campaign_customers>0): ?>
 </a><?php else: endif; ?>

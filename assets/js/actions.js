@@ -165,9 +165,11 @@ if ( typeof define === 'function' && define.amd ) {
   });
 function getActionData(scope = false){ //get all actions in multidimentional json array
         if ((/companies\/company/.test(window.location.href))) {
+            
+            var parid = GetUrlParamID();
         $.ajax({
             type: "GET",
-            url: "../companies/getAction/",
+            url: "../companies/getAction/"+parid,
             success: function(data) {
                 $('.timeline_inner').html('');
                 $('.timeline_inner').append(writeactions(data)); 
@@ -181,6 +183,7 @@ function getActionData(scope = false){ //get all actions in multidimentional jso
                 removeOutsandingAction();
                 mainMenuQty(scope);
                 comments_decoder()
+
                 //$('.follow-up-date').datepicker();
                 var dateToday = new Date();
 $('.actiondate').datetimepicker({ minDate: dateToday });
@@ -203,12 +206,8 @@ $('select[name="action_type_planned"]').addClass('action_type_planned');
         $('.timeline-entry').show();
             
         }
-           
+            comments_decoder()   
      }
-
-
-
-
 
 
 function comments_decoder(){
@@ -537,7 +536,7 @@ function bindAddCallBackToCompletedAction(){
                          if (typeof action['outcome'] == 'undefined'  || action['outcome'] == null){
                              actionOutcome = ''
                          } else { 
-                         actionOutcome = '<strong>Outcome: </strong><span class="commentFUA">'+action['outcome']+'</span>';
+                             actionOutcome = '<strong>Outcome: </strong><span class="commentFUA">'+action['outcome']+'</span>';
 
                          }           
 
@@ -680,7 +679,7 @@ function bindAddCallBackToCompletedAction(){
 
 
                   if (val.first_name != null){
-                      contactName = '<div class="label label-primary hint--top-right"   data-hint="Name" style="float:right; margin-top:0; ">'+val.first_name+ ' '+ val.last_name+'</div>';
+                      contactName = '<div class="label label-primary hint--top-right"   data-hint="Name" style="float:right; margin-top:-4px; ">'+val.first_name+ ' '+ val.last_name+'</div>';
                         }
 
                 if ( val.campaign !== null ){
@@ -696,7 +695,7 @@ function bindAddCallBackToCompletedAction(){
                         
                         }
                         
-                $('.timeline_inner').append('<div class="timeline-entry   actionIdactions_marketing" style="dislay:none;"> <div class="timeline-stat"> <div class="timeline-icon label-primary " style="color: white;"><i class="fa fa-envelope-o fa-lg"></i></div></div><div class="timeline-label"> <div class="mar-no pad-btm"><h4 class="mar-no pad-btm"><a href="javascript:;" class="text-danger"> '+val.campaign_name+' <span class"eeprefix">(Outbound Marketing)</span> </a>   </h4>'+'<span class="label label-warning">'+val.date+'</span></div><div style="float:right; margin-top:-4px; margin-left:3px;">'+action+'</div>'+contactName+'<div class="actionMsgText"><span class="actionMsg commentsComment"></span><hr></div><div> <div class="mic-info"> '+email_by+'</div></div></div>')
+                $('.timeline_inner').append('<div class="timeline-entry   actionIdactions_marketing" style="dislay:none;"> <div class="timeline-stat"> <div class="timeline-icon label-primary " style="color: white;"><i class="fa fa-envelope-o fa-lg"></i></div></div><div class="timeline-label"> <div class="mar-no pad-btm"><h4 class="mar-no pad-btm"><a href="javascript:;" class="text-danger"> '+val.campaign_name+' <span class"eeprefix">(Outbound Marketing)</span> </a>   </h4>'+'<span class="label label-warning">'+val.date+'</span></div><div style="float:right; margin-top:-9px; margin-left:3px;">'+action+'</div>'+contactName+'<div class="actionMsgText"><span class="actionMsg commentsComment"></span><hr></div><div> <div class="mic-info"> '+email_by+'</div></div></div>')
                     }
                 }
                     //$('#sidebar').hide();
@@ -715,7 +714,8 @@ function bindAddCallBackToCompletedAction(){
              $('a[data="actions_marketing"]').attr('disabled', true);
             }
 
-            mainMenuQty(scope);        
+            mainMenuQty(scope);   
+         
         }
 
 
@@ -798,18 +798,20 @@ $('.box'+bun+'  .actionContact option[value=]').prop('selected','selected');
       //   $('.actionNav a[data="actions_outstanding"]').trigger('click')
         }
       
-   $('.editor').on('keyup mouseleave click', function(){
-var texteditor  = $(this).attr('addOutcomeEditor');
-$('.textarea'+texteditor).val($(this).html())
+            $('.editor').on('keyup mouseleave click', function(){
+            var texteditor  = $(this).attr('addOutcomeEditor');
+            $('.textarea'+texteditor).val($(this).html())
 
-});
-        
-      //Handles action follow up actions output
+            });
+
+
+            //Handles action follow up actions output
             $(".commentFUA").each(function(){
             //console.log($(this).text());
             var kip = $(this).text()
             $(this).html(kip)
-            })   
+            })
+    
         
         
     } 
@@ -911,11 +913,12 @@ $('#sidebar').hide();
                 
             })
             
+        
          }
     (function($) {
         $.fn.goTo = function() {
         $('html, body').animate({
-        scrollTop: $(this).offset().top + 'px'
+        scrollTop: ($(this).offset().top)-200 + 'px'
         }, 'fast');
         return this; // for chaining...
         }
@@ -934,7 +937,7 @@ $('#sidebar').hide();
             //a[data='"+tech+"']
          $("a[data='actions_completed']" ).trigger('click');
           $('a[data='+actionId+']').trigger('click');
-            $('a[data='+actionId+']').goTo(20);
+            $('a[data='+actionId+']').goTo(0);
          
      }
      function getIcon(actionType){
@@ -955,7 +958,7 @@ $('#sidebar').hide();
                     case 'Check-In Call':
                         icon = '<div class="timeline-icon bg-info"><i class="fa fa-envelope fa-lg"></i></div>';
                     break;
-                    case 'Deal':
+                    case 'Pipeline - Deal':
                         icon = '<div class="timeline-icon bg-success"><i class="fa fa-thumbs-o-up  fa-lg"></i></div>';
                     break;
                     case 'Demo':
@@ -1096,7 +1099,7 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
           }
          
          if(typeof action['outcome'] !== 'undefined'  && action['outcome'] !== null &&  action['outcome'] !== 'null'   ){
-           outcome = '<span class="actionMsg piller'+actionId+' outcomeMsg'+actionId+' comments'+actionType+'"><strong>Outcome: </strong><span class="comment">'+ action['outcome'] +'</span></span>'; 
+             outcome = '<span class="actionMsg piller'+actionId+' outcomeMsg'+actionId+' comments'+actionType+'"><strong>Outcome: </strong><span class="comment">'+ action['outcome'] +'</span></span>'; 
             
          } 
         
@@ -1107,10 +1110,10 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
          }
          
          if(action['comments']){
-          tagline = '<span class="actionMsg piller'+actionId+' actionMsg'+actionId+  ' comments'+actionType+'"><strong>Comment: </strong><span class="comment">'+action['comments']+'</span></span><hr>'+outcome;
+             tagline = '<span class="actionMsg piller'+actionId+' actionMsg'+actionId+  ' comments'+actionType+'"><strong>Comment: </strong><span class="comment">'+action['comments']+'</span></span><hr>'+outcome;
          }
          
-         if(actionType == 'Deal') actionTypeOverwrite = actionType+'@'+initial_fee+'%';
+         if(actionType == 'Pipeline - Deal') actionTypeOverwrite = actionType+'@'+initial_fee+'%';
          
          if(!actions_cancelled || typeof actionImg !== 'undefined'){
             badge = '<span class="circle" style="float: left;margin-top: 0px;margin-right: 10px;width: 20px;height: 20px;border-radius: 15px;font-size: 8px;line-height: 20px;text-align: center;font-weight: 700;background-color:'+actionImg[1]+'; color:'+actionImg[2]+';">'+actionImg[0]+'</span>';
@@ -1163,14 +1166,10 @@ if(timestamp2 < timestamp && action['action_type_id'] == 11 )
         var detail = 'Meeting+with+'+contact+'%0A'+email+'+%0D%0D'+pageAddress; 
 
             
-            
-            
-            
-            
         calendarBtnDetail = '<a class="btn btn-default btn-xs add-to-calendar" href="http://www.google.com/calendar/event?action=TEMPLATE&amp;text='+msg+'&amp;dates='+ planned_at +'/'+ planned_at +'Z&amp;details='+detail+'%0D%0DAny changes made to this event are not updated in Baselist. %0D%23baselist" target="_blank" rel="nofollow" style="margin-top:0; font-size:10px;">Add to Calendar</a>';
 
 
-        calenderbtn = '<small>'+calendarBtnDetail +' </small><span class="btn btn-default btn-xs label label-success callbackAction callbackActionOutcome hint--top-right"  data-hint="Add Action Outcome" style="font-size:10px; margin:0 0px;" data="'+action['action_id']+'">Add Outcome</span> <span class="btn btn-default btn-xs label label-danger removeOutsandingAction hint--top-right"  data-hint="Cancel Callback Action" data="'+action['action_id']+'" >Remove</span>';
+        calenderbtn = '<small>'+calendarBtnDetail +' </small><span class="btn btn-default btn-xs label label-primary callbackAction callbackActionOutcome hint--top-right"  data-hint="Add Action Outcome" style="font-size:10px; margin:0 0px;" data="'+action['action_id']+'">Add Outcome</span> <span class="btn btn-default btn-xs label label-danger callbackAction removeOutsandingAction hint--top-right"  data-hint="Cancel Callback Action" data="'+action['action_id']+'" >Remove</span>';
 
          if(action['action_id'])                                                                                                                                          
             textbox= '<div class="form-group callbackActionTextBox  box'+action['action_id']+'" style="display:none">'+
@@ -1183,9 +1182,20 @@ if(timestamp2 < timestamp && action['action_type_id'] == 11 )
                 '<input type="submit" class="btn btn-primary btn-block actionSubmit box'+action['action_id']+' submit'+action['action_id']+'" "  style="float:right;" value="Save"></form><br /></div>';
 
         //console.log('box_'+action['action_id'])
-        overdueStatus = '<span class="label label-danger overdueAction ">Overdue</span>';
+            
+            
+        
+//var tm  = action['planned_at'];
+ 
+ 
+            
+var tm =  dateDiffChecker(action['planned_at']);
+
+if(tm > 1){ tm = tm + ' Days Overdue'; }else if(tm == 1){ tm  = tm + ' Day Overdue'; }else{ tm = tm +  ' Due Today'; } 
+            
+        overdueStatus = '<span class="label label-danger overdueAction ">'+tm +'</span>';
         var dateCompare = (new Date() - Date.parse(action['planned_at'])) >= 1000 * 60 * 30;
-       
+
         if(dateCompare == false && typeof action['planned_at'] != 'undefined'){
             overdueStatus = '';
         }
@@ -1293,11 +1303,56 @@ if(timestamp2 < timestamp && action['action_type_id'] == 11 )
             actions  = '<div class="timeline-entry actionId'+actionType+'  '+classCompleted+'"> <div class="timeline-stat"> '+icon+'</div><div class="timeline-label"> <div class="mar-no pad-btm"><h4 class="mar-no pad-btm">'+header+deal+'  <span class="label label-warning">'+planned_at+'</span>'+overdueStatus+'<span class="classActions" style="float:right; margin-top:0; margin-left:3px;">'+calenderbtn+outcomeRemove+ kpStr+'</span></h4></div><div class="actionMsgText" style="padding:0px 0px 0px 10px;">'+tagline+'</div>'+textbox+'<div class="mic-info"> '+status+': '+created_by+' - '+formattDate(createdAt, true)+followupAlert+' </div></div></div>';
          
         if(actionTypeName == 'Pipeline Update' ){
-              actions  = '<div class="timeline-entry actionId'+actionType+' '+classCompleted+'" > <div class="timeline-stat"> '+icon+'</div> <div class="timeline-label pipe"> <div class="mar-no pad-btm" ><h4 class="mar-no pad-btm">'+header+' <span class="classActions" style="margin-top:0; margin-left:3px; float:right;">'+calenderbtn+outcomeRemove+ kpStr+'</span></h4>'+overdueStatus+'</div><div class="actionMsgText">'+action['comments']+'</div></div></div>';  
+              actions  = '<div class="timeline-entry actionId'+actionType+' '+classCompleted+'" > <div class="timeline-stat"> '+icon+'</div> <div class="timeline-label pipe"> <div class="mar-no pad-btm" ><h4 class="mar-no pad-btm">'+header+' <span class="classActions" style="margin-top:0; margin-left:3px; float:right;">'+calenderbtn+outcomeRemove+ kpStr+'</span></h4>'+overdueStatus+'</div><div class="actionMsgText">'+action['comments']+'</div></div></div>';   actions  = '';
          }
      
         return actions;
        }
+
+
+function dateDiffChecker(tm){
+
+tm = tm.split(' ');
+
+tm = tm[0].split('-');
+
+tm = tm[1]+'/'+tm[2]+'/'+tm[0];
+            
+            
+            
+            
+            
+            var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth()+1; //January is 0!
+var yyyy = today.getFullYear();
+
+if(dd<10) {
+    dd='0'+dd
+} 
+
+if(mm<10) {
+    mm='0'+mm
+} 
+
+today = mm+'/'+dd+'/'+yyyy;
+       
+        return  daydiff(parseDate(tm),parseDate(today));
+
+
+
+}
+
+function parseDate(str) {
+    var mdy = str.split('/');
+    return new Date(mdy[2], mdy[0]-1, mdy[1]);
+}
+
+function daydiff(first, second) {
+    return Math.round((second-first)/(1000*60*60*24));
+}
+
+
           
     function formattDate(createdAt, showtime = true){
         

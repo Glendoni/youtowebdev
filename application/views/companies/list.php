@@ -8,7 +8,7 @@
 <?php $this->load->view('companies/create_contact_box.php',array('company'=>$company)); ?>
 <!--ANCHOR OFFSET-->
 <a class="anchor" id="<?php echo $company['id'];?>"></a>
-<div class="panel <?php if(isset($company['assigned_to_name'])): ?> panel-primary <?php else: ?> panel-default <?php endif; ?> company">
+<div class="panel <?php if(isset($company['assigned_to_name'])): ?> panel-primary <?php else: ?> panel-default <?php endif; ?> company companylistings">
 	<div class="panel-body">
     <div class="row">
 		<div class="col-sm-12 ">
@@ -109,7 +109,7 @@
 		<div class="row padding-bottom">
 <div class="col-sm-12 action-details">
 <div class="row padding-bottom"> 
-<div class="col-md-6 col-lg-6 col-sm-6">
+<div class="col-md-4 col-lg-4 col-sm-4">
 <div><strong>Last Contact</strong></div>
 <div>
 <?php if (empty($company['actioned_at1'])): ?>
@@ -134,7 +134,7 @@ if ($company['actioned_at1'] > 0){
 
 </div>
 </div>
-<div class="col-md-6 col-lg-6 col-sm-6">
+<div class="col-md-4 col-lg-4 col-sm-4">
 <div><strong> Scheduled</strong></div>
 <?php if (empty($company['planned_at2'])): ?>
 	None
@@ -163,27 +163,27 @@ if ($your_date < $now){;
 </div>
 
 	<?php if (isset($company['trading_name'])): ?>
-		<div class="col-md-6">
+		<div class="col-md-4">
 				<label>Registered Name</label>
 				<p style="margin-bottom:0;">	
 				<?php echo $company['name']; ?>
 				</p>
 		</div><!--END NAME-->
-		<div class="col-md-6">
+		<div class="col-md-4">
 				<label>Trading Name</label>
 				<p style="margin-bottom:0;">	
 				<?php echo $company['trading_name']; ?>
 				</p>
 		</div><!--END TRADING NAME-->
 		<?php else: ?>
-				<div class="col-md-6">
+				<div class="col-md-4">
 				<label>Registered Name</label>
 				<p style="margin-bottom:10px;">	
 				<?php echo $company['name']; ?>
 				</p>
 		</div><!--END NAME-->
 		<?php endif; ?>
-		<div class="col-md-6">
+		<div class="col-md-4">
 				<label>Registered Address</label>
 				<p style="margin-bottom:10px;">
                 <?php echo isset($company['address'])?'<a href="http://maps.google.com/?q='.urlencode($company['address']).'" target="_blank">'.$company['address'].'<span style="    line-height: 15px;font-size: 10px;padding-left: 5px;"><i class="fa fa-external-link"></i></span></a>':'-'; ?>  
@@ -223,88 +223,112 @@ if ($your_date < $now){;
 		</div>
  
 
-		<div class="row padding-bottom">
+		<div class="row details pad-bottom">
 				<div class="col-md-12">
 			<hr>
 		</div>
-		<div class="col-xs-6 col-md-3 centre" style="margin-top:10px;">
-			<label>Company Number</label>
+		<div class="col-xs-6 col-md-3 " style="margin-top:10px;">
+			<label>Company Number</label><br>
 			<p class="registration_number">	
 			 <!--COMPANY NUMBER IF APPLICABLE-->
 			<?php echo isset($company['registration'])?$company['registration']:''; ?>
          	</p>
         	</div>
 
-        	<div class="col-xs-6 col-md-3 centre" style="margin-top:10px;">
-        	<label>Founded</label>
+        	<div class="col-xs-6 col-md-3 " style="margin-top:10px;">
+        	<label>Founded</label><br>
 			<p>	
 				<?php echo isset($company['eff_from'])?$company['eff_from']:''; ?>
 			</p>
 		</div>
 
   	<!-- CONTACTS -->
-		<div class="col-xs-6 col-sm-3 centre" style="margin-top:10px;">
-			<strong>Contacts</strong>			
+		<div class="col-xs-6 col-sm-3 " style="margin-top:10px;">
+			<strong>Contacts</strong><br>			
 			<?php if (isset($company['contacts_count'])): ?>
 			<p class="details"><?php echo $company['contacts_count'];?> </p>
 			<?php else: ?>
-			<p class="details">0</p>
+			<p class="details">-</p>
 			<?php endif; ?>
 		</div>
             
-		<div class="col-xs-6 col-md-3 centre" style="margin-top:10px;">
-				<label>Class</label>
+		<div class="col-xs-6 col-md-3 " style="margin-top:10px;">
+				<label>Class</label><br>
 				<p>	
 		            <!--CLASS IF APPLICABLE-->
-		            <?php if (isset($company['class'])): ?>
-						<span class="label label-info"><?php echo $companies_classes[$company['class']] ?></span>	
-					<?php else: ?>
-						-
+		            <?php if (isset($company['class']) && $company['class'] != 'Unknown' ): ?>
+					 <?php echo $companies_classes[$company['class']] ?> 	
+					<?php else: 
+                    
+                    echo '-';
+                    
+                    ?>
+						
 		            <?php endif; ?>
 	            </p>
 			</div>
 
 		</div>
 		
-	<div class="row padding-bottom">
+	<div class="row details pad-bottom">
 		<!-- TURNOVER -->
-		<div class="col-xs-6 col-sm-3 centre">
-			<strong><span style="text-transform: capitalize"><?php echo isset($company['turnover_method'])?$company['turnover_method']:'';?></span> Turnover</strong>
+		<div class="col-xs-6 col-sm-3 ">
+			<strong><span style="text-transform: capitalize"><?php echo isset($company['turnover_method'])?$company['turnover_method']:'';?></span> Turnover</strong><br>
 			<p class="details" style="margin-bottom:5px;">
-				<?php echo isset($company['turnover'])? '£'.number_format (round($company['turnover'],-3)):'';?>
+				<?php echo isset($company['turnover'])? '£'.number_format (round($company['turnover'],-3)):'-';?>
 			</p>
         </div>
 	
-		<!-- EMPLOYEES -->
-		<div class="col-xs-6 col-sm-3 centre">
-			<strong>Employees</strong>
+	<!-- EMPLOYEES -->
+		<div class="col-xs-4 col-sm-3">
+			<strong>Employees</strong><br>
 			<?php if (isset($company['emp_count'])): ?>
 			<p class="details"><?php echo $company['emp_count'];?> </p>
 			<?php else: ?>
-			<!--<p class="details">Unknown</p>-->
+            <p class="details">-</p>
 			<?php endif; ?>
 		</div>
 		<!-- SECTORS -->
-		<div class="col-xs-6 col-sm-3 centre">
-			<strong>Sectors</strong> 
+        <?php if(isset($company['sectors'])){
+    
+    
+}else{
+    
+    
+    
+}
+        
+        ?>
+		<div class="col-xs-6 col-sm-4">
+			<strong>Sectors</strong> <br>
 			<?php 
 			if(isset($company['sectors'])){
 				foreach ($company['sectors'] as $key => $name)
 				{
-				echo '<p class="details" style="margin-bottom:0; text-align:centre;">'.$name.'</p>';
+				echo '<p class="detailsTagFormat" style="margin-bottom:0; text-align:centre;">'.$name.'</p>';
 				}
 			}
 			?>
 									<?php if (isset($company['perm'])): ?>
 
-<p class="details" style="margin-bottom:0; text-align:centre;"><b>Permanent</b></p>
+<p class="detailsTagFormat" style="margin-bottom:0; text-align:centre;">Permanent</p>
 
 			<?php endif; ?>
 								<?php if (isset($company['contract'])): ?>
 
 
-			<p class="details" style="margin-bottom:0; text-align:centre;"><b>Contract</b></p>
+			<p class="detailsTagFormat" style="margin-bottom:0; text-align:centre;">Contract</p>
 						<?php endif; ?>
+            
+     
+            <?php if ($company['perm'] == '' && $company['contract'] == '' && count($company['sectors']) ==0 ): ?>
+
+<p class="detailsTagFormat" style="margin-bottom:0; text-align:centre;">-</p>
+            
+            
+            <?php endif; ?>
+            
+            
 		</div>
 		</div>
 	
@@ -326,8 +350,8 @@ if ($your_date < $now){;
 			<thead>
 				<tr>
 					<th class="col-md-6">Mortgage Provider</th>
-					<th class="col-md-3" style="text-align:center;">Started</th>
-					<th class="col-md-3" style="text-align:center;">Status</th>
+					<th class="col-md-3">Started</th>
+					<th class="col-md-3">Status</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -343,8 +367,8 @@ if ($your_date < $now){;
 				<?php echo $mortgage['type']; ?>
 				</div>
 					</td>
-					<td class="col-md-3" style="text-align:center;"><?php echo $mortgage['eff_from']; ?></td>
-					<td class="col-md-3" style="text-align:center;"><!--<span class="label label-<?php echo $mortgage['stage']==MORTGAGES_SATISFIED? 'default' : 'success' ?>">--><strong><?php echo $mortgage['stage']; ?></strong><?php if(!empty($mortgage['eff_to'])){echo ' on '.$mortgage['eff_to'];} ?></span></td>
+					<td class="col-md-3"><?php echo $mortgage['eff_from']; ?></td>
+					<td class="col-md-3"><!--<span class="label label-<?php echo $mortgage['stage']==MORTGAGES_SATISFIED? 'default' : 'success' ?>">--><strong><?php echo $mortgage['stage']; ?></strong><?php if(!empty($mortgage['eff_to'])){echo ' on '.$mortgage['eff_to'];} ?></span></td>
 
 				</tr>
 				<?php endforeach; ?>

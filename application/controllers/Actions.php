@@ -21,6 +21,9 @@ class Actions extends MY_Controller {
 	}
 	public function create()
     {
+        
+        
+        
 			if (!empty($post['campaign_id'])) {
 			 $campaign_redirect ='&campaign_id='.$post['campaign_id'];
 			}
@@ -110,8 +113,55 @@ class Actions extends MY_Controller {
                                     $result = $this->Actions_model->company_updated_to_proposal($post); 
                                     $result1 = $this->Actions_model->add_to_zendesk($post); 
                                     if(empty($result)) $this->set_message_warning('Error while updating action for the company.');
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                //}
+                            }else if($post['action_type_completed']=='31' || $post['action_type_completed']=='32' || $post['action_type_completed']=='33' || $post['action_type_completed']=='34'){
+                                // proposal sent to company 
+                                
+                                 if($this->Companies_model->company_select($company_id)){ //prevents proposal being updated if company is a customer
+                                
+                                      if($post['action_type_completed']=='31')    $actionName = 'Prospect'   ; 
+
+                                            if($post['action_type_completed']=='32')    $actionName = 'Intent';
+                                            if($post['action_type_completed']=='33')    $actionName = 'Unsuitable';      
+                                            if($post['action_type_completed']=='34')    $actionName = 'Lost';      
+
+                                     
+                                     
+                                      if($actionName)  $result = $this->Actions_model->company_updated_to_action($post,$actionName);//update action
+                                            if($result)  $result = $this->Companies_model->update_company_to_action($company_id,$actionName); //update pipeline
+                                    
+              
+                                        }
+                                //if(empty($result)){
+                                  //  $this->set_message_warning('Error while updating company.');
+                                //}else{
+                                    // action model, update register an action for the proposal
+                                    //$result = $this->Actions_model->company_updated_to_proposal($post); 
+                                
+                                
+                                  //$result1 = $this->Actions_model->add_to_zendesk($post); 
+                                    if(empty($result)) $this->set_message_warning('Error while updating action for the company.');
                                 //}
                             }
+                            
+                            
+                            
+                            
+                            
+                            
+                            
                             $this->set_message_success('Action successfully inserted');
                             redirect('companies/company?id='.$this->input->post('company_id').$campaign_redirect.'#actions','location');
                         }

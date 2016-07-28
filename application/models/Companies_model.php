@@ -64,7 +64,7 @@ class Companies_model extends CI_Model {
 		$arrayNamesPipeline = array(
 			'Prospect' => 'Prospect',
 			'Intent' => 'Intent',
-			'Qualified' => 'Qualified',
+			//'Qualified' => 'Qualified',
 			'Unsuitable' => 'Unsuitable',
 			'Lost' => 'Lost'
 			);
@@ -84,7 +84,7 @@ class Companies_model extends CI_Model {
 	{
 		$arrayNamesPipelineSearch = array(
 			'Prospect' => 'Prospect',
-			'Qualified' => 'Qualified',
+			//'Qualified' => 'Qualified',
 			'Intent' => 'Intent',
 			'Proposal' => 'Proposal',
 			'Customer' => 'Customer',
@@ -125,7 +125,22 @@ class Companies_model extends CI_Model {
 		$this->db->update('companies', $pipelinedata);
 		return $this->db->affected_rows(); 
 	}
+    
+    
+    
+    
+    	function update_company_to_action($id, $actionName){ //new function to aid the refactor of pipeline from edit box
+		$pipelinedata = array('pipeline' => $actionName, 'updated_at' => date('Y-m-d H:i:s'));
+		$this->db->where('id', $id);
+		$this->db->update('companies', $pipelinedata);
+		return $this->db->affected_rows(); 
+	}
 
+    
+    
+    
+    
+    
      // $query = $this->db->query("YOUR QUERY");
 
 	function search_companies_sql($post,$company_id = False)
@@ -843,7 +858,7 @@ class Companies_model extends CI_Model {
 			$address = array(
 				'company_id' => $new_company_id,
 				'country_id' => $post['country_id'],
-				'address' => !empty($post['address'])?$post['address']:'',
+				'address' => !empty($post['address'])?$post['address']:NULL,
 				'lat' => !empty($post['lat'])?$post['lat']:NULL,
 				'lng' => !empty($post['lng'])?$post['lng']:NULL,
 				'type' => !empty($post['type'])?$post['type']:"Registered Address",
@@ -862,7 +877,7 @@ class Companies_model extends CI_Model {
                 	$address = array(
 				'company_id' => $new_company_id,
 				'country_id' => $post['country_id'],
-				'address' => $post['address'],
+				'address' => !empty($post['address'])?$post['address']:NULL,
 				'lat' => !empty($post['lat'])?$post['lat']:NULL,
 				'lng' => !empty($post['lng'])?$post['lng']:NULL,
 				'type' => "Trading Address",
@@ -881,7 +896,7 @@ class Companies_model extends CI_Model {
                    $address = array(
 				'company_id' => $new_company_id,
 				'country_id' => $post['country_id'],
-				'address' => $post['tradingAddress'],
+				'address' => !empty($post['tradingAddress'])?$post['tradingAddress']:NULL,
 				'lat' => !empty($post['lat'])?$post['lat']:NULL,
 				'lng' => !empty($post['lng'])?$post['lng']:NULL,
 				'type' => "Trading Address",
@@ -940,7 +955,7 @@ class Companies_model extends CI_Model {
 
 	function create_address($post)
 	{
-       	$address->address = $post['address']; // please read the below note
+       	$address->address = !empty($post['address'])?$post['address']:NULL; // please read the below note
     	$address->country_id = $post['country_id'];
 		$address->type = $post['address_types'];
 		$address->phone = !empty($post['phone'])?$post['phone']:NULL;
@@ -956,7 +971,7 @@ class Companies_model extends CI_Model {
 
 	function update_address($post)
 	{
-    	$address->address   = $post['address']; // please read the below note
+    	$address->address   = !empty($post['address'])?$post['address']:NULL; // please read the below note
     	$address->country_id = $post['country_id'];
 		$address->type = $post['address_types'];
 		$address->phone = !empty($post['phone'])?$post['phone']:NULL;

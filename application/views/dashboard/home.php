@@ -7,7 +7,7 @@
                 <li role="presentation"><button href="#calls" aria-controls="calls" role="tab" data-toggle="tab" class="btn btn-primary btn-sm c-a-m" style="margin-right:10px;" >Schedule</button></li>
                 <li role="presentation"><button href="#pipeline" aria-controls="pipeline" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Pipeline','<?php echo $current_user['id'];?>')">Pipeline</button></li>
                    <li role="presentation"><button href="#assigned" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Favourites','<?php echo $current_user['id'];?>')">Favourites</button></li>
-                <li><button href="companies/pipeline"role="tab" class="button btn btn-primary btn-sm deals_pipeline" style="margin-right:10px;" onclick="window.location ='companies/pipeline'">Deals Forecast</button></li>
+               <!-- <li><button href="companies/pipeline"role="tab" class="button btn btn-primary btn-sm deals_pipeline" style="margin-right:10px;" onclick="window.location ='companies/pipeline'">Deals Forecast</button></li> -->
                 <li role="presentation"><button href="#emailegagement" aria-controls="emailegagement" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Email Engagement','<?php echo $current_user['id'];?>')">Email Engagement</button></li>    
               </ul>
 
@@ -1251,8 +1251,8 @@
 <h3 class="panel-title pull-left">Campaign Summary</h3>
 <?php if ($current_user['permission'] == 'admin'): ?>
 <ul class="nav nav-tabs dashboard" role="tablist">
-<li role="presentation" class="active"><button href="#campaign_user" aria-controls="campaign_user" role="tab" data-toggle="tab" class="btn btn-primary btn-xs pull-right" style="margin-right:10px; margin-left:10px;    font-size: 10px;">My Campaigns</button></li>
-<li role="presentation"><button href="#campaign_team" aria-controls="campaign_team" role="tab" data-toggle="tab" class="btn btn-primary btn-xs pull-right" style="margin-right:10px;    font-size: 10px;">Team Campaigns</button></li>
+<li role="presentation" class="active"><button href="#campaign_user" aria-controls="campaign_user" role="tab" data-toggle="tab" class="btn btn-primary btn-xs pull-right" style="margin-right:10px; margin-left:10px;    font-size: 10px;">My Campaign</button></li>
+<li role="presentation"><button href="#campaign_team" aria-controls="campaign_team" role="tab" data-toggle="tab" class="btn btn-primary btn-xs pull-right" style="margin-right:10px;    font-size: 10px;">Team Campaign</button></li>
 
               </ul>
 
@@ -1291,7 +1291,7 @@
 <div class="circle-responsive prospect-circle <?php if ($this->session->userdata('pipeline')=='prospect'): echo 'active';else: endif; ?>">
 <div class="circle-content mega">
 <div class="large-number"><?php echo $get_user_campaign->campaign_prospects; ?></div>
-<div class="small-text"><?php if ($get_user_campaign->campaign_prospects <> "1") {echo "Prospects";} else { echo "Prospect";}?></div></div>
+<div class="small-text"><?php echo "Prospect" ; ?></div></div>
 </div>
 <?php if ($get_user_campaign->campaign_prospects>0): ?>
 <?php else: endif; ?>
@@ -1315,7 +1315,7 @@
 <div class="circle-responsive proposal-circle <?php if ($this->session->userdata('pipeline')=='proposal'): echo 'active';else: endif; ?>">
 <div class="circle-content mega">
 <div class="large-number"><?php echo $get_user_campaign->campaign_proposals; ?></div>
-<div class="small-text"><?php if ($get_user_campaign->campaign_proposals <> "1") {echo "Proposals";} else { echo "Proposal";}?></div></div>
+<div class="small-text"><?php  echo "Proposal";?></div></div>
 </div>
 <?php if ($get_user_campaign->campaign_proposals>0): ?>
 <?php else: endif; ?>
@@ -1467,7 +1467,7 @@
                           </div>
                           <div class="list-group-item" id="action_outcome_box_<?php echo $action->action_id ?>" style="display:none;">
                           
-                          <label>Outcome</label>
+                          <label>Comment<span class="actionEvalPipeline" style=" color: red;">*</span></label>
                           <textarea class="form-control textarea<?php echo $action->action_id ?>" name="outcome" rows="3" style="display: none;"></textarea>
 
  <div class="editor addOutcomeEditor" addoutcomeeditor="<?php echo $action->action_id ?>" style="margin-bottom: 5px; min-height: 70px;"></div>
@@ -1497,7 +1497,7 @@
               <div class="col-md-3 pipeline-holder ">
                             <div class="panel panel-default">
                             <div class="panel-heading">
-                            Initial Contact <div class="pull-right"><span class="badge"><?php echo count($pipelinecontactedindividual)?></span></div>
+                            Intent <div class="pull-right"><span class="badge"><?php echo count($pipelinecontactedindividual)?></span></div>
                             </div>
                             <div class="panel-body" style="padding:0; background-color:#DDDDDD;">
                             <?php foreach ($pipelinecontactedindividual as $pipelinecontactedindividual): ?>
@@ -1639,7 +1639,7 @@
               <div class="col-md-3 pipeline-holder ">
                             <div class="panel panel-default">
                             <div class="panel-heading">
-                            Initial Contact <div class="pull-right"><span class="badge"><?php echo count($pipelinecontacted)?></span></div>
+                            Intent <div class="pull-right"><span class="badge"><?php echo count($pipelinecontacted)?></span></div>
                             </div>
                             <div class="panel-body" style="padding:0; background-color:#DDDDDD;">
                             <?php foreach ($pipelinecontacted as $pipelinecontacted): ?>
@@ -1803,7 +1803,7 @@
                       
                      </select></form>
                   </span>
-                <span class="badge pull-right favouritesCount" style="margin-top: -20px;"><?php echo count($assigned_companies); ?></span>    
+                <span class="badge pull-right favouritesCount" style="margin-top: -19px; apdding:5px;"><?php echo count($assigned_companies); ?></span>    
               </div>
 <div class="panel-body" style="padding:0;">
 
@@ -1937,7 +1937,7 @@
 <div class="col-sm-3 col-sm-pull-9">
               <div class="panel panel-default">
               <div class="panel-heading">
-                <h3 class="panel-title">My Campaigns <span class="badge pull-right"><?php echo count($private_campaigns); ?></span></h3>
+                <h3 class="panel-title">My Campaign <span class="badge pull-right"><?php echo count($private_campaigns); ?></span></h3>
               </div>
               <div class="panel-body" style="padding:0;">
                   <!-- PRIVATE SEARCHES -->
@@ -1959,7 +1959,7 @@
             </div>
             <div class="panel panel-default">
               <div class="panel-heading">
-                <h3 class="panel-title">Recent Campaigns <span class="badge pull-right"><?php //echo count($shared_campaigns); ?></span></h3>    
+                <h3 class="panel-title">Recent Campaign<span class="badge pull-right"><?php //echo count($shared_campaigns); ?></span></h3>    
               </div>
               <div class="panel-body" style="padding:0;">
               <div id="campaignList">
