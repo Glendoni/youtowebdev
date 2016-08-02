@@ -131,7 +131,15 @@ echo $this->userPermission;
 
 
 }
-    
+  public function getActionsProposals(){
+      $output  =  $this->Actions_model->getActionsProposals();
+      
+      
+     echo json_encode($output);
+      
+      
+//echo '<pre>'; print_r($output); echo '</pre>';  
+  }  
     
 
 /*

@@ -695,7 +695,7 @@ function bindAddCallBackToCompletedAction(){
                         
                         }
                         
-                $('.timeline_inner').append('<div class="timeline-entry   actionIdactions_marketing" style="dislay:none;"> <div class="timeline-stat"> <div class="timeline-icon label-primary " style="color: white;"><i class="fa fa-envelope-o fa-lg"></i></div></div><div class="timeline-label"> <div class="mar-no pad-btm"><h4 class="mar-no pad-btm"><a href="javascript:;" class="text-danger"> '+val.campaign_name+' <span class"eeprefix">(Outbound Marketing)</span> </a>   </h4>'+'<span class="label label-warning">'+val.date+'</span></div><div style="float:right; margin-top:-9px; margin-left:3px;">'+action+'</div>'+contactName+'<div class="actionMsgText"><span class="actionMsg commentsComment"></span><hr></div><div> <div class="mic-info"> '+email_by+'</div></div></div>')
+                $('.timeline_inner').append('<div class="timeline-entry   actionIdactions_marketing" style="dislay:none;"> <div class="timeline-stat"> <div class="timeline-icon label-primary " style="color: white;"><i class="fa fa-envelope-o fa-lg"></i></div></div><div class="timeline-label"> <div class="mar-no pad-btm"><h4 class="mar-no pad-btm"><a href="javascript:;" class="actionPillHeaderTitle"> '+val.campaign_name+' <span class"eeprefix">(Outbound Marketing)</span> </a>   </h4>'+'<span class="label label-warning">'+val.date+'</span></div><div style="float:right; margin-top:-9px; margin-left:3px;">'+action+'</div>'+contactName+'<div class="actionMsgText"><span class="actionMsg commentsComment"></span><hr></div><div> <div class="mic-info"> '+email_by+'</div></div></div>')
                     }
                 }
                     //$('#sidebar').hide();
@@ -941,10 +941,10 @@ $('#sidebar').hide();
          
      }
      function getIcon(actionType){
-          
+            //console.log(actionType)
          var icon;
               switch (actionType){
-                      
+                    
                       //Quote to : 
                     case 'Attempted Call':
                         icon = '<div class="timeline-icon bg-success"><i class="fa fa-thumbs-up fa-lg"></i></div>';
@@ -988,8 +988,8 @@ $('#sidebar').hide();
                     case 'Sales Ledger Due Diligence':
                         icon = '<div class="timeline-icon bg-success"><i class="fa fa-thumbs-up fa-lg"></i></div>';
                     break;
-                    case 'Comment':
-                        icon = '<div class="timeline-icon bg-primary"><i class="fa fa-comment fa-lg"></i></div>';
+                    case 'Comment - Old':
+                        icon = '<div class="timeline-icon bg-primary"><i class="fa fa-comments fa-lg"></i></div>';
                     break;
                     case 'Web Form - Demo Requested':
                         icon = '<div class="timeline-icon bg-success"><i class="fa fa-thumbs-up fa-lg"></i></div>';
@@ -998,7 +998,7 @@ $('#sidebar').hide();
                         icon = '<div class="timeline-icon bg-success"><i class="fa fa-thumbs-up fa-lg"></i></div>';
                     break;
                     default: 
-                        icon = '<div class="timeline-icon bg-info"><i class="fa fa-envelope fa-lg"></i></div>';
+                        icon = '<div class="timeline-icon bg-info"><i class="fa fa-comments fa-lg"></i></div>';
               }
                      //console.debug(icon);
      
@@ -1083,10 +1083,6 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
          var showOutstandingForm = [];
          var getUrlIdParam = GetUrlParamID();
          
-         
-   
-         
-         
          if(typeof action['name'] !== 'undefined'  && action['name'] !== null &&  action['name'] !== 'null'   ){
             created_by = action['name'];
          }else{
@@ -1098,54 +1094,44 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
             actionId = action['id'];
           }
          
-         if(typeof action['outcome'] !== 'undefined'  && action['outcome'] !== null &&  action['outcome'] !== 'null'   ){
+         if(typeof action['outcome'] !== 'undefined'  && action['outcome'] !== null &&  action['outcome'] !== 'null'){
              outcome = '<span class="actionMsg piller'+actionId+' outcomeMsg'+actionId+' comments'+actionType+'"><strong>Outcome: </strong><span class="comment">'+ action['outcome'] +'</span></span>'; 
             
          } 
-        
          actionTypeName = actionType;
-         
          if(action['first_name'] != null){
              contactName = '<span class="label" style=" font-weight:bold; color:#666; padding-left: 0px; background:transparent;" > '+action['first_name']+' '+action['last_name']+'</span>';  
          }
          
          if(action['comments']){
              tagline = '<span class="actionMsg piller'+actionId+' actionMsg'+actionId+  ' comments'+actionType+'"><strong>Comment: </strong><span class="comment">'+action['comments']+'</span></span><hr>'+outcome;
+
+//alert()
          }
          
          if(actionType == 'Pipeline - Deal') actionTypeOverwrite = actionType+'@'+initial_fee+'%';
          
-         if(!actions_cancelled || typeof actionImg !== 'undefined'){
-            badge = '<span class="circle" style="float: left;margin-top: 0px;margin-right: 10px;width: 20px;height: 20px;border-radius: 15px;font-size: 8px;line-height: 20px;text-align: center;font-weight: 700;background-color:'+actionImg[1]+'; color:'+actionImg[2]+';">'+actionImg[0]+'</span>';
-             
-             
-            icon = '<div class="timeline-icon" style="font-weight: 700; font-size: 0.7em;background-color:'+actionImg[1]+'; color:'+actionImg[2]+';">'+actionImg[0]+'</div>';  
-             
-             
-         }
+             if(!actions_cancelled || typeof actionImg !== 'undefined'){
+                badge = '<span class="circle" style="float: left;margin-top: 0px;margin-right: 10px;width: 20px;height: 20px;border-radius: 15px;font-size: 8px;line-height: 20px;text-align: center;font-weight: 700;background-color:'+actionImg[1]+'; color:'+actionImg[2]+';">'+actionImg[0]+'</span>';
+
+            if(actionImg[2])  icon = '<div class="timeline-icon" style="font-weight: 700; font-size: 0.7em;background-color:'+actionImg[1]+'; color:'+actionImg[2]+';">'+actionImg[0]+'</div>';  
+
+             }
         // if(actionType == 'actions_outstanding') alert()
-         
-         
             if(kp == 'actions_outstanding'  ){ //if outstanding
              
                 showOutstandingForm = 'showOutstandingForm';
-                
                 
                 if(action['planned_at'] )
                   var  timestamp =  Date.now();
                  
                  var timestamp2 = new Date(''+action['planned_at']+''.replace(' ', 'T')).getTime();
               
-if(timestamp2 < timestamp && action['action_type_id'] == 11 )
-      icon = '<div class="timeline-icon label-danger "style="color: white;"><i class="fa fa-phone"></i></div>';          
-                
- 
-                
+            if(timestamp2 < timestamp && action['action_type_id'] == 11 )
+                  icon = '<div class="timeline-icon label-danger "style="color: white;"><i class="fa fa-phone"></i></div>';               
             }
-         
-        
-         
-    header = '<a href="javascript:;" class="text-danger '+showOutstandingForm+' pillerTitle" data-name="'+actionType+'" data="'+actionId+'">'+(actionTypeOverwrite ? actionTypeOverwrite : actionType)+ '</a> '+contactName;
+          
+        header = '<a href="javascript:;" class="text-danger '+showOutstandingForm+' pillerTitle" data-name="'+actionType+'" data="'+actionId+'">'+(actionTypeOverwrite ? actionTypeOverwrite : actionType)+ '</a> '+contactName;
          
         if( actions_cancelled == '' && typeof action['action_id'] != 'undefined' || actions_outstanding == true &&  actions_cancelled == '' && typeof action['action_id'] != 'undefined' ){ 
 

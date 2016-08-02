@@ -181,6 +181,7 @@ if ($company['actioned_at1'] > 0){
 </div>
 <div class="col-md-6 col-lg-6 col-sm-6">
 <div><strong>Scheduled</strong></div>
+  
 <?php if (empty($company['planned_at2'])): ?>
 	None
 <?php else: ?>
@@ -236,7 +237,10 @@ if ($your_date < $now){;
 
                 <?php echo isset($company['address'])?'<a href="http://maps.google.com/?q='.urlencode($company['address']).'" target="_blank">'.$company['address'].'<span style="    line-height: 15px;font-size: 10px;padding-left: 5px;"><i class="fa fa-external-link"></i></span></a>':'-'; ?>  
 				</p>
-		</div><!--END ADDRESS-->
+		</div>
+        
+            
+            <!--END ADDRESS-->
 		
 
             
@@ -265,15 +269,20 @@ if ($your_date < $now){;
 
               <a class="btn  btn-primary btn-sm btn-block" href="https://www.linkedin.com/vsearch/f?type=all&keywords=<?php echo  urlencode($name_no_ltd) ?>"  target="_blank">Search LinkedIn <i class="fa fa-search" aria-hidden="true"></i> </a>
             <?php endif; ?>
-					<?php if (isset($company['url'])): ?>
+					 <?php if (isset($company['url'])): ?>
 		<a class="btn btn-default btn-sm btn-block btn-url" href="<?php $parsed = parse_url($company['url']); if (empty($parsed['scheme'])) { echo 'http://' . ltrim($company['url'], '/'); }else{ echo $company['url']; } ?>" target="_blank">
 		<label style="margin-bottom:0;"></label> <?php echo str_replace("http://"," ",str_replace("www.", "", $company['url']))?>
 		</a>
-		<?php endif; ?>
+		<?php else: ?>
+
+    <a class="btn  btn-default btn-sm btn-block " href="https://www.google.co.uk/search?q=<?php echo $company['name'];  ?>>"  target="_blank">Search For Website</a>
+            <?php endif; ?>
+			
 			<?php if (isset($company['registration'])): ?>
 			<a class="btn  btn-info btn-sm btn-block companieshouse" href="https://beta.companieshouse.gov.uk/company/<?php echo $company['registration'] ?>" target="_blank">Companies House</a>
 			<?php endif; ?>
 		<?php endif; ?>
+         
         </div><!--CLOSE COL-MD-3-->
 		
             
@@ -305,7 +314,7 @@ if ($your_date < $now){;
         		<?php echo isset($company['phone'])?$company['phone']:'-'; ?>                
            		</p>
 			</div><!--END PHONE NUMBER-->
-		<div class="col-xs-6 col-md-3" style="margin-top:10px;">
+		<div class="col-xs-6 col-md-2" style="margin-top:10px;">
 				<label>Class</label><br>
 				<p>	
 		            <!--CLASS IF APPLICABLE-->
@@ -321,7 +330,19 @@ if ($your_date < $now){;
 		            <?php endif; ?>
 	            </p>
 			</div>
-
+    
+    
+    	<!-- CONTACTS -->
+		<div class="col-xs-2 col-sm-1" style="margin-top:10px;">
+				<label>Contacts</label><br>			
+			<?php if (isset($company['contacts_count'])): ?>
+			<p class=""><?php echo $company['contacts_count'];?> </p>
+			<?php else: ?>
+			<p class="">-</p>
+			<?php endif; ?>
+		</div>
+            
+    
 		</div>
             </div>
             
@@ -334,15 +355,22 @@ if ($your_date < $now){;
 				<?php echo isset($company['turnover'])? '£'.number_format (round($company['turnover'],-3)):'-';?>
 			</p>
         </div>
-		<!-- CONTACTS -->
-		<div class="col-xs-4 col-sm-3">
-			<strong>Contacts</strong><br>			
-			<?php if (isset($company['contacts_count'])): ?>
-			<p class="details"><?php echo $company['contacts_count'];?> </p>
-			<?php else: ?>
-			<p class="details">-</p>
-			<?php endif; ?>
+            
+              <div class="col-md-3">
+				<label>Lead Source</label>
+				<p>	
+           
+
+                <?php echo $company['source_explanation'] ? $company['source_explanation'] : '-'; ?>  
+		
+          
+ 
+            		</p>
 		</div>
+
+	
+            
+            
 		<!-- EMPLOYEES -->
 		<div class="col-xs-4 col-sm-3">
 			<strong>Employees</strong><br>
@@ -415,15 +443,16 @@ if ($your_date < $now){;
 			<table class="table table-hover">
 			<thead>
 				<tr>
-					<th class="col-md-6">Mortgage Provider</th>
+					<th class="col-md-4">Mortgage Provider</th>
 					<td class="col-md-3">Started</th>
 					<th class="col-md-3">Status</th>
+                <th class="col-md-2">Finished</th>
 				</tr>
 			</thead>
 			<tbody>
 				<?php foreach ($company['mortgages'] as $mortgage):?>
 				<tr <?php echo $mortgage['stage']==MORTGAGES_SATISFIED? 'class="danger"' : 'class="success"' ?>>
-				<td class="col-md-6" >
+				<td class="col-md-4" >
 					<?php if(isset($mortgage['url'])) : ?>
 						<a href="http://<?php echo $mortgage['url']; ?>" target="_blank"><?php echo $mortgage['name']; ?> <span style="font-size:10px;"><i class="fa fa-external-link"></i></span></a>
 	    			<?php else: ?>
@@ -441,7 +470,10 @@ if ($your_date < $now){;
 				</td>
 
 
-
+	<td class="col-md-2">
+				<?php  echo ''.$mortgage['eff_to'] ? $mortgage['eff_to'] : '<span style="text-align:center;">-</span>'; ?>
+				</td>
+		 
 				</tr>
 				<?php endforeach; ?>
 			</tbody>

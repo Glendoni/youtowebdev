@@ -8,6 +8,11 @@
                 <li role="presentation"><button href="#pipeline" aria-controls="pipeline" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Pipeline','<?php echo $current_user['id'];?>')">Pipeline</button></li>
                    <li role="presentation"><button href="#assigned" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Favourites','<?php echo $current_user['id'];?>')">Favourites</button></li>
                <!-- <li><button href="companies/pipeline"role="tab" class="button btn btn-primary btn-sm deals_pipeline" style="margin-right:10px;" onclick="window.location ='companies/pipeline'">Deals Forecast</button></li> -->
+                  
+                  
+      <li role="presentation"><button href="#proposals" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Proposals','<?php echo $current_user['id'];?>')">Proposals</button></li>              
+                  
+                  
                 <li role="presentation"><button href="#emailegagement" aria-controls="emailegagement" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Email Engagement','<?php echo $current_user['id'];?>')">Email Engagement</button></li>    
               </ul>
 
@@ -1903,6 +1908,52 @@
     </div>
           </div><!--END OF PANEL-->
           <!--END ASSIGNED-->
+
+          <!--PROPOSALS-->
+    <div role="tabpanel" class="tab-pane fade" id="proposals">
+    <!--START MARKETING STATS-->
+    
+            <div class="panel panel-default">
+    <div class="panel-heading" id="proposals">
+    <h3 class="panel-title">Outstanding Proposals<span class="badge pull-right eventcountproposal"></span></h3>
+    </div>
+                
+           
+    <!-- /.panel-heading -->
+    <div class="panel-body" style="font-size:12px;">
+        
+                 <div class="row record-holder-header mobile-hide">
+            <div class="col-xs-8 col-sm-3 col-md-3"><strong>Created</strong></div>
+            <div class="col-xs-5 col-sm-5 col-md-5"><strong>Company / Baselist URL</strong></div>
+            <div class="col-xs-4 col-sm-4 col-md-4"><strong>Planned at</strong></div>
+           
+            
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div class="row record-holder-propsals"></div>
+</div>
+
+
+        
+        
+        <!--AUTO PILOT 
+        <div class="row record-holder-header mobile-hide">
+            <div class="col-xs-8 col-sm-4 col-md-3"><strong>Company</strong></div>
+            <div class="col-xs-8 col-sm-4 col-md-2"><strong>Campaign</strong></div>
+            <div class="col-xs-4 col-sm-1 col-md-1"><strong>Pipeline</strong></div>
+            <div class="col-xs-6 col-sm-2 col-md-2"><strong>Contact</strong></div>
+            <div class="col-xs-6 col-sm-3 col-md-2"><strong>Last Action</strong></div>
+            <div class="col-xs-12 col-sm-2 col-md-1"><strong>Date</strong></div>
+        </div>
+        
+        <div id="stat"></div> 
+ -->
+        <!--AUTO PILOT END  -->
+</div>
+<!-- /.panel-body -->
+</div>
+</div><!--END OF PROPOSALPANEL-->
+
 
 
 

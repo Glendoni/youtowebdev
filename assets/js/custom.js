@@ -405,6 +405,29 @@ $( document ).ready(function() {
     var autopilotEmailCompany = window.location.href.split("id="); 
 
     if((/dashboard/.test(window.location.href))) {
+        
+             $.ajax({
+        type: "GET",
+            dataType: "json",
+        url: "dashboard/getActionsProposals",
+        success: function(data) {
+            
+             $.each( data, function( key, val ) {
+          
+           
+           
+    $('.record-holder-propsals').append('<div class="row record-holder"><div class="col-xs-8 col-sm-3 col-md-3">'+val.created+'</div><div class="col-xs-4 col-sm-5 col-md-5"><a href="companies/company?id='+val.id+'">'+val.comp_name+'</a></div><div class="col-xs-4 col-sm-3 col-md-4  "><span class="pipeline ">'+val.planned_at+'</span></div></div>')
+           
+             })
+             
+          var record_holder_propsals_length =    $('.record-holder-propsals .record-holder').length;
+record_holder_propsals_length = record_holder_propsals_length ? record_holder_propsals_length :'0';
+$('.eventcountproposal').text(record_holder_propsals_length);
+            
+        }
+
+    });
+        
         $.ajax({
         type: "GET",
         dataType: "json",

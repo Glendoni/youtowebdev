@@ -2312,6 +2312,7 @@ body {
     width: 17px;
     text-align: center;
     color: #2B4461;
+        box-shadow: 2px 2px 2px #aeaeae;
 }
 .actionNav .nav>li>a:hover, .nav>li>a:focus {
     text-decoration: none;
@@ -2384,6 +2385,7 @@ border-radius: 10%;
 a.btn.btn-default.btn-circle.hint--top-right {
 	    padding: 7px 9px;
     font-size: 10px;
+        box-shadow: 2px 2px 2px #aeaeae;
 }
 #stickMenu .hint--top-left:before, .hint--top-right:before, .hint--top:before {
     border-top-color: #2B4461;
@@ -2881,6 +2883,29 @@ box-shadow:none;
 .pad-bottom{
     
     margin-bottom:25px;
+}
+
+.pillerTitle, .actionPillHeaderTitle {
+    color: #333333;
+}
+
+.row  .details{
+margin-bottom:10px;
+}
+
+.timeline-label a.text-danger:hover, .timeline-label a.text-danger:focus {
+    color: #000;
+ 
+}
+.record-holder-propsals .record-holder:hover {
+    background-color: #f6f6f6;
+}
+
+
+.panel .timeline-label {
+  
+    box-shadow: 2px 2px 2px #aeaeae; 
+
 }
 /*! Hint.css - v2.2.1 - 2016-03-26 //#2b4461
 * http://kushagragour.in/lab/hint/

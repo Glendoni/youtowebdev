@@ -59,7 +59,10 @@ class MY_Controller extends CI_Controller {
 		{
 			//user not in session and segment 1 exist then redirect to login
 			if($this->uri->segment(1)){
-				$this->session->set_userdata('last_page', current_full_url());
+				//$this->session->set_userdata('last_page', current_full_url());
+ $gotUrlAfterLogin   =$this->input->cookie('lastpagevisited', TRUE) ?  $this->input->cookie('lastpagevisited', TRUE) : current_full_url();
+
+                $this->session->set_userdata('last_page', $gotUrlAfterLogin);
 				redirect('/','location');
 			}
 		}

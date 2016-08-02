@@ -4,6 +4,7 @@ class Login extends MY_Controller {
 	
 	function __construct() {
 		parent::__construct();
+         $this->load->helper('cookie');
 	}
 	
 	public function index() 
@@ -13,6 +14,7 @@ class Login extends MY_Controller {
 			$this->form_validation->set_rules('email', 'Email', 'valid_email|required|xss_clean');
 			$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|callback_check_database');
 			$this->form_validation->run();
+         
 		}
         
         
@@ -20,8 +22,20 @@ class Login extends MY_Controller {
  
 		if($this->session->userdata('logged_in')){
 			$not_redirectable = array("http://staging-baselist.herokuapp.com/", "http://baselist.herokuapp.com/", "http://baselist/","http://staging-baselist.herokuapp.com/Marketing/loaddata","https://staging-baselist.herokuapp.com/Marketing/loaddata","https://staging-baselist.herokuapp.com/Marketing/autopilotActions/undefined","https://baselist.herokuapp.com/Marketing/autopilotActions/undefined","http://baselist.herokuapp.com/Marketing/loaddata","http://localhost:8888/baselist/Marketing/loaddata","https://baselist.herokuapp.com/companies/autocomplete/","https://staging-baselist.herokuapp.com/companies/autocomplete/","https://staging-baselist.herokuapp.com/Actions/operations_read/","https://baselist.herokuapp.com/Actions/operations_read/", $baseUrl.'Actions/operations_read',$baseUrl.'Companies/campaign_page_getter',$baseUrl.'Companies/autocomplete');
-			if($this->session->userdata('last_page') and (!in_array($this->session->userdata('last_page'),$not_redirectable)) and !$this->is_ajax_request()){
-				redirect($this->session->userdata('last_page'));
+			
+            //echo $this->session->userdata('last_page');
+            
+            //exit();
+            
+            if($this->session->userdata('last_page')){
+				//redirect($this->session->userdata('last_page'));
+                //echo $this->input->cookie('lastpagevisited', TRUE);
+                //exit();
+                
+                    // redirect($this->session->userdata('last_page'));
+                redirect($this->input->cookie('lastpagevisited', TRUE));
+                
+                
 			}else{
 				redirect('/dashboard');	
 			}
