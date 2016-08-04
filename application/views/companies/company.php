@@ -275,7 +275,7 @@ if ($your_date < $now){;
 		</a>
 		<?php else: ?>
 
-    <a class="btn  btn-default btn-sm btn-block " href="https://www.google.co.uk/search?q=<?php echo $company['name'];  ?>>"  target="_blank">Search For Website</a>
+    <a class="btn  btn-default btn-sm btn-block " href="https://www.google.co.uk/search?q=<?php echo $company['name'];  ?>"  target="_blank">Search For Website</a>
             <?php endif; ?>
 			
 			<?php if (isset($company['registration'])): ?>

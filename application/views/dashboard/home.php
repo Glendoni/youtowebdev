@@ -6,11 +6,13 @@
                 <li role="presentation" class="active"><button href="#team_stats" aria-controls="team_stats" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Stats','<?php echo $current_user['id'];?>')">Stats</button></li>
                 <li role="presentation"><button href="#calls" aria-controls="calls" role="tab" data-toggle="tab" class="btn btn-primary btn-sm c-a-m" style="margin-right:10px;" >Schedule</button></li>
                 <li role="presentation"><button href="#pipeline" aria-controls="pipeline" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Pipeline','<?php echo $current_user['id'];?>')">Pipeline</button></li>
+                  
+                    <li role="presentation"><button href="#proposals" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Proposals','<?php echo $current_user['id'];?>')">Proposals</button></li> 
                    <li role="presentation"><button href="#assigned" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Favourites','<?php echo $current_user['id'];?>')">Favourites</button></li>
                <!-- <li><button href="companies/pipeline"role="tab" class="button btn btn-primary btn-sm deals_pipeline" style="margin-right:10px;" onclick="window.location ='companies/pipeline'">Deals Forecast</button></li> -->
                   
                   
-      <li role="presentation"><button href="#proposals" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Proposals','<?php echo $current_user['id'];?>')">Proposals</button></li>              
+                 
                   
                   
                 <li role="presentation"><button href="#emailegagement" aria-controls="emailegagement" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Email Engagement','<?php echo $current_user['id'];?>')">Email Engagement</button></li>    
@@ -1923,10 +1925,11 @@
     <div class="panel-body" style="font-size:12px;">
         
                  <div class="row record-holder-header mobile-hide">
-            <div class="col-xs-8 col-sm-3 col-md-3"><strong>Created</strong></div>
-            <div class="col-xs-5 col-sm-5 col-md-5"><strong>Company / Baselist URL</strong></div>
-            <div class="col-xs-4 col-sm-4 col-md-4"><strong>Planned at</strong></div>
-           
+            <div class="col-xs-8 col-sm-2 col-md-2"><strong>Created</strong></div>
+            <div class="col-xs-5 col-sm-4 col-md-4"><strong>Company</strong></div>
+            <div class="col-xs-4 col-sm-2 col-md-2"><strong>Planned</strong></div>
+           <div class="col-xs-4 col-sm-2 col-md-2"><strong>Action</strong></div>
+                     <div class="col-xs-4 col-sm-2 col-md-2"><strong>By</strong></div>
             
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">

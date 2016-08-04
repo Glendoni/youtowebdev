@@ -2805,7 +2805,8 @@ text-align:left;
     
 }
 .piplineUdate .company-header{
-    font-size: 44px;
+font-size: 44px;
+    font-size: 3.4vw;
     font-weight: 500;
 }
 

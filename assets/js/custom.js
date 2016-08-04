@@ -411,12 +411,12 @@ $( document ).ready(function() {
             dataType: "json",
         url: "dashboard/getActionsProposals",
         success: function(data) {
-            
+            var planned_at;
              $.each( data, function( key, val ) {
           
            
            
-    $('.record-holder-propsals').append('<div class="row record-holder"><div class="col-xs-8 col-sm-3 col-md-3">'+val.created+'</div><div class="col-xs-4 col-sm-5 col-md-5"><a href="companies/company?id='+val.id+'">'+val.comp_name+'</a></div><div class="col-xs-4 col-sm-3 col-md-4  "><span class="pipeline ">'+val.planned_at+'</span></div></div>')
+    $('.record-holder-propsals').append('<div class="row record-holder"><div class="col-xs-2 col-sm-2 col-md-2">'+val.proposal+'</div><div class="col-xs-4 col-sm-4 col-md-4"><a href="companies/company?id='+val.id+'">'+val.name+'</a></div><div class="col-xs-2 col-sm-2 col-md-2  "><span class="pipeline ">'+(val.planned ? val.planned : '-') +'</span></div><div class="col-xs-2 col-sm-2 col-md-2  "><span class="pipeline ">'+ (val.action ? val.action : '-')  +'</span></div><div class="col-xs-2 col-sm-2 col-md-2  "><span class="pipeline ">'+(val.by ? val.by : '-')   +'</span></div></div>')
            
              })
              

@@ -132,7 +132,7 @@ echo $this->userPermission;
 
 }
   public function getActionsProposals(){
-      $output  =  $this->Actions_model->getActionsProposals();
+      $output  =  $this->Actions_model->getActionsProposals($this->data['current_user']['id']);
       
       
      echo json_encode($output);
