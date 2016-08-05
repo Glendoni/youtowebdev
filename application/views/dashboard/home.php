@@ -7,7 +7,16 @@
                 <li role="presentation"><button href="#calls" aria-controls="calls" role="tab" data-toggle="tab" class="btn btn-primary btn-sm c-a-m" style="margin-right:10px;" >Schedule</button></li>
                 <li role="presentation"><button href="#pipeline" aria-controls="pipeline" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Pipeline','<?php echo $current_user['id'];?>')">Pipeline</button></li>
                   
-                    <li role="presentation"><button href="#proposals" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Proposals','<?php echo $current_user['id'];?>')">Proposals</button></li> 
+                  
+                  
+                  
+                  
+                  <li role="presentation"><button href="#proposals" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Proposals','<?php echo $current_user['id'];?>')">Proposals</button></li> 
+                  
+                  
+                     <li role="presentation"><button href="#intents" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Intents','<?php echo $current_user['id'];?>')">Intent</button></li> 
+                  
+                  
                    <li role="presentation"><button href="#assigned" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Favourites','<?php echo $current_user['id'];?>')">Favourites</button></li>
                <!-- <li><button href="companies/pipeline"role="tab" class="button btn btn-primary btn-sm deals_pipeline" style="margin-right:10px;" onclick="window.location ='companies/pipeline'">Deals Forecast</button></li> -->
                   
@@ -1419,8 +1428,6 @@
 
 <?php }?>
 </div><!--END TAB-->
-
-
     <div role="tabpanel" class="tab-pane fade" id="calls"><div class="panel panel-default">
               <div class="panel-heading">
               <h3 class="panel-title">Actions<span class="badge pull-right"><?php echo count($pending_actions); ?></span></h3>
@@ -1845,7 +1852,6 @@
               </div>
           </div><!--END OF PANEL-->
           <!--END ASSIGNED-->
-
           <!--ASSIGNED-->
     <div role="tabpanel" class="tab-pane fade" id="emailstats">
     <!--START MARKETING STATS-->
@@ -1910,15 +1916,18 @@
     </div>
           </div><!--END OF PANEL-->
           <!--END ASSIGNED-->
-
           <!--PROPOSALS-->
     <div role="tabpanel" class="tab-pane fade" id="proposals">
     <!--START MARKETING STATS-->
     
             <div class="panel panel-default">
+    
     <div class="panel-heading" id="proposals">
-    <h3 class="panel-title">Outstanding Proposals<span class="badge pull-right eventcountproposal"></span></h3>
+        <h3 class="panel-title">Outstanding Proposals<span class="badge pull-right eventcountproposals"></span></h3>
     </div>
+                
+                
+             
                 
            
     <!-- /.panel-heading -->
@@ -1933,7 +1942,7 @@
             
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-      <div class="row record-holder-propsals"></div>
+      <div class="row record-holder-proposals"></div>
 </div>
 
 
@@ -1956,11 +1965,36 @@
 <!-- /.panel-body -->
 </div>
 </div><!--END OF PROPOSALPANEL-->
-
-
-
-
           <!--ASSIGNED-->
+
+ <div role="tabpanel" class="tab-pane fade" id="intents">
+    <!--START MARKETING STATS-->
+            <div class="panel panel-default">
+    <div class="panel-heading" id="contacts">
+    <h3 class="panel-title">Intents<span class="badge pull-right eventcountintents"></span></h3>
+    </div>
+    <!-- /.panel-heading -->
+    <div class="panel-body" style="font-size:12px;">
+        <!--AUTO PILOT  -->
+          <div class="row record-holder-header mobile-hide">
+            <div class="col-xs-8 col-sm-2 col-md-2"><strong>Created</strong></div>
+            <div class="col-xs-5 col-sm-4 col-md-4"><strong>Company</strong></div>
+            <div class="col-xs-4 col-sm-2 col-md-2"><strong>Planned</strong></div>
+           <div class="col-xs-4 col-sm-2 col-md-2"><strong>Action</strong></div>
+                     <div class="col-xs-4 col-sm-2 col-md-2"><strong>By</strong></div>
+            
+        </div>
+        <div cl
+        
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div class="row record-holder-intents"></div>
+</div> 
+        <!--AUTO PILOT END  -->
+</div>
+<!-- /.panel-body -->
+</div>
+</div><!--END OF PANEL-->
+
     <div role="tabpanel" class="tab-pane fade" id="emailegagement">
     <!--START MARKETING STATS-->
             <div class="panel panel-default">

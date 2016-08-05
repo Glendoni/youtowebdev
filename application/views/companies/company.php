@@ -275,7 +275,7 @@ if ($your_date < $now){;
 		</a>
 		<?php else: ?>
 
-    <a class="btn  btn-default btn-sm btn-block " href="https://www.google.co.uk/search?q=<?php echo $company['name'];  ?>"  target="_blank">Search For Website</a>
+    <a class="btn  btn-default btn-sm btn-block " href="https://www.google.co.uk/search?q=<?php echo $company['name'];  ?>"  target="_blank">Google <i class="fa fa-search" aria-hidden="true"></i></a>
             <?php endif; ?>
 			
 			<?php if (isset($company['registration'])): ?>
@@ -332,15 +332,8 @@ if ($your_date < $now){;
 			</div>
     
     
-    	<!-- CONTACTS -->
-		<div class="col-xs-2 col-sm-1" style="margin-top:10px;">
-				<label>Contacts</label><br>			
-			<?php if (isset($company['contacts_count'])): ?>
-			<p class=""><?php echo $company['contacts_count'];?> </p>
-			<?php else: ?>
-			<p class="">-</p>
-			<?php endif; ?>
-		</div>
+    
+	 
             
     
 		</div>
@@ -350,22 +343,21 @@ if ($your_date < $now){;
 		<div class="col-xs-12 details" >
 		<!-- TURNOVER -->
 		<div class="col-xs-4 col-sm-3">
-			<strong><span style="text-transform: capitalize"><?php echo isset($company['turnover_method'])?$company['turnover_method']:'';?></span> Turnover</strong><br>
-			<p class="details" style="margin-bottom:5px;">
-				<?php echo isset($company['turnover'])? '£'.number_format (round($company['turnover'],-3)):'-';?>
-			</p>
+			<label><span style="text-transform: capitalize"><?php echo isset($company['turnover_method'])?$company['turnover_method']:'';?></span> Turnover</label><br>
+			<p class="details" style="margin-bottom:5px;"><?php echo isset($company['turnover'])? '£'.number_format (round($company['turnover'],-3)):'-';?></p>
+            
+            	<!-- CONTACTS -->
+            	<label>Contacts</label> 		
+			<?php if (isset($company['contacts_count'])): ?>
+			<p class="details"><?php echo $company['contacts_count'] ?  $company['contacts_count'] : '-';?></p>
+			<?php endif; ?>
         </div>
             
               <div class="col-md-3">
 				<label>Lead Source</label>
-				<p>	
-           
-
-                <?php echo $company['source_explanation'] ? $company['source_explanation'] : '-'; ?>  
-		
-          
- 
-            		</p>
+				<p>	<?php echo $company_sources[$company['source']]  ? $company_sources[$company['source']] : '-';?> </p>
+				<label>Explanation</label>
+				<p>	<?php echo $company['source_explanation'] ? $company['source_explanation'] : '-'; ?></p>
 		</div>
 
 	
@@ -444,7 +436,7 @@ if ($your_date < $now){;
 			<thead>
 				<tr>
 					<th class="col-md-4">Mortgage Provider</th>
-					<td class="col-md-3">Started</th>
+					<th class="col-md-3">Started</th>
 					<th class="col-md-3">Status</th>
                 <th class="col-md-2">Finished</th>
 				</tr>
@@ -471,7 +463,7 @@ if ($your_date < $now){;
 
 
 	<td class="col-md-2">
-				<?php  echo ''.$mortgage['eff_to'] ? $mortgage['eff_to'] : '<span style="text-align:center;">-</span>'; ?>
+				<?php  echo $mortgage['eff_to']; ?>
 				</td>
 		 
 				</tr>
@@ -626,7 +618,7 @@ endif;
 		<div class="panel-body">
 		<?php if(isset($contacts) and !empty($contacts)) : ?>
 
-			<table class="table table-hover">
+			<table class="table">
 	      <thead>
 	        <tr>
 	          	<th class="col-md-2">Name</th>

@@ -11,7 +11,7 @@ function dateRequired()     {
 
 //console.warn(regArray.join());
 
-
+$( document ).ready(function() {
 
 function gettagscampList(param){
     
@@ -310,7 +310,7 @@ $(".pipeline-validation-check").change(function() {
          }) 
     }
 
-$( document ).ready(function() {
+
     
     
     
@@ -412,18 +412,21 @@ $( document ).ready(function() {
         url: "dashboard/getActionsProposals",
         success: function(data) {
             var planned_at;
-             $.each( data, function( key, val ) {
-          
-           
-           
-    $('.record-holder-propsals').append('<div class="row record-holder"><div class="col-xs-2 col-sm-2 col-md-2">'+val.proposal+'</div><div class="col-xs-4 col-sm-4 col-md-4"><a href="companies/company?id='+val.id+'">'+val.name+'</a></div><div class="col-xs-2 col-sm-2 col-md-2  "><span class="pipeline ">'+(val.planned ? val.planned : '-') +'</span></div><div class="col-xs-2 col-sm-2 col-md-2  "><span class="pipeline ">'+ (val.action ? val.action : '-')  +'</span></div><div class="col-xs-2 col-sm-2 col-md-2  "><span class="pipeline ">'+(val.by ? val.by : '-')   +'</span></div></div>')
+            var  createdAt; 
+            var pipleine =  ['intents', 'proposals'];
+ $.each( pipleine, function(  index, keyval ) {
+            
+             $.each( data[keyval], function( key, val ) {
+                 
+               createdAt = val.intent ? val.intent : val.proposal;
+                 
+    $('.record-holder-'+keyval).append('<div class="row record-holder"><div class="col-xs-2 col-sm-2 col-md-2">'+createdAt+'</div><div class="col-xs-4 col-sm-4 col-md-4"><a href="companies/company?id='+val.id+'">'+val.name+'</a></div><div class="col-xs-2 col-sm-2 col-md-2  "><span class="pipeline ">'+(val.planned ? val.planned : '-') +'</span></div><div class="col-xs-2 col-sm-2 col-md-2  "><span class="pipeline ">'+ (val.action ? val.action : '-')  +'</span></div><div class="col-xs-2 col-sm-2 col-md-2  "><span class="pipeline ">'+(val.by ? val.by : '-')   +'</span></div></div>')
            
              })
-             
-          var record_holder_propsals_length =    $('.record-holder-propsals .record-holder').length;
-record_holder_propsals_length = record_holder_propsals_length ? record_holder_propsals_length :'0';
-$('.eventcountproposal').text(record_holder_propsals_length);
-            
+                    var record_holder_propsals_length =    $('.record-holder-'+keyval+' .record-holder').length;
+                    record_holder_propsals_length = record_holder_propsals_length ? record_holder_propsals_length :'0';
+                    $('.eventcount'+keyval).text(record_holder_propsals_length);
+             })
         }
 
     });
@@ -554,7 +557,7 @@ $('.eventcountproposal').text(record_holder_propsals_length);
 
     })
 
- 
+ //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
 });
 
@@ -563,7 +566,7 @@ $('.eventcountproposal').text(record_holder_propsals_length);
     
     
       function addActionChange(){
-        console.log('france')
+        //console.log('france')
                $('.actionrequired').click(function(){
 
 
@@ -634,6 +637,24 @@ function getUserFavourites(){ // Dashbord favorites
 
 
     }
+
+function timerounder(incomingtime){
+  var s = [];
+ incomingtime =   incomingtime.split(':')
+   var minutes = incomingtime[1];
+var hours = incomingtime[0];
+var m = (parseInt((minutes + 7.5)/15) * 15) % 60;
+var h = minutes > 52 ? (hours === 23 ? 0 : ++hours) : hours; 
+    if(m ===0) s=0;
+    return h+':'+m+s;
+    
+}
+
+
+
+
+
+
 
 
 //////////////Controls pipline pick date

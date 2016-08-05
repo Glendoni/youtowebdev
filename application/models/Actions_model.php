@@ -1003,192 +1003,144 @@ function delete_campaign($id,$user_id)
     }
     
 public function getActionsProposals($userID = 0){
-    
-    $sql = ('select T1.created_at::date "created",
-     C.id,C.name as comp_name,
-       -- T1."comments",
-	   TT2.planned_at::date,
-	   AT.name
+        
+    $sql = (' select T1.created_at::date "proposal",C.name,C.id,
+    -- T1."comments",
+           TT2.planned_at::date "planned",
+           AT.name "action",
+           TT2."by"
 
-from COMPANIES C
+    from COMPANIES C
 
-JOIN
-(-- T1
-select A.company_id,
-       A.created_at,
-       A.comments,
-       U.eff_from,
-       U.name,
-       U.id
-  
-from ACTIONS A
-JOIN USERS U
-ON A.user_id = U.id
+    JOIN
+    (-- T1
+    select A.company_id,
+           A.created_at,
+           A.comments,
+           U.eff_from,
+           U.name,
+           U.id
 
-where A.action_type_id = 8
-and user_id = 21
-)   T1
-ON C.id = T1.company_id
+    from ACTIONS A
+    JOIN USERS U
+    ON A.user_id = U.id
 
-LEFT JOIN
-(-- TT2
-select company_id,
-       planned_at,
-       comments,
-       action_type_id
-from 
-(-- T2
-select company_id,
-       planned_at,
-       comments,
-       action_type_id,
-       row_number() OVER (PARTITION BY company_id order by created_at desc) "rownum"
-from ACTIONS
-where actioned_at is null
-)   T2
-where "rownum" = 1
-)   TT2
-ON C.id = TT2.company_id
+    where A.action_type_id = 8
+    and user_id = '.$userID.'
+    )   T1
+    ON C.id = T1.company_id
 
-LEFT JOIN ACTION_TYPES AT
-ON TT2.action_type_id = AT.id
+    LEFT JOIN
+    (-- TT2
+    select company_id,
+           planned_at,
+           comments,
+           action_type_id,
+           "by"
+    from 
+    (-- T2
+    select A.company_id,
+           A.planned_at,
+           A.comments,
+           A.action_type_id,
+           U.name "by",
+           row_number() OVER (PARTITION BY company_id order by A.created_at desc) "rownum"
 
-where T1."name" ilike \'%katie%\'
-and customer_from is null
-and (C.eff_to is null and active = \'t\')
+    from ACTIONS A
+    JOIN USERS U
+    ON A.created_by = U.id  
 
-order by 1 desc');
+    where A.actioned_at is null
+    )   T2
+    where "rownum" = 1
+    )   TT2
+    ON C.id = TT2.company_id
 
+    LEFT JOIN ACTION_TYPES AT
+    ON TT2.action_type_id = AT.id
 
+    where customer_from is null
+    and (C.eff_to is null and active = \'t\')
 
-
-$sql = ('select T1.created_at::date "intent",C.name,C.id,
- -- T1."comments",
-	   TT2.planned_at::date "planned",
-	   AT.name "action",
-	   TT2."by"
-
-from COMPANIES C
-
-JOIN
-(-- T1
-select A.company_id,
-       A.created_at,
-       A.comments,
-       U.eff_from,
-       U.name,
-       U.id
-  
-from ACTIONS A
-JOIN USERS U
-ON A.user_id = U.id
-
-where A.action_type_id = 19
-and comments = \'Pipeline changed to Intent\' 
-and user_id = '.$userID.'
-)   T1
-ON C.id = T1.company_id
-
-LEFT JOIN
-(-- TT2
-select company_id,
-       planned_at,
-       comments,
-       action_type_id,
-       "by"
-from 
-(-- T2
-select A.company_id,
-       A.planned_at,
-       A.comments,
-       A.action_type_id,
-       U.name "by",
-       row_number() OVER (PARTITION BY company_id order by A.created_at desc) "rownum"
-  
-from ACTIONS A
-JOIN USERS U
-ON A.created_by = U.id  
-
-where A.actioned_at is null
-)   T2
-where "rownum" = 1
-)   TT2
-ON C.id = TT2.company_id
-
-LEFT JOIN ACTION_TYPES AT
-ON TT2.action_type_id = AT.id
-
-where customer_from is null
-and (C.eff_to is null and active = \'t\')
-
-order by 1 desc
-');
+    order by 1 desc') ;  
     
     
-$sql = (' select T1.created_at::date "proposal",C.name,C.id,
--- T1."comments",
-	   TT2.planned_at::date "planned",
-	   AT.name "action",
-	   TT2."by"
-
-from COMPANIES C
-
-JOIN
-(-- T1
-select A.company_id,
-       A.created_at,
-       A.comments,
-       U.eff_from,
-       U.name,
-       U.id
-  
-from ACTIONS A
-JOIN USERS U
-ON A.user_id = U.id
-
-where A.action_type_id = 8
-and user_id = '.$userID.'
-)   T1
-ON C.id = T1.company_id
-
-LEFT JOIN
-(-- TT2
-select company_id,
-       planned_at,
-       comments,
-       action_type_id,
-       "by"
-from 
-(-- T2
-select A.company_id,
-       A.planned_at,
-       A.comments,
-       A.action_type_id,
-       U.name "by",
-       row_number() OVER (PARTITION BY company_id order by A.created_at desc) "rownum"
-  
-from ACTIONS A
-JOIN USERS U
-ON A.created_by = U.id  
-
-where A.actioned_at is null
-)   T2
-where "rownum" = 1
-)   TT2
-ON C.id = TT2.company_id
-
-LEFT JOIN ACTION_TYPES AT
-ON TT2.action_type_id = AT.id
-
-where customer_from is null
-and (C.eff_to is null and active = \'t\')
-
-order by 1 desc')  ;  
-    
-    
-           $query = $this->db->query($sql);
+    $query = $this->db->query($sql);
        
-             return   $query->result_array();    
+    return   $query->result_array();    
+    
+    
+    
+}
+    public function getActionsIntents($userID = 0){
+    
+ 
+        $sql = ('select T1.created_at::date "intent",C.name,C.id,
+         -- T1."comments",
+               TT2.planned_at::date "planned",
+               AT.name "action",
+               TT2."by"
+
+        from COMPANIES C
+
+        JOIN
+        (-- T1
+        select A.company_id,
+               A.created_at,
+               A.comments,
+               U.eff_from,
+               U.name,
+               U.id
+
+        from ACTIONS A
+        JOIN USERS U
+        ON A.user_id = U.id
+
+        where A.action_type_id = 19
+        and comments = \'Pipeline changed to Intent\' 
+        and user_id = '.$userID.'
+        )   T1
+        ON C.id = T1.company_id
+
+        LEFT JOIN
+        (-- TT2
+        select company_id,
+               planned_at,
+               comments,
+               action_type_id,
+               "by"
+        from 
+        (-- T2
+        select A.company_id,
+               A.planned_at,
+               A.comments,
+               A.action_type_id,
+               U.name "by",
+               row_number() OVER (PARTITION BY company_id order by A.created_at desc) "rownum"
+
+        from ACTIONS A
+        JOIN USERS U
+        ON A.created_by = U.id  
+
+        where A.actioned_at is null
+        )   T2
+        where "rownum" = 1
+        )   TT2
+        ON C.id = TT2.company_id
+
+        LEFT JOIN ACTION_TYPES AT
+        ON TT2.action_type_id = AT.id
+
+        where customer_from is null
+        and (C.eff_to is null and active = \'t\')
+
+        order by 1 desc
+        ');
+    
+
+    $query = $this->db->query($sql);
+
+    return   $query->result_array();    
     
     
     
