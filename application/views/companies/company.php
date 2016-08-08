@@ -355,9 +355,8 @@ if ($your_date < $now){;
             
               <div class="col-md-3">
 				<label>Lead Source</label>
-				<p>	<?php echo $company_sources[$company['source']]  ? $company_sources[$company['source']] : '-';?> </p>
-				 
-				<p>	<?php echo $company['source_explanation'] ? $company['source_explanation'] : ''; ?></p>
+				<p>	<?php echo $company_sources[$company['source']]  ? $company_sources[$company['source']] : '-';?> <br/><?php echo $company['source_explanation'] ? $company['source_explanation'] : ''; ?></p>
+			 
 		</div>
 
 	
