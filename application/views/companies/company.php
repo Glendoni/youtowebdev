@@ -432,7 +432,7 @@ if ($your_date < $now){;
 		<div class="panel-body">
             
 		<?php if(!empty($company['mortgages'])): ?>
-			<table class="table table-hover">
+			<table class="table">
 			<thead>
 				<tr>
 					<th class="col-md-4">Mortgage Provider</th>
@@ -501,7 +501,7 @@ if ($your_date < $now){;
 		<?php if(isset($addresses) and !empty($addresses)) : ?>
 
 
-		<table class="table table-hover">
+		<table class="table">
 	      <thead>
 	        <tr>
 	          <th class="col-md-7">Address</th>
@@ -572,7 +572,7 @@ endif;
 		</div>
 		<!-- /.panel-heading -->
 		<div class="panel-body">
-		<table class="table table-hover">
+		<table class="table">
 	      <thead>
 	        <tr>
 	          <th class="col-md-6">Name</th>
