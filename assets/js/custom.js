@@ -198,7 +198,7 @@ $(".no-source-pipeline").slideUp(600);
 $(".pipeline-validation-check").change(function() {
         var company_source = $("select[name=company_source]").val();
 
-            var companysourceArr = ['2','3','4','5','6','7','8','9','14','15']; //Source id to force user to enter special insight 
+            var companysourceArr = ['7','8','10','11']; //Source id to force user to enter special insight 
 
 
         if (companysourceArr.indexOf(company_source) >=0) 
@@ -247,7 +247,7 @@ $(".pipeline-validation-check").change(function() {
             //    /^[a-z0-9]+$/i
             
             
-              var companysourceArr = ['2','3','4','5','6','7','8','9','14','15'];
+              var companysourceArr =  ['2','3','4','5','6','7','8','9','14','15'];
             
      var str = si_check;
     var patt1 = /[^a-z\d]/i;
