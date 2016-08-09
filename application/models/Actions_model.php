@@ -782,6 +782,18 @@ function set_action_state($action_id,$user_id,$state,$outcome,$post)
 // INSERTS
 function create($post)
 {
+    
+    
+    
+    
+    $query = $this->db->query("SELECT * FROM actions WHERE company_id=".$post['company_id']." AND action_type_id=16  LIMIT 1");
+
+    if ($query->num_rows() > 0 &&  $post['action_type_completed'] ==16)
+        {
+         return false;
+
+        }else{
+    
     if ($post['action_type_completed']>0) {
 
     //TEST - COMPLETED ACTION ONLY
@@ -818,7 +830,10 @@ function create($post)
         $query = $this->db->insert('actions', $planneddata);
 
     }
-    return $this->db->insert_id();    
+    return $this->db->insert_id();  
+        
+        
+        }
 }
 
 function company_updated_to_customer($post){

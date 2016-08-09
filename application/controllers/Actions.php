@@ -21,7 +21,7 @@ class Actions extends MY_Controller {
 	}
 	public function create()
     {
-        
+         $post = $this->input->post();
         
         
 			if (!empty($post['campaign_id'])) {
@@ -73,6 +73,7 @@ class Actions extends MY_Controller {
                             else 
                             {
                         $result = $this->Actions_model->create($this->input->post());
+                                if(!$result)     redirect('companies/company?id='.$this->input->post('company_id').$campaign_redirect.'#actions','location');
                             }
                         if(empty($result))
                             {
