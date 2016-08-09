@@ -346,7 +346,7 @@ if ($your_date < $now){;
 			
 			<div class="col-md-12">
 			<?php if(!empty($company['mortgages'])): ?>
-			<table class="table table-hover" style="font-size:12px">
+			<table class="table" style="font-size:12px">
 			<thead>
 				<tr>
 					<th class="col-md-6">Mortgage Provider</th>
