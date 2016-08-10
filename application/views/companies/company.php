@@ -346,14 +346,10 @@ if ($your_date < $now){;
 			<label><span style="text-transform: capitalize"><?php echo isset($company['turnover_method'])?$company['turnover_method']:'';?></span> Turnover</label><br>
 			<p class="details" style="margin-bottom:5px;"><?php echo isset($company['turnover'])? '£'.number_format (round($company['turnover'],-3)):'-';?></p>
             
-            	<!-- CONTACTS -->
-            	<label>Contacts</label> 		
-			<?php if (isset($company['contacts_count'])): ?>
-			<p class="details"><?php echo $company['contacts_count'] ?  $company['contacts_count'] : '-';?></p>
-			<?php endif; ?>
+            
         </div>
             
-              <div class="col-md-3">
+              <div class="col-md-3" style="display:none;">
 				<label>Lead Source</label>
 				<p style="
     margin-top: -4px;
@@ -361,6 +357,20 @@ if ($your_date < $now){;
                   <p><span class="leadSourceSubText"><?php echo $company['source_explanation'] ? $company['source_explanation'] : ''; ?></span></p>
 			 
 		</div>
+            
+            
+            <div class="col-md-3">
+					<!-- CONTACTS -->
+            	<label>Contacts</label> 		
+			<?php if (isset($company['contacts_count'])): ?>
+			<p class="details"><?php echo $company['contacts_count'] ?  $company['contacts_count'] : '-';?></p>
+			<?php endif; ?>
+			 
+		</div>
+            
+            
+            
+            
 
 	
             
@@ -382,17 +392,17 @@ if ($your_date < $now){;
 		
 				foreach ($company['sectors'] as $key => $name)
 				{
-				echo '<p class="details detailsTagFormat" style="margin-bottom:5px; text-align:centre;">'.$name.'</p>';
+				echo '<p class="details detailsTagFormat" style="margin-bottom:5px; font-size:11px; text-align:centre;">'.$name.'</p>';
 				}
 			}
 			?>
 
 
 <?php if (isset($company['perm'])): ?>
-<p class="details detailsTagFormat" style="margin-bottom:0; text-align:centre;">Permanent</p>
+<p class="details detailsTagFormat" style="margin-bottom:0; text-align:centre; font-size:11px;">Permanent</p>
 <?php endif; ?>
 <?php if (isset($company['contract'])): ?>
-<p class="details detailsTagFormat" style="margin-bottom:0; text-align:centre;">Contract</p>
+<p class="details detailsTagFormat" style="margin-bottom:0; text-align:centre; font-size:11px;">Contract</p>
 <?php endif; ?>
 </div>
 		</div>

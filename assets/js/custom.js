@@ -358,7 +358,35 @@ $(".pipeline-validation-check").change(function() {
             $('.tsector').removeClass('tsector'); 
        
      }
+
+//Prevents form from subitting     
+    
+            $("form").submit(function () {
+            if ($(this).valid()) {
+            $(this).submit(function () {
+            return false;
+            });
+            return true;
+            }
+            else {
+            return false;
+            }
+            }); 
+
+    
+    
     $('#add_action_request').click(function(e){
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
 
         var check  = /^\d+\.\d{0,2}?/.test($('#amount').val());
         if(check === false){ 
