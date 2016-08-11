@@ -241,9 +241,21 @@ class Companies_model extends CI_Model {
 		}
 		
 		// exclude_contacted_in
-		if (isset($post['contacted']) && !empty($post['contacted']) && !empty($post['contacted_days'])){
+		if (isset($post['contacted']) && !empty($post['contacted'])){
 			
 			$int_val = intval($post['contacted_days']);  //extract as interger
+            
+            
+                        if(!$int_val){
+                $datetime1 = date_create('2013-09-21');
+                $datetime2 = date_create(date('Y-m-d'));
+                $interval = date_diff($datetime1, $datetime2);
+                $int_val =  intval($interval->format('%a'));
+            }
+
+            
+            
+            
 			// is valid int 
 			// select companies that have had an action in that period and the exclude them from the results
 			if($post['contacted'] == 'include'){
@@ -418,9 +430,8 @@ class Companies_model extends CI_Model {
                 C.customer_to --f47
 			   )) "JSON output" 
 			   
+from (select * from COMPANIES where active = \'TRUE\' ' ;
 
-
-		from (select * from COMPANIES where active = \'TRUE\' OR active = \'FALSE\' AND initial_rate IS NOT  null AND zendesk_id IS NOT NULL AND active IS false ';
 		if(isset($contacted_in)) $sql = $sql.' AND id in ('.$contacted_in.')';
 		$sql = $sql.') C ';
 
