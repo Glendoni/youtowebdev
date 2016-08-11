@@ -131,7 +131,15 @@ echo $this->userPermission;
 
 
 }
-    
+  public function getActionsProposals(){
+      $output['proposals']  =  $this->Actions_model->getActionsProposals($this->data['current_user']['id']);
+       $output['intents']  =  $this->Actions_model->getActionsIntents($this->data['current_user']['id']);
+      
+     echo json_encode($output);
+      
+      
+//echo '<pre>'; print_r($output); echo '</pre>';  
+  }  
     
 
 /*

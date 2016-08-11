@@ -604,7 +604,7 @@ h2.company-header {
 	font-size: 40px;
 }
 h2.company-header a {
- color: #148CD2;
+ color: #0971af;
    -webkit-transition-duration: 0.4s;
   -moz-transition-duration: 0.4s;
   -ms-transition-duration: 0.4s;
@@ -685,8 +685,8 @@ h2.company-header a:hover {
 }
 .customer-circle {
     background: transparent !important;
-    color: #148CD2 !important;
-    border-color: #148CD2 !important;
+    color: #0971af !important;
+    border-color: #0971af !important;
     border-width: 2px;
     
 }
@@ -758,7 +758,7 @@ h2.company-header a:hover {
     margin: auto;
 }
 .label-Customer {
-	background-color: #148CD2;
+	background-color: #0971af; /*Change to sonovate blue on the request of PB 80/80/16*/
 	color: #fff;
  	padding-left: 5px;
  	padding-right: 5px;
@@ -1091,7 +1091,7 @@ a li.autocomplete-item:hover {
 	border-bottom: 1px solid #ddd;
 }
 .load-saved-search:hover {
-	background-color: #DEFFE2;
+	/*background-color: #DEFFE2;*/
 }
 
 /*#campaignList a{ display:none;
@@ -1453,7 +1453,7 @@ h2.company-header{
 }
 .customer-circle-campaign {
     background: transparent !important;
-    color: #148CD2 !important;
+    color: #0971af !important;
     /* border-color: #148CD2 !important; */
     /* border-width: 2px; */
     /* border-style: solid; */
@@ -2312,6 +2312,7 @@ body {
     width: 17px;
     text-align: center;
     color: #2B4461;
+        box-shadow: 2px 2px 2px #aeaeae;
 }
 .actionNav .nav>li>a:hover, .nav>li>a:focus {
     text-decoration: none;
@@ -2384,6 +2385,7 @@ border-radius: 10%;
 a.btn.btn-default.btn-circle.hint--top-right {
 	    padding: 7px 9px;
     font-size: 10px;
+        box-shadow: 2px 2px 2px #aeaeae;
 }
 #stickMenu .hint--top-left:before, .hint--top-right:before, .hint--top:before {
     border-top-color: #2B4461;
@@ -2663,7 +2665,7 @@ margin-right:11px;
 }
 
 .tsDealTitle{
-color:#428bca;
+color:#0971af;
 }
 .tsPropTitle{
 color:#45AE7C;
@@ -2803,7 +2805,8 @@ text-align:left;
     
 }
 .piplineUdate .company-header{
-    font-size: 44px;
+font-size: 44px;
+    font-size: 3.4vw;
     font-weight: 500;
 }
 
@@ -2881,6 +2884,34 @@ box-shadow:none;
 .pad-bottom{
     
     margin-bottom:25px;
+}
+
+.pillerTitle, .actionPillHeaderTitle {
+    color: #333333;
+}
+
+.row  .details{
+margin-bottom:10px;
+}
+
+.timeline-label a.text-danger:hover, .timeline-label a.text-danger:focus {
+    color: #000;
+ 
+}
+.record-holder-propsals .record-holder:hover {
+    background-color: #f6f6f6;
+}
+
+
+.panel .timeline-label {
+  
+    box-shadow: 2px 2px 2px #aeaeae; 
+
+}
+
+a {
+    color: #0971af;
+    text-decoration: none;
 }
 /*! Hint.css - v2.2.1 - 2016-03-26 //#2b4461
 * http://kushagragour.in/lab/hint/

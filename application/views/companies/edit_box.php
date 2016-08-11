@@ -181,14 +181,15 @@
                                 <?php } ?>
                                 
                                 <?php */ ?>
-             <?php if (isset($company['emp_count']) == False ):?>
+             <?php /*
+        if (isset($company['emp_count']) && $company['emp_count'] = false ):?>
                         <div class="col-sm-6 col-md-4">
                             <div class=" form-group">
                                 <label for="emp_count" class="control-label">Employees</label>                            
                                 <input type="text" name="emp_count" value="" id="emp_count" maxlength="50" class="form-control">
                             </div>
                         </div>
-                        <?php endif; ?>
+                        <?php endif;  */?>
                
                     <div class="col-md-4">
                        

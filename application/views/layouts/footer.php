@@ -67,6 +67,32 @@
 
 <?PHP
 
+
+
+$owned_urls= array('fe_read_tag', 'fe_get_tag', 'getAction', 'operation_read', 'autopilotActions', 'getCompletedActions', 'campaign_page_getter', 'loaddata', 'getTeamStats', 'refactorFavorites','login');
+   $string = current_full_url();
+        for($iLpage=0; $iLpage < count($owned_urls); $iLpage++)
+        {
+            if(strpos($string,$owned_urls[$iLpage]) != false)
+                $redirect = true;
+        }
+                if($redirect){
+                    //echo 'Found yes';
+                }else{
+                    $cookie = array(
+                    'name'   => 'lastpagevisited',
+                    'value'  => $string,
+                    'expire' =>  86500,
+                    'secure' => false
+                    );
+
+                    
+                    if($string != base_url() && $string != base_url().'campaigns'){
+                    
+                    $this->input->set_cookie($cookie);
+                    //echo  $this->input->cookie('lastpagevisited', TRUE);  
+            }}
+
 /*
 
  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>

@@ -11,7 +11,7 @@ function dateRequired()     {
 
 //console.warn(regArray.join());
 
-
+$( document ).ready(function() {
 
 function gettagscampList(param){
     
@@ -198,7 +198,7 @@ $(".no-source-pipeline").slideUp(600);
 $(".pipeline-validation-check").change(function() {
         var company_source = $("select[name=company_source]").val();
 
-            var companysourceArr = ['2','3','4','5','6','7','8','9','14','15']; //Source id to force user to enter special insight 
+            var companysourceArr = ['7','8','10','11']; //Source id to force user to enter special insight 
 
 
         if (companysourceArr.indexOf(company_source) >=0) 
@@ -247,7 +247,7 @@ $(".pipeline-validation-check").change(function() {
             //    /^[a-z0-9]+$/i
             
             
-              var companysourceArr = ['2','3','4','5','6','7','8','9','14','15'];
+              var companysourceArr =  ['2','3','4','5','6','7','8','9','14','15'];
             
      var str = si_check;
     var patt1 = /[^a-z\d]/i;
@@ -310,7 +310,7 @@ $(".pipeline-validation-check").change(function() {
          }) 
     }
 
-$( document ).ready(function() {
+
     
     
     
@@ -358,7 +358,35 @@ $( document ).ready(function() {
             $('.tsector').removeClass('tsector'); 
        
      }
+
+//Prevents form from subitting     
+    
+            $("form").submit(function () {
+            if ($(this).valid()) {
+            $(this).submit(function () {
+            return false;
+            });
+            return true;
+            }
+            else {
+            return false;
+            }
+            }); 
+
+    
+    
     $('#add_action_request').click(function(e){
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
 
         var check  = /^\d+\.\d{0,2}?/.test($('#amount').val());
         if(check === false){ 
@@ -405,6 +433,32 @@ $( document ).ready(function() {
     var autopilotEmailCompany = window.location.href.split("id="); 
 
     if((/dashboard/.test(window.location.href))) {
+        
+             $.ajax({
+        type: "GET",
+            dataType: "json",
+        url: "dashboard/getActionsProposals",
+        success: function(data) {
+            var planned_at;
+            var  createdAt; 
+            var pipleine =  ['intents', 'proposals'];
+ $.each( pipleine, function(  index, keyval ) {
+            
+             $.each( data[keyval], function( key, val ) {
+                 
+               createdAt = val.intent ? val.intent : val.proposal;
+                 
+    $('.record-holder-'+keyval).append('<div class="row record-holder"><div class="col-xs-2 col-sm-2 col-md-2">'+createdAt+'</div><div class="col-xs-4 col-sm-4 col-md-4"><a href="companies/company?id='+val.id+'">'+val.name+'</a></div><div class="col-xs-2 col-sm-2 col-md-2  "><span class="pipeline ">'+(val.planned ? val.planned : '') +'</span></div><div class="col-xs-2 col-sm-2 col-md-2  "><span class="pipeline ">'+ (val.action ? val.action : '')  +'</span></div><div class="col-xs-2 col-sm-2 col-md-2  "><span class="pipeline ">'+(val.by ? val.by : '')   +'</span></div></div>')
+           
+             })
+                    var record_holder_propsals_length =    $('.record-holder-'+keyval+' .record-holder').length;
+                    record_holder_propsals_length = record_holder_propsals_length ? record_holder_propsals_length :'0';
+                    $('.eventcount'+keyval).text(record_holder_propsals_length);
+             })
+        }
+
+    });
+        
         $.ajax({
         type: "GET",
         dataType: "json",
@@ -531,7 +585,7 @@ $( document ).ready(function() {
 
     })
 
- 
+ //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
 });
 
@@ -540,7 +594,7 @@ $( document ).ready(function() {
     
     
       function addActionChange(){
-        console.log('france')
+        //console.log('france')
                $('.actionrequired').click(function(){
 
 
@@ -611,6 +665,24 @@ function getUserFavourites(){ // Dashbord favorites
 
 
     }
+
+function timerounder(incomingtime){
+  var s = [];
+ incomingtime =   incomingtime.split(':')
+   var minutes = incomingtime[1];
+var hours = incomingtime[0];
+var m = (parseInt((minutes + 7.5)/15) * 15) % 60;
+var h = minutes > 52 ? (hours === 23 ? 0 : ++hours) : hours; 
+    if(m ===0) s=0;
+    return h+':'+m+s;
+    
+}
+
+
+
+
+
+
 
 
 //////////////Controls pipline pick date

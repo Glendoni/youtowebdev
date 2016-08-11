@@ -85,7 +85,7 @@
         <!-- Navigation -->
 <!--<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">-->
  <?php  $stag_distinct = ''; if (ENVIRONMENT  =='staging' || ENVIRONMENT  =='development'){ $stag_distinct = 'background:#5cb85c;'; }?>
- <?php  if (ENVIRONMENT  =='development'){ $stag_distinct = 'background:#4d2332;'; }?>
+ <?php  if (ENVIRONMENT  =='development'){ $stag_distinct = 'background:#5153c5;'; }?>
         
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0; <?php echo $stag_distinct; ?>">
 <!-- Brand and toggle get grouped for better mobile display -->
@@ -99,7 +99,7 @@
 } ?>
       
  
-<div style="font-size: 10px;font-weight: 300;text-align: right;float: right;line-height: 40px;padding-left: 5px;">Version 3.12</div>
+<div style="font-size: 10px;font-weight: 300;text-align: right;float: right;line-height: 40px;padding-left: 5px;">Version 3.13</div>
 <?php endif; ?>
 </a>
 </div>
