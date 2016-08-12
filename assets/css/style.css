@@ -2412,7 +2412,7 @@ background-color:#2B4461;
     color: #fff;
 }
 
-.actionMenuQty.qtyactions_completed, .actionMenuQty.qtyactions_marketing {
+.actionMenuQty.qtyactions_completed, .actionMenuQty.qtyactions_marketing, .qtyComment {
 	background-color: rgba(92, 184, 92, 0.7);
     color: #fff;
 }
@@ -2912,6 +2912,10 @@ margin-bottom:10px;
 a {
     color: #0971af;
     text-decoration: none;
+}
+.showCommentAddForm{
+    padding-top:4px;
+    
 }
 /*! Hint.css - v2.2.1 - 2016-03-26 //#2b4461
 * http://kushagragour.in/lab/hint/

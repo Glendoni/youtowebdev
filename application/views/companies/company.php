@@ -941,6 +941,11 @@ endif;
                         " aria-hidden="true"></span></a><span class="actionMenuQty qtyactions_marketing" aria-hidden="true"></span></li>
                    
                     
+                    
+                    <li class="" ><a href="javascript:;" class="btn btn-default btn-circle hint--top-right" data-hint="Comments" data="Comment"><i class="fa fa-comments fa-lg"></i></a><span class="actionMenuQty qtyComment" aria-hidden="true"><span></li>
+
+                    
+                    
                     <li class=""><a href="javascript:;" class="btn btn-default btn-circle hint--top-right"  data-hint="Cancelled" data="actions_cancelled"><span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span></a><span class="actionMenuQty qtyactions_cancelled" aria-hidden="true"></span></li>
 
                   
@@ -968,6 +973,8 @@ endif;
     				<div class="timeline-header-title bg-dark actiontitle"  style="margin-top:10px;">History</div>
                         <div class="timeline-header-title bg-dark showCommentAddBtn hint--top-right"  data-hint="Add Comment" style="float:right; margin-left:11px; margin-top:10px;">  <span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span></div>
                         <div class="timeline-header-title bg-dark showText" style="float:right;  margin-top:10px;">Hide/Text</div>
+
+ <div class="timeline-header-title bg-dark showCommentsearch" style="float:right;  margin-top:10px;">  <form><input type="text" id="filtercomment" onkeyup=" return callfunction(); " /></form></div>
                          
     			</div>
                 
@@ -1043,6 +1050,52 @@ endif;
 
         
     }
+    
+    function callfunction() {
+        
+        var pillid;
+        var valcont 
+         var n
+          var str 
+        $(".comment").each(function() {
+            pillid= $(this).attr('data');
+            valcont = $("#filtercomment").val();
+            
+            
+    
+             str = $(this).text();
+             
+         
+            if (str.search(valcont) < 0) {
+            
+                $(this).closest('.pillid'+pillid).fadeOut(500);
+                
+                       if(valcont == '' &&  $(".actionIdComment").css('display') == 'block'){
+                
+                $('.actionIdComment').fadeIn(500);
+            }
+           
+                
+            }else{
+                   //console.log($(this).attr('data'))
+                $(this).closest('.actionIdComment .pillid'+pillid).fadeIn(500);
+                
+                       if(valcont == '' &&  $(".actionIdComment").css('display') == 'block'){
+                
+                $('.actionIdComment').fadeIn(500);
+            }
+            }
+
+
+        
+          
+
+            
+          
+        });
+              
+        
+    } 
     
 
 </script>

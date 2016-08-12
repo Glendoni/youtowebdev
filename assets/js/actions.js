@@ -2,6 +2,8 @@ var $;
 $(document).ready(function () {
  bindTextEditor()
   if ((/companies\/company/.test(window.location.href))) {
+      
+      
 
 //BEGIN BREAD SCROLL
     function initbreadscroll() {
@@ -117,10 +119,12 @@ if ( typeof define === 'function' && define.amd ) {
             if (status === 'block' || status === 'inline') { $('.actionMsg').hide();  $('.showText').text('Show/Comment');} else {
                 $('.actionMsg').show();
                 $('.showText').text('Hide/Comment');
+                 
             }
         });
         
             $('.showCommentAddBtn').hide();
+      $('.showCommentsearch').hide();
            // $('.showText').hide();
   
             $('.showCommentAddForm').hide();
@@ -129,8 +133,10 @@ if ( typeof define === 'function' && define.amd ) {
             var blockStatus  = $('.showCommentAddForm').css('display');
             if (blockStatus === "block"){
                 $('.showCommentAddForm').toggle(false);
+                
             } else {
                  $('.showCommentAddForm').toggle(true);
+                
             }
         });
         
@@ -309,6 +315,8 @@ function writeactions(data, scope = false){
                             if (typeof actionType !== 'undefined'){
 
                                 icon =  getIcon(actionType);
+
+
 
                                 actionresults  =    actionProcessor(actionType ,action,icon,initial_fee,pipeline,actions_outstanding,actions_cancelled,comments,kp);
 
@@ -889,8 +897,10 @@ $('#sidebar').hide();
                                 
                     if(action  == 'Comment'){  
                             $('.showCommentAddBtn').show();
+                         $('.showCommentsearch').show();
                         }else{
                             $('.showCommentAddBtn').hide();
+                             $('.showCommentsearch').hide();
                       }
 
                     if(action == 'actions_marketing'){
@@ -1054,7 +1064,9 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
      }
      
      function actionSummary(actionImg =0,icon=0,actionType=0,createdAt=0,initial_fee=0,pipeline =0, actions_outstanding=false, updated_at = 0, actions_cancelled=false, comments=0,action=0,kp){
-         // console.log(actions_outstanding)
+    // console.log(actionType);
+         
+     actionType =     actionType.replace('Comment - Old','Comment')
         boxActionTextBox();
          var header;
          var deal = [];
@@ -1104,7 +1116,7 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
          }
          
          if(action['comments']){
-             tagline = '<span class="actionMsg piller'+actionId+' actionMsg'+actionId+  ' comments'+actionType+'"><strong>Comment: </strong><span class="comment">'+action['comments']+'</span></span><hr>'+outcome;
+             tagline = '<span class="actionMsg piller'+actionId+' actionMsg'+actionId+  ' comments'+actionType+'"><strong>Comment: </strong><span class="comment" data="'+actionId+'">'+action['comments']+'</span></span><hr>'+outcome;
 
 //alert()
          }
@@ -1286,7 +1298,7 @@ if(tm > 1){ tm = tm + ' Days Overdue'; }else if(tm == 1){ tm  = tm + ' Day Overd
        
          
       if(actionTypeName != 'Pipeline Update')   
-            actions  = '<div class="timeline-entry actionId'+actionType+'  '+classCompleted+'"> <div class="timeline-stat"> '+icon+'</div><div class="timeline-label"> <div class="mar-no pad-btm"><h4 class="mar-no pad-btm">'+header+deal+'  <span class="label label-warning">'+planned_at+'</span>'+overdueStatus+'<span class="classActions" style="float:right; margin-top:0; margin-left:3px;">'+calenderbtn+outcomeRemove+ kpStr+'</span></h4></div><div class="actionMsgText" style="padding:0px 0px 0px 10px;">'+tagline+'</div>'+textbox+'<div class="mic-info"> '+status+': '+created_by+' - '+formattDate(createdAt, true)+followupAlert+' </div></div></div>';
+            actions  = '<div class="timeline-entry actionId'+actionType+'  '+classCompleted+' pillid'+actionId+'" pillid='+actionId+'> <div class="timeline-stat"> '+icon+'</div><div class="timeline-label"> <div class="mar-no pad-btm"><h4 class="mar-no pad-btm">'+header+deal+'  <span class="label label-warning">'+planned_at+'</span>'+overdueStatus+'<span class="classActions" style="float:right; margin-top:0; margin-left:3px;">'+calenderbtn+outcomeRemove+ kpStr+'</span></h4></div><div class="actionMsgText" style="padding:0px 0px 0px 10px;">'+tagline+'</div>'+textbox+'<div class="mic-info"> '+status+': '+created_by+' - '+formattDate(createdAt, true)+followupAlert+' </div></div></div>';
          
         if(actionTypeName == 'Pipeline Update' ){
               actions  = '<div class="timeline-entry actionId'+actionType+' '+classCompleted+'" > <div class="timeline-stat"> '+icon+'</div> <div class="timeline-label pipe"> <div class="mar-no pad-btm" ><h4 class="mar-no pad-btm">'+header+' <span class="classActions" style="margin-top:0; margin-left:3px; float:right;">'+calenderbtn+outcomeRemove+ kpStr+'</span></h4>'+overdueStatus+'</div><div class="actionMsgText">'+action['comments']+'</div></div></div>';
