@@ -1063,14 +1063,14 @@ endif;
             
             
     
-             str = $(this).text();
+             str = $(this).text().toLowerCase();
              
          
-            if (str.search(valcont) < 0) {
+            if (str.search(valcont.toLowerCase()) < 0) {
             
                 $(this).closest('.pillid'+pillid).fadeOut(500);
                 
-                       if(valcont == '' &&  $(".actionIdComment").css('display') == 'block'){
+                       if(valcont == ''){
                 
                 $('.actionIdComment').fadeIn(500);
             }
@@ -1080,7 +1080,7 @@ endif;
                    //console.log($(this).attr('data'))
                 $(this).closest('.actionIdComment .pillid'+pillid).fadeIn(500);
                 
-                       if(valcont == '' &&  $(".actionIdComment").css('display') == 'block'){
+                       if(valcont == '' ){
                 
                 $('.actionIdComment').fadeIn(500);
             }
@@ -1089,12 +1089,20 @@ endif;
 
         
           
-
+          
             
           
         });
               
-        
+         if(valcont == '' ){
+                
+                $('.actionIdComment').fadeIn(500);
+            }
+
+if($('.commentsComment').css('display') == 'none'){
+    
+   $('.commentsComment').css('display', 'block'); 
+}
     } 
     
 
