@@ -1052,58 +1052,65 @@ endif;
     }
     
     function callfunction() {
-        
+                    
+     
         var pillid;
         var valcont 
-         var n
-          var str 
+        var n
+        var str 
+          
+         //  valcont = $("#filtercomment").val();
+      // processHiglighter(valcont);
+        
+          //str = $(this).text().toLowerCase();
+
         $(".comment").each(function() {
             pillid= $(this).attr('data');
             valcont = $("#filtercomment").val();
-            
-            
-    
-             str = $(this).text().toLowerCase();
-             
-         
-            if (str.search(valcont.toLowerCase()) < 0) {
-            
-                $(this).closest('.pillid'+pillid).fadeOut(500);
-                
-                       if(valcont == ''){
-                
-                $('.actionIdComment').fadeIn(500);
-            }
-           
-                
-            }else{
-                   //console.log($(this).attr('data'))
-                $(this).closest('.actionIdComment .pillid'+pillid).fadeIn(500);
-                
-                       if(valcont == '' ){
-                
-                $('.actionIdComment').fadeIn(500);
-            }
-            }
-
-
+   
         
-          
-          
-            
-          
-        });
-              
-         if(valcont == '' ){
-                
-                $('.actionIdComment').fadeIn(500);
+             str = $(this).text().toLowerCase();
+             if (str.search(valcont.toLowerCase()) < 0) {
+                $(this).closest('.pillid'+pillid).fadeOut(500);
+                     if(valcont == ''){
+                    $('.actionIdComment').fadeIn(500);
+                }
+                }else{
+                       //console.log($(this).attr('data'))
+                    $(this).closest('.actionIdComment .pillid'+pillid).fadeIn(500);
+               
+                if(findWord(valcont.toLowerCase(), str.toLowerCase()) && valcont.length >1){
+
+                    $(".commentsComment *").highlight(valcont.toLowerCase(), "filterhighlight");
+                }
+
+                     if(valcont == '' ){
+                    $('.actionIdComment').fadeIn(500);
+                }
             }
 
-if($('.commentsComment').css('display') == 'none'){
-    
-   $('.commentsComment').css('display', 'block'); 
-}
+        });
+            
+        if($('.commentsComment').css('display') == 'none' || $('.commentsComment').css('display') == 'inline'){
+
+           $('.commentsComment').css('display', 'block'); 
+        }else{
+
+        }
+        
+      if(valcont == '' ){
+            $('.actionIdComment').fadeIn(500);
+            $('.commentsComment').css('display', 'none'); 
+            $('span').removeClass('filterhighlight');
+        }
+       // $(".commentsComment *").highlight(valcont, "filterhighlight");
     } 
+    
+  
+    function findWord(word, str) {
+  return RegExp('\\b'+ word +'\\b').test(str)
+}
+    
     
 
 </script>

@@ -2917,6 +2917,13 @@ a {
     padding-top:4px;
     
 }
+
+.comment .filterhighlight{
+    
+    color:#000;
+    background-color: yellow;
+    
+}
 /*! Hint.css - v2.2.1 - 2016-03-26 //#2b4461
 * http://kushagragour.in/lab/hint/
 * Copyright (c) 2016 Kushagra Gour; Licensed  */
