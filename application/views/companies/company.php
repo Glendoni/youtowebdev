@@ -1071,13 +1071,13 @@ endif;
         
              str = $(this).text().toLowerCase();
              if (str.search(valcont.toLowerCase()) < 0) {
-                $(this).closest('.pillid'+pillid).fadeOut(500);
+                $(this).closest('.pillid'+pillid).fadeOut(100);
                      if(valcont == ''){
-                    $('.actionIdComment').fadeIn(500);
+                    $('.actionIdComment').fadeIn(100);
                 }
                 }else{
                        //console.log($(this).attr('data'))
-                    $(this).closest('.actionIdComment .pillid'+pillid).fadeIn(500);
+                    $(this).closest('.actionIdComment .pillid'+pillid).fadeIn(100);
                
                 if(findWord(valcont.toLowerCase(), str.toLowerCase()) && valcont.length >1){
 
@@ -1085,7 +1085,7 @@ endif;
                 }
 
                      if(valcont == '' ){
-                    $('.actionIdComment').fadeIn(500);
+                    $('.actionIdComment').fadeIn(100);
                 }
             }
 
@@ -1099,7 +1099,7 @@ endif;
         }
         
       if(valcont == '' ){
-            $('.actionIdComment').fadeIn(500);
+            $('.actionIdComment').fadeIn(100);
             $('.commentsComment').css('display', 'none'); 
             $('span').removeClass('filterhighlight');
         }
