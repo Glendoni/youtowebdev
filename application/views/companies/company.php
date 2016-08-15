@@ -972,7 +972,7 @@ endif;
                     <div class="timeline-header">
     				<div class="timeline-header-title bg-dark actiontitle"  style="margin-top:10px;">History</div>
                         <div class="timeline-header-title bg-dark showCommentAddBtn hint--top-right"  data-hint="Add Comment" style="float:right; margin-left:11px; margin-top:10px;">  <span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span></div>
-                        <div class="timeline-header-title bg-dark showText" style="float:right;  margin-top:10px;">Hide/Text</div>
+                        <div class="timeline-header-title bg-dark showText" style="float:right;  margin-top:10px;     margin-left: 10px;">Hide/Text</div>
 
  <div class="timeline-header-title bg-dark showCommentsearch" style="float:right;  margin-top:10px;">  <form><input type="text" id="filtercomment" onkeyup=" return callfunction(); " /></form></div>
                          

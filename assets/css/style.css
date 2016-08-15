@@ -1113,6 +1113,10 @@ a li.autocomplete-item:hover {
 	padding-top: 85px;
 }
 
+
+
+
+
 /* ADD TO CALL */
 a.btn.btn-default.btn-xs.add-to-calendar {
 	/*margin-left: 5px;
@@ -1267,6 +1271,11 @@ font-size: 11px;
     font-weight: 200;
     margin-top: -20px;
 }
+    
+#single-page{
+       padding-top:200px; 
+        
+    }
 .small-text {
 	font-size: 9px;
 }

@@ -56,9 +56,9 @@ class Dashboard extends MY_Controller {
 		$this->data['getuserdemos'] = $this->Actions_model->get_user_demos($_GET['period']);
 		$this->data['dates'] = $this->Actions_model->dates();
 		$this->data['campaignsummary'] = $this->Campaigns_model->get_user_campaigns($this->get_current_user_id());
-    $this->data['tagssummary'] = $this->Tagging_model->get_tagging_stats();
+        $this->data['tagssummary'] = $this->Tagging_model->get_tagging_stats();
 		$this->data['teamcampaignsummary'] = $this->Campaigns_model->get_team_campaigns();
-    $this->data['private_campaigns_new'] = $this->Campaigns_model->private_campaigns_new($this->get_current_user_id());
+$this->data['private_campaigns_new'] = $this->Campaigns_model->private_campaigns_new($this->get_current_user_id());
 		$this->data['userimage'] = $this->Users_model->get_user_image();
 		//$this->data['marketing_actions'] = $this->Actions_model->get_marketing_actions($this->get_current_user_id());
 		$this->data['main_content'] = 'dashboard/home';
