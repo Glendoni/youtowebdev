@@ -169,7 +169,7 @@ $(document).ready(function(){
         var repLimited = [];
         var name = [];
     
-   
+   /*
         $.ajax({
             type: "GET",
                 dataType: "json",
@@ -200,8 +200,10 @@ $(document).ready(function(){
                         
               }
          });
-    
+    */
 
+    
+     $('.tr-actions').append('<li>Maintenace update in progress...<br></li>');
  if(!(/companies\/company/.test(window.location.href))) {
      
     $('.pageQvNav').remove();
