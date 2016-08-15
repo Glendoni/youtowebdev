@@ -980,7 +980,7 @@ endif;
     height: 37px;
     border-radius: 5px;
     width: 300px;">  <form style="    float: right;
-    margin-top: 1px;
+    margin-top: 0px;
     display: block;
     height: 37px;
     border-radius: 5px;
@@ -1120,6 +1120,8 @@ endif;
             $('span').removeClass('filterhighlight');
         }
        // $(".commentsComment *").highlight(valcont, "filterhighlight");
+        
+        valcont ='';
     } 
     
   
