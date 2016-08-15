@@ -1000,6 +1000,11 @@ function delete_campaign($id,$user_id)
                                     )
                                     order by 3 desc
                                     limit 6");
+         
+
+echo $this->db->last_query();
+
+exit();
        
              return   $query->result_array();   
     }

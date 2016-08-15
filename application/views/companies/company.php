@@ -974,7 +974,23 @@ endif;
                         <div class="timeline-header-title bg-dark showCommentAddBtn hint--top-right"  data-hint="Add Comment" style="float:right; margin-left:11px; margin-top:10px;">  <span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span></div>
                         <div class="timeline-header-title bg-dark showText" style="float:right;  margin-top:10px;     margin-left: 10px;">Hide/Text</div>
 
- <div class="timeline-header-title bg-dark showCommentsearch" style="float:right;  margin-top:10px;">  <form><input type="text" id="filtercomment" onkeyup=" return callfunction(); " /></form></div>
+ <div class="timeline-header-title bg-dark showCommentsearch" style="float: right;
+    margin-top: 10px;
+    display: block;
+    height: 37px;
+    border-radius: 5px;
+    width: 300px;">  <form style="    float: right;
+    margin-top: 1px;
+    display: block;
+    height: 37px;
+    border-radius: 5px;
+    width: 270px;"><input type="text" id="filtercomment" onkeyup=" return callfunction(); " style="
+ margin-top: -53px;
+    width: 270px;
+    outline: none;
+    border: none;
+     color: #666;
+" /></form></div>
                          
     			</div>
                 
