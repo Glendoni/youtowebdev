@@ -356,12 +356,8 @@ $(".pipeline-validation-check").change(function() {
             });
          
             $('.tsector').removeClass('tsector'); 
-       
-     }
-
-//Prevents form from subitting     
-    
-            $("form").submit(function () {
+          
+         $("form").submit(function () {
             if ($(this).valid()) {
             $(this).submit(function () {
             return false;
@@ -372,6 +368,11 @@ $(".pipeline-validation-check").change(function() {
             return false;
             }
             }); 
+     }
+
+//Prevents form from subitting     
+    
+         
 
     
     
