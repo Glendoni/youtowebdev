@@ -434,7 +434,7 @@ $(".pipeline-validation-check").change(function() {
 
     if((/dashboard/.test(window.location.href))) {
         
-         $('.mycampaignajaxcount').html('<img style="-webkit-user-select: none" src="http://localhost:8888/baselist/assets/images/ajax-loader.gif">');
+         $('.mycampaignajaxcount').html('<img style="-webkit-user-select: none" src="assets/images/ajax-loader.gif">');
        
                 $.ajax({
                 type: "GET",
