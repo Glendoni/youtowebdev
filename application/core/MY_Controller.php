@@ -296,7 +296,7 @@ class MY_Controller extends CI_Controller {
 
 		// CAMPAIGN TABLE WITHOUT CRITERIA FIELDS
 		$this->data['shared_campaigns'] = $this->Campaigns_model->get_all_shared_campaigns($this->get_current_user_id());
-		$this->data['private_campaigns'] = $this->Campaigns_model->get_all_private_campaigns($this->get_current_user_id());
+		//$this->data['private_campaigns'] = $this->Campaigns_model->get_all_private_campaigns($this->get_current_user_id());
 		
 		//var_dump($this->session->userdata('campaign_shared'));
 		// var_dump($this->data['own_campaigns']);

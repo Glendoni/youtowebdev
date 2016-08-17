@@ -2933,6 +2933,11 @@ a {
     background-color: yellow;
     
 }
+#btn-input{
+outline:none;
+border:none;
+
+}
 /*! Hint.css - v2.2.1 - 2016-03-26 //#2b4461
 * http://kushagragour.in/lab/hint/
 * Copyright (c) 2016 Kushagra Gour; Licensed  */

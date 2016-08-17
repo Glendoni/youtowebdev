@@ -507,9 +507,9 @@ $company = $this->process_search_result($raw_search_results);
             header('Content-Type : application/json');
             $obj = json_decode($_POST);
             $output = array(
-            'registration' => $_POST['registration'],
+                'registration' => $_POST['registration'],
                 'user_id' => $_POST['user_id'],
-             'company_type' => $_POST['company_type']   
+                'company_type' => $_POST['company_type']   
                 
             );
             
@@ -885,7 +885,7 @@ echo $this->Tagging_model->$route($post);
  
     }
     
-    function getActionArray($id = 154537 ){
+    function getActionArray($id = 350441 ){
         
          $id = $this->session->userdata('selected_company_id');
         
@@ -905,9 +905,9 @@ echo $this->Tagging_model->$route($post);
         $action['initial_rate'] = $query[0]['actions_completed'][0]->initial_rate;
         }
          //$action['initial_fee']['initial_rate']  =  ($initial_rate/100);
-        // echo '<pre>'; print_r($action); echo '</pre>';
+      echo '<pre>'; print_r($action); echo '</pre>';
         header('Content-Type: application/json');
-        echo json_encode($action);
+        //echo json_encode($action);
  
     }
     

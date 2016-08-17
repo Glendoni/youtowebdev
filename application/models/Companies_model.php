@@ -137,10 +137,6 @@ class Companies_model extends CI_Model {
 	}
 
     
-    
-    
-    
-    
      // $query = $this->db->query("YOUR QUERY");
 
 	function search_companies_sql($post,$company_id = False)
@@ -157,6 +153,7 @@ class Companies_model extends CI_Model {
 		if($post['company_age_from'] >= 0  )
 		{
 			$company_age_from = date("m-d-Y", strtotime("-".$post['company_age_from']." month"));
+
 			
 		}
 		if(!empty($post['company_age_to'])  )
@@ -167,6 +164,7 @@ class Companies_model extends CI_Model {
 		if(isset($company_age_from) && isset($company_age_to)) 
 		{
 			$company_age_sql = 'select id from companies  where companies.eff_from between \''.$company_age_to.'\'  and  \''.$company_age_from.'\' ';
+
 		}
 		
 
@@ -247,15 +245,15 @@ class Companies_model extends CI_Model {
             
             
                         if(!$int_val){
-                $datetime1 = date_create('2013-09-21');
+                $datetime1 = date_create('1970-01-01');
                 $datetime2 = date_create(date('Y-m-d'));
                 $interval = date_diff($datetime1, $datetime2);
                 $int_val =  intval($interval->format('%a'));
             }
 
             
-            
-            
+              
+            //echo  $int_val;
 			// is valid int 
 			// select companies that have had an action in that period and the exclude them from the results
 			if($post['contacted'] == 'include'){
@@ -266,6 +264,8 @@ class Companies_model extends CI_Model {
 										 where actions.action_type_id in (11,5,4,16,8) 
 										 and actions.actioned_at > current_timestamp - interval '".$int_val." day' 
 										 ";
+                    
+                    // echo $sql = $this->db->last_query();
 				}
 			}elseif ($post['contacted'] == 'exclude') {
 				if (is_int($int_val)){
@@ -273,8 +273,10 @@ class Companies_model extends CI_Model {
 										 from companies 
 										 left join actions on actions.company_id = companies.id 
 										 where actions.action_type_id in (11,5,4,16,8) 
-										 and actions.actioned_at < current_timestamp - interval '".$int_val." day' 
+										 and actions.actioned_at < current_timestamp - interval '".$int_val." day'
 										 ";
+ 
+
 					if(isset($post['exlude_no_contact'])){
 						$contacted_in = $contacted_in.'  or actions.id is null';
 					}

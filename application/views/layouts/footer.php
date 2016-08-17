@@ -168,7 +168,7 @@ $(document).ready(function(){
         var operations = [];
         var repLimited = [];
         var name = [];
-    
+  //var pageEval = GetUrlParamID();
    
         $.ajax({
             type: "GET",
@@ -186,7 +186,7 @@ $(document).ready(function(){
                     repLimited =   repLimited.replace('ltd', "");
                     repLimited =   repLimited.replace('Ltd', "");
                     repLimited =   repLimited.replace('LTD', "");
-                    
+                   // console.log('<li><a href="<?php echo base_url();?>companies/company?id='+val.comp_id+'" >'+repLimited+'</a></li>');
                     $('.tr-actions').append('<li><a href="<?php echo base_url();?>companies/company?id='+val.comp_id+'" >'+repLimited+'</a></li>');
                      }
                  })

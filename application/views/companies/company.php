@@ -984,12 +984,12 @@ endif;
     display: block;
     height: 37px;
     border-radius: 5px;
-    width: 270px;"><input type="text" id="filtercomment" onkeyup=" return callfunction(); " style="
+    width: 270px;"><input type="text" id="filtercomment" onkeyup=" return callfunction(); " placeholder=" Search Comments" style="
  margin-top: -53px;
     width: 270px;
     outline: none;
     border: none;
-     color: #666;
+     color: #555;
 " /></form></div>
                          
     			</div>
@@ -1007,7 +1007,7 @@ endif;
                             <input type="hidden" name="campaign_id" value="" id="comcampaign_id">
                             <input type="hidden" name="action_type_completed" id="comaction_type_completed" value="7">
                             <div class="col-md-10">					
-                            <input id="btn-input" type="text" class="form-control input-md" name="comment" id="commentcontent" placeholder="Type your comment here...">
+                            <input id="btn-input" type="text" class="form-control input-md" name="comment" id="commentcontent"  required="required" placeholder="Type your comment here...">
                             </div>
                             <div class="col-md-2">	
                             <input type="submit" class="btn btn-primary btn-md btn-block" id="btn-chat">

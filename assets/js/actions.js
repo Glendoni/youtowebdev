@@ -138,13 +138,17 @@ if ( typeof define === 'function' && define.amd ) {
                  $('.showCommentAddForm').toggle(true);
                 
             }
+           
+              var parid = GetUrlParamID();
+           $('#comcompany_id').val(parid);
+           
         });
         
     
         $('#actionSendComment').submit(function(e){
             e.preventDefault();
            var param =  $('#actionSendComment').serialize();
-          
+        
                 $.ajax({
                   type: "POST",
                     data: param,
@@ -163,7 +167,7 @@ if ( typeof define === 'function' && define.amd ) {
             $('.timeline-entry').show();
             
         })
-        
+      $('#btn-input').val('');  
         getActionData(); //Get actions
       
   }
@@ -299,7 +303,7 @@ function writeactions(data, scope = false){
                                         actions_cancelled = action['comments'];
                                          //console.warn('actions_cancelled-------------------------------'+actions_cancelled);
                                 break;
-                                case 'comments':
+                                case 'Comments':
 
                                         comments = action['comments'];    
                                 break;
@@ -1128,9 +1132,19 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
          
          if(action['comments']){
              tagline = '<span class="actionMsg piller'+actionId+' actionMsg'+actionId+  ' comments'+actionType+'"><strong>Comment: </strong><span class="comment" data="'+actionId+'">'+action['comments']+'</span></span><hr>'+outcome;
+             
+
+//alert()
+         }   
+         
+         if(actionTypeName == 'Comment' ){
+    if( typeof actionImg[2]  !== 'undefined' )  icon = '<div class="timeline-icon" style="font-weight: 700; font-size: 0.7em;background-color:'+actionImg[1]+'; color:'+actionImg[2]+';">'+actionImg[0]+'</div>';  
+             
 
 //alert()
          }
+
+
          
          if(actionType == 'Pipeline - Deal') actionTypeOverwrite = actionType+'@'+initial_fee+'%';
          

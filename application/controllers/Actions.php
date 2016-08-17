@@ -169,7 +169,7 @@ class Actions extends MY_Controller {
                         $campaign_redirect ='&campaign_id='.$post['campaign_id'];
                         }
 
-                            $result = $this->Actions_model->create($this->input->post());
+                            $result = $this->Actions_model->create($this->input->post(),$this->data['current_user']['id']);
                             if(empty($result))
                             {
                                 $this->set_message_warning('Error while inserting details to database');
@@ -301,11 +301,13 @@ class Actions extends MY_Controller {
     function operations_read($pageEval = false)
     {
         
-       $pageEval = $pageEval?  $this->session->userdata('selected_company_id') : 0;
+       //$pageEval = $pageEval?  $this->session->userdata('selected_company_id') : 0;
         
         header('Content-Type: application/json');
-        $input['operations']  =  $this->Actions_model->operations_store_get($this->data['current_user']['id'],  $pageEval);
+       $input['operations'] =  $this->Actions_model->operations_store_get($this->data['current_user']['id'],  $pageEval);
         echo  json_encode($input);
+        
+
     }
     
     function _qvActions() //This can be removed part of quickview protoype which was rejected. Maybe store for future use
