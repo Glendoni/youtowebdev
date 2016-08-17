@@ -829,7 +829,7 @@ function get_campaign_owner($id)
 		$query = $this->db->get();
              
              
-             $this->db->last_query();
+             //$this->db->last_query();
 		//print_r($query->result());
                     foreach ($query->result_array() as $row)
                     {
@@ -848,12 +848,27 @@ function get_campaign_owner($id)
 }
     
     
-    function private_campaigns_new_ajax(){  
+    function private_campaigns_new_ajax($user_id){  
 
-	 $sql = 'SELECT DISTINCT "c"."name", "c"."id" as "id", "c"."user_id" as "userid", "u"."name" as "searchcreatedby", "u"."image" as "image", "c"."shared", "c"."created_at", to_char(c.created_at, \'dd-mm-yyyy\') as datecreated  FROM "campaigns" "c" JOIN "users" "u" ON "c"."user_id" = "u"."id" JOIN "targets" "t" ON "c"."id" = "t"."campaign_id" JOIN "companies" "comp" ON "t"."company_id" = "comp"."id" WHERE criteria IS NULL AND "u"."active" = E\'True\' AND "c"."shared" = E\'True\' AND "comp"."active" = E\'True\' AND "c"."user_id" = E\'3\' AND (c.eff_to IS NULL OR c.eff_to > \'2016-08-15\') GROUP BY 1, 2, 3, 4, 5 ORDER BY "c"."created_at" DESC LIMIT 20' ;
+	 $sql = 'SELECT DISTINCT "c"."name", "c"."id" as "id", "c"."user_id" as "userid", "u"."name" as "searchcreatedby", "u"."image" as "image", "c"."shared", "c"."created_at", to_char(c.created_at, \'dd-mm-yyyy\') as datecreated  FROM "campaigns" "c" JOIN "users" "u" ON "c"."user_id" = "u"."id" JOIN "targets" "t" ON "c"."id" = "t"."campaign_id" JOIN "companies" "comp" ON "t"."company_id" = "comp"."id" WHERE criteria IS NULL AND "u"."active" = E\'True\' AND "c"."shared" = E\'True\' AND "comp"."active" = E\'True\' AND "c"."user_id" = E\''.$user_id.'\' AND (c.eff_to IS NULL OR c.eff_to > \''.date('Y-m-d').'\') GROUP BY 1, 2, 3, 4, 5 ORDER BY "c"."created_at" DESC LIMIT 20' ;
              
-             	$query = $this->db->query($sql);
-		    return $query->result(); /* returns an object */
+        	$query = $this->db->query($sql);
+             
+        
+        foreach ($query->result_array() as $row)
+                    {
+                        
+                        $get_campaign_pipeline_new  =  $this->get_campaign_pipeline($row['id'],true);
+                       $output[] = array('id' => $row['id'],
+                                        'name' =>   $get_campaign_pipeline_new->campaignname,
+                                       'image' => $get_campaign_pipeline_new->image,
+                                         'datecreated' => date('d-m-Y', strtotime($get_campaign_pipeline_new->datecreated)),
+                                       'percentage' => $get_campaign_pipeline_new->contacted
+                                       );
+                    }        
+            
+            return $output;
+		    //return $query->result(); /* returns an object */
             //echo  $this->db->last_query();
           
 }

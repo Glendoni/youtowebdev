@@ -434,7 +434,7 @@ $(".pipeline-validation-check").change(function() {
 
     if((/dashboard/.test(window.location.href))) {
         
-        
+         $('.mycampaignajaxcount').html('<img style="-webkit-user-select: none" src="http://localhost:8888/baselist/assets/images/ajax-loader.gif">');
        
                 $.ajax({
                 type: "GET",
@@ -451,12 +451,13 @@ $(".pipeline-validation-check").change(function() {
 uimage = val.image.split(',')
  
                       
-                        items.push( '<a href="campaigns/display_campaign/?id='+val.id+'" class="load-saved-search" title="" data-original-title="'+val.datecreated+'"><div class="row"><div class="col-xs-1"><span class="label label-info" style="margin-right:3px;background-color: '+uimage[1]+';font-size:8px; color: '+uimage[2]+'"><b>'+uimage[0]+'</b></span></div><div class="col-xs-9" style="min-height:30px;overflow:hidden">'+val.name+'<br><span style="font-size:9px;">Created: '+val.datecreated+'</span></div><div class="col-xs-1" style="padding: 0 0 0 0px; font-size: 11px;">56%</div></div></a>');
+                        items.push( '<a href="campaigns/display_campaign/?id='+val.id+'" class="load-saved-search" title="" data-original-title="'+val.datecreated+'"><div class="row"><div class="col-xs-1"><span class="label label-info" style="margin-right:3px;background-color: '+uimage[1]+';font-size:8px; color: '+uimage[2]+'"><b>'+uimage[0]+'</b></span></div><div class="col-xs-9" style="min-height:30px;overflow:hidden">'+val.name+'<br><span style="font-size:9px;">Created: '+val.datecreated+'</span></div><div class="col-xs-1" style="padding: 0 0 0 0px; font-size: 11px;">'+val.percentage+'%</div></div></a>');
                   
-                      //items.push( '<a href="campaigns/display_campaign/?id=355" class="load-saved-search" title="" data-original-title="Bristol with finance and previous contact"><div class="row"><div class="col-xs-1"><span class="label label-info" style="margin-right:3px;background-color: #f44336;font-size:8px; color: #ffffff"><b>RL</b></span></div><div class="col-xs-9" style="min-height:30px;overflow:hidden">Bristol with finance and previous contact<br><span style="font-size:9px;">Created: 16-05-2016</span></div><div class="col-xs-1" style="padding: 0 0 0 0px; font-size: 11px;">56%</div></div></a>');
+                    
                     });
                        
                     $('.mycampaignajax').html(items.join( "" ));
+                    //$('.mycampaignajaxcount').html('<img style="-webkit-user-select: none" src="http://localhost:8888/baselist/assets/images/ajax-loader.gif">');
                     $('.mycampaignajaxcount').html(items.length); //update engagement counter
                 }
         
