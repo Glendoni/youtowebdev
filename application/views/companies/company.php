@@ -339,7 +339,7 @@ if ($your_date < $now){;
 		</div>
             </div>
             
-		<div class="row" >
+		<div class="row">
 		<div class="col-xs-12 details" >
 		<!-- TURNOVER -->
 		<div class="col-xs-4 col-sm-3">
@@ -383,7 +383,7 @@ if ($your_date < $now){;
 			<?php else: ?>
             <p class="details">-</p>
 			<?php endif; ?>
-		</div>
+            </div>
 		<!-- SECTORS -->
 		<div class="col-xs-4 col-sm-3">
 			<strong>Sectors</strong><br>
@@ -398,12 +398,12 @@ if ($your_date < $now){;
 			?>
 
 
-<?php if (isset($company['perm'])): ?>
+<?php /* if (isset($company['perm'])): ?>
 <p class="details detailsTagFormat" style="margin-bottom:0; text-align:centre; font-size:11px;">Permanent</p>
 <?php endif; ?>
 <?php if (isset($company['contract'])): ?>
 <p class="details detailsTagFormat" style="margin-bottom:0; text-align:centre; font-size:11px;">Contract</p>
-<?php endif; ?>
+<?php endif;  */ ?>
 </div>
 		</div>
 		</div>

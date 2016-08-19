@@ -309,7 +309,7 @@ if ($your_date < $now){;
 				}
 			}
 			?>
-									<?php if (isset($company['perm'])): ?>
+									<?php /*  if (isset($company['perm'])): ?>
 
 <p class="detailsTagFormat" style="margin-bottom:0; text-align:centre;">Permanent</p>
 
@@ -326,7 +326,7 @@ if ($your_date < $now){;
 <p class="detailsTagFormat" style="margin-bottom:0; text-align:centre;">-</p>
             
             
-            <?php endif; ?>
+            <?php endif;  */ ?>
             
             
 		</div>

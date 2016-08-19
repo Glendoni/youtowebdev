@@ -65,6 +65,14 @@ function turnoverCompanies(){
       $this->Cron_model->update_email_events();  
     }
     
+    
+    function pipelineCronChecker()  //Call this function every 5mins
+    {
+      $this->Cron_model->cronPipeline();  
+    }
+    
+    
+    
     //CSV
      function ippone($lmt = 100 ,$oft= 0,$debug = false)
   {

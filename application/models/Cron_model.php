@@ -997,4 +997,57 @@ echo 'Add tag to company ' .$tagid . '  ----- ' . $companyID .'<br><br>';
  
     }
     
+     
+    /*@@@
+    
+        Analyses only companies with pipeline of Qualified, Suspect, Prospect or is set to null
+        
+        If the company is "in a Target Sector and turnover < £25 million" then set to Prospect, else set to Suspect
+    @@@ */
+    
+    public function cronPipeline(){  
+
+        $query = $this->db->query("SELECT DISTINCT c.id,turn.turnover, c.pipeline FROM companies c 
+        LEFT JOIN operates ops
+        ON c.id = ops.company_id
+        LEFT JOIN turnovers turn
+        ON c.id = turn.company_id
+        WHERE  c.pipeline LIKE 'Qualified' OR   c.pipeline LIKE 'Prospect' OR   c.pipeline LIKE 'Prospect' OR   c.pipeline IS NULL ");
+
+                     if ($query->num_rows() > 0)
+                        {
+
+                            foreach($query->result() as $row)
+                            {
+
+                //echo '<table width="200"><tr><td>'.$row->id.' </td><td>'.$row->turnover.'</td></tr></table>'     ;
+                               if($row->turnover < 2000000000 ) {
+ 
+                                   if($row->pipeline != 'Prospect'){
+                                        $this->cronpipelineUpdater($row->id,'Prospect');
+                                   }
+                                   
+                               }else{
+                                    if($row->pipeline != 'Suspect'){
+                                      $this->cronpipelineUpdater($row->id,'Suspect');
+                                    }
+                              
+                               }
+                            }
+                     }
+            }
+    
+    
+    
+    private function cronpipelineUpdater($id,$pipeline){ 
+        //Updates company table pipeline based on conditions in crontogo function 
+                 $data = array(
+                                'pipeline' => $pipeline
+                             );
+
+                 $this->db->where('id', $id);
+                 $this->db->update('companies', $data);
+
+        }   
+    
 }

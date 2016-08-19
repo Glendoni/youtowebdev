@@ -51,17 +51,7 @@
                 </div>
             </div>
 
-        <!--HIDDEN UNLESS SPECIAL INSIGHT-->
-            <div class="col-sm-12">
-                <div id="show_si_box" class="show_si_box" style="display:none">
-                            <div class="alert alert-info" role="alert">
-                    <div class=" form-group ">
-                        <label for="source_explanation" class="control-label">Special Insight (Required)</label>
-                        <input type="text" name="source_explanation" value="<?php echo isset($company['source_explanation'])?$company['source_explanation']:NULL; ?>" id="source_explanation" class="form-control source_explanation">
-                    </div>
-                    </div>
-                </div>
-            </div>
+      
             
             <div class="col-sm-6 col-md-2" style="display:none;">
                 <div class=" form-group ">
@@ -91,7 +81,7 @@
                     ?>
                 </div>
          </div>
-        <div class="col-sm-6 col-md-2">
+        <div class="col-sm-6 col-md-4">
             <div class=" form-group ">
                 <?php
                 echo form_label('Source', 'company_source');
@@ -128,7 +118,7 @@
                    
                        <!-- Recruitment Type -->
             
-                                <div class="col-sm-6 col-md-4">
+                                <div class="col-sm-6 col-md-4" style="display:none">
                                     <div class=" form-group ">
                                         <label for="url" class="control-label">Recruitment Type</label>
                                         <div class="tag-holder">  
@@ -191,7 +181,7 @@
                         </div>
                         <?php endif;  */?>
                
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                        
                          
                             <div class=" form-group ">
@@ -201,7 +191,17 @@
                         </div>
                     <div class="row"> </div>
                 </div>
-        
+          <!--HIDDEN UNLESS SPECIAL INSIGHT-->
+            <div class="col-sm-12">
+                <div id="show_si_box" class="show_si_box" style="display:none">
+                            <div class="alert alert-info" role="alert">
+                    <div class=" form-group ">
+                        <label for="source_explanation" class="control-label">Special Insight <span id="specialInsightRequired">(Required)</span></label>
+                        <input type="text" name="source_explanation" value="<?php echo isset($company['source_explanation'])?$company['source_explanation']:NULL; ?>" id="source_explanation" class="form-control source_explanation">
+                    </div>
+                    </div>
+                </div>
+            </div>
                 <div class="col-md-12 target_sectors">
                     <label for="sectors" class="control-label">Target Sectors</label>
                     <div class="tag-holder">
