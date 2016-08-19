@@ -33,7 +33,10 @@
 
                             
 
-                                        <?php if(!empty($company['pipeline'])): ?>
+                                        <?php 
+                        
+                      
+                        if(!empty($company['pipeline'])): ?>
 
                                         <?php endif; ?>
                                         <span class="label  label-<?php echo str_replace(' ', '', $company['pipeline']); ?>"><?php echo $company['pipeline']?>        

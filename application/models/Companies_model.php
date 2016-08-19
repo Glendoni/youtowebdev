@@ -65,7 +65,7 @@ class Companies_model extends CI_Model {
 			'Prospect' => 'Prospect',
 			'Intent' => 'Intent',
 			//'Qualified' => 'Qualified',
-			'Unsuitable' => 'Unsuitable',
+			//'Unsuitable' => 'Unsuitable',
 			'Lost' => 'Lost'
 			);
 		return 	$arrayNamesPipeline;
@@ -88,7 +88,7 @@ class Companies_model extends CI_Model {
 			'Intent' => 'Intent',
 			'Proposal' => 'Proposal',
 			'Customer' => 'Customer',
-			'Unsuitable' => 'Unsuitable',
+			//'Unsuitable' => 'Unsuitable',
 			'Lost' => 'Lost'
 			);
 		return 	$arrayNamesPipelineSearch;

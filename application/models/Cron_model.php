@@ -1007,12 +1007,17 @@ echo 'Add tag to company ' .$tagid . '  ----- ' . $companyID .'<br><br>';
     
     public function cronPipeline(){  
 
-        $query = $this->db->query("SELECT DISTINCT c.id,turn.turnover, c.pipeline FROM companies c 
-        LEFT JOIN operates ops
-        ON c.id = ops.company_id
-        LEFT JOIN turnovers turn
-        ON c.id = turn.company_id
-        WHERE  c.pipeline LIKE 'Qualified' OR   c.pipeline LIKE 'Prospect' OR   c.pipeline LIKE 'Prospect' OR   c.pipeline IS NULL ");
+        $query = $this->db->query("SELECT DISTINCT c.id,c.pipeline,turn.turnover,sec.id as sec_id, sec.target FROM companies c 
+LEFT JOIN operates ops
+ON c.id = ops.company_id
+
+LEFT JOIN sectors sec
+ON ops.sector_id = sec.id
+LEFT JOIN turnovers turn
+ON c.id = turn.company_id
+
+WHERE turn.turnover < 2500000000 AND sec.id IS NOT NULL AND sec.target= TRUE AND (c.pipeline LIKE 'Qualified' OR
+   c.pipeline LIKE 'Prospect' OR   c.pipeline LIKE 'Suspect' OR   c.pipeline IS NULL  AND turn.turnover IS NOT NULL )");
 
                      if ($query->num_rows() > 0)
                         {
@@ -1021,7 +1026,7 @@ echo 'Add tag to company ' .$tagid . '  ----- ' . $companyID .'<br><br>';
                             {
 
                 //echo '<table width="200"><tr><td>'.$row->id.' </td><td>'.$row->turnover.'</td></tr></table>'     ;
-                               if($row->turnover < 2000000000 ) {
+                               if($row->turnover < 2500000000 ) {
  
                                    if($row->pipeline != 'Prospect'){
                                         $this->cronpipelineUpdater($row->id,'Prospect');
@@ -1033,6 +1038,36 @@ echo 'Add tag to company ' .$tagid . '  ----- ' . $companyID .'<br><br>';
                                     }
                               
                                }
+                            }
+                     }
+            }   
+    
+    public function cronPipelineWithoutTurnover(){  
+
+        $query = $this->db->query("SELECT DISTINCT c.id,c.pipeline,turn.turnover,sec.id as sec_id, sec.target FROM companies c 
+LEFT JOIN operates ops
+ON c.id = ops.company_id
+
+LEFT JOIN sectors sec
+ON ops.sector_id = sec.id
+LEFT JOIN turnovers turn
+ON c.id = turn.company_id
+
+WHERE sec.id IS NOT NULL AND sec.target= TRUE AND (c.pipeline LIKE 'Qualified' OR
+   c.pipeline LIKE 'Prospect' OR   c.pipeline LIKE 'Suspect' OR   c.pipeline IS NULL  ) AND turn.turnover IS NULL  ");
+
+                     if ($query->num_rows() > 0)
+                        {
+
+                            foreach($query->result() as $row)
+                            {
+
+               
+                                    if($row->pipeline != 'Suspect'){
+                                      $this->cronpipelineUpdater($row->id,'Suspect');
+                                    }
+                              
+                               
                             }
                      }
             }
