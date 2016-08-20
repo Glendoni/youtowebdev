@@ -968,6 +968,7 @@ $('#sidebar').hide();
      function getIcon(actionType){
             //console.log(actionType)
          var icon;
+console.log(actionType)
               switch (actionType){
                     
                       //Quote to : 
@@ -1015,7 +1016,10 @@ $('#sidebar').hide();
                     break;
                     case 'Comment - Old':
                         icon = '<div class="timeline-icon bg-primary"><i class="fa fa-comments fa-lg"></i></div>';
+                    break; case 'Comment':
+                        icon = '<div class="timeline-icon bg-primary"><i class="fa fa-comments fa-lg"></i></div>';
                     break;
+                      
                     case 'Web Form - Demo Requested':
                         icon = '<div class="timeline-icon bg-success"><i class="fa fa-thumbs-up fa-lg"></i></div>';
                     break;
@@ -1109,6 +1113,7 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
          var status = 'Created'
          var showOutstandingForm = [];
          var getUrlIdParam = GetUrlParamID();
+         var kps_cancelled;
          
          if(typeof action['name'] !== 'undefined'  && action['name'] !== null &&  action['name'] !== 'null'   ){
             created_by = action['name'];
@@ -1228,11 +1233,12 @@ if(tm > 1){ tm = tm + ' Days Overdue'; }else if(tm == 1){ tm  = tm + ' Day Overd
 
         if((false))
         outcomeRemove ='<span class=" btn btn-default btn-xs label label-success" style="font-size:10px; margin:0 0px;">Add Outcome</span> <span class="btn btn-default btn-xs label label-danger">Remove</span>';
-
-        if((actions_cancelled)){
-            outcomeRemove ='<span class="label label-danger" style="font-size:10px; margin:0 0px;">Cancelled: '+action['cancelled_at']+'</span>';
+console.log(action['cancelled_at'] )
+        if( action['cancelled_at'] != null){
+            kpStr   ='<span class="label label-danger" style="font-size:10px; margin:0 0px; float:right;">Cancelled: '+action['cancelled_at']+'</span>';
             badge = '';   
             overdueStatus = '';
+               icon = '<div class="timeline-icon label-danger "style="color: white;"><i class="fa fa-phone fa-lg"></i></div>';
         }
         if(comments !=''){
             //console.warn('Play '+comments);
@@ -1300,7 +1306,7 @@ if(tm > 1){ tm = tm + ' Days Overdue'; }else if(tm == 1){ tm  = tm + ' Day Overd
                         '</div>';
                }
              
-             kpStr = '<span class="label label-success" style="margin-left:3px;">Completed:  '+formattDate(action['actioned_at'])+'</span>';
+             kpStr = '<span class="label label-success" style="margin-left:3px; float:right;">Completed:  '+formattDate(action['actioned_at'])+'</span>';
                
               // console.log()
              actionType =kp;
@@ -1320,10 +1326,10 @@ if(tm > 1){ tm = tm + ' Days Overdue'; }else if(tm == 1){ tm  = tm + ' Day Overd
          }
          
          
-       
+ 
          
       if(actionTypeName != 'Pipeline Update')   
-            actions  = '<div class="timeline-entry actionId'+actionType+'  '+classCompleted+' pillid'+actionId+'" pillid='+actionId+'> <div class="timeline-stat"> '+icon+'</div><div class="timeline-label"> <div class="mar-no pad-btm"><h4 class="mar-no pad-btm">'+header+deal+'  <span class="label label-warning">'+planned_at+'</span>'+overdueStatus+'<span class="classActions" style="float:right; margin-top:0; margin-left:3px;">'+calenderbtn+outcomeRemove+ kpStr+'</span></h4></div><div class="actionMsgText" style="padding:0px 0px 0px 10px;">'+tagline+'</div>'+textbox+'<div class="mic-info"> '+status+': '+created_by+' - '+formattDate(createdAt, true)+followupAlert+' </div></div></div>';
+            actions  = '<div class="timeline-entry actionId'+actionType+'  '+classCompleted+' pillid'+actionId+'" pillid='+actionId+'> <div class="timeline-stat"> '+icon+'</div><div class="timeline-label"> <div class="mar-no pad-btm"><h4 class="mar-no pad-btm">'+header+deal+'  <span class="label label-warning">'+planned_at+'</span>'+overdueStatus+'<span class="classActions" style="float:right; margin-top:0; margin-left:3px;">'+calenderbtn+outcomeRemove+'</span></h4></div><div class="actionMsgText" style="padding:0px 0px 0px 10px;">'+tagline+'</div>'+textbox+ kpStr+'<div class="mic-info"> '+status+': '+created_by+' - '+formattDate(createdAt, true)+followupAlert+' </div></div></div>';
          
         if(actionTypeName == 'Pipeline Update' ){
               actions  = '<div class="timeline-entry actionId'+actionType+' '+classCompleted+'" > <div class="timeline-stat"> '+icon+'</div> <div class="timeline-label pipe"> <div class="mar-no pad-btm" ><h4 class="mar-no pad-btm">'+header+' <span class="classActions" style="margin-top:0; margin-left:3px; float:right;">'+calenderbtn+outcomeRemove+ kpStr+'</span></h4>'+overdueStatus+'</div><div class="actionMsgText">'+action['comments']+'</div></div></div>';
