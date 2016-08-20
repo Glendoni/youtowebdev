@@ -1033,7 +1033,7 @@ where pipeline is null
 or pipeline not in ('Customer','Proposal','Intent','Lost','Unsuitable','Blacklisted')
 -- and C.active = 't'
 											   
- LIMIT 100
+ LIMIT 500
 ");
 
                      if ($query->num_rows() > 0)
