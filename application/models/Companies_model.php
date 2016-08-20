@@ -55,7 +55,7 @@ class Companies_model extends CI_Model {
 
 	function get_pipeline_show_source()
 	{
-		$arrayNamesSources = array('Proposal','Intent','Customer','Proposal','Qualified');
+		$arrayNamesSources = array('Proposal','Intent','Customer','Proposal','Qualified','Suspect');
 		return 	$arrayNamesSources;
 	}
 
@@ -66,6 +66,7 @@ class Companies_model extends CI_Model {
 			'Intent' => 'Intent',
 			//'Qualified' => 'Qualified',
 			//'Unsuitable' => 'Unsuitable',
+             'Suspect' => 'Suspect',
 			'Lost' => 'Lost'
 			);
 		return 	$arrayNamesPipeline;
@@ -89,6 +90,7 @@ class Companies_model extends CI_Model {
 			'Proposal' => 'Proposal',
 			'Customer' => 'Customer',
 			//'Unsuitable' => 'Unsuitable',
+            'Suspect' => 'Suspect',
 			'Lost' => 'Lost'
 			);
 		return 	$arrayNamesPipelineSearch;

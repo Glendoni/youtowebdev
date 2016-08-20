@@ -724,7 +724,7 @@ h2.company-header a:hover {
     margin: auto;
 }
 .label-Prospect {
-	    background-color: #7c7a7a;
+	    background-color: #9c27b0;
 	color: #fff;
  	padding-left: 5px;
  	padding-right: 5px;
@@ -745,7 +745,7 @@ h2.company-header a:hover {
     margin: auto;
 }
 .label-Qualified, .label-Suspect {
-	background-color: #FFA03C;
+	background-color: #7c7a7a;
 	color: #fff;
  	padding-left: 5px;
  	padding-right: 5px;
