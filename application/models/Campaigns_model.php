@@ -867,7 +867,9 @@ function get_campaign_owner($id)
                                        );
                     }        
             
-            return $output;
+        
+        
+            return $output ? $output : array('success' => 'not ok');
 		    //return $query->result(); /* returns an object */
             //echo  $this->db->last_query();
           

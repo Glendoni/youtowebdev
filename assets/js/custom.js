@@ -445,7 +445,9 @@ $(".pipeline-validation-check").change(function() {
                     var items = [];
                      var idfk;
                    var uimage;
-        
+        if(data.success == 'not ok'){
+             $('.mycampaignajaxcount').html('0');
+        }else{
                     $.each( data, function( key, val ) {
                           idfk = val.company_id;
 uimage = val.image.split(',')
@@ -460,7 +462,7 @@ uimage = val.image.split(',')
                     //$('.mycampaignajaxcount').html('<img style="-webkit-user-select: none" src="http://localhost:8888/baselist/assets/images/ajax-loader.gif">');
                     $('.mycampaignajaxcount').html(items.length); //update engagement counter
                 }
-        
+                }
             });
             
         
