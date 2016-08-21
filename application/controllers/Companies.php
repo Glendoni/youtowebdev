@@ -52,6 +52,7 @@ class Companies extends MY_Controller {
 				// Result set to session and current search 
 				$this->seve_current_search($this->input->post());
 				$raw_search_results = $this->Companies_model->search_companies_sql($this->input->post());
+                
 				
 				$result = $this->process_search_result($raw_search_results);
 			 
@@ -320,6 +321,7 @@ $company = $this->process_search_result($raw_search_results);
             $this->data['option_contacts'] = $option_contacts;
 			$this->data['action_types_done'] = $this->Actions_model->get_action_types_done();
 			$this->data['action_types_planned'] = $this->Actions_model->get_action_types_planned();
+            $this->data['last_pipeline_created_at'] = $this->Actions_model->actiondata($this->input->get('id'));
 			//$this->data['action_types_array'] = $this->Actions_model->get_action_types_array();
 			//$this->data['actions_outstanding'] = $this->Actions_model->get_actions_outstanding($this->input->get('id'));
 			//$this->data['actions_completed'] = $this->Actions_model->get_actions_completed($this->input->get('id'));
@@ -965,6 +967,7 @@ echo $this->Tagging_model->$route($post);
 		$this->load->view('layouts/default_layout', $this->data);	
         
     }
-
+    
+    
 }
  

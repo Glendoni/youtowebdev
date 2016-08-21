@@ -2951,6 +2951,10 @@ border:none;
     
     display:none;
 } 
+.last_pipeline_created_at{
+    
+    margin-left: 7px;
+}
  
 /*! Hint.css - v2.2.1 - 2016-03-26 //#2b4461
 * http://kushagragour.in/lab/hint/

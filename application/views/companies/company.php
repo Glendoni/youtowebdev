@@ -34,9 +34,20 @@
                             
 
                                         <?php 
+
+                        
+                        
+                        
                         
                       
-                        if(!empty($company['pipeline'])): ?>
+                      
+                        if(!empty($company['pipeline'])):
+                        
+                        
+                        
+                        ?>
+                        
+                        
 
                                         <?php endif; ?>
                                         <span class="label  label-<?php echo str_replace(' ', '', $company['pipeline']); ?>"><?php echo $company['pipeline']?>        
@@ -48,6 +59,28 @@
                                         <?php endif; ?>
                                         </span>
 
+                        
+                         <?php if($last_pipeline_created_at){ ?>
+                    
+                        <span class="last_pipeline_created_at">
+                        <?php
+ 
+$your_date = date('Y-m-d' , strtotime($last_pipeline_created_at));
+                        
+                        
+$datetime1 = date_create(date('Y-m-d'));
+$datetime2 = date_create($your_date);
+$interval = date_diff($datetime1, $datetime2);
+ $interval = $interval->format('%a');
+                        
+             if($interval == 1){echo  $interval->format('%a day ago ') ;}  elseif($interval == 0){ echo 'Today'; }else{ echo $interval. ' days ago' ;}        
+                        
+
+ ?>
+      </span>
+               <?php } ?>  
+                        
+                        
                                         <?php if($company['customer_to']){  ?>
                                         <span class="label  label-<?php echo str_replace(' ', '', $company['pipeline']); ?> cancelledPill">
                                         Cancelled <?php echo date('d/m/Y',strtotime($company['customer_to'])); ?>
@@ -64,8 +97,11 @@
                                         <?php else: ?>
                                         <?php endif; ?>
 
-                          
-
+       
+                        
+                   
+                        
+                        
                         
                         </div><!--END ROW-->
 
@@ -155,7 +191,7 @@
 		<div class="row">
 <div class="col-sm-12 action-details">
 <div class="row"> 
-<div class="col-md-6 col-lg-6 col-sm-6">
+<div class="col-md-4 col-lg-4 col-sm-4">
 <div><strong>Last Contact</strong></div>
 <div>
 <?php if (empty($company['actioned_at1'])): ?>
@@ -182,7 +218,7 @@ if ($company['actioned_at1'] > 0){
 
 </div>
 </div>
-<div class="col-md-6 col-lg-6 col-sm-6">
+<div class="col-md-4 col-lg-4 col-sm-4">
 <div><strong>Scheduled</strong></div>
   
 <?php if (empty($company['planned_at2'])): ?>
@@ -205,35 +241,41 @@ if ($your_date < $now){;
 
 <?php } else {}?>
 <?php endif; ?>
+    
+    
+    
 
 </div>
+    
+		 
+    
 </div><!--END ROW-->
 <hr>
+    
 </div>
+	<div class="col-xs-6 col-md-4 details" style="margin-top:10px; ">
+			<label>Company Number</label><br>
+			<p>	
+			 <!--COMPANY NUMBER IF APPLICABLE-->
+			<?php echo isset($company['registration'])?$company['registration']:''; ?>
+         	</p>
+        	</div>
 
-	<?php if (isset($company['trading_name'])): ?>
-		<div class="col-md-6">
-				<label>Registered Name</label>
-				<p>	
+        	<div class="col-xs-6 col-md-4" style="margin-top:10px;">
+        	<label>Founded</label><br>
+			<p>	
+				<?php echo isset($company['eff_from'])?$company['eff_from']:''; ?>
+			</p>
+		</div>
+
+        <div class="col-xs-6 col-md-3" style="margin-top:10px;">
+        		<label>Phone</label><br>
+        		<p>
+        		<?php echo isset($company['phone'])?$company['phone']:'-'; ?>                
+           		</p>
+			</div><!--END PHONE NUMBER-->
 	
-				<?php echo $company['name']; ?>
-				</p>
-		</div><!--END NAME-->
-		<div class="col-md-6">
-				<label>Trading Name</label>
-				<p>	
-				<?php echo $company['trading_name']; ?>
-				</p>
-		</div><!--END TRADING NAME-->
-            
-		<?php else: ?>
-				<div class="col-md-6">
-				<label>Registered Name</label>
-				<p style="margin-bottom:10px;">	
-				<?php echo $company['name']; ?>
-				</p>
-		</div><!--END NAME-->
-		<?php endif; ?>
+            <?php /* ?>
 		<div class="col-md-6">
 				<label>Registered Address</label>
 				<p>	
@@ -242,7 +284,7 @@ if ($your_date < $now){;
 				</p>
 		</div>
         
-            
+            <?php  */ ?>
             <!--END ADDRESS-->
 		
 
@@ -296,28 +338,8 @@ if ($your_date < $now){;
 			<hr>
 		
 <div class="row  details">
-		<div class="col-xs-6 col-md-3 details" style="margin-top:10px; ">
-			<label>Company Number</label><br>
-			<p>	
-			 <!--COMPANY NUMBER IF APPLICABLE-->
-			<?php echo isset($company['registration'])?$company['registration']:''; ?>
-         	</p>
-        	</div>
-
-        	<div class="col-xs-6 col-md-3" style="margin-top:10px;">
-        	<label>Founded</label><br>
-			<p>	
-				<?php echo isset($company['eff_from'])?$company['eff_from']:''; ?>
-			</p>
-		</div>
-
-        <div class="col-xs-6 col-md-3" style="margin-top:10px;">
-        		<label>Phone</label><br>
-        		<p>
-        		<?php echo isset($company['phone'])?$company['phone']:'-'; ?>                
-           		</p>
-			</div><!--END PHONE NUMBER-->
-		<div class="col-xs-6 col-md-2" style="margin-top:10px;">
+	
+		<div class="col-xs-6 col-md-3" >
 				<label>Class</label><br>
 				<p>	
 		            <!--CLASS IF APPLICABLE-->
@@ -336,23 +358,14 @@ if ($your_date < $now){;
     
     
     
-	 
-            
-    
-		</div>
-            </div>
-            
-		<div class="row">
-		<div class="col-xs-12 details" >
-		<!-- TURNOVER -->
-		<div class="col-xs-4 col-sm-3">
+	 <div class="col-xs-4 col-sm-3">
 			<label><span style="text-transform: capitalize"><?php echo isset($company['turnover_method'])?$company['turnover_method']:'';?></span> Turnover</label><br>
 			<p class="details" style="margin-bottom:5px;"><?php echo isset($company['turnover'])? '£'.number_format (round($company['turnover'],-3)):'-';?></p>
             
             
         </div>
             
-              <div class="col-md-3" style="display:none;">
+              <div class="col-md-3" >
 				<label>Lead Source</label>
 				<p style="
     margin-top: -4px;
@@ -360,6 +373,15 @@ if ($your_date < $now){;
                   <p><span class="leadSourceSubText"><?php echo $company['source_explanation'] ? $company['source_explanation'] : ''; ?></span></p>
 			 
 		</div>
+            
+            
+    
+		</div>
+            </div>
+            
+		<div class="row">
+		<div class="col-xs-12 details" >
+		 
             
             
             <div class="col-md-3">

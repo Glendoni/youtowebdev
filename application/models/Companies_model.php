@@ -273,9 +273,17 @@ class Companies_model extends CI_Model {
 				if (is_int($int_val)){
 					$contacted_in = "select companies.id 
 										 from companies 
-										 left join actions on actions.company_id = companies.id 
-										 where actions.action_type_id in (11,5,4,16,8) 
-										 and actions.actioned_at < current_timestamp - interval '".$int_val." day'
+										LEFT JOIN 
+(
+select distinct company_id
+from ACTIONS
+where action_type_id in (11,5,4,16,8) 
+and created_at >= current_date - 180
+) ACTIONS_SUB
+ON companies.id = ACTIONS_SUB.company_id
+
+where active = 'TRUE' 
+and ACTIONS_SUB.company_id is null
 										 ";
  
 
