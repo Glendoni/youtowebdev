@@ -59,7 +59,7 @@
                                         <?php endif; ?>
                                         </span>
 
-                        
+                        <?php if(!$company['customer_to']){  ?> 
                          <?php if($last_pipeline_created_at){ ?>
                     
                         <span class="last_pipeline_created_at">
@@ -78,7 +78,7 @@ $interval = date_diff($datetime1, $datetime2);
 
  ?>
       </span>
-               <?php } ?>  
+               <?php }} ?>  
                         
                         
                                         <?php if($company['customer_to']){  ?>
