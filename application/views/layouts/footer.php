@@ -82,7 +82,7 @@ $owned_urls= array('fe_read_tag', 'fe_get_tag', 'getAction', 'operation_read', '
                     $cookie = array(
                     'name'   => 'lastpagevisited',
                     'value'  => $string,
-                    'expire' =>  86500,
+                    'expire' =>  (86400 * 30),
                     'secure' => false
                     );
 
