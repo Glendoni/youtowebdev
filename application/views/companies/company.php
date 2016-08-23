@@ -462,6 +462,7 @@ if ($your_date < $now){;
 			<thead>
 				<tr>
 					<th class="col-md-4">Mortgage Provider</th>
+                    <th class="col-md-3">&nbsp;</th>
 					<th class="col-md-3">Started</th>
 					<th class="col-md-3">Status</th>
                 <th class="col-md-2">Finished</th>
@@ -486,11 +487,15 @@ if ($your_date < $now){;
 				<?php echo $mortgage['type']; ?>
 				</div>
 				</td>
-				<td class="col-md-2">
+                    <td class="col-md-2">
+                        
+                     <?php  if($mortgage['stage'] == 'Outstanding'){ echo   $mortgage['Inv_fin_related']? '<span  class="related_to_Invoice_Finance inv'.$mortgage['id'].'"></span>' : '<span  class="Not_related_to_Invoice_Finance inv'.$mortgage['id'].'">Related To Invoice Finance</span>';  } ?>
+                    </td>
+				<td class="col-md-1">
 				<?php $mortgages_start  = $mortgage['eff_from'];$date_pieces = explode("/", $mortgages_start);$formatted_mortgage_date = $date_pieces[2].'/'.$date_pieces[1].'/'.$date_pieces[0];echo date("F Y",strtotime($formatted_mortgage_date));?>
-                    <?php  if($mortgage['stage'] == 'Outstanding'){ echo   $mortgage['Inv_fin_related']? '<span  class="related_to_Invoice_Finance inv'.$mortgage['id'].'"></span>' : '<span  class="Not_related_to_Invoice_Finance inv'.$mortgage['id'].'"><br>Related To Invoice Finance</span>';  } ?>
+                  
 				</td>
-				<td class="col-md-2">
+				<td class="col-md-1">
 				<?php echo ucfirst($mortgage['stage']); ?><?php if(!empty($mortgage['eff_to'])){
     //echo ' on '.$mortgage['eff_to'];
   

@@ -47,7 +47,7 @@ if(data.success){
                         
                          $('#morprov'+data.error).attr('providerstatus', '')
                          console.log('table Not_related_to_Invoice_Finance .inv'+data.error)
-                                $('.inv'+data.error).html('<br>Related To Invoice Finance');
+                                $('.inv'+data.error).html('Related To Invoice Finance');
                         }
       
         }
