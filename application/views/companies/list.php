@@ -215,6 +215,9 @@ if ($your_date < $now){;
 		<a class="btn btn-default btn-sm btn-block btn-url" href="<?php $parsed = parse_url($company['url']); if (empty($parsed['scheme'])) { echo 'http://' . ltrim($company['url'], '/'); }else{ echo $company['url']; } ?>" target="_blank">
 		<label style="margin-bottom:0;"></label> <?php echo str_replace("http://"," ",str_replace("www.", "", $company['url']))?>
 		</a>
+            	<?php else: ?>
+
+    <a class="btn  btn-default btn-sm btn-block " href="https://www.google.co.uk/search?q=<?php echo $company['name'];  ?>"  target="_blank">Google <i class="fa fa-search" aria-hidden="true"></i></a>
 		<?php endif; ?>
 			<?php if (isset($company['registration'])): ?>
 			<a class="btn  btn-info btn-sm btn-block companieshouse" href="https://beta.companieshouse.gov.uk/company/<?php echo $company['registration'] ?>" target="_blank">Companies House</a>

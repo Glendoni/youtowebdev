@@ -648,7 +648,7 @@ from (select * from COMPANIES where active = \'TRUE\' ' ;
 		select T."company id",
 		       json_agg(
 			   row_to_json(
-			   row (T."mortgage id", T."mortgage provider", T."mortgage stage", T."mortgage start", T."mortgage end", T."mortgage type",  T."provider url"))) "JSON output"  -- f11
+			   row (T."mortgage id", T."mortgage provider", T."mortgage stage", T."mortgage start", T."mortgage end", T."mortgage type",  T."provider url" ,T."mortgage Inv_fin_related"))) "JSON output"  -- f11
 				 
 		from 
 		(-- T
@@ -659,7 +659,8 @@ from (select * from COMPANIES where active = \'TRUE\' ' ;
 		       M.stage "mortgage stage",
 		       to_char(M.eff_from, \'dd/mm/yyyy\')  "mortgage start",
 		       to_char(M.eff_to, \'dd/mm/yyyy\')  "mortgage end",
-		       M.type "mortgage type"
+		       M.type "mortgage type",
+		       M.Inv_fin_related "mortgage Inv_fin_related"
 
 		from MORTGAGES M
 		  
@@ -1371,7 +1372,7 @@ $q = '
     public function creat_pipeline($post, $user_id){}
     
     public function get_company_from_id($id){
-       //Redundent function used temporarily for testing purposes only!
+       //Redundent function used temporarily for testing purposes only! 
 
         $this->db->select('*');
         $this->db->from('companies');
@@ -1396,7 +1397,7 @@ $q = '
           
     }
     
- function company_select($id){
+    function company_select($id){
      
      $query = $this->db->query("SELECT * FROM companies WHERE id='".$id."' LIMIT 1");
      
@@ -1405,9 +1406,33 @@ $q = '
                 $row = $query->row(); 
      
               if($row->pipeline == 'Customer') return false;
-     return true;
+         return true;
              } 
-         }
+      }
+    
+    function update_not_for_invoices($post,$userID){
+        
+        
+    $debenturemortgage  =      $post['debenturemortgage'] ? 'y' :NULL;
+        
+       $data = array(
+                      'updated_at' =>  date('Y-m-d H:i:s'),
+                      'updated_by' => intval($userID),
+                      'inv_fin_related' =>   $debenturemortgage
+                   );
+       
+        
+        
+        
+        
+     $this->db->where('company_id', intval($post['companyid']));
+        $this->db->where('id', intval($post['providerid']));
+       $this->db->update('mortgages', $data);
+       
+return $debenturemortgage ? true : false;
+
+        
+    }
    
     
 }

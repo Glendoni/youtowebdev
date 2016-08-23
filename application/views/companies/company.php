@@ -31,24 +31,13 @@
                                 <!--  </breadcrumbscroll> /breadcrumbscroll -->
                                 <!--END ASSIGN-->
 
-                            
-
+                                                <!-- Button trigger modal -->
+ 
                                         <?php 
-
-                        
-                        
-                        
-                        
-                      
-                      
                         if(!empty($company['pipeline'])):
-                        
-                        
-                        
+                       
                         ?>
                         
-                        
-
                                         <?php endif; ?>
                                         <span class="label  label-<?php echo str_replace(' ', '', $company['pipeline']); ?>"><?php echo $company['pipeline']?>        
                                         <?php if (isset($company['customer_from'])&&($company['pipeline']=='Customer')):?>  <?php echo date("d/m/y",strtotime($company['customer_from']));?><?php  
@@ -60,20 +49,20 @@
                                         </span>
 
                         <?php if(!$company['customer_to']){  ?> 
-                         <?php if($last_pipeline_created_at){ ?>
+                         <?php if($last_pipeline_created_at && $company['id'] != '154537' ){ ?>
                     
                         <span class="last_pipeline_created_at">
                         <?php
+ //echo $last_pipeline_created_at;
+                            $your_date = date('Y-m-d' , strtotime($last_pipeline_created_at));
  
-$your_date = date('Y-m-d' , strtotime($last_pipeline_created_at));
+
+                            $datetime1 = date_create(date('Y-m-d'));
+                            $datetime2 = date_create($your_date);
+                            $interval = date_diff($datetime1, $datetime2);
+                             $interval = $interval->format('%a');
                         
-                        
-$datetime1 = date_create(date('Y-m-d'));
-$datetime2 = date_create($your_date);
-$interval = date_diff($datetime1, $datetime2);
- $interval = $interval->format('%a');
-                        
-             if($interval == 1){echo  $interval->format('%a day ago ') ;}  elseif($interval == 0){ echo 'Today'; }else{ echo $interval. ' days ago' ;}        
+             if($interval == 1){ echo  $interval.' day ago' ;}  elseif($interval == 0){ echo 'Today'; }else{ echo $interval. ' days ago' ;}        
                         
 
  ?>
@@ -369,8 +358,8 @@ if ($your_date < $now){;
 				<label>Lead Source</label>
 				<p style="
     margin-top: -4px;
-">	<?php echo $company_sources[$company['source']]  ? $company_sources[$company['source']] : '-';?></p>
-                  <p><span class="leadSourceSubText"><?php echo $company['source_explanation'] ? $company['source_explanation'] : ''; ?></span></p>
+">	<?php echo $company_sources[$company['source']]  ? $company_sources[$company['source']]. ' - '  : '-';?><br>
+                  <span class="leadSourceSubText"><?php echo $company['source_explanation'] ? $company['source_explanation'] : ''; ?></span></p>
 			 
 		</div>
             
@@ -476,31 +465,50 @@ if ($your_date < $now){;
 					<th class="col-md-3">Started</th>
 					<th class="col-md-3">Status</th>
                 <th class="col-md-2">Finished</th>
+                    <th class="col-md-2">Edit</th>
 				</tr>
 			</thead>
 			<tbody>
-				<?php foreach ($company['mortgages'] as $mortgage):?>
-				<tr <?php echo $mortgage['stage']==MORTGAGES_SATISFIED? 'class="danger"' : 'class="success"' ?>>
+				<?php
+                
+     //print_r($company['mortgages']);
+               $tdbgcolorclass = 'success';
+                foreach ($company['mortgages'] as $mortgage):?>
+                <?php $tdbgcolorclass =  $mortgage['Inv_fin_related']? 'success' : 'warning' ;//$tdbgcolorclass = 'danger'; ?>
+				<tr <?php echo $mortgage['stage']==MORTGAGES_SATISFIED? 'class="danger cont'.$mortgage['id'].'"' : 'class="'.$tdbgcolorclass.' cont'.$mortgage['id'].'"' ?>>
 				<td class="col-md-4" >
 					<?php if(isset($mortgage['url'])) : ?>
 						<a href="http://<?php echo $mortgage['url']; ?>" target="_blank"><?php echo $mortgage['name']; ?> <span style="font-size:10px;"><i class="fa fa-external-link"></i></span></a>
 	    			<?php else: ?>
-						<?php echo $mortgage['name']; ?>
+						<?php echo $mortgage['name'] ?>
 					<?php endif; ?>
 				<div style="font-size:10px;">
 				<?php echo $mortgage['type']; ?>
 				</div>
 				</td>
-				<td class="col-md-3">
+				<td class="col-md-2">
 				<?php $mortgages_start  = $mortgage['eff_from'];$date_pieces = explode("/", $mortgages_start);$formatted_mortgage_date = $date_pieces[2].'/'.$date_pieces[1].'/'.$date_pieces[0];echo date("F Y",strtotime($formatted_mortgage_date));?>
 				</td>
-				<td class="col-md-3">
-				<?php echo ucfirst($mortgage['stage']); ?><?php if(!empty($mortgage['eff_to'])){echo ' on '.$mortgage['eff_to'];} ?>
-				</td>
-
+				<td class="col-md-2">
+				<?php echo ucfirst($mortgage['stage']); if($mortgage['stage'] == 'Outstanding'){ echo   $mortgage['Inv_fin_related']? '<span  class="Not_related_to_Invoice_Finance inv'.$mortgage['id'].'"><br>Not Related To Invoice Finance</span>' : '<span style="display:none;" class="Not_related_to_Invoice_Finance inv'.$mortgage['id'].'"><br>Not Related To Invoice Finance</span>';  } ?><?php if(!empty($mortgage['eff_to'])){
+    //echo ' on '.$mortgage['eff_to'];
+  
+} ?>
+				</td> 
 
 	<td class="col-md-2">
 				<?php  echo $mortgage['eff_to']; ?>
+				</td>
+                    
+	<td class="col-md-2">
+        <?php 
+        
+        
+        
+        if($mortgage['stage'] == 'Outstanding'){ 
+        ?>
+				<span  class="label  btn-warning comp_details_edit_btn providerStatus" id="morprov<?php echo $mortgage['id']; ?>" data-id="<?php echo $mortgage['id']; ?>" providerStatus="<?php echo $mortgage['Inv_fin_related'] ? 1 : false; ?>" data-toggle="modal" data-target="#debmortgage" style="font-size: 12px; float: right;">Edit</span>
+        <?php } ?>
 				</td>
 		 
 				</tr>
@@ -1054,6 +1062,9 @@ endif;
                 </div>
             </div>
     </div>
+            
+            
+
      </div>        
         
 
@@ -1070,7 +1081,36 @@ endif;
 
 </div>
     
+        
+        
+
+        
+  <!-- Modal -->
+<div class="modal fade" id="debmortgage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      
+      </div>
+      <div class="modal-body">
+          <form><lable>Not related to Invoice Finance </lable>
+                <input name="debenturemortgage" id="debenturemortgage" type="checkbox">   
+                <input name="providerid" type="hidden" class="providerid"  value=""> 
+                <input name="companyid" type="hidden" class="providercompanyid" value=""> 
+          </form>
+      </div>
+      <div class="modal-footer">
     
+     <button type="submit" class="btn btn-sm btn-warning btn-block ladda-button debmortgage" edit-btn=""   data-style="expand-right" data-size="1">
+                    <span class="ladda-label">Save</span>
+                </button>
+      </div>
+    </div>
+  </div>
+</div>  
  </div>
    
 <script>

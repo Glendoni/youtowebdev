@@ -968,7 +968,7 @@ $('#sidebar').hide();
      function getIcon(actionType){
             //console.log(actionType)
          var icon;
-console.log(actionType)
+//console.log(actionType)
               switch (actionType){
                     
                       //Quote to : 
@@ -1233,7 +1233,7 @@ if(tm > 1){ tm = tm + ' Days Overdue'; }else if(tm == 1){ tm  = tm + ' Day Overd
 
         if((false))
         outcomeRemove ='<span class=" btn btn-default btn-xs label label-success" style="font-size:10px; margin:0 0px;">Add Outcome</span> <span class="btn btn-default btn-xs label label-danger">Remove</span>';
-console.log(action['cancelled_at'] )
+//console.log(action['cancelled_at'] )
         if( action['cancelled_at'] != null){
             kpStr   ='<span class="label label-danger" style="font-size:10px; margin:0 0px; float:right;">Cancelled: '+action['cancelled_at']+'</span>';
             badge = '';   

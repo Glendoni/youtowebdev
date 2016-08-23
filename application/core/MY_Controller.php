@@ -470,6 +470,7 @@ class MY_Controller extends CI_Controller {
 			// mortgages 
 			if(isset($company->company->f2) && (empty($company->company->f2) == False)){
 				$mortgages_array = array();
+      
 				foreach ($company->company->f2 as $mortgage) {
 					$mortgages = array();
 					$mortgages['id'] = $mortgage->f1;
@@ -479,7 +480,7 @@ class MY_Controller extends CI_Controller {
 					$mortgages['eff_to'] = $mortgage->f5;
 					$mortgages['type'] = $mortgage->f6;
 					$mortgages['url'] = $mortgage->f7;
-
+$mortgages['Inv_fin_related'] = $mortgage->f8;
 
 					$mortgages_array[] = $mortgages;
 				}

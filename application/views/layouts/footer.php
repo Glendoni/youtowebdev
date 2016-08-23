@@ -69,7 +69,7 @@
 
 
 
-$owned_urls= array('fe_read_tag', 'fe_get_tag', 'getAction', 'operation_read', 'autopilotActions', 'getCompletedActions', 'campaign_page_getter', 'loaddata', 'getTeamStats', 'refactorFavorites','login');
+$owned_urls= array('fe_read_tag', 'fe_get_tag', 'getAction', 'operation_read', 'autopilotActions', 'getCompletedActions', 'notForInvoices',  'campaign_page_getter', 'loaddata', 'getTeamStats', 'refactorFavorites','login');
    $string = current_full_url();
         for($iLpage=0; $iLpage < count($owned_urls); $iLpage++)
         {

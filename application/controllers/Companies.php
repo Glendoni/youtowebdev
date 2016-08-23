@@ -968,6 +968,32 @@ echo $this->Tagging_model->$route($post);
         
     }
     
+  
+    public function notForInvoices(){
+        
+        $rap = $this->input->post();
+        
+       $this->get_current_user_id();
+    
+        
+ 
+     $output =  $this->Companies_model->update_not_for_invoices($rap,$this->get_current_user_id());
+        
+        
+        //echo $rap['debenturemortgage'] ? 'Yes': 'Nooooo';
+        if($output ){
+            
+          echo json_encode(array('success' =>$rap['providerid']));  
+        }else{
+             echo json_encode(array('error' =>$rap['providerid']));  
+        }
+        //echo json_encode(array('glen' =>$rap, 'userid' =>  $this->get_current_user_id()));
+        
+        
+    }
+    
+  
+    
     
 }
  

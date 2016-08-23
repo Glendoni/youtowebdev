@@ -9,9 +9,77 @@ function dateRequired()     {
 }
 
 
-//console.warn(regArray.join());
-
+  
 $( document ).ready(function() {
+    
+    
+    //INVOICE FINANCE
+$('.debmortgage').on('click', function(){
+ 
+        event.preventDefault();
+    var param = $('#debmortgage form').serialize();
+
+ 
+    //JS JASON WITH POST PARAMETER
+    
+      $.ajax({
+        type: "POST",
+          data: param,
+            dataType: "json",
+        url: "../companies/notForInvoices",
+        success: function(data) {
+          $('#debmortgage').modal('toggle');
+      
+if(data.success){  
+    $('table .inv'+data.success).show(); 
+
+ $('table .cont'+data.success).removeClass('warning'); 
+     $('table .cont'+data.success).addClass('success'); 
+       $('#morprov'+data.success).attr('providerstatus', 1)
+}
+            
+          if(data.error){  $('table .inv'+data.error).hide(); 
+                        
+                         $('table .cont'+data.error).removeClass('success'); 
+                         $('table .cont'+data.error).addClass('warning'); 
+                        
+                         $('#morprov'+data.error).attr('providerstatus', '')
+                        }
+      
+        }
+        });
+    
+  
+
+})
+    
+$('.providerStatus').click(function(){
+
+var  outstandingID  = $(this).attr('data-id')
+var  providerStatus  = $(this).attr('providerStatus')
+ 
+if(providerStatus){ 
+   
+    $('#debenturemortgage').prop('checked', true) 
+}else{
+    $('#debenturemortgage').prop('checked', false); 
+} 
+  var parid = GetUrlParamID();
+$('.providerid').val(outstandingID);
+    
+ $('.providercompanyid').val(parid);
+
+
+})
+
+$('#debenturemortgage').change(function() {
+    if(this.checked) {
+   
+        
+      // $('#debmortgage form lable').text('Not related to Invoice Finance ');  
+      
+    }
+});
 
 function gettagscampList(param){
     
@@ -28,23 +96,18 @@ function gettagscampList(param){
                  url: 'companies/fe_get_tag',
             success: function(data) {  
                 $.each( data, function( key, val) {
-                    
-                  
                  //parent_tag_name_holder.push('<ul class="tagLists'+param+val['parent_tag_id']+'"><li>'+val['name']+'<li></ul>')  
-
-
  //console.log(parent_tag_name_holder.indexOf('tagLists'+val['parent_tag_id']))
 //console.log(parent_tag_name_holder.indexOf(val['parent_tag_name']+val['parent_tag_id']) )
-if(parent_tag_name_holder.indexOf(val['parent_tag_name']) == -1){
+        if(parent_tag_name_holder.indexOf(val['parent_tag_name']) == -1){
 
-    parent_tag_name_holder.push(val['parent_tag_name']);
-    
-    $('.tagLists'+param).append('<div class="col-xs-6 col-sm-3  tag_display_holder"><div class="tag-display-header">'+val['parent_tag_name']+'</div><ul class="listTagSummary tagLists'+param+val['parent_tag_id']+'"></ul></div>');
-                //console.log("Needle found.");
-    
-};
- 
-                })
+        parent_tag_name_holder.push(val['parent_tag_name']);
+
+        $('.tagLists'+param).append('<div class="col-xs-6 col-sm-3  tag_display_holder"><div class="tag-display-header">'+val['parent_tag_name']+'</div><ul class="listTagSummary tagLists'+param+val['parent_tag_id']+'"></ul></div>');
+            //console.log("Needle found.");
+
+        };
+  })
                 
                 //console.log(parent_tag_name_holder.join(""));
                 

@@ -993,11 +993,11 @@ function delete_campaign($id,$user_id)
          
          $query = $this->db->query("select distinct T.company_id as comp_id,
 C.name
-from (select * from VIEWS V where V.user_id = ".$user_id." order by V.created_at desc limit 30) T
+from (select * from VIEWS V where V.user_id = ".$user_id." order by V.created_at desc limit 300) T
 JOIN COMPANIES C
 ON T.company_id = C.id
 where T.user_id = ".$user_id."
-limit 6");
+limit 15");
          
 
 //echo $this->db->last_query();
