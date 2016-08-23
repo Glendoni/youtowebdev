@@ -474,7 +474,7 @@ if ($your_date < $now){;
      //print_r($company['mortgages']);
                $tdbgcolorclass = 'success';
                 foreach ($company['mortgages'] as $mortgage):?>
-                <?php $tdbgcolorclass =  $mortgage['Inv_fin_related']? 'success' : 'warning' ;//$tdbgcolorclass = 'danger'; ?>
+                <?php $tdbgcolorclass =  $mortgage['Inv_fin_related']? 'success' : 'danger' ;//$tdbgcolorclass = 'danger'; ?>
 				<tr <?php echo $mortgage['stage']==MORTGAGES_SATISFIED? 'class="danger cont'.$mortgage['id'].'"' : 'class="'.$tdbgcolorclass.' cont'.$mortgage['id'].'"' ?>>
 				<td class="col-md-4" >
 					<?php if(isset($mortgage['url'])) : ?>
@@ -488,9 +488,10 @@ if ($your_date < $now){;
 				</td>
 				<td class="col-md-2">
 				<?php $mortgages_start  = $mortgage['eff_from'];$date_pieces = explode("/", $mortgages_start);$formatted_mortgage_date = $date_pieces[2].'/'.$date_pieces[1].'/'.$date_pieces[0];echo date("F Y",strtotime($formatted_mortgage_date));?>
+                    <?php  if($mortgage['stage'] == 'Outstanding'){ echo   $mortgage['Inv_fin_related']? '<span  class="related_to_Invoice_Finance inv'.$mortgage['id'].'"></span>' : '<span  class="Not_related_to_Invoice_Finance inv'.$mortgage['id'].'"><br>Related To Invoice Finance</span>';  } ?>
 				</td>
 				<td class="col-md-2">
-				<?php echo ucfirst($mortgage['stage']); if($mortgage['stage'] == 'Outstanding'){ echo   $mortgage['Inv_fin_related']? '<span  class="Not_related_to_Invoice_Finance inv'.$mortgage['id'].'"><br>Not Related To Invoice Finance</span>' : '<span style="display:none;" class="Not_related_to_Invoice_Finance inv'.$mortgage['id'].'"><br>Not Related To Invoice Finance</span>';  } ?><?php if(!empty($mortgage['eff_to'])){
+				<?php echo ucfirst($mortgage['stage']); ?><?php if(!empty($mortgage['eff_to'])){
     //echo ' on '.$mortgage['eff_to'];
   
 } ?>

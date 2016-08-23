@@ -31,19 +31,23 @@ $('.debmortgage').on('click', function(){
           $('#debmortgage').modal('toggle');
       
 if(data.success){  
-    $('table .inv'+data.success).show(); 
+    $('table .inv'+data.success).hide(); 
 
- $('table .cont'+data.success).removeClass('warning'); 
+ $('table .cont'+data.success).removeClass('danger'); 
      $('table .cont'+data.success).addClass('success'); 
        $('#morprov'+data.success).attr('providerstatus', 1)
+       
+       //$('.inv'+data.success).html('<br>Related To Invoice Finance');
 }
             
-          if(data.error){  $('table .inv'+data.error).hide(); 
+          if(data.error){   $('.inv'+data.error).show(); 
                         
                          $('table .cont'+data.error).removeClass('success'); 
-                         $('table .cont'+data.error).addClass('warning'); 
+                         $('table .cont'+data.error).addClass('danger'); 
                         
                          $('#morprov'+data.error).attr('providerstatus', '')
+                         console.log('table Not_related_to_Invoice_Finance .inv'+data.error)
+                                $('.inv'+data.error).html('<br>Related To Invoice Finance');
                         }
       
         }
