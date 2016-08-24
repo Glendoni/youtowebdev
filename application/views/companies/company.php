@@ -446,8 +446,6 @@ if ($your_date < $now){;
                                  echo '£'. number_format(floor($number / 10) * 10);  
 
                         }
-
-                       
                 }
                 
                 */
@@ -522,9 +520,7 @@ if ($your_date < $now){;
 			</tbody>
 			</table>
 			<?php else: ?>
-			<div class="alert alert-info" style="margin-top:10px;">
-                No mortgage data registered.
-            </div>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><p class="noactionmsg">No mortgage data registered</p></div>
 		<?php endif; ?>
 		</div>
  
@@ -553,6 +549,13 @@ if ($your_date < $now){;
 
 
 		<table class="table">
+            
+            
+            <?php 
+          // echo   print_r($addresses);
+            
+            
+            if($addresses->address) { ?>
 	      <thead>
 	        <tr>
 	          <th class="col-md-7">Address</th>
@@ -562,6 +565,7 @@ if ($your_date < $now){;
 
 	        </tr>
 	      </thead>
+            <?php } ?>
 	      <tbody>
 	      	<?php
               $ai =  0 ;
@@ -605,7 +609,7 @@ endif;
 		<?php endif; ?>
 
 
-<?php     if(!$ai) echo   '<div class="alert alert-info" style="margin-top:10px;">No address data.</div> ';
+<?php     if(!$ai) echo   '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><p class="noactionmsg">No address data registered</p></div>';
             ?>
 
 		</div>
@@ -706,9 +710,7 @@ endif;
 	    </table>
 
 	    <?php else: ?>
-			<div class="alert alert-info" style="margin-top:10px;">
-                None
-            </div>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><p class="noactionmsg">No contact data registered</p></div>
 		<?php endif; ?>
 
 		</div>

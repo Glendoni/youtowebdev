@@ -2955,6 +2955,15 @@ border:none;
     
     margin-left: 7px;
 }
+.noactionmsglisting{
+    
+    font-size: 23px; 
+    color: #D0D0D0; 
+       margin-left: 23px;
+    text-align:center;
+    
+    
+}
  
 /*! Hint.css - v2.2.1 - 2016-03-26 //#2b4461
 * http://kushagragour.in/lab/hint/

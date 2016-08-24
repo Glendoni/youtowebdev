@@ -390,9 +390,8 @@ if ($your_date < $now){;
 				</tbody>
 				</table>
 				<?php else: ?>
-				<div class="alert alert-info" style="margin-top:10px;">
-	                No mortgage data registered.
-	            </div>
+			 
+    	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><p class="noactionmsglisting">No mortgage data registered</p></div>
 			<?php endif; ?>
 			</div>
 		</div>
