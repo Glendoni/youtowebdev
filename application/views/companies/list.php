@@ -354,8 +354,9 @@ if ($your_date < $now){;
 				<tr>
 					<th class="col-md-4">Mortgage Provider</th>
                      <th class="col-md-2">&nbsp;</th>
-					<th class="col-md-3">Started</th>
-					<th class="col-md-3">Status</th>
+					<th class="col-md-2">Started</th>
+					<th class="col-md-2">Status</th>
+                    <th class="col-md-2">Finished</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -377,7 +378,12 @@ if ($your_date < $now){;
                      <?php  if($mortgage['stage'] == 'Outstanding'){ echo   $mortgage['Inv_fin_related']? '<span  class="related_to_Invoice_Finance inv'.$mortgage['id'].'"></span>' : '<span  class="Not_related_to_Invoice_Finance inv'.$mortgage['id'].'">Related To Invoice Finance</span>';  } ?>
                     </td>
 					<td class="col-md-3"><?php echo $mortgage['eff_from']; ?></td>
-					<td class="col-md-3"><!--<span class="label label-<?php echo $mortgage['stage']==MORTGAGES_SATISFIED? 'default' : 'success' ?>">--><strong><?php echo $mortgage['stage']; ?></strong><?php if(!empty($mortgage['eff_to'])){echo ' on '.$mortgage['eff_to'];} ?></span></td>
+					<td class="col-md-3"><!--<span class="label label-<?php echo $mortgage['stage']==MORTGAGES_SATISFIED? 'default' : 'success' ?>">--><strong><?php echo $mortgage['stage']; ?></strong><?php if(!empty($mortgage['eff_to'])){
+   // echo ' on '.$mortgage['eff_to'];
+} ?></span></td>
+                	<td class="col-md-2" style="text-align:center;">
+				<?php  echo $mortgage['eff_to'] ?  $mortgage['eff_to'] : '<span>-</span>'; ?>
+				</td>
 
 				</tr>
 				<?php endforeach; ?>
