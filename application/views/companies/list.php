@@ -207,7 +207,7 @@ if ($your_date < $now){;
 			<?php if (isset($company['linkedin_id'])): ?>
 			<a class="btn  btn-info btn-sm btn-block linkedin" href="https://www.linkedin.com/company/<?php echo $company['linkedin_id'] ?>"  target="_blank">LinkedIn</a>
 			  <?php else: ?>
-              <a class="btn  btn-primary btn-sm btn-block" href="https://www.linkedin.com/vsearch/f?type=all&keywords=<?php echo  urlencode($company['name']) ?>"  target="_blank">Search LinkedIn <i class="fa fa-search" aria-hidden="true"></i> </a>
+              <a class="btn  btn-primary btn-sm btn-block" href="https://www.linkedin.com/vsearch/f?type=all&keywords=<?php echo  urlencode($company['name']) ?>"  target="_blank">LinkedIn <i class="fa fa-search" aria-hidden="true"></i> </a>
             <?php endif; ?>
             
             
