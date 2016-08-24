@@ -520,7 +520,7 @@ if ($your_date < $now){;
 			</tbody>
 			</table>
 			<?php else: ?>
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><p class="noactionmsg">No mortgage data registered</p></div>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><p class="noactionmsglisting">No mortgage data registered</p></div>
 		<?php endif; ?>
 		</div>
  
@@ -609,7 +609,7 @@ endif;
 		<?php endif; ?>
 
 
-<?php     if(!$ai) echo   '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><p class="noactionmsg">No address data registered</p></div>';
+<?php     if(!$ai) echo   '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><p class="noactionmsglisting">No address data registered</p></div>';
             ?>
 
 		</div>
@@ -710,7 +710,7 @@ endif;
 	    </table>
 
 	    <?php else: ?>
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><p class="noactionmsg">No contact data registered</p></div>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><p class="noactionmsglisting">No contact data registered</p></div>
 		<?php endif; ?>
 
 		</div>
