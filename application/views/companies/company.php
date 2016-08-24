@@ -466,7 +466,7 @@ if ($your_date < $now){;
 					<th class="col-md-3">Started</th>
 					<th class="col-md-3">Status</th>
                 <th class="col-md-2">Finished</th>
-                    <th class="col-md-2">Edit</th>
+                    <th class="col-md-2">&nbsp;</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -502,8 +502,8 @@ if ($your_date < $now){;
 } ?>
 				</td> 
 
-	<td class="col-md-2">
-				<?php  echo $mortgage['eff_to']; ?>
+	<td class="col-md-2" style="text-align:center;">
+				<?php  echo $mortgage['eff_to'] ?  $mortgage['eff_to'] : '<span>-</span>'; ?>
 				</td>
                     
 	<td class="col-md-2">

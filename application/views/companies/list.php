@@ -352,15 +352,17 @@ if ($your_date < $now){;
 			<table class="table" style="font-size:12px">
 			<thead>
 				<tr>
-					<th class="col-md-6">Mortgage Provider</th>
+					<th class="col-md-4">Mortgage Provider</th>
+                     <th class="col-md-2">&nbsp;</th>
 					<th class="col-md-3">Started</th>
 					<th class="col-md-3">Status</th>
 				</tr>
 			</thead>
 			<tbody>
 				<?php foreach ($company['mortgages'] as $mortgage):?>
-				<tr <?php echo $mortgage['stage']==MORTGAGES_SATISFIED? 'class="danger"' : 'class="success"' ?> >
-					<td class="col-md-6" >
+			     <?php $tdbgcolorclass =  $mortgage['Inv_fin_related']? 'success' : 'danger' ;//$tdbgcolorclass = 'danger'; ?>
+				<tr <?php echo $mortgage['stage']==MORTGAGES_SATISFIED? 'class="danger cont'.$mortgage['id'].'"' : 'class="'.$tdbgcolorclass.' cont'.$mortgage['id'].'"' ?>>
+					<td class="col-md-4" >
 					<?php if(isset($mortgage['url'])) : ?>
 						<a href="http://<?php echo $mortgage['url']; ?>" target="_blank"><?php echo $mortgage['name']; ?> <span style="font-size:10px;"><i class="fa fa-external-link"></i></span></a>
 	    			<?php else: ?>
@@ -370,6 +372,10 @@ if ($your_date < $now){;
 				<?php echo $mortgage['type']; ?>
 				</div>
 					</td>
+                       <td class="col-md-2">
+                        
+                     <?php  if($mortgage['stage'] == 'Outstanding'){ echo   $mortgage['Inv_fin_related']? '<span  class="related_to_Invoice_Finance inv'.$mortgage['id'].'"></span>' : '<span  class="Not_related_to_Invoice_Finance inv'.$mortgage['id'].'">Related To Invoice Finance</span>';  } ?>
+                    </td>
 					<td class="col-md-3"><?php echo $mortgage['eff_from']; ?></td>
 					<td class="col-md-3"><!--<span class="label label-<?php echo $mortgage['stage']==MORTGAGES_SATISFIED? 'default' : 'success' ?>">--><strong><?php echo $mortgage['stage']; ?></strong><?php if(!empty($mortgage['eff_to'])){echo ' on '.$mortgage['eff_to'];} ?></span></td>
 
