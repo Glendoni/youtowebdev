@@ -487,7 +487,7 @@ if ($your_date < $now){;
 				</td>
                     <td class="col-md-2">
                         
-                     <?php  if($mortgage['stage'] == 'Outstanding'){ echo   $mortgage['Inv_fin_related']? '<span  class="related_to_Invoice_Finance inv'.$mortgage['id'].'"></span>' : '<span  class="Not_related_to_Invoice_Finance inv'.$mortgage['id'].'">Related To Invoice Finance</span>';  } ?>
+                     <?php  if($mortgage['stage'] == 'Outstanding'){ echo   $mortgage['Inv_fin_related']? '<span  class="related_to_Invoice_Finance inv'.$mortgage['id'].'">Not Related To Invoice Finance</span>' : '<span  class="Not_related_to_Invoice_Finance inv'.$mortgage['id'].'">Related To Invoice Finance</span>';  } ?>
                     </td>
 				<td class="col-md-1">
 				<?php $mortgages_start  = $mortgage['eff_from'];$date_pieces = explode("/", $mortgages_start);$formatted_mortgage_date = $date_pieces[2].'/'.$date_pieces[1].'/'.$date_pieces[0];echo date("F Y",strtotime($formatted_mortgage_date));?>

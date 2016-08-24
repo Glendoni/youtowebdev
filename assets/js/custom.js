@@ -31,13 +31,13 @@ $('.debmortgage').on('click', function(){
           $('#debmortgage').modal('toggle');
       
 if(data.success){  
-    $('table .inv'+data.success).hide(); 
+   // $('table .inv'+data.success).hide(); 
 
  $('table .cont'+data.success).removeClass('danger'); 
      $('table .cont'+data.success).addClass('success'); 
        $('#morprov'+data.success).attr('providerstatus', 1)
        
-       //$('.inv'+data.success).html('<br>Related To Invoice Finance');
+       $('.inv'+data.success).html('Not Related To Invoice Finance');
 }
             
           if(data.error){   $('.inv'+data.error).show(); 
