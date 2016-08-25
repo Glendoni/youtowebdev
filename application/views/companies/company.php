@@ -1104,11 +1104,19 @@ endif;
       
       </div>
       <div class="modal-body">
-          <form><lable>Not related to Invoice Finance </lable>
-                <input name="debenturemortgage" id="debenturemortgage" type="checkbox">   
-                <input name="providerid" type="hidden" class="providerid"  value=""> 
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+
+
+          <form>
+ <label class="checkbox-inline"><input type="checkbox" value="">Proberly Related to Invoice Finance</label>
+<label class="checkbox-inline"><input type="checkbox" value="">Related to Invoice Finance</label>
+<label class="checkbox-inline"><input type="checkbox" name="debenturemortgage" id="debenturemortgage" value="">Not related to Invoice Finance</label>
+               <input name="providerid" type="hidden" class="providerid"  value=""> 
                 <input name="companyid" type="hidden" class="providercompanyid" value=""> 
           </form>
+              
+              </div>
       </div>
       <div class="modal-footer">
     

@@ -1,8 +1,6 @@
 <?php if(empty($companies)): ?>
 	<div class="alert alert-warning">No companies found</div>
 <?php else: ?>
-
-
 <?php $i = 0; foreach ( $companies as $company):  ?>
 <?php $this->load->view('companies/edit_box.php',array('company'=>$company)); ?>
 <?php $this->load->view('companies/create_contact_box.php',array('company'=>$company)); ?>
@@ -89,18 +87,28 @@
 		</span>
                 
                      <?php
-               
+                    //print '<pre>';
+                  //print_r($pipedate);
+                
                 if(!$company['customer_to']){  ?> 
                        
                     
                         <span class="last_pipeline_created_at">
                         <?php
  //echo $last_pipeline_created_at;
+                  
+                    
+                     //print '</pre>';
+                 // echo $company['id'];
                     
                     
-                      foreach($last_pipeline_created_at['pipedate'] as $pipekey => $pipeval ){
+                
+                  $pipedate =    $pipedate ?  $pipedate : $this->session->userdata('pipedate') ;
                     
-                    if($pipeval['id'] == $company['id']){
+                    //print_r($pipedate);
+                      foreach($pipedate as $ky => $pipeval ){
+                
+                    if($pipeval['id'] == $company['id'] && ($pipeval['last_pipeline_date'])){
                         
                            $your_date = date('Y-m-d' , strtotime($pipeval['last_pipeline_date']));
  

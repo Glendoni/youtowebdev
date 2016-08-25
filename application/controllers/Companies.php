@@ -22,7 +22,7 @@ class Companies extends MY_Controller {
 	public function index($ajax_refresh = False) 
 	{	
 		$session_result = $this->session->userdata('companies');
-        
+        $this->session->unset_userdata('pipedate');
        
 		$search_results_in_session = unserialize($session_result);
 		$refresh_search_results = $this->session->flashdata('refresh');
@@ -138,8 +138,13 @@ class Companies extends MY_Controller {
         
         $this->data['fetagging'] =  $frontend_taging_js;
         
-        $pipedate['pipedate'] = $dta;
-        $this->data['last_pipeline_created_at'] = $pipedate;
+    $pipedate = $dta;
+        
+         //print '<pre>';
+			// print_r($dta);
+			 //die;	
+        
+        $this->data['pipedate'] = $pipedate;
 		$this->data['results_type'] = 'Saved Search';
 		$this->data['edit_page'] = 'edit_saved_search';
 		$this->data['main_content'] = 'companies/search_results';

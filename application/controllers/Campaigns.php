@@ -134,8 +134,10 @@ class Campaigns extends MY_Controller {
 	}
 
 	public function display_campaign(){
+        
 		if($this->input->get('id'))
 		{	
+            //$this->session->unset_userdata('pipedate');
 			$campaign = $this->Campaigns_model->get_campaign_by_id($this->input->get('id'));
 			if ($campaign[0]->id == False) {
 				print_r('No campaign');
@@ -157,11 +159,22 @@ class Campaigns extends MY_Controller {
 
 			if(empty($result))
 			{
-				$this->session->unset_userdata('companies');
+                
+               $this->session->unset_userdata('companies');
 				unset($search_results_in_session);
 			}
 			else
 			{
+                
+                
+                           foreach($result as $item => $value){
+                              // echo $value['id'];
+                        $dt =     $this->data['last_pipeline_created_at'] = $this->Actions_model->actiondata($value['id']);
+                        $dta[] = array('id' => $value['id'], 'last_pipeline_date' =>  $dt );      
+                
+                }
+            
+    $this->session->set_userdata('pipedate',$dta);
 				$session_result = serialize($result);
 				$this->session->set_userdata('pipeline',$pipeline);
 				$this->session->set_userdata('companies',$session_result);
