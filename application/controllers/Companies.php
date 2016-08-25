@@ -55,6 +55,13 @@ class Companies extends MY_Controller {
                 
 				
 				$result = $this->process_search_result($raw_search_results);
+                
+               foreach($result as $item => $value){
+            $dt =     $this->data['last_pipeline_created_at'] = $this->Actions_model->actiondata($value['id']);
+  $dta[] = array('id' => $value['id'], 'last_pipeline_date' =>  $dt );
+                   
+                
+}
 			 
 				if(empty($result))
 				{
@@ -77,6 +84,8 @@ class Companies extends MY_Controller {
 				$_POST[$key] = $value;
 			}
 			$raw_search_results = $this->Companies_model->search_companies_sql($post);
+
+
 			$result = $this->process_search_result($raw_search_results);
 			if(empty($result))
 			{
@@ -129,7 +138,8 @@ class Companies extends MY_Controller {
         
         $this->data['fetagging'] =  $frontend_taging_js;
         
-        
+        $pipedate['pipedate'] = $dta;
+        $this->data['last_pipeline_created_at'] = $pipedate;
 		$this->data['results_type'] = 'Saved Search';
 		$this->data['edit_page'] = 'edit_saved_search';
 		$this->data['main_content'] = 'companies/search_results';

@@ -51,7 +51,7 @@
 $active_group = 'remote';
 $active_record = TRUE;
 
-$db['remote']['hostname'] = 'ec2-54-225-223-12.compute-1.amazonaws.com';
+$db['remote']['hostname'] = 'ec2-54-227-240-21.compute-1.amazonaws.com';
 $db['remote']['username'] = 'u71hv1vp0v270n';
 $db['remote']['password'] = 'p98h432bp3a22c25h75oqrsj61m';
 $db['remote']['database'] = 'd7bptvh4086805';
@@ -66,7 +66,7 @@ $db['remote']['dbcollat'] = 'utf8_general_ci';
 $db['remote']['swap_pre'] = '';
 $db['remote']['autoinit'] = TRUE;
 $db['remote']['stricton'] = FALSE;
-$db['remote']['port'] = 6082;
+$db['remote']['port'] = 5552;
 
 
 
