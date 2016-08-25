@@ -1167,7 +1167,7 @@ public function getActionsProposals($userID = 0){
     
   function actiondata($id){ // Checks created at of pipeline action 
       
-   $sql = "SELECT id,created_at,action_type_id FROM actions WHERE company_id = ".intval($id)." AND action_type_id IN (16,32,34,8,31,11) ORDER BY created_at ";
+   $sql = "SELECT id,created_at,action_type_id FROM actions WHERE company_id = ".intval($id)." AND action_type_id IN (16,32,34,8,31,11,19) ORDER BY created_at ";
    
     $query = $this->db->query($sql);
     if ($query->num_rows() > 0)
