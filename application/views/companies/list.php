@@ -190,7 +190,7 @@ if ($company['actioned_at1'] > 0){
 <div><span class="label label-danger" style="font-size:10px;">
 <?php   if ($daysoverdue > 1) {echo $daysoverdue." Days";} elseif($daysoverdue == 1){  echo $daysoverdue." Day";   }else{echo "";};?>  Overdue </span></div>
 
-<?php } else {}?>
+ 
 <?php endif; ?>
 
 </div>
