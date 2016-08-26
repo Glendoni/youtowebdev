@@ -991,12 +991,30 @@ function delete_campaign($id,$user_id)
         //ops.user_id, c.id as comp_id, c.name 
      
         
-         $query = $this->db->query("select distinct T.company_id as company,
+         $query = $this->db->query("select T.company_id AS company,
 C.name
-from (select * from VIEWS V where V.user_id = ".$user_id." order by V.created_at desc limit 300) T
+
+from
+(
+select V.company_id,
+row_number() OVER (PARTITION BY company_id order by V.created_at desc) \"rownum\",
+V.created_at
+
+from VIEWS V
+
+where V.user_id = ".$user_id." -- ie current user
+
+order by V.created_at desc
+limit 50
+) T
+
 JOIN COMPANIES C
 ON T.company_id = C.id
-where T.user_id = ".$user_id."
+
+where \"rownum\" = 1
+
+order by T.created_at desc
+
 limit 16");
          
          
