@@ -415,14 +415,9 @@ if ($company['actioned_at1'] > 0){
     
        if($mortgage['Inv_fin_related'] == 'y'){ echo '<span  class="related_to_Invoice_Finance inv'.$mortgage['id'].'">Not Related To Invoice Finance</span>'; 
                 }elseif($mortgage['Inv_fin_related'] == null){
-        
     echo  '<span  class="Not_related_to_Invoice_Finance inv'.$mortgage['id'].'">Related To Invoice Finance</span>'; 
-    
-    
     }else{
-        
         echo  '<span  class="Not_related_to_Invoice_Finance inv'.$mortgage['id'].'">Properly Related To Invoice Finance</span>'; 
-        
     } 
                                                                    
                                                                    
