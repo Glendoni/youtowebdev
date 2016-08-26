@@ -49,7 +49,10 @@
                                         </span>
 
                         <?php if(!$company['customer_to']){  ?> 
-                         <?php if($last_pipeline_created_at && $company['id'] != '154537' ){ ?>
+                         <?php 
+
+                                                          
+                        if($last_pipeline_created_at && $company['id'] != '154537' && $company['pipeline'] != 'Prospect' && $company['pipeline'] != 'Suspect' ){ ?>
                     
                         <span class="last_pipeline_created_at">
                         <?php
@@ -358,8 +361,8 @@ if ($your_date < $now){;
 				<label>Lead Source</label>
 				<p style="
     margin-top: -4px;
-">	- <?php echo  $company_sources[$company['source']]  ? $company_sources[$company['source']]. '  '  : '';?><br>
-                 <span class="leadSourceSubText"><?php echo $company['source_explanation'] ? $company['source_explanation'] : ''; ?></span></p>
+"><?php echo  $company_sources[$company['source']]  ? $company_sources[$company['source']]. '  '  : '';?><br>
+                 <strong>-</strong> <span class="leadSourceSubText"><?php echo $company['source_explanation'] ? $company['source_explanation'] : ''; ?></span></p>
 			 
 		</div>
             
@@ -475,9 +478,9 @@ if ($your_date < $now){;
                 foreach ($company['mortgages'] as $mortgage):?>
                 <?php
                 
-                
-                
-             if( $mortgage['Inv_fin_related'] == 'y') {  
+               
+       
+             if( $mortgage['Inv_fin_related'] == 'p' || $mortgage['Inv_fin_related'] == false) {  
                 $tdbgcolorclass =   'success'  ;//$tdbgcolorclass = 'danger';
                 }else{
                     
@@ -501,7 +504,9 @@ if ($your_date < $now){;
 				</td>
                     <td class="col-md-2">
                         
-                     <?php  if($mortgage['stage'] == 'Outstanding'){ 
+                     <?php 
+                      
+                        if($mortgage['stage'] == 'Outstanding'){ 
     
     
   
@@ -516,7 +521,7 @@ if ($your_date < $now){;
     
     }else{
         
-        echo  '<span  class="Not_related_to_Invoice_Finance inv'.$mortgage['id'].'">Properly Related To Invoice Finance</span>'; 
+        echo  '<span  class="Properly_related_to_Invoice_Finance inv'.$mortgage['id'].'">Properly Related To Invoice Finance</span>'; 
         
     } 
                         

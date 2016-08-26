@@ -397,7 +397,25 @@ if ($company['actioned_at1'] > 0){
 			</thead>
 			<tbody>
 				<?php foreach ($company['mortgages'] as $mortgage):?>
-			     <?php $tdbgcolorclass =  $mortgage['Inv_fin_related']? 'success' : 'danger' ;//$tdbgcolorclass = 'danger'; ?>
+                
+                  <?php
+                
+                
+                
+             if( $mortgage['Inv_fin_related'] == 'y') {  
+                $tdbgcolorclass =   'danger'  ;//$tdbgcolorclass = 'danger';
+                }else{
+                    
+                  $tdbgcolorclass =   'success' ;  
+                    
+                }
+                
+                
+                
+                ?>
+                
+                
+			   
 				<tr <?php echo $mortgage['stage']==MORTGAGES_SATISFIED? 'class="danger cont'.$mortgage['id'].'"' : 'class="'.$tdbgcolorclass.' cont'.$mortgage['id'].'"' ?>>
 					<td class="col-md-4" >
 					<?php if(isset($mortgage['url'])) : ?>
@@ -438,8 +456,7 @@ if ($company['actioned_at1'] > 0){
 				</tbody>
 				</table>
 				<?php else: ?>
-			 
-    	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><p class="noactionmsglisting">No mortgage data registered</p></div>
+	 </div>
 			<?php endif; ?>
 			</div>
 		</div>

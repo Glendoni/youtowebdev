@@ -33,13 +33,13 @@ $('.debmortgage').on('click', function(){
 if(data.success){  
    // $('table .inv'+data.success).hide(); 
 
- $('table .cont'+data.success).removeClass('danger'); 
-     $('table .cont'+data.success).addClass('success'); 
+ $('table .cont'+data.success).removeClass('success'); 
+     $('table .cont'+data.success).addClass('danger'); 
       
   if(data.debenturemortgage == 'p'){
                             $('.inv'+data.success).html('Properly Related To Invoice Finance');
-       $('table .cont'+data.success).removeClass('success'); 
-                         $('table .cont'+data.success).addClass('danger'); 
+                         $('table .cont'+data.success).removeClass('danger'); 
+                         $('table .cont'+data.success).addClass('success'); 
       
        $('#morprov'+data.success).attr('providerstatus', 3)
       
@@ -54,8 +54,8 @@ if(data.success){
             
           if(data.error){   $('.inv'+data.error).show(); 
                         
-                         $('table .cont'+data.error).removeClass('success'); 
-                         $('table .cont'+data.error).addClass('danger'); 
+                         $('table .cont'+data.error).removeClass('danger'); 
+                         $('table .cont'+data.error).addClass('success'); 
                         
                          $('#morprov'+data.error).attr('providerstatus', 2)
                          console.log('table Not_related_to_Invoice_Finance .inv'+data.error)
