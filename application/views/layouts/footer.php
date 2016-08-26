@@ -168,6 +168,7 @@ $(document).ready(function(){
         var operations = [];
         var repLimited = [];
         var name = [];
+    var ourconcatstring = [];
   //var pageEval = GetUrlParamID();
    
         $.ajax({
@@ -176,18 +177,29 @@ $(document).ready(function(){
             url: "<?php echo base_url(); ?>Actions/operations_read/"+pageEval,
             success: function(data) {
   //dont know what the fucks up with the replace array function not working ?????? Must investigate 
+                 //console.log(data)   
                  $.each( data.operations, function( key, val ) {
     
-                     if(val.name != null){
-                 
+                     if(typeof val != null){
+                         
+                           ourconcatstring  =   val.split('_');   
+             repLimited =  ourconcatstring[1];
                     repLimited = ['Limited','ltd', 'LTD'];
-                    name =  val.name 
-                    repLimited =   name.replace('Limited', "");
+                    name = ourconcatstring[1]
+                    repLimited =   ourconcatstring[1].replace('Limited', "");
                     repLimited =   repLimited.replace('ltd', "");
                     repLimited =   repLimited.replace('Ltd', "");
                     repLimited =   repLimited.replace('LTD', "");
                    // console.log('<li><a href="<?php echo base_url();?>companies/company?id='+val.comp_id+'" >'+repLimited+'</a></li>');
-                    $('.tr-actions').append('<li><a href="<?php echo base_url();?>companies/company?id='+val.comp_id+'" >'+repLimited+'</a></li>');
+                    
+                     
+                    
+                         
+                         
+                 
+                        // console.log(ourconcatstring[0])
+                         
+                         $('.tr-actions').append('<li><a href="<?php echo base_url();?>companies/company?id='+ourconcatstring[0]+'" >'+repLimited+'</a></li>');
                      }
                  })
  

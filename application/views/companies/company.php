@@ -430,7 +430,7 @@ if ($your_date < $now){;
        
 		<!-- MORTGAGES -->
 
-
+<?php if(!empty($company['mortgages'])): ?>
 		
 		<div class="col-md-12">
 		<div class="panel panel-default">
@@ -455,7 +455,7 @@ if ($your_date < $now){;
  
 		<div class="panel-body">
             
-		<?php if(!empty($company['mortgages'])): ?>
+		
 			<table class="table">
 			<thead>
 				<tr>
@@ -519,8 +519,7 @@ if ($your_date < $now){;
 				<?php endforeach; ?>
 			</tbody>
 			</table>
-			<?php else: ?>
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><p class="noactionmsglisting">No mortgage data registered</p></div>
+	
 		<?php endif; ?>
 		</div>
  
@@ -529,6 +528,8 @@ if ($your_date < $now){;
 		</div>
 
 <!--ADDRESSES-->
+            
+          
 		<div class="col-md-12">
 		<div class="panel panel-default">
 		<div class="panel-heading" id="addresses">
@@ -543,9 +544,10 @@ if ($your_date < $now){;
             
 		</div>
 		</div>
+              <?php if(isset($addresses) and !empty($addresses)) : ?>
 		<!-- /.panel-heading -->
 		<div class="panel-body">
-		<?php if(isset($addresses) and !empty($addresses)) : ?>
+		
 
 
 		<table class="table">
@@ -609,7 +611,7 @@ endif;
 		<?php endif; ?>
 
 
-<?php     if(!$ai) echo   '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><p class="noactionmsglisting">No address data registered</p></div>';
+<?php     if(!$ai) //echo   '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><p class="noactionmsglisting">No address data registered</p></div>';
             ?>
 
 		</div>
@@ -710,7 +712,7 @@ endif;
 	    </table>
 
 	    <?php else: ?>
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><p class="noactionmsglisting">No contact data registered</p></div>
+		
 		<?php endif; ?>
 
 		</div>
@@ -1061,9 +1063,6 @@ endif;
                     <div class="timeline_inner"></div>
 
                     </div>
-                        
-                        <div class="row"><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><p class="noactionmsg">No Actions</p></div></div>
-
                 </div>
        
 
@@ -1109,9 +1108,9 @@ endif;
 
 
           <form>
- <label class="checkbox-inline"><input type="checkbox" value="">Proberly Related to Invoice Finance</label>
-<label class="checkbox-inline"><input type="checkbox" value="">Related to Invoice Finance</label>
-<label class="checkbox-inline"><input type="checkbox" name="debenturemortgage" id="debenturemortgage" value="">Not related to Invoice Finance</label>
+ <label class="checkbox-inline"><input type="radio"  name="debenturemortgage" value=""> Proberly Related to Invoice Finance</label>
+<label class="checkbox-inline"><input type="radio"  name="debenturemortgage" value=""> Related to Invoice Finance</label>
+<label class="checkbox-inline"><input type="radio" name="debenturemortgage" id="debenturemortgage" value="" > Not related to Invoice Finance</label>
                <input name="providerid" type="hidden" class="providerid"  value=""> 
                 <input name="companyid" type="hidden" class="providercompanyid" value=""> 
           </form>

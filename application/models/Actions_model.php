@@ -990,7 +990,7 @@ function delete_campaign($id,$user_id)
      function  operations_store_get($user_id,$comp_id=0){
         //ops.user_id, c.id as comp_id, c.name 
      
-         
+         /*
          $query = $this->db->query("select distinct T.company_id as comp_id,
 C.name
 from (select * from VIEWS V where V.user_id = ".$user_id." order by V.created_at desc limit 300) T
@@ -999,12 +999,47 @@ ON T.company_id = C.id
 where T.user_id = ".$user_id."
 limit 15");
          
+         */
+         
+         
+         
 
 //echo $this->db->last_query();
 
 //exit();
+         
+         
+         
+$query = $this->db->query("SELECT DISTINCT v.created_at,c.id as company,  c.name as name FROM views v 
+LEFT JOIN companies c
+ON v.company_id = c.id 
+WHERE v.user_id = 3
+GROUP BY c.id,v.created_at
+ORDER BY v.created_at DESC");
+            
+         
+            foreach ($query->result_array() as $row)
+        {
+            $comlist[$row['company']] =  $row['name'];
+ 
+             if(count($comlist)=== 16)   break;
+        }
        
-             return   $query->result_array();   
+         $i= 0;
+         foreach($comlist as $key => $item){
+             
+             
+             $comlister[$i++] = $key.'_'.$item;
+             
+             
+         }
+         
+       $comlister =   array_splice($comlister, 1, 15);
+             
+             
+             return   $comlister; 
+             
+               
     }
     
     

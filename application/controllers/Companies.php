@@ -55,13 +55,6 @@ class Companies extends MY_Controller {
                 
 				
 				$result = $this->process_search_result($raw_search_results);
-                
-               foreach($result as $item => $value){
-            $dt =     $this->data['last_pipeline_created_at'] = $this->Actions_model->actiondata($value['id']);
-  $dta[] = array('id' => $value['id'], 'last_pipeline_date' =>  $dt );
-                   
-                
-}
 			 
 				if(empty($result))
 				{
@@ -137,14 +130,6 @@ class Companies extends MY_Controller {
          $frontend_taging_js =    asset_url().'js/fe_tagging.js';
         
         $this->data['fetagging'] =  $frontend_taging_js;
-        
-    $pipedate = $dta;
-        
-         //print '<pre>';
-			// print_r($dta);
-			 //die;	
-        
-        $this->data['pipedate'] = $pipedate;
 		$this->data['results_type'] = 'Saved Search';
 		$this->data['edit_page'] = 'edit_saved_search';
 		$this->data['main_content'] = 'companies/search_results';
@@ -1007,7 +992,29 @@ echo $this->Tagging_model->$route($post);
         
     }
     
-  
+  function recent(){
+
+$query = $this->db->query("SELECT DISTINCT v.created_at,c.id as company,  c.name as name FROM views v 
+LEFT JOIN companies c
+ON v.company_id = c.id 
+WHERE v.user_id = 3
+GROUP BY c.id,v.created_at
+ORDER BY v.created_at DESC");
+        $i=0;
+        foreach ($query->result_array() as $row)
+        {
+            $comlist[$row['company']] =  $row['name'];
+ 
+             if(count($comlist)=== 15)   break;
+        }
+
+print '<pre>';
+      print_r($comlist);
+      print '</pre>';
+
+
+
+}
     
     
 }
