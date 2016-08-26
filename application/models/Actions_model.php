@@ -1013,7 +1013,7 @@ limit 15");
 $query = $this->db->query("SELECT DISTINCT v.created_at,c.id as company,  c.name as name FROM views v 
 LEFT JOIN companies c
 ON v.company_id = c.id 
-WHERE v.user_id = 3
+WHERE v.user_id = ".$user_id."
 GROUP BY c.id,v.created_at
 ORDER BY v.created_at DESC");
             
