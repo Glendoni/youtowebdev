@@ -248,7 +248,7 @@ $('.tagNum_'+dataID).text(liInCat)
 
 }
 })
-            
+             $('.main_MasterCategory').append('<li class="list-group-item"  data="1222226" style=" background: #fff;border: none;> <span class="" style="display: inline;"></span></li>')
             } 
     })               
 
