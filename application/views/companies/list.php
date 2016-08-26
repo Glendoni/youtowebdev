@@ -411,7 +411,24 @@ if ($company['actioned_at1'] > 0){
 					</td>
                        <td class="col-md-2">
                         
-                     <?php  if($mortgage['stage'] == 'Outstanding'){ echo   $mortgage['Inv_fin_related']? '<span  class="related_to_Invoice_Finance inv'.$mortgage['id'].'">Not Related To Invoice Finance</span>' : '<span  class="Not_related_to_Invoice_Finance inv'.$mortgage['id'].'">Related To Invoice Finance</span>';  } ?>
+                     <?php  if($mortgage['stage'] == 'Outstanding'){ 
+    
+       if($mortgage['Inv_fin_related'] == 'y'){ echo '<span  class="related_to_Invoice_Finance inv'.$mortgage['id'].'">Not Related To Invoice Finance</span>'; 
+                }elseif($mortgage['Inv_fin_related'] == null){
+        
+    echo  '<span  class="Not_related_to_Invoice_Finance inv'.$mortgage['id'].'">Related To Invoice Finance</span>'; 
+    
+    
+    }else{
+        
+        echo  '<span  class="Not_related_to_Invoice_Finance inv'.$mortgage['id'].'">Properly Related To Invoice Finance</span>'; 
+        
+    } 
+                                                                   
+                                                                   
+                                                                   
+                                                                   
+                                                                   } ?>
                     </td>
 					<td class="col-md-3"><?php echo $mortgage['eff_from']; ?></td>
 					<td class="col-md-3"><!--<span class="label label-<?php echo $mortgage['stage']==MORTGAGES_SATISFIED? 'default' : 'success' ?>">--><strong><?php echo $mortgage['stage']; ?></strong><?php if(!empty($mortgage['eff_to'])){

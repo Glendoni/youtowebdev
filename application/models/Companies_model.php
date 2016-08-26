@@ -295,8 +295,7 @@ ON companies.id = ACTIONS_SUB.company_id
 where active = 'TRUE' 
 and ACTIONS_SUB.company_id is null
 
--- )
-										 ";
+-- )";
  
 
 					if(isset($post['exlude_no_contact'])){
@@ -1425,7 +1424,7 @@ $q = '
     function update_not_for_invoices($post,$userID){
         
         
-    $debenturemortgage  =      $post['debenturemortgage'] ? 'y' :NULL;
+    $debenturemortgage  =      $post['debenturemortgage'] ? $post['debenturemortgage'] :NULL;
         
        $data = array(
                       'updated_at' =>  date('Y-m-d H:i:s'),
@@ -1434,14 +1433,11 @@ $q = '
                    );
        
         
-        
-        
-        
-     $this->db->where('company_id', intval($post['companyid']));
+        $this->db->where('company_id', intval($post['companyid']));
         $this->db->where('id', intval($post['providerid']));
-       $this->db->update('mortgages', $data);
+                    $this->db->update('mortgages', $data);
        
-return $debenturemortgage ? true : false;
+        return $debenturemortgage ? true : false;
 
         
     }

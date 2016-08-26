@@ -473,7 +473,21 @@ if ($your_date < $now){;
      //print_r($company['mortgages']);
                $tdbgcolorclass = 'success';
                 foreach ($company['mortgages'] as $mortgage):?>
-                <?php $tdbgcolorclass =  $mortgage['Inv_fin_related']? 'success' : 'danger' ;//$tdbgcolorclass = 'danger'; ?>
+                <?php
+                
+                
+                
+             if( $mortgage['Inv_fin_related'] == 'y') {  
+                $tdbgcolorclass =   'success'  ;//$tdbgcolorclass = 'danger';
+                }else{
+                    
+                  $tdbgcolorclass =   'danger' ;  
+                    
+                }
+                
+                
+                
+                ?>
 				<tr <?php echo $mortgage['stage']==MORTGAGES_SATISFIED? 'class="danger cont'.$mortgage['id'].'"' : 'class="'.$tdbgcolorclass.' cont'.$mortgage['id'].'"' ?>>
 				<td class="col-md-4" >
 					<?php if(isset($mortgage['url'])) : ?>
@@ -487,7 +501,27 @@ if ($your_date < $now){;
 				</td>
                     <td class="col-md-2">
                         
-                     <?php  if($mortgage['stage'] == 'Outstanding'){ echo   $mortgage['Inv_fin_related']? '<span  class="related_to_Invoice_Finance inv'.$mortgage['id'].'">Not Related To Invoice Finance</span>' : '<span  class="Not_related_to_Invoice_Finance inv'.$mortgage['id'].'">Related To Invoice Finance</span>';  } ?>
+                     <?php  if($mortgage['stage'] == 'Outstanding'){ 
+    
+    
+  
+    
+    
+    
+    if($mortgage['Inv_fin_related'] == 'y'){ echo '<span  class="related_to_Invoice_Finance inv'.$mortgage['id'].'">Not Related To Invoice Finance</span>'; 
+                }elseif($mortgage['Inv_fin_related'] == null){
+        
+    echo  '<span  class="Not_related_to_Invoice_Finance inv'.$mortgage['id'].'">Related To Invoice Finance</span>'; 
+    
+    
+    }else{
+        
+        echo  '<span  class="Not_related_to_Invoice_Finance inv'.$mortgage['id'].'">Properly Related To Invoice Finance</span>'; 
+        
+    } 
+                        
+                        
+}?>
                     </td>
 				<td class="col-md-1">
 				<?php $mortgages_start  = $mortgage['eff_from'];$date_pieces = explode("/", $mortgages_start);$formatted_mortgage_date = $date_pieces[2].'/'.$date_pieces[1].'/'.$date_pieces[0];echo date("F Y",strtotime($formatted_mortgage_date));?>
@@ -506,12 +540,15 @@ if ($your_date < $now){;
                     
 	<td class="col-md-2">
         <?php 
-        
-        
-        
         if($mortgage['stage'] == 'Outstanding'){ 
+            
+              if($mortgage['Inv_fin_related'] == 'y') $prob = 1;
+                    if($mortgage['Inv_fin_related'] == 'p') $prob = 3;
+                          if($mortgage['Inv_fin_related'] == null) $prob = 2;
+           
+            
         ?>
-				<span  class="label  btn-warning comp_details_edit_btn providerStatus" id="morprov<?php echo $mortgage['id']; ?>" data-id="<?php echo $mortgage['id']; ?>" providerStatus="<?php echo $mortgage['Inv_fin_related'] ? 1 : false; ?>" data-toggle="modal" data-target="#debmortgage" style="font-size: 12px; float: right;">Edit</span>
+				<span  class="label  btn-warning comp_details_edit_btn providerStatus" id="morprov<?php echo $mortgage['id']; ?>" data-id="<?php echo $mortgage['id']; ?>" providerStatus="<?php echo $prob; ?>" data-toggle="modal" data-target="#debmortgage" style="font-size: 12px; float: right;">Edit</span>
         <?php } ?>
 				</td>
 		 
@@ -1102,16 +1139,22 @@ endif;
         </button>
       
       </div>
-      <div class="modal-body">
+      <div class="modal-body" style="
+    padding-bottom: 37px;
+">
           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
 
 
           <form>
- <label class="checkbox-inline"><input type="radio"  name="debenturemortgage" value=""> Proberly Related to Invoice Finance</label>
-<label class="checkbox-inline"><input type="radio"  name="debenturemortgage" value=""> Related to Invoice Finance</label>
-<label class="checkbox-inline"><input type="radio" name="debenturemortgage" id="debenturemortgage" value="" > Not related to Invoice Finance</label>
-               <input name="providerid" type="hidden" class="providerid"  value=""> 
+ <label class="checkbox-inline"><input type="radio"  name="debenturemortgage" id="radio_3" value="p"> Proberly Related to Invoice Finance</label>
+<label class="checkbox-inline"><input type="radio"  name="debenturemortgage" id="radio_2" value=""> Related to Invoice Finance</label>
+<label class="checkbox-inline"><input type="radio" name="debenturemortgage"   id="radio_1" value="y" > Not related to Invoice Finance</label>
+              
+              
+              
+              
+              <input name="providerid" type="hidden" class="providerid"  value=""> 
                 <input name="companyid" type="hidden" class="providercompanyid" value=""> 
           </form>
               

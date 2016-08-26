@@ -983,7 +983,7 @@ echo $this->Tagging_model->$route($post);
         //echo $rap['debenturemortgage'] ? 'Yes': 'Nooooo';
         if($output ){
             
-          echo json_encode(array('success' =>$rap['providerid']));  
+          echo json_encode(array('success' =>$rap['providerid'], 'debenturemortgage' => $rap['debenturemortgage']));  
         }else{
              echo json_encode(array('error' =>$rap['providerid']));  
         }
@@ -1008,9 +1008,9 @@ ORDER BY v.created_at DESC");
              if(count($comlist)=== 15)   break;
         }
 
-print '<pre>';
-      print_r($comlist);
-      print '</pre>';
+//print '<pre>';
+  //    print_r($comlist);
+    //  print '</pre>';
 
 
 
