@@ -309,7 +309,7 @@ if ($your_date < $now){;
 		</a>
 		<?php else: ?>
 
-    <a class="btn  btn-default btn-sm btn-block " href="https://www.google.co.uk/search?q=<?php echo $company['name'];  ?>"  target="_blank">Google <i class="fa fa-search" aria-hidden="true"></i></a>
+    <a class="btn  btn-default btn-sm btn-block " href="https://www.google.co.uk/search?q=<?php echo $company['name'];  ?> recrutement"  target="_blank">Google <i class="fa fa-search" aria-hidden="true"></i></a>
             <?php endif; ?>
 			
 			<?php if (isset($company['registration'])): ?>
