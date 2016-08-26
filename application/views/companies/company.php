@@ -357,12 +357,12 @@ if ($your_date < $now){;
             
         </div>
             
-              <div class="col-md-3" >
+              <div class="col-md-5" >
 				<label>Lead Source</label>
 				<p style="
     margin-top: -4px;
-"><?php echo  $company_sources[$company['source']]  ? $company_sources[$company['source']]. '  '  : '';?><br>
-                 <strong>-</strong> <span class="leadSourceSubText"><?php echo $company['source_explanation'] ? $company['source_explanation'] : ''; ?></span></p>
+"><?php echo  $company_sources[$company['source']]  ? $company_sources[$company['source']]. ''  : '-';?><br>
+                 <strong><?php echo  $company_sources[$company['source']]  ? '-'  : '';?></strong> <span class="leadSourceSubText"><?php echo $company['source_explanation'] ? $company['source_explanation'] : ''; ?></span></p>
 			 
 		</div>
             
