@@ -358,8 +358,8 @@ if ($your_date < $now){;
 				<label>Lead Source</label>
 				<p style="
     margin-top: -4px;
-">	<?php echo $company_sources[$company['source']]  ? $company_sources[$company['source']]. ' - '  : '-';?><br>
-                  <span class="leadSourceSubText"><?php echo $company['source_explanation'] ? $company['source_explanation'] : ''; ?></span></p>
+">	- <?php echo  $company_sources[$company['source']]  ? $company_sources[$company['source']]. '  '  : '';?><br>
+                 <span class="leadSourceSubText"><?php echo $company['source_explanation'] ? $company['source_explanation'] : ''; ?></span></p>
 			 
 		</div>
             
