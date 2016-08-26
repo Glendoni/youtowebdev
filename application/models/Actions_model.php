@@ -990,17 +990,17 @@ function delete_campaign($id,$user_id)
      function  operations_store_get($user_id,$comp_id=0){
         //ops.user_id, c.id as comp_id, c.name 
      
-         /*
-         $query = $this->db->query("select distinct T.company_id as comp_id,
+        
+         $query = $this->db->query("select distinct T.company_id as company,
 C.name
 from (select * from VIEWS V where V.user_id = ".$user_id." order by V.created_at desc limit 300) T
 JOIN COMPANIES C
 ON T.company_id = C.id
 where T.user_id = ".$user_id."
-limit 15");
+limit 16");
          
-         */
          
+          
          
          
 
@@ -1008,7 +1008,7 @@ limit 15");
 
 //exit();
          
-         
+        /*
          
 $query = $this->db->query("SELECT DISTINCT v.created_at,c.id as company,  c.name as name FROM views v 
 LEFT JOIN companies c
@@ -1016,7 +1016,8 @@ ON v.company_id = c.id
 WHERE v.user_id = ".$user_id."
 GROUP BY c.id,v.created_at
 ORDER BY v.created_at DESC");
-            
+*/
+             
          
             foreach ($query->result_array() as $row)
         {
