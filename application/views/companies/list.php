@@ -108,7 +108,7 @@
                     //print_r($pipedate);
                       foreach($pipedate as $ky => $pipeval ){
                 
-                    if($pipeval['id'] == $company['id'] && ($pipeval['last_pipeline_date'])){
+                    if($pipeval['id'] == $company['id'] && $pipeval['last_pipeline_date'] == true ){
                         
                            $your_date = date('Y-m-d' , strtotime($pipeval['last_pipeline_date']));
  
@@ -435,7 +435,7 @@ if ($company['actioned_at1'] > 0){
                 }elseif($mortgage['Inv_fin_related'] == null){
     echo  '<span  class="Not_related_to_Invoice_Finance inv'.$mortgage['id'].'">Related To Invoice Finance</span>'; 
     }else{
-        echo  '<span  class="Not_related_to_Invoice_Finance inv'.$mortgage['id'].'">Properly Related To Invoice Finance</span>'; 
+        echo  '<span  class="Not_related_to_Invoice_Finance inv'.$mortgage['id'].'">Probably Related To Invoice Finance</span>'; 
     } 
                                                                    
                                                                    

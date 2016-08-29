@@ -361,8 +361,8 @@ if ($your_date < $now){;
 				<label>Lead Source</label>
 				<p style="
     margin-top: -4px;
-"><?php echo  $company_sources[$company['source']]  ? $company_sources[$company['source']]. ''  : '-';?><br>
-                 <strong><?php echo  $company_sources[$company['source']]  ? '-'  : '';?></strong> <span class="leadSourceSubText"><?php echo $company['source_explanation'] ? $company['source_explanation'] : ''; ?></span></p>
+"><?php echo  $company_sources[$company['source']]  ? $company_sources[$company['source']]. ''  : '';?><br>
+                 <strong><?php echo  $company_sources[$company['source']]  ? ''  : '';?></strong> <span class="leadSourceSubText"><?php echo $company['source_explanation'] ? $company['source_explanation'] : ''; ?></span></p>
 			 
 		</div>
             
@@ -521,7 +521,7 @@ if ($your_date < $now){;
     
     }else{
         
-        echo  '<span  class="Properly_related_to_Invoice_Finance inv'.$mortgage['id'].'">Properly Related To Invoice Finance</span>'; 
+        echo  '<span  class="Properly_related_to_Invoice_Finance inv'.$mortgage['id'].'">Probably Related To Invoice Finance</span>'; 
         
     } 
                         
@@ -1152,7 +1152,7 @@ endif;
 
 
           <form>
- <label class="checkbox-inline"><input type="radio"  name="debenturemortgage" id="radio_3" value="p"> Proberly Related to Invoice Finance</label>
+ <label class="checkbox-inline"><input type="radio"  name="debenturemortgage" id="radio_3" value="p"> Probably Related to Invoice Finance</label>
 <label class="checkbox-inline"><input type="radio"  name="debenturemortgage" id="radio_2" value=""> Related to Invoice Finance</label>
 <label class="checkbox-inline"><input type="radio" name="debenturemortgage"   id="radio_1" value="y" > Not related to Invoice Finance</label>
               

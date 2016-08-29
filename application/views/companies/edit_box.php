@@ -104,12 +104,7 @@
                         </div>
                     </div>
             
-              <div class="col-sm-6 col-md-2">
-                        <div class=" form-group ">
-                            <label for="phone" class="control-label">Phone</label>                            
-                            <input type="text" name="phone" value="<?php echo isset($company['phone'])?$company['phone']:''; ?>" id="phone" maxlength="50" class="form-control">
-                        </div>
-                    </div>
+          
             
     </div>
     <div class="row">
@@ -191,6 +186,12 @@
                         </div>
                     <div class="row"> </div>
                 </div>
+            <div class="col-sm-6 col-md-4">
+                        <div class=" form-group ">
+                            <label for="phone" class="control-label">Phone</label>                            
+                            <input type="text" name="phone" value="<?php echo isset($company['phone'])?$company['phone']:''; ?>" id="phone" maxlength="50" class="form-control">
+                        </div>
+                    </div>
           <!--HIDDEN UNLESS SPECIAL INSIGHT-->
             <div class="col-sm-12">
                 <div id="show_si_box" class="show_si_box" style="display:none">
