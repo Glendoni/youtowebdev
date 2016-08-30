@@ -373,7 +373,7 @@ if ($company['actioned_at1'] > 0){
                 
 			   
 				<tr <?php echo $mortgage['stage']==MORTGAGES_SATISFIED? 'class="danger cont'.$mortgage['id'].'"' : 'class="'.$tdbgcolorclass.' cont'.$mortgage['id'].'"' ?>>
-					<td class="col-md-4" >
+					<td class="col-md-3" >
 					<?php if(isset($mortgage['url'])) : ?>
 						<a href="http://<?php echo $mortgage['url']; ?>" target="_blank"><?php echo $mortgage['name']; ?> <span style="font-size:10px;"><i class="fa fa-external-link"></i></span></a>
 	    			<?php else: ?>
@@ -383,7 +383,7 @@ if ($company['actioned_at1'] > 0){
 				<?php echo $mortgage['type']; ?>
 				</div>
 					</td>
-                       <td class="col-md-2">
+                       <td class="col-md-3">
                         
                      <?php  if($mortgage['stage'] == 'Outstanding'){ 
     
