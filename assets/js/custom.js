@@ -37,7 +37,7 @@ if(data.success){
      $('table .cont'+data.success).addClass('danger'); 
       
   if(data.debenturemortgage == 'p'){
-                            $('.inv'+data.success).html('Properly Related To Invoice Finance');
+                            $('.inv'+data.success).html('Probably Related To Invoice Finance');
                          $('table .cont'+data.success).removeClass('danger'); 
                          $('table .cont'+data.success).addClass('success'); 
       
