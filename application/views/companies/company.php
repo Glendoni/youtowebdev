@@ -311,8 +311,7 @@ if ($your_date < $now){;
 		<label style="margin-bottom:0;"></label> <?php echo str_replace("http://"," ",str_replace("www.", "", $company['url']))?>
 		</a>
 		<?php else: ?>
-
-    <a class="btn  btn-default btn-sm btn-block " href="https://www.google.co.uk/search?q=<?php echo str_replace('&','',$company['name']);  ?> recruitment"  target="_blank">Google <i class="fa fa-search" aria-hidden="true"></i></a>
+    <a class="btn  btn-default btn-sm btn-block " href="https://www.google.co.uk/search?q=<?php echo urlencode(htmlspecialchars_decode($company['name'], ENT_QUOTES));  ?>"  target="_blank">Google <i class="fa fa-search" aria-hidden="true"></i></a>
             <?php endif; ?>
 			
 			<?php if (isset($company['registration'])): ?>
