@@ -1454,7 +1454,14 @@
                               <?php echo $action_types_array[$action->action_type_id]; ?>
                             </div>
                             <div class="col-md-3 text-center">
-                            <?php echo $action->duedate;?>
+                            <?php $action->duedate;?>
+                            <?php   $now = $action->duedate; 
+                                    $timestamp = strtotime($action->planned_at);
+                                    $round = 5*60;
+                                    $rounded = round($timestamp / $round) * $round;
+                                    echo date("H:i", $rounded)." ";
+                                    echo date('d/m/y', $timestamp);
+                                    ?>
                               
                             </div>
                             <div class="col-md-4" style="text-align:right;">

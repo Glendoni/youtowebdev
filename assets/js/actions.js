@@ -1380,8 +1380,8 @@ function formattDate(createdAt, showtime = true){
 
 var coeff = 1000 * 60 * 5;
 var date_r = new Date(createdAt);  //or use any other date
-var rounded = new Date(Math.round(date_r.getTime() / coeff) * coeff);
-
+var date_r1 = new Date(date_r.getTime() + 150000);
+var rounded = new Date(Math.round(date_r1.getTime() / coeff) * coeff);
 
 
 // Apply each element to the Date function
