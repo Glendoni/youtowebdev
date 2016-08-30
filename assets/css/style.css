@@ -2264,9 +2264,25 @@ body {
             margin-top:0px;
             
         }
+
+       .mar-no.pad-btm h4 {
+        	font-size: 20px;
+    font-weight: 700;
+    padding-top: 5px;
+    padding-bottom: 5px;
+        }
 .actionMsgText{
-    
     font-size: 11px;
+      padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+.followcont {
+	background: #fff; 
+	padding: 10px 0; margin-bottom: 10px; margin-top:10px; border-top: 1px solid #999;
+}
+.actionOutcomeText {
+    padding-top: 20px;
 }
 .callbackActionTextBox{
     

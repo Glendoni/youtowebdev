@@ -84,7 +84,51 @@
         echo $number ? '<span class="initial_rate_found">  - &#64;'.($number*100).'%</span>' : '<span class="initial_rate_not_found"> - Rate Not Set</span>' ;  ?>
         
 		<?php endif; ?>
-                </span>
+		</span>
+                
+                     <?php
+                    //print '<pre>';
+                  //print_r($pipedate);
+                
+                if(!$company['customer_to']){  ?> 
+                       
+                    
+                        <span class="last_pipeline_created_at">
+                        <?php
+ //echo $last_pipeline_created_at;
+                  
+                    
+                     //print '</pre>';
+                 // echo $company['id'];
+                    
+                    
+                
+                  $pipedate =    $pipedate ?  $pipedate : $this->session->userdata('pipedate') ;
+                    
+                    //print_r($pipedate);
+                      foreach($pipedate as $ky => $pipeval ){
+                
+                    if($pipeval['id'] == $company['id'] && $pipeval['last_pipeline_date'] == true ){
+                        
+                           $your_date = date('Y-m-d' , strtotime($pipeval['last_pipeline_date']));
+ 
+
+                            $datetime1 = date_create(date('Y-m-d'));
+                            $datetime2 = date_create($your_date);
+                            $interval = date_diff($datetime1, $datetime2);
+                             $interval = $interval->format('%a');
+                        
+             if($interval == 1){ echo  $interval.' day ago' ;}  elseif($interval == 0){ echo 'Today'; }else{ echo $interval. ' days ago' ;}  
+                        break;   
+                    } ;
+                    
+                 
+                }
+                      
+
+ ?>
+      </span>
+               <?php } ?> 
 		    
 	<?php if(isset($company['assigned_to_name'])): ?>
 		<span class="label label-assigned " id="label-assigned<?php echo $company['id'];?>"
@@ -209,8 +253,7 @@ if ($company['actioned_at1'] > 0){
 		</a>
             	<?php else: ?>
 
-    <a class="btn  btn-default btn-sm btn-block " href="https://www.google.co.uk/search?q=<?php
-   echo urlencode(htmlspecialchars_decode($company['name'], ENT_QUOTES));  ?>"  target="_blank">Google <i class="fa fa-search" aria-hidden="true"></i></a>
+    <a class="btn  btn-default btn-sm btn-block " href="https://www.google.co.uk/search?q=<?php echo urlencode(htmlspecialchars_decode($company['name'], ENT_QUOTES));  ?>"  target="_blank">Google <i class="fa fa-search" aria-hidden="true"></i></a>
 		<?php endif; ?>
 			<?php if (isset($company['registration'])): ?>
 			<a class="btn  btn-info btn-sm btn-block companieshouse" href="https://beta.companieshouse.gov.uk/company/<?php echo $company['registration'] ?>" target="_blank">Companies House</a>

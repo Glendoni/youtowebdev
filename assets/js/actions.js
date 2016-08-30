@@ -549,13 +549,13 @@ function bindAddCallBackToCompletedAction(){
                          if (typeof action['outcome'] == 'undefined'  || action['outcome'] == null){
                              actionOutcome = ''
                          } else { 
-                             actionOutcome = '<strong>Outcome: </strong><span class="commentFUA">'+action['outcome']+'</span>';
+                             actionOutcome = '<div class="actionOutcomeText"><strong>Outcome: </strong></br><span class="commentFUA">'+action['outcome']+'</span></div>';
 
                          }           
 
-                            $('.outcomeMsg'+action['followup_action_id']).append('<div class="followcont" style="background: #fff; padding: 10px; margin-bottom: 5px; margin-top:5px;">'+followup+ ' ' +followUpCompleteddate+cancellation+contactDetails+
-                                                                                ' <span class="comments"><br><strong>Action: </strong><span class="commentFUA">'+action['comments']+'</span><br>'+actionOutcome+
-                                                                                '</span><hr /></div>'); 
+                            $('.outcomeMsg'+action['followup_action_id']).append('<div class="followcont">'+followup+ ' ' +followUpCompleteddate+cancellation+contactDetails+
+                                                                                ' <hr><span class="comments"><br><strong>Action: </strong></br><span class="commentFUA">'+action['comments']+'</span><br>'+actionOutcome+
+                                                                                '</span></div>'); 
                         }
                         followUpCompleteddate = '';
                         cancellation = '';
@@ -1128,7 +1128,7 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
           }
          
          if(typeof action['outcome'] !== 'undefined'  && action['outcome'] !== null &&  action['outcome'] !== 'null'){
-             outcome = '<span class="actionMsg piller'+actionId+' outcomeMsg'+actionId+' comments'+actionType+'"><strong>Outcome: </strong><span class="comment">'+ action['outcome'] +'</span></span>'; 
+             outcome = '<div class="actionOutcomeText"><span class="actionMsg piller'+actionId+' outcomeMsg'+actionId+' comments'+actionType+'"><strong>Outcome: </strong></br><span class="comment">'+ action['outcome'] +'</span></span></div>'; 
             
          } 
          actionTypeName = actionType;
@@ -1137,7 +1137,7 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
          }
          
          if(action['comments']){
-             tagline = '<span class="actionMsg piller'+actionId+' actionMsg'+actionId+  ' comments'+actionType+'"><strong>Comment: </strong><span class="comment" data="'+actionId+'">'+action['comments']+'</span></span><hr>'+outcome;
+             tagline = '<span class="actionMsg piller'+actionId+' actionMsg'+actionId+  ' comments'+actionType+'"><strong>Comment: </strong></br><span class="comment" data="'+actionId+'">'+action['comments']+'</span></span>'+outcome;
              
 
 //alert()
@@ -1330,7 +1330,7 @@ if(tm > 1){ tm = tm + ' Days Overdue'; }else if(tm == 1){ tm  = tm + ' Day Overd
  
          
       if(actionTypeName != 'Pipeline Update')   
-            actions  = '<div class="timeline-entry actionId'+actionType+'  '+classCompleted+' pillid'+actionId+'" pillid='+actionId+'> <div class="timeline-stat"> '+icon+'</div><div class="timeline-label"> <div class="mar-no pad-btm"><h4 class="mar-no pad-btm">'+header+deal+'  <span class="label label-warning">'+planned_at+'</span>'+overdueStatus+'<span class="classActions" style="float:right; margin-top:0; margin-left:3px;">'+calenderbtn+outcomeRemove+'</span></h4></div><div class="actionMsgText" style="padding:0px 0px 0px 10px;">'+tagline+'</div>'+textbox+ kpStr+'<div class="mic-info"> '+status+': '+created_by+' - '+formattDate(createdAt, true)+followupAlert+' </div></div></div>';
+            actions  = '<div class="timeline-entry actionId'+actionType+'  '+classCompleted+' pillid'+actionId+'" pillid='+actionId+'> <div class="timeline-stat"> '+icon+'</div><div class="timeline-label"> <div class="mar-no pad-btm"><h4 class="mar-no pad-btm">'+header+deal+'  <span class="label label-warning">'+planned_at+'</span>'+overdueStatus+'<span class="classActions" style="float:right; margin-top:0; margin-left:3px;">'+calenderbtn+outcomeRemove+'</span></h4></div><div class="actionMsgText">'+tagline+'</div>'+textbox+ kpStr+'<div class="mic-info"> '+status+': '+created_by+' - '+formattDate(createdAt, true)+followupAlert+' </div></div></div>';
          
         if(actionTypeName == 'Pipeline Update' ){
               actions  = '<div class="timeline-entry actionId'+actionType+' '+classCompleted+'" > <div class="timeline-stat"> '+icon+'</div> <div class="timeline-label pipe"> <div class="mar-no pad-btm" ><h4 class="mar-no pad-btm">'+header+' <span class="classActions" style="margin-top:0; margin-left:3px; float:right;">'+calenderbtn+outcomeRemove+'</span></h4>' +kpStr+overdueStatus+'</div><div class="actionMsgText">'+action['comments']+'</div></div></div>';
