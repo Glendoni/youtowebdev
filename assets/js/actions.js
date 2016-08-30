@@ -1367,33 +1367,26 @@ if(mm<10) {
 today = mm+'/'+dd+'/'+yyyy;
        
         return  daydiff(parseDate(tm),parseDate(today));
-
-
-
 }
-
 function parseDate(str) {
     var mdy = str.split('/');
     return new Date(mdy[2], mdy[0]-1, mdy[1]);
 }
-
 function daydiff(first, second) {
     return Math.round((second-first)/(1000*60*60*24));
 }
-
-
-          
-    function formattDate(createdAt, showtime = true){
-        
-        
-     
-        
+function formattDate(createdAt, showtime = true){
         // Split timestamp into [ Y, M, D, h, m, s ]
-var t = createdAt.split(/[- :]/);
+
+var coeff = 1000 * 60 * 5;
+var date_r = new Date(createdAt);  //or use any other date
+var rounded = new Date(Math.round(date_r.getTime() / coeff) * coeff);
+
+
 
 // Apply each element to the Date function
 
-  var now =  new Date(t[0], t[1]-1, t[2], t[3], t[4], t[5]);
+  var now = rounded;
 
 var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
   "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
@@ -1426,7 +1419,7 @@ if(day == 1 || day == 21 || day == 31) dateSuffix = 'st';
 // Return the formatted string
        // console.log(showtime)
         
- return (showtime? timerounder(time.join(":"))+suffix : '') + " " + date.join(" ") + " " ; 
+ return (showtime? time.join(":")+suffix : '') + " - " + date.join(" ") + " " ; 
     } 
 
 /**
