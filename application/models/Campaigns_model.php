@@ -374,7 +374,7 @@ class Campaigns_model extends MY_Model {
 		select T."company id",
 		       json_agg(
 			   row_to_json(
-			   row (T."mortgage id", T."mortgage provider", T."mortgage stage", T."mortgage start", T."mortgage end", T."mortgage type",  T."provider url"))) "JSON output"  -- f11
+			   row (T."mortgage id", T."mortgage provider", T."mortgage stage", T."mortgage start", T."mortgage end", T."mortgage type",  T."provider url", T."mortgage Inv_fin_related"))) "JSON output"  -- f11
 				 
 		from 
 		(-- T
@@ -385,7 +385,8 @@ class Campaigns_model extends MY_Model {
 		       M.stage "mortgage stage",
 		       to_char(M.eff_from, \'dd/mm/yyyy\')  "mortgage start",
 		       to_char(M.eff_to, \'dd/mm/yyyy\')  "mortgage end",
-		       M.type "mortgage type"
+		       M.type "mortgage type",
+                M.Inv_fin_related "mortgage Inv_fin_related"
 
 		from MORTGAGES M
 		  
