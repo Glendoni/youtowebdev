@@ -539,6 +539,7 @@ function bindAddCallBackToCompletedAction(){
                        if (action['action_type_id'] == 11 ){
 
                             overdueStatus = '<span class="label label-danger">Overdue</span>' ;
+                         
                           var dateCompare = (new Date() - Date.parse(action['planned_at'])) >= 1000 * 60 * 30;
                             
                           if (dateCompare == false && typeof action['planned_at'] != 'undefined'){
@@ -1340,6 +1341,8 @@ if(tm > 1){ tm = tm + ' Days Overdue'; }else if(tm == 1){ tm  = tm + ' Day Overd
 
 
 function dateDiffChecker(tm){
+    
+    console.log(tm)
 
 tm = tm.split(' ');
 
