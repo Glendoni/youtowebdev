@@ -516,21 +516,21 @@ function bindAddCallBackToCompletedAction(){
 
                         if(action['action_type_id'] == 11  && action['followup_action_id'] != null && action['followup_action_id'] != null ){
 
-                            followUpCompleteddate = '<span class="label label-warning" style="margin-right: 10px;">Follow up planned: '+ formattDate(action['planned_at'])+' </span>';
+                            followUpCompleteddate = '<span class="label label-warning" style="margin-right: 3px;">Follow up planned: '+ formattDate(action['planned_at'])+' </span>';
                            if (action['cancelled_at'] != null){
                                      cancellation = '<span class="label label-danger" style="margin-left: 5px;">Cancelled: '+formattDate(action['cancelled_at'])+ '</span>';
                            }
                        }
 
                       if (action['action_type_id'] == 11  && action['followup_action_id'] != null && action['planned_at'] == null && typeof action['planned_at'] != 'undefined' && typeof action['planned_at'] != null){
-                                followup = '<span class="label label-warning" style="margin-right: 10px;"> Follow Up Action:  '+formattDate(action['planned_at'])+' </span>';
+                                followup = '<span class="label label-warning" style="margin-right: 3px;"> Follow Up Action:  '+formattDate(action['planned_at'])+' </span>';
                             }
 
                       if (action['action_type_id'] == 11  && action['followup_action_id'] != null && typeof action['planned_at'] != 'undefined' && typeof action['planned_at'] != null){
 
                           if (action['first_name'] != null){
 
-                             contactDetails = ' <span class="label label-primary"style="float: right;"> '+action['first_name']+' '+action['last_name']+' </span><br>';
+                             contactDetails = ' <span class="label label-primary">Contact: '+action['first_name']+' '+action['last_name']+' </span><br>';
 
                           }
 
@@ -1111,7 +1111,7 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
          var followupAlert = [];
          var created_by  = [];
          var actionId = [];
-         var status = 'Created'
+         var status = 'Created by '
          var showOutstandingForm = [];
          var getUrlIdParam = GetUrlParamID();
          var kps_cancelled;
@@ -1133,7 +1133,7 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
          } 
          actionTypeName = actionType;
          if(action['first_name'] != null){
-             contactName = '<span class="label" style=" font-weight:bold; color:#666; padding-left: 0px; background:transparent;" > '+action['first_name']+' '+action['last_name']+'</span>';  
+             contactName = '<span class="label label-primary" style="margin-left:3px;" > Contact: '+action['first_name']+' '+action['last_name']+'</span>';  
          }
          
          if(action['comments']){
@@ -1174,7 +1174,7 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
                   icon = '<div class="timeline-icon label-danger "style="color: white;"><i class="fa fa-phone"></i></div>';               
             }
           
-        header = '<a href="javascript:;" class="text-danger '+showOutstandingForm+' pillerTitle" data-name="'+actionType+'" data="'+actionId+'">'+(actionTypeOverwrite ? actionTypeOverwrite : actionType)+ '</a> '+contactName;
+        header = '<a href="javascript:;" class="text-danger '+showOutstandingForm+' pillerTitle" data-name="'+actionType+'" data="'+actionId+'">'+(actionTypeOverwrite ? actionTypeOverwrite : actionType)+ '</a> ';
          
         if( actions_cancelled == '' && typeof action['action_id'] != 'undefined' || actions_outstanding == true &&  actions_cancelled == '' && typeof action['action_id'] != 'undefined' ){ 
 
@@ -1195,10 +1195,10 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
         var detail = 'Meeting+with+'+contact+'%0A'+email+'+%0D%0D'+pageAddress; 
 
             
-        calendarBtnDetail = '<a class="btn btn-default btn-xs add-to-calendar" href="http://www.google.com/calendar/event?action=TEMPLATE&amp;text='+msg+'&amp;dates='+ planned_at +'/'+ planned_at +'Z&amp;details='+detail+'%0D%0DAny changes made to this event are not updated in Baselist. %0D%23baselist" target="_blank" rel="nofollow" style="margin-top:0; font-size:10px;">Add to Calendar</a>';
+        calendarBtnDetail = '<a class="btn btn-xs btn-info" href="http://www.google.com/calendar/event?action=TEMPLATE&amp;text='+msg+'&amp;dates='+ planned_at +'/'+ planned_at +'Z&amp;details='+detail+'%0D%0DAny changes made to this event are not updated in Baselist. %0D%23baselist" target="_blank" rel="nofollow">Add to Calendar</a>';
 
 
-        calenderbtn = '<small>'+calendarBtnDetail +' </small><span class="btn btn-default btn-xs label label-primary callbackAction callbackActionOutcome hint--top-right"  data-hint="Add Action Outcome" style="font-size:10px; margin:0 0px;" data="'+action['action_id']+'">Add Outcome</span> <span class="btn btn-default btn-xs label label-danger callbackAction removeOutsandingAction hint--top-right"  data-hint="Cancel Callback Action" data="'+action['action_id']+'" >Remove</span>';
+        calenderbtn = calendarBtnDetail +' <span class="btn btn-default btn-xs btn-primary callbackAction callbackActionOutcome hint--top-right"  data-hint="Add Action Outcome" data="'+action['action_id']+'">Add Outcome</span> <span class="btn btn-default btn-xs btn-danger callbackAction removeOutsandingAction hint--top-right"  data-hint="Cancel Callback Action" data="'+action['action_id']+'" >Remove</span>';
 
          if(action['action_id'])                                                                                                                                          
             textbox= '<div class="form-group callbackActionTextBox  box'+action['action_id']+'" style="display:none">'+
@@ -1228,7 +1228,7 @@ if(tm > 1){ tm = tm + ' Days Overdue'; }else if(tm == 1){ tm  = tm + ' Day Overd
         if(dateCompare == false && typeof action['planned_at'] != 'undefined'){
             overdueStatus = '';
         }
-        planned_at = formattDate(action['planned_at']);
+        planned_at = 'Due: '+formattDate(action['planned_at']);
 
         }
 
@@ -1307,7 +1307,7 @@ if(tm > 1){ tm = tm + ' Days Overdue'; }else if(tm == 1){ tm  = tm + ' Day Overd
                         '</div>';
                }
              
-             kpStr = '<span class="label label-success" style="margin-left:3px; float:right;">Completed:  '+formattDate(action['actioned_at'])+'</span>';
+             kpStr = '<span class="label label-success">Completed:  '+formattDate(action['actioned_at'])+'</span>';
                
               // console.log()
              actionType =kp;
@@ -1330,7 +1330,7 @@ if(tm > 1){ tm = tm + ' Days Overdue'; }else if(tm == 1){ tm  = tm + ' Day Overd
  
          
       if(actionTypeName != 'Pipeline Update')   
-            actions  = '<div class="timeline-entry actionId'+actionType+'  '+classCompleted+' pillid'+actionId+'" pillid='+actionId+'> <div class="timeline-stat"> '+icon+'</div><div class="timeline-label"> <div class="mar-no pad-btm"><h4 class="mar-no pad-btm">'+header+deal+'  <span class="label label-warning">'+planned_at+'</span>'+overdueStatus+'<span class="classActions" style="float:right; margin-top:0; margin-left:3px;">'+calenderbtn+outcomeRemove+'</span></h4></div><div class="actionMsgText">'+tagline+'</div>'+textbox+ kpStr+'<div class="mic-info"> '+status+': '+created_by+' - '+formattDate(createdAt, true)+followupAlert+' </div></div></div>';
+            actions  = '<div class="timeline-entry actionId'+actionType+'  '+classCompleted+' pillid'+actionId+'" pillid='+actionId+'> <div class="timeline-stat"> '+icon+'</div><div class="timeline-label"> <div class="mar-no pad-btm"><h4 class="mar-no pad-btm">'+header+deal+'  </h4><div class="actions-info"><span class="label label-warning">'+planned_at+'</span>'+kpStr+overdueStatus+contactName+'<span class="classActions" style="float:right; margin-top:0; margin-left:3px;">'+calenderbtn+outcomeRemove+followupAlert+'</span></div></div><div class="mic-info"> '+status+': '+created_by+' - '+formattDate(createdAt, true)+'</div><div class="actionMsgText">'+tagline+'</div>'+textbox+ ' </div></div>';
          
         if(actionTypeName == 'Pipeline Update' ){
               actions  = '<div class="timeline-entry actionId'+actionType+' '+classCompleted+'" > <div class="timeline-stat"> '+icon+'</div> <div class="timeline-label pipe"> <div class="mar-no pad-btm" ><h4 class="mar-no pad-btm">'+header+' <span class="classActions" style="margin-top:0; margin-left:3px; float:right;">'+calenderbtn+outcomeRemove+'</span></h4>' +kpStr+overdueStatus+'</div><div class="actionMsgText">'+action['comments']+'</div></div></div>';

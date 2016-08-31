@@ -540,9 +540,14 @@ border-right: 1px solid #e7e7e7;
 /* END  - COMAPNY PAGE QUICK VIEW SLIDE*/
 
 
+.btn-xs, .btn-group-xs>.btn {
+	font-size: 10px;
+}
 
 /*ACTION COMMENTS BOX*/
-.mic-info { color: #666666;font-size: 11px;margin-top: 5px; }
+.mic-info {     color: #666666;
+    font-size: 11px;
+    margin: 8px 0; }
 
 
 .triangle-isosceles , .comment-text .outcome{
@@ -2269,13 +2274,17 @@ body {
         	font-size: 20px;
     font-weight: 700;
     padding-top: 5px;
-    padding-bottom: 5px;
-        }
+    padding-bottom: 0;
+    margin-bottom: 0;
+    }        
 .actionMsgText{
     font-size: 11px;
       padding: 20px;
     background-color: #fff;
     border-radius: 5px;
+}
+.actions-info {
+	margin: 5px 0;
 }
 .followcont {
 	background: #fff; 
