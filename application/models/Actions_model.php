@@ -233,7 +233,7 @@ AND a.company_id='$company_id'";
     
 function get_pending_actions($user_id)
 {       
-    $this->db->select("actions.company_id, actions.id as action_id,comments,planned_at,action_type_id,name as company_name,contacts.first_name,contacts.last_name,contacts.phone,contacts.email, to_char(planned_at, 'HH24:MI DD/MM/YY') as duedate ");
+    $this->db->select("actions.company_id, actions.id as action_id,comments,planned_at,action_type_id,name as company_name,contacts.first_name,contacts.last_name,contacts.phone as contact_phone,contacts.email, to_char(planned_at, 'HH24:MI DD/MM/YY') as duedate, companies.phone as company_phone ");
     $this->db->where('actions.user_id',$user_id);
     $this->db->where('actioned_at',NULL);
     $this->db->where('cancelled_at',NULL);
@@ -287,7 +287,7 @@ function get_recent_stats($period, $team_type)
     $start_date = $dates['start_date'];
     $end_date = $dates['end_date'];
 
-   $sql[] = "select U.name, 
+$sql[] = "select U.name, 
        U.id as user, 
        U.image, 
        U.active as active, 
