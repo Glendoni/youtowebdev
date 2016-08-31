@@ -861,6 +861,16 @@ var para = window.location.href.split("id=");
     return param = param[0]; 
 } 
 
+
+$(function(){
+    $("[href^='#']").not("[href~='#']").click(function(evt){
+        evt.preventDefault();
+        var obj = $(this),
+        getHref = obj.attr("href").split("#")[1],
+        offsetSize = 1450;
+        $(window).scrollTop($("[name*='"+getHref+"']").offset().top - offsetSize);
+    });
+});
 </script>
 <!--COMBINE MULTIPLE JS FILES-->
 <?php if (isset($current_user)): ?>
