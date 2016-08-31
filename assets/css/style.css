@@ -2835,13 +2835,21 @@ display:none;
 }
 
 .piplineUdate .company-header,.trading-header{
-text-align:left;
-    
+text-align:left; 
 }
 .piplineUdate .company-header{
 font-size: 44px;
-    font-size: 3.4vw;
-    font-weight: 500;
+font-weight: 500;
+float: left;
+}
+h5.trading-header {
+
+	    float: left;
+    margin-left: 10px;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    margin-top: 39px;
+    font-size: 14px;
 }
 
 .piplineUdate .subsidiary {

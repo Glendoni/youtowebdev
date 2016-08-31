@@ -10,21 +10,18 @@
                     <div class="page-results-list" id="parent">
                     <breadcrumbscroll>
                     <div class="row top-info-holder">
-                    <div class="col-md-9 piplineUdate" style="
-    padding-left: 31px;
-">
+                    <div class="col-md-9 piplineUdate" style="padding-left: 31px;">
                                 <!-- <breadcrumbscroll> -->
-                                <h2 class="company-header" id="logo">
-                                    <?php $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' );
-                                        echo html_entity_decode (str_replace($words, ' ',$company['name'])); 
-                                    // &#39;
-                                    ?>
-                                       <?php if (isset($company['trading_name'])): ?>
-                                                        <h5 class="trading-header">
-                                                            <?php echo $company['trading_name'];?>
-                                                        </h5>
-                                                    <?php endif; ?>
-                                 </h2>
+    <h2 class="company-header" id="logo">
+                <?php $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' ); echo html_entity_decode (str_replace($words, ' ',$company['name'])); ?></h2>
+    <?php if (isset($company['trading_name'])): ?>
+        <h5 class="trading-header">
+        <small><b>T/A</b></small>  <?php echo $company['trading_name'];?>
+        </h5>
+    <?php endif; ?>
+    <div class="spacer" style="clear: both;"></div>
+
+
                       
                              
                         
@@ -38,8 +35,9 @@
                        
                         ?>
                         
-                                        <?php endif; ?>
-                                        <span class="label  label-<?php echo str_replace(' ', '', $company['pipeline']); ?>"><?php echo $company['pipeline']?>        
+                                        
+                                        <span class="label  label-<?php echo str_replace(' ', '', $company['pipeline']); ?>"><?php echo $company['pipeline']?>   
+                                        <?php endif; ?>     
                                         <?php if (isset($company['customer_from'])&&($company['pipeline']=='Customer')):?>  <?php echo date("d/m/y",strtotime($company['customer_from']));?><?php  
                                         $number  = $company['initial_rate'];
                                         //$number = 5.00;
@@ -1116,10 +1114,10 @@ endif;
      </div>        
         
 
- <div class="row" id="parent">
+<div class="row" id="parent">
 
 </div>
-        	</div>
+</div>
 </div><!--CLOSE ROW-->
     <?php //hide core page END ?>
        <?php endif; ?>
