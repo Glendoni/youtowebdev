@@ -90,7 +90,7 @@
                     //print '<pre>';
                   //print_r($pipedate);
                 
-                if(!$company['customer_to']){  ?> 
+                if(($company['pipeline']=='Customer')||($company['pipeline']=='Proposal')||($company['pipeline']=='Intent')){  ?> 
                        
                     
                         <span class="last_pipeline_created_at">
