@@ -17,8 +17,8 @@ a.anchor {
   .anchor-wrapper:before {
     display: block;
     content:" ";
-    height: 140px;
-    margin-top: -140px;
+    height: 160px;
+    margin-top: -160px;
 }
 .ladda-label .fa .fa-star-o {
 	color: red;
