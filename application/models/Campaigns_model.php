@@ -817,7 +817,7 @@ function get_campaign_owner($id)
 		// Apply this to find saved searches only
 		$this->db->where('criteria IS NULL', null, false);
 		$this->db->where('u.active', 'True');
-		$this->db->where('c.shared', 'True');
+		//$this->db->where('c.shared', 'True');
 		$this->db->where('comp.active', 'True');
 		$this->db->where('c.user_id', $user_id);
 		$this->db->order_by("c.created_at", "desc");
