@@ -177,11 +177,13 @@ class Campaigns_model extends MY_Model {
 			   pr.id, --f42
 			   C.source_explanation, --f43
 			   UC.name, --f44
-			   UU.name --f45
+			   UU.name, --f45
+                 C.initial_rate, --f46
+                C.customer_to --f47
 			   )) "JSON output" 
 			  
 
-		from (select * from COMPANIES where eff_to IS NULL  '.$pipeline_sql.') C ';
+		from (select * from companies where eff_to IS NULL  '.$pipeline_sql.') C ';
 
 		
 		$sql = $sql.' JOIN ( select company_id from targets where campaign_id = '.$campaign_id.' ) company ON C.id = company.company_id';
@@ -360,7 +362,9 @@ class Campaigns_model extends MY_Model {
 			     pr.id,
 			     C.source_explanation,
 			     UC.name, 
-			     UU.name
+			     UU.name,
+                  C.initial_rate,   
+                 C.customer_to
 
 
 		order by C.id 
@@ -851,7 +855,7 @@ function get_campaign_owner($id)
     
     function private_campaigns_new_ajax($user_id){  
 
-	 $sql = 'SELECT DISTINCT "c"."name", "c"."id" as "id", "c"."user_id" as "userid", "u"."name" as "searchcreatedby", "u"."image" as "image", "c"."shared", "c"."created_at", to_char(c.created_at, \'dd-mm-yyyy\') as datecreated  FROM "campaigns" "c" JOIN "users" "u" ON "c"."user_id" = "u"."id" JOIN "targets" "t" ON "c"."id" = "t"."campaign_id" JOIN "companies" "comp" ON "t"."company_id" = "comp"."id" WHERE criteria IS NULL AND "u"."active" = E\'True\' AND "c"."shared" = E\'True\' AND "comp"."active" = E\'True\' AND "c"."user_id" = E\''.$user_id.'\' AND (c.eff_to IS NULL OR c.eff_to > \''.date('Y-m-d').'\') GROUP BY 1, 2, 3, 4, 5 ORDER BY "c"."created_at" DESC LIMIT 20' ;
+	 $sql = 'SELECT DISTINCT "c"."name", "c"."id" as "id", "c"."user_id" as "userid", "u"."name" as "searchcreatedby", "u"."image" as "image", "c"."shared", "c"."created_at", to_char(c.created_at, \'dd-mm-yyyy\') as datecreated  FROM "campaigns" "c" JOIN "users" "u" ON "c"."user_id" = "u"."id" JOIN "targets" "t" ON "c"."id" = "t"."campaign_id" JOIN "companies" "comp" ON "t"."company_id" = "comp"."id" WHERE criteria IS NULL AND "u"."active" = E\'True\' AND "comp"."active" = E\'True\' AND "c"."user_id" = E\''.$user_id.'\' AND (c.eff_to IS NULL OR c.eff_to > \''.date('Y-m-d').'\') GROUP BY 1, 2, 3, 4, 5 ORDER BY "c"."created_at" DESC LIMIT 20' ;
              
         	$query = $this->db->query($sql);
              

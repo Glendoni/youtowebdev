@@ -92,6 +92,8 @@
                 
                 if(!$company['customer_to']){  ?> 
                        
+                
+                <?php  if($last_pipeline_created_at && $company['id'] != '154537' && $company['pipeline'] != 'Prospect' && $company['pipeline'] != 'Suspect' ){  ?>
                     
                         <span class="last_pipeline_created_at">
                         <?php
@@ -128,7 +130,7 @@
 
  ?>
       </span>
-               <?php } ?> 
+               <?php }} ?> 
 		    
 	<?php if(isset($company['assigned_to_name'])): ?>
 		<span class="label label-assigned " id="label-assigned<?php echo $company['id'];?>"
