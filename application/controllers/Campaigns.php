@@ -16,6 +16,9 @@ class Campaigns extends MY_Controller {
 		$campaign = $this->session->userdata('campaign_id');
 	
 		$companies_array = $search_results_in_session;
+        
+         //echo '<pre>'; print_r($companies_array); echo '</pre>';
+           //     exit();
 
 		// if campaign exist set this variables
 		$this->data['current_campaign_name'] = ($this->session->userdata('campaign_name') ?: FALSE );
@@ -52,7 +55,14 @@ class Campaigns extends MY_Controller {
 		$this->data['edit_page'] = 'edit_campaign';
 
 		$this->data['main_content'] = 'companies/search_results';
-		$this->load->view('layouts/default_layout', $this->data);
+		
+         
+        
+        
+        $this->load->view('layouts/default_layout', $this->data);
+        
+        
+        
 	}
 
 	public function create() 
@@ -174,7 +184,7 @@ class Campaigns extends MY_Controller {
                 
                 }
             
-    $this->session->set_userdata('pipedate',$dta);
+                $this->session->set_userdata('pipedate',$dta);
 				$session_result = serialize($result);
 				$this->session->set_userdata('pipeline',$pipeline);
 				$this->session->set_userdata('companies',$session_result);

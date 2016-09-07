@@ -177,11 +177,13 @@ class Campaigns_model extends MY_Model {
 			   pr.id, --f42
 			   C.source_explanation, --f43
 			   UC.name, --f44
-			   UU.name --f45
+			   UU.name, --f45
+                 C.initial_rate, --f46
+                C.customer_to --f47
 			   )) "JSON output" 
 			  
 
-		from (select * from COMPANIES where eff_to IS NULL  '.$pipeline_sql.') C ';
+		from (select * from companies where eff_to IS NULL  '.$pipeline_sql.') C ';
 
 		
 		$sql = $sql.' JOIN ( select company_id from targets where campaign_id = '.$campaign_id.' ) company ON C.id = company.company_id';
@@ -360,7 +362,9 @@ class Campaigns_model extends MY_Model {
 			     pr.id,
 			     C.source_explanation,
 			     UC.name, 
-			     UU.name
+			     UU.name,
+                  C.initial_rate,   
+                 C.customer_to
 
 
 		order by C.id 
