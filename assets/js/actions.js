@@ -1341,8 +1341,7 @@ if(tm > 1){ tm = tm + ' Days Overdue'; }else if(tm == 1){ tm  = tm + ' Day Overd
 
 
 function dateDiffChecker(tm){
-    
-    console.log(tm)
+ 
 
 tm = tm.split(' ');
 

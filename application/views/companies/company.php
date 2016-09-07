@@ -429,11 +429,11 @@ if ($your_date < $now){;
 		
        
 		<!-- MORTGAGES -->
-
+	<div class="col-md-12">
+		<div class="panel panel-default">
 <?php if(!empty($company['mortgages'])): ?>
 		
-		<div class="col-md-12">
-		<div class="panel panel-default">
+	
 		<div class="panel-heading" id="qvfinancials">
 		Financials
             
