@@ -99,7 +99,7 @@ function populate(){
             $.each( category, function( key, vals ) {
  
                 sort = vals.split('_');
-
+  //SIC Code 1
                 if(sort[0] != 'Downloads'){
                 $('.main_'+sort[1].replace(' ', '')).append('<li class="list-group-item folder" glen data="'+sort[2]+'"> <span class="folIcon indicatorshow"></span>'+sort[0]+' <span class="tagNumPlaceholder tagNum_'+sort[2]+'"></span></li>'); 
                 }
@@ -278,7 +278,7 @@ if((/companies/.test(window.location.href))) {
              $.each( data, function( key, val) {
         if(val['parent_tag_name'] != null){
               parent_tag_name =    val['parent_tag_name'].replace(' ', '');
-                if(parent_tag_name != 'Downloads'){
+                if(parent_tag_name != 'Downloads' && parent_tag_name != 'SICCode 1'){
                     preventtagRemove = '<span class="tagRemove" data-tag="'+val['tag_id']+'">x</span>';  
                 }
                  //indicatorshow  =  '<span class="folIcon indicatorshow"></span>';
