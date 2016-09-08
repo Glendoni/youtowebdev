@@ -856,7 +856,9 @@ endif;
 			echo form_open(site_url().'actions/create', 'name="create" class="form" role="form"',$hidden); ?>
 			<!--THE BELOW PASSES THE CLASS FIELD ACROSS PURELY FOR VALIDATION - IF THERE IS A BETTER WAY OF DOING THIS THEN IT NEEDS TO BE HERE-->
 			
-			<!--VALIDATION ERROR IF NO ACTION IS SELECTED-->
+			<!--VALIDATION ERROR IF NO ACTION IS SELECTED
+<option value="16">Pipeline - Deal</option>
+-->
 
 			<div id="action-error" class="no-source alert alert-warning" role="alert" style="display:none">
                 <strong>Source Required.</strong><br> To add a <span class="sourceRequiredDropDownItem"></span>&#44; please add a Source to this company.
@@ -865,15 +867,29 @@ endif;
                         <div class="col-sm-3 col-md-3">
                             <div class="form-group ">
                                 <label>New Action</label>
+                                
+                                
+                               
+                                
+                                
+                                
                                 <select id="action_type_completed" name="action_type_completed" class="form-control" >
                                     <option value="">--- Select an Action ---</option>
+                                    <option value="8">Pipeline - Proposal</option>
                                     <?php foreach($action_types_done as $action ): 
 
                                     if($action->id == 16 && $company['pipeline'] == 'Customer'|| $action->id == 31 && $company['pipeline'] == 'Customer' || $action->id == 32 && $company['pipeline'] == 'Customer' || $action->id == 33  && $company['pipeline'] == 'Customer'|| $action->id == 34 && $company['pipeline'] == 'Customer' ){ }else{ ?>
+                                   
+                                    <?php  if($action->id != 8 ){ ?>
                                       <option value="<?php echo $action->id; ?>"><?php echo $action->name; ?></option>
+                                    
+                                    <?php } ?>
                                     <?php 
                                     } endforeach; ?>
                                 </select>
+                                
+                                
+                               
                             </div>
                         </div>
                         <div class="col-sm-3 col-md-2 initialfee">
