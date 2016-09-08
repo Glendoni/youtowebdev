@@ -37,7 +37,7 @@
 	                <div class="col-md-6">
 	                    <div class="form-group">
 	                        <label for="phone" class="control-label">Phone</label>                            
-	                        <input type="text" name="phone" value="<?php echo isset($address->phone)?$address->phone:''; ?>" maxlength="50" class="form-control">
+	                        <input type="text" name="phone" value="<?php echo $address->phone; ?>" maxlength="50" class="form-control">
 	                    </div>
 	                </div>
 				 </div>
@@ -46,8 +46,21 @@
 	        	<button type="submit" class="btn btn-sm btn-warning btn-block">Add Location</button>
 	      	</div>
             <div class="modal-footer">
-            <div><small>
-            <?php echo $address->addresses_updated_at? '<b>Last Updated:</b> - '.$address->addresses_updated_at. ' '.$address->updated_by_user : ''; ?></small></div><div><small><b>Address Created:</b> <?php echo $address->addresses_created_at; ?>  - <?php echo $address->created_by_user; ?></small></div>
+     
+                
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+               <small class="popUpCreatedAt">
+                  <?php echo $address->addresses_updated_at? '<b>Last Updated:</b> - '.$address->addresses_updated_at. ' '.$address->updated_by_user : ''; ?>
+                   </small>
+            </div>
+                
+                
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                   <small><b>Address Created:</b> <?php echo $address->addresses_created_at; ?>  - <?php echo $address->created_by_user; ?></small>
+                   </div>
+                
+                
+                
                 
             </div>
 	      	<?php echo form_close(); ?>

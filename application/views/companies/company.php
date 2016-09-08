@@ -237,7 +237,22 @@ if ($your_date < $now){;
 
 </div>
     
-		 
+		<div class="col-xs-6 col-md-3" >
+				<label>Class</label><br>
+				<p>	
+		            <!--CLASS IF APPLICABLE-->
+		          
+                  <?php if (isset($company['class']) && $company['class'] != 'Unknown' ): ?>
+					 <?php echo $companies_classes[$company['class']] ?> 	
+					<?php else: 
+                    
+                    echo '-';
+                    
+                    ?>
+						
+		            <?php endif; ?>
+	            </p>
+			</div>	 
     
 </div><!--END ROW-->
 <hr>
@@ -328,23 +343,16 @@ if ($your_date < $now){;
 		
 <div class="row  details">
 	
-		<div class="col-xs-6 col-md-3" >
-				<label>Class</label><br>
-				<p>	
-		            <!--CLASS IF APPLICABLE-->
-		          
-                  <?php if (isset($company['class']) && $company['class'] != 'Unknown' ): ?>
-					 <?php echo $companies_classes[$company['class']] ?> 	
-					<?php else: 
-                    
-                    echo '-';
-                    
-                    ?>
-						
-		            <?php endif; ?>
-	            </p>
-			</div>
-    
+	 
+                
+            <div class="col-md-3">
+					<!-- CONTACTS -->
+            	<label>Contacts</label> 		
+			<?php if (isset($company['contacts_count'])): ?>
+			<p class="details"><?php echo $company['contacts_count'] ?  $company['contacts_count'] : '-';?></p>
+			<?php endif; ?>
+			 
+		</div>
     
     
 	 <div class="col-xs-4 col-sm-3">
@@ -372,15 +380,7 @@ if ($your_date < $now){;
 		<div class="col-xs-12 details" >
 		 
             
-            
-            <div class="col-md-3">
-					<!-- CONTACTS -->
-            	<label>Contacts</label> 		
-			<?php if (isset($company['contacts_count'])): ?>
-			<p class="details"><?php echo $company['contacts_count'] ?  $company['contacts_count'] : '-';?></p>
-			<?php endif; ?>
-			 
-		</div>
+
             
             
             
@@ -589,14 +589,18 @@ if ($your_date < $now){;
 		
 
 
-		<table class="table">
+	
             
             
             <?php 
           // echo   print_r($addresses);
             
             
-            if($addresses->address) { ?>
+            if(($address->address) || ($company['address']) ) { ?>
+            
+            
+            	<table class="table">
+            
 	      <thead>
 	        <tr>
 	          <th class="col-md-7">Address</th>
@@ -618,7 +622,7 @@ if ($your_date < $now){;
 				<td class="col-md-6">
                  <a target="_blank" href="http://maps.google.com/?q=<?=$address->address; ?>" ><span class="mainAddress"><?=$address->address; ?></span><span style="line-height: 15px;font-size: 10px;padding-left: 5px;"><i class="fa fa-external-link"></i></span></a></td>
 				<td class="col-md-3 mainAddrType"><?php echo $address->type;?></td>
-				<td class="col-md-2 mainPhone"><?php echo $address->phone; ?></td>
+				<td class="col-md-2 mainPhone"><?php echo $address->phone ? $address->phone : $company['phone']; ?></td>
 				<td  class="col-md-3">
                 <?php if ($address->type<>'Registered Address'): ?>
                         <div class=" pull-right ">
