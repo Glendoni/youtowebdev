@@ -568,7 +568,10 @@ if ($your_date < $now){;
 
 <!--ADDRESSES-->
             
-          
+         
+
+
+
 		<div class="col-md-12">
 		<div class="panel panel-default">
 		<div class="panel-heading" id="addresses">
@@ -587,11 +590,6 @@ if ($your_date < $now){;
 		<!-- /.panel-heading -->
 		<div class="panel-body">
 		
-
-
-	
-            
-            
             <?php 
           // echo   print_r($addresses);
             
@@ -662,7 +660,7 @@ endif;
 		</div>
 		</div>
 
-
+ 
 		<!--CAMPAIGNS-->
 		<?php if(isset($campaigns) and !empty($campaigns)) : ?>
 		<div class="col-md-12">
@@ -704,8 +702,10 @@ endif;
 		<!--CONTACTS-->
 		<div class="col-md-12">
 		<div class="panel panel-default">
-		<div class="panel-heading" id="contacts">
+
+		<div class="panel-heading">
 		Contacts
+
 		<div class="pull-right">
 		<div class="btn-group">
 		<button  class="btn btn-primary edit-btn btn-xs" data-toggle="modal" id="create_contact_<?php echo $company['id']; ?>"  data-target="#create_contact_<?php echo $company['id']; ?>" >
@@ -713,6 +713,8 @@ endif;
 		</button>
 		</div>
 		</div>
+               
+
 		</div>
 		<!-- /.panel-heading -->
 		<div class="panel-body">
