@@ -1007,7 +1007,7 @@ echo 'Add tag to company ' .$tagid . '  ----- ' . $companyID .'<br><br>';
     
     public function cronPipeline(){  
 
-        $query = $this->db->query("select C.id,
+        $query = $this->db->query("select C.id,C.turnover,
        CASE when T.company_id is not null and (C.turnover < 25000000 or C.turnover is null)
             then 'Prospect'
             else 'Suspect'
@@ -1033,19 +1033,22 @@ where pipeline is null
 or pipeline not in ('Customer','Proposal','Intent','Lost','Unsuitable','Blacklisted')
 -- and C.active = 't'
 											   
- LIMIT 500
+ LIMIT 5000
 ");
 
                      if ($query->num_rows() > 0)
                         {
-
+ //echo '<table width="400">';
                             foreach($query->result() as $row)
                             {
-
-                //echo '<table width="200"><tr><td>'.$row->id.' </td><td>'.$row->turnover.'</td></tr></table>'     ; 
-                                        $this->cronpipelineUpdater($row->id,$row->pipeline_value);
-                            
+//$turn   = $row->turnover ? $row->turnover : '-----';
+               // echo '<tr><td>'.$row->id.' </td><td align="left">'.$row->pipeline_value.'</td><td>'.$turn.'</td></tr>'     ; 
+                                      //if($row->id == 231806){  $this->cronpipelineUpdater($row->id,$row->pipeline_value);  } 
+                                $this->cronpipelineUpdater($row->id,$row->pipeline_value); 
+                                //if($row->id == 343853) echo 'Got ya';
                             }
+                         
+                         // echo '</table>';
                      }
             }   
     
@@ -1054,6 +1057,9 @@ or pipeline not in ('Customer','Proposal','Intent','Lost','Unsuitable','Blacklis
     
     
     private function cronpipelineUpdater($id,$pipeline){ 
+        
+        
+        
         //Updates company table pipeline based on conditions in crontogo function 
                  $data = array(
                                 'pipeline' => $pipeline
@@ -1061,6 +1067,8 @@ or pipeline not in ('Customer','Proposal','Intent','Lost','Unsuitable','Blacklis
 
                  $this->db->where('id', $id);
                  $this->db->update('companies', $data);
+        
+        
 
         }   
     
