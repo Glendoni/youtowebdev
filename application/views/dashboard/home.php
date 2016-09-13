@@ -1420,7 +1420,7 @@
 </div><!--END TAB-->
     <div role="tabpanel" class="tab-pane fade" id="calls"><div class="panel panel-default">
               <div class="panel-heading">
-              <h3 class="panel-title">Actions<span class="badge pull-right"><?php echo count($pending_actions); ?></span></h3>
+              <h3 class="panel-title">Your Schedule<span class="badge pull-right"><?php echo count($pending_actions); ?></span></h3>
               </div>
              
               <div class="panel-body no-padding">
@@ -1435,6 +1435,14 @@
                       </div>
                       </div>
                     <?php else: ?>
+            <div class="row record-holder-header mobile-hide">
+            <div class="col-md-3"><strong>Company</strong></div>
+            <div class="col-md-2"><strong>Phone</strong></div>
+            <div class="col-md-2"><strong>Action</strong></div>
+            <div class="col-md-2  "><strong>Due</strong></div>
+            <div class="col-md-3 "><strong>Actions</strong></div>
+            </div>
+
 
                     <?php foreach ($pending_actions as $action): 
                          // print_r('<pre>');print_r($action);print_r('</pre>');
@@ -1450,11 +1458,14 @@
                               <div style="clear:both"><?php echo $action->first_name.' '.$action->last_name;?></div>
                               <?php } else { $contact_details_for_calendar="";};?>
                             </div>
+                             <div class="col-md-2">
+                              <div><?php echo $action->company_phone;?></div>
+                              <div><?php echo $action->contact_phone;?></div>
+                            </div>
                             <div class="col-md-2">
                               <?php echo $action_types_array[$action->action_type_id]; ?>
                             </div>
-                            <div class="col-md-3 text-center">
-                            <?php $action->duedate;?>
+                            <div class="col-md-2  ">
                             <?php   $now = $action->duedate; 
                                     $timestamp = strtotime($action->planned_at);
                                     $round = 5*60;
@@ -1465,14 +1476,14 @@
                                     ?>
                               
                             </div>
-                            <div class="col-md-4" style="text-align:right;">
+                            <div class="col-md-3"  >
                             <a class="btn btn-default btn-xs add-to-calendar" href="http://www.google.com/calendar/event?action=TEMPLATE&text=<?php echo urlencode($action_types_array[$action->action_type_id].' | '.$action->company_name); ?>&dates=<?php echo date("Ymd\\THi00",strtotime($action->planned_at));?>/<?php echo date("Ymd\\THi00\\Z",strtotime($action->planned_at));?>&details=<?php echo $contact_details_for_calendar;?><?php echo urlencode('http://baselist.herokuapp.com/companies/company?id='.$action->company_id);?>%0D%0DAny changes made to this event are not updated in Baselist.%0D%23baselist"target="_blank" rel="nofollow">Add to Calendar</a>
                               <?php $hidden = array('action_id' => $action->action_id , 'user_id' => $current_user['id'], 'action_do' => 'completed', 'outcome' => '' , 'company_id' => $action->company_id);
                                echo form_open(site_url().'actions/edit', 'name="completed_action"  class="completed_action" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action->action_id.'" style="display:inline-block;" role="form"',$hidden); ?>
-                               <button class="btn btn-xs btn-success">Completed</button> 
+                               <button class="btn btn-xs btn-success"  style="display:none;">Completed</button> 
                                </form>
                                <?php $hidden = array('action_id' => $action->action_id , 'user_id' => $current_user['id'] , 'action_do' => 'cancelled','outcome' => '' , 'company_id' => $action->company_id,'page' => 'home' ,);
-                               echo form_open(site_url().'actions/edit', 'name="cancel_action"  class="cancel_action" style="display:inline-block;" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action->action_id.'" role="form"',$hidden); ?>
+                               echo form_open(site_url().'actions/edit', 'name="cancel_action"  class="cancel_action" style="display:none;" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action->action_id.'" role="form"',$hidden); ?>
                                <button class="btn btn-xs btn-overdue" >Cancel</button>
                                </form>
                             </div>
