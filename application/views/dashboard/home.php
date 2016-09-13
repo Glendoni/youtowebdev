@@ -1459,8 +1459,9 @@
                                     $timestamp = strtotime($action->planned_at);
                                     $round = 5*60;
                                     $rounded = round($timestamp / $round) * $round;
-                                    echo date("H:i", $rounded)." ";
-                                    echo date('d/m/y', $timestamp);
+                                    
+                                    echo date('d/m/y', $timestamp)." ";
+                                echo date("H:i", $rounded);
                                     ?>
                               
                             </div>
