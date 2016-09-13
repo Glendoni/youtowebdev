@@ -226,6 +226,14 @@ $(document).ready(function(){
  }
 
     if((/campaign_id/.test(window.location.href))) {
+        
+      $.urlParams = function(name){
+	var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+	return results[1] || 0;
+}
+        
+        
+        
         $.urlParam = function(name){
         var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
     if (results==null){
@@ -237,7 +245,9 @@ $(document).ready(function(){
 }
         
       var campaign_id  =   $.urlParam('campaign_id');
-      var para = ({'company_id':GetUrlParamID()});
+          var campaign_ids  =   $.urlParams('campaign_id');
+     
+      var para = ({'company_id':GetUrlParamID(), 'campaign_id' : campaign_id});
                           $.ajax({
                             type: "POST",
                               data: para,
@@ -861,6 +871,25 @@ var para = window.location.href.split("id=");
     return param = param[0]; 
 } 
 
+
+$(function(){
+    $("[href^='#']").not("[href~='#']").click(function(evt){
+        evt.preventDefault();
+        var obj = $(this),
+        getHref = obj.attr("href").split("#")[1],
+        offsetSize = 1450;
+        $(window).scrollTop($("[name*='"+getHref+"']").offset().top - offsetSize);
+    });
+});
+        $.urlParam = function(name){
+    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+    if (results==null){
+       return null;
+    }
+    else{
+       return results[1] || 0;
+    }
+}
 </script>
 <!--COMBINE MULTIPLE JS FILES-->
 <?php if (isset($current_user)): ?>

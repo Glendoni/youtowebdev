@@ -69,9 +69,9 @@ function turnoverCompanies(){
     }
     
     
-    function pipelineCronChecker()  //Call this function every 5mins
+    function pipelineCronChecker($offset = 0)  //Call this function every 5mins
     {
-      $this->Cron_model->cronPipeline();  
+      $this->Cron_model->cronPipeline($offset);  
     }
     
         function turnoverCompaniesWithoutTurnover(){

@@ -1005,7 +1005,7 @@ echo 'Add tag to company ' .$tagid . '  ----- ' . $companyID .'<br><br>';
         If the company is "in a Target Sector and turnover < £25 million" then set to Prospect, else set to Suspect
     @@@ */
     
-    public function cronPipeline(){  
+    public function cronPipeline($offset = 0){  
 
         $query = $this->db->query("select C.id,C.turnover,
        CASE when T.company_id is not null and (C.turnover < 25000000 or C.turnover is null)
@@ -1029,26 +1029,27 @@ and S.target = 't'
 ) T
 ON C.id = T.company_id
 
-where pipeline is null 
-or pipeline not in ('Customer','Proposal','Intent','Lost','Unsuitable','Blacklisted')
--- and C.active = 't'
-											   
- LIMIT 5000
-");
+where pipeline is null
+or pipeline not in ('Customer','Proposal','Intent','Lost','Unsuitable','Blacklisted') 
+-- and C.active = 't' 
+						   
+ LIMIT 500 OFFSET ".$offset                               
+);
 
                      if ($query->num_rows() > 0)
                         {
- //echo '<table width="400">';
+                            echo '<table width="400">';
                             foreach($query->result() as $row)
                             {
-//$turn   = $row->turnover ? $row->turnover : '-----';
-               // echo '<tr><td>'.$row->id.' </td><td align="left">'.$row->pipeline_value.'</td><td>'.$turn.'</td></tr>'     ; 
-                                      //if($row->id == 231806){  $this->cronpipelineUpdater($row->id,$row->pipeline_value);  } 
+                                $turn   = $row->turnover ? $row->turnover : '-----';
+                                
+                                echo '<tr><td>'.$row->id.' </td><td align="left" class="glen">'.$row->pipeline_value.'</td><td>'.$turn.'</td></tr>'; 
+                                //if($row->id == 231806){  $this->cronpipelineUpdater($row->id,$row->pipeline_value);  } 
                                 $this->cronpipelineUpdater($row->id,$row->pipeline_value); 
                                 //if($row->id == 343853) echo 'Got ya';
                             }
                          
-                         // echo '</table>';
+                         echo '</table>';
                      }
             }   
     
@@ -1062,7 +1063,9 @@ or pipeline not in ('Customer','Proposal','Intent','Lost','Unsuitable','Blacklis
         
         //Updates company table pipeline based on conditions in crontogo function 
                  $data = array(
-                                'pipeline' => $pipeline
+                                'pipeline' => $pipeline,
+                     'updated_at' => date("Y-m-d H:i:s")
+                                          
                              );
 
                  $this->db->where('id', $id);
