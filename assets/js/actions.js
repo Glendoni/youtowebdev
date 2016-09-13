@@ -692,7 +692,7 @@ function bindAddCallBackToCompletedAction(){
 
 
                   if (val.first_name != null){
-                      contactName = '<div class="label label-primary hint--top-right"   data-hint="Name" style="float:right; margin-top:-4px; ">'+val.first_name+ ' '+ val.last_name+'</div>';
+                      contactName = '<div class="label label-primary hint--top-right"   data-hint="Name" style="float:right; margin-top:-19px; ">'+val.first_name+ ' '+ val.last_name+'</div>';
                         }
 
                 if ( val.campaign !== null ){
@@ -708,7 +708,7 @@ function bindAddCallBackToCompletedAction(){
                         
                         }
                         
-                $('.timeline_inner').append('<div class="timeline-entry   actionIdactions_marketing" style="dislay:none;"> <div class="timeline-stat"> <div class="timeline-icon label-primary " style="color: white;"><i class="fa fa-envelope-o fa-lg"></i></div></div><div class="timeline-label"> <div class="mar-no pad-btm"><h4 class="mar-no pad-btm"><a href="javascript:;" class="actionPillHeaderTitle"> '+val.campaign_name+' <span class"eeprefix">(Outbound Marketing)</span> </a>   </h4>'+'<span class="label label-warning">'+val.date+'</span></div><div style="float:right; margin-top:-9px; margin-left:3px;">'+action+'</div>'+contactName+'<div class="actionMsgText"><span class="actionMsg commentsComment"></span><hr></div><div> <div class="mic-info"> '+email_by+'</div></div></div>')
+                $('.timeline_inner').append('<div class="timeline-entry   actionIdactions_marketing" style="dislay:none;"> <div class="timeline-stat"> <div class="timeline-icon label-primary " style="color: white;"><i class="fa fa-envelope-o fa-lg"></i></div></div><div class="timeline-label"> <div class="mar-no pad-btm" style="margin-bottom:4px;"><h4 class="mar-no pad-btm"><a href="javascript:;" class="actionPillHeaderTitle"> '+val.campaign_name+' <span class"eeprefix">(Outbound Marketing)</span> </a>   </h4>'+'<span class="label label-warning">'+val.date+'</span></div><div style="float:right; margin-top:-40px; margin-left:3px;">'+action+'</div>'+contactName+'<div class="actionMsgText"><span class="actionMsg commentsComment"></span><hr></div><div> <div class="mic-info"> '+email_by+'</div></div></div>')
                     }
                 }
                     //$('#sidebar').hide();

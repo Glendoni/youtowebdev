@@ -927,6 +927,66 @@ echo $this->Tagging_model->$route($post);
     
          $company_id = $this->input->post('company_id');
 
+
+$campaign_id = $this->input->post('campaign_id');
+
+        // $company_id = $this->input->post('company_id');
+
+	$campaign = $this->Campaigns_model->get_campaign_by_id($campaign_id);
+        
+        
+        //print_r($campaign);
+        
+        
+			if ($campaign[0]->id == False) {
+				print_r('No campaign');
+				return False;
+			}
+			$pipeline = $this->input->get('pipeline');
+			$companies = $this->Campaigns_model->get_companies_for_campaign_id($campaign_id,$pipeline);
+			// print '<pre>';
+			// print_r($companies);
+			// die;	
+			$this->refresh_search_results();
+			$this->session->set_userdata('campaign_id',$campaign[0]->id);
+			$this->session->set_userdata('campaign_name',$campaign[0]->name);
+			$this->session->set_userdata('campaign_owner',$campaign[0]->user_id);
+			$this->session->set_userdata('campaign_shared',$campaign[0]->shared);
+			$this->session->unset_userdata('current_search');
+
+			$result = $this->process_search_result($companies);
+        
+       // print_r($result);
+      
+
+			if(empty($result))
+			{
+                
+               $this->session->unset_userdata('companies');
+				unset($search_results_in_session);
+			}
+			else
+			{
+                
+                
+                           foreach($result as $item => $value){
+                              // echo $value['id'];
+                        $dt =     $this->data['last_pipeline_created_at'] = $this->Actions_model->actiondata($value['id']);
+                        $dta[] = array('id' => $value['id'], 'last_pipeline_date' =>  $dt );      
+                
+                }
+            
+                $this->session->set_userdata('pipedate',$dta);
+				$session_result = serialize($result);
+				$this->session->set_userdata('pipeline',$pipeline);
+				$this->session->set_userdata('companies',$session_result);
+			}
+
+
+
+
+
+/*
         $session_result = $this->session->userdata('companies');
             $search_results_in_session = unserialize($session_result);
             $campaign = $this->session->userdata('campaign_id');
@@ -937,8 +997,10 @@ echo $this->Tagging_model->$route($post);
                 $current_page_number = $this->input->get('page_num') ? $this->input->get('page_num') : 1;
                 $pages_count = ceil(count($companies_array)/RESULTS_PER_PAGE);
                 //$prev = array();
+                
+                */
                 $i = 0 ;
-                    foreach($companies_array_chunk[($current_page_number-1)] as $key=>$item){
+                    foreach($result as $key=>$item){
                            // echo $i;
                         if($i ==1){
                             $data['NextId'] = $item['id'];
