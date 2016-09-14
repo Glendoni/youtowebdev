@@ -1419,9 +1419,9 @@ if(day == 1 || day == 21 || day == 31) dateSuffix = 'st';
   }
 
 // Return the formatted string
-       // console.log(showtime)
+        console.log(time.join(":"))
         
- return (showtime? time.join(":")+suffix : '') + " - " + date.join(" ") + " " ; 
+ return (showtime? date.join(" ") + " - " + time.join(":")+suffix : '') + " " ; 
     } 
 
 /**

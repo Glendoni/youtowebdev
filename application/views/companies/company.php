@@ -198,9 +198,9 @@ $your_date = strtotime($company['actioned_at1']);
 $datediff = abs($now - $your_date);
 $days_since = floor($datediff/(60*60*24));
 if ($company['actioned_at1'] > 0){
-	echo " (".$days_since." days ago)";
+	echo "<br> ".$days_since." days ago";
 	} else {
-	echo " (".$days_since." day ago)";;
+	echo "<br> ".$days_since." day ago)";;
 	}
 ?></div>
 
@@ -246,7 +246,7 @@ if ($your_date < $now){;
 					 <?php echo $companies_classes[$company['class']] ?> 	
 					<?php else: 
                     
-                    echo '-';
+                    //echo '-';
                     
                     ?>
 						
@@ -276,7 +276,7 @@ if ($your_date < $now){;
         <div class="col-xs-6 col-md-3" style="margin-top:10px;">
         		<label>Phone</label><br>
         		<p>
-        		<?php echo isset($company['phone'])?$company['phone']:'-'; ?>                
+        		<?php echo isset($company['phone'])?$company['phone']:''; ?>                
            		</p>
 			</div><!--END PHONE NUMBER-->
 	
@@ -349,7 +349,7 @@ if ($your_date < $now){;
 					<!-- CONTACTS -->
             	<label>Contacts</label> 		
 			<?php if (isset($company['contacts_count'])): ?>
-			<p class="details"><?php echo $company['contacts_count'] ?  $company['contacts_count'] : '-';?></p>
+			<p class="details"><?php echo $company['contacts_count'] ?  $company['contacts_count'] : '';?></p>
 			<?php endif; ?>
 			 
 		</div>
@@ -357,7 +357,7 @@ if ($your_date < $now){;
     
 	 <div class="col-xs-4 col-sm-3">
 			<label><span style="text-transform: capitalize"><?php echo isset($company['turnover_method'])?$company['turnover_method']:'';?></span> Turnover</label><br>
-			<p class="details" style="margin-bottom:5px;"><?php echo isset($company['turnover'])? '£'.number_format (round($company['turnover'],-3)):'-';?></p>
+			<p class="details" style="margin-bottom:5px;"><?php echo isset($company['turnover'])? '£'.number_format (round($company['turnover'],-3)):'';?></p>
             
             
         </div>
@@ -395,7 +395,7 @@ if ($your_date < $now){;
 			<?php if (isset($company['emp_count'])): ?>
 			<p class="details"><?php echo $company['emp_count'];?> </p>
 			<?php else: ?>
-            <p class="details">-</p>
+            <p class="details"></p>
 			<?php endif; ?>
             </div>
 		<!-- SECTORS -->
