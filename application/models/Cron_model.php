@@ -1005,7 +1005,7 @@ echo 'Add tag to company ' .$tagid . '  ----- ' . $companyID .'<br><br>';
         If the company is "in a Target Sector and turnover < £25 million" then set to Prospect, else set to Suspect
     @@@ */
     
-    public function cronPipeline($offset = 0){  
+    public function cronPipeline($offset =0){  
 
         $query = $this->db->query("select C.id,C.turnover,
        CASE when T.company_id is not null and (C.turnover < 25000000 or C.turnover is null)
@@ -1031,9 +1031,10 @@ ON C.id = T.company_id
 
 where pipeline is null
 or pipeline not in ('Customer','Proposal','Intent','Lost','Unsuitable','Blacklisted') 
--- and C.active = 't' 
-						   
- LIMIT 500 OFFSET ".$offset                               
+
+and C.active = 't' 
+	ORDER BY C.updated_at DESC					   
+ LIMIT 10000 OFFSET ".$offset                               
 );
 
                      if ($query->num_rows() > 0)
