@@ -91,11 +91,14 @@
                      <?php
                     //print '<pre>';
                   //print_r($pipedate);
-                
+           
                 if(!$company['customer_to']){  ?> 
                        
-                
-                <?php  if($last_pipeline_created_at && $company['id'] != '154537' && $company['pipeline'] != 'Prospect' && $company['pipeline'] != 'Suspect' ){  ?>
+                     
+                <?php  
+                       
+             if($last_pipeline_created_at && $company['id'] != '154537' && $company['pipeline'] != 'Prospect' && $company['pipeline'] != 'Suspect' ){
+                ?>
                     
                         <span class="last_pipeline_created_at">
                         <?php
@@ -170,9 +173,9 @@ $your_date = strtotime($company['actioned_at1']);
 $datediff = abs($now - $your_date);
 $days_since = floor($datediff/(60*60*24));
 if ($company['actioned_at1'] > 0){
-	echo " (".$days_since." days ago)";
+	echo  " <br>".$days_since." days ago";
 	} else {
-	echo " (".$days_since." day ago)";;
+	echo " <br>".$days_since." day ago";
 	}
 ?></div>
 
@@ -190,9 +193,20 @@ if ($company['actioned_at1'] > 0){
 	<div class="action_date_list">
 <?php echo date("l jS F Y",strtotime($company['planned_at2']));?>
 </div>
- 
+<?php
+$now = time ();
+    $compdate = explode('T',$company['planned_at2']);
+$your_date = strtotime($compdate[0]);
+if ($your_date < $now){; 
+     $datediff = $now - $your_date;
+     $daysoverdue = floor($datediff/(60*60*24));?>
 <div><span class="label label-danger" style="font-size:10px;">
-<?php   if ($daysoverdue > 1) {echo $daysoverdue." Days";} elseif($daysoverdue == 1){  echo $daysoverdue." Day";   }else{echo "";};?>  Overdue </span></div>
+<?php   
+                    
+                       if ($daysoverdue > 1) {echo "Overdue";};?>   </span></div>
+
+<?php } else {}?> 
+ 
 
  
 <?php endif; ?>
@@ -226,7 +240,7 @@ if ($company['actioned_at1'] > 0){
 		<div class="col-md-4">
 				<label>Registered Address</label>
 				<p style="margin-bottom:10px;">
-                <?php echo isset($company['address'])?'<a href="http://maps.google.com/?q='.urlencode($company['address']).'" target="_blank">'.$company['address'].'<span style="    line-height: 15px;font-size: 10px;padding-left: 5px;"><i class="fa fa-external-link"></i></span></a>':'-'; ?>  
+                <?php echo isset($company['address'])?'<a href="http://maps.google.com/?q='.urlencode($company['address']).'" target="_blank">'.$company['address'].'<span style="    line-height: 15px;font-size: 10px;padding-left: 5px;"><i class="fa fa-external-link"></i></span></a>':''; ?>  
 				</p>
 		</div><!--END ADDRESS-->
 		
@@ -291,7 +305,7 @@ if ($company['actioned_at1'] > 0){
 			<?php if (isset($company['contacts_count'])): ?>
 			<p class="details"><?php echo $company['contacts_count'];?> </p>
 			<?php else: ?>
-			<p class="details">-</p>
+			<p class="details"></p>
 			<?php endif; ?>
 		</div>
             
@@ -303,7 +317,7 @@ if ($company['actioned_at1'] > 0){
 					 <?php echo $companies_classes[$company['class']] ?> 	
 					<?php else: 
                     
-                    echo '-';
+                    //echo '-';
                     
                     ?>
 						
@@ -318,7 +332,7 @@ if ($company['actioned_at1'] > 0){
 		<div class="col-xs-6 col-sm-3 ">
 			<strong><span style="text-transform: capitalize"><?php echo isset($company['turnover_method'])?$company['turnover_method']:'';?></span> Turnover</strong><br>
 			<p class="details" style="margin-bottom:5px;">
-				<?php echo isset($company['turnover'])? '£'.number_format (round($company['turnover'],-3)):'-';?>
+				<?php echo isset($company['turnover'])? '£'.number_format (round($company['turnover'],-3)):'';?>
 			</p>
         </div>
 	
@@ -328,7 +342,7 @@ if ($company['actioned_at1'] > 0){
 			<?php if (isset($company['emp_count'])): ?>
 			<p class="details"><?php echo $company['emp_count'];?> </p>
 			<?php else: ?>
-            <p class="details">-</p>
+            <p class="details"></p>
 			<?php endif; ?>
 		</div>
 		<!-- SECTORS -->
