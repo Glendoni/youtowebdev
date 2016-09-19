@@ -1419,7 +1419,7 @@ if(day == 1 || day == 21 || day == 31) dateSuffix = 'st';
   }
 
 // Return the formatted string
-        console.log(time.join(":"))
+      //  console.log(time.join(":"))
         
  return (showtime? date.join(" ") + " - " + time.join(":")+suffix : '') + " " ; 
     } 

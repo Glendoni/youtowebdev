@@ -38,16 +38,8 @@ class Companies_model extends CI_Model {
 	function get_companies_classes()
 	{
 		$arrayNames = array(
-	        'PreStartUp' => 'Pre-Start Up',
-            'PreStartUpWithoutAddress' => 'Pre-Start Up Without Address',
-			'StartUp' => 'Start Up',
-			'UsingFinance' => 'Using Finance',
-			'PermOnly' => 'Perm Only',
-			'OccasionalContract' => 'Perm - Occasional Placements',
-			'LookingToPlaceContractors' => 'Perm - Looking to Build Contract Business',
-			'SelfFunding' => 'Self-Funding',
-            'LowFixedFee' => 'Low Fixed Fee',
-			'Consultancy' => 'Consultancy'
+	       'Using Finance' => 'Using Finance',
+			'FF' => 'First to Finance'
 
 			);
 		return 	$arrayNames;
