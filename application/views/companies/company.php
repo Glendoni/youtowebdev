@@ -477,9 +477,12 @@ if ($your_date < $now){;
                 
                
        
-             if( $mortgage['Inv_fin_related'] == 'p' || $mortgage['Inv_fin_related'] == false) {  
+             if( $mortgage['Inv_fin_related'] == 'Y' || $mortgage['Inv_fin_related'] == 'P') {  
                 $tdbgcolorclass =   'success'  ;//$tdbgcolorclass = 'danger';
-                }else{
+                }
+                
+                
+                  if( $mortgage['Inv_fin_related'] == 'N'){
                     
                   $tdbgcolorclass =   'danger' ;  
                     
@@ -510,14 +513,14 @@ if ($your_date < $now){;
     
     
     
-    if($mortgage['Inv_fin_related'] == 'y'){ echo '<span  class="related_to_Invoice_Finance inv'.$mortgage['id'].'">Not Related To Invoice Finance</span>'; 
-                }elseif($mortgage['Inv_fin_related'] == null){
+    if($mortgage['Inv_fin_related'] == 'N'){ echo '<span  class="related_to_Invoice_Finance inv'.$mortgage['id'].'">Not Related To Invoice Finance</span>'; 
+                }elseif($mortgage['Inv_fin_related'] == 'Y'){
         
     echo  '<span  class="Not_related_to_Invoice_Finance inv'.$mortgage['id'].'">Related To Invoice Finance</span>'; 
     
     
-    }else{
-        
+    } 
+         if($mortgage['Inv_fin_related'] == 'P'){
         echo  '<span  class="Properly_related_to_Invoice_Finance inv'.$mortgage['id'].'">Probably Related To Invoice Finance</span>'; 
         
     } 
@@ -544,9 +547,9 @@ if ($your_date < $now){;
         <?php 
         if($mortgage['stage'] == 'Outstanding'){ 
             
-              if($mortgage['Inv_fin_related'] == 'y') $prob = 1;
-                    if($mortgage['Inv_fin_related'] == 'p') $prob = 3;
-                          if($mortgage['Inv_fin_related'] == null) $prob = 2;
+              if($mortgage['Inv_fin_related'] == 'Y') $prob = 2;
+                    if($mortgage['Inv_fin_related'] == 'P') $prob = 3;
+                          if($mortgage['Inv_fin_related'] == 'N') $prob = 1;
            
             
         ?>
@@ -1171,9 +1174,9 @@ endif;
 
 
           <form>
- <label class="checkbox-inline"><input type="radio"  name="debenturemortgage" id="radio_3" value="p"> Probably Related to Invoice Finance</label>
-<label class="checkbox-inline"><input type="radio"  name="debenturemortgage" id="radio_2" value=""> Related to Invoice Finance</label>
-<label class="checkbox-inline"><input type="radio" name="debenturemortgage"   id="radio_1" value="y" > Not Related to Invoice Finance</label>
+ <label class="checkbox-inline"><input type="radio"  name="debenturemortgage" id="radio_3" value="P"> Probably Related to Invoice Finance</label>
+<label class="checkbox-inline"><input type="radio"  name="debenturemortgage" id="radio_2" value="Y"> Related to Invoice Finance</label>
+<label class="checkbox-inline"><input type="radio" name="debenturemortgage"   id="radio_1" value="N" > Not Related to Invoice Finance</label>
               
               
               

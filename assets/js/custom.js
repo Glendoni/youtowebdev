@@ -36,14 +36,16 @@ if(data.success){
  $('table .cont'+data.success).removeClass('success'); 
      $('table .cont'+data.success).addClass('danger'); 
       
-  if(data.debenturemortgage == 'p'){
+  if(data.debenturemortgage == 'P'){
                             $('.inv'+data.success).html('Probably Related To Invoice Finance');
                          $('table .cont'+data.success).removeClass('danger'); 
                          $('table .cont'+data.success).addClass('success'); 
       
        $('#morprov'+data.success).attr('providerstatus', 3)
       
-  }else{
+  }
+    
+    if(data.debenturemortgage == 'N'){
        $('.inv'+data.success).html('Not Related To Invoice Finance');
        $('#morprov'+data.success).attr('providerstatus', 1)
       
@@ -52,18 +54,14 @@ if(data.success){
    
 }
             
-          if(data.error){   $('.inv'+data.error).show(); 
+         if(data.debenturemortgage == 'Y'){   $('.inv'+data.success).show(); 
                         
-                         $('table .cont'+data.error).removeClass('danger'); 
-                         $('table .cont'+data.error).addClass('success'); 
+                         $('table .cont'+data.success).removeClass('danger'); 
+                         $('table .cont'+data.success).addClass('success'); 
                         
-                         $('#morprov'+data.error).attr('providerstatus', 2)
-                         console.log('table Not_related_to_Invoice_Finance .inv'+data.error)
-                         
-                         
-                         
-                         
-                                $('.inv'+data.error).html('Related To Invoice Finance');
+                         $('#morprov'+data.success).attr('providerstatus', 2)
+                        // console.log('table Not_related_to_Invoice_Finance .inv'+data.error)
+                            $('.inv'+data.success).html('Related To Invoice Finance');
                           }
                         }
       
