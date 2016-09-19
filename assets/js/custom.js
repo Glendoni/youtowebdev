@@ -445,12 +445,7 @@ $(".pipeline-validation-check").change(function() {
             });
          
             $('.tsector').removeClass('tsector'); 
-<<<<<<< HEAD
-          
-         $("form").submit(function () {
-=======
         $("form").submit(function () {
->>>>>>> staging
             if ($(this).valid()) {
             $(this).submit(function () {
             return false;
@@ -460,20 +455,12 @@ $(".pipeline-validation-check").change(function() {
             else {
             return false;
             }
-<<<<<<< HEAD
-            }); 
-=======
             });
->>>>>>> staging
      }
 
 //Prevents form from subitting     
     
-<<<<<<< HEAD
-         
-=======
             
->>>>>>> staging
 
     
     
