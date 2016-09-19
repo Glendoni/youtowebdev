@@ -548,7 +548,9 @@ $company = $this->process_search_result($raw_search_results);
 
                         if($chargesResponse){      
                          //   file_put_contents('apitext.txt', 'Initial stage three'.PHP_EOL, FILE_APPEND); 
-                            $this->Companies_model->insert_charges_CH($chargesResponse,$rows_affected,$this->data['current_user']['id']);      
+                            $this->Companies_model->insert_charges_CH($chargesResponse,$rows_affected,$this->data['current_user']['id']);  
+
+    
                         }
                             echo json_encode(array('status' => 200, 'message' => $rows_affected));
                     }else{
@@ -1084,7 +1086,12 @@ ORDER BY v.created_at DESC");
 
 }
        
-    
+    function real(){
+        
+       $this->Companies_model->cronPipeline(0,335504);  
+        
+        
+    }
     
     
 }
