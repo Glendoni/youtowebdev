@@ -97,7 +97,7 @@
                      
                 <?php  
                        
-             if($last_pipeline_created_at  && $company['pipeline'] != 'Prospect' && $company['pipeline'] != 'Suspect' ){
+             if($last_pipeline_created_at && $company['pipeline'] != 'Prospect' && $company['pipeline'] != 'Suspect' ){
                 ?>
                     
                         <span class="last_pipeline_created_at">
