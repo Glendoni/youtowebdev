@@ -876,6 +876,7 @@ from (select * from COMPANIES where active = \'TRUE\' ' ;
 			'phone' => !empty($post['phone'])?$post['phone']:NULL,
 			'linkedin_id' => (!empty($post['linkedin_id']) and !empty($post['linkedin_id']))?$post['linkedin_id']:NULL,
 			'url' => !empty($post['url'])?str_replace('http://', '',$post['url']):NULL,
+            'pipeline' => 'Suspect',
 			'contract'=>!empty($post['contract'])?$post['contract']:NULL,
 			'perm'=>!empty($post['perm'])?$post['perm']:NULL,
 			'class'=>!empty($post['company_class'])?$post['company_class']:NULL,
@@ -1078,6 +1079,7 @@ $q = '
         'name' => humanize($postName),
         'contract' => null,
         'perm' => null,
+        'pipeline' => 'Suspect',
         'created_by'=> $user_id,
         'eff_from'=> $post['date_of_creation'],
         'registration' => !empty($post['registration'])?$post['registration']:NULL,		 
@@ -1482,23 +1484,25 @@ or pipeline not in ('Customer','Proposal','Intent','Lost','Unsuitable','Blacklis
 and C.active = 't' 
 
 ".$comp."
+
+LIMIT 1
 	 "                              
 );
 
                      if ($query->num_rows() > 0)
                         {
-                            echo '<table width="400">';
+                            //echo '<table width="400">';
                             foreach($query->result() as $row)
                             {
                                 $turn   = $row->turnover ? $row->turnover : '-----';
                                 
-                                echo '<tr><td>'.$row->id.' </td><td align="left" class="glen">'.$row->pipeline_value.'</td><td>'.$turn.'</td></tr>'; 
+                               // echo '<tr><td>'.$row->id.' </td><td align="left" class="glen">'.$row->pipeline_value.'</td><td>'.$turn.'</td></tr>'; 
                                 //if($row->id == 231806){  $this->cronpipelineUpdater($row->id,$row->pipeline_value);  } 
                                 $this->cronpipelineUpdater($row->id,$row->pipeline_value); 
                                 //if($row->id == 343853) echo 'Got ya';
                             }
                          
-                         echo '</table>';
+                        // echo '</table>';
                      }
             }   
     
