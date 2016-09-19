@@ -10,33 +10,34 @@
                     <div class="page-results-list" id="parent">
                     <breadcrumbscroll>
                     <div class="row top-info-holder">
-                    <div class="col-md-9 piplineUdate" style="
-    padding-left: 31px;
-">
+                    <div class="col-md-9 piplineUdate" style="padding-left: 31px;">
                                 <!-- <breadcrumbscroll> -->
-                                <h2 class="company-header" id="logo">
-                                    <?php $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' );
-                                        echo html_entity_decode (str_replace($words, ' ',$company['name'])); 
-                                    // &#39;
-                                    ?>
-                                       <?php if (isset($company['trading_name'])): ?>
-                                                        <h5 class="trading-header">
-                                                            <?php echo $company['trading_name'];?>
-                                                        </h5>
-                                                    <?php endif; ?>
-                                 </h2>
+    <h2 class="company-header" id="logo">
+                <?php $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' ); echo html_entity_decode (str_replace($words, ' ',$company['name'])); ?></h2>
+    <?php if (isset($company['trading_name'])): ?>
+        <h5 class="trading-header">
+        <small><b>T/A</b></small>  <?php echo $company['trading_name'];?>
+        </h5>
+    <?php endif; ?>
+    <div class="spacer" style="clear: both;"></div>
+
+
                       
                              
                         
                                 <!--  </breadcrumbscroll> /breadcrumbscroll -->
                                 <!--END ASSIGN-->
 
-                            
-
-                                        <?php if(!empty($company['pipeline'])): ?>
-
-                                        <?php endif; ?>
-                                        <span class="label  label-<?php echo str_replace(' ', '', $company['pipeline']); ?>"><?php echo $company['pipeline']?>        
+                                                <!-- Button trigger modal -->
+ 
+                                        <?php 
+                        if(!empty($company['pipeline'])):
+                       
+                        ?>
+                        
+                                        
+                                        <span class="label  label-<?php echo str_replace(' ', '', $company['pipeline']); ?>"><?php echo $company['pipeline']?>   
+                                        <?php endif; ?>     
                                         <?php if (isset($company['customer_from'])&&($company['pipeline']=='Customer')):?>  <?php echo date("d/m/y",strtotime($company['customer_from']));?><?php  
                                         $number  = $company['initial_rate'];
                                         //$number = 5.00;
@@ -45,6 +46,31 @@
                                         <?php endif; ?>
                                         </span>
 
+                        <?php if(!$company['customer_to']){  ?> 
+                         <?php 
+
+                                                          
+                        if($last_pipeline_created_at && $company['id'] != '154537' && $company['pipeline'] != 'Prospect' && $company['pipeline'] != 'Suspect' ){ ?>
+                    
+                        <span class="last_pipeline_created_at">
+                        <?php
+ //echo $last_pipeline_created_at;
+                            $your_date = date('Y-m-d' , strtotime($last_pipeline_created_at));
+ 
+
+                            $datetime1 = date_create(date('Y-m-d'));
+                            $datetime2 = date_create($your_date);
+                            $interval = date_diff($datetime1, $datetime2);
+                             $interval = $interval->format('%a');
+                        
+             if($interval == 1){ echo  $interval.' day ago' ;}  elseif($interval == 0){ echo 'Today'; }else{ echo $interval. ' days ago' ;}        
+                        
+
+ ?>
+      </span>
+               <?php }} ?>  
+                        
+                        
                                         <?php if($company['customer_to']){  ?>
                                         <span class="label  label-<?php echo str_replace(' ', '', $company['pipeline']); ?> cancelledPill">
                                         Cancelled <?php echo date('d/m/Y',strtotime($company['customer_to'])); ?>
@@ -61,8 +87,11 @@
                                         <?php else: ?>
                                         <?php endif; ?>
 
-                          
-
+       
+                        
+                   
+                        
+                        
                         
                         </div><!--END ROW-->
 
@@ -152,7 +181,7 @@
 		<div class="row">
 <div class="col-sm-12 action-details">
 <div class="row"> 
-<div class="col-md-6 col-lg-6 col-sm-6">
+<div class="col-md-4 col-lg-4 col-sm-4">
 <div><strong>Last Contact</strong></div>
 <div>
 <?php if (empty($company['actioned_at1'])): ?>
@@ -169,9 +198,9 @@ $your_date = strtotime($company['actioned_at1']);
 $datediff = abs($now - $your_date);
 $days_since = floor($datediff/(60*60*24));
 if ($company['actioned_at1'] > 0){
-	echo " (".$days_since." days ago)";
+	echo "<br> ".$days_since." days ago";
 	} else {
-	echo " (".$days_since." day ago)";;
+	echo "<br> ".$days_since." day ago)";;
 	}
 ?></div>
 
@@ -179,7 +208,7 @@ if ($company['actioned_at1'] > 0){
 
 </div>
 </div>
-<div class="col-md-6 col-lg-6 col-sm-6">
+<div class="col-md-4 col-lg-4 col-sm-4">
 <div><strong>Scheduled</strong></div>
   
 <?php if (empty($company['planned_at2'])): ?>
@@ -202,35 +231,56 @@ if ($your_date < $now){;
 
 <?php } else {}?>
 <?php endif; ?>
+    
+    
+    
 
 </div>
+    
+		<div class="col-xs-6 col-md-3" >
+				<label>Class</label><br>
+				<p>	
+		            <!--CLASS IF APPLICABLE-->
+		          
+                  <?php if (isset($company['class']) && $company['class'] != 'Unknown' ): ?>
+					 <?php echo $companies_classes[$company['class']] ?> 	
+					<?php else: 
+                    
+                    //echo '-';
+                    
+                    ?>
+						
+		            <?php endif; ?>
+	            </p>
+			</div>	 
+    
 </div><!--END ROW-->
 <hr>
+    
 </div>
+	<div class="col-xs-6 col-md-4 details" style="margin-top:10px; ">
+			<label>Company Number</label><br>
+			<p>	
+			 <!--COMPANY NUMBER IF APPLICABLE-->
+			<?php echo isset($company['registration'])?$company['registration']:''; ?>
+         	</p>
+        	</div>
 
-	<?php if (isset($company['trading_name'])): ?>
-		<div class="col-md-6">
-				<label>Registered Name</label>
-				<p>	
+        	<div class="col-xs-6 col-md-4" style="margin-top:10px;">
+        	<label>Founded</label><br>
+			<p>	
+				<?php echo isset($company['eff_from'])?$company['eff_from']:''; ?>
+			</p>
+		</div>
+
+        <div class="col-xs-6 col-md-3" style="margin-top:10px;">
+        		<label>Phone</label><br>
+        		<p>
+        		<?php echo isset($company['phone'])?$company['phone']:''; ?>                
+           		</p>
+			</div><!--END PHONE NUMBER-->
 	
-				<?php echo $company['name']; ?>
-				</p>
-		</div><!--END NAME-->
-		<div class="col-md-6">
-				<label>Trading Name</label>
-				<p>	
-				<?php echo $company['trading_name']; ?>
-				</p>
-		</div><!--END TRADING NAME-->
-            
-		<?php else: ?>
-				<div class="col-md-6">
-				<label>Registered Name</label>
-				<p style="margin-bottom:10px;">	
-				<?php echo $company['name']; ?>
-				</p>
-		</div><!--END NAME-->
-		<?php endif; ?>
+            <?php /* ?>
 		<div class="col-md-6">
 				<label>Registered Address</label>
 				<p>	
@@ -239,7 +289,7 @@ if ($your_date < $now){;
 				</p>
 		</div>
         
-            
+            <?php  */ ?>
             <!--END ADDRESS-->
 		
 
@@ -274,8 +324,7 @@ if ($your_date < $now){;
 		<label style="margin-bottom:0;"></label> <?php echo str_replace("http://"," ",str_replace("www.", "", $company['url']))?>
 		</a>
 		<?php else: ?>
-
-    <a class="btn  btn-default btn-sm btn-block " href="https://www.google.co.uk/search?q=<?php echo $company['name'];  ?>"  target="_blank">Google <i class="fa fa-search" aria-hidden="true"></i></a>
+    <a class="btn  btn-default btn-sm btn-block " href="https://www.google.co.uk/search?q=<?php echo urlencode(htmlspecialchars_decode($company['name'], ENT_QUOTES));  ?>"  target="_blank">Google <i class="fa fa-search" aria-hidden="true"></i></a>
             <?php endif; ?>
 			
 			<?php if (isset($company['registration'])): ?>
@@ -293,80 +342,45 @@ if ($your_date < $now){;
 			<hr>
 		
 <div class="row  details">
-		<div class="col-xs-6 col-md-3 details" style="margin-top:10px; ">
-			<label>Company Number</label><br>
-			<p>	
-			 <!--COMPANY NUMBER IF APPLICABLE-->
-			<?php echo isset($company['registration'])?$company['registration']:''; ?>
-         	</p>
-        	</div>
-
-        	<div class="col-xs-6 col-md-3" style="margin-top:10px;">
-        	<label>Founded</label><br>
-			<p>	
-				<?php echo isset($company['eff_from'])?$company['eff_from']:''; ?>
-			</p>
-		</div>
-
-        <div class="col-xs-6 col-md-3" style="margin-top:10px;">
-        		<label>Phone</label><br>
-        		<p>
-        		<?php echo isset($company['phone'])?$company['phone']:'-'; ?>                
-           		</p>
-			</div><!--END PHONE NUMBER-->
-		<div class="col-xs-6 col-md-2" style="margin-top:10px;">
-				<label>Class</label><br>
-				<p>	
-		            <!--CLASS IF APPLICABLE-->
-		          
-                  <?php if (isset($company['class']) && $company['class'] != 'Unknown' ): ?>
-					 <?php echo $companies_classes[$company['class']] ?> 	
-					<?php else: 
-                    
-                    echo '-';
-                    
-                    ?>
-						
-		            <?php endif; ?>
-	            </p>
-			</div>
-    
-    
-    
+	
 	 
+                
+            <div class="col-md-3">
+					<!-- CONTACTS -->
+            	<label>Contacts</label> 		
+			<?php if (isset($company['contacts_count'])): ?>
+			<p class="details"><?php echo $company['contacts_count'] ?  $company['contacts_count'] : '';?></p>
+			<?php endif; ?>
+			 
+		</div>
+    
+    
+	 <div class="col-xs-4 col-sm-3">
+			<label><span style="text-transform: capitalize"><?php echo isset($company['turnover_method'])?$company['turnover_method']:'';?></span> Turnover</label><br>
+			<p class="details" style="margin-bottom:5px;"><?php echo isset($company['turnover'])? '£'.number_format (round($company['turnover'],-3)):'';?></p>
+            
+            
+        </div>
+            
+              <div class="col-md-5" >
+				<label>Lead Source</label>
+				<p style="
+    margin-top: -4px;
+"><?php echo  $company_sources[$company['source']]  ? $company_sources[$company['source']]. ''  : '';?><br>
+                 <strong><?php echo  $company_sources[$company['source']]  ? ''  : '';?></strong> <span class="leadSourceSubText"><?php echo $company['source_explanation'] ? $company['source_explanation'] : ''; ?></span></p>
+			 
+		</div>
+            
             
     
 		</div>
             </div>
             
-		<div class="row" >
+		<div class="row">
 		<div class="col-xs-12 details" >
-		<!-- TURNOVER -->
-		<div class="col-xs-4 col-sm-3">
-			<label><span style="text-transform: capitalize"><?php echo isset($company['turnover_method'])?$company['turnover_method']:'';?></span> Turnover</label><br>
-			<p class="details" style="margin-bottom:5px;"><?php echo isset($company['turnover'])? '£'.number_format (round($company['turnover'],-3)):'-';?></p>
+		 
             
-            
-        </div>
-            
-              <div class="col-md-3" style="display:none;">
-				<label>Lead Source</label>
-				<p style="
-    margin-top: -4px;
-">	<?php echo $company_sources[$company['source']]  ? $company_sources[$company['source']] : '-';?></p>
-                  <p><span class="leadSourceSubText"><?php echo $company['source_explanation'] ? $company['source_explanation'] : ''; ?></span></p>
-			 
-		</div>
-            
-            
-            <div class="col-md-3">
-					<!-- CONTACTS -->
-            	<label>Contacts</label> 		
-			<?php if (isset($company['contacts_count'])): ?>
-			<p class="details"><?php echo $company['contacts_count'] ?  $company['contacts_count'] : '-';?></p>
-			<?php endif; ?>
-			 
-		</div>
+
             
             
             
@@ -381,9 +395,9 @@ if ($your_date < $now){;
 			<?php if (isset($company['emp_count'])): ?>
 			<p class="details"><?php echo $company['emp_count'];?> </p>
 			<?php else: ?>
-            <p class="details">-</p>
+            <p class="details"></p>
 			<?php endif; ?>
-		</div>
+            </div>
 		<!-- SECTORS -->
 		<div class="col-xs-4 col-sm-3">
 			<strong>Sectors</strong><br>
@@ -398,12 +412,12 @@ if ($your_date < $now){;
 			?>
 
 
-<?php if (isset($company['perm'])): ?>
+<?php /* if (isset($company['perm'])): ?>
 <p class="details detailsTagFormat" style="margin-bottom:0; text-align:centre; font-size:11px;">Permanent</p>
 <?php endif; ?>
 <?php if (isset($company['contract'])): ?>
 <p class="details detailsTagFormat" style="margin-bottom:0; text-align:centre; font-size:11px;">Contract</p>
-<?php endif; ?>
+<?php endif;  */ ?>
 </div>
 		</div>
 		</div>
@@ -415,11 +429,11 @@ if ($your_date < $now){;
 		
        
 		<!-- MORTGAGES -->
-
-
-		
-		<div class="col-md-12">
+	<div class="col-md-12">
 		<div class="panel panel-default">
+<?php if(!empty($company['mortgages'])): ?>
+		
+	
 		<div class="panel-heading" id="qvfinancials">
 		Financials
             
@@ -432,8 +446,6 @@ if ($your_date < $now){;
                                  echo '£'. number_format(floor($number / 10) * 10);  
 
                         }
-
-                       
                 }
                 
                 */
@@ -443,49 +455,113 @@ if ($your_date < $now){;
  
 		<div class="panel-body">
             
-		<?php if(!empty($company['mortgages'])): ?>
+		
 			<table class="table">
 			<thead>
 				<tr>
 					<th class="col-md-4">Mortgage Provider</th>
+                    <th class="col-md-3">&nbsp;</th>
 					<th class="col-md-3">Started</th>
 					<th class="col-md-3">Status</th>
                 <th class="col-md-2">Finished</th>
+                    <th class="col-md-2">&nbsp;</th>
 				</tr>
 			</thead>
 			<tbody>
-				<?php foreach ($company['mortgages'] as $mortgage):?>
-				<tr <?php echo $mortgage['stage']==MORTGAGES_SATISFIED? 'class="danger"' : 'class="success"' ?>>
+				<?php
+                
+     //print_r($company['mortgages']);
+               $tdbgcolorclass = 'success';
+                foreach ($company['mortgages'] as $mortgage):?>
+                <?php
+                
+               
+       
+             if( $mortgage['Inv_fin_related'] == 'Y' || $mortgage['Inv_fin_related'] == 'P') {  
+                $tdbgcolorclass =   'success'  ;//$tdbgcolorclass = 'danger';
+                }
+                
+                
+                  if( $mortgage['Inv_fin_related'] == 'N'){
+                    
+                  $tdbgcolorclass =   'danger' ;  
+                    
+                }
+                
+                
+                
+                ?>
+				<tr <?php echo $mortgage['stage']==MORTGAGES_SATISFIED? 'class="danger cont'.$mortgage['id'].'"' : 'class="'.$tdbgcolorclass.' cont'.$mortgage['id'].'"' ?>>
 				<td class="col-md-4" >
 					<?php if(isset($mortgage['url'])) : ?>
 						<a href="http://<?php echo $mortgage['url']; ?>" target="_blank"><?php echo $mortgage['name']; ?> <span style="font-size:10px;"><i class="fa fa-external-link"></i></span></a>
 	    			<?php else: ?>
-						<?php echo $mortgage['name']; ?>
+						<?php echo $mortgage['name'] ?>
 					<?php endif; ?>
 				<div style="font-size:10px;">
 				<?php echo $mortgage['type']; ?>
 				</div>
 				</td>
-				<td class="col-md-3">
+                    <td class="col-md-2">
+                        
+                     <?php 
+                      
+                        if($mortgage['stage'] == 'Outstanding'){ 
+    
+    
+  
+    
+    
+    
+    if($mortgage['Inv_fin_related'] == 'N'){ echo '<span  class="related_to_Invoice_Finance inv'.$mortgage['id'].'">Not Related To Invoice Finance</span>'; 
+                }elseif($mortgage['Inv_fin_related'] == 'Y'){
+        
+    echo  '<span  class="Not_related_to_Invoice_Finance inv'.$mortgage['id'].'">Related To Invoice Finance</span>'; 
+    
+    
+    } 
+         if($mortgage['Inv_fin_related'] == 'P'){
+        echo  '<span  class="Properly_related_to_Invoice_Finance inv'.$mortgage['id'].'">Probably Related To Invoice Finance</span>'; 
+        
+    } 
+                        
+                        
+}?>
+                    </td>
+				<td class="col-md-1">
 				<?php $mortgages_start  = $mortgage['eff_from'];$date_pieces = explode("/", $mortgages_start);$formatted_mortgage_date = $date_pieces[2].'/'.$date_pieces[1].'/'.$date_pieces[0];echo date("F Y",strtotime($formatted_mortgage_date));?>
+                  
 				</td>
-				<td class="col-md-3">
-				<?php echo ucfirst($mortgage['stage']); ?><?php if(!empty($mortgage['eff_to'])){echo ' on '.$mortgage['eff_to'];} ?>
+				<td class="col-md-1">
+				<?php echo ucfirst($mortgage['stage']); ?><?php if(!empty($mortgage['eff_to'])){
+    //echo ' on '.$mortgage['eff_to'];
+  
+} ?>
+				</td> 
+
+	<td class="col-md-2" style="text-align:center;">
+				<?php  echo $mortgage['eff_to'] ?  $mortgage['eff_to'] : '<span>-</span>'; ?>
 				</td>
-
-
+                    
 	<td class="col-md-2">
-				<?php  echo $mortgage['eff_to']; ?>
+        <?php 
+        if($mortgage['stage'] == 'Outstanding'){ 
+            
+              if($mortgage['Inv_fin_related'] == 'Y') $prob = 2;
+                    if($mortgage['Inv_fin_related'] == 'P') $prob = 3;
+                          if($mortgage['Inv_fin_related'] == 'N') $prob = 1;
+           
+            
+        ?>
+				<span  class="label  btn-warning comp_details_edit_btn providerStatus" id="morprov<?php echo $mortgage['id']; ?>" data-id="<?php echo $mortgage['id']; ?>" providerStatus="<?php echo $prob; ?>" data-toggle="modal" data-target="#debmortgage" style="font-size: 12px; float: right;">Edit</span>
+        <?php } ?>
 				</td>
 		 
 				</tr>
 				<?php endforeach; ?>
 			</tbody>
 			</table>
-			<?php else: ?>
-			<div class="alert alert-info" style="margin-top:10px;">
-                No mortgage data registered.
-            </div>
+	
 		<?php endif; ?>
 		</div>
  
@@ -494,6 +570,11 @@ if ($your_date < $now){;
 		</div>
 
 <!--ADDRESSES-->
+            
+         
+
+
+
 		<div class="col-md-12">
 		<div class="panel panel-default">
 		<div class="panel-heading" id="addresses">
@@ -508,12 +589,19 @@ if ($your_date < $now){;
             
 		</div>
 		</div>
+              <?php if(isset($addresses) and !empty($addresses)) : ?>
 		<!-- /.panel-heading -->
 		<div class="panel-body">
-		<?php if(isset($addresses) and !empty($addresses)) : ?>
-
-
-		<table class="table">
+		
+            <?php 
+          // echo   print_r($addresses);
+            
+            
+            if(($address->address) || ($company['address']) ) { ?>
+            
+            
+            	<table class="table">
+            
 	      <thead>
 	        <tr>
 	          <th class="col-md-7">Address</th>
@@ -523,6 +611,7 @@ if ($your_date < $now){;
 
 	        </tr>
 	      </thead>
+            <?php } ?>
 	      <tbody>
 	      	<?php
               $ai =  0 ;
@@ -534,7 +623,7 @@ if ($your_date < $now){;
 				<td class="col-md-6">
                  <a target="_blank" href="http://maps.google.com/?q=<?=$address->address; ?>" ><span class="mainAddress"><?=$address->address; ?></span><span style="line-height: 15px;font-size: 10px;padding-left: 5px;"><i class="fa fa-external-link"></i></span></a></td>
 				<td class="col-md-3 mainAddrType"><?php echo $address->type;?></td>
-				<td class="col-md-2 mainPhone"><?php echo $address->phone; ?></td>
+				<td class="col-md-2 mainPhone"><?php echo $address->phone ? $address->phone : $company['phone']; ?></td>
 				<td  class="col-md-3">
                 <?php if ($address->type<>'Registered Address'): ?>
                         <div class=" pull-right ">
@@ -566,7 +655,7 @@ endif;
 		<?php endif; ?>
 
 
-<?php     if(!$ai) echo   '<div class="alert alert-info" style="margin-top:10px;">No address data.</div> ';
+<?php     if(!$ai) //echo   '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><p class="noactionmsglisting">No address data registered</p></div>';
             ?>
 
 		</div>
@@ -574,7 +663,7 @@ endif;
 		</div>
 		</div>
 
-
+ 
 		<!--CAMPAIGNS-->
 		<?php if(isset($campaigns) and !empty($campaigns)) : ?>
 		<div class="col-md-12">
@@ -616,8 +705,10 @@ endif;
 		<!--CONTACTS-->
 		<div class="col-md-12">
 		<div class="panel panel-default">
-		<div class="panel-heading" id="contacts">
+
+		<div class="panel-heading">
 		Contacts
+
 		<div class="pull-right">
 		<div class="btn-group">
 		<button  class="btn btn-primary edit-btn btn-xs" data-toggle="modal" id="create_contact_<?php echo $company['id']; ?>"  data-target="#create_contact_<?php echo $company['id']; ?>" >
@@ -625,6 +716,8 @@ endif;
 		</button>
 		</div>
 		</div>
+               
+
 		</div>
 		<!-- /.panel-heading -->
 		<div class="panel-body">
@@ -667,9 +760,7 @@ endif;
 	    </table>
 
 	    <?php else: ?>
-			<div class="alert alert-info" style="margin-top:10px;">
-                None
-            </div>
+		
 		<?php endif; ?>
 
 		</div>
@@ -768,7 +859,9 @@ endif;
 			echo form_open(site_url().'actions/create', 'name="create" class="form" role="form"',$hidden); ?>
 			<!--THE BELOW PASSES THE CLASS FIELD ACROSS PURELY FOR VALIDATION - IF THERE IS A BETTER WAY OF DOING THIS THEN IT NEEDS TO BE HERE-->
 			
-			<!--VALIDATION ERROR IF NO ACTION IS SELECTED-->
+			<!--VALIDATION ERROR IF NO ACTION IS SELECTED
+<option value="16">Pipeline - Deal</option>
+-->
 
 			<div id="action-error" class="no-source alert alert-warning" role="alert" style="display:none">
                 <strong>Source Required.</strong><br> To add a <span class="sourceRequiredDropDownItem"></span>&#44; please add a Source to this company.
@@ -777,15 +870,29 @@ endif;
                         <div class="col-sm-3 col-md-3">
                             <div class="form-group ">
                                 <label>New Action</label>
+                                
+                                
+                               
+                                
+                                
+                                
                                 <select id="action_type_completed" name="action_type_completed" class="form-control" >
                                     <option value="">--- Select an Action ---</option>
+                                    <option value="8">Pipeline - Proposal</option>
                                     <?php foreach($action_types_done as $action ): 
 
                                     if($action->id == 16 && $company['pipeline'] == 'Customer'|| $action->id == 31 && $company['pipeline'] == 'Customer' || $action->id == 32 && $company['pipeline'] == 'Customer' || $action->id == 33  && $company['pipeline'] == 'Customer'|| $action->id == 34 && $company['pipeline'] == 'Customer' ){ }else{ ?>
+                                   
+                                    <?php  if($action->id != 8 ){ ?>
                                       <option value="<?php echo $action->id; ?>"><?php echo $action->name; ?></option>
+                                    
+                                    <?php } ?>
                                     <?php 
                                     } endforeach; ?>
                                 </select>
+                                
+                                
+                               
                             </div>
                         </div>
                         <div class="col-sm-3 col-md-2 initialfee">
@@ -941,6 +1048,11 @@ endif;
                         " aria-hidden="true"></span></a><span class="actionMenuQty qtyactions_marketing" aria-hidden="true"></span></li>
                    
                     
+                    
+                    <li class="" ><a href="javascript:;" class="btn btn-default btn-circle hint--top-right" data-hint="Comments" data="Comment"><i class="fa fa-comments fa-lg"></i></a><span class="actionMenuQty qtyComment" aria-hidden="true"><span></li>
+
+                    
+                    
                     <li class=""><a href="javascript:;" class="btn btn-default btn-circle hint--top-right"  data-hint="Cancelled" data="actions_cancelled"><span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span></a><span class="actionMenuQty qtyactions_cancelled" aria-hidden="true"></span></li>
 
                   
@@ -967,7 +1079,25 @@ endif;
                     <div class="timeline-header">
     				<div class="timeline-header-title bg-dark actiontitle"  style="margin-top:10px;">History</div>
                         <div class="timeline-header-title bg-dark showCommentAddBtn hint--top-right"  data-hint="Add Comment" style="float:right; margin-left:11px; margin-top:10px;">  <span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span></div>
-                        <div class="timeline-header-title bg-dark showText" style="float:right;  margin-top:10px;">Hide/Text</div>
+                        <div class="timeline-header-title bg-dark showText" style="float:right;  margin-top:10px;     margin-left: 10px;">Hide/Text</div>
+
+ <div class="timeline-header-title bg-dark showCommentsearch" style="float: right;
+    margin-top: 10px;
+    display: block;
+    height: 37px;
+    border-radius: 5px;
+    width: 300px;">  <form style="    float: right;
+    margin-top: 0px;
+    display: block;
+    height: 37px;
+    border-radius: 5px;
+    width: 270px;"><input type="text" id="filtercomment" onkeyup=" return callfunction(); " placeholder=" Search Comments" style="
+ margin-top: -53px;
+    width: 270px;
+    outline: none;
+    border: none;
+     color: #555;
+" /></form></div>
                          
     			</div>
                 
@@ -984,7 +1114,7 @@ endif;
                             <input type="hidden" name="campaign_id" value="" id="comcampaign_id">
                             <input type="hidden" name="action_type_completed" id="comaction_type_completed" value="7">
                             <div class="col-md-10">					
-                            <input id="btn-input" type="text" class="form-control input-md" name="comment" id="commentcontent" placeholder="Type your comment here...">
+                            <input id="btn-input" type="text" class="form-control input-md" name="comment" id="commentcontent"  required="required" placeholder="Type your comment here...">
                             </div>
                             <div class="col-md-2">	
                             <input type="submit" class="btn btn-primary btn-md btn-block" id="btn-chat">
@@ -997,22 +1127,22 @@ endif;
                     <div class="timeline_inner"></div>
 
                     </div>
-                        
-                        <div class="row"><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><p class="noactionmsg">No Actions</p></div></div>
-
                 </div>
        
 
                 </div>
             </div>
     </div>
+            
+            
+
      </div>        
         
 
- <div class="row" id="parent">
+<div class="row" id="parent">
 
 </div>
-        	</div>
+</div>
 </div><!--CLOSE ROW-->
     <?php //hide core page END ?>
        <?php endif; ?>
@@ -1022,7 +1152,50 @@ endif;
 
 </div>
     
+        
+        
+
+        
+  <!-- Modal -->
+<div class="modal fade" id="debmortgage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      
+      </div>
+      <div class="modal-body" style="
+    padding-bottom: 37px;
+">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+
+
+          <form>
+ <label class="checkbox-inline"><input type="radio"  name="debenturemortgage" id="radio_3" value="P"> Probably Related to Invoice Finance</label>
+<label class="checkbox-inline"><input type="radio"  name="debenturemortgage" id="radio_2" value="Y"> Related to Invoice Finance</label>
+<label class="checkbox-inline"><input type="radio" name="debenturemortgage"   id="radio_1" value="N" > Not Related to Invoice Finance</label>
+              
+              
+              
+              
+              <input name="providerid" type="hidden" class="providerid"  value=""> 
+                <input name="companyid" type="hidden" class="providercompanyid" value=""> 
+          </form>
+              
+              </div>
+      </div>
+      <div class="modal-footer">
     
+     <button type="submit" class="btn btn-sm btn-warning btn-block ladda-button debmortgage" edit-btn=""   data-style="expand-right" data-size="1">
+                    <span class="ladda-label">Save</span>
+                </button>
+      </div>
+    </div>
+  </div>
+</div>  
  </div>
    
 <script>
@@ -1043,6 +1216,69 @@ endif;
 
         
     }
+    
+    function callfunction() {
+                    
+     
+        var pillid;
+        var valcont 
+        var n
+        var str 
+          
+         //  valcont = $("#filtercomment").val();
+      // processHiglighter(valcont);
+        
+          //str = $(this).text().toLowerCase();
+
+        $(".comment").each(function() {
+            pillid= $(this).attr('data');
+            valcont = $("#filtercomment").val();
+   
+        
+             str = $(this).text().toLowerCase();
+             if (str.search(valcont.toLowerCase()) < 0) {
+                $(this).closest('.pillid'+pillid).fadeOut(100);
+                     if(valcont == ''){
+                    $('.actionIdComment').fadeIn(100);
+                }
+                }else{
+                       //console.log($(this).attr('data'))
+                    $(this).closest('.actionIdComment .pillid'+pillid).fadeIn(100);
+               
+                if(findWord(valcont.toLowerCase(), str.toLowerCase()) && valcont.length >1){
+
+                    $(".commentsComment *").highlight(valcont.toLowerCase(), "filterhighlight");
+                }
+
+                     if(valcont == '' ){
+                    $('.actionIdComment').fadeIn(100);
+                }
+            }
+
+        });
+            
+        if($('.commentsComment').css('display') == 'none' || $('.commentsComment').css('display') == 'inline'){
+
+           $('.commentsComment').css('display', 'block'); 
+        }else{
+
+        }
+        
+      if(valcont == '' ){
+            $('.actionIdComment').fadeIn(100);
+            $('.commentsComment').css('display', 'none'); 
+            $('span').removeClass('filterhighlight');
+        }
+       // $(".commentsComment *").highlight(valcont, "filterhighlight");
+        
+        valcont ='';
+    } 
+    
+  
+    function findWord(word, str) {
+  return RegExp('\\b'+ word +'\\b').test(str)
+}
+    
     
 
 </script>

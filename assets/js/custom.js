@@ -9,9 +9,103 @@ function dateRequired()     {
 }
 
 
-//console.warn(regArray.join());
-
+  
 $( document ).ready(function() {
+    
+    
+    //INVOICE FINANCE
+$('.debmortgage').on('click', function(){
+ 
+        event.preventDefault();
+    var param = $('#debmortgage form').serialize();
+
+ 
+    //JS JASON WITH POST PARAMETER
+    
+      $.ajax({
+        type: "POST",
+          data: param,
+            dataType: "json",
+        url: "../companies/notForInvoices",
+        success: function(data) {
+          $('#debmortgage').modal('toggle');
+      
+if(data.success){  
+   // $('table .inv'+data.success).hide(); 
+
+ $('table .cont'+data.success).removeClass('success'); 
+     $('table .cont'+data.success).addClass('danger'); 
+      
+  if(data.debenturemortgage == 'P'){
+                            $('.inv'+data.success).html('Probably Related To Invoice Finance');
+                         $('table .cont'+data.success).removeClass('danger'); 
+                         $('table .cont'+data.success).addClass('success'); 
+      
+       $('#morprov'+data.success).attr('providerstatus', 3)
+      
+  }
+    
+    if(data.debenturemortgage == 'N'){
+       $('.inv'+data.success).html('Not Related To Invoice Finance');
+       $('#morprov'+data.success).attr('providerstatus', 1)
+      
+  }
+    
+   
+}
+            
+         if(data.debenturemortgage == 'Y'){   $('.inv'+data.success).show(); 
+                        
+                         $('table .cont'+data.success).removeClass('danger'); 
+                         $('table .cont'+data.success).addClass('success'); 
+                        
+                         $('#morprov'+data.success).attr('providerstatus', 2)
+                        // console.log('table Not_related_to_Invoice_Finance .inv'+data.error)
+                            $('.inv'+data.success).html('Related To Invoice Finance');
+                          }
+                        }
+      
+        
+        });
+    
+  
+
+})
+    
+            $('.providerStatus').click(function(){
+  $('#debenturemortgage').prop('checked', false); 
+            var  outstandingID  = $(this).attr('data-id')
+            var  providerStatus  = $(this).attr('providerStatus')
+
+            
+        // $('#debenturemortgage').prop('checked', true);   outstandingID
+     
+            $("#radio_"+providerStatus).prop('checked', true);
+            
+      
+                
+            var parid = GetUrlParamID();
+                
+            $('.providerid').val(outstandingID);
+             $('.providercompanyid').val(parid);
+
+            })
+
+
+
+
+
+
+
+
+$('#debenturemortgage').change(function() {
+    if(this.checked) {
+   
+        
+      // $('#debmortgage form lable').text('Not related to Invoice Finance ');  
+      
+    }
+});
 
 function gettagscampList(param){
     
@@ -28,23 +122,18 @@ function gettagscampList(param){
                  url: 'companies/fe_get_tag',
             success: function(data) {  
                 $.each( data, function( key, val) {
-                    
-                  
                  //parent_tag_name_holder.push('<ul class="tagLists'+param+val['parent_tag_id']+'"><li>'+val['name']+'<li></ul>')  
-
-
  //console.log(parent_tag_name_holder.indexOf('tagLists'+val['parent_tag_id']))
 //console.log(parent_tag_name_holder.indexOf(val['parent_tag_name']+val['parent_tag_id']) )
-if(parent_tag_name_holder.indexOf(val['parent_tag_name']) == -1){
+        if(parent_tag_name_holder.indexOf(val['parent_tag_name']) == -1){
 
-    parent_tag_name_holder.push(val['parent_tag_name']);
-    
-    $('.tagLists'+param).append('<div class="col-xs-6 col-sm-3  tag_display_holder"><div class="tag-display-header">'+val['parent_tag_name']+'</div><ul class="listTagSummary tagLists'+param+val['parent_tag_id']+'"></ul></div>');
-                //console.log("Needle found.");
-    
-};
- 
-                })
+        parent_tag_name_holder.push(val['parent_tag_name']);
+
+        $('.tagLists'+param).append('<div class="col-xs-6 col-sm-3  tag_display_holder"><div class="tag-display-header">'+val['parent_tag_name']+'</div><ul class="listTagSummary tagLists'+param+val['parent_tag_id']+'"></ul></div>');
+            //console.log("Needle found.");
+
+        };
+  })
                 
                 //console.log(parent_tag_name_holder.join(""));
                 
@@ -356,8 +445,12 @@ $(".pipeline-validation-check").change(function() {
             });
          
             $('.tsector').removeClass('tsector'); 
+<<<<<<< HEAD
           
          $("form").submit(function () {
+=======
+        $("form").submit(function () {
+>>>>>>> staging
             if ($(this).valid()) {
             $(this).submit(function () {
             return false;
@@ -367,12 +460,20 @@ $(".pipeline-validation-check").change(function() {
             else {
             return false;
             }
+<<<<<<< HEAD
             }); 
+=======
+            });
+>>>>>>> staging
      }
 
 //Prevents form from subitting     
     
+<<<<<<< HEAD
          
+=======
+            
+>>>>>>> staging
 
     
     
@@ -434,6 +535,42 @@ $(".pipeline-validation-check").change(function() {
     var autopilotEmailCompany = window.location.href.split("id="); 
 
     if((/dashboard/.test(window.location.href))) {
+        
+         $('.mycampaignajaxcount').html('<img style="-webkit-user-select: none" src="assets/images/ajax-loader.gif">');
+       
+                $.ajax({
+                type: "GET",
+                    dataType: "json",
+                url: "dashboard/private_campaigns_new_ajax",
+                success: function(data) {
+                    var action;
+                    var items = [];
+                     var idfk;
+                   var uimage;
+        if(data.success == 'not ok'){
+             $('.mycampaignajaxcount').html('0');
+        }else{
+                    $.each( data, function( key, val ) {
+                          idfk = val.company_id;
+uimage = val.image.split(',')
+ 
+                      
+                        items.push( '<a href="campaigns/display_campaign/?id='+val.id+'" class="load-saved-search" title="" data-original-title="'+val.datecreated+'"><div class="row"><div class="col-xs-1"><span class="label label-info" style="margin-right:3px;background-color: '+uimage[1]+';font-size:8px; color: '+uimage[2]+'"><b>'+uimage[0]+'</b></span></div><div class="col-xs-9" style="min-height:30px;overflow:hidden">'+val.name+'<br><span style="font-size:9px;">Created: '+val.datecreated+'</span></div><div class="col-xs-1" style="padding: 0 0 0 0px; font-size: 11px;">'+val.percentage+'%</div></div></a>');
+                  
+                    
+                    });
+                       
+                    $('.mycampaignajax').html(items.join( "" ));
+                    //$('.mycampaignajaxcount').html('<img style="-webkit-user-select: none" src="http://localhost:8888/baselist/assets/images/ajax-loader.gif">');
+                    $('.mycampaignajaxcount').html(items.length); //update engagement counter
+                }
+                }
+            });
+            
+        
+        
+        
+        
         
              $.ajax({
         type: "GET",

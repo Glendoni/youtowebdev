@@ -540,9 +540,14 @@ border-right: 1px solid #e7e7e7;
 /* END  - COMAPNY PAGE QUICK VIEW SLIDE*/
 
 
+.btn-xs, .btn-group-xs>.btn {
+	font-size: 10px;
+}
 
 /*ACTION COMMENTS BOX*/
-.mic-info { color: #666666;font-size: 11px;margin-top: 5px; }
+.mic-info {     color: #666666;
+    font-size: 11px;
+    margin: 8px 0; }
 
 
 .triangle-isosceles , .comment-text .outcome{
@@ -632,7 +637,7 @@ h2.company-header a:hover {
 	text-align: center;
 	font-weight: 300;
 	margin-top: 0px;
-	font-size: 12px;
+	    font-size: 1.2em
 }
 
 .top-info-holder {
@@ -719,12 +724,12 @@ h2.company-header a:hover {
   	margin-top: 10px;
   	margin-left: 5px;
 }
-.pipeline.label-Prospect {
+.pipeline.label-Prospect , .pipeline.label-Suspect {
 	width: 80px;
     margin: auto;
 }
 .label-Prospect {
-	    background-color: #7c7a7a;
+	    background-color: #9c27b0;
 	color: #fff;
  	padding-left: 5px;
  	padding-right: 5px;
@@ -744,8 +749,8 @@ h2.company-header a:hover {
 	width: 100px;
     margin: auto;
 }
-.label-Qualified {
-	background-color: #FFA03C;
+.label-Qualified, .label-Suspect {
+	background-color: #7c7a7a;
 	color: #fff;
  	padding-left: 5px;
  	padding-right: 5px;
@@ -1113,6 +1118,10 @@ a li.autocomplete-item:hover {
 	padding-top: 85px;
 }
 
+
+
+
+
 /* ADD TO CALL */
 a.btn.btn-default.btn-xs.add-to-calendar {
 	/*margin-left: 5px;
@@ -1267,6 +1276,11 @@ font-size: 11px;
     font-weight: 200;
     margin-top: -20px;
 }
+    
+#single-page{
+       padding-top:200px; 
+        
+    }
 .small-text {
 	font-size: 9px;
 }
@@ -1538,11 +1552,11 @@ border-left: 3px #148cd2 solid;
 .tagContainer {
   list-style: none;
   margin: 0;
-  overflow: hidden; 
+   
   padding: 0;
       min-height: 100px !important;
     max-height: 300px;
-    overflow-y: scroll;
+   
 }
 
 li.folder {
@@ -2255,9 +2269,29 @@ body {
             margin-top:0px;
             
         }
+
+       .mar-no.pad-btm h4 {
+        	font-size: 20px;
+    font-weight: 700;
+    padding-top: 5px;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    }        
 .actionMsgText{
-    
     font-size: 11px;
+      padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+.actions-info {
+	margin: 5px 0;
+}
+.followcont {
+	background: #fff; 
+	padding: 10px 0; margin-bottom: 10px; margin-top:10px; border-top: 1px solid #999;
+}
+.actionOutcomeText {
+    padding-top: 20px;
 }
 .callbackActionTextBox{
     
@@ -2412,7 +2446,7 @@ background-color:#2B4461;
     color: #fff;
 }
 
-.actionMenuQty.qtyactions_completed, .actionMenuQty.qtyactions_marketing {
+.actionMenuQty.qtyactions_completed, .actionMenuQty.qtyactions_marketing, .qtyComment {
 	background-color: rgba(92, 184, 92, 0.7);
     color: #fff;
 }
@@ -2801,13 +2835,21 @@ display:none;
 }
 
 .piplineUdate .company-header,.trading-header{
-text-align:left;
-    
+text-align:left; 
 }
 .piplineUdate .company-header{
 font-size: 44px;
-    font-size: 3.4vw;
-    font-weight: 500;
+font-weight: 500;
+float: left;
+}
+h5.trading-header {
+
+	    float: left;
+    margin-left: 10px;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    margin-top: 39px;
+    font-size: 14px;
 }
 
 .piplineUdate .subsidiary {
@@ -2913,6 +2955,49 @@ a {
     color: #0971af;
     text-decoration: none;
 }
+.showCommentAddForm{
+    padding-top:4px;
+    
+}
+
+.comment .filterhighlight{
+    
+    color:#000;
+    background-color: yellow;
+    
+}
+#btn-input{
+outline:none;
+border:none;
+
+}
+ 
+
+ 
+    
+@media screen and (min-width: 1999px) {
+     #single-page {
+    padding-top: 185px;
+}
+}    
+#specialInsightRequired{
+    
+    display:none;
+} 
+.last_pipeline_created_at{
+    
+    margin-left: 7px;
+}
+.noactionmsglisting{
+    
+    font-size: 23px; 
+    color: #D0D0D0; 
+       margin-left: 23px;
+    text-align:center;
+    
+    
+}
+ 
 /*! Hint.css - v2.2.1 - 2016-03-26 //#2b4461
 * http://kushagragour.in/lab/hint/
 * Copyright (c) 2016 Kushagra Gour; Licensed  */

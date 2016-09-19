@@ -22,7 +22,7 @@ class Companies extends MY_Controller {
 	public function index($ajax_refresh = False) 
 	{	
 		$session_result = $this->session->userdata('companies');
-        
+        $this->session->unset_userdata('pipedate');
        
 		$search_results_in_session = unserialize($session_result);
 		$refresh_search_results = $this->session->flashdata('refresh');
@@ -52,6 +52,7 @@ class Companies extends MY_Controller {
 				// Result set to session and current search 
 				$this->seve_current_search($this->input->post());
 				$raw_search_results = $this->Companies_model->search_companies_sql($this->input->post());
+                
 				
 				$result = $this->process_search_result($raw_search_results);
 			 
@@ -76,6 +77,8 @@ class Companies extends MY_Controller {
 				$_POST[$key] = $value;
 			}
 			$raw_search_results = $this->Companies_model->search_companies_sql($post);
+
+
 			$result = $this->process_search_result($raw_search_results);
 			if(empty($result))
 			{
@@ -127,8 +130,6 @@ class Companies extends MY_Controller {
          $frontend_taging_js =    asset_url().'js/fe_tagging.js';
         
         $this->data['fetagging'] =  $frontend_taging_js;
-        
-        
 		$this->data['results_type'] = 'Saved Search';
 		$this->data['edit_page'] = 'edit_saved_search';
 		$this->data['main_content'] = 'companies/search_results';
@@ -307,7 +308,7 @@ $company = $this->process_search_result($raw_search_results);
                 }
             }
 			$this->data['addresses'] = $address;
-            $this->data['deals_pipline'] = $this->Companies_model->get_deals_pipeline($this->input->get('id'),$this->data['current_user']['id'],false);
+           // $this->data['deals_pipline'] = $this->Companies_model->get_deals_pipeline($this->input->get('id'),$this->data['current_user']['id'],false);
             $this->data['campaigns'] = $this->Campaigns_model->get_campaigns($this->input->get('id'));
             $this->data['created_by_name'] = $this->Users_model->get_user($user_id);
 			$option_contacts =  array();
@@ -320,6 +321,7 @@ $company = $this->process_search_result($raw_search_results);
             $this->data['option_contacts'] = $option_contacts;
 			$this->data['action_types_done'] = $this->Actions_model->get_action_types_done();
 			$this->data['action_types_planned'] = $this->Actions_model->get_action_types_planned();
+            $this->data['last_pipeline_created_at'] = $this->Actions_model->actiondata($this->input->get('id'));
 			//$this->data['action_types_array'] = $this->Actions_model->get_action_types_array();
 			//$this->data['actions_outstanding'] = $this->Actions_model->get_actions_outstanding($this->input->get('id'));
 			//$this->data['actions_completed'] = $this->Actions_model->get_actions_completed($this->input->get('id'));
@@ -351,10 +353,16 @@ $company = $this->process_search_result($raw_search_results);
 	{
 		if($this->input->post('edit_company'))
 		{
-
+ 
+            
+            
+            
 			$post = $this->input->post();
 			// We need to clean the post and validate the post fields *pending*
 			$result = $this->Companies_model->update_details($this->input->post(),$this->data['current_user']['id']);
+            
+              $this->Companies_model->cronPipeline(0,$post['company_id']);
+            
 			$this->refresh_search_results();
 			$this->set_message_success('Company Updated');
 			redirect('/companies','refresh');
@@ -507,9 +515,9 @@ $company = $this->process_search_result($raw_search_results);
             header('Content-Type : application/json');
             $obj = json_decode($_POST);
             $output = array(
-            'registration' => $_POST['registration'],
+                'registration' => $_POST['registration'],
                 'user_id' => $_POST['user_id'],
-             'company_type' => $_POST['company_type']   
+                'company_type' => $_POST['company_type']   
                 
             );
             
@@ -540,7 +548,9 @@ $company = $this->process_search_result($raw_search_results);
 
                         if($chargesResponse){      
                          //   file_put_contents('apitext.txt', 'Initial stage three'.PHP_EOL, FILE_APPEND); 
-                            $this->Companies_model->insert_charges_CH($chargesResponse,$rows_affected,$this->data['current_user']['id']);      
+                            $this->Companies_model->insert_charges_CH($chargesResponse,$rows_affected,$this->data['current_user']['id']);  
+
+    
                         }
                             echo json_encode(array('status' => 200, 'message' => $rows_affected));
                     }else{
@@ -868,7 +878,7 @@ echo $this->Tagging_model->$route($post);
             $query[]['actions_completed'] = $this->Actions_model->get_actions_completed($id);
         $query[]['actions_cancelled'] = $this->Actions_model->get_actions_cancelled($id);
         
-        $query[]['comments'] = $this->Actions_model->get_comments_two($id);
+        $query[]['comments'] = array_reverse($this->Actions_model->get_comments_two($id));
         
         foreach($query  as $key => $value){
             
@@ -885,7 +895,7 @@ echo $this->Tagging_model->$route($post);
  
     }
     
-    function getActionArray($id = 154537 ){
+    function getActionArray($id = 350441 ){
         
          $id = $this->session->userdata('selected_company_id');
         
@@ -905,9 +915,9 @@ echo $this->Tagging_model->$route($post);
         $action['initial_rate'] = $query[0]['actions_completed'][0]->initial_rate;
         }
          //$action['initial_fee']['initial_rate']  =  ($initial_rate/100);
-        // echo '<pre>'; print_r($action); echo '</pre>';
+      echo '<pre>'; print_r($action); echo '</pre>';
         header('Content-Type: application/json');
-        echo json_encode($action);
+        //echo json_encode($action);
  
     }
     
@@ -925,6 +935,66 @@ echo $this->Tagging_model->$route($post);
     
          $company_id = $this->input->post('company_id');
 
+
+$campaign_id = $this->input->post('campaign_id');
+
+        // $company_id = $this->input->post('company_id');
+
+	$campaign = $this->Campaigns_model->get_campaign_by_id($campaign_id);
+        
+        
+        //print_r($campaign);
+        
+        
+			if ($campaign[0]->id == False) {
+				print_r('No campaign');
+				return False;
+			}
+			$pipeline = $this->input->get('pipeline');
+			$companies = $this->Campaigns_model->get_companies_for_campaign_id($campaign_id,$pipeline);
+			// print '<pre>';
+			// print_r($companies);
+			// die;	
+			$this->refresh_search_results();
+			$this->session->set_userdata('campaign_id',$campaign[0]->id);
+			$this->session->set_userdata('campaign_name',$campaign[0]->name);
+			$this->session->set_userdata('campaign_owner',$campaign[0]->user_id);
+			$this->session->set_userdata('campaign_shared',$campaign[0]->shared);
+			$this->session->unset_userdata('current_search');
+
+			$result = $this->process_search_result($companies);
+        
+       // print_r($result);
+      
+
+			if(empty($result))
+			{
+                
+               $this->session->unset_userdata('companies');
+				unset($search_results_in_session);
+			}
+			else
+			{
+                
+                
+                           foreach($result as $item => $value){
+                              // echo $value['id'];
+                        $dt =     $this->data['last_pipeline_created_at'] = $this->Actions_model->actiondata($value['id']);
+                        $dta[] = array('id' => $value['id'], 'last_pipeline_date' =>  $dt );      
+                
+                }
+            
+                $this->session->set_userdata('pipedate',$dta);
+				$session_result = serialize($result);
+				$this->session->set_userdata('pipeline',$pipeline);
+				$this->session->set_userdata('companies',$session_result);
+			}
+
+
+
+
+
+/*
         $session_result = $this->session->userdata('companies');
             $search_results_in_session = unserialize($session_result);
             $campaign = $this->session->userdata('campaign_id');
@@ -935,8 +1005,10 @@ echo $this->Tagging_model->$route($post);
                 $current_page_number = $this->input->get('page_num') ? $this->input->get('page_num') : 1;
                 $pages_count = ceil(count($companies_array)/RESULTS_PER_PAGE);
                 //$prev = array();
+                
+                */
                 $i = 0 ;
-                    foreach($companies_array_chunk[($current_page_number-1)] as $key=>$item){
+                    foreach($result as $key=>$item){
                            // echo $i;
                         if($i ==1){
                             $data['NextId'] = $item['id'];
@@ -965,6 +1037,62 @@ echo $this->Tagging_model->$route($post);
 		$this->load->view('layouts/default_layout', $this->data);	
         
     }
+    
+  
+    public function notForInvoices(){
+        
+        $rap = $this->input->post();
+        
+       $this->get_current_user_id();
+    
+        
+ 
+     $output =  $this->Companies_model->update_not_for_invoices($rap,$this->get_current_user_id());
+        
+        
+        //echo $rap['debenturemortgage'] ? 'Yes': 'Nooooo';
+        if($output ){
+            
+          echo json_encode(array('success' =>$rap['providerid'], 'debenturemortgage' => $rap['debenturemortgage']));  
+        }else{
+             echo json_encode(array('error' =>$rap['providerid']));  
+        }
+        //echo json_encode(array('glen' =>$rap, 'userid' =>  $this->get_current_user_id()));
+        
+        
+    }
+    
+  function recent(){ //recently visited pages
 
+$query = $this->db->query("SELECT DISTINCT v.created_at,c.id as company,  c.name as name FROM views v 
+LEFT JOIN companies c
+ON v.company_id = c.id 
+WHERE v.user_id = 3
+GROUP BY c.id,v.created_at
+ORDER BY v.created_at DESC");
+        $i=0;
+        foreach ($query->result_array() as $row)
+        {
+            $comlist[$row['company']] =  $row['name'];
+ 
+             if(count($comlist)=== 15)   break;
+        }
+
+//print '<pre>';
+  //    print_r($comlist);
+    //  print '</pre>';
+
+
+
+}
+       
+    function real(){
+        
+       $this->Companies_model->cronPipeline(0,335504);  
+        
+        
+    }
+    
+    
 }
  

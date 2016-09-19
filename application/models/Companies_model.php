@@ -38,16 +38,8 @@ class Companies_model extends CI_Model {
 	function get_companies_classes()
 	{
 		$arrayNames = array(
-	        'PreStartUp' => 'Pre-Start Up',
-            'PreStartUpWithoutAddress' => 'Pre-Start Up Without Address',
-			'StartUp' => 'Start Up',
-			'UsingFinance' => 'Using Finance',
-			'PermOnly' => 'Perm Only',
-			'OccasionalContract' => 'Perm - Occasional Placements',
-			'LookingToPlaceContractors' => 'Perm - Looking to Build Contract Business',
-			'SelfFunding' => 'Self-Funding',
-            'LowFixedFee' => 'Low Fixed Fee',
-			'Consultancy' => 'Consultancy'
+	       'Using Finance' => 'Using Finance',
+			'FF' => 'First to Finance'
 
 			);
 		return 	$arrayNames;
@@ -55,7 +47,7 @@ class Companies_model extends CI_Model {
 
 	function get_pipeline_show_source()
 	{
-		$arrayNamesSources = array('Proposal','Intent','Customer','Proposal','Qualified');
+		$arrayNamesSources = array('Proposal','Intent','Customer','Proposal','Qualified','Suspect');
 		return 	$arrayNamesSources;
 	}
 
@@ -66,6 +58,7 @@ class Companies_model extends CI_Model {
 			'Intent' => 'Intent',
 			//'Qualified' => 'Qualified',
 			'Unsuitable' => 'Unsuitable',
+             'Suspect' => 'Suspect',
 			'Lost' => 'Lost'
 			);
 		return 	$arrayNamesPipeline;
@@ -89,6 +82,7 @@ class Companies_model extends CI_Model {
 			'Proposal' => 'Proposal',
 			'Customer' => 'Customer',
 			'Unsuitable' => 'Unsuitable',
+            'Suspect' => 'Suspect',
 			'Lost' => 'Lost'
 			);
 		return 	$arrayNamesPipelineSearch;
@@ -137,10 +131,6 @@ class Companies_model extends CI_Model {
 	}
 
     
-    
-    
-    
-    
      // $query = $this->db->query("YOUR QUERY");
 
 	function search_companies_sql($post,$company_id = False)
@@ -157,6 +147,7 @@ class Companies_model extends CI_Model {
 		if($post['company_age_from'] >= 0  )
 		{
 			$company_age_from = date("m-d-Y", strtotime("-".$post['company_age_from']." month"));
+
 			
 		}
 		if(!empty($post['company_age_to'])  )
@@ -167,6 +158,7 @@ class Companies_model extends CI_Model {
 		if(isset($company_age_from) && isset($company_age_to)) 
 		{
 			$company_age_sql = 'select id from companies  where companies.eff_from between \''.$company_age_to.'\'  and  \''.$company_age_from.'\' ';
+
 		}
 		
 
@@ -241,28 +233,63 @@ class Companies_model extends CI_Model {
 		}
 		
 		// exclude_contacted_in
-		if (isset($post['contacted']) && !empty($post['contacted']) && !empty($post['contacted_days'])){
+		if (isset($post['contacted']) && !empty($post['contacted'])){
 			
 			$int_val = intval($post['contacted_days']);  //extract as interger
+            
+            
+                        if(!$int_val){
+                $datetime1 = date_create('1970-01-01');
+                $datetime2 = date_create(date('Y-m-d'));
+                $interval = date_diff($datetime1, $datetime2);
+                $int_val =  intval($interval->format('%a'));
+            }
+
+            
+              
+            //echo  $int_val;
 			// is valid int 
 			// select companies that have had an action in that period and the exclude them from the results
 			if($post['contacted'] == 'include'){
 				if (is_int($int_val)){
 					$contacted_in = "select companies.id 
 										 from companies 
-										 left join actions on actions.company_id = companies.id 
-										 where actions.action_type_id in (11,5,4,16,8) 
-										 and actions.actioned_at > current_timestamp - interval '".$int_val." day' 
+										LEFT JOIN 
+(
+select distinct company_id
+from ACTIONS
+where action_type_id in (11,5,4,16,8) 
+and created_at < current_date - interval '".$int_val." day' 
+) ACTIONS_SUB
+ON companies.id = ACTIONS_SUB.company_id
+
+where active = 'TRUE' 
+and ACTIONS_SUB.company_id is null
+  
+-- )
 										 ";
+                    
+                    // echo $sql = $this->db->last_query();
 				}
 			}elseif ($post['contacted'] == 'exclude') {
 				if (is_int($int_val)){
 					$contacted_in = "select companies.id 
 										 from companies 
-										 left join actions on actions.company_id = companies.id 
-										 where actions.action_type_id in (11,5,4,16,8) 
-										 and actions.actioned_at < current_timestamp - interval '".$int_val." day' 
-										 ";
+										LEFT JOIN 
+(
+select distinct company_id
+from ACTIONS
+where action_type_id in (11,5,4,16,8) 
+and created_at > current_date - interval '".$int_val." day' 
+) ACTIONS_SUB
+ON companies.id = ACTIONS_SUB.company_id
+
+where active = 'TRUE' 
+and ACTIONS_SUB.company_id is null
+
+-- )";
+ 
+
 					if(isset($post['exlude_no_contact'])){
 						$contacted_in = $contacted_in.'  or actions.id is null';
 					}
@@ -418,9 +445,8 @@ class Companies_model extends CI_Model {
                 C.customer_to --f47
 			   )) "JSON output" 
 			   
+from (select * from COMPANIES where active = \'TRUE\' ' ;
 
-
-		from (select * from COMPANIES where active = \'TRUE\' OR active = \'FALSE\' AND initial_rate IS NOT  null AND zendesk_id IS NOT NULL AND active IS false ';
 		if(isset($contacted_in)) $sql = $sql.' AND id in ('.$contacted_in.')';
 		$sql = $sql.') C ';
 
@@ -625,7 +651,7 @@ class Companies_model extends CI_Model {
 		select T."company id",
 		       json_agg(
 			   row_to_json(
-			   row (T."mortgage id", T."mortgage provider", T."mortgage stage", T."mortgage start", T."mortgage end", T."mortgage type",  T."provider url"))) "JSON output"  -- f11
+			   row (T."mortgage id", T."mortgage provider", T."mortgage stage", T."mortgage start", T."mortgage end", T."mortgage type",  T."provider url" ,T."mortgage Inv_fin_related"))) "JSON output"  -- f11
 				 
 		from 
 		(-- T
@@ -636,7 +662,8 @@ class Companies_model extends CI_Model {
 		       M.stage "mortgage stage",
 		       to_char(M.eff_from, \'dd/mm/yyyy\')  "mortgage start",
 		       to_char(M.eff_to, \'dd/mm/yyyy\')  "mortgage end",
-		       M.type "mortgage type"
+		       M.type "mortgage type",
+		       M.Inv_fin_related "mortgage Inv_fin_related"
 
 		from MORTGAGES M
 		  
@@ -778,7 +805,11 @@ class Companies_model extends CI_Model {
 				'contract'=>!empty($post['contract'])?$post['contract']:NULL,
 				'perm'=>!empty($post['perm'])?$post['perm']:NULL,
 				'class'=>!empty($post['company_class'])?$post['company_class']:NULL,
+ 
 //'pipeline'=>(!empty($post['company_pipeline'])?$post['company_pipeline']:NULL),
+ 
+				//'pipeline'=>(!empty($post['company_pipeline'])?$post['company_pipeline']:NULL),
+ 
 				'updated_by'=>$post['user_id'],
 				//'pipeline'=>!empty($post['company_pipeline'])?$post['company_pipeline']:NULL,
 				'updated_at' => date('Y-m-d H:i:s'),
@@ -829,6 +860,11 @@ class Companies_model extends CI_Model {
 			}
 			$sectors_status = $this->db->affected_rows();
 		}
+        
+       
+        
+        
+        
 		return true;
 		
 	}
@@ -844,6 +880,7 @@ class Companies_model extends CI_Model {
 			'phone' => !empty($post['phone'])?$post['phone']:NULL,
 			'linkedin_id' => (!empty($post['linkedin_id']) and !empty($post['linkedin_id']))?$post['linkedin_id']:NULL,
 			'url' => !empty($post['url'])?str_replace('http://', '',$post['url']):NULL,
+            'pipeline' => 'Suspect',
 			'contract'=>!empty($post['contract'])?$post['contract']:NULL,
 			'perm'=>!empty($post['perm'])?$post['perm']:NULL,
 			'class'=>!empty($post['company_class'])?$post['company_class']:NULL,
@@ -1045,6 +1082,7 @@ $q = '
         'name' => humanize($postName),
         'contract' => null,
         'perm' => null,
+        'pipeline' => 'Suspect',
         'created_by'=> $user_id,
         'eff_from'=> $post['date_of_creation'],
         'registration' => !empty($post['registration'])?$post['registration']:NULL,		 
@@ -1348,7 +1386,7 @@ $q = '
     public function creat_pipeline($post, $user_id){}
     
     public function get_company_from_id($id){
-       //Redundent function used temporarily for testing purposes only!
+       //Redundent function used temporarily for testing purposes only! 
 
         $this->db->select('*');
         $this->db->from('companies');
@@ -1373,7 +1411,7 @@ $q = '
           
     }
     
- function company_select($id){
+    function company_select($id){
      
      $query = $this->db->query("SELECT * FROM companies WHERE id='".$id."' LIMIT 1");
      
@@ -1382,9 +1420,116 @@ $q = '
                 $row = $query->row(); 
      
               if($row->pipeline == 'Customer') return false;
-     return true;
+         return true;
              } 
-         }
+      }
+    
+    function update_not_for_invoices($post,$userID){
+        
+        
+    $debenturemortgage  =      $post['debenturemortgage'] ? $post['debenturemortgage'] :NULL;
+        
+       $data = array(
+                      'updated_at' =>  date('Y-m-d H:i:s'),
+                      'updated_by' => intval($userID),
+                      'inv_fin_related' =>   $debenturemortgage
+                   );
+       
+        
+        $this->db->where('company_id', intval($post['companyid']));
+        $this->db->where('id', intval($post['providerid']));
+                    $this->db->update('mortgages', $data);
+       
+        return $debenturemortgage ? true : false;
+
+        
+    }
+    
+    
+     /*@@@
+    
+        Analyses only companies with pipeline of Qualified, Suspect, Prospect or is set to null
+        
+        If the company is "in a Target Sector and turnover < £25 million" then set to Prospect, else set to Suspect
+    @@@ */
+    
+    public function cronPipeline($offset =0, $comp){  
+
+        
+        if($comp) $comp = 'and C.id='.$comp; 
+
+ 
+        $query = $this->db->query("select C.id,C.turnover,
+       CASE when T.company_id is not null and (C.turnover < 25000000 or C.turnover is null)
+            then 'Prospect'
+            else 'Suspect'
+	   END \"pipeline_value\"										   											      
+
+from COMPANIES C
+
+LEFT JOIN 
+(
+select distinct O.company_id
+  
+from OPERATES O
+
+JOIN SECTORS S
+ON S.id = O.sector_id
+  
+where O.active = 't'
+and S.target = 't'
+) T
+ON C.id = T.company_id
+
+where pipeline is null
+or pipeline not in ('Customer','Proposal','Intent','Lost','Unsuitable','Blacklisted') 
+
+and C.active = 't' 
+
+".$comp."
+
+LIMIT 1
+	 "                              
+);
+
+                     if ($query->num_rows() > 0)
+                        {
+                            //echo '<table width="400">';
+                            foreach($query->result() as $row)
+                            {
+                                $turn   = $row->turnover ? $row->turnover : '-----';
+                                
+                               // echo '<tr><td>'.$row->id.' </td><td align="left" class="glen">'.$row->pipeline_value.'</td><td>'.$turn.'</td></tr>'; 
+                                //if($row->id == 231806){  $this->cronpipelineUpdater($row->id,$row->pipeline_value);  } 
+                                $this->cronpipelineUpdater($row->id,$row->pipeline_value); 
+                                //if($row->id == 343853) echo 'Got ya';
+                            }
+                         
+                        // echo '</table>';
+                     }
+            }   
+    
+ 
+    
+    
+    
+    private function cronpipelineUpdater($id,$pipeline){ 
+        
+        
+        
+        //Updates company table pipeline based on conditions in crontogo function 
+                 $data = array(
+                                'pipeline' => $pipeline,
+                     'updated_at' => date("Y-m-d H:i:s")
+                                          
+                             );
+
+                 $this->db->where('id', $id);
+                 $this->db->update('companies', $data);
+        
+        
+
+        }   
    
     
 }

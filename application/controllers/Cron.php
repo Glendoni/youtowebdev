@@ -53,7 +53,10 @@ function turnoverCompanies(){
     
     
      $this->Cron_model->turnoverCompanies();
-}     
+}  
+    
+    
+
     //AUTOPILOT
      //This should maybe once or twice a day -  Checks and adds email campaign list to database from AP RUN first
     function create_email_campaign_listing() 
@@ -64,6 +67,18 @@ function turnoverCompanies(){
     {
       $this->Cron_model->update_email_events();  
     }
+    
+    
+    function pipelineCronChecker($offset = 0)  //Call this function every 5mins
+    {
+      $this->Cron_model->cronPipeline($offset);  
+    }
+    
+        function turnoverCompaniesWithoutTurnover(){
+    
+    
+     $this->Cron_model->cronPipelineWithoutTurnover();
+} 
     
     //CSV
      function ippone($lmt = 100 ,$oft= 0,$debug = false)

@@ -263,7 +263,7 @@ class MY_Controller extends CI_Controller {
 		$this->data['class_options'] = array(0=>'All') + $class_options;
 		$this->data['class_default'] ='0';
 
-		$this->data['pipeline_options'] = array('0'=>'All', 'none'=>'None') + $pipeline_options_search;
+		$this->data['pipeline_options'] = array('0'=>'All') + $pipeline_options_search;
 		$this->data['pipeline_default'] ='0';
 
 		$this->data['title_options'] = array(NULL=>'--') +  $title_options;
@@ -296,7 +296,7 @@ class MY_Controller extends CI_Controller {
 
 		// CAMPAIGN TABLE WITHOUT CRITERIA FIELDS
 		$this->data['shared_campaigns'] = $this->Campaigns_model->get_all_shared_campaigns($this->get_current_user_id());
-		$this->data['private_campaigns'] = $this->Campaigns_model->get_all_private_campaigns($this->get_current_user_id());
+		//$this->data['private_campaigns'] = $this->Campaigns_model->get_all_private_campaigns($this->get_current_user_id());
 		
 		//var_dump($this->session->userdata('campaign_shared'));
 		// var_dump($this->data['own_campaigns']);
@@ -451,10 +451,7 @@ class MY_Controller extends CI_Controller {
 			if($company->company->f1->f45)$mapped_companies_array['updated_by_name'] = $company->company->f1->f45;
             if($company->company->f1->f46)$mapped_companies_array['initial_rate'] = $company->company->f1->f46;
             if($company->company->f1->f47)$mapped_companies_array['customer_to'] = $company->company->f1->f47;
-
-
-
-			
+ 
 			// sectors
 
 			if(!empty($company->company->f1->f24)){
@@ -470,6 +467,7 @@ class MY_Controller extends CI_Controller {
 			// mortgages 
 			if(isset($company->company->f2) && (empty($company->company->f2) == False)){
 				$mortgages_array = array();
+      
 				foreach ($company->company->f2 as $mortgage) {
 					$mortgages = array();
 					$mortgages['id'] = $mortgage->f1;
@@ -479,7 +477,7 @@ class MY_Controller extends CI_Controller {
 					$mortgages['eff_to'] = $mortgage->f5;
 					$mortgages['type'] = $mortgage->f6;
 					$mortgages['url'] = $mortgage->f7;
-
+$mortgages['Inv_fin_related'] = $mortgage->f8;
 
 					$mortgages_array[] = $mortgages;
 				}

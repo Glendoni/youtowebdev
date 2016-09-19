@@ -1257,7 +1257,7 @@
 <h3 class="panel-title pull-left">Campaign Summary</h3>
 <?php if ($current_user['permission'] == 'admin'): ?>
 <ul class="nav nav-tabs dashboard" role="tablist">
-<li role="presentation" class="active"><button href="#campaign_user" aria-controls="campaign_user" role="tab" data-toggle="tab" class="btn btn-primary btn-xs pull-right" style="margin-right:10px; margin-left:10px;    font-size: 10px;">My Campaign</button></li>
+<li role="presentation" class="active"><button href="#campaign_user" aria-controls="campaign_user" role="tab" data-toggle="tab" class="btn btn-primary btn-xs pull-right" style="margin-right:10px; margin-left:10px;    font-size: 10px;">My Campaigns</button></li>
 <li role="presentation"><button href="#campaign_team" aria-controls="campaign_team" role="tab" data-toggle="tab" class="btn btn-primary btn-xs pull-right" style="margin-right:10px;    font-size: 10px;">Team Campaign</button></li>
 
               </ul>
@@ -1420,7 +1420,7 @@
 </div><!--END TAB-->
     <div role="tabpanel" class="tab-pane fade" id="calls"><div class="panel panel-default">
               <div class="panel-heading">
-              <h3 class="panel-title">Actions<span class="badge pull-right"><?php echo count($pending_actions); ?></span></h3>
+              <h3 class="panel-title">Your Schedule<span class="badge pull-right"><?php echo count($pending_actions); ?></span></h3>
               </div>
              
               <div class="panel-body no-padding">
@@ -1435,6 +1435,14 @@
                       </div>
                       </div>
                     <?php else: ?>
+            <div class="row record-holder-header mobile-hide">
+            <div class="col-md-3"><strong>Company</strong></div>
+            <div class="col-md-2"><strong>Phone</strong></div>
+            <div class="col-md-2"><strong>Action</strong></div>
+            <div class="col-md-2  "><strong>Due</strong></div>
+            <div class="col-md-3 "><strong>Actions</strong></div>
+            </div>
+
 
                     <?php foreach ($pending_actions as $action): 
                          // print_r('<pre>');print_r($action);print_r('</pre>');
@@ -1450,21 +1458,32 @@
                               <div style="clear:both"><?php echo $action->first_name.' '.$action->last_name;?></div>
                               <?php } else { $contact_details_for_calendar="";};?>
                             </div>
+                             <div class="col-md-2">
+                              <div><?php echo $action->company_phone;?></div>
+                              <div><?php echo $action->contact_phone;?></div>
+                            </div>
                             <div class="col-md-2">
                               <?php echo $action_types_array[$action->action_type_id]; ?>
                             </div>
-                            <div class="col-md-3 text-center">
-                            <?php echo $action->duedate;?>
+                            <div class="col-md-2  ">
+                            <?php   $now = $action->duedate; 
+                                    $timestamp = strtotime($action->planned_at);
+                                    $round = 5*60;
+                                    $rounded = round($timestamp / $round) * $round;
+                                    
+                                    echo date('d/m/y', $timestamp)." ";
+                                echo date("H:i", $rounded);
+                                    ?>
                               
                             </div>
-                            <div class="col-md-4" style="text-align:right;">
+                            <div class="col-md-3"  >
                             <a class="btn btn-default btn-xs add-to-calendar" href="http://www.google.com/calendar/event?action=TEMPLATE&text=<?php echo urlencode($action_types_array[$action->action_type_id].' | '.$action->company_name); ?>&dates=<?php echo date("Ymd\\THi00",strtotime($action->planned_at));?>/<?php echo date("Ymd\\THi00\\Z",strtotime($action->planned_at));?>&details=<?php echo $contact_details_for_calendar;?><?php echo urlencode('http://baselist.herokuapp.com/companies/company?id='.$action->company_id);?>%0D%0DAny changes made to this event are not updated in Baselist.%0D%23baselist"target="_blank" rel="nofollow">Add to Calendar</a>
                               <?php $hidden = array('action_id' => $action->action_id , 'user_id' => $current_user['id'], 'action_do' => 'completed', 'outcome' => '' , 'company_id' => $action->company_id);
                                echo form_open(site_url().'actions/edit', 'name="completed_action"  class="completed_action" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action->action_id.'" style="display:inline-block;" role="form"',$hidden); ?>
-                               <button class="btn btn-xs btn-success">Completed</button> 
+                               <button class="btn btn-xs btn-success"  style="display:none;">Completed</button> 
                                </form>
                                <?php $hidden = array('action_id' => $action->action_id , 'user_id' => $current_user['id'] , 'action_do' => 'cancelled','outcome' => '' , 'company_id' => $action->company_id,'page' => 'home' ,);
-                               echo form_open(site_url().'actions/edit', 'name="cancel_action"  class="cancel_action" style="display:inline-block;" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action->action_id.'" role="form"',$hidden); ?>
+                               echo form_open(site_url().'actions/edit', 'name="cancel_action"  class="cancel_action" style="display:none;" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action->action_id.'" role="form"',$hidden); ?>
                                <button class="btn btn-xs btn-overdue" >Cancel</button>
                                </form>
                             </div>
@@ -2015,13 +2034,13 @@
 <div class="col-sm-3 col-sm-pull-9">
               <div class="panel panel-default">
               <div class="panel-heading">
-                <h3 class="panel-title">My Campaign <span class="badge pull-right"><?php echo count($private_campaigns); ?></span></h3>
+                <h3 class="panel-title">My Campaigns <span class="badge pull-right mycampaignajaxcount"></span></h3>
               </div>
-              <div class="panel-body" style="padding:0;">
+              <div class="panel-body mycampaignajax" style="padding:0;">
                   <!-- PRIVATE SEARCHES -->
                  
                   
-                  <?php foreach ($private_campaigns_new as $campaign):?>
+                  <?php /* foreach ($private_campaigns_new as $campaign):?>
                   <?php $user_icon = explode(",", $campaign['image']);$bg_colour = $user_icon[1];$bg_colour_text = $user_icon[2];$bg_colour_name = $user_icon[0];?>
                     <a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $campaign['id']; ?>" class="load-saved-search" <?php echo strlen($campaign['name']) > 36 ? 'title="'.$campaign['name'].'"':"" ?>><div class="row">
                   <div class="col-xs-1"><span class="label label-info" style="margin-right:3px;background-color: <?php echo $bg_colour; ?>;font-size:8px; color: <?php echo $bg_colour_text;?>"><b><?php echo $bg_colour_name; ?></b>
@@ -2030,14 +2049,14 @@
                   <div class="col-xs-1" style="padding: 0 0 0 0px; font-size: 11px;"><?php echo $campaign['percentage']; ?>%</div>
                   </div>
                   </a>
-                  <?php endforeach; ?>
+                  <?php endforeach;  */ ?>
                   
                   
               </div>
             </div>
             <div class="panel panel-default">
               <div class="panel-heading">
-                <h3 class="panel-title">Recent Campaign<span class="badge pull-right"><?php //echo count($shared_campaigns); ?></span></h3>    
+                <h3 class="panel-title">Recent Campaigns<span class="badge pull-right"><?php //echo count($shared_campaigns); ?></span></h3>    
               </div>
               <div class="panel-body" style="padding:0;">
               <div id="campaignList">

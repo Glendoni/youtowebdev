@@ -116,7 +116,7 @@ class Actions extends MY_Controller {
                                     if(empty($result)) $this->set_message_warning('Error while updating action for the company.');
                                 
                                 //}
-                            }else if($post['action_type_completed']=='31' || $post['action_type_completed']=='32' || $post['action_type_completed']=='33' || $post['action_type_completed']=='34'){
+                            }else if($post['action_type_completed']=='31' || $post['action_type_completed']=='32' || $post['action_type_completed']=='33' || $post['action_type_completed']=='34'|| $post['action_type_completed']=='35'){
                                 // proposal sent to company 
                                 
                                  if($this->Companies_model->company_select($company_id)){ //prevents proposal being updated if company is a customer
@@ -124,7 +124,8 @@ class Actions extends MY_Controller {
                                             if($post['action_type_completed']=='31')    $actionName = 'Prospect'; 
                                             if($post['action_type_completed']=='32')    $actionName = 'Intent';
                                             if($post['action_type_completed']=='33')    $actionName = 'Unsuitable';      
-                                            if($post['action_type_completed']=='34')    $actionName = 'Lost';      
+                                            if($post['action_type_completed']=='34')    $actionName = 'Lost'; 
+                                            if($post['action_type_completed']=='35')    $actionName = 'Suspect'; 
 
                                      
                                      
@@ -169,7 +170,7 @@ class Actions extends MY_Controller {
                         $campaign_redirect ='&campaign_id='.$post['campaign_id'];
                         }
 
-                            $result = $this->Actions_model->create($this->input->post());
+                            $result = $this->Actions_model->create($this->input->post(),$this->data['current_user']['id']);
                             if(empty($result))
                             {
                                 $this->set_message_warning('Error while inserting details to database');
@@ -301,11 +302,13 @@ class Actions extends MY_Controller {
     function operations_read($pageEval = false)
     {
         
-       $pageEval = $pageEval?  $this->session->userdata('selected_company_id') : 0;
+       //$pageEval = $pageEval?  $this->session->userdata('selected_company_id') : 0;
         
         header('Content-Type: application/json');
-        $input['operations']  =  $this->Actions_model->operations_store_get($this->data['current_user']['id'],  $pageEval);
+       $input['operations'] =  $this->Actions_model->operations_store_get($this->data['current_user']['id'],  $pageEval);
         echo  json_encode($input);
+        
+
     }
     
     function _qvActions() //This can be removed part of quickview protoype which was rejected. Maybe store for future use

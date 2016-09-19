@@ -1,8 +1,6 @@
 <?php if(empty($companies)): ?>
 	<div class="alert alert-warning">No companies found</div>
 <?php else: ?>
-
-
 <?php $i = 0; foreach ( $companies as $company):  ?>
 <?php $this->load->view('companies/edit_box.php',array('company'=>$company)); ?>
 <?php $this->load->view('companies/create_contact_box.php',array('company'=>$company)); ?>
@@ -25,7 +23,9 @@
             
             
 			<h2 class="company-header">
-			<a href="<?php echo site_url();?>companies/company?id=<?php echo $company['id'];?><?php echo !empty($current_campaign_id)?'&campaign_id='.$current_campaign_id:''; ?>" <?php if(($current_user['new_window']=='t')): ?> target="_blank"<?php endif; ?> class="compa"  data-camp="pos<?php echo $i++ ; ?>" comp="<?php echo $company['id'];?>"><?php $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' );echo str_replace($words, ' ',$company['name']); ?></a>
+               
+                
+			<a href="<?php echo site_url();?>companies/company?id=<?php echo $company['id'];?><?php echo !empty($current_campaign_id)?'&campaign_id='.$current_campaign_id:''; ?><?php if(isset($_GET['page_num'])){ echo '&page_num='.$_GET['page_num']; } ?>" <?php if(($current_user['new_window']=='t')): ?> target="_blank"<?php endif; ?> class="compa"  data-camp="pos<?php echo $i++ ; ?>" comp="<?php echo $company['id'];?>"><?php $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' );echo str_replace($words, ' ',$company['name']); ?></a>
 		<!-- THIS IS ME -->    
        <?php $bgcolor =  explode(',',$current_user['image']) ?>
             <?php if(isset($company['assigned_to_name']) and !empty($company['assigned_to_name'])): ?>
@@ -87,6 +87,55 @@
         
 		<?php endif; ?>
 		</span>
+                
+                     <?php
+                    //print '<pre>';
+                  //print_r($pipedate);
+           
+                if(!$company['customer_to']){  ?> 
+                       
+                     
+                <?php  
+                       
+             if($last_pipeline_created_at && $company['pipeline'] != 'Prospect' && $company['pipeline'] != 'Suspect' ){
+                ?>
+                    
+                        <span class="last_pipeline_created_at">
+                        <?php
+ //echo $last_pipeline_created_at;
+                  
+                    
+                     //print '</pre>';
+                 // echo $company['id'];
+                    
+                    
+                
+                  $pipedate =    $pipedate ?  $pipedate : $this->session->userdata('pipedate') ;
+                    
+                    //print_r($pipedate);
+                      foreach($pipedate as $ky => $pipeval ){
+                
+                    if($pipeval['id'] == $company['id'] && $pipeval['last_pipeline_date'] == true ){
+                        
+                           $your_date = date('Y-m-d' , strtotime($pipeval['last_pipeline_date']));
+ 
+
+                            $datetime1 = date_create(date('Y-m-d'));
+                            $datetime2 = date_create($your_date);
+                            $interval = date_diff($datetime1, $datetime2);
+                             $interval = $interval->format('%a');
+                        
+             if($interval == 1){ echo  $interval.' day ago' ;}  elseif($interval == 0){ echo 'Today'; }else{ echo $interval. ' days ago' ;}  
+                        break;   
+                    } ;
+                    
+                 
+                }
+                      
+
+ ?>
+      </span>
+               <?php }} ?> 
 		    
 	<?php if(isset($company['assigned_to_name'])): ?>
 		<span class="label label-assigned " id="label-assigned<?php echo $company['id'];?>"
@@ -124,9 +173,9 @@ $your_date = strtotime($company['actioned_at1']);
 $datediff = abs($now - $your_date);
 $days_since = floor($datediff/(60*60*24));
 if ($company['actioned_at1'] > 0){
-	echo " (".$days_since." days ago)";
+	echo  " <br>".$days_since." days ago";
 	} else {
-	echo " (".$days_since." day ago)";;
+	echo " <br>".$days_since." day ago";
 	}
 ?></div>
 
@@ -152,9 +201,14 @@ if ($your_date < $now){;
      $datediff = $now - $your_date;
      $daysoverdue = floor($datediff/(60*60*24));?>
 <div><span class="label label-danger" style="font-size:10px;">
-<?php   if ($daysoverdue > 1) {echo $daysoverdue." Days";} elseif($daysoverdue == 1){  echo $daysoverdue." Day";   }else{echo "";};?>  Overdue </span></div>
+<?php   
+                    
+                       if ($daysoverdue > 1) {echo "Overdue";};?>   </span></div>
 
-<?php } else {}?>
+<?php } else {}?> 
+ 
+
+ 
 <?php endif; ?>
 
 </div>
@@ -186,7 +240,7 @@ if ($your_date < $now){;
 		<div class="col-md-4">
 				<label>Registered Address</label>
 				<p style="margin-bottom:10px;">
-                <?php echo isset($company['address'])?'<a href="http://maps.google.com/?q='.urlencode($company['address']).'" target="_blank">'.$company['address'].'<span style="    line-height: 15px;font-size: 10px;padding-left: 5px;"><i class="fa fa-external-link"></i></span></a>':'-'; ?>  
+                <?php echo isset($company['address'])?'<a href="http://maps.google.com/?q='.urlencode($company['address']).'" target="_blank">'.$company['address'].'<span style="    line-height: 15px;font-size: 10px;padding-left: 5px;"><i class="fa fa-external-link"></i></span></a>':''; ?>  
 				</p>
 		</div><!--END ADDRESS-->
 		
@@ -207,7 +261,7 @@ if ($your_date < $now){;
 			<?php if (isset($company['linkedin_id'])): ?>
 			<a class="btn  btn-info btn-sm btn-block linkedin" href="https://www.linkedin.com/company/<?php echo $company['linkedin_id'] ?>"  target="_blank">LinkedIn</a>
 			  <?php else: ?>
-              <a class="btn  btn-primary btn-sm btn-block" href="https://www.linkedin.com/vsearch/f?type=all&keywords=<?php echo  urlencode($company['name']) ?>"  target="_blank">Search LinkedIn <i class="fa fa-search" aria-hidden="true"></i> </a>
+              <a class="btn  btn-primary btn-sm btn-block" href="https://www.linkedin.com/vsearch/f?type=all&keywords=<?php echo  urlencode($company['name']) ?>"  target="_blank">LinkedIn <i class="fa fa-search" aria-hidden="true"></i> </a>
             <?php endif; ?>
             
             
@@ -215,6 +269,9 @@ if ($your_date < $now){;
 		<a class="btn btn-default btn-sm btn-block btn-url" href="<?php $parsed = parse_url($company['url']); if (empty($parsed['scheme'])) { echo 'http://' . ltrim($company['url'], '/'); }else{ echo $company['url']; } ?>" target="_blank">
 		<label style="margin-bottom:0;"></label> <?php echo str_replace("http://"," ",str_replace("www.", "", $company['url']))?>
 		</a>
+            	<?php else: ?>
+
+    <a class="btn  btn-default btn-sm btn-block " href="https://www.google.co.uk/search?q=<?php echo urlencode(htmlspecialchars_decode($company['name'], ENT_QUOTES));  ?>"  target="_blank">Google <i class="fa fa-search" aria-hidden="true"></i></a>
 		<?php endif; ?>
 			<?php if (isset($company['registration'])): ?>
 			<a class="btn  btn-info btn-sm btn-block companieshouse" href="https://beta.companieshouse.gov.uk/company/<?php echo $company['registration'] ?>" target="_blank">Companies House</a>
@@ -248,7 +305,7 @@ if ($your_date < $now){;
 			<?php if (isset($company['contacts_count'])): ?>
 			<p class="details"><?php echo $company['contacts_count'];?> </p>
 			<?php else: ?>
-			<p class="details">-</p>
+			<p class="details"></p>
 			<?php endif; ?>
 		</div>
             
@@ -260,7 +317,7 @@ if ($your_date < $now){;
 					 <?php echo $companies_classes[$company['class']] ?> 	
 					<?php else: 
                     
-                    echo '-';
+                    //echo '-';
                     
                     ?>
 						
@@ -275,7 +332,7 @@ if ($your_date < $now){;
 		<div class="col-xs-6 col-sm-3 ">
 			<strong><span style="text-transform: capitalize"><?php echo isset($company['turnover_method'])?$company['turnover_method']:'';?></span> Turnover</strong><br>
 			<p class="details" style="margin-bottom:5px;">
-				<?php echo isset($company['turnover'])? '£'.number_format (round($company['turnover'],-3)):'-';?>
+				<?php echo isset($company['turnover'])? '£'.number_format (round($company['turnover'],-3)):'';?>
 			</p>
         </div>
 	
@@ -285,7 +342,7 @@ if ($your_date < $now){;
 			<?php if (isset($company['emp_count'])): ?>
 			<p class="details"><?php echo $company['emp_count'];?> </p>
 			<?php else: ?>
-            <p class="details">-</p>
+            <p class="details"></p>
 			<?php endif; ?>
 		</div>
 		<!-- SECTORS -->
@@ -309,7 +366,7 @@ if ($your_date < $now){;
 				}
 			}
 			?>
-									<?php if (isset($company['perm'])): ?>
+									<?php /*  if (isset($company['perm'])): ?>
 
 <p class="detailsTagFormat" style="margin-bottom:0; text-align:centre;">Permanent</p>
 
@@ -326,7 +383,7 @@ if ($your_date < $now){;
 <p class="detailsTagFormat" style="margin-bottom:0; text-align:centre;">-</p>
             
             
-            <?php endif; ?>
+            <?php endif;  */ ?>
             
             
 		</div>
@@ -349,15 +406,36 @@ if ($your_date < $now){;
 			<table class="table" style="font-size:12px">
 			<thead>
 				<tr>
-					<th class="col-md-6">Mortgage Provider</th>
-					<th class="col-md-3">Started</th>
-					<th class="col-md-3">Status</th>
+					<th class="col-md-4">Mortgage Provider</th>
+                     <th class="col-md-2">&nbsp;</th>
+					<th class="col-md-2">Started</th>
+					<th class="col-md-2">Status</th>
+                    <th class="col-md-2">Finished</th>
 				</tr>
 			</thead>
 			<tbody>
 				<?php foreach ($company['mortgages'] as $mortgage):?>
-				<tr <?php echo $mortgage['stage']==MORTGAGES_SATISFIED? 'class="danger"' : 'class="success"' ?> >
-					<td class="col-md-6" >
+                
+                  <?php
+                
+                
+                
+             if( $mortgage['Inv_fin_related'] == 'y') {  
+                $tdbgcolorclass =   'danger'  ;//$tdbgcolorclass = 'danger';
+                }else{
+                    
+                  $tdbgcolorclass =   'success' ;  
+                    
+                }
+                
+                
+                
+                ?>
+                
+                
+			   
+				<tr <?php echo $mortgage['stage']==MORTGAGES_SATISFIED? 'class="danger cont'.$mortgage['id'].'"' : 'class="'.$tdbgcolorclass.' cont'.$mortgage['id'].'"' ?>>
+					<td class="col-md-3" >
 					<?php if(isset($mortgage['url'])) : ?>
 						<a href="http://<?php echo $mortgage['url']; ?>" target="_blank"><?php echo $mortgage['name']; ?> <span style="font-size:10px;"><i class="fa fa-external-link"></i></span></a>
 	    			<?php else: ?>
@@ -367,17 +445,36 @@ if ($your_date < $now){;
 				<?php echo $mortgage['type']; ?>
 				</div>
 					</td>
+                       <td class="col-md-3">
+                        
+                     <?php  if($mortgage['stage'] == 'Outstanding'){ 
+    
+       if($mortgage['Inv_fin_related'] == 'y'){ echo '<span  class="related_to_Invoice_Finance inv'.$mortgage['id'].'">Not Related To Invoice Finance</span>'; 
+                }elseif($mortgage['Inv_fin_related'] == null){
+    echo  '<span  class="Not_related_to_Invoice_Finance inv'.$mortgage['id'].'">Related To Invoice Finance</span>'; 
+    }else{
+        echo  '<span  class="Not_related_to_Invoice_Finance inv'.$mortgage['id'].'">Probably Related To Invoice Finance</span>'; 
+    } 
+                                                                   
+                                                                   
+                                                                   
+                                                                   
+                                                                   } ?>
+                    </td>
 					<td class="col-md-3"><?php echo $mortgage['eff_from']; ?></td>
-					<td class="col-md-3"><!--<span class="label label-<?php echo $mortgage['stage']==MORTGAGES_SATISFIED? 'default' : 'success' ?>">--><strong><?php echo $mortgage['stage']; ?></strong><?php if(!empty($mortgage['eff_to'])){echo ' on '.$mortgage['eff_to'];} ?></span></td>
+					<td class="col-md-3"><!--<span class="label label-<?php echo $mortgage['stage']==MORTGAGES_SATISFIED? 'default' : 'success' ?>">--><strong><?php echo $mortgage['stage']; ?></strong><?php if(!empty($mortgage['eff_to'])){
+   // echo ' on '.$mortgage['eff_to'];
+} ?></span></td>
+                	<td class="col-md-2" style="text-align:center;">
+				<?php  echo $mortgage['eff_to'] ?  $mortgage['eff_to'] : '<span>-</span>'; ?>
+				</td>
 
 				</tr>
 				<?php endforeach; ?>
 				</tbody>
 				</table>
 				<?php else: ?>
-				<div class="alert alert-info" style="margin-top:10px;">
-	                No mortgage data registered.
-	            </div>
+	 </div>
 			<?php endif; ?>
 			</div>
 		</div>

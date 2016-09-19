@@ -69,7 +69,7 @@
 
 
 
-$owned_urls= array('fe_read_tag', 'fe_get_tag', 'getAction', 'operation_read', 'autopilotActions', 'getCompletedActions', 'campaign_page_getter', 'loaddata', 'getTeamStats', 'refactorFavorites','login');
+$owned_urls= array('fe_read_tag', 'fe_get_tag', 'getAction', 'operation_read', 'autopilotActions', 'getCompletedActions', 'notForInvoices',  'campaign_page_getter', 'loaddata', 'getTeamStats', 'refactorFavorites','login');
    $string = current_full_url();
         for($iLpage=0; $iLpage < count($owned_urls); $iLpage++)
         {
@@ -82,7 +82,7 @@ $owned_urls= array('fe_read_tag', 'fe_get_tag', 'getAction', 'operation_read', '
                     $cookie = array(
                     'name'   => 'lastpagevisited',
                     'value'  => $string,
-                    'expire' =>  86500,
+                    'expire' =>  (86400 * 30),
                     'secure' => false
                     );
 
@@ -168,26 +168,38 @@ $(document).ready(function(){
         var operations = [];
         var repLimited = [];
         var name = [];
-    
-   /*
+    var ourconcatstring = [];
+  //var pageEval = GetUrlParamID();
+   
         $.ajax({
             type: "GET",
                 dataType: "json",
             url: "<?php echo base_url(); ?>Actions/operations_read/"+pageEval,
             success: function(data) {
   //dont know what the fucks up with the replace array function not working ?????? Must investigate 
+                 //console.log(data)   
                  $.each( data.operations, function( key, val ) {
     
-                     if(val.name != null){
-                 
+                     if(typeof val != null){
+                         
+                           ourconcatstring  =   val.split('_');   
+             repLimited =  ourconcatstring[1];
                     repLimited = ['Limited','ltd', 'LTD'];
-                    name =  val.name 
-                    repLimited =   name.replace('Limited', "");
+                    name = ourconcatstring[1]
+                    repLimited =   ourconcatstring[1].replace('Limited', "");
                     repLimited =   repLimited.replace('ltd', "");
                     repLimited =   repLimited.replace('Ltd', "");
                     repLimited =   repLimited.replace('LTD', "");
+                   // console.log('<li><a href="<?php echo base_url();?>companies/company?id='+val.comp_id+'" >'+repLimited+'</a></li>');
                     
-                    $('.tr-actions').append('<li><a href="<?php echo base_url();?>companies/company?id='+val.comp_id+'" >'+repLimited+'</a></li>');
+                     
+                    
+                         
+                         
+                 
+                        // console.log(ourconcatstring[0])
+                         
+                         $('.tr-actions').append('<li><a href="<?php echo base_url();?>companies/company?id='+ourconcatstring[0]+'" >'+repLimited+'</a></li>');
                      }
                  })
  
@@ -200,10 +212,8 @@ $(document).ready(function(){
                         
               }
          });
-    */
-
     
-     $('.tr-actions').append('<li>Maintenace update in progress...<br></li>');
+
  if(!(/companies\/company/.test(window.location.href))) {
      
     $('.pageQvNav').remove();
@@ -216,6 +226,14 @@ $(document).ready(function(){
  }
 
     if((/campaign_id/.test(window.location.href))) {
+        
+      $.urlParams = function(name){
+	var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+	return results[1] || 0;
+}
+        
+        
+        
         $.urlParam = function(name){
         var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
     if (results==null){
@@ -227,7 +245,9 @@ $(document).ready(function(){
 }
         
       var campaign_id  =   $.urlParam('campaign_id');
-      var para = ({'company_id':GetUrlParamID()});
+          var campaign_ids  =   $.urlParams('campaign_id');
+     
+      var para = ({'company_id':GetUrlParamID(), 'campaign_id' : campaign_id});
                           $.ajax({
                             type: "POST",
                               data: para,
@@ -851,6 +871,25 @@ var para = window.location.href.split("id=");
     return param = param[0]; 
 } 
 
+
+$(function(){
+    $("[href^='#']").not("[href~='#']").click(function(evt){
+        evt.preventDefault();
+        var obj = $(this),
+        getHref = obj.attr("href").split("#")[1],
+        offsetSize = 1450;
+        $(window).scrollTop($("[name*='"+getHref+"']").offset().top - offsetSize);
+    });
+});
+        $.urlParam = function(name){
+    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+    if (results==null){
+       return null;
+    }
+    else{
+       return results[1] || 0;
+    }
+}
 </script>
 <!--COMBINE MULTIPLE JS FILES-->
 <?php if (isset($current_user)): ?>

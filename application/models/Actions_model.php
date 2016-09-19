@@ -134,7 +134,7 @@ function get_actions_outstanding($company_id,$limit =100)
 
 function get_actions_completed($company_id)
 {
-    $category_exclude = array('7', '20');
+    $category_exclude = array('7', '20','30');
     $data = array(
         'a.company_id' => $company_id,
         );
@@ -218,11 +218,12 @@ function get_comments($company_id)
 
     function get_comments_two($company_id)
 {
-    $sql = "SELECT a.*, u.name as created_by 
+    $sql = "SELECT a.*, u.name as created_by , u.image
 FROM actions a
 LEFT JOIN users u
 ON a.created_by = u.id
-WHERE a.action_type_id =7 
+WHERE a.action_type_id =30  AND a.company_id='$company_id'
+OR a.action_type_id =7
 AND a.company_id='$company_id'";
          $query = $this->db->query($sql);
     return $query->result_object();
@@ -232,12 +233,13 @@ AND a.company_id='$company_id'";
     
 function get_pending_actions($user_id)
 {       
-    $this->db->select("actions.company_id, actions.id as action_id,comments,planned_at,action_type_id,name as company_name,contacts.first_name,contacts.last_name,contacts.phone,contacts.email, to_char(planned_at, 'HH24:MI DD/MM/YY') as duedate ");
+    $this->db->select("actions.company_id, actions.id as action_id,comments,planned_at,action_type_id,name as company_name,initial_rate, contacts.first_name,contacts.last_name,contacts.phone,contacts.email, to_char(planned_at, 'HH24:MI DD/MM/YY') as duedate ");
     $this->db->where('actions.user_id',$user_id);
     $this->db->where('actioned_at',NULL);
     $this->db->where('cancelled_at',NULL);
     $this->db->join('companies', 'companies.id = actions.company_id', 'left');
     $this->db->join('contacts', 'contacts.id = actions.contact_id', 'left');
+    $this->db->limit(100);
     $this->db->order_by('cancelled_at desc,planned_at asc');
     $query = $this->db->get('actions');
     // var_dump($query);
@@ -780,7 +782,7 @@ function set_action_state($action_id,$user_id,$state,$outcome,$post)
 }
 
 // INSERTS
-function create($post)
+function create($post, $userid =false)
 {
     
     
@@ -799,11 +801,11 @@ function create($post)
     //TEST - COMPLETED ACTION ONLY
     $completeddata = array(
         'company_id'    => $post['company_id'],
-        'user_id'       => $post['user_id'],
+        'user_id'       => $userid ? $userid : $post['user_id'],
         'comments'      => (isset($post['comment'])?htmlspecialchars(preg_replace('/[\x00-\x1F\x80-\xFF]/', '', rtrim($post['comment']))):NULL),
         'planned_at'    => NULL,
         'contact_id'    => (!empty($post['contact_id'])?$post['contact_id']:NULL),
-        'created_by'    => $post['user_id'],
+        'created_by'    => $userid ? $userid : $post['user_id'],
         'action_type_id'=> (isset($post['action_type_completed'])?$post['action_type_completed']:$post['action_type']),
         'actioned_at'   => date('Y-m-d H:i:s'),
         'created_at'    => date('Y-m-d H:i:s'),
@@ -817,11 +819,11 @@ function create($post)
 
         $planneddata = array(
         'company_id'    => $post['company_id'],
-        'user_id'       => $post['user_id'],
+        'user_id'       => $userid ? $userid : $post['user_id'],
         'comments'      => (isset($post['comment'])?htmlspecialchars(preg_replace('/[\x00-\x1F\x80-\xFF]/', '', rtrim($post['comment']))):NULL),
         'planned_at'    => $post['planned_at'],
         'contact_id'    => (!empty($post['contact_id'])?$post['contact_id']:NULL),
-        'created_by'    => $post['user_id'],
+        'created_by'    => $userid ? $userid : $post['user_id'],
         'action_type_id'=> $post['action_type_planned'],
         'actioned_at'   =>  NULL,
         'created_at'    => date('Y-m-d H:i:s'),
@@ -988,20 +990,76 @@ function delete_campaign($id,$user_id)
     
      function  operations_store_get($user_id,$comp_id=0){
         //ops.user_id, c.id as comp_id, c.name 
-        $query = $this->db->query("select o.company_id as comp_id, c.name, o.id from companies c
-                                    INNER JOIN 
-                                    views o ON o.company_id = c.id 
-                                    AND o.id = 
-                                    (
-                                    SELECT MAX(id) 
-                                    FROM views z1 
-                                    WHERE z1.company_id = o.company_id and z1.user_id = ".$user_id." and z1.company_id != ".$comp_id."
-                                    order by o.id desc
-                                    )
-                                    order by 3 desc
-                                    limit 6");
+     
+        
+         $query = $this->db->query("select T.company_id AS company,
+C.name
+
+from
+(
+select V.company_id,
+row_number() OVER (PARTITION BY company_id order by V.created_at desc) \"rownum\",
+V.created_at
+
+from VIEWS V
+
+where V.user_id = ".$user_id." -- ie current user
+
+order by V.created_at desc
+limit 50
+) T
+
+JOIN COMPANIES C
+ON T.company_id = C.id
+
+where \"rownum\" = 1
+
+order by T.created_at desc
+
+limit 16");
+         
+         
+          
+         
+         
+
+//echo $this->db->last_query();
+
+//exit();
+         
+        /*
+         
+$query = $this->db->query("SELECT DISTINCT v.created_at,c.id as company,  c.name as name FROM views v 
+LEFT JOIN companies c
+ON v.company_id = c.id 
+WHERE v.user_id = ".$user_id."
+GROUP BY c.id,v.created_at
+ORDER BY v.created_at DESC");
+*/
+             
+         
+            foreach ($query->result_array() as $row)
+        {
+            $comlist[$row['company']] =  $row['name'];
+ 
+             if(count($comlist)=== 16)   break;
+        }
        
-             return   $query->result_array();   
+         $i= 0;
+         foreach($comlist as $key => $item){
+             
+             
+             $comlister[$i++] = $key.'_'.$item;
+             
+             
+         }
+         
+       $comlister =   array_splice($comlister, 1, 15);
+             
+             
+             return   $comlister; 
+             
+               
     }
     
     
@@ -1162,5 +1220,25 @@ public function getActionsProposals($userID = 0){
 }
     
     
-     
+  function actiondata($id){ // Checks created at of pipeline action 
+      
+   $sql = "SELECT id,created_at,action_type_id FROM actions WHERE company_id = ".intval($id)." AND action_type_id IN (16,32,34,8,31,11,19) ORDER BY created_at ";
+   
+    $query = $this->db->query($sql);
+    if ($query->num_rows() > 0)
+    {
+        foreach ($query->result_array() as $row)
+        {
+            if( $row['action_type_id']  == 16){
+                $out = $row['created_at'];
+                break;
+            }else{
+                $out =  $row['created_at'];   
+            }
+        }
+        return $out;
+    }
+    
+        return false;
+    }    
 }
