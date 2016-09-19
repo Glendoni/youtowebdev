@@ -856,6 +856,11 @@ from (select * from COMPANIES where active = \'TRUE\' ' ;
 			}
 			$sectors_status = $this->db->affected_rows();
 		}
+        
+       
+        
+        
+        
 		return true;
 		
 	}
@@ -1434,6 +1439,90 @@ $q = '
 
         
     }
+    
+    
+     /*@@@
+    
+        Analyses only companies with pipeline of Qualified, Suspect, Prospect or is set to null
+        
+        If the company is "in a Target Sector and turnover < £25 million" then set to Prospect, else set to Suspect
+    @@@ */
+    
+    public function cronPipeline($offset =0, $comp){  
+
+        
+        if($comp) $comp = 'and C.id='.$comp; 
+
+ 
+        $query = $this->db->query("select C.id,C.turnover,
+       CASE when T.company_id is not null and (C.turnover < 25000000 or C.turnover is null)
+            then 'Prospect'
+            else 'Suspect'
+	   END \"pipeline_value\"										   											      
+
+from COMPANIES C
+
+LEFT JOIN 
+(
+select distinct O.company_id
+  
+from OPERATES O
+
+JOIN SECTORS S
+ON S.id = O.sector_id
+  
+where O.active = 't'
+and S.target = 't'
+) T
+ON C.id = T.company_id
+
+where pipeline is null
+or pipeline not in ('Customer','Proposal','Intent','Lost','Unsuitable','Blacklisted') 
+
+and C.active = 't' 
+
+".$comp."
+	 "                              
+);
+
+                     if ($query->num_rows() > 0)
+                        {
+                            echo '<table width="400">';
+                            foreach($query->result() as $row)
+                            {
+                                $turn   = $row->turnover ? $row->turnover : '-----';
+                                
+                                echo '<tr><td>'.$row->id.' </td><td align="left" class="glen">'.$row->pipeline_value.'</td><td>'.$turn.'</td></tr>'; 
+                                //if($row->id == 231806){  $this->cronpipelineUpdater($row->id,$row->pipeline_value);  } 
+                                $this->cronpipelineUpdater($row->id,$row->pipeline_value); 
+                                //if($row->id == 343853) echo 'Got ya';
+                            }
+                         
+                         echo '</table>';
+                     }
+            }   
+    
+ 
+    
+    
+    
+    private function cronpipelineUpdater($id,$pipeline){ 
+        
+        
+        
+        //Updates company table pipeline based on conditions in crontogo function 
+                 $data = array(
+                                'pipeline' => $pipeline,
+                     'updated_at' => date("Y-m-d H:i:s")
+                                          
+                             );
+
+                 $this->db->where('id', $id);
+                 $this->db->update('companies', $data);
+        
+        
+
+        }   
    
     
 }
