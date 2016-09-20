@@ -239,7 +239,7 @@ function get_pending_actions($user_id)
     $this->db->where('cancelled_at',NULL);
     $this->db->join('companies', 'companies.id = actions.company_id', 'left');
     $this->db->join('contacts', 'contacts.id = actions.contact_id', 'left');
-    $this->db->limit(100);
+    $this->db->limit(200);
     $this->db->order_by('cancelled_at desc,planned_at asc');
     $query = $this->db->get('actions');
     // var_dump($query);
