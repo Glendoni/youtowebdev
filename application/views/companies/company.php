@@ -50,14 +50,12 @@
                          <?php 
 
                                                           
-                        if($last_pipeline_created_at && $company['id'] != '154537' && $company['pipeline'] != 'Prospect' && $company['pipeline'] != 'Suspect' ){ ?>
+                        if($last_pipeline_created_at  && $company['pipeline'] != 'Prospect' && $company['pipeline'] != 'Suspect' ){ ?>
                     
                         <span class="last_pipeline_created_at">
                         <?php
  //echo $last_pipeline_created_at;
                             $your_date = date('Y-m-d' , strtotime($last_pipeline_created_at));
- 
-
                             $datetime1 = date_create(date('Y-m-d'));
                             $datetime2 = date_create($your_date);
                             $interval = date_diff($datetime1, $datetime2);
@@ -243,7 +241,7 @@ if ($your_date < $now){;
 		            <!--CLASS IF APPLICABLE-->
 		          
                   <?php if (isset($company['class']) && $company['class'] != 'Unknown' ): ?>
-					 <?php echo $companies_classes[$company['class']] ?> 	
+					 <?php echo  $company['class']; ?> 	
 					<?php else: 
                     
                     //echo '-';
