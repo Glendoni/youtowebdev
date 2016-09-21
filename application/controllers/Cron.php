@@ -53,6 +53,12 @@ function turnoverCompanies(){
     
     
      $this->Cron_model->turnoverCompanies();
+} 
+    
+function classUpdaterRun(){
+    
+    
+     $this->Cron_model->classUpdater();
 }  
     
     
