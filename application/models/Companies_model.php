@@ -402,47 +402,46 @@ and ACTIONS_SUB.company_id is null
 			   U.name, -- f6
 			   U.id , -- f7
 			   A.address, --f8
-			   C.contract, --f9
-			   C.perm, -- f10
-			   C.active, -- f11
-			   C.created_at, -- f12
-			   C.updated_at, -- f13
-			   C.created_by,-- f14
-			   C.updated_by,-- f15
-			   C.registration, -- f16
-		       TT1."turnover", -- f17
-			   TT1."turnover_method",  -- f18
-			   TT4.count,--f19
-			   U.image , -- f20
-			   C.class, -- f21
-			   A.lat, -- f22
-			   A.lng, -- f23
+			  
+			   C.active, -- f9
+			   C.created_at, -- f10
+			   C.updated_at, -- f11
+			   C.created_by,-- f12
+			   C.updated_by,-- f13
+			   C.registration, -- f14
+		       TT1."turnover", -- f15
+			   TT1."turnover_method",  -- f16
+			   TT4.count,--f17
+			   U.image , -- f18
+			   C.class, -- f19
+			   A.lat, -- f20
+			   A.lng, -- f21
 			   json_agg( 
 			   row_to_json ((
-			   TT2."sector_id", TT2."sector", TT2."target"))),-- f24
-			   C.phone, -- f25 
-			   C.pipeline, -- f26
-			   CONT.contacts_count, -- f27
-			   C.parent_registration, --f28
-			   C.zendesk_id, -- f29
-			   C.customer_from, -- f30
-			   C.sonovate_id, -- f31
-			   TT5.actioned_at, -- f32
-			   ACT1.name, -- f33
-			   AU1.name, -- f34
-			   TT6.planned_at, -- f35
-			   ACT2.name , -- f36
-			   AU2.name, -- f37
-			   C.trading_name, --f38
-			   C.lead_source_id, --f39
-			   C.source_date, --f40
-			   pr.name, --f41
-			   pr.id, --f42
-			   C.source_explanation, --f43
-			   UC.name, --f44
-			   UU.name, --f45
-               C.initial_rate, --f46
-                C.customer_to --f47
+			   TT2."sector_id", TT2."sector", TT2."target"))),-- f22
+			   C.phone, -- f23 
+			   C.pipeline, -- f24
+			   CONT.contacts_count, -- f25
+			   C.parent_registration, --f26
+			   C.zendesk_id, -- f27
+			   C.customer_from, -- f28
+			   C.sonovate_id, -- f29
+			   TT5.actioned_at, -- f30
+			   ACT1.name, -- f31
+			   AU1.name, -- f32
+			   TT6.planned_at, -- f33
+			   ACT2.name , -- f34
+			   AU2.name, -- f35
+			   C.trading_name, --f36
+			   C.lead_source_id, --f37
+			   C.source_date, --f38
+			   pr.name, --f39
+			   pr.id, --f40
+			   C.source_explanation, --f41
+			   UC.name, --f42
+			   UU.name, --f43
+               C.initial_rate, --f44
+                C.customer_to --f45
 			   )) "JSON output" 
 			   
 from (select * from COMPANIES where active = \'TRUE\' ' ;
@@ -600,8 +599,7 @@ from (select * from COMPANIES where active = \'TRUE\' ' ;
 		         C.url,
 			     C.eff_from,
 			     C.linkedin_id,
-			     C.contract,
-			     C.perm,
+			    
 			     C.active,
 			     C.created_at,
 			     C.updated_at,
@@ -802,8 +800,6 @@ from (select * from COMPANIES where active = \'TRUE\' ' ;
 				'phone' => !empty($post['phone'])?$post['phone']:NULL,
 				'linkedin_id' => (isset($post['linkedin_id']) and !empty($post['linkedin_id']))?$post['linkedin_id']:NULL,
 				'url' => !empty($post['url'])?str_replace('http://', '',$post['url']):NULL,
-				'contract'=>!empty($post['contract'])?$post['contract']:NULL,
-				'perm'=>!empty($post['perm'])?$post['perm']:NULL,
 				'class'=>!empty($post['company_class'])?$post['company_class']:NULL,
  
 //'pipeline'=>(!empty($post['company_pipeline'])?$post['company_pipeline']:NULL),
@@ -882,8 +878,6 @@ from (select * from COMPANIES where active = \'TRUE\' ' ;
 			'url' => !empty($post['url'])?str_replace('http://', '',$post['url']):NULL,
             'pipeline' => 'Suspect',
 'class' => 'FF',
-			'contract'=>!empty($post['contract'])?$post['contract']:NULL,
-			'perm'=>!empty($post['perm'])?$post['perm']:NULL,
 			'class'=>!empty($post['company_class'])?$post['company_class']:NULL,
 			'eff_from'=> !empty($post['eff_from'])?date("Y-m-d", strtotime($post['eff_from'])):date('Y-m-d H:i:s'),
 			'created_by'=>$post['user_id'],
@@ -1082,8 +1076,6 @@ $q = '
         
     $company = array(
         'name' => humanize($postName),
-        'contract' => null,
-        'perm' => null,
         'pipeline' => 'Suspect',
          'class' => 'FF',
         'created_by'=> $user_id,
@@ -1433,6 +1425,9 @@ $q = '
         
     $debenturemortgage  =      $post['debenturemortgage'] ? $post['debenturemortgage'] :NULL;
         
+        
+        
+     
        $data = array(
                       'updated_at' =>  date('Y-m-d H:i:s'),
                       'updated_by' => intval($userID),
@@ -1443,13 +1438,15 @@ $q = '
         $this->db->where('company_id', intval($post['companyid']));
         $this->db->where('id', intval($post['providerid']));
                     $this->db->update('mortgages', $data);
+        
+        
+          //$this->classUpdater(intval($post['companyid']));
+        
        
-        return $debenturemortgage ? true : false;
+       return $debenturemortgage ? true : false;
 
         
     }
-    
-    
      /*@@@
     
         Analyses only companies with pipeline of Qualified, Suspect, Prospect or is set to null

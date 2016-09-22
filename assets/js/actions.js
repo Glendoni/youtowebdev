@@ -377,14 +377,14 @@ comments_decoder()
             $('.textarea'+dat).attr('placeholder', 'Add outcome');
 
           if(!$(this).hasClass('appendCallbackContacts')){
-    $('.box'+dat+'  .action_type_planned option[value=]').prop('selected','selected');
-    $('.box'+dat+'  .actionContact option[value=]').prop('selected','selected');    
-    $('.box'+dat+' .actionContact ').prop('disabled', false);
-    $('.box'+dat+' .actionContact').attr("disabled", "disabled");
-    $('.box'+dat+' .actiondate').attr("disabled", "disabled");
-    $('.box'+dat+' .actiondate').val("");
-    $('.box'+dat+' .actionContact option[value=]').attr('selected','selected');
-    $('.box'+dat+' .formOutcome').show();
+                $('.box'+dat+'  .action_type_planned option[value=]').prop('selected','selected');
+                $('.box'+dat+'  .actionContact option[value=]').prop('selected','selected');    
+                $('.box'+dat+' .actionContact ').prop('disabled', false);
+                $('.box'+dat+' .actionContact').attr("disabled", "disabled");
+                $('.box'+dat+' .actiondate').attr("disabled", "disabled");
+                $('.box'+dat+' .actiondate').val("");
+                $('.box'+dat+' .actionContact option[value=]').attr('selected','selected');
+                $('.box'+dat+' .formOutcome').show();
             
 
 

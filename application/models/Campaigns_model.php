@@ -139,47 +139,45 @@ class Campaigns_model extends MY_Model {
 			   U.name, -- f6
 			   U.id , -- f7
 			   A.address, --f8
-			   C.contract, --f9
-			   C.perm, -- f10
-			   C.active, -- f11
-			   C.created_at, -- f12
-			   C.updated_at, -- f13
-			   C.created_by,-- f14
-			   C.updated_by,-- f15
-			   C.registration, -- f16
-		       TT1."turnover", -- f17
-			   TT1."turnover_method",  -- f18
-			   TT4.count,--f19
-			   U.image , -- f20
-			   C.class, -- f21
-			   A.lat, -- f22
-			   A.lng, -- f23
+			   C.active, -- f9
+			   C.created_at, -- f10
+			   C.updated_at, -- f11
+			   C.created_by,-- f12
+			   C.updated_by,-- f13
+			   C.registration, -- f14
+		       TT1."turnover", -- f15
+			   TT1."turnover_method",  -- f16
+			   TT4.count,--f17
+			   U.image , -- f18
+			   C.class, -- f19
+			   A.lat, -- f20
+			   A.lng, -- f21
 			   json_agg( 
 			   row_to_json ((
-			   TT2."sector_id", TT2."sector"))),-- f24
-			   C.phone, -- f25 
-			   C.pipeline, -- f26
-			   CONT.contacts_count, -- f27
-			   C.parent_registration, --f28
-			   C.zendesk_id, -- f29
-			   C.customer_from, -- f30
-			   C.sonovate_id, -- f31
-			   TT5.actioned_at, -- f32
-			   ACT1.name, -- f33
-			   AU1.name, -- f34
-			   TT6.planned_at, -- f35
-			   ACT2.name , -- f36
-			   AU2.name, -- f37
-			   C.trading_name, --f38
-			   C.lead_source_id, --f39
-			   C.source_date, --f40
-			   pr.name, --f41
-			   pr.id, --f42
-			   C.source_explanation, --f43
-			   UC.name, --f44
-			   UU.name, --f45
-                 C.initial_rate, --f46
-                C.customer_to --f47
+			   TT2."sector_id", TT2."sector"))),-- f22
+			   C.phone, -- f23 
+			   C.pipeline, -- f24
+			   CONT.contacts_count, -- f25
+			   C.parent_registration, --f26
+			   C.zendesk_id, -- f27
+			   C.customer_from, -- f28
+			   C.sonovate_id, -- f29
+			   TT5.actioned_at, -- f30
+			   ACT1.name, -- f31
+			   AU1.name, -- f32
+			   TT6.planned_at, -- f33
+			   ACT2.name , -- f34
+			   AU2.name, -- f35
+			   C.trading_name, --f36
+			   C.lead_source_id, --f37
+			   C.source_date, --f38
+			   pr.name, --f39
+			   pr.id, --f40
+			   C.source_explanation, --f41
+			   UC.name, --f42
+			   UU.name, --f43
+               C.initial_rate, --f44
+                C.customer_to --f45
 			   )) "JSON output" 
 			  
 
@@ -325,8 +323,7 @@ class Campaigns_model extends MY_Model {
 		         C.url,
 			     C.eff_from,
 			     C.linkedin_id,
-			     C.contract,
-			     C.perm,
+			    
 			     C.active,
 			     C.created_at,
 			     C.updated_at,

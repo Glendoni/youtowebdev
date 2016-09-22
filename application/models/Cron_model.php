@@ -1080,10 +1080,10 @@ and C.active = 't'
           $set_to_null =  "update companies set class = null";
             $this->db->query($set_to_null);
         
-         $update_UF =  "Update companies set class = 'Using Finance' where (id in (select company_id from mortgages where stage ilike 'Outstanding')) or (id in (select company_id from company_tags where tag_id in (select id  from tags where category_id = '13')))";
+         $update_UF =  "Update companies set class = 'Using Finance' where (id in (select company_id from mortgages where stage ilike 'Outstanding' AND inv_fin_related != 'N')) or (id in (select company_id from company_tags where tag_id in (select id  from tags where category_id = '13')))";
             $this->db->query($update_UF);
         
-         $update_FF =  "update companies set class = 'FF' where class is null";
+         $update_FF =  "update companies set class = 'FF' where (id not in (select company_id from mortgages where inv_fin_related = 'N')) AND class is null";
             $this->db->query($update_FF);
         
         

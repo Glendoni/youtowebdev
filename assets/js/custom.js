@@ -181,36 +181,54 @@ $(window).load(function(){
     }, 2000);
 });
 $('#action_type_completed').change(function(){
+  
+    $('#action-error .editBoxInstruction').text('Source');
 var source_check = $("input[name=source_check]").val();
+    var phone_check = $("#phone").val();
 var company_pipeline = $("input[name=company_pipeline]").val();
+    
+      var check = 'Phone Number';
 
-if ((this.value == '16' || this.value == '8' || this.value == '32') && (!source_check)) 
+if ((this.value == '16' || this.value == '8' || this.value == '32') && (!source_check || ( this.value == '16' && phone_check== false))) 
 {
  
  
    $('#add_action .disable_no_source').prop('disabled', 'true');
     $('.actionEvalPipeline').show()
     
-    if(this.value == '16' || this.value == '8'){ 
-        $('.completed-details').attr('required', 'required');
-        $('.actionEvalPipeline').show();
-         $('.addActionOutcome').show();
-        
-    }else{
-        $('.completed-details').prop('required', false);
-        $('.actionEvalPipeline').hide();
+            if(this.value == '16' || this.value == '8'){ 
+                $('.completed-details').attr('required', 'required');
+                $('.actionEvalPipeline').show();
+                 $('.addActionOutcome').show();
 
-        //$('.addActionOutcome').hide();
-      //if (this.value ==32){ 
-                        //  $('.addActionOutcome').hide();
-                      //}else{
-                           $('.addActionOutcome').show();
+            }else{
+                $('.completed-details').prop('required', false);
+                $('.actionEvalPipeline').hide();
 
-                      //}
-    }
+                //$('.addActionOutcome').hide();
+              //if (this.value ==32){ 
+                                //  $('.addActionOutcome').hide();
+                              //}else{
+                                   $('.addActionOutcome').show();
+
+                              //}
+            }
     
     $('.sourceRequiredDropDownItem').text($('#action_type_completed option:selected').text());
     $(".no-source").slideDown(600);
+    
+    if(this.value == '16' && (!source_check) && (!phone_check)){
+       
+       check = 'Source and Phone Number ';
+       
+       }
+    
+    if(this.value == '16' && phone_check== false){
+      
+         $('#action-error .editBoxInstruction').html(check );
+    }
+   /// console.log('the phone number  is '+$("#phone").val());
+    
     //$(".no-source").show();
     //$(".disable_no_source").attr('disabled', 'disabled');
     }
@@ -222,12 +240,12 @@ if ((this.value == '16' || this.value == '8' || this.value == '32') && (!source_
         $('#add_action .disable_no_source').prop('disabled', '') ;
 
 
-var actionArr = ['31','32','33','34'];
+        var actionArr = ['31','32','33','34'];
         
     if (actionArr.indexOf(this.value) >=0){ 
          $('.completed-details').prop('required', false);
          $('#add_action .disable_no_source').prop('disabled', false);
-        $('.actionEvalPipeline').hide();
+         $('.actionEvalPipeline').hide();
 
                       //if (this.value ==32){ 
                         //  $('.addActionOutcome').hide();
@@ -239,9 +257,9 @@ var actionArr = ['31','32','33','34'];
           
     }else{
         
-         $('.completed-details').attr('required', 'required');
-         $('.addActionOutcome').show();
-           $('.actionEvalPipeline').show()
+        $('.completed-details').attr('required', 'required');
+        $('.addActionOutcome').show();
+        $('.actionEvalPipeline').show()
     }
     //$(".no-source").hide();
     //$(".disable_no_source").removeAttr('disabled', 'disabled'); 
@@ -880,4 +898,9 @@ if($('.popUpAddress').val() && $('.mainAddrType').text() != 'Trading Address'){$
 $('#copymainaddr').click(function(){
 if($(this).prop("checked")){ $('.popUpAddress').val($('.mainAddress').text()) }else{ $('.popUpAddress').val('') }
 })
-
+function triggerOpenEditbox(){
+    
+    $('.comp_details_edit_btn').trigger('click');
+    
+    
+}

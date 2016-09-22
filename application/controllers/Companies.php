@@ -185,14 +185,14 @@ class Companies extends MY_Controller {
 
 			if($this->form_validation->run())
 			{
-                if($this->input->post('company_class')){   
-                }else{
-                     if(!$this->input->post('address')){ // 
+                //if($this->input->post('company_class')){   
+                //}else{
+                     //if(!$this->input->post('address')){ // 
                         
-                        $this->set_message_error('Error in the database while creating company');
-                        redirect('/companies/create_company','location');
-                    } 
-            }
+                        //$this->set_message_error('Error in the database while creating company');
+                      //  redirect('/companies/create_company','location');
+                    //} 
+            //}
 				$result = $this->Companies_model->create_company($this->input->post());
 				if($result == TRUE) {
 					$this->set_message_success('New company successfully created');
