@@ -804,7 +804,7 @@ from (select * from COMPANIES where active = \'TRUE\' ' ;
 				'url' => !empty($post['url'])?str_replace('http://', '',$post['url']):NULL,
 				'contract'=>!empty($post['contract'])?$post['contract']:NULL,
 				'perm'=>!empty($post['perm'])?$post['perm']:NULL,
-				'class'=>!empty($post['company_class'])?$post['company_class']:NULL,
+				//'class'=>!empty($post['company_class'])?$post['company_class']:NULL,
  
 //'pipeline'=>(!empty($post['company_pipeline'])?$post['company_pipeline']:NULL),
  
