@@ -73,14 +73,7 @@
                 </div>
             </div>
         
-          <div class="col-sm-6 col-md-2">
-                <div class=" form-group ">
-                    <?php
-                    echo form_label('Class', 'company_class');
-                    echo form_dropdown('company_class', $companies_classes, (isset($company['class'])?$company['class']:'') ,'class="form-control"');
-                    ?>
-                </div>
-         </div>
+       
         <div class="col-sm-6 col-md-4">
             <div class=" form-group ">
                 <?php
@@ -91,7 +84,7 @@
                 <input type="hidden" name="original_source_date" value="<?php echo $company['source_date'];?>" />
             </div>
         </div>
-        <div class="col-sm-6 col-md-2">
+        <div class="col-sm-6 col-md-4">
             <div class=" form-group ">
                 <label for="url" class="control-label">Website</label>                            
                 <input type="text" name="url" value="<?php echo isset($company['url'])?$company['url']:''; ?>" id="url" maxlength="100" class="form-control">
