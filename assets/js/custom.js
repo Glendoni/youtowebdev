@@ -11,8 +11,10 @@ function dateRequired()     {
 
   
 $( document ).ready(function() {
+      if((/contacts/.test(window.location.href))) {
+            $("[data=contacts]").trigger('click')
     
-    
+      }
     //INVOICE FINANCE
 $('.debmortgage').on('click', function(){
  
