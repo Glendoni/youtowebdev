@@ -800,7 +800,7 @@ from (select * from COMPANIES where active = \'TRUE\' ' ;
 				'phone' => !empty($post['phone'])?$post['phone']:NULL,
 				'linkedin_id' => (isset($post['linkedin_id']) and !empty($post['linkedin_id']))?$post['linkedin_id']:NULL,
 				'url' => !empty($post['url'])?str_replace('http://', '',$post['url']):NULL,
-				'class'=>!empty($post['company_class'])?$post['company_class']:NULL,
+				//'class'=>!empty($post['company_class'])?$post['company_class']:NULL,
  
 //'pipeline'=>(!empty($post['company_pipeline'])?$post['company_pipeline']:NULL),
  
