@@ -881,9 +881,9 @@ from (select * from COMPANIES where active = \'TRUE\' ' ;
 			'linkedin_id' => (!empty($post['linkedin_id']) and !empty($post['linkedin_id']))?$post['linkedin_id']:NULL,
 			'url' => !empty($post['url'])?str_replace('http://', '',$post['url']):NULL,
             'pipeline' => 'Suspect',
+            'class' => 'FF',
 			'contract'=>!empty($post['contract'])?$post['contract']:NULL,
 			'perm'=>!empty($post['perm'])?$post['perm']:NULL,
-			'class'=>!empty($post['company_class'])?$post['company_class']:NULL,
 			'eff_from'=> !empty($post['eff_from'])?date("Y-m-d", strtotime($post['eff_from'])):date('Y-m-d H:i:s'),
 			'created_by'=>$post['user_id'],
 

@@ -19,13 +19,7 @@ echo form_open('',$attributes,$hidden);
 	</div>
     
     
-    <div class="col-sm-6">
-        <label for="emp_count" class="control-label">Class</label>
-    <?php
-    echo form_dropdown('company_class', $companies_classes, (isset($_POST['company_class'])?$_POST['company_class']:'') ,'class="form-control company_class"');
-    ?>
-    </div>
-</div>
+ 
 <!--<div class="form-group">
 	<label class="control-label col-sm-2" for="linkedin_id">Linkedin ID:</label>
 	<div class="col-sm-10">
@@ -79,9 +73,9 @@ echo form_open('',$attributes,$hidden);
     </div>
 </div>-->
  
-<div class=" form-group ">
+ 
    
-    <div class="col-sm-12"> 
+    <div class="col-sm-6"> 
          <label for="address" class="control-label cr_address ">Address</label>
     	<input type="text" name="address"  value="<?php echo isset($_POST['address'])?$_POST['address']:''; ?>" id="address" maxlength="200" class="form-control cr_address">
     </div>
