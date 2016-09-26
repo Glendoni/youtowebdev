@@ -1077,8 +1077,8 @@ and C.active = 't'
     
     function classUpdater(){
         
-          $set_to_null =  "update companies set class = null";
-            $this->db->query($set_to_null);
+          //$set_to_null =  "update companies set class = null";
+            //$this->db->query($set_to_null);
         
          $update_UF =  "Update companies set class = 'Using Finance' where (id in (select company_id from mortgages where stage ilike 'Outstanding')) or (id in (select company_id from company_tags where tag_id in (select id  from tags where category_id = '13')))";
             $this->db->query($update_UF);
