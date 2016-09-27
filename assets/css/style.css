@@ -844,7 +844,7 @@ padding: 3px 5px;}
   	border: 1px #A5B0B1 solid;
   	border-top: none;
 	position: absolute;
-    width: 100%;
+    width: 107%;
     z-index: 9999;
 }
 ul.autocomplete-holder {

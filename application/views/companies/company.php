@@ -130,7 +130,7 @@
          <div class="col-md-12" >
                              
 
-            <span class="label  btn-warning comp_details_edit_btn" data-toggle="modal" id="editbtn<?php echo $company['id']; ?>" data-target="#editModal<?php echo $company['id']; ?>" style="
+            <span class="label  btn-warning comp_details_edit_btn mainedit" data-toggle="modal" id="editbtn<?php echo $company['id']; ?>" data-target="#editModal<?php echo $company['id']; ?>" style="
     font-size: 12px;     float: right;
 ">Edit</span>
          
@@ -736,7 +736,7 @@ endif;
 	      <tbody>
 <?php foreach ($contacts as $contact): ?>
 	      	<tr>
-				<td class="col-md-2">
+				<td class="col-md-2 companyDetailsContacts">
 				<?php echo ucfirst($contact->first_name).' '.ucfirst($contact->last_name); ?>
 				</td>
 				<td class="col-md-2"><?php echo ucfirst($contact->role); ?></td>
@@ -859,10 +859,11 @@ endif;
 			
 			<!--VALIDATION ERROR IF NO ACTION IS SELECTED
 <option value="16">Pipeline - Deal</option>
+<a href="javascript:;" onclick="return triggerOpenEditbox();"> <i class="fa fa-external-link"></i></a>
 -->
 
 			<div id="action-error" class="no-source alert alert-warning" role="alert" style="display:none">
-                <strong>Source Required.</strong><br> To add a <span class="sourceRequiredDropDownItem"></span>&#44; please add a <span class="editBoxInstruction">Source</span><a href="javascript:;" onclick="return triggerOpenEditbox();"> <i class="fa fa-external-link"></i></a> to this company.
+                <strong>Source Required.</strong><br> To add a <span class="sourceRequiredDropDownItem"></span>&#44; please add a <span class="editBoxInstruction">Source</span> to this company.
             </div>
             <div class="row">
                         <div class="col-sm-3 col-md-3">
