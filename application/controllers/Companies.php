@@ -1172,7 +1172,7 @@ order by customer_from desc') ;
                                 
                                 echo '<tr><td align="left" class="glen">'.$row->id.'</td><td align="left" class="glen">'.$row->class.'</td><td align="left" class="glen">'.$row->dog.'</td>';
                                 //if($row->id == 231806){  $this->cronpipelineUpdater($row->id,$row->pipeline_value);  } 
-                               $this->cronpipelineUpdater($row->id,$row->class);
+                               $this->cronpipelineUpdater($row->id,$row->dog);
                                 //if($row->id == 343853) echo 'Got ya';
                             }
                          
