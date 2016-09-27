@@ -1094,5 +1094,112 @@ ORDER BY v.created_at DESC");
     }
     
     
+    
+    function findTime(){
+        
+        
+        $query = $this->db->query("SELECT * FROM actions WHERE company_id=109673 AND action_type_id=32 order by updated_at DESC LIMIT 1");
+        $now = time(); // or your date as well
+        foreach ($query->result_array() as $row)
+        {
+             
+            
+           
+ //echo date( 'Y-m-d' , strtotime($row['created_at'])).'<br>';
+          
+$your_date =  strtotime($row['created_at']);
+        }
+
+        
+        
+      
+$datediff = $now - $your_date;
+
+echo floor($datediff / (60 * 60 * 24));
+        
+    }
+    
+    
+  function querychecker(){   
+    
+    $query = $this->db->query('select C.id,
+       C.name,
+	   C.customer_from,
+       CASE when T2.id is not null or T3.company_id is not null then \'Using Finance\' else \'FF\' END "class",
+	   class as dog
+
+from COMPANIES C
+
+LEFT JOIN 
+(
+select distinct C.id
+
+from COMPANIES C
+
+JOIN MORTGAGES M
+ON C.id = M.company_id
+AND C.customer_from between M.eff_from and (CASE when M.eff_to is not null then M.eff_to else \'2100-01-01\'::date END)
+
+where customer_from is not null
+and M.inv_fin_related <> \'N\'
+  ) T2
+ON C.id = T2.id
+
+LEFT JOIN
+(
+select distinct CT.company_id  
+  
+from COMPANY_TAGS CT
+  
+JOIN TAGS T
+ON CT.tag_id = T.id
+AND T.category_id = 13 
+) T3
+ON C.id = T3.company_id
+
+where C.customer_from is not null
+
+order by customer_from desc') ;     
+    
+    
+    
+     if ($query->num_rows() > 0)
+                        {
+                            echo '<table width="400">';
+                            foreach($query->result() as $row)
+                            {
+                                
+                                
+                                echo '<tr><td align="left" class="glen">'.$row->id.'</td><td align="left" class="glen">'.$row->class.'</td><td align="left" class="glen">'.$row->dog.'</td>';
+                                //if($row->id == 231806){  $this->cronpipelineUpdater($row->id,$row->pipeline_value);  } 
+                               $this->cronpipelineUpdater($row->id,$row->class);
+                                //if($row->id == 343853) echo 'Got ya';
+                            }
+                         
+                         echo '</table>';
+                     }
+    
+    
+}
+    
+    
+        private function cronpipelineUpdater($id,$pipeline){ 
+        
+        
+        echo '<td>'.$id.'</td>';
+        //Updates company table pipeline based on conditions in crontogo function 
+                 $data = array(
+                                'class' => $pipeline,
+                     'updated_at' => date("Y-m-d H:i:s")
+                                          
+                             );
+
+                 $this->db->where('id', $id);
+                 $this->db->update('companies', $data);
+
+        } 
+    
+    
+    
 }
  
