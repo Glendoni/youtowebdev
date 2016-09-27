@@ -863,7 +863,7 @@ endif;
 -->
 
 			<div id="action-error" class="no-source alert alert-warning" role="alert" style="display:none">
-                <strong>Source Required.</strong><br> To add a <span class="sourceRequiredDropDownItem"></span>&#44; please add a <span class="editBoxInstruction">Source</span> to this company.
+                <strong><span class="sourceRequiredTitle" >Source</span> Required.</strong><br> To add a <span class="sourceRequiredDropDownItem"></span>&#44; please add a <span class="editBoxInstruction">Source</span> to this company.
             </div>
             <div class="row">
                         <div class="col-sm-3 col-md-3">
