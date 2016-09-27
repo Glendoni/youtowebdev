@@ -187,11 +187,12 @@ $('#action_type_completed').change(function(){
     $('#action-error .editBoxInstruction').text('Source');
 var source_check = $("input[name=source_check]").val();
     var phone_check = $("#phone").val();
+    var contact_check = $(".companyDetailsContacts").length;
 var company_pipeline = $("input[name=company_pipeline]").val();
     
-      var check = 'Phone Number';
+      var check = 'Phone Numberss';
 
-if ((this.value == '16' || this.value == '8' || this.value == '32') && (!source_check || ( this.value == '16' && phone_check== false))) 
+if ((this.value == '16' || this.value == '8' || this.value == '32') && (!source_check || ( this.value == '16' && phone_check== false) || ( this.value == '16' && contact_check== false))) 
 {
  
  
@@ -219,16 +220,76 @@ if ((this.value == '16' || this.value == '8' || this.value == '32') && (!source_
     $('.sourceRequiredDropDownItem').text($('#action_type_completed option:selected').text());
     $(".no-source").slideDown(600);
     
+    
+   
+    
+    
+    
     if(this.value == '16' && (!source_check) && (!phone_check)){
        
-       check = 'Source and Phone Number ';
+       
        
        }
     
-    if(this.value == '16' && phone_check== false){
+     if(this.value == '16' && (!phone_check)){
       
-         $('#action-error .editBoxInstruction').html(check );
+         check = 'Phone Number';
     }
+    
+       if(this.value == '16' && (!source_check)){
+      
+       check =  'Source';
+    }
+    
+           if(this.value == '16' && (!contact_check)){
+      
+       check =  'Contact';
+    }
+    
+    
+    
+    
+      if(this.value == '16' && (!source_check) && (!phone_check) && (!contact_check)){
+       
+       check =  'Company Source, Phone Number and Contact Details';
+       }
+    
+   if(this.value == '16' && (source_check) && (!phone_check) && (!contact_check)){
+       
+        check =    'Company Phone Number and Contact Details';
+       
+    }
+    
+    if(this.value == '16' && (phone_check) && (!source_check) && (!contact_check)){
+       
+        check =   'Company Source and Contact Details';
+       
+    }
+    
+    
+    if(this.value == '16' && (contact_check) && (!source_check) && (!phone_check)){
+       
+        check =   'Source and Phone Number';
+       
+    }
+    
+    
+    
+    
+    
+   
+    
+   
+    
+  
+    
+  
+    
+    
+     $('#action-error .editBoxInstruction').html(check);
+    
+    
+    
    /// console.log('the phone number  is '+$("#phone").val());
     
     //$(".no-source").show();
@@ -902,7 +963,7 @@ if($(this).prop("checked")){ $('.popUpAddress').val($('.mainAddress').text()) }e
 })
 function triggerOpenEditbox(){
     
-    $('.comp_details_edit_btn').trigger('click');
+    $('.mainedit').trigger('click');
     
     
 }
