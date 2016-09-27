@@ -1089,4 +1089,24 @@ and C.active = 't'
         
     }
     
+    
+    function updateNotYetActive(){
+        
+        
+            $sql = "DELETE FROM company_tags WHERE tag_id=267;
+            INSERT INTO company_tags
+
+            (tag_id, company_id, eff_from, created_at, created_by, updated_at, updated_by)
+            SELECT  '267', id,now(),now(),'1',now(),'1' from companies
+            WHERE
+            id  in (
+            SELECT id FROM companies where id not in (SELECT  company_id FROM actions) 
+            )";
+
+        
+         $this->db->query($sql);
+        
+    }
+    
+    
 }

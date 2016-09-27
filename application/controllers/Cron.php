@@ -61,6 +61,11 @@ function classUpdaterRun(){
      $this->Cron_model->classUpdater();
 }  
     
+    function updateNotYetActive(){
+    
+     $this->Cron_model->updateNotYetActive();
+} 
+    
     
 
     //AUTOPILOT
