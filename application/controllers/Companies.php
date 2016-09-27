@@ -1170,9 +1170,9 @@ order by customer_from desc') ;
                             {
                                 
                                 
-                                echo '<tr><td align="left" class="glen">'.$row->id.'</td><td align="left" class="glen">'.$row->class.'</td><td align="left" class="glen">'.$row->dog.'</td>';
+echo '<tr><td align="left" class="glen">'.$row->id.'</td><td align="left" class="glen">'.$row->class.'</td><td align="left" class="glen">'.$row->dog.'</td>';
                                 //if($row->id == 231806){  $this->cronpipelineUpdater($row->id,$row->pipeline_value);  } 
-                               $this->cronpipelineUpdater($row->id,$row->dog);
+                               $this->Companies_model->cronpipelineUpdaternew($row->id,$row->class);
                                 //if($row->id == 343853) echo 'Got ya';
                             }
                          
@@ -1182,22 +1182,7 @@ order by customer_from desc') ;
     
 }
     
-    
-        private function cronpipelineUpdater($id,$pipeline){ 
-        
-        
-        echo '<td>'.$id.'</td>';
-        //Updates company table pipeline based on conditions in crontogo function 
-                 $data = array(
-                                'class' => $pipeline,
-                     'updated_at' => date("Y-m-d H:i:s")
-                                          
-                             );
-
-                 $this->db->where('id', $id);
-                 $this->db->update('companies', $data);
-
-        } 
+     
     
     
     
