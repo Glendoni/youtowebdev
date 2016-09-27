@@ -190,7 +190,7 @@ var source_check = $("input[name=source_check]").val();
     var contact_check = $(".companyDetailsContacts").length;
 var company_pipeline = $("input[name=company_pipeline]").val();
     
-      var check = 'Phone Numberss';
+      var check = 'Source';
 
 if ((this.value == '16' || this.value == '8' || this.value == '32') && (!source_check || ( this.value == '16' && phone_check== false) || ( this.value == '16' && contact_check== false))) 
 {
