@@ -189,7 +189,7 @@ var source_check = $("input[name=source_check]").val();
     var phone_check = $("#phone").val();
     var contact_check = $(".companyDetailsContacts").length;
 var company_pipeline = $("input[name=company_pipeline]").val();
-    
+    var sourceRequiredTitle = 'Source';
       var check = 'Source';
 
 if ((this.value == '16' || this.value == '8' || this.value == '32') && (!source_check || ( this.value == '16' && phone_check== false) || ( this.value == '16' && contact_check== false))) 
@@ -234,16 +234,20 @@ if ((this.value == '16' || this.value == '8' || this.value == '32') && (!source_
      if(this.value == '16' && (!phone_check)){
       
          check = 'Phone Number';
+         
+         sourceRequiredTitle = check ;
     }
     
        if(this.value == '16' && (!source_check)){
       
        check =  'Source';
+            sourceRequiredTitle = check ;
     }
     
            if(this.value == '16' && (!contact_check)){
       
        check =  'Contact';
+                sourceRequiredTitle = check+' Details' ;
     }
     
     
@@ -251,18 +255,26 @@ if ((this.value == '16' || this.value == '8' || this.value == '32') && (!source_
     
       if(this.value == '16' && (!source_check) && (!phone_check) && (!contact_check)){
        
-       check =  'Company Source, Phone Number and Contact Details';
+       check =  'Company Source Phone Number and Contact Details';
+          
+           sourceRequiredTitle = 'Source, Phone Number, Contact Details' ;
+          
        }
     
    if(this.value == '16' && (source_check) && (!phone_check) && (!contact_check)){
        
         check =    'Company Phone Number and Contact Details';
        
+       sourceRequiredTitle = 'Phone Number, Contact Details';
+       
     }
     
     if(this.value == '16' && (phone_check) && (!source_check) && (!contact_check)){
        
         check =   'Company Source and Contact Details';
+        
+         sourceRequiredTitle = 'Source, Contact Details';
+
        
     }
     
@@ -270,6 +282,8 @@ if ((this.value == '16' || this.value == '8' || this.value == '32') && (!source_
     if(this.value == '16' && (contact_check) && (!source_check) && (!phone_check)){
        
         check =   'Source and Phone Number';
+        
+         sourceRequiredTitle = 'Source, Phone Number';
        
     }
     
@@ -285,7 +299,7 @@ if ((this.value == '16' || this.value == '8' || this.value == '32') && (!source_
     
   
     
-    
+    $(".sourceRequiredTitle").html(sourceRequiredTitle);
      $('#action-error .editBoxInstruction').html(check);
     
     
