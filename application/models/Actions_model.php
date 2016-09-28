@@ -832,11 +832,48 @@ function create($post, $userid =false)
         $query = $this->db->insert('actions', $planneddata);
 
     }
+        
+    
+        $sqlCheckTags  = "SELECT tag_id FROM company_tags WHERE tag_id=267 AND company_id=".$post['company_id']." AND eff_to IS  NULL";
+        
+        
+         $query = $this->db->query($sqlCheckTags);
+        
+        if ($query->num_rows() > 0){
+        
+     $sql = "UPDATE company_tags SET eff_to=  (CURRENT_DATE - INTERVAL '1 day') WHERE tag_id  IN (SELECT tag_id FROM company_tags WHERE tag_id=267 AND company_id=".$post['company_id']." AND eff_to IS  NULL)";
+        
+        //echo $sql;
+        $query = $this->db->query($sql);
+        
+            
+        }
+        
+        
+        
+        
     return $this->db->insert_id();  
         
         
         }
 }
+    
+    
+    
+    function tagActionUpdater($comp_id){
+        
+              $data = array(
+            'eff_to' => date('Y-m-d', strtotime('-2 day', strtotime(date('Y-m-d')))),
+            'updated_by' =>1,
+            'updated_at' =>date('Y-m-d')
+            );
+
+$this->db->where('company_id', $comp_id);
+ $this->db->where('tag_id', 267);       
+$this->db->update('company_tags', $data); 
+        
+        
+    }
 
 function company_updated_to_customer($post){
  

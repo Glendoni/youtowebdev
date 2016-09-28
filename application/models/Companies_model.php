@@ -899,6 +899,16 @@ from (select * from COMPANIES where active = \'TRUE\' ' ;
 				);
 			$this->db->insert('addresses', $address);
 			$new_company_address_id = $this->db->insert_id(); 
+            
+            
+              $arrSql = array(
+                'tag_id' => 267,
+                 'eff_from' => date('Y-m-d'),
+                 'created_by' => 1,
+                    'company_id' => $new_company_id 
+            );
+            $this->db->insert('company_tags', $arrSql);
+            
 		}
         
         if(isset($post['tradingArr'])){
@@ -1094,6 +1104,14 @@ $q = '
 				);
 			$this->db->insert('addresses', $address);
 			$new_company_address_id = $this->db->insert_id();
+            
+                $arrSql = array(
+                'tag_id' => 267,
+                 'eff_from' => date('Y-m-d'),
+                 'created_by' => 1,
+                    'company_id' => $new_company_id 
+            );
+            $this->db->insert('company_tags', $arrSql);
 		}
     if($new_company_id and $new_company_address_id) return $new_company_id;
 		return FALSE;
@@ -1135,6 +1153,11 @@ $q = '
 
                     );
                 $this->db->insert('mortgages', $mortgages);
+            
+            
+            
+            
+          
         }        
              
     }  
