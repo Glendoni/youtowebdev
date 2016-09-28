@@ -1530,7 +1530,17 @@ LIMIT 1
         
 
         }   
-   
+    function cronpipelineUpdaternew($id,$pipeline){ 
+     
+         //Updates company table pipeline based on conditions in crontogo function 
+                  $data = array(
+                                'class' => $pipeline,
+                                'updated_at' => date("Y-m-d H:i:s")      
+                              );
+        
+                $this->db->where('id', $id);
+                $this->db->update('companies', $data);
+    }
     
     
     
