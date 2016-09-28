@@ -284,13 +284,7 @@ if ($your_date < $now){;
 				<div class="col-md-12">
 			<hr>
 		</div>
-		<div class="col-xs-6 col-md-3 " style="margin-top:10px;">
-			<label>Company Number</label><br>
-			<p class="registration_number">	
-			 <!--COMPANY NUMBER IF APPLICABLE-->
-			<?php echo isset($company['registration'])?$company['registration']:''; ?>
-         	</p>
-        	</div>
+		
 
         	<div class="col-xs-6 col-md-3 " style="margin-top:10px;">
         	<label>Founded</label><br>
@@ -298,6 +292,14 @@ if ($your_date < $now){;
 				<?php echo isset($company['eff_from'])?$company['eff_from']:''; ?>
 			</p>
 		</div>
+            
+            <div class="col-xs-6 col-md-3 " style="margin-top:10px;">
+			<label>Company Number</label><br>
+			<p class="registration_number">	
+			 <!--COMPANY NUMBER IF APPLICABLE-->
+			<?php echo isset($company['registration'])?$company['registration']:''; ?>
+         	</p>
+        	</div>
 
   	<!-- CONTACTS -->
 		<div class="col-xs-6 col-sm-3 " style="margin-top:10px;">
