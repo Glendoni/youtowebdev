@@ -361,7 +361,7 @@ $company = $this->process_search_result($raw_search_results);
 			// We need to clean the post and validate the post fields *pending*
 			$result = $this->Companies_model->update_details($this->input->post(),$this->data['current_user']['id']);
             
-              $this->Companies_model->cronPipeline(0,$post['company_id']);
+             $this->Companies_model->cronPipeline(0,$post['company_id']);
             
 			$this->refresh_search_results();
 			$this->set_message_success('Company Updated');

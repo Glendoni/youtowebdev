@@ -1513,13 +1513,13 @@ LIMIT 1
     
     
     
-     function cronpipelineUpdaternew($id,$pipeline){ 
+     function cronpipelineUpdater($id,$pipeline){ 
         
         
         
         //Updates company table pipeline based on conditions in crontogo function 
                  $data = array(
-                                'class' => $pipeline,
+                                'pipeline' => $pipeline,
                      'updated_at' => date("Y-m-d H:i:s")
                                           
                              );
