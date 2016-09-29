@@ -331,8 +331,8 @@ $search_default = $this->input->post('agency_name');
                                                 ?>         
                                          </div> 
                                     </div>
-                                    
-                                    <div class='form-row'>
+                                    <?php /* ?>
+                                    <div class='form-row hideme'>
                                         <div class="col-md-6 no-padding">
                                             <?php
                                             echo form_label('Contacted', 'contacted');
@@ -340,14 +340,16 @@ $search_default = $this->input->post('agency_name');
                                             ?>
                                          </div> 
 
-                                         <div class="col-md-6 no-padding"> 
+                                         <div class="col-md-6 no-padding hideme"> 
                                          <label>Last # days</label>
                                             <?php   
                                             echo form_input(array('name' => 'contacted_days', 'id' => 'contacted_days', 'maxlength' => '100','class'=>'form-control','placeholder'=>'','type'=>'number','min'=>'0'), set_value('contacted_days',$this->input->post('contacted_days')));?>
                                         
                                         </div>
+                                        
                                     </div><!--END FORM ROW-->
-                                    <div class="form-row" style="padding-top:50px;">
+                                    <?php */ ?>
+                                    <div class="form-row"  >
                                     <input type="submit" class="loading-btn btn btn-warning btn-block" value="Go" name="submit"  style="margin-top: 30px;">
 
 </div>
