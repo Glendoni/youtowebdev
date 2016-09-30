@@ -357,6 +357,15 @@ class Actions extends MY_Controller {
 
         echo json_encode($output);
     } 
+    
+    function changeActionDate(){
+        
+        $this->Actions_model->changeActionDate($this->input->post());
+        
+        echo  json_encode($this->input->post());
+        
+        
+    }
 
     
 }

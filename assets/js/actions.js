@@ -554,8 +554,8 @@ function bindAddCallBackToCompletedAction(){
                          }           
 
                             $('.outcomeMsg'+action['followup_action_id']).append('<div class="followcont">'+followup+ ' ' +followUpCompleteddate+cancellation+contactDetails+
-                                                                                ' <hr><span class="comments"><br><strong>Action: </strong></br><span class="commentFUA">'+action['comments']+'</span><br>'+actionOutcome+
-                                                                                '</span></div>'); 
+                        ' <hr><span class="comments"><br><strong>Action: </strong></br><span class="commentFUA">'+action['comments']+'</span><br>'+actionOutcome+
+                        '</span></div>'); 
                         }
                         followUpCompleteddate = '';
                         cancellation = '';
@@ -838,9 +838,123 @@ $('.box'+bun+'  .actionContact option[value=]').prop('selected','selected');
                             });
                           };
         
+updateDateTime();
+        
     } 
 
+function updateDateTime(){
+    
+       $('.datechanger').datetimepicker({  
+        dateFormat: 'YYYY/MM/DD H:m'        
+        // your options
+    })
+       
+           $('.datechanger').datepicker({  
+        dateFormat: 'YYYY/MM/DD H:m'        
+        // your options
+    })
+    
+    
+$('.datechanger').datepicker('option', { onClose: function() { 
+        $('#ui-datepicker-div').hide();
+         $('.bootstrap-datetimepicker-widget').hide(); // hide datepicker
+    
+    var datechangerData =  $(this).attr('data'); // data action id 9163
+    
+     var datehidden = $('.datechangerh'+datechangerData).val();
+    
+    
+    
+    console.log('datechangerData '+datechangerData);
+    var datechanger =  $(this).val(); // get main value
+    
+     console.log('datechanger '+datechanger);
+    // var id =  $(this).attr('data'); // 
+    
+    
+     $('.datechangerh'+datechangerData).val(datechanger);
+    
+    
+       
+    
+         console.log('datehidden '+datehidden);
+    
+    
+            //console.log('Before'+ $('#dateHidden').val());
+       
 
+         console.log('After'+ $('#dateHidden').val());
+        
+       if(datechanger  != datehidden) {
+        
+           console.log(datehidden)
+        
+                      var para = { "datechanger": datechanger  , "id": datechangerData };
+                      $.ajax({
+                        type: "POST",
+                          data: para,
+                            dataType: "json",
+                        url: "../actions/changeActionDate",
+                        success: function(data) {
+                             mainMenuQty();
+                            getActionData();
+                             $('.bootstrap-datetimepicker-widget').hide();
+                             mainMenuQty();
+                            updateDateTime();
+                         //console.log(data);
+                        }
+                        });
+       }
+        
+}});  
+    
+            $(".datechangerss").on("change paste keyup", function() {
+  
+
+
+                $('#ui-datepicker-div').hide();
+                console.log('I changed so I am going to send to server')
+                
+     
+               /*
+               
+               
+                                    
+            $('.datechanger').datepicker(); // Initialise
+  */ 
+
+               
+             
+ 
+               
+          
+              
+   
+        //JS JASON WITH POST PARAMETER
+                
+                /*
+         var para = { "datechanger": datechanger  , "id": id };
+          $.ajax({
+            type: "POST",
+              data: para,
+                dataType: "json",
+            url: "../actions/changeActionDate",
+            success: function(data) {
+                getActionData();
+                 $('.bootstrap-datetimepicker-widget').hide();
+             console.log(data);
+            }
+            });
+        */
+   
+              
+})
+     
+
+                
+       
+            
+}
 
 function intefaceVisibility(){
     
@@ -1115,6 +1229,7 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
          var showOutstandingForm = [];
          var getUrlIdParam = GetUrlParamID();
          var kps_cancelled;
+         var updatemeeting = [];
          
          if(typeof action['name'] !== 'undefined'  && action['name'] !== null &&  action['name'] !== 'null'   ){
             created_by = action['name'];
@@ -1194,11 +1309,19 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
         var calendarBtnDetail;
         var detail = 'Meeting+with+'+contact+'%0A'+email+'+%0D%0D'+pageAddress; 
 
+           // console.log('============'+parseInt(action['action_type_id'])+actionType);
+            
+            
+        console.log(actionType);
+            if(actionType =='Meeting' || actionType =='Demo Requested'){
+var updatemeeting   = '<input type="button"    class="form-control actiondate __web-inspector-hide-shortcut__ datechanger datechangerb'+actionId+' " data-date-format="YYYY/MM/DD H:m" name="planned_at" data="'+actionId+'"   value=""  ;"  ><input type="hidden" class" datechangerh'+actionId+' " name="datechanger" id="dateHidden" value=""><br> ';
+            }
+            
             
         calendarBtnDetail = '<a class="btn btn-xs btn-info" href="http://www.google.com/calendar/event?action=TEMPLATE&amp;text='+msg+'&amp;dates='+ planned_at +'/'+ planned_at +'Z&amp;details='+detail+'%0D%0DAny changes made to this event are not updated in Baselist. %0D%23baselist" target="_blank" rel="nofollow">Add to Calendar</a>';
 
 
-        calenderbtn = calendarBtnDetail +' <span class="btn btn-default btn-xs btn-primary callbackAction callbackActionOutcome hint--top-right"  data-hint="Add Action Outcome" data="'+action['action_id']+'">Add Outcome</span> <span class="btn btn-default btn-xs btn-danger callbackAction removeOutsandingAction hint--top-right"  data-hint="Cancel Callback Action" data="'+action['action_id']+'" >Remove</span>';
+        calenderbtn = calendarBtnDetail +'<span class="btn btn-default btn-xs btn-primary callbackAction callbackActionOutcome hint--top-right"  data-hint="Add Action Outcome" data="'+action['action_id']+'">Add Outcome</span> <span class="btn btn-default btn-xs btn-danger callbackAction removeOutsandingAction hint--top-right"  data-hint="Cancel Callback Action" data="'+action['action_id']+'" >Remove</span>';
 
          if(action['action_id'])                                                                                                                                          
             textbox= '<div class="form-group callbackActionTextBox  box'+action['action_id']+'" style="display:none">'+
@@ -1330,7 +1453,7 @@ if(tm > 1){ tm = tm + ' Days Overdue'; }else if(tm == 1){ tm  = tm + ' Day Overd
  
          
       if(actionTypeName != 'Pipeline Update')   
-            actions  = '<div class="timeline-entry actionId'+actionType+'  '+classCompleted+' pillid'+actionId+'" pillid='+actionId+'> <div class="timeline-stat"> '+icon+'</div><div class="timeline-label"> <div class="mar-no pad-btm"><h4 class="mar-no pad-btm">'+header+deal+'  </h4><div class="actions-info"><span class="label label-warning">'+planned_at+'</span>'+kpStr+overdueStatus+contactName+'<span class="classActions" style="float:right; margin-top:0; margin-left:3px;">'+calenderbtn+outcomeRemove+followupAlert+'</span></div></div><div class="mic-info"> '+status+': '+created_by+' - '+formattDate(createdAt, true)+'</div><div class="actionMsgText">'+tagline+'</div>'+textbox+ ' </div></div>';
+            actions  ='<div class="timeline-entry actionId'+actionType+'  '+classCompleted+' pillid'+actionId+'" pillid='+actionId+'> <div class="timeline-stat"> '+icon+'</div><div class="timeline-label"> <div class="mar-no pad-btm"><h4 class="mar-no pad-btm">'+header+deal+'  </h4><div class="actions-info" ><span class="label label-warning"  >'+planned_at+'</span>'+kpStr+ ' '+overdueStatus+ ' '+updatemeeting+contactName+' <span class="classActions" style="float:right; margin-top:0; margin-left:3px;">'+calenderbtn+outcomeRemove+followupAlert+'</span></div></div><div class="mic-info"> '+status+': '+created_by+' - '+formattDate(createdAt, true)+'</div><div class="actionMsgText">'+tagline+'</div>'+textbox+ ' </div></div>';
          
         if(actionTypeName == 'Pipeline Update' ){
               actions  = '<div class="timeline-entry actionId'+actionType+' '+classCompleted+'" > <div class="timeline-stat"> '+icon+'</div> <div class="timeline-label pipe"> <div class="mar-no pad-btm" ><h4 class="mar-no pad-btm">'+header+' <span class="classActions" style="margin-top:0; margin-left:3px; float:right;">'+calenderbtn+outcomeRemove+'</span></h4>' +kpStr+overdueStatus+'</div><div class="actionMsgText">'+action['comments']+'</div></div></div>';

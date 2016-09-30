@@ -3006,6 +3006,32 @@ border:none;
     
     display:none;
 }
+
+.datechanger{
+       padding: 0px;
+    width: 20px;
+    height: 17px;
+    text-align: center;
+    background: #f0ad4e;
+    color: #f0ad4e;
+    font-size: 10px;
+    margin-top: 3px;
+    margin-right: 4px;
+    float:left;
+}
+
+.love{
+    
+     padding: 0px;
+    width: 46px;
+    height: 19px;
+    text-align: center;
+    background: #f0ad4e;
+    color: #fefefe;
+    font-size: 10px
+    
+    
+}
 /*! Hint.css - v2.2.1 - 2016-03-26 //#2b4461
 * http://kushagragour.in/lab/hint/
 * Copyright (c) 2016 Kushagra Gour; Licensed  */

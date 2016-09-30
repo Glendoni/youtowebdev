@@ -1277,5 +1277,23 @@ public function getActionsProposals($userID = 0){
     }
     
         return false;
-    }    
+    }   
+    
+    
+    
+    function changeActionDate($post){
+        
+        $completeddata = array(
+          
+            'user_id'       => 1,
+            'planned_at'    => $post['datechanger'],
+    
+        );
+         $this->db->where('id', $post['id']);
+    $query = $this->db->update('actions', $completeddata);
+        
+        
+        
+        return 'glen';
+    }
 }
