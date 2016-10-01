@@ -1281,11 +1281,11 @@ public function getActionsProposals($userID = 0){
     
     
     
-    function changeActionDate($post){
+    function changeActionDate($post,$userID){
         
         $completeddata = array(
           
-            'user_id'       => 1,
+            'user_id'       => $userID,
             'planned_at'    => $post['datechanger'],
     
         );

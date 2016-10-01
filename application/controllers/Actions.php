@@ -360,7 +360,7 @@ class Actions extends MY_Controller {
     
     function changeActionDate(){
         
-        $this->Actions_model->changeActionDate($this->input->post());
+        $this->Actions_model->changeActionDate($this->input->post(),$this->data['current_user']['id']);
         
         echo  json_encode($this->input->post());
         
