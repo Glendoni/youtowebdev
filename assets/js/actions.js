@@ -1313,7 +1313,7 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
             
         //console.log(actionType);
             if(actionType =='Meeting' || actionType =='Demo Requested'){
-var updatemeeting   = '<input type="button"  data-date-format="YYYY/MM/DD HH:mm"  class="form-control datechanger datechangerb'+actionId+'"   name="planned_at" data="'+actionId+'"   value="" ><input type="hidden" class="datechangerh'+actionId+'" name="datechanger"  value=""><br> ';
+var updatemeeting   = '<span hint--top-right"  data-hint="Change date" class="datechangerTrigger"><input type="button"  data-date-format="YYYY/MM/DD HH:mm"  class="form-control datechanger datechangerb'+actionId+'"   name="planned_at" data="'+actionId+'"   value="" ><input type="hidden" class="datechangerh'+actionId+'" name="datechanger"  value=""></span><br> ';
             }
             
             

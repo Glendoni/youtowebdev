@@ -3016,10 +3016,13 @@ border:none;
     color: #f0ad4e;
     font-size: 10px;
     margin-top: 3px;
-    margin-right: 4px;
+    margin-right: 2px;
     float:left;
 }
-
+.datechangerTrigger{
+    
+    float: left;
+}
 .love{
     
      padding: 0px;
