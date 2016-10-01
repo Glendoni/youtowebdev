@@ -842,18 +842,72 @@ updateDateTime();
     } 
 
 function updateDateTime(){
-      // alert()
+      // alert()data-date-format="YYYY/MM/DD"
        $('.datechanger').datetimepicker({
-           useCurrent: false,
-           dateFormat: 'yyyy/mm/dd H:m '
+           dateFormat: 'YYYY/MM/DD hh:mm'
         // your options
     }) 
  
-
- 
+$('.datechanger').change(function(){
     
+    //alert($(this).val())
+    
+})
  
-    $('.datechanger').datepicker({
+    $('.datechanger').on("dp.change",function (e) {
+       // alert('helllo'+$(this).val())
+        console.log('I was added')
+        
+        var datechangerData =  $(this).attr('data'); // data action id 9163
+    
+     var datehidden = $('.datechangerh'+datechangerData).val($(this).val());
+        
+    } ); 
+    
+    
+    $('.datechanger').on("dp.show",function (e) {
+        //$(this).val('');
+        console.log('I was shown');
+        
+          var datechangerData =  $(this).attr('data'); // data action id 9163
+    
+     var datehidden = $('.datechangerh'+datechangerData).val('');
+        
+        
+    } );
+    
+    $('.datechanger').on("dp.hide",function (e) {
+        
+    
+    var datechangerData =  $(this).attr('data'); // data action id 9163
+    
+     var datehidden = $('.datechangerh'+datechangerData).val();
+    var datechanger =  $(this).val(); // get main value
+           
+        if(datehidden){
+                      var para = { "datechanger": datechanger  , "id": datechangerData };
+                      $.ajax({
+                        type: "POST",
+                          data: para,
+                            dataType: "json",
+                        url: "../actions/changeActionDate",
+                        success: function(data) {
+                              $('#ui-datepicker-div').hide();
+                             $('.bootstrap-datetimepicker-widget').hide();
+                            mainMenuQty();
+                            getActionData();
+                            
+                            // mainMenuQty();
+                          //  updateDateTime();
+                         //console.log(data);
+                        }
+                        });
+       }
+       
+        
+    } );
+ 
+    $('.datechangersss').datepicker({
         useCurrent: false,
     dateFormat: 'yyyy/mm/dd H:m', 
     onClose: function() { 
@@ -899,7 +953,6 @@ function updateDateTime(){
         
 }});  
      
-            
 }
 
 function intefaceVisibility(){
@@ -1260,7 +1313,7 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
             
         //console.log(actionType);
             if(actionType =='Meeting' || actionType =='Demo Requested'){
-var updatemeeting   = '<input type="button"    class="form-control    datechanger datechangerb'+actionId+' "   name="planned_at" data="'+actionId+'"   value="" ><input type="hidden" class"datechangerh'+actionId+' " name="datechanger" id="dateHidden'+actionId+'" value=""><br> ';
+var updatemeeting   = '<input type="button"  data-date-format="YYYY/MM/DD"  class="form-control datechanger datechangerb'+actionId+'"   name="planned_at" data="'+actionId+'"   value="" ><input type="hidden" class="datechangerh'+actionId+'" name="datechanger"  value=""><br> ';
             }
             
             
