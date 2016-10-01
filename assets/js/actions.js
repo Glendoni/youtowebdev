@@ -844,7 +844,7 @@ updateDateTime();
 function updateDateTime(){
       // alert()data-date-format="YYYY/MM/DD"
        $('.datechanger').datetimepicker({
-           dateFormat: 'YYYY/MM/DD hh:mm'
+         dateFormat: 'yyyy/mm/dd H:m',
         // your options
     }) 
  
@@ -866,8 +866,8 @@ $('.datechanger').change(function(){
     
     
     $('.datechanger').on("dp.show",function (e) {
-        //$(this).val('');
-        console.log('I was shown');
+        
+      
         
           var datechangerData =  $(this).attr('data'); // data action id 9163
     
@@ -1313,7 +1313,7 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
             
         //console.log(actionType);
             if(actionType =='Meeting' || actionType =='Demo Requested'){
-var updatemeeting   = '<input type="button"  data-date-format="YYYY/MM/DD"  class="form-control datechanger datechangerb'+actionId+'"   name="planned_at" data="'+actionId+'"   value="" ><input type="hidden" class="datechangerh'+actionId+'" name="datechanger"  value=""><br> ';
+var updatemeeting   = '<input type="button"  data-date-format="YYYY/MM/DD HH:mm"  class="form-control datechanger datechangerb'+actionId+'"   name="planned_at" data="'+actionId+'"   value="" ><input type="hidden" class="datechangerh'+actionId+'" name="datechanger"  value=""><br> ';
             }
             
             
