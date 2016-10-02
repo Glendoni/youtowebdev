@@ -849,31 +849,32 @@ function updateDateTime(){
     }) 
  
 $('.datechanger').change(function(){
-    
+      $('datechanger').css('color', '#f0ad4e');
     //alert($(this).val())
     
 })
  
     $('.datechanger').on("dp.change",function (e) {
        // alert('helllo'+$(this).val())
-        console.log('I was added')
+    
         
         var datechangerData =  $(this).attr('data'); // data action id 9163
     
+     
      var datehidden = $('.datechangerh'+datechangerData).val($(this).val());
-        
+          $('.datechanger').css('color', '#f0ad4e');
     } ); 
     
     
     $('.datechanger').on("dp.show",function (e) {
         
-      
+          $('.datechanger').css('color', '#f0ad4e');
         
           var datechangerData =  $(this).attr('data'); // data action id 9163
     
      var datehidden = $('.datechangerh'+datechangerData).val('');
         
-        
+          $('.datechanger').css('color', '#f0ad4e');
     } );
     
     $('.datechanger').on("dp.hide",function (e) {
@@ -902,6 +903,10 @@ $('.datechanger').change(function(){
                          //console.log(data);
                         }
                         });
+       }else{
+           
+           $('.datechangerb91661').val('');
+             $('datechanger').css('color', '#f0ad4e');
        }
        
         
@@ -1313,7 +1318,7 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
             
         //console.log(actionType);
             if(actionType =='Meeting' || actionType =='Demo Requested'){
-var updatemeeting   = '<span hint--top-right"  data-hint="Change date" class="datechangerTrigger"><input type="button"  data-date-format="YYYY/MM/DD HH:mm"  class="form-control datechanger datechangerb'+actionId+'"   name="planned_at" data="'+actionId+'"   value="" ><input type="hidden" class="datechangerh'+actionId+'" name="datechanger"  value=""></span><br> ';
+var updatemeeting   = '<span  class="datechangerTrigger"><input type="text"  data-date-format="YYYY/MM/DD HH:mm"  class="form-control datechanger datechangerb'+actionId+'"  placeholder="Change Date" name="planned_at" data="'+actionId+'"   value="" ><input type="hidden" class="datechangerh'+actionId+'" name="datechanger"  value=""></span><br> ';
             }
             
             
