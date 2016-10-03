@@ -1296,8 +1296,8 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
         header = '<a href="javascript:;" class="text-danger '+showOutstandingForm+' pillerTitle" data-name="'+actionType+'" data="'+actionId+'">'+(actionTypeOverwrite ? actionTypeOverwrite : actionType)+ '</a> ';
          
         if( actions_cancelled == '' && typeof action['action_id'] != 'undefined' || actions_outstanding == true &&  actions_cancelled == '' && typeof action['action_id'] != 'undefined' ){ 
-
-        var planned_at = '2016-05-20 15:46:00';
+console.log(action['planned_at']);
+        var planned_at = action['planned_at'];
         planned_at = planned_at.replace(/-/g, "");
         planned_at = planned_at.replace(/ /g, "T");
         planned_at = planned_at.replace(/:/g, ""); 

@@ -2287,6 +2287,7 @@ body {
       padding: 20px;
     background-color: #fff;
     border-radius: 5px;
+    box-shadow: 1px 1px 1px #d1d1d1;
 }
 .actions-info {
 	margin: 5px 0;
