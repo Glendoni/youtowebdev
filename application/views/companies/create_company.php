@@ -19,6 +19,7 @@ echo form_open('',$attributes,$hidden);
 	</div>
     
     
+  
  
 <!--<div class="form-group">
 	<label class="control-label col-sm-2" for="linkedin_id">Linkedin ID:</label>

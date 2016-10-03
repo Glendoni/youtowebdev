@@ -155,66 +155,67 @@
         
         
 		<div class="col-sm-9">
-		<div class="row padding-bottom">
-<div class="col-sm-12 action-details">
-<div class="row padding-bottom"> 
-<div class="col-md-4 col-lg-4 col-sm-4">
-<div><strong>Last Contact</strong></div>
-<div>
-<?php if (empty($company['actioned_at1'])): ?>
-Never
-<?php else: ?>
-<div class="action_type"><?php echo $company['action_name1']." by ".$company['action_user1']; ?></div>
-<div class="action_date_list">
-<?php echo date("l jS F Y",strtotime($company['actioned_at1']));?>
-<?php
-$now = time (); // or your date as well
-$your_date = strtotime($company['actioned_at1']);
-$datediff = abs($now - $your_date);
-$days_since = floor($datediff/(60*60*24));
-if ($company['actioned_at1'] > 0){
-	echo  " <br>".$days_since." days ago";
-	} else {
-	echo " <br>".$days_since." day ago";
-	}
-?></div>
+                    <div class="row padding-bottom">
+                    <div class="col-sm-12 action-details">
+                    <div class="row padding-bottom"> 
+                    <div class="col-md-4 col-lg-4 col-sm-4">
+                    <div><strong>Last Contact</strong></div>
+                    <div>
+                    <?php if (empty($company['actioned_at1'])): ?>
+                    Never
+                    <?php else: ?>
+                    <div class="action_type"><?php echo $company['action_name1']." by ".$company['action_user1']; ?></div>
+                    <div class="action_date_list">
+                    <?php echo date("l jS F Y",strtotime($company['actioned_at1']));?>
+                    <?php
+                    $now = time (); // or your date as well
+                    $your_date = strtotime($company['actioned_at1']);
+                    $datediff = abs($now - $your_date);
+                    $days_since = floor($datediff/(60*60*24));
+                    if ($company['actioned_at1'] > 0){
+                    echo  " <br>".$days_since." days ago";
+                    } else {
+                    echo " <br>".$days_since." day ago";
+                    }
+                    ?></div>
 
-<?php endif; ?>
+                    <?php endif; ?>
 
-</div>
-</div>
-<div class="col-md-4 col-lg-4 col-sm-4">
-<div><strong> Scheduled</strong></div>
-<?php if (empty($company['planned_at2'])): ?>
-	None
-<?php else: ?>
-	<div class="action_type"><?php echo $company['action_name2']." by ".$company['action_user2']; ?></div>
+                    </div>
+                    </div>
+                    <div class="col-md-4 col-lg-4 col-sm-4">
+                    <div><strong> Scheduled</strong></div>
+                    <?php if (empty($company['planned_at2'])): ?>
+                    None
+                    <?php else: ?>
+                    <div class="action_type"><?php echo $company['action_name2']." by ".$company['action_user2']; ?></div>
 
-	<div class="action_date_list">
-<?php echo date("l jS F Y",strtotime($company['planned_at2']));?>
-</div>
-<?php
-$now = time ();
-    $compdate = explode('T',$company['planned_at2']);
-$your_date = strtotime($compdate[0]);
-if ($your_date < $now){; 
-     $datediff = $now - $your_date;
-     $daysoverdue = floor($datediff/(60*60*24));?>
-<div><span class="label label-danger" style="font-size:10px;">
-<?php   
-                    
-                       if ($daysoverdue > 1) {echo "Overdue";};?>   </span></div>
+                    <div class="action_date_list">
+                    <?php echo date("l jS F Y",strtotime($company['planned_at2']));?>
+                    </div>
+                    <?php
+                    $now = time ();
+                    $compdate = explode('T',$company['planned_at2']);
+                    $your_date = strtotime($compdate[0]);
+                    if ($your_date < $now){; 
+                    $datediff = $now - $your_date;
+                    $daysoverdue = floor($datediff/(60*60*24));?>
+                    <div><span class="label label-danger" style="font-size:10px;">
+                    <?php   
 
-<?php } else {}?> 
- 
+                                   if ($daysoverdue > 1) {echo "Overdue";};?>  
+                        </span></div>
 
- 
-<?php endif; ?>
+                    <?php } else {}?> 
+
+
+
+                    <?php endif; ?>
 
 </div>
 </div><!--END ROW-->
 <hr>
-</div>
+ 
 
 	<?php if (isset($company['trading_name'])): ?>
 		<div class="col-md-4">
@@ -282,22 +283,24 @@ if ($your_date < $now){;
 
 		<div class="row details pad-bottom">
 				<div class="col-md-12">
-			<hr>
+			<hr />
 		</div>
-		<div class="col-xs-6 col-md-3 " style="margin-top:10px;">
+		
+
+        <div class="col-xs-6 col-md-3 " style="margin-top:10px;">
+        	<label>Founded</label><br>
+			<p>	
+				<?php echo isset($company['eff_from'])?$company['eff_from']:''; ?>
+			</p>
+		</div>
+            
+            <div class="col-xs-6 col-md-3 " style="margin-top:10px;">
 			<label>Company Number</label><br>
 			<p class="registration_number">	
 			 <!--COMPANY NUMBER IF APPLICABLE-->
 			<?php echo isset($company['registration'])?$company['registration']:''; ?>
          	</p>
         	</div>
-
-        	<div class="col-xs-6 col-md-3 " style="margin-top:10px;">
-        	<label>Founded</label><br>
-			<p>	
-				<?php echo isset($company['eff_from'])?$company['eff_from']:''; ?>
-			</p>
-		</div>
 
   	<!-- CONTACTS -->
 		<div class="col-xs-6 col-sm-3 " style="margin-top:10px;">

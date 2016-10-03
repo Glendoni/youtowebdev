@@ -72,7 +72,8 @@
                     ?>
                 </div>
             </div>
-      
+        
+       
         <div class="col-sm-6 col-md-4">
             <div class=" form-group ">
                 <?php
@@ -102,9 +103,9 @@
     <div class="row">
             
                   
-                   
+                   <?php /* ?>
                        <!-- Recruitment Type -->
-            
+            <!--
                                 <div class="col-sm-6 col-md-4" style="display:none">
                                     <div class=" form-group ">
                                         <label for="url" class="control-label">Recruitment Type</label>
@@ -121,9 +122,12 @@
                                     </div>
                                 </div>
 
+
+-->
+
               <!-- EFFECTIVE FROM -->
             
-            <?php /* ?>
+            
                                 <?php if($deals_pipline->eff_from){ ?>
 
                                         <div class="col-sm-6 col-md-3 pipeline_text"  > 
@@ -182,6 +186,7 @@
                         <div class=" form-group ">
                             <label for="phone" class="control-label">Phone</label>                            
                             <input type="text" name="phone" value="<?php echo isset($company['phone'])?$company['phone']:''; ?>" id="phone" maxlength="50" class="form-control">
+                            
                         </div>
                     </div>
           <!--HIDDEN UNLESS SPECIAL INSIGHT-->

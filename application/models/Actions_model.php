@@ -233,7 +233,7 @@ AND a.company_id='$company_id'";
     
 function get_pending_actions($user_id)
 {       
-    $this->db->select("actions.company_id, actions.id as action_id,comments,planned_at,action_type_id,name as company_name,initial_rate, contacts.first_name,contacts.last_name,contacts.phone,contacts.email, to_char(planned_at, 'HH24:MI DD/MM/YY') as duedate ");
+    $this->db->select("actions.company_id, actions.id as action_id,comments,planned_at,action_type_id,name as company_name,contacts.first_name,contacts.last_name,contacts.phone as contact_phone,contacts.email, to_char(planned_at, 'HH24:MI DD/MM/YY') as duedate, companies.phone as company_phone ");
     $this->db->where('actions.user_id',$user_id);
     $this->db->where('actioned_at',NULL);
     $this->db->where('cancelled_at',NULL);
@@ -287,7 +287,7 @@ function get_recent_stats($period, $team_type)
     $start_date = $dates['start_date'];
     $end_date = $dates['end_date'];
 
-   $sql[] = "select U.name, 
+$sql[] = "select U.name, 
        U.id as user, 
        U.image, 
        U.active as active, 
@@ -832,11 +832,48 @@ function create($post, $userid =false)
         $query = $this->db->insert('actions', $planneddata);
 
     }
+        
+    
+        $sqlCheckTags  = "SELECT tag_id FROM company_tags WHERE tag_id=267 AND company_id=".$post['company_id']." AND eff_to IS  NULL";
+        
+        
+         $query = $this->db->query($sqlCheckTags);
+        
+        if ($query->num_rows() > 0){
+        
+     $sql = "UPDATE company_tags SET eff_to=  (CURRENT_DATE - INTERVAL '1 day') WHERE tag_id  IN (SELECT tag_id FROM company_tags WHERE tag_id=267 AND company_id=".$post['company_id']." AND eff_to IS  NULL)";
+        
+        //echo $sql;
+        $query = $this->db->query($sql);
+        
+            
+        }
+        
+        
+        
+        
     return $this->db->insert_id();  
         
         
         }
 }
+    
+    
+    
+    function tagActionUpdater($comp_id){
+        
+              $data = array(
+            'eff_to' => date('Y-m-d', strtotime('-2 day', strtotime(date('Y-m-d')))),
+            'updated_by' =>1,
+            'updated_at' =>date('Y-m-d')
+            );
+
+$this->db->where('company_id', $comp_id);
+ $this->db->where('tag_id', 267);       
+$this->db->update('company_tags', $data); 
+        
+        
+    }
 
 function company_updated_to_customer($post){
  
@@ -1240,5 +1277,23 @@ public function getActionsProposals($userID = 0){
     }
     
         return false;
-    }    
+    }   
+    
+    
+    
+    function changeActionDate($post,$userID){
+        
+        $completeddata = array(
+          
+            'user_id'       => $userID,
+            'planned_at'    => $post['datechanger'],
+    
+        );
+         $this->db->where('id', $post['id']);
+    $query = $this->db->update('actions', $completeddata);
+        
+        
+        
+        return 'glen';
+    }
 }

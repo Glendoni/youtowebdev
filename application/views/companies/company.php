@@ -50,14 +50,12 @@
                          <?php 
 
                                                           
-                        if($last_pipeline_created_at && $company['id'] != '154537' && $company['pipeline'] != 'Prospect' && $company['pipeline'] != 'Suspect' ){ ?>
+                        if($last_pipeline_created_at  && $company['pipeline'] != 'Prospect' && $company['pipeline'] != 'Suspect' ){ ?>
                     
                         <span class="last_pipeline_created_at">
                         <?php
  //echo $last_pipeline_created_at;
                             $your_date = date('Y-m-d' , strtotime($last_pipeline_created_at));
- 
-
                             $datetime1 = date_create(date('Y-m-d'));
                             $datetime2 = date_create($your_date);
                             $interval = date_diff($datetime1, $datetime2);
@@ -132,7 +130,7 @@
          <div class="col-md-12" >
                              
 
-            <span class="label  btn-warning comp_details_edit_btn" data-toggle="modal" id="editbtn<?php echo $company['id']; ?>" data-target="#editModal<?php echo $company['id']; ?>" style="
+            <span class="label  btn-warning comp_details_edit_btn mainedit" data-toggle="modal" id="editbtn<?php echo $company['id']; ?>" data-target="#editModal<?php echo $company['id']; ?>" style="
     font-size: 12px;     float: right;
 ">Edit</span>
          
@@ -243,7 +241,7 @@ if ($your_date < $now){;
 		            <!--CLASS IF APPLICABLE-->
 		          
                   <?php if (isset($company['class']) && $company['class'] != 'Unknown' ): ?>
-					 <?php echo $companies_classes[$company['class']] ?> 	
+					 <?php echo  $company['class']; ?> 	
 					<?php else: 
                     
                     //echo '-';
@@ -258,13 +256,7 @@ if ($your_date < $now){;
 <hr>
     
 </div>
-	<div class="col-xs-6 col-md-4 details" style="margin-top:10px; ">
-			<label>Company Number</label><br>
-			<p>	
-			 <!--COMPANY NUMBER IF APPLICABLE-->
-			<?php echo isset($company['registration'])?$company['registration']:''; ?>
-         	</p>
-        	</div>
+	
 
         	<div class="col-xs-6 col-md-4" style="margin-top:10px;">
         	<label>Founded</label><br>
@@ -272,6 +264,13 @@ if ($your_date < $now){;
 				<?php echo isset($company['eff_from'])?$company['eff_from']:''; ?>
 			</p>
 		</div>
+            <div class="col-xs-6 col-md-4 details" style="margin-top:10px; ">
+			<label>Company Number</label><br>
+			<p>	
+			 <!--COMPANY NUMBER IF APPLICABLE-->
+			<?php echo isset($company['registration'])?$company['registration']:''; ?>
+         	</p>
+        	</div>
 
         <div class="col-xs-6 col-md-3" style="margin-top:10px;">
         		<label>Phone</label><br>
@@ -738,7 +737,7 @@ endif;
 	      <tbody>
 <?php foreach ($contacts as $contact): ?>
 	      	<tr>
-				<td class="col-md-2">
+				<td class="col-md-2 companyDetailsContacts">
 				<?php echo ucfirst($contact->first_name).' '.ucfirst($contact->last_name); ?>
 				</td>
 				<td class="col-md-2"><?php echo ucfirst($contact->role); ?></td>
@@ -861,10 +860,11 @@ endif;
 			
 			<!--VALIDATION ERROR IF NO ACTION IS SELECTED
 <option value="16">Pipeline - Deal</option>
+<a href="javascript:;" onclick="return triggerOpenEditbox();"> <i class="fa fa-external-link"></i></a>
 -->
 
 			<div id="action-error" class="no-source alert alert-warning" role="alert" style="display:none">
-                <strong>Source Required.</strong><br> To add a <span class="sourceRequiredDropDownItem"></span>&#44; please add a Source to this company.
+                <strong><span class="sourceRequiredTitle" >Source</span> Required.</strong><br> To add a <span class="sourceRequiredDropDownItem"></span>&#44; please add a <span class="editBoxInstruction">Source</span> to this company.
             </div>
             <div class="row">
                         <div class="col-sm-3 col-md-3">
@@ -1197,7 +1197,10 @@ endif;
   </div>
 </div>  
  </div>
-   
+ 
+ 
+ 
+
 <script>
  
     

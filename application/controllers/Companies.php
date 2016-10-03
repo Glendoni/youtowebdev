@@ -185,14 +185,14 @@ class Companies extends MY_Controller {
 
 			if($this->form_validation->run())
 			{
-                if($this->input->post('company_class')){   
-                }else{
-                     if(!$this->input->post('address')){ // 
+                //if($this->input->post('company_class')){   
+                //}else{
+                     //if(!$this->input->post('address')){ // 
                         
-                        $this->set_message_error('Error in the database while creating company');
-                        redirect('/companies/create_company','location');
-                    } 
-            }
+                        //$this->set_message_error('Error in the database while creating company');
+                      //  redirect('/companies/create_company','location');
+                    //} 
+            //}
 				$result = $this->Companies_model->create_company($this->input->post());
 				if($result == TRUE) {
 					$this->set_message_success('New company successfully created');
@@ -361,7 +361,7 @@ $company = $this->process_search_result($raw_search_results);
 			// We need to clean the post and validate the post fields *pending*
 			$result = $this->Companies_model->update_details($this->input->post(),$this->data['current_user']['id']);
             
-              $this->Companies_model->cronPipeline(0,$post['company_id']);
+             $this->Companies_model->cronPipeline(0,$post['company_id']);
             
 			$this->refresh_search_results();
 			$this->set_message_success('Company Updated');
@@ -1094,7 +1094,33 @@ ORDER BY v.created_at DESC");
     }
     
     
-    function querychecker(){   
+    
+    function findTime(){
+        
+        
+        $query = $this->db->query("SELECT * FROM actions WHERE company_id=109673 AND action_type_id=32 order by updated_at DESC LIMIT 1");
+        $now = time(); // or your date as well
+        foreach ($query->result_array() as $row)
+        {
+             
+            
+           
+ //echo date( 'Y-m-d' , strtotime($row['created_at'])).'<br>';
+          
+$your_date =  strtotime($row['created_at']);
+        }
+
+        
+        
+      
+$datediff = $now - $your_date;
+
+echo floor($datediff / (60 * 60 * 24));
+        
+    }
+    
+    
+  function querychecker(){   
     
     $query = $this->db->query('select C.id,
        C.name,
@@ -1116,6 +1142,7 @@ AND C.customer_from between M.eff_from and (CASE when M.eff_to is not null then 
 
 where customer_from is not null
 and M.inv_fin_related <> \'N\'
+ and  M.inv_fin_related in (\'Y\',\'P\')
   ) T2
 ON C.id = T2.id
 
@@ -1145,7 +1172,14 @@ order by customer_from desc') ;
                                 
                                 
 echo '<tr><td align="left" class="glen">'.$row->id.'</td><td align="left" class="glen">'.$row->class.'</td><td align="left" class="glen">'.$row->dog.'</td>';
-                                //if($row->id == 231806){  $this->cronpipelineUpdater($row->id,$row->pipeline_value);  } 
+                           
+
+    if($row->id == 346747){  
+                                echo '<h1>gotya! ==='.$row->class.'</h1>';
+                            }
+
+
+                                //$this->cronpipelineUpdater($row->id,$row->pipeline_value);  } 
                                $this->Companies_model->cronpipelineUpdaternew($row->id,$row->class);
                                 //if($row->id == 343853) echo 'Got ya';
                             }
@@ -1155,6 +1189,9 @@ echo '<tr><td align="left" class="glen">'.$row->id.'</td><td align="left" class=
     
     
 }
+    
+     
+    
     
     
 }

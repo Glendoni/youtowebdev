@@ -402,47 +402,46 @@ and ACTIONS_SUB.company_id is null
 			   U.name, -- f6
 			   U.id , -- f7
 			   A.address, --f8
-			   C.contract, --f9
-			   C.perm, -- f10
-			   C.active, -- f11
-			   C.created_at, -- f12
-			   C.updated_at, -- f13
-			   C.created_by,-- f14
-			   C.updated_by,-- f15
-			   C.registration, -- f16
-		       TT1."turnover", -- f17
-			   TT1."turnover_method",  -- f18
-			   TT4.count,--f19
-			   U.image , -- f20
-			   C.class, -- f21
-			   A.lat, -- f22
-			   A.lng, -- f23
+			  
+			   C.active, -- f9
+			   C.created_at, -- f10
+			   C.updated_at, -- f11
+			   C.created_by,-- f12
+			   C.updated_by,-- f13
+			   C.registration, -- f14
+		       TT1."turnover", -- f15
+			   TT1."turnover_method",  -- f16
+			   TT4.count,--f17
+			   U.image , -- f18
+			   C.class, -- f19
+			   A.lat, -- f20
+			   A.lng, -- f21
 			   json_agg( 
 			   row_to_json ((
-			   TT2."sector_id", TT2."sector", TT2."target"))),-- f24
-			   C.phone, -- f25 
-			   C.pipeline, -- f26
-			   CONT.contacts_count, -- f27
-			   C.parent_registration, --f28
-			   C.zendesk_id, -- f29
-			   C.customer_from, -- f30
-			   C.sonovate_id, -- f31
-			   TT5.actioned_at, -- f32
-			   ACT1.name, -- f33
-			   AU1.name, -- f34
-			   TT6.planned_at, -- f35
-			   ACT2.name , -- f36
-			   AU2.name, -- f37
-			   C.trading_name, --f38
-			   C.lead_source_id, --f39
-			   C.source_date, --f40
-			   pr.name, --f41
-			   pr.id, --f42
-			   C.source_explanation, --f43
-			   UC.name, --f44
-			   UU.name, --f45
-               C.initial_rate, --f46
-                C.customer_to --f47
+			   TT2."sector_id", TT2."sector", TT2."target"))),-- f22
+			   C.phone, -- f23 
+			   C.pipeline, -- f24
+			   CONT.contacts_count, -- f25
+			   C.parent_registration, --f26
+			   C.zendesk_id, -- f27
+			   C.customer_from, -- f28
+			   C.sonovate_id, -- f29
+			   TT5.actioned_at, -- f30
+			   ACT1.name, -- f31
+			   AU1.name, -- f32
+			   TT6.planned_at, -- f33
+			   ACT2.name , -- f34
+			   AU2.name, -- f35
+			   C.trading_name, --f36
+			   C.lead_source_id, --f37
+			   C.source_date, --f38
+			   pr.name, --f39
+			   pr.id, --f40
+			   C.source_explanation, --f41
+			   UC.name, --f42
+			   UU.name, --f43
+               C.initial_rate, --f44
+                C.customer_to --f45
 			   )) "JSON output" 
 			   
 from (select * from COMPANIES where active = \'TRUE\' ' ;
@@ -600,8 +599,7 @@ from (select * from COMPANIES where active = \'TRUE\' ' ;
 		         C.url,
 			     C.eff_from,
 			     C.linkedin_id,
-			     C.contract,
-			     C.perm,
+			    
 			     C.active,
 			     C.created_at,
 			     C.updated_at,
@@ -802,8 +800,6 @@ from (select * from COMPANIES where active = \'TRUE\' ' ;
 				'phone' => !empty($post['phone'])?$post['phone']:NULL,
 				'linkedin_id' => (isset($post['linkedin_id']) and !empty($post['linkedin_id']))?$post['linkedin_id']:NULL,
 				'url' => !empty($post['url'])?str_replace('http://', '',$post['url']):NULL,
-				'contract'=>!empty($post['contract'])?$post['contract']:NULL,
-				'perm'=>!empty($post['perm'])?$post['perm']:NULL,
 				//'class'=>!empty($post['company_class'])?$post['company_class']:NULL,
  
 //'pipeline'=>(!empty($post['company_pipeline'])?$post['company_pipeline']:NULL),
@@ -881,9 +877,7 @@ from (select * from COMPANIES where active = \'TRUE\' ' ;
 			'linkedin_id' => (!empty($post['linkedin_id']) and !empty($post['linkedin_id']))?$post['linkedin_id']:NULL,
 			'url' => !empty($post['url'])?str_replace('http://', '',$post['url']):NULL,
             'pipeline' => 'Suspect',
-            'class' => 'FF',
-			'contract'=>!empty($post['contract'])?$post['contract']:NULL,
-			'perm'=>!empty($post['perm'])?$post['perm']:NULL,
+'class' => 'FF',
 			'eff_from'=> !empty($post['eff_from'])?date("Y-m-d", strtotime($post['eff_from'])):date('Y-m-d H:i:s'),
 			'created_by'=>$post['user_id'],
 
@@ -905,6 +899,9 @@ from (select * from COMPANIES where active = \'TRUE\' ' ;
 				);
 			$this->db->insert('addresses', $address);
 			$new_company_address_id = $this->db->insert_id(); 
+            
+     
+            
 		}
         
         if(isset($post['tradingArr'])){
@@ -1039,11 +1036,12 @@ from (select * from COMPANIES where active = \'TRUE\' ' ;
 			}
 		else 
 			{
-			return $this->db->query("select c.name,c.id, c.pipeline, u.name as user, u.image as image, user_id, c.active from companies c left join  users u on u.id = c.user_id where c.eff_to IS NULL and ((REPLACE(c.name, '''', '') ilike '%".$search_data."%' or REPLACE(c.trading_name, '''', '') ilike '%".$search_data."%' or c.registration ilike '".$search_data."%' or regexp_replace(c.phone, E'[^0-9]', '', '') ilike regexp_replace('".$search_data."%', E'[^0-9%]', '', ''))) order by c.active desc, name asc limit 10");
+			return $this->db->query("select c.name,c.id, c.pipeline, u.name as user, u.image as image, user_id, c.active from companies c left join  users u on u.id = c.user_id where c.eff_to IS NULL and ((REPLACE(c.name, '''', '') ilike '%".$search_data."%' or REPLACE(c.trading_name, '''', '') ilike '%".$search_data."%' or c.registration ilike '".$search_data."%' or 
+(REPLACE(c.phone, ' ', '')) ilike (REPLACE('".$search_data."%', ' ', '')))) order by c.active desc, name asc limit 10");
 			}
 	}
 	    function get_autocomplete_contact($search_data) {
-            		 $query2 = $this->db->query("select concat(c.first_name::text,' ', c.last_name::text) as name, c.company_id as id, con.name as company_name from contacts c left join companies con on con.id= c.company_id where concat(c.first_name::text, ' ', c.last_name::text) ilike '".$search_data."%' order by name asc limit 7 ");
+            		 $query2 = $this->db->query("select concat(c.first_name::text,' ', c.last_name::text) as name, c.company_id as id, con.name as company_name from contacts c left join companies con on con.id= c.company_id where concat(c.first_name::text, ' ', c.last_name::text) ilike '".$search_data."%' order by name asc limit 10 ");
 
 	    if ($query2->num_rows() > 0)
 			{
@@ -1051,7 +1049,7 @@ from (select * from COMPANIES where active = \'TRUE\' ' ;
 			}
 		else 
 			{
-			return $this->db->query("select concat(c.first_name::text,' ', c.last_name::text) as name, c.company_id as id, con.name as company_name from contacts c left join companies con on con.id= c.company_id where REPLACE(concat(c.first_name::text, ' ', c.last_name::text), '''', '') ilike '%".$search_data."%' or regexp_replace(c.phone, E'[^0-9]', '', '') ilike regexp_replace('".$search_data."%', E'[^0-9%]', '', '') or regexp_replace(c.email, E'[^0-9]', '', '') ilike regexp_replace('".$search_data."%', E'[^0-9%]', '', '') order by name asc limit 7 ");
+			return $this->db->query("select concat(c.first_name::text,' ', c.last_name::text) as name, c.company_id as id, con.name as company_name from contacts c left join companies con on con.id= c.company_id where REPLACE(concat(c.first_name::text, ' ', c.last_name::text), '''', '') ilike '%".$search_data."%' or (REPLACE(c.phone, ' ', '')) ilike (REPLACE('".$search_data."%', ' ', '')) or (REPLACE(c.email, ' ', '')) ilike (REPLACE('".$search_data."%', ' ', '')) order by name asc limit 10 ");
 			}
 	}
     /*
@@ -1080,9 +1078,8 @@ $q = '
         
     $company = array(
         'name' => humanize($postName),
-        'contract' => null,
-        'perm' => null,
         'pipeline' => 'Suspect',
+         'class' => 'FF',
         'created_by'=> $user_id,
         'eff_from'=> $post['date_of_creation'],
         'registration' => !empty($post['registration'])?$post['registration']:NULL,		 
@@ -1100,6 +1097,8 @@ $q = '
 				);
 			$this->db->insert('addresses', $address);
 			$new_company_address_id = $this->db->insert_id();
+            
+               
 		}
     if($new_company_id and $new_company_address_id) return $new_company_id;
 		return FALSE;
@@ -1132,14 +1131,20 @@ $q = '
             $mortgages = array(
                     'company_id' => $company_id,
                     'provider_id' => $provider_id,
+'class' => 'Using Finance',
                     'ref' => $response['items'][0]['etag'],
-                    'stage' =>  $response['items'][0]['status'],
+                    'stage' =>  ucfirst($response['items'][0]['status']),
                     'eff_from' => $response['items'][0]['transactions'][0]['delivered_on'],
                     'created_at' =>   date('Y-m-d'),	
                     'created_by' => $user_id
 
                     );
                 $this->db->insert('mortgages', $mortgages);
+            
+            
+            
+            
+          
         }        
              
     }  
@@ -1162,7 +1167,7 @@ $q = '
                     'company_id' => $response['company_id'],
                     'provider_id' => $provider_id,
                     'ref' => $response['etag'],
-                    'stage' =>  $response['status'],
+                    'stage' =>  ucfirst($response['status']),
                     'eff_from' => $response['eff_from'],
                     'created_at' =>   date('Y-m-d'),	
                     'created_by' => $response['created_by']
@@ -1429,6 +1434,9 @@ $q = '
         
     $debenturemortgage  =      $post['debenturemortgage'] ? $post['debenturemortgage'] :NULL;
         
+        
+        
+     
        $data = array(
                       'updated_at' =>  date('Y-m-d H:i:s'),
                       'updated_by' => intval($userID),
@@ -1439,13 +1447,15 @@ $q = '
         $this->db->where('company_id', intval($post['companyid']));
         $this->db->where('id', intval($post['providerid']));
                     $this->db->update('mortgages', $data);
+        
+        
+          //$this->classUpdater(intval($post['companyid']));
+        
        
-        return $debenturemortgage ? true : false;
+       return $debenturemortgage ? true : false;
 
         
     }
-    
-    
      /*@@@
     
         Analyses only companies with pipeline of Qualified, Suspect, Prospect or is set to null
@@ -1513,7 +1523,7 @@ LIMIT 1
     
     
     
-    private function cronpipelineUpdater($id,$pipeline){ 
+     function cronpipelineUpdater($id,$pipeline){ 
         
         
         
@@ -1530,25 +1540,18 @@ LIMIT 1
         
 
         }   
-    
-    
-     function cronpipelineUpdaternew($id,$pipeline){ 
-        
-        
-        
-        //Updates company table pipeline based on conditions in crontogo function 
-                 $data = array(
+    function cronpipelineUpdaternew($id,$pipeline){ 
+     
+         //Updates company table pipeline based on conditions in crontogo function 
+                  $data = array(
                                 'class' => $pipeline,
-                     'updated_at' => date("Y-m-d H:i:s")
-                                          
-                             );
-
-                 $this->db->where('id', $id);
-                 $this->db->update('companies', $data);
+                                'updated_at' => date("Y-m-d H:i:s")      
+                              );
         
-        
-
-        }  
-   
+                $this->db->where('id', $id);
+                $this->db->update('companies', $data);
+    }
+    
+    
     
 }

@@ -417,7 +417,7 @@ public function get_campaign_name($campaign)
                                 'company_id' => $compID,
                                 'provider_str' =>   $value['persons_entitled'][0]['name'],
                                 'etag' => $value['etag'],  
-                                'stage' => $value['status'],    
+                                'stage' => ucfirst($value['status']),    
                                 'eff_from' => $value['transactions'][0]['delivered_on'], 
                                 'created_by' => 1 
                               );
@@ -473,7 +473,7 @@ public function get_campaign_name($campaign)
                     'company_id' => $company_id,
                     'provider_id' => $provider_id,
                     'ref' => $response['items'][0]['etag'],
-                    'stage' =>  $response['items'][0]['status'],
+                    'stage' =>  ucfirst($response['items'][0]['status']),
                     'eff_from' => $response['items'][0]['transactions'][0]['delivered_on'],
                     'created_at' =>   date('Y-m-d'),	
                     'created_by' => $user_id
@@ -528,7 +528,7 @@ public function get_campaign_name($campaign)
                     'company_id' => $response['company_id'],
                     'provider_id' => $provider_id,
                     'ref' => $response['etag'],
-                    'stage' =>  $response['status'],
+                    'stage' =>  ucfirst($response['status']),
                     'eff_from' => $response['eff_from'],
                     'created_at' =>   date('Y-m-d'),	
                     'created_by' => $response['created_by']
@@ -1077,16 +1077,44 @@ and C.active = 't'
     
     function classUpdater(){
         
-          //$set_to_null =  "update companies set class = null";
-            //$this->db->query($set_to_null);
+         // $set_to_null =  "update companies set class = null";
+           // $this->db->query($set_to_null);
         
-         $update_UF =  "Update companies set class = 'Using Finance' where (id in (select company_id from mortgages where stage ilike 'Outstanding')) or (id in (select company_id from company_tags where tag_id in (select id  from tags where category_id = '13')))";
+         $update_UF =  "Update companies set class = 'Using Finance' where (id in (select company_id from mortgages where stage ilike 'Outstanding' AND inv_fin_related != 'N')) or (id in (select company_id from company_tags where tag_id in (select id  from tags where category_id = '13')))";
             $this->db->query($update_UF);
         
-         $update_FF =  "update companies set class = 'FF' where class is null";
+         $update_FF =  "update companies set class = 'FF' where (id not in (select company_id from mortgages where inv_fin_related = 'N')) AND class is null";
             $this->db->query($update_FF);
         
         
     }
+    
+    
+    function updateNotYetActive(){ //4.0 passed
+        
+        /*
+         INSERT INTO company_tags
+
+            (tag_id, company_id, eff_from, created_at, created_by, updated_at, updated_by)
+            SELECT  '267', id,now(),now(),'1',now(),'1' from companies
+            WHERE
+            id  in (
+SELECT id FROM companies where id not in (SELECT  a.company_id FROM actions a) and active=true
+)
+        
+        */
+            $sql = "INSERT INTO company_tags
+   (tag_id, company_id, eff_from, created_at, created_by, updated_at, updated_by)
+SELECT  '267', id,now(),now(),'1',now(),'1' from companies
+WHERE
+    id  in (
+  SELECT id FROM companies where id not in (SELECT  company_id FROM actions) 
+  ) and id not in (SELECT company_id FROM company_tags WHERE tag_id=267 and eff_to IS NULL) and active=true;";
+
+        
+         $this->db->query($sql);
+        
+    }
+    
     
 }

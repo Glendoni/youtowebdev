@@ -3,7 +3,7 @@ $(document).ready(function () {
  bindTextEditor()
   if ((/companies\/company/.test(window.location.href))) {
       
-      
+      $('#sidebar').css('width', '140px')
 
 //BEGIN BREAD SCROLL
     function initbreadscroll() {
@@ -196,19 +196,18 @@ function getActionData(scope = false){ //get all actions in multidimentional jso
 
                 //$('.follow-up-date').datepicker();
                 var dateToday = new Date();
-$('.actiondate').datetimepicker({ minDate: dateToday });
+                $('.actiondate').datetimepicker({ minDate: dateToday });
                
                 $('.form .actionContact').clone().prependTo('.actionForm');
                 $('.form #action_type_planned').clone().prependTo('.formOutcome');
                
-
-$('select[name="action_type_planned"]').addClass('action_type_planned');
+                $('select[name="action_type_planned"]').addClass('action_type_planned');
                 //bindfollowUpInfoBtn(); 
 
 
-// $('.outcomeform .actionContact ').prop('disabled', false);
-//$('.outcomeform .actionContact').attr("disabled", "disabled");
-//$('.outcomeform .actiondate').attr("disabled", "disabled"); 
+                    // $('.outcomeform .actionContact ').prop('disabled', false);
+                    //$('.outcomeform .actionContact').attr("disabled", "disabled");
+                    //$('.outcomeform .actiondate').attr("disabled", "disabled"); 
 
             } //end success
         });   
@@ -377,14 +376,14 @@ comments_decoder()
             $('.textarea'+dat).attr('placeholder', 'Add outcome');
 
           if(!$(this).hasClass('appendCallbackContacts')){
-    $('.box'+dat+'  .action_type_planned option[value=]').prop('selected','selected');
-    $('.box'+dat+'  .actionContact option[value=]').prop('selected','selected');    
-    $('.box'+dat+' .actionContact ').prop('disabled', false);
-    $('.box'+dat+' .actionContact').attr("disabled", "disabled");
-    $('.box'+dat+' .actiondate').attr("disabled", "disabled");
-    $('.box'+dat+' .actiondate').val("");
-    $('.box'+dat+' .actionContact option[value=]').attr('selected','selected');
-    $('.box'+dat+' .formOutcome').show();
+                $('.box'+dat+'  .action_type_planned option[value=]').prop('selected','selected');
+                $('.box'+dat+'  .actionContact option[value=]').prop('selected','selected');    
+                $('.box'+dat+' .actionContact ').prop('disabled', false);
+                $('.box'+dat+' .actionContact').attr("disabled", "disabled");
+                $('.box'+dat+' .actiondate').attr("disabled", "disabled");
+                $('.box'+dat+' .actiondate').val("");
+                $('.box'+dat+' .actionContact option[value=]').attr('selected','selected');
+                $('.box'+dat+' .formOutcome').show();
             
 
 
@@ -554,8 +553,8 @@ function bindAddCallBackToCompletedAction(){
                          }           
 
                             $('.outcomeMsg'+action['followup_action_id']).append('<div class="followcont">'+followup+ ' ' +followUpCompleteddate+cancellation+contactDetails+
-                                                                                ' <hr><span class="comments"><br><strong>Action: </strong></br><span class="commentFUA">'+action['comments']+'</span><br>'+actionOutcome+
-                                                                                '</span></div>'); 
+                        ' <hr><span class="comments"><br><strong>Action: </strong></br><span class="commentFUA">'+action['comments']+'</span><br>'+actionOutcome+
+                        '</span></div>'); 
                         }
                         followUpCompleteddate = '';
                         cancellation = '';
@@ -838,9 +837,128 @@ $('.box'+bun+'  .actionContact option[value=]').prop('selected','selected');
                             });
                           };
         
+updateDateTime();
+        
     } 
 
-
+function updateDateTime(){
+      // alert()data-date-format="YYYY/MM/DD"
+       $('.datechanger').datetimepicker({
+         dateFormat: 'yyyy/mm/dd H:m',
+        // your options
+    }) 
+ 
+$('.datechanger').change(function(){
+      $('datechanger').css('color', '#f0ad4e');
+    //alert($(this).val())
+    
+})
+ 
+    $('.datechanger').on("dp.change",function (e) {
+       // alert('helllo'+$(this).val())
+    
+        
+        var datechangerData =  $(this).attr('data'); // data action id 9163
+    
+     
+     var datehidden = $('.datechangerh'+datechangerData).val($(this).val());
+          $('.datechanger').css('color', '#f0ad4e');
+    } ); 
+    
+    
+    $('.datechanger').on("dp.show",function (e) {
+        
+          $('.datechanger').css('color', '#f0ad4e');
+        
+          var datechangerData =  $(this).attr('data'); // data action id 9163
+    
+     var datehidden = $('.datechangerh'+datechangerData).val('');
+        
+          $('.datechanger').css('color', '#f0ad4e');
+    } );
+    
+    $('.datechanger').on("dp.hide",function (e) {
+        
+    
+    var datechangerData =  $(this).attr('data'); // data action id 9163
+    
+     var datehidden = $('.datechangerh'+datechangerData).val();
+    var datechanger =  $(this).val(); // get main value
+           
+        if(datehidden){
+                      var para = { "datechanger": datechanger  , "id": datechangerData };
+                      $.ajax({
+                        type: "POST",
+                          data: para,
+                            dataType: "json",
+                        url: "../actions/changeActionDate",
+                        success: function(data) {
+                              $('#ui-datepicker-div').hide();
+                             $('.bootstrap-datetimepicker-widget').hide();
+                            mainMenuQty();
+                            getActionData();
+                            
+                            // mainMenuQty();
+                          //  updateDateTime();
+                         //console.log(data);
+                        }
+                        });
+       }else{
+        
+          $('.datechanger').val('');
+             $('datechanger').css('color', '#ffffff');
+       }
+       
+        
+    } );
+ 
+    $('.datechangersss').datepicker({
+        useCurrent: false,
+    dateFormat: 'yyyy/mm/dd H:m', 
+    onClose: function() { 
+        
+         $('.bootstrap-datetimepicker-widget').hide(); // hide datepicker
+    
+    var datechangerData =  $(this).attr('data'); // data action id 9163
+    
+     var datehidden = $('.datechangerh'+datechangerData).val();
+     
+   // console.log('datechangerData '+datechangerData);
+    var datechanger =  $(this).val(); // get main value
+    
+     //console.log('datechanger '+datechanger);
+    // var id =  $(this).attr('data'); // 
+    
+    
+     $('.datechangerh'+datechangerData).val(datechanger);
+        
+       if(datechanger  != datehidden) {
+        
+           console.log(datehidden)
+        if(datechanger){
+                      var para = { "datechanger": datechanger  , "id": datechangerData };
+                      $.ajax({
+                        type: "POST",
+                          data: para,
+                            dataType: "json",
+                        url: "../actions/changeActionDate",
+                        success: function(data) {
+                              $('#ui-datepicker-div').hide();
+                             $('.bootstrap-datetimepicker-widget').hide();
+                            mainMenuQty();
+                            getActionData();
+                            
+                            // mainMenuQty();
+                          //  updateDateTime();
+                         //console.log(data);
+                        }
+                        });
+       }
+       }
+        
+}});  
+     
+}
 
 function intefaceVisibility(){
     
@@ -939,7 +1057,7 @@ $('#sidebar').hide();
                 
             })
             
-        
+        updateDateTime();
          }
     (function($) {
         $.fn.goTo = function() {
@@ -1115,6 +1233,7 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
          var showOutstandingForm = [];
          var getUrlIdParam = GetUrlParamID();
          var kps_cancelled;
+         var updatemeeting = [];
          
          if(typeof action['name'] !== 'undefined'  && action['name'] !== null &&  action['name'] !== 'null'   ){
             created_by = action['name'];
@@ -1177,8 +1296,8 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
         header = '<a href="javascript:;" class="text-danger '+showOutstandingForm+' pillerTitle" data-name="'+actionType+'" data="'+actionId+'">'+(actionTypeOverwrite ? actionTypeOverwrite : actionType)+ '</a> ';
          
         if( actions_cancelled == '' && typeof action['action_id'] != 'undefined' || actions_outstanding == true &&  actions_cancelled == '' && typeof action['action_id'] != 'undefined' ){ 
-
-        var planned_at = '2016-05-20 15:46:00';
+//console.log(action['planned_at']);
+        var planned_at = action['planned_at'];
         planned_at = planned_at.replace(/-/g, "");
         planned_at = planned_at.replace(/ /g, "T");
         planned_at = planned_at.replace(/:/g, ""); 
@@ -1194,11 +1313,19 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
         var calendarBtnDetail;
         var detail = 'Meeting+with+'+contact+'%0A'+email+'+%0D%0D'+pageAddress; 
 
+           // console.log('============'+parseInt(action['action_type_id'])+actionType);
             
-        calendarBtnDetail = '<a class="btn btn-xs btn-info" href="http://www.google.com/calendar/event?action=TEMPLATE&amp;text='+msg+'&amp;dates='+ planned_at +'/'+ planned_at +'Z&amp;details='+detail+'%0D%0DAny changes made to this event are not updated in Baselist. %0D%23baselist" target="_blank" rel="nofollow">Add to Calendar</a>';
+            
+        //console.log(actionType);
+            if(actionType =='Meeting' || actionType =='Demo Requested'){
+var updatemeeting   = '<span  class="datechangerTrigger"><input type="text"  data-date-format="YYYY/MM/DD HH:mm"  class="form-control datechanger datechangerb'+actionId+'"  placeholder="Change Date" name="planned_at" data="'+actionId+'"   value="" ><input type="hidden" class="datechangerh'+actionId+'" name="datechanger"  value=""></span> ';
+            }
+            
+            
+        calendarBtnDetail = '<a class="btn btn-xs btn-info addtocalender" href="http://www.google.com/calendar/event?action=TEMPLATE&amp;text='+msg+'&amp;dates='+ planned_at +'/'+ planned_at +'Z&amp;details='+detail+'%0D%0DAny changes made to this event are not updated in Baselist. %0D%23baselist" target="_blank" rel="nofollow">Add to Calendar</a>';
 
 
-        calenderbtn = calendarBtnDetail +' <span class="btn btn-default btn-xs btn-primary callbackAction callbackActionOutcome hint--top-right"  data-hint="Add Action Outcome" data="'+action['action_id']+'">Add Outcome</span> <span class="btn btn-default btn-xs btn-danger callbackAction removeOutsandingAction hint--top-right"  data-hint="Cancel Callback Action" data="'+action['action_id']+'" >Remove</span>';
+        calenderbtn = calendarBtnDetail +'<span class="btn btn-default btn-xs btn-primary callbackAction callbackActionOutcome hint--top-right"  data-hint="Add Action Outcome" data="'+action['action_id']+'">Add Outcome</span> <span class="btn btn-default btn-xs btn-danger callbackAction removeOutsandingAction hint--top-right"  data-hint="Cancel Callback Action" data="'+action['action_id']+'" >Remove</span>';
 
          if(action['action_id'])                                                                                                                                          
             textbox= '<div class="form-group callbackActionTextBox  box'+action['action_id']+'" style="display:none">'+
@@ -1330,7 +1457,7 @@ if(tm > 1){ tm = tm + ' Days Overdue'; }else if(tm == 1){ tm  = tm + ' Day Overd
  
          
       if(actionTypeName != 'Pipeline Update')   
-            actions  = '<div class="timeline-entry actionId'+actionType+'  '+classCompleted+' pillid'+actionId+'" pillid='+actionId+'> <div class="timeline-stat"> '+icon+'</div><div class="timeline-label"> <div class="mar-no pad-btm"><h4 class="mar-no pad-btm">'+header+deal+'  </h4><div class="actions-info"><span class="label label-warning">'+planned_at+'</span>'+kpStr+overdueStatus+contactName+'<span class="classActions" style="float:right; margin-top:0; margin-left:3px;">'+calenderbtn+outcomeRemove+followupAlert+'</span></div></div><div class="mic-info"> '+status+': '+created_by+' - '+formattDate(createdAt, true)+'</div><div class="actionMsgText">'+tagline+'</div>'+textbox+ ' </div></div>';
+            actions  ='<div class="timeline-entry actionId'+actionType+'  '+classCompleted+' pillid'+actionId+'" pillid='+actionId+'> <div class="timeline-stat"> '+icon+'</div><div class="timeline-label"> <div class="mar-no pad-btm"><h4 class="mar-no pad-btm">'+header+deal+'  </h4><div class="actions-info" ><span class="label label-warning"  >'+planned_at+'</span>'+kpStr+ ' '+overdueStatus+ ' '+updatemeeting+contactName+' <span class="classActions" style="float:right; margin-top:0; margin-left:3px;">'+calenderbtn+outcomeRemove+followupAlert+'</span></div></div><div class="mic-info"> '+status+': '+created_by+' - '+formattDate(createdAt, true)+'</div><div class="actionMsgText">'+tagline+'</div>'+textbox+ ' </div></div>';
          
         if(actionTypeName == 'Pipeline Update' ){
               actions  = '<div class="timeline-entry actionId'+actionType+' '+classCompleted+'" > <div class="timeline-stat"> '+icon+'</div> <div class="timeline-label pipe"> <div class="mar-no pad-btm" ><h4 class="mar-no pad-btm">'+header+' <span class="classActions" style="margin-top:0; margin-left:3px; float:right;">'+calenderbtn+outcomeRemove+'</span></h4>' +kpStr+overdueStatus+'</div><div class="actionMsgText">'+action['comments']+'</div></div></div>';
