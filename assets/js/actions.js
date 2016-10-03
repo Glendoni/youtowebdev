@@ -1318,7 +1318,7 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
             
         //console.log(actionType);
             if(actionType =='Meeting' || actionType =='Demo Requested'){
-var updatemeeting   = '<span  class="datechangerTrigger"><input type="text"  data-date-format="YYYY/MM/DD HH:mm"  class="form-control datechanger datechangerb'+actionId+'"  placeholder="Change Date" name="planned_at" data="'+actionId+'"   value="" ><input type="hidden" class="datechangerh'+actionId+'" name="datechanger"  value=""></span><br> ';
+var updatemeeting   = '<span  class="datechangerTrigger"><input type="text"  data-date-format="YYYY/MM/DD HH:mm"  class="form-control datechanger datechangerb'+actionId+'"  placeholder="Change Date" name="planned_at" data="'+actionId+'"   value="" ><input type="hidden" class="datechangerh'+actionId+'" name="datechanger"  value=""></span> ';
             }
             
             
