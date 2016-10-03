@@ -1090,7 +1090,7 @@ and C.active = 't'
     }
     
     
-    function updateNotYetActive(){
+    function updateNotYetActive(){ //4.0 passed
         
         /*
          INSERT INTO company_tags

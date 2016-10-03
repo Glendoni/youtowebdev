@@ -1142,6 +1142,7 @@ AND C.customer_from between M.eff_from and (CASE when M.eff_to is not null then 
 
 where customer_from is not null
 and M.inv_fin_related <> \'N\'
+ and  M.inv_fin_related in (\'Y\',\'P\')
   ) T2
 ON C.id = T2.id
 
@@ -1171,7 +1172,14 @@ order by customer_from desc') ;
                                 
                                 
 echo '<tr><td align="left" class="glen">'.$row->id.'</td><td align="left" class="glen">'.$row->class.'</td><td align="left" class="glen">'.$row->dog.'</td>';
-                                //if($row->id == 231806){  $this->cronpipelineUpdater($row->id,$row->pipeline_value);  } 
+                           
+
+    if($row->id == 346747){  
+                                echo '<h1>gotya! ==='.$row->class.'</h1>';
+                            }
+
+
+                                //$this->cronpipelineUpdater($row->id,$row->pipeline_value);  } 
                                $this->Companies_model->cronpipelineUpdaternew($row->id,$row->class);
                                 //if($row->id == 343853) echo 'Got ya';
                             }
