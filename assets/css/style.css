@@ -3043,6 +3043,11 @@ cursor:pointer;
     
     
 }
+.addtocalender{
+    
+        margin-right: 4px;
+    
+}
 
 .datechanger::-webkit-input-placeholder {
    color: #fff;

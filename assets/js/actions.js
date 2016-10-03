@@ -1322,7 +1322,7 @@ var updatemeeting   = '<span  class="datechangerTrigger"><input type="text"  dat
             }
             
             
-        calendarBtnDetail = '<a class="btn btn-xs btn-info" href="http://www.google.com/calendar/event?action=TEMPLATE&amp;text='+msg+'&amp;dates='+ planned_at +'/'+ planned_at +'Z&amp;details='+detail+'%0D%0DAny changes made to this event are not updated in Baselist. %0D%23baselist" target="_blank" rel="nofollow">Add to Calendar</a>';
+        calendarBtnDetail = '<a class="btn btn-xs btn-info addtocalender" href="http://www.google.com/calendar/event?action=TEMPLATE&amp;text='+msg+'&amp;dates='+ planned_at +'/'+ planned_at +'Z&amp;details='+detail+'%0D%0DAny changes made to this event are not updated in Baselist. %0D%23baselist" target="_blank" rel="nofollow">Add to Calendar</a>';
 
 
         calenderbtn = calendarBtnDetail +'<span class="btn btn-default btn-xs btn-primary callbackAction callbackActionOutcome hint--top-right"  data-hint="Add Action Outcome" data="'+action['action_id']+'">Add Outcome</span> <span class="btn btn-default btn-xs btn-danger callbackAction removeOutsandingAction hint--top-right"  data-hint="Cancel Callback Action" data="'+action['action_id']+'" >Remove</span>';
