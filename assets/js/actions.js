@@ -904,9 +904,9 @@ $('.datechanger').change(function(){
                         }
                         });
        }else{
-           
-           $('.datechangerb91661').val('');
-             $('datechanger').css('color', '#f0ad4e');
+        
+          $('.datechanger').val('');
+             $('datechanger').css('color', '#ffffff');
        }
        
         

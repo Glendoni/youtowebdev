@@ -3035,6 +3035,22 @@ border:none;
     
     
 }
+
+.datechanger::-webkit-input-placeholder {
+   color: #fff;
+}
+
+.datechanger:-moz-placeholder { /* Firefox 18- */
+     color: #fff; 
+}
+
+.datechanger::-moz-placeholder {  /* Firefox 19+ */
+    color: #fff; 
+}
+
+.datechanger:-ms-input-placeholder {  
+     color: #fff;  
+}
 /*! Hint.css - v2.2.1 - 2016-03-26 //#2b4461
 * http://kushagragour.in/lab/hint/
 * Copyright (c) 2016 Kushagra Gour; Licensed  */
