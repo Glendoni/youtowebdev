@@ -3018,6 +3018,8 @@ border:none;
     margin-top: 3px;
     margin-right: 2px;
     float:left;
+        border: none;
+    border-radius: 2px;
 }
 .datechangerTrigger{
     
