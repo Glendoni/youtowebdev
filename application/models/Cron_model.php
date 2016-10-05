@@ -1090,7 +1090,7 @@ and C.active = 't'
     }
     
     
-    function updateNotYetActive(){ //4.0 passed
+    function updateNotYetActive_(){ //4.0 passed
         
         /*
          INSERT INTO company_tags
@@ -1114,6 +1114,79 @@ WHERE
         
          $this->db->query($sql);
         
+    }
+    
+
+    function companyClassUpdater(){   //I update the classs in the companies table
+    
+        $query = $this->db->query('select C.id,
+        C.name,
+        C.customer_from,
+        CASE when T2.id is not null or T3.company_id is not null then \'Using Finance\' else \'FF\' END "class",
+        class as dog
+
+        from COMPANIES C
+
+        LEFT JOIN 
+        (
+        select distinct C.id
+
+        from COMPANIES C
+
+        JOIN MORTGAGES M
+        ON C.id = M.company_id
+        AND C.customer_from between M.eff_from and (CASE when M.eff_to is not null then M.eff_to else \'2100-01-01\'::date END)
+
+        where customer_from is not null
+        and M.inv_fin_related <> \'N\'
+        and  M.inv_fin_related in (\'Y\',\'P\')
+        ) T2
+        ON C.id = T2.id
+
+        LEFT JOIN
+        (
+        select distinct CT.company_id  
+
+        from COMPANY_TAGS CT
+
+        JOIN TAGS T
+        ON CT.tag_id = T.id
+        AND T.category_id = 13 
+        ) T3
+        ON C.id = T3.company_id
+
+        where C.customer_from is not null
+
+        order by customer_from desc') ;     
+
+    
+    
+        if ($query->num_rows() > 0)
+                {
+//                          echo '<table width="400">';
+                    foreach($query->result() as $row)
+                    {         
+                            //echo '<tr><td align="left" class="glen">'.$row->id.'</td><td align="left" class="glen">'.$row->class.'</td><td align="left" class="glen">'.$row->dog.'</td>';
+                    //$this->cronpipelineUpdater($row->id,$row->pipeline_value);  } 
+                       $this->cronpipelineUpdaternew($row->id,$row->class);
+                        //if($row->id == 343853) echo 'Got ya';
+                    }
+
+                // echo '</table>';
+             }
+    }
+    
+    
+        function cronpipelineUpdaternew($id,$pipeline){ 
+     
+         //Updates company table pipeline based on conditions in crontogo function 
+                  $data = array(
+                                'class' => $pipeline,
+                                'updated_at' => date("Y-m-d H:i:s")      
+                              );
+        
+                $this->db->where('id', $id);
+                $this->db->update('companies', $data);
     }
     
     

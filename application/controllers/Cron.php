@@ -67,6 +67,12 @@ function classUpdaterRun(){
 } 
     
     
+function companyClassUpdaterRun(){
+    
+     $this->Cron_model->companyClassUpdater();
+} 
+    
+    
 
     //AUTOPILOT
      //This should maybe once or twice a day -  Checks and adds email campaign list to database from AP RUN first
@@ -82,7 +88,7 @@ function classUpdaterRun(){
     
     function pipelineCronChecker($offset = 0)  //Call this function every 5mins
     {
-      $this->Cron_model->cronPipeline($offset);  
+      //$this->Cron_model->cronPipeline($offset);  
     }
     
         function turnoverCompaniesWithoutTurnover(){
