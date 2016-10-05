@@ -834,20 +834,20 @@ function create($post, $userid =false)
     }
         
     
-        $sqlCheckTags  = "SELECT tag_id FROM company_tags WHERE tag_id=267 AND company_id=".$post['company_id']." AND eff_to IS  NULL";
+        //$sqlCheckTags  = "SELECT tag_id FROM company_tags WHERE tag_id=267 AND company_id=".$post['company_id']." AND eff_to IS  NULL";
         
         
-         $query = $this->db->query($sqlCheckTags);
+         //$query = $this->db->query($sqlCheckTags);
         
-        if ($query->num_rows() > 0){
+       // if ($query->num_rows() > 0){
         
-     $sql = "UPDATE company_tags SET eff_to=  (CURRENT_DATE - INTERVAL '1 day') WHERE tag_id  IN (SELECT tag_id FROM company_tags WHERE tag_id=267 AND company_id=".$post['company_id']." AND eff_to IS  NULL)";
+     //$sql = "UPDATE company_tags SET eff_to=  (CURRENT_DATE - INTERVAL '1 day') WHERE tag_id  IN (SELECT tag_id FROM company_tags WHERE tag_id=267 AND company_id=".$post['company_id']." AND eff_to IS  NULL)";
         
         //echo $sql;
-        $query = $this->db->query($sql);
+       // $query = $this->db->query($sql);
         
             
-        }
+        //}
         
         
         
@@ -860,7 +860,7 @@ function create($post, $userid =false)
     
     
     
-    function tagActionUpdater($comp_id){
+    function tagActionUpdater_($comp_id){ //NOT ACTIVE
         
               $data = array(
             'eff_to' => date('Y-m-d', strtotime('-2 day', strtotime(date('Y-m-d')))),
