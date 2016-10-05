@@ -39,7 +39,7 @@ class Companies_model extends CI_Model {
 	{
 		$arrayNames = array(
 	       'Using Finance' => 'Using Finance',
-			'FF' => 'First to Finance'
+			'FF' => 'FF'
 
 			);
 		return 	$arrayNames;
