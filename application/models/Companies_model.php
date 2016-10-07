@@ -1453,25 +1453,7 @@ $q = '
         $id= intval($post['companyid']);
         
         
-         $query = $this->db->query('SELECT C.id
-
-from COMPANIES C
-LEFT JOIN 
-(
-select distinct C.id
-from COMPANIES C
-JOIN MORTGAGES M
-ON C.id = M.company_id
- 
-where M.inv_fin_related not in (\'Y\',\'P\')
- 
-  ) T1
-ON C.id = T1.id
-
-  
-where T1 is null
-and C.id= '.$id.'
-order by customer_from desc');
+         $query = $this->db->query('select company_id FROM MORTGAGES M  WHERE company_id = '.$id.' and   M.inv_fin_related  in (\'Y\',\'P\') ');
         
         
    
