@@ -1449,6 +1449,77 @@ $q = '
                     $this->db->update('mortgages', $data);
         
         
+  
+        $id= intval($post['companyid']);
+        
+        
+         $query = $this->db->query('SELECT C.id
+
+from COMPANIES C
+LEFT JOIN 
+(
+select distinct C.id
+from COMPANIES C
+JOIN MORTGAGES M
+ON C.id = M.company_id
+ 
+where M.inv_fin_related not in (\'Y\',\'P\')
+ 
+  ) T1
+ON C.id = T1.id
+
+  
+where T1 is null
+and C.id= '.$id.'
+order by customer_from desc');
+        
+        
+   
+        
+     
+         if ($query->num_rows() > 0)
+             {
+             
+             
+             
+             
+              $data = array(
+                                'class' => 'Using Finance',
+                                'updated_at' => date("Y-m-d H:i:s")
+                                          
+                             );
+
+                 $this->db->where('id', $id);
+                 $this->db->update('companies', $data);
+             
+             
+             
+             
+         }else{
+             
+             
+             $data = array(
+                                'class' => 'FF',
+                                'updated_at' => date("Y-m-d H:i:s")
+                                          
+                             );
+
+                 $this->db->where('id', $id);
+                 $this->db->update('companies', $data);  
+             
+             
+             
+             
+         }
+        
+        
+        
+        
+        
+        
+        
+        
+        
           //$this->classUpdater(intval($post['companyid']));
         
        
