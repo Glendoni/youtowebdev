@@ -70,6 +70,7 @@ function classUpdaterRun(){
 function companyClassUpdaterRun(){
     
      $this->Cron_model->companyClassUpdater();
+   
 } 
     
     
