@@ -407,12 +407,14 @@ ON tc.id = t.category_id
      function fegettags($post, $userID)
     {
         
-        $sql = 'SELECT t.name, ct.id as tag_id ,tc.id as parent_tag_id, tc.name as parent_tag_name
+        $sql = 'SELECT t.name, ct.id as tag_id ,tc.id as parent_tag_id, tc.name as parent_tag_name, u.name as username, tc.created_at as tagcreatedat
         FROM company_tags  ct
         LEFT JOIN tags t
         ON ct.tag_id= t.id
         LEFT JOIN tag_categories tc
         ON t.category_id = tc.id
+    LEFT JOIN users u
+    ON ct.created_by = u.id
         WHERE ct.company_id='.$post['companyID'].' 
         AND ct.eff_from <= DATE(NOW()) 
         AND ct.eff_to IS NULL 

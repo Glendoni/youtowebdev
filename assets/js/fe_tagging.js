@@ -282,7 +282,7 @@ if((/companies/.test(window.location.href))) {
                     preventtagRemove = '<span class="tagRemove" data-tag="'+val['tag_id']+'">x</span>';  
                 }
                  //indicatorshow  =  '<span class="folIcon indicatorshow"></span>';
-           $('.fetags'+val['parent_tag_id']).append('<li class="addedTag tag'+val['tag_id']+' feTagfolderTotal" ><span class="tagName"></span>'+val['name']+ preventtagRemove+'</li>');
+           $('.fetags'+val['parent_tag_id']).append('<li class="addedTag tag'+val['tag_id']+' feTagfolderTotal hint--top-right" data-hint="'+val['username']+' on  '+formattDate(val['tagcreatedat'], true)+'" ><span class="tagName"></span>'+val['name']+ preventtagRemove+'</li>');
            
                   $('.tafixed').show()
 
