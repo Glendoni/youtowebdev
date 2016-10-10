@@ -172,7 +172,7 @@
 	<?php $this->load->view('companies/create_contact_box.php',array('company'=>$company)); ?>
 	<?php $this->load->view('companies/create_address_box.php',array('company'=>$company)); ?>
    
-<div class="panel panel-primary" style="padding-top: 30px;"  >
+<div class="panel panel-primary" style="padding-top: 90px;"  >
 	<div class="panel-body">
     	<div class="row"><!--FINISHED AT THE END OF PANEL-->
 		<div class="col-sm-9">
