@@ -1429,7 +1429,7 @@ $q = '
              } 
       }
     
-    function update_not_for_invoices($post,$userID){
+ function update_not_for_invoices($post,$userID){
         
         
     $debenturemortgage  =      $post['debenturemortgage'] ? $post['debenturemortgage'] :NULL;
@@ -1447,6 +1447,59 @@ $q = '
         $this->db->where('company_id', intval($post['companyid']));
         $this->db->where('id', intval($post['providerid']));
                     $this->db->update('mortgages', $data);
+        
+        
+  
+        $id= intval($post['companyid']);
+        
+        
+         $query = $this->db->query('select company_id FROM MORTGAGES M  WHERE company_id = '.$id.' and   M.inv_fin_related  in (\'Y\',\'P\') ');
+        
+        
+   
+        
+     
+         if ($query->num_rows() > 0)
+             {
+             
+             
+             
+             
+              $data = array(
+                                'class' => 'Using Finance',
+                                'updated_at' => date("Y-m-d H:i:s")
+                                          
+                             );
+
+                 $this->db->where('id', $id);
+                 $this->db->update('companies', $data);
+             
+             
+             
+             
+         }else{
+             
+             
+             $data = array(
+                                'class' => 'FF',
+                                'updated_at' => date("Y-m-d H:i:s")
+                                          
+                             );
+
+                 $this->db->where('id', $id);
+                 $this->db->update('companies', $data);  
+             
+             
+             
+             
+         }
+        
+        
+        
+        
+        
+        
+        
         
         
           //$this->classUpdater(intval($post['companyid']));

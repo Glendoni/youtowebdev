@@ -1078,12 +1078,13 @@ and C.active = 't'
     function classUpdater(){
         
          // $set_to_null =  "update companies set class = null";
-           // $this->db->query($set_to_null);
+           // $this->db->query($set_to_null);  inv_fin_related in (\'Y\',\'P\'))) AND class is null";
+           // $this->db->query($update_FF);
         
-         $update_UF =  "Update companies set class = 'Using Finance' where (id in (select company_id from mortgages where stage ilike 'Outstanding' AND inv_fin_related != 'N')) or (id in (select company_id from company_tags where tag_id in (select id  from tags where category_id = '13')))";
+         $update_UF =  "Update companies set class = 'Using Finance' where (id in (select company_id from mortgages where stage ilike 'Outstanding' AND inv_fin_related != 'N' and inv_fin_related in ('Y','P')  )) or (id in (select company_id from company_tags where tag_id in (select id  from tags where category_id = '13')))";
             $this->db->query($update_UF);
         
-         $update_FF =  "update companies set class = 'FF' where (id not in (select company_id from mortgages where inv_fin_related = 'N')) AND class is null";
+         $update_FF =  "update companies set class = 'FF' where (id not in (select company_id from mortgages where inv_fin_related = 'N'  and  inv_fin_related not in ('Y','P'))) AND class is null";
             $this->db->query($update_FF);
         
         
@@ -1119,60 +1120,71 @@ WHERE
 
     function companyClassUpdater(){   //I update the classs in the companies table
     
-        $query = $this->db->query('select C.id,
-        C.name,
-        C.customer_from,
-        CASE when T2.id is not null or T3.company_id is not null then \'Using Finance\' else \'FF\' END "class",
-        class as dog
+       
+        
+        
+        $sql = 'select C.id,
+        C.name, C.customer_from,
+       CASE when T2.id is not null or T3.company_id is not null then \'Using Finance\' else \'FF\' END "class",
+	   class as dog  
 
-        from COMPANIES C
+from COMPANIES C
 
-        LEFT JOIN 
-        (
-        select distinct C.id
+LEFT JOIN 
+(
+select distinct C.id
 
-        from COMPANIES C
+from COMPANIES C
 
-        JOIN MORTGAGES M
-        ON C.id = M.company_id
-        AND C.customer_from between M.eff_from and (CASE when M.eff_to is not null then M.eff_to else \'2100-01-01\'::date END)
+JOIN MORTGAGES M
+ON C.id = M.company_id
+AND C.customer_from between M.eff_from and (CASE when M.eff_to is not null then M.eff_to else \'2100-01-01\'::date END)
 
-        where customer_from is not null
-        and M.inv_fin_related <> \'N\'
-        and  M.inv_fin_related in (\'Y\',\'P\')
-        ) T2
-        ON C.id = T2.id
+where customer_from is not null
+ and M.inv_fin_related <> \'N\'
+and M.inv_fin_related in (\'Y\',\'P\')
+ 
+  ) T2
+ON C.id = T2.id
 
-        LEFT JOIN
-        (
-        select distinct CT.company_id  
+LEFT JOIN
+(
+select distinct CT.company_id  
+  
+from COMPANY_TAGS CT
+  
+JOIN TAGS T
+ON CT.tag_id = T.id
+AND T.category_id = 13 
+) T3
+ON C.id = T3.company_id
 
-        from COMPANY_TAGS CT
+where C.customer_from is not null
+and CASE when T2.id is not null or T3.company_id is not null then \'Using Finance\' else \'FF\' END <> class
+order by customer_from desc';
+        
+        
+        $query = $this->db->query($sql) ;     
 
-        JOIN TAGS T
-        ON CT.tag_id = T.id
-        AND T.category_id = 13 
-        ) T3
-        ON C.id = T3.company_id
-
-        where C.customer_from is not null
-
-        order by customer_from desc') ;     
-
-    
+   
     
         if ($query->num_rows() > 0)
                 {
-//                          echo '<table width="400">';
+            
+       
+                         echo '<table width="400">';
                     foreach($query->result() as $row)
                     {         
-                            //echo '<tr><td align="left" class="glen">'.$row->id.'</td><td align="left" class="glen">'.$row->class.'</td><td align="left" class="glen">'.$row->dog.'</td>';
+                            echo '<tr><td align="left" class="glen">'.$row->id.'</td><td align="left" class="glen">'.$row->class.'</td><td align="left" class="glen">'.$row->class.'</td>';
                     //$this->cronpipelineUpdater($row->id,$row->pipeline_value);  } 
                        $this->cronpipelineUpdaternew($row->id,$row->class);
-                        //if($row->id == 343853) echo 'Got ya';
+                            
                     }
 
-                // echo '</table>';
+                 echo '</table>';
+            
+            
+         
              }
     }
     
@@ -1180,6 +1192,8 @@ WHERE
         function cronpipelineUpdaternew($id,$pipeline){ 
      
          //Updates company table pipeline based on conditions in crontogo function 
+            
+            
                   $data = array(
                                 'class' => $pipeline,
                                 'updated_at' => date("Y-m-d H:i:s")      
