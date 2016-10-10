@@ -265,3 +265,94 @@
     </div>
     <!-- /.modal-dialog -->
 </div>
+
+
+
+
+
+
+
+
+
+
+<div class="modal draggable-modal fade" id="editTag<?php echo $company['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="Edit <?php echo $company['name']; ?>" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'],'edit_company'=>'1', 'class_check' => $company['class'], 'pipeline_check' => $company['pipeline']);
+                 echo form_open(site_url().'companies/edit', 'name="edit_company" class="edit_company" role="form"',$hidden); ?>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                        <?php if ($current_user['permission'] == 'admin'): ?>
+                                            <h4 class="modal-title" id="myModalLabel">
+                                                <p  class="form-control" style="padding: 0;border: none;box-shadow: none;font-size: 18px;max-width: 500px;"><?php echo isset($company['name'])?$company['name']:''; ?>  Tags </p>
+                                                
+                                                <span style="font-size: 11px;"><?php echo $company['trading_name']; ?></span>
+</h4>
+                                            
+                <?php else: ?>
+                                <h4 class="modal-title" id="myModalLabel">
+<?php echo $company['name'] . ' Tags'; ?>
+                          
+
+</h4>
+
+                                <?php endif; ?>
+
+            </div>
+    <div class="modal-body">
+       
+    <div class="row">
+            
+                
+        <div id="popuptag"></div>
+        
+        
+       
+                <div class="col-md-12 target_sectors" style="display:none;">
+                    <label for="sectors" class="control-label">Target Sectors</label>
+                    <div class="tag-holder">
+                    <?php   
+                    foreach ($target_sectors_list as $key => $value): ?>
+                        <span class="button-checkbox">
+                            <button type="button" class="btn btn-checkbox" data-color="primary" >&nbsp;<?php echo $value; ?></button>
+                            <input type="checkbox" name="add_sectors[]" value="<?php echo $key; ?>" class="hidden" <?php echo (isset($company['sectors']) and array_key_exists($key,$company['sectors']))? 'checked': '' ; ?>  />
+                        </span>
+                    <?php endforeach ?>
+                    </div>
+
+                </div>
+            </div>
+    
+       
+        <div class="modal-loading-display text-center " id="loading-display-<?php echo $company['id']; ?>" style="display:none;">
+            <span class="btn btn-default btn-lg" ><i class="fa fa-refresh fa-spin"></i></span>
+        </div>
+    </div>
+            
+           
+            <div class="modal-footer">
+                
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+               <small class="popUpCreatedAt">
+                    <b>Company Created:</b> <?php echo date("d/m/Y",strtotime($company['created_at']));?> - <?php echo $created_by_name['name']; ?>
+                   </small>
+            </div>
+                
+                
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                      <small>
+                      <b>Last Updated:</b>
+                    <?php echo isset($company['updated_at'])?date("d/m/Y",strtotime($company['updated_at']))." - ".$company['updated_by_name']:'Never'; ?>   
+                </small>
+                   </div>
+                
+                
+                
+                
+            </div>
+            <?php echo form_close(); ?>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

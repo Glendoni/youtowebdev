@@ -128,11 +128,18 @@
      
      
          <div class="col-md-12" >
-                             
+               
+             
+                <span class="label  btn-info comp_details_edit_btn mainedittag"  onclick="openNav()" id="edittagbtn<?php echo $company['id']; ?>" data-target="#editTag<?php echo $company['id']; ?>" style="
+    font-size: 12px;     float: right;
+" >Add Tag</span>
+             
 
             <span class="label  btn-warning comp_details_edit_btn mainedit" data-toggle="modal" id="editbtn<?php echo $company['id']; ?>" data-target="#editModal<?php echo $company['id']; ?>" style="
     font-size: 12px;     float: right;
 ">Edit</span>
+             
+           
          
         </div>
 
@@ -798,8 +805,23 @@ endif;
                         <p>Tags are used to provide <strong>Sonovate</strong> with a better insight into current and potential clients </p>
                         </div>-->
 
+   
+                </div>   
+                    <div class="col-sm-6 subcont"> 
 
-                        <div class="col-sm-6 no-padding">
+                    <h4 class="ta"></h4>
+                    <ul id="fetags"></ul>
+                    </div></div>
+                    </div>   
+            </div>
+    </div>
+        
+        <div id="myNav" class="overlay">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <div class="overlay-content">
+  
+      
+                        <div class="col-sm-12 no-padding">
                             <div class="row tag-search-holder ">
                                 <div class="col-sm-12">         
                                     <form id="live-search" action="" method="post">
@@ -834,18 +856,9 @@ endif;
                                     </div>
                                 </div>
                             </div>
-                    </div>    
-                </div>   
-                    <div class="col-sm-6 subcont"> 
-
-                    <h4 class="ta"></h4>
-                    <ul id="fetags"></ul>
-                    </div></div>
-                    </div>   
-            </div>
-    </div>
-        
-        
+                    </div> 
+  </div>
+</div>
         <!--TAGGING END -->
 
 
@@ -1201,7 +1214,24 @@ endif;
  
  
 
-<script>
+
+ 
+
+
+    
+    <script>
+function openNav() {
+    document.getElementById("myNav").style.height = "100%";
+}
+
+function closeNav() {
+    document.getElementById("myNav").style.height = "0%";
+}
+</script>
+    
+    
+    
+    <script>
  
     
     function stickyActionsMenu() {
