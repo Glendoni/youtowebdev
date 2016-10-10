@@ -282,7 +282,7 @@ if((/companies/.test(window.location.href))) {
                     preventtagRemove = '<span class="tagRemove" data-tag="'+val['tag_id']+'">x</span>';  
                 }
                  //indicatorshow  =  '<span class="folIcon indicatorshow"></span>';
-           $('.fetags'+val['parent_tag_id']).append('<li class="addedTag tag'+val['tag_id']+' feTagfolderTotal hint--top-right" data-hint="'+val['username']+' on  '+formattDate(val['tagcreatedat'], true)+'" ><span class="tagName"></span>'+val['name']+ preventtagRemove+'</li>');
+           $('.fetags'+val['parent_tag_id']).append('<li class="addedTag tag'+val['tag_id']+' feTagfolderTotal hint--top-right" data-hint="'+val['username']+' on  '+formattDateTags(val['tagcreatedat'], true)+'" ><span class="tagName"></span>'+val['name']+ preventtagRemove+'</li>');
            
                   $('.tafixed').show()
 
@@ -539,5 +539,50 @@ function isInt(n) {
    return n % 1 === 0;
 }
 
+function formattDateTags(createdAt, showtime = true){
+        // Split timestamp into [ Y, M, D, h, m, s ]
 
+var coeff = 1000 * 60 * 5;
+var date_r = new Date(createdAt);  //or use any other date
+var date_r1 = new Date(date_r.getTime() + 150000);
+var rounded = new Date(Math.round(date_r1.getTime() / coeff) * coeff);
+
+
+// Apply each element to the Date function
+
+  var now = rounded;
+
+var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+];
+  var dateSuffix = 'th';
+var day = now.getDate();
+if(day == 1 || day == 21 || day == 31) dateSuffix = 'st';
+// Create an array with the current month, day and time
+  var date = [now.getDate()+dateSuffix, monthNames[now.getMonth()+ 0] ,  now.getFullYear() ];
+
+// Create an array with the current hour, minute and second date.join("")
+  var time = [ now.getHours(), now.getMinutes()];
+
+// Determine AM or PM suffix based on the hour + suffix
+  var suffix = ( time[0] < 12 ) ? "am" : "pm";
+
+// Convert hour from military time
+  time[0] = ( time[0] < 12 ) ? time[0] : time[0] - 12;
+
+// If hour is 0, set it to 12
+  time[0] = time[0] || 12;
+
+// If seconds and minutes are less than 10, add a zero
+  for ( var i = 1; i < 3; i++ ) {
+    if ( time[i] < 10 ) {
+      time[i] = "0" + time[i];
+    }
+  }
+
+// Return the formatted string
+      //  console.log(time.join(":"))
+        
+ return (showtime? date.join(" ") : '' )  ; 
+    } 
  
