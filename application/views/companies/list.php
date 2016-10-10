@@ -203,7 +203,10 @@
                     <div><span class="label label-danger" style="font-size:10px;">
                     <?php   
 
-                                   if ($daysoverdue > 1) {echo "Overdue";};?>  
+                                   if ($daysoverdue > 1) {echo "Overdue";};
+                        if ($daysoverdue ==0 ) {echo "Due Today";}
+                        
+                        ?>  
                         </span></div>
 
                     <?php } else {}?> 

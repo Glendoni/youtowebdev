@@ -1429,7 +1429,7 @@ $q = '
              } 
       }
     
-    function update_not_for_invoices($post,$userID){
+     function update_not_for_invoices($post,$userID){
         
         
     $debenturemortgage  =      $post['debenturemortgage'] ? $post['debenturemortgage'] :NULL;
