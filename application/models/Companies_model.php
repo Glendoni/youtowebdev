@@ -38,8 +38,9 @@ class Companies_model extends CI_Model {
 	function get_companies_classes()
 	{
 		$arrayNames = array(
-	       'Using Finance' => 'Using Finance',
-			'FF' => 'FF'
+	     
+			'FF' => 'FF',
+              'Using Finance' => 'Using Finance'
 
 			);
 		return 	$arrayNames;
