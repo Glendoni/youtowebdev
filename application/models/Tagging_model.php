@@ -365,7 +365,8 @@ ON tc.id = t.category_id
         t.eff_from,
         t.eff_to as eff_to,
         tc.name as category_name,
-        t.name
+        t.name,
+        t.how_used
         FROM tags t
         LEFT JOIN tags tt
         ON  t.category_id = tt.id

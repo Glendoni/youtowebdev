@@ -1566,24 +1566,22 @@ border-left: 3px #148cd2 solid;
 }
 
 li.folder {
-  
     background: #fff;
     border-bottom: 1px solid #999;
-  color: #000;
-  /*line-height: 26px;
-  margin: 0 5px 5px 0;
-  border-radius: 5px;*/
-  padding:7px 20px 7px 30px;
-  position: relative;
-  cursor: pointer;
-  text-decoration: none;
-  -webkit-transition: color 0.2s;
-  font-size: 12px;
+    color: #000;
+    padding: 7px 4px 7px 7px;
+    position: relative;
+    cursor: pointer;
+    text-decoration: none;
+    -webkit-transition: color 0.2s;
+    font-size: 12px;
     clear: left;
+    text-align: left;
+    font-weight: 900;
 }
 .folder::before {
   font-family: FontAwesome;
-  content: '\f054';
+  /*content: '\f054';*/
   height: 6px;
   left: 10px;
   position: absolute;
@@ -2718,6 +2716,7 @@ margin-right:11px;
     width: 20px;
     text-align: center;
     color: #fff;
+    margin-left: 3px;
     
 }
 
