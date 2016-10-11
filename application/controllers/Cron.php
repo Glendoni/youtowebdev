@@ -98,6 +98,18 @@ function companyClassUpdaterRun(){
      $this->Cron_model->cronPipelineWithoutTurnover();
 } 
     
+    
+      
+    function checkClassDateUpdaterRun(){
+        
+         $this->Cron_model->checkClassDateUpdater();
+        
+        
+    }
+    
+    
+    
+    
     //CSV
      function ippone($lmt = 100 ,$oft= 0,$debug = false)
   {

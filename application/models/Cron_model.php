@@ -1142,8 +1142,8 @@ AND C.customer_from between M.eff_from and (CASE when M.eff_to is not null then 
 
 where customer_from is not null
  and M.inv_fin_related <> \'N\'
-and M.inv_fin_related in (\'Y\',\'P\')
- 
+
+ and M.inv_fin_related not in (\'Y\',\'P\')
   ) T2
 ON C.id = T2.id
 
@@ -1160,8 +1160,14 @@ AND T.category_id = 13
 ON C.id = T3.company_id
 
 where C.customer_from is not null
-and CASE when T2.id is not null or T3.company_id is not null then \'Using Finance\' else \'FF\' END <> class
+and CASE when T2.id is not null or T3.company_id is not null  then \'Using Finance\' else \'FF\' END <> class
 order by customer_from desc';
+        
+        
+        
+        
+        $sql_ = "select company_id FROM MORTGAGES M 
+                        WHERE M.inv_fin_related  in ('Y','P') and M.stage  in ('Outstanding')";
         
         
         $query = $this->db->query($sql) ;     
@@ -1184,9 +1190,45 @@ order by customer_from desc';
                  echo '</table>';
             
             
-         
+          $this->checkClassDateUpdater();
              }
     }
+    
+    
+    
+    
+function  checkClassDateUpdater(){
+        
+        $sql= 'select  C.id 
+
+from companies C
+
+LEFT JOIN MORTGAGES M
+ON C.id = M.company_id
+
+
+where C.customer_from between M.eff_from and (CASE when M.eff_to is not null then M.eff_to else \'2100-01-01\'::date END)'; 
+        
+        
+          $query = $this->db->query($sql) ; 
+        
+               echo '<table width="400">';
+           foreach($query->result() as $row)
+                    {         
+                            echo '<tr><td align="left" class="glen">'.$row->id.'</td><td align="left" class="glen">'.$row->id.'</td>';
+                                //$this->cronpipelineUpdater($row->id,'Using Finance');  } 
+                      $this->cronpipelineUpdaternew($row->id,'Using Finance');
+                            
+                    }
+        
+        
+          echo '</table>';
+        
+        
+    }
+    
+    
+    
     
     
         function cronpipelineUpdaternew($id,$pipeline){ 
