@@ -100,8 +100,8 @@ function populate(){
  
                 sort = vals.split('_');
   //SIC Code 1
-                if(sort[0] != 'Downloads'){
-                $('.main_'+sort[1].replace(' ', '')).append('<li class="list-group-item folder" glen data="'+sort[2]+'"> <span class="folIcon indicatorshow"></span>'+sort[0]+' <span class="tagNumPlaceholder tagNum_'+sort[2]+'"></span></li>'); 
+                if(sort[0] != 'Downloads' && sort[0] != 'SIC Code 1'  ){
+                $('.main_'+sort[1].replace(' ', '')).append('<li class="list-group-item folder" glen data="'+sort[2]+'"> <span class="indicatorshow"></span>'+sort[0]+' <span class="tagNumPlaceholder tagNum_'+sort[2]+'"></span></li>'); 
                 }
                 $('.main_'+sort[1].replace(' ', '')).append('<ul class="subtags sub_'+sort[2]+'" ></ul>');  
  

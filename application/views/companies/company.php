@@ -130,11 +130,14 @@
          <div class="col-md-12" >
                
              
-                <span class="label  btn-info comp_details_edit_btn mainedittag"  onclick="openNav()" id="edittagbtn<?php echo $company['id']; ?>" data-target="#editTag<?php echo $company['id']; ?>" style="
-    font-size: 12px;     float: right;
-" >Add Tag</span>
-             
+            
 
+                 <span class="label   btn-info comp_details_edit_btn mainedit" data-toggle="modal" id="editbtn<?php echo $company['id']; ?>" data-target="#myModal<?php echo $company['id']; ?>" style="
+    font-size: 12px;     float: right;
+">Add Tag</span>
+             
+             
+             
             <span class="label  btn-warning comp_details_edit_btn mainedit" data-toggle="modal" id="editbtn<?php echo $company['id']; ?>" data-target="#editModal<?php echo $company['id']; ?>" style="
     font-size: 12px;     float: right;
 ">Edit</span>
@@ -416,6 +419,9 @@ if ($your_date < $now){;
 				}
 			}
 			?>
+            
+            
+            
 
 
 <?php /* if (isset($company['perm'])): ?>
@@ -425,6 +431,13 @@ if ($your_date < $now){;
 <p class="details detailsTagFormat" style="margin-bottom:0; text-align:centre; font-size:11px;">Contract</p>
 <?php endif;  */ ?>
 </div>
+            
+               <div class="col-sm-12 subcont"> 
+
+                    <h4 class="ta"></h4>
+                    <ul id="fetags"></ul>
+                    </div>
+            
 		</div>
 		</div>
 		</div>
@@ -776,7 +789,7 @@ endif;
         
         <!-- TAGGING  START-->
         
-        <div class="tag-tabs" id="tags-anchor">
+        <div class="tag-tabs" id="tags-anchor" style="display:none;">
                 <div class="col-md-12">
                     <div class="panel panel-default">
                     <div class="panel-heading" id="qvTags">Tags</div>
@@ -807,17 +820,34 @@ endif;
 
    
                 </div>   
-                    <div class="col-sm-6 subcont"> 
-
-                    <h4 class="ta"></h4>
-                    <ul id="fetags"></ul>
-                    </div></div>
+                 
+                        
+                        
+                        </div>
                     </div>   
             </div>
     </div>
         
-        <div id="myNav" class="overlay">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        
+        
+        
+          <!-- Modal -->
+  <div class="modal draggable-modal fade" id="myModal<?php echo $company['id']; ?>" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Add Company Tag</h4>
+        </div>
+        <div class="modal-body">
+      
+            
+            
+            
+           <div id="myNav" class="overlay">
+ 
   <div class="overlay-content">
   
       
@@ -858,7 +888,26 @@ endif;
                             </div>
                     </div> 
   </div>
-</div>
+</div> 
+            
+            
+            
+            
+            
+            
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+        
+        
+        
+        
+
         <!--TAGGING END -->
 
 

@@ -1534,14 +1534,15 @@ border-left: 3px #148cd2 solid;
 .label-master-category {
 	    background-color: #f5f5f5;
         color: rgba(51, 51, 51, 0.32);
+    display:none;
 }
 .italicFont{
     
     font-style: italic;
 }
 .tag-search-holder {
-	margin-top: 10px;
-	margin-bottom: 10px;
+	margin-top: 0px;
+	margin-bottom: 0px;
 
 }
 .label-count {
@@ -1566,7 +1567,7 @@ border-left: 3px #148cd2 solid;
 
 li.folder {
   
-    background: #eee;
+    background: #fff;
     border-bottom: 1px solid #999;
   color: #000;
   /*line-height: 26px;
@@ -1578,6 +1579,7 @@ li.folder {
   text-decoration: none;
   -webkit-transition: color 0.2s;
   font-size: 12px;
+    clear: left;
 }
 .folder::before {
   font-family: FontAwesome;
@@ -1588,9 +1590,9 @@ li.folder {
   width: 6px;
 }
 .inner.tag {
-	display: none;
+	/*display: none;*/
 	    list-style-type: none;
-    border-bottom: solid thin #f5f5f5;
+ ¬
 }
 
 .tag {
@@ -1599,8 +1601,8 @@ li.folder {
   /*line-height: 26px;
   margin: 0 5px 5px 0;
   background: #eee;
-  border-radius: 5px;*/
-  padding:5px 20px 5px 30px;
+  border-radius: 5px;*/¬1727
+  padding:4px 4px 10px 4px;
   position: relative;
   
   text-decoration: none;
@@ -1609,7 +1611,7 @@ li.folder {
 }
 .tag::before {
   font-family: FontAwesome;
-  content: '\f02b';
+  /*content: '\f02b';*/
   height: 6px;
   left: 10px;
   position: absolute;
@@ -1653,15 +1655,16 @@ li.folder {
 .category-name-holder {
     font-size: 12px;
     font-weight: 700;
-    border-bottom: 1px #ddd dotted;
+ 
     padding-bottom: 10px;
     margin-bottom: 10px;
+    float:left;
 }
 .added-tag-holder {
 padding-bottom: 10px;
     margin-left: 15px;
     padding: 0;
-        border-bottom: 1px #ddd dotted;
+   
 margin-bottom: 10px;
 }
     .subtags {
@@ -1674,18 +1677,24 @@ margin-bottom: 10px;
     }
 
     .addedTag {
-  background: #bff1ea;
-  border-radius: 3px;
-  color: #000;
-  display: inline-block;
-  /*height: 26px;*/
-  line-height: 26px;
-	padding: 0 8px 0 12px;
-  position: relative;
-  margin: 0 10px 10px 0;
-  text-decoration: none;
-  -webkit-transition: color 0.2s;
-  font-size: 12px;
+ 
+    font-size: 12px;
+    padding: 4px 8px;
+    list-style: none;
+    border-radius: 2px;
+    min-width: 50px;
+    text-align: center;
+    margin-top: 5px;
+    font-size: 11px;
+    margin-right: 2px;
+    color: #000000;
+    border: 1px solid #d6d6d6;
+    display: inline-block;
+}
+.folder{
+width:100%;
+    
+    
 }
 
 /*.addedTag::before {
@@ -1721,8 +1730,16 @@ margin-bottom: 10px;
         
       /*  display:none;*/
 
-          width: 100%;
+          /* width: 100%; */
+    float: left;
+    display: inline-block;
+            font-size: 10px;
+    color: #000;
+        width:auto;
+            border: thin solid #ccc;
+    margin: 2px;
     }
+
     
     .tadefault{
         font-weight: 100;
@@ -3065,6 +3082,20 @@ cursor:pointer;
 .datechanger:-ms-input-placeholder {  
      color: #fff;  
 }
+
+
+
+.sub_52, .sub_11{
+    
+    display:none;
+}
+
+.subtags .list-group-item{
+    padding: 7px 5px;
+
+}
+
+
 /*! Hint.css - v2.2.1 - 2016-03-26 //#2b4461
 * http://kushagragour.in/lab/hint/
 * Copyright (c) 2016 Kushagra Gour; Licensed  */
