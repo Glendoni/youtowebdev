@@ -86,7 +86,7 @@ function populate(){
                 subcatName = val['sub_cat_name'].replace(/\s/gi, "");
                 subcatName = subcatName.replace('(', '');
                 subcatName = subcatName.replace(')', '');
-                tagcont.push('<div class="col-xs-3 '+subcatName+' fetagsholder'+val['tac_sub_cat_id']+' added-tag-holder"><div class="category-name-holder" >'+val['sub_cat_name']+'</div><ul class="fetags'+val['tac_sub_cat_id']+' sub_ul"></ul></div>'); 
+                tagcont.push('<div class="col-xs-12 '+subcatName+' fetagsholder'+val['tac_sub_cat_id']+' added-tag-holder"><div class="category-name-holder" >'+val['sub_cat_name']+'</div><ul class="fetags'+val['tac_sub_cat_id']+' sub_ul"></ul></div>'); 
                 }          
 
                 vale = val;
@@ -121,12 +121,12 @@ function populate(){
                 if(val['parent_cat_name'] == null){
 
                     parentcatname =   val['category_name'].replace(' ', '');
-                    $('.main_'+parentcatname).append('<li class="list-group-item parent  sub_group sub'+val['tac_sub_cat_id']+' tag" cat_id='+val['tac_sub_cat_id']+' sub="'+val['tag_id']+'  hint--top-right" data-hint="'+val['how_used']+'"> '+val['name']+'</li>');  
+                    $('.main_'+parentcatname).append('<li class="list-group-item parent  sub_group sub'+val['tac_sub_cat_id']+' tag  hint--top-right" data-hint="'+val['how_used']+'" " cat_id='+val['tac_sub_cat_id']+' sub="'+val['tag_id']+'"> '+val['name']+'</li>');  
 
                 }
                 if(val['parent_cat_name']){
                 parentcatname =   val['parent_cat_name'].replace(' ', '')
-                $('.sub_'+val['cat_id']).append('<li class="list-group-item sub_group sub'+val['tac_sub_cat_id']+' inner tag" par-sub-id="'+val['cat_id']+' hint--top-right" data-hint="'+val['how_used']+'"  sub="'+val['tag_id']+'">'+val['name']+'<span class="pull-right label label-master-category">'+val['category_name']+'</span> </li>');  
+                $('.sub_'+val['cat_id']).append('<li class="list-group-item sub_group sub'+val['tac_sub_cat_id']+' inner tag  hint--top-right" data-hint="'+val['how_used']+'" " par-sub-id="'+val['cat_id']+'" sub="'+val['tag_id']+'">'+val['name']+'<span class="pull-right label label-master-category">'+val['category_name']+'</span> </li>');  
 
                 }
             //console.log($('.main_'+val['cat_id']+' .sub_'+val['cat_id']+ ' li').length);
@@ -136,7 +136,7 @@ function populate(){
             tagSearch();
                    //scScroll()
 
-            $('.tagContainer .list-group-item_').click(function(){
+            $('.tagContainer .list-group-item').click(function(){
 
                 if($(this).hasClass('folder') &&$(this).hasClass('activeMain')  ){
                     $('.folder').removeClass('activeMain');
@@ -411,7 +411,7 @@ return plainDate;
                         count++;
                         if($('#filter').val() === ''){
 
-                       // $('.sub_group').hide();
+                        $('.sub_group').hide();
                         $('.parent').show();
 
                         $(this).val(), count = 0;
