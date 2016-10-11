@@ -432,9 +432,9 @@ if ($your_date < $now){;
 <?php endif;  */ ?>
 </div>
             
-               <div class="col-sm-12 subcont"> 
+               <div class="subcont"> 
 
-                    <h4 class="ta"></h4>
+                    <!-- <h4 class="ta"></h4> -->
                     <ul id="fetags"></ul>
                     </div>
             
@@ -999,7 +999,17 @@ endif;
                         </div>
                         <div class="col-sm-12 col-md-12">
                             <div class="form-group addActionOutcome">
+                                 <?php foreach($action_types_done as $action ):  
+                                
+                                echo '<div class="action_verbiage action_verbiage_text'.str_replace(' ', '',$action->id ).'" >' .$action->how_used.'</div>';
+                                
+                                endforeach;
+                                ?>
+                                
                                 <label>Comment<span class="actionEvalPipeline"style=" color: red;">*</span></label>
+                                
+                                
+                                  
                                 <textarea class="form-control completed-details" name="comment" rows="3" required="required"></textarea>
 
                                 <!---

@@ -183,6 +183,13 @@ $(window).load(function(){
     }, 2000);
 });
 $('#action_type_completed').change(function(){
+                                                                         $('.action_verbiage').hide();
+                                                                        var action_verbiage_text = $(this).val();
+
+                                                                       $('.action_verbiage_text'+action_verbiage_text).show();
+
+
+                                                                        console.log($(this).val())
   
     $('#action-error .editBoxInstruction').text('Source');
 var source_check = $("input[name=source_check]").val();
