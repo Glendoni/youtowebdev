@@ -1209,7 +1209,7 @@ LEFT JOIN MORTGAGES M
 ON C.id = M.company_id
 
 
-where C.customer_from between M.eff_from and (CASE when M.eff_to is not null then M.eff_to else \'2100-01-01\'::date END)'; 
+where C.customer_from between M.eff_from and (CASE when M.eff_to is not null then M.eff_to else \'2100-01-01\'::date END) and M.provider_id <> 28935'; 
         
         
           $query = $this->db->query($sql) ; 
