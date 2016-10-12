@@ -409,13 +409,13 @@ if ($your_date < $now){;
             </div>
 		<!-- SECTORS -->
 		<div class="col-xs-4 col-sm-3">
-			<strong>Sectors</strong><br>
+			<div class="tag_sectortagheading"><strong>Sectors</strong></div>
 			<?php
 			if(isset($company['sectors'])){
 		
 				foreach ($company['sectors'] as $key => $name)
 				{
-				echo '<p class="details detailsTagFormat" style="margin-bottom:5px; font-size:11px; text-align:centre;">'.$name.'</p>';
+				echo '<div class="details detailsTagFormat" >'.$name.'</div>';
 				}
 			}
 			?>

@@ -396,7 +396,7 @@
 		</div>
 	
 
-	<div class="row padding-bottom">
+	<div class="row details padding-bottom">
 		<!-- TAGS -->
         <div class="tagLists tagLists<?php echo $company['id'];?>">
         </div>
