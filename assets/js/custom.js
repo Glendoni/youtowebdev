@@ -166,11 +166,31 @@ function populateGetTagsCampList(data,param){
                               parent_tag_name =    val['parent_tag_name'].replace(' ', '');
                             //if(parent_tag_name != 'Downloads'){
                                    //console.log(val['name']);
-                                $('.tagLists'+param+val['parent_tag_id']).append('<li>'+val['name']+'</li>');
+                                $('.tagLists'+param+val['parent_tag_id']).append('<li class="sub_group hint--top-right" data-hint=" '+val['username']+' on '+val['tagcreatedat']+'" >'+val['name']+'</li>');
                                         //parent_tag_name_holder.push(val['parent_tag_name']);
                               //  }
                        }
                  }) 
+         
+         
+         
+             var howUsed = '';
+$('.sub_group').each(function(){
+
+//console.log($(this).attr('data-hint'));
+
+howUsed = $(this).attr('data-hint');
+ 
+if(howUsed == 'null'){
+
+$(this).removeAttr('data-hint')
+}else{
+ 
+
+}
+
+
+})
     
     
 }
