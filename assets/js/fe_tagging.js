@@ -135,13 +135,13 @@ function populate(){
             gettags();
             tagSearch();
                    //scScroll()
-
+  $('.folder').css('border','none');
             $('.tagContainer .list-group-item').click(function(){
 
                 if($(this).hasClass('folder') &&$(this).hasClass('activeMain')  ){
                     $('.folder').removeClass('activeMain');
                     $('.activeMain .folIcon').removeClass('indicatorshow');
-                       $('.sub_group').hide();
+                      // $('.sub_group').hide();
  
                 } else{               
 
@@ -156,13 +156,13 @@ function populate(){
 
                     if($(this).hasClass('parent')){
 
-                        $('.subtags .tag').hide();
+                      //  $('.subtags .tag').hide();
                     }
 
                     if(!$(this).hasClass('parent')){
                     //$('.folIcon .indicatorshow').hide();
 
-                        $(this).addClass('activeMain');
+                       // $(this).addClass('activeMain');
                         $('.activeMain .folIcon').addClass('indicatorshow').show();
                     //console.warn('i was clicked')
                     }
@@ -173,17 +173,17 @@ function populate(){
                 $('sub_group').removeClass('subActive');
 
                 if(!$(this).closest(".main").length ){
-                    $(this).addClass('subActive');
+                   // $(this).addClass('subActive');
                 }
                 del_ini();
 
                 if(!$(this).hasClass('sub_group')){
                     $('.parent').removeClass('sub_group');
-                    $('.sub_group').hide();
+                    //$('.sub_group').hide();
 
                 //$('.subtags').hide()
 
-                    $('.sub'+subid).show("slide", { direction: "left" }, 200);
+                   // $('.sub'+subid).show("slide", { direction: "left" }, 200);
                     $('.parent').addClass('sub_group');
 
                 }else{
@@ -411,7 +411,7 @@ return plainDate;
                         count++;
                         if($('#filter').val() === ''){
 
-                        $('.sub_group').hide();
+                        $('.sub_group').show();
                         $('.parent').show();
 
                         $(this).val(), count = 0;
