@@ -1145,6 +1145,7 @@ where customer_from is not null
 
  and M.inv_fin_related not in (\'Y\',\'P\')
   and M.stage <> \'Satisfied\'
+and M.provider_id <> 28935
   ) T2
 ON C.id = T2.id
 
