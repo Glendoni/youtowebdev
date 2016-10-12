@@ -62,6 +62,10 @@ $(document).ready(function(){
         });
     });
      
+    
+    
+    
+    
 }); //Document End
 
 function populate(){
@@ -250,7 +254,11 @@ $('.tagNum_'+dataID).text(liInCat)
 })
              $('.main_MasterCategory').append('<li class="list-group-item"  data="1222226" style=" background: #fff;border: none;> <span class="" style="display: inline;"></span></li>')
             } 
-    })               
+    })       
+    
+    
+    
+    
 
 }
 
@@ -298,6 +306,26 @@ if((/companies/.test(window.location.href))) {
                     }
         })
 }
+    
+    
+    
+    var howUsed = '';
+$('.sub_group').each(function(){
+
+//console.log($(this).attr('data-hint'));
+
+howUsed = $(this).attr('data-hint');
+ 
+if(howUsed == 'null'){
+
+$(this).removeAttr('data-hint')
+}else{
+ 
+
+}
+
+
+})
     
     
 }
@@ -437,8 +465,9 @@ return plainDate;
 function unHighlightActiveSubITems(){
     
     $('.sub_group').css('opacity' , '1.0');
+    $('.sub_group').css('background' , '#ffffff');
     
-     $('.sub_group').css(' color' , 'rgba(0, 0, 0, 0.53)');
+     $('.sub_group').css('color' , '#000000');
  
     var parid;
     var tagSecGroup;
@@ -461,7 +490,9 @@ function unHighlightActiveSubITems(){
                 if(subItemName == subName.replace(apendParName, '')){
                     $('.sub_group').each(function(){
                         if($(this).attr('sub') == subAttr){
-                            $(this).css('opacity', '0.6');
+                            //$(this).css('opacity', '0.6');
+                               $(this).css('background' , '#428bca');
+                            $(this).css('color' , '#ffffff');
                         }
                     })
                 }
@@ -485,7 +516,8 @@ $('.parent').each(function(){
         if(parname.trim() == $(this).text().slice(0,-1)){
             $('.sub'+parid).each(function(){
                 if(test ==  $(this).attr('sub')){
-                      $(this).css('opacity', '0.6');
+                      //$(this).css('opacity', '0.6');
+                     $(this).css('color' , '#000000');
                 }
             })
         }

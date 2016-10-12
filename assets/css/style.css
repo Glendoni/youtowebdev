@@ -1571,7 +1571,7 @@ li.folder {
     color: #000;
     padding: 7px 4px 7px 7px;
     position: relative;
-    cursor: pointer;
+    cursor: default;
     text-decoration: none;
     -webkit-transition: color 0.2s;
     font-size: 12px;
