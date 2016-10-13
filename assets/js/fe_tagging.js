@@ -99,7 +99,7 @@ function populate(){
             })
             tagcont = tagcont.sort();
             $('.subcont').prepend(jQuery.unique(tagcont).join(''));  
-            category = category.sort()
+        //category = category.sort()
             $.each( category, function( key, vals ) {
  
                 sort = vals.split('_');
@@ -130,7 +130,7 @@ function populate(){
                 }
                 if(val['parent_cat_name']){
                 parentcatname =   val['parent_cat_name'].replace(' ', '')
-                $('.sub_'+val['cat_id']).append('<li class="list-group-item sub_group sub'+val['tac_sub_cat_id']+' inner tag  hint--top-right" data-hint="'+val['how_used']+'" " par-sub-id="'+val['cat_id']+'" sub="'+val['tag_id']+'">'+val['name']+'<span class="pull-right label label-master-category">'+val['category_name']+'</span> </li>');  
+    $('.sub_'+val['cat_id']).append('<li class="list-group-item sub_group sub'+val['tac_sub_cat_id']+' inner tag  hint--top-right" data-hint="'+val['how_used']+'" " par-sub-id="'+val['cat_id']+'" sub="'+val['tag_id']+'">'+val['name']+'<span class="pull-right label label-master-category">'+val['category_name']+'</span> </li>');  
 
                 }
             //console.log($('.main_'+val['cat_id']+' .sub_'+val['cat_id']+ ' li').length);

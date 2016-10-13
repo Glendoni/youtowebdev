@@ -355,7 +355,7 @@ ON tc.id = t.category_id
 
         
         $sql = 'SELECT  DISTINCT
-        tc.id as cat_id, 
+        tc.sequence, tc.id as cat_id, 
         tcn.name as parent_cat_name ,
         tcn.id as sub_parent_cat_id ,
         tc.id as tac_sub_cat_id,
@@ -378,8 +378,7 @@ ON tc.id = t.category_id
         AND t.eff_from <= DATE(NOW()) 
         AND  (tc.eff_to >= DATE(NOW()) or  tc.eff_to IS NULL) 
 	 AND  (t.eff_to >= DATE(NOW()) or  t.eff_to IS NULL)  
-   order by  t.name
-        
+   order by  tc.sequence        
         
         
         '; 
@@ -421,7 +420,7 @@ ON tc.id = t.category_id
         AND ct.eff_to IS NULL 
         AND t.eff_from <= DATE(NOW()) 
         AND t.eff_to IS NULL
-        ORDER BY tc.name'; 
+        ORDER BY tc.sequence'; 
          
         $query = $this->db->query($sql);
 
