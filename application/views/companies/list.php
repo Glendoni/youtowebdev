@@ -426,7 +426,7 @@
                 
                 
                 
-             if( $mortgage['Inv_fin_related'] == 'y') {  
+             if( $mortgage['Inv_fin_related'] == 'N') {  
                 $tdbgcolorclass =   'danger'  ;//$tdbgcolorclass = 'danger';
                 }else{
                     
