@@ -166,7 +166,7 @@ function populateGetTagsCampList(data,param){
                               parent_tag_name =    val['parent_tag_name'].replace(' ', '');
                             //if(parent_tag_name != 'Downloads'){
                                    //console.log(val['name']);
-                              $('.tagLists'+param+val['parent_tag_id']).append('<li class="subTags" ><span class="hint--top-right" data-hint="'+val['username']+'_on_'+formattDateTags(val['tagcreatedat'], true)+'">'+val['name']+'</span></li>');
+                              $('.tagLists'+param+val['parent_tag_id']).append('<li class="subTags" ><span class="hint--top-right" data-hint="'+val['username']+' on '+formattDateTags(val['tagcreatedat'], true)+'">'+val['name']+'</span></li>');
                                         //parent_tag_name_holder.push(val['parent_tag_name']);
                               //  }
                        }
