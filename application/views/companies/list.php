@@ -454,12 +454,18 @@
                        <td class="col-md-3">
                         
                      <?php  if($mortgage['stage'] == 'Outstanding'){ 
-    
-       if($mortgage['Inv_fin_related'] == 'y'){ echo '<span  class="related_to_Invoice_Finance inv'.$mortgage['id'].'">Not Related To Invoice Finance</span>'; 
-                }elseif($mortgage['Inv_fin_related'] == null){
+ 
+   
+if($mortgage['Inv_fin_related'] == 'N'){ echo '<span  class="related_to_Invoice_Finance inv'.$mortgage['id'].'">Not Related To Invoice Finance</span>'; 
+                }elseif($mortgage['Inv_fin_related'] == 'Y'){
+        
     echo  '<span  class="Not_related_to_Invoice_Finance inv'.$mortgage['id'].'">Related To Invoice Finance</span>'; 
-    }else{
-        echo  '<span  class="Not_related_to_Invoice_Finance inv'.$mortgage['id'].'">Probably Related To Invoice Finance</span>'; 
+    
+    
+    } 
+         if($mortgage['Inv_fin_related'] == 'P'){
+        echo  '<span  class="Properly_related_to_Invoice_Finance inv'.$mortgage['id'].'">Probably Related To Invoice Finance</span>'; 
+        
     } 
                                                                    
                                                                    
