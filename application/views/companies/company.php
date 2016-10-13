@@ -354,7 +354,7 @@ if ($your_date < $now){;
 	
 	 
                 
-            <div class="col-md-3">
+            <div class="col-md-3" style="display:none;">
 					<!-- CONTACTS -->
             	<label>Contacts</label> 		
 			<?php if (isset($company['contacts_count'])): ?>
@@ -371,7 +371,7 @@ if ($your_date < $now){;
             
         </div>
             
-              <div class="col-md-5" >
+              <div class="col-md-3" >
 				<label>Lead Source</label>
 				<p style="
     margin-top: -4px;
@@ -382,22 +382,8 @@ if ($your_date < $now){;
             
             
     
-		</div>
-            </div>
-            
-		<div class="row">
-		<div class="col-xs-12 details" >
-		 
-            
-
-            
-            
-            
-            
-
-	
-            
-            
+    
+                
 		<!-- EMPLOYEES -->
 		<div class="col-xs-4 col-sm-3">
 			<strong>Employees</strong><br>
@@ -431,6 +417,26 @@ if ($your_date < $now){;
 <p class="details detailsTagFormat" style="margin-bottom:0; text-align:centre; font-size:11px;">Contract</p>
 <?php endif;  */ ?>
 </div>
+    
+    
+    
+    
+		</div>
+            </div>
+            
+		<div class="row">
+		<div class="col-xs-12 details" >
+		 
+            
+
+            
+            
+            
+            
+
+	
+            
+
             
                <div class="subcont"> 
 
