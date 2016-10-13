@@ -435,7 +435,7 @@ if ($your_date < $now){;
                <div class="subcont"> 
 
                     <!-- <h4 class="ta"></h4> -->
-                    <ul id="fetags"></ul>
+                    <!--<ul id="fetags"></ul> -->
                     </div>
             
 		</div>
