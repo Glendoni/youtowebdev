@@ -2996,7 +2996,12 @@ border:none;
 @media screen and (min-width: 1999px) {
      #single-page {
     padding-top: 185px;
+         
 }
+    body{
+            padding-top: 0px;
+        
+    }
 }    
 #specialInsightRequired{
     
