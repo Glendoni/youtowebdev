@@ -1505,7 +1505,7 @@ $q = '
          $id= intval($post['companyid']);
          
          
-        $this->companyClassUpdatert($id) ;
+        //$this->companyClassUpdatert($id) ;
          
          return $debenturemortgage ? true : false;
     }
