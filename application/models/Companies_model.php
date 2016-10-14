@@ -1431,11 +1431,10 @@ $q = '
       }
     
      function update_not_for_invoices($post,$userID){
-        
-        
-    $debenturemortgage  =      $post['debenturemortgage'] ? $post['debenturemortgage'] :NULL;
-        
-        
+         
+          $debenturemortgage  =      $post['debenturemortgage'] ? $post['debenturemortgage'] :NULL;
+         
+       
         
      
        $data = array(
@@ -1495,20 +1494,20 @@ $q = '
              
          }
         
-        
-        
-        
-        
-        
-        
-        
-        
+         
           //$this->classUpdater(intval($post['companyid']));
         
        
        return $debenturemortgage ? true : false;
 
-        
+  
+         
+         $id= intval($post['companyid']);
+         
+         
+        $this->companyClassUpdatert($id) ;
+         
+         return $debenturemortgage ? true : false;
     }
      /*@@@
     
@@ -1605,6 +1604,168 @@ LIMIT 1
                 $this->db->where('id', $id);
                 $this->db->update('companies', $data);
     }
+    
+    
+    
+    function companyClassUpdatert($id =348423){   //I update the classs in the companies table
+    
+       
+        
+        
+                $sql = 'select C.id,
+                C.name, C.customer_from,
+                CASE when T2.id is not null or T3.company_id is not null then \'Using Finance\' else \'FF\' END "class",
+                class as dog  
+
+                from COMPANIES C
+
+                LEFT JOIN 
+                (
+                select distinct C.id
+
+                from COMPANIES C
+
+                JOIN MORTGAGES M
+                ON C.id = M.company_id
+                AND C.customer_from between M.eff_from and (CASE when M.eff_to is not null then M.eff_to else \'2100-01-01\'::date END)
+
+                where customer_from is not null
+                and M.inv_fin_related <> \'N\'
+
+                and M.inv_fin_related not in (\'Y\',\'P\')
+
+                or M.stage <> \'Satisfied\'  or M.provider_id <> 28935
+
+                ) T2
+                ON C.id = T2.id
+
+                LEFT JOIN
+                (
+                select distinct CT.company_id  
+
+                from COMPANY_TAGS CT
+
+                JOIN TAGS T
+                ON CT.tag_id = T.id
+                AND T.category_id = 13 
+                ) T3
+                ON C.id = T3.company_id
+
+                where C.customer_from is not null
+                and CASE when T2.id is not null or T3.company_id is not null  then \'Using Finance\' else \'FF\' END <> class
+                and C.id='.$id.'
+                order by customer_from desc';
+        
+        
+        $sql_ = "select company_id FROM MORTGAGES M 
+                        WHERE M.inv_fin_related  in ('Y','P') and M.stage  in ('Outstanding')";
+        
+        
+        $query = $this->db->query($sql) ;     
+
+        if ($query->num_rows() > 0)
+                {
+                                     
+                    echo '<table width="400">';
+                    foreach($query->result() as $row)
+                    {         
+                            echo '<tr><td align="left" class="glen">'.$row->id.'</td><td align="left" class="glen">'.$row->class.'</td><td align="left" class="glen">'.$row->class.'</td>';
+                    //$this->cronpipelineUpdater($row->id,$row->pipeline_value);  } 
+                            $this->cronpipelineUpdaternew($row->id,$row->class);
+                            
+                    }
+
+                 echo '</table>';
+            
+            
+          $this->checkClassDateUpdatert($id);
+            $this->checkClassDateUpdaterSonovatet($id);
+             }
+    }
+    
+    
+    ////////////////////////////////////amend below to manage a single company//////////////////////////////////////////////////////////////
+    
+function  checkClassDateUpdatert($id){
+        
+        $sql= 'select  C.id 
+
+from companies C
+
+LEFT JOIN MORTGAGES M
+ON C.id = M.company_id
+
+
+where C.customer_from between M.eff_from and (CASE when M.eff_to is not null then M.eff_to else \'2100-01-01\'::date END) and M.provider_id <> 28935 and C.id='.$id.' or M.stage <> \'Satisfied\'  and M.provider_id <> 28935  and C.id='.$id.''; 
+        
+        
+          $query = $this->db->query($sql) ; 
+        
+               echo '<table width="400">';
+           foreach($query->result() as $row)
+                    {         
+                            echo '<tr><td align="left" class="glen">'.$row->id.'</td><td align="left" class="glen">'.$row->id.'</td>';
+                                //$this->cronpipelineUpdater($row->id,'Using Finance');  } 
+                      $this->cronpipelineUpdaternewt($row->id,'Using Finance');
+                            
+                    }
+        
+        
+          echo '</table>';
+        
+        
+    }
+    
+    
+    function  checkClassDateUpdaterSonovatet($id){
+        
+        $sql= 'select  C.id 
+
+from companies C
+
+LEFT JOIN MORTGAGES M
+ON C.id = M.company_id
+where M.provider_id = 2893  and C.id='.$id.' '; 
+        
+        
+          $query = $this->db->query($sql) ; 
+        
+               echo '<table width="400">';
+           foreach($query->result() as $row)
+                    {         
+                            echo '<tr><td align="left" class="glen">'.$row->id.'</td><td align="left" class="glen"> sonovate '.$row->id.'</td>';
+                                //$this->cronpipelineUpdater($row->id,'Using Finance');  } 
+                      //$this->cronpipelineUpdaternew($row->id,'FF');
+                            
+                    }
+        
+        
+          echo '</table>';
+        
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+        function cronpipelineUpdaternewt($id,$pipeline){ 
+     
+         //Updates company table pipeline based on conditions in crontogo function 
+            
+            
+                  $data = array(
+                                'class' => $pipeline,
+                                'updated_at' => date("Y-m-d H:i:s")      
+                              );
+        
+                $this->db->where('id', $id);
+                $this->db->update('companies', $data);
+    }    
+    
     
     
     

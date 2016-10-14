@@ -838,7 +838,7 @@ endif;
         
         
           <!-- Modal -->
-  <div class="modal draggable-modal fade" id="myModal<?php echo $company['id']; ?>" role="dialog">
+  <div class="modal draggable-modal full-screen fade" id="myModal<?php echo $company['id']; ?>" role="dialog">
     <div class="modal-dialog">
     
       <!-- Modal content-->

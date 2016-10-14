@@ -1726,7 +1726,7 @@ width:100%;
           /* width: 100%; */
     float: left;
     display: inline-block;
-            font-size: 10px;
+            font-size: 11px;
     color: #000;
         width:auto;
             border: thin solid #ccc;
@@ -3118,8 +3118,12 @@ cursor:pointer;
         margin-bottom: 5px;
     
 }
+.modal {
+ width: 1200px !important;
+    margin: 0 auto;
+}
 
-
+ 
 /*! Hint.css - v2.2.1 - 2016-03-26 //#2b4461
 * http://kushagragour.in/lab/hint/
 * Copyright (c) 2016 Kushagra Gour; Licensed  */
