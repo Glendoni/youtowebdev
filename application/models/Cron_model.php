@@ -1221,7 +1221,7 @@ where C.customer_from between M.eff_from and (CASE when M.eff_to is not null the
                     {         
                             echo '<tr><td align="left" class="glen">'.$row->id.'</td><td align="left" class="glen">'.$row->id.'</td>';
                                 //$this->cronpipelineUpdater($row->id,'Using Finance');  } 
-                                    $this->cronpipelineUpdaternew($row->id,'Using Finance');
+                      $this->cronpipelineUpdaternew($row->id,'Using Finance');
                             
                     }
         
@@ -1249,7 +1249,7 @@ where M.provider_id = 2893 ';
            foreach($query->result() as $row)
                     {         
                             echo '<tr><td align="left" class="glen">'.$row->id.'</td><td align="left" class="glen"> sonovate '.$row->id.'</td>';
-                                $this->cronpipelineUpdater($row->id,'Using Finance');  
+                                //$this->cronpipelineUpdater($row->id,'Using Finance');  } 
                       //$this->cronpipelineUpdaternew($row->id,'FF');
                             
                     }
