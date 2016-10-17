@@ -182,7 +182,7 @@
 	<?php $this->load->view('companies/create_contact_box.php',array('company'=>$company)); ?>
 	<?php $this->load->view('companies/create_address_box.php',array('company'=>$company)); ?>
    
-<div class="panel panel-primary" style="padding-top: 90px;"  >
+<div class="panel panel-primary">
 	<div class="panel-body">
     	<div class="row"><!--FINISHED AT THE END OF PANEL-->
 		<div class="col-sm-9">
@@ -935,7 +935,7 @@ endif;
                 <strong><span class="sourceRequiredTitle" >Source</span> Required.</strong><br> To add a <span class="sourceRequiredDropDownItem"></span>&#44; please add a <span class="editBoxInstruction">Source</span> to this company.
             </div>
             <div class="row">
-                        <div class="col-sm-3 col-md-3">
+                        <div class="col-sm-4 col-md-4">
                             <div class="form-group ">
                                 <label>New Action</label>
                                 
@@ -963,7 +963,7 @@ endif;
                                
                             </div>
                         </div>
-                     <div class="col-sm-3 col-md-2 initialfee fee">
+                     <div class="col-sm-2 col-md-2 initialfee fee">
                             <div class="form-group ">
                                 <label>Initial Fee</label>
                                 <div class="input-group">
@@ -973,30 +973,10 @@ endif;
                             </div>
                         </div>
                 
-                
-                <?php if ($current_user['permission'] == 'admin' || $current_user['permission'] == 'data' || $current_user['permission'] == 'uf'): ?>
-<div class="col-sm-3   initialfee">
-        <div class="form-group ">
-            <label>Turnover</label>
-            <div class="input-group">   <div class="input-group-addon">£</div>
-                <input type="number" step="0.01" name="turnover" placeholder="0.00" min="0.01" max="25000000"   class="form-control" id="turnover" >
-             
-            </div>
-        </div>
-    </div>
-<div class="col-sm-3  initialfee">
-        <div class="form-group ">
-            <label>Contractors</label>
-            <div class="input-group">  <div class="input-group-addon">Runners</div>
-                <input type="number" step="0.01" name="runners" placeholder="0" min="0" class="form-control" id="runners" >
-              
-            </div>
-        </div>
-    </div>
-                 <?php endif; ?>
+               
                 
 
-                        <div class="col-sm-3 col-md-3  onInitialFee">
+                        <div class="col-sm-2 col-md-2  onInitialFee">
                             <?php if(isset($contacts) and !empty($contacts)) : ?>
                                 <div class="form-group ">
                                     <label>Contact</label>
@@ -1009,7 +989,7 @@ endif;
                                 </div>
                             <?php endif; ?>
                         </div>
-                         <div class="col-sm-3 col-md-3 onInitialFee">
+                         <div class="col-sm-2 col-md-2 onInitialFee">
                             <div class="form-group ">
                                 <label>Follow Up Action</label>
 
@@ -1021,23 +1001,67 @@ endif;
                                 </select>
                             </div>
                         </div>
-                        <div class="col-sm-3 col-md-3">
-                            <div class="form-group " >
+                        <div class="col-sm-2 col-md-4 followup">
+                            <div class="form-group" >
                                 <label>Follow Up Date</label>
                                 <input type="text" class="form-control follow-up-date" id="planned_at" data-date-format="YYYY/MM/DD H:m" name="planned_at" placeholder="">
                             </div>
                         </div>
-                
-                
-                   
-                        <div class="col-sm-12 col-md-12">
-                            <div class="form-group addActionOutcome">
-                                 <?php foreach($action_types_done as $action ):  
+                                        <div class="col-sm-4 col-md-4">
+
+                <?php foreach($action_types_done as $action ):  
                                 
-                                echo '<div class="action_verbiage action_verbiage_text'.str_replace(' ', '',$action->id ).'" >' .$action->how_used.'</div>';
+                                echo '<div class="alert alert-info action_verbiage action_verbiage_text'.str_replace(' ', '',$action->id ).'" >'
+                                    
+                                    
+                                    .$action->how_used.
+                                    
+                                    
+                                    
+                                    '</div>';
                                 
                                 endforeach;
                                 ?>
+                </div>
+                   
+                 
+                <?php if ($current_user['permission'] == 'admin' || $current_user['permission'] == 'data' || $current_user['permission'] == 'uf'): ?>
+<div class="col-sm-4   initialfee">
+        <div class="form-group ">
+            <label>Turnover</label>
+            <div class="input-group">   <div class="input-group-addon">£</div>
+                <input type="number" step="0.01" name="turnover" placeholder="0.00" min="0.01" max="25000000"   class="form-control" id="turnover" >
+             
+            </div>
+        </div>
+    </div>
+<div class="col-sm-4  initialfee">
+        <div class="form-group ">
+            <label>Contractors</label>
+            <div class="input-group">  <div class="input-group-addon">Runners</div>
+                <input type="number" step="0.01" name="runners" placeholder="0" min="0" class="form-control" id="runners" >
+              
+            </div>
+        </div>
+    </div>
+                 <?php endif; ?>
+                
+                
+                
+                
+                
+                
+                
+                        <div class="col-sm-12 col-md-12">
+                            <div class="form-group addActionOutcome">
+                                 
+                                
+                                
+                                
+                                
+                                
+                                
+                                
                                 
                                 <label>Comment<span class="actionEvalPipeline"style=" color: red;">*</span></label>
                                 
@@ -1118,7 +1142,7 @@ endif;
 
                             </div>
                             <button type="submit" name="no contno con" class="btn btn-primary form-control disable_no_source " id="add_action_request" disabled="disabled">Add Action</button>
-                        </div>
+                        </div><!--END MD-12-->
                         <?php echo form_close(); ?>
 </div>
 		  </div>

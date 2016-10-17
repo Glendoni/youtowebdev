@@ -788,11 +788,12 @@ uimage = val.image.split(',')
             
             if($('.initialfee').length ==1){
             $('.onInitialFee').addClass('col-md-2');
+                $('.followup').addClass('col-md-2');
             $('.initialfee').show();
             $('.initialfee input').attr('required', 'required');
             }else{
                 
-                 $('.fee').removeClass('col-md-2');
+               $('.followup').addClass('col-md-2');
             $('.initialfee').show();
             $('.initialfee input').attr('required', 'required');  
                 
@@ -806,6 +807,7 @@ uimage = val.image.split(',')
             //checkInitialFee()
         }else{
             $('.onInitialFee').removeClass('col-md-3');
+             $('.followup').removeClass('col-md-2');
             $('.initialfee input').val('').removeAttr('required');
             $('.initialfee').hide();
         }

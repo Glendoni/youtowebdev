@@ -3128,6 +3128,12 @@ cursor:pointer;
     margin: 0 auto;
 }
 
+.action_verbiage{
+    margin-top: 9px;
+    height: 50px;
+    margin-bottom: 5px;
+}
+
  
 /*! Hint.css - v2.2.1 - 2016-03-26 //#2b4461
 * http://kushagragour.in/lab/hint/
