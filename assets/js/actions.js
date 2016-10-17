@@ -1236,6 +1236,11 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
          var updatemeeting = [];
          var turnover = [];
          var employees = [];
+         var tfer_runners ;
+        var tfer_turnover;
+
+         
+         tfer_turnover
          
          if(typeof action['name'] !== 'undefined'  && action['name'] !== null &&  action['name'] !== 'null'   ){
             created_by = action['name'];
@@ -1280,12 +1285,12 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
             
              
              
-    turnover =  '<span class="label label-warning">Turnover ' + (parseFloat(action['turnover']).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,'))+'</span>' ; 
+    turnover =  '<span class="label label-warning">Turnover ' + (parseFloat(action['tfer_turnover']).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,'))+'</span>' ; 
             
              
-    employees  =   '<span class="label label-info"> Contractors  ' + action['employees']+' </span>' ;                            
+    employees  =   '<span class="label label-info"> Contractors  ' + action['tfer_runners']+' </span>' ;                            
                                              
-                                             
+                        
                                             }
         
              if(!actions_cancelled || typeof actionImg !== 'undefined'){

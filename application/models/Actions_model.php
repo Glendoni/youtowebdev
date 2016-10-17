@@ -138,7 +138,7 @@ function get_actions_completed($company_id)
     $data = array(
         'a.company_id' => $company_id,
         );
-    $this->db->select('a.created_at,a.actioned_at,a.action_type_id,com.initial_rate,a.comments,a.cancelled_at,a.outcome,a.id,u.image,u.name,c.first_name,c.last_name,com.turnover,com.employees,a.contact_id,a.followup_action_id, a.planned_at", ');
+    $this->db->select('a.created_at,a.actioned_at,a.action_type_id,com.initial_rate,a.comments,a.cancelled_at,a.outcome,a.id,u.image,u.name,c.first_name,c.last_name,a.tfer_runners,a.tfer_turnover,a.contact_id,a.followup_action_id, a.planned_at", ');
     $this->db->join('contacts c', 'c.id = a.contact_id', 'left');
     $this->db->join('users u', 'a.user_id = u.id', 'left');
     $this->db->join('companies com', 'a.company_id = com.id', 'left');
@@ -810,6 +810,11 @@ function create($post, $userid =false)
         'actioned_at'   => date('Y-m-d H:i:s'),
         'created_at'    => date('Y-m-d H:i:s'),
         'followup_action_id' =>(isset($post['followup_action_id'])?$post['followup_action_id']:NULL),
+         'tfer_runners'  => (!empty($post['runners'])? $post['runners']:0),  
+                'tfer_turnover' => (!empty($post['turnover'])?  $post['turnover']:0),
+        
+        
+        
         );
     $query = $this->db->insert('actions', $completeddata);
     //END TEST
@@ -895,6 +900,8 @@ function company_updated_to_customer($post){
                 'action_type_id'=> '19',
                 'actioned_at'   => date('Y-m-d H:i:s'),
                 'created_at'    => date('Y-m-d H:i:s'),
+                'tfer_runners'  => (!empty($post['runners'])? $post['runners']:0),  
+                'tfer_turnover' => (!empty($post['turnover'])?  $post['turnover']:0),
                 );
     $query = $this->db->insert('actions', $actiondata);
     return $this->db->insert_id();
@@ -913,6 +920,8 @@ function company_updated_to_proposal($post)
         'action_type_id'=> '19',
         'actioned_at'   => date('Y-m-d H:i:s'),
         'created_at'    => date('Y-m-d H:i:s'),
+      'tfer_runners'  => (!empty($post['runners'])? $post['runners']:0),  
+            'tfer_turnover'  => (!empty($post['turnover'])?  $post['turnover']:0),
         );
 
     $query = $this->db->insert('actions', $actiondata);

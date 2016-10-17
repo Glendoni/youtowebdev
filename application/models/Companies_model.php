@@ -108,14 +108,13 @@ class Companies_model extends CI_Model {
 		return $query->result();
 	}
 
-	function update_company_to_customer($id,$post){
+	function update_company_to_customer($id){
         
         //isset($post['method'])?$post['method']:NULL,
-   $contractors =      isset($post['contractors'])?$post['contractors']:NULL ;
-      $turnover =   isset($post['turnover'])?$post['turnover']:NULL ;
+  
         
 		$this->db->where('id', $id);
-		$this->db->update('companies', array('customer_from'=>date('Y-m-d H:i:s'),'pipeline' => "Customer",'employees' => $contractors, 'turnover' =>$turnover ));
+		$this->db->update('companies', array('customer_from'=>date('Y-m-d H:i:s'),'pipeline' => "Customer" ));
 		return $this->db->affected_rows();
 	}
 
@@ -126,10 +125,7 @@ class Companies_model extends CI_Model {
 		return $this->db->affected_rows(); 
 	}
     
-    
-    
-    
-    	function update_company_to_action($id, $actionName){ //new function to aid the refactor of pipeline from edit box
+    function update_company_to_action($id, $actionName){ //new function to aid the refactor of pipeline from edit box
 		$pipelinedata = array('pipeline' => $actionName, 'updated_at' => date('Y-m-d H:i:s'));
 		$this->db->where('id', $id);
 		$this->db->update('companies', $pipelinedata);

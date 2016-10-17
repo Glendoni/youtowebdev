@@ -192,7 +192,7 @@ $('#action_type_completed').change(function(){
                                                                        $('.action_verbiage_text'+action_verbiage_text).show();
 
 
-                                                                        console.log($(this).val())
+                                                                        //console.log($(this).val())
   
     $('#action-error .editBoxInstruction').text('Source');
 var source_check = $("input[name=source_check]").val();
@@ -298,16 +298,6 @@ if ((this.value == '16' || this.value == '8' || this.value == '32') && (!source_
     }
     
     
-    
-    
-    
-   
-    
-   
-    
-  
-    
-  
     
     $(".sourceRequiredTitle").html(sourceRequiredTitle);
      $('#action-error .editBoxInstruction').html(check);
@@ -792,13 +782,30 @@ uimage = val.image.split(',')
     }
     $('#action_type_completed').on('change',function(){
 
-        if($('#action_type_completed').val() == 16 ){
+        if($('#action_type_completed').val() == 16 || $('#action_type_completed').val() == 8 ){
+            
+            
+            
+            if($('.initialfee').length ==1){
             $('.onInitialFee').addClass('col-md-2');
             $('.initialfee').show();
             $('.initialfee input').attr('required', 'required');
+            }else{
+                
+                 $('.fee').removeClass('col-md-2');
+            $('.initialfee').show();
+            $('.initialfee input').attr('required', 'required');  
+                
+                
+                
+            }
+                
+                
+                
+                
             //checkInitialFee()
         }else{
-            $('.onInitialFee').removeClass('col-md-2');
+            $('.onInitialFee').removeClass('col-md-3');
             $('.initialfee input').val('').removeAttr('required');
             $('.initialfee').hide();
         }

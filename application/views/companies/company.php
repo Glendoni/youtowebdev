@@ -963,7 +963,7 @@ endif;
                                
                             </div>
                         </div>
-                        <div class="col-sm-3 col-md-2 initialfee">
+                     <div class="col-sm-3 col-md-2 initialfee fee">
                             <div class="form-group ">
                                 <label>Initial Fee</label>
                                 <div class="input-group">
@@ -972,26 +972,30 @@ endif;
                                 </div>
                             </div>
                         </div>
-<?php if ($current_user['permission'] == 'admin' || $current_user['permission'] == 'data' || $current_user['permission'] == 'uf'): ?>
-<div class="col-sm-3 col-md-2 initialfee">
+                
+                
+                <?php if ($current_user['permission'] == 'admin' || $current_user['permission'] == 'data' || $current_user['permission'] == 'uf'): ?>
+<div class="col-sm-3   initialfee">
         <div class="form-group ">
             <label>Turnover</label>
             <div class="input-group">   <div class="input-group-addon">£</div>
-                <input type="number" step="0.01" name="turnover" placeholder="0.00" min="0.01"   class="form-control" id="turnover" >
+                <input type="number" step="0.01" name="turnover" placeholder="0.00" min="0.01" max="25000000"   class="form-control" id="turnover" >
              
             </div>
         </div>
     </div>
-<div class="col-sm-3 col-md-2 initialfee">
+<div class="col-sm-3  initialfee">
         <div class="form-group ">
             <label>Contractors</label>
-            <div class="input-group">  <div class="input-group-addon">num</div>
-                <input type="number" step="0.01" name="contractors" placeholder="0.00" min="5" max="900" class="form-control" id="contactors" >
+            <div class="input-group">  <div class="input-group-addon">Runners</div>
+                <input type="number" step="0.01" name="runners" placeholder="0" min="0" class="form-control" id="runners" >
               
             </div>
         </div>
     </div>
                  <?php endif; ?>
+                
+
                         <div class="col-sm-3 col-md-3  onInitialFee">
                             <?php if(isset($contacts) and !empty($contacts)) : ?>
                                 <div class="form-group ">
@@ -1023,6 +1027,9 @@ endif;
                                 <input type="text" class="form-control follow-up-date" id="planned_at" data-date-format="YYYY/MM/DD H:m" name="planned_at" placeholder="">
                             </div>
                         </div>
+                
+                
+                   
                         <div class="col-sm-12 col-md-12">
                             <div class="form-group addActionOutcome">
                                  <?php foreach($action_types_done as $action ):  
