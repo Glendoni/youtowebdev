@@ -1285,10 +1285,10 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
             
              
              
-    turnover =  '<span class="label label-warning">Turnover ' + (parseFloat(action['tfer_turnover']).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,'))+'</span>' ; 
+    //turnover =  '<span class="label label-warning">Turnover ' + (parseFloat(action['tfer_turnover']).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,'))+'</span>' ; 
             
              
-    employees  =   '<span class="label label-info"> Contractors  ' + action['tfer_runners']+' </span>' ;                            
+    //employees  =   '<span class="label label-info"> Contractors  ' + action['tfer_runners']+' </span>' ;                            
                                              
                         
                                             }
