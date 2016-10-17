@@ -138,7 +138,7 @@ function get_actions_completed($company_id)
     $data = array(
         'a.company_id' => $company_id,
         );
-    $this->db->select('a.created_at,a.actioned_at,a.action_type_id,com.initial_rate,a.comments,a.cancelled_at,a.outcome,a.id,u.image,u.name,c.first_name,c.last_name,a.contact_id,a.followup_action_id, a.planned_at", ');
+    $this->db->select('a.created_at,a.actioned_at,a.action_type_id,com.initial_rate,a.comments,a.cancelled_at,a.outcome,a.id,u.image,u.name,c.first_name,c.last_name,com.turnover,com.employees,a.contact_id,a.followup_action_id, a.planned_at", ');
     $this->db->join('contacts c', 'c.id = a.contact_id', 'left');
     $this->db->join('users u', 'a.user_id = u.id', 'left');
     $this->db->join('companies com', 'a.company_id = com.id', 'left');

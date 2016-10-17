@@ -89,7 +89,7 @@ class Actions extends MY_Controller {
 
                                 // if action type completed is a deal then company is a now a customer
                                 // companies model update the company to customer
-                                $result = $this->Companies_model->update_company_to_customer($company_id);
+                                $result = $this->Companies_model->update_company_to_customer($company_id,$post);
                                 if(empty($result)){
                                     $this->set_message_warning('Error while updating company.');	
                                 }
