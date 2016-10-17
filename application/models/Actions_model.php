@@ -116,7 +116,7 @@ function get_actions_outstanding($company_id,$limit =100)
     $data = array(
         'a.company_id' => $company_id,
         );
-    $this->db->select('a.company_id, a.id "action_id",a.followup_action_id,a.comments,a.planned_at,a.action_type_id,u.name ,c.first_name,c.last_name,c.phone,comp.initial_rate,c.email,a.user_id,c.id "contact_id",a.created_at as "created_at",a.actioned_at as "actioned_at", at.name as actionType, a.planned_at, u.image ,comp.name as "company_name" ');
+    $this->db->select('a.company_id, a.id "action_id",a.followup_action_id,a.comments,a.planned_at,a.action_type_id,u.name ,c.first_name,c.last_name,c.phone,comp.initial_rate,c.email,a.user_id,c.id "contact_id",a.created_at as "created_at",a.actioned_at as "actioned_at", at.name as actionType, a.planned_at, u.image ,comp.name as "company_name",');
     $this->db->where('a.planned_at IS NOT NULL', null);
     $this->db->where('a.actioned_at IS NULL', null);
     $this->db->where('a.cancelled_at IS NULL', null);
@@ -138,7 +138,7 @@ function get_actions_completed($company_id)
     $data = array(
         'a.company_id' => $company_id,
         );
-    $this->db->select('a.created_at,a.actioned_at,a.action_type_id,com.initial_rate,a.comments,a.cancelled_at,a.outcome,a.id,u.image,u.name,c.first_name,c.last_name,a.tfer_runners,a.tfer_turnover,a.contact_id,a.followup_action_id, a.planned_at ');
+    $this->db->select('a.created_at,a.actioned_at,a.action_type_id,com.initial_rate,a.comments,a.cancelled_at,a.outcome,a.id,u.image,u.name,c.first_name,c.last_name,a.contact_id,a.followup_action_id, a.planned_at", ');
     $this->db->join('contacts c', 'c.id = a.contact_id', 'left');
     $this->db->join('users u', 'a.user_id = u.id', 'left');
     $this->db->join('companies com', 'a.company_id = com.id', 'left');
@@ -157,7 +157,7 @@ function get_follow_up_actions($company_id) //Added by glen this has only one de
     $data = array(
         'a.company_id' => $company_id,
         );
-    $this->db->select('a.created_at,a.actioned_at,a.action_type_id,a.comments,a.outcome,a.cancelled_at,a.id,u.image,u.name,c.first_name,c.last_name,a.contact_id,a. followup_action_id, a.planned_at ');
+    $this->db->select('a.created_at,a.actioned_at,a.action_type_id,a.comments,a.outcome,a.cancelled_at,a.id,u.image,u.name,c.first_name,c.last_name,a.contact_id,a. followup_action_id, a.planned_at", ');
     $this->db->join('contacts c', 'c.id = a.contact_id', 'left');
     $this->db->join('users u', 'a.user_id = u.id', 'left');
     $this->db->where('followup_action_id IS NOT NULL', null);
@@ -810,11 +810,6 @@ function create($post, $userid =false)
         'actioned_at'   => date('Y-m-d H:i:s'),
         'created_at'    => date('Y-m-d H:i:s'),
         'followup_action_id' =>(isset($post['followup_action_id'])?$post['followup_action_id']:NULL),
-         'tfer_runners'  => (!empty($post['runners'])? $post['runners']:0),  
-                'tfer_turnover' => (!empty($post['turnover'])?  $post['turnover']:0),
-        
-        
-        
         );
     $query = $this->db->insert('actions', $completeddata);
     //END TEST
@@ -900,8 +895,6 @@ function company_updated_to_customer($post){
                 'action_type_id'=> '19',
                 'actioned_at'   => date('Y-m-d H:i:s'),
                 'created_at'    => date('Y-m-d H:i:s'),
-                'tfer_runners'  => (!empty($post['runners'])? $post['runners']:0),  
-                'tfer_turnover' => (!empty($post['turnover'])?  $post['turnover']:0),
                 );
     $query = $this->db->insert('actions', $actiondata);
     return $this->db->insert_id();
@@ -920,8 +913,6 @@ function company_updated_to_proposal($post)
         'action_type_id'=> '19',
         'actioned_at'   => date('Y-m-d H:i:s'),
         'created_at'    => date('Y-m-d H:i:s'),
-      'tfer_runners'  => (!empty($post['runners'])? $post['runners']:0),  
-            'tfer_turnover'  => (!empty($post['turnover'])?  $post['turnover']:0),
         );
 
     $query = $this->db->insert('actions', $actiondata);
