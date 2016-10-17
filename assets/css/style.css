@@ -2993,16 +2993,33 @@ border:none;
 
  
     
-@media screen and (min-width: 1999px) {
+@media screen and (min-width: 1491px) {
      #single-page {
-    padding-top: 185px;
+    padding-top: 105px;
          
 }
     body{
-            padding-top: 0px;
+            padding-top: 80px;
+      
         
     }
-}    
+}  
+
+
+@media screen and (max-width: 1280px) {
+     #single-page {
+ 
+          padding-top: 20px; 
+}
+      body{
+            padding-top: 10%;
+      
+        
+    }
+    
+}
+
+
 #specialInsightRequired{
     
     display:none;
