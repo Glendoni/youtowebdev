@@ -138,19 +138,10 @@ function remove_contacts_from_marketing()
 
             //UNSUBSCRIBE//
             $ch2 = curl_init();
-            curl_setopt($ch2, CURLOPT_URL, "https://api2.autopilothq.com/v1/contact");
+            curl_setopt($ch2, CURLOPT_URL, "https://api2.autopilothq.com/v1/contact/".$email."");
             curl_setopt($ch2, CURLOPT_RETURNTRANSFER, TRUE);
             curl_setopt($ch2, CURLOPT_HEADER, FALSE);
-
             curl_setopt($ch2, CURLOPT_POST, TRUE);
-
-            curl_setopt($ch2, CURLOPT_POSTFIELDS, "{
-            \"contact\": {
-            \"unsubscribed\": \"Yes\",
-            \"Email\": \"".$email."\"
-            }
-            }");
-
             curl_setopt($ch2, CURLOPT_HTTPHEADER, array(
             "autopilotapikey: ed278f3d19a5453fb807125aa945a81a",
             "Content-Type: application/json"
