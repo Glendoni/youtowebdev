@@ -782,10 +782,10 @@ uimage = val.image.split(',')
     }
     $('#action_type_completed').on('change',function(){
 
-        if($('#action_type_completed').val() == 16 || $('#action_type_completed').val() == 8 ){
+        if($('#action_type_completed').val() == 16 || $('#action_type_completed').val() == 8  && ($('.initialfee').length ==1 && $('#action_type_completed').val() != 8)){
             
             
-            
+     
             if($('.initialfee').length ==1){
             $('.onInitialFee').addClass('col-md-2');
                 $('.followup').addClass('col-md-2');
