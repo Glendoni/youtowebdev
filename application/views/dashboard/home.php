@@ -1273,7 +1273,7 @@
 
 <div class="col-sm-2 mobile-hide">
 <div class="circle-responsive_campiagns black-circle-campaign  <?php echo empty($this->session->userdata('pipeline'))? 'active':'';?>"><div class="circle-content mega">
-<div class="large-number"><?php echo number_format($get_user_campaign->campaign_total); ?></div> <div class="small-text">Companies
+<div class="large-number"><?php echo $get_user_campaign->campaign_total; ?></div> <div class="small-text">Companies
 </div>
 
 </div>
