@@ -1039,7 +1039,7 @@ endif;
         <div class="form-group ">
             <label>Contractors</label>
             <div class="input-group">  <div class="input-group-addon">Runners</div>
-                <input type="number" step="0.01" name="runners" placeholder="0" min="0" class="form-control" id="runners" >
+                <input type="number" step="1" name="runners" placeholder="0" min="0" class="form-control" id="runners" >
               
             </div>
         </div>
