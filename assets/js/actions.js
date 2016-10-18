@@ -1279,23 +1279,21 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
 
 
          
-         if(actionType == 'Pipeline - Deal'){ 
+         if(actionType == 'Pipeline - Deal' ){ 
              actionTypeOverwrite = actionType+'@'+initial_fee+'%';
-             
+         }
             
              
-          
-             
-                if(typeof action['tfer_turnover'] !== 'undefined' ){
-     turnover =  '<span class="label label-warning">Turnover ' + (parseFloat(action['tfer_turnover']).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,'))+'</span>' ; 
-            
-             
+           if(actionType == 'Pipeline - Deal' || actionType == 'Pipeline - Proposal'){ 
+             alert(action['tfer_turnover'])
+            if(typeof action['tfer_turnover'] !== 'undefined' ){
+     turnover =  '<span class="label label-warning">Turnover ' + (parseFloat(action['tfer_turnover']).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,'))+'</span>' ;  
     employees  =   '<span class="label label-info"> Contractors  ' + action['tfer_runners']+' </span>' ;    
                     
                 }
                                              
                         
-                                            }
+             }
         
              if(!actions_cancelled || typeof actionImg !== 'undefined'){
                 badge = '<span class="circle" style="float: left;margin-top: 0px;margin-right: 10px;width: 20px;height: 20px;border-radius: 15px;font-size: 8px;line-height: 20px;text-align: center;font-weight: 700;background-color:'+actionImg[1]+'; color:'+actionImg[2]+';">'+actionImg[0]+'</span>';

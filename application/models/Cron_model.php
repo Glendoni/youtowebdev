@@ -1155,7 +1155,7 @@ order by customer_from desc';
                          echo '<table width="400">';
                     foreach($query->result() as $row)
                     {         
-                            echo '<tr><td align="left" class="glen">'.$row->id.'</td><td align="left" class="glen">'.$row->class.'</td><td align="left" class="glen">'.$row->class.'</td>';
+                            echo '<tr><td align="left" class="glen">'.$row->id.'</td><td align="left" class="glen">'.$row->class.'</td><td align="left" class="glen">'.$row->dog.'</td>';
                     //$this->cronpipelineUpdater($row->id,$row->pipeline_value);  } 
                        $this->cronpipelineUpdaternew($row->id,$row->class);
                             
