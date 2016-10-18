@@ -121,7 +121,7 @@ function remove_contacts_from_marketing()
     foreach ($query->result() as $row) {
         $email = $row->email;
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, "https://api2.autopilothq.com/v1/contact/".$email."");
+        curl_setopt($ch, CURLOPT_URL, "https://api2.autopilothq.com/v1/contact/".$email."/unsubscribe");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
         curl_setopt($ch, CURLOPT_HEADER, FALSE);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
@@ -130,26 +130,6 @@ function remove_contacts_from_marketing()
 
         $response = curl_exec($ch);
         curl_close($ch);
-        $contact = json_decode($response);
-        $contactactemail = $contact->Email;
-        $unsubscribestatus = $contact->unsubscribed;
-
-        if ((!empty($contactactemail)) && (empty($unsubscribestatus))) {
-
-            //UNSUBSCRIBE//
-            $ch2 = curl_init();
-            curl_setopt($ch2, CURLOPT_URL, "https://api2.autopilothq.com/v1/contact/".$email."");
-            curl_setopt($ch2, CURLOPT_RETURNTRANSFER, TRUE);
-            curl_setopt($ch2, CURLOPT_HEADER, FALSE);
-            curl_setopt($ch2, CURLOPT_POST, TRUE);
-            curl_setopt($ch2, CURLOPT_HTTPHEADER, array(
-            "autopilotapikey: ed278f3d19a5453fb807125aa945a81a",
-            "Content-Type: application/json"
-            ));
-            $response2 = curl_exec($ch2);
-            curl_close($ch2);
-            echo $email."updated";
-        }
     }
     
 }
