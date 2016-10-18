@@ -810,8 +810,8 @@ function create($post, $userid =false)
         'actioned_at'   => date('Y-m-d H:i:s'),
         'created_at'    => date('Y-m-d H:i:s'),
         'followup_action_id' =>(isset($post['followup_action_id'])?$post['followup_action_id']:NULL),
-         'tfer_turnover' =>(isset($post['turnover'])?$post['turnover']:0),
-         'tfer_runners' =>(isset($post['runners'])?$post['runners']:0)
+         'tfer_turnover' =>(isset($post['turnover'])?$post['turnover']:null),
+         'tfer_runners' =>(isset($post['runners'])?$post['runners']:null)
         );
     $query = $this->db->insert('actions', $completeddata);
     //END TEST
