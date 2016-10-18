@@ -209,7 +209,7 @@ $search_default = $this->input->post('agency_name');
                                     
 
 
-                    <input name="agency_name" id="agency_name" type="text" onkeyup="ajaxSearch();" class="form-control large-search-height large-search" style="background-color: transparent;border: none;box-shadow: none;color: #fff;" autocomplete="off" autofocus value="<?php echo trim($search_default);?>" placeholder="Search">
+                    <input name="agency_name" id="agency_name" type="text" onkeyup="ajaxSearch();" class="form-control large-search-height large-search" autocomplete="off" autofocus value="<?php echo trim($search_default);?>" placeholder="Search">
                     <div class="alert alert-warning alert-dismissible" style="display:none;" id="empty_form_error" role="alert">
                     <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 
