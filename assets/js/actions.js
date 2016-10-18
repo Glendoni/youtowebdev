@@ -1285,7 +1285,6 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
             
              
            if(actionType == 'Pipeline - Deal' || actionType == 'Pipeline - Proposal'){ 
-             alert(action['tfer_turnover'])
             if(typeof action['tfer_turnover'] !== 'undefined' ){
      turnover =  '<span class="label label-warning">Turnover ' + (parseFloat(action['tfer_turnover']).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,'))+'</span>' ;  
     employees  =   '<span class="label label-info"> Contractors  ' + action['tfer_runners']+' </span>' ;    
