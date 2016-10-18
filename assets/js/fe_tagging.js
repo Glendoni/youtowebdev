@@ -290,7 +290,7 @@ if((/companies/.test(window.location.href))) {
                     preventtagRemove = '<span class="tagRemove" data-tag="'+val['tag_id']+'">x</span>';  
                 }
                  //indicatorshow  =  '<span class="folIcon indicatorshow"></span>';
-         //  $('.fetags'+val['parent_tag_id']).append('<li class="addedTag tag'+val['tag_id']+' feTagfolderTotal hint--top-right" data-hint="'+val['username']+' on  '+formattDateTags(val['tagcreatedat'], true)+'" ><span class="tagName"></span>'+val['name']+ preventtagRemove+'</li>');
+           $('.fetags'+val['parent_tag_id']).append('<li class="addedTag tag'+val['tag_id']+' feTagfolderTotal hint--top-right" data-hint="'+val['username']+' on  '+formattDateTags(val['tagcreatedat'], true)+'" ><span class="tagName"></span>'+val['name']+ preventtagRemove+'</li>');
            
                   $('.tafixed').show()
 
@@ -369,7 +369,7 @@ function del_ini(){
                              $('.activeMain .folIcon').removeClass('indicatorshow');
                               //alert($('.addedTag').length);
                            $('.sub li').hide()
-                           $('.addedTag').length ? $('.ta').show()+ $('.tadefault').hide() +$('.tafixed').show() :  $('.tadefault').show() + $('.ta').hide() + $('.tafixed').hide();
+ $('.addedTag').length ? $('.ta').show()+ $('.tadefault').hide() +$('.tafixed').show() :  $('.tadefault').show() + $('.ta').hide() + $('.tafixed').hide();
                            
                         unHighlightActiveSubITems();
                         $('.tagRemove').off('click.disabled');
