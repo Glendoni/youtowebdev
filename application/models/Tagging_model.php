@@ -393,7 +393,7 @@ ON tc.id = t.category_id
     function fegetcategories()
     {
         
-        $sql = 'SELECT name as  par_name FROM tag_categories  WHERE master_category_id IS NULL'; 
+        $sql = 'SELECT name as  par_name FROM tag_categories  WHERE master_category_id IS NULL '; 
 
         $query = $this->db->query($sql);
 
@@ -407,20 +407,20 @@ ON tc.id = t.category_id
      function fegettags($post, $userID)
     {
         
-        $sql = 'SELECT t.name, ct.id as tag_id ,tc.id as parent_tag_id, tc.name as parent_tag_name, u.name as username, ct.eff_from as tagcreatedat 
+        $sql = 'SELECT  tc.sequence, t.name, ct.id as tag_id ,tc.id as parent_tag_id, tc.name as parent_tag_name, u.name as username, ct.eff_from as tagcreatedat 
         FROM company_tags  ct
         LEFT JOIN tags t
         ON ct.tag_id= t.id
         LEFT JOIN tag_categories tc
         ON t.category_id = tc.id
-    LEFT JOIN users u
-    ON ct.created_by = u.id
+        LEFT JOIN users u
+        ON ct.created_by = u.id
         WHERE ct.company_id='.$post['companyID'].' 
         AND ct.eff_from <= DATE(NOW()) 
         AND ct.eff_to IS NULL 
         AND t.eff_from <= DATE(NOW()) 
         AND t.eff_to IS NULL
-        ORDER BY tc.sequence DESC'; 
+        ORDER BY tc.sequence asc'; 
          
         $query = $this->db->query($sql);
 
@@ -440,9 +440,9 @@ ON tc.id = t.category_id
         
             $arrSql = array(
             'tag_id' => $post['tagid'],
-                 'eff_from' => date('Y-m-d'),
-                 'created_by' => $userID,
-                'company_id' => $post['companyID']
+             'eff_from' => date('Y-m-d'),
+             'created_by' => $userID,
+            'company_id' => $post['companyID']
             );
             $this->db->insert('company_tags', $arrSql);
             return json_encode(array('success' => 'ok'));

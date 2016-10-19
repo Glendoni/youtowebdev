@@ -97,14 +97,16 @@ function populate(){
                 //console.log(val['cat_id'])
                 if($.inArray(el, category) === -1) category.push(el);
             })
-            tagcont = tagcont.sort();
+           // tagcont = tagcont.sort();
             $('.subcont').prepend(jQuery.unique(tagcont).join(''));  
         //category = category.sort()
             $.each( category, function( key, vals ) {
  
                 sort = vals.split('_');
   //SIC Code 1
-                if(sort[0] != 'Downloads' && sort[0] != 'SIC Code 1'  ){
+
+ 
+                if(sort[0] != 'Downloads' && sort[0] != 'SIC Code'  ){
                 $('.main_'+sort[1].replace(' ', '')).append('<li class="list-group-item folder" glen data="'+sort[2]+'"> <span class="indicatorshow"></span>'+sort[0]+' <span class="tagNumPlaceholder tagNum_'+sort[2]+'"></span></li>'); 
                 }
                 $('.main_'+sort[1].replace(' ', '')).append('<ul class="subtags sub_'+sort[2]+'" ></ul>');  
@@ -286,7 +288,9 @@ if((/companies/.test(window.location.href))) {
              $.each( data, function( key, val) {
         if(val['parent_tag_name'] != null){
               parent_tag_name =    val['parent_tag_name'].replace(' ', '');
-                if(parent_tag_name != 'Downloads' && parent_tag_name != 'SICCode 1'){
+            
+            //console.log(parent_tag_name +val['parent_tag_id'])
+                if(parent_tag_name != 'Downloads' && val['parent_tag_id'] != 52){
                     preventtagRemove = '<span class="tagRemove" data-tag="'+val['tag_id']+'">x</span>';  
                 }
                  //indicatorshow  =  '<span class="folIcon indicatorshow"></span>';
