@@ -110,7 +110,7 @@ function populate(){
                 $('.main_'+sort[1].replace(' ', '')).append('<li class="list-group-item folder" glen data="'+sort[2]+'"> <span class="indicatorshow"></span>'+sort[0]+' <span class="tagNumPlaceholder tagNum_'+sort[2]+'"></span></li>'); 
                 }
                 
-                if(sort[2] != 52){
+                if(sort[2] != 52 ){
                 $('.main_'+sort[1].replace(' ', '')).append('<ul class="subtags sub_'+sort[2]+'" ></ul>');  
                     
                 }
