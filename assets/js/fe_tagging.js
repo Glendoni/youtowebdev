@@ -125,18 +125,18 @@ function populate(){
                         $('.tadefix').show();
                     }
                 }
-   console.log(val['how_used'])
+  
                 if(val['parent_cat_name'] == null){
 
                     parentcatname =   val['category_name'].replace(' ', '');
                     
                  
-                    $('.main_'+parentcatname).append('<li class="list-group-item parent  sub_group sub'+val['tac_sub_cat_id']+' tag  hint--top-right" data-hint="'+val['how_used']+'" " cat_id='+val['tac_sub_cat_id']+' sub="'+val['tag_id']+'"> '+val['name']+'</li>');  
+                    $('.main_'+parentcatname).append('<li class="list-group-item parent  sub_group sub'+val['tac_sub_cat_id']+' tag  hint--top-right" data-hint="'+val['how_used']+'" cat_id='+val['tac_sub_cat_id']+' sub="'+val['tag_id']+'"> '+val['name']+'</li>');  
 
                 }
                 if(val['parent_cat_name']){
                 parentcatname =   val['parent_cat_name'].replace(' ', '')
-    $('.sub_'+val['cat_id']).append('<li class="list-group-item sub_group sub'+val['tac_sub_cat_id']+' inner tag  hint--top-right" data-hint="'+val['how_used']+'" " par-sub-id="'+val['cat_id']+'" sub="'+val['tag_id']+'">'+val['name']+'<span class="pull-right label label-master-category">'+val['category_name']+'</span> </li>');  
+    $('.sub_'+val['cat_id']).append('<li class="list-group-item sub_group sub'+val['tac_sub_cat_id']+' inner tag  hint--top-right" data-hint="'+val['how_used']+'" par-sub-id="'+val['cat_id']+'" sub="'+val['tag_id']+'">'+val['name']+'<span class="pull-right label label-master-category">'+val['category_name']+'</span> </li>');  
 
                 }
             //console.log($('.main_'+val['cat_id']+' .sub_'+val['cat_id']+ ' li').length);
