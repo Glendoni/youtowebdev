@@ -107,11 +107,11 @@ function populate(){
 
  
                 if(sort[0] != 'Downloads' && sort[0] != 'SIC Code'  ){
-                $('.main_'+sort[1].replace(' ', '')).append('<li class="list-group-item folder" glen data="'+sort[2]+'"> <span class="indicatorshow"></span>'+sort[0]+' <span class="tagNumPlaceholder tagNum_'+sort[2]+'"></span></li>'); 
+                $('.main_'+sort[1].replace(' ', '')).append('<div class="col-sm-4 col-md-2"><li class="list-group-item folder" glen data="'+sort[2]+'"> <span class="indicatorshow"></span>'+sort[0]+' <span class="tagNumPlaceholder tagNum_'+sort[2]+'"></span></li></div>'); 
                 }
                 
                 if(sort[2] != 52 ){
-                $('.main_'+sort[1].replace(' ', '')).append('<ul class="subtags sub_'+sort[2]+'" ></ul>');  
+                $('.main_'+sort[1].replace(' ', '')).append('<div class="col-sm-8 col-md-10" style="border-bottom: 1px dotted #e5e5e5;padding-bottom: 3px;margin-bottom: 3px;padding-left: 0;"><ul class="subtags sub_'+sort[2]+'" ></ul></div>');  
                     
                 }
  

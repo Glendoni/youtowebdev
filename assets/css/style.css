@@ -1720,31 +1720,24 @@ width:100%;
 }
     
     #cat1 .list-group-item{
-        
-      /*  display:none;*/
-
-          /* width: 100%; */
     float: left;
     display: inline-block;
-            font-size: 13px;
     color: #000;
-        width:auto;
-            border: thin solid #ccc;
+    width:auto;
+    border: thin solid #ccc;
     margin: 2px;
+    border-radius: 2px;
+    font-size: 11px;
+    }
+  
+    .tadefault{
+    font-weight: 100;
+    font-size: 1.2em;
+	padding-top: 30px;
+	display:none;
+	text-align: center;
     }
 
-    
-    .tadefault{
-        font-weight: 100;
-        font-size: 1.2em;
-        padding-top: 30px;
-        display:none;
-         text-align: center;
-    }
-    
-    
-     
-    
     .tadefault span{
         display:none;
         color:#428BCA;
