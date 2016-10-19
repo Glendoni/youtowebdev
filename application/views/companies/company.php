@@ -1026,16 +1026,8 @@ endif;
                    
                  
                 <?php if ($current_user['permission'] == 'admin' || $current_user['permission'] == 'data' || $current_user['permission'] == 'uf'): ?>
-<div class="col-sm-4   initialfee">
-        <div class="form-group ">
-            <label>Turnover</label>
-            <div class="input-group">   <div class="input-group-addon">£</div>
-                <input type="number" step="0.01" name="turnover" placeholder="0.00" min="0.01" max="25000000"   class="form-control" id="turnover" >
-             
-            </div>
-        </div>
-    </div>
-<div class="col-sm-4  initialfee">
+
+                <div class="col-sm-4  initialfee">
         <div class="form-group ">
             <label>Contractors</label>
             <div class="input-group">  <div class="input-group-addon">Runners</div>
@@ -1044,6 +1036,17 @@ endif;
             </div>
         </div>
     </div>
+                
+                <div class="col-sm-4   initialfee">
+        <div class="form-group ">
+            <label>Turnover</label>
+            <div class="input-group">   <div class="input-group-addon">£</div>
+                <input type="number" step="0.01" name="turnover" placeholder="0.00" min="0.01" max="25000000"   class="form-control" id="turnover" >
+             
+            </div>
+        </div>
+    </div>
+
                  <?php endif; ?>
                 
                 
