@@ -918,7 +918,21 @@ function company_updated_to_proposal($post)
         );
 
     $query = $this->db->insert('actions', $actiondata);
-    return $this->db->insert_id();
+
+    
+    
+    
+      if(isset($post['initialfee']) && is_numeric($post['initialfee'])){
+        $data = array(
+        'initial_rate'  => (!empty($post['initialfee'])? $this->calIntRate($post['initialfee']):NULL)
+            );
+        $this->db->where('id', $post['company_id']);
+        $this->db->update('companies', $data); 
+        
+    }
+    
+    
+        return $this->db->insert_id();
 
 }
     
