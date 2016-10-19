@@ -398,12 +398,21 @@ if ($your_date < $now){;
 			<div class="tag_sectortagheading"><strong>Sectors</strong></div>
 			<?php
 			if(isset($company['sectors'])){
-		
+		if(count($company['sectors']) <= 2){
 				foreach ($company['sectors'] as $key => $name)
 				{
 				echo '<div class="details detailsTagFormat" >'.$name.'</div>';
 				}
-			}
+			}else{
+            echo '<div class="sectorsPlainText">';
+            foreach ($company['sectors'] as $key => $name)
+				{
+				echo  $name.'<br>' ;
+				}
+            
+             echo '</div>';
+        }
+            }
 			?>
             
             
