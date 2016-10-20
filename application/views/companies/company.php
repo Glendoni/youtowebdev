@@ -1014,7 +1014,7 @@ endif;
                                         <div class="col-sm-4 col-md-4">
 
                 <?php foreach($action_types_done as $action ):  
-                                
+                                if($action->how_used){
                                 echo '<div class="alert alert-info action_verbiage action_verbiage_text'.str_replace(' ', '',$action->id ).'" >'
                                     
                                     
@@ -1023,7 +1023,7 @@ endif;
                                     
                                     
                                     '</div>';
-                                
+                                }
                                 endforeach;
                                 ?>
                 </div>
