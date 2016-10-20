@@ -237,7 +237,7 @@ function get_pending_actions($user_id)
     $this->db->where('actions.user_id',$user_id);
     $this->db->where('actioned_at',NULL);
     $this->db->where('cancelled_at',NULL);
-      $this->db->where('customer_to',NULL);    
+      $this->db->where('active',true);    
     $this->db->join('companies', 'companies.id = actions.company_id', 'left');
     $this->db->join('contacts', 'contacts.id = actions.contact_id', 'left'); 
     $this->db->limit(200);

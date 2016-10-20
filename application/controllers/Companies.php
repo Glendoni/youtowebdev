@@ -294,9 +294,9 @@ class Companies extends MY_Controller {
            $deals_pipeline_statusArr  = array(0=>'Please select', 1 => 'Should Close',2 => 'Will Close'); //Move will be moved to a new array file.
 			$this->load->model('Email_templates_model');
 			$this->data['email_templates'] = $this->Email_templates_model->get_all();
-$raw_search_results = $this->Companies_model->search_companies_sql(FALSE,$this->input->get('id'));
-          $this->data['companieshack'] = $this->Companies_model->hackmorgages($this->input->get('id'));
-$company = $this->process_search_result($raw_search_results);
+            $raw_search_results = $this->Companies_model->search_companies_sql(FALSE,$this->input->get('id'));
+            $this->data['companieshack'] = $this->Companies_model->hackmorgages($this->input->get('id'));
+            $company = $this->process_search_result($raw_search_results);
             $this->data['companieshack'] = $this->Companies_model->hackmorgages($this->input->get('id'));
 			$this->data['contacts'] = $this->Contacts_model->get_contacts_s($this->input->get('id'));
             $address = $this->Companies_model->get_addresses($this->input->get('id'));
