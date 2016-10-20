@@ -1,6 +1,12 @@
 $(document).ready(function(){
       if((/companies\/company/.test(window.location.href))) {
      gettags();
+          
+          $('.mainedit').click(function(){
+
+$('.list-group-item').show();
+
+})
       }
     $('.nav-tabs').click(function(){
         
@@ -133,12 +139,12 @@ function populate(){
                     parentcatname =   val['category_name'].replace(' ', '');
                     
                  
-                    $('.main_'+parentcatname).append('<li class="list-group-item parent  sub_group sub'+val['tac_sub_cat_id']+' tag  hint--top-right" data-hint="'+val['how_used']+'" cat_id='+val['tac_sub_cat_id']+' sub="'+val['tag_id']+'"> '+val['name']+'</li>');  
+                    $('.main_'+parentcatname).append('<li class="list-group-item parent  sub_group sub'+val['tac_sub_cat_id']+' tag  hint--top-right" data-hint="'+val['how_used']+'"  cat_id='+val['tac_sub_cat_id']+' sub="'+val['tag_id']+'"  > '+val['name']+'</li>');  
 
                 }
                 if(val['parent_cat_name']){
                 parentcatname =   val['parent_cat_name'].replace(' ', '')
-    $('.sub_'+val['cat_id']).append('<li class="list-group-item sub_group sub'+val['tac_sub_cat_id']+' inner tag  hint--top-right" data-hint="'+val['how_used']+'" par-sub-id="'+val['cat_id']+'" sub="'+val['tag_id']+'">'+val['name']+'<span class="pull-right label label-master-category">'+val['category_name']+'</span> </li>');  
+    $('.sub_'+val['cat_id']).append('<li class="list-group-item sub_group sub'+val['tac_sub_cat_id']+' inner tag  hint--top-right" data-hint="'+val['how_used']+'" par-sub-id="'+val['cat_id']+'"  tagName="'+val['name'].replace(/\s/gi, "").replace(')',"").replace('(',"")+val['tac_sub_cat_id']+'"  sub="'+val['tag_id']+'">'+val['name']+'<span class="pull-right label label-master-category">'+val['category_name']+'</span> </li>');  
 
                 }
             //console.log($('.main_'+val['cat_id']+' .sub_'+val['cat_id']+ ' li').length);
@@ -149,6 +155,14 @@ function populate(){
                    //scScroll()
   $('.folder').css('border','none');
             $('.tagContainer .list-group-item').click(function(){
+                
+                if(!$(this).hasClass('tagActive')){
+                    
+                    
+                
+                    
+             
+                
 
                 if($(this).hasClass('folder') &&$(this).hasClass('activeMain')  ){
                     $('.folder').removeClass('activeMain');
@@ -245,6 +259,20 @@ function populate(){
 
 
 }
+                    
+                       }else{
+                           
+                           
+                           $($(this).removeClass('tagActive'));
+                           
+                             $(this).css('color' , '#000000');
+                   $(this).css('background' , '#ffffff');
+                           
+                           console.log('.tagname_'+$(this).attr('tagName').replace(' ', ''))
+                           
+                              $('.tagname_'+$(this).attr('tagName').replace(' ', '')).trigger('click');
+                           
+                       }
             })
 
             var dataID;
@@ -280,7 +308,7 @@ if((/companies/.test(window.location.href))) {
     var preventtagRemove = [];
     var para  = window.location.href.split("?id=");
     var parent_tag_name = [];
- 
+
     
    param =  checkUrlParam(para);
      var para = {'companyID': param};
@@ -295,12 +323,12 @@ if((/companies/.test(window.location.href))) {
         if(val['parent_tag_name'] != null){
               parent_tag_name =    val['parent_tag_name'].replace(' ', '');
             
-            //console.log(parent_tag_name +val['parent_tag_id'])
+      // console.log(val['name'].replace(' ', ''))
                 if(parent_tag_name != 'Downloads' && val['parent_tag_id'] != 52){
-                    preventtagRemove = '<span class="tagRemove" data-tag="'+val['tag_id']+'">x</span>';  
+                    preventtagRemove = '<span class="tagRemove tagname_'+(val['name']+ val['parent_tag_id']).replace(/\s/gi, "").replace(')',"").replace('(',"")+'" data-tag="'+val['tag_id']+'">x</span>';  
                 }
                  //indicatorshow  =  '<span class="folIcon indicatorshow"></span>';
-           $('.fetags'+val['parent_tag_id']).append('<li class="addedTag tag'+val['tag_id']+' feTagfolderTotal hint--top-right" data-hint="'+val['username']+' on  '+formattDateTags(val['tagcreatedat'], true)+'" ><span class="tagName"></span>'+val['name']+ preventtagRemove+'</li>');
+           $('.fetags'+val['parent_tag_id']).append('<li class="addedTag tag'+val['tag_id']+' feTagfolderTotal hint--top-right" data-hint="'+val['username']+' on  '+formattDateTags(val['tagcreatedat'], true)+'"  tagName="'+(val['name'] + val['parent_tag_id']).replace(/\s/gi, "").replace(')',"").replace('(',"")+'"><span class="tagName"></span>'+val['name']+ preventtagRemove+'</li>');
            
                   $('.tafixed').show()
 
@@ -503,6 +531,9 @@ function unHighlightActiveSubITems(){
                             //$(this).css('opacity', '0.6');
                                $(this).css('background' , '#428bca');
                             $(this).css('color' , '#ffffff');
+                            $(this).addClass('tagActive');
+      
+                            
                         }
                     })
                 }
@@ -528,6 +559,8 @@ $('.parent').each(function(){
                 if(test ==  $(this).attr('sub')){
                       //$(this).css('opacity', '0.6');
                      $(this).css('color' , '#000000');
+                     $(this).removeClass('tagActive');
+                    
                 }
             })
         }
