@@ -8,12 +8,19 @@
     if ($current_user['department'] == 'support'){  ?>
               <!-- Nav tabs -->
               <ul class="nav nav-tabs dashboard" role="tablist">
-                <li role="presentation" class="active"><button href="#team_stats" aria-controls="team_stats" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Stats','<?php echo $current_user['id'];?>')">Pods</button></li>
+              
+                                                 <li role="presentation" class="active"><button href="#podone" aria-controls="calls" role="tab" data-toggle="tab" class="btn btn-primary btn-sm c-a-m" style="margin-right:10px;" >Pod 1</button></li>
+                             <li role="presentation"><button href="#podtwo" aria-controls="calls" role="tab" data-toggle="tab" class="btn btn-primary btn-sm c-a-m" style="margin-right:10px;" >Pod 2</button></li>
+                               <li role="presentation"><button href="#podthree" aria-controls="calls" role="tab" data-toggle="tab" class="btn btn-primary btn-sm c-a-m" style="margin-right:10px;" >Pod 3</button></li> 
                 <li role="presentation"><button href="#calls" aria-controls="calls" role="tab" data-toggle="tab" class="btn btn-primary btn-sm c-a-m" style="margin-right:10px;" >Schedule</button></li>
               </ul>
 <?php } else {?>
 <!-- Nav tabs -->
               <ul class="nav nav-tabs dashboard" role="tablist">
+                  
+                   
+                  
+                  
                 <li role="presentation" class="active"><button href="#team_stats" aria-controls="team_stats" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Stats','<?php echo $current_user['id'];?>')">Stats</button></li>
                 <li role="presentation"><button href="#calls" aria-controls="calls" role="tab" data-toggle="tab" class="btn btn-primary btn-sm c-a-m" style="margin-right:10px;" >Schedule</button></li>
                 <li role="presentation"><button href="#pipeline" aria-controls="pipeline" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Pipeline','<?php echo $current_user['id'];?>')">Pipeline</button></li>
@@ -34,6 +41,7 @@
 <div class="col-sm-9 col-sm-push-3">
 <!-- Tab panes -->
 <div class="tab-content">
+      <?php if (!$current_user['department'] == 'support'){  ?>
 <div role="tabpanel" class="tab-pane fade in active" id="team_stats">
 <?php if ($_GET['search']==2) { ?>
 <!--GET SEARCH DATES TO DISPLAY-->
@@ -1429,6 +1437,9 @@
 
 <?php }?>
 </div><!--END TAB-->
+    
+    
+    <?php  } ?>
     <div role="tabpanel" class="tab-pane fade" id="calls"><div class="panel panel-default">
               <div class="panel-heading">
               <h3 class="panel-title">Your Schedule<span class="badge pull-right"><?php echo count($pending_actions); ?></span></h3>
@@ -1515,7 +1526,12 @@
               </div>
               </div>
           </div><!--END OF PANEL--></div>
-    <div role="tabpanel" class="tab-pane fade" id="pipeline">
+
+
+
+  <?php if (!$current_user['department'] == 'support'){  ?>
+
+    <div role="tabpanel" class="tab-pane fade " id="pipeline">
       <div class="panel panel-default">
               <div class="panel-heading">
               <h3 class="panel-title">Pipeline</h3>
@@ -2039,6 +2055,93 @@
 <!-- /.panel-body -->
 </div>
 </div><!--END OF PANEL-->
+
+<?php }else{ ?>
+<div role="tabpanel" class="tab-pane  active" id="podone">
+                <!--Pod One-->
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading" id="podone">
+                                <h3 class="panel-title">Pod 1<span class="badge pull-right eventcountpods200"></span></h3>
+                            </div>
+                            <!-- /.panel-heading -->
+                            <div class="panel-body" style="font-size:12px;">
+                                <div class="row record-holder-header mobile-hide">
+                                <div class="col-xs-8 col-sm-2 col-md-2"><strong>Created</strong></div>
+                                <div class="col-xs-5 col-sm-4 col-md-4"><strong>Company</strong></div>
+                                <div class="col-xs-4 col-sm-2 col-md-2"><strong>Planned</strong></div>
+                                <div class="col-xs-4 col-sm-2 col-md-2"><strong>Action</strong></div>
+                                <div class="col-xs-4 col-sm-2 col-md-2"><strong>By</strong></div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <div class="row record-holder-pods200"></div>
+                            </div>
+
+                            <!--AUTO PILOT END  -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                    </div><!--END OF Pod One-->
+
+
+
+                <div role="tabpanel" class="tab-pane fade" id="podtwo">
+                <!--Pod One-->
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading" id="podtwo">
+                                <h3 class="panel-title">Pod 2<span class="badge pull-right eventcountpods201"></span></h3>
+                            </div>
+                            <!-- /.panel-heading -->
+                            <div class="panel-body" style="font-size:12px;">
+                                <div class="row record-holder-header mobile-hide">
+                                <div class="col-xs-8 col-sm-2 col-md-2"><strong>Created</strong></div>
+                                <div class="col-xs-5 col-sm-4 col-md-4"><strong>Company</strong></div>
+                                <div class="col-xs-4 col-sm-2 col-md-2"><strong>Planned</strong></div>
+                                <div class="col-xs-4 col-sm-2 col-md-2"><strong>Action</strong></div>
+                                <div class="col-xs-4 col-sm-2 col-md-2"><strong>By</strong></div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <div class="row record-holder-pods201"></div>
+                            </div>
+
+                            <!--AUTO PILOT END  -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                    </div><!--END OF Pod One-->
+
+
+
+
+
+                <div role="tabpanel" class="tab-pane fade" id="podthree">
+                <!--Pod One-->
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading" id="podthree">
+                                <h3 class="panel-title">Pod 3<span class="badge pull-right eventcountpods202"></span></h3>
+                            </div>
+                            <!-- /.panel-heading -->
+                            <div class="panel-body" style="font-size:12px;">
+                                <div class="row record-holder-header mobile-hide">
+                                <div class="col-xs-8 col-sm-2 col-md-2"><strong>Created</strong></div>
+                                <div class="col-xs-5 col-sm-4 col-md-4"><strong>Company</strong></div>
+                                <div class="col-xs-4 col-sm-2 col-md-2"><strong>Planned</strong></div>
+                                <div class="col-xs-4 col-sm-2 col-md-2"><strong>Action</strong></div>
+                                <div class="col-xs-4 col-sm-2 col-md-2"><strong>By</strong></div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <div class="row record-holder-pods202"></div>
+                            </div>
+
+                            <!--AUTO PILOT END  -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                    </div><!--END OF Pod One-->
+
+<?php } ?>
 <!--END ASSIGNED-->
 </div><!--END TAB PANES-->
 </div><!--END-COL-SM-9-->

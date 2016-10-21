@@ -1272,6 +1272,26 @@ public function getActionsProposals($userID = 0){
 }
     
     
+    function getPods($id){
+        
+       
+        $sql = ('SELECT com.id, ct.tag_id, com.created_at::date, com.name FROM companies com
+LEFT JOIN company_tags ct
+ON com.id = ct.company_id
+WHERE ct.tag_id in (200,201,202)
+AND com.active = true
+LIMIT 200');
+    
+
+    $query = $this->db->query($sql);
+
+    return   $query->result_array();  
+        
+        
+        
+    }
+    
+    
   function actiondata($id){ // Checks created at of pipeline action 
       
    $sql = "SELECT id,created_at,action_type_id FROM actions WHERE company_id = ".intval($id)." AND action_type_id IN (16,32,34,8,31,11,19) ORDER BY created_at ";
