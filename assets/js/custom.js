@@ -672,7 +672,7 @@ uimage = val.image.split(',')
  
     $.each( data['pods'], function(  index, pods ) {
             
-             console.log(pods.tag_id);
+          //   console.log(pods.tag_id);
         
         $('.record-holder-pods'+pods.tag_id).append('<div class="row record-holder"><div class="col-xs-2 col-sm-2 col-md-2">'+pods.created_at.split("-").reverse().join("-")+
                                         '</div><div class="col-xs-4 col-sm-4 col-md-4"><a href="companies/company?id='+pods.id+'">'+pods.name+'</a></div>');
