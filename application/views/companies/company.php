@@ -7,7 +7,9 @@
             <?php endif; ?>
             <?php //hide core page content if no company is found ?>
                 <?php if (isset($company['id'])): ?>
-                    <div class="page-results-list" id="parent">
+                    <div class="page-results-list" id="parent" style="
+    padding-top: 100px;
+">
                     <breadcrumbscroll>
                     <div class="row top-info-holder">
                     <div class="col-md-9 piplineUdate" style="padding-left: 31px;">
