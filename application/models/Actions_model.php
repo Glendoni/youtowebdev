@@ -1274,22 +1274,83 @@ public function getActionsProposals($userID = 0){
     
     function getPods($id){
         
-       
-        $sql = ('SELECT com.id, ct.tag_id, com.created_at::date, com.name FROM companies com
-LEFT JOIN company_tags ct
-ON com.id = ct.company_id
-WHERE ct.tag_id in (200,201,202)
-AND com.active = true
-LIMIT 200');
+       /*
+        $sql = ('SELECT DISTINCT  ct.company_id as id, ct.tag_id, com.created_at::date, com.name, ct.tag_id ,
+ 
+
+ FROM company_tags ct  
+ INNER JOIN actions ac 
+ON ct.company_id = ac.company_id 
+INNER JOIN companies com
+ON  ct.company_id  = com.id
+INNER JOIN action_types atp
+ON  ac.action_type_id = atp.id
+INNER JOIN users u 
+ON ac.updated_by = u.id 
+WHERE ct.company_id in (select   ctt.company_id from company_tags ctt  INNER JOIN actions  acc on  ctt.company_id = 
+ acc.company_id WHERE ctt.tag_id in (200,201,202)  GROUP BY acc.company_id, ctt.company_id ,acc.updated_at ORDER BY acc.updated_at DESC
+   
+)  
+AND ct.tag_id in (200,201,202)  
+');
     
 
     $query = $this->db->query($sql);
 
     return   $query->result_array();  
         
+        */
+
+        
+                $sql =  ' SELECT  ct.company_id as id, ct.tag_id, c.created_at::date, c.name, ct.tag_id 
+
+                FROM companies c
+                LEFT JOIN company_tags ct
+                ON c.id= ct.company_id
+                WHERE ct.tag_id in (200,201,202)
+                AND ct.eff_to is null
+                ';     
+
+
+
+                $query= $this->db->query($sql);
+
+                $pp =  $query->result_array();  
+
+
+                $i = 0;
+                foreach($pp as $item => $value){
+
+                //  $pp[$item]['action'] =  $this->getmore() ;
+                // echo $value['compid'];
+                $idval =   $this->getmore($value['id']) ;
+                array_push($pp[$item],  array( 'last_action'=> $idval));
+
+                }
+        
+        return $pp;
         
         
     }
+    
+    
+        function getmore($id){
+      
+         $query = $this->db->query('SELECT ac.company_id, ac.action_type_id, ac.updated_at::date as acudate, ac.updated_by, u.name as username, atp.name as actionname, ac.created_at::date as createdatac
+         FROM actions ac
+LEFT JOIN action_types atp
+ON  ac.action_type_id = atp.id
+LEFT JOIN users u 
+ON ac.created_by = u.id 
+WHERE ac.company_id='.$id.' order by ac.updated_at DESC LIMIT 1' ) ;     
+    
+ return $query->result_array(); 
+        
+        
+    }
+    
+    
+    
     
     
   function actiondata($id){ // Checks created at of pipeline action 

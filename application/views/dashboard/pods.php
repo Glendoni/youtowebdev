@@ -139,8 +139,9 @@
                             <!-- /.panel-heading -->
                             <div class="panel-body" style="font-size:12px;">
                                 <div class="row record-holder-header mobile-hide">
-                                <div class="col-xs-8 col-sm-2 col-md-2"><strong>Created</strong></div>
+                                
                                 <div class="col-xs-5 col-sm-4 col-md-4"><strong>Company</strong></div>
+                                    <div class="col-xs-8 col-sm-2 col-md-2"><strong>Last Action</strong></div>
                                 <!--   <div class="col-xs-4 col-sm-2 col-md-2"><strong>Planned</strong></div>
                                 <div class="col-xs-4 col-sm-2 col-md-2"><strong>Action</strong></div>
                                 <div class="col-xs-4 col-sm-2 col-md-2"><strong>By</strong></div> -->
@@ -167,8 +168,8 @@
                             <!-- /.panel-heading -->
                             <div class="panel-body" style="font-size:12px;">
                                 <div class="row record-holder-header mobile-hide">
-                                <div class="col-xs-8 col-sm-2 col-md-2"><strong>Created</strong></div>
                                 <div class="col-xs-5 col-sm-4 col-md-4"><strong>Company</strong></div>
+                                    <div class="col-xs-8 col-sm-2 col-md-2"><strong>Last Action</strong></div>
                              <!--   <div class="col-xs-4 col-sm-2 col-md-2"><strong>Planned</strong></div>
                                 <div class="col-xs-4 col-sm-2 col-md-2"><strong>Action</strong></div>
                                 <div class="col-xs-4 col-sm-2 col-md-2"><strong>By</strong></div> -->
@@ -197,8 +198,8 @@
                             <!-- /.panel-heading -->
                             <div class="panel-body" style="font-size:12px;">
                                 <div class="row record-holder-header mobile-hide">
-                                <div class="col-xs-8 col-sm-2 col-md-2"><strong>Created</strong></div>
                                 <div class="col-xs-5 col-sm-4 col-md-4"><strong>Company</strong></div>
+                                    <div class="col-xs-8 col-sm-2 col-md-2"><strong>Last Action</strong></div>
                                <!--   <div class="col-xs-4 col-sm-2 col-md-2"><strong>Planned</strong></div>
                                 <div class="col-xs-4 col-sm-2 col-md-2"><strong>Action</strong></div>
                                 <div class="col-xs-4 col-sm-2 col-md-2"><strong>By</strong></div> -->
@@ -217,51 +218,6 @@
 <!--END ASSIGNED-->
 </div><!--END TAB PANES-->
 </div><!--END-COL-SM-9-->
-<div class="col-sm-3 col-sm-pull-9" style="display:none;">
-              <div class="panel panel-default">
-              <div class="panel-heading">
-                <h3 class="panel-title">My Campaigns <span class="badge pull-right mycampaignajaxcount"></span></h3>
-              </div>
-              <div class="panel-body mycampaignajax" style="padding:0;">
-                  <!-- PRIVATE SEARCHES -->
-                 
-                  
-                  <?php /* foreach ($private_campaigns_new as $campaign):?>
-                  <?php $user_icon = explode(",", $campaign['image']);$bg_colour = $user_icon[1];$bg_colour_text = $user_icon[2];$bg_colour_name = $user_icon[0];?>
-                    <a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $campaign['id']; ?>" class="load-saved-search" <?php echo strlen($campaign['name']) > 36 ? 'title="'.$campaign['name'].'"':"" ?>><div class="row">
-                  <div class="col-xs-1"><span class="label label-info" style="margin-right:3px;background-color: <?php echo $bg_colour; ?>;font-size:8px; color: <?php echo $bg_colour_text;?>"><b><?php echo $bg_colour_name; ?></b>
-                    </span></div>
-                  <div class="col-xs-9" style="min-height:30px;overflow:hidden"><?php echo $campaign['name'];?><br><span style="font-size:9px;"><?php echo 'Created: '. $campaign['datecreated'];?></span></div>
-                  <div class="col-xs-1" style="padding: 0 0 0 0px; font-size: 11px;"><?php echo $campaign['percentage']; ?>%</div>
-                  </div>
-                  </a>
-                  <?php endforeach;  */ ?>
-                  
-                  
-              </div>
-            </div>
-            <div class="panel panel-default" style="display:none;">
-              <div class="panel-heading">
-                <h3 class="panel-title">Recent Campaigns<span class="badge pull-right"><?php //echo count($shared_campaigns); ?></span></h3>    
-              </div>
-              <div class="panel-body" style="padding:0;">
-              <div id="campaignList">
-                  <!-- SHARED SEARCHES -->
-                  <?php foreach ($shared_campaigns as $campaign):?>
-                    <?php $user_icon = explode(",", $campaign->image);$bg_colour = $user_icon[1];$bg_colour_text = $user_icon[2];$bg_colour_name = $user_icon[0];?>
-                    <a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $campaign->id; ?>" class="load-saved-search" <?php echo strlen($campaign->name) > 36 ? 'title="'.$campaign->name.'"':"" ?>><div class="row">
-                  <div class="col-xs-1"><span class="label label-info" style="margin-right:3px;background-color: <?php echo $bg_colour; ?>;font-size:8px; color: <?php echo $bg_colour_text;?>"><b><?php echo $bg_colour_name; ?></b>
-                    </span></div>
-                  <div class="col-xs-9" style="max-height:15px;overflow:hidden"><?php echo $campaign->name;?></div>
-                  <div class="col-xs-1" style="padding: 0 0 0 5px;"><b><?php //echo $campaign->campaigncount; ?></b></div>
-                  </div>
-                  </a>
-                    <?php endforeach; ?>
-              </div><!--END CAMPAIGN LIST-->
-          <!--<button type="submit" class="btn btn-success btn-block" id="loadMore">Load More</button>-->
-
-              </div>
-            </div>
-          </div><!--END COL-3-->
+ 
 </div><!--END ROW-->
 

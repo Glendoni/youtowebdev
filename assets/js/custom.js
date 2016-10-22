@@ -652,7 +652,9 @@ uimage = val.image.split(',')
             var planned_at;
             var  createdAt; 
             var pipleine =  ['intents', 'proposals'];
- $.each( pipleine, function(  index, keyval ) {
+ 
+            if(!typeof data.intent == 'undefined'){
+            $.each( pipleine, function(  index, keyval ) {
             
              $.each( data[keyval], function( key, val ) {
                  
@@ -667,15 +669,15 @@ uimage = val.image.split(',')
              })
  
  
- 
- 
- 
+            }
+ //pods.acudate.split("-").reverse().join("-")
+ var    actionedAt;
     $.each( data['pods'], function(  index, pods ) {
             
-          //   console.log(pods.tag_id);
-        
-        $('.record-holder-pods'+pods.tag_id).append('<div class="row record-holder"><div class="col-xs-2 col-sm-2 col-md-2">'+pods.created_at.split("-").reverse().join("-")+
-                                        '</div><div class="col-xs-4 col-sm-4 col-md-4"><a href="companies/company?id='+pods.id+'">'+pods.name+'</a></div>');
+          //console.log(pods.tag_id);
+      actionedAt  =   pods[0]['last_action'][0]['acudate']? pods[0]['last_action'][0]['acudate'] : pods[0]['last_action'][0]['createdatac'] ;
+        $('.record-holder-pods'+pods.tag_id).append('<div class="row record-holder"><div class="col-xs-4 col-sm-4 col-md-4"><a href="companies/company?id='+pods.id+'">'+pods.name+'</a></div><div class="col-xs-4 col-sm-4 col-md-4">'+pods[0]['last_action'][0]['actionname']+'<br> by '+pods[0]['last_action'][0]['username']+
+        ' on '+ actionedAt.split("-").reverse().join("-")+'</div></div>');
         
         
         
