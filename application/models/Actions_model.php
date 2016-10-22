@@ -1342,7 +1342,7 @@ LEFT JOIN action_types atp
 ON  ac.action_type_id = atp.id
 LEFT JOIN users u 
 ON ac.created_by = u.id 
-WHERE ac.company_id='.$id.' AND  ac.action_type_id !=19 order by ac.updated_at DESC,  ac.created_at DESC  LIMIT 1' ) ;     
+WHERE ac.company_id='.$id.' AND  ac.action_type_id !=19 order by ac.updated_at DESC , ac.id DESC  LIMIT 1' ) ;     
     
  return $query->result_array(); 
         
