@@ -8,11 +8,11 @@
     if ($current_user['department'] == 'support'){  ?>
               <!-- Nav tabs -->
               <ul class="nav nav-tabs dashboard" role="tablist">
-              
-                                                 <li role="presentation" class="active"><button href="#podone" aria-controls="calls" role="tab" data-toggle="tab" class="btn btn-primary btn-sm c-a-m" style="margin-right:10px;" >Pod 1</button></li>
+                  <li role="presentation" class="active"><button href="#calls" aria-controls="calls" role="tab" data-toggle="tab" class="btn btn-primary btn-sm c-a-m" style="margin-right:10px;" >Schedule</button></li>
+                                                 <li role="presentation" ><button href="#podone" aria-controls="calls" role="tab" data-toggle="tab" class="btn btn-primary btn-sm c-a-m" style="margin-right:10px;" >Pod 1</button></li>
                              <li role="presentation"><button href="#podtwo" aria-controls="calls" role="tab" data-toggle="tab" class="btn btn-primary btn-sm c-a-m" style="margin-right:10px;" >Pod 2</button></li>
                                <li role="presentation"><button href="#podthree" aria-controls="calls" role="tab" data-toggle="tab" class="btn btn-primary btn-sm c-a-m" style="margin-right:10px;" >Pod 3</button></li> 
-                <li role="presentation"><button href="#calls" aria-controls="calls" role="tab" data-toggle="tab" class="btn btn-primary btn-sm c-a-m" style="margin-right:10px;" >Schedule</button></li>
+            
               </ul>
 <?php }  ?>
           </div>
@@ -22,7 +22,7 @@
 <!-- Tab panes -->
 <div class="tab-content">
  
-    <div role="tabpanel" class="tab-pane fade" id="calls"><div class="panel panel-default">
+    <div role="tabpanel" class="tab-pane active" id="calls"><div class="panel panel-default">
               <div class="panel-heading">
               <h3 class="panel-title">Your Schedule<span class="badge pull-right"><?php echo count($pending_actions); ?></span></h3>
               </div>
@@ -129,7 +129,7 @@
 </div><!--END OF PANEL-->
 
 <?php }else{ ?>
-<div role="tabpanel" class="tab-pane  active" id="podone">
+<div role="tabpanel" class="tab-pane  fade" id="podone">
                 <!--Pod One-->
 
                         <div class="panel panel-default">
