@@ -1,8 +1,7 @@
 DirectoryIndex index.php
 RewriteEngine on
 
-RewriteCond %{HTTPS} off
-RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
+
 
 #AuthUserFile /home/antonio/.htpasswd
 #AuthType Basic
@@ -15,3 +14,5 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ ./index.php/$1 [L,QSA]
  
  
+RewriteCond %{HTTPS} off
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
