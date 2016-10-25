@@ -20,9 +20,20 @@ class MY_Controller extends CI_Controller {
 		break;
 		case 'staging':
 		        $this->output->enable_profiler(FALSE);
+                
+                if($_SERVER["HTTPS"] != "on")
+{
+    header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
+    exit();
+}
 		break;
 		case 'production':
 				$this->output->enable_profiler(FALSE);
+                
+                
+                
+                
+                
 		break;
 
 		default:
