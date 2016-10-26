@@ -815,7 +815,7 @@ function create($post, $userid =false)
         'created_at'    => date('Y-m-d H:i:s'),
         'followup_action_id' =>(isset($post['followup_action_id'])?$post['followup_action_id']:NULL),
          'tfer_turnover' => $post['turnover']?$post['turnover']:null,
-         'tfer_runners'  => $post['runners'] ?$post['runners']:NULL,
+         'tfer_runners'  => $post['runners'] ?$post['runners']:0,
          'initial_fee'  => (!empty($post['initialfee'])? $this->calIntRate($post['initialfee']):NULL)
         );
     $query = $this->db->insert('actions', $completeddata);

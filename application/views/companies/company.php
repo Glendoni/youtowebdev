@@ -971,9 +971,9 @@ endif;
                         </div>
                      <div class="col-sm-2 col-md-2 initialfee fee">
                             <div class="form-group ">
-                                <label>Initial Fee</label>
+                                <label>Initial Fee<span class="actionrqd">*</span></label>
                                 <div class="input-group">
-                                    <input type="number" step="0.01" name="initialfee" placeholder="0.00" min="0.01" max="9.99" class="form-control" id="amount" >
+                                    <input type="number" step="0.01" name="initialfee" placeholder="0.00" min="0.01" max="9.99"  class="form-control" id="amount" >
                                     <div class="input-group-addon">%</div>
                                 </div>
                             </div>
@@ -1035,9 +1035,9 @@ endif;
 
                 <div class="col-sm-4  initialfee">
         <div class="form-group ">
-            <label>Contractors</label>
+            <label>Contractors<span class="actionrqd">*</span></label>
             <div class="input-group">  <div class="input-group-addon">Runners</div>
-                <input type="number" step="1" name="runners" placeholder="0" min="0" class="form-control" id="runners" >
+                <input type="number" step="1" name="runners" placeholder="0" min="0"  max="100"  class="form-control"  id="runners" >
               
             </div>
         </div>
@@ -1045,9 +1045,9 @@ endif;
                 
                 <div class="col-sm-4   initialfee">
         <div class="form-group ">
-            <label>Turnover</label>
+            <label>Turnover<span class="actionrqd">*</span></label>
             <div class="input-group">   <div class="input-group-addon">£</div>
-                <input type="number" step="0.01" name="turnover" placeholder="0.00" min="0.01" max="25000000"   class="form-control" id="turnover" >
+                <input type="number" step="0.01" name="turnover" placeholder="0.00" min="0.01" max="25000000"  class="form-control" id="turnover" >
              
             </div>
         </div>
