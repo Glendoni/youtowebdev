@@ -652,15 +652,16 @@ uimage = val.image.split(',')
             var planned_at;
             var  createdAt; 
             var pipleine =  ['intents', 'proposals'];
+  //console.log(data.intents);
+            if(!typeof data.intents != 'undefined'){
  
-            if(!typeof data.intent == 'undefined'){
             $.each( pipleine, function(  index, keyval ) {
-            
+   
              $.each( data[keyval], function( key, val ) {
                  
                createdAt = val.intent ? val.intent : val.proposal;
                  
-    $('.record-holder-'+keyval).append('<div class="row record-holder"><div class="col-xs-2 col-sm-2 col-md-2">'+createdAt+'</div><div class="col-xs-4 col-sm-4 col-md-4"><a href="companies/company?id='+val.id+'">'+val.name+'</a></div><div class="col-xs-2 col-sm-2 col-md-2  "><span class="pipeline ">'+(val.planned ? val.planned : '') +'</span></div><div class="col-xs-2 col-sm-2 col-md-2  "><span class="pipeline ">'+ (val.action ? val.action : '')  +'</span></div><div class="col-xs-2 col-sm-2 col-md-2  "><span class="pipeline ">'+(val.by ? val.by : '')   +'</span></div></div>')
+    $('.record-holder-'+keyval).append('<div class="row record-holder"><div class="col-xs-2 col-sm-2 col-md-2">'+createdAt+'</div><div class="col-xs-4 col-sm-4 col-md-4"><a href="companies/company?id='+val.id+'">'+val.name+'</a></div><div class="col-xs-2 col-sm-2 col-md-2  "><span class="pipeline ">'+(val.planned ? val.planned : '') +'</span></div><div class="col-xs-2 col-sm-2 col-md-2  "><span class="pipeline ">'+ (val.action ? val.action : '')  +'</span></div><div class="col-xs-2 col-sm-2 col-md-2  "><span class="pipeline ">'+(val.by ? val.by : '')   +'</span></div></div>');
            
              })
                     var record_holder_propsals_length =    $('.record-holder-'+keyval+' .record-holder').length;

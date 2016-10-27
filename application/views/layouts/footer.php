@@ -871,7 +871,7 @@ var para = window.location.href.split("id=");
     return param = param[0]; 
 } 
 
-
+ if((/companies\/company/.test(window.location.href))) {
 $(function(){
     $("[href^='#']").not("[href~='#']").click(function(evt){
         evt.preventDefault();
@@ -881,6 +881,7 @@ $(function(){
         $(window).scrollTop($("[name*='"+getHref+"']").offset().top - offsetSize);
     });
 });
+ }
         $.urlParam = function(name){
     var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
     if (results==null){
