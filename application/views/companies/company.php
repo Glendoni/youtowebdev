@@ -1045,7 +1045,7 @@ endif;
                 
                 <div class="col-sm-4   initialfee">
         <div class="form-group ">
-            <label>Turnover<span class="actionrqd">*</span></label>
+            <label>Projected Annual Contract Turnver<span class="actionrqd">*</span></label>
             <div class="input-group">   <div class="input-group-addon">£</div>
                 <input type="number" step="0.01" name="turnover" placeholder="0.00" min="0.01" max="25000000"  class="form-control" id="turnover" >
              
