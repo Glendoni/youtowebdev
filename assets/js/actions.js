@@ -1291,7 +1291,7 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
                 
                 turnoverAction =  (parseFloat(action['tfer_turnover']).toFixed(1).replace(/(\d)(?=(\d{3})+\.)/g, '$1,').split('.'));
                 
-     turnover =  '<span>Turnover £' + turnoverAction[0]+'</span><br>' ;  
+     turnover =  '<span> <strong style="color: black;"> :: </strong> Projected Annual Contract Turnover £' + turnoverAction[0]+'</span><br>' ;  
     employees  =   '<span> Contractors  ' + action['tfer_runners']+' </span>' ;    
                     
                 }
