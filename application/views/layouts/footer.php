@@ -872,6 +872,13 @@ var para = window.location.href.split("id=");
 } 
 
  if((/companies\/company/.test(window.location.href))) {
+     
+     
+     var name = 'qvfinancials';
+  if($("#" + name).length == 0) {
+$('.qvlink a[data="qvfinancials"]').parent().remove()
+}
+     
 $(function(){
     $("[href^='#']").not("[href~='#']").click(function(evt){
         evt.preventDefault();
