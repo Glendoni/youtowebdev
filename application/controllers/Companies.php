@@ -1184,7 +1184,7 @@ echo '<tr><td align="left" class="glen">'.$row->id.'</td><td align="left" class=
                                 //if($row->id == 343853) echo 'Got ya';
                             }
                          
-                         echo '</table>';
+         echo '</table>';
                      }
     
     
