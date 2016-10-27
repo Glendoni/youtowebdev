@@ -952,15 +952,14 @@ endif;
                                 
                                 <select id="action_type_completed" name="action_type_completed" class="form-control" >
                                     <option value="">--- Select an Action ---</option>
-                                    <option value="8">Pipeline - Proposal</option>
+                                  
                                     <?php foreach($action_types_done as $action ): 
 
                                     if($action->id == 16 && $company['pipeline'] == 'Customer'|| $action->id == 31 && $company['pipeline'] == 'Customer' || $action->id == 32 && $company['pipeline'] == 'Customer' || $action->id == 33  && $company['pipeline'] == 'Customer'|| $action->id == 34 && $company['pipeline'] == 'Customer' ){ }else{ ?>
                                    
-                                    <?php  if($action->id != 8 ){ ?>
+                                
                                       <option value="<?php echo $action->id; ?>"><?php echo $action->name; ?></option>
-                                    
-                                    <?php } ?>
+                                
                                     <?php 
                                     } endforeach; ?>
                                 </select>
