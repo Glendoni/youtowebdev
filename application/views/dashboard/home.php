@@ -1,7 +1,18 @@
 <div class="row">
 <?php echo $config['sess_expiration']; ?>
           <div class="col-sm-9 col-sm-offset-3 " style="margin-bottom:20px;">
+
+      <?php 
+    
+    
+    if ($current_user['department'] == 'support'){  ?>
               <!-- Nav tabs -->
+              <ul class="nav nav-tabs dashboard" role="tablist">
+                <li role="presentation" class="active"><button href="#team_stats" aria-controls="team_stats" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Stats','<?php echo $current_user['id'];?>')">Pods</button></li>
+                <li role="presentation"><button href="#calls" aria-controls="calls" role="tab" data-toggle="tab" class="btn btn-primary btn-sm c-a-m" style="margin-right:10px;" >Schedule</button></li>
+              </ul>
+<?php } else {?>
+<!-- Nav tabs -->
               <ul class="nav nav-tabs dashboard" role="tablist">
                 <li role="presentation" class="active"><button href="#team_stats" aria-controls="team_stats" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Stats','<?php echo $current_user['id'];?>')">Stats</button></li>
                 <li role="presentation"><button href="#calls" aria-controls="calls" role="tab" data-toggle="tab" class="btn btn-primary btn-sm c-a-m" style="margin-right:10px;" >Schedule</button></li>
@@ -16,7 +27,7 @@
                   
                 <li role="presentation"><button href="#emailegagement" aria-controls="emailegagement" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Email Engagement','<?php echo $current_user['id'];?>')">Email Engagement</button></li>    
               </ul>
-
+  <?php }; ?>
           </div>
         </div>
 <div class="row">          
@@ -1273,7 +1284,7 @@
 
 <div class="col-sm-2 mobile-hide">
 <div class="circle-responsive_campiagns black-circle-campaign  <?php echo empty($this->session->userdata('pipeline'))? 'active':'';?>"><div class="circle-content mega">
-<div class="large-number"><?php echo number_format($get_user_campaign->campaign_total); ?></div> <div class="small-text">Companies
+<div class="large-number"><?php echo $get_user_campaign->campaign_total; ?></div> <div class="small-text">Companies
 </div>
 
 </div>

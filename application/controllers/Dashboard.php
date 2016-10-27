@@ -19,7 +19,7 @@ class Dashboard extends MY_Controller {
 		// Clear search in session 
 		$this->clear_search_results();
 		$this->clear_campaign_from_session();
-		$this->data['hide_side_nav'] = True;
+		$this->data['hide_side_nav'] = true;
 		$this->data['full_container'] = True;
 
 		
@@ -28,10 +28,14 @@ class Dashboard extends MY_Controller {
 		// Add options
 		// array_unshift($providers_options,'All');
 
+        
+        
 		$this->data['pending_actions'] = $this->Actions_model->get_pending_actions($this->get_current_user_id());
 		//$this->data['assigned_companies'] = $this->Actions_model->get_assigned_companies($this->get_current_user_id());
 		$this->data['action_types_array'] = $this->Actions_model->get_action_types_array();
-        
+          if($this->data['current_user']['department'] == 'support'){
+                $this->data['main_content'] = 'dashboard/pods';
+            } else{
         $permission = 'admin';
         if($this->userPermission == 'uf') $permission = 'uf';
 		$this->data['stats'] = $this->Actions_model->get_recent_stats('week', 'np');
@@ -61,8 +65,11 @@ class Dashboard extends MY_Controller {
 //$this->data['private_campaigns_new'] = $this->Campaigns_model->private_campaigns_new($this->get_current_user_id());
 		$this->data['userimage'] = $this->Users_model->get_user_image();
 		//$this->data['marketing_actions'] = $this->Actions_model->get_marketing_actions($this->get_current_user_id());
-		$this->data['main_content'] = 'dashboard/home';
-		$this->load->view('layouts/default_layout', $this->data);	
+		
+       $this->data['main_content'] = 'dashboard/home';
+    }
+        
+        $this->load->view('layouts/default_layout', $this->data);	
 	}
     
    
@@ -134,12 +141,29 @@ echo $this->userPermission;
   public function getActionsProposals(){
       $output['proposals']  =  $this->Actions_model->getActionsProposals($this->data['current_user']['id']);
        $output['intents']  =  $this->Actions_model->getActionsIntents($this->data['current_user']['id']);
+      $output['pods']  =  $this->Actions_model->getPods($this->data['current_user']['id']);
+      
+      $output['userpermission'] =  $this->userPermission;
       
      echo json_encode($output);
       
       
 //echo '<pre>'; print_r($output); echo '</pre>';  
   }  
+    
+    
+    
+    
+      public function getPods(){
+      $output['pods']  =  $this->Actions_model->getActionsProposals($this->data['current_user']['id']);
+  
+      
+      
+     echo json_encode($output);
+      
+      
+//echo '<pre>'; print_r($output); echo '</pre>';  
+  } 
 
 
 function private_campaigns_new(){ //dElete this function when finished there are no dependentcies

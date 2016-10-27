@@ -1234,9 +1234,18 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
          var getUrlIdParam = GetUrlParamID();
          var kps_cancelled;
          var updatemeeting = [];
+         var turnover = [];
+          var turnoverAction = [];
+         var employees = [];
+         var tfer_runners ;
+        var tfer_turnover;
+
+         
+       
          
          if(typeof action['name'] !== 'undefined'  && action['name'] !== null &&  action['name'] !== 'null'   ){
             created_by = action['name'];
+           
          }else{
              created_by = action['created_by'];   
          }
@@ -1271,8 +1280,34 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
 
 
          
-         if(actionType == 'Pipeline - Deal') actionTypeOverwrite = actionType+'@'+initial_fee+'%';
+         if(actionType == 'Pipeline - Deal'){ 
+             actionTypeOverwrite = actionType+'@'+initial_fee+'%';
+         }
+            
+             
+           if(actionType == 'Pipeline - Deal' || actionType == 'Pipeline - Proposal'  && action['initial_fee'] != 0.00){ 
+            if(typeof action['tfer_turnover'] !== 'undefined' ){
+                
+                
+                turnoverAction =  (parseFloat(action['tfer_turnover']).toFixed(1).replace(/(\d)(?=(\d{3})+\.)/g, '$1,').split('.'));
+                
+     turnover =  '<span> <strong style="color: black;"> :: </strong> Projected Annual Contract Turnover £' + turnoverAction[0]+'</span><br>' ;  
+    employees  =   '<span> Contractors  ' + action['tfer_runners']+' </span>' ;    
+                    
+                }
+                                             
+                        
+             }
          
+         
+         
+         
+         if(actionType == 'Pipeline - Proposal'  &&  action['initial_fee'] != 0.00){ 
+        actionTypeOverwrite = actionType+'@'+ (parseFloat(action['initial_fee']*100).toFixed(2))+'%';
+             
+             
+         }
+        
              if(!actions_cancelled || typeof actionImg !== 'undefined'){
                 badge = '<span class="circle" style="float: left;margin-top: 0px;margin-right: 10px;width: 20px;height: 20px;border-radius: 15px;font-size: 8px;line-height: 20px;text-align: center;font-weight: 700;background-color:'+actionImg[1]+'; color:'+actionImg[2]+';">'+actionImg[0]+'</span>';
 
@@ -1457,7 +1492,7 @@ if(tm > 1){ tm = tm + ' Days Overdue'; }else if(tm == 1){ tm  = tm + ' Day Overd
  
          
       if(actionTypeName != 'Pipeline Update')   
-            actions  ='<div class="timeline-entry actionId'+actionType+'  '+classCompleted+' pillid'+actionId+'" pillid='+actionId+'> <div class="timeline-stat"> '+icon+'</div><div class="timeline-label"> <div class="mar-no pad-btm"><h4 class="mar-no pad-btm">'+header+deal+'  </h4><div class="actions-info" ><span class="label label-warning"  >'+planned_at+'</span>'+kpStr+ ' '+overdueStatus+ ' '+updatemeeting+contactName+' <span class="classActions" style="float:right; margin-top:0; margin-left:3px;">'+calenderbtn+outcomeRemove+followupAlert+'</span></div></div><div class="mic-info"> '+status+': '+created_by+' - '+formattDate(createdAt, true)+'</div><div class="actionMsgText">'+tagline+'</div>'+textbox+ ' </div></div>';
+            actions  ='<div class="timeline-entry actionId'+actionType+'  '+classCompleted+' pillid'+actionId+'" pillid='+actionId+'> <div class="timeline-stat"> '+icon+'</div><div class="timeline-label"> <div class="mar-no pad-btm"><h4 class="mar-no pad-btm">'+header+deal+'  </h4><div class="actions-info" ><span class="label label-warning"  >'+planned_at+'</span>'+kpStr+ ' '+overdueStatus+ ' '+updatemeeting+contactName+' <span class="classActions" style="float:right; margin-top:0; margin-left:3px;">'+calenderbtn+outcomeRemove+followupAlert+'</span></div></div><div class="mic-info"> '+status+': '+created_by+' - '+formattDate(createdAt, true)+' </div> <div class="actionMsgText">' +employees+''+turnover+''+tagline+' </div>'+textbox+ ' </div></div>';
          
         if(actionTypeName == 'Pipeline Update' ){
               actions  = '<div class="timeline-entry actionId'+actionType+' '+classCompleted+'" > <div class="timeline-stat"> '+icon+'</div> <div class="timeline-label pipe"> <div class="mar-no pad-btm" ><h4 class="mar-no pad-btm">'+header+' <span class="classActions" style="margin-top:0; margin-left:3px; float:right;">'+calenderbtn+outcomeRemove+'</span></h4>' +kpStr+overdueStatus+'</div><div class="actionMsgText">'+action['comments']+'</div></div></div>';

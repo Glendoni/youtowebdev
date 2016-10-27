@@ -19,10 +19,15 @@ class MY_Controller extends CI_Controller {
 		        $this->output->enable_profiler(FALSE);
 		break;
 		case 'staging':
-		        $this->output->enable_profiler(FALSE);
+		        $this->output->enable_profiler(FALSE);  
 		break;
 		case 'production':
 				$this->output->enable_profiler(FALSE);
+                
+                
+                
+                
+                
 		break;
 
 		default:
@@ -44,6 +49,29 @@ class MY_Controller extends CI_Controller {
 		$this->load->model('Contacts_model');
 		$this->load->model('Tagging_model');
 		$this->data['pending_actions'] = $this->Actions_model->get_pending_actions($this->get_current_user_id());
+        
+        
+        	if($_GET['id'] && (!$this->session->userdata('logged_in'))) 
+		{
+                   $string = current_full_url();
+         
+   
+        
+          //$string =  'http://localhost:8888/baselist/companies/company?id=112170';
+            //$string current_full_url();    
+                
+                   $cookie = array(
+                    'name'   => 'lastpagevisited',
+                    'value'  => $string,
+                    'expire' =>  (86400 * 30),
+                    'secure' => false
+                    );
+
+                    $this->input->set_cookie($cookie);
+                
+                
+            }
+        
 
 		// $this->load->helper('mobile');
 		

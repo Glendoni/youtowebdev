@@ -1094,7 +1094,7 @@ WHERE
        
         
         
-        $sql = 'select C.id,
+        $sql_ = 'select C.id,
         C.name, C.customer_from,
        CASE when T2.id is not null or T3.company_id is not null then \'Using Finance\' else \'FF\' END "class",
 	   class as dog  
@@ -1140,8 +1140,51 @@ order by customer_from desc';
         
         
         
+        $sql = 'SELECT c.id,   c.class as "current company class", T1.provider_id as tID
+, CASE when T1.id is not null or T2.company_id is not null   then \'Using Finance\' else \'FF\' END "class"
+FROM companies c
+LEFT JOIN (SELECT  c.id  ,m.provider_id   
+FROM companies c 
+LEFT JOIN mortgages m
+ON c.id= m.company_id
+where m.id is not null
+ and (M.inv_fin_related  in (\'Y\',\'P\') and m.stage  in (\'Outstanding\'))
+or (m.inv_fin_related <> \'N\' 
+ 
+ 
+ and m.stage in (\'Outstanding\')
+and   C.active is true
+ AND c.customer_from between m.eff_from and (CASE when m.eff_to is not null then m.eff_to else \'2100-01-01\'::date END)
+ )
+and provider_id != 2893
+) T1
+ --
+
+ON C.id = T1.id 
+LEFT JOIN
+(
+select   CT.company_id, T.category_id
+  
+from company_tags CT
+  
+LEFT JOIN tags T
+ON CT.tag_id = T.id
+WHERE T.category_id in (13) 
+
+) T2
+ON c.id = T2.company_id
+
+--WHERE  c.id =346385
+
+and CASE when T1.id is not null or  T2.company_id is not null   then \'Using Finance\' else \'FF\' END <> class
+ 
+ order by c.id DESC
+--and  c.id =346151';
+        
+        
+        
         $sql_ = "select company_id FROM MORTGAGES M 
-                        WHERE M.inv_fin_related  in ('Y','P') and M.stage  in ('Outstanding')";
+                        WHERE M.inv_fin_related  in ('Y','P') and M.stage  in (\'Outstanding\')";
         
         
         $query = $this->db->query($sql) ;     
@@ -1155,7 +1198,7 @@ order by customer_from desc';
                          echo '<table width="400">';
                     foreach($query->result() as $row)
                     {         
-                            echo '<tr><td align="left" class="glen">'.$row->id.'</td><td align="left" class="glen">'.$row->class.'</td><td align="left" class="glen">'.$row->class.'</td>';
+                            echo '<tr><td align="left" class="glen">'.$row->id.'</td><td align="left" class="glen">'.$row->class.'</td>';
                     //$this->cronpipelineUpdater($row->id,$row->pipeline_value);  } 
                        $this->cronpipelineUpdaternew($row->id,$row->class);
                             
@@ -1164,8 +1207,8 @@ order by customer_from desc';
                  echo '</table>';
             
             
-          $this->checkClassDateUpdater();
-            $this->checkClassDateUpdaterSonovate();
+          //$this->checkClassDateUpdater();
+            //$this->checkClassDateUpdaterSonovate();
              }
     }
     

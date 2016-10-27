@@ -166,11 +166,14 @@ function populateGetTagsCampList(data,param){
                               parent_tag_name =    val['parent_tag_name'].replace(' ', '');
                             //if(parent_tag_name != 'Downloads'){
                                    //console.log(val['name']);
-                                $('.tagLists'+param+val['parent_tag_id']).append('<li>'+val['name']+'</li>');
+                              $('.tagLists'+param+val['parent_tag_id']).append('<li class="subTags" ><span class="hint--top-right" data-hint="'+val['username']+' on '+formattDateTags(val['tagcreatedat'], true)+'">'+val['name']+'</span></li>');
                                         //parent_tag_name_holder.push(val['parent_tag_name']);
                               //  }
                        }
                  }) 
+         
+         
+
     
     
 }
@@ -183,6 +186,13 @@ $(window).load(function(){
     }, 2000);
 });
 $('#action_type_completed').change(function(){
+                                                                         $('.action_verbiage').hide();
+                                                                        var action_verbiage_text = $(this).val();
+
+                                                                       $('.action_verbiage_text'+action_verbiage_text).show();
+
+
+                                                                        //console.log($(this).val())
   
     $('#action-error .editBoxInstruction').text('Source');
 var source_check = $("input[name=source_check]").val();
@@ -288,16 +298,6 @@ if ((this.value == '16' || this.value == '8' || this.value == '32') && (!source_
     }
     
     
-    
-    
-    
-   
-    
-   
-    
-  
-    
-  
     
     $(".sourceRequiredTitle").html(sourceRequiredTitle);
      $('#action-error .editBoxInstruction').html(check);
@@ -652,22 +652,58 @@ uimage = val.image.split(',')
             var planned_at;
             var  createdAt; 
             var pipleine =  ['intents', 'proposals'];
- $.each( pipleine, function(  index, keyval ) {
-            
+  //console.log(data.intents);
+            if(!typeof data.intents != 'undefined'){
+ 
+            $.each( pipleine, function(  index, keyval ) {
+   
              $.each( data[keyval], function( key, val ) {
                  
                createdAt = val.intent ? val.intent : val.proposal;
                  
-    $('.record-holder-'+keyval).append('<div class="row record-holder"><div class="col-xs-2 col-sm-2 col-md-2">'+createdAt+'</div><div class="col-xs-4 col-sm-4 col-md-4"><a href="companies/company?id='+val.id+'">'+val.name+'</a></div><div class="col-xs-2 col-sm-2 col-md-2  "><span class="pipeline ">'+(val.planned ? val.planned : '') +'</span></div><div class="col-xs-2 col-sm-2 col-md-2  "><span class="pipeline ">'+ (val.action ? val.action : '')  +'</span></div><div class="col-xs-2 col-sm-2 col-md-2  "><span class="pipeline ">'+(val.by ? val.by : '')   +'</span></div></div>')
+    $('.record-holder-'+keyval).append('<div class="row record-holder"><div class="col-xs-2 col-sm-2 col-md-2">'+createdAt+'</div><div class="col-xs-4 col-sm-4 col-md-4"><a href="companies/company?id='+val.id+'">'+val.name+'</a></div><div class="col-xs-2 col-sm-2 col-md-2  "><span class="pipeline ">'+(val.planned ? val.planned : '') +'</span></div><div class="col-xs-2 col-sm-2 col-md-2  "><span class="pipeline ">'+ (val.action ? val.action : '')  +'</span></div><div class="col-xs-2 col-sm-2 col-md-2  "><span class="pipeline ">'+(val.by ? val.by : '')   +'</span></div></div>');
            
              })
                     var record_holder_propsals_length =    $('.record-holder-'+keyval+' .record-holder').length;
                     record_holder_propsals_length = record_holder_propsals_length ? record_holder_propsals_length :'0';
                     $('.eventcount'+keyval).text(record_holder_propsals_length);
              })
+ 
+ 
+            }
+ //pods.acudate.split("-").reverse().join("-")
+ var    actionedAt;
+    $.each( data['pods'], function(  index, pods ) {
+            
+          //console.log(pods.tag_id);
+      actionedAt  =   pods[0]['last_action'][0]['acudate']? pods[0]['last_action'][0]['acudate'] : pods[0]['last_action'][0]['createdatac'] ;
+        $('.record-holder-pods'+pods.tag_id).append('<div class="row record-holder"><div class="col-xs-4 col-sm-4 col-md-4"><a href="companies/company?id='+pods.id+'">'+pods.name+'</a></div><div class="col-xs-4 col-sm-4 col-md-4">'+pods[0]['last_action'][0]['actionname']+'<br> '+pods[0]['last_action'][0]['username']+
+        ' on '+ actionedAt.split("-").reverse().join("-")+'</div></div>');
+        
+        
+        
+          var record_holder_propsals_length =    $('.record-holder-pods'+pods.tag_id+' .record-holder').length;
+                    record_holder_propsals_length = record_holder_propsals_length ? record_holder_propsals_length :'0';
+                    $('.eventcountpods'+pods.tag_id).text(record_holder_propsals_length);
+
+    });
+        
+ 
+ 
+ 
+ 
         }
 
     });
+        
+        
+        
+        
+      
+        
+        
+        
+        
         
         $.ajax({
         type: "GET",
@@ -782,13 +818,32 @@ uimage = val.image.split(',')
     }
     $('#action_type_completed').on('change',function(){
 
-        if($('#action_type_completed').val() == 16 ){
+        if($('#action_type_completed').val() == 16 || $('#action_type_completed').val() == 8  && $('.initialfee').length !=1){
+            
+            
+     
+            if($('.initialfee').length ==1){
             $('.onInitialFee').addClass('col-md-2');
+                $('.followup').addClass('col-md-2');
             $('.initialfee').show();
             $('.initialfee input').attr('required', 'required');
+            }else{
+                
+               $('.followup').addClass('col-md-2');
+            $('.initialfee').show();
+            $('.initialfee input').attr('required', 'required');  
+                
+                
+                
+            }
+                
+                
+                
+                
             //checkInitialFee()
         }else{
-            $('.onInitialFee').removeClass('col-md-2');
+            $('.onInitialFee').removeClass('col-md-3');
+             $('.followup').removeClass('col-md-2');
             $('.initialfee input').val('').removeAttr('required');
             $('.initialfee').hide();
         }

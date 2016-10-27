@@ -138,7 +138,7 @@ function get_actions_completed($company_id)
     $data = array(
         'a.company_id' => $company_id,
         );
-    $this->db->select('a.created_at,a.actioned_at,a.action_type_id,com.initial_rate,a.comments,a.cancelled_at,a.outcome,a.id,u.image,u.name,c.first_name,c.last_name,a.contact_id,a.followup_action_id, a.planned_at", ');
+    $this->db->select('a.created_at,a.actioned_at,a.action_type_id,com.initial_rate,a.comments,a.cancelled_at,a.outcome,a.id,u.image,u.name,c.first_name,c.last_name,a.contact_id,a.followup_action_id, ,a.tfer_turnover, a.tfer_runners, a.initial_fee,  a.planned_at", ');
     $this->db->join('contacts c', 'c.id = a.contact_id', 'left');
     $this->db->join('users u', 'a.user_id = u.id', 'left');
     $this->db->join('companies com', 'a.company_id = com.id', 'left');
@@ -229,7 +229,7 @@ AND a.company_id='$company_id'";
     return $query->result_object();
 }
     
-    
+  
     
 function get_pending_actions($user_id)
 {       
@@ -237,12 +237,16 @@ function get_pending_actions($user_id)
     $this->db->where('actions.user_id',$user_id);
     $this->db->where('actioned_at',NULL);
     $this->db->where('cancelled_at',NULL);
+      $this->db->where('active',true);    
     $this->db->join('companies', 'companies.id = actions.company_id', 'left');
-    $this->db->join('contacts', 'contacts.id = actions.contact_id', 'left');
+    $this->db->join('contacts', 'contacts.id = actions.contact_id', 'left'); 
     $this->db->limit(200);
     $this->db->order_by('cancelled_at desc,planned_at asc');
     $query = $this->db->get('actions');
     // var_dump($query);
+    
+   // echo $this->db->last_query();
+    
     return $query->result_object();
 
 }
@@ -810,6 +814,9 @@ function create($post, $userid =false)
         'actioned_at'   => date('Y-m-d H:i:s'),
         'created_at'    => date('Y-m-d H:i:s'),
         'followup_action_id' =>(isset($post['followup_action_id'])?$post['followup_action_id']:NULL),
+         'tfer_turnover' => $post['turnover']?$post['turnover']:null,
+         'tfer_runners'  => $post['runners'] ?$post['runners']:0,
+         'initial_fee'  => (!empty($post['initialfee'])? $this->calIntRate($post['initialfee']):NULL)
         );
     $query = $this->db->insert('actions', $completeddata);
     //END TEST
@@ -913,10 +920,18 @@ function company_updated_to_proposal($post)
         'action_type_id'=> '19',
         'actioned_at'   => date('Y-m-d H:i:s'),
         'created_at'    => date('Y-m-d H:i:s'),
+         
         );
 
     $query = $this->db->insert('actions', $actiondata);
-    return $this->db->insert_id();
+
+    
+    
+    
+   
+    
+    
+        return $this->db->insert_id();
 
 }
     
@@ -1257,9 +1272,90 @@ public function getActionsProposals($userID = 0){
 }
     
     
+    function getPods($id){
+        
+       /*
+        $sql = ('SELECT DISTINCT  ct.company_id as id, ct.tag_id, com.created_at::date, com.name, ct.tag_id ,
+ 
+
+ FROM company_tags ct  
+ INNER JOIN actions ac 
+ON ct.company_id = ac.company_id 
+INNER JOIN companies com
+ON  ct.company_id  = com.id
+INNER JOIN action_types atp
+ON  ac.action_type_id = atp.id
+INNER JOIN users u 
+ON ac.updated_by = u.id 
+WHERE ct.company_id in (select   ctt.company_id from company_tags ctt  INNER JOIN actions  acc on  ctt.company_id = 
+ acc.company_id WHERE ctt.tag_id in (200,201,202)  GROUP BY acc.company_id, ctt.company_id ,acc.updated_at ORDER BY acc.updated_at DESC
+   
+)  
+AND ct.tag_id in (200,201,202)  
+');
+    
+
+    $query = $this->db->query($sql);
+
+    return   $query->result_array();  
+        
+        */
+
+        
+                $sql =  ' SELECT  ct.company_id as id, ct.tag_id, c.created_at::date, c.name, ct.tag_id 
+
+                FROM companies c
+                LEFT JOIN company_tags ct
+                ON c.id= ct.company_id
+                WHERE ct.tag_id in (200,201,202)
+                AND ct.eff_to is null
+                ';     
+
+
+
+                $query= $this->db->query($sql);
+
+                $pp =  $query->result_array();  
+
+
+                $i = 0;
+                foreach($pp as $item => $value){
+
+                //  $pp[$item]['action'] =  $this->getmore() ;
+                // echo $value['compid'];
+                $idval =   $this->getmore($value['id']) ;
+                array_push($pp[$item],  array( 'last_action'=> $idval));
+
+                }
+        
+        return $pp;
+        
+        
+    }
+    
+    
+        function getmore($id){
+      
+         $query = $this->db->query('SELECT ac.company_id, ac.action_type_id, ac.updated_at::date as acudate, ac.updated_by, u.name as username, atp.name as actionname, ac.created_at::date as createdatac
+         FROM actions ac
+LEFT JOIN action_types atp
+ON  ac.action_type_id = atp.id
+LEFT JOIN users u 
+ON ac.created_by = u.id 
+WHERE ac.company_id='.$id.' AND  ac.action_type_id !=19 order by ac.updated_at DESC , ac.id DESC  LIMIT 1' ) ;     
+    
+ return $query->result_array(); 
+        
+        
+    }
+    
+    
+    
+    
+    
   function actiondata($id){ // Checks created at of pipeline action 
       
-   $sql = "SELECT id,created_at,action_type_id FROM actions WHERE company_id = ".intval($id)." AND action_type_id IN (16,32,34,8,31,11,19) ORDER BY created_at ";
+   $sql = "SELECT id,created_at,action_type_id FROM actions WHERE company_id = ".intval($id)." AND action_type_id IN (16,32,34,8,31,11,19) ORDER BY created_at DESC";
    
     $query = $this->db->query($sql);
     if ($query->num_rows() > 0)

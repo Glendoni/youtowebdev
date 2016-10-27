@@ -7,7 +7,9 @@
             <?php endif; ?>
             <?php //hide core page content if no company is found ?>
                 <?php if (isset($company['id'])): ?>
-                    <div class="page-results-list" id="parent">
+                    <div class="page-results-list" id="parent" style="
+    padding-top: 100px;
+">
                     <breadcrumbscroll>
                     <div class="row top-info-holder">
                     <div class="col-md-9 piplineUdate" style="padding-left: 31px;">
@@ -128,11 +130,21 @@
      
      
          <div class="col-md-12" >
-                             
+               
+             
+            
 
+                 <span class="label   btn-info comp_details_edit_btn mainedit" data-toggle="modal" id="editbtn<?php echo $company['id']; ?>" data-target="#myModal<?php echo $company['id']; ?>" style="
+    font-size: 12px;     float: right;
+">Add Tag</span>
+             
+             
+             
             <span class="label  btn-warning comp_details_edit_btn mainedit" data-toggle="modal" id="editbtn<?php echo $company['id']; ?>" data-target="#editModal<?php echo $company['id']; ?>" style="
     font-size: 12px;     float: right;
 ">Edit</span>
+             
+           
          
         </div>
 
@@ -172,7 +184,7 @@
 	<?php $this->load->view('companies/create_contact_box.php',array('company'=>$company)); ?>
 	<?php $this->load->view('companies/create_address_box.php',array('company'=>$company)); ?>
    
-<div class="panel panel-primary" style="padding-top: 30px;"  >
+<div class="panel panel-primary">
 	<div class="panel-body">
     	<div class="row"><!--FINISHED AT THE END OF PANEL-->
 		<div class="col-sm-9">
@@ -344,7 +356,7 @@ if ($your_date < $now){;
 	
 	 
                 
-            <div class="col-md-3">
+            <div class="col-md-3" style="display:none;">
 					<!-- CONTACTS -->
             	<label>Contacts</label> 		
 			<?php if (isset($company['contacts_count'])): ?>
@@ -361,7 +373,7 @@ if ($your_date < $now){;
             
         </div>
             
-              <div class="col-md-5" >
+              <div class="col-md-3" >
 				<label>Lead Source</label>
 				<p style="
     margin-top: -4px;
@@ -371,6 +383,49 @@ if ($your_date < $now){;
 		</div>
             
             
+    
+    
+                
+		<!-- EMPLOYEES -->
+		<div class="col-xs-4 col-sm-3">
+			<strong>Employees</strong><br>
+			<?php if (isset($company['emp_count'])): ?>
+			<p class="details"><?php echo $company['emp_count'];?> </p>
+			<?php else: ?>
+            <p class="details"></p>
+			<?php endif; ?>
+            </div>
+		<!-- SECTORS -->
+		<div class="col-xs-4 col-sm-3">
+			<div class="tag_sectortagheading"><strong>Sectors</strong></div>
+			<?php
+			if(isset($company['sectors'])){
+	 
+            echo '<div class="sectorsPlainText">';
+            foreach ($company['sectors'] as $key => $name)
+				{
+				echo  $name.'<br>' ;
+				}
+            
+             echo '</div>';
+        }
+            
+			?>
+            
+            
+            
+
+
+<?php /* if (isset($company['perm'])): ?>
+<p class="details detailsTagFormat" style="margin-bottom:0; text-align:centre; font-size:11px;">Permanent</p>
+<?php endif; ?>
+<?php if (isset($company['contract'])): ?>
+<p class="details detailsTagFormat" style="margin-bottom:0; text-align:centre; font-size:11px;">Contract</p>
+<?php endif;  */ ?>
+</div>
+    
+    
+    
     
 		</div>
             </div>
@@ -387,37 +442,14 @@ if ($your_date < $now){;
 
 	
             
+
             
-		<!-- EMPLOYEES -->
-		<div class="col-xs-4 col-sm-3">
-			<strong>Employees</strong><br>
-			<?php if (isset($company['emp_count'])): ?>
-			<p class="details"><?php echo $company['emp_count'];?> </p>
-			<?php else: ?>
-            <p class="details"></p>
-			<?php endif; ?>
-            </div>
-		<!-- SECTORS -->
-		<div class="col-xs-4 col-sm-3">
-			<strong>Sectors</strong><br>
-			<?php
-			if(isset($company['sectors'])){
-		
-				foreach ($company['sectors'] as $key => $name)
-				{
-				echo '<p class="details detailsTagFormat" style="margin-bottom:5px; font-size:11px; text-align:centre;">'.$name.'</p>';
-				}
-			}
-			?>
+               <div class="subcont"> 
 
-
-<?php /* if (isset($company['perm'])): ?>
-<p class="details detailsTagFormat" style="margin-bottom:0; text-align:centre; font-size:11px;">Permanent</p>
-<?php endif; ?>
-<?php if (isset($company['contract'])): ?>
-<p class="details detailsTagFormat" style="margin-bottom:0; text-align:centre; font-size:11px;">Contract</p>
-<?php endif;  */ ?>
-</div>
+                    <!-- <h4 class="ta"></h4> -->
+                    <!--<ul id="fetags"></ul> -->
+                    </div>
+            
 		</div>
 		</div>
 		</div>
@@ -769,7 +801,7 @@ endif;
         
         <!-- TAGGING  START-->
         
-        <div class="tag-tabs" id="tags-anchor">
+        <div class="tag-tabs" id="tags-anchor" style="display:none;">
                 <div class="col-md-12">
                     <div class="panel panel-default">
                     <div class="panel-heading" id="qvTags">Tags</div>
@@ -798,8 +830,40 @@ endif;
                         <p>Tags are used to provide <strong>Sonovate</strong> with a better insight into current and potential clients </p>
                         </div>-->
 
-
-                        <div class="col-sm-6 no-padding">
+   
+                </div>   
+                 
+                        
+                        
+                        </div>
+                    </div>   
+            </div>
+    </div>
+        
+        
+        
+        
+          <!-- Modal -->
+  <div class="modal draggable-modal full-screen fade" id="myModal<?php echo $company['id']; ?>" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Tags</h4>
+        </div>
+        <div class="modal-body">
+      
+            
+            
+            
+           <div id="myNav" class="overlay">
+ 
+  <div class="overlay-content">
+  
+      
+                        <div class="col-sm-12 no-padding">
                             <div class="row tag-search-holder ">
                                 <div class="col-sm-12">         
                                     <form id="live-search" action="" method="post">
@@ -834,18 +898,28 @@ endif;
                                     </div>
                                 </div>
                             </div>
-                    </div>    
-                </div>   
-                    <div class="col-sm-6 subcont"> 
-
-                    <h4 class="ta"></h4>
-                    <ul id="fetags"></ul>
-                    </div></div>
-                    </div>   
-            </div>
+                    </div> 
+  </div>
+</div> 
+            
+            
+            
+            
+            
+            
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
     </div>
+  </div>
         
         
+        
+        
+
         <!--TAGGING END -->
 
 
@@ -867,7 +941,7 @@ endif;
                 <strong><span class="sourceRequiredTitle" >Source</span> Required.</strong><br> To add a <span class="sourceRequiredDropDownItem"></span>&#44; please add a <span class="editBoxInstruction">Source</span> to this company.
             </div>
             <div class="row">
-                        <div class="col-sm-3 col-md-3">
+                        <div class="col-sm-4 col-md-4">
                             <div class="form-group ">
                                 <label>New Action</label>
                                 
@@ -878,15 +952,14 @@ endif;
                                 
                                 <select id="action_type_completed" name="action_type_completed" class="form-control" >
                                     <option value="">--- Select an Action ---</option>
-                                    <option value="8">Pipeline - Proposal</option>
+                                  
                                     <?php foreach($action_types_done as $action ): 
 
                                     if($action->id == 16 && $company['pipeline'] == 'Customer'|| $action->id == 31 && $company['pipeline'] == 'Customer' || $action->id == 32 && $company['pipeline'] == 'Customer' || $action->id == 33  && $company['pipeline'] == 'Customer'|| $action->id == 34 && $company['pipeline'] == 'Customer' ){ }else{ ?>
                                    
-                                    <?php  if($action->id != 8 ){ ?>
+                                
                                       <option value="<?php echo $action->id; ?>"><?php echo $action->name; ?></option>
-                                    
-                                    <?php } ?>
+                                
                                     <?php 
                                     } endforeach; ?>
                                 </select>
@@ -895,16 +968,20 @@ endif;
                                
                             </div>
                         </div>
-                        <div class="col-sm-3 col-md-2 initialfee">
+                     <div class="col-sm-2 col-md-2 initialfee fee">
                             <div class="form-group ">
-                                <label>Initial Fee</label>
+                                <label>Initial Fee<span class="actionrqd">*</span></label>
                                 <div class="input-group">
-                                    <input type="number" step="0.01" name="initialfee" placeholder="0.00" min="0.01" max="9.99" class="form-control" id="amount" >
+                                    <input type="number" step="0.01" name="initialfee" placeholder="0.00" min="0.01" max="9.99"  class="form-control" id="amount" >
                                     <div class="input-group-addon">%</div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-3 col-md-3  onInitialFee">
+                
+               
+                
+
+                        <div class="col-sm-2 col-md-2  onInitialFee">
                             <?php if(isset($contacts) and !empty($contacts)) : ?>
                                 <div class="form-group ">
                                     <label>Contact</label>
@@ -917,7 +994,7 @@ endif;
                                 </div>
                             <?php endif; ?>
                         </div>
-                         <div class="col-sm-3 col-md-3 onInitialFee">
+                         <div class="col-sm-2 col-md-2 onInitialFee">
                             <div class="form-group ">
                                 <label>Follow Up Action</label>
 
@@ -929,15 +1006,75 @@ endif;
                                 </select>
                             </div>
                         </div>
-                        <div class="col-sm-3 col-md-3">
-                            <div class="form-group " >
+                        <div class="col-sm-2 col-md-4 followup">
+                            <div class="form-group" >
                                 <label>Follow Up Date</label>
                                 <input type="text" class="form-control follow-up-date" id="planned_at" data-date-format="YYYY/MM/DD H:m" name="planned_at" placeholder="">
                             </div>
                         </div>
+                                        <div class="col-sm-4 col-md-4">
+
+                <?php foreach($action_types_done as $action ):  
+                                if($action->how_used){
+                                echo '<div class="alert alert-info action_verbiage action_verbiage_text'.str_replace(' ', '',$action->id ).'" >'
+                                    
+                                    
+                                    .$action->how_used.
+                                    
+                                    
+                                    
+                                    '</div>';
+                                }
+                                endforeach;
+                                ?>
+                </div>
+                   
+                 
+                <?php if ($current_user['permission'] == 'admin' || $current_user['permission'] == 'data' || $current_user['permission'] == 'uf'): ?>
+
+                <div class="col-sm-4  initialfee">
+        <div class="form-group ">
+            <label>Contractors<span class="actionrqd">*</span></label>
+            <div class="input-group">  <div class="input-group-addon">Runners</div>
+                <input type="number" step="1" name="runners" placeholder="0" min="0"  max="100"  class="form-control"  id="runners" >
+              
+            </div>
+        </div>
+    </div>
+                
+                <div class="col-sm-4   initialfee">
+        <div class="form-group ">
+            <label>Projected Annual Contract Turnover<span class="actionrqd">*</span></label>
+            <div class="input-group">   <div class="input-group-addon">£</div>
+                <input type="number" step="0.01" name="turnover" placeholder="0.00" min="0.01" max="25000000"  class="form-control" id="turnover" >
+             
+            </div>
+        </div>
+    </div>
+
+                 <?php endif; ?>
+                
+                
+                
+                
+                
+                
+                
                         <div class="col-sm-12 col-md-12">
                             <div class="form-group addActionOutcome">
+                                 
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
                                 <label>Comment<span class="actionEvalPipeline"style=" color: red;">*</span></label>
+                                
+                                
+                                  
                                 <textarea class="form-control completed-details" name="comment" rows="3" required="required"></textarea>
 
                                 <!---
@@ -1013,7 +1150,7 @@ endif;
 
                             </div>
                             <button type="submit" name="no contno con" class="btn btn-primary form-control disable_no_source " id="add_action_request" disabled="disabled">Add Action</button>
-                        </div>
+                        </div><!--END MD-12-->
                         <?php echo form_close(); ?>
 </div>
 		  </div>
@@ -1201,7 +1338,24 @@ endif;
  
  
 
-<script>
+
+ 
+
+
+    
+    <script>
+function openNav() {
+    document.getElementById("myNav").style.height = "100%";
+}
+
+function closeNav() {
+    document.getElementById("myNav").style.height = "0%";
+}
+</script>
+    
+    
+    
+    <script>
  
     
     function stickyActionsMenu() {
