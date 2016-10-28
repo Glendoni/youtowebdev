@@ -1140,7 +1140,7 @@ order by customer_from desc';
         
         
         
-        $sql = 'SELECT c.id,   c.class as "current company class", T1.provider_id as tID
+        $sql_ = 'SELECT c.id,   c.class as "current company class", T1.provider_id as tID
 , CASE when T1.id is not null or T2.company_id is not null   then \'Using Finance\' else \'FF\' END "class"
 FROM companies c
 LEFT JOIN (SELECT  c.id  ,m.provider_id   
@@ -1182,11 +1182,48 @@ and CASE when T1.id is not null or  T2.company_id is not null   then \'Using Fin
 --and  c.id =346151';
         
         
+     
+        $sql = "select distinct C.id,
+       -- C.name,
+	   
+	   -- T1.company_id,
+	   -- T2.company_id,
+	   CASE when T1.company_id is not null or T2.company_id is not null then 'Using Finance' else 'FF' END \"class\"
+  
+from COMPANIES C
+
+LEFT JOIN
+(-- T1
+select company_id,
+       eff_from \"eff from\",
+       CASE when eff_to is null then '2999-01-01'::date else eff_to END \"eff to\"
+from MORTGAGES M
+where provider_id <> 2893 -- ie not Sonovate's Mortgage
+and inv_fin_related in ('P','Y')
+)   T1
+ON C.id = T1.company_id
+AND (CASE when C.customer_from is not null then C.customer_from else current_date END) between T1.\"eff from\" and T1.\"eff to\"
+
+LEFT JOIN
+(-- T2
+select distinct CT.company_id
+from COMPANY_TAGS CT
+JOIN TAGS T
+ON CT.tag_id = T.id
+  
+where T.category_id = 13 -- ie alt fin provider
+and CT.eff_to is null
+)   T2
+ON C.id = T2.company_id
+
+-- where C.customer_from is not null
+
+-- order by 3,4
+
+--limit 100
+";
         
-        $sql_ = "select company_id FROM MORTGAGES M 
-                        WHERE M.inv_fin_related  in ('Y','P') and M.stage  in (\'Outstanding\')";
-        
-        
+       
         $query = $this->db->query($sql) ;     
 
    
