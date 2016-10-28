@@ -1114,16 +1114,16 @@ AND C.customer_from between M.eff_from and (CASE when M.eff_to is not null then 
 where customer_from is not null
  and M.inv_fin_related <> \'N\'
 
- and M.inv_fin_related not in (\'Y\',\'P\')
+ and M.inv_fin_related not in (\'Y\',\'P\') 
 
-or M.stage <> \'Satisfied\'  or M.provider_id <> 28935
+or M.stage <> \'Satisfied\'  or M.provider_id <> 28935 
  
   ) T2
-ON C.id = T2.id
+ON C.id = T2.id 
 
-LEFT JOIN
+LEFT JOIN 
 (
-select distinct CT.company_id  
+select distinct CT.company_id   
   
 from COMPANY_TAGS CT
   
