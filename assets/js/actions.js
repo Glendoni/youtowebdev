@@ -1281,11 +1281,13 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
 
          
          if(actionType == 'Pipeline - Deal'){ 
+             
+           
              actionTypeOverwrite = actionType+'@'+initial_fee+'%';
          }
             
              
-           if(actionType == 'Pipeline - Deal' || actionType == 'Pipeline - Proposal'  && action['initial_fee'] != 0.00){ 
+           if(actionType == 'Pipeline - Deal' || actionType == 'Pipeline - Proposal'  && (parseFloat(action['initial_fee']*100).toFixed(2))  != 0.00){ 
             if(typeof action['tfer_turnover'] !== 'undefined' ){
                 
                 
@@ -1300,9 +1302,11 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
              }
          
          
+         console.log(action['initial_fee']);
          
-         
-         if(actionType == 'Pipeline - Proposal'  &&  action['initial_fee'] != 0.00){ 
+         if(actionType == 'Pipeline - Proposal'  &&  (parseFloat(action['initial_fee']*100).toFixed(2)) != 0.00){ 
+             
+     
         actionTypeOverwrite = actionType+'@'+ (parseFloat(action['initial_fee']*100).toFixed(2))+'%';
              
              
