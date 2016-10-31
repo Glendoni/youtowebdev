@@ -1144,12 +1144,12 @@ echo floor($datediff / (60 * 60 * 24));
              echo '<br>';
             $mystring = current_full_url();
       
-            $findme   = 'https:';
+            $findme   = 'https://';
             $pos = strpos($mystring, $findme);
 
             // Note our use of ===.  Simply == would not work as expected
             // because the position of 'a' was the 0th (first) character.
-            if ($pos === false || $pos == '') {
+            if ($pos === false) {
           echo "The string '$findme' was not found in the string '$mystring'";
 
 
