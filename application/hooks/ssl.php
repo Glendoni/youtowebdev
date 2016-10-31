@@ -1,7 +1,7 @@
 <?php
 function redirect_ssl() 
 {
-    $CI->load->helper("url_helper");
+    //$CI->load->helper("url_helper");
     $CI =& get_instance();
     $class = $CI->router->fetch_class();
     $exclude =  array();  // add more controller name to exclude ssl.
