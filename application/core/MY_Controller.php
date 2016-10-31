@@ -10,6 +10,15 @@ class MY_Controller extends CI_Controller {
 	public function __construct() {	
 
 		parent::__construct();
+        
+        
+        
+        
+        
+        
+        
+        
+        
 		set_time_limit(6000); 
 		ini_set("memory_limit", -1);
 		
@@ -51,6 +60,45 @@ class MY_Controller extends CI_Controller {
 		$this->data['pending_actions'] = $this->Actions_model->get_pending_actions($this->get_current_user_id());
         
         
+        
+        
+             if($this->session->userdata('logged_in')){
+          
+          if($_SERVER['SERVER_PORT'] == 80){ // server =  80 localhost =  8888
+           
+          
+       // server =  80 localhost =  8888)
+      
+      
+            $a =  str_replace('http://','https://', site_url());
+ 
+            $mystring = current_full_url();
+      
+            $findme   = 'https:';
+            $pos = strpos($mystring, $findme);
+
+            // Note our use of ===.  Simply == would not work as expected
+            // because the position of 'a' was the 0th (first) character.
+            if ($pos === false || $pos == '') {
+            //  echo "The string '$findme' was not found in the string '$mystring'";
+ 
+
+
+           header( 'Location: '.$a ) ;
+
+            } 
+  
+    
+}
+             }
+        
+        
+        
+        
+        
+        
+        
+        
         	if($_GET['id'] && (!$this->session->userdata('logged_in'))) 
 		{
                    $string = current_full_url();
@@ -68,6 +116,13 @@ class MY_Controller extends CI_Controller {
                     );
 
                     $this->input->set_cookie($cookie);
+                
+                
+            }else{
+                
+                
+                
+                
                 
                 
             }
