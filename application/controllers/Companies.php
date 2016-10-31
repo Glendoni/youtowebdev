@@ -17,6 +17,37 @@ class Companies extends MY_Controller {
 		$this->load->helper('url');
         $this->load->helper('form');
         $this->load->library('form_validation');
+        
+        
+                if($this->session->userdata('logged_in')){
+          
+          if($_SERVER['SERVER_PORT'] == 80){ // server =  80 localhost =  8888
+          
+       // server =  80 localhost =  8888)
+      
+            $a =  str_replace('http://','https://', site_url().'dashboard');
+ 
+            $mystring = current_full_url();
+      
+            $findme   = 'https://';
+            $pos = strpos($mystring, $findme);
+
+            // Note our use of ===.  Simply == would not work as expected
+            // because the position of 'a' was the 0th (first) character.
+            if ($pos === false || $pos == '') {
+            //  echo "The string '$findme' was not found in the string '$mystring'";
+ 
+           header( 'Location: '.$a ) ;
+                
+                exit();
+
+            } 
+  
+    
+}
+             }
+        
+        
 	}
 	
 	public function index($ajax_refresh = False) 
