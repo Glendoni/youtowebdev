@@ -27,59 +27,7 @@ class Companies extends MY_Controller {
         
         
         
-        if(isset($_SERVER['SERVER_PORT'])){
-          
-          //echo 'Current full'.  site_url();
-          
-          if($_SERVER['SERVER_PORT'] == 80){ // server =  80 localhost =  8888
-          
-          
-          
-       // server =  80 localhost =  8888)
-      
-      
-            $a =  str_replace('http://','https://', site_url());
 
-         echo 'Current full'.  site_url();
-
-             echo '<br>';
-            $mystring = current_full_url();
-      
-            $findme   = 'https://';
-            $pos = strpos($mystring, $findme);
-
-            // Note our use of ===.  Simply == would not work as expected
-            // because the position of 'a' was the 0th (first) character.
-            if ($pos === false) {
-          echo "The string '$findme' was not found in the string '$mystring'";
-
-
-             redirect($a, 'location');
-
-
-        //   header( 'Location: '.$a ) ;
-
-            } 
-      else {
-    echo "The string '$findme' was found in the string '$mystring'";
-  echo " and exists at position $pos";
-}
-      
-      
-      
-      
-       //if (!preg_match("~^(?:f|ht)tps?://~i", $_SERVER['HTTP_HOST'])) {
-        //$url = "https:/" . $_SERVER['REQUEST_URI'];
-//    }
-   // echo  $url;
-      
-      
-     // echo (strpos($a, 'http://'));
-    
-}
-    
-     
-      }
         
         
 	}
