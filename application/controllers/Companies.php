@@ -1124,10 +1124,12 @@ echo floor($datediff / (60 * 60 * 24));
     
      echo 'Server Port '.$_SERVER['SERVER_PORT'];
       echo '<br>';
-    echo    $a =  $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+    echo    $a =  current_full_url();
+      
+     // echo 'Current full'.  current_full_url();
       
        echo '<br>';
-  $mystring = $_SERVER['HTTP_HOST'];
+  $mystring = current_full_url();
 $findme   = 'https:';
 $pos = strpos($mystring, $findme);
 
