@@ -80,7 +80,7 @@ class MY_Controller extends CI_Controller {
             if ($pos === false || $pos == '') {
             //  echo "The string '$findme' was not found in the string '$mystring'";
  
-           header( 'Location: '.$a ) ;
+          // header( 'Location: '.$a ) ;
 
             } 
   
