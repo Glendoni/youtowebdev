@@ -74,7 +74,7 @@ class MY_Controller extends CI_Controller {
        // server =  80 localhost =  8888)
       
       
-            $a =  str_replace('http://','https://', site_url());
+            $a =  str_replace('http://','https://', site_url().$_SERVER['REQUEST_URI']);
 
          //echo 'Current full'.  site_url();
 

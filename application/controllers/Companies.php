@@ -1160,7 +1160,7 @@ echo floor($datediff / (60 * 60 * 24));
       
             $a =  str_replace('http://','https://', site_url());
 
-         echo 'Current full'.  site_url();
+         echo 'Current full'. site_url().$_SERVER['REQUEST_URI'];
 
              echo '<br>';
             $mystring = current_full_url();
