@@ -37,6 +37,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 
-
+$hook['post_controller_constructor'][] = array(
+                                'function' => 'redirect_ssl',
+                                'filename' => 'ssl.php',
+                                'filepath' => 'hooks'
+                                );
 /* End of file hooks.php */
 /* Location: ./application/config/hooks.php */
