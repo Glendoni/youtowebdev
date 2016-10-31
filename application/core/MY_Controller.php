@@ -65,10 +65,8 @@ class MY_Controller extends CI_Controller {
              if($this->session->userdata('logged_in')){
           
           if($_SERVER['SERVER_PORT'] == 80){ // server =  80 localhost =  8888
-           
           
        // server =  80 localhost =  8888)
-      
       
             $a =  str_replace('http://','https://', site_url());
  
@@ -82,9 +80,7 @@ class MY_Controller extends CI_Controller {
             if ($pos === false || $pos == '') {
             //  echo "The string '$findme' was not found in the string '$mystring'";
  
-
-
-           header( 'Location: '.$a ) ;
+          // header( 'Location: '.$a ) ;
 
             } 
   

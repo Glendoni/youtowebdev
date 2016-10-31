@@ -1122,39 +1122,54 @@ echo floor($datediff / (60 * 60 * 24));
     
   function querychecker(){   
     
-     //echo 'Server Port '.$_SERVER['SERVER_PORT'];
-      //echo '<br>';
-     $a =  str_replace('http://','https://', site_url());
+            //echo 'Server Port '.$_SERVER['SERVER_PORT'];
+            //echo '<br>';
       
-     // echo 'Current full'.  current_full_url();
+//site_url()
       
-      // echo '<br>';
-  $mystring = current_full_url();
-$findme   = 'https:';
-$pos = strpos($mystring, $findme);
+      
+      if(isset($_SERVER['SERVER_PORT'])){
+          
+          if($_SERVER['SERVER_PORT'] == 80){ // server =  80 localhost =  8888
+          
+          
+          
+       // server =  80 localhost =  8888)
+      
+      
+            $a =  str_replace('http://','https://', site_url());
 
-// Note our use of ===.  Simply == would not work as expected
-// because the position of 'a' was the 0th (first) character.
-if ($pos === false || $pos == '') {
-  //  echo "The string '$findme' was not found in the string '$mystring'";
+         echo 'Current full'.  current_full_url();
 
-    
-   // redirect($a, 'http://localhost:8888/baselist/');
-    
-    
-    header( 'Location: '.$a ) ;
+             echo '<br>';
+            $mystring = current_full_url();
+      
+            $findme   = 'https:';
+            $pos = strpos($mystring, $findme);
 
-} else {
+            // Note our use of ===.  Simply == would not work as expected
+            // because the position of 'a' was the 0th (first) character.
+            if ($pos === false || $pos == '') {
+          echo "The string '$findme' was not found in the string '$mystring'";
+
+
+            // redirect($a, 'http://localhost:8888/baselist/');
+
+
+          // header( 'Location: '.$a ) ;
+
+            } 
+      else {
     echo "The string '$findme' was found in the string '$mystring'";
-    echo " and exists at position $pos";
+  echo " and exists at position $pos";
 }
       
       
       
       
-       if (!preg_match("~^(?:f|ht)tps?://~i", $_SERVER['HTTP_HOST'])) {
-        $url = "https:/" . $_SERVER['REQUEST_URI'];
-    }
+       //if (!preg_match("~^(?:f|ht)tps?://~i", $_SERVER['HTTP_HOST'])) {
+        //$url = "https:/" . $_SERVER['REQUEST_URI'];
+//    }
    // echo  $url;
       
       
@@ -1163,7 +1178,9 @@ if ($pos === false || $pos == '') {
 }
     
      
-    
+      }
+  
+  }
     
     
 }
