@@ -1139,7 +1139,7 @@ echo floor($datediff / (60 * 60 * 24));
        // server =  80 localhost =  8888)
       
       
-            $a =  str_replace('http://','https://', site_url();
+            $a =  str_replace('http://','https://', site_url());
 
          echo 'Current full'.  site_url();
 
