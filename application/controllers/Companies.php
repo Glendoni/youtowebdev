@@ -1119,7 +1119,6 @@ echo floor($datediff / (60 * 60 * 24));
         
     }
     
-    
   function querychecker(){   
     
      echo 'Server Port '.$_SERVER['SERVER_PORT'];
