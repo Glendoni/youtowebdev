@@ -1119,19 +1119,28 @@ echo floor($datediff / (60 * 60 * 24));
         
     }
     
+    
   function querychecker(){   
     
      echo 'Server Port '.$_SERVER['SERVER_PORT'];
       echo '<br>';
-    echo    $a =  site_url();
+    echo    $a =  $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
       
        echo '<br>';
       if (strpos($a, 'http://') !== false) {
     echo 'site url is true';
 }else{
           
-       echo 'site url is ssl';   
+       echo 'site url is ssl ';   
       }
+      
+      
+      
+      
+       if (!preg_match("~^(?:f|ht)tps?://~i", $_SERVER['HTTP_HOST'])) {
+        $url = "https:/" . $_SERVER['REQUEST_URI'];
+    }
+    echo  $url;
     
 }
     
