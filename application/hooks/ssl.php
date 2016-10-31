@@ -17,4 +17,3 @@ function redirect_ssl()
       $CI->config->config['base_url'] = str_replace('https://', 'http://', $CI->config->config['base_url']);
       if ($_SERVER['SERVER_PORT'] == 443) redirect($CI->uri->uri_string());
     }
-}
