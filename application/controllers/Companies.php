@@ -19,33 +19,7 @@ class Companies extends MY_Controller {
         $this->load->library('form_validation');
         
         
-                if($this->session->userdata('logged_in')){
-          
-          if($_SERVER['SERVER_PORT'] == 80){ // server =  80 localhost =  8888
-          
-       // server =  80 localhost =  8888)
-      
-            $a =  str_replace('http://','https://', site_url().'dashboard');
- 
-            $mystring = current_full_url();
-      
-            $findme   = 'https://';
-            $pos = strpos($mystring, $findme);
-
-            // Note our use of ===.  Simply == would not work as expected
-            // because the position of 'a' was the 0th (first) character.
-            if ($pos === false) {
-             echo "The string '$findme' was not found in the string '$mystring'";
- 
-           //header( 'Location: '.$a ) ;
-                
-               // exit();
-
-            } 
-  
-    
-}
-             }
+   
         
         
 	}
@@ -298,6 +272,40 @@ class Companies extends MY_Controller {
 	
 	public function company()
 	{
+        
+        
+                     if($this->session->userdata('logged_in')){
+          
+          if($_SERVER['SERVER_PORT'] == 80){ // server =  80 localhost =  8888
+          
+       // server =  80 localhost =  8888)
+      
+            $a =  str_replace('http://','https://', site_url());
+ 
+            $mystring = current_full_url();
+      
+            $findme   = 'https://';
+            $pos = strpos($mystring, $findme);
+
+            // Note our use of ===.  Simply == would not work as expected
+            // because the position of 'a' was the 0th (first) character.
+            if ($pos === false) {
+             echo "The string '$findme' was not found in the string '$mystring'";
+ 
+           header( 'Location: '.$a ) ;
+                
+             exit();
+
+            } 
+  
+    
+}
+             }
+        
+        
+        
+        
+        
         if($this->input->get('id'))
 		{
  
@@ -1186,7 +1194,7 @@ echo floor($datediff / (60 * 60 * 24));
           echo "The string '$findme' was not found in the string '$mystring'";
 
 
-            // redirect($a, 'http://localhost:8888/baselist/');
+             redirect($a, 'location');
 
 
         //   header( 'Location: '.$a ) ;
