@@ -652,9 +652,18 @@ if ($your_date < $now){;
             <?php  if($address->address != 'Unknown' && $address->address != '' ): ?>
 	      	<tr>
 				<td class="col-md-6">
-                 <a target="_blank" href="http://maps.google.com/?q=<?=$address->address; ?>" ><span class="mainAddress"><?=$address->address; ?></span><span style="line-height: 15px;font-size: 10px;padding-left: 5px;"><i class="fa fa-external-link"></i></span></a></td>
+                    
+                <?php 
+                    $phone = array();                   
+                    if($address->type == 'Registered Address'){ 
+                        $phone =  $company['phone'];
+                    }else{
+                        $phone =  $address->phone;
+                    }
+                ?>
+                 <a target="_blank" href="http://maps.google.com/?q=<?=$phone; ?>" ><span class="mainAddress"><?=$address->address; ?></span><span style="line-height: 15px;font-size: 10px;padding-left: 5px;"><i class="fa fa-external-link"></i></span></a></td>
 				<td class="col-md-3 mainAddrType"><?php echo $address->type;?></td>
-				<td class="col-md-2 mainPhone"><?php echo $address->phone ? $address->phone : $company['phone']; ?></td>
+				<td class="col-md-2 mainPhone"><?php echo $phone; ?></td>
 				<td  class="col-md-3">
                 <?php if ($address->type<>'Registered Address'): ?>
                         <div class=" pull-right ">
