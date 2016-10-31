@@ -34,12 +34,12 @@ class Companies extends MY_Controller {
 
             // Note our use of ===.  Simply == would not work as expected
             // because the position of 'a' was the 0th (first) character.
-            if ($pos === false || $pos == '') {
-            //  echo "The string '$findme' was not found in the string '$mystring'";
+            if ($pos === false) {
+             echo "The string '$findme' was not found in the string '$mystring'";
  
-           header( 'Location: '.$a ) ;
+           //header( 'Location: '.$a ) ;
                 
-                exit();
+               // exit();
 
             } 
   
