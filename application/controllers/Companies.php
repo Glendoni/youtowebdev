@@ -1130,6 +1130,8 @@ echo floor($datediff / (60 * 60 * 24));
       
       if(isset($_SERVER['SERVER_PORT'])){
           
+          //echo 'Current full'.  site_url();
+          
           if($_SERVER['SERVER_PORT'] == 80){ // server =  80 localhost =  8888
           
           
@@ -1137,9 +1139,9 @@ echo floor($datediff / (60 * 60 * 24));
        // server =  80 localhost =  8888)
       
       
-            $a =  str_replace('http://','https://', current_full_url());
+            $a =  str_replace('http://','https://', site_url();
 
-         echo 'Current full'.  current_full_url();
+         echo 'Current full'.  site_url();
 
              echo '<br>';
             $mystring = current_full_url();
@@ -1156,7 +1158,7 @@ echo floor($datediff / (60 * 60 * 24));
             // redirect($a, 'http://localhost:8888/baselist/');
 
 
-          // header( 'Location: '.$a ) ;
+        //   header( 'Location: '.$a ) ;
 
             } 
       else {

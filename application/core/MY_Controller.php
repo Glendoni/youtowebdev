@@ -72,7 +72,7 @@ class MY_Controller extends CI_Controller {
  
             $mystring = current_full_url();
       
-            $findme   = 'https:';
+            $findme   = 'https://';
             $pos = strpos($mystring, $findme);
 
             // Note our use of ===.  Simply == would not work as expected
@@ -80,7 +80,7 @@ class MY_Controller extends CI_Controller {
             if ($pos === false || $pos == '') {
             //  echo "The string '$findme' was not found in the string '$mystring'";
  
-          // header( 'Location: '.$a ) ;
+           header( 'Location: '.$a ) ;
 
             } 
   
