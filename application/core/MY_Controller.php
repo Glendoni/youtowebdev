@@ -68,7 +68,7 @@ class MY_Controller extends CI_Controller {
           
        // server =  80 localhost =  8888)
       
-            $a =  str_replace('http://','https://', site_url());
+            $a =  str_replace('http://','https://', site_url().'dashboard');
  
             $mystring = current_full_url();
       
@@ -80,7 +80,7 @@ class MY_Controller extends CI_Controller {
             if ($pos === false || $pos == '') {
             //  echo "The string '$findme' was not found in the string '$mystring'";
  
-          // header( 'Location: '.$a ) ;
+           header( 'Location: '.$a ) ;
 
             } 
   
