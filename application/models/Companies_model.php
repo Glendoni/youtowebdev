@@ -77,13 +77,15 @@ class Companies_model extends CI_Model {
 		function get_companies_pipeline_search()
 	{
 		$arrayNamesPipelineSearch = array(
+             'Suspect' => 'Suspect',
 			'Prospect' => 'Prospect',
 			//'Qualified' => 'Qualified',
 			'Intent' => 'Intent',
+            'Customer' => 'Customer',
 			'Proposal' => 'Proposal',
-			'Customer' => 'Customer',
+			
 			'Unsuitable' => 'Unsuitable',
-            'Suspect' => 'Suspect',
+           
 			'Lost' => 'Lost'
 			);
 		return 	$arrayNamesPipelineSearch;

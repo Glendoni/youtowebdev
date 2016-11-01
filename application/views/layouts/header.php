@@ -317,9 +317,9 @@ $search_default = $this->input->post('agency_name');
                                     <div class='form-row'>
                                         <div class="form-group">
                                             <?php
-                                            echo form_label('Pipeline', 'pipeline');
+                                            echo form_label('Pipeline hold ctrl to select multiples', 'pipeline');
                                                 echo form_multiselect('pipeline[]', $pipeline_options,
-                                                    ($this->input->post('pipeline')?$this->input->post('pipeline'):$pipeline_default),'class="form-control"');?>
+                                                    ($this->input->post('pipeline')?$this->input->post('pipeline'):$pipeline_default),'class="form-control pipelineSelectSearch"');?>
                                          </div> 
                                     </div>
                                     <div class='form-row'>
