@@ -402,7 +402,7 @@ if ($your_date < $now){;
 			if(isset($company['sectors'])){
 	 
             echo '<div class="sectorsPlainText">';
-            foreach ($company['sectors'] as $key => $name)
+            foreach (array_reverse($company['sectors']) as $key => $name)
 				{
 				echo  $name.'<br>' ;
 				}

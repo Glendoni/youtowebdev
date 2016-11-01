@@ -159,6 +159,17 @@ $('.completed-details').val($('.editorAction').html())
 $(document).ready(function(){
       
     
+var scheduleTotal  =  parseInt($('.scheduleBadge').text());
+ 
+if(scheduleTotal <1){
+
+$('.scheduleBtn').removeAttr('onClick').css('font-style', 'italic');
+
+}
+    
+    
+    
+    
      var pageEval = [];
     if((/companies\/company/.test(window.location.href))) {
         pageEval = GetUrlParamID();

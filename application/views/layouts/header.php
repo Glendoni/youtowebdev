@@ -114,7 +114,7 @@
 
                     <li class="dropdown">
                         <div class="btn-group">
-                                  <button type="button" class="btn btn-default" onclick="location.href='<?php echo site_url();?>dashboard&#35;calls'"><span class="myactivity">Scheduled  <span class="badge"><?php echo count($pending_actions); ?></span></span></button>
+                                  <button type="button" class="btn btn-default scheduleBtn" onclick="location.href='<?php echo site_url();?>dashboard&#35;calls'"><span class="myactivity">Scheduled  <span class="badge scheduleBadge"><?php echo count($pending_actions); ?></span></span></button>
                                   <button type="button" class="btn btn-default dropdown-toggle sublinkMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                                     <span class="caret"></span>
                                     <span class="sr-only">Toggle Dropdown</span>
