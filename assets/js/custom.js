@@ -128,10 +128,19 @@ function gettagscampList(param){
  //console.log(parent_tag_name_holder.indexOf('tagLists'+val['parent_tag_id']))
 //console.log(parent_tag_name_holder.indexOf(val['parent_tag_name']+val['parent_tag_id']) )
         if(parent_tag_name_holder.indexOf(val['parent_tag_name']) == -1){
-
+//console.log(val['parent_tag_name']);
         parent_tag_name_holder.push(val['parent_tag_name']);
-
-        $('.tagLists'+param).append('<div class="col-xs-6 col-sm-3  tag_display_holder"><div class="tag-display-header">'+val['parent_tag_name']+'</div><ul class="listTagSummary tagLists'+param+val['parent_tag_id']+'"></ul></div>');
+if(val['parent_tag_name'] != 'SIC Code'  ){
+    
+    $('.tagLists'+param).append('<div class="col-xs-6 col-sm-3  tag_display_holder"><div class="tag-display-header">'+val['parent_tag_name']+'</div><ul class="listTagSummary tagLists'+param+val['parent_tag_id']+'"></ul></div>');
+    
+}else{
+    
+   $('.tagLists'+param).prepend('<div class="col-xs-6 col-sm-3  tag_display_holder"><div class="tag-display-header">'+val['parent_tag_name']+'</div><ul class="listTagSummary tagLists'+param+val['parent_tag_id']+'"></ul></div>'); 
+    
+    
+}
+        
             //console.log("Needle found.");
 
         };

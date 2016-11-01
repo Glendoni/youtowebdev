@@ -199,7 +199,7 @@
         ?>
         <div class="panel panel-default ff">
         <div class="panel-heading">
-        <h3 class="panel-title">First To Finance</h3>
+        <h3 class="panel-title">FF</h3>
         </div>
         <div class="panel-body" style="font-size:12px;">
         <div class="list-group">
@@ -1450,8 +1450,8 @@
             <div class="col-md-3"><strong>Company</strong></div>
             <div class="col-md-2"><strong>Phone</strong></div>
             <div class="col-md-2"><strong>Action</strong></div>
-            <div class="col-md-2  "><strong>Due</strong></div>
-            <div class="col-md-3 "><strong>Actions</strong></div>
+            <div class="col-md-2  "><strong>Planned</strong></div>
+            <div class="col-md-3 "><strong> </strong></div>
             </div>
 
 

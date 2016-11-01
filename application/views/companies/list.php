@@ -389,7 +389,7 @@
 			if(isset($company['sectors'])){
 				foreach ($company['sectors'] as $key => $name)
 				{
-				echo '<p class="detailsTagFormat" style="margin-bottom:0; text-align:centre;">'.$name.'</p>';
+				echo '<div class="sectorsPlainText">'.$name.'</div>';
 				}
 			}
 			?>

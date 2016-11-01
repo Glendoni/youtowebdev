@@ -110,7 +110,7 @@
             <?php if (isset($current_user)): ?>
 
         <ul class=" nav navbar-top-links navbar-right " >
-                    <?php if(count($pending_actions)>0){?>
+                   
 
                     <li class="dropdown">
                         <div class="btn-group">
@@ -148,8 +148,7 @@
                     </li>
 
 
-
-                    <?php } else {};?>
+ 
 
                         <li class="dropdown">
 
