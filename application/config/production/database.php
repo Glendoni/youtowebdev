@@ -66,7 +66,7 @@ $db['remote']['dbcollat'] = 'utf8_general_ci';
 $db['remote']['swap_pre'] = '';
 $db['remote']['autoinit'] = TRUE;
 $db['remote']['stricton'] = FALSE;
-$db['remote']['port'] = 5552;
+$db['remote']['port'] = 5442;
 
 
 
