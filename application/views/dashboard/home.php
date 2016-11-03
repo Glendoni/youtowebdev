@@ -1450,7 +1450,7 @@
             <div class="col-md-3"><strong>Company</strong></div>
             <div class="col-md-2"><strong>Phone</strong></div>
             <div class="col-md-2"><strong>Action</strong></div>
-            <div class="col-md-2  "><strong>Planned</strong></div>
+            <div class="col-md-2  "><strong>Scheduled</strong></div>
             <div class="col-md-3 "><strong> </strong></div>
             </div>
 

@@ -209,7 +209,10 @@ echo $this->Tagging_model->$route($post);
     function fe_read_tag()
     {
        
-        echo   $this->Tagging_model->feReadTag();
+       echo   $this->Tagging_model->feReadTag() ;
+        
+        //echo json_encode(array('me'=>  'Glennnn'));
+//echo  '{"par_namess":"Masterss Category"}';
         
     }
     

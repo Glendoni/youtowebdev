@@ -846,6 +846,8 @@ echo $this->Tagging_model->$route($post);
        
         echo   $this->Tagging_model->feReadTag();
         
+       
+        
     }
     
     function fe_read_cat()

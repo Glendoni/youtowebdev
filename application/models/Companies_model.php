@@ -81,8 +81,9 @@ class Companies_model extends CI_Model {
 			'Prospect' => 'Prospect',
 			//'Qualified' => 'Qualified',
 			'Intent' => 'Intent',
+            'Proposal' => 'Proposal',
             'Customer' => 'Customer',
-			'Proposal' => 'Proposal',
+			
 			
 			'Unsuitable' => 'Unsuitable',
            

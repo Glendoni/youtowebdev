@@ -8,13 +8,21 @@
 	    <?php endif; ?>
 		</div>
 		<div class="col-xs-8 ">
+           
         <span class="count_of_results">
         <?php if($current_campaign_name && $current_campaign_owner_id && $current_campaign_id ): ?>
 				<?php else: ?>
 				<?php echo number_format($companies_count); ?> <?php if ($companies_count<> "1") {echo "Companies";} else { echo "Company";}?>
 				<?php endif; ?>
 				<?php if($previous_page_number or $next_page_number): ?><span style="font-size:15px; font-weight:700;"> Page <?php echo $current_page_number; ?> of <?php echo $page_total ?> </span><?php endif; ?>
+            
+           
+            
+        
 		</span>
+            
+            <div class="col-md-12 searchcriteria"></div>
+          
 		</div>    
 	<div class="col-xs-2">
 	    <?php if($next_page_number): ?>

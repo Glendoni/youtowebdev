@@ -3175,6 +3175,15 @@ html {
 .pipelineSelectSearch{
 height:147px !important;
 }
+.searchcriteria span{
+  font-weight: 600;
+font-size: 16px;
+    
+}
+
+.lastclass:last-child {
+  display:none
+}
 /*! Hint.css - v2.2.1 - 2016-03-26 //#2b4461
 * http://kushagragour.in/lab/hint/
 * Copyright (c) 2016 Kushagra Gour; Licensed  */

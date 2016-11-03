@@ -1292,7 +1292,11 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
                 
                 console.log(action['tfer_turnover']);
                 
-                if(typeof action['tfer_turnover'] == true){
+               
+                
+                
+                
+                if(action['tfer_turnover'] != null){
                 turnoverAction =  (parseFloat(action['tfer_turnover']).toFixed(1).replace(/(\d)(?=(\d{3})+\.)/g, '$1,').split('.'));
                 
      turnover =  '<span> <strong style="color: black;"> :: </strong> Projected Annual Contract Turnover £' + turnoverAction[0]+'</span>' ;  
@@ -1300,12 +1304,13 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
            
                 }
                  
-                
-                if(action['tfer_runners']){
+                console.log(action['tfer_runners'])
+                if(action['tfer_runners']  != null){
                 employees  =   '<span> Contractors  ' + action['tfer_runners']+' </span>' ;   
+                        turnover = employees+' '+turnover+'<br>';
                 }
                 
-                turnover = employees+' '+turnover+'<br>';
+            
                 
                     
                 }
