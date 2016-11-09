@@ -15,6 +15,43 @@ $( document ).ready(function() {
             $("[data=contacts]").trigger('click')
     
       }
+    
+    
+             // ADD EVERGREEN
+ $('.myevergreenaddcompanies').click(function(){  
+                      //$('.myevergreenaddcompanies').text('Some companies have not been actioned')
+                      
+                   
+     
+   var campid = $(this).attr('data');
+         //Add EVERGREEN
+         var para = {'campid': campid};
+           $.ajax({
+             type: "POST",
+               data: para,
+                 dataType: "json",
+             url: "evergreen/updateTagCampaignRun",
+             success: function(data) {
+                 
+                 //alert(campid)
+                 
+            //location.reload();
+                 window.location = "http://localhost:8888/baselist/campaigns/display_campaign/?id="+campid;
+                 //http://localhost:8888/baselist/campaigns/display_campaign/?id=1
+             }
+             });
+         
+         
+     
+     
+     
+     
+     
+ //location.reload();
+                        
+                    })
+    
+    
     //INVOICE FINANCE
 $('.debmortgage').on('click', function(){
  
@@ -502,10 +539,6 @@ $(".pipeline-validation-check").change(function() {
             }
          }) 
     }
-
-
-    
-    
     
    if((/campaigns/.test(window.location.href)) ||(/companies/.test(window.location.href))) { 
 
@@ -515,6 +548,13 @@ $(".pipeline-validation-check").change(function() {
                 gettagscampList($(this).attr('comp').trim());
                   //console.warn($(this).attr('comp').trim());
             })
+            
+            if($('.remaining').text() != 0){
+                $('.myevergreenaddcompanies').hide();
+                
+                   }
+             
+                   
 
  }
     
@@ -618,8 +658,66 @@ $(".pipeline-validation-check").change(function() {
     if((/dashboard/.test(window.location.href))) {
         
          $('.mycampaignajaxcount').html('<img style="-webkit-user-select: none" src="assets/images/ajax-loader.gif">');
+       $('.myevergreencount').html('<img style="-webkit-user-select: none" src="assets/images/ajax-loader.gif">');
+                
+          $.ajax({
+                        type: "GET",
+                    dataType: "json",
+                url: "evergreen/getMyEvergreenCampaign",
+                success: function(data) {
+                    var action;
+                    var itemss = [];
+                     var idfk;
+                   var uimage;
+                    
+                    
+                    
+                   // console.log(data)
+        if(data.success == 'not ok'){
+             $('.myevergreencount').html('0');
+        }else{
+                    $.each( data, function( key, val ) {
+                          idfk = val.company_id;
+                        
+           // console.log(val.id);            
+                        
+              if(val.id != 'undefined'){          
+                  uimage = val.image.split(',');
+ 
+                      
+                    itemss.push( '<a href="campaigns/display_campaign/?id='+val.id+'" class="load-saved-search" title="" data-original-title="'+val.datecreated+'"><div class="row"><div class="col-xs-1"><span class="label label-info" style="margin-right:3px;background-color: '+uimage[1]+';font-size:8px; color: '+uimage[2]+'"><b>'+uimage[0]+'</b></span></div><div class="col-xs-9" style="min-height:30px;overflow:hidden">'+val.name+'<br><span style="font-size:9px;">Created: '+val.datecreated+'</span></div><div class="col-xs-1" style="padding: 0 0 0 0px; font-size: 11px;"> 3</div></div></a>');
+                  
+                        }
+                    });
+                    
+                        
+                
+                    $('.myevergreenajax').html(itemss.join( "" ));
+                    //$('.mycampaignajaxcount').html('<img style="-webkit-user-select: none" src="http://localhost:8888/baselist/assets/images/ajax-loader.gif">');
+                    $('.myevergreencount').html(itemss.length); //update engagement counter
+                }
+                }
+            });
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
        
-                $.ajax({
+        
+        
+        
+        
+        
+        
+        
+        $.ajax({
                 type: "GET",
                     dataType: "json",
                 url: "dashboard/private_campaigns_new_ajax",
@@ -640,6 +738,8 @@ uimage = val.image.split(',')
                   
                     
                     });
+
+
                        
                     $('.mycampaignajax').html(items.join( "" ));
                     //$('.mycampaignajaxcount').html('<img style="-webkit-user-select: none" src="http://localhost:8888/baselist/assets/images/ajax-loader.gif">');

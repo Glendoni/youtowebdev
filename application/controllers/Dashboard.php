@@ -9,7 +9,7 @@ class Dashboard extends MY_Controller {
 		parent::__construct();
 		// Some models are already been loaded on MY_Controller
         
-       
+       $this->load->model('Evergreen_model');
           $this->userPermission = $this->data['current_user']['permission']? $this->data['current_user']['permission'] :   $this->userMarket = $this->data['current_user']['market'];
 		
 	}
@@ -183,6 +183,20 @@ echo json_encode($output);
 
 
 }
+    
+    
+function evergreenman(){
+    
+    
+ $output   =   $this->Evergreen_model->evergreenHeaderInfo($this->get_current_user_id());
+echo '<pre>'; print_r($output); echo '</pre>';
+//echo json_encode($output);   
+    
+    
+    
+}    
+    
+    
     
 
 /*

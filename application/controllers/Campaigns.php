@@ -5,6 +5,7 @@ class Campaigns extends MY_Controller {
 	function __construct() 
 	{
 		parent::__construct();
+         $this->load->model('Evergreen_model');
 		
 	}
 	
@@ -49,6 +50,9 @@ class Campaigns extends MY_Controller {
 			$this->data['next_page_number'] = ($current_page_number+1) <= $this->data['page_total'] ? ($current_page_number+1) : FALSE;
 			$this->data['previous_page_number'] = ($current_page_number-1) >= 0 ? ($current_page_number-1) : FALSE;
             $this->data['companies'] = $companies_array_chunk[($current_page_number-1)];
+            
+            
+$this->data['evergreen'] =  $this->Evergreen_model->evergreenHeaderInfo($this->get_current_user_id(),($this->session->userdata('campaign_id') ?: FALSE ));
            
 		}
 		$this->data['results_type'] = 'Campaign';
@@ -284,6 +288,14 @@ class Campaigns extends MY_Controller {
 		
 		redirect('/campaigns');
 	}
+    
+    
+      function updateTagCampaignRun()
+    { //updates the campaign with 5 more 
+        echo json_encode(array('success' => 'ok'));
+        //echo json_encode($this->Evergreen_model->updateTagCampaign());
+        
+    }
     
 
 }
