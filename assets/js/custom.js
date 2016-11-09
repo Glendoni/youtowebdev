@@ -36,7 +36,7 @@ $( document ).ready(function() {
                  //alert(campid)
                  
             //location.reload();
-                 window.location = "http://localhost:8888/baselist/campaigns/display_campaign/?id="+campid;
+                 window.location = "campaigns/display_campaign/?id="+campid;
                  //http://localhost:8888/baselist/campaigns/display_campaign/?id=1
              }
              });
