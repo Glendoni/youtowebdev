@@ -21,9 +21,12 @@
 		<?php endif; ?>
             
             
-            
+                        <div   class="pulser pulser_<? echo $company['id']; ?>">
+  <div class="dot"></div>
+  <div class="pulse"></div>
+</div>
 			<h2 class="company-header">
-               
+    
                 
 			<a href="<?php echo site_url();?>companies/company?id=<?php echo $company['id'];?><?php echo !empty($current_campaign_id)?'&campaign_id='.$current_campaign_id:''; ?><?php if(isset($_GET['page_num'])){ echo '&page_num='.$_GET['page_num']; } ?>" <?php if(($current_user['new_window']=='t')): ?> target="_blank"<?php endif; ?> class="compa"  data-camp="pos<?php echo $i++ ; ?>" comp="<?php echo $company['id'];?>"><?php $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' );echo str_replace($words, ' ',$company['name']); ?></a>
 		<!-- THIS IS ME -->    
@@ -57,7 +60,7 @@
 	<?php echo form_close(); ?>
 	<?php endif; ?>
 </h2>
-            
+           
         
             
              <!-- THIS IS ME END-->    
@@ -399,13 +402,14 @@
 }
         
         ?>
-		<div class="col-xs-6 col-sm-4">
+		<div class="col-xs-6 col-sm-4 sectorIdentifier" data="<?php echo $company['id']; ?>">
 			<strong>Sectors</strong> <br>
 			<?php 
 			if(isset($company['sectors'])){
 				foreach ($company['sectors'] as $key => $name)
 				{
-				echo '<div class="sectorsPlainText">'.$name.'</div>';
+                    //print_r($company);
+				echo '<div class="sectorsPlainText sectorEntry_'.$company['id'].'">'.$name.'</div>';
 				}
 			}
 			?>

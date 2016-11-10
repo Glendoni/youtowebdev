@@ -49,7 +49,7 @@ class Campaigns extends MY_Controller {
 			$this->data['current_page_number'] = $current_page_number;
 			$this->data['next_page_number'] = ($current_page_number+1) <= $this->data['page_total'] ? ($current_page_number+1) : FALSE;
 			$this->data['previous_page_number'] = ($current_page_number-1) >= 0 ? ($current_page_number-1) : FALSE;
-            $this->data['companies'] = $companies_array_chunk[($current_page_number-1)];
+$this->data['companies'] = $companies_array_chunk[($current_page_number-1)];
             
             
 $this->data['evergreen'] =  $this->Evergreen_model->evergreenHeaderInfo($this->get_current_user_id(),($this->session->userdata('campaign_id') ?: FALSE ));

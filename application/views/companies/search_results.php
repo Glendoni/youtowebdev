@@ -143,16 +143,16 @@
             
             
             <div class="row campaign" style="margin-bottom: 20px;">
-        <div class="col-sm-2 mobile-hide">
+        <div class="col-sm-3 mobile-hide">
         <a href="<?php echo site_url(); ?>campaigns/display_campaign/?id="<?php echo $evergreen[0]['companies_in_campaign']; ?> >
-        <div class="circle-responsive_campiagns black-circle-campaign  active"><div class="circle-content mega">
+        <div class="circle-responsive_campiagns contacted_percentage_campaign  active"><div class="circle-content mega">
         <div class="large-number"><?php echo $evergreen[0]['companies_in_campaign']; ?></div> <div class="small-text">Company in<br>Campaign</div>
         </div>
         </div>
         </a>
         <div class="small-text" style="font-weight:300; font-size:9px; max-width:80%; margin-left:auto; margin-right:auto;"></div>
         </div>
-        <div class="col-sm-2 mobile-hide">
+        <div class="col-sm-3 mobile-hide">
         <div class="circle-responsive_campiagns cyan-circle contacted_percentage_campaign">
         <div class="circle-content mega">
         <div class="large-number"><?php echo $evergreen[0]['DQ_Tag']; ?></div>
@@ -163,19 +163,19 @@
         </div>
         <div class="small-text" style="font-weight:300; font-size:9px; max-width:80%; margin-left:auto; margin-right:auto;"></div>
         </div>
-        <div class="col-sm-2 mobile-hide">
+        <div class="col-sm-3 mobile-hide">
                 <a href="<?php echo site_url(); ?>campaigns/display_campaign/?id=1&amp;pipeline=prospect">
-                <div class="circle-responsive_campiagns prospect-circle_campaign         ">
+                <div class="circle-responsive_campiagns contacted_percentage_campaign">
         <div class="circle-content mega">
         <div class="large-number"><?php echo $evergreen[0]['Sector_Allocated']; ?></div>
         <div class="small-text">Sector Allocated</div></div>
         </div>
                 </a>        </div>
-        <div class="col-sm-2 mobile-hide">
-                <div class="circle-responsive_campiagns intent-circle_campaign ">
+        <div class="col-sm-3 mobile-hide">
+                <div class="circle-responsive_campiagns contacted_percentage_campaign">
         <div class="circle-content mega">
         <div class="large-number remaining"><?php echo $evergreen[0]['remaining']; ?></div>
-        <div class="small-text">Remaining<br> (Companies in Campaign - DQ tag or Sector Allocated)</div></div>
+        <div class="small-text">Remaining<br>Companies in Campaign - DQ tag or Sector Allocated</div></div>
         </div>
                 </div>
       
