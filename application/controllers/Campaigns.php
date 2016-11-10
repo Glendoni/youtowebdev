@@ -51,6 +51,7 @@ class Campaigns extends MY_Controller {
 			$this->data['previous_page_number'] = ($current_page_number-1) >= 0 ? ($current_page_number-1) : FALSE;
 $this->data['companies'] = $companies_array_chunk[($current_page_number-1)];
             
+$this->data['department'] =   $this->data['current_user']['department'] ;
             
 $this->data['evergreen'] =  $this->Evergreen_model->evergreenHeaderInfo($this->get_current_user_id(),($this->session->userdata('campaign_id') ?: FALSE ));
            
@@ -158,7 +159,16 @@ $this->data['evergreen'] =  $this->Evergreen_model->evergreenHeaderInfo($this->g
 				return False;
 			}
 			$pipeline = $this->input->get('pipeline');
+
+if($this->data['current_user']['department'] == 'data'){
+    
+    $companies = $this->Campaigns_model->get_companies_for_campaign_id_data_entry($campaign[0]->id,$pipeline);
+}else{
+            
+        
 			$companies = $this->Campaigns_model->get_companies_for_campaign_id($campaign[0]->id,$pipeline);
+    
+}
 			// print '<pre>';
 			// print_r($companies);
 			// die;	

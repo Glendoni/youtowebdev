@@ -27,7 +27,7 @@ class Dashboard extends MY_Controller {
 
 		// Add options
 		// array_unshift($providers_options,'All');
-
+$this->data['department'] =   $this->data['current_user']['department'] ;
         
         
 		$this->data['pending_actions'] = $this->Actions_model->get_pending_actions($this->get_current_user_id());

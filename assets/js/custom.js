@@ -19,9 +19,9 @@ $( document ).ready(function() {
     
              // ADD EVERGREEN
  $('.myevergreenaddcompanies').click(function(){  
-                      //$('.myevergreenaddcompanies').text('Some companies have not been actioned')
+                      $('.myevergreenaddcompanies').text('Processing...')
                       
-                   
+                   $('.myevergreenaddcompanies').attr("disabled","disabled");
      
    var campid = $(this).attr('data');
          //Add EVERGREEN

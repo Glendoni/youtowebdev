@@ -2046,7 +2046,7 @@
     
     
     
-    
+     <?php   if($current_user['department'] == 'data'){ ?>
         
             <div class="panel panel-default">
               <div class="panel-heading">
@@ -2069,9 +2069,9 @@
                   
                   
             
+    <?php } ?>
     
-    
-    
+     <?php   if(!$current_user['department'] == 'data'){ ?>
               <div class="panel panel-default">
               <div class="panel-heading">
                 <h3 class="panel-title">My Campaigns <span class="badge pull-right mycampaignajaxcount"></span></h3>
@@ -2094,9 +2094,13 @@
                   
               </div>
             </div>
+                    <?php } ?>
+                  <?php   if(!$current_user['department'] == 'data'){ ?>
             <div class="panel panel-default">
               <div class="panel-heading">
                 <h3 class="panel-title">Recent Campaigns<span class="badge pull-right"><?php //echo count($shared_campaigns); ?></span></h3>    
+
+
               </div>
               <div class="panel-body" style="padding:0;">
               <div id="campaignList">
@@ -2116,6 +2120,8 @@
 
               </div>
             </div>
+                  
+                  <?php  } ?>
           </div><!--END COL-3-->
 </div><!--END ROW-->
 

@@ -51,8 +51,8 @@
 
 						<div><a class="btn btn-info btn-xs" href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $current_campaign_id; ?>">Refresh</a></div>
 
-						
-<div class="row campaign" style="margin-bottom: 20px; display:none">
+				 <?php if(!$department == 'data'){ ;?> 		
+<div class="row campaign" style="margin-bottom: 20px;">
         <div class="col-sm-2 mobile-hide">
         <a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $current_campaign_stats->campaign_id; ?>">
         <div class="circle-responsive_campiagns black-circle-campaign  <?php echo empty($this->session->userdata('pipeline'))? 'active':'';?>"><div class="circle-content mega">
@@ -133,15 +133,15 @@
             
            
             
+           
             
             
             
-            
-            
+            <?php } ?>  
             
         <!--Data evergreen --> 
             
-            
+     <?php if($department == 'data'){ ;?>
             <div class="row campaign" style="margin-bottom: 20px;">
         <div class="col-sm-3 mobile-hide">
         <a href="<?php echo site_url(); ?>campaigns/display_campaign/?id="<?php echo $evergreen[0]['companies_in_campaign']; ?> >
@@ -181,7 +181,7 @@
       
         		
 </div>
-            
+            <?php } ?>
             <!--Data evergreen End -->    
             
             
@@ -200,10 +200,13 @@
 
 
 	  </div>
-                
+    <?php   if($current_user['department'] == 'data'){ ?>
+                <div>
                 <button type="button" class="btn btn-large btn-block btn-default myevergreenaddcompanies" data="<?=$current_campaign_id; ?>">Add  5 Companies </button>
 
             </div>
+
+  <?php } ?>
 	<?php 
 	// Display companies
 	$this->load->view('companies/list.php');
