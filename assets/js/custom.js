@@ -198,7 +198,7 @@ $('.sectorIdentifier').each(function(){
 secId = $(this).attr('data');
 secEntryLength   = $('.sectorEntry_'+secId).length;
 
-dq = $('.tagLists'+ secId+' .listTagSummary').hasClass('tagLists35603518');
+dq = $('.tagLists'+ secId+'  .listTagSummary').hasClass('tagLists'+secId+'18');
 
 if(secEntryLength == false &&  dq == false ){
 //console.log('show Sector alert');
