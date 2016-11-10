@@ -446,6 +446,7 @@ class Campaigns_model extends MY_Model {
 			   C.name,
 			   C.pipeline,
 S."has sector",
+TAGS."has DQ tag",
 			   U.id "owner_id",
 			   TT5.actioned_at, -- f32
 			   TT6.planned_at, -- f35
@@ -508,10 +509,24 @@ S."has sector",
 		$sql = $sql.' JOIN ( select company_id from targets where campaign_id = '.$campaign_id.' ) company ON C.id = company.company_id
         		LEFT JOIN
 		(
-		select distinct company_id "has sector"
+			select distinct company_id "has sector"
 		from OPERATES		  
 		) S
 		ON C.id = S."has sector"
+		  
+		LEFT JOIN
+		(-- T2
+		select distinct CT.company_id "has DQ tag"
+
+		from COMPANY_TAGS CT
+
+		JOIN TAGS T
+		ON CT.tag_id = T.id
+
+		where T.category_id = 18
+		and   CT.eff_to is null
+		)   TAGS
+		ON C.id = TAGS."has DQ tag"
         
         ';
 		$sql = $sql.' LEFT JOIN 
@@ -653,6 +668,7 @@ S."has sector",
 			     C.eff_from,
 			     C.linkedin_id,
 "has sector",
+ "has DQ tag",
 			     C.active,
 			     C.created_at,
 			     C.updated_at,
@@ -737,9 +753,9 @@ S."has sector",
 		-- insert this for sort order  
 		order by 
 		CASE
-		   when "has sector" is null then 1
+		   when "has sector" is null and "has DQ tag" is null then 1	    
 		   else 1000
-		end
+		END
 		 
 		) results';
 		// print_r($sql);

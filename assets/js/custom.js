@@ -569,7 +569,7 @@ $(".pipeline-validation-check").change(function() {
                   //console.warn($(this).attr('comp').trim());
             })
             
-            if($('.remaining').text() < 1){
+            if($('.remaining').text() == 0 && $('.remaining').text() != "" ){
                 $('.myevergreenaddcompanies').show();
                 
                    }
