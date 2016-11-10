@@ -288,7 +288,7 @@ limit 5';
 
 
    
-        $preCheckAllocation  = $this->evergreenHeaderInfo(1,4);
+        $preCheckAllocation  = $this->evergreenHeaderInfo(1,$campaign_id);
  if (!$preCheckAllocation [0]['remaining']){
     $query = $this->db->query("SELECT * FROM evergreen WHERE id=".$campaign_id);
      $row  =     $query->result_array();

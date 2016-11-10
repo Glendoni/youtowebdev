@@ -175,7 +175,7 @@
                 <div class="circle-responsive_campiagns intent-circle_campaign ">
         <div class="circle-content mega">
         <div class="large-number remaining"><?php echo $evergreen[0]['remaining']; ?></div>
-        <div class="small-text">Remaining (Companies in Campaign - DQ tag or Sector Allocated)</div></div>
+        <div class="small-text">Remaining<br> (Companies in Campaign - DQ tag or Sector Allocated)</div></div>
         </div>
                 </div>
       

@@ -549,8 +549,8 @@ $(".pipeline-validation-check").change(function() {
                   //console.warn($(this).attr('comp').trim());
             })
             
-            if($('.remaining').text() != 0){
-                $('.myevergreenaddcompanies').hide();
+            if($('.remaining').text() < 1){
+                $('.myevergreenaddcompanies').show();
                 
                    }
              
