@@ -6,7 +6,7 @@ class Campaigns extends MY_Controller {
 	{
 		parent::__construct();
          $this->load->model('Evergreen_model');
-		
+				
 	}
 	
 	public function index() 
@@ -136,19 +136,39 @@ $this->data['evergreen'] =  $this->Evergreen_model->evergreenHeaderInfo($this->g
 	}
 
 	public function get_all_shared_searches(){
+$this->session->unset_userdata('evergreen');
 		return $this->Campaigns_model->get_all_shared_searches();
 	}
 
 	public function get_all_private_searches($user_id){
+        $this->session->unset_userdata('evergreen');
 		return $this->Campaigns_model->get_all_private_searches($user_id);
 	}
 	
 	public function get_campaigns_for_user($user_id)
 	{
+        $this->session->unset_userdata('evergreen');
 		return $this->Campaigns_model->get_campaigns_for_user($user_id);
 	}
 
 	public function display_campaign(){
+        
+        
+        if($this->input->get('evergreen')){
+
+//echo 'fsdgsdfgsd';
+//exit();
+            
+        $this->session->set_userdata('evergreen','true');
+            
+            
+}else{
+            
+           
+			$this->session->unset_userdata('evergreen');
+            
+        }
+        
         
 		if($this->input->get('id'))
 		{	

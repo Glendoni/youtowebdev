@@ -51,7 +51,9 @@
 
 						<div><a class="btn btn-info btn-xs" href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $current_campaign_id; ?>">Refresh</a></div>
 
-				 <?php if(!$department == 'data'){ ;?> 		
+				 <?php if($this->session->userdata("evergreen") != 'true'){ ;?> 
+
+ 	
 <div class="row campaign" style="margin-bottom: 20px;">
         <div class="col-sm-2 mobile-hide">
         <a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $current_campaign_stats->campaign_id; ?>">
@@ -141,7 +143,8 @@
             
         <!--Data evergreen --> 
             
-     <?php if($department == 'data'){ ;?>
+     <?php if($department == 'data' && $this->session->userdata("evergreen") == 'true')
+        { ;?>
             <div class="row campaign" style="margin-bottom: 20px;">
         <div class="col-sm-3 mobile-hide">
         <a href="<?php echo site_url(); ?>campaigns/display_campaign/?id="<?php echo $evergreen[0]['companies_in_campaign']; ?> >
