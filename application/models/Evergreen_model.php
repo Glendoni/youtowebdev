@@ -398,7 +398,7 @@ JOIN TAGS T
 ON CT.tag_id = T.id
 
 where T.category_id = 18
--- AND CT.eff_to is null
+AND CT.eff_to is null
 )   T1
 ON C.id = T1.company_id
 
