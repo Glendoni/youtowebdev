@@ -36,8 +36,8 @@ class Evergreen extends MY_Controller {
         
         $user_id =  $this->get_current_user_id();
         $current_campaign_id =  $this->input->post('campid');
-         echo json_encode(array('success' => $user_id));
-      // echo json_encode($this->Evergreen_model->updateTagCampaign($current_campaign_id,$user_id));
+         //echo json_encode(array('success' => $user_id));
+       echo json_encode($this->Evergreen_model->updateTagCampaign($current_campaign_id,$user_id));
         
     }
 	   
