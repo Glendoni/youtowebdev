@@ -2067,7 +2067,7 @@
                   </a>
                   <?php endforeach;  */ ?>
                   
-                  
+                </div>
             
     <?php } ?>
     
