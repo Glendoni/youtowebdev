@@ -152,9 +152,9 @@ $this->session->unset_userdata('evergreen');
 	}
 
 	public function display_campaign(){
+
         
-        
-        if($this->input->get('evergreen')){
+        if(($this->input->get('evergreen')) || ($this->session->userdata("evergreen"))  ){
 
 //echo 'fsdgsdfgsd';
 //exit();
@@ -165,9 +165,16 @@ $this->session->unset_userdata('evergreen');
 }else{
             
            
-			$this->session->unset_userdata('evergreen');
+		 $this->session->unset_userdata('evergreen');
             
         }
+        
+        
+          if($this->input->get('private')){
+              
+               $this->session->unset_userdata('evergreen');  
+              
+          }
         
         
 		if($this->input->get('id'))

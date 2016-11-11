@@ -1506,6 +1506,8 @@
                                echo form_open(site_url().'actions/edit', 'name="cancel_action"  class="cancel_action" style="display:none;" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action->action_id.'" role="form"',$hidden); ?>
                                <button class="btn btn-xs btn-overdue" >Cancel</button>
                                </form>
+                      
+                      <div>Favorite</div>
                             </div>
                           </div>
                           <div class="list-group-item" id="action_outcome_box_<?php echo $action->action_id ?>" style="display:none;">
