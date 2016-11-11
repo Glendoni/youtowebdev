@@ -202,7 +202,10 @@
 	  </div>
     <?php   if($current_user['department'] == 'data'){ ?>
                 <div>
-                <button type="button" class="btn btn-large btn-block btn-default myevergreenaddcompanies" data="<?=$current_campaign_id; ?>">Add  5 Companies </button>
+                    
+                    
+                    <?php  //echo $evergreen[0]['evergreen']; ?>
+                <button type="button" class="btn btn-large btn-block btn-default myevergreenaddcompanies" data="<?=$current_campaign_id; ?>" evergreen="<?php  echo $evergreen[0]['evergreen']; ?>">Add  5 Companies </button>
 
             </div>
 

@@ -24,8 +24,9 @@ $( document ).ready(function() {
                    $('.myevergreenaddcompanies').attr("disabled","disabled");
      
    var campid = $(this).attr('data');
+      var evergreen = $(this).attr('evergreen');
          //Add EVERGREEN
-         var para = {'campid': campid};
+         var para = {'campid': campid, 'evergreen': evergreen};
            $.ajax({
              type: "POST",
                data: para,
@@ -202,7 +203,7 @@ dq = $('.tagLists'+ secId+'  .listTagSummary').hasClass('tagLists'+secId+'18');
 
 if(secEntryLength == false &&  dq == false ){
 //console.log('show Sector alert');
-$('.pulser_'+secId).show();
+//$('.pulser_'+secId).show();
 }else{
 
 //console.log('hide Sector alert');

@@ -758,9 +758,14 @@ TAGS."has DQ tag",
 		END
 		 
 		) results';
-		// print_r($sql);
-		$query = $this->db->query($sql);
 
+		$query = $this->db->query($sql);
+	 
+            
+            
+           // print_r($query->result_array());
+
+//exit();
 		return $query->result_array();
 	}
     
