@@ -317,7 +317,23 @@ $search_default = $this->input->post('agency_name');
                                     <div class='form-row'>
                                         <div class="form-group">
                                             <?php
-                                            echo form_label('Pipeline hold ctrl to select multiples', 'pipeline');
+                                            
+                                            
+                                                  $mystring = $_SERVER['HTTP_USER_AGENT'];
+$findme   = 'Macintosh';
+$pos = strpos($mystring, $findme);
+
+// Note our use of ===.  Simply == would not work as expected
+// because the position of 'a' was the 0th (first) character.
+if ($pos === false) {
+  $piplelineStapLine  = 'Pipeline <span class="piplineverbiagekeayboard">- Hold ctrl key to select multiples</span>';
+} else {
+    $piplelineStapLine  = 'Pipeline <span class="piplineverbiagekeayboard">- Hold cmd &#8984; key to select multiples </span>';
+}
+                                            
+                                            
+                                            
+                                            echo form_label($piplelineStapLine, 'pipeline');
                                                 echo form_multiselect('pipeline[]', $pipeline_options,
                                                     ($this->input->post('pipeline')?$this->input->post('pipeline'):$pipeline_default),'class="form-control pipelineSelectSearch"');?>
                                          </div> 
