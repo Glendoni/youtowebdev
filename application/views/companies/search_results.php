@@ -237,7 +237,5 @@
 
 				<?php if($current_campaign_name && $current_campaign_owner_id && $current_campaign_id ): ?>
 <div class="col-sm-12">
-
-<p style="margin-top:3px;text-align: center;"><b>Note:</b> Campaigns are ordered so companies not contacted recently will appear first.</p>
+ </div>
 <?php endif; ?>
-</div>

@@ -80,7 +80,7 @@ public function updateTagCampaign($campaign_id,$user_id,$evergreenID){
             foreach ($query->result_array() as $row => $value)
             {
                 //echo $value['companyid'];
-                $this->campaignAllocator($value['companyid'],$user_id,$campaign_id);
+                $this->campaignAllocator($value['companyid'],$user_id,$campaign_id,$evergreenID);
     
             }
     
@@ -91,7 +91,7 @@ public function updateTagCampaign($campaign_id,$user_id,$evergreenID){
 }
     
     
-    private function campaignAllocator($company_id,$user_id,$campaign_id){
+    private function campaignAllocator($company_id,$user_id,$campaign_id,$evergreenID){
 
 
 $data = array(
@@ -102,7 +102,7 @@ $data = array(
     'created_at' => date('Y-m-d H:i:s'),
     'updated_at' => date('Y-m-d H:i:s'),
     'eff_to' => null,
-    'evergreen_id' => $campaign_id
+    'evergreen_id' => $evergreenID
 );
 
 $this->db->insert('targets', $data);
@@ -211,7 +211,7 @@ ON CA.user_id = U.id
 LEFT JOIN
 (-- T1
 select company_id,
-       max(CT.eff_from) "most recent DQ set"
+       max(CT.created_at) "most recent DQ set"
   
 from COMPANY_TAGS CT
 
