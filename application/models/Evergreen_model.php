@@ -238,8 +238,6 @@ where CA.id = '.$campaign_id.'
 
 group by 1,2,3';
         
-    
-    
          $query = $this->db->query($sql);
             //return $query->result_array();
         
