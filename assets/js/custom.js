@@ -37,7 +37,7 @@ $( document ).ready(function() {
                  //alert(campid)
                  
             //location.reload();
-                 window.location = "campaigns/display_campaign/?id="+campid;
+                 window.location = "campaigns/display_campaign/?evergreen="+evergreen+"&id="+campid;
                  //http://localhost:8888/baselist/campaigns/display_campaign/?id=1
              }
              });
@@ -570,7 +570,7 @@ $(".pipeline-validation-check").change(function() {
                   //console.warn($(this).attr('comp').trim());
             })
             
-            if($('.remaining').text() == 0 && $('.remaining').text() != "" ){
+            if($('.remaining').text() == 0 && $('.remaining').text() != "" || $('.company-header').length ==0 ){
                 $('.myevergreenaddcompanies').show();
                 
                    }
@@ -706,7 +706,7 @@ $(".pipeline-validation-check").change(function() {
                   uimage = val.image.split(',');
  
                       
-                    itemss.push( '<a href="campaigns/display_campaign/?id='+val.id+'&evergreen=1" class="load-saved-search" title="" data-original-title="'+val.datecreated+'"><div class="row"><div class="col-xs-1"><span class="label label-info" style="margin-right:3px;background-color: '+uimage[1]+';font-size:8px; color: '+uimage[2]+'"><b>'+uimage[0]+'</b></span></div><div class="col-xs-9" style="min-height:30px;overflow:hidden">'+val.name+'<br><span style="font-size:9px;">Created: '+val.datecreated+'</span></div><div class="col-xs-1" style="padding: 0 0 0 0px; font-size: 11px;"></div></div></a>');
+                    itemss.push( '<a href="campaigns/display_campaign/?id='+val.id+'&evergreen='+val.evergreen_id+'" class="load-saved-search" title="" data-original-title="'+val.datecreated+'"><div class="row"><div class="col-xs-1"><span class="label label-info" style="margin-right:3px;background-color: '+uimage[1]+';font-size:8px; color: '+uimage[2]+'"><b>'+uimage[0]+'</b></span></div><div class="col-xs-9" style="min-height:30px;overflow:hidden">'+val.name+'<br><span style="font-size:9px;">Created: '+val.datecreated+'</span></div><div class="col-xs-1" style="padding: 0 0 0 0px; font-size: 11px;"></div></div></a>');
                   
                         }
                     });

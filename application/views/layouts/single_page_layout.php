@@ -17,9 +17,20 @@
 <div class="return_to_campaign">
    
 
- 
+        
+   <?php  if($this->session->userdata("evergreen")){ 
+    $evergreenID = $this->session->userdata("evergreen");
     
-<a class="btn btn-default btn-sm" href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $_GET['campaign_id']; ?>#<?php echo $_GET['id']; ?>" role="button">Return to Campaign</a>
+    ?>
+    
+<a class="btn btn-default btn-sm" href="<?php echo site_url();?>campaigns/display_campaign/?evergreen=<?php echo $evergreenID ; ?>&id=<?php echo $_GET['campaign_id']; ?>#<?php echo $_GET['id']; ?>" role="button">Return to Evergreen Campaign</a>
+    
+    
+    <?php }else{ ?>
+    
+    <a class="btn btn-default btn-sm" href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $_GET['campaign_id']; ?>#<?php echo $_GET['id']; ?>" role="button">Return to Campaign</a>
+    
+    <?php } ?>
     
 
 </div>

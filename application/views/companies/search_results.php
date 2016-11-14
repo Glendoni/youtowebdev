@@ -51,7 +51,7 @@
 
 						<div><a class="btn btn-info btn-xs" href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $current_campaign_id; ?>">Refresh</a></div>
 
-				 <?php if($this->session->userdata("evergreen") != 'true'){ ;?> 
+				 <?php if($this->session->userdata("evergreen") != true){ ;?> 
 
  	
 <div class="row campaign" style="margin-bottom: 20px;">
@@ -142,8 +142,8 @@
             <?php } ?>  
             
         <!--Data evergreen --> 
-            
-     <?php if($department == 'data' && $this->session->userdata("evergreen") == 'true')
+            <?php //echo 'This is the data '.$this->session->userdata("evergreen") ;  ?>
+     <?php if($department == 'data' && $this->session->userdata("evergreen") == true)
         { ;?>
             <div class="row campaign" style="margin-bottom: 20px;">
         <div class="col-sm-3 mobile-hide">
@@ -205,16 +205,22 @@
 
 
 	  </div>
-    <?php   if($current_user['department'] == 'data'){ ?>
+    <?php   if($current_user['department'] == 'data' && $this->session->userdata('evergreen') == true){ ?>
                 <div>
                     
+                  
+                    <?php  //echo $this->session->userdata('evergreen'); 
                     
-                    <?php  //echo $evergreen[0]['evergreen']; ?>
-                <button type="button" class="btn btn-large btn-block btn-default myevergreenaddcompanies" data="<?=$current_campaign_id; ?>" evergreen="<?php  echo $evergreen[0]['evergreen']; ?>">Add  5 Companies </button>
+                    
+                    ?>
+                <button type="button" class="btn btn-large btn-block btn-default myevergreenaddcompanies" data="<?=$current_campaign_id; ?>" evergreen="<?php  echo $this->session->userdata('evergreen'); ?>">Add  5 Companies </button>
 
             </div>
 
-  <?php } ?>
+<?php 
+                                                      
+                                                      //echo  $this->session->userdata('evergreen') .$evergreen[0]['evergreen'];
+ } ?>
 	<?php 
 	// Display companies
 	$this->load->view('companies/list.php');

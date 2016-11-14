@@ -145,9 +145,7 @@ $this->db->insert('targets', $data);
     
     function evergreenHeaderInfo($user_id, $campaign_id){
         
-        
-        
-        $sql = 'select U.name "owner",
+               $sql_ = 'select U.name "owner",
        CA.created_at::date "created",
        CA.name "campaign",
        CA.evergreen_id "evergreen",
@@ -190,7 +188,55 @@ ON C.id = T2.company_id
 
 where CA.id = '.$campaign_id.'
 
-group by 1,2,3,4';
+group by 1,2,3,4'; 
+        
+        $sql = 'select U.name "owner",
+       CA.created_at::date "created",
+       CA.name "campaign",
+       count(*) "companies_in_campaign",
+	   count(CASE when T1.company_id is not null then 1 END) "DQ_Tag",
+	   count(CASE when T2.company_id is not null then 1 END) "Sector_Allocated",
+	   count(*) - count(CASE when T1.company_id is not null or T2.company_id is not null then 1 END) "remaining"
+
+from CAMPAIGNS CA
+JOIN TARGETS T
+ON CA.id = T.campaign_id
+  
+JOIN COMPANIES C
+ON T.company_id = C.id
+
+JOIN USERS U
+ON CA.user_id = U.id
+
+LEFT JOIN
+(-- T1
+select company_id,
+       max(CT.eff_from) "most recent DQ set"
+  
+from COMPANY_TAGS CT
+
+JOIN TAGS 
+ON TAGS.id = CT.tag_id
+
+where TAGS.category_id = 18
+and CT.eff_TO is null
+
+group by 1
+)   T1
+ON C.id = T1.company_id
+AND "most recent DQ set" > T.created_at 
+
+LEFT JOIN
+(-- T2
+select distinct company_id
+from OPERATES 
+where active = \'t\'
+)   T2
+ON C.id = T2.company_id
+
+where CA.id = '.$campaign_id.'
+
+group by 1,2,3';
         
     
     

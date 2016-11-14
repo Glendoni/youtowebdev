@@ -159,7 +159,7 @@ $this->session->unset_userdata('evergreen');
 //echo 'fsdgsdfgsd';
 //exit();
             
-        $this->session->set_userdata('evergreen','true');
+        $this->session->set_userdata('evergreen',$this->input->get('evergreen'));
             
             
 }else{
@@ -191,9 +191,7 @@ if($this->data['current_user']['department'] == 'data'){
     
     $companies = $this->Campaigns_model->get_companies_for_campaign_id_data_entry($campaign[0]->id,$pipeline);
 }else{
-            
-        
-			$companies = $this->Campaigns_model->get_companies_for_campaign_id($campaign[0]->id,$pipeline);
+           $companies = $this->Campaigns_model->get_companies_for_campaign_id($campaign[0]->id,$pipeline);
     
 }
 			// print '<pre>';
