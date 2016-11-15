@@ -17,6 +17,19 @@ class Companies extends MY_Controller {
 		$this->load->helper('url');
         $this->load->helper('form');
         $this->load->library('form_validation');
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+        
+        
 	}
 	
 	public function index($ajax_refresh = False) 
@@ -267,6 +280,12 @@ class Companies extends MY_Controller {
 	
 	public function company()
 	{
+
+        
+        
+        
+        
+        
         if($this->input->get('id'))
 		{
  
@@ -827,6 +846,8 @@ echo $this->Tagging_model->$route($post);
        
         echo   $this->Tagging_model->feReadTag();
         
+       
+        
     }
     
     function fe_read_cat()
@@ -1122,76 +1143,67 @@ echo floor($datediff / (60 * 60 * 24));
     
   function querychecker(){   
     
-    $query = $this->db->query('select C.id,
-       C.name,
-	   C.customer_from,
-       CASE when T2.id is not null or T3.company_id is not null then \'Using Finance\' else \'FF\' END "class",
-	   class as dog
+            //echo 'Server Port '.$_SERVER['SERVER_PORT'];
+            //echo '<br>';
+      
+//site_url()
+      
+      
+      if(isset($_SERVER['SERVER_PORT'])){
+          
+          //echo 'Current full'.  site_url();
+          
+          if($_SERVER['SERVER_PORT'] == 80){ // server =  80 localhost =  8888
+          
+          
+          
+       // server =  80 localhost =  8888)
+      
+      
+            $a =  str_replace('http://','https://', site_url());
 
-from COMPANIES C
+         echo 'Current full'. site_url().$_SERVER['REQUEST_URI'];
 
-LEFT JOIN 
-(
-select distinct C.id
+             echo '<br>';
+            $mystring = current_full_url();
+      
+            $findme   = 'https://';
+            $pos = strpos($mystring, $findme);
 
-from COMPANIES C
-
-JOIN MORTGAGES M
-ON C.id = M.company_id
-AND C.customer_from between M.eff_from and (CASE when M.eff_to is not null then M.eff_to else \'2100-01-01\'::date END)
-
-where customer_from is not null
-and M.inv_fin_related <> \'N\'
- and  M.inv_fin_related in (\'Y\',\'P\')
-  ) T2
-ON C.id = T2.id
-
-LEFT JOIN
-(
-select distinct CT.company_id  
-  
-from COMPANY_TAGS CT
-  
-JOIN TAGS T
-ON CT.tag_id = T.id
-AND T.category_id = 13 
-) T3
-ON C.id = T3.company_id
-
-where C.customer_from is not null
-
-order by customer_from desc') ;     
-    
-    
-    
-     if ($query->num_rows() > 0)
-                        {
-                            echo '<table width="400">';
-                            foreach($query->result() as $row)
-                            {
-                                
-                                
-echo '<tr><td align="left" class="glen">'.$row->id.'</td><td align="left" class="glen">'.$row->class.'</td><td align="left" class="glen">'.$row->dog.'</td>';
-                           
-
-    if($row->id == 346747){  
-                                echo '<h1>gotya! ==='.$row->class.'</h1>';
-                            }
+            // Note our use of ===.  Simply == would not work as expected
+            // because the position of 'a' was the 0th (first) character.
+            if ($pos === false) {
+          echo "The string '$findme' was not found in the string '$mystring'";
 
 
-                                //$this->cronpipelineUpdater($row->id,$row->pipeline_value);  } 
-                               $this->Companies_model->cronpipelineUpdaternew($row->id,$row->class);
-                                //if($row->id == 343853) echo 'Got ya';
-                            }
-                         
-         echo '</table>';
-                     }
-    
+             redirect($a, 'location');
+
+
+        //   header( 'Location: '.$a ) ;
+
+            } 
+      else {
+    echo "The string '$findme' was found in the string '$mystring'";
+  echo " and exists at position $pos";
+}
+      
+      
+      
+      
+       //if (!preg_match("~^(?:f|ht)tps?://~i", $_SERVER['HTTP_HOST'])) {
+        //$url = "https:/" . $_SERVER['REQUEST_URI'];
+//    }
+   // echo  $url;
+      
+      
+     // echo (strpos($a, 'http://'));
     
 }
     
      
-    
+      }
+  
+  }
     
     
 }

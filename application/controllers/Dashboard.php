@@ -9,7 +9,7 @@ class Dashboard extends MY_Controller {
 		parent::__construct();
 		// Some models are already been loaded on MY_Controller
         
-       
+       $this->load->model('Evergreen_model');
           $this->userPermission = $this->data['current_user']['permission']? $this->data['current_user']['permission'] :   $this->userMarket = $this->data['current_user']['market'];
 		
 	}
@@ -27,7 +27,7 @@ class Dashboard extends MY_Controller {
 
 		// Add options
 		// array_unshift($providers_options,'All');
-
+$this->data['department'] =   $this->data['current_user']['department'] ;
         
         
 		$this->data['pending_actions'] = $this->Actions_model->get_pending_actions($this->get_current_user_id());
@@ -177,12 +177,29 @@ echo json_encode($output);
     
     function private_campaigns_new_ajax(){
 
-$output   = $this->data['private_campaigns_new'] = $this->Campaigns_model->private_campaigns_new_ajax($this->get_current_user_id());
+    $department =  $this->data['current_user']['department'];    
+      
+        
+$output   = $this->data['private_campaigns_new'] = $this->Campaigns_model->private_campaigns_new_ajax($this->get_current_user_id(), $department);
 //echo '<pre>'; print_r($output); echo '</pre>';
 echo json_encode($output);
 
 
 }
+    
+    
+function evergreenman(){
+    
+    
+ $output   =   $this->Evergreen_model->evergreenHeaderInfo($this->get_current_user_id());
+echo '<pre>'; print_r($output); echo '</pre>';
+//echo json_encode($output);   
+    
+    
+    
+}    
+    
+    
     
 
 /*

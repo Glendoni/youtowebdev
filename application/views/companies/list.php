@@ -21,9 +21,12 @@
 		<?php endif; ?>
             
             
-            
+                        <div   class="pulser pulser_<? echo $company['id']; ?>">
+  <div class="dot"></div>
+  <div class="pulse"></div>
+</div>
 			<h2 class="company-header">
-               
+    
                 
 			<a href="<?php echo site_url();?>companies/company?id=<?php echo $company['id'];?><?php echo !empty($current_campaign_id)?'&campaign_id='.$current_campaign_id:''; ?><?php if(isset($_GET['page_num'])){ echo '&page_num='.$_GET['page_num']; } ?>" <?php if(($current_user['new_window']=='t')): ?> target="_blank"<?php endif; ?> class="compa"  data-camp="pos<?php echo $i++ ; ?>" comp="<?php echo $company['id'];?>"><?php $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' );echo str_replace($words, ' ',$company['name']); ?></a>
 		<!-- THIS IS ME -->    
@@ -57,20 +60,21 @@
 	<?php echo form_close(); ?>
 	<?php endif; ?>
 </h2>
-            
+           
         
-            
-             <!-- THIS IS ME END-->    
-
-
-
-	<?php if (isset($company['trading_name'])): ?>
+   	<?php if (isset($company['trading_name'])): ?>
 	<h5 class="trading-header" style="text-align:center;">
 <?php echo $company['trading_name'];?>
 </h5>
-	<?php endif; ?>
-			</div>
-			<div class="col-sm-12 label-assigned<?php echo $company['id'];?>" style="margin-top:5px; margin-bottom: 15px; text-align:center;">
+	<?php endif; ?>         
+           
+	 
+ 	 </div>
+        
+        
+        
+        
+        			<div class="col-sm-12 label-assigned<?php echo $company['id'];?>" style="margin-top:5px; margin-bottom: 15px; text-align:center;">
 <?php if(isset($company['pipeline'])): ?>
 	<span class="label pipeline label-<?php echo str_replace(' ', '', $company['pipeline']); ?>"><?php echo $company['pipeline']?>
 	<?php endif; ?>
@@ -153,208 +157,212 @@
     <?php } ?>
 	</div>
         
-        
-		<div class="col-sm-12">
-                    <div class="row padding-bottom">
+        <div class="col-sm-12">
+            
+            <div class="row padding-bottom">
                     <div class="col-sm-12 action-details">
                     <div class="row padding-bottom"> 
-                    <div class="col-md-4 col-lg-4 col-sm-4">
-                    <div><strong>Last Contact</strong></div>
-                    <div>
-                    <?php if (empty($company['actioned_at1'])): ?>
-                    Never
-                    <?php else: ?>
-                    <div class="action_type"><?php echo $company['action_name1']." by ".$company['action_user1']; ?></div>
-                    <div class="action_date_list">
-                    <?php echo date("l jS F Y",strtotime($company['actioned_at1']));?>
-                    <?php
-                    $now = time (); // or your date as well
-                    $your_date = strtotime($company['actioned_at1']);
-                    $datediff = abs($now - $your_date);
-                    $days_since = floor($datediff/(60*60*24));
-                    if ($company['actioned_at1'] > 0){
-                    echo  " <br>".$days_since." days ago";
-                    } else {
-                    echo " <br>".$days_since." day ago";
-                    }
-                    ?></div>
+                        
+                        
+                        
+                        
+                             <div class="col-md-4 col-lg-4 col-sm-4">
+                                <div><strong>Last Contact</strong></div>
+                                    <div>
+                                    <?php if (empty($company['actioned_at1'])): ?>
+                                    Never
+                                    <?php else: ?>
+                                    <div class="action_type"><?php echo $company['action_name1']." by ".$company['action_user1']; ?></div>
+                                    <div class="action_date_list">
+                                    <?php echo date("l jS F Y",strtotime($company['actioned_at1']));?>
+                                    <?php
+                                    $now = time (); // or your date as well
+                                    $your_date = strtotime($company['actioned_at1']);
+                                    $datediff = abs($now - $your_date);
+                                    $days_since = floor($datediff/(60*60*24));
+                                    if ($company['actioned_at1'] > 0){
+                                    echo  " <br>".$days_since." days ago";
+                                    } else {
+                                    echo " <br>".$days_since." day ago";
+                                    }
+                                    ?></div>
 
-                    <?php endif; ?>
+                                    <?php endif; ?>
 
-                    </div>
-                    </div>
+                                    </div>
+                                </div>
+                        
+                        
+                        
+                        
                     <div class="col-md-4 col-lg-5 col-sm-4">
-                    <div><strong> Scheduled</strong></div>
-                    <?php if (empty($company['planned_at2'])): ?>
-                    None
-                    <?php else: ?>
-                    <div class="action_type"><?php echo $company['action_name2']." by ".$company['action_user2']; ?></div>
+                        <div><strong> Scheduled</strong></div>
+                        <?php if (empty($company['planned_at2'])): ?>
+                        None
+                        <?php else: ?>
+                        <div class="action_type"><?php echo $company['action_name2']." by ".$company['action_user2']; ?></div>
 
-                    <div class="action_date_list">
-                    <?php echo date("l jS F Y",strtotime($company['planned_at2']));?>
-                    </div>
-                    <?php
-                    $now = time ();
-                    $compdate = explode('T',$company['planned_at2']);
-                    $your_date = strtotime($compdate[0]);
-                    if ($your_date < $now){; 
-                    $datediff = $now - $your_date;
-                    $daysoverdue = floor($datediff/(60*60*24));?>
-                    <div><span class="label label-danger" style="font-size:10px;">
-                    <?php   
+                        <div class="action_date_list">
+                        <?php echo date("l jS F Y",strtotime($company['planned_at2']));?>
+                        </div>
+                        <?php
+                        $now = time ();
+                        $compdate = explode('T',$company['planned_at2']);
+                        $your_date = strtotime($compdate[0]);
+                        if ($your_date < $now){; 
+                        $datediff = $now - $your_date;
+                        $daysoverdue = floor($datediff/(60*60*24));?>
+                        <div><span class="label label-danger" style="font-size:10px;">
+                        <?php   
 
-                                   if ($daysoverdue >= 1) {echo "Overdue";};
-                        if ($daysoverdue ==0 ) {echo "Due Today";}
+                                       if ($daysoverdue >= 1) {echo "Overdue";};
+                            if ($daysoverdue ==0 ) {echo "Due Today";}
+
+                            ?>  
+                            </span></div>
+
+                        <?php } else {}?> 
+
+
+
+                        <?php endif; ?>
+
+                </div>
                         
-                        ?>  
-                        </span></div>
-
-                    <?php } else {}?> 
-
-
-
-                    <?php endif; ?>
-
-</div>
                         
-                         	<div class="col-sm-3" style="margin-top:10px;">
-		<?php $this->load->view('companies/actions_box_list.php',array('company'=>$company)); ?>
-		<!-- LINKS AND BTN -->
-			<?php if (isset($company['sonovate_id'])): ?>
-			<a class="btn  btn-info btn-sm btn-block sonovate" href="https://members.sonovate.com/agency-admin/<?php echo $company['sonovate_id'] ?>/profile"  target="_blank">Sonovate 3.0</a>
-			<?php endif; ?>
-	<?php if (($current_user['department']) =='support' && isset($company['zendesk_id'])): ?>
-			<a class="btn  btn-info btn-sm btn-block zendesk" href="https://sonovate.zendesk.com/agent/organizations/<?php echo $company['zendesk_id'] ?>"  target="_blank">ZenDesk</a>
-			<?php endif; ?>
-			<?php if (isset($company['linkedin_id'])): ?>
-			<a class="btn  btn-info btn-sm btn-block linkedin" href="https://www.linkedin.com/company/<?php echo $company['linkedin_id'] ?>"  target="_blank">LinkedIn</a>
-			  <?php else: ?>
-              <a class="btn  btn-primary btn-sm btn-block" href="https://www.linkedin.com/vsearch/f?type=all&keywords=<?php echo  urlencode($company['name']) ?>"  target="_blank">LinkedIn <i class="fa fa-search" aria-hidden="true"></i> </a>
-            <?php endif; ?>
-            
-            
-					<?php if (isset($company['url'])): ?>
-		<a class="btn btn-default btn-sm btn-block btn-url" href="<?php $parsed = parse_url($company['url']); if (empty($parsed['scheme'])) { echo 'http://' . ltrim($company['url'], '/'); }else{ echo $company['url']; } ?>" target="_blank">
-		<label style="margin-bottom:0;"></label> <?php echo str_replace("http://"," ",str_replace("www.", "", $company['url']))?>
-		</a>
-            	<?php else: ?>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                <div class="col-sm-3" style="margin-top:10px;">
+                                            <?php $this->load->view('companies/actions_box_list.php',array('company'=>$company)); ?>
+                                            <!-- LINKS AND BTN -->
+                                                <?php if (isset($company['sonovate_id'])): ?>
+                                                    <a class="btn  btn-info btn-sm btn-block sonovate" href="https://members.sonovate.com/agency-admin/<?php echo $company['sonovate_id'] ?>/profile"  target="_blank">Sonovate 3.0</a>
+                                                <?php endif; ?>
+                                                <?php if (($current_user['department']) =='support' && isset($company['zendesk_id'])): ?>
+                                                    <a class="btn  btn-info btn-sm btn-block zendesk" href="https://sonovate.zendesk.com/agent/organizations/<?php echo $company['zendesk_id'] ?>"  target="_blank">ZenDesk</a>
+                                                <?php endif; ?>
+                                                <?php if (isset($company['linkedin_id'])): ?>
+                                                    <a class="btn  btn-info btn-sm btn-block linkedin" href="https://www.linkedin.com/company/<?php echo $company['linkedin_id'] ?>"  target="_blank">LinkedIn</a>
+                                                  <?php else: ?>
+                                                    <a class="btn  btn-primary btn-sm btn-block" href="https://www.linkedin.com/vsearch/f?type=all&keywords=<?php echo  urlencode($company['name']) ?>"  target="_blank">LinkedIn <i class="fa fa-search" aria-hidden="true"></i> </a>
+                                                <?php endif; ?>
 
-    <a class="btn  btn-default btn-sm btn-block " href="https://www.google.co.uk/search?q=<?php echo urlencode(htmlspecialchars_decode($company['name'], ENT_QUOTES));  ?>"  target="_blank">Google <i class="fa fa-search" aria-hidden="true"></i></a>
-		<?php endif; ?>
-			<?php if (isset($company['registration'])): ?>
-			<a class="btn  btn-info btn-sm btn-block companieshouse" href="https://beta.companieshouse.gov.uk/company/<?php echo $company['registration'] ?>" target="_blank">Companies House</a>
-			<?php endif; ?>
+
+                                                        <?php if (isset($company['url'])): ?>
+                                                                <a class="btn btn-default btn-sm btn-block btn-url" href="<?php $parsed = parse_url($company['url']); if (empty($parsed['scheme'])) { echo 'http://' . ltrim($company['url'], '/'); }else{ echo $company['url']; } ?>" target="_blank">
+                                                                <label style="margin-bottom:0;"></label> <?php echo str_replace("http://"," ",str_replace("www.", "", $company['url']))?>
+                                                                </a>
+                                                    <?php else: ?>
+
+                                                        <a class="btn  btn-default btn-sm btn-block " href="https://www.google.co.uk/search?q=<?php echo urlencode(htmlspecialchars_decode($company['name'], ENT_QUOTES));  ?>"  target="_blank">Google <i class="fa fa-search" aria-hidden="true"></i></a>
+                                            <?php endif; ?>
+                                                <?php if (isset($company['registration'])): ?>
+                                <a class="btn  btn-info btn-sm btn-block companieshouse" href="https://beta.companieshouse.gov.uk/company/<?php echo $company['registration'] ?>" target="_blank">Companies House</a>
+                                                <?php endif; ?>
 			</div><!--CLOSE MD-3-->
                         
                         
                         
                         
-                        
+
+<div class="row"> 
+<div class="col-md-12">
+
+<?php if (isset($company['trading_name'])): ?>
+<div class="col-md-4">
+<label>Registered Name</label>
+<p style="margin-bottom:0;">	
+<?php echo $company['name']; ?>
+</p>
+</div><!--END NAME-->
+<div class="col-md-4">
+<label>Trading Name</label>
+<p style="margin-bottom:0;">	
+<?php echo $company['trading_name']; ?>
+</p>
+</div><!--END TRADING NAME-->
+<?php else: ?>
+
+
+<div class="col-md-4">
+<label>Registered Name</label>
+<p style="margin-bottom:10px;">	
+<?php echo $company['name']; ?>
+</p>
+</div><!--END NAME-->
+<?php endif; ?>
+<div class="col-md-4">
+<label>Registered Address</label>
+<p style="margin-bottom:10px;">
+<?php echo isset($company['address'])?'<a href="http://maps.google.com/?q='.urlencode($company['address']).'" target="_blank">'.$company['address'].'<span style="    line-height: 15px;font-size: 10px;padding-left: 5px;"><i class="fa fa-external-link"></i></span></a>':''; ?>  
+</p>
+</div><!--END ADDRESS-->
+
+    </div>
 </div><!--END ROW-->
-<hr>
                         
                         
                         
-                       <div class="row"> 
- 
-
-                                    <?php if (isset($company['trading_name'])): ?>
-                                        <div class="col-md-4">
-                                                <label>Registered Name</label>
-                                                <p style="margin-bottom:0;">	
-                                                <?php echo $company['name']; ?>
-                                                </p>
-                                        </div><!--END NAME-->
-                                        <div class="col-md-4">
-                                                <label>Trading Name</label>
-                                                <p style="margin-bottom:0;">	
-                                                <?php echo $company['trading_name']; ?>
-                                                </p>
-                                        </div><!--END TRADING NAME-->
-                                        <?php else: ?>
-                        
-                        
-                                        <div class="col-md-4">
-                                                <label>Registered Name</label>
-                                                <p style="margin-bottom:10px;">	
-                                                <?php echo $company['name']; ?>
-                                                </p>
-                                        </div><!--END NAME-->
-		                      <?php endif; ?>
-		<div class="col-md-4">
-				<label>Registered Address</label>
-				<p style="margin-bottom:10px;">
-                <?php echo isset($company['address'])?'<a href="http://maps.google.com/?q='.urlencode($company['address']).'" target="_blank">'.$company['address'].'<span style="    line-height: 15px;font-size: 10px;padding-left: 5px;"><i class="fa fa-external-link"></i></span></a>':''; ?>  
-				</p>
-		</div><!--END ADDRESS-->
-		
-
-                        
-                        
-                        
-                        
-                        
-		</div><!--END ROW-->
-                        
-                        
-        <div class="row">                   
-        </div><!--CLOSE MD-9-->
-
-
-	
-		</div>
-
-        </div>
 <div class="row details pad-bottom">
-				<div class="col-md-12">
-			<hr />
-		</div>
-		
+<div class="col-md-12">
+<hr />
 
-        <div class="col-xs-6 col-md-3 " style="margin-top:10px;">
-        	<label>Founded</label><br>
-			<p>	
-				<?php echo isset($company['eff_from'])?$company['eff_from']:''; ?>
-			</p>
-		</div>
-            
-            <div class="col-xs-6 col-md-3 " style="margin-top:10px;">
-			<label>Company Number</label><br>
-			<p class="registration_number">	
-			 <!--COMPANY NUMBER IF APPLICABLE-->
-			<?php echo isset($company['registration'])?$company['registration']:''; ?>
-         	</p>
-        	</div>
 
-  	<!-- CONTACTS -->
-		<div class="col-xs-6 col-sm-3 " style="margin-top:10px;">
-			<strong>Contacts</strong><br>			
-			<?php if (isset($company['contacts_count'])): ?>
-			<p class="details"><?php echo $company['contacts_count'];?> </p>
-			<?php else: ?>
-			<p class="details"></p>
-			<?php endif; ?>
-		</div>
-            
-		<div class="col-xs-6 col-md-3 " style="margin-top:10px;">
-				<label>Class</label><br>
-				<p>	
-		            <!--CLASS IF APPLICABLE-->
-		            <?php if (isset($company['class']) && $company['class'] != 'Unknown' ): ?>
-					 <?php echo $companies_classes[$company['class']] ?> 	
-					<?php else: 
-                    
-                    //echo '-';
-                    
-                    ?>
-						
-		            <?php endif; ?>
-	            </p>
-			</div>
 
+<div class="col-xs-6 col-md-3 " style="margin-top:10px;">
+<label>Founded</label><br>
+<p>	
+<?php echo isset($company['eff_from'])?$company['eff_from']:''; ?>
+</p>
 </div>
-		
+
+<div class="col-xs-6 col-md-3 " style="margin-top:10px;">
+<label>Company Number</label><br>
+<p class="registration_number">	
+<!--COMPANY NUMBER IF APPLICABLE-->
+<?php echo isset($company['registration'])?$company['registration']:''; ?>
+</p>
+</div>
+
+<!-- CONTACTS -->
+<div class="col-xs-6 col-sm-3 " style="margin-top:10px;">
+<strong>Contacts</strong><br>			
+<?php if (isset($company['contacts_count'])): ?>
+<p class="details"><?php echo $company['contacts_count'];?> </p>
+<?php else: ?>
+<p class="details"></p>
+<?php endif; ?>
+</div>
+
+<div class="col-xs-6 col-md-3 " style="margin-top:10px;">
+<label>Class</label><br>
+<p>	
+<!--CLASS IF APPLICABLE-->
+<?php if (isset($company['class']) && $company['class'] != 'Unknown' ): ?>
+<?php echo $companies_classes[$company['class']] ?> 	
+<?php else: 
+
+//echo '-';
+
+?>
+
+<?php endif; ?>
+</p>
+</div>
+</div>
+</div>                        
+          
+                        
+                        
 	<div class="row details pad-bottom">
+        <div class="col-md-12">
 		<!-- TURNOVER -->
 		<div class="col-xs-6 col-sm-3 ">
 			<strong><span style="text-transform: capitalize"><?php echo isset($company['turnover_method'])?$company['turnover_method']:'';?></span> Turnover</strong><br>
@@ -372,64 +380,45 @@
             <p class="details"></p>
 			<?php endif; ?>
 		</div>
-		<!-- SECTORS -->
-        <?php if(isset($company['sectors'])){
-    
-    
-}else{
-    
-    
-    
-}
-        
-        ?>
-		<div class="col-xs-6 col-sm-4">
+ 
+		<div class="col-xs-6 col-sm-4 sectorIdentifier" data="<?php echo $company['id']; ?>">
 			<strong>Sectors</strong> <br>
 			<?php 
 			if(isset($company['sectors'])){
 				foreach ($company['sectors'] as $key => $name)
 				{
-				echo '<p class="detailsTagFormat" style="margin-bottom:0; text-align:centre;">'.$name.'</p>';
+                    //print_r($company);
+				echo '<div class="sectorsPlainText sectorEntry_'.$company['id'].'">'.$name.'</div>';
 				}
 			}
 			?>
-									<?php /*  if (isset($company['perm'])): ?>
-
-<p class="detailsTagFormat" style="margin-bottom:0; text-align:centre;">Permanent</p>
-
-			<?php endif; ?>
-								<?php if (isset($company['contract'])): ?>
-
-
-			<p class="detailsTagFormat" style="margin-bottom:0; text-align:centre;">Contract</p>
-						<?php endif; ?>
-            
-     
-            <?php if ($company['perm'] == '' && $company['contract'] == '' && count($company['sectors']) ==0 ): ?>
-
-<p class="detailsTagFormat" style="margin-bottom:0; text-align:centre;">-</p>
-            
-            
-            <?php endif;  */ ?>
+							 
             
             
 		</div>
-</div>
-	
-
-	<div class="row details padding-bottom">
+            
+            
+            
+            
+            
+</div>                        
+                        
+     <div class="col-md-12">
 		<!-- TAGS -->
-        <div class="tagLists tagLists<?php echo $company['id'];?>">
+        <div class="tagLists tagLists<?php echo $company['id'];?>"></div>
         </div>
-	</div>
+                        
+                        
+ 
 		<hr>
 
 		<div class="row">
             
 		<!-- MORTGAGES -->
 			
-			<div class="col-md-12">
+			
 			<?php if(!empty($company['mortgages'])): ?>
+            <div class="col-md-12">
 			<table class="table" style="font-size:12px">
 			<thead>
 				<tr>
@@ -503,18 +492,37 @@ if($mortgage['Inv_fin_related'] == 'N'){ echo '<span  class="related_to_Invoice_
 				</td>
 
 				</tr>
+       
+            
 				<?php endforeach; ?>
 				</tbody>
 				</table>
+                        	</div>
 				<?php else: ?>
-	 </div>
+
 			<?php endif; ?>
-			</div>
-		</div>
-		</div>
- <hr>
+		
+	 
+ 	 </div>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+            </div>  
+                        
+                        </div><!--END ROW-->
+                        
+                        </div></div></div>
+            
+        </div>
+        
+        
+        
 
-
+        </div>
 	</div>
 <?php endforeach; ?>
 <?php endif; ?>

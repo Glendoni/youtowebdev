@@ -99,7 +99,7 @@
 } ?>
       
  
-<div style="font-size: 10px;font-weight: 300;text-align: right;float: right;line-height: 40px;padding-left: 5px;">Version 4.1</div>
+<div style="font-size: 10px;font-weight: 300;text-align: right;float: right;line-height: 40px;padding-left: 5px;">Version 4.2</div>
 <?php endif; ?>
 </a>
 </div>
@@ -110,11 +110,11 @@
             <?php if (isset($current_user)): ?>
 
         <ul class=" nav navbar-top-links navbar-right " >
-                    <?php if(count($pending_actions)>0){?>
+                   
 
                     <li class="dropdown">
                         <div class="btn-group">
-                                  <button type="button" class="btn btn-default" onclick="location.href='<?php echo site_url();?>dashboard&#35;calls'"><span class="myactivity">Scheduled  <span class="badge"><?php echo count($pending_actions); ?></span></span></button>
+                                  <button type="button" class="btn btn-default scheduleBtn" onclick="location.href='<?php echo site_url();?>dashboard&#35;calls'"><span class="myactivity">Scheduled  <span class="badge scheduleBadge"><?php echo count($pending_actions); ?></span></span></button>
                                   <button type="button" class="btn btn-default dropdown-toggle sublinkMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                                     <span class="caret"></span>
                                     <span class="sr-only">Toggle Dropdown</span>
@@ -148,8 +148,7 @@
                     </li>
 
 
-
-                    <?php } else {};?>
+ 
 
                         <li class="dropdown">
 
@@ -318,9 +317,25 @@ $search_default = $this->input->post('agency_name');
                                     <div class='form-row'>
                                         <div class="form-group">
                                             <?php
-                                            echo form_label('Pipeline', 'pipeline');
+                                            
+                                            
+                                                  $mystring = $_SERVER['HTTP_USER_AGENT'];
+$findme   = 'Macintosh';
+$pos = strpos($mystring, $findme);
+
+// Note our use of ===.  Simply == would not work as expected
+// because the position of 'a' was the 0th (first) character.
+if ($pos === false) {
+  $piplelineStapLine  = 'Pipeline <span class="piplineverbiagekeayboard">- Hold ctrl key to select multiples</span>';
+} else {
+    $piplelineStapLine  = 'Pipeline <span class="piplineverbiagekeayboard">- Hold cmd &#8984; key to select multiples </span>';
+}
+                                            
+                                            
+                                            
+                                            echo form_label($piplelineStapLine, 'pipeline');
                                                 echo form_multiselect('pipeline[]', $pipeline_options,
-                                                    ($this->input->post('pipeline')?$this->input->post('pipeline'):$pipeline_default),'class="form-control"');?>
+                                                    ($this->input->post('pipeline')?$this->input->post('pipeline'):$pipeline_default),'class="form-control pipelineSelectSearch"');?>
                                          </div> 
                                     </div>
                                     <div class='form-row'>

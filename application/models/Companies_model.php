@@ -77,13 +77,16 @@ class Companies_model extends CI_Model {
 		function get_companies_pipeline_search()
 	{
 		$arrayNamesPipelineSearch = array(
+             'Suspect' => 'Suspect',
 			'Prospect' => 'Prospect',
 			//'Qualified' => 'Qualified',
 			'Intent' => 'Intent',
-			'Proposal' => 'Proposal',
-			'Customer' => 'Customer',
+            'Proposal' => 'Proposal',
+            'Customer' => 'Customer',
+			
+			
 			'Unsuitable' => 'Unsuitable',
-            'Suspect' => 'Suspect',
+           
 			'Lost' => 'Lost'
 			);
 		return 	$arrayNamesPipelineSearch;
@@ -583,7 +586,7 @@ from (select * from COMPANIES where active = \'TRUE\' ' ;
 
 		JOIN SECTORS S
 		ON O.sector_id = S.id
-		where O.active = \'TRUE\'
+		where O.active = \'TRUE\' order by S.name DESC
 		)   TT2
 		ON TT2."company id" = C.id
 
@@ -691,6 +694,9 @@ from (select * from COMPANIES where active = \'TRUE\' ' ;
 		end, name asc
 		 
 		) results';
+        
+       // echo nl2br($sql);
+        //exit();
 		//nl2br($sql);
 		//print_r($sql);
 		$query = $this->db->query($sql);

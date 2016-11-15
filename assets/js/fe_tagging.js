@@ -116,6 +116,8 @@ function populate(){
                 $('.main_'+sort[1].replace(' ', '')).append('<div class="col-sm-4 col-md-2"><li class="list-group-item folder" glen data="'+sort[2]+'"> <span class="indicatorshow"></span>'+sort[0]+' <span class="tagNumPlaceholder tagNum_'+sort[2]+'"></span></li></div>'); 
                 }
                 
+                
+// $('.addTagbtn').attr('add-tag-user');         gets user department       
                 if(sort[2] != 52 ){
                 $('.main_'+sort[1].replace(' ', '')).append('<div class="col-sm-8 col-md-10" style="border-bottom: 1px dotted #e5e5e5;padding-bottom: 3px;margin-bottom: 3px;padding-left: 0;"><ul class="subtags sub_'+sort[2]+'" ></ul></div>');  
                     
@@ -320,6 +322,7 @@ if((/companies/.test(window.location.href))) {
         success: function(data) {  
               $('.addedTag').remove();
              $.each( data, function( key, val) {
+             
         if(val['parent_tag_name'] != null){
               parent_tag_name =    val['parent_tag_name'].replace(' ', '');
             

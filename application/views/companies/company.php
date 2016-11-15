@@ -134,15 +134,13 @@
              
             
 
-                 <span class="label   btn-info comp_details_edit_btn mainedit" data-toggle="modal" id="editbtn<?php echo $company['id']; ?>" data-target="#myModal<?php echo $company['id']; ?>" style="
-    font-size: 12px;     float: right;
-">Add Tag</span>
+                 <span class="label addTagbtn  btn-info comp_details_edit_btn mainedit" data-toggle="modal" id="editbtn<?php echo $company['id']; ?>" data-target="#myModal<?php echo $company['id']; ?>" add-tag-user="<?php echo  $current_user['department']; ?>"  style="font-size: 12px;     float: right;">Add Tag</span>
              
              
              
             <span class="label  btn-warning comp_details_edit_btn mainedit" data-toggle="modal" id="editbtn<?php echo $company['id']; ?>" data-target="#editModal<?php echo $company['id']; ?>" style="
     font-size: 12px;     float: right;
-">Edit</span>
+">Sectors etc</span>
              
            
          
@@ -402,7 +400,7 @@ if ($your_date < $now){;
 			if(isset($company['sectors'])){
 	 
             echo '<div class="sectorsPlainText">';
-            foreach ($company['sectors'] as $key => $name)
+            foreach (array_reverse($company['sectors']) as $key => $name)
 				{
 				echo  $name.'<br>' ;
 				}
@@ -652,9 +650,18 @@ if ($your_date < $now){;
             <?php  if($address->address != 'Unknown' && $address->address != '' ): ?>
 	      	<tr>
 				<td class="col-md-6">
-                 <a target="_blank" href="http://maps.google.com/?q=<?=$address->address; ?>" ><span class="mainAddress"><?=$address->address; ?></span><span style="line-height: 15px;font-size: 10px;padding-left: 5px;"><i class="fa fa-external-link"></i></span></a></td>
+                    
+                <?php 
+                    $phone = array();                   
+                    if($address->type == 'Registered Address'){ 
+                        $phone =  $company['phone'];
+                    }else{
+                        $phone =  $address->phone;
+                    }
+                ?>
+                 <a target="_blank" href="http://maps.google.com/?q=<?=$phone; ?>" ><span class="mainAddress"><?=$address->address; ?></span><span style="line-height: 15px;font-size: 10px;padding-left: 5px;"><i class="fa fa-external-link"></i></span></a></td>
 				<td class="col-md-3 mainAddrType"><?php echo $address->type;?></td>
-				<td class="col-md-2 mainPhone"><?php echo $address->phone ? $address->phone : $company['phone']; ?></td>
+				<td class="col-md-2 mainPhone"><?php echo $phone; ?></td>
 				<td  class="col-md-3">
                 <?php if ($address->type<>'Registered Address'): ?>
                         <div class=" pull-right ">
@@ -1274,8 +1281,7 @@ endif;
             
 
      </div>        
-        
-
+ 
 <div class="row" id="parent">
 
 </div>

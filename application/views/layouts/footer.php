@@ -159,6 +159,17 @@ $('.completed-details').val($('.editorAction').html())
 $(document).ready(function(){
       
     
+var scheduleTotal  =  parseInt($('.scheduleBadge').text());
+ 
+if(scheduleTotal <1){
+
+$('.scheduleBtn').removeAttr('onClick').css('font-style', 'italic');
+
+}
+    
+    
+    
+    
      var pageEval = [];
     if((/companies\/company/.test(window.location.href))) {
         pageEval = GetUrlParamID();
@@ -288,8 +299,60 @@ $(document).ready(function(){
           e.preventDefault()
           $(this).tab('show')
         });
+    
+    
+    
+    
+            var BreakException = {};
+
+            try {
+              $('.pipelineSelectSearch option').each( function(e){
+
+              if( $(this).attr('selected') == 'selected'){ 
+          setfilterVerbiage()
+            throw BreakException;  }
+             });
+
+            } catch (e) {
+              if (e !== BreakException) throw e;
+            }
 
 })
+
+
+
+
+
+
+function setfilterVerbiage(){
+
+
+var att;
+
+$('.searchcriteria').prepend('<strong>Pipeline Filter: </strong>')
+$('.pipelineSelectSearch option').each(function(){
+attr = $(this).attr('selected');
+
+// For some browsers, `attr` is undefined; for others, `attr` is false. Check for both.
+if (typeof attr !== typeof undefined && attr !== false) {
+  // Element has this attribute
+
+if($(this).val() == 0){
+
+$('.searchcriteria').append('All ');
+}else{
+$('.searchcriteria').append('  ' + $(this).val()+' <span class="lastclass">|</span>');
+//$('.searchcriteria').append(' <span class="filtersearch"> | </span> ');
+
+}
+}
+
+})
+
+
+
+
+}
 
 bindFavorites();
     

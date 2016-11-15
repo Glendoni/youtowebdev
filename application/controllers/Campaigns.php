@@ -5,7 +5,8 @@ class Campaigns extends MY_Controller {
 	function __construct() 
 	{
 		parent::__construct();
-		
+         $this->load->model('Evergreen_model');
+				
 	}
 	
 	public function index() 
@@ -48,7 +49,11 @@ class Campaigns extends MY_Controller {
 			$this->data['current_page_number'] = $current_page_number;
 			$this->data['next_page_number'] = ($current_page_number+1) <= $this->data['page_total'] ? ($current_page_number+1) : FALSE;
 			$this->data['previous_page_number'] = ($current_page_number-1) >= 0 ? ($current_page_number-1) : FALSE;
-            $this->data['companies'] = $companies_array_chunk[($current_page_number-1)];
+$this->data['companies'] = $companies_array_chunk[($current_page_number-1)];
+            
+$this->data['department'] =   $this->data['current_user']['department'] ;
+            
+$this->data['evergreen'] =  $this->Evergreen_model->evergreenHeaderInfo($this->get_current_user_id(),($this->session->userdata('campaign_id') ?: FALSE ));
            
 		}
 		$this->data['results_type'] = 'Campaign';
@@ -131,19 +136,46 @@ class Campaigns extends MY_Controller {
 	}
 
 	public function get_all_shared_searches(){
+$this->session->unset_userdata('evergreen');
 		return $this->Campaigns_model->get_all_shared_searches();
 	}
 
 	public function get_all_private_searches($user_id){
+        $this->session->unset_userdata('evergreen');
 		return $this->Campaigns_model->get_all_private_searches($user_id);
 	}
 	
 	public function get_campaigns_for_user($user_id)
 	{
+        $this->session->unset_userdata('evergreen');
 		return $this->Campaigns_model->get_campaigns_for_user($user_id);
 	}
 
 	public function display_campaign(){
+
+        
+        if(($this->input->get('evergreen')) || ($this->session->userdata("evergreen"))  ){
+
+//echo 'fsdgsdfgsd';
+//exit();
+            
+        $this->session->set_userdata('evergreen',$this->input->get('evergreen'));
+            
+            
+}else{
+            
+           
+		 $this->session->unset_userdata('evergreen');
+            
+        }
+        
+        
+          if($this->input->get('private')){
+              
+               $this->session->unset_userdata('evergreen');  
+              
+          }
+        
         
 		if($this->input->get('id'))
 		{	
@@ -154,7 +186,14 @@ class Campaigns extends MY_Controller {
 				return False;
 			}
 			$pipeline = $this->input->get('pipeline');
-			$companies = $this->Campaigns_model->get_companies_for_campaign_id($campaign[0]->id,$pipeline);
+
+if($this->data['current_user']['department'] == 'data'){
+    
+    $companies = $this->Campaigns_model->get_companies_for_campaign_id_data_entry($campaign[0]->id,$pipeline);
+}else{
+           $companies = $this->Campaigns_model->get_companies_for_campaign_id($campaign[0]->id,$pipeline);
+    
+}
 			// print '<pre>';
 			// print_r($companies);
 			// die;	
@@ -284,6 +323,14 @@ class Campaigns extends MY_Controller {
 		
 		redirect('/campaigns');
 	}
+    
+    
+      function updateTagCampaignRun()
+    { //updates the campaign with 5 more 
+        echo json_encode(array('success' => 'ok'));
+        //echo json_encode($this->Evergreen_model->updateTagCampaign());
+        
+    }
     
 
 }
