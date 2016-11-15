@@ -35,11 +35,22 @@
 
 	    <!-- Collect the nav links, forms, and other content for toggling -->
 		<div>
+         
+            
 	      	<?php if(($companies_count > 0)): ?>
 				<?php if($current_campaign_name && $current_campaign_owner_id && $current_campaign_id ): ?>
 
+ 
+            
+            
 					<?php foreach($current_campaign_stats as $current_campaign_stats){?>
 						<div style="font-weight:300; font-size:32px; margin-bottom: 20px; margin-top: -20px; text-align:center;">
+                            
+                               <?php if($department == 'data' && $this->session->userdata("evergreen") == true)
+        { ;?>
+                            <img style="height:50px;margin-top: 0px;  margin-left: -74px;" src="assets/images/evergreen.png">
+                            
+                            <?php } ?>
 						<?php echo $current_campaign_name; ?> <?php if($current_campaign_is_shared == False): ?>
 						</div>	
 						<?php else: ?>	
@@ -53,7 +64,7 @@
 
 				 <?php if($this->session->userdata("evergreen") != true){ ;?> 
 
- 	
+ 
 <div class="row campaign" style="margin-bottom: 20px;">
         <div class="col-sm-2 mobile-hide">
         <a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $current_campaign_stats->campaign_id; ?>">
@@ -145,6 +156,8 @@
             <?php //echo 'This is the data '.$this->session->userdata("evergreen") ;  ?>
      <?php if($department == 'data' && $this->session->userdata("evergreen") == true)
         { ;?>
+            
+            
             <div class="row campaign" style="margin-bottom: 20px;">
         <div class="col-sm-3 mobile-hide">
         <a href="<?php echo site_url(); ?>campaigns/display_campaign/?id="<?php echo $evergreen[0]['companies_in_campaign']; ?> >
