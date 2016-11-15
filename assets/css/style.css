@@ -333,7 +333,7 @@ ul.nav.navbar-top-links.navbar-right {
 	border-bottom-left-radius: 0px;
 }
 
-.list-group-item.delayed {
+.list-group-item.delayed .homeSchedule {
 	/*color: #a94442;*/
 	/*background-color: #f2dede;*/
 	/*border-color: #ebccd1;*/
@@ -3286,6 +3286,12 @@ top: -20px;
 .piplineverbiagekeayboard{
 
     font-weight:100;
+}
+.scheduelFavorite{
+    
+    float: right;margin-top: 0px;margin-right: 10px;width: 20px;height: 20px;border-radius: 15px;font-size: 8px;line-height: 20px;text-align: center;font-weight: 700;
+    
+    
 }
 /*! Hint.css - v2.2.1 - 2016-03-26 //#2b4461
 * http://kushagragour.in/lab/hint/

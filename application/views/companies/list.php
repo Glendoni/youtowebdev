@@ -62,20 +62,19 @@
 </h2>
            
         
-            
-             <!-- THIS IS ME END-->    
-
-
-
-	<?php if (isset($company['trading_name'])): ?>
+   	<?php if (isset($company['trading_name'])): ?>
 	<h5 class="trading-header" style="text-align:center;">
 <?php echo $company['trading_name'];?>
 </h5>
-	<?php endif; ?>
-			</div>
+	<?php endif; ?>         
+           
+	 
+ 	 </div>
         
         
-			<div class="col-sm-12 label-assigned<?php echo $company['id'];?>" style="margin-top:5px; margin-bottom: 15px; text-align:center;">
+        
+        
+        			<div class="col-sm-12 label-assigned<?php echo $company['id'];?>" style="margin-top:5px; margin-bottom: 15px; text-align:center;">
 <?php if(isset($company['pipeline'])): ?>
 	<span class="label pipeline label-<?php echo str_replace(' ', '', $company['pipeline']); ?>"><?php echo $company['pipeline']?>
 	<?php endif; ?>
@@ -158,12 +157,16 @@
     <?php } ?>
 	</div>
         
-        
-		<div class="col-sm-12">
-                    <div class="row padding-bottom">
+        <div class="col-sm-12">
+            
+            <div class="row padding-bottom">
                     <div class="col-sm-12 action-details">
                     <div class="row padding-bottom"> 
-                                <div class="col-md-4 col-lg-4 col-sm-4">
+                        
+                        
+                        
+                        
+                             <div class="col-md-4 col-lg-4 col-sm-4">
                                 <div><strong>Last Contact</strong></div>
                                     <div>
                                     <?php if (empty($company['actioned_at1'])): ?>
@@ -268,111 +271,96 @@
                         
                         
                         
-                        
+
+<div class="row"> 
+
+
+<?php if (isset($company['trading_name'])): ?>
+<div class="col-md-4">
+<label>Registered Name</label>
+<p style="margin-bottom:0;">	
+<?php echo $company['name']; ?>
+</p>
+</div><!--END NAME-->
+<div class="col-md-4">
+<label>Trading Name</label>
+<p style="margin-bottom:0;">	
+<?php echo $company['trading_name']; ?>
+</p>
+</div><!--END TRADING NAME-->
+<?php else: ?>
+
+
+<div class="col-md-4">
+<label>Registered Name</label>
+<p style="margin-bottom:10px;">	
+<?php echo $company['name']; ?>
+</p>
+</div><!--END NAME-->
+<?php endif; ?>
+<div class="col-md-4">
+<label>Registered Address</label>
+<p style="margin-bottom:10px;">
+<?php echo isset($company['address'])?'<a href="http://maps.google.com/?q='.urlencode($company['address']).'" target="_blank">'.$company['address'].'<span style="    line-height: 15px;font-size: 10px;padding-left: 5px;"><i class="fa fa-external-link"></i></span></a>':''; ?>  
+</p>
+</div><!--END ADDRESS-->
+
+
 </div><!--END ROW-->
-<hr>
                         
                         
                         
-                       <div class="row"> 
- 
-
-                                    <?php if (isset($company['trading_name'])): ?>
-                                        <div class="col-md-4">
-                                                <label>Registered Name</label>
-                                                <p style="margin-bottom:0;">	
-                                                <?php echo $company['name']; ?>
-                                                </p>
-                                        </div><!--END NAME-->
-                                        <div class="col-md-4">
-                                                <label>Trading Name</label>
-                                                <p style="margin-bottom:0;">	
-                                                <?php echo $company['trading_name']; ?>
-                                                </p>
-                                        </div><!--END TRADING NAME-->
-                                        <?php else: ?>
-                        
-                        
-                                        <div class="col-md-4">
-                                                <label>Registered Name</label>
-                                                <p style="margin-bottom:10px;">	
-                                                <?php echo $company['name']; ?>
-                                                </p>
-                                        </div><!--END NAME-->
-		                      <?php endif; ?>
-		<div class="col-md-4">
-				<label>Registered Address</label>
-				<p style="margin-bottom:10px;">
-                <?php echo isset($company['address'])?'<a href="http://maps.google.com/?q='.urlencode($company['address']).'" target="_blank">'.$company['address'].'<span style="    line-height: 15px;font-size: 10px;padding-left: 5px;"><i class="fa fa-external-link"></i></span></a>':''; ?>  
-				</p>
-		</div><!--END ADDRESS-->
-		
-
-                        
-                        
-                        
-                        
-                        
-		</div><!--END ROW-->
-                        
-                        
-        <div class="row">                   
-        </div><!--CLOSE MD-9-->
-
-
-	
-		</div>
-
-        </div>
 <div class="row details pad-bottom">
-				<div class="col-md-12">
-			<hr />
-		</div>
-		
-
-        <div class="col-xs-6 col-md-3 " style="margin-top:10px;">
-        	<label>Founded</label><br>
-			<p>	
-				<?php echo isset($company['eff_from'])?$company['eff_from']:''; ?>
-			</p>
-		</div>
-            
-            <div class="col-xs-6 col-md-3 " style="margin-top:10px;">
-			<label>Company Number</label><br>
-			<p class="registration_number">	
-			 <!--COMPANY NUMBER IF APPLICABLE-->
-			<?php echo isset($company['registration'])?$company['registration']:''; ?>
-         	</p>
-        	</div>
-
-  	<!-- CONTACTS -->
-		<div class="col-xs-6 col-sm-3 " style="margin-top:10px;">
-			<strong>Contacts</strong><br>			
-			<?php if (isset($company['contacts_count'])): ?>
-			<p class="details"><?php echo $company['contacts_count'];?> </p>
-			<?php else: ?>
-			<p class="details"></p>
-			<?php endif; ?>
-		</div>
-            
-		<div class="col-xs-6 col-md-3 " style="margin-top:10px;">
-				<label>Class</label><br>
-				<p>	
-		            <!--CLASS IF APPLICABLE-->
-		            <?php if (isset($company['class']) && $company['class'] != 'Unknown' ): ?>
-					 <?php echo $companies_classes[$company['class']] ?> 	
-					<?php else: 
-                    
-                    //echo '-';
-                    
-                    ?>
-						
-		            <?php endif; ?>
-	            </p>
-			</div>
-
+<div class="col-md-12">
+<hr />
 </div>
-		
+
+
+<div class="col-xs-6 col-md-3 " style="margin-top:10px;">
+<label>Founded</label><br>
+<p>	
+<?php echo isset($company['eff_from'])?$company['eff_from']:''; ?>
+</p>
+</div>
+
+<div class="col-xs-6 col-md-3 " style="margin-top:10px;">
+<label>Company Number</label><br>
+<p class="registration_number">	
+<!--COMPANY NUMBER IF APPLICABLE-->
+<?php echo isset($company['registration'])?$company['registration']:''; ?>
+</p>
+</div>
+
+<!-- CONTACTS -->
+<div class="col-xs-6 col-sm-3 " style="margin-top:10px;">
+<strong>Contacts</strong><br>			
+<?php if (isset($company['contacts_count'])): ?>
+<p class="details"><?php echo $company['contacts_count'];?> </p>
+<?php else: ?>
+<p class="details"></p>
+<?php endif; ?>
+</div>
+
+<div class="col-xs-6 col-md-3 " style="margin-top:10px;">
+<label>Class</label><br>
+<p>	
+<!--CLASS IF APPLICABLE-->
+<?php if (isset($company['class']) && $company['class'] != 'Unknown' ): ?>
+<?php echo $companies_classes[$company['class']] ?> 	
+<?php else: 
+
+//echo '-';
+
+?>
+
+<?php endif; ?>
+</p>
+</div>
+
+</div>                        
+          
+                        
+                        
 	<div class="row details pad-bottom">
 		<!-- TURNOVER -->
 		<div class="col-xs-6 col-sm-3 ">
@@ -391,17 +379,7 @@
             <p class="details"></p>
 			<?php endif; ?>
 		</div>
-		<!-- SECTORS -->
-        <?php if(isset($company['sectors'])){
-    
-    
-}else{
-    
-    
-    
-}
-        
-        ?>
+ 
 		<div class="col-xs-6 col-sm-4 sectorIdentifier" data="<?php echo $company['id']; ?>">
 			<strong>Sectors</strong> <br>
 			<?php 
@@ -413,30 +391,15 @@
 				}
 			}
 			?>
-									<?php /*  if (isset($company['perm'])): ?>
-
-<p class="detailsTagFormat" style="margin-bottom:0; text-align:centre;">Permanent</p>
-
-			<?php endif; ?>
-								<?php if (isset($company['contract'])): ?>
-
-
-			<p class="detailsTagFormat" style="margin-bottom:0; text-align:centre;">Contract</p>
-						<?php endif; ?>
-            
-     
-            <?php if ($company['perm'] == '' && $company['contract'] == '' && count($company['sectors']) ==0 ): ?>
-
-<p class="detailsTagFormat" style="margin-bottom:0; text-align:centre;">-</p>
-            
-            
-            <?php endif;  */ ?>
+							 
             
             
 		</div>
-</div>
-	
-
+</div>                        
+                        
+  
+                        
+                        
 	<div class="row details padding-bottom">
 		<!-- TAGS -->
         <div class="tagLists tagLists<?php echo $company['id'];?>">
@@ -532,8 +495,25 @@ if($mortgage['Inv_fin_related'] == 'N'){ echo '<span  class="related_to_Invoice_
 			</div>
 	 
  	 </div>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        </div><!--END ROW-->
+                        
+                        </div></div></div>
+            
+        </div>
+        
+        
+        
 
-
+        </div>
 	</div>
 <?php endforeach; ?>
 <?php endif; ?>

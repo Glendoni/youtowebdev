@@ -140,7 +140,7 @@
              
             <span class="label  btn-warning comp_details_edit_btn mainedit" data-toggle="modal" id="editbtn<?php echo $company['id']; ?>" data-target="#editModal<?php echo $company['id']; ?>" style="
     font-size: 12px;     float: right;
-">Edit</span>
+">Sectors etc</span>
              
            
          
