@@ -177,7 +177,10 @@ echo json_encode($output);
     
     function private_campaigns_new_ajax(){
 
-$output   = $this->data['private_campaigns_new'] = $this->Campaigns_model->private_campaigns_new_ajax($this->get_current_user_id());
+    $department =  $this->data['current_user']['department'];    
+      
+        
+$output   = $this->data['private_campaigns_new'] = $this->Campaigns_model->private_campaigns_new_ajax($this->get_current_user_id(), $department);
 //echo '<pre>'; print_r($output); echo '</pre>';
 echo json_encode($output);
 

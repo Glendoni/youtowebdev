@@ -125,7 +125,7 @@ $this->db->insert('targets', $data);
             FROM campaigns cam 
             LEFT JOIN users  U
             ON cam.user_id = U.id
-            WHERE cam.user_id='.$user_id;
+            WHERE cam.user_id='.$user_id.' AND cam.evergreen_id is not null';
         
             $query = $this->db->query($sql);
             //return $query->result_array();

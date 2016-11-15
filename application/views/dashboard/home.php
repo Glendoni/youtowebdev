@@ -2107,7 +2107,7 @@
     </div>
     <?php } ?>
     
-    <?php   if($current_user['department'] != 'data'){ ?>
+    
               <div class="panel panel-default">
               <div class="panel-heading">
                 <h3 class="panel-title">My Campaigns <span class="badge pull-right mycampaignajaxcount"></span></h3>
@@ -2130,7 +2130,7 @@
                   
               </div>
             </div>
-                  <?php } ?>
+                
                <?php   if($current_user['department'] != 'data'){ ?>
             <div class="panel panel-default">
               <div class="panel-heading">
