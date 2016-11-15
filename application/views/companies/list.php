@@ -273,7 +273,7 @@
                         
 
 <div class="row"> 
-
+<div class="col-md-12">
 
 <?php if (isset($company['trading_name'])): ?>
 <div class="col-md-4">
@@ -305,7 +305,7 @@
 </p>
 </div><!--END ADDRESS-->
 
-
+    </div>
 </div><!--END ROW-->
                         
                         
@@ -313,7 +313,7 @@
 <div class="row details pad-bottom">
 <div class="col-md-12">
 <hr />
-</div>
+
 
 
 <div class="col-xs-6 col-md-3 " style="margin-top:10px;">
@@ -356,12 +356,13 @@
 <?php endif; ?>
 </p>
 </div>
-
+</div>
 </div>                        
           
                         
                         
 	<div class="row details pad-bottom">
+        <div class="col-md-12">
 		<!-- TURNOVER -->
 		<div class="col-xs-6 col-sm-3 ">
 			<strong><span style="text-transform: capitalize"><?php echo isset($company['turnover_method'])?$company['turnover_method']:'';?></span> Turnover</strong><br>
@@ -395,24 +396,29 @@
             
             
 		</div>
+            
+            
+            
+            
+            
 </div>                        
                         
-  
-                        
-                        
-	<div class="row details padding-bottom">
+     <div class="col-md-12">
 		<!-- TAGS -->
-        <div class="tagLists tagLists<?php echo $company['id'];?>">
+        <div class="tagLists tagLists<?php echo $company['id'];?>"></div>
         </div>
-	</div>
+                        
+                        
+ 
 		<hr>
 
 		<div class="row">
             
 		<!-- MORTGAGES -->
 			
-			<div class="col-md-12">
+			
 			<?php if(!empty($company['mortgages'])): ?>
+            <div class="col-md-12">
 			<table class="table" style="font-size:12px">
 			<thead>
 				<tr>
@@ -486,13 +492,16 @@ if($mortgage['Inv_fin_related'] == 'N'){ echo '<span  class="related_to_Invoice_
 				</td>
 
 				</tr>
+       
+            
 				<?php endforeach; ?>
 				</tbody>
 				</table>
+                        	</div>
 				<?php else: ?>
 
 			<?php endif; ?>
-			</div>
+		
 	 
  	 </div>
                         
@@ -502,7 +511,7 @@ if($mortgage['Inv_fin_related'] == 'N'){ echo '<span  class="related_to_Invoice_
                         
                         
                         
-                        
+            </div>  
                         
                         </div><!--END ROW-->
                         
