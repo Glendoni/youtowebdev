@@ -67,7 +67,7 @@ public function updateTagCampaign($campaign_id,$user_id,$evergreenID){
    
         $preCheckAllocation  = $this->evergreenHeaderInfo(1,$campaign_id);
  if (!$preCheckAllocation [0]['remaining']){
-    $query = $this->db->query("SELECT * FROM evergreen WHERE id=".$evergreenID);
+    $query = $this->db->query("SELECT * FROM evergreens WHERE id=".$evergreenID);
      $row  =     $query->result_array();
          
      $sql =   $row[0]['sql']; 
