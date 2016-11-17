@@ -70,6 +70,11 @@ class Users extends MY_Controller {
 	} 
 
 	public function settings(){
+        
+        
+        echo $this->input->post(),$this->data['current_user']['id']
+        
+        
 		if($this->input->post('gmail_account'))
 		{
 			$this->load->library('form_validation');
