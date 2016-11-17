@@ -91,11 +91,7 @@ class Users extends MY_Controller {
 				$result = $this->Users_model->update_settings($this->input->post(),$this->data['current_user']['id']);
 				if(!$result)
 				{
-                    
-                    
-                                      echo   $this->input->post('gmail_password').$this->data['current_user']['id'];
-            
-            exit();
+
 					redirect('/users/settings');
 				}
 				else
