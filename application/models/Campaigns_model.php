@@ -1461,7 +1461,7 @@ function get_campaign_owner($id)
     
          function private_campaigns_new($user_id)
 	{
-		$this->db->distinct();
+			$this->db->distinct();
 		$this->db->select('c.name,c.id as id,c.user_id as userid,u.name as searchcreatedby,u.image as image,c.shared, c.created_at as datecreated');
 		$this->db->from('campaigns c');
 		$this->db->join('users u', 'c.user_id = u.id');
@@ -1472,7 +1472,7 @@ function get_campaign_owner($id)
 		$this->db->where('u.active', 'True');
 		//$this->db->where('c.shared', 'True');
 		$this->db->where('comp.active', 'True');
-		$this->db->where('c.user_id', 55);
+		$this->db->where('c.user_id', $user_id);		
 		$this->db->order_by("c.created_at", "desc");
 		//$this->db->limit(20);
 		$this->db->where("(c.eff_to IS NULL OR c.eff_to > '".date('Y-m-d')."')",null, false); 
@@ -1485,14 +1485,7 @@ function get_campaign_owner($id)
              //$this->db->last_query();
 		//print_r($query->result());
              
-               return $query->result(); 
-             
-             
-             //$this->db->last_query();
-		//print_r($query->result());
-                  
-            
-           
+               return $query->result();          
             
 }
     
