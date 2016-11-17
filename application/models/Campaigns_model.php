@@ -1505,22 +1505,8 @@ function get_campaign_owner($id)
         	$query = $this->db->query($sql);
              
         
-        foreach ($query->result_array() as $row)
-                    {
-                        
-                        $get_campaign_pipeline_new  =  $this->get_campaign_pipeline($row['id'],true);
-                       $output[] = array('id' => $row['id'],
-                                        'name' =>   $get_campaign_pipeline_new->campaignname,
-                                       'image' => $get_campaign_pipeline_new->image,
-                                         'datecreated' => date('d-m-Y', strtotime($get_campaign_pipeline_new->datecreated)),
-                                       'percentage' => $get_campaign_pipeline_new->contacted
-                                       );
-                    }        
-            
-        
-        
-            return $output ? $output : array('success' => 'not ok');
-		    //return $query->result(); /* returns an object */
+      
+		    return $query->result(); /* returns an object */
             //echo  $this->db->last_query();
           
 }
