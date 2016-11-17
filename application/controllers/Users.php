@@ -76,15 +76,26 @@ class Users extends MY_Controller {
         
 		if($this->input->post('gmail_account'))
 		{
+            
+        
+            
+            
 			$this->load->library('form_validation');
 			$this->form_validation->set_rules('gmail_account', 'gmail_account', 'xss_clean|required');
 			$this->form_validation->set_rules('gmail_password', 'gmail_password', 'xss_clean|required');
 			if($this->form_validation->run())
 			{	
                 
+
+                
 				$result = $this->Users_model->update_settings($this->input->post(),$this->data['current_user']['id']);
 				if(!$result)
 				{
+                    
+                    
+                                      echo   $this->input->post('gmail_password').$this->data['current_user']['id'];
+            
+            exit();
 					redirect('/users/settings');
 				}
 				else

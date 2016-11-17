@@ -138,6 +138,8 @@ class Users_model extends MY_Model {
 	}
 
 	function update_settings($data,$user_id){
+        
+    
 		$this->load->library('encrypt');
 		$data = array(
 			'gmail_account' => $data['gmail_account'],
