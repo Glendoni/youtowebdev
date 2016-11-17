@@ -141,9 +141,10 @@ class Users_model extends MY_Model {
         
     
 		$this->load->library('encrypt');
+       
 		$data = array(
 			'gmail_account' => $data['gmail_account'],
-			'gmail_password' => md5($data['gmail_password'])
+			'gmail_password' => $this->encrypt->encode($data['gmail_password'])
 			);
 
 		$this->db->where('id', $user_id);
