@@ -37,7 +37,7 @@ class Campaigns_model extends MY_Model {
 	function get_all_shared_campaigns($user_id)
 	{
 		$this->db->distinct();
-		$this->db->select('c.name,c.id,c.user_id,u.name as searchcreatedby,u.image,c.shared, c.created_at');
+		$this->db->select('c.name,c.id,c.user_id,u.name as searchcreatedby,u.image,c.shared, c.created_at,c.evergreen_id');
 		$this->db->from('campaigns c');
 		$this->db->join('users u', 'c.user_id = u.id');
 		$this->db->join('targets t', 'c.id = t.campaign_id');
