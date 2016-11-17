@@ -71,8 +71,7 @@ class Users extends MY_Controller {
 
 	public function settings(){
         
-        
-        echo $this->input->post(),$this->data['current_user']['id']
+    
         
         
 		if($this->input->post('gmail_account'))
@@ -82,6 +81,7 @@ class Users extends MY_Controller {
 			$this->form_validation->set_rules('gmail_password', 'gmail_password', 'xss_clean|required');
 			if($this->form_validation->run())
 			{	
+                
 				$result = $this->Users_model->update_settings($this->input->post(),$this->data['current_user']['id']);
 				if(!$result)
 				{

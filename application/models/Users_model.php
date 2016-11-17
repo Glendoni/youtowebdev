@@ -141,16 +141,16 @@ class Users_model extends MY_Model {
 		$this->load->library('encrypt');
 		$data = array(
 			'gmail_account' => $data['gmail_account'],
-			'gmail_password' => $this->encrypt->encode($data['gmail_password'])
+			'gmail_password' => md5($data['gmail_password'])
 			);
 
 		$this->db->where('id', $user_id);
 		$this->db->update('users',$data);
 		if($this->db->affected_rows() !== 1){
 			$this->addError($this->db->_error_message());
-			return False;
+			return false;
 		}else{
-			return True;
+			return true;
 		} 
 	}
 
