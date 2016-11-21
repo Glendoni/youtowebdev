@@ -2082,7 +2082,9 @@
     
     
     
-     <?php   if($current_user['department'] == 'data'){ ?>
+     <?php   $dept = array('data','sales');
+
+if(in_array($current_user['department'],$dept) ){ ?>
         
             <div class="panel panel-default">
               <div class="panel-heading">

@@ -224,9 +224,9 @@ echo '<pre>'; print_r($output); echo '</pre>';
              
              
              //$this->db->last_query();
-		print_r($query->result());
+		//print_r($query->result());
         
-        exit();
+        //exit();
                     foreach ($query->result_array() as $row)
                     {
                         

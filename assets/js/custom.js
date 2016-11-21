@@ -570,7 +570,7 @@ $(".pipeline-validation-check").change(function() {
                   //console.warn($(this).attr('comp').trim());
             })
             
-            if($('.remaining').text() == 0 && $('.remaining').text() != "" || $('.company-header').length ==0 ){
+            if(parseInt($('.remaining').text()) == 0 && $('.remaining').text() != "" || $('.company-header').length ==0 ){
                 $('.myevergreenaddcompanies').show();
                 
                    }

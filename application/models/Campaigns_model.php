@@ -1064,9 +1064,7 @@ $sql = 'select json_agg(results)
 	 
             
             
-           // print_r($query->result_array());
-
-//exit();
+   
 		return $query->result_array();
 	}
     

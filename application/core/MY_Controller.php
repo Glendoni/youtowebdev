@@ -589,6 +589,12 @@ $mortgages['Inv_fin_related'] = $mortgage->f8;
 			}
 			$companies_array[]= $mapped_companies_array;
 		}
+        
+        
+        
+               // print_r($companies_array);
+
+//exit();
 		return $companies_array;
 	}
 

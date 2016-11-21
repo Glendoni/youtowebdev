@@ -52,8 +52,11 @@ class Campaigns extends MY_Controller {
 $this->data['companies'] = $companies_array_chunk[($current_page_number-1)];
             
 $this->data['department'] =   $this->data['current_user']['department'] ;
+            if($this->data['current_user']['department'] == 'sales')
+$this->data['evergreen'] =  $this->Evergreen_model->evergreenHeaderInfoSales($this->session->userdata('campaign_id'));
             
-$this->data['evergreen'] =  $this->Evergreen_model->evergreenHeaderInfo($this->get_current_user_id(),($this->session->userdata('campaign_id') ?: FALSE ));
+            if($this->data['current_user']['department'] == 'data')
+            $this->data['evergreen'] =  $this->Evergreen_model->evergreenHeaderInfo($this->session->userdata('campaign_id'));
            
 		}
 		$this->data['results_type'] = 'Campaign';
@@ -187,9 +190,12 @@ $this->session->unset_userdata('evergreen');
 			}
 			$pipeline = $this->input->get('pipeline');
 
-if($this->data['current_user']['department'] == 'data'){
+$dept = array('data','sales');
+ 
+if(in_array($this->data['current_user']['department'],$dept) && ($this->input->get('evergreen'))){
     
     $companies = $this->Campaigns_model->get_companies_for_campaign_id_data_entry($campaign[0]->id,$pipeline);
+
 }else{
            $companies = $this->Campaigns_model->get_companies_for_campaign_id($campaign[0]->id,$pipeline);
     
@@ -331,6 +337,100 @@ if($this->data['current_user']['department'] == 'data'){
         //echo json_encode($this->Evergreen_model->updateTagCampaign());
         
     }
+    
+    
+    function test(){
+        
+        
+     $output =    $this->data['evergreen'] =  $this->Evergreen_model->evergreenHeaderInfoSales($this->session->userdata('campaign_id'));
+        
+    print_r($output);
+        
+        
+        
+    }
+    
+    
+    function evergreenHeaderInfoSales($campaign_id){
+           
+           
+        $sql= "select campaign_id,
+       campaignname,
+	   description,
+	   image,
+	   datecreated,
+       campaign_total,
+	   campaign_suspect,
+       campaign_prospect,
+       campaign_intent,
+       campaign_proposal,
+       campaign_customer,
+       campaign_unsuitable,
+	   unprocessed
+	   
+from
+(-- TT1
+select CA.id,
+ 	   CA.id campaign_id,
+	   CA.created_at::date \"created\",
+	   U.image image,
+	   CA.name \"campaign name\" ,
+	   CA.name \"campaignname\" ,
+       CA.created_at::date \"datecreated\",
+       CA.description description ,
+       count(distinct T.id) campaign_total,
+       count(distinct CASE when CO.pipeline = 'Suspect' then CO.id END) campaign_suspect,
+       count(distinct CASE when CO.pipeline = 'Prospect' then CO.id END) campaign_prospect,
+       count(distinct CASE when CO.pipeline = 'Intent' then CO.id END) campaign_intent,
+       count(distinct CASE when CO.pipeline = 'Proposal' then CO.id END) campaign_proposal,
+       count(distinct CASE when CO.pipeline = 'Customer' then CO.id END) campaign_customer,
+       count(distinct CASE when CO.pipeline in ('Unsuitable','Lost') then CO.id END) campaign_unsuitable,
+       count(distinct T.id) - count(T1.company_id) unprocessed
+  
+FROM CAMPAIGNS CA
+  
+JOIN USERS U
+ON CA.user_id = U.id
+  
+JOIN TARGETS T
+ON CA.id = T.campaign_id
+  
+JOIN COMPANIES CO
+ON T.company_id = CO.id
+  
+LEFT JOIN 
+(
+select company_id,
+       max(created_at) \"most recent action\"
+  
+from ACTIONS 
+group by 1
+)   T1
+ON CO.id = T1.company_id
+AND T1.\"most recent action\" > T.created_at
+  
+where CA.id = 652 
+and CO.active = 't'
+  
+group by 1,2,3,4,5,6,7,8
+  
+order by 2, 1 desc
+)   TT1"
+;   
+           
+     $query = $this->db->query($sql);
+            //return $query->result_array();
+        
+       // $array2[0] =  array( 'percentage' => 23);
+   
+        //return $query->result_array();  
+        
+        
+      print '<pre>';
+     print_r($query->result_array());
+      print '</pre>';
+           
+       }
     
 
 }
