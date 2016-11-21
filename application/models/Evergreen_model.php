@@ -67,7 +67,11 @@ public function updateTagCampaign($campaign_id,$user_id,$evergreenID){
    
         $preCheckAllocation  = $this->evergreenHeaderInfo(1,$campaign_id);
  if (!$preCheckAllocation [0]['remaining']){
-    $query = $this->db->query("SELECT * FROM evergreens WHERE id=".$evergreenID);
+    $query = $this->db->query("SELECT evg.max_allowed, sql, count(ta.id) FROM evergreens evg 
+LEFT JOIN targets ta
+ON evg.id = ta.evergreen_id
+WHERE evg.id=".$evergreenID."
+GROUP BY 1,2");
      $row  =     $query->result_array();
          
      $sql =   $row[0]['sql']; 
@@ -269,6 +273,72 @@ group by 1,2,3,4,5,6,7,8
 order by 2, 1 desc
 )   TT1"
 ;   
+           
+           
+$sql = "select campaign_id,
+       campaignname,
+	   description,
+	   image,
+	   datecreated,
+       campaign_total,
+	   campaign_suspect,
+       campaign_prospect,
+       campaign_intent,
+       campaign_proposal,
+       campaign_customer,
+       campaign_unsuitable,
+	   unprocessed
+	   
+from
+(-- TT1
+select CA.id,
+ 	   CA.id campaign_id,
+	   CA.created_at::date \"created\",
+	   U.image image,
+	   CA.name \"campaign name\" ,
+	   CA.name \"campaignname\" ,
+       CA.created_at::date \"datecreated\",
+       CA.description description ,
+       count(distinct T.id) campaign_total,
+       count(distinct CASE when CO.pipeline = 'Suspect' then CO.id END) campaign_suspect,
+       count(distinct CASE when CO.pipeline = 'Prospect' then CO.id END) campaign_prospect,
+       count(distinct CASE when CO.pipeline = 'Intent' then CO.id END) campaign_intent,
+       count(distinct CASE when CO.pipeline = 'Proposal' then CO.id END) campaign_proposal,
+       count(distinct CASE when CO.pipeline = 'Customer' then CO.id END) campaign_customer,
+       count(distinct CASE when CO.pipeline in ('Unsuitable','Lost') then CO.id END) campaign_unsuitable,
+       count(distinct T.id) - count(T1.company_id) unprocessed
+  
+FROM CAMPAIGNS CA
+  
+JOIN USERS U
+ON CA.user_id = U.id
+  
+JOIN TARGETS T
+ON CA.id = T.campaign_id
+  
+JOIN COMPANIES CO
+ON T.company_id = CO.id
+  
+LEFT JOIN 
+(
+select company_id,
+       max(created_at) \"most recent action\"
+  
+from ACTIONS 
+group by 1
+)   T1
+ON CO.id = T1.company_id
+AND T1.\"most recent action\" > T.created_at
+  
+where CA.id =  ".$campaign_id."
+and CO.active = 't'
+  
+group by 1,2,3,4,5,6,7,8
+  
+order by 2, 1 desc
+)   TT1
+";           
+           
            
      $query = $this->db->query($sql);
             //return $query->result_array();

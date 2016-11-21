@@ -1,84 +1,68 @@
 <div class="page-results-list">
-		<ul class="pager">
+    <ul class="pager">
 		<div class="col-xs-2">
-		<?php if($previous_page_number): ?>
-	  	<li class="previous">
-	  		<a href="?page_num=<?php echo $previous_page_number; ?>">&larr; Previous</a>
-	  	</li>
-	    <?php endif; ?>
+                <?php if($previous_page_number): ?>
+                <li class="previous">
+                    <a href="?page_num=<?php echo $previous_page_number; ?>">&larr; Previous</a>
+                </li>
+                <?php endif; ?>
 		</div>
 		<div class="col-xs-8 ">
-           
-        <span class="count_of_results">
-        <?php if($current_campaign_name && $current_campaign_owner_id && $current_campaign_id ): ?>
-				<?php else: ?>
-				<?php echo number_format($companies_count); ?> <?php if ($companies_count<> "1") {echo "Companies";} else { echo "Company";}?>
-				<?php endif; ?>
-				<?php if($previous_page_number or $next_page_number): ?><span style="font-size:15px; font-weight:700;"> Page <?php echo $current_page_number; ?> of <?php echo $page_total ?> </span><?php endif; ?>
-            
-           
-            
-        
-		</span>
+                <span class="count_of_results">
+                <?php if($current_campaign_name && $current_campaign_owner_id && $current_campaign_id ): ?>
+                        <?php else: ?>
+                        <?php echo number_format($companies_count); ?> <?php if ($companies_count<> "1") {echo "Companies";} else { echo "Company";}?>
+                        <?php endif; ?>
+                        <?php if($previous_page_number or $next_page_number): ?><span style="font-size:15px; font-weight:700;"> Page <?php echo $current_page_number; ?> of <?php echo $page_total ?> </span><?php endif; ?>
+                </span>
             
             <div class="col-md-12 searchcriteria"></div>
-          
-		</div>    
-	<div class="col-xs-2">
-	    <?php if($next_page_number): ?>
-	  	<li class="next">
-	  		<a href="?page_num=<?php echo $next_page_number; ?>">Next &rarr;</a>
-	  	</li>
-		<?php endif; ?>
+       </div>    
+	   <div class="col-xs-2">
+            <?php if($next_page_number): ?>
+            <li class="next">
+                <a href="?page_num=<?php echo $next_page_number; ?>">Next &rarr;</a>
+            </li>
+            <?php endif; ?>
 		</div>
 	</ul>
 
 	    <!-- Collect the nav links, forms, and other content for toggling -->
 		<div>
-         
-            
 	      	<?php if(($companies_count > 0)): ?>
 				<?php if($current_campaign_name && $current_campaign_owner_id && $current_campaign_id ): ?>
-
- 
-            
-            
-					<?php foreach($current_campaign_stats as $current_campaign_stats){?>
+                    <?php foreach($current_campaign_stats as $current_campaign_stats){?>
 						<div style="font-weight:300; font-size:32px; margin-bottom: 20px; margin-top: -20px; text-align:center;">
+                                <?php $dept = array('sales','data');
+                                  if(in_array($current_user['department'],$dept)  && $this->session->userdata("evergreen") == true) {?>
+                                        <img style="height:50px;margin-top: 0px;  margin-left: -74px;" src="assets/images/evergreen.png">
+                                <?php } ?>
                             
-                               <?php $dept = array('sales','data');
-
-if(in_array($current_user['department'],$dept)  && $this->session->userdata("evergreen") == true)
-        { ;?>
-                            <img style="height:50px;margin-top: 0px;  margin-left: -74px;" src="assets/images/evergreen.png">
-                            
-                            <?php } ?>
-						<?php echo $current_campaign_name; ?> <?php if($current_campaign_is_shared == False): ?>
-						</div>	
+						<?php echo $current_campaign_name; ?> 
+                            </div>
+                            		
+                            <?php if($current_campaign_is_shared == False): ?>
+					
 						<?php else: ?>	
 						<?php endif;?>
-					<?php foreach($current_campaign_owners as $current_campaign_owner): echo "<div style='text-align: center;font-weight: 300; font-size:12px;'>Owned by <b>".$current_campaign_owner->username."</b> | Created on <b>".date('jS F Y',strtotime($current_campaign_stats->created))."</b></div>"; endforeach ?>	
+					<?php foreach($current_campaign_owners as $current_campaign_owner):
+                            echo "<div style='text-align: center;font-weight: 300; font-size:12px;'>Owned by <b>".$current_campaign_owner->username."</b> | Created on <b>".date('jS F Y',strtotime($current_campaign_stats->created))."</b></div>"; 
+                        endforeach ?>	
 					<?php if(!empty($current_campaign_stats->description)): ?>
 						<p style="font-size:14px"><?php echo $current_campaign_stats->description; ?></p>
 					<?php endif;?>
 
 						<div><a class="btn btn-info btn-xs" href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $current_campaign_id; ?>">Refresh</a></div>
 
-              <?php  
-                        $dept = array('sales');
-
-if(in_array($current_user['department'],$dept) && $this->session->userdata("evergreen") == true)
-        { ?>
-            
-            <div>    <span class="campaign remaining" ><?php echo $evergreen[0]['campaign_customer']; ?></span><br>Remaining
-            
-            
-            </div>
+                        <?php  
+                            $dept = array('sales');
+                            if(in_array($current_user['department'],$dept) && $this->session->userdata("evergreen") == true){ ?>
+                                <div><span class="campaign remaining" ><?php echo $evergreen[0]['unprocessed']; ?></span><br>Remaining</div>
             
             
             
             
-            <? } ?>
+            <?php } ?>
 				 <?php if($this->session->userdata("evergreen") != true){ ;?> 
 
  
