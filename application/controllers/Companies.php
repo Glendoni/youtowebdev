@@ -946,11 +946,11 @@ echo $this->Tagging_model->$route($post);
          $company_id = $this->input->post('company_id');
 
 
-$campaign_id = $this->input->post('campaign_id');
+            $campaign_id = $this->input->post('campaign_id');
 
         // $company_id = $this->input->post('company_id');
 
-	$campaign = $this->Campaigns_model->get_campaign_by_id($campaign_id);
+	       $campaign = $this->Campaigns_model->get_campaign_by_id($campaign_id);
         
         
         //print_r($campaign);
@@ -974,7 +974,7 @@ $campaign_id = $this->input->post('campaign_id');
 
 			$result = $this->process_search_result($companies);
         
-       // print_r($result);
+        print_r($result);
       
 
 			if(empty($result))

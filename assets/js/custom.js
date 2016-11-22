@@ -36,9 +36,15 @@ $( document ).ready(function() {
                  
                  //alert(campid)
                  
+console.log(data.success);
+if(data.success == 202){
+$('.myevergreenaddcompanies').text('Campaign has reached max allowed')
+}else{
             //location.reload();
-                 window.location = "campaigns/display_campaign/?evergreen="+evergreen+"&id="+campid;
+    window.location = "campaigns/display_campaign/?evergreen="+evergreen+"&id="+campid;
                  //http://localhost:8888/baselist/campaigns/display_campaign/?id=1
+    
+}
              }
              });
          

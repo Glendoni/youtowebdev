@@ -37,7 +37,7 @@ class Campaigns_model extends MY_Model {
 	function get_all_shared_campaigns($user_id)
 	{
 		$this->db->distinct();
-		$this->db->select('c.name,c.id,c.user_id,u.name as searchcreatedby,u.image,c.shared, c.created_at');
+		$this->db->select('c.name,c.id,c.user_id,u.name as searchcreatedby,u.image,c.shared, c.created_at,c.evergreen_id');
 		$this->db->from('campaigns c');
 		$this->db->join('users u', 'c.user_id = u.id');
 		$this->db->join('targets t', 'c.id = t.campaign_id');
@@ -1058,19 +1058,11 @@ $sql = 'select json_agg(results)
 		 
 		) results';
             
-            
-            
+           
 		$query = $this->db->query($sql);
 	 
-            
-            
-   
 		return $query->result_array();
 	}
-    
-    
-    
-    
     
     
 	function get_saved_searched_by_id($id)
@@ -1496,7 +1488,7 @@ function get_campaign_owner($id)
       $datauser =   "AND c.evergreen_id is null";
         }
 
-	 $sql = 'SELECT DISTINCT "c"."name", "c"."id" as "id", "c"."user_id" as "userid", "u"."name" as "searchcreatedby", "u"."image" as "image", "c"."shared", "c"."created_at", to_char(c.created_at, \'dd-mm-yyyy\') as datecreated  FROM "campaigns" "c" JOIN "users" "u" ON "c"."user_id" = "u"."id" JOIN "targets" "t" ON "c"."id" = "t"."campaign_id" JOIN "companies" "comp" ON "t"."company_id" = "comp"."id" WHERE criteria IS NULL AND "u"."active" = E\'True\' AND "comp"."active" = E\'True\' AND "c"."user_id" = E\''.$user_id.'\' AND (c.eff_to IS NULL OR c.eff_to > \''.date('Y-m-d').'\') '.$datauser.' GROUP BY 1, 2, 3, 4, 5 ORDER BY "c"."created_at" DESC LIMIT 20' ;
+	 $sql = 'SELECT DISTINCT "c"."name", "c"."id" as "id", "c"."user_id" as "userid", "u"."name" as "searchcreatedby", "u"."image" as "image", "c"."shared", "c"."created_at", to_char(c.created_at, \'dd-mm-yyyy\') as datecreated  FROM "campaigns" "c" JOIN "users" "u" ON "c"."user_id" = "u"."id" JOIN "targets" "t" ON "c"."id" = "t"."campaign_id" JOIN "companies" "comp" ON "t"."company_id" = "comp"."id" WHERE criteria IS NULL AND "u"."active" = E\'True\' AND "comp"."active" = E\'True\' AND "c"."user_id" = E\''.$user_id.'\' AND (c.eff_to IS NULL OR c.eff_to > \''.date('Y-m-d').'\') '.$datauser.' AND c.evergreen_id IS NULL GROUP BY 1, 2, 3, 4, 5 ORDER BY "c"."created_at" DESC LIMIT 20' ;
              
         
     

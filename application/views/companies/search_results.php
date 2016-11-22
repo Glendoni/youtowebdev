@@ -56,7 +56,7 @@
 
                         <?php  
                             $dept = array('sales');
-                            if(in_array($current_user['department'],$dept) && $this->session->userdata("evergreen") == true){ ?>
+                            if((in_array($current_user['department'],$dept) && $this->session->userdata("evergreen") == true) || ( $curent_user_permission == 'admin' && $this->session->userdata("evergreen") == true)){ ?>
                                 <div><span class="campaign remaining" ><?php echo $evergreen[0]['unprocessed']; ?></span><br>Remaining</div>
             
             
@@ -144,28 +144,16 @@
 		
 </div><!--END ROW-->
             
-            
-           
-            
-           
-            
-            
-            
             <?php } ?>  
             
         <!--Data evergreen --> 
             <?php //echo 'This is the data '.$this->session->userdata("evergreen") ;  ?>
-            
-            
-            
-            
+          
      <?php 
             $dept = array('data');
 
 if(in_array($current_user['department'],$dept) && $this->session->userdata("evergreen") == true)
         { ?>
-            
-            
             <div class="row campaign" style="margin-bottom: 20px;">
         <div class="col-sm-3 mobile-hide">
         <a href="<?php echo site_url(); ?>campaigns/display_campaign/?id="<?php echo $evergreen[0]['companies_in_campaign']; ?> >
@@ -210,23 +198,13 @@ if(in_array($current_user['department'],$dept) && $this->session->userdata("ever
             <?php } ?>
             <!--Data evergreen End -->  
             
-            
-            
-            
             <?php  
                         $dept = array('sales');
 
-if(in_array($current_user['department'],$dept) && $this->session->userdata("evergreen") == true)
+if((in_array($current_user['department'],$dept) && $this->session->userdata("evergreen") == true) || ( $curent_user_permission == 'admin' && $this->session->userdata("evergreen"  == true)))
         { ?>
             
-           
-            
-            
-            
             <div class="row campaign" style="margin-bottom: 20px;">
-                
-         
-                
                 
         <div class="col-sm-2 mobile-hide">
         <a href="<?php echo site_url(); ?>campaigns/display_campaign/?id="<?php echo $evergreen[0]['campaign_id']; ?> >
@@ -287,8 +265,7 @@ if(in_array($current_user['department'],$dept) && $this->session->userdata("ever
 </div>
             <?php } ?>
             <!--Data evergreen End -->  
-        
-					
+        		
 <?php else: ?>
 <?php endif; ?>					
 <?php endif; ?>
@@ -301,13 +278,7 @@ if(in_array($current_user['department'],$dept) && $this->session->userdata("ever
 $dept = array('data','sales');
 
 if(in_array($current_user['department'],$dept) && $this->session->userdata('evergreen') == true){ ?>
-                <div>
-                    
-                  
-                    <?php  //echo $this->session->userdata('evergreen'); 
-                    
-                    
-                    ?>
+                <div>                   
                 <button type="button" class="btn btn-large btn-block btn-default myevergreenaddcompanies" data="<?=$current_campaign_id; ?>" evergreen="<?php  echo $this->session->userdata('evergreen'); ?>">Add  5 Companies </button>
 
             </div>

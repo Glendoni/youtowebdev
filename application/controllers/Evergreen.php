@@ -70,4 +70,36 @@ echo 'YEss';
     }
     
     
+    function testlimiter(){
+      $sqlCheck = 'SELECT evg.max_allowed as maxallowed,count(ta.id)  FROM targets ta
+LEFT JOIN evergreens evg
+ON ta.evergreen_id = evg.id
+
+ WHERE ta.campaign_id=661 AND ta.evergreen_id is not null
+
+ GROUP BY 1';
+        $query = $this->db->query($sqlCheck);
+        $row  =     $query->result_array(); 
+        echo $row[0]['maxallowed'];
+       if($row[0]['maxallowed'] > $row[0]['count']){
+                  //echo 'yessss';
+              }
+        
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

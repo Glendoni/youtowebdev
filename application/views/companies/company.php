@@ -282,9 +282,10 @@ if ($your_date < $now){;
 			</p>
 		</div>
             <div class="col-xs-6 col-md-4 details" style="margin-top:10px; ">
-			<label>Company Number</label><br>
+			<label>Company</label><br>
 			<p>	
 			 <!--COMPANY NUMBER IF APPLICABLE-->
+                <?php echo isset($company['name'])?$company['name']:''; ?><br>
 			<?php echo isset($company['registration'])?$company['registration']:''; ?>
          	</p>
         	</div>
