@@ -106,7 +106,7 @@ public function updateTagCampaign($campaign_id,$user_id,$evergreenID){
             foreach ($query->result_array() as $row => $value)
             {
                 //echo $value['companyid'];
-                //$this->campaignAllocator($value['companyid'],$user_id,$campaign_id,$evergreenID);
+                $this->campaignAllocator($value['companyid'],$user_id,$campaign_id,$evergreenID);
     
             }
     
