@@ -293,7 +293,9 @@ if((in_array($current_user['department'],$dept) && $this->session->userdata("eve
 </div><!-- /.row -->
 
 </div>
-	 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+	 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="
+    background: #f8f8f8;
+">
     <?php   
 
 $dept = array('data','sales');
