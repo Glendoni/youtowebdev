@@ -63,13 +63,32 @@
                 <?php */ ?>
                 
                      <?php  
+                            
+                          
                             $dept = array('sales');
-                            if((in_array($current_user['department'],$dept) && $this->session->userdata("evergreen") == true) || ( $curent_user_permission == 'admin' && $this->session->userdata("evergreen") == true)){ ?>
-                                <div class="campaign remaining" style="
+                if((in_array($current_user['department'],$dept) && $this->session->userdata("evergreen") == true) || ($curent_user_permission == 'admin' && $this->session->userdata("evergreen") == true && $current_user['department'] != 'data' )){ ?>
+                    
+<?php if($evergreen[0]['evergreenmax']){ ?>          
+                   <div class="campaign remaining" style="
+    font-size: 38px;
+    font-weight: 200;
+    margin-top: 3px;
+"> <?php echo $evergreen[0]['evergreenmax']; ?></div><div style=" margin-top: -5px;">Campaign Total</div>
+                
+                <?php } ?> 
+                
+                <div class="campaign remaining" style="
     font-size: 38px;
     font-weight: 200;
     margin-top: 3px;
 "><?php echo $evergreen[0]['unprocessed']; ?></div><div style=" margin-top: -5px;">Unprocessed</div>
+                
+                 
+               
+                
+                
+                
+               
             
             <?php } ?>
                 
@@ -190,7 +209,11 @@ if(in_array($current_user['department'],$dept) && $this->session->userdata("ever
                 <a href="<?php echo site_url(); ?>campaigns/display_campaign/?id=1&amp;pipeline=prospect">
                 <div class="circle-responsive_campiagns contacted_percentage_campaign">
         <div class="circle-content mega">
-        <div class="large-number"><?php echo $evergreen[0]['Sector_Allocated']; ?></div>
+        <div class="large-number">
+            
+         
+            
+            <?php echo $evergreen[0]['Sector_Allocated']; ?></div>
         <div class="small-text">Sector Allocated</div></div>
         </div>
                 </a>        </div>
@@ -222,9 +245,9 @@ if(in_array($current_user['department'],$dept) && $this->session->userdata("ever
             <?php  
                         $dept = array('sales');
 
-if((in_array($current_user['department'],$dept) && $this->session->userdata("evergreen") == true) || ( $curent_user_permission == 'admin' && $this->session->userdata("evergreen"  == true)))
+if((in_array($current_user['department'],$dept) && $this->session->userdata("evergreen") == true) || ( $curent_user_permission == 'admin' && $this->session->userdata("evergreen"  == true  && $current_user['department'] != 'data')))
         { ?>
-            
+           
             <div class="row campaign" style="margin-bottom: 20px;">
                 
         <div class="col-sm-2 mobile-hide">

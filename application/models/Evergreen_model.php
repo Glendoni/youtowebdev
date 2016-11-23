@@ -379,6 +379,7 @@ order by 2, 1 desc
        campaign_proposal,
        campaign_customer,
        campaign_unsuitable,
+       evergreenmax,
 	   unprocessed
 	   
 from
@@ -389,6 +390,7 @@ select CA.id,
 	   U.image image,
 	   CA.name \"campaign name\" ,
 	   CA.name \"campaignname\" ,
+       evg.max_allowed  \"evergreenmax\",
        CA.created_at::date \"datecreated\",
        CA.description description ,
        count(distinct T.id) campaign_total,
@@ -420,6 +422,8 @@ from ACTIONS
 group by 1
 )   T1
 ON CO.id = T1.company_id
+ LEFT JOIN evergreens evg
+ON CA.evergreen_id = evg.id 
 AND T1.\"most recent action\" > T.created_at
   
 where CA.id = ".$campaign_id." 
