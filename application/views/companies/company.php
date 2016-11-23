@@ -143,7 +143,7 @@
              
             
 
-                 <span class="label addTagbtn  btn-info comp_details_edit_btn mainedit" data-toggle="modal" id="editbtn<?php echo $company['id']; ?>" data-target="#myModal<?php echo $company['id']; ?>" add-tag-user="<?php echo  $current_user['department']; ?>"  style="font-size: 12px;     float: right;">Add Tag</span>
+                 <span class="label addTagbtn  btn-primary comp_details_edit_btn mainedit" data-toggle="modal" id="editbtn<?php echo $company['id']; ?>" data-target="#myModal<?php echo $company['id']; ?>" add-tag-user="<?php echo  $current_user['department']; ?>"  style="font-size: 12px;     float: right;">Add Tag</span>
              
              
              
