@@ -69,7 +69,7 @@
                 if((in_array($current_user['department'],$dept) && $this->session->userdata("evergreen") == true) || ($curent_user_permission == 'admin' && $this->session->userdata("evergreen") == true && $current_user['department'] != 'data' )){ ?>
                     
 <?php if($evergreen[0]['evergreenmax']){ ?>          
-                   <div class="campaign remaining" style="
+                   <div class="campaign" style="
     font-size: 38px;
     font-weight: 200;
     margin-top: 3px;
