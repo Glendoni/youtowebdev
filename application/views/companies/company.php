@@ -72,8 +72,10 @@
                         
                         
                                         <?php if($company['customer_to']){  ?>
-                                        <span class="label  label-<?php echo str_replace(' ', '', $company['pipeline']); ?> cancelledPill">
-                                        Cancelled:  <?php echo date('d/m/Y',strtotime($company['customer_from'])); ?> until  <?php echo date('d/m/Y',strtotime($company['customer_to'])); ?>
+                                         &nbsp;<span class="label label-Customer">
+                                        Customer From:   <?php echo date('d/m/Y',strtotime($company['customer_from'])); ?>
+                                        </span>  <span class="label  label-<?php echo str_replace(' ', '', $company['pipeline']); ?> cancelledPill">
+                                        Cancelled:  <?php echo date('d/m/Y',strtotime($company['customer_to'])); ?>
                                         </span>
                         
                         
