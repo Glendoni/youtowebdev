@@ -412,6 +412,9 @@ ON CA.id = T.campaign_id
   
 JOIN COMPANIES CO
 ON T.company_id = CO.id
+
+LEFT JOIN evergreens evg
+ON CA.evergreen_id = evg.id 
   
 LEFT JOIN 
 (
@@ -422,8 +425,7 @@ from ACTIONS
 group by 1
 )   T1
 ON CO.id = T1.company_id
- LEFT JOIN evergreens evg
-ON CA.evergreen_id = evg.id 
+ 
 AND T1.\"most recent action\" > T.created_at
   
 where CA.id = ".$campaign_id." 
