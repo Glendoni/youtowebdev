@@ -83,9 +83,9 @@ if(data.success){
      $('table .cont'+data.success).addClass('danger'); 
       
   if(data.debenturemortgage == 'P'){
-                            $('.inv'+data.success).html('Probably Related To Invoice Finance');
-                         $('table .cont'+data.success).removeClass('danger'); 
-                         $('table .cont'+data.success).addClass('success'); 
+                        $('.inv'+data.success).html('Probably Related To Invoice Finance');
+                        $('table .cont'+data.success).removeClass('danger'); 
+                        $('table .cont'+data.success).addClass('success'); 
       
        $('#morprov'+data.success).attr('providerstatus', 3)
       

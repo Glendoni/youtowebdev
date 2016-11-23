@@ -70,7 +70,8 @@ public function updateTagCampaign($campaign_id,$user_id,$evergreenID){
    
      
      
-          $sqlCheck = 'SELECT evg.max_allowed as maxallowed, sql ,count(ta.id) FROM targets ta
+          $sqlCheck = 'SELECT evg.max_allowed as maxallowed, sql ,count(ta.id) as targetCounter
+                        FROM targets ta
                         LEFT JOIN evergreens evg
                         ON ta.evergreen_id = evg.id
                         WHERE ta.campaign_id='.$campaign_id.'
@@ -79,10 +80,10 @@ public function updateTagCampaign($campaign_id,$user_id,$evergreenID){
         $query = $this->db->query($sqlCheck);
         $row  =     $query->result_array(); 
         
-       if($row[0]['maxallowed'] > $row[0]['count']){
+       if($row[0]['targetcounter'] > $row[0]['maxallowed']){
                     return array('success' => 202);
-                    exit();
-              }
+                 
+              }else{
      
             $numrow = $query->num_rows();
      
@@ -105,12 +106,14 @@ public function updateTagCampaign($campaign_id,$user_id,$evergreenID){
             foreach ($query->result_array() as $row => $value)
             {
                 //echo $value['companyid'];
-                $this->campaignAllocator($value['companyid'],$user_id,$campaign_id,$evergreenID);
+                //$this->campaignAllocator($value['companyid'],$user_id,$campaign_id,$evergreenID);
     
             }
     
- }
+ 
     return array('success' => 'ok');
+   }  
+ }
                // echo '<pre>'; print_r($query); echo '</pre>';
              
 }

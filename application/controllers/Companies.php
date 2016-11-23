@@ -974,7 +974,7 @@ echo $this->Tagging_model->$route($post);
 
 			$result = $this->process_search_result($companies);
         
-        print_r($result);
+        //print_r($result);
       
 
 			if(empty($result))
