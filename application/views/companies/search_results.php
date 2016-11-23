@@ -28,6 +28,11 @@
 	</ul>
 
 	    <!-- Collect the nav links, forms, and other content for toggling -->
+    
+    
+
+
+
 		<div>
 	      	<?php if(($companies_count > 0)): ?>
 				<?php if($current_campaign_name && $current_campaign_owner_id && $current_campaign_id ): ?>
@@ -224,7 +229,7 @@ if((in_array($current_user['department'],$dept) && $this->session->userdata("eve
                 
         <div class="col-sm-2 mobile-hide">
         <a href="<?php echo site_url(); ?>campaigns/display_campaign/?id="<?php echo $evergreen[0]['campaign_id']; ?> >
-        <div class="circle-responsive_campiagns contacted_percentage_campaign  active"><div class="circle-content mega">
+        <div class="circle-responsive_campiagns black-circle-campaign  active"><div class="circle-content mega">
         <div class="large-number"><?php echo $evergreen[0]['campaign_total']; ?></div> <div class="small-text">Companies</div>
         </div>
         </div>
@@ -242,7 +247,7 @@ if((in_array($current_user['department'],$dept) && $this->session->userdata("eve
                 </a>        </div>
                 
                    <div class="col-sm-2 mobile-hide">
-        <div class="circle-responsive_campiagns cyan-circle contacted_percentage_campaign">
+        <div class="circle-responsive_campiagns cyan-circle prospect-circle_campaign">
         <div class="circle-content mega">
         <div class="large-number"><?php echo $evergreen[0]['campaign_prospect']; ?></div>
         <div class="small-text">Prospect </div>
@@ -253,7 +258,7 @@ if((in_array($current_user['department'],$dept) && $this->session->userdata("eve
         <div class="small-text" style="font-weight:300; font-size:9px; max-width:80%; margin-left:auto; margin-right:auto;"></div>
         </div>
         <div class="col-sm-2">
-                <div class="circle-responsive_campiagns contacted_percentage_campaign">
+                <div class="circle-responsive_campiagns intent-circle_campaign">
                     <div class="circle-content mega">
                         <div class="large-number "><?php echo $evergreen[0]['campaign_intent']; ?></div>
                         <div class="small-text">Intent</div>
@@ -261,7 +266,7 @@ if((in_array($current_user['department'],$dept) && $this->session->userdata("eve
                 </div>
         </div>
                    <div class="col-sm-2">
-                <div class="circle-responsive_campiagns contacted_percentage_campaign">
+                <div class="circle-responsive_campiagns proposal-circle_campaign">
                     <div class="circle-content mega">
                         <div class="large-number "><?php echo $evergreen[0]['campaign_proposal']; ?></div>
                         <div class="small-text">Proposal</div>
@@ -269,7 +274,7 @@ if((in_array($current_user['department'],$dept) && $this->session->userdata("eve
                 </div>
         </div>
                    <div class="col-sm-2">
-                <div class="circle-responsive_campiagns contacted_percentage_campaign">
+                <div class="circle-responsive_campiagns customer-circle-campaign">
                     <div class="circle-content mega">
                         <div class="large-number "><?php echo $evergreen[0]['campaign_customer']; ?></div>
                         <div class="small-text">Customer</div>
@@ -287,8 +292,8 @@ if((in_array($current_user['department'],$dept) && $this->session->userdata("eve
 <?php endif; ?>
 </div><!-- /.row -->
 
-
-	  </div>
+</div>
+	 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <?php   
 
 $dept = array('data','sales');
@@ -303,8 +308,13 @@ if(in_array($current_user['department'],$dept) && $this->session->userdata('ever
                                                       
                                                       //echo  $this->session->userdata('evergreen') .$evergreen[0]['evergreen'];
  } ?>
+
+
 	<?php 
 	// Display companies
+
+
+
 	$this->load->view('companies/list.php');
 	?>
 	<ul class="pager">
@@ -321,3 +331,4 @@ if(in_array($current_user['department'],$dept) && $this->session->userdata('ever
 <div class="col-sm-12">
  </div>
 <?php endif; ?>
+</div>
