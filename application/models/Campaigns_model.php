@@ -9,7 +9,7 @@ class Campaigns_model extends MY_Model {
 		$this->db->from('campaigns c');
 		$this->db->join('users u', 'c.user_id = u.id');
 		// Apply this to find saved searches only
-		$this->db->where('criteria IS NOT NULL', null, false);
+		//$this->db->where('criteria IS NOT NULL', null, false);
 		$this->db->where('shared', 'True');
 		$this->db->where_not_in('user_id', $user_id);
 		$this->db->where('status', 'search');
@@ -25,7 +25,7 @@ class Campaigns_model extends MY_Model {
 		$this->db->select('name,id,user_id,shared');
 		$this->db->from('campaigns');
 		// Apply this to find saved searches only
-		$this->db->where('criteria IS NOT NULL', null, false);
+		//$this->db->where('criteria IS NOT NULL', null, false);
 		$this->db->where('user_id', $user_id);
 		$this->db->where('status', 'search');
 		$this->db->where("(eff_to IS NULL OR eff_to > '".date('Y-m-d')."')",null, false);
@@ -43,7 +43,7 @@ class Campaigns_model extends MY_Model {
 		$this->db->join('targets t', 'c.id = t.campaign_id');
 		$this->db->join('companies comp', 't.company_id = comp.id');
 		// Apply this to find saved searches only
-		$this->db->where('criteria IS NULL', null, false);
+		//$this->db->where('criteria IS NULL', null, false);
 		$this->db->where('u.active', 'True');
 		$this->db->where('c.shared', 'True');
 		$this->db->where('comp.active', 'True');
@@ -68,7 +68,7 @@ class Campaigns_model extends MY_Model {
 		$this->db->join('targets t', 'c.id = t.campaign_id');
 		$this->db->join('companies comp', 't.company_id = comp.id');
 		// Apply this to find saved searches only
-		$this->db->where('criteria IS NULL', null, false);
+		//$this->db->where('criteria IS NULL', null, false);
 		$this->db->where('u.active', 'True');
 		$this->db->where('c.shared', 'True');
 		$this->db->where('comp.active', 'True');
@@ -89,7 +89,7 @@ class Campaigns_model extends MY_Model {
 		$this->db->select('name,id,user_id');
 		$this->db->from('campaigns');
 		// Apply this to find campaigns
-		$this->db->where('criteria IS NULL', null, false);
+		//$this->db->where('criteria IS NULL', null, false);
 		$this->db->where('user_id', $user_id);
 		$this->db->order_by("name", "asc"); 
 		$query = $this->db->get();
@@ -100,7 +100,7 @@ class Campaigns_model extends MY_Model {
 	{
 		$this->db->select('*');
 		$this->db->from('campaigns');
-		$this->db->where('campaigns.criteria IS NULL', null, false);
+		//$this->db->where('campaigns.criteria IS NULL', null, false);
 		$this->db->where('campaigns.id', $id);
 		$query = $this->db->get();
 		return $query->result();
@@ -1275,8 +1275,7 @@ where (action_type_id in ('4','5','8','9','10','16','17','18','23','6'))
 	  and actioned_at is not null and cancelled_at is null)
 )   A
 on CO.id = A.company_id
-where C.criteria is null
-and C.id = '$id' and CO.active = 't'
+where C.id = '$id' and CO.active = 't'
 group by 1,2,3,4
 order by 2, 1 desc
 )   T1
@@ -1365,8 +1364,7 @@ where (action_type_id in ('4','5','8','9','10','16','17','18','23','6'))
 	  and actioned_at is not null and cancelled_at is null)
 )   A
 on CO.id = A.company_id
-where C.criteria is null
-and C.user_id = '$user_id' and CO.active = 't' and c.eff_to is null
+where C.user_id = '$user_id' and CO.active = 't' and c.eff_to is null
 order by 2, 1 desc
 )   T1";
 		echo $query = $this->db->query($sql);
@@ -1423,8 +1421,7 @@ where (action_type_id in ('4','5','8','9','10','16','17','18','23','6'))
 	  and actioned_at is not null and cancelled_at is null)
 )   A
 on CO.id = A.company_id
-where C.criteria is null and
-CO.active = 't' and u.active = 'true' and u.department = 'sales' and c.eff_to is null
+where CO.active = 't' and u.active = 'true' and u.department = 'sales' and c.eff_to is null
 group by 1
 order by 2 desc
 )   T1";
@@ -1458,7 +1455,7 @@ function get_campaign_owner($id)
 		$this->db->join('targets t', 'c.id = t.campaign_id');
 		$this->db->join('companies comp', 't.company_id = comp.id');
 		// Apply this to find saved searches only
-		$this->db->where('criteria IS NULL', null, false);
+		//$this->db->where('criteria IS NULL', null, false);
 		$this->db->where('u.active', 'True');
 		//$this->db->where('c.shared', 'True');
 		$this->db->where('comp.active', 'True');
@@ -1488,7 +1485,7 @@ function get_campaign_owner($id)
       $datauser =   "AND c.evergreen_id is null";
         }
 
-	 $sql = 'SELECT DISTINCT "c"."name", "c"."id" as "id", "c"."user_id" as "userid", "u"."name" as "searchcreatedby", "u"."image" as "image", "c"."shared", "c"."created_at", to_char(c.created_at, \'dd-mm-yyyy\') as datecreated  FROM "campaigns" "c" JOIN "users" "u" ON "c"."user_id" = "u"."id" JOIN "targets" "t" ON "c"."id" = "t"."campaign_id" JOIN "companies" "comp" ON "t"."company_id" = "comp"."id" WHERE criteria IS NULL AND "u"."active" = E\'True\' AND "comp"."active" = E\'True\' AND "c"."user_id" = E\''.$user_id.'\' AND (c.eff_to IS NULL OR c.eff_to > \''.date('Y-m-d').'\') '.$datauser.' AND c.evergreen_id IS NULL GROUP BY 1, 2, 3, 4, 5 ORDER BY "c"."created_at" DESC LIMIT 20' ;
+	 $sql = 'SELECT DISTINCT "c"."name", "c"."id" as "id", "c"."user_id" as "userid", "u"."name" as "searchcreatedby", "u"."image" as "image", "c"."shared", "c"."created_at", to_char(c.created_at, \'dd-mm-yyyy\') as datecreated  FROM "campaigns" "c" JOIN "users" "u" ON "c"."user_id" = "u"."id" JOIN "targets" "t" ON "c"."id" = "t"."campaign_id" JOIN "companies" "comp" ON "t"."company_id" = "comp"."id" WHERE  "u"."active" = E\'True\' AND "comp"."active" = E\'True\' AND "c"."user_id" = E\''.$user_id.'\' AND (c.eff_to IS NULL OR c.eff_to > \''.date('Y-m-d').'\') '.$datauser.' AND c.evergreen_id IS NULL GROUP BY 1, 2, 3, 4, 5 ORDER BY "c"."created_at" DESC LIMIT 20' ;
              
         
     
