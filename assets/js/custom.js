@@ -47,13 +47,7 @@ $('.myevergreenaddcompanies').text('Campaign has reached max allowed')
 }
              }
              });
-         
-         
-     
-     
-     
-     
-     
+        
  //location.reload();
                         
                     })

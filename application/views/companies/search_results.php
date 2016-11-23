@@ -45,24 +45,40 @@
 					
 						<?php else: ?>	
 						<?php endif;?>
+            <div style='text-align: center;font-weight: 300; font-size:12px;'>
 					<?php foreach($current_campaign_owners as $current_campaign_owner):
-                            echo "<div style='text-align: center;font-weight: 300; font-size:12px;'>Owned by <b>".$current_campaign_owner->username."</b> | Created on <b>".date('jS F Y',strtotime($current_campaign_stats->created))."</b></div>"; 
-                        endforeach ?>	
+                            echo "Owned by <b>".$current_campaign_owner->username."</b> | Created on <b>".date('jS F Y',strtotime($current_campaign_stats->created))."</b></b>
+                            
+                            
+                           "; 
+                        endforeach ?>
+                
+                <?php /* ?>
+                  	<div><br><a class="btn btn-info btn-xs" href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $current_campaign_id; ?>">Refresh</a><br> </div>
+                <?php */ ?>
+                
+                     <?php  
+                            $dept = array('sales');
+                            if((in_array($current_user['department'],$dept) && $this->session->userdata("evergreen") == true) || ( $curent_user_permission == 'admin' && $this->session->userdata("evergreen") == true)){ ?>
+                                <div class="campaign remaining" style="
+    font-size: 38px;
+    font-weight: 200;
+    margin-top: 3px;
+"><?php echo $evergreen[0]['unprocessed']; ?></div><div style=" margin-top: -5px;">Unprocessed</div>
+            
+            <?php } ?>
+                
+                
+                
+                 </div>
+        
 					<?php if(!empty($current_campaign_stats->description)): ?>
 						<p style="font-size:14px"><?php echo $current_campaign_stats->description; ?></p>
 					<?php endif;?>
 
-						<div><a class="btn btn-info btn-xs" href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $current_campaign_id; ?>">Refresh</a></div>
+					
 
-                        <?php  
-                            $dept = array('sales');
-                            if((in_array($current_user['department'],$dept) && $this->session->userdata("evergreen") == true) || ( $curent_user_permission == 'admin' && $this->session->userdata("evergreen") == true)){ ?>
-                                <div><span class="campaign remaining" ><?php echo $evergreen[0]['unprocessed']; ?></span><br>Remaining</div>
-            
-            
-            
-            
-            <?php } ?>
+                   
 				 <?php if($this->session->userdata("evergreen") != true){ ;?> 
 
  
