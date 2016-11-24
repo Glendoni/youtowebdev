@@ -389,10 +389,6 @@ if ($your_date < $now){;
                  <strong><?php echo  $company_sources[$company['source']]  ? ''  : '';?></strong> <span class="leadSourceSubText"><?php echo $company['source_explanation'] ? $company['source_explanation'] : ''; ?></span></p>
 			 
 		</div>
-            
-            
-    
-    
                 
 		<!-- EMPLOYEES -->
 		<div class="col-xs-4 col-sm-3">

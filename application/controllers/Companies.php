@@ -269,12 +269,6 @@ class Companies extends MY_Controller {
 	
 	public function company()
 	{
-
-        
-        
-        
-        
-        
         if($this->input->get('id'))
 		{
  
@@ -291,8 +285,6 @@ class Companies extends MY_Controller {
                 $this->session->set_userdata($company_id);
             
             //END
-            
-            
 			$months = array();
 			$currentMonth = (int)date('m');
 			for ($x = $currentMonth; $x < $currentMonth + 12; $x++) {
@@ -361,10 +353,7 @@ class Companies extends MY_Controller {
 	{
 		if($this->input->post('edit_company'))
 		{
- 
-            
-            
-            
+  
 			$post = $this->input->post();
 			// We need to clean the post and validate the post fields *pending*
 			$result = $this->Companies_model->update_details($this->input->post(),$this->data['current_user']['id']);
@@ -743,7 +732,7 @@ class Companies extends MY_Controller {
                 
                     echo json_encode(array('success' =>$rap ));         
              }else{
-                 echo json_encode(array('error' =>$msg )); 
+                    echo json_encode(array('error' =>$msg )); 
              }
             
               exit();

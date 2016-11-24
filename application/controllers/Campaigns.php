@@ -50,17 +50,41 @@ class Campaigns extends MY_Controller {
 			$this->data['next_page_number'] = ($current_page_number+1) <= $this->data['page_total'] ? ($current_page_number+1) : FALSE;
 			$this->data['previous_page_number'] = ($current_page_number-1) >= 0 ? ($current_page_number-1) : FALSE;
 $this->data['companies'] = $companies_array_chunk[($current_page_number-1)];
+   
             
-$this->data['department'] =   $this->data['current_user']['department'] ;
-            if($this->data['current_user']['department'] == 'sales' || $this->data['current_user']['permission'] == 'admin')
-$this->data['evergreen'] =  $this->Evergreen_model->evergreenHeaderInfoSales($this->session->userdata('campaign_id'));
             
-            if($this->data['current_user']['department'] == 'data')
-            $this->data['evergreen'] =  $this->Evergreen_model->evergreenHeaderInfo($this->session->userdata('campaign_id'));
+            
+            
+            
+            
+            /*
+            Who does this belong to?
+            
+            are they from the data team
+            
+            
+            
+            
+            
+            */
+            
+        $campaignOwnerdetails    =    $this->Campaigns_model->getCampaignOwner($this->session->userdata('campaign_id'));
+            
+ 
+            
+            
+$this->data['campaignownertype'] =   $campaignOwnerdetails[0]->campaignownertype ;
+            $this->data['campaignowner'] =   $campaignOwnerdetails[0]->campaignowner ;
+            if( $campaignOwnerdetails[0]->campaignownertype == 'sales' || $this->data['current_user']['permission'] == 'admin')
+                    $this->data['evergreen'] =  $this->Evergreen_model->evergreenHeaderInfoSales($this->session->userdata('campaign_id'));
+            
+            if( $campaignOwnerdetails[0]->campaignownertype == 'data')
+                $this->data['evergreen'] =  $this->Evergreen_model->evergreenHeaderInfo($this->session->userdata('campaign_id'));
            
 		}
 		$this->data['results_type'] = 'Campaign';
 		$this->data['edit_page'] = 'edit_campaign';
+        
 
 		$this->data['main_content'] = 'companies/search_results';
 		

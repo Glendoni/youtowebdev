@@ -1497,5 +1497,25 @@ function get_campaign_owner($id)
             //echo  $this->db->last_query();
           
 }
+    
+    
+    function getCampaignOwner($campaignID){
+        
+      $sql = 'SELECT U.department as campaignOwnerType, cam.created_by as campaignowner  FROM campaigns cam
+LEFT JOIN users as U 
+ON cam.user_id = U.id
+WHERE cam.id='.$campaignID.'
+LIMIt 1' ;
+             
+        
+    
+        	$query = $this->db->query($sql);
+             
+        
+      
+		    return $query->result();   
+        
+        
+    }
 
 }
