@@ -36,7 +36,7 @@
 						<div style="font-weight:300; font-size:32px; margin-bottom: 20px; margin-top: -20px; text-align:center;">
                                 <?php $dept = array('sales','data');
                                   if(in_array($current_user['department'],$dept)  && $this->session->userdata("evergreen") == true) {?>
-                                        <img style="height:80px;margin-top: 0px;  margin-left: -74px;" src="assets/images/evergreen-logo-white.png">
+                                        <img style="height:60px;margin-top: 0px;  margin-left: -74px;" src="assets/images/evergreen-logo.png">
                                 <?php } ?>
                             
 						<?php echo $current_campaign_name; ?> 
@@ -82,11 +82,12 @@
                 
                 <?php if($campaignownertype != 'data' && $this->session->userdata("evergreen") == true){ ?>
                 
-                                               <div class="col-md-6 col-md-pull-2">
+                                               <div class="col-md-6  ">
                                                          <div class="campaign remaining" style="
                                                             font-size: 24px;
                                                             font-weight: 200;
-                                                            margin-top: 3px;
+                                                            margin-top: 3px
+                                                            float:left;
                                                         ">
                                                     <?php echo $evergreen[0]['unprocessed']; ?>
                                                    </div><div style=" margin-top: -5px;">Unprocessed</div>
