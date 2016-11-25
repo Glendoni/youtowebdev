@@ -1,67 +1,108 @@
 <div class="page-results-list">
-		<ul class="pager">
+    <ul class="pager">
 		<div class="col-xs-2">
-		<?php if($previous_page_number): ?>
-	  	<li class="previous">
-	  		<a href="?page_num=<?php echo $previous_page_number; ?>">&larr; Previous</a>
-	  	</li>
-	    <?php endif; ?>
+                <?php if($previous_page_number): ?>
+                <li class="previous">
+                    <a href="?page_num=<?php echo $previous_page_number; ?>">&larr; Previous</a>
+                </li>
+                <?php endif; ?>
 		</div>
 		<div class="col-xs-8 ">
-           
-        <span class="count_of_results">
-        <?php if($current_campaign_name && $current_campaign_owner_id && $current_campaign_id ): ?>
-				<?php else: ?>
-				<?php echo number_format($companies_count); ?> <?php if ($companies_count<> "1") {echo "Companies";} else { echo "Company";}?>
-				<?php endif; ?>
-				<?php if($previous_page_number or $next_page_number): ?><span style="font-size:15px; font-weight:700;"> Page <?php echo $current_page_number; ?> of <?php echo $page_total ?> </span><?php endif; ?>
-            
-           
-            
-        
-		</span>
+                <span class="count_of_results">
+                <?php if($current_campaign_name && $current_campaign_owner_id && $current_campaign_id ): ?>
+                        <?php else: ?>
+                        <?php echo number_format($companies_count); ?> <?php if ($companies_count<> "1") {echo "Companies";} else { echo "Company";}?>
+                        <?php endif; ?>
+                        <?php if($previous_page_number or $next_page_number): ?><span style="font-size:15px; font-weight:700;"> Page <?php echo $current_page_number; ?> of <?php echo $page_total ?> </span><?php endif; ?>
+                </span>
             
             <div class="col-md-12 searchcriteria"></div>
-          
-		</div>    
-	<div class="col-xs-2">
-	    <?php if($next_page_number): ?>
-	  	<li class="next">
-	  		<a href="?page_num=<?php echo $next_page_number; ?>">Next &rarr;</a>
-	  	</li>
-		<?php endif; ?>
+       </div>    
+	   <div class="col-xs-2">
+            <?php if($next_page_number): ?>
+            <li class="next">
+                <a href="?page_num=<?php echo $next_page_number; ?>">Next &rarr;</a>
+            </li>
+            <?php endif; ?>
 		</div>
 	</ul>
 
 	    <!-- Collect the nav links, forms, and other content for toggling -->
+    
 		<div>
-         
-            
 	      	<?php if(($companies_count > 0)): ?>
 				<?php if($current_campaign_name && $current_campaign_owner_id && $current_campaign_id ): ?>
-
- 
-            
-            
-					<?php foreach($current_campaign_stats as $current_campaign_stats){?>
+                    <?php foreach($current_campaign_stats as $current_campaign_stats){?>
 						<div style="font-weight:300; font-size:32px; margin-bottom: 20px; margin-top: -20px; text-align:center;">
+                                <?php $dept = array('sales','data');
+                                  if(in_array($current_user['department'],$dept)  && $this->session->userdata("evergreen") == true) {?>
+                                        <img style="height:60px;margin-top: 0px;  margin-left: -74px;" src="assets/images/evergreen-logo.png">
+                                <?php } ?>
                             
-                               <?php if($department == 'data' && $this->session->userdata("evergreen") == true)
-        { ;?>
-                            <img style="height:50px;margin-top: 0px;  margin-left: -74px;" src="assets/images/evergreen.png">
-                            
-                            <?php } ?>
-						<?php echo $current_campaign_name; ?> <?php if($current_campaign_is_shared == False): ?>
-						</div>	
+						<?php echo $current_campaign_name; ?> 
+                            </div>
+                            		
+                            <?php if($current_campaign_is_shared == False): ?>
+					
 						<?php else: ?>	
 						<?php endif;?>
-					<?php foreach($current_campaign_owners as $current_campaign_owner): echo "<div style='text-align: center;font-weight: 300; font-size:12px;'>Owned by <b>".$current_campaign_owner->username."</b> | Created on <b>".date('jS F Y',strtotime($current_campaign_stats->created))."</b></div>"; endforeach ?>	
+            <div style='text-align: center;font-weight: 300; font-size:12px;'>
+					<?php foreach($current_campaign_owners as $current_campaign_owner):
+                            echo "Owned by <b>".$current_campaign_owner->username."</b> | Created on <b>".date('jS F Y',strtotime($current_campaign_stats->created))."</b></b>"; 
+                        endforeach ?>
+                
+                <?php /* ?>
+                  	<div><br><a class="btn btn-info btn-xs" href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $current_campaign_id; ?>">Refresh</a><br> </div>
+                <?php */ ?>
+                 
+                
+                
+                
+                
+                
+                
+                
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                     <?php  
+                            $dept = array('sales');
+                if((in_array($current_user['department'],$dept) && $this->session->userdata("evergreen") == true) || ($curent_user_permission == 'admin' && $this->session->userdata("evergreen") == true && $current_user['department'] != 'data' )){ ?>
+                    
+<?php if($evergreen[0]['evergreenmax']){ ?>          
+                   
+                            <div class="col-md-6 col-md-push-2" >
+                                <div class="campaign" style="font-size: 24px; font-weight: 200; margin-top: 3px;"> 
+                                    <?php echo $evergreen[0]['evergreenmax']; ?>
+                                </div>
+                                <div style=" margin-top: -5px;">Campaign Max Total</div>
+                            </div>
+                
+                
+                
+                <?php } ?> 
+                
+                <?php if($campaignownertype != 'data' && $this->session->userdata("evergreen") == true){ ?>
+                
+                                               <div class="col-md-6  ">
+                                                         <div class="campaign remaining" style="
+                                                            font-size: 24px;
+                                                            font-weight: 200;
+                                                            margin-top: 3px
+                                                            float:left;
+                                                        ">
+                                                    <?php echo $evergreen[0]['unprocessed']; ?>
+                                                   </div><div style=" margin-top: -5px;">Unprocessed</div>
+                
+                
+                </div>
+                
+            <?php }} ?>
+     
+                 </div>
+               
 					<?php if(!empty($current_campaign_stats->description)): ?>
 						<p style="font-size:14px"><?php echo $current_campaign_stats->description; ?></p>
 					<?php endif;?>
-
-						<div><a class="btn btn-info btn-xs" href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $current_campaign_id; ?>">Refresh</a></div>
-
+    <div style="clear:left"></div>
 				 <?php if($this->session->userdata("evergreen") != true){ ;?> 
 
  
@@ -80,8 +121,6 @@
         <div class="circle-content mega">
         <div class="large-number"><?php echo $current_campaign_stats->contacted; ?><span style="font-size:18px;">%</small></div>
         <div class="small-text">Actioned </div>
-
-
         </div>
         </div>
         <div class="small-text" style="font-weight:300; font-size:9px; max-width:80%; margin-left:auto; margin-right:auto;"><?php if ($current_campaign_stats->campaign_unsuitable > "0") {echo "Companies marked as Unsuitable are not included in this figure";} else {}?></div>
@@ -143,21 +182,18 @@
 		
 </div><!--END ROW-->
             
-            
-           
-            
-           
-            
-            
-            
             <?php } ?>  
             
         <!--Data evergreen --> 
-            <?php //echo 'This is the data '.$this->session->userdata("evergreen") ;  ?>
-     <?php if($department == 'data' && $this->session->userdata("evergreen") == true)
-        { ;?>
+            <?php //echo 'This is the data '. <?php echo 'zsdasdsdf' . $campaignowner; ?> 
+           
+     <?php 
             
-            
+           
+            $dept = array('data');
+
+if(in_array($campaignownertype,$dept) && $this->session->userdata("evergreen") == true)
+        { ?>
             <div class="row campaign" style="margin-bottom: 20px;">
         <div class="col-sm-3 mobile-hide">
         <a href="<?php echo site_url(); ?>campaigns/display_campaign/?id="<?php echo $evergreen[0]['companies_in_campaign']; ?> >
@@ -173,7 +209,11 @@
                 <a href="<?php echo site_url(); ?>campaigns/display_campaign/?id=1&amp;pipeline=prospect">
                 <div class="circle-responsive_campiagns contacted_percentage_campaign">
         <div class="circle-content mega">
-        <div class="large-number"><?php echo $evergreen[0]['Sector_Allocated']; ?></div>
+        <div class="large-number">
+            
+         
+            
+            <?php echo $evergreen[0]['Sector_Allocated']; ?></div>
         <div class="small-text">Sector Allocated</div></div>
         </div>
                 </a>        </div>
@@ -192,7 +232,11 @@
         <div class="col-sm-3">
                 <div class="circle-responsive_campiagns contacted_percentage_campaign">
         <div class="circle-content mega">
-        <div class="large-number remaining"><?php echo $evergreen[0]['remaining']; ?></div>
+            
+            
+           
+
+        <div class="large-number <?php if ($campaignowner ==  $current_user['id'] ){ echo 'remaining'; } ?>"><?php echo $evergreen[0]['remaining']; ?></div>
         <div class="small-text">Remaining<br>Companies in Campaign - DQ tag or Sector Allocated</div></div>
         </div>
                 </div>
@@ -200,32 +244,91 @@
         		
 </div>
             <?php } ?>
-            <!--Data evergreen End -->    
+            <!--Data evergreen End -->  
             
-            
-            
-            
-            
-            
-            
-            
-            
-					
+            <?php  
+                        $dept = array('sales');
+
+if((in_array($campaignownertype,$dept) && $this->session->userdata("evergreen") == true) || ( $curent_user_permission == 'admin' && $this->session->userdata("evergreen"  == true  && $current_user['department'] != 'data')))
+        { ?>
+           
+            <div class="row campaign" style="margin-bottom: 20px;">
+                
+        <div class="col-sm-2">
+        <a href="<?php echo site_url(); ?>campaigns/display_campaign/?id="<?php echo $evergreen[0]['campaign_id']; ?> >
+        <div class="circle-responsive_campiagns black-circle-campaign  active"><div class="circle-content mega">
+        <div class="large-number"><?php echo $evergreen[0]['campaign_total']; ?></div> <div class="small-text">Companies</div>
+        </div>
+        </div>
+        </a>
+        <div class="small-text" style="font-weight:300; font-size:9px; max-width:80%; margin-left:auto; margin-right:auto;"></div>
+        </div>
+     
+        <div class="col-sm-2 mobile-hide">
+                <a href="<?php echo site_url(); ?>campaigns/display_campaign/?id=1&amp;pipeline=prospect">
+                <div class="circle-responsive_campiagns contacted_percentage_campaign">
+        <div class="circle-content mega">
+        <div class="large-number"><?php echo $evergreen[0]['campaign_suspect']; ?></div>
+        <div class="small-text">Suspect</div></div>
+        </div>
+                </a>        </div>
+                
+        <div class="col-sm-2 mobile-hide">
+            <div class="circle-responsive_campiagns cyan-circle prospect-circle_campaign">
+            <div class="circle-content mega">
+            <div class="large-number"><?php echo $evergreen[0]['campaign_prospect']; ?></div>
+            <div class="small-text">Prospect </div>
+
+
+            </div>
+            </div>
+            <div class="small-text" style="font-weight:300; font-size:9px; max-width:80%; margin-left:auto; margin-right:auto;"></div>
+        </div>
+        <div class="col-sm-2">
+                <div class="circle-responsive_campiagns intent-circle_campaign">
+                    <div class="circle-content mega">
+                        <div class="large-number "><?php echo $evergreen[0]['campaign_intent']; ?></div>
+                        <div class="small-text">Intent</div>
+                    </div>
+                </div>
+        </div>
+                   <div class="col-sm-2">
+                <div class="circle-responsive_campiagns proposal-circle_campaign">
+                    <div class="circle-content mega">
+                        <div class="large-number "><?php echo $evergreen[0]['campaign_proposal']; ?></div>
+                        <div class="small-text">Proposal</div>
+                    </div>
+                </div>
+        </div>
+                   <div class="col-sm-2">
+                <div class="circle-responsive_campiagns customer-circle-campaign">
+                    <div class="circle-content mega">
+                        <div class="large-number "><?php echo $evergreen[0]['campaign_customer']; ?></div>
+                        <div class="small-text">Customer</div>
+                    </div>
+                </div>
+        </div>
+      
+        		
+</div>
+            <?php } ?>
+            <!--Data evergreen End -->  
+        		
 <?php else: ?>
 <?php endif; ?>					
 <?php endif; ?>
 </div><!-- /.row -->
 
+</div>
+	 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="
+    background: #f8f8f8;
+">
+    <?php   
 
-	  </div>
-    <?php   if($current_user['department'] == 'data' && $this->session->userdata('evergreen') == true){ ?>
-                <div>
-                    
-                  
-                    <?php  //echo $this->session->userdata('evergreen'); 
-                    
-                    
-                    ?>
+$dept = array('data','sales');
+
+if(in_array($current_user['department'],$dept) && $this->session->userdata('evergreen') == true){ ?>
+                <div>                   
                 <button type="button" class="btn btn-large btn-block btn-default myevergreenaddcompanies" data="<?=$current_campaign_id; ?>" evergreen="<?php  echo $this->session->userdata('evergreen'); ?>">Add  5 Companies </button>
 
             </div>
@@ -234,8 +337,13 @@
                                                       
                                                       //echo  $this->session->userdata('evergreen') .$evergreen[0]['evergreen'];
  } ?>
+
+
 	<?php 
 	// Display companies
+
+
+
 	$this->load->view('companies/list.php');
 	?>
 	<ul class="pager">
@@ -252,3 +360,4 @@
 <div class="col-sm-12">
  </div>
 <?php endif; ?>
+</div>

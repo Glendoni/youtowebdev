@@ -151,9 +151,9 @@
 	<?php endif; ?>
                 
                <?php if($company['customer_to']){  ?>
-            <span class="label pipeline label-<?php echo str_replace(' ', '', $company['pipeline']); ?> cancelledPill">
-                Cancelled <?php echo date('d/m/Y',strtotime($company['customer_to'])); ?>
-            </span>
+                                        <span class="label  label-<?php echo str_replace(' ', '', $company['pipeline']); ?> cancelledPill">
+                                        Cancelled:    <?php echo date('d/m/Y',strtotime($company['customer_from'])); ?> until  <?php echo date('d/m/Y',strtotime($company['customer_to'])); ?>
+                                        </span>
     <?php } ?>
 	</div>
         
@@ -415,10 +415,10 @@
 		<div class="row">
             
 		<!-- MORTGAGES -->
-			
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			
 			<?php if(!empty($company['mortgages'])): ?>
-            <div class="col-md-12">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<table class="table" style="font-size:12px">
 			<thead>
 				<tr>
@@ -434,8 +434,6 @@
                 
                   <?php
                 
-                
-                
              if( $mortgage['Inv_fin_related'] == 'N') {  
                 $tdbgcolorclass =   'danger'  ;//$tdbgcolorclass = 'danger';
                 }else{
@@ -444,12 +442,8 @@
                     
                 }
                 
-                
-                
                 ?>
                 
-                
-			   
 				<tr <?php echo $mortgage['stage']==MORTGAGES_SATISFIED? 'class="danger cont'.$mortgage['id'].'"' : 'class="'.$tdbgcolorclass.' cont'.$mortgage['id'].'"' ?>>
 					<td class="col-md-3" >
 					<?php if(isset($mortgage['url'])) : ?>
@@ -477,10 +471,6 @@ if($mortgage['Inv_fin_related'] == 'N'){ echo '<span  class="related_to_Invoice_
         echo  '<span  class="Properly_related_to_Invoice_Finance inv'.$mortgage['id'].'">Probably Related To Invoice Finance</span>'; 
         
     } 
-                                                                   
-                                                                   
-                                                                   
-                                                                   
                                                                    } ?>
                     </td>
 					<td class="col-md-3"><?php echo $mortgage['eff_from']; ?></td>
@@ -497,11 +487,11 @@ if($mortgage['Inv_fin_related'] == 'N'){ echo '<span  class="related_to_Invoice_
 				<?php endforeach; ?>
 				</tbody>
 				</table>
-                        	</div>
+                        </div> 
 				<?php else: ?>
 
 			<?php endif; ?>
-		
+		                        </div> 
 	 
  	 </div>
                         

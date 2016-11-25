@@ -72,9 +72,18 @@
                         
                         
                                         <?php if($company['customer_to']){  ?>
-                                        <span class="label  label-<?php echo str_replace(' ', '', $company['pipeline']); ?> cancelledPill">
-                                        Cancelled <?php echo date('d/m/Y',strtotime($company['customer_to'])); ?>
+                                         &nbsp;<span class="label label-Customer">
+                                        Customer From:   <?php echo date('d/m/Y',strtotime($company['customer_from'])); ?>
+                                        </span>  <span class="label  label-<?php echo str_replace(' ', '', $company['pipeline']); ?> cancelledPill">
+                                        Cancelled:  <?php echo date('d/m/Y',strtotime($company['customer_to'])); ?>
                                         </span>
+                        
+                        
+                        
+                       
+                        
+                        
+                        
                                         <?php } ?>
 
                                         <?php if(isset($company['assigned_to_name'])): ?>
@@ -134,7 +143,7 @@
              
             
 
-                 <span class="label addTagbtn  btn-info comp_details_edit_btn mainedit" data-toggle="modal" id="editbtn<?php echo $company['id']; ?>" data-target="#myModal<?php echo $company['id']; ?>" add-tag-user="<?php echo  $current_user['department']; ?>"  style="font-size: 12px;     float: right;">Add Tag</span>
+                 <span class="label addTagbtn  btn-primary comp_details_edit_btn mainedit" data-toggle="modal" id="editbtn<?php echo $company['id']; ?>" data-target="#myModal<?php echo $company['id']; ?>" add-tag-user="<?php echo  $current_user['department']; ?>"  style="font-size: 12px;     float: right;">Add Tag</span>
              
              
              
@@ -275,9 +284,10 @@ if ($your_date < $now){;
 			</p>
 		</div>
             <div class="col-xs-6 col-md-4 details" style="margin-top:10px; ">
-			<label>Company Number</label><br>
+			<label>Company</label><br>
 			<p>	
 			 <!--COMPANY NUMBER IF APPLICABLE-->
+                <?php echo isset($company['name'])?$company['name']:''; ?><br>
 			<?php echo isset($company['registration'])?$company['registration']:''; ?>
          	</p>
         	</div>
@@ -379,10 +389,6 @@ if ($your_date < $now){;
                  <strong><?php echo  $company_sources[$company['source']]  ? ''  : '';?></strong> <span class="leadSourceSubText"><?php echo $company['source_explanation'] ? $company['source_explanation'] : ''; ?></span></p>
 			 
 		</div>
-            
-            
-    
-    
                 
 		<!-- EMPLOYEES -->
 		<div class="col-xs-4 col-sm-3">

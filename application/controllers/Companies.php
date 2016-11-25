@@ -17,18 +17,7 @@ class Companies extends MY_Controller {
 		$this->load->helper('url');
         $this->load->helper('form');
         $this->load->library('form_validation');
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-
-        
+ 
         
 	}
 	
@@ -280,12 +269,6 @@ class Companies extends MY_Controller {
 	
 	public function company()
 	{
-
-        
-        
-        
-        
-        
         if($this->input->get('id'))
 		{
  
@@ -302,8 +285,6 @@ class Companies extends MY_Controller {
                 $this->session->set_userdata($company_id);
             
             //END
-            
-            
 			$months = array();
 			$currentMonth = (int)date('m');
 			for ($x = $currentMonth; $x < $currentMonth + 12; $x++) {
@@ -372,10 +353,7 @@ class Companies extends MY_Controller {
 	{
 		if($this->input->post('edit_company'))
 		{
- 
-            
-            
-            
+  
 			$post = $this->input->post();
 			// We need to clean the post and validate the post fields *pending*
 			$result = $this->Companies_model->update_details($this->input->post(),$this->data['current_user']['id']);
@@ -754,7 +732,7 @@ class Companies extends MY_Controller {
                 
                     echo json_encode(array('success' =>$rap ));         
              }else{
-                 echo json_encode(array('error' =>$msg )); 
+                    echo json_encode(array('error' =>$msg )); 
              }
             
               exit();
@@ -957,11 +935,11 @@ echo $this->Tagging_model->$route($post);
          $company_id = $this->input->post('company_id');
 
 
-$campaign_id = $this->input->post('campaign_id');
+            $campaign_id = $this->input->post('campaign_id');
 
         // $company_id = $this->input->post('company_id');
 
-	$campaign = $this->Campaigns_model->get_campaign_by_id($campaign_id);
+	       $campaign = $this->Campaigns_model->get_campaign_by_id($campaign_id);
         
         
         //print_r($campaign);
@@ -985,7 +963,7 @@ $campaign_id = $this->input->post('campaign_id');
 
 			$result = $this->process_search_result($companies);
         
-       // print_r($result);
+        //print_r($result);
       
 
 			if(empty($result))
