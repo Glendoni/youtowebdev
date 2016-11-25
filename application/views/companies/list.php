@@ -385,10 +385,19 @@
 			<strong>Sectors</strong> <br>
 			<?php 
 			if(isset($company['sectors'])){
-				foreach ($company['sectors'] as $key => $name)
+			foreach (array_reverse($company['sectors']) as $key => $name)
 				{
-                    //print_r($company);
-				echo '<div class="sectorsPlainText sectorEntry_'.$company['id'].'">'.$name.'</div>';
+				//echo  $name.$key.'<br>' ;
+                
+              if(in_array($name,$not_target_sectors_list)){
+                  
+                echo  '<span class="notsector" style=" "> '.$name.'</span> <br>'  ;  
+              }else{
+                  
+                 echo '<span  class="issector" style="color: green;  "> '.$name.' </span><br>' ;   
+                  
+              }
+                
 				}
 			}
 			?>
