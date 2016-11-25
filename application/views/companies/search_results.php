@@ -82,7 +82,7 @@
                 
                 <?php if($campaignownertype != 'data' && $this->session->userdata("evergreen") == true){ ?>
                 
-                                               <div class="col-md-6  ">
+                                               <div class="col-md-6  col-md-pull-2 ">
                                                          <div class="campaign remaining" style="
                                                             font-size: 24px;
                                                             font-weight: 200;
