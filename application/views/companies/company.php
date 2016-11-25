@@ -406,9 +406,22 @@ if ($your_date < $now){;
 			if(isset($company['sectors'])){
 	 
             echo '<div class="sectorsPlainText">';
+                
+                
+             //print_r($not_target_sectors_list);
             foreach (array_reverse($company['sectors']) as $key => $name)
 				{
-				echo  $name.'<br>' ;
+				//echo  $name.$key.'<br>' ;
+                
+              if(in_array($name,$not_target_sectors_list)){
+                  
+                echo  '<span style="opacity:0.6"><i> '.$name.'</i> </span><br>'  ;  
+              }else{
+                  
+                 echo  $name.'<br>' ;   
+                  
+              }
+                
 				}
             
              echo '</div>';
