@@ -255,23 +255,23 @@ if((in_array($campaignownertype,$dept) && $this->session->userdata("evergreen") 
             <div class="row campaign" style="margin-bottom: 20px;">
                 
         <div class="col-sm-2">
-        <a href="<?php echo site_url(); ?>campaigns/display_campaign/?id="<?php echo $evergreen[0]['campaign_id']; ?> >
+        
         <div class="circle-responsive_campiagns black-circle-campaign  active"><div class="circle-content mega">
         <div class="large-number"><?php echo $evergreen[0]['campaign_total']; ?></div> <div class="small-text">Companies</div>
         </div>
         </div>
-        </a>
+     
         <div class="small-text" style="font-weight:300; font-size:9px; max-width:80%; margin-left:auto; margin-right:auto;"></div>
         </div>
      
         <div class="col-sm-2 mobile-hide">
-                <a href="<?php echo site_url(); ?>campaigns/display_campaign/?id=1&amp;pipeline=prospect">
+               
                 <div class="circle-responsive_campiagns contacted_percentage_campaign">
         <div class="circle-content mega">
         <div class="large-number"><?php echo $evergreen[0]['campaign_suspect']; ?></div>
         <div class="small-text">Suspect</div></div>
         </div>
-                </a>        </div>
+                        </div>
                 
         <div class="col-sm-2 mobile-hide">
             <div class="circle-responsive_campiagns cyan-circle prospect-circle_campaign">
