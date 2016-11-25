@@ -43,7 +43,7 @@ class Campaigns_model extends MY_Model {
 		$this->db->join('targets t', 'c.id = t.campaign_id');
 		$this->db->join('companies comp', 't.company_id = comp.id');
 		// Apply this to find saved searches only
-		$this->db->where('criteria IS NULL', null, false);
+		//$this->db->where('criteria IS NULL', null, false);
 		$this->db->where('u.active', 'True');
 		$this->db->where('c.shared', 'True');
 		$this->db->where('comp.active', 'True');
