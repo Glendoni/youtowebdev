@@ -184,7 +184,7 @@ function get_actions_cancelled($company_id)
 function get_actions_marketing($company_id)
 {
     $sql = "select distinct ec.name as campaign_name, con.first_name, con.last_name,  
-    c.name, u.email,u.id as user_id,ec.date_sent,ec.sent_id, to_char(ec.date_sent, 'DAY DDth MONTH') as Date,ea.email_action_type as action,
+    c.name, u.email,u.id as user_id,ec.date_sent,ec.sent_id, to_char(ec.date_sent, 'DAY DDth MONTH') as Dater,to_char(ea.action_time, 'DAY DDth MONTH YYYY') as Date, ea.email_action_type as action,
     sum(case when email_action_type = '2' then 1 else 0 end) opened,
     sum(case when email_action_type = '3' then 1 else 0 end) clicked,
     sum(case when email_action_type = '3' and link ilike '%unsubscribe%' then 1 else 0 end) unsubscribed
@@ -196,7 +196,7 @@ function get_actions_marketing($company_id)
     where c.id = '$company_id'
     AND ec.name != 'pending'
     AND ea.action_time >= '2016-01-01'
-    group by 1,2,3,4,5,6,7,8,ea.email_action_type order by date_sent desc LIMIT 100";
+    group by 1,2,3,4,5,6,7,8,ea.email_action_type,action_time order by date_sent desc LIMIT 100";
     $query = $this->db->query($sql);
     if($query){
         return $query->result_array(); 
