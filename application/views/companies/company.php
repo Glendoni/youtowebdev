@@ -424,9 +424,9 @@ if ($your_date < $now){;
                 
 				}
                 
-                
+                   echo join($insec, '');
                 echo join($notinsec, '');
-                echo join($insec, '');
+             
             
              echo '</div>';
         }
