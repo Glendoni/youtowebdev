@@ -403,10 +403,37 @@
             
 </div>                        
                         
-     <div class="col-md-12">
-		<!-- TAGS -->
-        <div class="tagLists tagLists<?php echo $company['id'];?>"></div>
-        </div>
+    <div class="col-md-12">
+         <div class="col-md-12">
+                   <strong>Tags</strong> <br>
+
+
+    <div class="tagLists" style="display: block">
+    <ul class="listTagSummary">
+  
+   <?php foreach ($company['tags'] as $tag):
+   if (!empty($tag['name'])) {?>
+
+<li class="subTags">
+<div class="hint--top-right" data-hint=" <?php echo $tag['created_by'] . ' on ' .date( 'dS M Y', strtotime($tag['created_at'])); ?>">
+<?php echo $tag['name']; ?>
+    
+</div>
+<div class="tag-info" style="font-size: 6px"> <?php echo $tag['category_name']; ?></div>
+</li>
+<?php }; ?>
+
+                                     
+
+<?php endforeach; ?>
+</ul>
+
+
+
+        <!-- TAGS -->
+       </div></div>
+              
+              </div>
                         
                         
  

@@ -567,7 +567,22 @@ class MY_Controller extends CI_Controller {
 				}
 				if(!empty($sectors)) $mapped_companies_array['sectors'] = $sectors;
 			}
-			
+			    if(isset($company->company->f3) && (empty($company->company->f3) == False)){
+                $tags_array = array();
+     
+                foreach ($company->company->f3 as $tag) {
+                    $tags = array();
+                    $tags['category_name'] = $tag->f1;
+                    $tags['id'] = $tag->f2;
+                    $tags['name'] = $tag->f3;
+                    $tags['created_by'] = $tag->f4;
+                    $tags['created_at'] = $tag->f5;
+            
+
+                    $tags_array[] = $tags;
+                }
+                $mapped_companies_array['tags'] = $tags_array;
+            }
 			// mortgages 
 			if(isset($company->company->f2) && (empty($company->company->f2) == False)){
 				$mortgages_array = array();
