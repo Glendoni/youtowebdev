@@ -91,19 +91,32 @@
 <!-- Brand and toggle get grouped for better mobile display -->
 <!--<div class="navbar-header">-->
 <div class="col-sm-3 col-md-3">
- <a class="navbar-brand" href="<?php echo site_url();?>" ><img src="<?php echo asset_url();?>images/baselist-logotype-black-transparent-bg.png" style="width:120px;">
+ <a class="navbar-brand" href="<?php echo site_url();?>" ><img src="<?php echo asset_url();?>images/baselist-logotype-black-transparent-bg.png" style="width:120px;"><br> <div style="    font-size: 10px;
+    font-weight: 300;
+    text-align: left;
+    line-height: 40px;
+    padding-left: 71px;
+    margin-top: -13px;">Version 4.3</div>
+    </a>
+     <a><div class="btn btn-warning"style="margin-top: 15px;  margin-left: 2px;
+    padding: 2px 20px;">Team</div><br>  
+ 
+     
+     
 <?php if (isset($current_user)): ?>
         <?php if (ENVIRONMENT  =='staging'){?>
 <div style="font-size: 10px;font-weight: 600;text-align: right;float: right;line-height: 40px;padding-left: 5px;">Staging</div>
 <?php
 } ?>
       
- 
-<div style="font-size: 10px;font-weight: 300;text-align: right;float: right;line-height: 40px;padding-left: 5px;">Version 5.0</div>
+
+
 <?php endif; ?>
 </a>
+    
+   
+ 
 </div>
-
 
     <div class="col-sm-4 col-sm-push-5" >
             <!-- Top Menu Items -->

@@ -10,6 +10,7 @@ class Dashboard extends MY_Controller {
 		// Some models are already been loaded on MY_Controller
         
        $this->load->model('Evergreen_model');
+         $this->load->model('Workflows_model');
           $this->userPermission = $this->data['current_user']['permission']? $this->data['current_user']['permission'] :   $this->userMarket = $this->data['current_user']['market'];
 		
 	}
@@ -67,6 +68,63 @@ $this->data['department'] =   $this->data['current_user']['department'] ;
 		//$this->data['marketing_actions'] = $this->Actions_model->get_marketing_actions($this->get_current_user_id());
 		
        $this->data['main_content'] = 'dashboard/home';
+    }
+        
+        $this->load->view('layouts/default_layout', $this->data);	
+	}
+public function team() 
+	{	
+		// Clear search in session 
+		$this->clear_search_results();
+		$this->clear_campaign_from_session();
+		$this->data['hide_side_nav'] = true;
+		$this->data['full_container'] = True;
+
+		
+		// Getting all sectors 
+
+		// Add options
+		// array_unshift($providers_options,'All');
+$this->data['department'] =   $this->data['current_user']['department'] ;
+        
+        
+		$this->data['pending_actions'] = $this->Actions_model->get_pending_actions($this->get_current_user_id());
+		//$this->data['assigned_companies'] = $this->Actions_model->get_assigned_companies($this->get_current_user_id());
+		$this->data['action_types_array'] = $this->Actions_model->get_action_types_array();
+          if($this->data['current_user']['department'] == 'support'){
+                $this->data['main_content'] = 'dashboard/pods';
+            } else{
+        $permission = 'admin';
+        if($this->userPermission == 'uf') $permission = 'uf';
+		$this->data['stats'] = $this->Actions_model->get_recent_stats('week', 'np');
+        $this->data['ustats'] = $this->Actions_model->get_recent_stats('week', $permission);
+		//$this->data['lastweekstats'] = $this->Actions_model->get_recent_stats('lastweek');
+		//$this->data['thismonthstats'] = $this->Actions_model->get_recent_stats('thismonth');
+		//$this->data['lastmonthstats'] = $this->Actions_model->get_recent_stats('lastmonth');
+		if($_GET['search']) $this->data['getstatssearch'] = $this->Actions_model->get_recent_stats('search','np');
+        if($_GET['search']) $this->data['ugetstatssearch'] = $this->Actions_model->get_recent_stats('search', 'uf');
+        
+		$this->data['pipelinecontacted'] = $this->Actions_model->get_pipeline_contacted();
+		$this->data['pipelinecontactedindividual'] = $this->Actions_model->get_pipeline_contacted_individual($this->get_current_user_id());
+		$this->data['pipelineproposal'] = $this->Actions_model->get_pipeline_proposal($this->get_current_user_id());
+		$this->data['pipelineproposalindividual'] = $this->Actions_model->get_pipeline_proposal_individual($this->get_current_user_id());
+		$this->data['pipelinecustomer'] = $this->Actions_model->get_pipeline_customer($this->get_current_user_id());
+		$this->data['pipelinecustomerindividual'] = $this->Actions_model->get_pipeline_customer_individual($this->get_current_user_id());
+		$this->data['pipelinelost'] = $this->Actions_model->get_pipeline_lost($this->get_current_user_id());
+		$this->data['pipelinelostindividual'] = $this->Actions_model->get_pipeline_lost_individual($this->get_current_user_id());
+		$this->data['getuserplacements'] = $this->Actions_model->get_user_placements($_GET['period']);
+		$this->data['getuserproposals'] = $this->Actions_model->get_user_proposals($_GET['period']);
+		$this->data['getusermeetings'] = $this->Actions_model->get_user_meetings($_GET['period']);
+		$this->data['getuserdemos'] = $this->Actions_model->get_user_demos($_GET['period']);
+		$this->data['dates'] = $this->Actions_model->dates();
+		$this->data['campaignsummary'] = $this->Campaigns_model->get_user_campaigns($this->get_current_user_id());
+        $this->data['tagssummary'] = $this->Tagging_model->get_tagging_stats();
+		$this->data['teamcampaignsummary'] = $this->Campaigns_model->get_team_campaigns();
+//$this->data['private_campaigns_new'] = $this->Campaigns_model->private_campaigns_new($this->get_current_user_id());
+		$this->data['userimage'] = $this->Users_model->get_user_image();
+		//$this->data['marketing_actions'] = $this->Actions_model->get_marketing_actions($this->get_current_user_id());
+		
+       $this->data['main_content'] = 'dashboard/team';
     }
         
         $this->load->view('layouts/default_layout', $this->data);	
@@ -244,11 +302,73 @@ echo '<pre>'; print_r($output); echo '</pre>';
 }
     
     
- 
     
-    
-    
+    function workflow(){
+        
+        $data['customer_deal']  = $this->allUserCustomersRun();
+          $data['companies_added']  = $this->companiesCreatedUsersRun();
+          $data['recent_viewed_companies']  = $this->recentViewedCompaniesRun();
+       
+        
+        echo json_encode($data);
+        
+  if(false){
+               print '<pre>';
+   print_r($data);
+      print '</pre>';
+          
+      }
 
+
+    }
+    
+    
+    
+    
+    
+      function allUserCustomersRun(){
+          
+           $output   =   $this->Workflows_model->allUserCustomers($this->get_current_user_id());
+        return  $output;
+          
+         if(false){
+               print '<pre>';
+   print_r($output);
+      print '</pre>';
+          
+      }
+      }
+    
+    
+    
+ function companiesCreatedUsersRun(){ 
+     
+      $output   =   $this->Workflows_model->companiesCreatedUser($this->get_current_user_id());
+    return $output;
+     
+      if(false){
+               print '<pre>';
+   print_r($output);
+      print '</pre>';
+          
+      }
+ }
+    
+    
+  function recentViewedCompaniesRun(){  
+       $output   =   $this->Workflows_model->recentViewedCompanies($this->get_current_user_id());
+      
+      
+      return $output;
+      
+      if(false){
+               print '<pre>';
+   print_r($output);
+      print '</pre>';
+          
+      }
+      
+  }
 /*
 By: Glen 20/04/2016
 
