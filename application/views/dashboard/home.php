@@ -382,7 +382,7 @@
     <!--START MARKETING STATS-->
             <div class="panel panel-default">
     <div class="panel-heading" id="contacts">
-    <h3 class="panel-title">Co.Added<span class="badge pull-right eventcount"></span></h3>
+    <h3 class="panel-title">Company Added<span class="badge pull-right eventcount"></span></h3>
     </div>
     <!-- /.panel-heading -->
     <div class="panel-body" style="font-size:12px;">
@@ -395,14 +395,7 @@
           
         </div>
         
-        <div id="coaddedres" class="row record-holder">
-       
-        
-            
-        
-        
-        
-        </div>   
+        <div id="coaddedres">Loading...</div>   
         <!--AUTO PILOT END  -->
 </div>
 <!-- /.panel-body -->
@@ -430,18 +423,7 @@
           
         </div>
         
-        <div id="recent_viewed_companies">
-        <div class="row record-holder"> <div class=" col-md-2"><strong>01-02-2016</strong></div>
-           
-            <div class="col-xs-4 col-sm-1 col-md-6"><strong>Aspire Recruitment Services Ltd</strong></div>
-            <div class="col-xs-8 col-sm-4 col-md-2"><strong>Suspect</strong></div>
-            </div>
-        
-            
-        
-        
-        
-        </div>   
+        <div id="recent_viewed_companies"></div>   
         <!--AUTO PILOT END  -->
 </div>
 <!-- /.panel-body -->

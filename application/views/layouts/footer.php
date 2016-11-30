@@ -169,64 +169,60 @@ $(document).ready(function(){
                     var recent_viewed_companies = [];
                     var customer_deal = [];
                  var idfk;
+var customer_to =[];
+                var  turnover = [];
+                var  planned = [];
+                var  action = [];
+                
+                var by = [];
     
                 $.each( data, function( key, val ) {
                       
-                  console.log('lendnnn'+key);
-                  
-                   //console.log(key);
-                
-                 
-                     
-                         
-                         
-                         //console.log(val[0].customer_from)
-                   
-             
-                    
-                    
                   
                     switch (key) {
     case 'customer_deal':
-                         
+    $.each( val, function( keye, vale ) {
+                 customer_to = vale.customer_to? vale.customer_to : '' ;
+                 turnover   = vale.turnover ? vale.turnover : '';
+                 planned    = vale.planned ? vale.planned :  ''; 
+                 action     = vale.action ? vale.action :  '';
+                 by     = vale.by   ? vale.by: '';                        
+
+                     customer_deal.push('<div class="row record-holder"> <div class="col-xs-8 col-sm-4 col-md-1">'+vale.customer_from+'</div> <div class="col-xs-8 col-sm-4 col-md-1">'+customer_to+'</div><div class="col-xs-8 col-sm-4 col-md-2"><a href=companies/company?id='+vale.company_id+'>  '+vale.name_+'</a></div><div class="col-xs-4 col-sm-1 col-md-1">'+vale.initial_rate+'</div><div class="col-xs-6 col-sm-2 col-md-1"> '+vale.lead_source+'</div><div class="col-xs-6 col-sm-3 col-md-1">'+vale.age_at_joining_months+'</div><div class="col-xs-12 col-sm-2 col-md-1">'+turnover+'</div><div class="col-xs-12 col-sm-2 col-md-1"> '+vale.class+'</div><div class="col-xs-12 col-sm-2 col-md-1">'+planned+'</div><div class="col-xs-12 col-sm-2 col-md-1">'+action+'</div><div class="col-xs-12 col-sm-2 col-md-1">'+by+'</div></div>');
+                                           });
+
+                    break;
+                    case 'companies_added':
+
+
+
                                $.each( val, function( keye, vale ) {
-         customer_deal.push('<div class="row record-holder"> <div class="col-xs-8 col-sm-4 col-md-1"><strong>'+vale.customer_from+'</strong></div> <div class="col-xs-8 col-sm-4 col-md-1"><strong>'+vale.customer_to+'</strong></div><div class="col-xs-8 col-sm-4 col-md-2"><strong>'+vale.company_id+'  '+vale.name_+'.</strong></div><div class="col-xs-4 col-sm-1 col-md-1"><strong>'+vale.initial_rate+'</strong></div><div class="col-xs-6 col-sm-2 col-md-1"><strong>'+vale.lead_source+'</strong></div><div class="col-xs-6 col-sm-3 col-md-1"><strong>'+vale.age_at_joining_months+'</strong></div><div class="col-xs-12 col-sm-2 col-md-1"><strong>'+vale.turnover+'</strong></div><div class="col-xs-12 col-sm-2 col-md-1"><strong>'+vale.class+'</strong></div><div class="col-xs-12 col-sm-2 col-md-1"><strong>'+vale.planned+'</strong></div><div class="col-xs-12 col-sm-2 col-md-1"><strong>'+vale.action+'</strong></div><div class="col-xs-12 col-sm-2 col-md-1"><strong>'+vale.by+'</strong></div></div>');
-                               })
-              
-        break;
-   case 'companies_added':
+                                   //   console.log(vale);
+                                   coaddedres.push('<div class="row record-holder"> <div class="col-md-2">'+vale.created+'</div><div class="col-xs-4 col-sm-1 col-md-6"><a href="companies/company?id='+vale.company_id+'">  '+vale.company_name+'</a></div><div class="col-xs-8 col-sm-4 col-md-4"> '+vale.pipeline+'</div></div>');
+                               });
+
+
+                                       //  
+                        break;
+                case 'recent_viewed_companies':
+                                         $.each( val, function( keye, vale ) {
+                 recent_viewed_companies.push('<div class="row record-holder"> <div class=" col-md-2">'+vale.visit_date+'</div><div class="col-xs-4 col-sm-1 col-md-6"><a href="companies/company?id='+vale.company_id+'">  '+vale.company_name+'</a></div><div class="col-xs-8 col-sm-4 col-md-2">'+vale.pipeline+'</div></div>');
+
+
+                                         })
+
+                                              break;   
+                                    }
                 
-
- 
-               $.each( val, function( keye, vale ) {
-                   //   console.log(vale);
-                   coaddedres.push('<div class="row record-holder"> <div class="col-md-2"><strong>'+vale.created+'</strong></div><div class="col-xs-4 col-sm-1 col-md-6"><strong>'+vale.company_name+'</strong></div><div class="col-xs-8 col-sm-4 col-md-4"><strong>'+vale.pipeline+'</strong></div></div>');
-               })
-           
-
-                       // 
-               
-         
-        break;
-    case 'recent_viewed_companies':
-                             $.each( val, function( keye, vale ) {
-     recent_viewed_companies.push('<div class="row record-holder"> <div class=" col-md-2"><strong>'+vale.visit_date+'</strong></div><div class="col-xs-4 col-sm-1 col-md-6"><strong>'+vale.company_name+'</strong></div><div class="col-xs-8 col-sm-4 col-md-2"><strong>'+vale.pipeline+'</strong></div></div>')
-   
-                                 
-                             })
-                            
-                                  break;
-    
-}
-                    
-               
-              
-                  
                 });
                    
+                
+                 $('#coaddedres').html(coaddedres.join( "" ));
+                 $('#customer_deal').html(customer_deal.join( "" ));
+                
                  $('#recent_viewed_companies').html(recent_viewed_companies.join( "" ));
-                     $('#coaddedres').html(coaddedres.join( "" ));
-                  $('#customer_deal').html(customer_deal.join( "" ));
+ 
+//Glen
                 //$('.eventcount').html(items.length); //update engagement counter
             }
     
@@ -259,78 +255,7 @@ $(document).ready(function(){
 
 
     });
-
-    if((/dashboard/.test(window.location.href))) {
-            $.ajax({
-            type: "GET",
-                dataType: "json",
-            url: "Dashboard/workflow",
-            success: function(data) {
-                var action;
-                var coaddedres = [];
-                    var recent_viewed_companies = [];
-                    var customer_deal = [];
-                 var idfk;
-    
-                $.each( data, function( key, val ) {
-                      
-                
-                  
-                   //console.log(key);
-                
-                 
-                     
-                         
-                         
-                         //console.log(val[0].customer_from)
-                   
-             
-                    
-                    
-                    
-                    
-                    switch (key) {
-    case 'customer_deal':
-                             // console.log('Glendonnn')        
-         
-              
-        break;
-   case 'companies_added':
-                
-
  
-               $.each( val, function( keye, vale ) {
-                   //   console.log(vale);
-                   coaddedres.push('<div class="col-md-2"><strong>'+vale.created+'</strong></div><div class="col-xs-4 col-sm-1 col-md-6"><strong>'+vale.company_name+'</strong></div><div class="col-xs-8 col-sm-4 col-md-4"><strong>'+vale.pipeline+'</strong></div>');
-               })
-           
-
-                       // 
-               
-              $('#coaddedres').html(coaddedres.join( "" ));
-        break;
- case 'recent_viewed_companies':
-                             $.each( val, function( keye, vale ) {
-     recent_viewed_companies.push('<div class="row record-holder"> <div class=" col-md-2"><strong>'+vale.visit_date+'</strong></div><div class="col-xs-4 col-sm-1 col-md-6"><strong>'+vale.visit_+'</strong></div><div class="col-xs-8 col-sm-4 col-md-2"><strong>'+vale.visit_date+'</strong></div></div>')
-   
-                                 
-                             })
-                               $('#recent_viewed_companies').html(recent_viewed_companies.join( "" ));
-                                  break;
-    
-}
-                    
-               
-              
-                  
-                });
-                   
-                $('#coaddedres').html(items.join( "" ));
-                //$('.eventcount').html(items.length); //update engagement counter
-            }
-    
-        });
-          }
     
     
       
