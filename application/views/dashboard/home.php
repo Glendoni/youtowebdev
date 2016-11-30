@@ -28,7 +28,7 @@
                    <li role="presentation"><button href="#customerdeal" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Customerdeal','<?php echo $current_user['id'];?>')">Customer/Deal</button></li> 
                   
                    <li role="presentation"><button href="#assigned" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Favourites','<?php echo $current_user['id'];?>')">Favourites</button></li>
-                   <li role="presentation"><button href="#coadded" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','','<?php echo $current_user['id'];?>')">Co.Added</button></li> 
+                   <li role="presentation"><button href="#coadded" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','','<?php echo $current_user['id'];?>')">Company Added</button></li> 
                   
                   
                   
@@ -356,15 +356,17 @@
         <!--AUTO PILOT  -->
         <div class="row record-holder-header mobile-hide">
             <div class="col-xs-8 col-sm-4 col-md-1"><strong>Customer From</strong></div>
-            <div class="col-xs-8 col-sm-4 col-md-2"><strong>Customer To</strong></div>
-            <div class="col-xs-4 col-sm-1 col-md-1"><strong>Initial Rate</strong></div>
-            <div class="col-xs-6 col-sm-2 col-md-2"><strong>Lead Source</strong></div>
-            <div class="col-xs-6 col-sm-3 col-md-2"><strong>age at joining (months)</strong></div>
-            <div class="col-xs-12 col-sm-2 col-md-1"><strong>Founded</strong></div>
+            <div class="col-xs-8 col-sm-4 col-md-1"><strong>Customer To</strong></div>
+            <div class="col-xs-4 col-sm-1 col-md-2"><strong>Company Name</strong></div>
+            <div class="col-xs-6 col-sm-2 col-md-1"><strong>Initial Rate</strong></div>
+            <div class="col-xs-6 col-sm-3 col-md-1"><strong>Lead Source</strong></div>
+            <div class="col-xs-12 col-sm-2 col-md-1"><strong>Age at Joining <br>(months)</strong></div>
             
              <div class="col-xs-12 col-sm-2 col-md-1"><strong>Turnover</strong></div>
             
-             <div class="col-xs-12 col-sm-2 col-md-1"><strong>Sector</strong></div>
+             <div class="col-xs-12 col-sm-2 col-md-1"><strong>Planned</strong></div>
+             <div class="col-xs-12 col-sm-2 col-md-1"><strong>Action</strong></div>
+             <div class="col-xs-12 col-sm-2 col-md-1"><strong>By</strong></div>
              <div class="col-xs-12 col-sm-2 col-md-1"><strong>Class</strong></div>
         </div>
         
@@ -757,9 +759,27 @@
                       
                      </select></form>
                   </span>
-                <span class="badge pull-right favouritesCount" style="margin-top: -19px; apdding:5px;"><?php echo count($assigned_companies); ?></span>    
+                <span class="badge pull-right favouritesCount" style="margin-top: -19px; apdding:5px;"><?php echo count($assigned_companies); ?>
+                  </span>    
               </div>
+        
+        
+        
+         
+       
+   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">         
+          <div class="row record-holder-header mobile-hide">
+                <div class="col-xs-8 col-sm-8 col-md-8"><strong>Company Name</strong></div>
+                <div class="col-xs-4 col-sm-1 col-md-4"><strong>Pipeline</strong></div>
+            </div>
+        </div>
+               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"> 
 <div class="panel-body" style="padding:0;">
+
+ 
+
+
+
 
 
                     <?php   if(empty($assigned_companies)) :  ?>
@@ -768,18 +788,20 @@
 
                     <?php foreach ($assigned_companies as $assigned):?>
 
-                  <a href="<?php echo site_url();?>companies/company?id=<?php echo $assigned->id;?>" <?php if(($current_user['new_window']=='t')): ?> target="_blank"<?php endif; ?> class="load-saved-search">
+                
                   <div class="row">
                   <div class="col-xs-8">
+                        <a href="<?php echo site_url();?>companies/company?id=<?php echo $assigned->id;?>" <?php if(($current_user['new_window']=='t')): ?> target="_blank"<?php endif; ?> class="load-saved-search">
                   <?php $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' ); echo str_replace($words, ' ',$assigned->name); ?>
                   </div>
+                        </a>
                   <div class="col-xs-4">
                   <span class="label label-<?php echo str_replace(' ', '', $assigned->pipeline); ?>" style="margin-top: 3px;"><?php echo $assigned->pipeline;?>
-                  <?php if (isset($company['customer_from'])):?> from <?php echo date("d/m/y",strtotime($company['customer_from']));?><?php endif; ?>
+                    <?php if (isset($company['customer_from'])):?> from <?php echo date("d/m/y",strtotime($company['customer_from']));?><?php endif; ?>
                   </span>
                   </div>
                   </div>
-                  </a>
+                
 
 
 
@@ -789,6 +811,8 @@
                       <?php endforeach ?>
                     <?php endif ?>
                 </div>
+   
+</div>
               </div>
           </div><!--END OF PANEL-->
           <!--END ASSIGNED-->
