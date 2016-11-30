@@ -415,14 +415,18 @@ if ($your_date < $now){;
                 
               if(in_array($name,$not_target_sectors_list)){
                   
-                echo  '<span style="opacity:0.6"><i> '.$name.'</i> </span><br>'  ;  
+               $notinsec[] = '<span class="notsector" style=" "> '.$name.'</span> <br>'  ;  
               }else{
                   
-                 echo  $name.'<br>' ;   
+                $insec[] =  '<span  class="issector" style="color: green;  "> '.$name.' </span><br>' ;   
                   
               }
                 
 				}
+                
+                
+                echo join($notinsec, '');
+                echo join($insec, '');
             
              echo '</div>';
         }
@@ -450,17 +454,6 @@ if ($your_date < $now){;
 		<div class="row">
 		<div class="col-xs-12 details" >
 		 
-            
-
-            
-            
-            
-            
-
-	
-            
-
-            
                <div class="subcont"> 
 
                     <!-- <h4 class="ta"></h4> -->
