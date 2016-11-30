@@ -147,7 +147,7 @@ $('#debenturemortgage').change(function() {
     }
 });
 
-function gettagscampList(param){
+function gettagscampList_(param){
     
    
 //console.debug(param)
@@ -566,7 +566,7 @@ $(".pipeline-validation-check").change(function() {
             var regArray = [];
             $('.company-header a').each(function(e,i){
 
-                gettagscampList($(this).attr('comp').trim());
+               // gettagscampList($(this).attr('comp').trim());
                   //console.warn($(this).attr('comp').trim());
             })
             

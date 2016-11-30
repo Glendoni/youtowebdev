@@ -15,7 +15,7 @@
                         <?php endif; ?>
                         <?php if($previous_page_number or $next_page_number): ?><span style="font-size:15px; font-weight:700;"> Page <?php echo $current_page_number; ?> of <?php echo $page_total ?> </span><?php endif; ?>
                 </span>
-            
+             <div class="col-md-12 "><?php if ($companies_count > "999") {echo "Limited to 1,000 Results";}?></div>
             <div class="col-md-12 searchcriteria"></div>
        </div>    
 	   <div class="col-xs-2">

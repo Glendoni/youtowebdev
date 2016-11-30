@@ -386,7 +386,9 @@ and ACTIONS_SUB.company_id is null
 
 		select row_to_json((
 		       T1."JSON output",
-		       T2."JSON output"
+		       T2."JSON output",
+		      		       T3."JSON output"
+
 		       )) "company"
 		from 
 		(-- T1
@@ -407,7 +409,6 @@ and ACTIONS_SUB.company_id is null
 			   U.name, -- f6
 			   U.id , -- f7
 			   A.address, --f8
-			  
 			   C.active, -- f9
 			   C.created_at, -- f10
 			   C.updated_at, -- f11
@@ -424,8 +425,10 @@ and ACTIONS_SUB.company_id is null
 			   json_agg( 
 			   row_to_json ((
 			   TT2."sector_id", TT2."sector", TT2."target"))),-- f22
-			   C.phone, -- f23 
-			   C.pipeline, -- f24
+			   C.phone, -- f23
+			  
+
+			  C.pipeline, -- f24
 			   CONT.contacts_count, -- f25
 			   C.parent_registration, --f26
 			   C.zendesk_id, -- f27
@@ -446,7 +449,9 @@ and ACTIONS_SUB.company_id is null
 			   UC.name, --f42
 			   UU.name, --f43
                C.initial_rate, --f44
-                C.customer_to --f45
+               C.customer_to --f45
+			  
+               
 			   )) "JSON output" 
 			   
 from (select * from COMPANIES where active = \'TRUE\' ' ;
@@ -590,6 +595,8 @@ from (select * from COMPANIES where active = \'TRUE\' ' ;
 		)   TT2
 		ON TT2."company id" = C.id
 
+		
+
 
 		LEFT JOIN 
 		ADDRESSES A
@@ -684,7 +691,48 @@ from (select * from COMPANIES where active = \'TRUE\' ' ;
 		)   T2
 		ON T1.id = T2."company id"
 
-		-- insert this for sort order  
+
+		LEFT JOIN
+
+		(-- T3
+		select ct."company id",
+		       json_agg(
+			   row_to_json(
+			   row ( ct."category name",ct."tag id", ct."tag name", ct."added by", ct."created_at"))) "JSON output"  -- f46
+				 
+		from 
+		(-- CT
+			select ct.company_id "company id",
+		       tc.sequence,
+		       t.name "tag name",
+		       ct.id "tag id",
+		       tc.id,
+		       tc.name "category name",
+		       u.name "added by",  
+               t.created_at "created_at"  
+		FROM company_tags ct
+        LEFT JOIN tags t
+        ON ct.tag_id= t.id
+        LEFT JOIN tag_categories tc
+        ON t.category_id = tc.id
+        LEFT JOIN users u
+        ON ct.created_by = u.id
+		WHERE
+        ct.eff_to IS NULL 
+        AND t.eff_to IS NULL
+        ORDER BY tc.id asc, t.created_at asc
+
+
+		)   ct
+
+		group by CT."company id"	
+
+		order by CT."company id"
+
+		)   T3
+		ON T1.id = T3."company id"
+
+
 		order by case when pipeline = \'Customer\' then 1
 		when pipeline = \'Proposal\' then 2
 		when pipeline = \'Intent\' then 3
@@ -692,7 +740,7 @@ from (select * from COMPANIES where active = \'TRUE\' ' ;
 		when pipeline = \'Lost\' then 8
 		else 5
 		end, name asc
-		 
+		limit 1000
 		) results';
         
        // echo nl2br($sql);
