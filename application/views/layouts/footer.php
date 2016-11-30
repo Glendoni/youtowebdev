@@ -192,10 +192,6 @@ $(document).ready(function(){
                                $.each( val, function( keye, vale ) {
          customer_deal.push('<div class="row record-holder"> <div class="col-xs-8 col-sm-4 col-md-1"><strong>'+vale.customer_from+'</strong></div> <div class="col-xs-8 col-sm-4 col-md-1"><strong>'+vale.customer_to+'</strong></div><div class="col-xs-8 col-sm-4 col-md-2"><strong>'+vale.company_id+'  '+vale.name_+'.</strong></div><div class="col-xs-4 col-sm-1 col-md-1"><strong>'+vale.initial_rate+'</strong></div><div class="col-xs-6 col-sm-2 col-md-1"><strong>'+vale.lead_source+'</strong></div><div class="col-xs-6 col-sm-3 col-md-1"><strong>'+vale.age_at_joining_months+'</strong></div><div class="col-xs-12 col-sm-2 col-md-1"><strong>'+vale.turnover+'</strong></div><div class="col-xs-12 col-sm-2 col-md-1"><strong>'+vale.class+'</strong></div><div class="col-xs-12 col-sm-2 col-md-1"><strong>'+vale.planned+'</strong></div><div class="col-xs-12 col-sm-2 col-md-1"><strong>'+vale.action+'</strong></div><div class="col-xs-12 col-sm-2 col-md-1"><strong>'+vale.by+'</strong></div></div>');
                                })
-                               
-                               
-                              
-                            
               
         break;
    case 'companies_added':
@@ -212,7 +208,7 @@ $(document).ready(function(){
                
          
         break;
- case 'recent_viewed_companies':
+    case 'recent_viewed_companies':
                              $.each( val, function( keye, vale ) {
      recent_viewed_companies.push('<div class="row record-holder"> <div class=" col-md-2"><strong>'+vale.visit_date+'</strong></div><div class="col-xs-4 col-sm-1 col-md-6"><strong>'+vale.company_name+'</strong></div><div class="col-xs-8 col-sm-4 col-md-2"><strong>'+vale.pipeline+'</strong></div></div>')
    
