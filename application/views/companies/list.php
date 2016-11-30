@@ -385,20 +385,23 @@
 			<strong>Sectors</strong> <br>
 			<?php 
 			if(isset($company['sectors'])){
-			foreach (array_reverse($company['sectors']) as $key => $name)
+		foreach (array_reverse($company['sectors']) as $key => $name)
 				{
 				//echo  $name.$key.'<br>' ;
                 
               if(in_array($name,$not_target_sectors_list)){
                   
-                echo  '<span class="notsector" style=" "> '.$name.'</span> <br>'  ;  
+               $notinsec[] = '<span class="notsector" style=" "> '.$name.'</span> <br>'  ;  
               }else{
                   
-                 echo '<span  class="issector" style="color: green;  "> '.$name.' </span><br>' ;   
+                $insec[] =  '<span  class="issector" style="color: green;  "> '.$name.' </span><br>' ;   
                   
               }
                 
 				}
+                
+                echo join($insec, '');
+                echo join($notinsec, '');
 			}
 			?>
 							 
@@ -421,7 +424,7 @@
     <ul class="listTagSummary">
   
    <?php foreach ($company['tags'] as $tag):
-   if (!empty($tag['name'])) {?>
+   if (true) {?>
 
 <li class="subTags">
 <div class="hint--top-right" data-hint=" <?php echo $tag['created_by'] . ' on ' .date( 'dS M Y', strtotime($tag['created_at'])); ?>">
