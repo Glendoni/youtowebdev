@@ -105,7 +105,7 @@
      
      Version 5.0</div>
     </a>
-     <a><div class="btn btn-warning"style="margin-top: 15px;  margin-left: 2px;
+     <a href="<?php echo site_url(); ?>dashboard/team" ><div class="btn btn-warning"style="margin-top: 15px;  margin-left: 2px;
     padding: 2px 20px;">Team</div><br>  
  
      
