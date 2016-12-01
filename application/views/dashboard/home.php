@@ -294,8 +294,8 @@
                                     $round = 5*60;
                                     $rounded = round($timestamp / $round) * $round;
                                     
-                                    echo date('d/m/y', $timestamp)." ";
-                                echo date("H:i", $rounded);
+                                    echo date('dS M y', $timestamp);
+                               // echo date("H:i", $rounded);
                                     ?>
                         
                              
@@ -363,11 +363,11 @@
             <div class="col-xs-12 col-sm-2 col-md-1"><strong>Age at Joining <br>(months)</strong></div>
             
              <div class="col-xs-12 col-sm-2 col-md-1"><strong>Turnover</strong></div>
-            
+              <div class="col-xs-12 col-sm-2 col-md-1"><strong>Class</strong></div>
              <div class="col-xs-12 col-sm-2 col-md-1"><strong>Planned</strong></div>
-             <div class="col-xs-12 col-sm-2 col-md-1"><strong>Action</strong></div>
+             <div class="col-xs-12 col-sm-2 col-md-1"><strong>Actioned</strong></div>
              <div class="col-xs-12 col-sm-2 col-md-1"><strong>By</strong></div>
-             <div class="col-xs-12 col-sm-2 col-md-1"><strong>Class</strong></div>
+           
         </div>
         
         <div id="customer_deal">Loading...</div>   
