@@ -125,10 +125,10 @@
             <!-- Top Menu Items -->
             <?php if (isset($current_user)): ?>
 
-        <ul class=" nav navbar-top-links navbar-right  " style="display:none;">
+        <ul class=" nav navbar-top-links navbar-right  " >
                    
 
-                    <li class="dropdown">
+                    <li class="dropdown" style="display:none;">
                         <div class="btn-group">
                                   <button type="button" class="btn btn-default scheduleBtn" onclick="location.href='<?php echo site_url();?>dashboard&#35;calls'"><span class="myactivity">Scheduled  <span class="badge scheduleBadge"><?php echo count($pending_actions); ?></span></span></button>
                                   <button type="button" class="btn btn-default dropdown-toggle sublinkMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
