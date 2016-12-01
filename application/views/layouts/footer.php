@@ -982,7 +982,7 @@ function saveCompanyHandler(){$('.ch_drop_title').css('background','#7fe3d5');$(
 });
     </script>
  <?php //if(ENVIRONMENT !== 'production'): ?>
-  <?php if($current_user['permission'] == 'admin'): ?>
+  <?php if($current_user['permission'] == 'admin' || ENVIRONMENT == 'development'): ?>
     <div class="alert alert-warning" role="alert">
     <p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>
     </div> <?php endif; ?>
