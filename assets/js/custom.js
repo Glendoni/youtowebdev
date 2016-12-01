@@ -676,8 +676,8 @@ $(".pipeline-validation-check").change(function() {
     ////////End stats counter//////////////////////
     var autopilotEmailCompany = window.location.href.split("id="); 
 
-    if((/dashboard/.test(window.location.href))) {
-        
+    
+           if((/dashboard/.test(window.location.href)) && (/dashboard\/team/.test(window.location.href)!= true)) {
          $('.mycampaignajaxcount').html('<img style="-webkit-user-select: none" src="assets/images/ajax-loader.gif">');
        $('.myevergreencount').html('<img style="-webkit-user-select: none" src="assets/images/ajax-loader.gif">');
                 
@@ -719,22 +719,6 @@ $(".pipeline-validation-check").change(function() {
                 }
                 }
             });
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-       
-        
-        
-        
-        
         
         
         
@@ -832,7 +816,7 @@ uimage = val.image.split(',')
       
         
         
-        
+       
         
         
         $.ajax({
@@ -858,11 +842,18 @@ uimage = val.image.split(',')
 
         });
 
+               
+               
+                     }
+        
+        
+        if((/dashboard/.test(window.location.href))&& (/dashboard\/team/.test(window.location.href)== true)){
+               
         //GET TEAM STATS VIA JSON
        $.ajax({
             type: "GET",
                 dataType: "json",
-            url: "dashboard/getTeamStats",
+            url: "getTeamStats",
             success: function(data) {
                 $.each( data, function( key, val ) {
             //key = tslastweek, tscurrentmonth , tslastmonth
@@ -873,12 +864,12 @@ uimage = val.image.split(',')
             }
         });
         
-        
+      
         
            $.ajax({
             type: "GET",
                 dataType: "json",
-            url: "dashboard/getTeamStats/uf",
+            url: "getTeamStats/uf",
             success: function(data) {
                 $.each( data, function( key, val ) {
             //key = tslastweek, tscurrentmonth , tslastmonth
@@ -888,16 +879,21 @@ uimage = val.image.split(',')
                tsTotalConfig();
             }
         });
+            
+           } 
+    
+    
+     if((/dashboard/.test(window.location.href))&& (/dashboard\/team/.test(window.location.href)!= true)){
          //GET TEAM STATS END 
-            getUserFavourites();   
+            getUserFavourites();   //trigger favorites 
         $('.sortform form select').change(function(){
-            getUserFavourites(); 
+            getUserFavourites(); //Trigger alt sort on change
 
-})
+        })
         
         
-        
-    }
+     }
+   
     if(autopilotEmailCompany[1]){ 
     var myParam = window.location.href.split("id=");
     var action ;
@@ -995,7 +991,7 @@ uimage = val.image.split(',')
 
 //console.log()
                         if($('#action-error').css('display') != 'none'){
-                        event.preventDefault();
+                            event.preventDefault();
                         }
 
 

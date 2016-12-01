@@ -158,7 +158,7 @@ $('.completed-details').val($('.editorAction').html())
     
 $(document).ready(function(){
     
-        if((/dashboard/.test(window.location.href))) {
+        if((/dashboard/.test(window.location.href)) && (/dashboard\/team/.test(window.location.href)!= true)) {
             $.ajax({
             type: "GET",
                 dataType: "json",
