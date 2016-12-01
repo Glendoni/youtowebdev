@@ -1,6 +1,6 @@
 <div class="row">
 <?php echo $config['sess_expiration']; ?>
-          <div class="col-sm-9 col-sm-offset-3 " style="margin-bottom:20px;">
+          <div class="col-sm-9 " style="margin-bottom:20px;">
 
       <?php 
     
@@ -16,37 +16,43 @@
               <ul class="nav nav-tabs dashboard" role="tablist">
               
                 <li role="presentation" class="active"><button href="#calls" aria-controls="calls" role="tab" data-toggle="tab" class="btn btn-primary btn-sm c-a-m" style="margin-right:10px;" >Schedule</button></li>
-                      <li role="presentation"><button href="#intents" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Intents','<?php echo $current_user['id'];?>')">Intent</button></li> 
-                       
-                  <li role="presentation"><button href="#proposals" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Proposals','<?php echo $current_user['id'];?>')">Proposals</button></li> 
           
                   
                
              
                   
+          
                   
-                   <li role="presentation"><button href="#customerdeal" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Customerdeal','<?php echo $current_user['id'];?>')">Customer/Deal</button></li> 
+                   <li role="presentation"><button href="#assigned" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Favourites','<?php echo $current_user['id'];?>')">Favourite</button></li>
                   
-                   <li role="presentation"><button href="#assigned" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Favourites','<?php echo $current_user['id'];?>')">Favourites</button></li>
-                   <li role="presentation"><button href="#coadded" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','','<?php echo $current_user['id'];?>')">Company Added</button></li> 
+                   <li role="presentation"><button href="#dasboardviews" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','dasboardviews','<?php echo $current_user['id'];?>')">View</button></li>
+                  
+                   <li role="presentation"><button href="#coadded" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','','<?php echo $current_user['id'];?>')">Company</button></li> 
                   
                   
                   
-                  <li role="presentation"><button href="#dasboardviews" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','dasboardviews','<?php echo $current_user['id'];?>')">Views</button></li>
+                 
                <!-- <li><button href="companies/pipeline"role="tab" class="button btn btn-primary btn-sm deals_pipeline" style="margin-right:10px;" onclick="window.location ='companies/pipeline'">Deals Forecast</button></li> -->
-                  
+               
                 <li role="presentation"><button href="#emailegagement" aria-controls="emailegagement" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Email Engagement','<?php echo $current_user['id'];?>')">Email Engagement</button></li>    
                   
+                     <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
                   
+                      <li role="presentation"><button href="#intents" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Intents','<?php echo $current_user['id'];?>')">Intent</button></li> 
+                       
+                  <li role="presentation"><button href="#proposals" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Proposals','<?php echo $current_user['id'];?>')">Proposal</button></li> 
                   
+                           
+                   <li role="presentation"><button href="#customerdeal" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Customerdeal','<?php echo $current_user['id'];?>')">Customer</button></li>
                   
                   
               </ul>
   <?php }; ?>
           </div>
         </div>
-<div class="row">          
-<div class="col-sm-9 col-sm-push-3 dashboardMainContent">
+<div class="row">    
+
+<div class="col-sm-9    dashboardMainContent">
 <!-- Tab panes -->
 <div class="tab-content">
 <div role="tabpanel" class="tab-pane fade in active" id="team_stats">
@@ -342,13 +348,15 @@
               </div>
     
           </div><!--END OF PANEL--></div>
-    
+  
     
     
         <div role="tabpanel" class="tab-pane fade" id="customerdeal">
     <!--START MARKETING STATS-->
             <div class="panel panel-default">
-    <div class="panel-heading" id="contacts">
+    <div class="panel-heading" id="contacts" style="
+    background: #0971af;
+">
     <h3 class="panel-title">Customer Deal<span class="badge pull-right eventcount"></span></h3>
     </div>
     <!-- /.panel-heading -->
@@ -412,7 +420,7 @@
     <!--START MARKETING STATS-->
             <div class="panel panel-default">
     <div class="panel-heading" id="contacts">
-    <h3 class="panel-title">Views<span class="badge pull-right eventcount"></span></h3>
+ 
     </div>
     <!-- /.panel-heading -->
     <div class="panel-body" style="font-size:12px;">
@@ -759,8 +767,7 @@
                       
                      </select></form>
                   </span>
-                <span class="badge pull-right favouritesCount" style="margin-top: -19px; apdding:5px;"><?php echo count($assigned_companies); ?>
-                  </span>    
+                 
               </div>
         
         
@@ -886,7 +893,7 @@
     
             <div class="panel panel-default">
     
-    <div class="panel-heading" id="proposals">
+    <div class="panel-heading" id="proposals" style="background:#45AE7C">
         <h3 class="panel-title">Outstanding Proposals<span class="badge pull-right eventcountproposals"></span></h3>
     </div>
                 
@@ -934,7 +941,9 @@
  <div role="tabpanel" class="tab-pane fade" id="intents">
     <!--START MARKETING STATS-->
             <div class="panel panel-default">
-    <div class="panel-heading" id="contacts">
+    <div class="panel-heading" id="contacts" style="
+    background: #f0ad4e;
+">
     <h3 class="panel-title">Intents<span class="badge pull-right eventcountintents"></span></h3>
     </div>
     <!-- /.panel-heading -->
@@ -986,7 +995,7 @@
 <!--END ASSIGNED-->
 </div><!--END TAB PANES-->
 </div><!--END-COL-SM-9-->
-<div class="col-sm-3 col-sm-pull-9 dashboardSidebarCol">
+    <div class="col-sm-3   dashboardSidebarCol">
     
     
     

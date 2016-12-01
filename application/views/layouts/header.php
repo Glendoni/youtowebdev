@@ -125,7 +125,7 @@
             <!-- Top Menu Items -->
             <?php if (isset($current_user)): ?>
 
-        <ul class=" nav navbar-top-links navbar-right " >
+        <ul class=" nav navbar-top-links navbar-right  " style="display:none;">
                    
 
                     <li class="dropdown">
