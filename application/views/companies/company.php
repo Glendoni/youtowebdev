@@ -168,6 +168,18 @@
         <!-- // POPUP BOXES -->
         </div><!--END TOP INFO HOLDER-->
   <div class="row">
+      <ul class="qvlink" style="margin-left: -15px; float:left">
+                                                    <li><a href"javascript:;"  data="qvfinancials"><i class="fa fa-money" aria-hidden="true"></i> Financials</a></li>
+                                                    <li><a href"javascript:;"  data="addresses"><i class="fa fa-globe" aria-hidden="true"></i> Locations</a></li>
+                                                    <li><a href"javascript:;"  data="contacts"><i class="fa fa-user" aria-hidden="true"></i> Contacts</a></li>
+                                                    <li><a href"javascript:;"  data="qvTags"><i class="fa fa-tags" aria-hidden="true"></i> Tags</a></li>
+                                                    <li><a href"javascript:;"  data="add_action"><i class="fa fa-calendar" aria-hidden="true"></i> Add Action</a></li>
+                                                    <li><a href"javascript:;"  data="actions"><i class="fa fa-info-circle" aria-hidden="true"></i> Actions</a></li>
+                                                    </ul>
+
+      
+      
+      
         <?php if (isset($company['parent_name'])): ?>
         <div class="subsidiary">
         <span class="label label-danger"><a href="<?php echo site_url();?>companies/company?id=<?php echo $company['parent_id'];?>" target="_blank">Subsidiary of <?php echo $company['parent_name'];?> <i class="fa fa-external-link"></i></a></span>

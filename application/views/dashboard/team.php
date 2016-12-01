@@ -1,6 +1,6 @@
 <div class="row">
 <?php echo $config['sess_expiration']; ?>
-          <div class="col-sm-9 col-sm-offset-3 " style="margin-bottom:20px;">
+          <div class="col-sm-12" style="margin-bottom:20px;">
 
       <?php 
     
@@ -36,7 +36,7 @@
           </div>
         </div>
 <div class="row">          
-<div class="col-sm-9 col-sm-push-3">
+<div class="col-sm-12">
 
       <div class="panel panel-default">
           <div class="panel-heading">
@@ -2140,51 +2140,7 @@ if(in_array($current_user['department'],$dept) ){ ?>
                   
               </div>
             </div>
-                
-               <?php   if($current_user['department'] != 'data'){ ?>
-            <div class="panel panel-default" >
-              <div class="panel-heading">
-                <h3 class="panel-title">Recent Campaigns<span class="badge pull-right"><?php //echo count($shared_campaigns); ?></span></h3>    
-              </div>
-              <div class="panel-body" style="padding:0;">
-              <div id="campaignList">
-                  <!-- SHARED SEARCHES -->
-                  
-                  
-                 
-
-<?php   $showCampaignType  = 'private=true'; ?>
-
-                  <?php foreach ($shared_campaigns as $campaign):?>
-                  
-                  <?php
-                                                                 
-              $showCampaignType  = 'private=true';
-             if(($campaign->evergreen_id)){
-                    //echo $campaign->evergreen_id;
-             $showCampaignType =  'evergreen='.$campaign->evergreen_id; 
-             } ?>
-                  
-                  
-              
-                    <?php $user_icon = explode(",", $campaign->image);$bg_colour = $user_icon[1];$bg_colour_text = $user_icon[2];$bg_colour_name = $user_icon[0];?>
-                    <a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $campaign->id; ?>&<?php echo   $showCampaignType; ?>" class="load-saved-search" <?php echo strlen($campaign->name) > 36 ? 'title="'.$campaign->name.'"':"" ?>><div class="row">
-                  <div class="col-xs-1"><span class="label label-info" style="margin-right:3px;background-color: <?php echo $bg_colour; ?>;font-size:8px; color: <?php echo $bg_colour_text;?>"><b><?php echo $bg_colour_name; ?></b>
-                    </span></div>
-                  <div class="col-xs-9" style="max-height:15px;overflow:hidden"><?php echo $campaign->name;?></div>
-                  <div class="col-xs-1" style="padding: 0 0 0 5px;"><b><?php //echo $campaign->campaigncount; ?></b></div>
-                  </div>
-                  </a>
-                    <?php 
-                                                                 
-                                                                 //unset($showCampaignType);
-                     endforeach; ?>
-              </div><!--END CAMPAIGN LIST-->
-          <!--<button type="submit" class="btn btn-success btn-block" id="loadMore">Load More</button>-->
-
-              </div>
-            </div>
-                      <?php } ?>
+          
                 
           </div><!--END COL-3-->
 </div><!--END ROW-->

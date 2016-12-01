@@ -339,7 +339,8 @@ ul.nav.navbar-top-links.navbar-right {
 	/*border-color: #ebccd1;*/
 
     background-color: rgba(242, 222, 222, 0.63);
-    border-color: rgba(235, 204, 209, 0.56)
+    border-color: rgba(235, 204, 209, 0.56);
+    padding: 3px;
 }
 
 .pipeline-update {
@@ -2541,7 +2542,7 @@ breadcrumbscroll {
   -ms-transition: height 0.3s;
   -o-transition: height 0.3s;
   transition: height 0.3s;
-  padding: 20px 0;
+  padding: 9px 0;
   box-sizing: border-box;
 	box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     border-bottom: 1px solid #ccc;
@@ -3302,6 +3303,10 @@ top: -20px;
     
     
 }
+.qvlink li{float:left; margin-right:15px;  } 
+
+.qvlink{ padding-left:38%; margin-top -20px; }
+.qvlink a{color:#000; text-transform: none; cursor: pointer;}
 /*! Hint.css - v2.2.1 - 2016-03-26 //#2b4461
 * http://kushagragour.in/lab/hint/
 * Copyright (c) 2016 Kushagra Gour; Licensed  */

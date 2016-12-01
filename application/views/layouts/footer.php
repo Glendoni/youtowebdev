@@ -240,7 +240,7 @@ var customer_to =[];
  
 
                     $('.dashboardSidebarCol').show()
-                    $('.dashboardMainContent').addClass('col-sm-push-3')
+                  //  $('.dashboardMainContent').addClass('col-sm-push-3')
                     $('.dashboardMainContent').addClass('col-sm-9')
                     $('.dashboardMainContent').removeClass('col-sm-12')
  
@@ -248,7 +248,7 @@ var customer_to =[];
 }else{
     
      $('.dashboardSidebarCol').hide()
-                    $('.dashboardMainContent').removeClass('col-sm-push-3')
+                   // $('.dashboardMainContent').removeClass('col-sm-push-3')
                     $('.dashboardMainContent').removeClass('col-sm-9')
                     $('.dashboardMainContent').addClass('col-sm-12')
     
@@ -268,7 +268,7 @@ var customer_to =[];
  
 
                     $('.dashboardSidebarCol').show()
-                    $('.dashboardMainContent').addClass('col-sm-push-3')
+                   // $('.dashboardMainContent').addClass('col-sm-push-3')
                     $('.dashboardMainContent').addClass('col-sm-9')
                     $('.dashboardMainContent').removeClass('col-sm-12')
  
@@ -276,7 +276,7 @@ var customer_to =[];
 }else{
     
      $('.dashboardSidebarCol').hide()
-                    $('.dashboardMainContent').removeClass('col-sm-push-3')
+                    //$('.dashboardMainContent').removeClass('col-sm-push-3')
                     $('.dashboardMainContent').removeClass('col-sm-9')
                     $('.dashboardMainContent').addClass('col-sm-12')
     
