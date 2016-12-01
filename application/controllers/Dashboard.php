@@ -307,7 +307,7 @@ echo '<pre>'; print_r($output); echo '</pre>';
         
         $data['customer_deal']  = $this->allUserCustomersRun();
           $data['companies_added']  = $this->companiesCreatedUsersRun();
-          $data['recent_viewed_companies']  = $this->recentViewedCompaniesRun();
+         $data['recent_viewed_companies']  = $this->recentViewedCompaniesRun();
        
         
         echo json_encode($data);

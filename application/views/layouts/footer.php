@@ -173,6 +173,7 @@ var customer_to =[];
                 var  turnover = [];
                 var  planned = [];
                 var  action = [];
+                var  actioned = [];
                 
                 var by = [];
     
@@ -186,9 +187,10 @@ var customer_to =[];
                  turnover   = vale.turnover ? vale.turnover : '';
                  planned    = vale.planned ? vale.planned :  ''; 
                  action     = vale.action ? vale.action :  '';
+          actioned     = vale.actioned ? vale.actioned:  '';
                  by     = vale.by   ? vale.by: '';                        
 
-                     customer_deal.push('<div class="row record-holder"> <div class="col-xs-8 col-sm-4 col-md-1">'+vale.customer_from+'</div> <div class="col-xs-8 col-sm-4 col-md-1">'+customer_to+'</div><div class="col-xs-8 col-sm-4 col-md-2"><a href=companies/company?id='+vale.company_id+'>  '+vale.name_+'</a></div><div class="col-xs-4 col-sm-1 col-md-1">'+vale.initial_rate+'</div><div class="col-xs-6 col-sm-2 col-md-1"> '+vale.lead_source+'</div><div class="col-xs-6 col-sm-3 col-md-1">'+vale.age_at_joining_months+'</div><div class="col-xs-12 col-sm-2 col-md-1">'+turnover+'</div><div class="col-xs-12 col-sm-2 col-md-1">'+planned+'</div><div class="col-xs-12 col-sm-2 col-md-1">'+action+'</div><div class="col-xs-12 col-sm-2 col-md-1">'+by+'</div><div class="col-xs-12 col-sm-2 col-md-1"> '+vale.class+'</div></div>');
+                     customer_deal.push('<div class="row record-holder"> <div class="col-xs-8 col-sm-4 col-md-1">'+vale.customer_from+'</div> <div class="col-xs-8 col-sm-4 col-md-1">'+customer_to+'</div><div class="col-xs-8 col-sm-4 col-md-2"><a href=companies/company?id='+vale.company_id+'>  '+vale.name_+'</a></div><div class="col-xs-4 col-sm-1 col-md-1">'+vale.initial_rate+'</div><div class="col-xs-6 col-sm-2 col-md-1"> '+vale.lead_source+'</div><div class="col-xs-6 col-sm-3 col-md-1">'+vale.age_at_joining_months+'</div><div class="col-xs-12 col-sm-2 col-md-1">'+turnover+'</div><div class="col-xs-12 col-sm-2 col-md-1"> '+vale.class+'</div><div class="col-xs-12 col-sm-2 col-md-1">'+action+'<br>'+planned+'</div><div class="col-xs-12 col-sm-2 col-md-1">'+actioned+'</div><div class="col-xs-12 col-sm-2 col-md-1">'+by+'</div></div>');
                                            });
 
                     break;
