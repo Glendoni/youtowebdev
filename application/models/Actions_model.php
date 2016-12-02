@@ -134,7 +134,7 @@ function get_actions_outstanding($company_id,$limit =100)
 
 function get_actions_completed($company_id)
 {
-    $category_exclude = array( '20','30');
+    $category_exclude = array(   '20');
     $data = array(
         'a.company_id' => $company_id,
         );
