@@ -107,10 +107,6 @@ if ( typeof define === 'function' && define.amd ) {
 })( window );
 ///END OFBREAD SCROLL
 
-
-
-
-   
         $('.timeline-header .showText').click(function () {
             var activeMenu =  $('.activeMenu').attr('data');
             var status = $('.actionMsg').css('display'); 
@@ -552,9 +548,9 @@ function bindAddCallBackToCompletedAction(){
 
                          }           
 
-                            $('.outcomeMsg'+action['followup_action_id']).append('<div class="followcont">'+followup+ ' ' +followUpCompleteddate+cancellation+contactDetails+
-                        ' <hr><span class="comments"><br><strong>Action: </strong></br><span class="commentFUA">'+action['comments']+'</span><br>'+actionOutcome+
-                        '</span></div>'); 
+                            //$('.outcomeMsg'+action['followup_action_id']).append('<div class="followcont">'+followup+ ' ' +followUpCompleteddate+cancellation+contactDetails+
+                        //' <hr><span class="comments"><br><strong>Action: </strong></br><span class="commentFUA">'+action['comments']+'</span><br>'+actionOutcome+
+                        //'</span></div>'); 
                         }
                         followUpCompleteddate = '';
                         cancellation = '';
@@ -1511,7 +1507,10 @@ if(tm > 1){ tm = tm + ' Days Overdue'; }else if(tm == 1){ tm  = tm + ' Day Overd
          
          
  
+         console.log(action['action_type_id']);
          
+         
+        if(action['action_type_id'] == 7 ) actionType = 'Comment';
       if(actionTypeName != 'Pipeline Update')   
             actions  ='<div class="timeline-entry actionId'+actionType+'  '+classCompleted+' pillid'+actionId+'" pillid='+actionId+'> <div class="timeline-stat"> '+icon+'</div><div class="timeline-label"> <div class="mar-no pad-btm"><h4 class="mar-no pad-btm">'+header+deal+'  </h4><div class="actions-info" ><span class="label label-warning"  >'+planned_at+'</span>'+kpStr+ ' '+overdueStatus+ ' '+updatemeeting+contactName+' <span class="classActions" style="float:right; margin-top:0; margin-left:3px;">'+calenderbtn+outcomeRemove+followupAlert+'</span></div></div><div class="mic-info"> '+status+': '+created_by+' - '+formattDate(createdAt, true)+' </div> <div class="actionMsgText">'+turnover+''+tagline+' </div>'+textbox+ ' </div></div>';
          
