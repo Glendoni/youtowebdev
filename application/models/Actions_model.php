@@ -1256,9 +1256,9 @@ public function getActionsProposals($userID = 0){
         LEFT JOIN ACTION_TYPES AT
         ON TT2.action_type_id = AT.id
 
-        where customer_from is null
-        and (C.eff_to is null and active = \'t\')
-
+       where customer_from is null
+        and C.active = \'t\'
+		and pipeline = \'Intent\'
         order by 1 desc
         ');
     
