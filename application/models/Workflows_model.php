@@ -110,7 +110,7 @@ from ACTIONS A
 
 where A.action_type_id = 19
 and comments = 'Pipeline changed to Customer'
-and created_by = 21 -- CURRENT USER HERE ! ! ! 
+and created_by = ".$userID." -- CURRENT USER HERE ! ! ! 
 )   T0
 ON C.id = T0.company_id
 
