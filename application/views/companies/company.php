@@ -168,7 +168,7 @@
         <!-- // POPUP BOXES -->
         </div><!--END TOP INFO HOLDER-->
   <div class="row">
-      <ul class="qvlink" style="margin-left: -15px; float:left">
+      <ul class="qvlink" style="margin-left: -15px; float:left; margin-top: -6px;">
                                                     <li><a href"javascript:;"  data="qvfinancials"><i class="fa fa-money" aria-hidden="true"></i> Financials</a></li>
                                                     <li><a href"javascript:;"  data="addresses"><i class="fa fa-globe" aria-hidden="true"></i> Locations</a></li>
                                                     <li><a href"javascript:;"  data="contacts"><i class="fa fa-user" aria-hidden="true"></i> Contacts</a></li>
