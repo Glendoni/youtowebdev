@@ -44,11 +44,11 @@
           </div>
           <div class="panel-body">
             <form class="form-inline" role="form">
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-3">
             <label for="start-date">From</label>
             <input type="text" class="form-control" id="start_date" data-date-format="DD-MM-YYYY" name="start_date" placeholder="" value="<?php echo  date('d-m-Y',strtotime($dates['start_date']));?>">
             </div>
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-3">
             <label for="end-date">To</label>
             <input type="text" class="form-control" id="end_date" data-date-format="DD-MM-YYYY" name="end_date" placeholder="" value="<?php echo  date('d-m-Y',strtotime($dates['end_date']));?>">
             </div>
