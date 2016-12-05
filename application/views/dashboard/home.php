@@ -228,7 +228,7 @@
     
     <div role="tabpanel" class="tab-pane active" id="calls"><div class="panel panel-default">
               <div class="panel-heading">
-              <h3 class="panel-title">Your Schedule<span class="badge pull-right"><?php echo count($pending_actions); ?></span></h3>
+              <h3 class="panel-title">Schedule<span class="badge pull-right"><?php echo count($pending_actions); ?></span></h3>
               </div>
              
               <div class="panel-body no-padding">
@@ -1005,7 +1005,7 @@ if(in_array($current_user['department'],$dept) ){ ?>
         
             <div class="panel panel-default">
               <div class="panel-heading">
-                <h3 class="panel-title">My Evergreen Campaigns <span class="badge pull-right myevergreencount"></span></h3>
+                <h3 class="panel-title">Evergreen Campaign<span class="badge pull-right myevergreencount"></span></h3>
               </div>
               <div class="panel-body myevergreenajax" style="padding:0;">
                   <!-- PRIVATE SEARCHES -->
@@ -1029,7 +1029,7 @@ if(in_array($current_user['department'],$dept) ){ ?>
     
               <div class="panel panel-default">
               <div class="panel-heading">
-                <h3 class="panel-title">My Campaigns <span class="badge pull-right mycampaignajaxcount"></span></h3>
+                <h3 class="panel-title">Campaign<span class="badge pull-right mycampaignajaxcount"></span></h3>
               </div>
               <div class="panel-body mycampaignajax" style="padding:0;">
                   <!-- PRIVATE SEARCHES -->

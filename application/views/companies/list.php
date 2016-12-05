@@ -191,10 +191,7 @@
 
                                     </div>
                                 </div>
-                        
-                        
-                        
-                        
+                     
                     <div class="col-md-4 col-lg-5 col-sm-4">
                         <div><strong> Scheduled</strong></div>
                         <?php if (empty($company['planned_at2'])): ?>
@@ -251,11 +248,8 @@
                                                   <?php else: ?>
                                                     <a class="btn  btn-primary btn-sm btn-block" href="https://www.linkedin.com/vsearch/f?type=all&keywords=<?php echo  urlencode($company['name']) ?>"  target="_blank">LinkedIn <i class="fa fa-search" aria-hidden="true"></i> </a>
                                                 <?php endif; ?>
-
-
-                                                     
-                                                <?php if (isset($company['registration'])): ?>
-                                <a class="btn  btn-info btn-sm btn-block companieshouse" href="https://beta.companieshouse.gov.uk/company/<?php echo $company['registration'] ?>" target="_blank">Companies House</a>
+                                <?php if (isset($company['registration'])): ?>
+                                    <a class="btn  btn-info btn-sm btn-block companieshouse" href="https://beta.companieshouse.gov.uk/company/<?php echo $company['registration'] ?>" target="_blank">Companies House</a>
                                                 <?php endif; ?>
 			</div><!--CLOSE MD-3-->
                         
