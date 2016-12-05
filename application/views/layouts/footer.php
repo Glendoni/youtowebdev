@@ -218,14 +218,17 @@ var customer_to =[];
                 
                 });
                    
-                
+             //   Revision 1
                  $('#coaddedres').html(coaddedres.join( "" ));
                  $('#customer_deal').html(customer_deal.join( "" ));
                 
                  $('#recent_viewed_companies').html(recent_viewed_companies.join( "" ));
  
 //Glen
-                //$('.eventcount').html(items.length); //update engagement counter
+                $('.customerdealcount').html(customer_deal.length); //update engagement counter
+                $('.coaddedrescount').html(coaddedres.length); //update engagement counter
+                
+                $('.dasboardviewscount').html(recent_viewed_companies.length); //update engagement counter
             }
     
         });
@@ -411,7 +414,7 @@ $('.scheduleBtn').removeAttr('onClick').css('font-style', 'italic');
         var location = $(this).attr('data');
       //$('html, body').animate({scrollTop: $('#'+location).offset().top -280 }, 'slow');
        // $(".qv").slideToggle();  
-               
+           
                
     })
        

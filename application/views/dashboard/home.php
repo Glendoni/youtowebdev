@@ -52,7 +52,7 @@
   <?php }; ?>
           </div>
         </div>
-<div class="row">    
+<div class="row dashboardmaincontainer">    
 
 <div class="col-sm-9    dashboardMainContent">
 <!-- Tab panes -->
@@ -359,7 +359,7 @@
     <div class="panel-heading" id="contacts" style="
     background: #0971af;
 ">
-    <h3 class="panel-title">Customer Deal<span class="badge pull-right eventcount"></span></h3>
+    <h3 class="panel-title">Customer Deal<span class="badge pull-right customerdealcount"></span></h3>
     </div>
     <!-- /.panel-heading -->
     <div class="panel-body" style="font-size:12px;">
@@ -394,7 +394,7 @@
     <!--START MARKETING STATS-->
             <div class="panel panel-default">
     <div class="panel-heading" id="contacts">
-    <h3 class="panel-title">Company Added<span class="badge pull-right eventcount"></span></h3>
+    <h3 class="panel-title">Company Added<span class="badge pull-right coaddedrescount"></span></h3>
     </div>
     <!-- /.panel-heading -->
     <div class="panel-body" style="font-size:12px;">
@@ -422,7 +422,7 @@
     <!--START MARKETING STATS-->
             <div class="panel panel-default">
     <div class="panel-heading" id="contacts">
-  <h3 class="panel-title">Recently Viewed Companies<span class="badge pull-right eventcount"></span></h3>
+  <h3 class="panel-title">Recently Viewed Companies<span class="badge pull-right dasboardviewscount"></span></h3>
     </div>
     <!-- /.panel-heading -->
     <div class="panel-body" style="font-size:12px;">

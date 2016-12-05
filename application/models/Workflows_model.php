@@ -161,7 +161,7 @@ ON TT2.action_type_id = AT.id
 where C.customer_from is not null
 
 order by 1 desc
-LIMIT 100
+ 
 ";        
         
         
@@ -187,7 +187,7 @@ where created_by =  ".$userID." -- ie CURRENT USER
 
 order by created_at desc
 
-limit 100
+ 
 ";
         
         $query = $this->db->query($sql);
