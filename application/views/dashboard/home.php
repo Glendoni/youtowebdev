@@ -1,6 +1,8 @@
-<div class="row">
+<div class="row" style="
+    height: 35px;
+">
 <?php echo $config['sess_expiration']; ?>
-          <div class="col-sm-9 " style="margin-bottom:20px;">
+          <div class="col-sm-9 " style="margin-bottom: 43px;z-index: 9999;top: 72px;position: fixed;/* padding-bottom: 40px; */">
 
       <?php 
     
@@ -420,7 +422,7 @@
     <!--START MARKETING STATS-->
             <div class="panel panel-default">
     <div class="panel-heading" id="contacts">
-  <h3 class="panel-title">Recently Viewed<span class="badge pull-right eventcount"></span></h3>
+  <h3 class="panel-title">Recently Viewed Companies<span class="badge pull-right eventcount"></span></h3>
     </div>
     <!-- /.panel-heading -->
     <div class="panel-body" style="font-size:12px;">
