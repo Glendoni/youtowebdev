@@ -295,14 +295,16 @@
                             <div class="col-md-2">
                               <?php echo $action_types_array[$action->action_type_id]; ?>
                             </div>
-    <div class="col-md-1 homeSchedule">
+    <div class="col-md-1 homeSchedule" style="
+    padding: 3px;
+">
                                
                             <?php   $now = $action->duedate; 
                                     $timestamp = strtotime($action->planned_at);
                                     $round = 5*60;
                                     $rounded = round($timestamp / $round) * $round;
-                                    
-                                    echo date('Y m d', $timestamp);
+                                    echo date('dS M Y', $timestamp);
+                                    //echo date('Y m d', $timestamp);
                                // echo date("H:i", $rounded);
                                     ?>
                         
