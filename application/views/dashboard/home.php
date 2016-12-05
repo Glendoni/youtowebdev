@@ -420,7 +420,7 @@
     <!--START MARKETING STATS-->
             <div class="panel panel-default">
     <div class="panel-heading" id="contacts">
- 
+  <h3 class="panel-title">Recently Viewed<span class="badge pull-right eventcount"></span></h3>
     </div>
     <!-- /.panel-heading -->
     <div class="panel-body" style="font-size:12px;">
