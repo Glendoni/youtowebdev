@@ -872,17 +872,19 @@ echo $this->Tagging_model->$route($post);
          //$id = $this->session->userdata('selected_company_id');
         //$query[]['actions'] = $this->Actions_model->get_actions(154537); //$this->input->get('id')
         $query[]['actions_outstanding'] = $this->Actions_model->get_actions_outstanding($id);
+    
         $query[]['action_types_array'] = (array)$this->Actions_model->get_action_types_array();
-        $query[]['actions_completed'] = $this->Actions_model->get_actions_completed($id);
+            $query[]['actions_completed'] = $this->Actions_model->get_actions_completed($id);
         $query[]['actions_cancelled'] = $this->Actions_model->get_actions_cancelled($id);
-       // $query[]['comments'] = array_reverse($this->Actions_model->get_comments_two($id));
+        
+        $query[]['comments'] = array_reverse($this->Actions_model->get_comments_two($id));
         
         foreach($query  as $key => $value){
             
                 $action[][] = $value; 
         }
         if($query[0]['actions_completed'][0]->initial_rate){
-        $action['initial_rate'] = $query[0]['actions_completed'][0]->initial_rate;
+            $action['initial_rate'] = $query[0]['actions_completed'][0]->initial_rate;
         }
         
          //$action['initial_fee']['initial_rate']  =  ($initial_rate/100);
@@ -900,16 +902,30 @@ echo $this->Tagging_model->$route($post);
         //$query[]['actions_outstanding'] = $this->Actions_model->get_actions_outstanding($id);
         
         //$query[]['action_types_array'] = (array)$this->Actions_model->get_action_types_array();
-        $query[]['actions_completed'] = $this->Actions_model->get_actions_completed($id);
+        //$query[]['actions_completed'] = $this->Actions_model->get_actions_completed($id);
         //$query[]['actions_cancelled'] = $this->Actions_model->get_actions_cancelled($id);
-         //$query[]['comments'] = $this->Actions_model->get_comments_two($id);
+        
+         $query[]['comments'] = $this->Actions_model->get_comments_two($id);
+        
+        $i = 0 ;
         foreach($query  as $key => $value){
+            
+            foreach($value['actions_completed'] as $k => $v){
+                
+          echo $v->action_type_id.'<br>';
+            }
+
             $action[][] = $value; 
+
+
         }
        
          if($query[0]['actions_completed'][0]->initial_rate){
         $action['initial_rate'] = $query[0]['actions_completed'][0]->initial_rate;
         }
+
+
+
          //$action['initial_fee']['initial_rate']  =  ($initial_rate/100);
       echo '<pre>'; print_r($action); echo '</pre>';
         header('Content-Type: application/json');

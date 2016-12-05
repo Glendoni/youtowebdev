@@ -300,7 +300,7 @@
                                     $round = 5*60;
                                     $rounded = round($timestamp / $round) * $round;
                                     
-                                    echo date('dS M y', $timestamp);
+                                    echo date('Y m d', $timestamp);
                                // echo date("H:i", $rounded);
                                     ?>
                         
