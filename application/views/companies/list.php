@@ -1,6 +1,7 @@
 <?php if(empty($companies)): ?>
 	<div class="alert alert-warning">No companies found</div>
 <?php else: ?>
+<?php $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' ); ?>
 <?php $i = 0; foreach ( $companies as $company):  ?>
 <?php $this->load->view('companies/edit_box.php',array('company'=>$company)); ?>
 <?php $this->load->view('companies/create_contact_box.php',array('company'=>$company)); ?>
@@ -264,7 +265,7 @@
 <div class="col-md-4">
 <label>Registered Name</label>
 <p style="margin-bottom:0;">	
-<?php echo $company['name']; ?>
+<?php echo str_replace($words, '',$company['name']); ?>
 </p>
 </div><!--END NAME-->
 <div class="col-md-4">
@@ -279,7 +280,7 @@
 <div class="col-md-4">
 <label>Registered Name</label>
 <p style="margin-bottom:10px;">	
-<?php echo $company['name']; ?>
+<?php echo str_replace($words, '',$company['name']); ?>
 </p>
 </div><!--END NAME-->
 <?php endif; ?>
