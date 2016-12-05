@@ -2,7 +2,7 @@
     height: 35px;
 ">
 <?php echo $config['sess_expiration']; ?>
-          <div class="col-sm-9 " style="margin-bottom: 43px;z-index: 9999;top: 72px;position: fixed;/* padding-bottom: 40px; */">
+          <div class="col-sm-12 " style="margin-bottom: 43px;z-index: 9999;top: 57px;position: fixed;background: rgba(248, 248, 248, 0.82); padding: 12px 0px 9px 12px;">
 
       <?php 
     

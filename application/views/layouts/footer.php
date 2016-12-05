@@ -200,7 +200,7 @@ var customer_to =[];
 
                                $.each( val, function( keye, vale ) {
                                    //   console.log(vale);
-                                   coaddedres.push('<div class="row record-holder"> <div class="col-md-2">'+vale.created+'</div><div class="col-xs-4 col-sm-1 col-md-6"><a href="companies/company?id='+vale.company_id+'">'+vale.company_name+'</a></div><div class="col-xs-8 col-sm-4 col-md-4"> '+vale.pipeline+'</div></div>');
+                                   coaddedres.push('<div class="row record-holder"> <div class="col-md-2">'+vale.created+'</div><div class="col-xs-4 col-sm-1 col-md-6"><a href="companies/company?id='+vale.company_id+'">'+vale.company_name+'</a></div><div class="col-xs-8 col-sm-4 col-md-4"><span class="label label-'+vale.pipeline+'" style="margin-top: 3px;"> '+vale.pipeline+' </span></div></div>');
                                });
 
 
@@ -208,7 +208,7 @@ var customer_to =[];
                         break;
                 case 'recent_viewed_companies':
                                          $.each( val, function( keye, vale ) {
-                 recent_viewed_companies.push('<div class="row record-holder"> <div class=" col-md-2">'+vale.visit_date+'</div><div class="col-xs-4 col-sm-1 col-md-6"><a href="companies/company?id='+vale.company_id+'">  '+vale.company_name+'</a></div><div class="col-xs-8 col-sm-4 col-md-2">'+vale.pipeline+'</div></div>');
+                 recent_viewed_companies.push('<div class="row record-holder"> <div class=" col-md-2">'+vale.visit_date+'</div><div class="col-xs-4 col-sm-1 col-md-6"><a href="companies/company?id='+vale.company_id+'">  '+vale.company_name+'</a></div><div class="col-xs-8 col-sm-4 col-md-2"><span class="label label-'+vale.pipeline+'" style="margin-top: 3px;"> '+vale.pipeline+' </span></div></div>');
 
 
                                          })
@@ -232,6 +232,12 @@ var customer_to =[];
             }
     
         });
+            
+            
+            
+            $('.dashboard .btn-sm').click(function(){
+ $('html, body').animate({scrollTop: $('.dashboardmaincontainer').offset().top -280 }, 'fast');   
+})
           }
     
     
