@@ -2,7 +2,7 @@
     height: 35px;
 ">
 <?php echo $config['sess_expiration']; ?>
-          <div class="col-sm-12 " style="margin-bottom: 43px;z-index: 9999;top: 57px;position: fixed;background: rgba(248, 248, 248, 0.82); padding: 12px 0px 9px 12px;">
+          <div class="col-sm-12 " style="margin-bottom: 43px;z-index: 999;top: 57px;position: fixed;background: rgba(248, 248, 248, 0.95); padding: 12px 0px 9px 12px;">
 
       <?php 
     
@@ -19,21 +19,12 @@
               
                 <li role="presentation" class="active"><button href="#calls" aria-controls="calls" role="tab" data-toggle="tab" class="btn btn-primary btn-sm c-a-m" style="margin-right:10px;" >Schedule</button></li>
           
-                  
-               
-             
-                  
-          
-                  
                    <li role="presentation"><button href="#assigned" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Favourites','<?php echo $current_user['id'];?>')">Favourite</button></li>
                   
                    <li role="presentation"><button href="#dasboardviews" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','dasboardviews','<?php echo $current_user['id'];?>')">View</button></li>
                   
                    <li role="presentation"><button href="#coadded" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','','<?php echo $current_user['id'];?>')">Company</button></li> 
-                  
-                  
-                  
-                 
+                    
                <!-- <li><button href="companies/pipeline"role="tab" class="button btn btn-primary btn-sm deals_pipeline" style="margin-right:10px;" onclick="window.location ='companies/pipeline'">Deals Forecast</button></li> -->
                
                 <li role="presentation"><button href="#emailegagement" aria-controls="emailegagement" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Email Engagement','<?php echo $current_user['id'];?>')">Email Engagement</button></li>    
