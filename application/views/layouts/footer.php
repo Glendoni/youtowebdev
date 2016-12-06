@@ -734,8 +734,13 @@ $('#agency_name').addClass('autocomplete-live');
      function dashboardTabLoader(){
         
         var readLastButtonClickedInDashboardHeaderMenuTab  = readCookie('94e5f7986ab2d1cba8be016aae11263c');
-        var LastMenuTabClicked = readLastButtonClickedInDashboardHeaderMenuTab.replace('#','.');
+        
+if(readLastButtonClickedInDashboardHeaderMenuTab){
+var LastMenuTabClicked = readLastButtonClickedInDashboardHeaderMenuTab.replace('#','.');
+         
         $(LastMenuTabClicked).trigger('click');
+    
+}
         
     }
     
