@@ -236,7 +236,9 @@
                       </div>
                       </div>
                     <?php else: ?>
-            <div class="row record-holder-header mobile-hide">
+            <div class="row record-holder-header mobile-hide" style="
+    font-size: 12px;
+">
             <div class="col-md-3" style="
     padding-left: -0px;
 "><strong>Company</strong></div>
@@ -765,8 +767,12 @@
          
        
    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">         
-          <div class="row record-holder-header mobile-hide">
-                <div class="col-xs-8 col-sm-8 col-md-5"><strong>Company</strong></div>
+          <div class="row record-holder-header mobile-hide" style="
+    font-size: 12px;
+">
+                <div class="col-xs-8 col-sm-8 col-md-6" style="margin-"><strong style="
+    margin-left: -14px;
+">Company</strong></div>
                 <div class="col-xs-4 col-sm-1 col-md-4"><strong>Pipeline</strong></div>
             </div>
         </div>

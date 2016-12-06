@@ -1028,7 +1028,7 @@ function getUserFavourites(){ // Dashbord favorites
                     pipeline =   val.pipeline ? val.pipeline : '';
                     
                     
-                    interface  = '<a href="companies/company?id='+val.id+'" class="load-saved-search"> <div class="row"> <div class="col-xs-8">'+company_name +'</div><div class="col-xs-4"> <span class="label label-'+pipeline+'" style="margin-top: 3px;"> '+pipeline+' </span> </div></div></a>';
+                    interface  = '<a href="companies/company?id='+val.id+'" class="load-saved-search"> <div class="row"> <div class="col-xs-6">'+company_name +'</div><div class="col-xs-4"> <span class="label label-'+pipeline+'" style="margin-top: 3px;"> '+pipeline+' </span> </div></div></a>';
                     
                      if(!order){
                      favourites.push(interface);

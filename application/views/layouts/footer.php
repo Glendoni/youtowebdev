@@ -163,8 +163,8 @@ $(document).ready(function(){
     
         if((/dashboard/.test(window.location.href)) && (/dashboard\/team/.test(window.location.href)!= true)) {
       //BACK BUTTON READER      
-dashboardTabLoader();
-            
+
+         dashboardTabLoader()   
             
             
             
@@ -255,10 +255,23 @@ var customer_to =[];
          var  dashboardButtonClicked  = $(this).attr('href');      
        createCookie('94e5f7986ab2d1cba8be016aae11263c', dashboardButtonClicked,14);         
 })
-          }
+          
+        
+       
+        
+        }
     
-    
-      
+     $('.dashboardSidebarCol').hide()
+      if($('.dashboard .active button').attr('aria-controls') == "calls"){
+          
+           $('.dashboardSidebarCol').show()
+       
+      }else{
+        
+           $('.dashboardMainContent').addClass('col-sm-12')
+            $('.dashboardMainContent').removeClass('col-sm-9')
+                    $('.dashboardMainContent').addClass('col-sm-12')
+      }
   
         $('.btn-sm').click(function(){
         
