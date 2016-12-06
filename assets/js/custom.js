@@ -771,7 +771,7 @@ uimage = val.image.split(',')
             if(!typeof data.intents != 'undefined'){
  
             $.each( pipleine, function(  index, keyval ) {
-   
+    $('.record-holder-'+keyval).html('');
              $.each( data[keyval], function( key, val ) {
                  
                createdAt = val.intent ? val.intent : val.proposal;

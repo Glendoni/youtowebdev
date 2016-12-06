@@ -10,35 +10,35 @@
     if ($current_user['department'] == 'support'){  ?>
               <!-- Nav tabs -->
               <ul class="nav nav-tabs dashboard" role="tablist">
-                <li role="presentation" class="active"><button href="#team_stats" aria-controls="team_stats" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Stats','<?php echo $current_user['id'];?>')">Pods</button></li>
+                <li role="presentation" class="active"><button href="#team_stats" aria-controls="team_stats" role="tab" data-toggle="tab" class="btn btn-primary btn-sm " style="margin-right:10px;" onclick="ga('send','event','Clicks','Stats','<?php echo $current_user['id'];?>')">Pods</button></li>
                 <li role="presentation"><button href="#calls" aria-controls="calls" role="tab" data-toggle="tab" class="btn btn-primary btn-sm c-a-m" style="margin-right:10px;" >Schedule</button></li>
               </ul>
 <?php } else {?>
 <!-- Nav tabs -->
               <ul class="nav nav-tabs dashboard" role="tablist">
               
-                <li role="presentation" class="active"><button href="#calls" aria-controls="calls" role="tab" data-toggle="tab" class="btn btn-primary btn-sm c-a-m" style="margin-right:10px;" >Schedule</button></li>
+                <li role="presentation" class="active"><button href="#calls" aria-controls="calls" role="tab" data-toggle="tab" class="btn btn-primary btn-sm c-a-m calls" style="margin-right:10px;" >Schedule</button></li>
           
-                   <li role="presentation"><button href="#assigned" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Favourites','<?php echo $current_user['id'];?>')">Favourite</button></li>
+                   <li role="presentation"><button href="#emailegagement" aria-controls="emailegagement" role="tab" data-toggle="tab" class="btn btn-primary btn-sm emailegagement" style="margin-right:10px;" onclick="ga('send','event','Clicks','Email Engagement','<?php echo $current_user['id'];?>')"> Engagement</button></li> 
                   
-                   <li role="presentation"><button href="#dasboardviews" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','dasboardviews','<?php echo $current_user['id'];?>')">View</button></li>
                   
-                   <li role="presentation"><button href="#coadded" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','','<?php echo $current_user['id'];?>')">Company</button></li> 
-                    
+                   <li role="presentation"><button href="#dasboardviews" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm dasboardviews" style="margin-right:10px;" onclick="ga('send','event','Clicks','dasboardviews','<?php echo $current_user['id'];?>')">View</button></li>
+                
+                   <li role="presentation"><button href="#coadded" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm coadded" style="margin-right:10px;" onclick="ga('send','event','Clicks','','<?php echo $current_user['id'];?>')">Co Added</button></li> 
+                     <li role="presentation"><button href="#assigned" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm assigned" style="margin-right:10px;" onclick="ga('send','event','Clicks','Favourites','<?php echo $current_user['id'];?>')">Favourite</button></li>
+                  
                <!-- <li><button href="companies/pipeline"role="tab" class="button btn btn-primary btn-sm deals_pipeline" style="margin-right:10px;" onclick="window.location ='companies/pipeline'">Deals Forecast</button></li> -->
                
-                <li role="presentation"><button href="#emailegagement" aria-controls="emailegagement" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Email Engagement','<?php echo $current_user['id'];?>')">Email Engagement</button></li>    
+                  
                   
                      <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
                   
-                      <li role="presentation"><button href="#intents" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Intents','<?php echo $current_user['id'];?>')">Intent</button></li> 
+                      <li role="presentation"><button href="#intents" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm intents" style="margin-right:10px;" onclick="ga('send','event','Clicks','Intents','<?php echo $current_user['id'];?>')">Intent</button></li> 
                        
-                  <li role="presentation"><button href="#proposals" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Proposals','<?php echo $current_user['id'];?>')">Proposal</button></li> 
+                  <li role="presentation"><button href="#proposals" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm proposals" style="margin-right:10px;" onclick="ga('send','event','Clicks','Proposals','<?php echo $current_user['id'];?>')">Proposal</button></li> 
                   
                            
-                   <li role="presentation"><button href="#customerdeal" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm" style="margin-right:10px;" onclick="ga('send','event','Clicks','Customerdeal','<?php echo $current_user['id'];?>')">Customer</button></li>
-                  
-                  
+                   <li role="presentation"><button href="#customerdeal" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm customerdeal" style="margin-right:10px;" onclick="ga('send','event','Clicks','Customerdeal','<?php echo $current_user['id'];?>')">Customer</button></li>
               </ul>
   <?php }; ?>
           </div>
@@ -287,14 +287,14 @@
                               <?php echo $action_types_array[$action->action_type_id]; ?>
                             </div>
     <div class="col-md-1 homeSchedule" style="
-    padding: 3px;
+    width: 104px;
 ">
                                
                             <?php   $now = $action->duedate; 
                                     $timestamp = strtotime($action->planned_at);
                                     $round = 5*60;
                                     $rounded = round($timestamp / $round) * $round;
-                                    echo date('jS M', $timestamp);
+                                    echo date('D jS M', $timestamp);
                                     //echo date('Y m d', $timestamp);
                                // echo date("H:i", $rounded);
                                     ?>
@@ -306,10 +306,6 @@
                                 
 
                                 
-                              
-                                
-                                
-                                
                               <?php $hidden = array('action_id' => $action->action_id , 'user_id' => $current_user['id'], 'action_do' => 'completed', 'outcome' => '' , 'company_id' => $action->company_id);
                                echo form_open(site_url().'actions/edit', 'name="completed_action"  class="completed_action" onsubmit="return validateActionForm(this)" outcome-box="action_outcome_box_'.$action->action_id.'" style="display:inline-block;" role="form"',$hidden); ?>
                                <button class="btn btn-xs btn-success"  style="display:none;">Completed</button> 
@@ -319,9 +315,6 @@
                                <button class="btn btn-xs btn-overdue" >Cancel</button>
                                </form>
                       
-                            
-                  
-                 
                   </div>
                    
                           </div>
@@ -352,7 +345,7 @@
     <div class="panel-heading" id="contacts" style="
     background: #0971af;
 ">
-    <h3 class="panel-title">Customer Deal<span class="badge pull-right customerdealcount"></span></h3>
+    <h3 class="panel-title">Customers - Current & Cancelled<span class="badge pull-right customerdealcount"></span></h3>
     </div>
     <!-- /.panel-heading -->
     <div class="panel-body" style="font-size:12px;">
@@ -360,15 +353,18 @@
         <div class="row record-holder-header mobile-hide">
             <div class="col-xs-8 col-sm-4 col-md-1"><strong>Customer From</strong></div>
             <div class="col-xs-8 col-sm-4 col-md-1"><strong>Customer To</strong></div>
-            <div class="col-xs-4 col-sm-1 col-md-2"><strong>Company Name</strong></div>
+            <div class="col-xs-4 col-sm-1 col-md-2"><strong>Company</strong></div>
+             <div class="col-xs-12 col-sm-2 col-md-1"><strong>Class</strong></div>
             <div class="col-xs-6 col-sm-2 col-md-1"><strong>Initial Rate</strong></div>
             <div class="col-xs-6 col-sm-3 col-md-1"><strong>Lead Source</strong></div>
             <div class="col-xs-12 col-sm-2 col-md-1"><strong>Age at Joining <br>(months)</strong></div>
             
-             <div class="col-xs-12 col-sm-2 col-md-1"><strong>Turnover</strong></div>
-              <div class="col-xs-12 col-sm-2 col-md-1"><strong>Class</strong></div>
-             <div class="col-xs-12 col-sm-2 col-md-1"><strong>Planned</strong></div>
+           
+             
+           
+              <div class="col-xs-12 col-sm-2 col-md-1"><strong>Planned</strong></div>
              <div class="col-xs-12 col-sm-2 col-md-1"><strong>Actioned</strong></div>
+              <div class="col-xs-12 col-sm-2 col-md-1"><strong>Action</strong></div>
              <div class="col-xs-12 col-sm-2 col-md-1"><strong>By</strong></div>
            
         </div>
@@ -387,15 +383,14 @@
     <!--START MARKETING STATS-->
             <div class="panel panel-default">
     <div class="panel-heading" id="contacts">
-    <h3 class="panel-title">Company Added<span class="badge pull-right coaddedrescount"></span></h3>
+    <h3 class="panel-title">Companies Added<span class="badge pull-right coaddedrescount"></span></h3>
     </div>
     <!-- /.panel-heading -->
     <div class="panel-body" style="font-size:12px;">
         <!--AUTO PILOT  -->
         <div class="row record-holder-header mobile-hide">
-            <div class="col-xs-8 col-sm-4 col-md-2"><strong>Created</strong></div>
-           
-            <div class="col-xs-4 col-sm-1 col-md-6"><strong>Company Name</strong></div>
+            <div class="col-xs-8 col-sm-4 col-md-2"><strong>Added</strong></div>
+            <div class="col-xs-4 col-sm-1 col-md-6"><strong>Company</strong></div>
             <div class="col-xs-6 col-sm-2 col-md-2"><strong>Pipeline</strong></div>
           
         </div>
@@ -421,9 +416,9 @@
     <div class="panel-body" style="font-size:12px;">
         <!--AUTO PILOT  -->
         <div class="row record-holder-header mobile-hide">
-            <div class="col-xs-8 col-sm-4 col-md-2"><strong>Created</strong></div>
+            <div class="col-xs-8 col-sm-4 col-md-2"><strong>Viewed</strong></div>
            
-            <div class="col-xs-4 col-sm-1 col-md-6"><strong>Company Name</strong></div>
+            <div class="col-xs-4 col-sm-1 col-md-6"><strong>Company</strong></div>
             <div class="col-xs-6 col-sm-2 col-md-2"><strong>Pipeline</strong></div>
           
         </div>
@@ -755,7 +750,7 @@
               <h3 class="panel-title">Favourites</h3>
                     <span class="badge pull-right sortform" style="margin-top: -22px; margin-left: 5px;">
                  <form><lable>Display By:</lable>
-                     <select type="dropdown" name="" >
+                     <select id="favoritesSelectBtn" >
                         
                          <option value>Company</option>
                          <option value="1">Pipeline</option>
@@ -771,7 +766,7 @@
        
    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">         
           <div class="row record-holder-header mobile-hide">
-                <div class="col-xs-8 col-sm-8 col-md-8"><strong>Company Name</strong></div>
+                <div class="col-xs-8 col-sm-8 col-md-5"><strong>Company</strong></div>
                 <div class="col-xs-4 col-sm-1 col-md-4"><strong>Pipeline</strong></div>
             </div>
         </div>
@@ -792,7 +787,7 @@
 
                 
                   <div class="row">
-                  <div class="col-xs-8">
+                  <div class="col-xs-5">
                         <a href="<?php echo site_url();?>companies/company?id=<?php echo $assigned->id;?>" <?php if(($current_user['new_window']=='t')): ?> target="_blank"<?php endif; ?> class="load-saved-search">
                   <?php $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' ); echo str_replace($words, ' ',$assigned->name); ?>
                   </div>
@@ -908,7 +903,7 @@
             
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-      <div class="row record-holder-proposals"></div>
+      <div class="row record-holder-proposals">loading...</div>
 </div>
 
 
@@ -955,7 +950,7 @@
         <div cl
         
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-      <div class="row record-holder-intents"></div>
+      <div class="row record-holder-intents">loading...</div>
 </div> 
         <!--AUTO PILOT END  -->
 </div>

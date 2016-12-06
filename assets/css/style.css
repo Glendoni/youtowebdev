@@ -638,17 +638,17 @@ h2.company-header a:hover {
 	margin-top: 10px;
 }
 .trading-header {
-	margin-bottom: 0;
-	padding-bottom: 0;
-	border-bottom: none;
-	text-align: center;
-	font-weight: 300;
-	margin-top: 0px;
-	    font-size: 1.2em
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+    text-align: center;
+    font-weight: 300;
+    margin-top: 0px;
+    font-size: 1.2em
 }
 
 .top-info-holder {
-	margin-bottom: 3px;
+	margin-bottom: 14px;
 	padding: 0 15px;
 }
 
@@ -1951,7 +1951,7 @@ display:none;
 }
 
 .panel-body {
-    padding: 25px 20px;
+    padding: 5px 20px;
 }
 
 
@@ -3301,6 +3301,10 @@ top: -20px;
 }
 .dashboardMainContent{
     
+    
+}
+#favoritesSelectBtn{
+    width:100px;
     
 }
 .qvlink li{float:left; margin-right:15px;  } 

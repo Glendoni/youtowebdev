@@ -1286,7 +1286,7 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
            if(actionType == 'Pipeline - Deal' || actionType == 'Pipeline - Proposal'  && (parseFloat(action['initial_fee']*100).toFixed(2))  != 0.00){ 
             if(typeof action['tfer_turnover'] !== 'undefined' ){
                 
-                console.log(action['tfer_turnover']);
+              
                 
                
                 
@@ -1300,7 +1300,7 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
            
                 }
                  
-                console.log(action['tfer_runners'])
+               
                 if(action['tfer_runners']  != null){
                 employees  =   '<span> Contractors  ' + action['tfer_runners']+' </span>' ;   
                         turnover = employees+' '+turnover+'<br>';

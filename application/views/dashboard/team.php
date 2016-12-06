@@ -44,15 +44,19 @@
           </div>
           <div class="panel-body">
             <form class="form-inline" role="form">
-            <div class="form-group col-md-3 col-sm-push-3">
+            <div class="form-group col-md-3 col-sm-push-3 ">
             <label for="start-date">From</label>
             <input type="text" class="form-control" id="start_date" data-date-format="DD-MM-YYYY" name="start_date" placeholder="" value="<?php echo  date('d-m-Y',strtotime($dates['start_date']));?>">
             </div>
-            <div class="form-group col-md-3 col-sm-push-2">
+            <div class="form-group col-md-3 col-sm-push-2" style="
+    margin-left: 10px;
+">
             <label for="end-date">To</label>
             <input type="text" class="form-control" id="end_date" data-date-format="DD-MM-YYYY" name="end_date" placeholder="" value="<?php echo  date('d-m-Y',strtotime($dates['end_date']));?>">
             </div>
-            <div class="form-group col-md-1 col-sm-push-1">
+            <div class="form-group col-md-1 col-sm-push-1" style="
+    margin-left: 0px;
+">
             <input type="hidden" name="search" value="3">
             <?php if (isset($_GET['user'])) { ?>
              <input type="hidden" name="user" value="<?php echo $_GET['user'];?>"> <?php
@@ -1872,9 +1876,9 @@
               <div class="panel-heading">
                   
               <h3 class="panel-title">Favourites</h3>
-                    <span class="badge pull-right sortform" style="margin-top: -22px; margin-left: 5px;">
+                    <span class="badge pull-right sortform" style="margin-top: -22px; margin-left: 0px;">
                  <form><lable>Display By:</lable>
-                     <select type="dropdown" name="" >
+                     <select   name="" >
                         
                          <option value>Company</option>
                          <option value="1">Pipeline</option>
@@ -1892,24 +1896,19 @@
 
                     <?php foreach ($assigned_companies as $assigned):?>
 
-                  <a href="<?php echo site_url();?>companies/company?id=<?php echo $assigned->id;?>" <?php if(($current_user['new_window']=='t')): ?> target="_blank"<?php endif; ?> class="load-saved-search">
-                  <div class="row">
-                  <div class="col-xs-8">
-                  <?php $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' ); echo str_replace($words, ' ',$assigned->name); ?>
-                  </div>
-                  <div class="col-xs-4">
-                  <span class="label label-<?php echo str_replace(' ', '', $assigned->pipeline); ?>" style="margin-top: 3px;"><?php echo $assigned->pipeline;?>
-                  <?php if (isset($company['customer_from'])):?> from <?php echo date("d/m/y",strtotime($company['customer_from']));?><?php endif; ?>
-                  </span>
-                  </div>
-                  </div>
-                  </a>
+                              <a href="<?php echo site_url();?>companies/company?id=<?php echo $assigned->id;?>" <?php if(($current_user['new_window']=='t')): ?> target="_blank"<?php endif; ?> class="load-saved-search">
+                              <div class="row">
+                              <div class="col-xs-8">
+                              <?php $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' ); echo str_replace($words, ' ',$assigned->name); ?>
+                              </div>
+                              <div class="col-xs-4">
+                              <span class="label label-<?php echo str_replace(' ', '', $assigned->pipeline); ?>" style="margin-top: 3px;"><?php echo $assigned->pipeline;?>
+                              <?php if (isset($company['customer_from'])):?> from <?php echo date("d/m/y",strtotime($company['customer_from']));?><?php endif; ?>
+                              </span>
+                              </div>
+                              </div>
+                              </a>
 
-
-
-
-
-                         
                       <?php endforeach ?>
                     <?php endif ?>
                 </div>

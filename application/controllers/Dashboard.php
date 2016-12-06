@@ -87,7 +87,7 @@ class Dashboard extends MY_Controller {
             $this->data['stats'] = $this->Actions_model->get_recent_stats('week', 'np');
             $this->data['ustats'] = $this->Actions_model->get_recent_stats('week', $permission);
             //$this->data['lastweekstats'] = $this->Actions_model->get_recent_stats('lastweek');
-            //$this->data['thismonthstats'] = $this->Actions_model->get_recent_stats('thismonth');
+//$this->data['thismonthstats'] = $this->Actions_model->get_recent_stats('thismonth');
             //$this->data['lastmonthstats'] = $this->Actions_model->get_recent_stats('lastmonth');
             if($_GET['search']) $this->data['getstatssearch'] = $this->Actions_model->get_recent_stats('search','np');
             if($_GET['search']) $this->data['ugetstatssearch'] = $this->Actions_model->get_recent_stats('search', 'uf');

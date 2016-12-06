@@ -156,9 +156,18 @@ $('.completed-details').val($('.editorAction').html())
     return Math.floor(new Date(date).getTime() / 1000);
 }
     
+    
+   
+    
 $(document).ready(function(){
     
         if((/dashboard/.test(window.location.href)) && (/dashboard\/team/.test(window.location.href)!= true)) {
+      //BACK BUTTON READER      
+dashboardTabLoader();
+            
+            
+            
+            
             $.ajax({
             type: "GET",
                 dataType: "json",
@@ -193,7 +202,7 @@ var customer_to =[];
 //name = vale.name_;
    name = vale.name_.replace(/Limited|Ltd|ltd|limited/gi, function myFunction(x){return ''});                      
 
-                     customer_deal.push('<div class="row record-holder"> <div class="col-xs-8 col-sm-4 col-md-1">'+vale.customer_from+'</div> <div class="col-xs-8 col-sm-4 col-md-1">'+customer_to+'</div><div class="col-xs-8 col-sm-4 col-md-2"><a href=companies/company?id='+vale.company_id+'>  '+name+'</a></div><div class="col-xs-4 col-sm-1 col-md-1">'+vale.initial_rate+'</div><div class="col-xs-6 col-sm-2 col-md-1"> '+vale.lead_source+'</div><div class="col-xs-6 col-sm-3 col-md-1">'+age_at_joining_months+'</div><div class="col-xs-12 col-sm-2 col-md-1">'+turnover+'</div><div class="col-xs-12 col-sm-2 col-md-1"> '+vale.class+'</div><div class="col-xs-12 col-sm-2 col-md-1">'+action+'<br>'+planned+'</div><div class="col-xs-12 col-sm-2 col-md-1">'+actioned+'</div><div class="col-xs-12 col-sm-2 col-md-1">'+by+'</div></div>');
+                     customer_deal.push('<div class="row record-holder"> <div class="col-xs-8 col-sm-4 col-md-1">'+vale.customer_from+'</div> <div class="col-xs-8 col-sm-4 col-md-1">'+customer_to+'</div><div class="col-xs-8 col-sm-4 col-md-2"><a href=companies/company?id='+vale.company_id+'>  '+name+'</a></div><div class="col-xs-12 col-sm-2 col-md-1"> '+vale.class+'</div><div class="col-xs-4 col-sm-1 col-md-1">'+vale.initial_rate+'</div><div class="col-xs-6 col-sm-2 col-md-1"> '+vale.lead_source+'</div><div class="col-xs-6 col-sm-3 col-md-1">'+age_at_joining_months+'</div><div class="col-xs-12 col-sm-2 col-md-1">'+planned+'</div><div class="col-xs-12 col-sm-2 col-md-1">'+actioned+'</div><div class="col-xs-12 col-sm-2 col-md-1">'+action+'</div><div class="col-xs-12 col-sm-2 col-md-1">'+by+'</div></div>');
                                            });
 
                     break;
@@ -243,6 +252,8 @@ var customer_to =[];
             
             $('.dashboard .btn-sm').click(function(){
  $('html, body').animate({scrollTop: $('.dashboardmaincontainer').offset().top -280 }, 'fast');   
+         var  dashboardButtonClicked  = $(this).attr('href');      
+       createCookie('94e5f7986ab2d1cba8be016aae11263c', dashboardButtonClicked,14);         
 })
           }
     
@@ -716,6 +727,44 @@ $('#agency_name').addClass('autocomplete-live');
 });
     }
 }
+    
+    
+     
+    
+     function dashboardTabLoader(){
+        
+        var readLastButtonClickedInDashboardHeaderMenuTab  = readCookie('94e5f7986ab2d1cba8be016aae11263c');
+        var LastMenuTabClicked = readLastButtonClickedInDashboardHeaderMenuTab.replace('#','.');
+        $(LastMenuTabClicked).trigger('click');
+        
+    }
+    
+    function createCookie(name, value, days) {
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                var expires = "; expires=" + date.toGMTString();
+            }
+            else var expires = "";               
+
+            document.cookie = name + "=" + value + expires + "; path=/";
+        }
+
+        function readCookie(name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+
+        function eraseCookie(name) {
+            createCookie(name, "", -1);
+        }
+    
 function getCompany(input_data){
     
     input_data =  input_data.replace(" ", "");
