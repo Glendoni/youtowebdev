@@ -19,7 +19,7 @@
               
                 <li role="presentation" class="active"><button href="#calls" aria-controls="calls" role="tab" data-toggle="tab" class="btn btn-primary btn-sm c-a-m calls" style="margin-right:10px;" >Schedule</button></li>
           
-                   <li role="presentation"><button href="#emailegagement" aria-controls="emailegagement" role="tab" data-toggle="tab" class="btn btn-primary btn-sm emailegagement" style="margin-right:10px;" onclick="ga('send','event','Clicks','Email Engagement','<?php echo $current_user['id'];?>')"> Engagement</button></li> 
+                 <!--  <li role="presentation"><button href="#emailegagement" aria-controls="emailegagement" role="tab" data-toggle="tab" class="btn btn-primary btn-sm emailegagement" style="margin-right:10px;" onclick="ga('send','event','Clicks','Email Engagement','<?php echo $current_user['id'];?>')"> Engagement</button></li>  -->
                   
                   
                    <li role="presentation"><button href="#dasboardviews" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm dasboardviews" style="margin-right:10px;" onclick="ga('send','event','Clicks','dasboardviews','<?php echo $current_user['id'];?>')">View</button></li>
