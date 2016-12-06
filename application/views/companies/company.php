@@ -12,7 +12,9 @@
 ">
                     <breadcrumbscroll>
                     <div class="row top-info-holder">
-                    <div class="col-md-9 piplineUdate" style="padding-left: 31px;">
+                    <div class="col-md-9 piplineUdate" style="    padding-left: 31px;
+    height: 20px;
+    margin-top: 6px;">
                                 <!-- <breadcrumbscroll> -->
     <h2 class="company-header" id="logo">
                 <?php $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' ); echo html_entity_decode (str_replace($words, ' ',$company['name'])); ?></h2>
@@ -168,7 +170,10 @@
         <!-- // POPUP BOXES -->
         </div><!--END TOP INFO HOLDER-->
   <div class="row">
-      <ul class="qvlink" style="margin-left: -15px; float:left; margin-top: -6px;">
+      <ul class="qvlink" style="    margin-left: -15px;
+    float: left;
+    margin-top: 2px;
+    margin-bottom: 0px;">
                                                     <li><a href"javascript:;"  data="qvfinancials"><i class="fa fa-money" aria-hidden="true"></i> Financials</a></li>
                                                     <li><a href"javascript:;"  data="addresses"><i class="fa fa-globe" aria-hidden="true"></i> Locations</a></li>
                                                     <li><a href"javascript:;"  data="contacts"><i class="fa fa-user" aria-hidden="true"></i> Contacts</a></li>
