@@ -991,7 +991,7 @@
 <!--END ASSIGNED-->
 </div><!--END TAB PANES-->
 </div><!--END-COL-SM-9-->
-    <div class="col-sm-3   dashboardSidebarCol">
+    <div class="col-sm-3   dashboardSidebarCol" style="display:none;">
     
     
     
