@@ -176,7 +176,7 @@ var customer_to =[];
                 var  actioned = [];
                  var  age_at_joining_months = [];
                 var by = [];
-    
+    var name = [];
                 $.each( data, function( key, val ) {
                       
                   
@@ -189,9 +189,11 @@ var customer_to =[];
                  action     = vale.action ? vale.action :  '';
                 actioned     = vale.actioned ? vale.actioned:  '';
          age_at_joining_months     = vale.age_at_joining_months ? vale.age_at_joining_months.replace(0,''):  '';
-                 by     = vale.by   ? vale.by: '';                        
+                 by     = vale.by   ? vale.by: '';  
+//name = vale.name_;
+   name = vale.name_.replace(/Limited|Ltd|ltd|limited/gi, function myFunction(x){return ''});                      
 
-                     customer_deal.push('<div class="row record-holder"> <div class="col-xs-8 col-sm-4 col-md-1">'+vale.customer_from+'</div> <div class="col-xs-8 col-sm-4 col-md-1">'+customer_to+'</div><div class="col-xs-8 col-sm-4 col-md-2"><a href=companies/company?id='+vale.company_id+'>  '+vale.name_+'</a></div><div class="col-xs-4 col-sm-1 col-md-1">'+vale.initial_rate+'</div><div class="col-xs-6 col-sm-2 col-md-1"> '+vale.lead_source+'</div><div class="col-xs-6 col-sm-3 col-md-1">'+age_at_joining_months+'</div><div class="col-xs-12 col-sm-2 col-md-1">'+turnover+'</div><div class="col-xs-12 col-sm-2 col-md-1"> '+vale.class+'</div><div class="col-xs-12 col-sm-2 col-md-1">'+action+'<br>'+planned+'</div><div class="col-xs-12 col-sm-2 col-md-1">'+actioned+'</div><div class="col-xs-12 col-sm-2 col-md-1">'+by+'</div></div>');
+                     customer_deal.push('<div class="row record-holder"> <div class="col-xs-8 col-sm-4 col-md-1">'+vale.customer_from+'</div> <div class="col-xs-8 col-sm-4 col-md-1">'+customer_to+'</div><div class="col-xs-8 col-sm-4 col-md-2"><a href=companies/company?id='+vale.company_id+'>  '+name+'</a></div><div class="col-xs-4 col-sm-1 col-md-1">'+vale.initial_rate+'</div><div class="col-xs-6 col-sm-2 col-md-1"> '+vale.lead_source+'</div><div class="col-xs-6 col-sm-3 col-md-1">'+age_at_joining_months+'</div><div class="col-xs-12 col-sm-2 col-md-1">'+turnover+'</div><div class="col-xs-12 col-sm-2 col-md-1"> '+vale.class+'</div><div class="col-xs-12 col-sm-2 col-md-1">'+action+'<br>'+planned+'</div><div class="col-xs-12 col-sm-2 col-md-1">'+actioned+'</div><div class="col-xs-12 col-sm-2 col-md-1">'+by+'</div></div>');
                                            });
 
                     break;
@@ -201,7 +203,8 @@ var customer_to =[];
 
                                $.each( val, function( keye, vale ) {
                                    //   console.log(vale);
-                                   coaddedres.push('<div class="row record-holder"> <div class="col-md-2">'+vale.created+'</div><div class="col-xs-4 col-sm-1 col-md-6"><a href="companies/company?id='+vale.company_id+'">'+vale.company_name+'</a></div><div class="col-xs-8 col-sm-4 col-md-4"><span class="label label-'+vale.pipeline+'" style="margin-top: 3px;"> '+vale.pipeline+' </span></div></div>');
+                                   name = vale.company_name.replace(/Limited|Ltd|ltd|limited/gi, function myFunction(x){return ''});
+                                   coaddedres.push('<div class="row record-holder"> <div class="col-md-2">'+vale.created+'</div><div class="col-xs-4 col-sm-1 col-md-6"><a href="companies/company?id='+vale.company_id+'">'+name+'</a></div><div class="col-xs-8 col-sm-4 col-md-4"><span class="label label-'+vale.pipeline+'" style="margin-top: 3px;"> '+vale.pipeline+' </span></div></div>');
                                });
 
 
@@ -209,7 +212,9 @@ var customer_to =[];
                         break;
                 case 'recent_viewed_companies':
                                          $.each( val, function( keye, vale ) {
-                 recent_viewed_companies.push('<div class="row record-holder"> <div class=" col-md-2">'+vale.visit_date+'</div><div class="col-xs-4 col-sm-1 col-md-6"><a href="companies/company?id='+vale.company_id+'">  '+vale.company_name+'</a></div><div class="col-xs-8 col-sm-4 col-md-2"><span class="label label-'+vale.pipeline+'" style="margin-top: 3px;"> '+vale.pipeline+' </span></div></div>');
+                                             
+                                              name = vale.company_name.replace(/Limited|Ltd|ltd|limited/gi, function myFunction(x){return ''});
+                 recent_viewed_companies.push('<div class="row record-holder"> <div class=" col-md-2">'+vale.visit_date+'</div><div class="col-xs-4 col-sm-1 col-md-6"><a href="companies/company?id='+vale.company_id+'">  '+name+'</a></div><div class="col-xs-8 col-sm-4 col-md-2"><span class="label label-'+vale.pipeline+'" style="margin-top: 3px;"> '+vale.pipeline+' </span></div></div>');
 
 
                                          })

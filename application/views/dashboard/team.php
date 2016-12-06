@@ -44,15 +44,15 @@
           </div>
           <div class="panel-body">
             <form class="form-inline" role="form">
-            <div class="form-group col-md-3">
+            <div class="form-group col-md-3 col-sm-push-3">
             <label for="start-date">From</label>
             <input type="text" class="form-control" id="start_date" data-date-format="DD-MM-YYYY" name="start_date" placeholder="" value="<?php echo  date('d-m-Y',strtotime($dates['start_date']));?>">
             </div>
-            <div class="form-group col-md-3">
+            <div class="form-group col-md-3 col-sm-push-2">
             <label for="end-date">To</label>
             <input type="text" class="form-control" id="end_date" data-date-format="DD-MM-YYYY" name="end_date" placeholder="" value="<?php echo  date('d-m-Y',strtotime($dates['end_date']));?>">
             </div>
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-1 col-sm-push-1">
             <input type="hidden" name="search" value="3">
             <?php if (isset($_GET['user'])) { ?>
              <input type="hidden" name="user" value="<?php echo $_GET['user'];?>"> <?php
@@ -230,7 +230,7 @@
         ?>
         <div class="panel panel-default ff">
         <div class="panel-heading">
-        <h3 class="panel-title">FF</h3>
+        <h3 class="panel-title">FF - Team of 6</h3>
         </div>
         <div class="panel-body" style="font-size:12px;">
         <div class="list-group">
@@ -713,7 +713,7 @@
         ?>
         <div class="panel panel-default uf">
         <div class="panel-heading">
-        <h3 class="panel-title">With Finance</h3>
+        <h3 class="panel-title">With Finance - Team of 7</h3>
         </div>
         <div class="panel-body" style="font-size:12px;">
         <div class="list-group">

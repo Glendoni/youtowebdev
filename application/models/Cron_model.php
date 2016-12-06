@@ -1219,13 +1219,7 @@ where M.provider_id = 2893 ';
         
     }
     
-    
-    
-    
-    
-    
-    
-    
+
         function cronpipelineUpdaternew($id,$pipeline){ 
      
          //Updates company table pipeline based on conditions in crontogo function 
