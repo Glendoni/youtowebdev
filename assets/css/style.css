@@ -3305,7 +3305,13 @@ top: -20px;
 }
 .qvlink li{float:left; margin-right:15px;  } 
 
-.qvlink{ padding-left:38%; margin-top -20px; }
+.qvlink{    width: 529px;
+    /* margin-right: auto; */
+    /* margin-left: auto; */
+    /* text-align: center; */
+    position: relative;
+    margin: auto;
+ }
 .qvlink a{color:#000; text-transform: none; cursor: pointer;}
 /*! Hint.css - v2.2.1 - 2016-03-26 //#2b4461
 * http://kushagragour.in/lab/hint/
