@@ -84,35 +84,51 @@
     <div id="wrapper">
         <!-- Navigation -->
 <!--<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">-->
- <?php  $stag_distinct = ''; if (ENVIRONMENT  =='staging' || ENVIRONMENT  =='development'){ $stag_distinct = 'background:#5cb85c;'; }?>
- <?php  if (ENVIRONMENT  =='development'){ $stag_distinct = 'background:#5153c5;'; }?>
+ <?php  $stag_distinct = ''; if (ENVIRONMENT  =='staging' || ENVIRONMENT  =='development'){ $stag_distinct = "background:#0971af;"; }?>
+ <?php  if (ENVIRONMENT  =='development'){ $stag_distinct = "background:#0971af;"; }?>
         
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0; <?php echo $stag_distinct; ?>">
 <!-- Brand and toggle get grouped for better mobile display -->
 <!--<div class="navbar-header">-->
 <div class="col-sm-3 col-md-3">
- <a class="navbar-brand" href="<?php echo site_url();?>" ><img src="<?php echo asset_url();?>images/baselist-logotype-black-transparent-bg.png" style="width:120px;">
-<?php if (isset($current_user)): ?>
+ <a class="navbar-brand" href="<?php echo site_url();?>" ><img src="<?php echo asset_url();?>images/baselist-logotype-black-transparent-bg.png" style="width:120px;"><br> <div style="    font-size: 10px;
+    font-weight: 300;
+    text-align: left;
+    line-height: 40px;
+    padding-left: 71px;
+    margin-top: -13px;">
+     <?php if (isset($current_user)): ?>
         <?php if (ENVIRONMENT  =='staging'){?>
 <div style="font-size: 10px;font-weight: 600;text-align: right;float: right;line-height: 40px;padding-left: 5px;">Staging</div>
 <?php
 } ?>
-      
+     
+     Version 5.0</div>
+    </a>
+     <a href="<?php echo site_url(); ?>dashboard/team" ><div class="btn btn-warning"style="margin-top: 15px;  margin-left: 2px;
+    padding: 2px 20px;">Team</div><br>  
  
-<div style="font-size: 10px;font-weight: 300;text-align: right;float: right;line-height: 40px;padding-left: 5px;">Version 4.3.1</div>
+     
+     
+
+      
+
+
 <?php endif; ?>
 </a>
+    
+   
+ 
 </div>
-
 
     <div class="col-sm-4 col-sm-push-5" >
             <!-- Top Menu Items -->
             <?php if (isset($current_user)): ?>
 
-        <ul class=" nav navbar-top-links navbar-right " >
+        <ul class=" nav navbar-top-links navbar-right  " >
                    
 
-                    <li class="dropdown">
+                    <li class="dropdown" style="display:none;">
                         <div class="btn-group">
                                   <button type="button" class="btn btn-default scheduleBtn" onclick="location.href='<?php echo site_url();?>dashboard&#35;calls'"><span class="myactivity">Scheduled  <span class="badge scheduleBadge"><?php echo count($pending_actions); ?></span></span></button>
                                   <button type="button" class="btn btn-default dropdown-toggle sublinkMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >

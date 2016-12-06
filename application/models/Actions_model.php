@@ -134,7 +134,7 @@ function get_actions_outstanding($company_id,$limit =100)
 
 function get_actions_completed($company_id)
 {
-    $category_exclude = array('7', '20','30');
+    $category_exclude = array( '20','30');
     $data = array(
         'a.company_id' => $company_id,
         );
@@ -157,7 +157,7 @@ function get_follow_up_actions($company_id) //Added by glen this has only one de
     $data = array(
         'a.company_id' => $company_id,
         );
-    $this->db->select('a.created_at,a.actioned_at,a.action_type_id,a.comments,a.outcome,a.cancelled_at,a.id,u.image,u.name,c.first_name,c.last_name,a.contact_id,a. followup_action_id, a.planned_at", ');
+    $this->db->select('a.created_at,a.actioned_at,a.action_type_id,a.comments,a.outcome,a.cancelled_at,a.id,u.image,u.name,c.first_name,c.last_name,a.contact_id,a.followup_action_id, a.planned_at", ');
     $this->db->join('contacts c', 'c.id = a.contact_id', 'left');
     $this->db->join('users u', 'a.user_id = u.id', 'left');
     $this->db->where('followup_action_id IS NOT NULL', null);
@@ -184,7 +184,7 @@ function get_actions_cancelled($company_id)
 function get_actions_marketing($company_id)
 {
     $sql = "select distinct ec.name as campaign_name, con.first_name, con.last_name,  
-    c.name, u.email,u.id as user_id,ec.date_sent,ec.sent_id, to_char(ec.date_sent, 'DAY DDth MONTH') as Date,ea.email_action_type as action,
+    c.name, u.email,u.id as user_id,ec.date_sent,ec.sent_id, to_char(ec.date_sent, 'DAY DDth MONTH') as Dater,to_char(ea.action_time, 'DAY DDth MONTH YYYY') as Date, ea.email_action_type as action,
     sum(case when email_action_type = '2' then 1 else 0 end) opened,
     sum(case when email_action_type = '3' then 1 else 0 end) clicked,
     sum(case when email_action_type = '3' and link ilike '%unsubscribe%' then 1 else 0 end) unsubscribed
@@ -196,7 +196,7 @@ function get_actions_marketing($company_id)
     where c.id = '$company_id'
     AND ec.name != 'pending'
     AND ea.action_time >= '2016-01-01'
-    group by 1,2,3,4,5,6,7,8,ea.email_action_type order by date_sent desc LIMIT 100";
+    group by 1,2,3,4,5,6,7,8,ea.email_action_type,action_time order by date_sent desc LIMIT 100";
     $query = $this->db->query($sql);
     if($query){
         return $query->result_array(); 
@@ -1256,9 +1256,9 @@ public function getActionsProposals($userID = 0){
         LEFT JOIN ACTION_TYPES AT
         ON TT2.action_type_id = AT.id
 
-        where customer_from is null
-        and (C.eff_to is null and active = \'t\')
-
+       where customer_from is null
+        and C.active = \'t\'
+		and pipeline = \'Intent\'
         order by 1 desc
         ');
     

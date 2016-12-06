@@ -766,7 +766,8 @@ $sql = 'select json_agg(results)
 
 		select row_to_json((
 		       T1."JSON output",
-		       T2."JSON output"
+		       T2."JSON output",
+               T3."JSON output"
 		       )) "company"
 		from 
 		(-- T1 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1053,6 +1054,46 @@ $sql = 'select json_agg(results)
 
 		)   T2 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		ON T1.id = T2."company id"
+        
+        	LEFT JOIN
+
+		(-- T3
+		select ct."company id",
+		       json_agg(
+			   row_to_json(
+			   row ( ct."category name",ct."tag id", ct."tag name", ct."added by", ct."created_at"))) "JSON output"  -- f46
+				 
+		from 
+		(-- CT
+			select ct.company_id "company id",
+		       tc.sequence,
+		       t.name "tag name",
+		       ct.id "tag id",
+		       tc.id,
+		       tc.name "category name",
+		       u.name "added by",  
+               t.created_at "created_at"  
+		FROM company_tags ct
+        LEFT JOIN tags t
+        ON ct.tag_id= t.id
+        LEFT JOIN tag_categories tc
+        ON t.category_id = tc.id
+        LEFT JOIN users u
+        ON ct.created_by = u.id
+		WHERE
+        ct.eff_to IS NULL 
+        AND t.eff_to IS NULL
+        ORDER BY tc.id asc, t.created_at asc
+
+
+		)   ct
+
+		group by CT."company id"	
+
+		order by CT."company id"
+
+		)   T3
+		ON T1.id = T3."company id"
  
 		order by "target created"desc
 		 

@@ -156,8 +156,175 @@ $('.completed-details').val($('.editorAction').html())
     return Math.floor(new Date(date).getTime() / 1000);
 }
     
+    
+   
+    
 $(document).ready(function(){
+    
+        if((/dashboard/.test(window.location.href)) && (/dashboard\/team/.test(window.location.href)!= true)) {
+      //BACK BUTTON READER      
+
+         dashboardTabLoader()   
+            
+            
+            
+            $.ajax({
+            type: "GET",
+                dataType: "json",
+            url: "Dashboard/workflow",
+            success: function(data) {
+                var action;
+                var coaddedres = [];
+                    var recent_viewed_companies = [];
+                    var customer_deal = [];
+                 var idfk;
+var customer_to =[];
+                var  turnover = [];
+                var  planned = [];
+                var  action = [];
+                var  actioned = [];
+                 var  age_at_joining_months = [];
+                var by = [];
+    var name = [];
+                $.each( data, function( key, val ) {
+                      
+                  
+                    switch (key) {
+    case 'customer_deal':
+    $.each( val, function( keye, vale ) {
+                 customer_to = vale.customer_to? vale.customer_to : '' ;
+                 turnover   = vale.turnover ? vale.turnover : '';
+                 planned    = vale.planned ? vale.planned :  ''; 
+                 action     = vale.action ? vale.action :  '';
+                actioned     = vale.actioned ? vale.actioned:  '';
+         age_at_joining_months     = vale.age_at_joining_months ? vale.age_at_joining_months.replace(0,''):  '';
+                 by     = vale.by   ? vale.by: '';  
+//name = vale.name_;
+   name = vale.name_.replace(/Limited|Ltd|ltd|limited/gi, function myFunction(x){return ''});                      
+
+                     customer_deal.push('<div class="row record-holder"> <div class="col-xs-8 col-sm-4 col-md-1">'+vale.customer_from+'</div> <div class="col-xs-8 col-sm-4 col-md-1">'+customer_to+'</div><div class="col-xs-8 col-sm-4 col-md-2"><a href=companies/company?id='+vale.company_id+'>  '+name+'</a></div><div class="col-xs-12 col-sm-2 col-md-1"> '+vale.class+'</div><div class="col-xs-4 col-sm-1 col-md-1">'+vale.initial_rate+'</div><div class="col-xs-6 col-sm-2 col-md-1"> '+vale.lead_source+'</div><div class="col-xs-6 col-sm-3 col-md-1">'+age_at_joining_months+'</div><div class="col-xs-12 col-sm-2 col-md-1">'+planned+'</div><div class="col-xs-12 col-sm-2 col-md-1">'+actioned+'</div><div class="col-xs-12 col-sm-2 col-md-1">'+action+'</div><div class="col-xs-12 col-sm-2 col-md-1">'+by+'</div></div>');
+                                           });
+
+                    break;
+                    case 'companies_added':
+
+
+
+                               $.each( val, function( keye, vale ) {
+                                   //   console.log(vale);
+                                   name = vale.company_name.replace(/Limited|Ltd|ltd|limited/gi, function myFunction(x){return ''});
+                                   coaddedres.push('<div class="row record-holder"> <div class="col-md-2">'+vale.created+'</div><div class="col-xs-4 col-sm-1 col-md-6"><a href="companies/company?id='+vale.company_id+'">'+name+'</a></div><div class="col-xs-8 col-sm-4 col-md-4"><span class="label label-'+vale.pipeline+'" style="margin-top: 3px;"> '+vale.pipeline+' </span></div></div>');
+                               });
+
+
+                                       //  
+                        break;
+                case 'recent_viewed_companies':
+                                         $.each( val, function( keye, vale ) {
+                                             
+                                              name = vale.company_name.replace(/Limited|Ltd|ltd|limited/gi, function myFunction(x){return ''});
+                 recent_viewed_companies.push('<div class="row record-holder"> <div class=" col-md-2">'+vale.visit_date+'</div><div class="col-xs-4 col-sm-1 col-md-6"><a href="companies/company?id='+vale.company_id+'">  '+name+'</a></div><div class="col-xs-8 col-sm-4 col-md-2"><span class="label label-'+vale.pipeline+'" style="margin-top: 3px;"> '+vale.pipeline+' </span></div></div>');
+
+
+                                         })
+
+                                              break;   
+                                    }
+                
+                });
+                   
+             //   Revision 1
+                 $('#coaddedres').html(coaddedres.join( "" ));
+                 $('#customer_deal').html(customer_deal.join( "" ));
+                
+                 $('#recent_viewed_companies').html(recent_viewed_companies.join( "" ));
+ 
+//Glen
+                $('.customerdealcount').html(customer_deal.length); //update engagement counter
+                $('.coaddedrescount').html(coaddedres.length); //update engagement counter
+                
+                $('.dasboardviewscount').html(recent_viewed_companies.length); //update engagement counter
+            }
+    
+        });
+            
+            
+            
+            $('.dashboard .btn-sm').click(function(){
+ $('html, body').animate({scrollTop: $('.dashboardmaincontainer').offset().top -280 }, 'fast');   
+         var  dashboardButtonClicked  = $(this).attr('href');      
+       createCookie('94e5f7986ab2d1cba8be016aae11263c', dashboardButtonClicked,14);         
+})
+          
+        
+       
+        
+        }
+    
+     $('.dashboardSidebarCol').hide()
+      if($('.dashboard .active button').attr('aria-controls') == "calls"){
+          
+           $('.dashboardSidebarCol').show()
+       
+      }else{
+        
+           $('.dashboardMainContent').addClass('col-sm-12')
+            $('.dashboardMainContent').removeClass('col-sm-9')
+                    $('.dashboardMainContent').addClass('col-sm-12')
+      }
+  
+        $('.btn-sm').click(function(){
+        
+        if($(this).attr('aria-controls') ==  'calls'){
+ 
+
+                    $('.dashboardSidebarCol').show()
+                  //  $('.dashboardMainContent').addClass('col-sm-push-3')
+                    $('.dashboardMainContent').addClass('col-sm-9')
+                    $('.dashboardMainContent').removeClass('col-sm-12')
+ 
+
+}else{
+    
+     $('.dashboardSidebarCol').hide()
+                   // $('.dashboardMainContent').removeClass('col-sm-push-3')
+                    $('.dashboardMainContent').removeClass('col-sm-9')
+                    $('.dashboardMainContent').addClass('col-sm-12')
+    
+    
+}
+
+
+    });
+ 
+    
+    
       
+  
+        $('.btn-sm').click(function(){
+        
+        if($(this).attr('aria-controls') ==  'calls'){
+ 
+
+                    $('.dashboardSidebarCol').show()
+                   // $('.dashboardMainContent').addClass('col-sm-push-3')
+                    $('.dashboardMainContent').addClass('col-sm-9')
+                    $('.dashboardMainContent').removeClass('col-sm-12')
+ 
+
+}else{
+    
+     $('.dashboardSidebarCol').hide()
+                    //$('.dashboardMainContent').removeClass('col-sm-push-3')
+                    $('.dashboardMainContent').removeClass('col-sm-9')
+                    $('.dashboardMainContent').addClass('col-sm-12')
+    
+    
+}
+
+
+    });
+    
     
 var scheduleTotal  =  parseInt($('.scheduleBadge').text());
  
@@ -283,7 +450,7 @@ $('.scheduleBtn').removeAttr('onClick').css('font-style', 'italic');
         var location = $(this).attr('data');
       //$('html, body').animate({scrollTop: $('#'+location).offset().top -280 }, 'slow');
        // $(".qv").slideToggle();  
-               
+           
                
     })
        
@@ -481,6 +648,12 @@ function bindFavorites(){
 <!--EMAIL DUPLICATE CHECK-->
  <script type="text/javascript">
     $(document).ready(function() {
+
+
+
+
+
+
         
         $('.search_box_cancel').click(function(){
                 $('#agency_name').val('');
@@ -567,6 +740,49 @@ $('#agency_name').addClass('autocomplete-live');
 });
     }
 }
+    
+    
+     
+    
+     function dashboardTabLoader(){
+        
+        var readLastButtonClickedInDashboardHeaderMenuTab  = readCookie('94e5f7986ab2d1cba8be016aae11263c');
+        
+if(readLastButtonClickedInDashboardHeaderMenuTab){
+var LastMenuTabClicked = readLastButtonClickedInDashboardHeaderMenuTab.replace('#','.');
+         
+        $(LastMenuTabClicked).trigger('click');
+    
+}
+        
+    }
+    
+    function createCookie(name, value, days) {
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                var expires = "; expires=" + date.toGMTString();
+            }
+            else var expires = "";               
+
+            document.cookie = name + "=" + value + expires + "; path=/";
+        }
+
+        function readCookie(name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+
+        function eraseCookie(name) {
+            createCookie(name, "", -1);
+        }
+    
 function getCompany(input_data){
     
     input_data =  input_data.replace(" ", "");
@@ -848,7 +1064,7 @@ function saveCompanyHandler(){$('.ch_drop_title').css('background','#7fe3d5');$(
 });
     </script>
  <?php //if(ENVIRONMENT !== 'production'): ?>
-  <?php if($current_user['permission'] == 'admin'): ?>
+  <?php if($current_user['permission'] == 'admin' || ENVIRONMENT == 'development'): ?>
     <div class="alert alert-warning" role="alert">
     <p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>
     </div> <?php endif; ?>

@@ -12,7 +12,9 @@
 ">
                     <breadcrumbscroll>
                     <div class="row top-info-holder">
-                    <div class="col-md-9 piplineUdate" style="padding-left: 31px;">
+                    <div class="col-md-9 piplineUdate" style="    padding-left: 31px;
+    height: 20px;
+    margin-top: 6px;">
                                 <!-- <breadcrumbscroll> -->
     <h2 class="company-header" id="logo">
                 <?php $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' ); echo html_entity_decode (str_replace($words, ' ',$company['name'])); ?></h2>
@@ -168,6 +170,22 @@
         <!-- // POPUP BOXES -->
         </div><!--END TOP INFO HOLDER-->
   <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+
+
+      <ul class="qvlink" style="">
+                                                    <li><a href"javascript:;"  data="qvfinancials"><i class="fa fa-money" aria-hidden="true"></i> Financials</a></li>
+                                                    <li><a href"javascript:;"  data="addresses"><i class="fa fa-globe" aria-hidden="true"></i> Locations</a></li>
+                                                    <li><a href"javascript:;"  data="contacts"><i class="fa fa-user" aria-hidden="true"></i> Contacts</a></li>
+                                                    
+                                                    <li><a href"javascript:;"  data="add_action"><i class="fa fa-calendar" aria-hidden="true"></i> Add Action</a></li>
+                                                    <li><a href"javascript:;"  data="actions"><i class="fa fa-info-circle" aria-hidden="true"></i> Actions</a></li>
+                                                    </ul>
+
+      
+      </div>
+      
         <?php if (isset($company['parent_name'])): ?>
         <div class="subsidiary">
         <span class="label label-danger"><a href="<?php echo site_url();?>companies/company?id=<?php echo $company['parent_id'];?>" target="_blank">Subsidiary of <?php echo $company['parent_name'];?> <i class="fa fa-external-link"></i></a></span>
@@ -330,6 +348,14 @@ if ($your_date < $now){;
 	<?php if (($current_user['department']) =='support' && isset($company['zendesk_id'])): ?>
 			<a class="btn  btn-info btn-sm btn-block zendesk" href="https://sonovate.zendesk.com/agent/organizations/<?php echo $company['zendesk_id'] ?>"  target="_blank">ZenDesk</a>
 			<?php endif; ?>
+             <?php if (isset($company['url'])): ?>
+		<a class="btn btn-default btn-sm btn-block btn-url" href="<?php $parsed = parse_url($company['url']); if (empty($parsed['scheme'])) { echo 'http://' . ltrim($company['url'], '/'); }else{ echo $company['url']; } ?>" target="_blank">
+		<label style="margin-bottom:0;"></label> <?php echo str_replace("http://"," ",str_replace("www.", "", $company['url']))?>
+		</a>
+		<?php else: ?>
+    <a class="btn  btn-default btn-sm btn-block " href="https://www.google.co.uk/search?q=<?php echo urlencode(htmlspecialchars_decode($company['name'], ENT_QUOTES));  ?>"  target="_blank">Google <i class="fa fa-search" aria-hidden="true"></i></a>
+            <?php endif; ?>
+            
 			<?php if (isset($company['linkedin_id'])): ?>
 			<a class="btn  btn-info btn-sm btn-block linkedin" href="https://www.linkedin.com/company/<?php echo $company['linkedin_id'] ?>"  target="_blank">LinkedIn</a>
             <?php else: ?>
@@ -338,13 +364,7 @@ if ($your_date < $now){;
 
               <a class="btn  btn-primary btn-sm btn-block" href="https://www.linkedin.com/vsearch/f?type=all&keywords=<?php echo  urlencode($name_no_ltd) ?>"  target="_blank">LinkedIn <i class="fa fa-search" aria-hidden="true"></i> </a>
             <?php endif; ?>
-					 <?php if (isset($company['url'])): ?>
-		<a class="btn btn-default btn-sm btn-block btn-url" href="<?php $parsed = parse_url($company['url']); if (empty($parsed['scheme'])) { echo 'http://' . ltrim($company['url'], '/'); }else{ echo $company['url']; } ?>" target="_blank">
-		<label style="margin-bottom:0;"></label> <?php echo str_replace("http://"," ",str_replace("www.", "", $company['url']))?>
-		</a>
-		<?php else: ?>
-    <a class="btn  btn-default btn-sm btn-block " href="https://www.google.co.uk/search?q=<?php echo urlencode(htmlspecialchars_decode($company['name'], ENT_QUOTES));  ?>"  target="_blank">Google <i class="fa fa-search" aria-hidden="true"></i></a>
-            <?php endif; ?>
+					
 			
 			<?php if (isset($company['registration'])): ?>
 			<a class="btn  btn-info btn-sm btn-block companieshouse" href="https://beta.companieshouse.gov.uk/company/<?php echo $company['registration'] ?>" target="_blank">Companies House</a>
@@ -406,10 +426,27 @@ if ($your_date < $now){;
 			if(isset($company['sectors'])){
 	 
             echo '<div class="sectorsPlainText">';
+                
+                
+             //print_r($not_target_sectors_list);
             foreach (array_reverse($company['sectors']) as $key => $name)
 				{
-				echo  $name.'<br>' ;
+				//echo  $name.$key.'<br>' ;
+                
+              if(in_array($name,$not_target_sectors_list)){
+                  
+               $notinsec[] = '<span class="notsector" style=" "> '.$name.'</span> <br>'  ;  
+              }else{
+                  
+                $insec[] =  '<span  class="issector" style="color: green;  "> '.$name.' </span><br>' ;   
+                  
+              }
+                
 				}
+                
+                   echo join($insec, '');
+                echo join($notinsec, '');
+             
             
              echo '</div>';
         }
@@ -437,17 +474,6 @@ if ($your_date < $now){;
 		<div class="row">
 		<div class="col-xs-12 details" >
 		 
-            
-
-            
-            
-            
-            
-
-	
-            
-
-            
                <div class="subcont"> 
 
                     <!-- <h4 class="ta"></h4> -->

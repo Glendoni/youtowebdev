@@ -1,6 +1,7 @@
 <?php if(empty($companies)): ?>
 	<div class="alert alert-warning">No companies found</div>
 <?php else: ?>
+<?php $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' ); ?>
 <?php $i = 0; foreach ( $companies as $company):  ?>
 <?php $this->load->view('companies/edit_box.php',array('company'=>$company)); ?>
 <?php $this->load->view('companies/create_contact_box.php',array('company'=>$company)); ?>
@@ -191,10 +192,7 @@
 
                                     </div>
                                 </div>
-                        
-                        
-                        
-                        
+                     
                     <div class="col-md-4 col-lg-5 col-sm-4">
                         <div><strong> Scheduled</strong></div>
                         <?php if (empty($company['planned_at2'])): ?>
@@ -228,17 +226,7 @@
                         <?php endif; ?>
 
                 </div>
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
+                       
                 <div class="col-sm-3" style="margin-top:10px;">
                                             <?php $this->load->view('companies/actions_box_list.php',array('company'=>$company)); ?>
                                             <!-- LINKS AND BTN -->
@@ -248,14 +236,7 @@
                                                 <?php if (($current_user['department']) =='support' && isset($company['zendesk_id'])): ?>
                                                     <a class="btn  btn-info btn-sm btn-block zendesk" href="https://sonovate.zendesk.com/agent/organizations/<?php echo $company['zendesk_id'] ?>"  target="_blank">ZenDesk</a>
                                                 <?php endif; ?>
-                                                <?php if (isset($company['linkedin_id'])): ?>
-                                                    <a class="btn  btn-info btn-sm btn-block linkedin" href="https://www.linkedin.com/company/<?php echo $company['linkedin_id'] ?>"  target="_blank">LinkedIn</a>
-                                                  <?php else: ?>
-                                                    <a class="btn  btn-primary btn-sm btn-block" href="https://www.linkedin.com/vsearch/f?type=all&keywords=<?php echo  urlencode($company['name']) ?>"  target="_blank">LinkedIn <i class="fa fa-search" aria-hidden="true"></i> </a>
-                                                <?php endif; ?>
-
-
-                                                        <?php if (isset($company['url'])): ?>
+                       <?php if (isset($company['url'])): ?>
                                                                 <a class="btn btn-default btn-sm btn-block btn-url" href="<?php $parsed = parse_url($company['url']); if (empty($parsed['scheme'])) { echo 'http://' . ltrim($company['url'], '/'); }else{ echo $company['url']; } ?>" target="_blank">
                                                                 <label style="margin-bottom:0;"></label> <?php echo str_replace("http://"," ",str_replace("www.", "", $company['url']))?>
                                                                 </a>
@@ -263,8 +244,13 @@
 
                                                         <a class="btn  btn-default btn-sm btn-block " href="https://www.google.co.uk/search?q=<?php echo urlencode(htmlspecialchars_decode($company['name'], ENT_QUOTES));  ?>"  target="_blank">Google <i class="fa fa-search" aria-hidden="true"></i></a>
                                             <?php endif; ?>
-                                                <?php if (isset($company['registration'])): ?>
-                                <a class="btn  btn-info btn-sm btn-block companieshouse" href="https://beta.companieshouse.gov.uk/company/<?php echo $company['registration'] ?>" target="_blank">Companies House</a>
+                                                <?php if (isset($company['linkedin_id'])): ?>
+                                                    <a class="btn  btn-info btn-sm btn-block linkedin" href="https://www.linkedin.com/company/<?php echo $company['linkedin_id'] ?>"  target="_blank">LinkedIn</a>
+                                                  <?php else: ?>
+                                                    <a class="btn  btn-primary btn-sm btn-block" href="https://www.linkedin.com/vsearch/f?type=all&keywords=<?php echo  urlencode($company['name']) ?>"  target="_blank">LinkedIn <i class="fa fa-search" aria-hidden="true"></i> </a>
+                                                <?php endif; ?>
+                                <?php if (isset($company['registration'])): ?>
+                                    <a class="btn  btn-info btn-sm btn-block companieshouse" href="https://beta.companieshouse.gov.uk/company/<?php echo $company['registration'] ?>" target="_blank">Companies House</a>
                                                 <?php endif; ?>
 			</div><!--CLOSE MD-3-->
                         
@@ -279,7 +265,7 @@
 <div class="col-md-4">
 <label>Registered Name</label>
 <p style="margin-bottom:0;">	
-<?php echo $company['name']; ?>
+<?php echo str_replace($words, '',$company['name']); ?>
 </p>
 </div><!--END NAME-->
 <div class="col-md-4">
@@ -294,7 +280,7 @@
 <div class="col-md-4">
 <label>Registered Name</label>
 <p style="margin-bottom:10px;">	
-<?php echo $company['name']; ?>
+<?php echo str_replace($words, '',$company['name']); ?>
 </p>
 </div><!--END NAME-->
 <?php endif; ?>
@@ -385,11 +371,23 @@
 			<strong>Sectors</strong> <br>
 			<?php 
 			if(isset($company['sectors'])){
-				foreach ($company['sectors'] as $key => $name)
+		foreach (array_reverse($company['sectors']) as $key => $name)
 				{
-                    //print_r($company);
-				echo '<div class="sectorsPlainText sectorEntry_'.$company['id'].'">'.$name.'</div>';
+				//echo  $name.$key.'<br>' ;
+                
+              if(in_array($name,$not_target_sectors_list)){
+                  
+               $notinsec[] = '<span class="notsector" style=" "> '.$name.'</span> <br>'  ;  
+              }else{
+                  
+                $insec[] =  '<span  class="issector" style="color: green;  "> '.$name.' </span><br>' ;   
+                  
+              }
+                
 				}
+                
+                echo join($insec, '');
+                echo join($notinsec, '');
 			}
 			?>
 							 
@@ -412,7 +410,7 @@
     <ul class="listTagSummary">
   
    <?php foreach ($company['tags'] as $tag):
-   if (!empty($tag['name'])) {?>
+   if (true) {?>
 
 <li class="subTags">
 <div class="hint--top-right" data-hint=" <?php echo $tag['created_by'] . ' on ' .date( 'dS M Y', strtotime($tag['created_at'])); ?>">

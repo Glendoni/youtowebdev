@@ -102,7 +102,7 @@ a.anchor {
 .navbar-default .navbar-brand {
     color: #f7f7f7;
     font-weight: bold;
-    margin-top: 5px;
+    margin-top: 0px;
 }
 
 .panel-default>.panel-heading {
@@ -339,7 +339,8 @@ ul.nav.navbar-top-links.navbar-right {
 	/*border-color: #ebccd1;*/
 
     background-color: rgba(242, 222, 222, 0.63);
-    border-color: rgba(235, 204, 209, 0.56)
+    border-color: rgba(235, 204, 209, 0.56);
+    padding: 3px;
 }
 
 .pipeline-update {
@@ -370,7 +371,7 @@ a.btn.btn-block.clear-fields {
 
 
 .target_sectors .btn.btn-checkbox.btn-primary.active {
-	background-color: #428bca;;
+	background-color: #037f03;
 	border-color: #fff;
 }
 
@@ -637,17 +638,17 @@ h2.company-header a:hover {
 	margin-top: 10px;
 }
 .trading-header {
-	margin-bottom: 0;
-	padding-bottom: 0;
-	border-bottom: none;
-	text-align: center;
-	font-weight: 300;
-	margin-top: 0px;
-	    font-size: 1.2em
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+    text-align: center;
+    font-weight: 300;
+    margin-top: 0px;
+    font-size: 1.2em
 }
 
 .top-info-holder {
-	margin-bottom: 0px;
+	margin-bottom: 14px;
 	padding: 0 15px;
 }
 
@@ -1950,7 +1951,7 @@ display:none;
 }
 
 .panel-body {
-    padding: 25px 20px;
+    padding: 5px 20px;
 }
 
 
@@ -2541,7 +2542,7 @@ breadcrumbscroll {
   -ms-transition: height 0.3s;
   -o-transition: height 0.3s;
   transition: height 0.3s;
-  padding: 20px 0;
+  padding: 9px 0;
   box-sizing: border-box;
 	box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     border-bottom: 1px solid #ccc;
@@ -3293,6 +3294,29 @@ top: -20px;
     
     
 }
+.dashboardSidebarCol{
+    
+    
+    
+}
+.dashboardMainContent{
+    
+    
+}
+#favoritesSelectBtn{
+    width:100px;
+    
+}
+.qvlink li{float:left; margin-right:15px;  } 
+
+.qvlink{    width: 529px;
+    /* margin-right: auto; */
+    /* margin-left: auto; */
+    /* text-align: center; */
+    position: relative;
+    margin: auto;
+ }
+.qvlink a{color:#000; text-transform: none; cursor: pointer;}
 /*! Hint.css - v2.2.1 - 2016-03-26 //#2b4461
 * http://kushagragour.in/lab/hint/
 * Copyright (c) 2016 Kushagra Gour; Licensed  */

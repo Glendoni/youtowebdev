@@ -676,8 +676,8 @@ $(".pipeline-validation-check").change(function() {
     ////////End stats counter//////////////////////
     var autopilotEmailCompany = window.location.href.split("id="); 
 
-    if((/dashboard/.test(window.location.href))) {
-        
+    
+           if((/dashboard/.test(window.location.href)) && (/dashboard\/team/.test(window.location.href)!= true)) {
          $('.mycampaignajaxcount').html('<img style="-webkit-user-select: none" src="assets/images/ajax-loader.gif">');
        $('.myevergreencount').html('<img style="-webkit-user-select: none" src="assets/images/ajax-loader.gif">');
                 
@@ -719,22 +719,6 @@ $(".pipeline-validation-check").change(function() {
                 }
                 }
             });
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-       
-        
-        
-        
-        
         
         
         
@@ -781,17 +765,18 @@ uimage = val.image.split(',')
         success: function(data) {
             var planned_at;
             var  createdAt; 
+            var company_name = [];
             var pipleine =  ['intents', 'proposals'];
   //console.log(data.intents);
             if(!typeof data.intents != 'undefined'){
  
             $.each( pipleine, function(  index, keyval ) {
-   
+    $('.record-holder-'+keyval).html('');
              $.each( data[keyval], function( key, val ) {
                  
                createdAt = val.intent ? val.intent : val.proposal;
-                 
-    $('.record-holder-'+keyval).append('<div class="row record-holder"><div class="col-xs-2 col-sm-2 col-md-2">'+createdAt+'</div><div class="col-xs-4 col-sm-4 col-md-4"><a href="companies/company?id='+val.id+'">'+val.name+'</a></div><div class="col-xs-2 col-sm-2 col-md-2  "><span class="pipeline ">'+(val.planned ? val.planned : '') +'</span></div><div class="col-xs-2 col-sm-2 col-md-2  "><span class="pipeline ">'+ (val.action ? val.action : '')  +'</span></div><div class="col-xs-2 col-sm-2 col-md-2  "><span class="pipeline ">'+(val.by ? val.by : '')   +'</span></div></div>');
+                    company_name = val.name.replace(/Limited|Ltd|ltd|limited/gi, function myFunction(x){return ''});
+    $('.record-holder-'+keyval).append('<div class="row record-holder"><div class="col-xs-2 col-sm-2 col-md-2">'+createdAt+'</div><div class="col-xs-4 col-sm-4 col-md-4"><a href="companies/company?id='+val.id+'">'+company_name+'</a></div><div class="col-xs-2 col-sm-2 col-md-2  "><span class="pipeline ">'+(val.planned ? val.planned : '') +'</span></div><div class="col-xs-2 col-sm-2 col-md-2  "><span class="pipeline ">'+ (val.action ? val.action : '')  +'</span></div><div class="col-xs-2 col-sm-2 col-md-2  "><span class="pipeline ">'+(val.by ? val.by : '')   +'</span></div></div>');
            
              })
                     var record_holder_propsals_length =    $('.record-holder-'+keyval+' .record-holder').length;
@@ -832,7 +817,7 @@ uimage = val.image.split(',')
       
         
         
-        
+       
         
         
         $.ajax({
@@ -858,11 +843,18 @@ uimage = val.image.split(',')
 
         });
 
+               
+               
+                     }
+        
+        
+        if((/dashboard/.test(window.location.href))&& (/dashboard\/team/.test(window.location.href)== true)){
+               
         //GET TEAM STATS VIA JSON
        $.ajax({
             type: "GET",
                 dataType: "json",
-            url: "dashboard/getTeamStats",
+            url: "getTeamStats",
             success: function(data) {
                 $.each( data, function( key, val ) {
             //key = tslastweek, tscurrentmonth , tslastmonth
@@ -873,12 +865,12 @@ uimage = val.image.split(',')
             }
         });
         
-        
+      
         
            $.ajax({
             type: "GET",
                 dataType: "json",
-            url: "dashboard/getTeamStats/uf",
+            url: "getTeamStats/uf",
             success: function(data) {
                 $.each( data, function( key, val ) {
             //key = tslastweek, tscurrentmonth , tslastmonth
@@ -888,16 +880,21 @@ uimage = val.image.split(',')
                tsTotalConfig();
             }
         });
+            
+           } 
+    
+    
+     if((/dashboard/.test(window.location.href))&& (/dashboard\/team/.test(window.location.href)!= true)){
          //GET TEAM STATS END 
-            getUserFavourites();   
+            getUserFavourites();   //trigger favorites 
         $('.sortform form select').change(function(){
-            getUserFavourites(); 
+            getUserFavourites(); //Trigger alt sort on change
 
-})
+        })
         
         
-        
-    }
+     }
+   
     if(autopilotEmailCompany[1]){ 
     var myParam = window.location.href.split("id=");
     var action ;
@@ -995,7 +992,7 @@ uimage = val.image.split(',')
 
 //console.log()
                         if($('#action-error').css('display') != 'none'){
-                        event.preventDefault();
+                            event.preventDefault();
                         }
 
 
@@ -1010,6 +1007,14 @@ function getUserFavourites(){ // Dashbord favorites
     var order = $('.sortform form select').val();
     var pipeline = [];
         var favourites = [];
+    var company_name  = [];
+    
+        var Customer  = [];
+        var Proposal = [];
+        var Intent  = [];
+        var Prospect  = [];
+        var Suspect = [];
+    var interface = [];
         $.ajax({
             type: "GET",
                 dataType: "json",
@@ -1017,12 +1022,50 @@ function getUserFavourites(){ // Dashbord favorites
             success: function(data) {
                 
                 $.each( data, function( key, val ) {
+                     company_name = val.name.replace(/Limited|Ltd|ltd|limited/gi, function myFunction(x){return ''});
+                    
+                    
                     pipeline =   val.pipeline ? val.pipeline : '';
-                    favourites.push('<a href="companies/company?id='+val.id+'" class="load-saved-search"> <div class="row"> <div class="col-xs-8">'+val.name+'</div><div class="col-xs-4"> <span class="label label-'+pipeline+'" style="margin-top: 3px;"> '+pipeline+' </span> </div></div></a>');     
+                    
+                    
+                    interface  = '<a href="companies/company?id='+val.id+'" class="load-saved-search"> <div class="row"> <div class="col-xs-6">'+company_name +'</div><div class="col-xs-4"> <span class="label label-'+pipeline+'" style="margin-top: 3px;"> '+pipeline+' </span> </div></div></a>';
+                    
+                     if(!order){
+                     favourites.push(interface);
+                     }
+                    
+                    if(order){
+                    if(val.pipeline == 'Customer') Customer.push(interface);
+                     if(val.pipeline == 'Proposal') Proposal.push(interface);
+                     if(val.pipeline == 'Intent') Intent.push(interface);
+                     if(val.pipeline == 'Prospect')Prospect.push(interface);
+                     if(val.pipeline == 'Suspect')Suspect.push(interface);
+                    
+                    }
                 }) 
                 
-                    $('#assigned .panel-body').html('');
-                    $('#assigned .panel-body').prepend(favourites.join(""));
+                
+                //console.log(Customer.join(""))
+                
+                    $('#assigned .panel-body').html('');   
+                
+                if(!order){
+                $('#assigned .panel-body').prepend(favourites.join(""));
+                }
+                if(order){
+                       $('#assigned .panel-body').prepend(Suspect.join(""));
+                      $('#assigned .panel-body').prepend(Prospect.join(""));
+                    $('#assigned .panel-body').prepend(Intent.join(""));
+                    $('#assigned .panel-body').prepend(Proposal.join(""));
+                $('#assigned .panel-body').prepend(Customer.join(""));
+                  
+                
+              
+                 
+                }
+                
+              
+              
 
                     var favouritesCount =  $('#assigned .panel-body a').length;
 
@@ -1030,6 +1073,7 @@ function getUserFavourites(){ // Dashbord favorites
                         var favouritesCount = $('#assigned .panel-body a').length;
                         $('.favouritesCount').text(favouritesCount);
                         $('.sortform').show();
+                    
                     }else{
 
                         $('.sortform').hide();
