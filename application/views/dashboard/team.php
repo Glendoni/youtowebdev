@@ -187,7 +187,7 @@
                             <div class="col-md-3">
                             <?php foreach ($getusermeetings as $get_user_meetings): ?>
                               <li class="user-stat-holder">
-                            <div class="user-stat company"><a href="companies/company?id=<?php echo $get_user_meetings['id'] ?>"  <?php if(($current_user['new_window']=='t')): ?> target="_blank"<?php endif; ?>><?php echo $get_user_meetings['name'];?></a></div>
+                            <div class="user-stat company"><a href="<?php echo site_url(); ?>companies/company?id=<?php echo $get_user_meetings['id'] ?>"  <?php if(($current_user['new_window']=='t')): ?> target="_blank"<?php endif; ?>><?php echo $get_user_meetings['name'];?></a></div>
                             <div class="user-stat company action_date">
                             <b>Created: </b> <?php echo  date('D jS M y',strtotime($get_user_meetings['created_at']));?></div>
                             <?php if(!empty($get_user_meetings['actioned_at'])): ?>
@@ -205,7 +205,7 @@
                             <div class="col-md-3"> 
                             <?php foreach ($getuserdemos as $get_user_demos): ?>
                             <li class="user-stat-holder">
-                            <div class="user-stat company"><a href="companies/company?id=<?php echo $get_user_demos['id'] ?>"  <?php if(($current_user['new_window']=='t')): ?> target="_blank"<?php endif; ?>><?php echo $get_user_demos['name'];?></a></div>
+                            <div class="user-stat company"><a href="<?php echo site_url(); ?>companies/company?id=<?php echo $get_user_demos['id'] ?>"  <?php if(($current_user['new_window']=='t')): ?> target="_blank"<?php endif; ?>><?php echo $get_user_demos['name'];?></a></div>
                             <div class="user-stat company action_date">
                             <b>Created: </b> <?php echo  date('D jS M y',strtotime($get_user_demos['created_at']));?></div>
                             <?php if(!empty($get_user_demos['actioned_at'])): ?>
