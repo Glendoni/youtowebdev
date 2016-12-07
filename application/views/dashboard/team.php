@@ -178,7 +178,7 @@
 
                             <?php foreach ($getuserproposals as $get_user_proposals): ?>
                             <li class="user-stat-holder">
-                            <div class="user-stat company"><div class="user-stat company"><a href="companies/company?id=<?php echo $get_user_proposals['id'] ?>" <?php if(($current_user['new_window']=='t')): ?> target="_blank"<?php endif; ?>><?php echo $get_user_proposals['name'];?></a></div>
+                            <div class="user-stat company"><div class="user-stat company"><a href="<?php echo site_url(); ?>companies/company?id=<?php echo $get_user_proposals['id'] ?>" <?php if(($current_user['new_window']=='t')): ?> target="_blank"<?php endif; ?>><?php echo $get_user_proposals['name'];?></a></div>
                             <div class="user-stat company action_date">
                             <?php echo  date('D jS M y',strtotime($get_user_proposals['created_at']));?></div>
                             </li>
