@@ -121,7 +121,7 @@
                             <div class="col-md-3">
                              <?php foreach ($getuserplacements as $get_user_placements): ?>
                             <li class="user-stat-holder">
-                            <div class="user-stat company"><a href="companies/company?id=<?php echo $get_user_placements['id'] ?>" <?php if(($current_user['new_window']=='t')): ?> target="_blank"<?php endif; ?>><?php echo $get_user_placements['name'];?></a></div>
+                            <div class="user-stat company"><a href="<?php echo site_url(); ?>companies/company?id=<?php echo $get_user_placements['id'] ?>" <?php if(($current_user['new_window']=='t')): ?> target="_blank"<?php endif; ?>><?php echo $get_user_placements['name'];?></a></div>
                         <?php 
     
     
