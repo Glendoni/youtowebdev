@@ -3315,6 +3315,7 @@ top: -20px;
     /* text-align: center; */
     position: relative;
     margin: auto;
+    margin-top: -19px;
  }
 .qvlink a{color:#000; text-transform: none; cursor: pointer;}
 /*! Hint.css - v2.2.1 - 2016-03-26 //#2b4461
