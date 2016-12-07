@@ -371,23 +371,30 @@
 			<strong>Sectors</strong> <br>
 			<?php 
 			if(isset($company['sectors'])){
-		foreach (array_reverse($company['sectors']) as $key => $name)
-				{
-				//echo  $name.$key.'<br>' ;
                 
-              if(in_array($name,$not_target_sectors_list)){
-                  
-               $notinsec[] = '<span class="notsector" style=" "> '.$name.'</span> <br>'  ;  
+                //print_r($company['sectors']);
+                
+		      foreach(array_reverse($company['sectors']) as $key => $name)
+				{
+                    //echo  $name.$key.'<br>' ;
+
+                  if(in_array($name,$not_target_sectors_list)){
+//echo $name;
+                   $notinsec[] = '<span class="notsector" style=" "> '.$name.'</span> <br>'  ;  
               }else{
-                  
+                  //echo $name;
                 $insec[] =  '<span  class="issector" style="color: green;  "> '.$name.' </span><br>' ;   
                   
               }
                 
 				}
-                
+           
                 echo join($insec, '');
                 echo join($notinsec, '');
+                
+                
+                unset($insec);
+                unset($notinsec);
 			}
 			?>
 							 
