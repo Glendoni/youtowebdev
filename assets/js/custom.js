@@ -768,6 +768,8 @@ uimage = val.image.split(',')
             var company_name = [];
             var pipleine =  ['intents', 'proposals'];
   //console.log(data.intents);
+            
+           
             if(!typeof data.intents != 'undefined'){
  
             $.each( pipleine, function(  index, keyval ) {
@@ -805,10 +807,16 @@ uimage = val.image.split(',')
         
  
  
- 
+     if( data.window == 't'){
+         
+         $('.dashboardmaincontainer  a').attr('target',"_blank");
+         
+     }
  
         }
 
+                 
+             
     });
         
         

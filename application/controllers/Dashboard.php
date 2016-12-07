@@ -16,6 +16,8 @@ class Dashboard extends MY_Controller {
 	
     public function index() 
     {	
+        
+       
         // Clear search in session 
         $this->clear_search_results();
         $this->clear_campaign_from_session();
@@ -59,8 +61,12 @@ class Dashboard extends MY_Controller {
                 //$this->data['teamcampaignsummary'] = $this->Campaigns_model->get_team_campaigns();
                 //$this->data['private_campaigns_new'] = $this->Campaigns_model->private_campaigns_new($this->get_current_user_id());
                 //$this->data['marketing_actions'] = $this->Actions_model->get_marketing_actions($this->get_current_user_id());
+           
+        
             $this->data['main_content'] = 'dashboard/home';
         }
+        
+          $this->data['window']  = $this->data['current_user']['new_window'];
             $this->load->view('layouts/default_layout', $this->data);	
     }
     
@@ -167,7 +173,7 @@ class Dashboard extends MY_Controller {
       $output['intents']  =  $this->Actions_model->getActionsIntents($this->data['current_user']['id']);
       $output['pods']  =  $this->Actions_model->getPods($this->data['current_user']['id']);
       $output['userpermission'] =  $this->userPermission;
-
+$output['window']   = $this->data['current_user']['new_window'];
       echo json_encode($output);
         //echo '<pre>'; print_r($output); echo '</pre>';  
     }  

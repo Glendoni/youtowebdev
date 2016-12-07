@@ -102,6 +102,16 @@ $owned_urls= array('fe_read_tag', 'fe_get_tag', 'getAction', 'operation_read', '
 
 ?>
 <script>
+    
+ 
+    function blankWindowEval(window = false){
+        
+     if(window == 't'){
+         
+      $('.dashboardmaincontainer  a').attr('target',"_blank");
+     }   
+    }
+  
   $(function(){
     function initToolbarBootstrapBindings() {
       var fonts = ['Serif', 'Sans', 'Arial', 'Arial Black', 'Courier', 
@@ -230,6 +240,8 @@ var customer_to =[];
 
                                               break;   
                                     }
+                    
+                      
                 
                 });
                    
@@ -244,6 +256,8 @@ var customer_to =[];
                 $('.coaddedrescount').html(coaddedres.length); //update engagement counter
                 
                 $('.dasboardviewscount').html(recent_viewed_companies.length); //update engagement counter
+                
+                blankWindowEval('<?php echo $window;?>');
             }
     
         });
