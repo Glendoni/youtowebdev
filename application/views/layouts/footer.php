@@ -171,17 +171,17 @@ $('.completed-details').val($('.editorAction').html())
     
 $(document).ready(function(){
     
-    
+ 
     
     //if(history.length>0)alert("the user clicked back!")
     
-    
+ 
     
     
         if((/dashboard/.test(window.location.href)) && (/dashboard\/team/.test(window.location.href)!= true)) {
       //BACK BUTTON READER      
 
-        // dashboardTabLoader()   
+                                                                                                                            // dashboardTabLoader()    //MANAGES BACK BUTTON FUNCTIONALITY
             
             
             

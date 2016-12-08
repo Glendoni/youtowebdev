@@ -976,11 +976,33 @@ uimage = val.image.split(',')
                 
                 
             //checkInitialFee()
+        }else if($('#action_type_completed').val() == 4000 ){
+            
+            
+               if($('.who').length ==1){
+            
+               
+                $('.who').show();
+                $('.who select').attr('required', 'required');
+                $('.onwhocontacthide').hide();
+            }
+            
+            
+            
         }else{
+            
+            
+            $('.onwho').removeClass('col-md-3');
             $('.onInitialFee').removeClass('col-md-3');
+            
              $('.followup').removeClass('col-md-2');
             $('.initialfee input').val('').removeAttr('required');
+            $('.who select').val('').removeAttr('required');
+            
             $('.initialfee').hide();
+         
+            $('.actionContact').show();
+             $('.onwhocontacthide').show();
         }
 
     })

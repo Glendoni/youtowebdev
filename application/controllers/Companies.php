@@ -269,6 +269,13 @@ class Companies extends MY_Controller {
 	
 	public function company()
 	{
+        
+      $getallusers =   $this->data['getallusers'] =  $this->Users_model->get_all_users();
+       $this->data['currentuserid']   = $this->data['current_user']['id'];
+        
+     //   print_r($getallusers);
+        
+       // exit();
         if($this->input->get('id'))
 		{
  
@@ -300,6 +307,7 @@ class Companies extends MY_Controller {
             $this->data['companieshack'] = $this->Companies_model->hackmorgages($this->input->get('id'));
 			$this->data['contacts'] = $this->Contacts_model->get_contacts_s($this->input->get('id'));
             $address = $this->Companies_model->get_addresses($this->input->get('id'));
+            
             foreach ($address as $row)
             {
                 if($row->created_by){

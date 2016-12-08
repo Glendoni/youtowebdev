@@ -941,11 +941,6 @@ endif;
   </div>
 </div> 
             
-            
-            
-            
-            
-            
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -955,10 +950,6 @@ endif;
     </div>
   </div>
         
-        
-        
-        
-
         <!--TAGGING END -->
 
 
@@ -983,11 +974,6 @@ endif;
                         <div class="col-sm-4 col-md-4">
                             <div class="form-group ">
                                 <label>New Action</label>
-                                
-                                
-                               
-                                
-                                
                                 
                                 <select id="action_type_completed" name="action_type_completed" class="form-control" >
                                     <option value="">--- Select an Action ---</option>
@@ -1020,7 +1006,7 @@ endif;
                
                 
 
-                        <div class="col-sm-2 col-md-2  onInitialFee">
+                        <div class="col-sm-2 col-md-2  onInitialFee onwho onwhocontacthide">
                             <?php if(isset($contacts) and !empty($contacts)) : ?>
                                 <div class="form-group ">
                                     <label>Contact</label>
@@ -1033,7 +1019,7 @@ endif;
                                 </div>
                             <?php endif; ?>
                         </div>
-                         <div class="col-sm-2 col-md-2 onInitialFee">
+                         <div class="col-sm-2 col-md-2 onInitialFee onwho">
                             <div class="form-group ">
                                 <label>Follow Up Action</label>
 
@@ -1045,7 +1031,28 @@ endif;
                                 </select>
                             </div>
                         </div>
-                        <div class="col-sm-2 col-md-4 followup">
+                   <div class="col-sm-2 col-md-2  who whois">
+                         <div class="form-group ">
+                                    <label>Who</label>
+                                    <select name="who_user_id" class="form-control">
+                                     <!--   <option value="">--- Select a Contact ---</option> -->
+                                        <?php foreach($getallusers as $user ): ?>
+                                        
+                                                <?php if($currentuserid == $user['id'] ) { 
+                                                    $whooptioncurrentuser[] = '<option value="'.$user['id'].'">'.ucfirst($user['name']).' - '.$user['department'].'</option>';
+                                                }else{
+                                                    $whooptions[] = '<option value="'.$user['id'].'">'.ucfirst($user['name']).' - '.$user['department'].'</option>';                                 
+                                                }?>
+
+                                        <?php endforeach; ?>
+                                        <?php
+                                            echo join($whooptioncurrentuser,"");
+                                            echo join($whooptions,""); 
+                                        ?>
+                                    </select>
+                                </div>
+                        </div>
+                        <div class="col-sm-2 col-md-2 followup">
                             <div class="form-group" >
                                 <label>Follow Up Date</label>
                                 <input type="text" class="form-control follow-up-date" id="planned_at" data-date-format="YYYY/MM/DD H:m" name="planned_at" placeholder="">
