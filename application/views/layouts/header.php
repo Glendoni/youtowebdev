@@ -83,9 +83,9 @@
 
     <div id="wrapper">
         <!-- Navigation -->
-<!--<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">-->
- <?php  $stag_distinct = ''; if (ENVIRONMENT  =='staging' || ENVIRONMENT  =='development'){ $stag_distinct = "background:#0971af;"; }?>
- <?php  if (ENVIRONMENT  =='production'){ $stag_distinct = "background:#0971af;"; }?>
+<!--<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">--> 
+ <?php  $stag_distinct = ''; if (ENVIRONMENT  =='staging'){ $stag_distinct = "background:#2eaf09;"; }?>
+ <?php  if (ENVIRONMENT  =='development'){ $stag_distinct = "background:#af1c09;"; }?>
         
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0; <?php echo $stag_distinct; ?>">
 <!-- Brand and toggle get grouped for better mobile display -->
@@ -107,18 +107,10 @@
     </a>
      <a href="<?php echo site_url(); ?>dashboard/team" ><div class="btn btn-warning"style="margin-top: 15px;  margin-left: 2px;
     padding: 2px 20px;">Team</div><br>  
- 
-     
-     
-
-      
-
 
 <?php endif; ?>
 </a>
-    
-   
- 
+
 </div>
 
     <div class="col-sm-4 col-sm-push-5" >
