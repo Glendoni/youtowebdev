@@ -7,14 +7,10 @@
             <?php endif; ?>
             <?php //hide core page content if no company is found ?>
                 <?php if (isset($company['id'])): ?>
-                    <div class="page-results-list" id="parent" style="
-    padding-top: 100px;
-">
-                    <breadcrumbscroll>
+                    <div class="page-results-list" id="parent" style="padding-top: 116px;">
+<breadcrumbscroll>
                     <div class="row top-info-holder">
-                    <div class="col-md-9 piplineUdate" style="    padding-left: 31px;
-    height: 20px;
-    margin-top: 6px;">
+                    <div class="col-md-9 piplineUdate" style="    padding-left: 31px;height: 20px;margin-top: 6px;">
                                 <!-- <breadcrumbscroll> -->
     <h2 class="company-header" id="logo">
                 <?php $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' ); echo html_entity_decode (str_replace($words, ' ',$company['name'])); ?></h2>
@@ -33,7 +29,9 @@
                                 <!--END ASSIGN-->
 
                                                 <!-- Button trigger modal -->
- 
+ <?php if(isset($company['account_manager'])): ?>
+    <span class="label" style="background-color: #01A4A4; color:#fff; margin-left: 5px;"><b>Account Manager:</b> <?php echo $company['account_manager']?></span>
+    <?php endif; ?>
                                         <?php 
                         if(!empty($company['pipeline'])):
                        
@@ -170,21 +168,7 @@
         <!-- // POPUP BOXES -->
         </div><!--END TOP INFO HOLDER-->
   <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
-
-
-      <ul class="qvlink" style="">
-                                                    <li><a href"javascript:;"  data="qvfinancials"><i class="fa fa-money" aria-hidden="true"></i> Financials</a></li>
-                                                    <li><a href"javascript:;"  data="addresses"><i class="fa fa-globe" aria-hidden="true"></i> Locations</a></li>
-                                                    <li><a href"javascript:;"  data="contacts"><i class="fa fa-user" aria-hidden="true"></i> Contacts</a></li>
-                                                    
-                                                    <li><a href"javascript:;"  data="add_action"><i class="fa fa-calendar" aria-hidden="true"></i> Add Action</a></li>
-                                                    <li><a href"javascript:;"  data="actions"><i class="fa fa-info-circle" aria-hidden="true"></i> Actions</a></li>
-                                                    </ul>
-
-      
-      </div>
       
         <?php if (isset($company['parent_name'])): ?>
         <div class="subsidiary">
@@ -198,7 +182,23 @@
 
 
         </div>
+        <div class="row">
+
+
+
+    <ul class="qvlink" style="">
+    <li class="col-md-15"><a href"javascript:;"  data="qvfinancials"><i class="fa fa-money" aria-hidden="true"></i> Financials</a></li>
+    <li class="col-md-15"><a href"javascript:;"  data="addresses"><i class="fa fa-globe" aria-hidden="true"></i> Locations</a></li>
+    <li class="col-md-15"><a href"javascript:;"  data="contacts"><i class="fa fa-user" aria-hidden="true"></i> Contacts</a></li>
+    <li class="col-md-15"><a href"javascript:;"  data="add_action"><i class="fa fa-calendar" aria-hidden="true"></i> Add Action</a></li>
+    <li class="col-md-15"><a href"javascript:;"  data="actions"><i class="fa fa-info-circle" aria-hidden="true"></i> Actions</a></li>
+    </ul>
+      
+      </div>
+
+
         </div><!--END TOP INFO HOLDER-->
+
 </breadcrumbscroll>
     
     
@@ -210,7 +210,7 @@
 	<?php $this->load->view('companies/create_address_box.php',array('company'=>$company)); ?>
    
 <div class="panel panel-primary">
-	<div class="panel-body">
+	<div class="panel-body" style="padding-top:40px;">
     	<div class="row"><!--FINISHED AT THE END OF PANEL-->
 		<div class="col-sm-9">
 		<div class="row">
