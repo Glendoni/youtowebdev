@@ -449,7 +449,8 @@ and ACTIONS_SUB.company_id is null
 			   UC.name, --f42
 			   UU.name, --f43
                C.initial_rate, --f44
-               C.customer_to --f45
+               C.customer_to,--f45
+               AM.name --f46
 			  
                
 			   )) "JSON output" 
@@ -553,6 +554,19 @@ from (select * from COMPANIES where active = \'TRUE\' ' ;
  		users AU1 on
  		TT5.user_id = AU1.id
 
+ 		--THIS GRABS THE ACCOUNT MANAGER TAG
+ 		LEFT JOIN 
+		company_tags AMT1 ON AMT1.company_id = c.id 
+		AND AMT1.id = 
+			(
+			SELECT CT99.id
+			FROM company_tags CT99 
+			join tags T99 on T99.id = CT99.tag_id
+			WHERE T99.category_id = \'10\' and CT99.company_id = C.id and CT99.eff_to is null and T99.eff_to is null
+			order by CT99.created_at desc limit 1
+			)
+		left join tags AM on AM.id = AMT1.tag_id
+
  		LEFT JOIN 
 		(-- TT6 NEXT ACTION
 		select distinct ac2.*
@@ -649,7 +663,8 @@ from (select * from COMPANIES where active = \'TRUE\' ' ;
 			     UC.name, 
 			     UU.name,
                  C.initial_rate,   
-                 C.customer_to
+                 C.customer_to,
+                 AM.name
 
 		order by C.id 
 

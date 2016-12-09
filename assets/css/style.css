@@ -31,6 +31,30 @@ a.anchor {
     font-size: 34px;
 
 }
+/*Allow for 5 columns*/
+.col-xs-15 {
+    width: 20%;
+    float: left;
+}
+@media (min-width: 768px) {
+.col-sm-15 {
+        width: 20%;
+        float: left;
+    }
+}
+@media (min-width: 992px) {
+    .col-md-15 {
+        width: 20%;
+        float: left;
+    }
+}
+@media (min-width: 1200px) {
+    .col-lg-15 {
+        width: 20%;
+        float: left;
+    }
+}
+
 .unassigned-star{
 	/*color: #DCDCDC; */
     border: none;
@@ -2542,8 +2566,8 @@ breadcrumbscroll {
   -ms-transition: height 0.3s;
   -o-transition: height 0.3s;
   transition: height 0.3s;
-  padding: 9px 0;
-  box-sizing: border-box;
+    padding: 20px 0 0 0;
+      box-sizing: border-box;
 	box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     border-bottom: 1px solid #ccc;
     background-color: #fff;
@@ -3307,17 +3331,17 @@ top: -20px;
     width:100px;
     
 }
-.qvlink li{float:left; margin-right:15px;  } 
+.qvlink li{ text-align: center; font-size: 11px; } 
 
-.qvlink{    width: 529px;
-    /* margin-right: auto; */
-    /* margin-left: auto; */
-    /* text-align: center; */
-    position: relative;
-    margin: auto;
-    margin-top: -19px;
+.qvlink{     margin-top: 20px;
+    background-color: #f7f7f7;
+    clear: both;
+    float: left;
+    width: 100%;
+    margin-bottom: 0;
+    padding: 10px 0;
  }
-.qvlink a{color:#000; text-transform: none; cursor: pointer;}
+.qvlink a{color:#000; text-transform: none; cursor: pointer;     width: 100%;display: block;}
 /*! Hint.css - v2.2.1 - 2016-03-26 //#2b4461
 * http://kushagragour.in/lab/hint/
 * Copyright (c) 2016 Kushagra Gour; Licensed  */

@@ -68,14 +68,16 @@
 <?php echo $company['trading_name'];?>
 </h5>
 	<?php endif; ?>         
-           
-	 
- 	 </div>
-        
-        
-        
-        
-        			<div class="col-sm-12 label-assigned<?php echo $company['id'];?>" style="margin-top:5px; margin-bottom: 15px; text-align:center;">
+</div>
+<div class="col-sm-12 label-assigned<?php echo $company['id'];?>" style="margin-top:5px; margin-bottom: 15px; text-align:center;">
+
+                    <?php if(isset($company['account_manager'])): ?>
+
+    <span class="label" style="background-color: #01A4A4; color:#fff; margin-left: 5px;"><?php echo $company['account_manager']?></span>
+    <?php endif; ?>
+
+
+
 <?php if(isset($company['pipeline'])): ?>
 	<span class="label pipeline label-<?php echo str_replace(' ', '', $company['pipeline']); ?>"><?php echo $company['pipeline']?>
 	<?php endif; ?>
@@ -98,10 +100,7 @@
                   //print_r($pipedate);
            
                 if(!$company['customer_to']){  ?> 
-                       
-                     
                 <?php  
-                       
              if($last_pipeline_created_at && $company['pipeline'] != 'Prospect' && $company['pipeline'] != 'Suspect' ){
                 ?>
                     
