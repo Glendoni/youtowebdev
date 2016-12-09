@@ -35,13 +35,20 @@ class Evergreen extends MY_Controller {
     { //updates the campaign with 5 more 
         
         $user_id =  $this->get_current_user_id();
+        
+        
         $current_campaign_id =  $this->input->post('campid');
          $evergreenID =  $this->input->post('evergreen');
-         //echo json_encode(array('success' => $user_id));
+         
+        
+        
+       // echo $user_id . ' - '.$current_campaign_id . ' - ' .$evergreenID;
+      
+        //echo json_encode(array('success' => $user_id));
         
         
         //echo  'Hlendn '.$evergreenID;
-       echo json_encode($this->Evergreen_model->updateTagCampaign($current_campaign_id,$user_id,$evergreenID));
+       echo  json_encode($this->Evergreen_model->updateTagCampaign($current_campaign_id,$user_id,$evergreenID));
         
     }
 	   

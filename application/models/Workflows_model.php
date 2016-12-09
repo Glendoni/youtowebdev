@@ -5,7 +5,7 @@ class Workflows_model extends MY_Model {
 function allUserCustomers($userID){
         
         
-echo $sql = "select customer_from,
+$sql = "select customer_from,
        customer_to,
 	  C.id  \"company_id\",C.name \"name_\",
 	   round(100* initial_rate,2) \"initial_rate\", 
@@ -82,7 +82,7 @@ where C.customer_from is not null
 order by 1 desc
 ";
 
-echo $sql = "select customer_from,
+$sql = "select customer_from,
        customer_to,
 	  C.id  \"company_id\",C.name \"name_\",
 	   round(100* initial_rate,2) \"initial_rate\", 

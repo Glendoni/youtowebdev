@@ -1031,7 +1031,7 @@ endif;
                                 </select>
                             </div>
                         </div>
-                   <div class="col-sm-2 col-md-2  who whois">
+                   <div class="col-sm-2 col-md-2 ">
                          <div class="form-group ">
                                     <label>Who</label>
                                     <select name="who_user_id" class="form-control">

@@ -66,29 +66,47 @@ public function updateTagCampaign($campaign_id,$user_id,$evergreenID){
 
    
         $preCheckAllocation  = $this->evergreenHeaderInfo(1,$campaign_id);
- if (!$preCheckAllocation [0]['remaining']){
+    
+  
+    
+ if ($preCheckAllocation [0]['remaining'] != true){ // not equal to true the it is 0.
    
+      
      
-     
-          $sqlCheck = 'SELECT evg.max_allowed as maxallowed, sql ,count(ta.id) as targetCounter
+          $sqlCheck = 'SELECT ta.id, evg.max_allowed as maxallowed, sql ,count(ta.id) as targetCounter
                         FROM targets ta
                         LEFT JOIN evergreens evg
                         ON ta.evergreen_id = evg.id
                         WHERE ta.campaign_id='.$campaign_id.'
                         AND ta.evergreen_id is not null
-                        GROUP BY 1,2';
+                        GROUP BY 1,2,3';
+        
+     
+     
         $query = $this->db->query($sqlCheck);
         $row  =     $query->result_array(); 
+     
+     
+     //echo  $row[0]['sql']; 
+     //print_r($row);
+     
+    // exit();
         
        if($row[0]['targetcounter'] > $row[0]['maxallowed']){
+                
                     return array('success' => 202);
                  
               }else{
      
             $numrow = $query->num_rows();
+           
+           
+          // echo $numrow;
      
         if($numrow < 1){ 
-         $query = $this->db->query("SELECT evg.max_allowed as emax, sql, count(ta.id) FROM evergreens evg 
+
+            
+         $query = $this->db->query("SELECT evg.max_allowed as emax, evg.sql as sql, count(ta.id) FROM evergreens evg 
                                     LEFT JOIN targets ta
                                     ON evg.id = ta.evergreen_id
                                     WHERE evg.id=".$evergreenID."
@@ -97,7 +115,8 @@ public function updateTagCampaign($campaign_id,$user_id,$evergreenID){
         }
      
          $sql =   $row[0]['sql']; 
-  
+        
+           
                             //return $query->result_array();
                      //$sql  =  $query->result_array();
   
