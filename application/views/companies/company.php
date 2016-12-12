@@ -1218,7 +1218,7 @@ endif;
                     
                     <div class="col-md-1" id="leftCol">
               
-              	<ul class="nav nav-stacked actionNav sticky  " style="list-style: none;     z-index: 999;  margin-bottom: auto; " id="sidebar">
+              	<ul class="nav nav-stacked actionNav sticky  " style="list-style: none;     z-index: 0;  margin-bottom: auto; " id="sidebar">
                  
                     
                     <li class="active activeMenu"><a href="javascript:;" class="btn btn-default btn-circle actionAll hint--top-right"  data-hint="All" data="All"><span class="glyphicon glyphicon-dashboard" aria-hidden="true"></a><span class="actionMenuQty qtyAll" aria-hidden="true"></span></li>
@@ -1244,13 +1244,7 @@ endif;
               
       		</div>
                   
-				    <div class="col-sm-1 col-md-10">
-                        
-                        
-                        <div id="marketing_action">
-                        <ul></ul>
-                        
-                        </div>
+				    <div class="col-sm-1 col-md-10"><div id="marketing_action"><ul></ul></div>
                         
 
 	<!-- Timeline -->
@@ -1260,7 +1254,7 @@ endif;
     			<!-- Timeline header -->
  
                     <div class="timeline-header">
-    				<div class="timeline-header-title bg-dark actiontitle"  style="margin-top:10px;">History</div>
+    				<div class="timeline-header-title bg-dark actiontitle"  style="margin-top:10px; margin-bottom: 58px !important;">History</div>
                         <div class="timeline-header-title bg-dark showCommentAddBtn hint--top-right"  data-hint="Add Comment" style="float:right; margin-left:11px; margin-top:10px;">  <span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span></div>
                         <div class="timeline-header-title bg-dark showText" style="float:right;  margin-top:10px;     margin-left: 10px;">Hide/Text</div>
 
@@ -1408,7 +1402,7 @@ function closeNav() {
                 var offset = $(".child").offset();
                 var posY = (offset.top) - ($(window).scrollTop());
                 var posX = offset.left - $(window).scrollLeft();
-                var  breadcrumbHeightEval  =  $('.top-info-holder').height() +  20;
+                var  breadcrumbHeightEval  =  $('.top-info-holder').height() +  100;
                 if(posY < 0){
                     $('.sticky').addClass('affix');
                     $('.affix').css('padding-top', + breadcrumbHeightEval +'px');

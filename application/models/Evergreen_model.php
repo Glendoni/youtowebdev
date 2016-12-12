@@ -70,79 +70,48 @@ public function updateTagCampaign($campaign_id,$user_id,$evergreenID){
   
     
  if ($preCheckAllocation [0]['remaining'] != true){ // not equal to true the it is 0.
-   
-      
-     
-          $sqlCheck = 'SELECT ta.id, evg.max_allowed as maxallowed, sql ,count(ta.id) as targetCounter
-                        FROM targets ta
-                        LEFT JOIN evergreens evg
-                        ON ta.evergreen_id = evg.id
-                        WHERE ta.campaign_id='.$campaign_id.'
-                        AND ta.evergreen_id is not null
-                        GROUP BY 1,2,3';
+ 
         
-     
-     
-        $query = $this->db->query($sqlCheck);
-        $row  =     $query->result_array(); 
-     
-     
-     //echo  $row[0]['sql']; 
-     //print_r($row);
-     
-    // exit();
-        
-       if($row[0]['targetcounter'] > $row[0]['maxallowed']){
-                
-                    return array('success' => 202);
-                 
-              }else{
-     
-            $numrow = $query->num_rows();
-           
-           
-          // echo $numrow;
-     
-        if($numrow < 1){ 
-
-            
-         $query = $this->db->query("SELECT evg.max_allowed as emax, evg.sql as sql, count(ta.id) FROM evergreens evg 
-                                    LEFT JOIN targets ta
-                                    ON evg.id = ta.evergreen_id
+         $query = $this->db->query("SELECT evg.max_allowed as maxallowed, evg.sql as sql, count(T.id) as targetcounter FROM evergreens evg 
+                                    LEFT JOIN (select ta.id, ta.evergreen_id  FROM targets ta WHERE ta.campaign_id =".$campaign_id." GROUP BY 1,2) T
+                                    ON evg.id = T.evergreen_id
                                     WHERE evg.id=".$evergreenID."
                                     GROUP BY 1,2");
          $row = $query->result_array();
-        }
-     
-         $sql =   $row[0]['sql']; 
+    if($row[0]['maxallowed'] > $row[0]['targetcounter']  ){
         
-           
-                            //return $query->result_array();
-                     //$sql  =  $query->result_array();
-  
+        $sql =   $row[0]['sql']; 
+        
+ // echo $sql;
+   //     exit();
+        
+        
+        
          $query = $this->db->query($sql);
            
             foreach ($query->result_array() as $row => $value)
             {
-                //echo $value['companyid'];
+                //echo 'usr id '.$user_id . '   cam ID '.$campaign_id .' evg id '.$evergreenID;
                 $this->campaignAllocator($value['companyid'],$user_id,$campaign_id,$evergreenID);
     
             }
     
  
     return array('success' => 'ok');
-   }  
+    }
+     
+      return array('success' => 202);
  }
                // echo '<pre>'; print_r($query); echo '</pre>';
              
 }
     
     
-    private function campaignAllocator($company_id,$user_id,$campaign_id,$evergreenID){
+     function campaignAllocator($company_id,$user_id,$campaign_id,$evergreenID){
 
 
        
-
+//echo $company_id.' - '.$user_id.' - '.$campaign_id.' - '.$evergreenID;
             $data = array(
                 'campaign_id' => $campaign_id ,
                 'company_id' => $company_id,

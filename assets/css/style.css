@@ -2012,7 +2012,7 @@ display:none;
     border-radius: 0;
     clear: both;
     margin-bottom: 50px;
-    margin-top: 50px;
+    margin-top: 60px;
     position: relative;
     border-bottom: 1px solid transparent;
     border-top-left-radius: 3px;
@@ -2027,8 +2027,8 @@ display:none;
 }
 
 .timeline .timeline-header:first-child {
-    margin-bottom: 30px;
-    margin-top: 15px
+    margin-bottom: 0px;
+    margin-top: 58px;
 }
 
 .timeline-stat {
@@ -2041,7 +2041,7 @@ display:none;
 
 .timeline-entry {
     margin-bottom: 50px;
-    margin-top: 5px;
+    margin-top: 0px;
     position: relative;
     clear: both
 }
@@ -2276,7 +2276,7 @@ body {
   
   #sidebar.affix {
     position: fixed;
-    top:70px;
+    top:48px;
     width:228px;
   }
 }
@@ -2417,6 +2417,7 @@ body {
     
     
 }
+ 
 .actionTotal{
     
     margin-top:0px;
@@ -2992,7 +2993,7 @@ a {
     text-decoration: none;
 }
 .showCommentAddForm{
-    padding-top:4px;
+    padding-top:0px;
     
 }
 
