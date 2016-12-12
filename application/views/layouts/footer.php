@@ -634,7 +634,7 @@ function bindFavorites(){
     
     $('.qvlink  li a').on('click', function(){
         var location = $(this).attr('data');
-        $.scrollTo('#'+location, 1000, { easing: 'easeInOutExpo', offset: -190, 'axis': 'y' });
+        $.scrollTo('#'+location, 1000, { easing: 'easeInOutExpo', offset: -210, 'axis': 'y' });
         $(".qv").slideToggle();                   
     })
        
