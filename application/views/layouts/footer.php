@@ -181,13 +181,23 @@ $(document).ready(function(){
         if((/dashboard/.test(window.location.href)) && (/dashboard\/team/.test(window.location.href)!= true)) {
       //BACK BUTTON READER      
 
-                                                                                                                            // dashboardTabLoader()    //MANAGES BACK BUTTON FUNCTIONALITY
+                    $('.dashboard button').hover(function(){
+
+
+if(!$(this).hasClass('requested')){
+    
+//alert($(this).attr('aria-controls'))
+    $(this).addClass('requested');  
+    
+    var clickedBtnVal = $(this).attr('aria-controls');
+    // dashboardTabLoader()    //MANAGES BACK BUTTON FUNCTIONALITY
             
-            
+              var para = {'pulldetails':clickedBtnVal};
             
             $.ajax({
-            type: "GET",
+            type: "post",
                 dataType: "json",
+                data: para,
             url: "Dashboard/workflow",
             success: function(data) {
                 var action;
@@ -268,6 +278,15 @@ var customer_to =[];
             }
     
         });
+            
+         
+            
+}
+
+})            
+            
+            
+            
             
             
             
