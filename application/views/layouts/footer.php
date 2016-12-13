@@ -217,7 +217,7 @@ var customer_to =[];
     var name = [];
                 $.each( data, function( key, val ) {
                       
-                   console.log('I am the don'+val);
+                
                     switch (clickedBtnVal) {
                             
                            
