@@ -21,7 +21,7 @@
             <li role="presentation"><button href="#emailegagement" aria-controls="emailegagement" role="tab" data-toggle="tab" class="btn btn-primary btn-sm emailegagement" style="margin-right:10px;" onclick="ga('send','event','Clicks','Email Engagement','<?php echo $current_user['id'];?>')"> Engagement</button></li>   
                   
                   
-                   <li role="presentation"><button href="#dasboardviews" aria-controls="recent_viewed_companies" role="tab" data-toggle="tab" class="btn btn-primary btn-sm dasboardviews" style="margin-right:10px;" onclick="ga('send','event','Clicks','dasboardviews','<?php echo $current_user['id'];?>')">View</button></li>
+                   <li role="presentation"><button href="#dasboardviews" aria-controls="recent_viewed_companies" role="tab" data-toggle="tab" class="btn btn-primary btn-sm recent_viewed_companies" style="margin-right:10px;" onclick="ga('send','event','Clicks','dasboardviews','<?php echo $current_user['id'];?>')">View</button></li>
                 
                    <li role="presentation"><button href="#coadded" aria-controls="companies_added" role="tab" data-toggle="tab" class="btn btn-primary btn-sm coadded" style="margin-right:10px;" onclick="ga('send','event','Clicks','','<?php echo $current_user['id'];?>')">Co Added</button></li> 
                      <li role="presentation"><button href="#assigned" aria-controls="favorites" role="tab" data-toggle="tab" class="btn btn-primary btn-sm  favorites" style="margin-right:10px;" onclick="ga('send','event','Clicks','Favourites','<?php echo $current_user['id'];?>')">Favourite</button></li>
@@ -343,7 +343,7 @@
         <div role="tabpanel" class="tab-pane fade" id="customerdeal">
     <!--START MARKETING STATS-->
             <div class="panel panel-default">
-    <div class="panel-heading" id="contacts" style="
+    <div class="panel-heading"  style="
     background: #0971af;
 ">
     <h3 class="panel-title">Customers - Current & Cancelled<span class="badge pull-right customerdealcount"></span></h3>
@@ -383,7 +383,7 @@
     <div role="tabpanel" class="tab-pane fade" id="coadded">
     <!--START MARKETING STATS-->
             <div class="panel panel-default">
-    <div class="panel-heading" id="contacts">
+    <div class="panel-heading"  >
     <h3 class="panel-title">Companies Added<span class="badge pull-right coaddedrescount"></span></h3>
     </div>
     <!-- /.panel-heading -->
@@ -396,7 +396,7 @@
           
         </div>
         
-        <div id="coaddedres">Loading...</div>   
+        <div id="companies_addedwf">Loading...</div>   
         <!--AUTO PILOT END  -->
 </div>
 <!-- /.panel-body -->
@@ -410,7 +410,7 @@
         <div role="tabpanel" class="tab-pane fade" id="dasboardviews">
     <!--START MARKETING STATS-->
             <div class="panel panel-default">
-    <div class="panel-heading" id="contacts">
+    <div class="panel-heading"  >
   <h3 class="panel-title">Recently Viewed Companies<span class="badge pull-right dasboardviewscount"></span></h3>
     </div>
     <!-- /.panel-heading -->
