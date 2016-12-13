@@ -1099,9 +1099,12 @@ from (select * from COMPANIES where active = \'TRUE\' ' ;
        //$search_data = str_replace("'","&#39;", $search_data);  
         $search_data = pg_escape_string($search_data);
         //$search_data = str_replace('&#39;',"", $search_data);  
-		$query1 = $this->db->query("select linkedin_id, c.name,c.id, c.pipeline, u.name as user, u.image as image, user_id, c.active from companies c left join  users u on u.id = c.user_id where c.eff_to IS NULL and (REPLACE(c.name, '''', '') ilike '".$search_data."%' or REPLACE(c.trading_name, '''', '') ilike'".$search_data."%') order by c.active desc, name asc limit 10 ");
+		$query1 = $this->db->query("select c.name,c.id, c.pipeline, u.name as user, u.image as image, user_id, c.active from companies c left join  users u on u.id = c.user_id where ((REPLACE(c.name, '''', '') ilike '%".$search_data."%' or REPLACE(c.trading_name, '''', '') ilike '%".$search_data."%' or c.registration ilike '".$search_data."%' or (REPLACE(c.phone, ' ', '')) ilike (REPLACE('".$search_data."%', ' ', '')))) order by c.active desc, name asc limit 10");
 
-	    if ($query1->num_rows() > 0)
+			return $query1; // If you want to merge both results
+
+
+	   /* if ($query1->num_rows() > 0)
 			{
 			return $query1; // If you want to merge both results
 			}
@@ -1109,20 +1112,23 @@ from (select * from COMPANIES where active = \'TRUE\' ' ;
 			{
 			return $this->db->query("select c.name,c.id, c.pipeline, u.name as user, u.image as image, user_id, c.active from companies c left join  users u on u.id = c.user_id where c.eff_to IS NULL and ((REPLACE(c.name, '''', '') ilike '%".$search_data."%' or REPLACE(c.trading_name, '''', '') ilike '%".$search_data."%' or c.registration ilike '".$search_data."%' or 
 (REPLACE(c.phone, ' ', '')) ilike (REPLACE('".$search_data."%', ' ', '')))) order by c.active desc, name asc limit 10");
-			}
+			} */
 	}
 	    function get_autocomplete_contact($search_data) {
-            		 $query2 = $this->db->query("select concat(c.first_name::text,' ', c.last_name::text) as name, c.company_id as id, con.name as company_name from contacts c left join companies con on con.id= c.company_id where concat(c.first_name::text, ' ', c.last_name::text) ilike '".$search_data."%' order by name asc limit 10 ");
+            		echo  $query2 = $this->db->query("select concat(c.first_name::text,' ', c.last_name::text) as name, c.company_id as id, con.name as company_name, con.active as companyactive from contacts c left join companies con on con.id= c.company_id where REPLACE(concat(c.first_name::text, ' ', c.last_name::text), '''', '') ilike '%".$search_data."%' or (REPLACE(c.phone, ' ', '')) ilike (REPLACE('%".$search_data."%', ' ', '')) or (REPLACE(c.email, ' ', '')) ilike (REPLACE('%".$search_data."%', ' ', '')) order by name asc limit 10");
 
-	    if ($query2->num_rows() > 0)
+				return $query2;
+}	 
+
+	   /* if ($query2->num_rows() > 0)
 			{
 			return $query2; // If you want to merge both results
 			}
 		else 
 			{
-			return $this->db->query("select concat(c.first_name::text,' ', c.last_name::text) as name, c.company_id as id, con.name as company_name from contacts c left join companies con on con.id= c.company_id where REPLACE(concat(c.first_name::text, ' ', c.last_name::text), '''', '') ilike '%".$search_data."%' or (REPLACE(c.phone, ' ', '')) ilike (REPLACE('".$search_data."%', ' ', '')) or (REPLACE(c.email, ' ', '')) ilike (REPLACE('".$search_data."%', ' ', '')) order by name asc limit 10 ");
+			return $this->db->query("select concat(c.first_name::text,' ', c.last_name::text) as name, c.company_id as id, con.name as company_name from contacts c left join companies con on con.id= c.company_id where REPLACE(concat(c.first_name::text, ' ', c.last_name::text), '''', '') ilike '%".$search_data."%' or (REPLACE(c.phone, ' ', '')) ilike (REPLACE('%".$search_data."%', ' ', '')) or (REPLACE(c.email, ' ', '')) ilike (REPLACE('%".$search_data."%', ' ', '')) order by name asc limit 10");
 			}
-	}
+	}*/
     /*
     @ Insert Company details from Company House API Record
     @ Author: Glen Small

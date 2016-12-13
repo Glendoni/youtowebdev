@@ -507,7 +507,11 @@ class Companies extends MY_Controller {
         
      
  		foreach ($query->result() as $row):
-            $response= $response."<a href='". base_url() . "companies/company?id=" . $row->id . "#contacts'><li class='autocomplete-item autocomplete-contact'><strong>" . str_replace($words, ' ',$row->name). "</strong><br><small>".$row->company_name."</small></li></a>";
+ 					if($row->companyactive=='f') { 
+ 						 $response= $response."<li class='autocomplete-item autocomplete-contact inactive'><strong>" . str_replace($words, ' ',$row->name). "</strong><br><small>".$row->company_name."</small><br><small>Company no longer active.<span class='label label-danger pull-right'>Inactive</span></small></li>";}
+
+else {
+            $response= $response."<a href='". base_url() . "companies/company?id=" . $row->id . "#contacts'><li class='autocomplete-item autocomplete-contact'><strong>" . str_replace($words, ' ',$row->name). "</strong><br><small>".$row->company_name."</small></li></a>";};
            //
         endforeach;
         $response= $response."</ul></div>";

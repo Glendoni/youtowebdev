@@ -1039,9 +1039,9 @@ endif;
                                         <?php foreach($getallusers as $user ): ?>
                                         
                                                 <?php if($currentuserid == $user['id'] ) { 
-                                                    $whooptioncurrentuser[] = '<option value="'.$user['id'].'">'.ucfirst($user['name']).' - '.$user['department'].'</option>';
+                                                    $whooptioncurrentuser[] = '<option value="'.$user['id'].'">'.ucfirst($user['name']).' - '.ucfirst($user['department']).'</option>';
                                                 }else{
-                                                    $whooptions[] = '<option value="'.$user['id'].'">'.ucfirst($user['name']).' - '.$user['department'].'</option>';                                 
+                                                    $whooptions[] = '<option value="'.$user['id'].'">'.ucfirst($user['name']).' - '.ucfirst($user['department']).'</option>';                                 
                                                 }?>
 
                                         <?php endforeach; ?>
