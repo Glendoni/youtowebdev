@@ -1112,7 +1112,7 @@ from (select * from COMPANIES where active = \'TRUE\' ' ;
 			}
 	}
 	    function get_autocomplete_contact($search_data) {
-            		 $query2 = $this->db->query("select concat(c.first_name::text,' ', c.last_name::text) as name, c.company_id as id, con.name as company_name from contacts c left join companies con on con.id= c.company_id where concat(c.first_name::text, ' ', c.last_name::text) ilike '".$search_data."%' order by name asc limit 10 ");
+            		 $query2 = $this->db->query("select concat(c.first_name::text,' ', c.last_name::text) as name, c.company_id as id, con.name as company_name, c.email, c.phone from contacts c left join companies con on con.id= c.company_id where REPLACE(concat(c.first_name::text, ' ', c.last_name::text), '''', '') ilike '%".$search_data."%' or (REPLACE(c.phone, ' ', '')) ilike (REPLACE('%".$search_data."%', ' ', '')) or (REPLACE(c.email, ' ', '')) ilike (REPLACE('%".$search_data."%', ' ', '')) and con.eff_to IS NULL order by name asc limit 10 ");
 
 	    if ($query2->num_rows() > 0)
 			{
@@ -1120,7 +1120,7 @@ from (select * from COMPANIES where active = \'TRUE\' ' ;
 			}
 		else 
 			{
-			return $this->db->query("select concat(c.first_name::text,' ', c.last_name::text) as name, c.company_id as id, con.name as company_name from contacts c left join companies con on con.id= c.company_id where REPLACE(concat(c.first_name::text, ' ', c.last_name::text), '''', '') ilike '%".$search_data."%' or (REPLACE(c.phone, ' ', '')) ilike (REPLACE('".$search_data."%', ' ', '')) or (REPLACE(c.email, ' ', '')) ilike (REPLACE('".$search_data."%', ' ', '')) order by name asc limit 10 ");
+			return $this->db->query("select concat(c.first_name::text,' ', c.last_name::text) as name, c.company_id as id, con.name as company_name, c.email, c.phone from contacts c left join companies con on con.id= c.company_id where REPLACE(concat(c.first_name::text, ' ', c.last_name::text), '''', '') ilike '%".$search_data."%' or (REPLACE(c.phone, ' ', '')) ilike (REPLACE('%".$search_data."%', ' ', '')) or (REPLACE(c.email, ' ', '')) ilike (REPLACE('%".$search_data."%', ' ', '')) and con.eff_to IS NULL order by name asc limit 10 ");
 			}
 	}
     /*

@@ -458,7 +458,9 @@ class Companies extends MY_Controller {
         
         $callCH = false;
         $search_data = trim($this->input->post("search_data"));
-		$response = "<div class='autocomplete-full-holder'><div class='col-md-6 clearfix no-padding'><ul class='autocomplete-holder'>";
+		$response = "<div class='autocomplete-full-holder'>
+		<div class='col-md-6 clearfix no-padding'>
+		<ul class='autocomplete-holder'>";
        
         $search_data  = str_replace('\'', '',$search_data);
         $query = $this->Companies_model->get_autocomplete($search_data);
@@ -507,7 +509,7 @@ class Companies extends MY_Controller {
         
      
  		foreach ($query->result() as $row):
-            $response= $response."<a href='". base_url() . "companies/company?id=" . $row->id . "#contacts'><li class='autocomplete-item autocomplete-contact'><strong>" . str_replace($words, ' ',$row->name). "</strong><br><small>".$row->company_name."</small></li></a>";
+            $response= $response."<a href='". base_url() . "companies/company?id=" . $row->id . "#contacts'><li class='autocomplete-item autocomplete-contact'><strong>" . str_replace($words, ' ',$row->name). "</strong><br><small>".$row->company_name."</small><br><small>".$row->email."</small><br><small>".$row->phone."</small></li></a>";
            //
         endforeach;
         $response= $response."</ul></div>";
