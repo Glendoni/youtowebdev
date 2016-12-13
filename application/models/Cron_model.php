@@ -575,7 +575,7 @@ public function get_campaign_name($campaign)
     public function update_email_events()  //Call this function every 5mins
 	{
        
-        $query = $this->db->query("SELECT id,name, updated_at, sent_id FROM email_campaigns WHERE  date_sent >= '2016-04-01' AND id > 479 ORDER BY updated_at ASC LIMIT 1");
+        $query = $this->db->query("SELECT id,name, updated_at, sent_id FROM email_campaigns WHERE  date_sent >= '2016-04-01' AND id = 1130 ORDER BY updated_at ASC LIMIT 1");
 
         foreach ($query->result_array() as $row)
         {

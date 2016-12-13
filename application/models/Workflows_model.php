@@ -2,7 +2,7 @@
 class Workflows_model extends MY_Model {
     
     
-    function allUserCustomers($userID){
+function allUserCustomers($userID){
         
         
 $sql = "select customer_from,
@@ -178,13 +178,13 @@ $query = $this->db->query($sql);
 
 $sql = "select created_at::date created,
        id  company_id,
-       name  company_name,
-	   pipeline   pipeline        
+       name  as company_name,
+	   pipeline as pipeline        
 	   
 from COMPANIES
 
-where created_by =  ".$userID." -- ie CURRENT USER
-
+where created_by =  ".$userID."  
+and pipeline is not null
 order by created_at desc
 
  

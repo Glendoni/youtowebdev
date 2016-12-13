@@ -253,14 +253,11 @@ $(window).load(function(){
     }, 2000);
 });
 $('#action_type_completed').change(function(){
-                                                                         $('.action_verbiage').hide();
-                                                                        var action_verbiage_text = $(this).val();
+         $('.action_verbiage').hide();
+        var action_verbiage_text = $(this).val();
 
-                                                                       $('.action_verbiage_text'+action_verbiage_text).show();
+       $('.action_verbiage_text'+action_verbiage_text).show();
 
-
-                                                                        //console.log($(this).val())
-  
     $('#action-error .editBoxInstruction').text('Source');
 var source_check = $("input[name=source_check]").val();
     var phone_check = $("#phone").val();
@@ -754,7 +751,7 @@ uimage = val.image.split(',')
             });
             
         
-        
+            
         
         
         
@@ -818,6 +815,8 @@ uimage = val.image.split(',')
                  
              
     });
+
+ 
         
         
         
@@ -825,8 +824,14 @@ uimage = val.image.split(',')
       
         
         
-       
+       $('.emailegagement').hover(function(){
         
+
+if(!$(this).hasClass('requested') && $(this).attr('aria-controls') ==  'emailegagement'){
+    
+//alert($(this).attr('aria-controls'))
+    $(this).addClass('requested'); 
+    
         
         $.ajax({
         type: "GET",
@@ -851,8 +856,11 @@ uimage = val.image.split(',')
 
         });
 
-               
-               
+       
+
+}
+        
+       })
                      }
         
         
@@ -894,7 +902,20 @@ uimage = val.image.split(',')
     
      if((/dashboard/.test(window.location.href))&& (/dashboard\/team/.test(window.location.href)!= true)){
          //GET TEAM STATS END 
-            getUserFavourites();   //trigger favorites 
+           
+                $('.favorites').hover(function(){
+        
+
+    if(!$(this).hasClass('requested') && $(this).attr('aria-controls') ==  'favorites'){
+
+    //alert($(this).attr('aria-controls'))
+        $(this).addClass('requested'); 
+
+             getUserFavourites();   //trigger favorites 
+
+        } 
+    })
+         
         $('.sortform form select').change(function(){
             getUserFavourites(); //Trigger alt sort on change
 
@@ -976,11 +997,33 @@ uimage = val.image.split(',')
                 
                 
             //checkInitialFee()
+        }else if($('#action_type_completed').val() == 4000 ){
+            
+            
+               if($('.who').length ==1){
+            
+               
+                $('.who').show();
+                $('.who select').attr('required', 'required');
+                $('.onwhocontacthide').hide();
+            }
+            
+            
+            
         }else{
+            
+            
+            $('.onwho').removeClass('col-md-3');
             $('.onInitialFee').removeClass('col-md-3');
+            
              $('.followup').removeClass('col-md-2');
             $('.initialfee input').val('').removeAttr('required');
+            $('.who select').val('').removeAttr('required');
+            
             $('.initialfee').hide();
+         
+            $('.actionContact').show();
+             $('.onwhocontacthide').show();
         }
 
     })

@@ -195,8 +195,10 @@ function getActionData(scope = false){ //get all actions in multidimentional jso
                 $('.actiondate').datetimepicker({ minDate: dateToday });
                
                 $('.form .actionContact').clone().prependTo('.actionForm');
+                  
                 $('.form #action_type_planned').clone().prependTo('.formOutcome');
-               
+             
+                $('.form #who_user_id').clone().prependTo('.formOutcome .who_is_clone');
                 $('select[name="action_type_planned"]').addClass('action_type_planned');
                 //bindfollowUpInfoBtn(); 
 
@@ -1235,6 +1237,7 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
          var employees = [];
          var tfer_runners ;
         var tfer_turnover;
+        var  createfollowername;
 
          
        
@@ -1384,7 +1387,7 @@ var updatemeeting   = '<span  class="datechangerTrigger"><input type="text"  dat
                 '<form action="Actions/addOutcome" class="outcomeform" data="'+action['action_id']+'" >'+
                 '<textarea class="form-control   textarea'+action['action_id']+'  " name="outcome" placeholder="Add outcome" required="required" rows="2" style="margin-bottom:5px;"></textarea><div class="editor addOutcomeEditor" addOutcomeEditor="'+action['action_id']+'" ></div>'+
                 ' <div class="form-group form-inline actionForm formOutcome">'+
-                                            '<input type="text" class="form-control actiondate" data-date-format="YYYY/MM/DD H:m" name="planned_at" required="required" placeholder="Follow Up Date">'+
+                                            '<span class="who_is_clone"></span><input type="text" class="form-control actiondate" data-date-format="YYYY/MM/DD H:m" name="planned_at" required="required" placeholder="Follow Up Date">'+
                                         '</div>'+
                 '<input type="hidden" name="outcomeActionId" value="'+action['action_id']+'" /><input type="hidden" name="company_id" value="'+getUrlIdParam+'" /> <input type="hidden" name="status" id="callBackActionStatus'+action['action_id']+'" value="" />'+
                 '<input type="submit" class="btn btn-primary btn-block actionSubmit box'+action['action_id']+' submit'+action['action_id']+'" "  style="float:right;" value="Save"></form><br /></div>';
@@ -1508,11 +1511,23 @@ if(tm > 1){ tm = tm + ' Days Overdue'; }else if(tm == 1){ tm  = tm + ' Day Overd
         if(action['action_type_id'] == 7 || action['action_type_id'] == 30  ){
             actionType = 'Comment';
         }
+         
+          createfollowername  = action['createfollowername']; 
+      if(createfollowername  != null  ) {
+          createfollowername = action['createfollowername'] + ' forwarded to ';
+          
+          console.log(action['createfollowername'] );
+      }else{
+          
+          createfollowername = '';
+      }  
+        
+         
       if(actionTypeName != 'Pipeline Update')   
-            actions  ='<div class="timeline-entry actionId'+actionType+'  '+classCompleted+' pillid'+actionId+'" pillid='+actionId+'> <div class="timeline-stat"> '+icon+'</div><div class="timeline-label"> <div class="mar-no pad-btm"><h4 class="mar-no pad-btm">'+header+deal+'  </h4><div class="actions-info" ><span class="label label-warning"  >'+planned_at+'</span>'+kpStr+ ' '+overdueStatus+ ' '+updatemeeting+contactName+' <span class="classActions" style="float:right; margin-top:0; margin-left:3px;">'+calenderbtn+outcomeRemove+followupAlert+'</span></div></div><div class="mic-info"> '+status+': '+created_by+' - '+formattDate(createdAt, true)+' </div> <div class="actionMsgText">'+turnover+''+tagline+' </div>'+textbox+ ' </div></div>';
+            actions  ='<div class="timeline-entry actionId'+actionType+'  '+classCompleted+' pillid'+actionId+'" pillid='+actionId+'> <div class="timeline-stat"> '+icon+'</div><div class="timeline-label"> <div class="mar-no pad-btm"><h4 class="mar-no pad-btm">'+header+deal+'  </h4><div class="actions-info" ><span class="label label-warning"  >'+planned_at+'</span>'+kpStr+ ' '+overdueStatus+ ' '+updatemeeting+contactName+' <span class="classActions" style="float:right; margin-top:0; margin-left:3px;">'+calenderbtn+outcomeRemove+followupAlert+'</span></div></div><div class="mic-info"> '+status+': '+createfollowername+created_by+' - '+formattDate(createdAt, true)+' </div> <div class="actionMsgText">'+turnover+''+tagline+' </div>'+textbox+ ' </div></div>';
          
         if(actionTypeName == 'Pipeline Update' ){
-              actions  = '<div class="timeline-entry actionId'+actionType+' '+classCompleted+'" > <div class="timeline-stat"> '+icon+'</div> <div class="timeline-label pipe"> <div class="mar-no pad-btm" ><h4 class="mar-no pad-btm">'+header+' <span class="classActions" style="margin-top:0; margin-left:3px; float:right;">'+calenderbtn+outcomeRemove+'</span></h4>' +kpStr+overdueStatus+'</div><div class="actionMsgText">'+action['comments']+'</div></div></div>';
+              actions  = '<div class="timeline-entry actionId'+actionType+' '+classCompleted+'" > <div class="timeline-stat"> '+icon+'</div> <div class="timeline-label pipe"> <div class="mar-no pad-btm" ><h4 class="mar-no pad-btm">'+header+' <span class="classActions" style="margin-top:0; margin-left:3px; float:right;">'+calenderbtn+outcomeRemove+'</span></h4>' +kpStr+overdueStatus+'</div><div class="actionMsgText">'+action['comments']+'</div> </div>';
          }
      
         return actions;

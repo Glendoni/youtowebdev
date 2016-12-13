@@ -66,53 +66,7 @@ class MY_Controller extends CI_Controller {
                 if(isset($_SERVER['SERVER_PORT'])){
           
           //echo 'Current full'.  site_url();
-          
-          if($_SERVER['SERVER_PORT'] == 80){ // server =  80 localhost =  8888
-          
-          
-          
-       // server =  80 localhost =  8888)
-      
-      
-            $a =  str_replace('http://','https://', site_url().$_SERVER['REQUEST_URI']);
-
-         //echo 'Current full'.  site_url();
-
-           //  echo '<br>';
-            $mystring = current_full_url();
-      
-            $findme   = 'https://';
-            $pos = strpos($mystring, $findme);
-
-            // Note our use of ===.  Simply == would not work as expected
-            // because the position of 'a' was the 0th (first) character.
-            if ($pos === false) {
-          //echo "The string '$findme' was not found in the string '$mystring'";
-
-
-             redirect($a, 'location');
-
-
-        //   header( 'Location: '.$a ) ;
-
-            } 
-      else {
-    //echo "The string '$findme' was found in the string '$mystring'";
-  //echo " and exists at position $pos";
-}
-      
-      
-      
-      
-       //if (!preg_match("~^(?:f|ht)tps?://~i", $_SERVER['HTTP_HOST'])) {
-        //$url = "https:/" . $_SERVER['REQUEST_URI'];
-//    }
-   // echo  $url;
-      
-      
-     // echo (strpos($a, 'http://'));
-    
-}
+         
     
      
       }
@@ -555,7 +509,8 @@ class MY_Controller extends CI_Controller {
 			if($company->company->f1->f43)$mapped_companies_array['updated_by_name'] = $company->company->f1->f43;
             if($company->company->f1->f44)$mapped_companies_array['initial_rate'] = $company->company->f1->f44;
             if($company->company->f1->f45)$mapped_companies_array['customer_to'] = $company->company->f1->f45;
- 
+            if($company->company->f1->f46)$mapped_companies_array['account_manager'] = $company->company->f1->f46;
+
 			// sectors
 
 			if(!empty($company->company->f1->f22)){

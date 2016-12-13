@@ -7,14 +7,10 @@
             <?php endif; ?>
             <?php //hide core page content if no company is found ?>
                 <?php if (isset($company['id'])): ?>
-                    <div class="page-results-list" id="parent" style="
-    padding-top: 100px;
-">
-                    <breadcrumbscroll>
+                    <div class="page-results-list" id="parent" style="padding-top: 116px;">
+<breadcrumbscroll>
                     <div class="row top-info-holder">
-                    <div class="col-md-9 piplineUdate" style="    padding-left: 31px;
-    height: 20px;
-    margin-top: 6px;">
+                    <div class="col-md-9 piplineUdate" style="    padding-left: 31px;height: 20px;margin-top: 6px;">
                                 <!-- <breadcrumbscroll> -->
     <h2 class="company-header" id="logo">
                 <?php $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' ); echo html_entity_decode (str_replace($words, ' ',$company['name'])); ?></h2>
@@ -33,7 +29,9 @@
                                 <!--END ASSIGN-->
 
                                                 <!-- Button trigger modal -->
- 
+ <?php if(isset($company['account_manager'])): ?>
+    <span class="label" style="background-color: #01A4A4; color:#fff; margin-left: 5px;"><b>Account Manager:</b> <?php echo $company['account_manager']?></span>
+    <?php endif; ?>
                                         <?php 
                         if(!empty($company['pipeline'])):
                        
@@ -170,21 +168,7 @@
         <!-- // POPUP BOXES -->
         </div><!--END TOP INFO HOLDER-->
   <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
-
-
-      <ul class="qvlink" style="">
-                                                    <li><a href"javascript:;"  data="qvfinancials"><i class="fa fa-money" aria-hidden="true"></i> Financials</a></li>
-                                                    <li><a href"javascript:;"  data="addresses"><i class="fa fa-globe" aria-hidden="true"></i> Locations</a></li>
-                                                    <li><a href"javascript:;"  data="contacts"><i class="fa fa-user" aria-hidden="true"></i> Contacts</a></li>
-                                                    
-                                                    <li><a href"javascript:;"  data="add_action"><i class="fa fa-calendar" aria-hidden="true"></i> Add Action</a></li>
-                                                    <li><a href"javascript:;"  data="actions"><i class="fa fa-info-circle" aria-hidden="true"></i> Actions</a></li>
-                                                    </ul>
-
-      
-      </div>
       
         <?php if (isset($company['parent_name'])): ?>
         <div class="subsidiary">
@@ -198,7 +182,23 @@
 
 
         </div>
+        <div class="row">
+
+
+
+    <ul class="qvlink" style="">
+    <li class="col-md-15"><a href"javascript:;"  data="qvfinancials"><i class="fa fa-money" aria-hidden="true"></i> Financials</a></li>
+    <li class="col-md-15"><a href"javascript:;"  data="addresses"><i class="fa fa-globe" aria-hidden="true"></i> Locations</a></li>
+    <li class="col-md-15"><a href"javascript:;"  data="contacts"><i class="fa fa-user" aria-hidden="true"></i> Contacts</a></li>
+    <li class="col-md-15"><a href"javascript:;"  data="add_action"><i class="fa fa-calendar" aria-hidden="true"></i> Add Action</a></li>
+    <li class="col-md-15"><a href"javascript:;"  data="actions"><i class="fa fa-info-circle" aria-hidden="true"></i> Actions</a></li>
+    </ul>
+      
+      </div>
+
+
         </div><!--END TOP INFO HOLDER-->
+
 </breadcrumbscroll>
     
     
@@ -210,7 +210,7 @@
 	<?php $this->load->view('companies/create_address_box.php',array('company'=>$company)); ?>
    
 <div class="panel panel-primary">
-	<div class="panel-body">
+	<div class="panel-body" style="padding-top:40px;">
     	<div class="row"><!--FINISHED AT THE END OF PANEL-->
 		<div class="col-sm-9">
 		<div class="row">
@@ -941,11 +941,6 @@ endif;
   </div>
 </div> 
             
-            
-            
-            
-            
-            
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -955,10 +950,6 @@ endif;
     </div>
   </div>
         
-        
-        
-        
-
         <!--TAGGING END -->
 
 
@@ -983,11 +974,6 @@ endif;
                         <div class="col-sm-4 col-md-4">
                             <div class="form-group ">
                                 <label>New Action</label>
-                                
-                                
-                               
-                                
-                                
                                 
                                 <select id="action_type_completed" name="action_type_completed" class="form-control" >
                                     <option value="">--- Select an Action ---</option>
@@ -1020,7 +1006,7 @@ endif;
                
                 
 
-                        <div class="col-sm-2 col-md-2  onInitialFee">
+                        <div class="col-sm-2 col-md-2  onInitialFee onwho onwhocontacthide">
                             <?php if(isset($contacts) and !empty($contacts)) : ?>
                                 <div class="form-group ">
                                     <label>Contact</label>
@@ -1033,7 +1019,7 @@ endif;
                                 </div>
                             <?php endif; ?>
                         </div>
-                         <div class="col-sm-2 col-md-2 onInitialFee">
+                         <div class="col-sm-2 col-md-2 onInitialFee onwho">
                             <div class="form-group ">
                                 <label>Follow Up Action</label>
 
@@ -1045,7 +1031,28 @@ endif;
                                 </select>
                             </div>
                         </div>
-                        <div class="col-sm-2 col-md-4 followup">
+                   <div class="col-sm-2 col-md-2 ">
+                         <div class="form-group ">
+                                    <label>Who</label>
+                                    <select name="who_user_id" id="who_user_id" class="form-control">
+                                     <!--   <option value="">--- Select a Contact ---</option> -->
+                                        <?php foreach($getallusers as $user ): ?>
+                                        
+                                                <?php if($currentuserid == $user['id'] ) { 
+                                                    $whooptioncurrentuser[] = '<option value="'.$user['id'].'">'.ucfirst($user['name']).' - '.ucfirst($user['department']).'</option>';
+                                                }else{
+                                                    $whooptions[] = '<option value="'.$user['id'].'">'.ucfirst($user['name']).' - '.ucfirst($user['department']).'</option>';                                 
+                                                }?>
+
+                                        <?php endforeach; ?>
+                                        <?php
+                                            echo join($whooptioncurrentuser,"");
+                                            echo join($whooptions,""); 
+                                        ?>
+                                    </select>
+                                </div>
+                        </div>
+                        <div class="col-sm-2 col-md-2 followup">
                             <div class="form-group" >
                                 <label>Follow Up Date</label>
                                 <input type="text" class="form-control follow-up-date" id="planned_at" data-date-format="YYYY/MM/DD H:m" name="planned_at" placeholder="">
@@ -1211,7 +1218,7 @@ endif;
                     
                     <div class="col-md-1" id="leftCol">
               
-              	<ul class="nav nav-stacked actionNav sticky  " style="list-style: none;     z-index: 999;  margin-bottom: auto; " id="sidebar">
+              	<ul class="nav nav-stacked actionNav sticky  " style="list-style: none;     z-index: 0;  margin-bottom: auto; " id="sidebar">
                  
                     
                     <li class="active activeMenu"><a href="javascript:;" class="btn btn-default btn-circle actionAll hint--top-right"  data-hint="All" data="All"><span class="glyphicon glyphicon-dashboard" aria-hidden="true"></a><span class="actionMenuQty qtyAll" aria-hidden="true"></span></li>
@@ -1237,13 +1244,7 @@ endif;
               
       		</div>
                   
-				    <div class="col-sm-1 col-md-10">
-                        
-                        
-                        <div id="marketing_action">
-                        <ul></ul>
-                        
-                        </div>
+				    <div class="col-sm-1 col-md-10"><div id="marketing_action"><ul></ul></div>
                         
 
 	<!-- Timeline -->
@@ -1253,7 +1254,7 @@ endif;
     			<!-- Timeline header -->
  
                     <div class="timeline-header">
-    				<div class="timeline-header-title bg-dark actiontitle"  style="margin-top:10px;">History</div>
+    				<div class="timeline-header-title bg-dark actiontitle"  style="margin-top:10px; margin-bottom: 58px !important;">History</div>
                         <div class="timeline-header-title bg-dark showCommentAddBtn hint--top-right"  data-hint="Add Comment" style="float:right; margin-left:11px; margin-top:10px;">  <span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span></div>
                         <div class="timeline-header-title bg-dark showText" style="float:right;  margin-top:10px;     margin-left: 10px;">Hide/Text</div>
 
@@ -1401,7 +1402,7 @@ function closeNav() {
                 var offset = $(".child").offset();
                 var posY = (offset.top) - ($(window).scrollTop());
                 var posX = offset.left - $(window).scrollLeft();
-                var  breadcrumbHeightEval  =  $('.top-info-holder').height() +  20;
+                var  breadcrumbHeightEval  =  $('.top-info-holder').height() +  100;
                 if(posY < 0){
                     $('.sticky').addClass('affix');
                     $('.affix').css('padding-top', + breadcrumbHeightEval +'px');

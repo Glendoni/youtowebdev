@@ -69,7 +69,6 @@ class Actions extends MY_Controller {
                             $this->set_message_error('<strong>Deal Not Added</strong></br> Please add at least one sector to this company.');
                             redirect('companies/company?id='.$this->input->post('company_id').$campaign_redirect.'#add_action','location');
                             }
-
                             else 
                             {
                         $result = $this->Actions_model->create($this->input->post());

@@ -116,19 +116,21 @@ function get_actions_outstanding($company_id,$limit =100)
     $data = array(
         'a.company_id' => $company_id,
         );
-    $this->db->select('a.company_id, a.id "action_id",a.followup_action_id,a.comments,a.planned_at,a.action_type_id,u.name ,c.first_name,c.last_name,c.phone,comp.initial_rate,c.email,a.user_id,c.id "contact_id",a.created_at as "created_at",a.actioned_at as "actioned_at", at.name as actionType, a.planned_at, u.image ,comp.name as "company_name",');
+    $this->db->select('a.company_id, a.id "action_id",a.followup_action_id,a.comments,a.planned_at,a.action_type_id,u.name ,c.first_name,c.last_name,c.phone,ufwd.name as createfollowername, comp.initial_rate,c.email,a.user_id,c.id "contact_id",a.created_at as "created_at",a.actioned_at as "actioned_at", at.name as actionType, a.planned_at, u.image ,comp.name as "company_name",');
     $this->db->where('a.planned_at IS NOT NULL', null);
     $this->db->where('a.actioned_at IS NULL', null);
     $this->db->where('a.cancelled_at IS NULL', null);
     $this->db->where_not_in('a.action_type_id',$category_exclude);
     $this->db->join('contacts c', 'c.id = a.contact_id', 'left');
     $this->db->join('users u', 'a.user_id = u.id', 'left');
+     $this->db->join('users ufwd', 'a.campaign_id = ufwd.id', 'left');
     $this->db->join('companies comp', 'a.company_id = comp.id', 'left');
     $this->db->join('action_types at', 'a.action_type_id = at.id', 'left');
     $this->db->order_by('a.actioned_at desc, a.cancelled_at desc,a.planned_at desc');
      $this->db->limit($limit);
     $query = $this->db->get_where('actions a', $data);
-   //echo $this->db->last_query();
+//echo $this->db->last_query();
+  //  exit();
     return $query->result_object();
 }
 
@@ -733,6 +735,10 @@ function set_action_state($action_id,$user_id,$state,$outcome,$post)
 
 {
     //$outcome =  htmlentities($outcome);
+
+
+
+    
     
     if($state == 'completed'){
         $data = array(
@@ -763,13 +769,25 @@ function set_action_state($action_id,$user_id,$state,$outcome,$post)
         
         
               if ($post['action_type_planned']>0) {
+                  
+                  
+                      
+       
+        if($post['who_user_id'] != $user_id ){
+            
+            $useris =  $user_id;
+            
+            
+        }
+                  
             $planneddata = array(
             'company_id'    => $post['company_id'],
-            'user_id'       => $user_id,
+             'user_id'      => $post['who_user_id'] ? $post['who_user_id'] : $user_id,
             'comments'      => (!empty($outcome)?$outcome:NULL),
             'planned_at'    => $post['planned_at'],
             'contact_id'    => (!empty($post['contact_id'])?$post['contact_id']:NULL),
             'created_by'    => $user_id,
+                 'campaign_id' => $useris ? $useris : null,
             'action_type_id'=> $post['action_type_planned'],
             'actioned_at'   =>  NULL,
             'created_at'    => date('Y-m-d H:i:s'),
@@ -786,7 +804,7 @@ function set_action_state($action_id,$user_id,$state,$outcome,$post)
 }
 
 // INSERTS
-function create($post, $userid =false)
+function                     create($post, $userid =false)
 {
     
     
@@ -823,12 +841,21 @@ function create($post, $userid =false)
     }
     
     if ($post['action_type_planned']>0) {
+        
+        $useris = array();
+        if($post['who_user_id'] != $post['user_id'] ){
+            
+            $useris =  $post['user_id'];
+            
+            
+        }
 
         $planneddata = array(
         'company_id'    => $post['company_id'],
-        'user_id'       => $userid ? $userid : $post['user_id'],
+        'user_id'       => $post['who_user_id'] ? $post['who_user_id'] : $post['user_id'],
         'comments'      => (isset($post['comment'])?htmlspecialchars(preg_replace('/[\x00-\x1F\x80-\xFF]/', '', rtrim($post['comment']))):NULL),
         'planned_at'    => $post['planned_at'],
+            'campaign_id' => $useris,
         'contact_id'    => (!empty($post['contact_id'])?$post['contact_id']:NULL),
         'created_by'    => $userid ? $userid : $post['user_id'],
         'action_type_id'=> $post['action_type_planned'],
