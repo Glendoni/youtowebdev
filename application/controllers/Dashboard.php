@@ -248,10 +248,39 @@ $output['window']   = $this->data['current_user']['new_window'];
     
     function workflow()
     {
+        $pulldetails = $this->input->post('pulldetails');
+ 
 
-        $data['customer_deal']  = $this->allUserCustomersRun();
-        $data['companies_added']  = $this->companiesCreatedUsersRun();
-        $data['recent_viewed_companies']  = $this->recentViewedCompaniesRun();
+
+
+
+
+
+ //if post  favorites, coadded, views
+
+switch ($pulldetails){
+	case "assigned":
+	       $data['customer_deal']  = $this->allUserCustomersRun();
+		break;
+	case "coadded":
+		  $data['companies_added']  = $this->companiesCreatedUsersRun();
+		break;	
+	case "views":
+	     $data['recent_viewed_companies']  = $this->recentViewedCompaniesRun();
+		break;	
+ 	
+}
+
+
+
+
+
+ 
+
+
+       // $data['customer_deal']  = $this->allUserCustomersRun();
+        //$data['companies_added']  = $this->companiesCreatedUsersRun();
+        //$data['recent_viewed_companies']  = $this->recentViewedCompaniesRun();
         
         echo json_encode($data);
         //print '<pre>'; print_r($data); print '</pre>';  
