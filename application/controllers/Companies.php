@@ -509,7 +509,7 @@ class Companies extends MY_Controller {
         
      
  		foreach ($query->result() as $row):
-            $response= $response."<a href='". base_url() . "companies/company?id=" . $row->id . "#contacts'><li class='autocomplete-item autocomplete-contact'><strong>" . str_replace($words, ' ',$row->name). "</strong><br><small>".$row->company_name."</small><br><small>".$row->email."</small><br><small>".$row->phone."</small></li></a>";
+            $response= $response."<a href='". base_url() . "companies/company?id=" . $row->id . "#contacts'><li class='autocomplete-item autocomplete-contact'><strong>" . str_replace($words, ' ',$row->name). "</strong><br><small>".$row->company_name."</small></li></a>";
            //
         endforeach;
         $response= $response."</ul></div>";
