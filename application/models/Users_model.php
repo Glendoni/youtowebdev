@@ -191,9 +191,9 @@ class Users_model extends MY_Model {
 		}
 	}
 
-function get_all_users(){
+function get_all_users($userid){
 
-    $sql = 'SELECT id, name, department FROM users WHERE active=true  and department not in ( \'hr\',\'data\') order by department desc , name asc';
+    $sql = 'SELECT id, name, department FROM users WHERE active=true  and department not in ( \'hr\',\'data\', \'development\') or  id='.$userid.' order by department desc , name asc';
     $query = $this->db->query($sql);
     return $query->result_array();
 

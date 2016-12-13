@@ -21,10 +21,10 @@
             <li role="presentation"><button href="#emailegagement" aria-controls="emailegagement" role="tab" data-toggle="tab" class="btn btn-primary btn-sm emailegagement" style="margin-right:10px;" onclick="ga('send','event','Clicks','Email Engagement','<?php echo $current_user['id'];?>')"> Engagement</button></li>   
                   
                   
-                   <li role="presentation"><button href="#dasboardviews" aria-controls="views" role="tab" data-toggle="tab" class="btn btn-primary btn-sm dasboardviews" style="margin-right:10px;" onclick="ga('send','event','Clicks','dasboardviews','<?php echo $current_user['id'];?>')">View</button></li>
+                   <li role="presentation"><button href="#dasboardviews" aria-controls="recent_viewed_companies" role="tab" data-toggle="tab" class="btn btn-primary btn-sm dasboardviews" style="margin-right:10px;" onclick="ga('send','event','Clicks','dasboardviews','<?php echo $current_user['id'];?>')">View</button></li>
                 
-                   <li role="presentation"><button href="#coadded" aria-controls="coadded" role="tab" data-toggle="tab" class="btn btn-primary btn-sm coadded" style="margin-right:10px;" onclick="ga('send','event','Clicks','','<?php echo $current_user['id'];?>')">Co Added</button></li> 
-                     <li role="presentation"><button href="#assigned" aria-controls="favorites" role="tab" data-toggle="tab" class="btn btn-primary btn-sm assigned" style="margin-right:10px;" onclick="ga('send','event','Clicks','Favourites','<?php echo $current_user['id'];?>')">Favourite</button></li>
+                   <li role="presentation"><button href="#coadded" aria-controls="companies_added" role="tab" data-toggle="tab" class="btn btn-primary btn-sm coadded" style="margin-right:10px;" onclick="ga('send','event','Clicks','','<?php echo $current_user['id'];?>')">Co Added</button></li> 
+                     <li role="presentation"><button href="#assigned" aria-controls="favorites" role="tab" data-toggle="tab" class="btn btn-primary btn-sm  favorites" style="margin-right:10px;" onclick="ga('send','event','Clicks','Favourites','<?php echo $current_user['id'];?>')">Favourite</button></li>
                   
                <!-- <li><button href="companies/pipeline"role="tab" class="button btn btn-primary btn-sm deals_pipeline" style="margin-right:10px;" onclick="window.location ='companies/pipeline'">Deals Forecast</button></li> -->
                
@@ -32,12 +32,12 @@
                   
                      <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
                   
-                      <li role="presentation"><button href="#intents" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm intents" style="margin-right:10px;" onclick="ga('send','event','Clicks','Intents','<?php echo $current_user['id'];?>')">Intent</button></li> 
+                      <li role="presentation"><button href="#intents" aria-controls="intents" role="tab" data-toggle="tab" class="btn btn-primary btn-sm intents" style="margin-right:10px;" onclick="ga('send','event','Clicks','Intents','<?php echo $current_user['id'];?>')">Intent</button></li> 
                        
-                  <li role="presentation"><button href="#proposals" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm proposals" style="margin-right:10px;" onclick="ga('send','event','Clicks','Proposals','<?php echo $current_user['id'];?>')">Proposal</button></li> 
+                  <li role="presentation"><button href="#proposals" aria-controls="proposals" role="tab" data-toggle="tab" class="btn btn-primary btn-sm proposals" style="margin-right:10px;" onclick="ga('send','event','Clicks','Proposals','<?php echo $current_user['id'];?>')">Proposal</button></li> 
                   
                            
-                   <li role="presentation"><button href="#customerdeal" aria-controls="assigned" role="tab" data-toggle="tab" class="btn btn-primary btn-sm customerdeal" style="margin-right:10px;" onclick="ga('send','event','Clicks','Customerdeal','<?php echo $current_user['id'];?>')">Customer</button></li>
+                   <li role="presentation"><button href="#customerdeal" aria-controls="customer_deal" role="tab" data-toggle="tab" class="btn btn-primary btn-sm customer_deal" style="margin-right:10px;" onclick="ga('send','event','Clicks','Customerdeal','<?php echo $current_user['id'];?>')">Customer</button></li>
               </ul>
   <?php }; ?>
           </div>

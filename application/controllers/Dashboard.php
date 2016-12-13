@@ -251,21 +251,18 @@ $output['window']   = $this->data['current_user']['new_window'];
         $pulldetails = $this->input->post('pulldetails');
  
 
-
-
-
-
+ //print_r($pulldetails);
 
  //if post  favorites, coadded, views
 
 switch ($pulldetails){
-	case "assigned":
-	       $data['customer_deal']  = $this->allUserCustomersRun();
+	case "customer_deal":
+	      $data['customer_deal']  = $this->allUserCustomersRun();
 		break;
-	case "coadded":
+	case "companies_added":
 		  $data['companies_added']  = $this->companiesCreatedUsersRun();
 		break;	
-	case "views":
+	case "recent_viewed_companies":
 	     $data['recent_viewed_companies']  = $this->recentViewedCompaniesRun();
 		break;	
  	

@@ -754,7 +754,7 @@ uimage = val.image.split(',')
             });
             
         
-        
+            
         
         
         
@@ -818,6 +818,8 @@ uimage = val.image.split(',')
                  
              
     });
+
+ 
         
         
         
@@ -825,8 +827,14 @@ uimage = val.image.split(',')
       
         
         
-       
+       $('.emailegagement').hover(function(){
         
+
+if(!$(this).hasClass('requested') && $(this).attr('aria-controls') ==  'emailegagement'){
+    
+//alert($(this).attr('aria-controls'))
+    $(this).addClass('requested'); 
+    
         
         $.ajax({
         type: "GET",
@@ -851,8 +859,11 @@ uimage = val.image.split(',')
 
         });
 
-               
-               
+       
+
+}
+        
+       })
                      }
         
         
@@ -894,7 +905,20 @@ uimage = val.image.split(',')
     
      if((/dashboard/.test(window.location.href))&& (/dashboard\/team/.test(window.location.href)!= true)){
          //GET TEAM STATS END 
-            getUserFavourites();   //trigger favorites 
+           
+                $('.favorites').hover(function(){
+        
+
+    if(!$(this).hasClass('requested') && $(this).attr('aria-controls') ==  'favorites'){
+
+    //alert($(this).attr('aria-controls'))
+        $(this).addClass('requested'); 
+
+             getUserFavourites();   //trigger favorites 
+
+        } 
+    })
+         
         $('.sortform form select').change(function(){
             getUserFavourites(); //Trigger alt sort on change
 

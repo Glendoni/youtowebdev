@@ -450,9 +450,10 @@ a.btn.btn-block.clear-fields {
 	border-color:#ddd;
 }
 .btn.companieshouse {
-	background-color:#0b0c0c;;
+	background-color:#f7f7f7;
 	border-color:#ddd;
-	color: #fff;
+	color: #040404;
+    font-weight:bold;
 }
 .btn.duedil:hover {
 	background-color:#f7f7f7;
@@ -2431,7 +2432,7 @@ body {
     color:#000000;
 }
 .callbackActionTextBox #action_type_planned, .callbackActionTextBox .actionContact,.callbackActionTextBox .actiondate{
-width: 32.7%;
+width: 24.0%;
     margin-right: 5px;
 }
 .callbackActionTextBox .actiondate{

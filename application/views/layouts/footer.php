@@ -184,12 +184,14 @@ $(document).ready(function(){
                     $('.dashboard button').hover(function(){
 
 
-if(!$(this).hasClass('requested')){
+if(!$(this).hasClass('requested') && $(this).attr('aria-controls') !=  'emailegagement'  && $(this).attr('aria-controls') !=  'proposals'  && $(this).attr('aria-controls') !=  'intents' && $(this).attr('aria-controls') !=  'favorites'){
     
 //alert($(this).attr('aria-controls'))
     $(this).addClass('requested');  
     
     var clickedBtnVal = $(this).attr('aria-controls');
+    
+   
     // dashboardTabLoader()    //MANAGES BACK BUTTON FUNCTIONALITY
             
               var para = {'pulldetails':clickedBtnVal};
@@ -215,17 +217,19 @@ var customer_to =[];
     var name = [];
                 $.each( data, function( key, val ) {
                       
-                  
-                    switch (key) {
+                   console.log('I am the don'+val);
+                    switch (clickedBtnVal) {
+                            
+                           
     case 'customer_deal':
     $.each( val, function( keye, vale ) {
-                 customer_to = vale.customer_to? vale.customer_to : '' ;
-                 turnover   = vale.turnover ? vale.turnover : '';
-                 planned    = vale.planned ? vale.planned :  ''; 
-                 action     = vale.action ? vale.action :  '';
-                actioned     = vale.actioned ? vale.actioned:  '';
-         age_at_joining_months     = vale.age_at_joining_months ? vale.age_at_joining_months.replace(0,''):  '';
-                 by     = vale.by   ? vale.by: '';  
+                 customer_to = vale.customer_to ? vale.customer_to : '' ;
+                 turnover = vale.turnover ? vale.turnover : '';
+                 planned  = vale.planned ? vale.planned :  ''; 
+                 action   = vale.action ? vale.action :  '';
+                actioned  = vale.actioned ? vale.actioned:  '';
+         age_at_joining_months = vale.age_at_joining_months ? vale.age_at_joining_months.replace(0,''):  '';
+                 by = vale.by   ? vale.by: '';  
 //name = vale.name_;
    name = vale.name_.replace(/Limited|Ltd|ltd|limited/gi, function myFunction(x){return ''});                      
 
@@ -235,9 +239,7 @@ var customer_to =[];
                     break;
                     case 'companies_added':
 
-
-
-                               $.each( val, function( keye, vale ) {
+                                $.each( val, function( keye, vale ) {
                                    //   console.log(vale);
                                    name = vale.company_name.replace(/Limited|Ltd|ltd|limited/gi, function myFunction(x){return ''});
                                    coaddedres.push('<div class="row record-holder"> <div class="col-md-2">'+vale.created+'</div><div class="col-xs-4 col-sm-1 col-md-6"><a href="companies/company?id='+vale.company_id+'">'+name+'</a></div><div class="col-xs-8 col-sm-4 col-md-4"><span class="label label-'+vale.pipeline+'" style="margin-top: 3px;"> '+vale.pipeline+' </span></div></div>');
@@ -246,7 +248,7 @@ var customer_to =[];
 
                                        //  
                         break;
-                case 'recent_viewed_companies':
+                    case 'recent_viewed_companies':
                                          $.each( val, function( keye, vale ) {
                                              
                                               name = vale.company_name.replace(/Limited|Ltd|ltd|limited/gi, function myFunction(x){return ''});
@@ -255,7 +257,7 @@ var customer_to =[];
 
                                          })
 
-                                              break;   
+                        break;   
                                     }
                     
                       
