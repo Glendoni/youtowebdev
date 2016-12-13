@@ -195,7 +195,7 @@ if(!$(this).hasClass('requested') && $(this).attr('aria-controls') !=  'emailega
     // dashboardTabLoader()    //MANAGES BACK BUTTON FUNCTIONALITY
             delete para;
                para = {'pulldetails':clickedBtnVal};
-            console.log(para);
+          
             $.ajax({
             type: "post",
                 dataType: "json",
