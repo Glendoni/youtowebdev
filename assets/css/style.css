@@ -895,7 +895,7 @@ li.autocomplete-company {
 
 }
 
-li.autocomplete-company.inactive {
+li.autocomplete-company.inactive, li.autocomplete-contact.inactive {
 color: #ccc;
 cursor: not-allowed;
 }
