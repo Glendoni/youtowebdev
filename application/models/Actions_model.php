@@ -735,6 +735,10 @@ function set_action_state($action_id,$user_id,$state,$outcome,$post)
 
 {
     //$outcome =  htmlentities($outcome);
+
+
+
+    
     
     if($state == 'completed'){
         $data = array(
@@ -765,13 +769,25 @@ function set_action_state($action_id,$user_id,$state,$outcome,$post)
         
         
               if ($post['action_type_planned']>0) {
+                  
+                  
+                      
+       
+        if($post['who_user_id'] != $user_id ){
+            
+            $useris =  $user_id;
+            
+            
+        }
+                  
             $planneddata = array(
             'company_id'    => $post['company_id'],
-            'user_id'       => $user_id,
+             'user_id'      => $post['who_user_id'] ? $post['who_user_id'] : $user_id,
             'comments'      => (!empty($outcome)?$outcome:NULL),
             'planned_at'    => $post['planned_at'],
             'contact_id'    => (!empty($post['contact_id'])?$post['contact_id']:NULL),
             'created_by'    => $user_id,
+                 'campaign_id' => $useris ? $useris : null,
             'action_type_id'=> $post['action_type_planned'],
             'actioned_at'   =>  NULL,
             'created_at'    => date('Y-m-d H:i:s'),
@@ -826,7 +842,7 @@ function create($post, $userid =false)
     
     if ($post['action_type_planned']>0) {
         
-        $useris == array();
+        $useris = array();
         if($post['who_user_id'] != $post['user_id'] ){
             
             $useris =  $post['user_id'];

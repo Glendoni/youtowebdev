@@ -195,8 +195,10 @@ function getActionData(scope = false){ //get all actions in multidimentional jso
                 $('.actiondate').datetimepicker({ minDate: dateToday });
                
                 $('.form .actionContact').clone().prependTo('.actionForm');
+                  
                 $('.form #action_type_planned').clone().prependTo('.formOutcome');
-               
+             
+                $('.form #who_user_id').clone().prependTo('.formOutcome .who_is_clone');
                 $('select[name="action_type_planned"]').addClass('action_type_planned');
                 //bindfollowUpInfoBtn(); 
 
@@ -1385,7 +1387,7 @@ var updatemeeting   = '<span  class="datechangerTrigger"><input type="text"  dat
                 '<form action="Actions/addOutcome" class="outcomeform" data="'+action['action_id']+'" >'+
                 '<textarea class="form-control   textarea'+action['action_id']+'  " name="outcome" placeholder="Add outcome" required="required" rows="2" style="margin-bottom:5px;"></textarea><div class="editor addOutcomeEditor" addOutcomeEditor="'+action['action_id']+'" ></div>'+
                 ' <div class="form-group form-inline actionForm formOutcome">'+
-                                            '<input type="text" class="form-control actiondate" data-date-format="YYYY/MM/DD H:m" name="planned_at" required="required" placeholder="Follow Up Date">'+
+                                            '<span class="who_is_clone"></span><input type="text" class="form-control actiondate" data-date-format="YYYY/MM/DD H:m" name="planned_at" required="required" placeholder="Follow Up Date">'+
                                         '</div>'+
                 '<input type="hidden" name="outcomeActionId" value="'+action['action_id']+'" /><input type="hidden" name="company_id" value="'+getUrlIdParam+'" /> <input type="hidden" name="status" id="callBackActionStatus'+action['action_id']+'" value="" />'+
                 '<input type="submit" class="btn btn-primary btn-block actionSubmit box'+action['action_id']+' submit'+action['action_id']+'" "  style="float:right;" value="Save"></form><br /></div>';
