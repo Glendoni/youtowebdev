@@ -1034,7 +1034,7 @@ endif;
                    <div class="col-sm-2 col-md-2 ">
                          <div class="form-group ">
                                     <label>Who</label>
-                                    <select name="who_user_id" id="who_user_id" class="form-control selectpicker" data-live-search="true">
+                                    <select name="who_user_id" id="who_user_id" class="form-control selectpicker show-tick" data-live-search="true">
                                      <!--   <option value="">--- Select a Contact ---</option> -->
                                         <?php foreach($getallusers as $user ): ?>
                                         
