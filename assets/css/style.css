@@ -2432,8 +2432,8 @@ body {
     color:#000000;
 }
 .callbackActionTextBox #action_type_planned, .callbackActionTextBox .actionContact,.callbackActionTextBox .actiondate{
-width: 24.0%;
-    margin-right: 5px;
+width: 25.8%;
+    margin-right: 2px;
 }
 .callbackActionTextBox .actiondate{
     float:right;
