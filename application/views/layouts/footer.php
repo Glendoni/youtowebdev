@@ -1230,7 +1230,7 @@ $(function(){
 
 
 <!-- Latest compiled and minified JavaScript -->
-<script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.min.js"></script>
 
  
 
