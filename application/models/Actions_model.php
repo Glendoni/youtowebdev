@@ -851,17 +851,17 @@ function                     create($post, $userid =false)
         }
 
         $planneddata = array(
-        'company_id'    => $post['company_id'],
-        'user_id'       => $post['who_user_id'] ? $post['who_user_id'] : $post['user_id'],
-        'comments'      => (isset($post['comment'])?htmlspecialchars(preg_replace('/[\x00-\x1F\x80-\xFF]/', '', rtrim($post['comment']))):NULL),
-        'planned_at'    => $post['planned_at'],
-            'campaign_id' => $useris ? $useris : null ,
-        'contact_id'    => (!empty($post['contact_id'])?$post['contact_id']:NULL),
-        'created_by'    => $userid ? $userid : $post['user_id'],
-        'action_type_id'=> $post['action_type_planned'],
-        'actioned_at'   =>  NULL,
-        'created_at'    => date('Y-m-d H:i:s'),
-        'followup_action_id' =>(isset($post['followup_action_id'])?$post['followup_action_id']:NULL),
+            'company_id'    => $post['company_id'],
+            'user_id'       => $post['who_user_id'] ? $post['who_user_id'] : $post['user_id'],
+            'comments'      => (isset($post['comment'])?htmlspecialchars(preg_replace('/[\x00-\x1F\x80-\xFF]/', '', rtrim($post['comment']))):NULL),
+            'planned_at'    => $post['planned_at'],
+            'campaign_id' => $useris ? $useris : null,
+            'contact_id'    => (!empty($post['contact_id'])?$post['contact_id']:NULL),
+            'created_by'    => $userid ? $userid : $post['user_id'],
+            'action_type_id'=> $post['action_type_planned'],
+            'actioned_at'   =>  NULL,
+            'created_at'    => date('Y-m-d H:i:s'),
+            'followup_action_id' =>(isset($post['followup_action_id'])?$post['followup_action_id']:NULL),
         );
         $query = $this->db->insert('actions', $planneddata);
 
