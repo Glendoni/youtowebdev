@@ -752,9 +752,9 @@ uimage = val.image.split(',')
             
         
             
+var username  =  [];
         
-        
-        
+        var pods = [];
              $.ajax({
         type: "GET",
             dataType: "json",
@@ -764,52 +764,136 @@ uimage = val.image.split(',')
             var  createdAt; 
             var company_name = [];
             var pipleine =  ['intents', 'proposals'];
+            var pad = [];
+               var username = [];
+            var associated_company = [];
+            var completed
+       
   //console.log(data.intents);
             
            
-            if(!typeof data.intents != 'undefined'){
- 
-            $.each( pipleine, function(  index, keyval ) {
-    $('.record-holder-'+keyval).html('');
-             $.each( data[keyval], function( key, val ) {
-                 
-               createdAt = val.intent ? val.intent : val.proposal;
-                    company_name = val.name.replace(/Limited|Ltd|ltd|limited/gi, function myFunction(x){return ''});
-    $('.record-holder-'+keyval).append('<div class="row record-holder"><div class="col-xs-2 col-sm-2 col-md-2">'+createdAt+'</div><div class="col-xs-4 col-sm-4 col-md-4"><a href="companies/company?id='+val.id+'">'+company_name+'</a></div><div class="col-xs-2 col-sm-2 col-md-2  "><span class="pipeline ">'+(val.planned ? val.planned : '') +'</span></div><div class="col-xs-2 col-sm-2 col-md-2  "><span class="pipeline ">'+ (val.action ? val.action : '')  +'</span></div><div class="col-xs-2 col-sm-2 col-md-2  "><span class="pipeline ">'+(val.by ? val.by : '')   +'</span></div></div>');
-           
-             })
-                    var record_holder_propsals_length =    $('.record-holder-'+keyval+' .record-holder').length;
-                    record_holder_propsals_length = record_holder_propsals_length ? record_holder_propsals_length :'0';
-                    $('.eventcount'+keyval).text(record_holder_propsals_length);
-             })
- 
- 
-            }
+                            
  //pods.acudate.split("-").reverse().join("-")
- var    actionedAt;
-    $.each( data['pods'], function(  index, pods ) {
+                     var    actionedAt;
+                        $.each( data['pods'], function(  index, pods ) {
+
+
+                           // console.warn( pods[0]['account_manager'][0]['name']);
+
+                       // console.log(pods[1]['account_manager'][0]['name']);
+                            pad  = pods[1]['account_manager'][0];  
+
+                                    $(pad).each(function(inx, val){
+                                        if(typeof pods[1]['account_manager'][0] ){
+                                            //console.log(val['name']);
+                                            associated_company.push(val['name']);
+                                            username.push(val['name']+'_'+val['tag_id']);
+                                        }
+                                    //console.debug(pods[1]);    
+                                    })
+
+                        });
+
+ 
+                         if( data.window == 't'){
+
+                             $('.dashboardmaincontainer  a').attr('target',"_blank");
+
+                         }
             
-          //console.log(pods.tag_id);
-      actionedAt  =   pods[0]['last_action'][0]['acudate']? pods[0]['last_action'][0]['acudate'] : pods[0]['last_action'][0]['createdatac'] ;
-        $('.record-holder-pods'+pods.tag_id).append('<div class="row record-holder"><div class="col-xs-4 col-sm-4 col-md-4"><a href="companies/company?id='+pods.id+'">'+pods.name+'</a></div><div class="col-xs-4 col-sm-4 col-md-4">'+pods[0]['last_action'][0]['actionname']+'<br> '+pods[0]['last_action'][0]['username']+
-        ' on '+ actionedAt.split("-").reverse().join("-")+'</div></div>');
+            
+            
+                         var uniqueNames = [];
+                        $.each(username, function(i, el){
+                            if($.inArray(el, uniqueNames) === -1) uniqueNames.push(el);
+                        });
+            
+           
+            
+                        var splitname = [];
+
+                        var tagid = [];
+                       $.each(uniqueNames , function(key,name){
+
+                          name =  name.split('_');
+                          tagid =name[1];
+                          name=name[0];
+
+               console.log(name+tagid)
+             $('.tab-content').append( '<div role="tabpanel" class="tab-pane fade" id="'+name.replace(' ','')+'"> <div class="panel panel-default"> <div class="panel-heading" id="'+name.replace(' ','')+'"> <h3 class="panel-title">Account Manager '+name+'<span class="badge pull-right eventcountpods200"></span></h3> </div><div class="panel-body" style="font-size:12px;"> <div class="row record-holder-header mobile-hide"> <div class="col-xs-5 col-sm-4 col-md-4"><strong>Company</strong></div><div class="col-xs-8 col-sm-2 col-md-2"><strong>Last Action</strong></div></div><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"> <div class="row record-holder-pods'+tagid+'"></div></div></div></div></div>');
+                
+                        })
+            
+            
+                var unique_associated_company = [];
+                $.each(associated_company, function(i, el){
+                    if($.inArray(el, unique_associated_company) === -1) unique_associated_company.push(el);
+                }); 
+            
+            
+                $.each(unique_associated_company , function(key,name){
+                
+                //console.log(name);
+                    
+                      name =  name.split('_');
+                          tagid =name[1];
+                          name=name[0];
+                    console.log(tagid);
+                $('.dashboardpods').append('<li role="presentation"><button href="#'+name.replace(' ','')+'" aria-controls="calls" role="tab" data-toggle="tab" class="btn btn-primary btn-sm c-a-m" style="margin-right:10px;" >'+name+'</button></li> ');
+                
+
+                     //$('.tab-content').append( '<div role="tabpanel" class="tab-pane fade" id="'+name.replace(' ','')+'"> <div class="panel panel-default"> <div class="panel-heading" id="'+name.replace(' ','')+'"> <h3 class="panel-title">Account Manager '+name+'<span class="badge pull-right eventcountpods200"></span></h3> </div><div class="panel-body" style="font-size:12px;"> <div class="row record-holder-header mobile-hide"> <div class="col-xs-5 col-sm-4 col-md-4"><strong>Company</strong></div><div class="col-xs-8 col-sm-2 col-md-2"><strong>Last Action</strong></div></div><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"> <div class="row record-holder-pods660"></div></div></div></div></div>');
+                
+                
+            })
+            
+          var topid = 21;
+            
+         
+                
+                
+                
+                    if(!typeof data.intents != 'undefined'){
+
+                                $.each( pipleine, function(  index, keyval ) {
+                                    $('.record-holder-'+keyval).html('');
+                                 $.each( data[keyval], function( key, val ) {
+//console.log(keyval)
+                                   createdAt = val.intent ? val.intent : val.proposal;
+                                        company_name = val.name.replace(/Limited|Ltd|ltd|limited/gi, function myFunction(x){return ''});
+                        $('.record-holder-'+keyval).append('<div class="row record-holder"><div class="col-xs-2 col-sm-2 col-md-2">'+createdAt+'</div><div class="col-xs-4 col-sm-4 col-md-4"><a href="companies/company?id='+val.id+'">'+company_name+'</a></div><div class="col-xs-2 col-sm-2 col-md-2  "><span class="pipeline ">'+(val.planned ? val.planned : '') +'</span></div><div class="col-xs-2 col-sm-2 col-md-2  "><span class="pipeline ">'+ (val.action ? val.action : '')  +'</span></div><div class="col-xs-2 col-sm-2 col-md-2  "><span class="pipeline ">'+(val.by ? val.by : '')   +'</span></div></div>');
+
+                                 })
+                                        var record_holder_propsals_length =    $('.record-holder-'+keyval+' .record-holder').length;
+                                        record_holder_propsals_length = record_holder_propsals_length ? record_holder_propsals_length :'0';
+                                        $('.eventcount'+keyval).text(record_holder_propsals_length);
+                                 })
+
+
+                                }
+            
+            
+            
+            
+            
+                   $.each( data['pods'], function(  index, pods ) {
+                 
+                  actionedAt  =   pods[0]['last_action'][0]['acudate']? pods[0]['last_action'][0]['acudate'] : pods[0]['last_action'][0]['createdatac'] ;
+       // console.log('Glennnnn '+pods.tagid);
+       $('.record-holder-pods'+pods.tag_id).append('<div class="row record-holder"><div class="col-xs-4 col-sm-4 col-md-4"><a href="companies/company?id='+pods.id+'">'+pods.name+'</a></div><div class="col-xs-4 col-sm-4 col-md-4">'+pods[0]['last_action'][0]['actionname']+'<br> '+pods[0]['last_action'][0]['username']+' on '+ actionedAt.split("-").reverse().join("-")+'</div></div>');
         
         
         
           var record_holder_propsals_length =    $('.record-holder-pods'+pods.tag_id+' .record-holder').length;
                     record_holder_propsals_length = record_holder_propsals_length ? record_holder_propsals_length :'0';
-                    $('.eventcountpods'+pods.tag_id).text(record_holder_propsals_length);
-
-    });
-        
- 
- 
-     if( data.window == 't'){
-         
-         $('.dashboardmaincontainer  a').attr('target',"_blank");
-         
-     }
- 
+                    $('.eventcountpods'+pods.tag_id).text(record_holder_propsals_length);  
+                 
+                 
+                 
+             })
+                
+             // console.log(uniqueNames.join("")); 
+              //console.debug(username.join());   
         }
 
                  

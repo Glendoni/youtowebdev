@@ -1329,15 +1329,15 @@ AND ct.tag_id in (200,201,202)
         */
 
         
-                $sql =  ' SELECT  ct.company_id as id, ct.tag_id, c.created_at::date, c.name, ct.tag_id 
+                $sql =  ' SELECT  ct.company_id as id, ct.tag_id, c.created_at::date, c.name 
 
                 FROM companies c
                 LEFT JOIN company_tags ct
                 ON c.id= ct.company_id
-                WHERE ct.tag_id in (200,201,202)
+               LEFT  JOIN tags t on ct.tag_id = t.id 
+                WHERE  t.category_id  in (10)
                 AND ct.eff_to is null
                 ';     
-
 
 
                 $query= $this->db->query($sql);
@@ -1351,7 +1351,13 @@ AND ct.tag_id in (200,201,202)
                 //  $pp[$item]['action'] =  $this->getmore() ;
                 // echo $value['compid'];
                 $idval =   $this->getmore($value['id']) ;
+                $idvalac =   $this->get_account_manager($value['id']) ;
                 array_push($pp[$item],  array( 'last_action'=> $idval));
+                     
+//if($idvalac){
+                    array_push($pp[$item],  array( 'account_manager' => $idvalac));
+    
+//}
 
                 }
         
@@ -1361,17 +1367,17 @@ AND ct.tag_id in (200,201,202)
     }
     
     
-        function getmore($id){
+    function getmore($id){
       
-         $query = $this->db->query('SELECT ac.company_id, ac.action_type_id, ac.updated_at::date as acudate, ac.updated_by, u.name as username, atp.name as actionname, ac.created_at::date as createdatac
-         FROM actions ac
-LEFT JOIN action_types atp
-ON  ac.action_type_id = atp.id
-LEFT JOIN users u 
-ON ac.created_by = u.id 
-WHERE ac.company_id='.$id.' AND  ac.action_type_id !=19 order by ac.updated_at DESC , ac.id DESC  LIMIT 1' ) ;     
+        $query = $this->db->query('SELECT ac.company_id, ac.action_type_id, ac.updated_at::date as acudate, ac.updated_by, u.name as username, atp.name as actionname, ac.created_at::date as createdatac
+        FROM actions ac
+        LEFT JOIN action_types atp
+        ON  ac.action_type_id = atp.id
+        LEFT JOIN users u 
+        ON ac.created_by = u.id 
+        WHERE ac.company_id='.$id.' AND  ac.action_type_id !=19 order by ac.updated_at DESC , ac.id DESC  LIMIT 1' ) ;     
     
- return $query->result_array(); 
+        return $query->result_array(); 
         
         
     }
@@ -1419,4 +1425,23 @@ WHERE ac.company_id='.$id.' AND  ac.action_type_id !=19 order by ac.updated_at D
         
         return 'glen';
     }
+    
+    
+    function get_account_manager($company_id)
+    {
+
+        $sql = "SELECT  ct.company_id as id, ct.tag_id, c.created_at::date, c.name, ct.tag_id, t.name
+        FROM companies c
+        LEFT JOIN company_tags ct
+        ON c.id= ct.company_id
+        AND ct.eff_to is null
+        INNER JOIN tags t on t.id = ct.tag_id 
+        and t.category_id = '10'
+        and c.id= ".$company_id;
+           $query = $this->db->query($sql);
+           return $query->result_array()?  $query->result_array() : '';
+
+    }
+    
+    
 }
