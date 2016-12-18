@@ -10,9 +10,19 @@
     if ($current_user['department'] == 'support'){  ?>
               <!-- Nav tabs -->
               <ul class="nav nav-tabs dashboard" role="tablist">
+                  
+                  
+                  
                 <li role="presentation" class="active"><button href="#team_stats" aria-controls="team_stats" role="tab" data-toggle="tab" class="btn btn-primary btn-sm " style="margin-right:10px;" onclick="ga('send','event','Clicks','Stats','<?php echo $current_user['id'];?>')">Pods</button></li>
-                <li role="presentation"><button href="#calls" aria-controls="calls" role="tab" data-toggle="tab" class="btn btn-primary btn-sm c-a-m" style="margin-right:10px;" >Schedule</button></li>
+                  
+                <li role="presentation">
+                    <button href="#calls" aria-controls="calls" role="tab" data-toggle="tab" class="btn btn-primary btn-sm c-a-m" style="margin-right:10px;" >Schedule</button>
+                  </li>
               </ul>
+              
+              
+              
+              
 <?php } else {?>
 <!-- Nav tabs -->
               <ul class="nav nav-tabs dashboard" role="tablist">

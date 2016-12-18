@@ -64,6 +64,9 @@
     <!-- Custom Fonts -->
   
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.min.css">
       
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -103,10 +106,20 @@
 <?php
 } ?>
      
-     Version 5.1</div>
+     Version 5.1.1</div>
     </a>
+    
+        <?php 
+    
+    
+    if ($current_user['department'] != 'support'){  ?>
      <a href="<?php echo site_url(); ?>dashboard/team" ><div class="btn btn-warning"style="margin-top: 15px;  margin-left: 2px;
-    padding: 2px 20px;">Team</div><br>  
+    padding: 2px 20px;">Team</div>
+         
+         <?php } ?>
+         <br>  
+         
+         
 
 <?php endif; ?>
 </a>

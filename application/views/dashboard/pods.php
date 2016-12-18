@@ -7,11 +7,15 @@
     
     if ($current_user['department'] == 'support'){  ?>
               <!-- Nav tabs -->
-              <ul class="nav nav-tabs dashboard" role="tablist">
-                  <li role="presentation" class="active"><button href="#calls" aria-controls="calls" role="tab" data-toggle="tab" class="btn btn-primary btn-sm c-a-m" style="margin-right:10px;" >Schedule</button></li>
-                                                 <li role="presentation" ><button href="#podone" aria-controls="calls" role="tab" data-toggle="tab" class="btn btn-primary btn-sm c-a-m" style="margin-right:10px;" >Pod 1</button></li>
-                             <li role="presentation"><button href="#podtwo" aria-controls="calls" role="tab" data-toggle="tab" class="btn btn-primary btn-sm c-a-m" style="margin-right:10px;" >Pod 2</button></li>
-                               <li role="presentation"><button href="#podthree" aria-controls="calls" role="tab" data-toggle="tab" class="btn btn-primary btn-sm c-a-m" style="margin-right:10px;" >Pod 3</button></li> 
+              <ul class="nav nav-tabs dashboard dashboardpods" role="tablist">
+                  <li role="presentation" class="active"><button href="#calls" aria-controls="calls" role="tab" data-toggle="tab" class="btn btn-primary btn-sm c-a-m requested" style="margin-right:10px;" >Schedule</button></li>
+                  
+                  
+                              
+                  
+                  
+                  
+                  
             
               </ul>
 <?php }  ?>
@@ -129,90 +133,15 @@
 </div><!--END OF PANEL-->
 
 <?php }else{ ?>
-<div role="tabpanel" class="tab-pane  fade" id="podone">
-                <!--Pod One-->
+ 
 
-                        <div class="panel panel-default">
-                            <div class="panel-heading" id="podone">
-                                <h3 class="panel-title">Pod 1<span class="badge pull-right eventcountpods200"></span></h3>
-                            </div>
-                            <!-- /.panel-heading -->
-                            <div class="panel-body" style="font-size:12px;">
-                                <div class="row record-holder-header mobile-hide">
-                                
-                                <div class="col-xs-5 col-sm-4 col-md-4"><strong>Company</strong></div>
-                                    <div class="col-xs-8 col-sm-2 col-md-2"><strong>Last Action</strong></div>
-                                <!--   <div class="col-xs-4 col-sm-2 col-md-2"><strong>Planned</strong></div>
-                                <div class="col-xs-4 col-sm-2 col-md-2"><strong>Action</strong></div>
-                                <div class="col-xs-4 col-sm-2 col-md-2"><strong>By</strong></div> -->
-                            </div>
-                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <div class="row record-holder-pods200"></div>
-                            </div>
 
-                            <!--AUTO PILOT END  -->
-                            </div>
-                            <!-- /.panel-body -->
-                        </div>
-                    </div><!--END OF Pod One-->
+<div id="kool"> </div>
 
 
 
-                <div role="tabpanel" class="tab-pane fade" id="podtwo">
-                <!--Pod One-->
+ 
 
-                        <div class="panel panel-default">
-                            <div class="panel-heading" id="podtwo">
-                                <h3 class="panel-title">Pod 2<span class="badge pull-right eventcountpods201"></span></h3>
-                            </div>
-                            <!-- /.panel-heading -->
-                            <div class="panel-body" style="font-size:12px;">
-                                <div class="row record-holder-header mobile-hide">
-                                <div class="col-xs-5 col-sm-4 col-md-4"><strong>Company</strong></div>
-                                    <div class="col-xs-8 col-sm-2 col-md-2"><strong>Last Action</strong></div>
-                             <!--   <div class="col-xs-4 col-sm-2 col-md-2"><strong>Planned</strong></div>
-                                <div class="col-xs-4 col-sm-2 col-md-2"><strong>Action</strong></div>
-                                <div class="col-xs-4 col-sm-2 col-md-2"><strong>By</strong></div> -->
-                            </div>
-                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <div class="row record-holder-pods201"></div>
-                            </div>
-
-                            <!--AUTO PILOT END  -->
-                            </div>
-                            <!-- /.panel-body -->
-                        </div>
-                    </div><!--END OF Pod One-->
-
-
-
-
-
-                <div role="tabpanel" class="tab-pane fade" id="podthree">
-                <!--Pod One-->
-
-                        <div class="panel panel-default">
-                            <div class="panel-heading" id="podthree">
-                                <h3 class="panel-title">Pod 3<span class="badge pull-right eventcountpods202"></span></h3>
-                            </div>
-                            <!-- /.panel-heading -->
-                            <div class="panel-body" style="font-size:12px;">
-                                <div class="row record-holder-header mobile-hide">
-                                <div class="col-xs-5 col-sm-4 col-md-4"><strong>Company</strong></div>
-                                    <div class="col-xs-8 col-sm-2 col-md-2"><strong>Last Action</strong></div>
-                               <!--   <div class="col-xs-4 col-sm-2 col-md-2"><strong>Planned</strong></div>
-                                <div class="col-xs-4 col-sm-2 col-md-2"><strong>Action</strong></div>
-                                <div class="col-xs-4 col-sm-2 col-md-2"><strong>By</strong></div> -->
-                            </div>
-                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <div class="row record-holder-pods202"></div>
-                            </div>
-
-                            <!--AUTO PILOT END  -->
-                            </div>
-                            <!-- /.panel-body -->
-                        </div>
-                    </div><!--END OF Pod One-->
 
 <?php } ?>
 <!--END ASSIGNED-->

@@ -1226,6 +1226,15 @@ $(function(){
     }
 }
 </script>
+
+
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.min.js"></script>
+
+ 
+
+
 <!--COMBINE MULTIPLE JS FILES-->
 <?php if (isset($current_user)): ?>
 <div class="col-lg-12">    

@@ -29,6 +29,9 @@ class Dashboard extends MY_Controller {
         $this->data['department'] =   $this->data['current_user']['department'] ;
         $this->data['pending_actions'] = $this->Actions_model->get_pending_actions($this->get_current_user_id());
         //$this->data['assigned_companies'] = $this->Actions_model->get_assigned_companies($this->get_current_user_id());
+        
+       
+        
         $this->data['action_types_array'] = $this->Actions_model->get_action_types_array();
         if($this->data['current_user']['department'] == 'support'){
             $this->data['main_content'] = 'dashboard/pods';
@@ -171,9 +174,10 @@ class Dashboard extends MY_Controller {
     {
       $output['proposals']  =  $this->Actions_model->getActionsProposals($this->data['current_user']['id']);
       $output['intents']  =  $this->Actions_model->getActionsIntents($this->data['current_user']['id']);
-      $output['pods']  =  $this->Actions_model->getPods($this->data['current_user']['id']);
-      $output['userpermission'] =  $this->userPermission;
-$output['window']   = $this->data['current_user']['new_window'];
+        
+                                            $output['pods']  =  $this->Actions_model->getPods($this->data['current_user']['id']);
+                                                $output['userpermission'] =  $this->userPermission;
+                                                    $output['window']   = $this->data['current_user']['new_window'];
       echo json_encode($output);
         //echo '<pre>'; print_r($output); echo '</pre>';  
     }  
@@ -349,5 +353,17 @@ switch ($pulldetails){
                 }
             }
         */
+    
+    
+    
+    function actester(){
+        
+        //$data =  $this->data['getaccountmanager'] = $this->Actions_model->get_account_manager();
+
+ $data  =  $this->Actions_model->getPods($this->data['current_user']['id']);
+print '<pre>'; print_r($data); print '</pre>'; 
+        
+        
+    }
 
 }
