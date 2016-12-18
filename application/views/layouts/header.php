@@ -108,8 +108,18 @@
      
      Version 5.1.2</div>
     </a>
+    
+        <?php 
+    
+    
+    if ($current_user['department'] != 'support'){  ?>
      <a href="<?php echo site_url(); ?>dashboard/team" ><div class="btn btn-warning"style="margin-top: 15px;  margin-left: 2px;
-    padding: 2px 20px;">Team</div><br>  
+    padding: 2px 20px;">Team</div>
+         
+         <?php } ?>
+         <br>  
+         
+         
 
 <?php endif; ?>
 </a>

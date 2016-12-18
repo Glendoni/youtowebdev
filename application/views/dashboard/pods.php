@@ -8,7 +8,7 @@
     if ($current_user['department'] == 'support'){  ?>
               <!-- Nav tabs -->
               <ul class="nav nav-tabs dashboard dashboardpods" role="tablist">
-                  <li role="presentation" class="active"><button href="#calls" aria-controls="calls" role="tab" data-toggle="tab" class="btn btn-primary btn-sm c-a-m" style="margin-right:10px;" >Schedule</button></li>
+                  <li role="presentation" class="active"><button href="#calls" aria-controls="calls" role="tab" data-toggle="tab" class="btn btn-primary btn-sm c-a-m requested" style="margin-right:10px;" >Schedule</button></li>
                   
                   
                               
