@@ -819,8 +819,8 @@ var username  =  [];
                           tagid =name[1];
                           name=name[0];
 
-               console.log(name+tagid)
-             $('.tab-content').append( '<div role="tabpanel" class="tab-pane fade" id="'+name.replace(' ','')+'"> <div class="panel panel-default"> <div class="panel-heading" id="'+name.replace(' ','')+'"> <h3 class="panel-title">Account Manager '+name+'<span class="badge pull-right eventcountpods200"></span></h3> </div><div class="panel-body" style="font-size:12px;"> <div class="row record-holder-header mobile-hide"> <div class="col-xs-5 col-sm-4 col-md-4"><strong>Company</strong></div><div class="col-xs-8 col-sm-2 col-md-2"><strong>Last Action</strong></div></div><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"> <div class="row record-holder-pods'+tagid+'"></div></div></div></div></div>');
+          
+             $('.tab-content').append( '<div role="tabpanel" class="tab-pane fade" id="'+name.replace(' ','')+'"> <div class="panel panel-default"> <div class="panel-heading" id="'+name.replace(' ','')+'"> <h3 class="panel-title">Account Manager '+name+'<span class="badge pull-right eventcountpods200"></span></h3> </div><div class="panel-body" style="font-size:12px;"> <div class="row record-holder-header mobile-hide"> <div class="col-xs-5 col-sm-4 col-md-4"><strong>Company</strong></div><div class="col-xs-4 col-sm-4 col-md-4"><strong>Last Action</strong></div><div class="col-xs-8 col-sm-2 col-md-2"><strong>Pipeline</strong></div></div><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"> <div class="row record-holder-pods'+tagid+'"></div></div></div></div></div>');
                 
                         })
             
@@ -838,7 +838,7 @@ var username  =  [];
                       name =  name.split('_');
                           tagid =name[1];
                           name=name[0];
-                    console.log(tagid);
+             
                 $('.dashboardpods').append('<li role="presentation"><button href="#'+name.replace(' ','')+'" aria-controls="calls" role="tab" data-toggle="tab" class="btn btn-primary btn-sm c-a-m" style="margin-right:10px;" >'+name+'</button></li> ');
                 
 
@@ -880,7 +880,7 @@ var username  =  [];
                  
                   actionedAt  =   pods[0]['last_action'][0]['acudate']? pods[0]['last_action'][0]['acudate'] : pods[0]['last_action'][0]['createdatac'] ;
        // console.log('Glennnnn '+pods.tagid);
-       $('.record-holder-pods'+pods.tag_id).append('<div class="row record-holder"><div class="col-xs-4 col-sm-4 col-md-4"><a href="companies/company?id='+pods.id+'">'+pods.name+'</a></div><div class="col-xs-4 col-sm-4 col-md-4">'+pods[0]['last_action'][0]['actionname']+'<br> '+pods[0]['last_action'][0]['username']+' on '+ actionedAt.split("-").reverse().join("-")+'</div></div>');
+       $('.record-holder-pods'+pods.tag_id).append('<div class="row record-holder"><div class="col-xs-4 col-sm-4 col-md-4"><a href="companies/company?id='+pods.id+'">'+pods.name+'</a></div><div class="col-xs-4 col-sm-4 col-md-4">'+pods[0]['last_action'][0]['actionname']+'<br> '+pods[0]['last_action'][0]['username']+' on '+ actionedAt.split("-").reverse().join("-")+'</div><div class="col-md-2"><span class="label  label-'+pods.pipeline+'">'+pods.pipeline+'</div></div>');
         
         
         

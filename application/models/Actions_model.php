@@ -1329,7 +1329,7 @@ AND ct.tag_id in (200,201,202)
         */
 
         
-                $sql =  ' SELECT  ct.company_id as id, ct.tag_id, c.created_at::date, c.name 
+                $sql =  ' SELECT  ct.company_id as id, ct.tag_id, c.created_at::date, c.name , c.pipeline
 
                 FROM companies c
                 LEFT JOIN company_tags ct
