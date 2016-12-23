@@ -5,6 +5,9 @@ class Actions extends MY_Controller {
 	function __construct() 
 	{
 		parent::__construct();
+        
+         $this->load->model('Files_model');
+        $this->load->helper(array('form', 'url'));
 		
 	}
 
@@ -23,7 +26,7 @@ class Actions extends MY_Controller {
     {
          $post = $this->input->post();
         
-        
+    
 			if (!empty($post['campaign_id'])) {
 			 $campaign_redirect ='&campaign_id='.$post['campaign_id'];
 			}
@@ -80,6 +83,64 @@ class Actions extends MY_Controller {
                             }
                         else
                             {
+                            
+                            
+                            
+                                     
+                                if(($post['action_type_completed']=='40')){
+
+// $upload_data = $this->upload->data(); //Returns array of containing all of the data related to the file you uploaded.
+//$file_name = $upload_data['file_name'];
+ //$filename =$file_name; // do something with filename
+                                      
+                                   //$target_file = $_FILES["userfile"]["name"];//  $_FILES["userfile"]["name"];
+                                  //$filename =  date('YmdHis').pathinfo($target_file,PATHINFO_EXTENSION); 
+                                    
+                                    $array = explode('.', $_FILES['userfile']['name']);
+$extension = end($array);
+                                    
+                                    
+                                    $filename =  date('YmdHis');
+                                    
+                                        $config['file_name'] =     $filename;          
+                                        $config['upload_path'] = 'uploads/';                
+                                        $config['allowed_types'] = 'gif|jpg|png|pdf|csv|doc|txt';
+                                        $config['max_size']	= '100000000000';
+
+                                        $this->load->library('upload', $config);
+
+                                        if ( ! $this->upload->do_upload())
+                                        {
+                                            $error = array('error' => $this->upload->display_errors());
+
+                                            //return $error;
+
+                                        }else{
+
+                                            $data = array('upload_data' => $this->upload->data());
+                                            
+                                            
+                                            $filename_encrypted  = sha1($this->input->post('userfilename').date('YmdHis'));
+    $file_action_post = array(
+           'action_id' => $result,
+           'name' => $this->input->post('userfilename'),
+           'file_location' =>  $filename.'.'.$extension,
+           'created_at' => date('Y-m-d'),
+           'created_by' => $this->data['current_user']['id'],
+        'encryption_name' => $filename_encrypted
+       );
+                                        
+                                        $this->Files_model->file_uploader($file_action_post);
+                                            //return $data;
+
+                                        }
+                                    }
+                            
+                            
+                            
+                            
+                            
+                            
                             // after the initial action has been successfully created we can continue with the following login
                             // *** TRY TO KEEP LOGIC IN THE CONTROLLER AND DATABASE COMMITS IN THE MODELS***
                             $post = $this->input->post();
@@ -176,6 +237,17 @@ class Actions extends MY_Controller {
                             }
                             else
                             {
+                                
+                                
+                       
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
                                 $this->set_message_success('Action successfully inserted');
                                 redirect('companies/company?id='.$this->input->post('company_id').$campaign_redirect,'location');
                             }
@@ -363,6 +435,40 @@ class Actions extends MY_Controller {
         
         echo  json_encode($this->input->post());
         
+        
+    }
+    
+    
+    function downloadking($sha){
+        $this->load->helper('download');
+        if(true)
+{
+   
+          $encyption_file_name  = $this->Files_model->getfile($sha);
+          
+$pth    =   file_get_contents(base_url()."uploads/".$encyption_file_name[0]['file_location']);
+            $fileExt    =   explode('.',$encyption_file_name[0]['file_location']);
+
+           $nme =  trim($encyption_file_name[0]['name'].'.'.$fileExt[1]);
+            
+                    header('Content-Type: application/octet-stream'); 
+header("Content-Disposition: attachment; filename=$nme");
+ob_clean();
+force_download($nme, $pth); 
+             flush(); 
+}
+        
+        
+        
+    }
+    
+    
+       function getfilesh($id = '2fc563a34b29bd3986e649674c0e2a48d28f7d5f'){
+        
+        $query = $this->db->query("SELECT file_location FROM files WHERE encryption_name='".$id."' LIMIT 1");
+              $output =   $query->result_array();
+               
+    echo $output[0]['file_location'];
         
     }
 

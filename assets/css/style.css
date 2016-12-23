@@ -2432,7 +2432,7 @@ body {
     color:#000000;
 }
 .callbackActionTextBox #action_type_planned, .callbackActionTextBox .actionContact,.callbackActionTextBox .actiondate{
-width: 25.8%;
+width: 24.4%;
     margin-right: 2px;
 }
 .callbackActionTextBox .actiondate{
@@ -3344,6 +3344,15 @@ top: -20px;
     padding: 10px 0;
  }
 .qvlink a{color:#000; text-transform: none; cursor: pointer;     width: 100%;display: block;}
+
+.btn-file{ /* file upload interfce handler */
+display:none;
+}
+.action_file_uploader{
+    
+    display:none;
+    
+}
 /*! Hint.css - v2.2.1 - 2016-03-26 //#2b4461
 * http://kushagragour.in/lab/hint/
 * Copyright (c) 2016 Kushagra Gour; Licensed  */

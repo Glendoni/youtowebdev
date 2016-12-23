@@ -272,6 +272,7 @@ if ((this.value == '16' || this.value == '8' || this.value == '32') && (!source_
  
    $('#add_action .disable_no_source').prop('disabled', 'true');
     $('.actionEvalPipeline').show()
+     $('.action_file_uploader').hide();
     
             if(this.value == '16' || this.value == '8'){ 
                 $('.completed-details').attr('required', 'required');
@@ -373,8 +374,14 @@ if ((this.value == '16' || this.value == '8' || this.value == '32') && (!source_
     //$(".no-source").show();
     //$(".disable_no_source").attr('disabled', 'disabled');
     }
-    else
-    {
+        else if(this.value == '40'){
+        
+       $('.action_file_uploader').show();
+            $('.addActionOutcome').show();
+        $('.btn-file').show();
+        
+         
+    }else{
     
         $(".no-source").slideUp(600);
 

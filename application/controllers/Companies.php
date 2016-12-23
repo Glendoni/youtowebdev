@@ -906,7 +906,7 @@ echo $this->Tagging_model->$route($post);
  
     }
     
-    function getActionArray($id = 350441 ){
+    function getActionArray($id = 352533 ){
         
          $id = $this->session->userdata('selected_company_id');
         
@@ -914,7 +914,7 @@ echo $this->Tagging_model->$route($post);
         //$query[]['actions_outstanding'] = $this->Actions_model->get_actions_outstanding($id);
         
         //$query[]['action_types_array'] = (array)$this->Actions_model->get_action_types_array();
-        //$query[]['actions_completed'] = $this->Actions_model->get_actions_completed($id);
+        $query[]['actions_completed'] = $this->Actions_model->get_actions_completed($id);
         //$query[]['actions_cancelled'] = $this->Actions_model->get_actions_cancelled($id);
         
          $query[]['comments'] = $this->Actions_model->get_comments_two($id);

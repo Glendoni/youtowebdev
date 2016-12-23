@@ -836,7 +836,7 @@ $('.box'+bun+'  .actionContact option[value=]').prop('selected','selected');
                           };
         
 updateDateTime();
-        
+       downloadattachedfile();  
     } 
 
 function updateDateTime(){
@@ -946,6 +946,10 @@ $('.datechanger').change(function(){
                             mainMenuQty();
                             getActionData();
                             
+                            
+                           
+                            
+                            
                             // mainMenuQty();
                           //  updateDateTime();
                          //console.log(data);
@@ -957,6 +961,21 @@ $('.datechanger').change(function(){
 }});  
      
 }
+
+
+function  downloadattachedfile(){
+     $('.triggerdownload').unbind('click')
+                $('.triggerdownload').click(function(){
+var filestring  = $(this).attr('data');
+                            //alert();8151325dcdbae9e0ff95f9f9658432dbedfdb209
+                            $('body').append('<iframe src="http://localhost:8888/baselist/actions/downloadking/'+filestring+'" id="documentdownload" style="display:none;"></iframe>');
+                })
+    
+    
+    
+}
+
+
 
 function intefaceVisibility(){
     
@@ -1239,10 +1258,15 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
         var tfer_turnover;
         var  createfollowername;
 
+         var filename = [];
+      
          
-       
-         
-         if(typeof action['name'] !== 'undefined'  && action['name'] !== null &&  action['name'] !== 'null'   ){
+         if(typeof action['file_location'] !== 'undefined'  && action['file_location'] !== null &&  action['file_location'] !== 'null'   ){
+               filename = action['file_location'];
+             
+             filename= '<span class="btn btn-default btn-xs btn-danger triggerdownload hint--top-right" data-hint="Download Attached File" data="'+action['encryption_name']+'" style="float: right; text-transform:capitalize">Download '+action['file_name']+' </span>';
+         }
+             if(typeof action['name'] !== 'undefined'  && action['name'] !== null &&  action['name'] !== 'null'   ){
             created_by = action['name'];
            
          }else{
@@ -1398,7 +1422,7 @@ var updatemeeting   = '<span  class="datechangerTrigger"><input type="text"  dat
         
 //var tm  = action['planned_at'];
  
- 
+
             
 var tm =  dateDiffChecker(action['planned_at']);
 
@@ -1516,7 +1540,7 @@ if(tm > 1){ tm = tm + ' Days Overdue'; }else if(tm == 1){ tm  = tm + ' Day Overd
       if(createfollowername  != null  ) {
           createfollowername = action['createfollowername'] + ' forwarded to ';
           
-          console.log(action['createfollowername'] );
+          //console.log(action['createfollowername'] );
       }else{
           
           createfollowername = '';
@@ -1524,7 +1548,7 @@ if(tm > 1){ tm = tm + ' Days Overdue'; }else if(tm == 1){ tm  = tm + ' Day Overd
         
          
       if(actionTypeName != 'Pipeline Update')   
-            actions  ='<div class="timeline-entry actionId'+actionType+'  '+classCompleted+' pillid'+actionId+'" pillid='+actionId+'> <div class="timeline-stat"> '+icon+'</div><div class="timeline-label"> <div class="mar-no pad-btm"><h4 class="mar-no pad-btm">'+header+deal+'  </h4><div class="actions-info" ><span class="label label-warning"  >'+planned_at+'</span>'+kpStr+ ' '+overdueStatus+ ' '+updatemeeting+contactName+' <span class="classActions" style="float:right; margin-top:0; margin-left:3px;">'+calenderbtn+outcomeRemove+followupAlert+'</span></div></div><div class="mic-info"> '+status+': '+createfollowername+created_by+' - '+formattDate(createdAt, true)+' </div> <div class="actionMsgText">'+turnover+''+tagline+' </div>'+textbox+ ' </div></div>';
+            actions  ='<div class="timeline-entry actionId'+actionType+'  '+classCompleted+' pillid'+actionId+'" pillid='+actionId+'> <div class="timeline-stat"> '+icon+'</div><div class="timeline-label"> <div class="mar-no pad-btm"><h4 class="mar-no pad-btm">'+header+deal+'  </h4><div class="actions-info" ><span class="label label-warning"  >'+planned_at+'</span>'+kpStr+ ' '+overdueStatus+ ' '+updatemeeting+contactName+filename+' <span class="classActions" style="float:right; margin-top:0; margin-left:3px;">'+calenderbtn+outcomeRemove+followupAlert+'</span></div></div><div class="mic-info"> '+status+': '+createfollowername+created_by+' - '+formattDate(createdAt, true)+' </div> <div class="actionMsgText">'+turnover+''+tagline+' </div>'+textbox+ ' </div></div>';
          
         if(actionTypeName == 'Pipeline Update' ){
               actions  = '<div class="timeline-entry actionId'+actionType+' '+classCompleted+'" > <div class="timeline-stat"> '+icon+'</div> <div class="timeline-label pipe"> <div class="mar-no pad-btm" ><h4 class="mar-no pad-btm">'+header+' <span class="classActions" style="margin-top:0; margin-left:3px; float:right;">'+calenderbtn+outcomeRemove+'</span></h4>' +kpStr+overdueStatus+'</div><div class="actionMsgText">'+action['comments']+'</div> </div>';
