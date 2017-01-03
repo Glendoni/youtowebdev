@@ -11,11 +11,18 @@ function dateRequired()     {
 
   
 $( document ).ready(function() {
+   // addActionMultipleFileFields();
       if((/contacts/.test(window.location.href))) {
             $("[data=contacts]").trigger('click')
     
       }
     
+    
+    $('#addMoreMultipleFileFields').click(function(){
+
+addActionMultipleFileFields()
+
+})
     
              // ADD EVERGREEN
  $('.myevergreenaddcompanies').click(function(){  
@@ -130,7 +137,6 @@ if(data.success){
              $('.providercompanyid').val(parid);
 
             })
-
 
 
 
@@ -1088,7 +1094,7 @@ if(!$(this).hasClass('requested') && $(this).attr('aria-controls') ==  'emailega
                 
                 
             //checkInitialFee()
-        }else if($('#action_type_completed').val() == 4000 ){
+        }else if($('#action_type_completed').val() == 40 ){
             
             
                if($('.who').length ==1){
@@ -1125,7 +1131,14 @@ if(!$(this).hasClass('requested') && $(this).attr('aria-controls') ==  'emailega
 
 
 
+ function addActionMultipleFileFields(){
+    console.log('france')
     
+      $('#addActionMultipleFileFields').append('<div class="col-sm-4 col-md-8 col-md-push-4 alert alert-info alert-dismissable  "><div class="col-md-8 "><input type="text" name="userfilename[]" class="form-control" placeholder="What is the name of document you are uploading?" style="margin-top:-7px; text-transform:capitalize;"></div><div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><input type="file" name="userfile[]" id="userfile"  size="20" /> </div></div>');
+    
+    
+}
+   
     
       function addActionChange(){
         //console.log('france')

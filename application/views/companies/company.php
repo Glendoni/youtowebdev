@@ -1089,13 +1089,13 @@ endif;
   <div class="col-md-8">
  
     
-      <input type="text" name="userfilename" class="form-control" placeholder="What is the name of document you are uploading?" style="margin-top:-7px; text-transform:capitalize;">
+      <input type="text" name="userfilename[]" class="form-control" placeholder="What is the name of document you are uploading?" style="margin-top:-7px; text-transform:capitalize;">
     </div><!-- /input-group -->
                     
                     
                 <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                     
-                     <input type="file" name="userfile" id="userfile"  size="20" />
+                     <input type="file" name="userfile[]" id="userfile"  size="20" /> <a href="javascript:;" id="addMoreMultipleFileFields"><i >Add More</i></a>
 
 </div>
 
@@ -1105,7 +1105,9 @@ endif;
                 
                         
                    
-                        
+      <!--file rows -->
+                
+                <div id="addActionMultipleFileFields"></div>
                   
                    
                                   
@@ -1274,7 +1276,7 @@ endif;
                     
                     <li class=""><a href="javascript:;" class="btn btn-default btn-circle hint--top-right"  data-hint="Cancelled" data="actions_cancelled"><span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span></a><span class="actionMenuQty qtyactions_cancelled" aria-hidden="true"></span></li>
 
-                  
+               
                
               	</ul>
               

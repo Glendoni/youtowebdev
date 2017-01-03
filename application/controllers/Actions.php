@@ -24,7 +24,31 @@ class Actions extends MY_Controller {
 	}
 	public function create()
     {
+        
+        
+        
+        /*
+        
          $post = $this->input->post();
+        
+        // print_r('<pre>');print_r($this->input->post());print_r('</pre>');
+        
+        $userfilename = $this->input->post('userfilename');
+        $uploadedfilename = $_FILES['userfile']['name'];
+        
+
+foreach($userfilename as $key => $value){
+    
+     echo $userfilename[$key] .''.$uploadedfilename[$key];
+    
+}
+
+       
+     
+        echo 'Yes Glen';
+        exit();
+        */
+        
         
     
 			if (!empty($post['campaign_id'])) {
@@ -88,6 +112,12 @@ class Actions extends MY_Controller {
                             
                                      
                                 if(($post['action_type_completed']=='40')){
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
 
 // $upload_data = $this->upload->data(); //Returns array of containing all of the data related to the file you uploaded.
 //$file_name = $upload_data['file_name'];
@@ -96,48 +126,112 @@ class Actions extends MY_Controller {
                                    //$target_file = $_FILES["userfile"]["name"];//  $_FILES["userfile"]["name"];
                                   //$filename =  date('YmdHis').pathinfo($target_file,PATHINFO_EXTENSION); 
                                     
-                                    $array = explode('.', $_FILES['userfile']['name']);
-$extension = end($array);
                                     
                                     
-                                    $filename =  date('YmdHis');
                                     
-                                        $config['file_name'] =     $filename;          
-                                        $config['upload_path'] = 'uploads/';                
-                                        $config['allowed_types'] = 'gif|jpg|png|pdf|csv|doc|txt';
-                                        $config['max_size']	= '100000000000';
+//$userfilename = $this->input->post('userfilename');
+//$uploadedfilename = $_FILES['userfile']['name'];
+        
 
-                                        $this->load->library('upload', $config);
+//foreach($userfilename as $key => $value){
 
-                                        if ( ! $this->upload->do_upload())
-                                        {
-                                            $error = array('error' => $this->upload->display_errors());
+                                                                                        /*
+                                
+                                                                                        $array = explode('.', $_FILES['userfile']['name']);
+                                                                                        $extension = end($array);
 
-                                            //return $error;
+                                                                                        $filename =  date('YmdHis');
 
-                                        }else{
+                                                                                        $config['file_name'] =     $filename;          
+                                                                                        $config['upload_path'] = 'uploads/';                
+                                                                                        $config['allowed_types'] = 'gif|jpg|png|pdf|csv|doc|txt';
+                                                                                        $config['max_size']	= '100000000000';
 
-                                            $data = array('upload_data' => $this->upload->data());
-                                            
-                                            
-                                            $filename_encrypted  = sha1($this->input->post('userfilename').date('YmdHis'));
-    $file_action_post = array(
-           'action_id' => $result,
-           'name' => $this->input->post('userfilename'),
-           'file_location' =>  $filename.'.'.$extension,
-           'created_at' => date('Y-m-d'),
-           'created_by' => $this->data['current_user']['id'],
-        'encryption_name' => $filename_encrypted
-       );
-                                        
-                                        $this->Files_model->file_uploader($file_action_post);
-                                            //return $data;
+                                                                                        $this->load->library('upload', $config);
 
-                                        }
+                                                                                        if ( ! $this->upload->do_upload()){
+
+                                                                                                $error = array('error' => $this->upload->display_errors());
+                                                                                                //return $error;
+                                                                                        }else{
+
+                                                                                                    $data = array('upload_data' => $this->upload->data());
+
+                                                                                                    $filename_encrypted  = sha1($this->input->post('userfilename').date('YmdHis'));
+                                                                                                    $file_action_post = array(
+                                                                                                    'action_id' => $result,
+                                                                                                    'name' => $this->input->post('userfilename'),
+                                                                                                    'file_location' =>  $filename.'.'.$extension,
+                                                                                                    'created_at' => date('Y-m-d'),
+                                                                                                    'created_by' => $this->data['current_user']['id'],
+                                                                                                    'encryption_name' => $filename_encrypted
+                                                                                                    );
+
+                                                                                                    $this->Files_model->file_uploader($file_action_post);
+                                                                                                    //return $data;
+
+                                                                                        }
+
+                                                                                        unset($config);
+                                                                                        
+                                                                                        */
+                                    
+                                            $userfilename = $this->input->post('userfilename'); 
+
+                                            $img = $_FILES['userfile'];
+
+                                            if(!empty($img))
+                                            {
+                                            $img_desc = $this->reArrayFiles($img);
+                                            print_r($img_desc);
+
+                                            foreach($img_desc as $val)
+                                            {
+
+
+                                            $newname = date('YmdHis',time()).mt_rand().'.'.pathinfo($val['name'],PATHINFO_EXTENSION);
+
+                                            $locationName[] = $newname;
+                                            move_uploaded_file($val['tmp_name'],'./uploads/'.$newname);
+                                            }
+                                            }
+                                    
+                                    
+            foreach($locationName as $key => $value){
+                
+                
+                 // echo '<h2>'.$userfilename[$key] .''.$value.'</h2>';
+                
+                
+ 
+
+                        $filename_encrypted  = sha1($value.date('YmdHis'));
+                        $file_action_post = array(
+                        'action_id' => $result,
+                        'name' => $userfilename[$key],
+                        'file_location' =>  $value,
+                        'created_at' => date('Y-m-d'),
+                        'company_id' => $this->input->post('company_id'),
+                        'created_by' => $this->data['current_user']['id'],
+                        'encryption_name' => $filename_encrypted
+                        );
+
+                        $this->Files_model->file_uploader($file_action_post);
+                
+            }                        
+                                    
+                                    
+                                    
+                                    
+                                    
+//}
+                                    
+                                    
+                                    
                                     }
                             
                             
-                            
+                       
                             
                             
                             
@@ -259,7 +353,30 @@ $extension = end($array);
             }
 	} 
 
-	public function edit()
+	
+   
+    
+    
+    
+    function reArrayFiles($file)
+{
+    $file_ary = array();
+    $file_count = count($file['name']);
+    $file_key = array_keys($file);
+    
+    for($i=0;$i<$file_count;$i++)
+    {
+        foreach($file_key as $val)
+        {
+            $file_ary[$i][$val] = $file[$val][$i];
+        }
+    }
+    return $file_ary;
+}
+    
+    
+    
+    public function edit()
     {
 		if($this->input->post('action_id'))
 		{

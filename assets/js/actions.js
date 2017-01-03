@@ -203,17 +203,30 @@ function getActionData(scope = false){ //get all actions in multidimentional jso
                 //bindfollowUpInfoBtn(); 
 
 
+              //  $('.9714596251932ddaee51f652b03586a7d3abc0e7').prepend('<span class="btn btn-default btn-xs btn-danger triggerdownload hint--top-right" data-hint="Download Attached File" data="9714596251932ddaee51f652b03586a7d3abc0e7" style="float: right;text-transform:capitalize;margin-left: 2px;">Download  upppp text nut</span>')
                     // $('.outcomeform .actionContact ').prop('disabled', false);
                     //$('.outcomeform .actionContact').attr("disabled", "disabled");
                     //$('.outcomeform .actiondate').attr("disabled", "disabled"); 
-
+ $.each( data[4][0], function( k, val ) {
+                       console.log(val.action_id)
+                       
+                       
+                       $('.file'+val.action_id).prepend('<span class="btn btn-default btn-xs btn-danger triggerdownload hint--top-right" data-hint="Download Attached File" data="'+val.encryption_name+'" style="float: right;text-transform:capitalize;margin-left: 2px;">Download '+ val.name+'</span>')
+                       
+ })
+                
             } //end success
         });   
 
+            
+            
+     
+            
+            
         $('.timeline-entry').show();
             
         }
-            comments_decoder()   
+            comments_decoder();
      }
 
 
@@ -835,7 +848,7 @@ $('.box'+bun+'  .actionContact option[value=]').prop('selected','selected');
                             });
                           };
         
-updateDateTime();
+       updateDateTime();
        downloadattachedfile();  
     } 
 
@@ -1261,11 +1274,16 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
          var filename = [];
       
          
-         if(typeof action['file_location'] !== 'undefined'  && action['file_location'] !== null &&  action['file_location'] !== 'null'   ){
+         if(action['action_type_id'] == 40  ){
                filename = action['file_location'];
              
-             filename= '<span class="btn btn-default btn-xs btn-danger triggerdownload hint--top-right" data-hint="Download Attached File" data="'+action['encryption_name']+'" style="float: right; text-transform:capitalize">Download '+action['file_name']+' </span>';
+             filename= '<div class="file'+action['id']+'"></div>';
+             actionType = 'files';
          }
+         
+         
+         
+         
              if(typeof action['name'] !== 'undefined'  && action['name'] !== null &&  action['name'] !== 'null'   ){
             created_by = action['name'];
            
@@ -1329,7 +1347,7 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
                  
                
                 if(action['tfer_runners']  != null){
-                employees  =   '<span> Contractors  ' + action['tfer_runners']+' </span>' ;   
+                        employees  = '<span> Contractors  ' + action['tfer_runners']+' </span>' ;   
                         turnover = employees+' '+turnover+'<br>';
                 }
                 
@@ -1546,7 +1564,7 @@ if(tm > 1){ tm = tm + ' Days Overdue'; }else if(tm == 1){ tm  = tm + ' Day Overd
           createfollowername = '';
       }  
         
-         
+       
       if(actionTypeName != 'Pipeline Update')   
             actions  ='<div class="timeline-entry actionId'+actionType+'  '+classCompleted+' pillid'+actionId+'" pillid='+actionId+'> <div class="timeline-stat"> '+icon+'</div><div class="timeline-label"> <div class="mar-no pad-btm"><h4 class="mar-no pad-btm">'+header+deal+'  </h4><div class="actions-info" ><span class="label label-warning"  >'+planned_at+'</span>'+kpStr+ ' '+overdueStatus+ ' '+updatemeeting+contactName+filename+' <span class="classActions" style="float:right; margin-top:0; margin-left:3px;">'+calenderbtn+outcomeRemove+followupAlert+'</span></div></div><div class="mic-info"> '+status+': '+createfollowername+created_by+' - '+formattDate(createdAt, true)+' </div> <div class="actionMsgText">'+turnover+''+tagline+' </div>'+textbox+ ' </div></div>';
          

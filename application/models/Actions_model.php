@@ -140,17 +140,28 @@ function get_actions_completed($company_id)
     $data = array(
         'a.company_id' => $company_id,
         );
-    $this->db->select('a.created_at,a.actioned_at,a.action_type_id,com.initial_rate,a.comments,a.cancelled_at,a.outcome,a.id,u.image,u.name,c.first_name,c.last_name,a.contact_id,a.followup_action_id, ,a.tfer_turnover, a.tfer_runners, a.initial_fee,  a.planned_at, f.id as file_id, f.name as file_name, f.file_location, f.encryption_name');
+    $this->db->select('a.created_at,a.actioned_at,a.action_type_id,com.initial_rate,a.comments,a.cancelled_at,a.outcome,a.id,u.image,u.name,c.first_name,c.last_name,a.contact_id,a.followup_action_id, ,a.tfer_turnover, a.tfer_runners, a.initial_fee,  a.planned_at');
     $this->db->join('contacts c', 'c.id = a.contact_id', 'left');
     $this->db->join('users u', 'a.user_id = u.id', 'left');
     $this->db->join('companies com', 'a.company_id = com.id', 'left');
-     $this->db->join('files f', 'a.id = f.action_id', 'left');
+     //$this->db->join('files f', 'a.id = f.action_id', 'left');
     $this->db->where('actioned_at IS NOT NULL', null);
     $this->db->where('followup_action_id', null);
     $this->db->where_not_in('action_type_id', $category_exclude);
     $this->db->order_by('actioned_at desc,planned_at desc');
     $query = $this->db->get_where('actions a', $data);
+   // echo $this->db->last_query();
+    
+    return $query->result_object();
+}
+    
+    function get_actions_files($company_id)
+{ //TESTER FOR FILES QUERRY DELETE AFTER USE
+ $sql = 'select * FROM files  ';
     //echo $this->db->last_query();
+         $query = $this->db->query($sql);
+ 
+        //return $query->result_array();
     return $query->result_object();
 }
     
