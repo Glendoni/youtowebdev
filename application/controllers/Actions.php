@@ -556,28 +556,7 @@ foreach($userfilename as $key => $value){
     }
     
     
-    function downloadking($sha){
-        $this->load->helper('download');
-        if(true)
-{
-   
-          $encyption_file_name  = $this->Files_model->getfile($sha);
-          
-$pth    =   file_get_contents(base_url()."uploads/".$encyption_file_name[0]['file_location']);
-            $fileExt    =   explode('.',$encyption_file_name[0]['file_location']);
 
-           $nme =  trim($encyption_file_name[0]['name'].'.'.$fileExt[1]);
-            
-                    header('Content-Type: application/octet-stream'); 
-header("Content-Disposition: attachment; filename=$nme");
-ob_clean();
-force_download($nme, $pth); 
-             flush(); 
-}
-        
-        
-        
-    }
     
     
        function getfilesh($id = '2fc563a34b29bd3986e649674c0e2a48d28f7d5f'){

@@ -981,7 +981,7 @@ function  downloadattachedfile(){
                 $('.triggerdownload').click(function(){
 var filestring  = $(this).attr('data');
                             //alert();8151325dcdbae9e0ff95f9f9658432dbedfdb209
-                            $('body').append('<iframe src="http://localhost:8888/baselist/actions/downloadking/'+filestring+'" id="documentdownload" style="display:none;"></iframe>');
+                            $('body').append('<iframe src="downloadking/'+filestring+'" id="documentdownload" style="display:none;"></iframe>');
                 })
     
     

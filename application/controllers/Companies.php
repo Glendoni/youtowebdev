@@ -14,6 +14,7 @@ class Companies extends MY_Controller {
         //$this->input->get('id')
         ///$this->input->post(),$this->data['current_user']['id']
 		$this->load->model('Tagging_model');
+          $this->load->model('Files_model');
 		$this->load->helper('url');
         $this->load->helper('form');
         $this->load->library('form_validation');
@@ -1194,6 +1195,33 @@ echo floor($datediff / (60 * 60 * 24));
       }
   
   }
+    
+    
+        function downloadking($sha){
+        $this->load->helper('download');
+        if(true)
+{
+   
+          $encyption_file_name  = $this->Files_model->getfile($sha);
+          
+$pth    =   file_get_contents(base_url()."uploads/".$encyption_file_name[0]['file_location']);
+            $fileExt    =   explode('.',$encyption_file_name[0]['file_location']);
+
+           $nme =  trim($encyption_file_name[0]['name'].'.'.$fileExt[1]);
+            
+                    header('Content-Type: application/octet-stream'); 
+header("Content-Disposition: attachment; filename=$nme");
+ob_clean();
+force_download($nme, $pth); 
+             flush(); 
+}
+        
+        
+        
+    }
+    
+    
+    
     function filetester($id = 352533){
         //line 158
          $query[]['files'] = $this->Actions_model->get_actions_files($id);
