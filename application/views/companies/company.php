@@ -1082,7 +1082,7 @@ endif;
                                 endforeach;
                                 ?>
                 </div>
-                <div class="col-sm-4 col-md-8 alert alert-info action_verbiage action_file_uploader ">
+                <div class="col-sm-4 col-md-8 alert alert-info action_verbiage action_file_uploader mainUploader">
  
     
                
@@ -1093,11 +1093,12 @@ endif;
     </div><!-- /input-group -->
                     
                     
-                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3">
                     
-                     <input type="file" name="userfile[]" id="userfile"  size="20" /> <a href="javascript:;" id="addMoreMultipleFileFields"><i >Add More</i></a>
+                     <input type="file" name="userfile[]" id="userfile"  size="20" />  
 
-</div>
+</div>           
+                   
 
  
  

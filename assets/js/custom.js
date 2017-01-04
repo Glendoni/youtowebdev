@@ -260,6 +260,7 @@ $(window).load(function(){
 });
 $('#action_type_completed').change(function(){
          $('.action_verbiage').hide();
+    $('.mainUploader input').prop('required', false);
         var action_verbiage_text = $(this).val();
 
        $('.action_verbiage_text'+action_verbiage_text).show();
@@ -381,10 +382,11 @@ if ((this.value == '16' || this.value == '8' || this.value == '32') && (!source_
     //$(".disable_no_source").attr('disabled', 'disabled');
     }
         else if(this.value == '40'){
-        
+         $('#add_action .disable_no_source').prop('disabled', '') ;
        $('.action_file_uploader').show();
             $('.addActionOutcome').show();
         $('.btn-file').show();
+            $('.mainUploader input').attr('required', 'required');
         
          
     }else{
@@ -1132,11 +1134,11 @@ if(!$(this).hasClass('requested') && $(this).attr('aria-controls') ==  'emailega
 
 
  function addActionMultipleFileFields(){
-    console.log('france')
-    
-      $('#addActionMultipleFileFields').append('<div class="col-sm-4 col-md-8 col-md-push-4 alert alert-info alert-dismissable  "><div class="col-md-8 "><input type="text" name="userfilename[]" class="form-control" placeholder="What is the name of document you are uploading?" style="margin-top:-7px; text-transform:capitalize;"></div><div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"><input type="file" name="userfile[]" id="userfile"  size="20" /> </div></div>');
     
     
+      $('#addActionMultipleFileFields').append('<div class="col-sm-4 col-md-8 col-md-push-4 alert alert-info alert-dismissable  "><div class="col-md-8 "><input type="text" name="userfilename[]" required="required" class="form-control" placeholder="What is the name of document you are uploading?" style="margin-top:-7px; text-transform:capitalize;"></div><div class="col-xs-4 col-sm-3 col-md-3 col-lg-3"><input type="file" name="userfile[]" id="userfile" required="required" size="20" /> </div> <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"><button type="button" class="btn btn-warning btn-xs multifileremover">Remove</button></div></div>');
+    
+    bindMultipleFileRemover();
 }
    
     
@@ -1156,7 +1158,18 @@ if(!$(this).hasClass('requested') && $(this).attr('aria-controls') ==  'emailega
                
 }
 
+function bindMultipleFileRemover(){
+    
+    $('.multifileremover').click(function(){
 
+$(this).parent().parent().remove();
+        
+  
+
+})
+    
+    
+}
 function getUserFavourites(){ // Dashbord favorites
     
     var order = $('.sortform form select').val();

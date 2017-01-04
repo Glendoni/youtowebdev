@@ -157,7 +157,7 @@ function get_actions_completed($company_id)
     
     function get_actions_files($company_id)
 { //TESTER FOR FILES QUERRY DELETE AFTER USE
- $sql = 'select * FROM files  ';
+ $sql = 'select * FROM files WHERE company_id='.$company_id;
     //echo $this->db->last_query();
          $query = $this->db->query($sql);
  
