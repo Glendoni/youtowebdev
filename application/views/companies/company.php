@@ -1089,7 +1089,7 @@ endif;
   <div class="col-md-8">
  
     
-      <input type="text" name="userfilename[]" class="form-control" placeholder="What is the name of document you are uploading?" style="margin-top:-7px; text-transform:capitalize;">
+      <input type="text" name="userfilename[]" class="form-control" placeholder="Please name your file" style="margin-top:-7px; text-transform:capitalize;">
     </div><!-- /input-group -->
                     
                     

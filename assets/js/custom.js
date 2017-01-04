@@ -1136,7 +1136,7 @@ if(!$(this).hasClass('requested') && $(this).attr('aria-controls') ==  'emailega
  function addActionMultipleFileFields(){
     
     
-      $('#addActionMultipleFileFields').append('<div class="col-sm-4 col-md-8 col-md-push-4 alert alert-info alert-dismissable  "><div class="col-md-8 "><input type="text" name="userfilename[]" required="required" class="form-control" placeholder="What is the name of document you are uploading?" style="margin-top:-7px; text-transform:capitalize;"></div><div class="col-xs-4 col-sm-3 col-md-3 col-lg-3"><input type="file" name="userfile[]" id="userfile" required="required" size="20" /> </div> <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"><button type="button" class="btn btn-warning btn-xs multifileremover">Remove</button></div></div>');
+      $('#addActionMultipleFileFields').append('<div class="col-sm-4 col-md-8 col-md-push-4 alert alert-info alert-dismissable  "><div class="col-md-8 "><input type="text" name="userfilename[]" required="required" class="form-control" placeholder="Please name your file" style="margin-top:-7px; text-transform:capitalize;"></div><div class="col-xs-4 col-sm-3 col-md-3 col-lg-3"><input type="file" name="userfile[]" id="userfile" required="required" size="20" /> </div> <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"><button type="button" class="btn btn-warning btn-xs multifileremover">Remove</button></div></div>');
     
     bindMultipleFileRemover();
 }
