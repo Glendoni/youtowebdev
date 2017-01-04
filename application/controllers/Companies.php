@@ -1204,7 +1204,7 @@ echo floor($datediff / (60 * 60 * 24));
    
           $encyption_file_name  = $this->Files_model->getfile($sha);
           
-$pth    =   file_get_contents(base_url()."uploads/".$encyption_file_name[0]['file_location']);
+$pth    =   file_get_contents(base_url()."application/uploads/".$encyption_file_name[0]['file_location']);
             $fileExt    =   explode('.',$encyption_file_name[0]['file_location']);
 
            $nme =  trim($encyption_file_name[0]['name'].'.'.$fileExt[1]);
