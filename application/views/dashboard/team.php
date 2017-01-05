@@ -717,7 +717,7 @@
         ?>
         <div class="panel panel-default uf">
         <div class="panel-heading">
-        <h3 class="panel-title">With Finance - Team of 7</h3>
+        <h3 class="panel-title">With Finance - Team of 8</h3>
         </div>
         <div class="panel-body" style="font-size:12px;">
         <div class="list-group">
