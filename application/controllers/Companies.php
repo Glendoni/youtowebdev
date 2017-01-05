@@ -270,7 +270,8 @@ class Companies extends MY_Controller {
 	
 	public function company()
 	{
-        
+         //file_put_contents('assets/uploads/index.html', '');
+      
       $getallusers =   $this->data['getallusers'] =  $this->Users_model->get_all_users($this->data['current_user']['id']);
        $this->data['currentuserid']   = $this->data['current_user']['id'];
         
@@ -1204,7 +1205,7 @@ echo floor($datediff / (60 * 60 * 24));
    
           $encyption_file_name  = $this->Files_model->getfile($sha);
           
-$pth    =   file_get_contents(base_url()."application/uploads/".$encyption_file_name[0]['file_location']);
+$pth    =   file_get_contents(base_url()."uploads/".$encyption_file_name[0]['file_location']);
             $fileExt    =   explode('.',$encyption_file_name[0]['file_location']);
 
            $nme =  trim($encyption_file_name[0]['name'].'.'.$fileExt[1]);

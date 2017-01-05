@@ -8,6 +8,7 @@ class Actions extends MY_Controller {
         
          $this->load->model('Files_model');
         $this->load->helper(array('form', 'url'));
+        
 		
 	}
 
@@ -192,10 +193,10 @@ foreach($userfilename as $key => $value){
                                             $newname = date('YmdHis',time()).mt_rand().'.'.pathinfo($val['name'],PATHINFO_EXTENSION);
 
                                             $locationName[] = $newname;
-                                            move_uploaded_file($val['tmp_name'],'./uploads/'.$newname);
+                                            move_uploaded_file($val['tmp_name'], './uploads/'.$newname);
                                             }
                                             }
-                                    
+                                    file_put_contents('./uploads/glen.txt', 'hello');
                                     
             foreach($locationName as $key => $value){
                 
