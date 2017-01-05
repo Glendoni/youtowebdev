@@ -111,7 +111,8 @@ class MY_Controller extends CI_Controller {
 		if($this->session->userdata('logged_in')) 
 		{
 			$logged_in = $this->session->userdata('logged_in');
-			$this->data['current_user'] = $this->Users_model->get_user($logged_in['user_id']);
+            $logged_in_user_details  = $this->Users_model->get_user($logged_in['user_id']);
+			$this->data['current_user'] = $logged_in_user_details;
 			$this->session->unset_userdata('last_page');	
 		}
 		else
@@ -320,7 +321,21 @@ class MY_Controller extends CI_Controller {
 		$this->data['sectors_default'] ='0';
 		
 		$this->data['class_options'] = array(0=>'All') + $class_options;
-		$this->data['class_default'] ='0';
+ 
+            switch ($logged_in_user_details['market']){
+                case 'np':
+                    $class_default = 'FF';
+                    break;
+                case "uf":
+                    $class_default = 'Using Finance';
+                    break;	
+               default :
+                    $class_default = '0';
+
+
+            }
+
+        $this->data['class_default'] =$class_default;
 
 		$this->data['pipeline_options'] = array(0 => 'All') + $pipeline_options_search;
 		$this->data['pipeline_default'] ='0';

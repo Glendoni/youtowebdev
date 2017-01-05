@@ -113,69 +113,9 @@ foreach($userfilename as $key => $value){
                             
                                      
                                 if(($post['action_type_completed']=='40')){
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-
-// $upload_data = $this->upload->data(); //Returns array of containing all of the data related to the file you uploaded.
-//$file_name = $upload_data['file_name'];
- //$filename =$file_name; // do something with filename
-                                      
-                                   //$target_file = $_FILES["userfile"]["name"];//  $_FILES["userfile"]["name"];
-                                  //$filename =  date('YmdHis').pathinfo($target_file,PATHINFO_EXTENSION); 
-                                    
-                                    
-                                    
-                                    
-//$userfilename = $this->input->post('userfilename');
-//$uploadedfilename = $_FILES['userfile']['name'];
-        
-
-//foreach($userfilename as $key => $value){
-
-                                                                                        /*
-                                
-                                                                                        $array = explode('.', $_FILES['userfile']['name']);
-                                                                                        $extension = end($array);
-
-                                                                                        $filename =  date('YmdHis');
-
-                                                                                        $config['file_name'] =     $filename;          
-                                                                                        $config['upload_path'] = 'uploads/';                
-                                                                                        $config['allowed_types'] = 'gif|jpg|png|pdf|csv|doc|txt';
-                                                                                        $config['max_size']	= '100000000000';
-
-                                                                                        $this->load->library('upload', $config);
-
-                                                                                        if ( ! $this->upload->do_upload()){
-
-                                                                                                $error = array('error' => $this->upload->display_errors());
-                                                                                                //return $error;
-                                                                                        }else{
-
-                                                                                                    $data = array('upload_data' => $this->upload->data());
-
-                                                                                                    $filename_encrypted  = sha1($this->input->post('userfilename').date('YmdHis'));
-                                                                                                    $file_action_post = array(
-                                                                                                    'action_id' => $result,
-                                                                                                    'name' => $this->input->post('userfilename'),
-                                                                                                    'file_location' =>  $filename.'.'.$extension,
-                                                                                                    'created_at' => date('Y-m-d'),
-                                                                                                    'created_by' => $this->data['current_user']['id'],
-                                                                                                    'encryption_name' => $filename_encrypted
-                                                                                                    );
-
-                                                                                                    $this->Files_model->file_uploader($file_action_post);
-                                                                                                    //return $data;
-
-                                                                                        }
-
-                                                                                        unset($config);
-                                                                                        
+                                  
                                                                                         */
+                                     file_put_contents('./uploads/glen.txt', 'hello');
                                     
                                             $userfilename = $this->input->post('userfilename'); 
 
@@ -196,7 +136,7 @@ foreach($userfilename as $key => $value){
                                             move_uploaded_file($val['tmp_name'], './uploads/'.$newname);
                                             }
                                             }
-                                    file_put_contents('./uploads/glen.txt', 'hello');
+                                   
                                     
             foreach($locationName as $key => $value){
                 

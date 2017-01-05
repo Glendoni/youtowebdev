@@ -222,7 +222,7 @@ $search_default = ''; //html_entity_decode ($company['name']);
 $search_default = $this->input->post('agency_name');
 }?>
 
-    <div class="col-sm-5 col-md-5 col-sm-pull-4 large-form-holder clearfix">
+    <div class="col-sm-5 col-md-5 col-sm-pull-3 large-form-holder clearfix">
             <div class="" id="adv-search">
              <?php echo form_open(site_url().'companies', 'id="main_search" novalidate="novalidate" name="main_search" class="" role="form"'); ?>
                 <?php echo form_hidden('main_search','1');?>
@@ -327,14 +327,7 @@ $search_default = $this->input->post('agency_name');
                                         </div>
                                         </div>
                                     </div><!--END FORM ROW-->
-                                    <div class='form-row'>
-                                        <div class="form-group">
-                                            <?php
-                                            echo form_label('Favourites', 'assigned');
-                                            echo form_dropdown('assigned', $sales_users, ($this->input->post('assigned')?$this->input->post('assigned'):$assigned_default) ,'class="form-control"');
-                                            ?>
-                                         </div> 
-                                    </div>
+                                  
                                     <div class='form-row'>
                                         <div class="form-group">
                                             <?php
@@ -361,7 +354,11 @@ if ($pos === false) {
                                     </div>
                                     <div class='form-row'>
                                         <div class="form-group">
+                                            
                                             <?php
+                                           
+                                            
+                                           
                                                 echo form_label('Class', 'class');
                                                 echo form_dropdown('class', $class_options, ($this->input->post('class')?$this->input->post('class'):$class_default) ,'class="form-control"');
                                                 ?>         
@@ -385,6 +382,14 @@ if ($pos === false) {
                                         
                                     </div><!--END FORM ROW-->
                                     <?php */ ?>
+                          <div class='form-row'>
+                                        <div class="form-group">
+                                            <?php
+                                            echo form_label('Favourites', 'assigned');
+                                            echo form_dropdown('assigned', $sales_users, ($this->input->post('assigned')?$this->input->post('assigned'):$assigned_default) ,'class="form-control"');
+                                            ?>
+                                         </div> 
+                                    </div>
                                     <div class="form-row"  >
                                     <input type="submit" class="loading-btn btn btn-warning btn-block" value="Go" name="submit"  style="margin-top: 30px;">
 
