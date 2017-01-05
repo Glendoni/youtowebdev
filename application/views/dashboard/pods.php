@@ -44,7 +44,7 @@
                       </div>
                     <?php else: ?>
             <div class="row record-holder-header mobile-hide">
-            <div class="col-md-3"><strong>Company</strong></div>
+            <div class="col-md-3"><strong>Company &amp; Contact</strong></div>
             <div class="col-md-2"><strong>Phone</strong></div>
             <div class="col-md-2"><strong>Action</strong></div>
             <div class="col-md-2  "><strong>Due</strong></div>
