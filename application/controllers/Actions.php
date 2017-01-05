@@ -114,7 +114,7 @@ foreach($userfilename as $key => $value){
                                      
                                 if(($post['action_type_completed']=='40')){
                                   
-                                                                                        */
+                                                                                        
                                      file_put_contents('./uploads/glen.txt', 'hello');
                                     
                                             $userfilename = $this->input->post('userfilename'); 
