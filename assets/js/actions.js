@@ -1278,7 +1278,7 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
                filename = action['file_location'];
              
              filename= '<div class="file'+action['id']+'"></div>';
-             actionType = 'files';
+             actionType = 'Files';
          }
          
          
@@ -1569,7 +1569,7 @@ if(tm > 1){ tm = tm + ' Days Overdue'; }else if(tm == 1){ tm  = tm + ' Day Overd
             actions  ='<div class="timeline-entry actionId'+actionType+'  '+classCompleted+' pillid'+actionId+'" pillid='+actionId+'> <div class="timeline-stat"> '+icon+'</div><div class="timeline-label"> <div class="mar-no pad-btm"><h4 class="mar-no pad-btm">'+header+deal+'  </h4><div class="actions-info" ><span class="label label-warning"  >'+planned_at+'</span>'+kpStr+ ' '+overdueStatus+ ' '+updatemeeting+contactName+filename+' <span class="classActions" style="float:right; margin-top:0; margin-left:3px;">'+calenderbtn+outcomeRemove+followupAlert+'</span></div></div><div class="mic-info"> '+status+': '+createfollowername+created_by+' - '+formattDate(createdAt, true)+' </div> <div class="actionMsgText">'+turnover+''+tagline+' </div>'+textbox+ ' </div></div>';
          
         if(actionTypeName == 'Pipeline Update' ){
-              actions  = '<div class="timeline-entry actionId'+actionType+' '+classCompleted+'" > <div class="timeline-stat"> '+icon+'</div> <div class="timeline-label pipe"> <div class="mar-no pad-btm" ><h4 class="mar-no pad-btm">'+header+' <span class="classActions" style="margin-top:0; margin-left:3px; float:right;">'+calenderbtn+outcomeRemove+'</span></h4>' +kpStr+overdueStatus+'</div><div class="actionMsgText">'+action['comments']+'</div> </div>';
+              actions  = '<div class="timeline-entry actionId'+actionType+' '+classCompleted+'" > <div class="timeline-stat"> '+icon+'</div> <div class="timeline-label pipe" style="margin-bottom: 50px;"> <div class="mar-no pad-btm" ><h4 class="mar-no pad-btm">'+header+' <span class="classActions" style="margin-top:0; margin-left:3px; float:right;">'+calenderbtn+outcomeRemove+'</span></h4>' +kpStr+overdueStatus+'</div><div class="actionMsgText">'+action['comments']+'</div> </div>';
          }
      
         return actions;

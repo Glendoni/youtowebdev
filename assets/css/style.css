@@ -3347,7 +3347,7 @@ top: -20px;
 .qvlink a{color:#000; text-transform: none; cursor: pointer;     width: 100%;display: block;}
 
 .btn-file{ /* file upload interfce handler */
-display:none;
+    display:none;
 }
 .action_file_uploader{
     
@@ -3356,8 +3356,19 @@ display:none;
 }
 #addActionMultipleFileFields .alert{
 
-margin-bottom:5px;
-height:50px;
+    margin-bottom:5px;
+    height:50px;
+}
+
+#addMoreMultipleFileFields{
+    float: right;
+    font-size: 11px;
+    padding: 1px 4px;
+}
+
+#pipe{
+    
+   margin-bottom: 50px; 
 }
 /*! Hint.css - v2.2.1 - 2016-03-26 //#2b4461
 * http://kushagragour.in/lab/hint/
