@@ -1297,7 +1297,7 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
           }
          
          if(typeof action['outcome'] !== 'undefined'  && action['outcome'] !== null &&  action['outcome'] !== 'null'){
-             outcome = '<div class="actionOutcomeText"><span class="actionMsg piller'+actionId+' outcomeMsg'+actionId+' comments'+actionType+'"><strong>Outcome: </strong></br><span class="comment">'+ action['outcome'] +'</span></span></div>'; 
+             outcome = '<div class="actionOutcomeText"><span class="actionMsg piller'+actionId+' outcomeMsg'+actionId+' comments'+actionType+'"><strong>Outcome: </strong><br>Created by '+ action['name'] +'<br><span class="comment">'+ action['outcome'] +'</span></span></div>'; 
             
          } 
          actionTypeName = actionType;
