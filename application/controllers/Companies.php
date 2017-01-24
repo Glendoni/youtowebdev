@@ -889,7 +889,7 @@ echo $this->Tagging_model->$route($post);
             $query[]['actions_completed'] = $this->Actions_model->get_actions_completed($id);
         $query[]['actions_cancelled'] = $this->Actions_model->get_actions_cancelled($id);
         
-        $query[]['comments'] = array_reverse($this->Actions_model->get_comments_two($id));
+       // $query[]['comments'] = array_reverse($this->Actions_model->get_comments_two($id));
         
         foreach($query  as $key => $value){
             
