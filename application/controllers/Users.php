@@ -42,14 +42,19 @@ class Users extends MY_Controller {
 			$this->form_validation->set_rules('name', 'name', 'xss_clean|required');
 			$this->form_validation->set_rules('email', 'email', 'xss_clean|valid_email|required');
 			$this->form_validation->set_rules('phone', 'phone', 'xss_clean|required');
-			$this->form_validation->set_rules('role', 'role', 'xss_clean|required');
+			//$this->form_validation->set_rules('role', 'role', 'xss_clean|required');
 			$this->form_validation->set_rules('mobile', 'mobile', 'xss_clean');
 			$this->form_validation->set_rules('linkedin', 'linkedin', 'xss_clean');
 			$this->form_validation->set_rules('gmail_account', 'gmail_account', 'xss_clean');
 			$this->form_validation->set_rules('gmail_password', 'gmail_password', 'xss_clean');
+            $this->form_validation->set_rules('updatepassword', 'updatepassword', 'xss_clean');
 			if($this->form_validation->run())
 			{	
-				$result = $this->Users_model->update($this->input->post(),$this->data['current_user']['id'],$image_updated);
+				
+           
+                
+                
+                $result = $this->Users_model->update($this->input->post(),$this->data['current_user']['id'],$image_updated);
 				if(!$result)
 				{
 					redirect('/users/profile');

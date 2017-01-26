@@ -11,6 +11,67 @@ function dateRequired()     {
 
   
 $( document ).ready(function() {
+    if((/users\/profile/.test(window.location.href))) {
+    $('#userupdatepassword').click(function(){
+
+$('.updatepassword').toggle(function(){
+    
+   console.log($(this).css('display')); 
+    var displayPasswordStatus  = $(this).css('display');
+    if(displayPasswordStatus == 'block'){
+        
+        $('.updatepasswordinput').attr('required', 'required');
+
+        $('#update_profile').prop('disabled', true);
+        
+
+    }else{
+        $('.passwordsdonotmatch').hide();
+        $('.pass_enter').val('');
+         $('.re_pass_enter').val('');
+          $('.updatepasswordinput').removeAttr('required');
+         $('#update_profile').prop('disabled', false);
+    }
+    
+    
+});
+
+
+})
+    
+    
+      $('.updatepasswordinput').keyup(function(){
+        
+       var enter = $('.pass_enter').val();
+          var reenter = $('.re_pass_enter').val();
+          var enterlenth =  enter.length;
+          
+          console.log(enter  +  ' ' +reenter)
+         
+          
+          
+          
+          
+          if(enter == reenter && enterlenth > 2 ){
+              
+           $('#update_profile').prop('disabled', false);
+              
+              $('.passwordsdonotmatch').hide();
+          }else{
+              
+               $('#update_profile').prop('disabled', true);
+              if(enterlenth > 2 ){
+                $('.passwordsdonotmatch').show();
+              }
+          }
+          
+    })
+    
+    
+    
+    
+    }
+    
    // addActionMultipleFileFields();
       if((/contacts/.test(window.location.href))) {
             $("[data=contacts]").trigger('click')

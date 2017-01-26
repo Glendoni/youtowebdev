@@ -3371,6 +3371,21 @@ top: -20px;
    margin-bottom: 50px; 
 }
 
+/*Settings*/
+
+.updatepassword{
+    
+    display:none;
+}
+
+/*///////// USER privilege ///////*/
+
+.userupdatepassword input,.userupdatepassword label,{
+    
+    float: right;
+    
+}
+
 .privilege_cont label{margin-left:18px;
  
 }
@@ -3384,7 +3399,7 @@ margin-right:5px;
 }
  #department , .usergroup {text-transform: capitalize;}
 
-#pagin li a{
+#pagin li a{ 
 padding:6px;
  float:left;
 background:#428bca;
@@ -3420,6 +3435,16 @@ height:45px
     display:none;
     
 }
+.passwordsdonotmatch{
+        color: #af1c09;
+    display:none;
+    
+    
+}
+/*//////// END USER privilege /////////////////*/
+
+
+
 /*! Hint.css - v2.2.1 - 2016-03-26 //#2b4461
 * http://kushagragour.in/lab/hint/
 * Copyright (c) 2016 Kushagra Gour; Licensed  */

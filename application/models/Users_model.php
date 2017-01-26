@@ -92,6 +92,9 @@ class Users_model extends MY_Model {
 	// UPDATES
 
 	function update($data,$user_id,$image_updated=FALSE){
+        
+        
+       
 
 		//GET INITIALS OF USER//
 		$words = explode(" ",$data['name'] );
@@ -105,10 +108,22 @@ class Users_model extends MY_Model {
 
         $role = rtrim($data['role']," "); // removes empty space on rightside of string ltrim removes empty space on the left before string
         
-        
+        /*
 		$data = array(
 			
 			'name' => $data['name'],
+			'email' => $data['email'],
+			 
+			'mobile' => !empty($data['mobile'])?$data['mobile']:Null,
+			'linkedin' => !empty($data['linkedin'])?$data['linkedin']:Null,
+			 
+			'updated_at' => date('Y-m-d H:i:s'),
+			'updated_by' => $user_id,
+			'image' => $image,
+			//'gmail_account' => $data['gmail_account'],
+			'new_window' => $data['new_window']
+			
+/*'name' => $data['name'],
 			'email' => $data['email'],
 			'phone' => !empty($data['phone'])?$data['phone']:Null,
 			'mobile' => !empty($data['mobile'])?$data['mobile']:Null,
@@ -120,12 +135,29 @@ class Users_model extends MY_Model {
 			//'gmail_account' => $data['gmail_account'],
 			'new_window' => $data['new_window'],
 			'permission' => !empty($data['permission'])?$data['permission']:Null,
+            
+          
 
 
 			);
+        */
 
+    $insert['name'] = $data['name'];
+    $insert['email'] =  $data['email'];
+    $insert['mobile'] =  !empty($data['mobile'])?$data['mobile']:Null;
+    $insert['linkedin'] =  !empty($data['linkedin'])?$data['linkedin']:Null;
+    $insert['updated_at'] =  date('Y-m-d H:i:s');
+    $insert['updated_by'] =  $user_id;
+    $insert['image'] =  $image;
+    $insert['new_window'] =  $data['new_window'];
+    if(trim($data['updatepassword']))  $insert['password'] =  md5($data['updatepassword']);
+    
+
+          
+        
+        
 		$this->db->where('id', $user_id);
-		$this->db->update('users',$data);
+		$this->db->update('users',$insert);
 		if($this->db->affected_rows() !== 1){
 			$this->addError($this->db->_error_message());
 			return False;
