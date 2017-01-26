@@ -71,7 +71,7 @@
                             <div class="col-sm-6 ">
                         
                                 <input type="submit"  value="Submit" class="btn btn-primary"> 
-                                <input type="button"  value="Send Reminder To Change Temporary Password " class="btn btn-success emailuser">
+                                <!--<input type="button"  value="Send Reminder To Change Temporary Password " class="btn btn-success emailuser"> -->
                             </div>
                             
                             <div class="col-sm-1 ">

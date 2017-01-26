@@ -189,10 +189,15 @@
                                             <a href="https://status.heroku.com/" target="_blank"><i class="fa fa-fw fa-tasks"></i> Hosting Status</a>
                                          </li>
                                             <li class="divider"></li>
-                                            <?php if ($current_user['permission'] == 'admin'): ?>
+                                            <?php 
+                                  
+                                    if ($current_user['department'] == 'development'  || $current_user['department'] ==  'board'): ?>
                                          <li>
                                             <a href="<?php echo base_url(); ?>companies/create_company" ><i class="fa fa-plus-circle"></i> Add Company</a>
                                         </li>
+                                      <li>
+                                                <a href="<?php echo site_url(); ?>Privilege"><i class="fa fa-shield fa-rotate-270"></i> User Management</a>
+                                          </li>
                                         <li>
                                             <a href="<?php echo base_url(); ?>email_templates/" ><i class="fa fa-envelope"></i> Manage Email Templates</a>
                                         </li>

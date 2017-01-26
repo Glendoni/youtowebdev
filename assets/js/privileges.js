@@ -289,7 +289,7 @@ function edituser(){
                 url: "Privilege/getUser",
                 success: function(data) {
                     $('#created_by_name, #updated_by_name,#temp_password').text('');
-                    $('.emailuser').hide();
+                   // $('.emailuser').hide(); //To be assesed. Wil be used to show button to email user from UI
                     $.each( data, function( key, val ) {
                     
                         
@@ -318,7 +318,7 @@ function edituser(){
                         }else if(key == 'temp_password' &&  val != null &&  val != '' ){
                           // console.log(key)
                            $('#submit_user #'+key).text('Temp Password: '+val);  
-                            $('.emailuser').show();
+                            //$('.emailuser').show();
                            
                        }else{
                            $('#submit_user #'+key).val(val); 
