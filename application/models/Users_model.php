@@ -200,6 +200,118 @@ function get_all_users($userid){
     
 }
 
+function privilages_insert_user($post,$user_id,$genrated_password)
+	{
+		$user = $this->get_user_by_email($post['email']);
+        $tablemax = $this->get_table_max();
+        
+      
+		if(!$user){ 
+            
+                $data = array(  
+                    'id' => $tablemax,
+                    'password' =>  md5($genrated_password),
+                    'eff_from' =>  date('Y-m-d', strtotime($post['eff_from'])),
+                    'eff_from' =>  date('Y-m-d', strtotime($post['eff_to'])),
+                    'name' =>  $post['name'],
+                    'department' =>  $post['department'],
+                    'created_by' => $user_id,
+                    'email' =>  $post['email'],
+                    'role' =>  $post['role'],
+                    'phone' =>  (!empty($post['phone'])?$post['phone']:NULL),
+                    'mobile' =>  (!empty($post['mobile'])?$post['mobile']:NULL),
+                    'linkedin' => (!empty($post['linkedin'])?$post['linkedin']:NULL),
+                    'temp_password' =>  $genrated_password
+                );
+
+
+                $this->db->insert('users', $data);
+            
+            }
+			if($this->db->affected_rows() !== 1){
+				$this->addError($this->db->_error_message());
+                
+             
+				return false;
+			}else{
+				//return user if insert was successful 
+				//$user_id = $this->db->insert_id();
+				 return $user_id;
+			}
+			
+		 
+		 
+	}
+
+    function get_users_privilages($id){
+        
+        $sql = "SELECT distinct  u.id,u.name,u.department, u.role, u.phone, u.temp_password, u.mobile, u.eff_from,u.eff_to, u.linkedin, u.email ,T1.id as created_by, T1.name as created_by_name, T2.updated_by, T2.name as updated_by_name,
+        CASE when T2.temp_password is not null then '' else u.temp_password  END  \"display_temp_password\" 
+from users u
+JOIN (select id, created_by, name from users ) T1
+ON u.created_by = T1.id
+LEFT JOIN (select id, updated_by,temp_password, name from users ) T2
+ON u.updated_by = T2.id
+WHERE u.active=true 
+
+AND  u.id=$id
+order by u.name, u.department
+
+ ";
+        
+        
+         $query = $this->db->query($sql);
+   
+        return $query->row_array();
+        
+        
+    }
+    
+            function update_user($data,$user_id)
+            {
+
+                
+                $user = $this->get_user_by_email($data['email']);
+$data['updated_by'] = $user_id;
+$data['eff_from']  = date('Y-m-d', strtotime($data['eff_from']));
+                $data['eff_to']  = date('Y-m-d', strtotime($data['eff_to']));
+               if($user[0]->id){
+                $this->db->where('id', $user[0]->id);
+                $this->db->update('users', $data);
+                
+               }
+                if($this->db->affected_rows() !== 1){
+                $this->addError($this->db->_error_message());
+                return false;
+                }else{
+                //return user if insert was successful 
+               // $user_id = $this->db->insert_id();
+                return true;
+                }
+
+
+            }
+    
+	function get_table_max()
+	{	
+		 $sql = "select max(id) from users";
+		$query = $this->db->query($sql);
+
+		    $user =  $query->result(); /* returns an object */
+       return ($user[0]->max + 1);
+		 
+	}
+    
+    
+    
+function getUsersList(){
+    $sql = "SELECT * FROM users WHERE active=true order by name, department";
+		$query = $this->db->query($sql);
+
+		    return $query->result(); /* returns an object */
+    
+    
+}    
 	// DELETES
 
 
