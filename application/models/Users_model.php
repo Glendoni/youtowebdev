@@ -150,7 +150,11 @@ class Users_model extends MY_Model {
     $insert['updated_by'] =  $user_id;
     $insert['image'] =  $image;
     $insert['new_window'] =  $data['new_window'];
-    if(trim($data['updatepassword']))  $insert['password'] =  md5($data['updatepassword']);
+    if(trim($data['updatepassword'])) {
+        
+        $insert['password'] =  md5($data['updatepassword']);
+        $insert['temp_password'] = null;
+    }
     
 
           
