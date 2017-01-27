@@ -249,7 +249,7 @@ function privilages_insert_user($post,$user_id,$genrated_password)
                     'id' => $tablemax,
                     'password' =>  md5($genrated_password),
                     'eff_from' =>  date('Y-m-d', strtotime($post['eff_from'])),
-                    'eff_from' =>  date('Y-m-d', strtotime($post['eff_to'])),
+                    'eff_to' =>  date('Y-m-d', strtotime($post['eff_to'])),
                     'name' =>  $post['name'],
                     'department' =>  $post['department'],
                     'created_by' => $user_id,

@@ -37,7 +37,7 @@ class Privilege extends MY_Controller {
         $contact_info = $this->input->post();
        $psw = explode(' ', $contact_info['name']); 
         $pswd  = $psw[0][0];
-       $genrated_password = $this->GeraHash(6);
+       $genrated_password = $this->GeraHash(8);
        $data  = $this->input->post();
        $pswd = array('password' => $contact_info);
        $data = array_merge($pswd,$data);
