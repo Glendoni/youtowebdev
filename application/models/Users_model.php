@@ -144,6 +144,7 @@ class Users_model extends MY_Model {
 
     $insert['name'] = $data['name'];
     $insert['email'] =  $data['email'];
+        $insert['phone'] =  $data['phone'];
     $insert['mobile'] =  !empty($data['mobile'])?$data['mobile']:Null;
     $insert['linkedin'] =  !empty($data['linkedin'])?$data['linkedin']:Null;
     $insert['updated_at'] =  date('Y-m-d H:i:s');

@@ -112,10 +112,10 @@ foreach($userfilename as $key => $value){
                             
                             
                                      
-                                if(($post['action_type_completed']=='40')){
+                                if(($post['action_type_completed']=='42')){
                                   
                                                                                         
-                                     file_put_contents('./uploads/glen.txt', 'hello');
+                                   //  file_put_contents('./uploads/glen.txt', 'hello');
                                     
                                             $userfilename = $this->input->post('userfilename'); 
 
@@ -124,7 +124,7 @@ foreach($userfilename as $key => $value){
                                             if(!empty($img))
                                             {
                                             $img_desc = $this->reArrayFiles($img);
-                                            print_r($img_desc);
+                                            //print_r($img_desc);
 
                                             foreach($img_desc as $val)
                                             {

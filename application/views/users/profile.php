@@ -32,14 +32,15 @@
                 <div class="form-group col-md-6">  
                   <label>Mobile</label>
                   <input type="text" class="form-control" name="mobile" id="mobile" value="<?php echo $current_user['mobile'] ?>" > 
+                       <br>
+                    <label class="userupdatepassword">Change password</label>
+                        <input type="checkbox" class="userupdatepassword" id="userupdatepassword" >
                 </div>   
                 <div class="form-group col-md-6">  
                   <label>LinkedIn username</label>
                   <input type="text" class="form-control" name="linkedin" value="<?php echo $current_user['linkedin'] ?>" > 
                         
-                    
-                    <label class="userupdatepassword">Change password</label>
-                        <input type="checkbox" class="userupdatepassword" id="userupdatepassword" >
+                 
                 </div>
             
             <div class="col-md-12   ">

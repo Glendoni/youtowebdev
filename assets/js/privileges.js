@@ -157,15 +157,15 @@ $(document).ready(function(){
     
     $('.addnewuser').click(function(){
         
-        $('.freset,#department,#password').val(''); 
+        $('.freset,#department,#password,#role').val(''); 
         $('.emailuser').hide();
         $('#created_by_name,#updated_by_name,#temp_password').text('');
-        $('.userverbiagechange').text('Add New');
+        $('.userverbiagechange').text('Add');
         $('#formstatus').attr('data','addUser');
 
     })
   
-get_users_info();
+
     
     
     $('#submit_user').on('submit', function(e){
@@ -190,7 +190,7 @@ get_users_info();
                     
                     
                     
-                    console.log('I ran');
+                    
                     $('.addnewuser').trigger('click');
                     
                    
@@ -204,7 +204,7 @@ get_users_info();
      
         
     })
-
+get_users_info();
 }) //end of document ready.
 
 
@@ -227,14 +227,18 @@ function get_users_info(){
             var items = [];
             var idfk;
             var testkey = [];
+            var testkeyrole = [];
             var indices = [];
             var array = []
             var element = 'a';
+            var user_role;
      
             $.each( data, function( key, val ) {
+                //console.log(val['role'])
+               if(val['department'] !=null) testkey.push(val['department']);
+                if(val['role'] !=null) testkeyrole.push(val['role']);
                 
-                testkey.push(val['department']);
-                items.push( '<div class="col-lg-12 results"><div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">'+val['name']+ '</div><div class="col-xs-5 col-sm-5 col-md-5 col-lg-5"><span class="usergroup">'+val['department']+'</span></div><div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"><button class="btn btn-sm btn-warning btn-block edp"  data_sub="'+val['id']+'" >Edit</button></div><br><hr /></div>');    
+                items.push( '<div class=" results"><div class="col-md-3">'+val['name']+ '</div>  <div class="col-md-2">  '+(val['eff_from']? val['eff_from']: '')+ '</div>  <div class="col-md-2"> '+(val['eff_to']? val['eff_to']: '')+ ' </div>  <div class="col-md-2"><span class="usergroup">'+(val['department']? val['department'] : '')+'</span></div>   <div class="col-md-2"> '+(val['role']? val['role']: '')+ ' </div>   <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"><button class="btn btn-sm btn-warning btn-block edp btn-xs"  data_sub="'+val['id']+'" >Edit</button></div><br><hr /></div>');    
             
             });
              
@@ -242,18 +246,38 @@ function get_users_info(){
     $('#pagin').html('');
             $('#users').append(items.join( "" ));
             
-                    var uniqueVals = [];  
-                    var department = [];
-                    $.each(testkey, function(i, el){
-                        if($.inArray(el, uniqueVals) === -1){
+var uniqueVals = [];  
+var department = [];
+$.each(testkey, function(i, el){
+if($.inArray(el, uniqueVals) === -1){
 
-                            uniqueVals.push(el);
-                            department.push('<option value="'+el+'">'+el+'</option>');
-                        }
+uniqueVals.push(el);
+department.push('<option value="'+el+'">'+el+'</option>');
+}
 
-            });
+});
            
-           $('#department').append(department.join( "" ));
+$('#department').append(department.sort().join( "" ));
+            
+            
+  
+            var uniqueRoleVals = [];  
+var role = [];
+$.each(testkeyrole, function(i, el){
+if($.inArray(el, uniqueRoleVals) === -1){
+
+uniqueRoleVals.push(el);
+role.push('<option value="'+el+'">'+el+'</option>');
+}
+
+});
+           
+$('#role').append(role.sort().join( "" ));
+            
+            
+            
+            
+            
                 edituser();
                 setpagenumber();
             }

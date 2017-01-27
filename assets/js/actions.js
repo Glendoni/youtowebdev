@@ -1274,7 +1274,7 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
          var filename = [];
       
          
-         if(action['action_type_id'] == 40  ){
+         if(action['action_type_id'] == 42  ){
                filename = action['file_location'];
              
              filename= '<div class="file'+action['id']+'"></div>';

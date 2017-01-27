@@ -41,7 +41,7 @@ class Users extends MY_Controller {
 			$this->load->library('form_validation');
 			$this->form_validation->set_rules('name', 'name', 'xss_clean|required');
 			$this->form_validation->set_rules('email', 'email', 'xss_clean|valid_email|required');
-			$this->form_validation->set_rules('phone', 'phone', 'xss_clean|required');
+			//$this->form_validation->set_rules('phone', 'phone', 'xss_clean|required');
 			//$this->form_validation->set_rules('role', 'role', 'xss_clean|required');
 			$this->form_validation->set_rules('mobile', 'mobile', 'xss_clean');
 			$this->form_validation->set_rules('linkedin', 'linkedin', 'xss_clean');

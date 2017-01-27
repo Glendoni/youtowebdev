@@ -442,7 +442,7 @@ if ((this.value == '16' || this.value == '8' || this.value == '32') && (!source_
     //$(".no-source").show();
     //$(".disable_no_source").attr('disabled', 'disabled');
     }
-        else if(this.value == '40'){
+        else if(this.value == '42'){
          $('#add_action .disable_no_source').prop('disabled', '') ;
        $('.action_file_uploader').show();
             $('.addActionOutcome').show();
@@ -1157,7 +1157,7 @@ if(!$(this).hasClass('requested') && $(this).attr('aria-controls') ==  'emailega
                 
                 
             //checkInitialFee()
-        }else if($('#action_type_completed').val() == 40 ){
+        }else if($('#action_type_completed').val() == 42 ){
             
             
                if($('.who').length ==1){
