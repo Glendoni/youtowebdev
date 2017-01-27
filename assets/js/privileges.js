@@ -232,13 +232,21 @@ function get_users_info(){
             var array = []
             var element = 'a';
             var user_role;
+            var eff_to_date_val;
+            var eff_from_date_val;
      
             $.each( data, function( key, val ) {
                 //console.log(val['role'])
                if(val['department'] !=null) testkey.push(val['department']);
                 if(val['role'] !=null) testkeyrole.push(val['role']);
                 
-                items.push( '<div class=" results"><div class="col-md-3">'+val['name']+ '</div>  <div class="col-md-2">  '+(val['eff_from']? val['eff_from']: '')+ '</div>  <div class="col-md-2"> '+(val['eff_to']? val['eff_to']: '')+ ' </div>  <div class="col-md-2"><span class="usergroup">'+(val['department']? val['department'] : '')+'</span></div>   <div class="col-md-2"> '+(val['role']? val['role']: '')+ ' </div>   <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"><button class="btn btn-sm btn-warning btn-block edp btn-xs"  data_sub="'+val['id']+'" >Edit</button></div><br><hr /></div>');    
+                  if(val['eff_to'] !=null) eff_to_date_val = val['eff_to'].split('-');
+                
+                if(val['eff_from'] !=null) eff_from_date_val = val['eff_from'].split('-');
+                          // $('#submit_user #'+key).val(eff_to_date_val[2]+'-'+eff_to_date_val[1]+'-'+eff_to_date_val[0]); 
+                
+                
+                items.push( '<div class=" results"><div class="col-md-3">'+val['name']+ '</div>  <div class="col-md-2"> '+(val['eff_from']? eff_from_date_val[2]+'-'+eff_from_date_val[1]+'-'+eff_from_date_val[0]: '')+ '</div>  <div class="col-md-2"> '+(val['eff_to']? eff_to_date_val[2]+'-'+eff_to_date_val[1]+'-'+eff_to_date_val[0]: '')+ ' </div>  <div class="col-md-2"><span class="usergroup">'+(val['department']? val['department'] : '')+'</span></div>   <div class="col-md-2"> '+(val['role']? val['role']: '')+ ' </div>   <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"><button class="btn btn-sm btn-warning btn-block edp btn-xs"  data_sub="'+val['id']+'" >Edit</button></div><br><hr /></div>');    
             
             });
              
