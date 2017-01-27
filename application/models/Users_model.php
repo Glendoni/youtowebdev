@@ -249,7 +249,7 @@ function privilages_insert_user($post,$user_id,$genrated_password)
                     'id' => $tablemax,
                     'password' =>  md5($genrated_password),
                     'eff_from' =>  date('Y-m-d', strtotime($post['eff_from'])),
-                    'eff_to' =>  date('Y-m-d', strtotime($post['eff_to'])),
+                    'eff_to' =>  (!empty($post['eff_to'])? date('Y-m-d', strtotime($post['eff_to'])): null),
                     'name' =>  $post['name'],
                     'department' =>  $post['department'],
                     'created_by' => $user_id,
@@ -311,7 +311,7 @@ order by u.name, u.department
                 $user = $this->get_user_by_email($data['email']);
 $data['updated_by'] = $user_id;
 $data['eff_from']  = date('Y-m-d', strtotime($data['eff_from']));
-                $data['eff_to']  = date('Y-m-d', strtotime($data['eff_to']));
+                $data['eff_to']  = (!empty($data['eff_to'])? date('Y-m-d', strtotime($data['eff_to'])): null);
                if($user[0]->id){
                 $this->db->where('id', $user[0]->id);
                 $this->db->update('users', $data);
