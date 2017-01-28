@@ -3446,7 +3446,10 @@ padding-top:19px;
 }
 /*//////// END USER privilege /////////////////*/
 
-
+.freset{
+    
+    text-transform: capitalize;
+}
 
 /*! Hint.css - v2.2.1 - 2016-03-26 //#2b4461
 * http://kushagragour.in/lab/hint/

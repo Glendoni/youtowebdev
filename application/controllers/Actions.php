@@ -358,7 +358,7 @@ foreach($userfilename as $key => $value){
 			else if($this->input->post('action_do') == 'cancelled')
 			{	
 				$outcome = $this->input->post('outcome');
-				$result = $this->Actions_model->set_action_state($this->input->post('action_id'),$this->input->post('user_id'),'cancelled',$outcome);				
+$result = $this->Actions_model->set_action_state($this->input->post('action_id'),$this->input->post('user_id'),'cancelled',$outcome);				
 				if($result)
 				{
 					$this->set_message_success('Action set to cancelled.');
@@ -509,5 +509,15 @@ foreach($userfilename as $key => $value){
         
     }
 
+    
+    
+    function lip(){
+        
+         $query = $this->db->query("SELECT * FROM actions where id=1234008");
+              $output =   $query->result_array();
+                echo $query->num_rows();
+    //echo $output[0]['created_by'];  
+        
+    }
     
 }

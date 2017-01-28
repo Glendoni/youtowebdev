@@ -1272,7 +1272,7 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
         var  createfollowername;
 
          var filename = [];
-      
+      var originalcreator;
          
          if(action['action_type_id'] == 42  ){
                filename = action['file_location'];
@@ -1282,14 +1282,32 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
          }
          
          
-         
+        // console.log(action['originalcreator'] + action['id']);
          
              if(typeof action['name'] !== 'undefined'  && action['name'] !== null &&  action['name'] !== 'null'   ){
             created_by = action['name'];
+                 
+                
+                  if(typeof action['creater'] !== 'undefined' && action['creater'] != action['name'] && action['creater'] !== null &&  action['creater'] !== 'null' && action['action_type_id'] == 11){
+                    
+                     created_by = action['creater']  + ' forwarded to ' +action['name'];
+                }
            
          }else{
              created_by = action['created_by'];   
          }
+         
+         
+            if(typeof action['originalcreator'] !== 'undefined'  && action['originalcreator'] !== null &&  action['originalcreator'] !== 'null'   ){
+             
+               
+                originalcreator = action['originalcreator'] + ' - ' + formattDate(action['outcome_action_date'], true);
+           
+                
+                 //console.log(action['actioned_at']);
+                
+         } 
+         
          
          actionId = action['action_id'];
          if(typeof action['id'] != 'undefined'){
@@ -1297,7 +1315,7 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
           }
          
          if(typeof action['outcome'] !== 'undefined'  && action['outcome'] !== null &&  action['outcome'] !== 'null'){
-             outcome = '<div class="actionOutcomeText"><span class="actionMsg piller'+actionId+' outcomeMsg'+actionId+' comments'+actionType+'"><strong>Outcome: </strong><br>Created by '+ action['name'] +'<br><span class="comment">'+ action['outcome'] +'</span></span></div>'; 
+             outcome = '<div class="actionOutcomeText"><span class="actionMsg piller'+actionId+' outcomeMsg'+actionId+' comments'+actionType+'"><strong>Outcome: </strong><br>Created by: '+ (originalcreator? originalcreator:action['name']) +'<br><span class="comment">'+ action['outcome'] +'</span></span></div>'; 
             
          } 
          actionTypeName = actionType;

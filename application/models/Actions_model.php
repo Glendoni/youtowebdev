@@ -136,11 +136,31 @@ function get_actions_outstanding($company_id,$limit =100)
 
 function get_actions_completed($company_id)
 {
-    $category_exclude = array( '20','30');
+    $category_exclude = array( '20');
     $data = array(
         'a.company_id' => $company_id,
         );
-    $this->db->select('a.created_at,a.actioned_at,a.action_type_id,com.initial_rate,a.comments,a.cancelled_at,a.outcome,a.id,u.image,u.name,c.first_name,c.last_name,a.contact_id,a.followup_action_id, ,a.tfer_turnover, a.tfer_runners, a.initial_fee,  a.planned_at');
+  $sql = "SELECT  a.created_at, a.actioned_at, a.action_type_id, com.initial_rate, a.comments, a.cancelled_at, a.outcome, a.id, u.image, u.name, c.first_name, c.last_name, a.contact_id, a.followup_action_id, a.tfer_turnover, a.tfer_runners, a.initial_fee, a.planned_at,T1.updated_at outcome_action_date,
+ CASE when a.created_by = T1.updated_by then null else T1.peep END originalcreator,
+  CASE when a.created_by = T2.updated_by then null else T2.peep END creater
+FROM actions a
+LEFT JOIN contacts c ON c.id = a.contact_id
+LEFT JOIN users u ON a.user_id = u.id
+LEFT JOIN companies com ON a.company_id = com.id
+
+LEFT JOIN (select cb.id,cb.user_id, cb.updated_by,cb.updated_at, u.name as peep from actions cb LEFT JOIN users u on cb.updated_by = u.id where company_id=".$company_id.") T1
+ON a.id = T1.id
+LEFT JOIN (select cb.id, cb.updated_by, u.name as peep from actions cb LEFT JOIN users u on cb.created_by = u.id where company_id=".$company_id.") T2
+ON a.id = T2.id
+WHERE actioned_at IS NOT NULL
+AND followup_action_id IS NULL
+AND action_type_id NOT IN(20)
+AND a.company_id = ".$company_id."
+
+ORDER BY actioned_at desc,planned_at desc
+";
+    
+    /*
     $this->db->join('contacts c', 'c.id = a.contact_id', 'left');
     $this->db->join('users u', 'a.user_id = u.id', 'left');
     $this->db->join('companies com', 'a.company_id = com.id', 'left');
@@ -149,8 +169,11 @@ function get_actions_completed($company_id)
     $this->db->where('followup_action_id', null);
     $this->db->where_not_in('action_type_id', $category_exclude);
     $this->db->order_by('actioned_at desc,planned_at desc');
-    $query = $this->db->get_where('actions a', $data);
+   
+    */
+     //$query = $this->db->get_where('actions a', $data);
    // echo $this->db->last_query();
+      $query = $this->db->query($sql);
     
     return $query->result_object();
 }
@@ -791,6 +814,17 @@ function set_action_state($action_id,$user_id,$state,$outcome,$post)
             
             
         }
+             
+                  
+                   $query = $this->db->query("SELECT created_by FROM actions where id=".$action_id." LIMIT 1");
+                    $output =   $query->result_array();
+                   $num =  $query->num_rows();
+                  
+                  if($num == true) $user_id =  $output[0]['created_by'];  
+                  
+                  echo $user_id;
+                  
+                  exit();
                   
             $planneddata = array(
             'company_id'    => $post['company_id'],
@@ -805,7 +839,7 @@ function set_action_state($action_id,$user_id,$state,$outcome,$post)
             'created_at'    => date('Y-m-d H:i:s'),
             'followup_action_id' =>(isset($post['followup_action_id'])?$post['followup_action_id']:NULL),
         );
-        $query = $this->db->insert('actions', $planneddata);
+       $query = $this->db->insert('actions', $planneddata);
         
         
         }
