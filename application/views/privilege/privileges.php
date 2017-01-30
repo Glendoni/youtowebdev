@@ -18,7 +18,7 @@
    
 	 <div class="form-group col-md-6">
                 <label>Full Name *</label>
-		<input type="text" class="form-control freset"  required="required" name="name" id="name" placeholder="Name">
+		<input type="text" class="form-control freset fresetname"  required="required" name="name" id="name" placeholder="Name">
 	</div>
                      
            
