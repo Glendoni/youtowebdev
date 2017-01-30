@@ -1,10 +1,10 @@
 <div class="row">
 <ol class="breadcrumb">
-          <li><a href="<?php echo site_url(); ?>email_templates/"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Dashboard</a></li>
+          <li><a href="<?php echo site_url(); ?>email_templates/"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Template List</a></li>
         </ol>
   <div class="col-lg-12">
     <div class="panel panel-default">
-        <div class="panel-heading"> 
+        <div class="panel-heading profile-heading"> 
             <h3>Email Template</h3>
         </div>
         <!-- /.panel-heading -->
@@ -19,8 +19,8 @@
                   <input type="text" class="form-control" required name="subject" value="<?php echo isset($template->subject)?$template->subject:''  ?>" > 
                 </div>
                 <div class="form-group col-md-12">            
-                <label>Message* <small>Variables: {{contact_first_name}}</small></label>
-                <textarea rows="4" cols="50" class="form-control editor" required name="message"><?php echo isset($template->message)?$template->message:'{{contact_first_name}}';  ?></textarea>
+                <label>Message* </label><strong><small style="float:right">Variables: {{contact_first_name}}</strong></small>
+                <textarea rows="13" cols="50" class="form-control editor" required name="message"><?php echo isset($template->message)?$template->message:'{{contact_first_name}}';  ?></textarea>
                 </div>
                 <div class="form-group col-md-12">
                  
@@ -36,7 +36,7 @@
                   <input type="file" name="files[]" multiple />
                 </div>      
                 <div class="form-group col-md-12">
-                  <button class="btn btn-primary" name="email_template" value="1">Update</button>
+                  <button class="btn btn-warning" name="email_template" value="1">Save</button>
                 </div>
             </form>
         </div>

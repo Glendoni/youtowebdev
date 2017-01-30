@@ -102,8 +102,7 @@ class MY_Controller extends CI_Controller {
                 
                 
             }
-        
-
+     
 		// $this->load->helper('mobile');
 		
 		// loging checking and redirect
@@ -647,4 +646,38 @@ $mortgages['Inv_fin_related'] = $mortgage->f8;
 			return FALSE;
 		} 	
 	}
+      function accessArr($access){ // Any changes here must eb made in the header.php accessArr method
+        
+      
+          switch ($access){
+        	case 'edit_template':
+        		return array(31,21,7,25,17,1,61,3,6,78);
+        		break;
+        	case "delete_email_template":
+              return  array(31,1,6);
+        		//return array(31,1,12,21);
+        		
+        		break;
+                  case "access_email_template":
+              return  array(31,21,7,25,17,1,61,3,6,78);
+        		//return array(31,1,12,21);
+        		
+        		break;
+                  case "add_email_template":
+              return  array(31,21,1,6,3,45);
+        		//return array(31,1,12,21);
+        		
+        		break;
+              default:
+                  //return array(21,7,25,17,1,61,3,6,78);
+        	 	
+                  
+                    
+        }
+        
+     
+    }
+    
+    
+    
 }

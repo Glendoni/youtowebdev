@@ -2,9 +2,18 @@
             <?php if (!empty($_GET['campaign_id'])): 
                     $campaign_id = $_GET['campaign_id'];
                 endif; ?>
-            <?php if (!isset($company['id'])): ?>
-                    <div class="alert alert-danger" role="alert">This company is no longer active.</div>
-            <?php endif; ?>
+            <?php if (!isset($company['active'])): ?>
+                    <div class="alert alert-danger" role="alert"><?php echo $company['name']; ?> is no longer active. </div>
+
+            <?php 
+
+endif;
+
+?>
+
+ <?php if (isset($company['active'])): ?>
+
+
             <?php //hide core page content if no company is found ?>
                 <?php if (isset($company['id'])): ?>
                     <div class="page-results-list" id="parent" style="padding-top: 116px;">
@@ -1518,3 +1527,4 @@ function closeNav() {
 
 </script>
  
+<?php endif; //active or not end ?>

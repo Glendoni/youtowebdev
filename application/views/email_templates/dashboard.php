@@ -1,8 +1,8 @@
 <div class="row">
-  <div class="col-lg-124">
+  <div class="col-lg-12">
     <div class="panel panel-default">
-        <div class="panel-heading ">
-            <h3>Email templates</h3>
+        <div class="panel-heading profile-heading">
+            <h3>Email Templates</h3>
         </div>
         <!-- /.panel-heading -->
         <div class="panel-body">
@@ -23,13 +23,24 @@
                   <tr>
                     <td><?php echo $tempalte->name ?></td>
                     <td><?php echo $tempalte->subject ?></td>
+                      <?php if( $edit ){ ?>
                     <td><a href="<?php echo site_url(); ?>email_templates/edit?id=<?php echo $tempalte->id ?>" class="btn btn-primary btn-xs">view/edit</a></td>
+                      
+                      <?php } ?>
+                      
+                      <?php if($delete){  ?>
                     <td><a href="<?php echo site_url(); ?>email_templates/delete?id=<?php echo $tempalte->id ?>" class="btn btn-danger btn-xs">delete</a></td>
+                      
+                      <?php } ?>
                   </tr>
                 <?php endforeach; ?>
                 </tbody>
               </table>
-              <span ><a style="color:#fff;" href="<?php echo site_url(); ?>email_templates/edit" class="btn btn-primary">Add template</a></span>
+              <?php if($add){  ?>
+              <span ><a style="color:#fff;" href="<?php echo site_url(); ?>email_templates/edit" class="btn btn-primary">Add Template</a></span>
+             <?php } ?>
+            
+            
             <?php endif; ?>
         </div>
         <!-- /.panel-body -->

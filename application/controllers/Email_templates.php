@@ -2,22 +2,69 @@
 
 class Email_templates extends MY_Controller {
 
+    public  $access = false;
+     public  $edit = false;
+     public  $delete = false;
+    public  $add = false;
 	function __construct() 
 	{
 		parent::__construct();
 		$this->load->model('Email_templates_model');
+        
+            // $usrid =   $this->accessArr('access'); //user id array list
+        
+       
+       // echo in_array($this->data['current_user']['id'],$usrid);
+      //  echo $this->data['current_user']['role']  == 'Admin';
+         
+      
+          $this->access = true;
+          $this->edit =  in_array($this->data['current_user']['id'],$this->accessArr('edit_template'));
+          $this->delete = in_array($this->data['current_user']['id'],$this->accessArr('delete_email_template'));
+        $this->add = in_array($this->data['current_user']['id'],$this->accessArr('add_email_template'));
 	}
 
 	public function index()
 	{
-		$this->data['hide_side_nav'] = True;
+        
+        
+		 if(!$this->edit){
+         
+        redirect('/dashboard','location');
+        exit();
+         }
+        
+        
+     //  $this->data['current_user']['department'];
+    
+        if($this->access){
+            
+           $this->data['edit'] = $this->edit;
+            $this->data['delete'] =  $this->delete;
+             $this->data['add'] =  $this->add;
+            
+        $this->data['hide_side_nav'] = True;
 		$this->data['email_templates'] = $this->Email_templates_model->get_all();
 		$this->data['main_content'] = 'email_templates/dashboard';
 		$this->load->view('layouts/single_page_layout', $this->data);
+            
+        }
+            
+            
 	}
+    
+  
 
 	public function edit()
 	{	
+        
+         if(!$this->edit){
+         
+        redirect('/dashboard','location');
+        exit();
+         }
+         $data['edit']=$this->edit;
+        
 		if($this->input->get('id'))
 		{
 			 $template= $this->Email_templates_model->get_by_id($this->input->get('id'));
@@ -28,14 +75,25 @@ class Email_templates extends MY_Controller {
 		$this->data['hide_side_nav'] = True;
 		$this->data['main_content'] = 'email_templates/edit';
 		$this->load->view('layouts/single_page_layout', $this->data);
+         
 	}
 
 	public function delete(){
+        
+         if(!$this->delete){
+         
+        redirect('/dashboard','location');
+        exit();
+         }
+        
+        if($this->delete){
+        
 		if($this->input->get('id'))
 		{
 			$result = $this->Email_templates_model->delete($this->input->get('id'));
 			redirect('/email_templates/');
 		}
+        }
 	}
 	private function process_upload(){
 		if (!empty($_FILES['files']['name'][0])) {

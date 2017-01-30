@@ -59,7 +59,7 @@
                  
    <div class="form-group col-md-3">
           <label for="sel1">Effective From Date *</label>
-                       <input type="text" class="form-control follow-up-date planned_at planned_atdefault freset" value="<?php echo date('d/m/Y'); ?>" required="required" data-date-format="DD-MM-YYYY" id="eff_from" name="eff_from" placeholder="Active From Date">
+                       <input type="text" class="form-control follow-up-date planned_at planned_atdefault freset" value="" required="required" data-date-format="DD-MM-YYYY" id="eff_from" name="eff_from" placeholder="Active From Date">
               
                      </div>
                      

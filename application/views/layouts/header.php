@@ -189,7 +189,19 @@
                                             <a href="https://status.heroku.com/" target="_blank"><i class="fa fa-fw fa-tasks"></i> Hosting Status</a>
                                          </li>
                                             <li class="divider"></li>
-                                            <?php 
+                                            
+                                    
+                                     <?php
+                                  
+                                    if(  in_array($current_user['id'],access_permission_nav('access_email_template'))){ ?> 
+                                        <li>
+                                            <a href="<?php echo base_url(); ?>email_templates/" ><i class="fa fa-envelope"></i> Manage Email Templates</a>
+                                        </li>
+                                    
+                                    <?php } ?>
+                                    
+                                    
+                                    <?php 
                                   
                                     if ($current_user['department'] == 'development'  || $current_user['department'] ==  'board'): ?>
                                          <li>
@@ -198,9 +210,7 @@
                                       <li>
                                                 <a href="<?php echo site_url(); ?>Privilege"><i class="fa fa-shield fa-rotate-270"></i> User Management</a>
                                           </li>
-                                        <li>
-                                            <a href="<?php echo base_url(); ?>email_templates/" ><i class="fa fa-envelope"></i> Manage Email Templates</a>
-                                        </li>
+                                   
                                         <li>
                                             <a href="<?php echo base_url(); ?>tagging/tag_categories" ><i class="fa fa-plus-circle"></i> Tagging</a>
                                         </li>
@@ -410,4 +420,37 @@ if ($pos === false) {
 
            
         </nav>
+        
+        
+        <?php 
+      function access_permission_nav($access){ // Any changes here must eb made in the My_controller accessArr method
+        switch ($access){
+        
+        	case 'edit_template':
+        		return array(31,21,7,25,17,1,61,3,6,78);
+        		break;
+        	case "delete_email_template":
+              return  array(31,1,6);
+        		//return array(31,1,12,21);
+        		
+        		break;
+                case "access_email_template":
+              return  array(31,21,1,6,3,45);
+        		//return array(31,1,12,21);
+        		
+        		break;
+                  case "add_email_template":
+              return  array(31,21,1,6,3,45);
+        		//return array(31,1,12,21);
+        		
+        		break;
+                  
+              default:
+                  //return
+        	 	
+        }
+        
+     
+    }
+        ?>
  

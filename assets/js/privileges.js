@@ -220,11 +220,15 @@ Array.prototype.contains = function ( needle ) {
 
 function get_users_info(){
         
+    
+    
         $.ajax({
         type: "GET",
             dataType: "json",
         url: "privilege/getusers",
         success: function(data) {
+            
+            
             var action;
             var items = [];
             var idfk;
@@ -253,7 +257,8 @@ function get_users_info(){
             });
              
                 $('#users').html(''); 
-    $('#pagin').html('');
+    $('#pagin').html(''); 
+          
             $('#users').append(items.join( "" ));
             
 var uniqueVals = [];  
@@ -266,8 +271,7 @@ department.push('<option value="'+el+'">'+el+'</option>');
 }
 
 });
-           
-$('#department').append(department.sort().join( "" ));
+       
             
             
   
@@ -281,10 +285,15 @@ role.push('<option value="'+el+'">'+el+'</option>');
 }
 
 });
-           
+   //
+            
+             $('#role option').remove();
+            $('#role').append('<option value="">Please Select</option>');       
 $('#role').append(role.sort().join( "" ));
             
-            
+                 $('#department option').remove();
+            $('#department').append('<option value="">Please Select</option>');   
+$('#department').append(department.sort().join( "" ));
             
             
             
