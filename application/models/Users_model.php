@@ -266,14 +266,14 @@ function privilages_insert_user($post,$user_id,$genrated_password)
             
             }
 			if($this->db->affected_rows() !== 1){
-				$this->addError($this->db->_error_message());
+				//$this->addError($this->db->_error_message());
                 
              
-				return false;
+				return array('status' => 402);
 			}else{
 				//return user if insert was successful 
 				//$user_id = $this->db->insert_id();
-				 return $user_id;
+				return array('status' => 200);
 			}
 			
 		 
@@ -299,6 +299,8 @@ order by u.name, u.department
         
          $query = $this->db->query($sql);
    
+        
+        
         return $query->row_array();
         
         

@@ -186,10 +186,36 @@ $(document).ready(function(){
                 url: "Privilege/"+url,
                 success: function(data) { 
                  //console.log(data); //error false
-                   get_users_info(false);
+                  
+                  
+                  // 
                     
                     
-                     $('#formstatus').attr('data','updateUser');
+                    if (data.status === 200) {
+                         $('#formstatus').attr('data','updateUser');
+                         get_users_info(false);
+           $('.messageprev').prepend(' <div class="alert alert-success userdatastatus"  >  Updated Successfully. </div>') 
+window.setTimeout(function() {
+    $(".alert-success").fadeTo(500, 0).slideUp(500, function(){
+    $(this).remove(); 
+    });
+    }, 4000);
+
+                    
+                    
+                   
+                        
+                    }else{
+                        
+                       console.log(data);   
+                                   $('.messageprev').prepend(' <div class="alert alert-danger userdatastatus"  >  This user already exit. </div>') 
+window.setTimeout(function() {
+    $(".alert-danger").fadeTo(500, 0).slideUp(500, function(){
+    $(this).remove(); 
+    });
+    }, 4000);
+             
+                    }
                     
                     //$('.addnewuser').trigger('click');
                     
@@ -197,7 +223,7 @@ $(document).ready(function(){
                 }
                   
                   
-                });
+                }).error(function() { alert("error"); });
                 
             
           

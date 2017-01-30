@@ -68,7 +68,7 @@ class Privilege extends MY_Controller {
        
            
            $output = $this->Users_model->update_user($data,$this->data['current_user']['id']);
-       echo  json_encode(array('success' => $output));
+       echo  json_encode(array('success' => $output , 'status' => 200));
         
     }
     

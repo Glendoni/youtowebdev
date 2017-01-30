@@ -1,5 +1,5 @@
- 
-<div class="row">
+  
+<div class="row messageprev">
     <div class="col-lg-12">
         <div class="panel panel-default cr_switch create">
             <div class="panel-heading profile-heading">
