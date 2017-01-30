@@ -17,7 +17,7 @@
     <?php
 } else {?>
 
-    <link rel="icon" type="image/png" href="<?php echo asset_url();?>images/favicon.jpg">
+    <link rel="icon" type="image/jpg" href="<?php echo asset_url();?>images/favicon.jpg">
 <?php
 }; ?>
 
@@ -94,7 +94,7 @@
 <!-- Brand and toggle get grouped for better mobile display -->
 <!--<div class="navbar-header">-->
 <div class="col-sm-3 col-md-3">
- <a class="navbar-brand" href="<?php echo site_url();?>" ><img src="<?php echo asset_url();?>images/baselist-logotype-black-transparent-bg.png" style="width:120px;"><br> <div style="    font-size: 10px;
+ <a class="navbar-brand" href="<?php echo site_url();?>" ><img src="<?php echo asset_url();?>images/baselist-logo-white.svg" style="width:120px;"><br> <div style="    font-size: 10px;
     font-weight: 300;
     text-align: left;
     line-height: 40px;
