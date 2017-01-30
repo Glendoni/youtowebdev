@@ -186,12 +186,12 @@ $(document).ready(function(){
                 url: "Privilege/"+url,
                 success: function(data) { 
                  //console.log(data); //error false
-                   get_users_info();
+                   get_users_info(false);
                     
                     
+                     $('#formstatus').attr('data','updateUser');
                     
-                    
-                    $('.addnewuser').trigger('click');
+                    //$('.addnewuser').trigger('click');
                     
                    
                 }
@@ -218,7 +218,7 @@ Array.prototype.contains = function ( needle ) {
 }
 
 
-function get_users_info(){
+function get_users_info(refresh = true){
         
     
     
@@ -256,52 +256,61 @@ function get_users_info(){
             
             });
              
-                $('#users').html(''); 
-    $('#pagin').html(''); 
-          
-            $('#users').append(items.join( "" ));
             
-var uniqueVals = [];  
-var department = [];
-$.each(testkey, function(i, el){
-if($.inArray(el, uniqueVals) === -1){
+           // if(refresh){
+            
+                    $('#users').html(''); 
+                    $('#pagin').html(''); 
 
-uniqueVals.push(el);
-department.push('<option value="'+el+'">'+el+'</option>');
-}
+                    $('#users').append(items.join( "" ));
+
+                    var uniqueVals = [];  
+                    var department = [];
+                    $.each(testkey, function(i, el){
+                    if($.inArray(el, uniqueVals) === -1){
+
+                    uniqueVals.push(el);
+                    department.push('<option value="'+el+'">'+el+'</option>');
+                    }
+    
+//}
 
 });
        
             
-            
-  
-            var uniqueRoleVals = [];  
-var role = [];
-$.each(testkeyrole, function(i, el){
-if($.inArray(el, uniqueRoleVals) === -1){
+                        if(refresh){
 
-uniqueRoleVals.push(el);
-role.push('<option value="'+el+'">'+el+'</option>');
-}
+                                var uniqueRoleVals = [];  
+                                var role = [];
+                                $.each(testkeyrole, function(i, el){
+                                if($.inArray(el, uniqueRoleVals) === -1){
 
-});
-   //
+                                uniqueRoleVals.push(el);
+                                role.push('<option value="'+el+'">'+el+'</option>');
+                                }
+
+                                });
+                                //
+
+                                $('#role option').remove();
+                                $('#role').append('<option value="">Please Select</option>');       
+                                $('#role').append(role.sort().join( "" ));
+
+                                $('#department option').remove();
+                                $('#department').append('<option value="">Please Select</option>');   
+                                $('#department').append(department.sort().join( "" ));
+
+                                }
+
+                                edituser();
+                                setpagenumber();
             
-             $('#role option').remove();
-            $('#role').append('<option value="">Please Select</option>');       
-$('#role').append(role.sort().join( "" ));
+             // $('#formstatus').attr('data','updateUser');
+                        }
+          
             
-                 $('#department option').remove();
-            $('#department').append('<option value="">Please Select</option>');   
-$('#department').append(department.sort().join( "" ));
-            
-            
-            
-                edituser();
-                setpagenumber();
-            }
-    });
-    
+                        });
+
     
 }
 

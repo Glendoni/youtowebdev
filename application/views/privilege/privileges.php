@@ -1,3 +1,4 @@
+ 
 <div class="row">
     <div class="col-lg-12">
         <div class="panel panel-default cr_switch create">
@@ -67,7 +68,7 @@
           <label for="sel1">Effective To Date </label>
                        <input type="text" class="form-control follow-up-date planned_at freset"   data-date-format="DD-MM-YYYY" id="eff_to" name="eff_to" placeholder="Active To Date">
           <input type="hidden" id="formstatus"   data="addUser">
-               <input type="hidden"  name="password"  id="password" >       
+                  
                      </div>
                      
                      

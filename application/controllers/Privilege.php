@@ -58,8 +58,8 @@ class Privilege extends MY_Controller {
         $pswd  = $psw[0][0];
    
        $data  = $this->input->post();
-       $pswd = array('password' => $contact_info);
-       $data = array_merge($pswd,$data);
+       //$pswd = array('password' => $contact_info);
+      // $data = array_merge($pswd,$data);
        
           // echo 'Update';
            //print_r($data);
