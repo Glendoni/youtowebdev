@@ -239,7 +239,7 @@ function get_all_users($userid){
 
 function privilages_insert_user($post,$user_id,$genrated_password)
 	{
-		$user = $this->get_user_by_email($post['email']);
+		$user = $this->get_user_by_email(trim($post['email']));
         $tablemax = $this->get_table_max();
         
       
@@ -253,7 +253,7 @@ function privilages_insert_user($post,$user_id,$genrated_password)
                     'name' =>  $post['name'],
                     'department' =>  $post['department'],
                     'created_by' => $user_id,
-                    'email' =>  $post['email'],
+                    'email' =>  trim($post['email']),
                     'role' =>  $post['role'],
                     'phone' =>  (!empty($post['phone'])?$post['phone']:NULL),
                     'mobile' =>  (!empty($post['mobile'])?$post['mobile']:NULL),
