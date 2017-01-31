@@ -194,7 +194,7 @@ $(document).ready(function(){
                     if (data.status === 200) {
                          $('#formstatus').attr('data','updateUser');
                          get_users_info(false);
-           $('.messageprev').prepend(' <div class="alert alert-success userdatastatus"  >  Updated Successfully. </div>') 
+           $('.messageprev').prepend(' <div class="alert alert-success userdatastatus"> '+data.msg+' </div>') 
 window.setTimeout(function() {
     $(".alert-success").fadeTo(500, 0).slideUp(500, function(){
     $(this).remove(); 
@@ -207,8 +207,8 @@ window.setTimeout(function() {
                         
                     }else{
                         
-                       console.log(data);   
-                                   $('.messageprev').prepend(' <div class="alert alert-danger userdatastatus"  >  This user already exit. </div>') 
+                      // console.log(data);   
+                                   $('.messageprev').prepend(' <div class="alert alert-danger userdatastatus"  >  '+data.msg+' </div>') 
 window.setTimeout(function() {
     $(".alert-danger").fadeTo(500, 0).slideUp(500, function(){
     $(this).remove(); 

@@ -270,7 +270,7 @@ function privilages_insert_user($post,$user_id,$genrated_password)
 				//$this->addError($this->db->_error_message());
                 
              
-				return array('success' => true ,'status' => 402, 'msg'=>'This email is already in use!'); 
+				return array('success' => true ,'status' => 402, 'msg'=>'This email belongs to another user!'); 
 			}else{
 				//return user if insert was successful 
 				//$user_id = $this->db->insert_id();
@@ -327,7 +327,7 @@ GROUP BY 1,2
 		    $user =  $query->result(); /* returns an object */
           //$row=  $query->row_array();
        $num  =   $query->num_rows();
-        
+        $affected_rows =  true;
                 
                 
             $data['updated_by'] = $user_id;
@@ -337,17 +337,17 @@ GROUP BY 1,2
                 if($num ==1){
                     $this->db->where('id', $user[0]->id);
                     $this->db->update('users', $data);
-                
+                $affected_rows =  false;
                }
-                if($this->db->affected_rows() !== 1){
+                if($affected_rows ==  true){
                // $this->addError($this->db->_error_message());
-                return array('status' => 402);
+                return array('status' => 402, 'msg'=>'Whopps something when wrong. Please check email!');
                 }else{
                 //return user if insert was successful 
                // $user_id = $this->db->insert_id();
                     
                     
-                return array('success' => true , 'status' => 200);
+                return array('success' => true , 'status' => 200, 'msg'=>'User updated successfully!');
                 }
 
 
