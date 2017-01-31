@@ -240,9 +240,9 @@ function get_all_users($userid){
 function privilages_insert_user($post,$user_id,$genrated_password)
 	{
 		$user = $this->get_user_by_email(trim($post['email']));
-        $tablemax = $this->get_table_max();
+        echo $tablemax = $this->get_table_max();
         
-    
+    exit();
 		if(!$user){ 
             
                 $data = array(  
@@ -269,11 +269,11 @@ function privilages_insert_user($post,$user_id,$genrated_password)
 				//$this->addError($this->db->_error_message());
                 
              
-				return array('status' => 402); 
+				return array('success' => true ,'status' => 402); 
 			}else{
 				//return user if insert was successful 
 				//$user_id = $this->db->insert_id();
-			 return array('success' => true , 'status' => 402);
+			 return array('success' => true , 'status' => 200);
 			}
 			
 		 
