@@ -241,7 +241,7 @@ function privilages_insert_user($post,$user_id,$genrated_password)
 	{
 		$user = $this->get_user_by_email(trim($post['email']));
         $tablemax = $this->get_table_max();
-        
+        $affected_rows = false;
     
 		if(!$user){ 
             
@@ -263,19 +263,18 @@ function privilages_insert_user($post,$user_id,$genrated_password)
 
 
                 $this->db->insert('users', $data);
-            
+              $affected_rows =  true;
             }
-        echo $this->db->affected_rows();
-        exit();
-			if($this->db->affected_rows() != 1){
+      
+			if($affected_rows != true ){
 				//$this->addError($this->db->_error_message());
                 
              
-				return array('success' => true ,'status' => 402); 
+				return array('success' => true ,'status' => 402, 'msg'=>'This email is already in use!'); 
 			}else{
 				//return user if insert was successful 
 				//$user_id = $this->db->insert_id();
-			 return array('success' => true , 'status' => 200);
+			 return array('success' => true , 'status' => 200 'msg'=>'User added successfully!');
 			}
 			
 		 
