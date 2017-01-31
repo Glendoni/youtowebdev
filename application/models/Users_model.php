@@ -310,22 +310,43 @@ order by u.name, u.department
             {
 
                 
-                $user = $this->get_user_by_email($data['email']);
-$data['updated_by'] = $user_id;
-$data['eff_from']  = date('Y-m-d', strtotime($data['eff_from']));
-                $data['eff_to']  = (!empty($data['eff_to'])? date('Y-m-d', strtotime($data['eff_to'])): null);
-               if($user[0]->id){
-                $this->db->where('id', $user[0]->id);
-                $this->db->update('users', $data);
+               // $user = $this->get_user_by_email($data['email']);
+             
+                
+                 	$sql = " SELECT T1.id,T2.id as duplicate, count(T1.id)
+FROM users T1 
+LEFT JOIN (select id,email from users where email='".trim($data['email'])."') T2
+ON T1.id =T2.id
+WHERE T1.id=".$data['id']." or T2.email='".trim($data['email'])."'
+GROUP BY 1,2
+
+  ";
+		$query = $this->db->query($sql);
+
+		    $user =  $query->result(); /* returns an object */
+          //$row=  $query->row_array();
+       $num  =   $query->num_rows();
+        
+                
+                
+            $data['updated_by'] = $user_id;
+            $data['eff_from']  = date('Y-m-d', strtotime($data['eff_from']));
+            $data['eff_to']  = (!empty($data['eff_to'])? date('Y-m-d', strtotime($data['eff_to'])): null);
+              
+                if($num ==1){
+                    $this->db->where('id', $user[0]->id);
+                    $this->db->update('users', $data);
                 
                }
                 if($this->db->affected_rows() !== 1){
-                $this->addError($this->db->_error_message());
-                return false;
+               // $this->addError($this->db->_error_message());
+                return array('status' => 402);
                 }else{
                 //return user if insert was successful 
                // $user_id = $this->db->insert_id();
-                return true;
+                    
+                    
+                return array('success' => true , 'status' => 200);
                 }
 
 
@@ -344,7 +365,7 @@ $data['eff_from']  = date('Y-m-d', strtotime($data['eff_from']));
     
     
 function getUsersList(){
-    $sql = "SELECT * FROM users WHERE active=true order by name, department";
+    $sql = "SELECT id,name,eff_to,eff_from,department,temp_password,role,mobile FROM users WHERE active=true order by eff_to desc, name asc ";
 		$query = $this->db->query($sql);
 
 		    return $query->result(); /* returns an object */
