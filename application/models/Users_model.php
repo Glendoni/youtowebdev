@@ -242,7 +242,7 @@ function privilages_insert_user($post,$user_id,$genrated_password)
 		$user = $this->get_user_by_email(trim($post['email']));
         $tablemax = $this->get_table_max();
         
-      
+    
 		if(!$user){ 
             
                 $data = array(  
@@ -273,7 +273,7 @@ function privilages_insert_user($post,$user_id,$genrated_password)
 			}else{
 				//return user if insert was successful 
 				//$user_id = $this->db->insert_id();
-			 return array('success' => true , 'status' => 200);
+			 return array('success' => true , 'status' => 402);
 			}
 			
 		 
