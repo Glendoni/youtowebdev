@@ -274,7 +274,7 @@ function privilages_insert_user($post,$user_id,$genrated_password)
 			}else{
 				//return user if insert was successful 
 				//$user_id = $this->db->insert_id();
-			 return array('success' => true , 'status' => 200 'msg'=>'User added successfully!');
+			 return array('success' => true , 'status' => 200, 'msg'=>'User added successfully!');
 			}
 			
 		 
