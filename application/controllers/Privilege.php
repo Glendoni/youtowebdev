@@ -47,7 +47,9 @@ class Privilege extends MY_Controller {
        
        //print_r($data);
         //echo json_encode($contact_info);
-        echo  json_encode($this->Users_model->privilages_insert_user($data,$this->data['current_user']['id'],$genrated_password));
+       
+      $output =  $this->Users_model->privilages_insert_user($data,$this->data['current_user']['id'],$genrated_password);
+        echo  json_encode($output);
         
     }
     
