@@ -269,7 +269,7 @@ function privilages_insert_user($post,$user_id,$genrated_password)
 				//$this->addError($this->db->_error_message());
                 
              
-				return array('status' => 402);
+				return array('status' => 402); 
 			}else{
 				//return user if insert was successful 
 				//$user_id = $this->db->insert_id();
