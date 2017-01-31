@@ -265,7 +265,7 @@ function privilages_insert_user($post,$user_id,$genrated_password)
                 $this->db->insert('users', $data);
             
             }
-			if($this->db->affected_rows() !== 1){
+			if($this->db->affected_rows() != 1){
 				//$this->addError($this->db->_error_message());
                 
              
