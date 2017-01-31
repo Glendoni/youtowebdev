@@ -245,6 +245,8 @@ function privilages_insert_user($post,$user_id,$genrated_password)
     
 		if(!$user){ 
             
+            if($post['department'] == 'admin') $permission ='Admin';
+             if($post['department'] == 'support') $permission ='Support';
                 $data = array(  
                     'id' => $tablemax,
                     'password' =>  md5($genrated_password),
@@ -252,6 +254,7 @@ function privilages_insert_user($post,$user_id,$genrated_password)
                     'eff_to' =>  (!empty($post['eff_to'])? date('Y-m-d', strtotime($post['eff_to'])): null),
                     'name' =>  $post['name'],
                     'department' =>  $post['department'],
+                    'permission' =>  $permission ? $permission : null,
                     'created_by' => $user_id,
                     'email' =>  trim($post['email']),
                     'role' =>  $post['role'],
@@ -329,10 +332,12 @@ GROUP BY 1,2
        $num  =   $query->num_rows();
         $affected_rows =  true;
                 
-                
+                $data['permission'] = null;
             $data['updated_by'] = $user_id;
             $data['eff_from']  = date('Y-m-d', strtotime($data['eff_from']));
             $data['eff_to']  = (!empty($data['eff_to'])? date('Y-m-d', strtotime($data['eff_to'])): null);
+                  if($data['department'] == 'admin') $data['permission'] ='Admin';
+             if($data['department'] == 'support') $data['permission'] ='Support';
               
                 if($num ==1){
                     $this->db->where('id', $user[0]->id);
