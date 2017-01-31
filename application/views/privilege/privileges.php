@@ -3,7 +3,7 @@
     <div class="col-lg-12">
         <div class="panel panel-default cr_switch create">
             <div class="panel-heading profile-heading">
-                   <button type="submit" style="float:right;margin-top: -10px;" class="btn btn-primary addnewuser">Add User</button>
+                   <button type="submit" style="float:right;margin-top: -9px;" class="btn btn-primary addnewuser">Add User</button>
                 <h3 class="tagtitle">User</h3>
             </div>
                 <!-- /.panel-heading -->
@@ -34,14 +34,14 @@
                      
                      <div class="form-group col-md-6">
                 <label>Email *</label>
-		<input type="text" class="form-control freset"  required="required"   name="email" id="email" placeholder="Email">
+		<input type="email" class="form-control freset"  required="required"   name="email" id="email" placeholder="Email">
 	</div>
                      
            
                      
                      <div class="form-group col-md-6">
                 <label>Mobile/Phone</label>
-		<input type="text" class="form-control freset" name="mobile" id="mobile" placeholder="Mobile">
+		<input type="number" class="form-control freset" name="mobile" id="mobile" placeholder="Mobile">
 	</div>
                      <!--
                      <div class="form-group col-md-6">
@@ -68,7 +68,7 @@
           <label for="sel1">Effective To Date </label>
                        <input type="text" class="form-control follow-up-date planned_at freset"   data-date-format="DD-MM-YYYY" id="eff_to" name="eff_to" placeholder="Active To Date">
           <input type="hidden" id="formstatus"   data="addUser">
-                  
+                <input type="hidden" name="id" id="id" value="">  
                      </div>
                      
                      

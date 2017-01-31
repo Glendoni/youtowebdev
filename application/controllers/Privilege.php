@@ -39,8 +39,8 @@ class Privilege extends MY_Controller {
         $pswd  = $psw[0][0];
        $genrated_password = $this->GeraHash(8);
        $data  = $this->input->post();
-       $pswd = array('password' => $contact_info);
-       $data = array_merge($pswd,$data);
+       //$pswd = array('password' => $contact_info);
+      // $data = array_merge($pswd,$data);
        
        
        //echo 'Create';
@@ -68,7 +68,7 @@ class Privilege extends MY_Controller {
        
            
            $output = $this->Users_model->update_user($data,$this->data['current_user']['id']);
-       echo  json_encode(array('success' => $output , 'status' => 200));
+       echo  json_encode($output);
         
     }
     
@@ -146,7 +146,30 @@ order by u.name, u.department
 
      //}
     
+    function tester(){
+        
+       	$sql = "SELECT T1.id,T2.id as duplicate, count(T1.id)
+FROM users T1 
+LEFT JOIN (select id,email from users where email='astevens@sonovate.com' and id not in (6)) T2
+ON T1.email =T2.email
+WHERE T1.id=6  
+GROUP BY 1,2
+LIMIT 1";
+		$query = $this->db->query($sql);
+
+		    $user =  $query->result(); /* returns an object */
+          //$row=  $query->row_array();
+        
+       echo  $user[0]->duplicate;
+        
+      //echo   $num  =   $query->num_rows();
+       
+        
+        
     
+     
+        
+    }
  
 
 }
