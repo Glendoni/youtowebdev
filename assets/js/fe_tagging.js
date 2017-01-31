@@ -119,7 +119,7 @@ function populate(){
                 
 // $('.addTagbtn').attr('add-tag-user');         gets user department       
                 if(sort[2] != 52 ){
-                $('.main_'+sort[1].replace(' ', '')).append('<div class="col-sm-8 col-md-10" style="border-bottom: 1px dotted #e5e5e5;padding-bottom: 3px;margin-bottom: 3px;padding-left: 0;"><ul class="subtags sub_'+sort[2]+'" ></ul></div>');  
+                $('.main_'+sort[1].replace(' ', '')).append('<div class="col-sm-8 col-md-10" style="padding-bottom: 3px;margin-bottom: 3px;padding-left: 0;"><ul class="subtags sub_'+sort[2]+'" ></ul></div>');  
                     
                 }
  
