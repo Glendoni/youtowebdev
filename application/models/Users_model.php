@@ -245,7 +245,8 @@ function privilages_insert_user($post,$user_id,$genrated_password)
     
 		if(!$user){ 
             
-            if($post['department'] == 'admin') $permission ='Admin';
+            if($post['role'] == 'Admin') $permission ='Admin';  
+            
              if($post['department'] == 'support') $permission ='Support';
                 $data = array(  
                     'id' => $tablemax,
@@ -336,7 +337,8 @@ GROUP BY 1,2
             $data['updated_by'] = $user_id;
             $data['eff_from']  = date('Y-m-d', strtotime($data['eff_from']));
             $data['eff_to']  = (!empty($data['eff_to'])? date('Y-m-d', strtotime($data['eff_to'])): null);
-                  if($data['department'] == 'admin') $data['permission'] ='Admin';
+                  if($data['role'] == 'Admin') $data['permission'] ='Admin';
+                
              if($data['department'] == 'support') $data['permission'] ='Support';
               
                 if($num ==1){
