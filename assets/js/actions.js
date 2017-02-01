@@ -207,13 +207,17 @@ function getActionData(scope = false){ //get all actions in multidimentional jso
                     // $('.outcomeform .actionContact ').prop('disabled', false);
                     //$('.outcomeform .actionContact').attr("disabled", "disabled");
                     //$('.outcomeform .actiondate').attr("disabled", "disabled"); 
- $.each( data[4][0], function( k, val ) {
+ 
+/*
+$.each( data[4][0], function( k, val ) {
                     
                        
                        
                        $('.file'+val.action_id).prepend('<span class="btn btn-default btn-xs btn-danger triggerdownload hint--top-right" data-hint="Download Attached File" data="'+val.encryption_name+'" style="float: right;text-transform:capitalize;margin-left: 2px;">Download '+ val.name+'</span>')
                        
  })
+ 
+ */
                 
             } //end success
         });   
@@ -1289,9 +1293,17 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
                  
                 
                   if(typeof action['creater'] !== 'undefined' && action['creater'] != action['name'] && action['creater'] !== null &&  action['creater'] !== 'null' && action['action_type_id'] == 11){
-                    
+                   // console.log(action['action_type_id']   + action['name']  + action['creater']);
+                     //created_by = action['creater']  + ' forwarded to ' +action['name'];
+                }
+                 
+                 
+                     if(typeof action['campaign_id'] !== 'undefined' && action['campaign_id'] !== null &&  action['campaign_id'] !== 'null' && action['creater'] != null ){
+                            console.log(action['action_type_id']   + action['name']  + action['creater']);
                      created_by = action['creater']  + ' forwarded to ' +action['name'];
                 }
+                 
+                 
            
          }else{
              created_by = action['created_by'];   

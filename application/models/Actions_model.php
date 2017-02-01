@@ -140,7 +140,7 @@ function get_actions_completed($company_id)
     $data = array(
         'a.company_id' => $company_id,
         );
-  $sql = "SELECT  a.created_at, a.actioned_at, a.action_type_id, com.initial_rate, a.comments, a.cancelled_at, a.outcome, a.id, u.image, u.name, c.first_name, c.last_name, a.contact_id, a.followup_action_id, a.tfer_turnover, a.tfer_runners, a.initial_fee, a.planned_at,T1.updated_at outcome_action_date,
+  $sql = "SELECT  a.created_at, a.actioned_at, a.action_type_id, com.initial_rate, a.comments, a.cancelled_at, a.campaign_id, a.outcome, a.id, u.image, u.name, c.first_name, c.last_name, a.contact_id, a.followup_action_id, a.tfer_turnover, a.tfer_runners, a.initial_fee, a.planned_at,T1.updated_at outcome_action_date,
  CASE when a.created_by = T1.updated_by then null else T1.peep END originalcreator,
   CASE when a.created_by = T2.updated_by then null else T2.peep END creater
 FROM actions a
@@ -822,9 +822,9 @@ function set_action_state($action_id,$user_id,$state,$outcome,$post)
                   
                   if($num == true) $user_id =  $output[0]['created_by'];  
                   
-                  echo $user_id;
+                //  echo $user_id;
                   
-                  exit();
+                  //exit();
                   
             $planneddata = array(
             'company_id'    => $post['company_id'],
@@ -833,7 +833,7 @@ function set_action_state($action_id,$user_id,$state,$outcome,$post)
             'planned_at'    => $post['planned_at'],
             'contact_id'    => (!empty($post['contact_id'])?$post['contact_id']:NULL),
             'created_by'    => $user_id,
-                 'campaign_id' => $useris ? $useris : null,
+            'campaign_id' => $useris ? $useris : null,
             'action_type_id'=> $post['action_type_planned'],
             'actioned_at'   =>  NULL,
             'created_at'    => date('Y-m-d H:i:s'),
