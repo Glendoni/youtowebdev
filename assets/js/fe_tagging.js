@@ -117,9 +117,17 @@ function populate(){
                 }
                 
                 
-// $('.addTagbtn').attr('add-tag-user');         gets user department       
-                if(sort[2] != 52 ){
-                $('.main_'+sort[1].replace(' ', '')).append('<div class="col-sm-8 col-md-10" style="padding-bottom: 3px;margin-bottom: 3px;padding-left: 0;"><ul class="subtags sub_'+sort[2]+'" ></ul></div>');  
+// $('.addTagbtn').attr('add-tag-user');         gets user department  
+                
+                
+               // console.log(sort[2])
+                if(sort[2] != 52  ){
+                    if(sort[2] == 11  ){
+                          $('.main_'+sort[1].replace(' ', '')).append('<div class="col-sm-8 col-md-12 " style="padding-bottom: 3px;margin-bottom: 3px;padding-left: 0;"><ul class="subtags sub_'+sort[2]+'" ></ul></div>');  
+                    }else{
+                $('.main_'+sort[1].replace(' ', '')).append('<div class="col-sm-8 col-md-10 " style="padding-bottom: 3px;margin-bottom: 3px;padding-left: 0;"><ul class="subtags sub_'+sort[2]+'" ></ul></div>');  
+                    
+                }
                     
                 }
  
