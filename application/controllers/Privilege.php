@@ -8,6 +8,11 @@ class Privilege extends MY_Controller {
         
         
             $this->load->model('Users_model');
+        
+        
+        
+        
+        
       
         
 	}
@@ -49,7 +54,17 @@ class Privilege extends MY_Controller {
         //echo json_encode($contact_info);
        
       $output =  $this->Users_model->privilages_insert_user($data,$this->data['current_user']['id'],$genrated_password);
+
+
+
         echo  json_encode($output);
+       if($output['status'] == 200){
+    
+
+$this->send_New_User_Email($contact_info['name'],$contact_info['email'],$genrated_password);
+ 
+  
+}
         
     }
     
@@ -148,28 +163,58 @@ order by u.name, u.department
 
      //}
     
-    function tester(){
+    private function send_New_User_Email($name, $email,$password){
         
-       	$sql = "SELECT T1.id,T2.id as duplicate, count(T1.id)
-FROM users T1 
-LEFT JOIN (select id,email from users where email='astevens@sonovate.com' and id not in (6)) T2
-ON T1.email =T2.email
-WHERE T1.id=6  
-GROUP BY 1,2
-LIMIT 1";
-		$query = $this->db->query($sql);
+      //  $email = 'gsmall@sonovate.com';
+        //$name = 'Glendon';
+        //$password = '123456';
+        
+        
+        $msg = "
+        
+        Hello '".ucwords($name)."',
 
-		    $user =  $query->result(); /* returns an object */
-          //$row=  $query->row_array();
+<p>Welcome to Baselist!</p>
+
+<p>This is just a quick email to get you up and running on the system. </p>
+
+<p>Baselist is Sonovate’s in-house CRM and Marketing tool where you can also  manage your ongoing campaigns and keep track of your prospects as they move through the sales funnel.</p>
+
+<p>Use the details below to log into your personalised user dashboard.</p>
+
+<p>Url: https://baselist.herokuapp.com/users/profile<br />
+Login: ".$email."
+<br />Password: ".$password."
+<p>
+<p>Remember to keep this email safe so you’ll always have these details to hand.</p>
+
+<p>Thanks!</p>
         
-       echo  $user[0]->duplicate;
-        
-      //echo   $num  =   $query->num_rows();
-       
+        ";
         
         
-    
-     
+ $this->load->library('encrypt');
+     $ci = get_instance();
+$ci->load->library('email');
+$config['protocol'] = "smtp";
+$config['smtp_host'] = "ssl://smtp.googlemail.com";
+$config['smtp_port'] = "465";
+$config['smtp_user'] = $this->data['current_user']['gmail_account']; 
+$config['smtp_pass'] = $this->encrypt->decode($this->data['current_user']['gmail_password']);
+$config['charset'] = "utf-8";
+$config['mailtype'] = "html";
+$config['starttls'] = true;
+$config['newline'] = "\r\n";
+
+$ci->email->initialize($config);
+
+$ci->email->from($this->data['current_user']['gmail_account'], $this->data['current_user']['name']);
+$list = array($email);
+$ci->email->to($list);
+//$this->email->reply_to('my-email@gmail.com', 'Explendid Videos');
+$ci->email->subject('Baselist');
+$ci->email->message($msg);
+$ci->email->send();
         
     }
  
