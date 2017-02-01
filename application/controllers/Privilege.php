@@ -172,7 +172,7 @@ order by u.name, u.department
         
         $msg = "
         
-        Hello '".ucwords($name)."',
+        Hello ".ucwords($name).",
 
 <p>Welcome to Baselist!</p>
 
