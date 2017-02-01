@@ -207,8 +207,9 @@ function getActionData(scope = false){ //get all actions in multidimentional jso
                     // $('.outcomeform .actionContact ').prop('disabled', false);
                     //$('.outcomeform .actionContact').attr("disabled", "disabled");
                     //$('.outcomeform .actiondate').attr("disabled", "disabled"); 
-                /*
- $.each( data[4][0], function( k, val ) {
+ 
+/*
+$.each( data[4][0], function( k, val ) {
                     
                        
                        
@@ -1292,9 +1293,17 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
                  
                 
                   if(typeof action['creater'] !== 'undefined' && action['creater'] != action['name'] && action['creater'] !== null &&  action['creater'] !== 'null' && action['action_type_id'] == 11){
-                    
+                   // console.log(action['action_type_id']   + action['name']  + action['creater']);
+                     //created_by = action['creater']  + ' forwarded to ' +action['name'];
+                }
+                 
+                 
+                     if(typeof action['campaign_id'] !== 'undefined' && action['campaign_id'] !== null &&  action['campaign_id'] !== 'null' && action['creater'] != null ){
+                            console.log(action['action_type_id']   + action['name']  + action['creater']);
                      created_by = action['creater']  + ' forwarded to ' +action['name'];
                 }
+                 
+                 
            
          }else{
              created_by = action['created_by'];   
