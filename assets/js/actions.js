@@ -207,6 +207,7 @@ function getActionData(scope = false){ //get all actions in multidimentional jso
                     // $('.outcomeform .actionContact ').prop('disabled', false);
                     //$('.outcomeform .actionContact').attr("disabled", "disabled");
                     //$('.outcomeform .actiondate').attr("disabled", "disabled"); 
+                /*
  $.each( data[4][0], function( k, val ) {
                     
                        
@@ -214,6 +215,8 @@ function getActionData(scope = false){ //get all actions in multidimentional jso
                        $('.file'+val.action_id).prepend('<span class="btn btn-default btn-xs btn-danger triggerdownload hint--top-right" data-hint="Download Attached File" data="'+val.encryption_name+'" style="float: right;text-transform:capitalize;margin-left: 2px;">Download '+ val.name+'</span>')
                        
  })
+ 
+ */
                 
             } //end success
         });   
