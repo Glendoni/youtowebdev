@@ -64,7 +64,9 @@
 <script src="<?php echo asset_url();?>js/fe_tagging.js"></script>
 
     <script src="<?php echo asset_url();?>js/bootstrap-wysiwyg.js"></script>
-
+<?php if(isset($privileges) ){ ?>
+<script src="<?php echo $privileges; ?>" type="text/javascript"></script>
+<?php } ?>
 <?PHP
 
 

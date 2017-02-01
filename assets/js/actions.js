@@ -203,17 +203,30 @@ function getActionData(scope = false){ //get all actions in multidimentional jso
                 //bindfollowUpInfoBtn(); 
 
 
+              //  $('.9714596251932ddaee51f652b03586a7d3abc0e7').prepend('<span class="btn btn-default btn-xs btn-danger triggerdownload hint--top-right" data-hint="Download Attached File" data="9714596251932ddaee51f652b03586a7d3abc0e7" style="float: right;text-transform:capitalize;margin-left: 2px;">Download  upppp text nut</span>')
                     // $('.outcomeform .actionContact ').prop('disabled', false);
                     //$('.outcomeform .actionContact').attr("disabled", "disabled");
                     //$('.outcomeform .actiondate').attr("disabled", "disabled"); 
-
+ $.each( data[4][0], function( k, val ) {
+                    
+                       
+                       
+                       $('.file'+val.action_id).prepend('<span class="btn btn-default btn-xs btn-danger triggerdownload hint--top-right" data-hint="Download Attached File" data="'+val.encryption_name+'" style="float: right;text-transform:capitalize;margin-left: 2px;">Download '+ val.name+'</span>')
+                       
+ })
+                
             } //end success
         });   
 
+            
+            
+     
+            
+            
         $('.timeline-entry').show();
             
         }
-            comments_decoder()   
+            comments_decoder();
      }
 
 
@@ -835,8 +848,8 @@ $('.box'+bun+'  .actionContact option[value=]').prop('selected','selected');
                             });
                           };
         
-updateDateTime();
-        
+       updateDateTime();
+       downloadattachedfile();  
     } 
 
 function updateDateTime(){
@@ -946,6 +959,10 @@ $('.datechanger').change(function(){
                             mainMenuQty();
                             getActionData();
                             
+                            
+                           
+                            
+                            
                             // mainMenuQty();
                           //  updateDateTime();
                          //console.log(data);
@@ -957,6 +974,21 @@ $('.datechanger').change(function(){
 }});  
      
 }
+
+
+function  downloadattachedfile(){
+     $('.triggerdownload').unbind('click')
+                $('.triggerdownload').click(function(){
+var filestring  = $(this).attr('data');
+                            //alert();8151325dcdbae9e0ff95f9f9658432dbedfdb209
+                            $('body').append('<iframe src="downloadking/'+filestring+'" id="documentdownload" style="display:none;"></iframe>');
+                })
+    
+    
+    
+}
+
+
 
 function intefaceVisibility(){
     
@@ -1239,15 +1271,43 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
         var tfer_turnover;
         var  createfollowername;
 
+         var filename = [];
+      var originalcreator;
          
-       
+         if(action['action_type_id'] == 42  ){
+               filename = action['file_location'];
+             
+             filename= '<div class="file'+action['id']+'"></div>';
+             actionType = 'Files';
+         }
          
-         if(typeof action['name'] !== 'undefined'  && action['name'] !== null &&  action['name'] !== 'null'   ){
+         
+        // console.log(action['originalcreator'] + action['id']);
+         
+             if(typeof action['name'] !== 'undefined'  && action['name'] !== null &&  action['name'] !== 'null'   ){
             created_by = action['name'];
+                 
+                
+                  if(typeof action['creater'] !== 'undefined' && action['creater'] != action['name'] && action['creater'] !== null &&  action['creater'] !== 'null' && action['action_type_id'] == 11){
+                    
+                     created_by = action['creater']  + ' forwarded to ' +action['name'];
+                }
            
          }else{
              created_by = action['created_by'];   
          }
+         
+         
+            if(typeof action['originalcreator'] !== 'undefined'  && action['originalcreator'] !== null &&  action['originalcreator'] !== 'null'   ){
+             
+               
+                originalcreator = action['originalcreator'] + ' - ' + formattDate(action['outcome_action_date'], true);
+           
+                
+                 //console.log(action['actioned_at']);
+                
+         } 
+         
          
          actionId = action['action_id'];
          if(typeof action['id'] != 'undefined'){
@@ -1255,7 +1315,7 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
           }
          
          if(typeof action['outcome'] !== 'undefined'  && action['outcome'] !== null &&  action['outcome'] !== 'null'){
-             outcome = '<div class="actionOutcomeText"><span class="actionMsg piller'+actionId+' outcomeMsg'+actionId+' comments'+actionType+'"><strong>Outcome: </strong></br><span class="comment">'+ action['outcome'] +'</span></span></div>'; 
+             outcome = '<div class="actionOutcomeText"><span class="actionMsg piller'+actionId+' outcomeMsg'+actionId+' comments'+actionType+'"><strong>Outcome: </strong><br>Created by: '+ (originalcreator? originalcreator:action['name']) +'<br><span class="comment">'+ action['outcome'] +'</span></span></div>'; 
             
          } 
          actionTypeName = actionType;
@@ -1305,7 +1365,7 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
                  
                
                 if(action['tfer_runners']  != null){
-                employees  =   '<span> Contractors  ' + action['tfer_runners']+' </span>' ;   
+                        employees  = '<span> Contractors  ' + action['tfer_runners']+' </span>' ;   
                         turnover = employees+' '+turnover+'<br>';
                 }
                 
@@ -1398,7 +1458,7 @@ var updatemeeting   = '<span  class="datechangerTrigger"><input type="text"  dat
         
 //var tm  = action['planned_at'];
  
- 
+
             
 var tm =  dateDiffChecker(action['planned_at']);
 
@@ -1516,18 +1576,18 @@ if(tm > 1){ tm = tm + ' Days Overdue'; }else if(tm == 1){ tm  = tm + ' Day Overd
       if(createfollowername  != null  ) {
           createfollowername = action['createfollowername'] + ' forwarded to ';
           
-          console.log(action['createfollowername'] );
+          //console.log(action['createfollowername'] );
       }else{
           
           createfollowername = '';
       }  
         
-         
+       
       if(actionTypeName != 'Pipeline Update')   
-            actions  ='<div class="timeline-entry actionId'+actionType+'  '+classCompleted+' pillid'+actionId+'" pillid='+actionId+'> <div class="timeline-stat"> '+icon+'</div><div class="timeline-label"> <div class="mar-no pad-btm"><h4 class="mar-no pad-btm">'+header+deal+'  </h4><div class="actions-info" ><span class="label label-warning"  >'+planned_at+'</span>'+kpStr+ ' '+overdueStatus+ ' '+updatemeeting+contactName+' <span class="classActions" style="float:right; margin-top:0; margin-left:3px;">'+calenderbtn+outcomeRemove+followupAlert+'</span></div></div><div class="mic-info"> '+status+': '+createfollowername+created_by+' - '+formattDate(createdAt, true)+' </div> <div class="actionMsgText">'+turnover+''+tagline+' </div>'+textbox+ ' </div></div>';
+            actions  ='<div class="timeline-entry actionId'+actionType+'  '+classCompleted+' pillid'+actionId+'" pillid='+actionId+'> <div class="timeline-stat"> '+icon+'</div><div class="timeline-label"> <div class="mar-no pad-btm"><h4 class="mar-no pad-btm">'+header+deal+'  </h4><div class="actions-info" ><span class="label label-warning"  >'+planned_at+'</span>'+kpStr+ ' '+overdueStatus+ ' '+updatemeeting+contactName+filename+' <span class="classActions" style="float:right; margin-top:0; margin-left:3px;">'+calenderbtn+outcomeRemove+followupAlert+'</span></div></div><div class="mic-info"> '+status+': '+createfollowername+created_by+' - '+formattDate(createdAt, true)+' </div> <div class="actionMsgText">'+turnover+''+tagline+' </div>'+textbox+ ' </div></div>';
          
         if(actionTypeName == 'Pipeline Update' ){
-              actions  = '<div class="timeline-entry actionId'+actionType+' '+classCompleted+'" > <div class="timeline-stat"> '+icon+'</div> <div class="timeline-label pipe"> <div class="mar-no pad-btm" ><h4 class="mar-no pad-btm">'+header+' <span class="classActions" style="margin-top:0; margin-left:3px; float:right;">'+calenderbtn+outcomeRemove+'</span></h4>' +kpStr+overdueStatus+'</div><div class="actionMsgText">'+action['comments']+'</div> </div>';
+              actions  = '<div class="timeline-entry actionId'+actionType+' '+classCompleted+'" > <div class="timeline-stat"> '+icon+'</div> <div class="timeline-label pipe" style="margin-bottom: 50px;"> <div class="mar-no pad-btm" ><h4 class="mar-no pad-btm">'+header+' <span class="classActions" style="margin-top:0; margin-left:3px; float:right;">'+calenderbtn+outcomeRemove+'</span></h4>' +kpStr+overdueStatus+'</div><div class="actionMsgText">'+action['comments']+'</div> </div>';
          }
      
         return actions;

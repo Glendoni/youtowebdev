@@ -17,7 +17,7 @@
     <?php
 } else {?>
 
-    <link rel="icon" type="image/png" href="<?php echo asset_url();?>images/favicon.jpg">
+    <link rel="icon" type="image/jpg" href="<?php echo asset_url();?>images/favicon.jpg">
 <?php
 }; ?>
 
@@ -94,7 +94,7 @@
 <!-- Brand and toggle get grouped for better mobile display -->
 <!--<div class="navbar-header">-->
 <div class="col-sm-3 col-md-3">
- <a class="navbar-brand" href="<?php echo site_url();?>" ><img src="<?php echo asset_url();?>images/baselist-logotype-black-transparent-bg.png" style="width:120px;"><br> <div style="    font-size: 10px;
+ <a class="navbar-brand" href="<?php echo site_url();?>" ><img src="<?php echo asset_url();?>images/baselist-logo-white.svg" style="width:120px;"><br> <div style="    font-size: 10px;
     font-weight: 300;
     text-align: left;
     line-height: 40px;
@@ -189,13 +189,28 @@
                                             <a href="https://status.heroku.com/" target="_blank"><i class="fa fa-fw fa-tasks"></i> Hosting Status</a>
                                          </li>
                                             <li class="divider"></li>
-                                            <?php if ($current_user['permission'] == 'admin'): ?>
-                                         <li>
-                                            <a href="<?php echo base_url(); ?>companies/create_company" ><i class="fa fa-plus-circle"></i> Add Company</a>
-                                        </li>
+                                            
+                                    
+                                     <?php
+                                  
+                                    if(  in_array($current_user['id'],access_permission_nav('access_email_template'))){ ?> 
                                         <li>
                                             <a href="<?php echo base_url(); ?>email_templates/" ><i class="fa fa-envelope"></i> Manage Email Templates</a>
                                         </li>
+                                    
+                                    <?php } ?>
+                                    
+                                    
+                                    <?php 
+                                  
+                                    if ($current_user['department'] == 'development'  || $current_user['department'] ==  'board'): ?>
+                                         <li>
+                                            <a href="<?php echo base_url(); ?>companies/create_company" ><i class="fa fa-plus-circle"></i> Add Company</a>
+                                        </li>
+                                      <li>
+                                                <a href="<?php echo site_url(); ?>Privilege"><i class="fa fa-shield fa-rotate-270"></i> User Management</a>
+                                          </li>
+                                   
                                         <li>
                                             <a href="<?php echo base_url(); ?>tagging/tag_categories" ><i class="fa fa-plus-circle"></i> Tagging</a>
                                         </li>
@@ -222,7 +237,7 @@ $search_default = ''; //html_entity_decode ($company['name']);
 $search_default = $this->input->post('agency_name');
 }?>
 
-    <div class="col-sm-5 col-md-5 col-sm-pull-4 large-form-holder clearfix">
+    <div class="col-sm-5 col-md-5 col-sm-pull-3 large-form-holder clearfix">
             <div class="" id="adv-search">
              <?php echo form_open(site_url().'companies', 'id="main_search" novalidate="novalidate" name="main_search" class="" role="form"'); ?>
                 <?php echo form_hidden('main_search','1');?>
@@ -327,14 +342,7 @@ $search_default = $this->input->post('agency_name');
                                         </div>
                                         </div>
                                     </div><!--END FORM ROW-->
-                                    <div class='form-row'>
-                                        <div class="form-group">
-                                            <?php
-                                            echo form_label('Favourites', 'assigned');
-                                            echo form_dropdown('assigned', $sales_users, ($this->input->post('assigned')?$this->input->post('assigned'):$assigned_default) ,'class="form-control"');
-                                            ?>
-                                         </div> 
-                                    </div>
+                                  
                                     <div class='form-row'>
                                         <div class="form-group">
                                             <?php
@@ -361,7 +369,11 @@ if ($pos === false) {
                                     </div>
                                     <div class='form-row'>
                                         <div class="form-group">
+                                            
                                             <?php
+                                           
+                                            
+                                           
                                                 echo form_label('Class', 'class');
                                                 echo form_dropdown('class', $class_options, ($this->input->post('class')?$this->input->post('class'):$class_default) ,'class="form-control"');
                                                 ?>         
@@ -385,6 +397,14 @@ if ($pos === false) {
                                         
                                     </div><!--END FORM ROW-->
                                     <?php */ ?>
+                          <div class='form-row'>
+                                        <div class="form-group">
+                                            <?php
+                                            echo form_label('Favourites', 'assigned');
+                                            echo form_dropdown('assigned', $sales_users, ($this->input->post('assigned')?$this->input->post('assigned'):$assigned_default) ,'class="form-control"');
+                                            ?>
+                                         </div> 
+                                    </div>
                                     <div class="form-row"  >
                                     <input type="submit" class="loading-btn btn btn-warning btn-block" value="Go" name="submit"  style="margin-top: 30px;">
 
@@ -400,4 +420,37 @@ if ($pos === false) {
 
            
         </nav>
+        
+        
+        <?php 
+      function access_permission_nav($access){ // Any changes here must eb made in the My_controller accessArr method
+        switch ($access){
+        
+        	case 'edit_template':
+        		return array(31,21,7,25,17,1,61,3,6,78);
+        		break;
+        	case "delete_email_template":
+              return  array(31,1,6);
+        		//return array(31,1,12,21);
+        		
+        		break;
+                case "access_email_template":
+              return  array(31,21,1,6,3,45);
+        		//return array(31,1,12,21);
+        		
+        		break;
+                  case "add_email_template":
+              return  array(31,21,1,6,3,45);
+        		//return array(31,1,12,21);
+        		
+        		break;
+                  
+              default:
+                  //return
+        	 	
+        }
+        
+     
+    }
+        ?>
  

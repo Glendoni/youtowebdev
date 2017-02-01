@@ -19,11 +19,11 @@
                 </div>
                 <div class="form-group col-md-6"> 
                   <label>Role*</label>
-                  <input type="text" class="form-control" name="role" value="<?php echo $current_user['role'] ?>" > 
+                  <input type="text" class="form-control" name="role" readonly value="<?php echo $current_user['role'] ?>" > 
                 </div>
                 <div class="form-group col-md-6">  
                   <label>Email *</label>
-                  <input type="text" class="form-control" name="email" value="<?php echo $current_user['email'] ?>" > 
+                  <input type="text" class="form-control" name="email" readonly value="<?php echo $current_user['email'] ?>" > 
                 </div>
                 <div class="form-group col-md-6">  
                   <label>Direct Contact Number *</label>
@@ -31,11 +31,32 @@
                 </div>
                 <div class="form-group col-md-6">  
                   <label>Mobile</label>
-                  <input type="text" class="form-control" name="mobile" value="<?php echo $current_user['mobile'] ?>" > 
+                  <input type="text" class="form-control" name="mobile" id="mobile" value="<?php echo $current_user['mobile'] ?>" > 
+                       <br>
+                    <label class="userupdatepassword">Change password</label>
+                        <input type="checkbox" class="userupdatepassword" id="userupdatepassword" >
                 </div>   
                 <div class="form-group col-md-6">  
                   <label>LinkedIn username</label>
                   <input type="text" class="form-control" name="linkedin" value="<?php echo $current_user['linkedin'] ?>" > 
+                        
+                 
+                </div>
+            
+            <div class="col-md-12   ">
+
+</div>
+            
+            
+             <div class=" form-group col-md-6 updatepassword">  
+                  <label>New Password </label>
+                  <input type="password" class="form-control updatepasswordinput pass_enter" name="updatepassword"  value="" > 
+                     <label><span class="passwordsdonotmatch"> Passwords do not match</span></label>
+                </div>
+                <div class="form-group col-md-6 updatepassword">  
+                  <label>Re-enter Password</label>
+                  <input type="password" class="form-control updatepasswordinput re_pass_enter"  value="" > 
+                    
                 </div>
 
                 <div class="col-md-12">
@@ -69,13 +90,13 @@
 
 <?php if (ENVIRONMENT  =='staging' || ENVIRONMENT  =='development'){?>
 
-<div class="col-md-12">
+<div class="col-md-12" style="display:none">
                 <hr>
             <h4 style="font-weight:700;">Testing</h4>
             <hr>
             </div>
 
-                <div class="form-group col-md-6">  
+                <div class="form-group col-md-6" style="display:none">  
                   <label>Role Type</label>
 
                   <select name="permission" class="form-control">
@@ -101,7 +122,7 @@
 
                 <div class="form-group col-md-12">
                 
-                  <button class="btn btn-sm btn-warning btn-block" name="update_profile">Save</button>
+                  <button class="btn btn-sm btn-warning btn-block" id="update_profile" name="update_profile">Save</button>
                 </div>
 
             </form>

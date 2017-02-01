@@ -250,7 +250,7 @@
 ">
             <div class="col-md-3" style="
     padding-left: -0px;
-"><strong>Company</strong></div>
+"><strong>Company &amp; Contact</strong></div>
             <div class="col-md-2" style="
     padding-left: 6px;
 "><strong>Pipline</strong></div>

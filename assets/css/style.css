@@ -294,13 +294,14 @@ border-bottom: 1px dashed #ddd;
 .action_date {
 	font-weight:300;
 	font-size: 10px;
+        margin-left: -43px;
 }
 
 .navbar-default .navbar-text small{
 	color: #777;
 }
 .navbar-default {
-    background-color: #148cd2;
+    background-color: #0f84c7;
     border-color: #e7e7e7;
 }
 ul.nav.navbar-top-links.navbar-right {
@@ -2432,7 +2433,7 @@ body {
     color:#000000;
 }
 .callbackActionTextBox #action_type_planned, .callbackActionTextBox .actionContact,.callbackActionTextBox .actiondate{
-width: 25.8%;
+width: 24.4%;
     margin-right: 2px;
 }
 .callbackActionTextBox .actiondate{
@@ -3344,6 +3345,115 @@ top: -20px;
     padding: 10px 0;
  }
 .qvlink a{color:#000; text-transform: none; cursor: pointer;     width: 100%;display: block;}
+
+.btn-file{ /* file upload interfce handler */
+    display:none;
+}
+.action_file_uploader{
+    
+    display:none;
+    
+}
+#addActionMultipleFileFields .alert{
+
+    margin-bottom:5px;
+    height:50px;
+}
+
+#addMoreMultipleFileFields{
+    float: right;
+    font-size: 11px;
+    padding: 1px 4px;
+}
+
+#pipe{
+    
+   margin-bottom: 50px; 
+}
+
+/*Settings*/
+
+.updatepassword{
+    
+    display:none;
+}
+
+/*///////// USER privilege ///////*/
+
+.userupdatepassword input,.userupdatepassword label,{
+    
+    float: right;
+    
+}
+
+.privilege_cont label{margin-left:18px;
+ 
+}
+.privilege_items{
+margin-right:5px;
+}
+ 
+.privilege_items span{padding-left: 5px}
+.privilege_items input[type=checkbox]{
+    margin-left: -16px;
+}
+ #department , .usergroup {text-transform: capitalize;}
+
+#pagin li a{ 
+padding:6px;
+ float:left;
+background:#428bca;
+margin-right:5px;
+color:#fff;
+border-radius:2px;
+width:46px;
+text-align:center;
+text-decoration:none;
+}
+
+ li {
+list-style: none;
+}
+
+#pagin .current{
+background:#f0ad4e;
+
+}
+#users{
+min-height:300px
+}
+ #users .col-lg-12{
+
+height:45px
+
+}
+#users .col-lg-5{
+    margin-left: -15px;
+    margin-right: 30px;
+}
+.emailuser{
+    display:none;
+    
+}
+.passwordsdonotmatch{
+        color: #af1c09;
+    display:none;
+    
+    
+}
+.usrheader{
+padding-top:19px;
+}
+/*//////// END USER privilege /////////////////*/
+
+.fresetname{
+    
+    text-transform: capitalize;
+}
+
+.fade .modal-header{
+border-bottom: none;
+}
 /*! Hint.css - v2.2.1 - 2016-03-26 //#2b4461
 * http://kushagragour.in/lab/hint/
 * Copyright (c) 2016 Kushagra Gour; Licensed  */

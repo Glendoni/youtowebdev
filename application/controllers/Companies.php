@@ -14,6 +14,7 @@ class Companies extends MY_Controller {
         //$this->input->get('id')
         ///$this->input->post(),$this->data['current_user']['id']
 		$this->load->model('Tagging_model');
+          $this->load->model('Files_model');
 		$this->load->helper('url');
         $this->load->helper('form');
         $this->load->library('form_validation');
@@ -269,7 +270,8 @@ class Companies extends MY_Controller {
 	
 	public function company()
 	{
-        
+         //file_put_contents('assets/uploads/index.html', '');
+      
       $getallusers =   $this->data['getallusers'] =  $this->Users_model->get_all_users($this->data['current_user']['id']);
        $this->data['currentuserid']   = $this->data['current_user']['id'];
         
@@ -888,7 +890,9 @@ echo $this->Tagging_model->$route($post);
         $query[]['action_types_array'] = (array)$this->Actions_model->get_action_types_array();
             $query[]['actions_completed'] = $this->Actions_model->get_actions_completed($id);
         $query[]['actions_cancelled'] = $this->Actions_model->get_actions_cancelled($id);
-        
+ 
+            //$query['files'] = $this->Actions_model->get_actions_files($id);
+ 
        // $query[]['comments'] = array_reverse($this->Actions_model->get_comments_two($id));
         
         foreach($query  as $key => $value){
@@ -902,40 +906,26 @@ echo $this->Tagging_model->$route($post);
          //$action['initial_fee']['initial_rate']  =  ($initial_rate/100);
         // echo '<pre>'; print_r($action); echo '</pre>';
         header('Content-Type: application/json');
-        echo json_encode($action);
+       echo json_encode($action);
  
     }
     
-    function getActionArray($id = 350441 ){
+    function getActionArray($id = 352533 ){
         
-         $id = $this->session->userdata('selected_company_id');
+        $query[]['actions_outstanding'] = $this->Actions_model->get_actions_outstanding($id);
+        $query[]['action_types_array'] = (array)$this->Actions_model->get_action_types_array();
+        $query[]['actions_completed'] = $this->Actions_model->get_actions_completed($id);
+        $query[]['actions_cancelled'] = $this->Actions_model->get_actions_cancelled($id);
+        $query[]['files'] = $this->Actions_model->get_actions_files($id);
+      //  $query[]['comments'] = array_reverse($this->Actions_model->get_comments_two($id));
         
-        //$query[]['actions'] = $this->Actions_model->get_actions(154537); //$this->input->get('id')
-        //$query[]['actions_outstanding'] = $this->Actions_model->get_actions_outstanding($id);
-        
-        //$query[]['action_types_array'] = (array)$this->Actions_model->get_action_types_array();
-        //$query[]['actions_completed'] = $this->Actions_model->get_actions_completed($id);
-        //$query[]['actions_cancelled'] = $this->Actions_model->get_actions_cancelled($id);
-        
-         $query[]['comments'] = $this->Actions_model->get_comments_two($id);
-        
-        $i = 0 ;
         foreach($query  as $key => $value){
             
-            foreach($value['actions_completed'] as $k => $v){
-                
-          echo $v->action_type_id.'<br>';
-            }
-
-            $action[][] = $value; 
-
-
+                $action[][] = $value; 
         }
-       
-         if($query[0]['actions_completed'][0]->initial_rate){
-        $action['initial_rate'] = $query[0]['actions_completed'][0]->initial_rate;
+        if($query[0]['actions_completed'][0]->initial_rate){
+            $action['initial_rate'] = $query[0]['actions_completed'][0]->initial_rate;
         }
-
 
 
          //$action['initial_fee']['initial_rate']  =  ($initial_rate/100);
@@ -1207,6 +1197,46 @@ echo floor($datediff / (60 * 60 * 24));
       }
   
   }
+    
+    
+        function downloadking($sha){
+        $this->load->helper('download');
+        if(true)
+{
+   
+          $encyption_file_name  = $this->Files_model->getfile($sha);
+          
+$pth    =   file_get_contents(base_url()."uploads/".$encyption_file_name[0]['file_location']);
+            $fileExt    =   explode('.',$encyption_file_name[0]['file_location']);
+
+           $nme =  trim($encyption_file_name[0]['name'].'.'.$fileExt[1]);
+            
+                    header('Content-Type: application/octet-stream'); 
+header("Content-Disposition: attachment; filename=$nme");
+ob_clean();
+force_download($nme, $pth); 
+             flush(); 
+}
+        
+        
+        
+    }
+    
+    
+    
+    function filetester($id = 352533){
+        //line 158
+         $query[]['files'] = $this->Actions_model->get_actions_files($id);
+        
+        
+           foreach($query  as $key => $value){
+            
+                $action[][] = $value; 
+        }
+      
+echo '<pre>'; print_r($action); echo '</pre>';
+        
+    }
     
     
 }

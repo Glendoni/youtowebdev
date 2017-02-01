@@ -455,7 +455,7 @@ and ACTIONS_SUB.company_id is null
                
 			   )) "JSON output" 
 			   
-from (select * from COMPANIES where active = \'TRUE\' ' ;
+from (select * from COMPANIES ' ;
 
 		if(isset($contacted_in)) $sql = $sql.' AND id in ('.$contacted_in.')';
 		$sql = $sql.') C ';

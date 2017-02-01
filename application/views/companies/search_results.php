@@ -36,7 +36,7 @@
 						<div style="font-weight:300; font-size:32px; margin-bottom: 20px; margin-top: -20px; text-align:center;">
                                 <?php $dept = array('sales','data');
                                   if(in_array($current_user['department'],$dept)  && $this->session->userdata("evergreen") == true) {?>
-                                        <img style="height:60px;margin-top: 0px;  margin-left: -74px;" src="assets/images/evergreen-logo.png">
+                                        <img style="height:80px;margin-top: 0px;  margin-left: -74px;" src="assets/images/evergreen-logo-white-star.png">
                                 <?php } ?>
                             
 						<?php echo $current_campaign_name; ?> 

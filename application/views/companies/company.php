@@ -1,10 +1,19 @@
-        <?php  $company = $companies[0]; ?>
+<?php  $company = $companies[0]; ?>
             <?php if (!empty($_GET['campaign_id'])): 
                     $campaign_id = $_GET['campaign_id'];
                 endif; ?>
-            <?php if (!isset($company['id'])): ?>
-                    <div class="alert alert-danger" role="alert">This company is no longer active.</div>
-            <?php endif; ?>
+            <?php if (!isset($company['active'])): ?>
+                    <div class="alert alert-danger" role="alert"><?php echo $company['name']; ?> is no longer active. </div>
+
+            <?php 
+
+endif;
+
+?>
+
+ <?php if (isset($company['active'])): ?>
+
+
             <?php //hide core page content if no company is found ?>
                 <?php if (isset($company['id'])): ?>
                     <div class="page-results-list" id="parent" style="padding-top: 116px;">
@@ -32,6 +41,13 @@
  <?php if(isset($company['account_manager'])): ?>
     <span class="label" style="background-color: #01A4A4; color:#fff; margin-left: 5px;"><b>Account Manager:</b> <?php echo $company['account_manager']?></span>
     <?php endif; ?>
+                        
+                        
+                        
+  
+
+
+ 
                                         <?php 
                         if(!empty($company['pipeline'])):
                        
@@ -959,7 +975,7 @@ endif;
 		  <div class="panel-heading">Add Action</div>
 		  <div class="panel-body">
 		   <?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'],'done'=>'1','campaign_id' => $campaign_id, 'class_check' => $companies_classes[$company['class']],'source_check' => $company['source'],'sector_check' => count($company['sectors']),);
-			echo form_open(site_url().'actions/create', 'name="create" class="form" role="form"',$hidden); ?>
+			echo form_open_multipart(site_url().'actions/create', 'name="create" class="form" role="form"',$hidden); ?>
 			<!--THE BELOW PASSES THE CLASS FIELD ACROSS PURELY FOR VALIDATION - IF THERE IS A BETTER WAY OF DOING THIS THEN IT NEEDS TO BE HERE-->
 			
 			<!--VALIDATION ERROR IF NO ACTION IS SELECTED
@@ -1034,7 +1050,7 @@ endif;
                    <div class="col-sm-2 col-md-2 ">
                          <div class="form-group ">
                                     <label>Who</label>
-                                    <select name="who_user_id" id="who_user_id" class="form-control selectpicker show-tick" data-live-search="true" data-size="15">
+                                    <select name="who_user_id" id="who_user_id" class="form-control  show-tick" data-live-search="true" data-size="15">
                                      <!--   <option value="">--- Select a Contact ---</option> -->
                                         <?php foreach($getallusers as $user ): ?>
                                         
@@ -1058,7 +1074,9 @@ endif;
                                 <input type="text" class="form-control follow-up-date" id="planned_at" data-date-format="YYYY/MM/DD H:m" name="planned_at" placeholder="">
                             </div>
                         </div>
-                                        <div class="col-sm-4 col-md-4">
+                                      
+                
+                <div class="col-sm-4 col-md-4">
 
                 <?php foreach($action_types_done as $action ):  
                                 if($action->how_used){
@@ -1067,12 +1085,42 @@ endif;
                                     
                                     .$action->how_used.
                                     
-                                    
-                                    
                                     '</div>';
+                                 
                                 }
                                 endforeach;
                                 ?>
+                </div>
+                <div class="col-sm-4 col-md-8 alert alert-info action_verbiage action_file_uploader mainUploader">
+ 
+    
+               
+  <div class="col-md-8">
+ 
+    
+      <input type="text" name="userfilename[]" class="form-control" placeholder="Please name your file" style="margin-top:-7px; text-transform:capitalize;">
+    </div><!-- /input-group -->
+                    
+                    
+                <div class="col-xs-4 col-sm-4 col-md-3 col-lg-3">
+                    
+                     <input type="file" name="userfile[]" id="userfile"  size="20" />  
+
+</div>           
+                   
+
+ 
+ 
+</div><!-- /.row -->
+                
+                        
+                   
+      <!--file rows -->
+                
+                <div id="addActionMultipleFileFields"></div>
+                  
+                   
+                                  
                 </div>
                    
                  
@@ -1238,7 +1286,7 @@ endif;
                     
                     <li class=""><a href="javascript:;" class="btn btn-default btn-circle hint--top-right"  data-hint="Cancelled" data="actions_cancelled"><span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span></a><span class="actionMenuQty qtyactions_cancelled" aria-hidden="true"></span></li>
 
-                  
+               
                
               	</ul>
               
@@ -1479,3 +1527,4 @@ function closeNav() {
 
 </script>
  
+<?php endif; //active or not end ?>

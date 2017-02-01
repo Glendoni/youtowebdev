@@ -11,11 +11,79 @@ function dateRequired()     {
 
   
 $( document ).ready(function() {
+    if((/users\/profile/.test(window.location.href))) {
+    $('#userupdatepassword').click(function(){
+
+$('.updatepassword').toggle(function(){
+    
+   console.log($(this).css('display')); 
+    var displayPasswordStatus  = $(this).css('display');
+    if(displayPasswordStatus == 'block'){
+        
+        $('.updatepasswordinput').attr('required', 'required');
+
+        $('#update_profile').prop('disabled', true);
+        
+
+    }else{
+        $('.passwordsdonotmatch').hide();
+        $('.pass_enter').val('');
+         $('.re_pass_enter').val('');
+          $('.updatepasswordinput').removeAttr('required');
+         $('#update_profile').prop('disabled', false);
+    }
+    
+    
+});
+
+
+})
+    
+    
+      $('.updatepasswordinput').keyup(function(){
+        
+       var enter = $('.pass_enter').val();
+          var reenter = $('.re_pass_enter').val();
+          var enterlenth =  enter.length;
+          
+          console.log(enter  +  ' ' +reenter)
+         
+          
+          
+          
+          
+          if(enter == reenter && enterlenth > 2 ){
+              
+           $('#update_profile').prop('disabled', false);
+              
+              $('.passwordsdonotmatch').hide();
+          }else{
+              
+               $('#update_profile').prop('disabled', true);
+              if(enterlenth > 2 ){
+                $('.passwordsdonotmatch').show();
+              }
+          }
+          
+    })
+    
+    
+    
+    
+    }
+    
+   // addActionMultipleFileFields();
       if((/contacts/.test(window.location.href))) {
             $("[data=contacts]").trigger('click')
     
       }
     
+    
+    $('#addMoreMultipleFileFields').click(function(){
+
+addActionMultipleFileFields()
+
+})
     
              // ADD EVERGREEN
  $('.myevergreenaddcompanies').click(function(){  
@@ -130,7 +198,6 @@ if(data.success){
              $('.providercompanyid').val(parid);
 
             })
-
 
 
 
@@ -254,6 +321,7 @@ $(window).load(function(){
 });
 $('#action_type_completed').change(function(){
          $('.action_verbiage').hide();
+    $('.mainUploader input').prop('required', false);
         var action_verbiage_text = $(this).val();
 
        $('.action_verbiage_text'+action_verbiage_text).show();
@@ -272,6 +340,7 @@ if ((this.value == '16' || this.value == '8' || this.value == '32') && (!source_
  
    $('#add_action .disable_no_source').prop('disabled', 'true');
     $('.actionEvalPipeline').show()
+     $('.action_file_uploader').hide();
     
             if(this.value == '16' || this.value == '8'){ 
                 $('.completed-details').attr('required', 'required');
@@ -373,8 +442,15 @@ if ((this.value == '16' || this.value == '8' || this.value == '32') && (!source_
     //$(".no-source").show();
     //$(".disable_no_source").attr('disabled', 'disabled');
     }
-    else
-    {
+        else if(this.value == '42'){
+         $('#add_action .disable_no_source').prop('disabled', '') ;
+       $('.action_file_uploader').show();
+            $('.addActionOutcome').show();
+        $('.btn-file').show();
+            $('.mainUploader input').attr('required', 'required');
+        
+         
+    }else{
     
         $(".no-source").slideUp(600);
 
@@ -931,7 +1007,7 @@ if(!$(this).hasClass('requested') && $(this).attr('aria-controls') ==  'emailega
             if( typeof idfk !== 'undefined'){
             var company = val.company.replace(/Limited|Ltd|ltd|limited/gi, function myFunction(x){return ''});
             var pipeline = val.pipeline.charAt(0).toUpperCase() + val.pipeline.slice(1);    
-            items.push( '<div class="row record-holder"><div class="col-xs-8 col-sm-4 col-md-3"><a href="companies/company?id='+idfk+'">'+company+'</a></div><div class="col-xs-8 col-sm-4 col-md-2">'+val.campaign+'</div><div class="col-xs-4 col-sm-1 col-md-1 text-right"><span class="label pipeline label-'+pipeline+'">'+pipeline+'</span></div><div class="col-xs-6 col-sm-2 col-md-2"><a href="companies/company?id='+idfk+'#contacts">'+val.username+'</a></div><div class="col-xs-6 col-sm-3 col-md-2 align-right "> <span class="label label-primary">'+action+'</span></div><div class="col-xs-12 col-sm-2 col-md-2 contact-phone">'+val.date+'</div></div>' );
+            items.push( '<div class="row record-holder"><div class="col-xs-8 col-sm-4 col-md-3"><a href="companies/company?id='+idfk+'">'+company+'</a></div><div class="col-xs-8 col-sm-4 col-md-2">'+val.campaign+'</div><div class="col-xs-4 col-sm-1 col-md-1 text-left"><span class="label pipeline label-'+pipeline+'">'+pipeline+'</span></div><div class="col-xs-6 col-sm-2 col-md-2"><a href="companies/company?id='+idfk+'#contacts">'+val.username+'</a></div><div class="col-xs-6 col-sm-3 col-md-2 align-right "> <span class="label label-primary">'+action+'</span></div><div class="col-xs-12 col-sm-2 col-md-2 contact-phone">'+val.date+'</div></div>' );
             } 
         }); 
         $('#stat').html(items.join( "" ));
@@ -1081,7 +1157,7 @@ if(!$(this).hasClass('requested') && $(this).attr('aria-controls') ==  'emailega
                 
                 
             //checkInitialFee()
-        }else if($('#action_type_completed').val() == 4000 ){
+        }else if($('#action_type_completed').val() == 42 ){
             
             
                if($('.who').length ==1){
@@ -1118,7 +1194,14 @@ if(!$(this).hasClass('requested') && $(this).attr('aria-controls') ==  'emailega
 
 
 
+ function addActionMultipleFileFields(){
     
+    
+      $('#addActionMultipleFileFields').append('<div class="col-sm-4 col-md-8 col-md-push-4 alert alert-info alert-dismissable  "><div class="col-md-8 "><input type="text" name="userfilename[]" required="required" class="form-control" placeholder="Please name your file" style="margin-top:-7px; text-transform:capitalize;"></div><div class="col-xs-4 col-sm-3 col-md-3 col-lg-3"><input type="file" name="userfile[]" id="userfile" required="required" size="20" /> </div> <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"><button type="button" class="btn btn-warning btn-xs multifileremover">Remove</button></div></div>');
+    
+    bindMultipleFileRemover();
+}
+   
     
       function addActionChange(){
         //console.log('france')
@@ -1136,7 +1219,18 @@ if(!$(this).hasClass('requested') && $(this).attr('aria-controls') ==  'emailega
                
 }
 
+function bindMultipleFileRemover(){
+    
+    $('.multifileremover').click(function(){
 
+$(this).parent().parent().remove();
+        
+  
+
+})
+    
+    
+}
 function getUserFavourites(){ // Dashbord favorites
     
     var order = $('.sortform form select').val();

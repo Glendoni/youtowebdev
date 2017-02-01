@@ -5,6 +5,10 @@ class Actions extends MY_Controller {
 	function __construct() 
 	{
 		parent::__construct();
+        
+         $this->load->model('Files_model');
+        $this->load->helper(array('form', 'url'));
+        
 		
 	}
 
@@ -21,9 +25,33 @@ class Actions extends MY_Controller {
 	}
 	public function create()
     {
+        
+        
+        
+        /*
+        
          $post = $this->input->post();
         
+        // print_r('<pre>');print_r($this->input->post());print_r('</pre>');
         
+        $userfilename = $this->input->post('userfilename');
+        $uploadedfilename = $_FILES['userfile']['name'];
+        
+
+foreach($userfilename as $key => $value){
+    
+     echo $userfilename[$key] .''.$uploadedfilename[$key];
+    
+}
+
+       
+     
+        echo 'Yes Glen';
+        exit();
+        */
+        
+        
+    
 			if (!empty($post['campaign_id'])) {
 			 $campaign_redirect ='&campaign_id='.$post['campaign_id'];
 			}
@@ -80,6 +108,74 @@ class Actions extends MY_Controller {
                             }
                         else
                             {
+                            
+                            
+                            
+                                     
+                                if(($post['action_type_completed']=='42')){
+                                  
+                                                                                        
+                                   //  file_put_contents('./uploads/glen.txt', 'hello');
+                                    
+                                            $userfilename = $this->input->post('userfilename'); 
+
+                                            $img = $_FILES['userfile'];
+
+                                            if(!empty($img))
+                                            {
+                                            $img_desc = $this->reArrayFiles($img);
+                                            //print_r($img_desc);
+
+                                            foreach($img_desc as $val)
+                                            {
+
+
+                                            $newname = date('YmdHis',time()).mt_rand().'.'.pathinfo($val['name'],PATHINFO_EXTENSION);
+
+                                            $locationName[] = $newname;
+                                            move_uploaded_file($val['tmp_name'], './uploads/'.$newname);
+                                            }
+                                            }
+                                   
+                                    
+            foreach($locationName as $key => $value){
+                
+                
+                 // echo '<h2>'.$userfilename[$key] .''.$value.'</h2>';
+                
+                
+ 
+
+                        $filename_encrypted  = sha1($value.date('YmdHis'));
+                        $file_action_post = array(
+                        'action_id' => $result,
+                        'name' => $userfilename[$key],
+                        'file_location' =>  $value,
+                        'created_at' => date('Y-m-d'),
+                        'company_id' => $this->input->post('company_id'),
+                        'created_by' => $this->data['current_user']['id'],
+                        'encryption_name' => $filename_encrypted
+                        );
+
+                        $this->Files_model->file_uploader($file_action_post);
+                
+            }                        
+                                    
+                                    
+                                    
+                                    
+                                    
+//}
+                                    
+                                    
+                                    
+                                    }
+                            
+                            
+                       
+                            
+                            
+                            
                             // after the initial action has been successfully created we can continue with the following login
                             // *** TRY TO KEEP LOGIC IN THE CONTROLLER AND DATABASE COMMITS IN THE MODELS***
                             $post = $this->input->post();
@@ -176,6 +272,17 @@ class Actions extends MY_Controller {
                             }
                             else
                             {
+                                
+                                
+                       
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
                                 $this->set_message_success('Action successfully inserted');
                                 redirect('companies/company?id='.$this->input->post('company_id').$campaign_redirect,'location');
                             }
@@ -187,7 +294,30 @@ class Actions extends MY_Controller {
             }
 	} 
 
-	public function edit()
+	
+   
+    
+    
+    
+    function reArrayFiles($file)
+{
+    $file_ary = array();
+    $file_count = count($file['name']);
+    $file_key = array_keys($file);
+    
+    for($i=0;$i<$file_count;$i++)
+    {
+        foreach($file_key as $val)
+        {
+            $file_ary[$i][$val] = $file[$val][$i];
+        }
+    }
+    return $file_ary;
+}
+    
+    
+    
+    public function edit()
     {
 		if($this->input->post('action_id'))
 		{
@@ -228,7 +358,7 @@ class Actions extends MY_Controller {
 			else if($this->input->post('action_do') == 'cancelled')
 			{	
 				$outcome = $this->input->post('outcome');
-				$result = $this->Actions_model->set_action_state($this->input->post('action_id'),$this->input->post('user_id'),'cancelled',$outcome);				
+$result = $this->Actions_model->set_action_state($this->input->post('action_id'),$this->input->post('user_id'),'cancelled',$outcome);				
 				if($result)
 				{
 					$this->set_message_success('Action set to cancelled.');
@@ -365,6 +495,29 @@ class Actions extends MY_Controller {
         
         
     }
+    
+    
 
+    
+    
+       function getfilesh($id = '2fc563a34b29bd3986e649674c0e2a48d28f7d5f'){
+        
+        $query = $this->db->query("SELECT file_location FROM files WHERE encryption_name='".$id."' LIMIT 1");
+              $output =   $query->result_array();
+               
+    echo $output[0]['file_location'];
+        
+    }
+
+    
+    
+    function lip(){
+        
+         $query = $this->db->query("SELECT * FROM actions where id=1234008");
+              $output =   $query->result_array();
+                echo $query->num_rows();
+    //echo $output[0]['created_by'];  
+        
+    }
     
 }

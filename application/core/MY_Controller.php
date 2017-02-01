@@ -102,8 +102,7 @@ class MY_Controller extends CI_Controller {
                 
                 
             }
-        
-
+     
 		// $this->load->helper('mobile');
 		
 		// loging checking and redirect
@@ -111,7 +110,8 @@ class MY_Controller extends CI_Controller {
 		if($this->session->userdata('logged_in')) 
 		{
 			$logged_in = $this->session->userdata('logged_in');
-			$this->data['current_user'] = $this->Users_model->get_user($logged_in['user_id']);
+            $logged_in_user_details  = $this->Users_model->get_user($logged_in['user_id']);
+			$this->data['current_user'] = $logged_in_user_details;
 			$this->session->unset_userdata('last_page');	
 		}
 		else
@@ -320,7 +320,21 @@ class MY_Controller extends CI_Controller {
 		$this->data['sectors_default'] ='0';
 		
 		$this->data['class_options'] = array(0=>'All') + $class_options;
-		$this->data['class_default'] ='0';
+ 
+            switch ($logged_in_user_details['market']){
+                case 'np':
+                    $class_default = 'FF';
+                    break;
+                case "uf":
+                    $class_default = 'Using Finance';
+                    break;	
+               default :
+                    $class_default = '0';
+
+
+            }
+
+        $this->data['class_default'] =$class_default;
 
 		$this->data['pipeline_options'] = array(0 => 'All') + $pipeline_options_search;
 		$this->data['pipeline_default'] ='0';
@@ -632,4 +646,38 @@ $mortgages['Inv_fin_related'] = $mortgage->f8;
 			return FALSE;
 		} 	
 	}
+      function accessArr($access){ // Any changes here must eb made in the header.php accessArr method
+        
+      
+          switch ($access){
+        	case 'edit_template':
+        		return array(31,21,7,25,17,1,61,3,6,78);
+        		break;
+        	case "delete_email_template":
+              return  array(31,1,6);
+        		//return array(31,1,12,21);
+        		
+        		break;
+                  case "access_email_template":
+              return  array(31,21,7,25,17,1,61,3,6,78);
+        		//return array(31,1,12,21);
+        		
+        		break;
+                  case "add_email_template":
+              return  array(31,21,1,6,3,45);
+        		//return array(31,1,12,21);
+        		
+        		break;
+              default:
+                  //return array(21,7,25,17,1,61,3,6,78);
+        	 	
+                  
+                    
+        }
+        
+     
+    }
+    
+    
+    
 }
