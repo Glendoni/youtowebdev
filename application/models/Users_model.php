@@ -253,7 +253,7 @@ function privilages_insert_user($post,$user_id,$genrated_password)
                     'password' =>  md5($genrated_password),
                     'eff_from' =>  date('Y-m-d', strtotime($post['eff_from'])),
                     'eff_to' =>  (!empty($post['eff_to'])? date('Y-m-d', strtotime($post['eff_to'])): null),
-                    'name' =>  $post['name'],
+                    'name' =>  ucwords($post['name']),
                     'department' =>  $post['department'],
                     'permission' =>  $permission ? $permission : null,
                     'created_by' => $user_id,
