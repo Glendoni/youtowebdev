@@ -771,7 +771,7 @@ function set_action_state($action_id,$user_id,$state,$outcome,$post)
 {
     //$outcome =  htmlentities($outcome);
 
-
+ 
 
     
     
@@ -832,7 +832,7 @@ function set_action_state($action_id,$user_id,$state,$outcome,$post)
             'comments'      => (!empty($outcome)?$outcome:NULL),
             'planned_at'    => $post['planned_at'],
             'contact_id'    => (!empty($post['contact_id'])?$post['contact_id']:NULL),
-            'created_by'    => $user_id,
+            'created_by'    =>  $useris ? $useris : $user_id,
             'campaign_id' => $useris ? $useris : null,
             'action_type_id'=> $post['action_type_planned'],
             'actioned_at'   =>  NULL,
