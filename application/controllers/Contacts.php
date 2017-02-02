@@ -39,10 +39,32 @@ class Contacts extends MY_Controller {
 			$this->form_validation->set_rules('company_id', 'company_id', 'xss_clean|required');
 			$this->form_validation->set_rules('user_id', 'user_id', 'xss_clean|required');
 			$this->form_validation->set_rules('email', 'email', 'valid_email');
+			$this->form_validation->set_rules('report_extensions', 'report_extensions', 'xss_clean');
+			$this->form_validation->set_rules('report_timesheets_storage', 'report_timesheets_storage', 'xss_clean');
+			$this->form_validation->set_rules('report_timesheets_processed', 'report_timesheets_processed', 'xss_clean');
+			$this->form_validation->set_rules('report_sales_ledger', 'report_sales_ledger', 'xss_clean');
+			$this->form_validation->set_rules('report_commision', 'report_commision', 'xss_clean');
+			$this->form_validation->set_rules('report_age_debtor', 'report_age_debtor', 'xss_clean');
 
 			if($this->form_validation->run())
 			{
-				echo $rows_affected = $this->Contacts_model->create_contact($this->input->post('first_name'),$this->input->post('last_name'),$this->input->post('email'),$this->input->post('role'),$this->input->post('company_id'),$this->input->post('user_id'),$this->input->post('phone'),$this->input->post('linkedin_id'),$this->input->post('title'));
+				echo $rows_affected = $this->Contacts_model->create_contact(
+					$this->input->post('first_name'),
+					$this->input->post('last_name'),
+					$this->input->post('email'),
+					$this->input->post('role'),
+					$this->input->post('company_id'),
+					$this->input->post('user_id'),
+					$this->input->post('phone'),
+					$this->input->post('linkedin_id'),
+					$this->input->post('title'),
+					$this->input->post('report_extensions'),
+					$this->input->post('report_timesheets_storage'),
+					$this->input->post('report_timesheets_processed'),
+					$this->input->post('report_sales_ledger'),
+					$this->input->post('report_commision'),
+					$this->input->post('report_age_debtor')
+				);
 				if($rows_affected  > 0)
 				{
 					$this->output->set_status_header('200');
@@ -85,6 +107,12 @@ class Contacts extends MY_Controller {
 			$this->form_validation->set_rules('contact_id', 'contact_id', 'xss_clean|required');
 			$this->form_validation->set_rules('user_id', 'user_id', 'xss_clean|required');
 			$this->form_validation->set_rules('email', 'email', 'valid_email');
+			$this->form_validation->set_rules('report_extensions', 'report_extensions', 'xss_clean');
+			$this->form_validation->set_rules('report_timesheets_storage', 'report_timesheets_storage', 'xss_clean');
+			$this->form_validation->set_rules('report_timesheets_processed', 'report_timesheets_processed', 'xss_clean');
+			$this->form_validation->set_rules('report_sales_ledger', 'report_sales_ledger', 'xss_clean');
+			$this->form_validation->set_rules('report_commision', 'report_commision', 'xss_clean');
+			$this->form_validation->set_rules('report_age_debtor', 'report_age_debtor', 'xss_clean');
 
 			if($this->form_validation->run())
 			{
