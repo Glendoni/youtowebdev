@@ -15,13 +15,7 @@ class Api extends CI_Controller {
     
     function index(){
      
-        print_r($_SERVER);
-        
-        
-        foreach($_SERVER as $item => $value){
-            
-            echo $item .' '.$value.'<br>';
-        }
+     
     }
     
     function test_endpoint(){
@@ -32,23 +26,15 @@ class Api extends CI_Controller {
         @@@ */ 
        // 
         $res = array();
+        $payload = json_decode(file_get_contents('php://input'), true);
         $headers = $_SERVER;
         $data = array(
-                        'companyRegistration' => $headers['HTTP_COMPANYREGISTRATION'], 
-                        'sonovate3Id' => $headers['HTTP_SONOVATE3ID'], 
+                        'companyRegistration' => $payload['companyRegistration'], 
+                        'sonovate3Id' => $payload['sonovate3Id'], 
                         'token' => $headers['HTTP_TOKEN']
                     );
         
-        
-        // print_r($_SERVER);
-        
-        
-        //foreach($_SERVER as $item => $value){
-            
-           // echo $item .' '.$value.'<br>';
-        //}
-        
-         //print_r($headers);
+         
         if($headers['HTTP_TOKEN'] === "764f427e0f687d987f6a0f5c5324cdbd"){
            $data_insert_res = $this->Api_model->logAgent($data); //save data
             if($data_insert_res){
