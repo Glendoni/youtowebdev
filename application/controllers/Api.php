@@ -15,7 +15,7 @@ class Api extends CI_Controller {
     
     function index(){
      
-        $headers =  getallheaders();
+        print_r($_SERVER);
     }
     
     function test_endpoint(){
