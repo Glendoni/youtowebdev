@@ -15,7 +15,7 @@ class Api extends CI_Controller {
     
     function index(){
      
-        $headers = apache_request_headers();
+        $headers =  getallheaders();
     }
     
     function test_endpoint(){
@@ -26,7 +26,7 @@ class Api extends CI_Controller {
         @@@ */ 
        // 
         $res = array();
-        $headers = apache_request_headers();
+        $headers = getallheaders();
         $data = array(
                         'companyRegistration' => $headers['companyRegistration'], 
                         'sonovate3Id' => $headers['sonovate3Id'], 
