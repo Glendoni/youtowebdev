@@ -24,21 +24,29 @@ class Api extends CI_Controller {
         Your Hash: 764f427e0f687d987f6a0f5c5324cdbd
         Your String: baselistfusion
         @@@ */ 
-        
+       // 
+        $res = array();
         $headers = apache_request_headers();
-         print_r($headers);
+        $data = array(
+                        'companyRegistration' => $headers['companyRegistration'], 
+                        'sonovate3Id' => $headers['sonovate3Id'], 
+                        'token' => $headers['token']
+                    );
+         //print_r($headers);
         if($headers['token'] === "764f427e0f687d987f6a0f5c5324cdbd"){
-            $data = array('companyRegistration' => $headers['companyRegistration'], 'sonovate3Id' => $headers['sonovate3Id'], 'token' => $headers['token']);
-            $res = $_GET['callback'] . '('.json_encode($data).')';
-            $this->Api_model->logAgent($data);
+           $data_insert_res = $this->Api_model->logAgent($data); //save data
+            if($data_insert_res){
+             $res =  $_GET['callback'] . json_encode($data); //return resonse '('.json_encode($data).')';
+            }else{
+                
+                $res = 'Sorry something went wrong!' ;
+            }
+           
         }else{
-            $res =  'Cannot connect to Baselist';
+            $res = 'Cannot connect to Baselist';
         }
-        
-        
         echo $res;
-        
         
     }
     
-    }
+}
