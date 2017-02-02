@@ -51,6 +51,7 @@ print_r($data);
         }else{
             $res = 'Cannot connect to Baselist';
         }
+        header('Content-Type: application/json');
         echo $res;
         
     }
