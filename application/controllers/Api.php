@@ -34,7 +34,7 @@ class Api extends CI_Controller {
                     );
          //print_r($headers);
         if($headers['token'] === "764f427e0f687d987f6a0f5c5324cdbd"){
-           $data_insert_res = $this->Api_model->logAgent($data); //save data
+           //$data_insert_res = $this->Api_model->logAgent($data); //save data
             if($data_insert_res){
              $res =  $_GET['callback'] . json_encode($data); //return resonse '('.json_encode($data).')';
             }else{
