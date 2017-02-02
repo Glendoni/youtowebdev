@@ -16,6 +16,12 @@ class Api extends CI_Controller {
     function index(){
      
         print_r($_SERVER);
+        
+        
+        foreach($_SERVER as $item => $value){
+            
+            echo $item .' '.$value.'<br>';
+        }
     }
     
     function test_endpoint(){
@@ -26,15 +32,25 @@ class Api extends CI_Controller {
         @@@ */ 
        // 
         $res = array();
-        $headers = getallheaders();
+        $headers = $_SERVER;
         $data = array(
-                        'companyRegistration' => $headers['companyRegistration'], 
-                        'sonovate3Id' => $headers['sonovate3Id'], 
-                        'token' => $headers['token']
+                        'companyRegistration' => $headers['HTTP_COMPANYREGISTRATION'], 
+                        'sonovate3Id' => $headers['HTTP_SONOVATE3ID'], 
+                        'token' => $headers['HTTP_TOKEN']
                     );
+        
+        
+        // print_r($_SERVER);
+        
+        
+        //foreach($_SERVER as $item => $value){
+            
+           // echo $item .' '.$value.'<br>';
+        //}
+        
          //print_r($headers);
-        if($headers['token'] === "764f427e0f687d987f6a0f5c5324cdbd"){
-           //$data_insert_res = $this->Api_model->logAgent($data); //save data
+        if($headers['HTTP_TOKEN'] === "764f427e0f687d987f6a0f5c5324cdbd"){
+           $data_insert_res = $this->Api_model->logAgent($data); //save data
             if($data_insert_res){
              $res =  $_GET['callback'] . json_encode($data); //return resonse '('.json_encode($data).')';
             }else{
