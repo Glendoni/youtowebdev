@@ -28,48 +28,7 @@
                   <label for="sel1">Role *</label>
                   <select class="form-control " name="role" required="required" id="role" >
                    <option value="">Please Select</option>
-                      <option value="">Corporate</option>
-	<option value="HR">HR</option>
-	<option value="Product">Product</option>
-	<option value="Development">Development</option>
-	<option value="Finance">Finance</option>
-	<option value="Marketing">Marketing</option>
-	<option value="Risk">Risk</option>
-	<option value="Client Services">Client Services</option>
-	<option value="Design">Design</option>
-	<option value="Systems">Systems</option>
-	<option value="Technology">Technology</option>
-	<option value="Sales">Sales</option>
-	<option value="Data">Data</option>
-	<option value="Operations">Operations</option>
-                  </select>
-                </div> 
-                     
-                     
-                     <div class="form-group col-md-6">
-                <label>Email *</label>
-		<input type="email" class="form-control freset"  required="required"   name="email" id="email" placeholder="Email">
-	</div>
-                     
-           
-                     
-                     <div class="form-group col-md-6">
-                <label>Mobile/Phone</label>
-		<input type="number" class="form-control freset" name="mobile" id="mobile" placeholder="Mobile">
-	</div>
-                     <!--
-                     <div class="form-group col-md-6">
-                <label>LinkedIn Username</label>
-		<input type="text" class="form-control freset"  name="linkedin" id="linkedin" placeholder="LinkedIn">
-	</div>
-
--->
-
-                       <div class="form-group col-md-6">
-                  <label for="sel1">Department *</label>
-                  <select class="form-control" name="department" required="required" id="department" >
-                   <option value="">Please Select</option>
-          <option  value="Senior Credit Controller" >Senior Credit Controller</option>
+       <option  value="Senior Credit Controller" >Senior Credit Controller</option>
  <option  value="Business Development Consultant" >Business Development Consultant</option>
  <option  value="Front End Developer" >Front End Developer</option>
  <option  value="Graphic Designer" >Graphic Designer</option>
@@ -137,6 +96,48 @@
  <option  value="Head of Data and Analytics" >Head of Data and Analytics</option>
  <option  value="Risk, Governance and Control Manager" >Risk, Governance and Control Manager</option>
  <option  value="PA/ Office Manager" >PA/ Office Manager</option>
+                  </select>
+                </div> 
+                     
+                     
+                     <div class="form-group col-md-6">
+                <label>Email *</label>
+		<input type="email" class="form-control freset"  required="required"   name="email" id="email" placeholder="Email">
+	</div>
+                     
+           
+                     
+                     <div class="form-group col-md-6">
+                <label>Mobile/Phone</label>
+		<input type="number" class="form-control freset" name="mobile" id="mobile" placeholder="Mobile">
+	</div>
+                     <!--
+                     <div class="form-group col-md-6">
+                <label>LinkedIn Username</label>
+		<input type="text" class="form-control freset"  name="linkedin" id="linkedin" placeholder="LinkedIn">
+	</div>
+
+-->
+
+                       <div class="form-group col-md-6">
+                  <label for="sel1">Department *</label>
+                  <select class="form-control" name="department" required="required" id="department" >
+                   <option value="">Please Select</option>
+                                     <option value="">Corporate</option>
+	<option value="HR">HR</option>
+	<option value="Product">Product</option>
+	<option value="Development">Development</option>
+	<option value="Finance">Finance</option>
+	<option value="Marketing">Marketing</option>
+	<option value="Risk">Risk</option>
+	<option value="Client Services">Client Services</option>
+	<option value="Design">Design</option>
+	<option value="Systems">Systems</option>
+	<option value="Technology">Technology</option>
+	<option value="Sales">Sales</option>
+	<option value="Data">Data</option>
+	<option value="Operations">Operations</option>
+         
                   </select>
                 </div>  
                  
