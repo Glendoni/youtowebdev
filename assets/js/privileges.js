@@ -292,11 +292,13 @@ function get_users_info(refresh = true){
 
                     var uniqueVals = [];  
                     var department = [];
+                    
+
                     $.each(testkey, function(i, el){
                     if($.inArray(el, uniqueVals) === -1){
 
                     uniqueVals.push(el);
-                    department.push('<option value="'+el+'">'+el+'</option>');
+                   // department.push('<option value="'+el+'">'+el+'</option>');
                     }
     
 //}
@@ -312,19 +314,19 @@ function get_users_info(refresh = true){
                                 if($.inArray(el, uniqueRoleVals) === -1){
 
                                 uniqueRoleVals.push(el);
-                                role.push('<option value="'+el+'">'+el+'</option>');
+                                //role.push('<option value="'+el+'">'+el+'</option>');
                                 }
 
                                 });
                                 //
 
-                                $('#role option').remove();
-                                $('#role').append('<option value="">Please Select</option>');       
-                                $('#role').append(role.sort().join( "" ));
+                               // $('#role option').remove();
+                                //$('#role').append('<option value="">Please Select</option>');       
+                                //$('#role').append(role.sort().join( "" ));
 
-                                $('#department option').remove();
-                                $('#department').append('<option value="">Please Select</option>');   
-                                $('#department').append(department.sort().join( "" ));
+                                //$('#department option').remove();
+                               // $('#department').append('<option value="">Please Select</option>');   
+                               // $('#department').append(department.sort().join( "" ));
 
                                 }
 
