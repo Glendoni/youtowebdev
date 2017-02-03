@@ -101,27 +101,41 @@
 	        	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 	        	<h4 class="modal-title">Edit Contact <?php echo ucfirst($contact->first_name).' '.ucfirst($contact->last_name);?></h4>
 	      	</div>
-	      	<?php $hidden = array('contact_id' => $contact->id , 'user_id' => $current_user['id'],'update_contact'=>'1','company_id'=>$contact->company_id );
-				 echo form_open(site_url().'contacts/update', 'name="update_contact" class="form" role="form"',$hidden); ?>
+	      	<?php
+				$hidden = array(
+					'contact_id' => $contact->id ,
+					'user_id' => $current_user['id'],
+					'update_contact'=>'1',
+					'company_id'=>$contact->company_id
+				);
+				echo form_open(
+					site_url().'contacts/update',
+					'name="update_contact" class="form" role="form"',
+					$hidden
+				);
+			?>
 	      	<div class="modal-body">
 	      		<div class="row">
-						<div class="col-md-2">
-	                    <div class="form-group">
-	      		<?php  
-                            
-			echo form_label('Title', 'title_options');
-						echo form_dropdown('title', $title_options, (isset($contact->title)?$contact->title:'0') ,'class="form-control"' );?>
+					<div class="col-md-2">
+	                	<div class="form-group">
+							<?php  
+								echo form_label(
+									'Title',
+									'title_options'
+								);
+								echo form_dropdown(
+									'title',
+									$title_options,
+									(isset($contact->title)?$contact->title:'0'),
+									'class="form-control"'
+								);
+							?>
 						</div>
-						</div>
-
+					</div>
 					<div class="col-md-5">
 	                    <div class="form-group">
-
-	                    
-
-
 	                        <label for="name" class="control-label">First Name*</label>                            
-	                        <input type="text" name="first_name" value="<?php echo isset($contact->first_name)?$contact->first_name:''; ?>" maxlength="50" class="form-control">
+	                        <input type="text"  name="first_name" value="<?php echo isset($contact->first_name)?$contact->first_name:''; ?>" maxlength="50" class="form-control">
 	                    </div>
 	                </div>
 	                <div class="col-md-5">
@@ -136,7 +150,6 @@
 	                        <input type="text" name="role" value="<?php echo isset($contact->role)?$contact->role:''; ?>" maxlength="50" class="form-control">
 	                    </div>
 	                </div>
-
 	                <div class="col-md-6">
 	                    <div class="form-group">
 	                        <label for="email" class="control-label">Email</label>                            
@@ -157,53 +170,99 @@
 	                </div>
 	                <div class="col-md-6">
 	                    <div class="form-group">
-						<label for="marketing" class="control-label">Opt-Out of Email Marketing </label>   
-                        <select name="marketing_opt_out" class="form-control">
-                            <option value="0" <?php if(empty($contact->email_opt_out_date)): ?>selected=""<?php endif; ?>>No</option>
-                            <option value="1" <?php if(!empty($contact->email_opt_out_date)): ?>selected=""<?php endif; ?>>Yes</option>
-                        </select>
-                        <!-- PASS OPT OUT DATE IF SET TO STOP BEING OVERWRITTEN-->
-                        <?php if(!empty($contact->email_opt_out_date)): ?>
-						<input type="hidden" name="opt_out_check" value="<?php echo $contact->email_opt_out_date; ?>" />
-                        <?php endif; ?>
+							<label for="marketing" class="control-label">Opt-Out of Email Marketing </label>   
+							<select name="marketing_opt_out" class="form-control">
+								<option value="0" <?php if(empty($contact->email_opt_out_date)): ?>selected=""<?php endif; ?>>No</option>
+								<option value="1" <?php if(!empty($contact->email_opt_out_date)): ?>selected=""<?php endif; ?>>Yes</option>
+							</select>
+							<!-- PASS OPT OUT DATE IF SET TO STOP BEING OVERWRITTEN-->
+							<?php if(!empty($contact->email_opt_out_date)): ?>
+								<input type="hidden" name="opt_out_check" value="<?php echo $contact->email_opt_out_date; ?>" />
+							<?php endif; ?>
 						</div>
 	                </div>
-                      <div class="col-md-6">
+                    <div class="col-md-6">
 	                    <div class="form-group">
-						<label for="eff_to" class="control-label">Status</label>   
-                        <select name="eff_to" class="form-control">
-                            <option value="0" selected="">Active</option>
-                            <option value="1">Left</option>
-                        </select>
+							<label for="eff_to" class="control-label">Status</label>   
+                        	<select name="eff_to" class="form-control">
+                            	<option value="0" selected="">Active</option>
+                            	<option value="1">Left</option>
+                        	</select>
 						</div>
 	                </div>
-				 </div>
+					<div class="col-md-12">
+						<div class="form-group">
+							<label for="reports" class="control-label">Reports needed</label>   
+							<?php $reports = json_decode($contact->reports); ?>
+							<div class="reports">
+								<label>
+									<input type="checkbox" name="report_extensions" value="report_extensions"
+										<?php if($reports && in_array("report_extensions", $reports)) { echo "checked"; } ?>
+									>
+									Extensions
+								</label>
+							</div>
+							<div class="reports">
+								<label>
+									<input type="checkbox" name="report_timesheets_storage" value="report_timesheets_storage"
+										<?php if($reports && in_array("report_timesheets_storage", $reports)) { echo "checked"; } ?>
+									>
+									Timesheets Charger
+								</label>
+							</div>
+							<div class="reports">
+								<label>
+									<input type="checkbox" name="report_timesheets_processed" value="report_timesheets_processed"
+										<?php if($reports && in_array("report_timesheets_processed", $reports)) { echo "checked"; } ?>
+									>
+									Timesheets Processed
+								</label>
+							</div>
+							<div class="reports">
+								<label>
+									<input type="checkbox" name="report_sales_ledger" value="report_sales_ledger"
+										<?php if($reports && in_array("report_sales_ledger", $reports)) { echo "checked"; } ?>
+									>
+									Sales Ledger
+								</label>
+							</div>
+							<div class="reports">
+								<label>
+									<input type="checkbox" name="report_commision" value="report_commision"
+										<?php if($reports && in_array("report_commision", $reports)) { echo "checked"; } ?>
+									>
+									Commission
+								</label>
+							</div>
+							<div class="reports">
+								<label>
+									<input type="checkbox" name="report_age_debtor" value="report_age_debt_ledger"
+										<?php if($reports && in_array("report_age_debt_ledger", $reports)) { echo "checked"; } ?>
+									>
+									Age Debt Ledger
+								</label>
+							</div>
+						</div>
+					</div>
+				</div>
 	      	</div>
-
-
-	      	
 	      	<div class="modal-footer">
 	        	<button type="submit" class="btn btn-sm btn-warning btn-block">Save</button>
 	      	</div>
-            <div class="modal-footer">
-                
-        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-
-      
-                <small class="popUpCreatedAt">
-                     <b>Contact Created:</b> <?php echo $contact->contact_created_at; ?>  <?php echo $contact->created_by; ?>
-            </small> 
+            <div class="modal-footer">   
+        		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                	<small class="popUpCreatedAt">
+                    	<b>Contact Created:</b> <?php echo $contact->contact_created_at; ?>  <?php echo $contact->created_by; ?>
+            		</small> 
                
+    			</div>
+      			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+          			<small>
+              			<?php echo $contact->updated_by? '<b>Last Updated:</b>'. $contact->contact_updated_at.' - '.$contact->updated_by  : ''; ?>
+               		</small>  
+				</div>
+	      		<?php echo form_close(); ?>
+        	</div>
+		</div>
     </div>
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-          <small>
-              <?php echo $contact->updated_by? '<b>Last Updated:</b>'. $contact->contact_updated_at.' - '.$contact->updated_by  : ''; ?>
-               </small>  
-                
-            </div>
-	      	<?php echo form_close(); ?>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
 </div>

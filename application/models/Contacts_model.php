@@ -52,26 +52,42 @@ class Contacts_model extends CI_Model {
 function get_contacts_s($company_id)
 	{
 		$data = array('company_id' => $company_id);
-		//$this->db->where('eff_to >', 'now()');
-		//$this->db->or_where('eff_to', null);
-    
-    
-$sql = "SELECT contacts.*, usr_created_by.name as created_by,  usr_updated_by.name as updated_by, to_char(contacts.updated_at, 'DD/MM/YYYY') as contact_updated_at, to_char(contacts.created_at, 'DD/MM/YYYY') as contact_created_at
-FROM contacts
-LEFT JOIN users as usr_updated_by  ON contacts.updated_by=usr_updated_by.id
-LEFT JOIN users as usr_created_by  ON contacts.created_by=usr_created_by.id
-WHERE contacts.company_id=".$company_id." order by eff_to desc, last_name asc";
-     $result = $this->db->query($sql);
-      return    $result->result();
+
+		$sql = "SELECT contacts.*, usr_created_by.name
+			as created_by,  usr_updated_by.name
+			as updated_by, to_char(contacts.updated_at, 'DD/MM/YYYY')
+			as contact_updated_at, to_char(contacts.created_at, 'DD/MM/YYYY') 
+			as contact_created_at
+			FROM contacts
+			LEFT JOIN users as usr_updated_by  ON contacts.updated_by=usr_updated_by.id
+			LEFT JOIN users as usr_created_by  ON contacts.created_by=usr_created_by.id
+			WHERE contacts.company_id=" . $this->db->escape($company_id) . " order by eff_to desc, last_name asc";
+
+	 	$result = $this->db->query($sql);
+      	return $result->result();
 	}
 
     
     
     
     
-	function create_contact($first_name,$last_name,$email,$role,$company_id,$created_by,$phone=NULL,$linkedin_id,$title)
-	{
-    
+	function create_contact(
+		$first_name,
+		$last_name,
+		$email,
+		$role,
+		$company_id,
+		$created_by,
+		$phone=NULL,
+		$linkedin_id,
+		$title,
+		$report_extensions,
+		$report_timesheets_storage,
+		$report_timesheets_processed,
+		$report_sales_ledger,
+		$report_commision,
+		$report_age_debtor
+	) {
         $role = rtrim($role," "); // removes empty space on rightside of string ltrim removes empty space on the left before string
 		$contact->title = !empty(trim($title))?trim($title):NULL;
         $contact->first_name = str_replace('\'', '&#39;', rtrim($first_name)); // please read the below note
@@ -81,17 +97,31 @@ WHERE contacts.company_id=".$company_id." order by eff_to desc, last_name asc";
         $contact->role =  ltrim($role);
         $contact->company_id = $company_id;
         $contact->created_by = $created_by;
-        //$contact->linkedin_id = $linkedin_id;
+		$reports = [];
+		if ($report_extensions) {
+			$reports[] = $report_extensions;
+		}
+		if ($report_timesheets_storage) {
+			$reports[] = $report_timesheets_storage;
+		}
+		if ($report_timesheets_processed) {
+			$reports[] = $report_timesheets_processed;
+		}
+		if ($report_sales_ledger) {
+			$reports[] = $report_sales_ledger;
+		}
+		if ($report_commision) {
+			$reports[] = $report_commision;
+		}
+		if ($report_age_debtor) {
+			$reports[] = $report_age_debtor;
+		}
+		$contact->reports = json_encode($reports);
         $parts = explode("?",$linkedin_id); 
 		$li_id = $parts['0'];
 		$contact->linkedin_id = !empty($li_id)?$li_id:NULL;
-
-        //if(strpos($linkedin_id, '&') !== false) {
-		//$revised_linkedin_id = str_replace(array('.', ','), '' , preg_replace('/[^0-9,..]/i', '', $li_id));
-		//} else {
-		//$revised_linkedin_id = str_replace(array('.', ','), '' , preg_replace('/[^0-9,..]/i', '', $li_id));
-		//}
-        //$contact->linkedin_id = !empty($revised_linkedin_id)?$revised_linkedin_id:NULL;
+		
+		
 		$this->db->insert('contacts', $contact);
         $new_id = $this->db->insert_id();
         $rows = $this->db->affected_rows();
@@ -136,6 +166,26 @@ WHERE contacts.company_id=".$company_id." order by eff_to desc, last_name asc";
 		$contact->linkedin_id =  !empty($li_id)?$li_id:NULL;
         $contact->updated_by = $post['user_id'];
         $contact->updated_at = date('Y-m-d H:i:s');
+		$reports = [];
+		if ($post['report_extensions']) {
+			$reports[] = $post['report_extensions'];
+		}
+		if ($post['report_timesheets_storage']) {
+			$reports[] = $post['report_timesheets_storage'];
+		}
+		if ($post['report_timesheets_processed']) {
+			$reports[] = $post['report_timesheets_processed'];
+		}
+		if ($post['report_sales_ledger']) {
+			$reports[] = $post['report_sales_ledger'];
+		}
+		if ($post['report_commision']) {
+			$reports[] = $post['report_commision'];
+		}
+		if ($post['report_age_debtor']) {
+			$reports[] = $post['report_age_debtor'];
+		}
+		$contact->reports = json_encode($reports);
         $this->db->where('id', $post['contact_id']);
 		$this->db->update('contacts',$contact);
 		if($this->db->affected_rows() !== 1){
