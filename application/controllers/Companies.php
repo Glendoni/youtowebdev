@@ -888,7 +888,7 @@ echo $this->Tagging_model->$route($post);
         $query[]['action_types_array'] = (array)$this->Actions_model->get_action_types_array();
             $query[]['actions_completed'] = $this->Actions_model->get_actions_completed($id);
         $query[]['actions_cancelled'] = $this->Actions_model->get_actions_cancelled($id);
-            //$query['files'] = $this->Actions_model->get_actions_files($id);
+            $query['files'] = $this->Actions_model->get_actions_files($id);
        // $query[]['comments'] = array_reverse($this->Actions_model->get_comments_two($id));
         
         foreach($query  as $key => $value){
@@ -1197,12 +1197,30 @@ echo floor($datediff / (60 * 60 * 24));
     
         function downloadking($sha){
         $this->load->helper('download');
+             $this->load->helper('My_privilege');
         if(true)
 {
-   
-          $encyption_file_name  = $this->Files_model->getfile($sha);
+
+          $encyption_file_name  = $this->Files_model->getfile_($sha);
+    
+    
+    $src  =  file_get_contents('https://baselisttemp.blob.core.windows.net/baselisttemp/'.$encyption_file_name[0]['file_location']);
+    
+    force_download('fotty.png', $src);  
+    
+    
           
-$pth    =   file_get_contents(base_url()."uploads/".$encyption_file_name[0]['file_location']);
+//$pth    =   file_get_contents(base_url()."uploads/".$encyption_file_name[0]['file_location']);
+    
+    /*
+    
+   $fl =  $encyption_file_name[0]['file_location'];
+    
+ // echo   $fl = 'https://baselisttemp.blob.core.windows.net/baselisttemp/201702050314531504745078.png';
+  
+    
+      $pthr    =    file_get_contents('https://baselisttemp.blob.core.windows.net/baselisttemp/201702050314531504745078.png');
+     // exit();
             $fileExt    =   explode('.',$encyption_file_name[0]['file_location']);
 
            $nme =  trim($encyption_file_name[0]['name'].'.'.$fileExt[1]);
@@ -1210,8 +1228,14 @@ $pth    =   file_get_contents(base_url()."uploads/".$encyption_file_name[0]['fil
                     header('Content-Type: application/octet-stream'); 
 header("Content-Disposition: attachment; filename=$nme");
 ob_clean();
-force_download($nme, $pth); 
+force_download($nme, $pthr); 
              flush(); 
+             
+             
+             */
+    
+    
+     
 }
         
         

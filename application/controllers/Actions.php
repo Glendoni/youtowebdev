@@ -8,7 +8,7 @@ class Actions extends MY_Controller {
         
          $this->load->model('Files_model');
         $this->load->helper(array('form', 'url'));
-        
+         $this->load->helper('My_privilege');
 		
 	}
 
@@ -133,8 +133,13 @@ foreach($userfilename as $key => $value){
                                             $newname = date('YmdHis',time()).mt_rand().'.'.pathinfo($val['name'],PATHINFO_EXTENSION);
 
                                             $locationName[] = $newname;
-                                            move_uploaded_file($val['tmp_name'], './uploads/'.$newname);
+                                                $src =  file_get_contents($val['tmp_name']);
+                                                 
+                                             uploadBlob($src, $newname); 
+                                                
                                             }
+                                                
+                                                
                                             }
                                    
                                     
@@ -509,6 +514,44 @@ $result = $this->Actions_model->set_action_state($this->input->post('action_id')
         
     }
 
+    
+    //////////////AZURE////
+    
+     public function azure_list_files (){
+ 
+    // $this->load->library('Azure');
+     $this->load->helper('download');
+      list_files();
+     
+     //force_download('$nme',  getfile());
+     
+ }
+    public function downloadfile($file = 'https://baselisttemp.blob.core.windows.net/baselisttemp/2f3586cc-f193-44fe-bdb2-e174c8b507b7.png'){
+ 
+    // $this->load->library('Azure');
+     $this->load->helper('download');
+      //getfile();
+     
+     force_download('Azure',file_get_contents('https://baselisttemp.blob.core.windows.net/baselisttemp/'.$file));
+     
+ }
+    public function addfile(){
+ 
+    // $this->load->library('Azure');
+     $this->load->helper('download');
+      uploadBlob();
+     
+    // force_download('Azure',file_get_contents($file));
+     
+ }
+    
+    
+    
+    
+    
+    /////////////AZURE///////////////////////////
+    
+    
     
     
     function lip(){
