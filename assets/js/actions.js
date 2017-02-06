@@ -208,7 +208,7 @@ function getActionData(scope = false){ //get all actions in multidimentional jso
                     //$('.outcomeform .actionContact').attr("disabled", "disabled");
                     //$('.outcomeform .actiondate').attr("disabled", "disabled"); 
  
-/*
+ 
 $.each( data[4][0], function( k, val ) {
                     
                        
@@ -217,7 +217,7 @@ $.each( data[4][0], function( k, val ) {
                        
  })
  
- */
+  
                 
             } //end success
         });   
