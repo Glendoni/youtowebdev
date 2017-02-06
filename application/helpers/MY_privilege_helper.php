@@ -6,9 +6,6 @@ use MicrosoftAzure\Storage\Common\ServiceException;
 
 
 function asset_upload(){
-   
-    
-
 
 // Create blob REST proxy.
 
