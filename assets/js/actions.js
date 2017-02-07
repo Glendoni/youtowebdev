@@ -1299,7 +1299,7 @@ function actionProcessor(actionType = 0 ,action = 0 ,icon = 0,initial_fee,pipeli
                  
                  
                      if(typeof action['campaign_id'] !== 'undefined' && action['campaign_id'] !== null &&  action['campaign_id'] !== 'null' && action['creater'] != null ){
-                            console.log(action['action_type_id']   + action['name']  + action['creater']);
+                           // console.log(action['action_type_id']   + action['name']  + action['creater']);
                      created_by = action['creater']  + ' forwarded to ' +action['name'];
                 }
                  
