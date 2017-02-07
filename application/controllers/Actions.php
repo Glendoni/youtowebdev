@@ -110,75 +110,53 @@ foreach($userfilename as $key => $value){
                             
                             
                                      
-                                if(($post['action_type_completed']=='42')){
-                                  
-                                                                                        
-                                   //  file_put_contents('./uploads/glen.txt', 'hello');
-                                    
-                                            $userfilename = $this->input->post('userfilename'); 
-
-                                            $img = $_FILES['userfile'];
-
-                                            if(!empty($img))
-                                            {
-                                            $img_desc = $this->reArrayFiles($img);
-                                            //print_r($img_desc);
-
-                                            foreach($img_desc as $val)
-                                            {
+                            if(($post['action_type_completed']=='42')){
 
 
-                                            $newname = date('YmdHis',time()).mt_rand().'.'.pathinfo($val['name'],PATHINFO_EXTENSION);
+                               //  file_put_contents('./uploads/glen.txt', 'hello');
 
-                                            $locationName[] = $newname;
-                                                $src =  file_get_contents($val['tmp_name']);
-                                                 
-                                             uploadBlob($src, $newname); 
-                                                
-                                            }
-                                                
-                                                
-                                            }
-                                   
-                                    
-            foreach($locationName as $key => $value){
-                
-                
-                 // echo '<h2>'.$userfilename[$key] .''.$value.'</h2>';
-                
-                
- 
+                                $userfilename = $this->input->post('userfilename'); 
 
-                        $filename_encrypted  = sha1($value.date('YmdHis'));
-                        $file_action_post = array(
-                        'action_id' => $result,
-                        'name' => $userfilename[$key],
-                        'file_location' =>  $value,
-                        'created_at' => date('Y-m-d'),
-                        'company_id' => $this->input->post('company_id'),
-                        'created_by' => $this->data['current_user']['id'],
-                        'encryption_name' => $filename_encrypted
-                        );
+                                $img = $_FILES['userfile'];
 
-                        $this->Files_model->file_uploader($file_action_post);
-                
-            }                        
-                                    
-                                    
-                                    
-                                    
-                                    
-//}
-                                    
-                                    
-                                    
+                                if(!empty($img))
+                                {
+                                    $img_desc = $this->reArrayFiles($img);
+                                    //print_r($img_desc);
+
+                                    foreach($img_desc as $val)
+                                    {
+
+                                        $newname = date('YmdHis',time()).mt_rand().'.'.pathinfo($val['name'],PATHINFO_EXTENSION);
+                                        $locationName[] = $newname;
+                                        $src =  file_get_contents($val['tmp_name']);
+
+                                         uploadBlob($src, $newname); //Sends file and custom filename to Azure
+
                                     }
+                                }
+
+
+                                foreach($locationName as $key => $value){
+
+                                            $filename_encrypted  = sha1($value.date('YmdHis'));
+                                            $file_action_post = array(
+                                            'action_id' => $result,
+                                            'name' => $userfilename[$key],
+                                            'file_location' =>  $value,
+                                            'created_at' => date('Y-m-d'),
+                                            'company_id' => $this->input->post('company_id'),
+                                            'created_by' => $this->data['current_user']['id'],
+                                            'encryption_name' => $filename_encrypted
+                                            );
+
+                                            $this->Files_model->file_uploader($file_action_post);
+
+                                }                        
+
+                            }
                             
-                            
-                       
-                            
-                            
-                            
+                          
                             // after the initial action has been successfully created we can continue with the following login
                             // *** TRY TO KEEP LOGIC IN THE CONTROLLER AND DATABASE COMMITS IN THE MODELS***
                             $post = $this->input->post();
@@ -302,21 +280,21 @@ foreach($userfilename as $key => $value){
     
     
     
-    function reArrayFiles($file)
-{
-    $file_ary = array();
-    $file_count = count($file['name']);
-    $file_key = array_keys($file);
-    
-    for($i=0;$i<$file_count;$i++)
-    {
-        foreach($file_key as $val)
+        function reArrayFiles($file)
         {
-            $file_ary[$i][$val] = $file[$val][$i];
+            $file_ary = array();
+            $file_count = count($file['name']);
+            $file_key = array_keys($file);
+
+            for($i=0;$i<$file_count;$i++)
+            {
+                foreach($file_key as $val)
+                {
+                    $file_ary[$i][$val] = $file[$val][$i];
+                }
+            }
+            return $file_ary;
         }
-    }
-    return $file_ary;
-}
     
     
     
@@ -361,7 +339,7 @@ foreach($userfilename as $key => $value){
 			else if($this->input->post('action_do') == 'cancelled')
 			{	
 				$outcome = $this->input->post('outcome');
-$result = $this->Actions_model->set_action_state($this->input->post('action_id'),$this->input->post('user_id'),'cancelled',$outcome);				
+                $result = $this->Actions_model->set_action_state($this->input->post('action_id'),$this->input->post('user_id'),'cancelled',$outcome);				
 				if($result)
 				{
 					$this->set_message_success('Action set to cancelled.');
