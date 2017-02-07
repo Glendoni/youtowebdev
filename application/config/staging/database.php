@@ -47,7 +47,7 @@
 
 postgres://mhcpgrefocjdtf:CZbMFlzImraARQeWme1UM3VFOm@ec2-54-228-195-52.eu-west-1.compute.amazonaws.com:5432/d1bna94a8j95ip
 */
-$databasestr =   getenv(DATABASE_URL);
+$databasestr =  'postgres://mhcpgrefocjdtf:CZbMFlzImraARQeWme1UM3VFOm@ec2-54-228-195-52.eu-west-1.compute.amazonaws.com:5432/d1bna94a8j95ip';
 $connect = explode(':', str_replace('postgres://','',$databasestr));
 
 //$connect[0]; //username
