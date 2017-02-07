@@ -1,10 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-//namespace foo;
-
-//require_once dirname(__FILE__) . 'application/third_party/azure/azure.php';
-
-
 class Privilege extends MY_Controller {
 	
 	function __construct() {
@@ -12,15 +7,7 @@ class Privilege extends MY_Controller {
 		// Some models are already been loaded on MY_Controller
         
         $this->load->model('Users_model');
-       // $this->load->model('Azure_model');
-       $this->load->helper('My_privilege');
-        
-        //include APPPATH . 'application/third_party/azure/azure.php';
-        
-        
-        
-      
-        
+       
 	}
 	
 	public function index() 
@@ -40,72 +27,7 @@ class Privilege extends MY_Controller {
         
     }
     
-    
-    public function downloadfile($file = 'https://baselisttemp.blob.core.windows.net/baselisttemp/test'){
- 
-    // $this->load->library('Azure');
-     $this->load->helper('download');
-      //getfile();
-     
-     force_download('Azure',file_get_contents($file));
-     
- }
-    public function addfile(){
- 
-    // $this->load->library('Azure');
 
-        $this->load->helper('download');
-        
-        
-        $ext = 'Football.png';
-     uploadBlob(file_get_contents('http://harvardmagazine.com/sites/default/files/inline_images/2016-SeptOct/Football.png'), 'test_two.png');
- 
-     
- }
-    
-    
-    function filegetfile($fileToGet){
-        
-       // echo getfile('test_two.png');
-        $src =    file_get_contents('https://baselisttemp.blob.core.windows.net/baselisttemp/test_two.png');
-   
-    //echo '<img src="'.$src.'" >';
-        
-        
-         $this->load->helper('download');
-         force_download('fott.png', $src);  
-        
-    }
-    
-    function data_uri($file, $mime) 
-{  
-  $contents = file_get_contents($file);
-  $base64   = base64_encode($contents); 
-    
- 
-    
-  return ('data:' . $mime . ';base64,' . $base64);
-}
-    
-    
-    /*
- public function azure_list_files (){
- 
-    // $this->load->library('Azure');
-     $this->load->helper('download');
-      list_files();
-     
-     //force_download('$nme',  getfile());
-     
- }
-    
-    
-    
-    
-
-    
-    
- */
     
    public function addUser(){
        
@@ -131,7 +53,7 @@ class Privilege extends MY_Controller {
        if($output['status'] == 200){
     
 
-$this->send_New_User_Email($contact_info['name'],$contact_info['email'],$genrated_password);
+           $this->send_New_User_Email($contact_info['name'],$contact_info['email'],$genrated_password);
  
   
 }
