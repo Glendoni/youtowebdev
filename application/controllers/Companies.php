@@ -888,7 +888,7 @@ echo $this->Tagging_model->$route($post);
         $query[]['action_types_array'] = (array)$this->Actions_model->get_action_types_array();
             $query[]['actions_completed'] = $this->Actions_model->get_actions_completed($id);
         $query[]['actions_cancelled'] = $this->Actions_model->get_actions_cancelled($id);
-            //$query['files'] = $this->Actions_model->get_actions_files($id);
+            $query['files'] = $this->Actions_model->get_actions_files($id);
        // $query[]['comments'] = array_reverse($this->Actions_model->get_comments_two($id));
         
         foreach($query  as $key => $value){
@@ -932,7 +932,8 @@ echo $this->Tagging_model->$route($post);
     }
     
     
-    function getCompletedActions($id = 154537){
+    function getCompletedActions($id = 154537)
+    {
         
         //$id = $this->session->userdata('selected_company_id');
         $actions =  $this->Actions_model->get_follow_up_actions($id);
@@ -940,69 +941,65 @@ echo $this->Tagging_model->$route($post);
     }
     
     
-    function campaign_page_getter(){
+        function campaign_page_getter()
+        {
 
-    
-         $company_id = $this->input->post('company_id');
+
+            $company_id = $this->input->post('company_id');
 
 
             $campaign_id = $this->input->post('campaign_id');
 
-        // $company_id = $this->input->post('company_id');
+            // $company_id = $this->input->post('company_id');
 
-	       $campaign = $this->Campaigns_model->get_campaign_by_id($campaign_id);
-        
-        
+            $campaign = $this->Campaigns_model->get_campaign_by_id($campaign_id);
+
+
         //print_r($campaign);
-        
-        
-			if ($campaign[0]->id == False) {
-				print_r('No campaign');
-				return False;
-			}
-			$pipeline = $this->input->get('pipeline');
-			$companies = $this->Campaigns_model->get_companies_for_campaign_id($campaign_id,$pipeline);
-			// print '<pre>';
-			// print_r($companies);
-			// die;	
-			$this->refresh_search_results();
-			$this->session->set_userdata('campaign_id',$campaign[0]->id);
-			$this->session->set_userdata('campaign_name',$campaign[0]->name);
-			$this->session->set_userdata('campaign_owner',$campaign[0]->user_id);
-			$this->session->set_userdata('campaign_shared',$campaign[0]->shared);
-			$this->session->unset_userdata('current_search');
 
-			$result = $this->process_search_result($companies);
-        
+
+            if ($campaign[0]->id == False) {
+                print_r('No campaign');
+                return False;
+            }
+            $pipeline = $this->input->get('pipeline');
+            $companies = $this->Campaigns_model->get_companies_for_campaign_id($campaign_id,$pipeline);
+            // print '<pre>';
+            // print_r($companies);
+            // die;	
+            $this->refresh_search_results();
+            $this->session->set_userdata('campaign_id',$campaign[0]->id);
+            $this->session->set_userdata('campaign_name',$campaign[0]->name);
+            $this->session->set_userdata('campaign_owner',$campaign[0]->user_id);
+            $this->session->set_userdata('campaign_shared',$campaign[0]->shared);
+            $this->session->unset_userdata('current_search');
+
+            $result = $this->process_search_result($companies);
+
         //print_r($result);
-      
 
-			if(empty($result))
-			{
-                
+
+            if(empty($result))
+            {
+
                $this->session->unset_userdata('companies');
-				unset($search_results_in_session);
-			}
-			else
-			{
-                
-                
-                           foreach($result as $item => $value){
-                              // echo $value['id'];
-                        $dt =     $this->data['last_pipeline_created_at'] = $this->Actions_model->actiondata($value['id']);
-                        $dta[] = array('id' => $value['id'], 'last_pipeline_date' =>  $dt );      
-                
-                }
-            
+                unset($search_results_in_session);
+            }
+            else
+            {
+
+                    foreach($result as $item => $value){
+                    // echo $value['id'];
+                    $dt =     $this->data['last_pipeline_created_at'] = $this->Actions_model->actiondata($value['id']);
+                    $dta[] = array('id' => $value['id'], 'last_pipeline_date' =>  $dt );      
+
+                    }
+
                 $this->session->set_userdata('pipedate',$dta);
-				$session_result = serialize($result);
-				$this->session->set_userdata('pipeline',$pipeline);
-				$this->session->set_userdata('companies',$session_result);
-			}
-
-
-
-
+                $session_result = serialize($result);
+                $this->session->set_userdata('pipeline',$pipeline);
+                $this->session->set_userdata('companies',$session_result);
+            }
 
 /*
         $session_result = $this->session->userdata('companies');
@@ -1015,7 +1012,7 @@ echo $this->Tagging_model->$route($post);
                 $current_page_number = $this->input->get('page_num') ? $this->input->get('page_num') : 1;
                 $pages_count = ceil(count($companies_array)/RESULTS_PER_PAGE);
                 //$prev = array();
-                
+
                 */
                 $i = 0 ;
                     foreach($result as $key=>$item){
@@ -1032,206 +1029,161 @@ echo $this->Tagging_model->$route($post);
                         }
                             $prev = $item['id'];
 
-        }
-                        echo json_encode($data);
-                 //echo '<pre>'; print_r($data); echo '</pre>';
-                //echo '<pre>'; print_r($companies_array_chunk[($current_page_number-1)]); echo '</pre>';
-                exit();
+            }
+                            echo json_encode($data);
+                     //echo '<pre>'; print_r($data); echo '</pre>';
+                    //echo '<pre>'; print_r($companies_array_chunk[($current_page_number-1)]); echo '</pre>';
+                    //exit();
 
-    }
+        }
     
-    function pipert(){
-        
-        
-        	$this->data['main_content'] = 'companies/editor';
-		$this->load->view('layouts/default_layout', $this->data);	
-        
-    }
+        function pipert()
+        {
+
+
+                $this->data['main_content'] = 'companies/editor';
+            $this->load->view('layouts/default_layout', $this->data);	
+
+        }
     
   
-    public function notForInvoices(){
-        
-        $rap = $this->input->post();
-        
-       $this->get_current_user_id();
-    
-        
- 
-     $output =  $this->Companies_model->update_not_for_invoices($rap,$this->get_current_user_id());
-        
-        
-        //echo $rap['debenturemortgage'] ? 'Yes': 'Nooooo';
-        if($output ){
-            
-          echo json_encode(array('success' =>$rap['providerid'], 'debenturemortgage' => $rap['debenturemortgage']));  
-        }else{
-             echo json_encode(array('error' =>$rap['providerid']));  
-        }
-        //echo json_encode(array('glen' =>$rap, 'userid' =>  $this->get_current_user_id()));
-        
-        
-    }
-    
-  function recent(){ //recently visited pages
-
-$query = $this->db->query("SELECT DISTINCT v.created_at,c.id as company,  c.name as name FROM views v 
-LEFT JOIN companies c
-ON v.company_id = c.id 
-WHERE v.user_id = 3
-GROUP BY c.id,v.created_at
-ORDER BY v.created_at DESC");
-        $i=0;
-        foreach ($query->result_array() as $row)
+        public function notForInvoices()
         {
-            $comlist[$row['company']] =  $row['name'];
- 
-             if(count($comlist)=== 15)   break;
+
+            $rap = $this->input->post();
+
+           $this->get_current_user_id();
+
+
+
+         $output =  $this->Companies_model->update_not_for_invoices($rap,$this->get_current_user_id());
+
+
+            //echo $rap['debenturemortgage'] ? 'Yes': 'Nooooo';
+            if($output ){
+
+              echo json_encode(array('success' =>$rap['providerid'], 'debenturemortgage' => $rap['debenturemortgage']));  
+            }else{
+                 echo json_encode(array('error' =>$rap['providerid']));  
+            }
+            //echo json_encode(array('glen' =>$rap, 'userid' =>  $this->get_current_user_id()));
+
+
         }
+    
+        function recent()
+        { //recently visited pages
 
-//print '<pre>';
-  //    print_r($comlist);
-    //  print '</pre>';
+                $query = $this->db->query("SELECT DISTINCT v.created_at,c.id as company,  c.name as name FROM views v 
+                LEFT JOIN companies c
+                ON v.company_id = c.id 
+                WHERE v.user_id = 3
+                GROUP BY c.id,v.created_at
+                ORDER BY v.created_at DESC");
+                        $i=0;
+                        foreach ($query->result_array() as $row)
+                        {
+                            $comlist[$row['company']] =  $row['name'];
 
+                             if(count($comlist)=== 15)   break;
+                        }
 
+                //print '<pre>';
+                  // print_r($comlist);
+                    //print '</pre>';
 
-}
+        }
        
-    function real(){
-        
-       $this->Companies_model->cronPipeline(0,335504);  
-        
-        
-    }
-    
-    
-    
-    function findTime(){
-        
-        
-        $query = $this->db->query("SELECT * FROM actions WHERE company_id=109673 AND action_type_id=32 order by updated_at DESC LIMIT 1");
-        $now = time(); // or your date as well
-        foreach ($query->result_array() as $row)
+        function real()
         {
-             
-            
-           
- //echo date( 'Y-m-d' , strtotime($row['created_at'])).'<br>';
-          
-$your_date =  strtotime($row['created_at']);
+
+           $this->Companies_model->cronPipeline(0,335504);   
+        }
+    
+    
+    
+        function findTime(){
+
+            $query = $this->db->query("SELECT * FROM actions WHERE company_id=109673 AND action_type_id=32 order by updated_at DESC LIMIT 1");
+            $now = time(); // or your date as well
+            foreach ($query->result_array() as $row)
+            {
+
+            //echo date( 'Y-m-d' , strtotime($row['created_at'])).'<br>';
+
+            $your_date =  strtotime($row['created_at']);
+            }
+
+            $datediff = $now - $your_date;
+
+            echo floor($datediff / (60 * 60 * 24));
+
         }
 
-        
-        
-      
-$datediff = $now - $your_date;
+    
+      function querychecker()
+      {   
+ 
+        if(isset($_SERVER['SERVER_PORT'])){     
 
-echo floor($datediff / (60 * 60 * 24));
-        
+            //echo 'Current full'.  site_url();
+                if($_SERVER['SERVER_PORT'] == 80){ // server =  80 localhost =  8888
+                    // server =  80 localhost =  8888)
+
+                    $a =  str_replace('http://','https://', site_url());
+
+                    echo 'Current full'. site_url().$_SERVER['REQUEST_URI'];
+
+                    echo '<br>';
+                    $mystring = current_full_url();
+
+                    $findme   = 'https://';
+                    $pos = strpos($mystring, $findme);
+
+                    // Note our use of ===.  Simply == would not work as expected
+                    // because the position of 'a' was the 0th (first) character.
+                    if ($pos === false) {
+                        echo "The string '$findme' was not found in the string '$mystring'";
+
+                        redirect($a, 'location');
+                    //   header( 'Location: '.$a ) ;
+                } else {        
+                    echo "The string '$findme' was found in the string '$mystring'";
+                    echo " and exists at position $pos";
+                }
+            }
+
+        }
+  
     }
     
     
-  function querychecker(){   
-    
-            //echo 'Server Port '.$_SERVER['SERVER_PORT'];
-            //echo '<br>';
-      
-//site_url()
-      
-      
-      if(isset($_SERVER['SERVER_PORT'])){
-          
-          //echo 'Current full'.  site_url();
-          
-          if($_SERVER['SERVER_PORT'] == 80){ // server =  80 localhost =  8888
-          
-          
-          
-       // server =  80 localhost =  8888)
-      
-      
-            $a =  str_replace('http://','https://', site_url());
+    function downloadking($sha)
+    {
 
-         echo 'Current full'. site_url().$_SERVER['REQUEST_URI'];
-
-             echo '<br>';
-            $mystring = current_full_url();
-      
-            $findme   = 'https://';
-            $pos = strpos($mystring, $findme);
-
-            // Note our use of ===.  Simply == would not work as expected
-            // because the position of 'a' was the 0th (first) character.
-            if ($pos === false) {
-          echo "The string '$findme' was not found in the string '$mystring'";
-
-
-             redirect($a, 'location');
-
-
-        //   header( 'Location: '.$a ) ;
-
-            } 
-      else {
-    echo "The string '$findme' was found in the string '$mystring'";
-  echo " and exists at position $pos";
-}
-      
-      
-      
-      
-       //if (!preg_match("~^(?:f|ht)tps?://~i", $_SERVER['HTTP_HOST'])) {
-        //$url = "https:/" . $_SERVER['REQUEST_URI'];
-//    }
-   // echo  $url;
-      
-      
-     // echo (strpos($a, 'http://'));
-    
-}
-    
-     
-      }
-  
-  }
-    
-    
-        function downloadking($sha){
         $this->load->helper('download');
-        if(true)
-{
-   
-          $encyption_file_name  = $this->Files_model->getfile($sha);
-          
-$pth    =   file_get_contents(base_url()."uploads/".$encyption_file_name[0]['file_location']);
-            $fileExt    =   explode('.',$encyption_file_name[0]['file_location']);
+        $this->load->helper('MY_azurefile');
+        $encyption_file_name  = $this->Files_model->getfile_($sha);
+        $fileExt    =   explode('.',$encyption_file_name[0]['file_location']);
+        $nme =  str_replace(' ','_', trim($encyption_file_name[0]['name'].'.'.$fileExt[1]));
+        $src  =  file_get_contents('https://baselisttemp.blob.core.windows.net/baselisttemp/'.$encyption_file_name[0]['file_location']);
 
-           $nme =  trim($encyption_file_name[0]['name'].'.'.$fileExt[1]);
-            
-                    header('Content-Type: application/octet-stream'); 
-header("Content-Disposition: attachment; filename=$nme");
-ob_clean();
-force_download($nme, $pth); 
-             flush(); 
-}
-        
-        
-        
+        force_download($nme, $src);  
+     
     }
     
     
     
     function filetester($id = 352533){
         //line 158
-         $query[]['files'] = $this->Actions_model->get_actions_files($id);
-        
-        
-           foreach($query  as $key => $value){
-            
-                $action[][] = $value; 
+        $query[]['files'] = $this->Actions_model->get_actions_files($id);
+        foreach($query  as $key => $value){
+
+        $action[][] = $value; 
         }
-      
-echo '<pre>'; print_r($action); echo '</pre>';
-        
+
+        echo '<pre>'; print_r($action); echo '</pre>';
+
     }
     
     

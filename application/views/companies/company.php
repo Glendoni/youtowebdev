@@ -794,6 +794,8 @@ endif;
 
 		<div class="panel-heading" id="contacts">
 		Contacts
+            
+            <?php echo ' This is a system variable'. getenv(DATABASE_URL); ?>
 
 		<div class="pull-right">
 		<div class="btn-group">
