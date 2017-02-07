@@ -42,7 +42,7 @@ ALTER TABLE files
     } 
     
     
-    function getfile($id){
+    function getfile_($id){
         
         $query = $this->db->query("SELECT name,file_location FROM files WHERE encryption_name='".$id."' LIMIT 1");
               return $query->result_array();

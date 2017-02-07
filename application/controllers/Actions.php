@@ -8,7 +8,7 @@ class Actions extends MY_Controller {
         
          $this->load->model('Files_model');
         $this->load->helper(array('form', 'url'));
-         $this->load->helper('MY_privilege');
+         $this->load->helper('MY_azure');
 		
 	}
 
