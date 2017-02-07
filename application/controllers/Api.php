@@ -37,18 +37,20 @@ class Api extends CI_Controller {
         if($headers['HTTP_TOKEN'] === "764f427e0f687d987f6a0f5c5324cdbd"){
            $data_insert_res = $this->Api_model->logAgent($data); //save data
             if($data_insert_res){
-             $res =  $_GET['callback'] . json_encode($data); //return resonse '('.json_encode($data).')';
+             $res =  $data; //return resonse '('.json_encode($data).')';
+                
+                header('Content-Type: application/json');
+        echo $_GET['callback'] . json_encode($res);
             }else{
                 
-                $res = 'Sorry something went wrong!' ;
+                header($_SERVER['SERVER_PROTOCOL'] . ' 401 Unauthorized', true, 401);
             }
            
         }else{
-            $res = 'Cannot connect to Baselist';
+           header($_SERVER['SERVER_PROTOCOL'] . '500 Internal Server Error', true, 500);
         }
-        header('Content-Type: application/json');
-        echo $res;
         
+       
     }
     
 }
