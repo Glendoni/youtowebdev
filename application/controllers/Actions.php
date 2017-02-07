@@ -468,20 +468,17 @@ foreach($userfilename as $key => $value){
         echo json_encode($output);
     } 
     
-    function changeActionDate(){
+    function changeActionDate()
+    {
         
         $this->Actions_model->changeActionDate($this->input->post(),$this->data['current_user']['id']);
         
         echo  json_encode($this->input->post());
         
-        
     }
     
-    
-
-    
-    
-       function getfilesh($id = '2fc563a34b29bd3986e649674c0e2a48d28f7d5f'){
+    function getfilesh($id = '2fc563a34b29bd3986e649674c0e2a48d28f7d5f')
+    {
         
         $query = $this->db->query("SELECT file_location FROM files WHERE encryption_name='".$id."' LIMIT 1");
               $output =   $query->result_array();
@@ -493,50 +490,17 @@ foreach($userfilename as $key => $value){
     
     //////////////AZURE////
     
-     public function azure_list_files (){
+     public function azure_list_files_tester (){
  
     // $this->load->library('Azure');
-     $this->load->helper('download');
-      list_files();
+   
+      //list_files();
      
      //force_download('$nme',  getfile());
      
  }
-    public function downloadfile($file = 'https://baselisttemp.blob.core.windows.net/baselisttemp/2f3586cc-f193-44fe-bdb2-e174c8b507b7.png'){
+    
+    /////////////=END///////////////////
  
-    // $this->load->library('Azure');
-     $this->load->helper('download');
-      //getfile();
-     
-     force_download('Azure',file_get_contents('https://baselisttemp.blob.core.windows.net/baselisttemp/'.$file));
-     
- }
-    public function addfile(){
- 
-    // $this->load->library('Azure');
-     $this->load->helper('download');
-      uploadBlob();
-     
-    // force_download('Azure',file_get_contents($file));
-     
- }
-    
-    
-    
-    
-    
-    /////////////AZURE///////////////////////////
-    
-    
-    
-    
-    function lip(){
-        
-         $query = $this->db->query("SELECT * FROM actions where id=1234008");
-              $output =   $query->result_array();
-                echo $query->num_rows();
-    //echo $output[0]['created_by'];  
-        
-    }
     
 }
