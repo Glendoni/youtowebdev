@@ -43,42 +43,11 @@
 |
 | The $active_record variables lets you determine whether or not to load
 | the active record class
-
-
-postgres://mhcpgrefocjdtf:CZbMFlzImraARQeWme1UM3VFOm@ec2-54-228-195-52.eu-west-1.compute.amazonaws.com:5432/d1bna94a8j95ip
 */
-$databasestr =  'postgres://mhcpgrefocjdtf:CZbMFlzImraARQeWme1UM3VFOm@ec2-54-228-195-52.eu-west-1.compute.amazonaws.com:5432/d1bna94a8j95ip';
-$connect = explode(':', str_replace('postgres://','',$databasestr));
-
-//$connect[0]; //username
-$passUrl =  explode('@',$connect[1]); //password and url
-
-//$passUrl[0]; //password
-//$passUrl[1]; //hostname
-//$connect[2];  // database
-
 
 $active_group = 'remote';
 $active_record = TRUE;
 
-$db['remote']['hostname'] = $passUrl[1];
-$db['remote']['username'] = $connect[0]; 
-$db['remote']['password'] = $passUrl[0];
-$db['remote']['database'] = $connect[2];
-$db['remote']['dbdriver'] = 'postgre';
-$db['remote']['dbprefix'] = '';
-$db['remote']['pconnect'] = TRUE;
-$db['remote']['db_debug'] = FALSE;
-$db['remote']['cache_on'] = FALSE;
-$db['remote']['cachedir'] = '';
-$db['remote']['char_set'] = 'utf8';
-$db['remote']['dbcollat'] = 'utf8_general_ci';
-$db['remote']['swap_pre'] = '';
-$db['remote']['autoinit'] = TRUE;
-$db['remote']['stricton'] = FALSE;
-$db['remote']['port'] = 5432;
-
-/*
 $db['remote']['hostname'] = 'ec2-54-228-195-52.eu-west-1.compute.amazonaws.com';
 $db['remote']['username'] = 'mhcpgrefocjdtf';
 $db['remote']['password'] = 'CZbMFlzImraARQeWme1UM3VFOm';
@@ -95,8 +64,6 @@ $db['remote']['swap_pre'] = '';
 $db['remote']['autoinit'] = TRUE;
 $db['remote']['stricton'] = FALSE;
 $db['remote']['port'] = 5432;
-
-*/
 
 
 
