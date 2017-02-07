@@ -1197,7 +1197,7 @@ echo floor($datediff / (60 * 60 * 24));
     
         function downloadking($sha){
         $this->load->helper('download');
-             $this->load->helper('My_privilege');
+             $this->load->helper('MY_azurefile');
         if(true)
 {
 
