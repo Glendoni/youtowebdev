@@ -794,9 +794,6 @@ endif;
 
 		<div class="panel-heading" id="contacts">
 		Contacts
-            
-            <?php echo ' This is a system variable'. getenv(DATABASE_URL); ?>
-
 		<div class="pull-right">
 		<div class="btn-group">
 		<button  class="btn btn-primary edit-btn btn-xs" data-toggle="modal" id="create_contact_<?php echo $company['id']; ?>"  data-target="#create_contact_<?php echo $company['id']; ?>" >
