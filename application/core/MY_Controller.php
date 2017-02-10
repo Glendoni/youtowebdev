@@ -158,12 +158,15 @@ class MY_Controller extends CI_Controller {
 		{	
 			$target_sectors_list = $this->session->userdata('target_sectors_list');
 			$not_target_sectors_list = $this->session->userdata('not_target_sectors_list');
+            $bespoke_target_sectors_list = $this->session->userdata('bespoke_target_sectors_list');
 
 		}
 		else
 		{
 			$target_sectors_list = $this->Sectors_model->get_all_target();
 			$this->session->set_userdata('target_sectors_list',$target_sectors_list);
+            $bespoke_target_sectors_list = $this->Sectors_model->get_bespoke_target();
+			$this->session->set_userdata('bespoke_target_sectors_list',$bespoke_target_sectors_list);
 			$not_target_sectors_list = $this->Sectors_model->get_all_not_target();
 			$this->session->set_userdata('not_target_sectors_list',$not_target_sectors_list);
 		}
@@ -298,6 +301,7 @@ class MY_Controller extends CI_Controller {
 		$this->data['sectors_list'] = $sectors_list;
 		$this->data['target_sectors_list'] = $target_sectors_list;
 		$this->data['not_target_sectors_list'] = $not_target_sectors_list;
+        $this->data['bespoke_target_sectors_list'] = $bespoke_target_sectors_list;
 
 		// Add options 
 		$system_users = array(0=>'All') + $system_users;
