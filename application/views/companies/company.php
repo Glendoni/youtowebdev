@@ -794,9 +794,6 @@ endif;
 
 		<div class="panel-heading" id="contacts">
 		Contacts
-            
-            <?php echo ' This is a system variable'. getenv(DATABASE_URL); ?>
-
 		<div class="pull-right">
 		<div class="btn-group">
 		<button  class="btn btn-primary edit-btn btn-xs" data-toggle="modal" id="create_contact_<?php echo $company['id']; ?>"  data-target="#create_contact_<?php echo $company['id']; ?>" >
@@ -823,28 +820,40 @@ endif;
 
 	        </tr>
 	      </thead>
-	      <tbody>
-<?php foreach ($contacts as $contact): ?>
-	      	<tr>
-				<td class="col-md-2 companyDetailsContacts">
-				<?php echo ucfirst($contact->first_name).' '.ucfirst($contact->last_name); ?>
-				</td>
-				<td class="col-md-2"><?php echo ucfirst($contact->role); ?></td>
-				<td class="col-md-3"><?php echo $contact->email; ?>&nbsp;
-	<?php if (!empty($contact->email_opt_out_date)): ?>
-		<span class="label label-danger contact-opt-out">Email Marketing Opt-Out</span>
-	<?php endif;?></td>
-				<td  class="col-md-2"><?php echo $contact->phone; ?></td>
-								<td  class="col-md-3"><div class="pull-right mobile-left actionsactionscontact-options">
-				<?php if ($company['pipeline']=='Blacklisted'): ?>
-				<?php else: ?>
-	            <?php $this->load->view('companies/action_box_contacts.php',array('contact'=>$contact)); ?>
-	        	<?php endif; ?>
-	            </div></td>
-
-        	</tr>
-			<?php endforeach; ?>  
-	      </tbody>
+            <tbody>
+                <?php foreach ($contacts as $contact): ?>
+                    <tr>
+                        <td class="col-md-2 companyDetailsContacts">
+                            <?php echo ucfirst($contact->first_name).' '.ucfirst($contact->last_name); ?>
+                        </td>
+                        <td class="col-md-2">
+                            <?php if($contact->role_dropdown): ?>
+                                <?php echo $contact->role_dropdown; ?>
+                            <?php endif; ?>
+                            <?php if($contact->role_dropdown and $contact->role): ?>
+                                / 
+                            <?php endif; ?>
+                            <?php echo ucfirst($contact->role); ?>
+                            
+                        </td>
+                        <td class="col-md-3">
+                            <?php echo $contact->email; ?>&nbsp;
+                            <?php if (!empty($contact->email_opt_out_date)): ?>
+                                <span class="label label-danger contact-opt-out">Email Marketing Opt-Out</span>
+                            <?php endif;?>
+                        </td>
+                        <td class="col-md-2"><?php echo $contact->phone; ?></td>
+                        <td class="col-md-3">
+                            <div class="pull-right mobile-left actionsactionscontact-options">
+                                <?php if ($company['pipeline']=='Blacklisted'): ?>
+                                <?php else: ?>
+                                <?php $this->load->view('companies/action_box_contacts.php',array('contact'=>$contact)); ?>
+                                <?php endif; ?>
+                            </div>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>  
+            </tbody>
 	    </table>
 
 	    <?php else: ?>
