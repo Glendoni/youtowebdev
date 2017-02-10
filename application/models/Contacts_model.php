@@ -185,6 +185,7 @@ function get_contacts_s($company_id)
 		if ($post['report_age_debtor']) {
 			$reports[] = $post['report_age_debtor'];
 		}
+        
 		$contact->reports = json_encode($reports);
         $this->db->where('id', $post['contact_id']);
 		$this->db->update('contacts',$contact);

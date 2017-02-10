@@ -116,6 +116,7 @@ class Contacts extends MY_Controller {
 
 			if($this->form_validation->run())
 			{
+                
 				$rows_affected = $this->Contacts_model->update($this->input->post());
 				if($rows_affected)
 				{

@@ -659,7 +659,35 @@ $(".pipeline-validation-check").change(function() {
 
      if((/companies\/company/.test(window.location.href))) {
          
-         
+        
+        $(document).ready(function($){
+
+                if($('#bespokeEval').val() == 'support'){ //evaluates support services
+
+
+                    $('.checkbox_bespoke').click(function(){
+
+                        if($('.bespoke_checkbox  .active').length){
+                                $('.submit_btn').prop("disabled",false);
+                        }else{
+                                $('.submit_btn').prop("disabled",true);
+                        }
+                    })
+
+                    if($('.bespoke_checkbox  .active').length >0){
+                        $('.btn-checkbox').attr("disabled", true);  
+                    }else{
+                        $('.submit_btn').prop("disabled",true);  
+
+                    }
+
+                }
+
+        });
+
+
+
+
     if($('#source_explanation').val()){
        
        $('.show_si_box').show();

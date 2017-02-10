@@ -14,7 +14,8 @@ class Companies extends MY_Controller {
         //$this->input->get('id')
         ///$this->input->post(),$this->data['current_user']['id']
 		$this->load->model('Tagging_model');
-          $this->load->model('Files_model');
+          $this->load->model('Files_model'); 
+          $this->load->model('Sectors_model'); 
 		$this->load->helper('url');
         $this->load->helper('form');
         $this->load->library('form_validation');
@@ -272,7 +273,7 @@ class Companies extends MY_Controller {
 	{
       $getallusers =   $this->data['getallusers'] =  $this->Users_model->get_all_users($this->data['current_user']['id']);
        $this->data['currentuserid']   = $this->data['current_user']['id'];
-        
+      
      //   print_r($getallusers);
         
        // exit();
@@ -306,6 +307,7 @@ class Companies extends MY_Controller {
             $company = $this->process_search_result($raw_search_results);
             $this->data['companieshack'] = $this->Companies_model->hackmorgages($this->input->get('id'));
 			$this->data['contacts'] = $this->Contacts_model->get_contacts_s($this->input->get('id'));
+           // $this->data['bespoke'] = $this->Companies_model->bespoke_array();
             $address = $this->Companies_model->get_addresses($this->input->get('id'));
             
             foreach ($address as $row)
@@ -319,6 +321,7 @@ class Companies extends MY_Controller {
            // $this->data['deals_pipline'] = $this->Companies_model->get_deals_pipeline($this->input->get('id'),$this->data['current_user']['id'],false);
             $this->data['campaigns'] = $this->Campaigns_model->get_campaigns($this->input->get('id'));
             $this->data['created_by_name'] = $this->Users_model->get_user($user_id);
+           $this->data['bespokeSelected'] = $this->Sectors_model->bespokeSelected($this->input->get('id'));
 			$option_contacts =  array();
 			foreach ($this->data['contacts'] as $contact) {
 				$option_contacts[$contact->id] = $contact->first_name.' '.$contact->last_name;
@@ -1186,6 +1189,63 @@ echo $this->Tagging_model->$route($post);
 
     }
     
+    
+function deleteTest_(){
+    
+    
+    $bsp = $this->bespoke_array();
+$i =56;
+foreach($bsp as $ky=>$value){
+    
+    
+    echo $i++.'<br>';
+    
+    
+   $data = array(
+       'id' => $i,
+      'name' => $value,
+      'display' => TRUE ,
+      'created_at' => date('Y-m-d H:i:s'),
+       'updated_at' => date('Y-m-d H:i:s'),
+       'created_by' => 1,
+       'updated_by' => 1,
+       'target' => TRUE,
+       'sector_group' => 1
+   );
+   
+   $this->db->insert('sectors', $data);
+   
+}
+    
+
+}
+     function bespoke_array()
+	{
+		$bespokeArr = array(
+	'Timesheets issued on behalf of agency'  => 'Timesheets issued on behalf of agency',
+	'Full Breakdown of Timesheets'  => 'Full Breakdown of Timesheets',
+	'Placements Reworked'  => 'Placements Reworked',
+	'Agency Specific Contracts Used'  => 'Agency Specific Contracts Used',
+	'Unusual Approvals Process?'  => 'Unusual Approvals Process?',
+	'External System Used for Timesheets'  => 'External System Used for Timesheets',
+	'Mixture of Payment Terms?'  => 'Mixture of Payment Terms?',
+	'Mon AM Timesheet Report'  => 'Mon AM Timesheet Report',
+	'Tues AM Timesheet Report'  => 'Tues AM Timesheet Report',
+	'Tue PM Timesheet Report'  => 'Tue PM Timesheet Report',
+	'Wed AM Self Bill emailed report'  => 'Wed AM Self Bill emailed report',
+	'Wed Client Invoice Report'  => 'Wed Client Invoice Report',
+	'Timesheet report week before and week after month end'  => 'Timesheet report week before and week after month end',
+	'Wed timesheet deadline'  => 'Wed timesheet deadline',
+	'External System Used for Invoicing/ Self Bills'  => 'External System Used for Invoicing/ Self Bills',
+	'Monthly Payments Outside Payrun'  => 'Monthly Payments Outside Payrun',
+	'Commission Report'  => 'Commission Report',
+	'Debt Management Report'  => 'Debt Management Report',
+	'Advances on demand'  => 'Advances on demand',
+	'CONSTRUCTION INDUSTRY?'  => 'CONSTRUCTION INDUSTRY?'
+);
+
+		return 	$bespokeArr;
+	}
     
 }
  

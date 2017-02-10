@@ -417,6 +417,9 @@ if ($your_date < $now){;
             
         </div>
             
+
+<?php if($current_user['department'] =='sales' ){ ?>
+
               <div class="col-md-3" >
 				<label>Lead Source</label>
 				<p style="
@@ -425,6 +428,26 @@ if ($your_date < $now){;
                  <strong><?php echo  $company_sources[$company['source']]  ? ''  : '';?></strong> <span class="leadSourceSubText"><?php echo $company['source_explanation'] ? $company['source_explanation'] : ''; ?></span></p>
 			 
 		</div>
+    
+    <?php }else{ ?>
+        <div class="col-md-3" >
+				<label>Bespoke</label>
+			<?php
+                     echo '<div class="sectorsPlainText">';
+                
+              foreach($bespokeSelected as $bsk => $bsv){
+                  
+                  echo '<span  class="issector" style="color: #2a48ad;  "> '.$bsv['name'].' </span><br><span class="bespoke_date">Created at: '.date("l jS F Y", strtotime($bsv['created_at'])).'</span><br>' ; 
+                  
+              }
+                  
+                  echo '</div>';
+                  ?>
+			 
+		</div>
+    
+    
+    <?php } ?>
                 
 		<!-- EMPLOYEES -->
 		<div class="col-xs-4 col-sm-3">
@@ -442,8 +465,7 @@ if ($your_date < $now){;
 			if(isset($company['sectors'])){
 	 
             echo '<div class="sectorsPlainText">';
-                
-                
+              
              //print_r($not_target_sectors_list);
             foreach (array_reverse($company['sectors']) as $key => $name)
 				{
@@ -452,6 +474,9 @@ if ($your_date < $now){;
               if(in_array($name,$not_target_sectors_list)){
                   
                $notinsec[] = '<span class="notsector" style=" "> '.$name.'</span> <br>'  ;  
+              }elseif( in_array($name,$bespoke_target_sectors_list)){
+                  
+                  //$insec[] =  '<span  class="issector" style="color: red;  "> '.$name.' </span><br>' ;   
               }else{
                   
                 $insec[] =  '<span  class="issector" style="color: green;  "> '.$name.' </span><br>' ;   
@@ -794,9 +819,6 @@ endif;
 
 		<div class="panel-heading" id="contacts">
 		Contacts
-            
-            <?php echo ' This is a system variable'. getenv(DATABASE_URL); ?>
-
 		<div class="pull-right">
 		<div class="btn-group">
 		<button  class="btn btn-primary edit-btn btn-xs" data-toggle="modal" id="create_contact_<?php echo $company['id']; ?>"  data-target="#create_contact_<?php echo $company['id']; ?>" >
