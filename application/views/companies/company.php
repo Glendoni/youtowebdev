@@ -431,7 +431,7 @@ if ($your_date < $now){;
     
     <?php }else{ ?>
         <div class="col-md-3" >
-				<label>Baspoke</label>
+				<label>Bespoke</label>
 			<?php
                      echo '<div class="sectorsPlainText">';
                 
