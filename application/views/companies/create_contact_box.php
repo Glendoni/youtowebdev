@@ -48,8 +48,37 @@
                         </div>
                         <div class="col-md-6">
                             <div class=" form-group ">
-                                <label for="role" class="control-label">Role *</label>                            
-                                <input type="text" name="role" value="" id="role" maxlength="50" class="form-control">
+                                <label for="type">Select role:</label>
+                                <select class="form-control" id="type" name="role_dropdown">
+                                    <option value=""></option>
+                                    <option value="PM">PM</option>
+                                    <option value="Data Entry Administrator">Data Entry Administrator</option>
+                                    <option value="Marketing Manager">Marketing Manager</option>
+                                    <option value="Business Development">Business Development</option>
+                                    <option value="Manager">Manager</option>
+                                    <option value="CEO">CEO</option>
+                                    <option value="Risk and Compliance Officer">Risk and Compliance Officer</option>
+                                    <option value="Admin">Admin</option>
+                                    <option value="Finance Director">Finance Director</option>
+                                    <option value="CTO">CTO</option>
+                                    <option value="Data Entry">Data Entry</option>
+                                    <option value="Dev">Dev</option>
+                                    <option value="Account Director">Account Director</option>
+                                    <option value="Tester">Tester</option>
+                                    <option value="Business Development Manager">Business Development Manager</option>
+                                    <option value="Assistant">Assistant</option>
+                                    <option value="Account Manager">Account Manager</option>
+                                    <option value="Commercial Sales Manager">Commercial Sales Manager</option>
+                                    <option value="Board Bod">Board Bod</option>
+                                    <option value="Inbound Marketing">Inbound Marketing</option>
+                                    <option value="Director">Director</option>
+                                    <option value="Accountant">Accountant</option>
+                                    <option value="Manager">Manager</option>
+                                    <option value="Senior Consultant">Senior Consultant</option>
+                                    <option value="Consultant">Consultant</option>
+                                    <option value="Operations Manager">Operations Manager</option>
+                                    <option value="Administrator">Administrator</option>
+                                </select>
                             </div>
                         </div>
                         <div class="col-md-6">

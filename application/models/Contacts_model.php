@@ -86,7 +86,8 @@ function get_contacts_s($company_id)
 		$report_timesheets_processed,
 		$report_sales_ledger,
 		$report_commision,
-		$report_age_debtor
+		$report_age_debtor,
+		$role_dropdown
 	) {
         $role = rtrim($role," "); // removes empty space on rightside of string ltrim removes empty space on the left before string
 		$contact->title = !empty(trim($title))?trim($title):NULL;
@@ -97,6 +98,7 @@ function get_contacts_s($company_id)
         $contact->role =  ltrim($role);
         $contact->company_id = $company_id;
         $contact->created_by = $created_by;
+		$contact->role_dropdown = $role_dropdown;
 		$reports = [];
 		if ($report_extensions) {
 			$reports[] = $report_extensions;
@@ -130,12 +132,10 @@ function get_contacts_s($company_id)
 
     function update($post)
     {
-
-        $role = rtrim($post['role']," "); // removes empty space on rightside of string ltrim removes empty space on the left before string
         $contact->title = !empty(trim($title))?trim($title):NULL;
         $contact->first_name   = str_replace('\'', '&#39;',rtrim($post['first_name'])); // please read the below note
     	$contact->last_name = str_replace('\'', '&#39;',ltrim($post['last_name']));
-        $contact->role = ltrim($role);
+        $contact->role_dropdown = $post['role_dropdown'];
         $contact->email = !empty($post['email'])?$post['email']:NULL;
         $contact->phone = !empty($post['phone'])?$post['phone']:NULL;
         $linkedin_id = !empty($post['linkedin_id'])?$post['linkedin_id']:NULL;
