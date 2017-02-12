@@ -156,7 +156,8 @@ $(document).ready(function(){
    
     
     $('.addnewuser').click(function(){
-        
+        $('.checkbox').removeAttr('required'); 
+        $('.checkbox').hide(); 
         $('.freset,#department,#password,#role').val(''); 
         $('.emailuser').hide();
         $('#created_by_name,#updated_by_name,#temp_password').text('');
@@ -232,7 +233,21 @@ window.setTimeout(function() {
     })
 get_users_info();
     
- 
+ $('#department').change(function(){
+$('.market').prop('checked', false);
+//console.log($(this).val());
+
+if($(this).val() == "sales"){
+
+$('.checkbox').show();
+
+}else{
+$('.checkbox').hide();
+}
+
+})
+    
+    
 }) //end of document ready.
 
 
@@ -368,10 +383,25 @@ function edituser(){
                 success: function(data) {
                     $('#created_by_name, #updated_by_name,#temp_password').text('');
                    // $('.emailuser').hide(); //To be assesed. Wil be used to show button to email user from UI
+                  $('.checkbox').hide();
+                    $('.market').removeAttr('required'); 
                     $.each( data, function( key, val ) {
                     
                         
-                      // if( key == 'department') console.log(val);
+                       //if( key == 'department') 
+
+ if(key == 'department' && val == 'sales' ){
+ 
+//  console.log(key+val);
+$('.checkbox').show();
+    $('.market').attr('required','required'); 
+  
+}else{
+//$('.checkbox').hide();
+     //$('.market').removeAttr('required'); 
+}
+ 
+                        
                         
                        if( key == 'eff_from' &&  val != null){
                       
@@ -396,6 +426,15 @@ function edituser(){
                         }else if(key == 'temp_password' &&  val != null &&  val != '' ){
                           // console.log(key)
                            $('#submit_user #'+key).text('Temp Password: '+val);  
+                            //$('.emailuser').show();
+                           
+                       }else if(key == 'market' &&  val != null &&  val != ''   ){
+                         
+$('.market').prop('checked', false);
+//console.log($(this).val());
+
+ $("input[name=market][value='"+val+"']").prop("checked",true); 
+    $('.market').attr('required','required'); 
                             //$('.emailuser').show();
                            
                        }else{

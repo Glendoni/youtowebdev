@@ -793,9 +793,13 @@ endif;
 	        </tr>
 	      </thead>
 	      <tbody>
-	      	<?php foreach ($campaigns as $campaign): ?>
+	      	<?php foreach ($campaigns as $campaign): 
+              
+            $evergreeneval =   $campaign->evergreen_id ? '&evegreen='.$campaign->evergreen_id : '';
+              
+              ?>
 	      	<tr>
-				<td class="col-md-6"><a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $campaign->id;?>"><?php echo $campaign->campaign_name;?></a></td>
+				<td class="col-md-6"><a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $campaign->id.$evergreeneval ;?>"><?php echo $campaign->campaign_name;?></a></td>
 				<td class="col-md-3"><?php echo $campaign->name;?></td>
 				<td class="col-md-2"><?php echo date("d/m/y",strtotime($campaign->created_at));?></td>
 				<td  class="col-md-3">
