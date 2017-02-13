@@ -287,7 +287,7 @@ function privilages_insert_user($post,$user_id,$genrated_password)
 
     function get_users_privilages($id){
         
-        $sql = "SELECT distinct  u.id,u.name,u.department, u.role, u.phone, u.temp_password, u.mobile, u.eff_from,u.eff_to, u.linkedin, u.email ,T1.id as created_by, T1.name as created_by_name, T2.updated_by, T2.name as updated_by_name,
+        $sql = "SELECT distinct  u.id,u.name,u.department, u.role, u.phone, u.temp_password, u.mobile, u.eff_from,u.eff_to,u.market, u.linkedin, u.email ,T1.id as created_by, T1.name as created_by_name, T2.updated_by, T2.name as updated_by_name,
         CASE when T2.temp_password is not null then '' else u.temp_password  END  \"display_temp_password\" 
 from users u
 JOIN (select id, created_by, name from users ) T1
@@ -337,6 +337,7 @@ GROUP BY 1,2
             $data['updated_by'] = $user_id;
             $data['eff_from']  = date('Y-m-d', strtotime($data['eff_from']));
             $data['eff_to']  = (!empty($data['eff_to'])? date('Y-m-d', strtotime($data['eff_to'])): null);
+            $data['market']  = (!empty($data['market'])? $data['market']: null);
                   if($data['role'] == 'Admin') $data['permission'] ='Admin';
                 
              if($data['department'] == 'support') $data['permission'] ='Support';
