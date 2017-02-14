@@ -81,9 +81,22 @@
                                 <!--<input type="button"  value="Send Reminder To Change Temporary Password " class="btn btn-success emailuser"> -->
                             </div>
                             
-                            <div class="col-sm-1 ">
+                           <div class="col-sm-6 ">
                         
-                                
+                                <div class="user_management_uf_np checkbox">
+	<label>
+		<input type="radio" name="market" class="market" value="np">
+		First to Finance
+	</label>
+ 
+                                                                
+	<label>
+		<input type="radio" name="market" class="market" value="uf">
+		Using Finance
+	</label>
+</div>
+
+
                             </div>
                             
                                       <div class="col-xs-6" style="text-align:right;">

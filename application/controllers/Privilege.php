@@ -6,15 +6,8 @@ class Privilege extends MY_Controller {
 		parent::__construct();
 		// Some models are already been loaded on MY_Controller
         
-        
-            $this->load->model('Users_model');
-        
-        
-        
-        
-        
-      
-        
+        $this->load->model('Users_model');
+       
 	}
 	
 	public function index() 
@@ -34,8 +27,7 @@ class Privilege extends MY_Controller {
         
     }
     
- 
- 
+
     
    public function addUser(){
        
@@ -61,7 +53,7 @@ class Privilege extends MY_Controller {
        if($output['status'] == 200){
     
 
-$this->send_New_User_Email($contact_info['name'],$contact_info['email'],$genrated_password);
+           $this->send_New_User_Email($contact_info['name'],$contact_info['email'],$genrated_password);
  
   
 }

@@ -35,7 +35,6 @@ class Contacts extends MY_Controller {
 			$this->form_validation->set_rules('email', 'email', 'xss_clean');
 			$this->form_validation->set_rules('phone', 'phone', 'xss_clean');
 			$this->form_validation->set_rules('linkedin_id', 'linkedin_id', 'xss_clean');
-			$this->form_validation->set_rules('role', 'role', 'xss_clean|required');
 			$this->form_validation->set_rules('company_id', 'company_id', 'xss_clean|required');
 			$this->form_validation->set_rules('user_id', 'user_id', 'xss_clean|required');
 			$this->form_validation->set_rules('email', 'email', 'valid_email');
@@ -45,6 +44,7 @@ class Contacts extends MY_Controller {
 			$this->form_validation->set_rules('report_sales_ledger', 'report_sales_ledger', 'xss_clean');
 			$this->form_validation->set_rules('report_commision', 'report_commision', 'xss_clean');
 			$this->form_validation->set_rules('report_age_debtor', 'report_age_debtor', 'xss_clean');
+			$this->form_validation->set_rules('role_dropdown', 'role', 'xss_clean|required');
 
 			if($this->form_validation->run())
 			{
@@ -63,7 +63,8 @@ class Contacts extends MY_Controller {
 					$this->input->post('report_timesheets_processed'),
 					$this->input->post('report_sales_ledger'),
 					$this->input->post('report_commision'),
-					$this->input->post('report_age_debtor')
+					$this->input->post('report_age_debtor'),
+					$this->input->post('role_dropdown')
 				);
 				if($rows_affected  > 0)
 				{
@@ -102,7 +103,6 @@ class Contacts extends MY_Controller {
 			$this->form_validation->set_rules('email', 'email', 'xss_clean');
 			$this->form_validation->set_rules('phone', 'phone', 'xss_clean');
 			$this->form_validation->set_rules('linkedin_id', 'linkedin_id', 'xss_clean');
-			$this->form_validation->set_rules('role', 'role', 'xss_clean|required');
 			$this->form_validation->set_rules('company_id', 'company_id', 'xss_clean|required');
 			$this->form_validation->set_rules('contact_id', 'contact_id', 'xss_clean|required');
 			$this->form_validation->set_rules('user_id', 'user_id', 'xss_clean|required');
@@ -113,9 +113,11 @@ class Contacts extends MY_Controller {
 			$this->form_validation->set_rules('report_sales_ledger', 'report_sales_ledger', 'xss_clean');
 			$this->form_validation->set_rules('report_commision', 'report_commision', 'xss_clean');
 			$this->form_validation->set_rules('report_age_debtor', 'report_age_debtor', 'xss_clean');
+			$this->form_validation->set_rules('role_dropdown', 'role', 'xss_clean|required');
 
 			if($this->form_validation->run())
 			{
+                
 				$rows_affected = $this->Contacts_model->update($this->input->post());
 				if($rows_affected)
 				{

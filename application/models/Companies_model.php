@@ -1,5 +1,10 @@
 <?php
 class Companies_model extends CI_Model {
+    
+    
+   
+
+    
 	
 	function get_all()
 	{

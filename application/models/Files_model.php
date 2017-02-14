@@ -27,44 +27,36 @@ ALTER TABLE files
     
     */
 
-	public function file_uploader($data){
-        
-        
-        
-       // file_put_contents('demotestfile.txt', 'I am a file what are noooooooo?');
-        
-        
-
-        
+	public function file_uploader($data)
+    {
+         
        $this->db->insert('files', $data);
-        
-        
+         
     } 
     
     
-    function getfile($id){
+    function getfile_($id)
+    { //This is a working 
         
         $query = $this->db->query("SELECT name,file_location FROM files WHERE encryption_name='".$id."' LIMIT 1");
-              return $query->result_array();
+        return $query->result_array();
                
-        
-        
     }
     
     
-    public function upload_image($fileName)
-{
-if($filename!='' ){
-      $filename1 = explode(',',$filename);
-  foreach($filename1 as $file){
-  $file_data = array(
-  'name' => $file,
-  'datetime' => date('Y-m-d h:i:s')
-  );
-  //$this->db->insert('uploaded_files', $file_data);
-  }
-  }
-}
+    public function upload_image_($fileName)
+    {
+        if($filename!='' ){
+              $filename1 = explode(',',$filename);
+              foreach($filename1 as $file){
+                  $file_data = array(
+                  'name' => $file,
+                  'datetime' => date('Y-m-d h:i:s')
+                  );
+              //$this->db->insert('uploaded_files', $file_data);
+              }
+          }
+    }
     
 
 }

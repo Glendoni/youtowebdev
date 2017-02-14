@@ -1247,7 +1247,7 @@ $sql = 'select json_agg(results)
 
 		function get_campaigns($company_id)
 	{
-		$this->db->select('campaigns.id,campaigns.name as "campaign_name", users.name, campaigns.created_at');
+		$this->db->select('campaigns.id,campaigns.name as "campaign_name", users.name, campaigns.created_at,campaigns.evergreen_id');
 		$this->db->distinct();
 		$this->db->join('campaigns', 'campaigns.id = targets.campaign_id', 'left');
 		$this->db->join('users', 'users.id = campaigns.created_by', 'left');
