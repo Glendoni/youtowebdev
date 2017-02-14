@@ -6,6 +6,8 @@
     "require": {
         "compwright/codeigniter-installers": "*",
         "ext-memcached": "*",
-        "shlikhota/postgresdb-php":"*"
+        "shlikhota/postgresdb-php":"*",
+        "robmorgan/phinx": "^0.7.0",
+        "microsoft/windowsazure": "^0.4"
     }
 }
