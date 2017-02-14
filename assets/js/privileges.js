@@ -155,14 +155,33 @@ $(document).ready(function(){
   //getMainObj();
    
     
+    $('#department').change(function(){
+$('.market').prop('checked', false);
+console.log($(this).val());
+
+if($(this).val() == "sales"){
+
+$('.checkbox').show();
+    $('.market').attr('required','required');
+
+}else{
+$('.checkbox').hide();
+     $('.market').removeAttr('required');  
+}
+
+})
+    
+    
+    
     $('.addnewuser').click(function(){
-        $('.checkbox').removeAttr('required'); 
-        $('.checkbox').hide(); 
+        
         $('.freset,#department,#password,#role').val(''); 
         $('.emailuser').hide();
         $('#created_by_name,#updated_by_name,#temp_password').text('');
         $('.userverbiagechange').text('Add');
         $('#formstatus').attr('data','addUser');
+        $('.checkbox').hide();
+     $('.market').removeAttr('required');  
 
     })
   
@@ -188,34 +207,25 @@ $(document).ready(function(){
                 success: function(data) { 
                  //console.log(data); //error false
                   
-                  
-                  // 
-                    
-                    
                     if (data.status === 200) {
-                         $('#formstatus').attr('data','updateUser');
-                         get_users_info(false);
-           $('.messageprev').prepend(' <div class="alert alert-success userdatastatus"> '+data.msg+' </div>') 
-window.setTimeout(function() {
-    $(".alert-success").fadeTo(500, 0).slideUp(500, function(){
-    $(this).remove(); 
-    });
-    }, 4000);
+                        $('#formstatus').attr('data','updateUser');
+                        get_users_info(false);
+                        $('.messageprev').prepend(' <div class="alert alert-success userdatastatus"> '+data.msg+' </div>') 
+                        window.setTimeout(function() {
+                        $(".alert-success").fadeTo(500, 0).slideUp(500, function(){
+                            $(this).remove(); 
+                        });
+                        }, 4000);
+                        $('.userverbiagechange').text('Edit');
 
-                    
-                    
-                   
-                        
                     }else{
-                        
-                      // console.log(data);   
-                                   $('.messageprev').prepend(' <div class="alert alert-danger userdatastatus"  >  '+data.msg+' </div>') 
-window.setTimeout(function() {
-    $(".alert-danger").fadeTo(500, 0).slideUp(500, function(){
-    $(this).remove(); 
-    });
-    }, 4000);
-             
+                        // console.log(data);   
+                        $('.messageprev').prepend(' <div class="alert alert-danger userdatastatus"  >  '+data.msg+' </div>') 
+                        window.setTimeout(function() {
+                        $(".alert-danger").fadeTo(500, 0).slideUp(500, function(){
+                        $(this).remove(); 
+                        });
+                        }, 4000);
                     }
                     
                     //$('.addnewuser').trigger('click');
@@ -233,21 +243,7 @@ window.setTimeout(function() {
     })
 get_users_info();
     
- $('#department').change(function(){
-$('.market').prop('checked', false);
-//console.log($(this).val());
-
-if($(this).val() == "sales"){
-
-$('.checkbox').show();
-
-}else{
-$('.checkbox').hide();
-}
-
-})
-    
-    
+ 
 }) //end of document ready.
 
 
@@ -375,6 +371,10 @@ function edituser(){
         
         var testkey = [];
        var dateval = [];
+       
+       
+       
+       
     $.ajax({
                 type: "POST",
                   data: para,
@@ -383,25 +383,10 @@ function edituser(){
                 success: function(data) {
                     $('#created_by_name, #updated_by_name,#temp_password').text('');
                    // $('.emailuser').hide(); //To be assesed. Wil be used to show button to email user from UI
-                  $('.checkbox').hide();
-                    $('.market').removeAttr('required'); 
                     $.each( data, function( key, val ) {
                     
                         
-                       //if( key == 'department') 
-
- if(key == 'department' && val == 'sales' ){
- 
-//  console.log(key+val);
-$('.checkbox').show();
-    $('.market').attr('required','required'); 
-  
-}else{
-//$('.checkbox').hide();
-     //$('.market').removeAttr('required'); 
-}
- 
-                        
+                      // if( key == 'department') console.log(val);
                         
                        if( key == 'eff_from' &&  val != null){
                       
@@ -428,13 +413,14 @@ $('.checkbox').show();
                            $('#submit_user #'+key).text('Temp Password: '+val);  
                             //$('.emailuser').show();
                            
-                       }else if(key == 'market' &&  val != null &&  val != ''   ){
-                         
-$('.market').prop('checked', false);
-//console.log($(this).val());
+                       }else if(key == 'market' &&  val != null &&  val != '' ){
+                          // console.log(key)
+                          // $('#market #'+key).text('Temp Password: '+val); 
+                           $('.market').prop('checked', false);
 
- $("input[name=market][value='"+val+"']").prop("checked",true); 
-    $('.market').attr('required','required'); 
+
+                           $("input[name=market][value='"+val+"']").prop("checked",true);
+                           
                             //$('.emailuser').show();
                            
                        }else{
@@ -442,9 +428,21 @@ $('.market').prop('checked', false);
                        }
                         
                     })
+                   
+                    
+                    if($('#department').val() == "sales"){
+
+$('.checkbox').show();
+$('.market').attr('required','required');
+}else{
+$('.checkbox').hide();
+    $('.market').removeAttr('required'); 
+}
                     
                    $("html, body").animate({ scrollTop: 0 }, "slow");
                // console.log(testkey.join(''))
+                    
+                    
                 }
         
                 });
