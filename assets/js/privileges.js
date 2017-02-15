@@ -155,6 +155,24 @@ $(document).ready(function(){
   //getMainObj();
    
     
+    $('#department').change(function(){
+$('.market').prop('checked', false);
+console.log($(this).val());
+
+if($(this).val() == "sales"){
+
+$('.checkbox').show();
+    $('.market').attr('required','required');
+
+}else{
+$('.checkbox').hide();
+     $('.market').removeAttr('required');  
+}
+
+})
+    
+    
+    
     $('.addnewuser').click(function(){
         
         $('.freset,#department,#password,#role').val(''); 
@@ -162,6 +180,8 @@ $(document).ready(function(){
         $('#created_by_name,#updated_by_name,#temp_password').text('');
         $('.userverbiagechange').text('Add');
         $('#formstatus').attr('data','addUser');
+        $('.checkbox').hide();
+     $('.market').removeAttr('required');  
 
     })
   
@@ -187,34 +207,25 @@ $(document).ready(function(){
                 success: function(data) { 
                  //console.log(data); //error false
                   
-                  
-                  // 
-                    
-                    
                     if (data.status === 200) {
-                         $('#formstatus').attr('data','updateUser');
-                         get_users_info(false);
-           $('.messageprev').prepend(' <div class="alert alert-success userdatastatus"> '+data.msg+' </div>') 
-window.setTimeout(function() {
-    $(".alert-success").fadeTo(500, 0).slideUp(500, function(){
-    $(this).remove(); 
-    });
-    }, 4000);
+                        $('#formstatus').attr('data','updateUser');
+                        get_users_info(false);
+                        $('.messageprev').prepend(' <div class="alert alert-success userdatastatus"> '+data.msg+' </div>') 
+                        window.setTimeout(function() {
+                        $(".alert-success").fadeTo(500, 0).slideUp(500, function(){
+                            $(this).remove(); 
+                        });
+                        }, 4000);
+                        $('.userverbiagechange').text('Edit');
 
-                    
-                    
-                   
-                        
                     }else{
-                        
-                      // console.log(data);   
-                                   $('.messageprev').prepend(' <div class="alert alert-danger userdatastatus"  >  '+data.msg+' </div>') 
-window.setTimeout(function() {
-    $(".alert-danger").fadeTo(500, 0).slideUp(500, function(){
-    $(this).remove(); 
-    });
-    }, 4000);
-             
+                        // console.log(data);   
+                        $('.messageprev').prepend(' <div class="alert alert-danger userdatastatus"  >  '+data.msg+' </div>') 
+                        window.setTimeout(function() {
+                        $(".alert-danger").fadeTo(500, 0).slideUp(500, function(){
+                        $(this).remove(); 
+                        });
+                        }, 4000);
                     }
                     
                     //$('.addnewuser').trigger('click');
@@ -360,6 +371,10 @@ function edituser(){
         
         var testkey = [];
        var dateval = [];
+       
+       
+       
+       
     $.ajax({
                 type: "POST",
                   data: para,
@@ -398,14 +413,36 @@ function edituser(){
                            $('#submit_user #'+key).text('Temp Password: '+val);  
                             //$('.emailuser').show();
                            
+                       }else if(key == 'market' &&  val != null &&  val != '' ){
+                          // console.log(key)
+                          // $('#market #'+key).text('Temp Password: '+val); 
+                           $('.market').prop('checked', false);
+
+
+                           $("input[name=market][value='"+val+"']").prop("checked",true);
+                           
+                            //$('.emailuser').show();
+                           
                        }else{
                            $('#submit_user #'+key).val(val); 
                        }
                         
                     })
+                   
+                    
+                    if($('#department').val() == "sales"){
+
+$('.checkbox').show();
+$('.market').attr('required','required');
+}else{
+$('.checkbox').hide();
+    $('.market').removeAttr('required'); 
+}
                     
                    $("html, body").animate({ scrollTop: 0 }, "slow");
                // console.log(testkey.join(''))
+                    
+                    
                 }
         
                 });

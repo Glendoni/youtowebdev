@@ -11,7 +11,7 @@ function asset_upload(){
 
 //$connectionString = "DefaultEndpointsProtocol=[http|https];AccountName=[yourAccount];AccountKey=[yourKey]";
 // Create blob REST proxy.
-return  ServicesBuilder::getInstance()->createBlobService('DefaultEndpointsProtocol=https;AccountName=baselisttemp;AccountKey=7p3u0ud8nI/OSevWqMQtCoiM9+mXjq/sFMhHO+zc/CyBjrV3aMmw6IhdspKjWWGcK0+6A6/TLmKFSqoF2warXg==;');
+return  ServicesBuilder::getInstance()->createBlobService('DefaultEndpointsProtocol=https;AccountName=raveninterceptordev;AccountKey=pssTrAFj3ztS2PsNj6CkSyAKi820t9BxS4TGBMoaZhUskcgKbPPt6gXetMHVwWA/xUPNrDg8E57IwK2qIYul/Q==');
 
 
 }
