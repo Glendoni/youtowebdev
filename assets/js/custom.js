@@ -661,6 +661,27 @@ $(".pipeline-validation-check").change(function() {
          
         
         $(document).ready(function($){
+            
+            $('.contact_role').change(function(){
+
+var roleAllowSubmitEval = $(this).val();
+
+console.log(roleAllowSubmitEval)
+
+if(roleAllowSubmitEval == 1){
+
+$('.updateComContact').prop("disabled",true);
+$('.historic').show();
+
+}else{
+
+$('.updateComContact').prop("disabled",false);
+$('.historic').hide();
+
+}
+
+                                          })
+            
 
                 if($('#bespokeEval').val() == 'support'){ //evaluates support services
 

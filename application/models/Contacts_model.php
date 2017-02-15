@@ -135,7 +135,7 @@ function get_contacts_s($company_id)
         $contact->title = !empty(trim($title))?trim($title):NULL;
         $contact->first_name   = str_replace('\'', '&#39;',rtrim($post['first_name'])); // please read the below note
     	$contact->last_name = str_replace('\'', '&#39;',ltrim($post['last_name']));
-        $contact->role_dropdown = $post['role_dropdown'];
+        $contact->role = $post['role_dropdown'];
         $contact->email = !empty($post['email'])?$post['email']:NULL;
         $contact->phone = !empty($post['phone'])?$post['phone']:NULL;
         $linkedin_id = !empty($post['linkedin_id'])?$post['linkedin_id']:NULL;

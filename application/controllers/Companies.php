@@ -327,6 +327,23 @@ class Companies extends MY_Controller {
 				$option_contacts[$contact->id] = $contact->first_name.' '.$contact->last_name;
 			}
  
+             $this->data['cont_roleArray'] = array('Account Director' => 'Account Director',
+'Account Manager' => 'Account Manager',
+'Accountant' => 'Accountant',
+'Administrator' => 'Administrator',
+'Business Development Manager' => 'Business Development Manager',
+'CEO' => 'CEO',
+'Consultant' => 'Consultant',
+'CFO' => 'CFO',
+'CTO' => 'CTO',
+'Director' => 'Director',
+'Financial Controller' =>'Financial Controller',
+'Manager' => 'Manager',
+'Marketing Manager' => 'Marketing Manager',
+'Non Exec Director' => 'Non Exec Director',
+'Operations Manager' => 'Operations Manager');
+            
+            
             $this->data['deals_pipeline_months'] = $monthArr;
             $this->data['deals_pipeline_status'] = $deals_pipeline_statusArr;
             $this->data['option_contacts'] = $option_contacts;
