@@ -51,47 +51,20 @@
                                 <label for="type">Select role:</label>
                                 <select class="form-control" id="type" name="role_dropdown">
                                <option value=""></option>
-                                    <option value="Resourcer">Resourcer</option>
-	<option value="Recruitment Consultant">Recruitment Consultant</option>
-	<option value="Senior Recruitment Consultant">Senior Recruitment Consultant</option>
-	<option value="Manager">Manager</option>
-	<option value="Account Manager">Account Manager</option>
-	<option value="Account Director">Account Director</option>
-	<option value="Business Development Manager">Business Development Manager</option>
-	<option value="Business Development Director">Business Development Director</option>
-	<option value="Commercial Sales Manager">Commercial Sales Manager</option>
-	<option value="Commercial Sales Director">Commercial Sales Director</option>
-	<option value="Operations Manager">Operations Manager</option>
-	<option value="Operations Director">Operations Director</option>
-	<option value="Director">Director</option>
-	<option value="Account Director">Account Director</option>
-	<option value="Head of Division">Head of Division</option>
-	<option value="Head of Function">Head of Function</option>
-	<option value="Managing Director">Managing Director</option>
-	<option value="Board Member">Board Member</option>
-	<option value="COO - Chief Operating Officer">COO - Chief Operating Officer</option>
-	<option value="CEO - Chief Executive Officer">CEO - Chief Executive Officer</option>
-	<option value="CTO - Chief Technical Officer">CTO - Chief Technical Officer</option>
-	<option value="Personal Assistant">Personal Assistant</option>
-	<option value="Administrator">Administrator</option>
-	<option value="Data Entry Administrator">Data Entry Administrator</option>
-	<option value="Developer">Developer</option>
-	<option value="Senior Developer">Senior Developer</option>
-	<option value="Development Manager">Development Manager</option>
-	<option value="Software Tester">Software Tester</option>
-	<option value="Software Testing Manager">Software Testing Manager</option>
-	<option value="Project Manager">Project Manager</option>
-	<option value="Programme Manager">Programme Manager</option>
-	<option value="Programme Director">Programme Director</option>
-	<option value="Risk & Compliance Officer">Risk & Compliance Officer</option>
-	<option value="Risk & Compliance Manager">Risk & Compliance Manager</option>
-	<option value="Risk & Compliance Director">Risk & Compliance Director</option>
-	<option value="Inbound Marketing">Inbound Marketing</option>
-	<option value="Marketing Manager">Marketing Manager</option>
-	<option value="Marketing Director">Marketing Director</option>
-	<option value="Accountant">Accountant</option>
-	<option value="Finance Analyst">Finance Analyst</option>
-	           <option value="Finance Director">Finance Director</option>
+                                    
+                                    <?php 
+                                    
+                                    foreach($cont_roleArray  as $key => $value){
+                                        
+                                        
+                          echo    '<option value="'.$key.'">'.$value.'</option>';           
+                                        
+                                        
+                                    }
+                                    
+                                    
+                                    ?>
+                                    
                                 </select>
                             </div>
                         </div>
@@ -120,20 +93,16 @@
                                 <label for="reports" class="control-label">Reports needed</label>   
                                 <div class="reports">
                                     <label><input type="checkbox" name="report_extensions" value="report_extensions">Extensions</label>
-                                </div>
-                                <div class="reports">
+                               
                                     <label><input type="checkbox" name="report_timesheets_storage" value="report_timesheets_storage">Timesheets Charger</label>
-                                </div>
-                                <div class="reports">
+                                
                                     <label><input type="checkbox" name="report_timesheets_processed" value="report_timesheets_processed">Timesheets Processed</label>
                                 </div>
                                 <div class="reports">
                                     <label><input type="checkbox" name="report_sales_ledger" value="report_sales_ledger">Sales Ledger</label>
-                                </div>
-                                <div class="reports">
+                               
                                     <label><input type="checkbox" name="report_commision" value="report_commision">Commission</label>
-                                </div>
-                                <div class="reports">
+                                
                                     <label><input type="checkbox" name="report_age_debtor" value="report_age_debt_ledger">Age Debt Ledger</label>
                                 </div>
                             </div>

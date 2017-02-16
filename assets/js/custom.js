@@ -665,18 +665,18 @@ $(".pipeline-validation-check").change(function() {
             $('.contact_role').change(function(){
 
 var roleAllowSubmitEval = $(this).val();
-
-console.log(roleAllowSubmitEval)
+var contactRoleId = $(this).attr('data');
+//console.log(roleAllowSubmitEval)
 
 if(roleAllowSubmitEval == 1){
 
-$('.updateComContact').prop("disabled",true);
-$('.historic').show();
+$('.contact_sumit_'+contactRoleId).prop("disabled",true);
+$('.historic_'+contactRoleId).show();
 
 }else{
 
-$('.updateComContact').prop("disabled",false);
-$('.historic').hide();
+$('.contact_sumit_'+contactRoleId).prop("disabled",false);
+$('.historic_'+contactRoleId).hide();
 
 }
 

@@ -156,7 +156,7 @@ $historicalRole = '';
                     if(!in_array($contact->role, $cont_roleArray)){
                         
                         $oldcontact = $contact->role;
-                        $historicalRole = ' <span class="historic">(Depricated  Role Type ) Please change in order to save form </span>';
+                        $historicalRole = ' <span class="historic_'.$contact->id.'">(Depricated  Role Type ) Please change in order to save form </span>';
 $showHideSaveEval = 'disabled="disabled"';
 //Historic
                     }
@@ -165,7 +165,7 @@ $showHideSaveEval = 'disabled="disabled"';
 					<div class="col-md-6">
 						<div class="form-group ">
 							<label for="type">Select role:<?php echo $historicalRole; ?></label>
-							<select class="form-control contact_role" id="type" name="role_dropdown">
+							<select class="form-control contact_role" id="type" data="<?php echo $contact->id; ?>"name="role_dropdown">
 							    <option value="1"><?php echo $oldcontact; ?></option>
 								<option <?php echo $contact->role === 'Account Director'?'selected':''; ?> value="Account Director">Account Director</option>
 								<option <?php echo $contact->role === 'Account Manager'?'selected':''; ?> value="Account Manager">Account Manager</option>
@@ -241,16 +241,14 @@ $showHideSaveEval = 'disabled="disabled"';
 									>
 									Extensions
 								</label>
-							</div>
-							<div class="reports">
+						 
 								<label>
 									<input type="checkbox" name="report_timesheets_storage" value="report_timesheets_storage"
 										<?php if($reports && in_array("report_timesheets_storage", $reports)) { echo "checked"; } ?>
 									>
 									Timesheets Charger
 								</label>
-							</div>
-							<div class="reports">
+							 
 								<label>
 									<input type="checkbox" name="report_timesheets_processed" value="report_timesheets_processed"
 										<?php if($reports && in_array("report_timesheets_processed", $reports)) { echo "checked"; } ?>
@@ -265,16 +263,14 @@ $showHideSaveEval = 'disabled="disabled"';
 									>
 									Sales Ledger
 								</label>
-							</div>
-							<div class="reports">
+						 
 								<label>
 									<input type="checkbox" name="report_commision" value="report_commision"
 										<?php if($reports && in_array("report_commision", $reports)) { echo "checked"; } ?>
 									>
 									Commission
 								</label>
-							</div>
-							<div class="reports">
+							 
 								<label>
 									<input type="checkbox" name="report_age_debtor" value="report_age_debt_ledger"
 										<?php if($reports && in_array("report_age_debt_ledger", $reports)) { echo "checked"; } ?>
@@ -287,7 +283,7 @@ $showHideSaveEval = 'disabled="disabled"';
 				</div>
 	      	</div>
 	      	<div class="modal-footer">
-	        	<button type="submit" class="btn btn-sm btn-warning btn-block updateComContact" <?php echo $showHideSaveEval; ?>>Save</button>
+	        	<button type="submit" class="btn btn-sm btn-warning btn-block updateComContact contact_sumit_<?php echo $contact->id; ?>" <?php echo $showHideSaveEval; ?>>Save</button>
 	      	</div>
             <div class="modal-footer">   
         		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
