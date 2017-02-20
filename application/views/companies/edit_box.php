@@ -221,11 +221,11 @@
                     </div>
         <div class="col-sm-6 col-md-2">
                         <div class=" form-group ">
-                            <label for="phone" class="control-label">Confidential</label> 
+                            <label for="phone" class="control-label">Funding Type</label> 
                             
                      
                            <span class="button-checkbox bespoke_checkbox ">
-            <button type="button"  class="btn btn-checkbox   btn-default enterpriseBoxBtn" data-color="primary"><i class="state-icon undefined"></i> &nbsp;Confidential/Enterprise</button>
+            <button type="button"  class="btn btn-checkbox   btn-default enterpriseBoxBtn" data-color="primary"><i class="state-icon undefined"></i> &nbsp;CONFIDENTIAL</button>
             <input type="checkbox" name="confidential_flag" value="1" class="hidden" <?php echo $company['confidential_flag']?  'checked=\"checked\"' : "" ; ?>
         </span>
                         </div>

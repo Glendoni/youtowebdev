@@ -21,13 +21,50 @@ endif;
                     <div class="row top-info-holder">
                     <div class="col-md-9 piplineUdate" style="    padding-left: 31px;height: 20px;margin-top: 6px;">
                                 <!-- <breadcrumbscroll> -->
+                        
+                        
+                      
     <h2 class="company-header" id="logo">
-                <?php $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' ); echo html_entity_decode (str_replace($words, ' ',$company['name'])); ?></h2>
-    <?php if (isset($company['trading_name'])): ?>
-        <h5 class="trading-header">
-        <small><b>T/A</b></small>  <?php echo $company['trading_name'];?>
-        </h5>
-    <?php endif; ?>
+                <?php $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' ); echo html_entity_decode (str_replace($words, ' ',$company['name'])); ?> 
+        
+        
+                             
+        
+        
+                             </h2>
+                        
+                        
+               
+   
+            <div>
+
+                <?php if (isset($company['confidential_flag'])): ?>
+                    <h5 class="trading-header" style="margin-top: 9px; margin-left: 2px;">
+                    <?php if($company['confidential_flag']): ?>
+                        <span class="label trading-header" style="background-color: #428bca; color:#fff;float:left;font-size: 1.7em;">
+                            <b>Enterprise</b> 
+                        </span>
+                    <?php endif; ?>
+
+                <?php endif; ?>
+
+
+                </h5>
+                <?php if (isset($company['trading_name'])): ?>
+                <div class="spacer" style="clear: both;"></div>
+                <br> <p id="comapny_header_trading_name">
+                    <small><b>T/A</b></small> 
+                    <?php echo $company['trading_name'];?>
+                </p>
+                <?php endif; ?>
+
+            </div>
+                            
+                       
+                        
+                        <div>
+  
+                        </div>
     <div class="spacer" style="clear: both;"></div>
 
 
@@ -108,9 +145,6 @@ endif;
                                         <?php endif; ?>
 
        
-                              <?php if($company['confidential_flag']): ?>
-                                        <span class="label" style="background-color: #428bca; color:#fff; margin-left: 5px;"><b>Enterprise</b> </span>
-                                <?php endif; ?>
                     
                    
                         
@@ -818,6 +852,12 @@ endif;
 		<!--CONTACTS-->
 		<div class="col-md-12">
 		<div class="panel panel-default">
+
+		
+            
+            
+            
+        <div class="panel panel-default">
 
 		<div class="panel-heading" id="contacts">
 		Contacts
