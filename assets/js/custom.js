@@ -11,12 +11,31 @@ function dateRequired()     {
 
   
 $( document ).ready(function() {
+    
+$('.comp_details_edit_btn').click(function(){
+ 
+    $('.enterpriseBoxBtn').on('click', function(){
+
+    if($(this).hasClass('active')){		
+    $('.enterpriseBox').show();
+    $('.enterpriseBox strong').text('Enterprise');
+    }else{
+
+    $('.enterpriseBox').hide();
+    $('.enterpriseBox strong').text('');
+    }
+
+    })
+
+})
+    
+    
     if((/users\/profile/.test(window.location.href))) {
     $('#userupdatepassword').click(function(){
 
 $('.updatepassword').toggle(function(){
     
-   console.log($(this).css('display')); 
+  // console.log($(this).css('display')); 
     var displayPasswordStatus  = $(this).css('display');
     if(displayPasswordStatus == 'block'){
         
@@ -1483,7 +1502,7 @@ $('#copymainaddr').click(function(){
 if($(this).prop("checked")){ $('.popUpAddress').val($('.mainAddress').text()) }else{ $('.popUpAddress').val('') }
 })
 function triggerOpenEditbox(){
-    
+         console.log('I am legend'); 
     $('.mainedit').trigger('click');
     
     

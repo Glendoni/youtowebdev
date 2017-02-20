@@ -399,6 +399,7 @@ and ACTIONS_SUB.company_id is null
 		(-- T1
 		select C.id,
 			   C.name,
+              
 			   C.pipeline,
 			   U.id "owner_id",
 			   TT5.actioned_at, -- f32
@@ -455,8 +456,8 @@ and ACTIONS_SUB.company_id is null
 			   UU.name, --f43
                C.initial_rate, --f44
                C.customer_to,--f45
-               AM.name --f46
-			  
+               AM.name, --f46
+			   C.confidential_flag -- f47,
                
 			   )) "JSON output" 
 			   
@@ -627,6 +628,7 @@ from (select * from COMPANIES ' ;
 				 
 		group by C.id,
 		         C.name,
+                 C.confidential_flag,
 		         C.url,
 			     C.eff_from,
 			     C.linkedin_id,
@@ -876,6 +878,8 @@ from (select * from COMPANIES ' ;
 				'phone' => !empty($post['phone'])?$post['phone']:NULL,
 				'linkedin_id' => (isset($post['linkedin_id']) and !empty($post['linkedin_id']))?$post['linkedin_id']:NULL,
 				'url' => !empty($post['url'])?str_replace('http://', '',$post['url']):NULL,
+            
+            'confidential_flag' => !empty($post['confidential_flag'])? $post['confidential_flag'] : FALSE,
 				//'class'=>!empty($post['company_class'])?$post['company_class']:NULL,
  
 //'pipeline'=>(!empty($post['company_pipeline'])?$post['company_pipeline']:NULL),

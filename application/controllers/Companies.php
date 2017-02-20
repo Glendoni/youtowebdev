@@ -334,6 +334,7 @@ class Companies extends MY_Controller {
 'Business Development Manager' => 'Business Development Manager',
 'CEO' => 'CEO',
 'Consultant' => 'Consultant',
+'Managing Director' => 'Managing Director',
 'CFO' => 'CFO',
 'CTO' => 'CTO',
 'Director' => 'Director',
@@ -379,7 +380,10 @@ class Companies extends MY_Controller {
     
 	public function edit()
 	{
-		if($this->input->post('edit_company'))
+		
+
+
+if($this->input->post('edit_company'))
 		{
   
 			$post = $this->input->post();

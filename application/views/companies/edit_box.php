@@ -3,22 +3,45 @@
         <div class="modal-content">
             <?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'],'edit_company'=>'1', 'class_check' => $company['class'], 'pipeline_check' => $company['pipeline']);
                  echo form_open(site_url().'companies/edit', 'name="edit_company" class="edit_company" role="form"',$hidden); ?>
+            
+            
+            
+            
+            
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                         <?php if ($current_user['permission'] == 'admin'|| $current_user['department'] == 'data'): ?>
-                                            <h4 class="modal-title" id="myModalLabel">
-<input type="text" name="reg_name" value="<?php echo isset($company['name'])?$company['name']:''; ?>" id="trading_name" class="form-control" style="padding: 0;border: none;box-shadow: none;font-size: 18px;max-width: 500px;">
-                                                
-                                                <span style="font-size: 11px;"><?php echo $company['trading_name']; ?></span>
-</h4>
                                             
+                <div>
+                <h4 class="modal-title" id="myModalLabel">
+
+                                                
+                                                
+                                                
+    <input type="text" name="reg_name" value="<?php echo isset($company['name'])?$company['name']:''; ?>" id="trading_name" class="form-control" style="padding: 0;border: none;box-shadow: none;font-size: 18px;max-width: 500px;">
+                                                
+                                               
+                                                
+                                                <span style="font-size: 11px;"><?php echo $company['trading_name']; ?>  </span>
+</h4>
+                    
+                    </div>
+                      <div class="enterpriseBox" style="
+    margin-left: 46%; margin-top: -20px;
+
+"><strong><?php     if($company['confidential_flag']) echo $confidential_flag ='( Enterprise )'; ?> </strong></div>  
+                                           
                 <?php else: ?>
+             
                                 <h4 class="modal-title" id="myModalLabel">
 <?php echo $company['name']; ?>
-<input type="hidden" name="reg_name" value="<?php echo $company['name']; ?>" id="reg_name" class="hidden" >                          
+<input type="hidden" name="reg_name" value="<?php echo $company['name']; ?>" id="reg_name" class="hidden" >    
+                                    
 
 </h4>
 
+             
+                
                                 <?php endif; ?>
 
             </div>
@@ -90,7 +113,7 @@
                 <input type="text" name="url" value="<?php echo isset($company['url'])?$company['url']:''; ?>" id="url" maxlength="100" class="form-control">
             </div>
         </div>
-             <div class="col-sm-6 col-md-2">
+             <div class="col-sm-6 col-md-4">
                         <div class=" form-group ">
                             <label for="linkedin_id" class="control-label">Linkedin ID</label>                            
                             <input type="text" name="linkedin_id" value="<?php echo isset($company['linkedin_id'])?$company['linkedin_id']:''; ?>" id="linkedin_id" maxlength="50" class="form-control">
@@ -135,7 +158,14 @@
 
                                             <div class="col-xs-6 col-sm-6 col-md-8" style="right: 14px;">
                                                 <label for="pipeline_text">Pipeline Status</label>
-                                                <p style="font-size: 12px;"><?php echo ucfirst($deals_pipeline_status[$deals_pipline->status]).' In '.date("F", strtotime($deals_pipline->eff_from)). '<br/> by: '.$deals_pipline->name ;?></p>      
+                                                <p style="font-size: 12px;"><?php echo ucfirst($deals_pipeline_status[$deals_pipline->status]).' $data = array(
+                                                   'title' => 'My title' ,
+                                                   'name' => 'My Name' ,
+                                                   'date' => 'My date'
+                                                );
+                                                
+                                                $this->db->insert('mytable', $data);
+                                                
                                             </div>
                                             <div class="col-xs-6 col-sm-6 col-md-4" >
                                                 <label for="exampleSelect1">Delete</label>
@@ -189,6 +219,17 @@
                             
                         </div>
                     </div>
+        <div class="col-sm-6 col-md-2">
+                        <div class=" form-group ">
+                            <label for="phone" class="control-label">Confidential</label> 
+                            
+                     
+                           <span class="button-checkbox bespoke_checkbox ">
+            <button type="button"  class="btn btn-checkbox   btn-default enterpriseBoxBtn" data-color="primary"><i class="state-icon undefined"></i> &nbsp;Confidential/Enterprise</button>
+            <input type="checkbox" name="confidential_flag" value="1" class="hidden" <?php echo $company['confidential_flag']?  'checked=\"checked\"' : "" ; ?>
+        </span>
+                        </div>
+                    </div>
           <!--HIDDEN UNLESS SPECIAL INSIGHT-->
             <div class="col-sm-12">
                 <div id="show_si_box" class="show_si_box" style="display:none">
@@ -212,7 +253,10 @@
         <div class="col-md-12 target_sectors" style="margin-top:10px;">
             <label for="sectors" class="control-label">Bespoke</label>
                 <div class="tag-holder">  
-              <?php  foreach ($bespoke_target_sectors_list as $key => $value): 
+              <?php  
+        $confidential_flag = '';
+
+foreach ($bespoke_target_sectors_list as $key => $value): 
         
         if(array_key_exists($key,$company['sectors'])) array_push($bespokeArr, 1); 
         ?>

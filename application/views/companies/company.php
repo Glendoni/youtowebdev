@@ -42,6 +42,7 @@ endif;
     <span class="label" style="background-color: #01A4A4; color:#fff; margin-left: 5px;"><b>Account Manager:</b> <?php echo $company['account_manager']?></span>
     <?php endif; ?>
                         
+                      
                         
                         
   
@@ -94,12 +95,6 @@ endif;
                                         Cancelled:  <?php echo date('d/m/Y',strtotime($company['customer_to'])); ?>
                                         </span>
                         
-                        
-                        
-                       
-                        
-                        
-                        
                                         <?php } ?>
 
                                         <?php if(isset($company['assigned_to_name'])): ?>
@@ -113,7 +108,10 @@ endif;
                                         <?php endif; ?>
 
        
-                        
+                              <?php if($company['confidential_flag']): ?>
+                                        <span class="label" style="background-color: #428bca; color:#fff; margin-left: 5px;"><b>Enterprise</b> </span>
+                                <?php endif; ?>
+                    
                    
                         
                         
