@@ -549,8 +549,11 @@ if ($your_date < $now){;
         <?php
  
     $exclude_from_view = array('sales','data');
-        if(!in_array($current_user['department'],$exclude_from_view)){ ?>
-		  <div class="col-md-12">
+        if(!in_array($current_user['department'],$exclude_from_view)){ 
+    if(count($bespokeSelected)){
+    ?>
+		 
+    <div class="col-md-12">
 		<div class="panel panel-default">
             
 		<div class="panel-heading" id="bespoke" >
@@ -592,7 +595,7 @@ if ($your_date < $now){;
 		</div>
 		 
   </div>
-<?php } ?>
+<?php }} ?>
 		<!-- MORTGAGES -->
 	<div class="col-md-12">
 		<div class="panel panel-default">
