@@ -1,6 +1,10 @@
     <div class="modal draggable-modal fade" id="editModal<?php echo $company['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="Edit <?php echo $company['name']; ?>" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
         <div class="modal-content">
+            
+            
+        
+            
             <?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'],'edit_company'=>'1', 'class_check' => $company['class'], 'pipeline_check' => $company['pipeline']);
                  echo form_open(site_url().'companies/edit', 'name="edit_company" class="edit_company" role="form"',$hidden); ?>
             
@@ -10,41 +14,26 @@
             
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                        <?php if ($current_user['permission'] == 'admin'|| $current_user['department'] == 'data'): ?>
-                                            
+                <?php if ($current_user['permission'] == 'admin'|| $current_user['department'] == 'data'): ?>
                 <div>
-                <h4 class="modal-title" id="myModalLabel">
+                    <h4 class="modal-title" id="myModalLabel">
+                        <input type="text" name="reg_name" value="<?php echo isset($company['name'])?$company['name']:''; ?>" id="trading_name" class="form-control" style="padding: 0;border: none;box-shadow: none;font-size: 18px;max-width: 500px;">
+                        <span style="font-size: 11px;"><?php echo $company['trading_name']; ?>  </span>
+                    </h4>
 
-                                                
-                                                
-                                                
-    <input type="text" name="reg_name" value="<?php echo isset($company['name'])?$company['name']:''; ?>" id="trading_name" class="form-control" style="padding: 0;border: none;box-shadow: none;font-size: 18px;max-width: 500px;">
-                                                
-                                               
-                                                
-                                                <span style="font-size: 11px;"><?php echo $company['trading_name']; ?>  </span>
-</h4>
-                    
-                    </div>
-                      <div class="enterpriseBox" style="
-    margin-left: 46%; margin-top: -20px;
-
-"><strong><?php     if($company['confidential_flag']) echo $confidential_flag ='( Enterprise )'; ?> </strong></div>  
-                                           
+                </div>
                 <?php else: ?>
-             
-                                <h4 class="modal-title" id="myModalLabel">
-<?php echo $company['name']; ?>
-<input type="hidden" name="reg_name" value="<?php echo $company['name']; ?>" id="reg_name" class="hidden" >    
-                                    
-
-</h4>
-
-             
-                
-                                <?php endif; ?>
-
+                    <h4 class="modal-title" id="myModalLabel">
+                        <?php echo $company['name']; ?>
+                        <input type="hidden" name="reg_name" value="<?php echo $company['name']; ?>" id="reg_name" class="hidden" >
+                        <div class="enterpriseBox"  >
+                            <strong><?php if($company['confidential_flag']) echo '( Enterprise )'; ?> </strong>
+                        </div> 
+                    </h4>
+                <?php endif; ?>
             </div>
+            
+            
     <div class="modal-body">
         <div class="row">
             <div class="col-sm-12">
@@ -52,8 +41,7 @@
                 <strong>Source & Class Required</strong><br> Please add a Source &amp; Class to this company.
                 </div>
             </div>
-        </div>
-               
+        </div>     
         <div class="row">
             <div class="col-sm-6 col-md-2" style="display:none;">
                 <div class="row">
@@ -73,9 +61,6 @@
                     </div>
                 </div>
             </div>
-
-      
-            
             <div class="col-sm-6 col-md-2" style="display:none;">
                 <div class=" form-group ">
                     <?php
@@ -95,24 +80,23 @@
                     ?>
                 </div>
             </div>
-        
-       
-        <div class="col-sm-6 col-md-4">
-            <div class=" form-group ">
-                <?php
-                echo form_label('Source', 'company_source');
-                echo form_dropdown('company_source', $company_sources, (isset($company['source'])?$company['source']:'') ,'class="form-control pipeline-validation-check"');
-                ?>
-                <input type="hidden" name="original_source" value="<?php echo $company['source'];?>" />
-                <input type="hidden" name="original_source_date" value="<?php echo $company['source_date'];?>" />
+    
+            <div class="col-sm-6 col-md-4">
+                <div class=" form-group ">
+                    <?php
+                    echo form_label('Source', 'company_source');
+                    echo form_dropdown('company_source', $company_sources, (isset($company['source'])?$company['source']:'') ,'class="form-control pipeline-validation-check"');
+                    ?>
+                    <input type="hidden" name="original_source" value="<?php echo $company['source'];?>" />
+                    <input type="hidden" name="original_source_date" value="<?php echo $company['source_date'];?>" />
+                </div>
             </div>
-        </div>
-        <div class="col-sm-6 col-md-4">
-            <div class=" form-group ">
-                <label for="url" class="control-label">Website</label>                            
-                <input type="text" name="url" value="<?php echo isset($company['url'])?$company['url']:''; ?>" id="url" maxlength="100" class="form-control">
+            <div class="col-sm-6 col-md-4">
+                <div class=" form-group ">
+                    <label for="url" class="control-label">Website</label>                            
+                    <input type="text" name="url" value="<?php echo isset($company['url'])?$company['url']:''; ?>" id="url" maxlength="100" class="form-control">
+                </div>
             </div>
-        </div>
              <div class="col-sm-6 col-md-4">
                         <div class=" form-group ">
                             <label for="linkedin_id" class="control-label">Linkedin ID</label>                            
@@ -121,7 +105,6 @@
                     </div>
             
           
-            
     </div>
     <div class="row">
             
@@ -203,109 +186,90 @@
                         <?php endif;  */?>
                
                     <div class="col-md-6">
-                       
-                         
                             <div class=" form-group ">
                                 <label for="trading_name" class="control-label">Trading Name</label>                            
                                 <input type="text" name="trading_name" value="<?php echo isset($company['trading_name'])?$company['trading_name']:''; ?>" id="trading_name" class="form-control">
                            
-                        </div>
-                    <div class="row"> </div>
-                </div>
-            <div class="col-sm-6 col-md-4">
+                            </div>
+                        <div class="row"> </div>
+                    </div>
+                    <div class="col-sm-6 col-md-4">
                         <div class=" form-group ">
                             <label for="phone" class="control-label">Phone</label>                            
                             <input type="text" name="phone" value="<?php echo isset($company['phone'])?$company['phone']:''; ?>" id="phone" maxlength="50" class="form-control">
                             
                         </div>
                     </div>
-        <div class="col-sm-6 col-md-2">
+                    <div class="col-sm-6 col-md-2">
                         <div class=" form-group ">
                             <label for="phone" class="control-label">Funding Type</label> 
-                            
-                     
-                           <span class="button-checkbox bespoke_checkbox ">
-            <button type="button"  class="btn btn-checkbox   btn-default enterpriseBoxBtn" data-color="primary"><i class="state-icon undefined"></i> &nbsp;CONFIDENTIAL</button>
-            <input type="checkbox" name="confidential_flag" value="1" class="hidden" <?php echo $company['confidential_flag']?  'checked=\"checked\"' : "" ; ?>
-        </span>
+                            <span class="button-checkbox">
+                                <button type="button"  class="btn    btn-default enterpriseBoxBtn" data-color="primary"><i class="state-icon undefined"></i> &nbsp;CONFIDENTIAL</button>
+                                <input type="checkbox" name="confidential_flag" value="1" class="hidden" <?php echo $company['confidential_flag']?  'checked=\"checked\"' : "" ; ?>
+                            </span>
                         </div>
                     </div>
           <!--HIDDEN UNLESS SPECIAL INSIGHT-->
-            <div class="col-sm-12">
-                <div id="show_si_box" class="show_si_box" style="display:none">
-                            <div class="alert alert-info" role="alert">
-                    <div class=" form-group ">
-                        <label for="source_explanation" class="control-label">Special Insight <span id="specialInsightRequired">(Required)</span></label>
-                        <input type="text" name="source_explanation" value="<?php echo isset($company['source_explanation'])?$company['source_explanation']:NULL; ?>" id="source_explanation" class="form-control source_explanation">
+                    <div class="col-sm-12">
+                        <div id="show_si_box" class="show_si_box" style="display:none">
+                                    <div class="alert alert-info" role="alert">
+                            <div class=" form-group ">
+                                <label for="source_explanation" class="control-label">Special Insight <span id="specialInsightRequired">(Required)</span></label>
+                                <input type="text" name="source_explanation" value="<?php echo isset($company['source_explanation'])?$company['source_explanation']:NULL; ?>" id="source_explanation" class="form-control source_explanation">
+                            </div>
+                            </div>
+                        </div>
                     </div>
-                    </div>
-                </div>
-            </div>
-        
-        
-        
         <?php
      //echo count($bespokeArr) ;   
        
  
-    if(  $current_user['permission'] == 'admin' && $current_user['department'] !='sales' ||$current_user['department'] == 'support' && $current_user['department'] !='sales'  ){   ?> 
+        if(  $current_user['permission'] == 'admin' && $current_user['department'] !='sales' ||$current_user['department'] == 'support' && $current_user['department'] !='sales'  ){   ?> 
 
         <div class="col-md-12 target_sectors" style="margin-top:10px;">
             <label for="sectors" class="control-label">Bespoke</label>
-                <div class="tag-holder">  
-              <?php  
-        $confidential_flag = '';
+            <div class="tag-holder">  
+                <?php  
+                $confidential_flag = '';
 
-foreach ($bespoke_target_sectors_list as $key => $value): 
-        
-        if(array_key_exists($key,$company['sectors'])) array_push($bespokeArr, 1); 
-        ?>
+                foreach ($bespoke_target_sectors_list as $key => $value): 
 
-        <span class="button-checkbox bespoke_checkbox">
-            <button type="button" id="bespoke_checkbox" class="btn btn-checkbox checkbox_bespoke" data-color="primary" >&nbsp;<?php echo $value; ?></button>
-            <input type="checkbox" name="add_sectors[]" value="<?php echo $key; ?>" class="hidden" <?php echo (isset($company['sectors']) and array_key_exists($key,$company['sectors']))? 'checked': '' ; ?>  />
-        </span>
+                    if(array_key_exists($key,$company['sectors'])) array_push($bespokeArr, 1); 
+                ?>
 
-    <?php endforeach ?>
-                </div>
+                    <span class="button-checkbox bespoke_checkbox">
+                    <button type="button" id="bespoke_checkbox" class="btn btn-checkbox checkbox_bespoke" data-color="primary" >&nbsp;<?php echo $value; ?></button>
+                    <input type="checkbox" name="add_sectors[]" value="<?php echo $key; ?>" class="hidden" <?php echo (isset($company['sectors']) and array_key_exists($key,$company['sectors']))? 'checked': '' ; ?>  />
+                    </span>
+
+                <?php endforeach ?>
+            </div>
         </div>
         <input type="hidden" id="bespokeEval" value="<?php echo $current_user['department']; ?>" >
-    <?php   }  ?> 
-
-        
-        
-        
+        <?php   }  ?> 
+                        
         <?php  
-        $sectorEval = '';
-       // $sectorEval = 'sectorEval';
-    if($current_user['department'] == 'support'  ){ 
+            $sectorEval = '';
+            // $sectorEval = 'sectorEval';
+            if($current_user['department'] == 'support'  ){ 
+                $sectorEval = 'sectorEval';
+            }
+        ?>
         
-        $sectorEval = 'sectorEval';
-    }
-
- //} ?>
-        
-        
-        
-        
-        
-        
-        
-        
-                <div class="col-md-12 target_sectors <?php echo $sectorEval; ?>">
-                    <label for="sectors" class="control-label">Target Sectors</label>
-                    <div class="tag-holder">
-                    <?php   
-                    foreach ($target_sectors_list as $key => $value): ?>
-                        <span class="button-checkbox">
-                            <button type="button" class="btn btn-checkbox" data-color="primary" >&nbsp;<?php echo $value; ?></button>
-                            <input type="checkbox" name="add_sectors[]" value="<?php echo $key; ?>" class="hidden" <?php echo (isset($company['sectors']) and array_key_exists($key,$company['sectors']))? 'checked': '' ; ?>  />
-                        </span>
-                    <?php endforeach ?>
-                    </div>
-
-                </div>
+        <div class="col-md-12 target_sectors <?php echo $sectorEval; ?>">
+            <label for="sectors" class="control-label">Target Sectors</label>
+            <div class="tag-holder">
+            <?php   
+            foreach ($target_sectors_list as $key => $value): ?>
+                <span class="button-checkbox">
+                    <button type="button" class="btn btn-checkbox" data-color="primary" >&nbsp;<?php echo $value; ?></button>
+                    <input type="checkbox" name="add_sectors[]" value="<?php echo $key; ?>" class="hidden" <?php echo (isset($company['sectors']) and array_key_exists($key,$company['sectors']))? 'checked': '' ; ?>  />
+                </span>
+            <?php endforeach ?>
             </div>
+
+        </div>
+    </div> <!--End of row -->
     
          <div class="row">
             <div class="col-md-12 other_sectors <?php echo $sectorEval; ?>" style="margin-top:10px;">
@@ -324,34 +288,27 @@ foreach ($bespoke_target_sectors_list as $key => $value):
         <div class="modal-loading-display text-center " id="loading-display-<?php echo $company['id']; ?>" style="display:none;">
             <span class="btn btn-default btn-lg" ><i class="fa fa-refresh fa-spin"></i></span>
         </div>
-    </div>
+    </div> <!-- END of modal-body -->
             
-            <div class="modal-footer bespoke_submit_btn">
-                <button type="submit" class="btn btn-sm btn-warning btn-block ladda-button  submit_btn disable_no_source disable_no_si" edit-btn="editbtn<?php echo $company['id']; ?>" loading-display="loading-display-<?php echo $company['id']; ?>" data-style="expand-right" data-size="1" >
-                    <span class="ladda-label">Save</span>
-                </button>
-            </div>
-            <div class="modal-footer">
-                
-            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-               <small class="popUpCreatedAt">
-                    <b>Company Created:</b> <?php echo date("d/m/Y",strtotime($company['created_at']));?> - <?php echo $created_by_name['name']; ?>
-                   </small>
-            </div>
-                
-                
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                      <small>
-                      <b>Last Updated:</b>
-                    <?php echo isset($company['updated_at'])?date("d/m/Y",strtotime($company['updated_at']))." - ".$company['updated_by_name']:'Never'; ?>   
-                </small>
-                   </div>
-                
-                
-                
-                
-            </div>
-            <?php echo form_close(); ?>
+    <div class="modal-footer bespoke_submit_btn">
+        <button type="submit" class="btn btn-sm btn-warning btn-block ladda-button  submit_btn disable_no_source disable_no_si" edit-btn="editbtn<?php echo $company['id']; ?>" loading-display="loading-display-<?php echo $company['id']; ?>" data-style="expand-right" data-size="1" >
+            <span class="ladda-label">Save</span>
+        </button>
+    </div>
+    <div class="modal-footer">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <small class="popUpCreatedAt">
+            <b>Company Created:</b> <?php echo date("d/m/Y",strtotime($company['created_at']));?> - <?php echo $created_by_name['name']; ?>
+            </small>
+        </div>
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <small>
+        <b>Last Updated:</b>
+        <?php echo isset($company['updated_at'])?date("d/m/Y",strtotime($company['updated_at']))." - ".$company['updated_by_name']:'Never'; ?>   
+        </small>
+    </div>
+    </div>
+    <?php echo form_close(); ?>
         </div>
         <!-- /.modal-content -->
     </div>

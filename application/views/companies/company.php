@@ -258,7 +258,7 @@ endif;
 	<?php $this->load->view('companies/create_address_box.php',array('company'=>$company)); ?>
    
 <div class="panel panel-primary">
-	<div class="panel-body" style="padding-top:40px;">
+	<div class="panel-body" style="padding-top:40px;     margin-bottom: 20px;">
     	<div class="row"><!--FINISHED AT THE END OF PANEL-->
 		<div class="col-sm-9">
 		<div class="row">
@@ -542,9 +542,57 @@ if ($your_date < $now){;
 		<div class="col-md-12">
 			<hr>
 		</div>
-
+    </div>
 		
-       
+       		<!--CONTACTS-->
+      
+        <?php
+ 
+    $exclude_from_view = array('sales','data');
+        if(!in_array($current_user['department'],$exclude_from_view)){ ?>
+		  <div class="col-md-12">
+		<div class="panel panel-default">
+            
+		<div class="panel-heading" id="bespoke" >
+		Bespoke 
+		</div>
+		<!-- /.panel-heading -->
+		<div class="panel-body">
+		<?php if(isset($contacts) and !empty($contacts)) : ?>
+
+			<table class="table">
+	      <thead>
+	        <tr>
+	          	<th class="col-md-6">Serices</th>
+	          	<th class="col-md-6">Date Created</th>
+	           
+
+
+	        </tr>
+	      </thead>
+            <tbody>
+                <?php 
+                foreach($bespokeSelected as $bsk => $bsv){ ?>
+              <tr>   <td class="col-md-6"><?php echo $bsv['name']; ?> </td><td class="col-md-6"> <?php echo date("l jS F Y", strtotime($bsv['created_at'])); ?>  </td>  </tr>
+                
+                  
+              
+          <?php    }   //echo '<span  class="issector" style="color: #2a48ad;  "> '.$bsv['name'].' </span><br><span class="bespoke_date">Created at: '.date("l jS F Y", strtotime($bsv['created_at'])).'</span><br>' ; ?>  
+                
+                
+            </tbody>
+	    </table>
+
+	    <?php else: ?>
+		
+		<?php endif; ?>
+
+		</div>
+		<!-- /.panel-body -->
+		</div>
+		 
+  </div>
+<?php } ?>
 		<!-- MORTGAGES -->
 	<div class="col-md-12">
 		<div class="panel panel-default">
@@ -688,69 +736,12 @@ if ($your_date < $now){;
 
 <!--ADDRESSES-->
             
-        </div>
+      
          
-		<!--CONTACTS-->
-       
-        <?php  $exclude_from_view = array('sales','data');
-        if(!in_array($exclude_from_view,$current_user['department'])){ ?>
-		 
-		<div class="panel panel-default">
-            
-            
-            
-            
-
-		<div class="panel-heading" id="contacts">
-		Bespoke 
-		<div class="pull-right">
-		<div class="btn-group">
-		 
-		</div>
-		</div>
-               
-
-		</div>
-		<!-- /.panel-heading -->
-		<div class="panel-body">
-		<?php if(isset($contacts) and !empty($contacts)) : ?>
-
-			<table class="table">
-	      <thead>
-	        <tr>
-	          	<th class="col-md-6">Serices</th>
-	          	<th class="col-md-6">Date Created</th>
-	           
 
 
-	        </tr>
-	      </thead>
-            <tbody>
-                <?php 
-                foreach($bespokeSelected as $bsk => $bsv){ ?>
-              <tr>   <td class="col-md-6"><?php echo $bsv['name']; ?> </td><td class="col-md-6"> <?php echo date("l jS F Y", strtotime($bsv['created_at'])); ?>  </td>  </tr>
-                
-                  
-              
-          <?php    }   //echo '<span  class="issector" style="color: #2a48ad;  "> '.$bsv['name'].' </span><br><span class="bespoke_date">Created at: '.date("l jS F Y", strtotime($bsv['created_at'])).'</span><br>' ; ?>  
-                
-                
-            </tbody>
-	    </table>
-
-	    <?php else: ?>
-		
-		<?php endif; ?>
-
-		</div>
-		<!-- /.panel-body -->
-		</div>
-		 
-
-<?php } ?>
-
-
-		 
+      
+		 <div class="col-md-12">
 		<div class="panel panel-default">
 		<div class="panel-heading" id="addresses">
 		Locations
@@ -846,11 +837,11 @@ endif;
 		<!-- /.panel-body -->
 		</div>
 	 
-
+        </div>
  
 		<!--CAMPAIGNS-->
 		<?php if(isset($campaigns) and !empty($campaigns)) : ?>
-		 
+		 <div class="col-md-12">
 		<div class="panel panel-default">
 		<div class="panel-heading" id="campaigns">
 		Campaigns
@@ -886,32 +877,27 @@ endif;
 		</div>
 		<!-- /.panel-body -->
 		</div>
-		 
+        </div>
 		<?php endif; ?>
 
 
 		<!--CONTACTS-->
-		 
+		 <div class="col-md-12">
 		<div class="panel panel-default">
 
-		
-            
-            
-            
-        <div class="panel panel-default">
+	 
 
 		<div class="panel-heading" id="contacts">
-		Contacts
-		<div class="pull-right">
-		<div class="btn-group">
-		<button  class="btn btn-primary edit-btn btn-xs" data-toggle="modal" id="create_contact_<?php echo $company['id']; ?>"  data-target="#create_contact_<?php echo $company['id']; ?>" >
-        <span class="ladda-label"> Add Contact </span>
-		</button>
+                Contacts
+                <div class="pull-right">
+                <div class="btn-group">
+                <button  class="btn btn-primary edit-btn btn-xs" data-toggle="modal" id="create_contact_<?php echo $company['id']; ?>"  data-target="#create_contact_<?php echo $company['id']; ?>" >
+                <span class="ladda-label"> Add Contact </span>
+                </button>
+                </div>
+                </div>
 		</div>
-		</div>
-               
-
-		</div>
+            
 		<!-- /.panel-heading -->
 		<div class="panel-body">
 		<?php if(isset($contacts) and !empty($contacts)) : ?>
@@ -924,8 +910,6 @@ endif;
 	          	<th class="col-md-3">Email</th>
 				<th class="col-md-2">Phone</th>
 				<th class="col-md-3"></th>
-
-
 	        </tr>
 	      </thead>
             <tbody>
@@ -1369,7 +1353,7 @@ endif;
 		  </div>
 		</div>
 		</div>
-        
+        </div>
           <div class="col-md-12 child" id="stickMenu" >
     
     

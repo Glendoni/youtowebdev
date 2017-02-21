@@ -14,18 +14,7 @@ $( document ).ready(function() {
     
 $('.comp_details_edit_btn').click(function(){
  
-    $('.enterpriseBoxBtn').on('click', function(){
-
-    if($(this).hasClass('active')){		
-    $('.enterpriseBox').show();
-    $('.enterpriseBox strong').text('Enterprise');
-    }else{
-
-    $('.enterpriseBox').hide();
-    $('.enterpriseBox strong').text('');
-    }
-
-    })
+ confidentialHandler();
 
 })
     
@@ -232,7 +221,23 @@ $('#debenturemortgage').change(function() {
       
     }
 });
+function confidentialHandler(){
+  
+        $('.enterpriseBoxBtn').on('click', function(){
 
+    if($(this).hasClass('active')){		
+    $('.enterpriseBox').show();
+    $('.enterpriseBox strong').text('( Enterprise )');
+    }else{
+
+    $('.enterpriseBox').hide();
+    $('.enterpriseBox strong').text('');
+    }
+
+    })
+    
+    
+}
 function gettagscampList_(param){
     
    
