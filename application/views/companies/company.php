@@ -416,7 +416,7 @@ if ($your_date < $now){;
         </div>
             
 
-<?php if($current_user['department'] =='sales' ){ ?>
+
 
               <div class="col-md-3" >
 				<label>Lead Source</label>
@@ -427,25 +427,8 @@ if ($your_date < $now){;
 			 
 		</div>
     
-    <?php }else{ ?>
-        <div class="col-md-3" >
-				<label>Bespoke</label>
-			<?php
-                     echo '<div class="sectorsPlainText">';
-                
-              foreach($bespokeSelected as $bsk => $bsv){
-                  
-                  echo '<span  class="issector" style="color: #2a48ad;  "> '.$bsv['name'].' </span><br><span class="bespoke_date">Created at: '.date("l jS F Y", strtotime($bsv['created_at'])).'</span><br>' ; 
-                  
-              }
-                  
-                  echo '</div>';
-                  ?>
-			 
-		</div>
     
-    
-    <?php } ?>
+      
                 
 		<!-- EMPLOYEES -->
 		<div class="col-xs-4 col-sm-3">
@@ -671,11 +654,69 @@ if ($your_date < $now){;
 
 <!--ADDRESSES-->
             
+        </div>
          
+		<!--CONTACTS-->
+       
+        <?php  $exclude_from_view = array('sales','data');
+        if(!in_array($exclude_from_view,$current_user['department'])){ ?>
+		 
+		<div class="panel panel-default">
+            
+            
+            
+            
+
+		<div class="panel-heading" id="contacts">
+		Bespoke 
+		<div class="pull-right">
+		<div class="btn-group">
+		 
+		</div>
+		</div>
+               
+
+		</div>
+		<!-- /.panel-heading -->
+		<div class="panel-body">
+		<?php if(isset($contacts) and !empty($contacts)) : ?>
+
+			<table class="table">
+	      <thead>
+	        <tr>
+	          	<th class="col-md-6">Serices</th>
+	          	<th class="col-md-6">Date Created</th>
+	           
 
 
+	        </tr>
+	      </thead>
+            <tbody>
+                <?php 
+                foreach($bespokeSelected as $bsk => $bsv){ ?>
+              <tr>   <td class="col-md-6"><?php echo $bsv['name']; ?> </td><td class="col-md-6"> <?php echo date("l jS F Y", strtotime($bsv['created_at'])); ?>  </td>  </tr>
+                
+                  
+              
+          <?php    }   //echo '<span  class="issector" style="color: #2a48ad;  "> '.$bsv['name'].' </span><br><span class="bespoke_date">Created at: '.date("l jS F Y", strtotime($bsv['created_at'])).'</span><br>' ; ?>  
+                
+                
+            </tbody>
+	    </table>
 
-		<div class="col-md-12">
+	    <?php else: ?>
+		
+		<?php endif; ?>
+
+		</div>
+		<!-- /.panel-body -->
+		</div>
+		 
+
+<?php } ?>
+
+
+		 
 		<div class="panel panel-default">
 		<div class="panel-heading" id="addresses">
 		Locations
@@ -770,12 +811,12 @@ endif;
 		</div>
 		<!-- /.panel-body -->
 		</div>
-		</div>
+	 
 
  
 		<!--CAMPAIGNS-->
 		<?php if(isset($campaigns) and !empty($campaigns)) : ?>
-		<div class="col-md-12">
+		 
 		<div class="panel panel-default">
 		<div class="panel-heading" id="campaigns">
 		Campaigns
@@ -811,12 +852,12 @@ endif;
 		</div>
 		<!-- /.panel-body -->
 		</div>
-		</div>
+		 
 		<?php endif; ?>
 
 
 		<!--CONTACTS-->
-		<div class="col-md-12">
+		 
 		<div class="panel panel-default">
 
 		<div class="panel-heading" id="contacts">
@@ -890,7 +931,7 @@ endif;
 		</div>
 		<!-- /.panel-body -->
 		</div>
-		</div>
+		 
         
         <!-- TAGGING  START-->
         
@@ -1008,7 +1049,7 @@ endif;
 
 
 		<!--ACTIONS-->
-		<div class="col-md-12" id="add_action">
+		<div   id="add_action">
 		<div class="panel panel-default ">
 		  <div class="panel-heading">Add Action</div>
 		  <div class="panel-body">
@@ -1402,6 +1443,7 @@ endif;
      </div>        
  
 <div class="row" id="parent">
+    
 
 </div>
 </div>
