@@ -3494,7 +3494,15 @@ margin-right: 3px;
 }
 
 
+.confidential_status{ 
+    background-color: #5cb85c; color:#fff;float:left;font-size: 1.5em !important;
+}
 
+#bespoke{
+    
+  margin-top:15px;  
+    
+}
 /*! Hint.css - v2.2.1 - 2016-03-26 //#2b4461
 * http://kushagragour.in/lab/hint/
 * Copyright (c) 2016 Kushagra Gour; Licensed  */

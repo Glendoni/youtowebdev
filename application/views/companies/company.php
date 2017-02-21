@@ -41,7 +41,7 @@ endif;
                 <?php if (isset($company['confidential_flag'])): ?>
                     <h5 class="trading-header" style="margin-top: 9px; margin-left: 2px;">
                     <?php if($company['confidential_flag']): ?>
-                        <span class="label trading-header" style="background-color: #428bca; color:#fff;float:left;font-size: 1.7em;">
+                        <span class="label confidential_status" style="">
                             <b>Enterprise</b> 
                         </span>
                     <?php endif; ?>
@@ -258,7 +258,7 @@ endif;
 	<?php $this->load->view('companies/create_address_box.php',array('company'=>$company)); ?>
    
 <div class="panel panel-primary">
-	<div class="panel-body" style="padding-top:40px;     margin-bottom: 20px;">
+	<div class="panel-body" style="padding-top:40px;     margin-bottom: 5px;">
     	<div class="row"><!--FINISHED AT THE END OF PANEL-->
 		<div class="col-sm-9">
 		<div class="row">
@@ -547,54 +547,42 @@ if ($your_date < $now){;
        		<!--CONTACTS-->
       
         <?php
- 
+
     $exclude_from_view = array('sales','data');
         if(!in_array($current_user['department'],$exclude_from_view)){ 
     if(count($bespokeSelected)){
     ?>
-		 
     <div class="col-md-12">
-		<div class="panel panel-default">
-            
-		<div class="panel-heading" id="bespoke" >
-		Bespoke 
-		</div>
-		<!-- /.panel-heading -->
-		<div class="panel-body">
-		<?php if(isset($contacts) and !empty($contacts)) : ?>
-
-			<table class="table">
-	      <thead>
-	        <tr>
-	          	<th class="col-md-6">Serices</th>
-	          	<th class="col-md-6">Date Created</th>
-	           
-
-
-	        </tr>
-	      </thead>
-            <tbody>
+        <div class="panel panel-default">
+            <div class="panel-heading" id="bespoke" >
+                Bespoke 
+            </div>
+        <!-- /.panel-heading -->
+            <div class="panel-body">
+                <table class="table">
+                <thead>
+                <tr>
+                <th class="col-md-6">Serices</th>
+                <th class="col-md-6">Date Created</th>
+                </tr>
+                </thead>
+                <tbody>
                 <?php 
                 foreach($bespokeSelected as $bsk => $bsv){ ?>
-              <tr>   <td class="col-md-6"><?php echo $bsv['name']; ?> </td><td class="col-md-6"> <?php echo date("l jS F Y", strtotime($bsv['created_at'])); ?>  </td>  </tr>
-                
-                  
-              
-          <?php    }   //echo '<span  class="issector" style="color: #2a48ad;  "> '.$bsv['name'].' </span><br><span class="bespoke_date">Created at: '.date("l jS F Y", strtotime($bsv['created_at'])).'</span><br>' ; ?>  
-                
-                
-            </tbody>
-	    </table>
+                    <tr>
+                        <td class="col-md-6"><?php echo $bsv['name']; ?> </td>
+                        <td class="col-md-6"> <?php echo date("l jS F Y", strtotime($bsv['created_at'])); ?></td>
+                    </tr>
+                <?php    }   //echo '<span  class="issector" style="color: #2a48ad;  "> '.$bsv['name'].' </span><br><span class="bespoke_date">Created at: '.date("l jS F Y", strtotime($bsv['created_at'])).'</span><br>' ; ?>  
 
-	    <?php else: ?>
-		
-		<?php endif; ?>
+                </tbody>
+                </table>
 
-		</div>
-		<!-- /.panel-body -->
-		</div>
-		 
-  </div>
+            </div>
+        <!-- /.panel-body -->
+        </div>
+
+    </div>
 <?php }} ?>
 		<!-- MORTGAGES -->
 	<div class="col-md-12">
@@ -1073,8 +1061,8 @@ endif;
   </div>
         
         <!--TAGGING END -->
-
-
+        </div>
+  <div class="col-md-12">
 		<!--ACTIONS-->
 		<div   id="add_action">
 		<div class="panel panel-default ">
@@ -1254,23 +1242,9 @@ endif;
 
                  <?php endif; ?>
                 
-                
-                
-                
-                
-                
-                
                         <div class="col-sm-12 col-md-12">
                             <div class="form-group addActionOutcome">
                                  
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
                                 <label>Comment<span class="actionEvalPipeline"style=" color: red;">*</span></label>
                                 
                                 
@@ -1356,8 +1330,8 @@ endif;
 		  </div>
 		</div>
 		</div>
-        </div>
-          <div class="col-md-12 child" id="stickMenu" >
+       
+          <div class="col-md-12 child" id="stickMenu" ><div>
     
     
     
@@ -1468,7 +1442,7 @@ endif;
             
 
      </div>        
- 
+        </div>
 <div class="row" id="parent">
     
 

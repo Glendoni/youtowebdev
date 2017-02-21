@@ -26,11 +26,12 @@
                     <h4 class="modal-title" id="myModalLabel">
                         <?php echo $company['name']; ?>
                         <input type="hidden" name="reg_name" value="<?php echo $company['name']; ?>" id="reg_name" class="hidden" >
-                        <div class="enterpriseBox"  >
-                            <strong><?php if($company['confidential_flag']) echo '( Enterprise )'; ?> </strong>
-                        </div> 
+                       
                     </h4>
                 <?php endif; ?>
+                 <div class="enterpriseBox"  >
+                            <strong><?php if($company['confidential_flag']) echo '( Enterprise )'; ?> </strong>
+                        </div> 
             </div>
             
             
@@ -204,7 +205,7 @@
                         <div class=" form-group ">
                             <label for="phone" class="control-label">Funding Type</label> 
                             <span class="button-checkbox">
-                                <button type="button"  class="btn    btn-default enterpriseBoxBtn" data-color="primary"><i class="state-icon undefined"></i> &nbsp;CONFIDENTIAL</button>
+                                <button type="button"  class="btn    btn-default enterpriseBoxBtn" data-color="success"><i class="state-icon undefined"></i> &nbsp;CONFIDENTIAL</button>
                                 <input type="checkbox" name="confidential_flag" value="1" class="hidden" <?php echo $company['confidential_flag']?  'checked=\"checked\"' : "" ; ?>
                             </span>
                         </div>
@@ -238,7 +239,7 @@
                 ?>
 
                     <span class="button-checkbox bespoke_checkbox">
-                    <button type="button" id="bespoke_checkbox" class="btn btn-checkbox checkbox_bespoke" data-color="primary" >&nbsp;<?php echo $value; ?></button>
+                    <button type="button" id="bespoke_checkbox" class="btn btn-checkbox checkbox_bespoke" data-color="success" >&nbsp;<?php echo $value; ?></button>
                     <input type="checkbox" name="add_sectors[]" value="<?php echo $key; ?>" class="hidden" <?php echo (isset($company['sectors']) and array_key_exists($key,$company['sectors']))? 'checked': '' ; ?>  />
                     </span>
 
