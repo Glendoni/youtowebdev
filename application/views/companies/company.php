@@ -395,10 +395,17 @@ if ($your_date < $now){;
             
             
             
-            if ($company['sonovate_id'] == true && ENVIRONMENT == 'production' ){ ?>
+            if (($company['sonovate_id']) && && ENVIRONMENT == 'production' ){ ?>
 			<a class="btn  btn-info btn-sm btn-block sonovate" href="https://members.sonovate.com/agency-admin/<?php echo $company['sonovate_id'] ?>/profile"  target="_blank">Sonovate 3.0</a>
-			<?php }else{ ?>
+			<?php } ?>
              
+            
+            <?php if (($company['sonovate_id']) && && ENVIRONMENT == 'staging' ){ ?>
+			<a class="btn  btn-info btn-sm btn-block sonovate" href="https://invoicing-dev.sonovate.com/agency-admin/<?php echo $company['sonovate_id'] ?>/profile"  target="_blank">Sonovate 3.0</a>
+			<?php } ?>
+            
+            
+             <?php if (($company['sonovate_id']) && ENVIRONMENT == 'development' ){ ?>
 			<a class="btn  btn-info btn-sm btn-block sonovate" href="https://invoicing-dev.sonovate.com/agency-admin/<?php echo $company['sonovate_id'] ?>/profile"  target="_blank">Sonovate 3.0</a>
 			<?php } ?>
             
