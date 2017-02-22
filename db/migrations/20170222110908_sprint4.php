@@ -2,7 +2,7 @@
 
 use Phinx\Migration\AbstractMigration;
 
-class MyNewMigration extends AbstractMigration
+class Sprint4 extends AbstractMigration
 {
     /**
      * Change Method.
@@ -25,15 +25,15 @@ class MyNewMigration extends AbstractMigration
      * Remember to call "create()" or "update()" and NOT "save()" when working
      * with the Table class.
      */
-    public function up()
-    {
-        $table = $this->table('users');
-        $table->addColumn('city', 'string', ['null' => true])->update();
+    public function up() {
+        $table = $this->table('companies');
+        $table->addColumn('confidential_flag', 'boolean', [
+            'default' => false
+        ]);
     }
 
-    public function down()
-    {
-        $table = $this->table('users');
-        $table->removeColumn('city')->update();
+    public function down() {
+        $table = $this->table('companies');
+        $table->removeColumn('confidential_flag');
     }
 }
