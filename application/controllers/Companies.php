@@ -382,7 +382,6 @@ class Companies extends MY_Controller {
 	{
 		
 
-
 if($this->input->post('edit_company'))
 		{
   
@@ -398,6 +397,28 @@ if($this->input->post('edit_company'))
 			return True;
 		
 		}
+        
+        
+           if($this->input->post('edit_service_level'))
+                    {
+
+                        $post = $this->input->post();
+                        // We need to clean the post and validate the post fields *pending*
+                        $result = $this->Companies_model->add_Services_Level($this->input->post(),$this->data['current_user']['id']);
+ exit();
+                       //  $this->Companies_model->cronPipeline(0,$post['company_id']);
+
+                        $this->refresh_search_results();
+                        $this->set_message_success('Company Updated');
+                        redirect('/companies','refresh');
+                        return True;
+
+                    }
+
+        
+        
+        
+        
 	}
 
     public function create_address()

@@ -255,6 +255,7 @@ endif;
 <!-- POPUP BOXES -->
 	<?php $this->load->view('companies/edit_box.php',array('company'=>$company)); ?>
 	<?php $this->load->view('companies/create_contact_box.php',array('company'=>$company)); ?>
+    <?php $this->load->view('companies/service_offering_box.php',array('company'=>$company)); ?>
 	<?php $this->load->view('companies/create_address_box.php',array('company'=>$company)); ?>
    
 <div class="panel panel-primary">
@@ -550,22 +551,38 @@ if ($your_date < $now){;
 
     $exclude_from_view = array('sales','data');
         if(!in_array($current_user['department'],$exclude_from_view)){ 
-    if(count($bespokeSelected)){
+    
     ?>
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading" id="bespoke" >
-                Bespoke 
+               Service Level 
+                
+                <div class="pull-right">
+                <div class="btn-group">
+                <button class="btn btn-primary edit-btn btn-xs" data-toggle="modal"  data-target="#serviceoffering">
+                <span class="ladda-label"><?php echo count($bespokeSelected) ? 'Edit Services' : 'Add Service'; ?>  </span>
+                </button>
+                </div>
+                </div>
             </div>
         <!-- /.panel-heading -->
             <div class="panel-body">
                 <table class="table">
-                <thead>
+                
+                    <?php if(count($bespokeSelected)){ ?>
+                    <thead>
                 <tr>
-                <th class="col-md-6">Serices</th>
+                <th class="col-md-6">Services</th>
                 <th class="col-md-6">Date Created</th>
                 </tr>
                 </thead>
+                    <?php }else{
+        
+        echo '<p style="text-align:center;">No Services </p>';
+        
+    } ?>
+                    
                 <tbody>
                 <?php 
                 foreach($bespokeSelected as $bsk => $bsv){ ?>
@@ -583,7 +600,7 @@ if ($your_date < $now){;
         </div>
 
     </div>
-<?php }} ?>
+<?php } ?>
 		<!-- MORTGAGES -->
 	<div class="col-md-12">
 		<div class="panel panel-default">

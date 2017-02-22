@@ -801,18 +801,45 @@ from (select * from COMPANIES ' ;
 	}
 
 	function clear_company_sectors($id,$user_id){
-				$data = array(
-				'active'=>'False',
-                'updated_by' => $user_id,
-                'updated_at' => date('Y-m-d H:i:s')
-            );
+				$sql = "update operates set active=false,  updated_by=".$user_id."
+where id in(
+select o.id from operates o 
+LEFT JOIN sectors s
+ON o.sector_id = s.id
+WHERE active=true and company_id=".$id." 
+and s.sector_group!=1
 
-		$this->db->where('company_id', $id);
-		$this->db->where('active', 'true');
+)";
 
-		$this->db->update('operates', $data);
-		return $this->db->affected_rows();
+
+
+ $query = $this->db->query($sql);
+        	return $this->db->affected_rows();
 	}
+
+
+    function clear_company_sectors_services($id,$user_id){
+				 
+
+
+$sql = "update operates set active=false,  updated_by=".$user_id."
+where id in(
+select o.id from operates o 
+LEFT JOIN sectors s
+ON o.sector_id = s.id
+WHERE active=true and company_id=".$id." 
+and s.sector_group=1
+
+)";
+
+
+
+ $query = $this->db->query($sql);
+return $this->db->affected_rows();
+
+
+	}
+
 
 	function update_details($post, $user_id=0)
 	{
@@ -878,8 +905,7 @@ from (select * from COMPANIES ' ;
 				'phone' => !empty($post['phone'])?$post['phone']:NULL,
 				'linkedin_id' => (isset($post['linkedin_id']) and !empty($post['linkedin_id']))?$post['linkedin_id']:NULL,
 				'url' => !empty($post['url'])?str_replace('http://', '',$post['url']):NULL,
-            
-            'confidential_flag' => !empty($post['confidential_flag'])? $post['confidential_flag'] : FALSE,
+           
 				//'class'=>!empty($post['company_class'])?$post['company_class']:NULL,
  
 //'pipeline'=>(!empty($post['company_pipeline'])?$post['company_pipeline']:NULL),
@@ -944,6 +970,48 @@ from (select * from COMPANIES ' ;
 		return true;
 		
 	}
+
+
+    function add_Services_Level($post)
+    {
+        
+        
+        
+      
+        
+            $result = $this->clear_company_sectors_services($post['company_id'], $post['user_id']);
+
+            if (isset($post['add_sectors']) and !empty($post['add_sectors']))
+            {
+                foreach ($post['add_sectors'] as $sector_id) {
+                    $this->db->set('company_id', $post['company_id']);
+                    $this->db->set('sector_id', $sector_id);
+                    $this->db->set('created_by', $post['user_id']);  
+                    $this->db->set('created_at', date('Y-m-d H:i:s')); 
+                    $this->db->insert('operates'); 
+                }
+                
+                 
+                 //$this->db->set('confidential_flag', $post['confidential_flag']); 
+              
+                //$sectors_status = $this->db->affected_rows();
+            }
+
+        
+           $confidential  = $post['confidential_flag']? $post['confidential_flag'] : FALSE;
+             $company = array( 
+              'confidential_flag' =>  $confidential
+             
+             ) ;  
+                
+             $this->db->where('id', $post['company_id']);
+		      $this->db->update('companies', $company);
+                
+        
+            return true;     
+
+    }
+
     
 
 	function create_company($post){

@@ -712,17 +712,18 @@ $('.historic_'+contactRoleId).hide();
 
                     $('.checkbox_bespoke').click(function(){
 
-                        if($('.bespoke_checkbox  .active').length){
-                                $('.submit_btn').prop("disabled",false);
+                        if($('#serviceoffering .bespoke_checkbox  .active').length){
+                                $('#serviceoffering .submit_btn').prop("disabled",false);
                         }else{
-                                $('.submit_btn').prop("disabled",true);
+                                $('#serviceoffering .submit_btn').prop("disabled",true);
                         }
                     })
 
-                    if($('.bespoke_checkbox  .active').length >0){
-                        $('.btn-checkbox').attr("disabled", true);  
+                    if($('#serviceoffering .bespoke_checkbox  .active').length >0){
+                        $('#serviceoffering .btn-checkbox').attr("disabled", true);  
+                         $('#serviceoffering .submit_btn').prop("disabled",true);  
                     }else{
-                        $('.submit_btn').prop("disabled",true);  
+                        $('#serviceoffering .submit_btn').prop("disabled",true);  
 
                     }
 
