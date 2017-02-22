@@ -721,9 +721,9 @@ $('.historic_'+contactRoleId).hide();
 
                     if($('#serviceoffering .bespoke_checkbox  .active').length >0){
                         $('#serviceoffering .btn-checkbox').attr("disabled", true);  
-                         $('#serviceoffering .submit_btn').prop("disabled",true);  
+                         //$('#serviceoffering .submit_btn').prop("disabled",true);  
                     }else{
-                        $('#serviceoffering .submit_btn').prop("disabled",true);  
+                       // $('#serviceoffering .submit_btn').prop("disabled",true);  
 
                     }
 
