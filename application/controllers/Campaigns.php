@@ -377,7 +377,7 @@ if(in_array($this->data['current_user']['department'],$dept) && ($this->input->g
     
     function evergreenHeaderInfoSales($campaign_id){
            
-     $campaign_id  = 657;      
+     //$campaign_id  = 657;      
                     
 $sql = 'select json_agg(results)
 		from (

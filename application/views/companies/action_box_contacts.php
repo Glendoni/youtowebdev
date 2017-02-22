@@ -144,13 +144,49 @@
 	                        <input type="text" name="last_name" value="<?php echo isset($contact->last_name)?$contact->last_name:''; ?>" maxlength="50" class="form-control">
 	                    </div>
 	                </div>
-	                <div class="col-md-6">
-	                    <div class="form-group">
-	                        <label for="role" class="control-label">Role*</label>                            
-	                        <input type="text" name="role" value="<?php echo isset($contact->role)?$contact->role:''; ?>" maxlength="50" class="form-control">
-	                    </div>
-	                </div>
-	                <div class="col-md-6">
+					<div class="col-md-6">
+						<div class="form-group ">
+							<label for="type">Select role:</label>
+							<select class="form-control" id="type" name="role_dropdown">
+							    <option value=""></option>
+								<option <?php echo $contact->role_dropdown === 'Account Director'?'selected':''; ?> value="Account Director">Account Director</option>
+								<option <?php echo $contact->role_dropdown === 'Account Manager'?'selected':''; ?> value="Account Manager">Account Manager</option>
+								<option <?php echo $contact->role_dropdown === 'Accountant'?'selected':''; ?> value="Accountant">Accountant</option>
+								<option <?php echo $contact->role_dropdown === 'Admin'?'selected':''; ?> value="Admin">Admin</option>
+								<option <?php echo $contact->role_dropdown === 'Administrator'?'selected':''; ?> value="Administrator">Administrator</option>
+								<option <?php echo $contact->role_dropdown === 'Assistant'?'selected':''; ?> value="Assistant">Assistant</option>
+								<option <?php echo $contact->role_dropdown === 'Board Bod'?'selected':''; ?> value="Board Bod">Board Bod</option>
+								<option <?php echo $contact->role_dropdown === 'Business Development'?'selected':''; ?> value="Business Development">Business Development</option>
+								<option <?php echo $contact->role_dropdown === 'Business Development Manager'?'selected':''; ?> value="Business Development Manager">Business Development Manager</option>
+								<option <?php echo $contact->role_dropdown === 'CEO'?'selected':''; ?> value="CEO">CEO</option>
+								<option <?php echo $contact->role_dropdown === 'Commercial Sales Manager'?'selected':''; ?> value="Commercial Sales Manager">Commercial Sales Manager</option>
+								<option <?php echo $contact->role_dropdown === 'Consultant'?'selected':''; ?> value="Consultant">Consultant</option>
+								<option <?php echo $contact->role_dropdown === 'CTO'?'selected':''; ?> value="CTO">CTO</option>
+								<option <?php echo $contact->role_dropdown === 'Data Entry'?'selected':''; ?> value="Data Entry">Data Entry</option>
+								<option <?php echo $contact->role_dropdown === 'Data Entry Administrator'?'selected':''; ?> value="Data Entry Administrator">Data Entry Administrator</option>
+								<option <?php echo $contact->role_dropdown === 'Dev'?'selected':''; ?> value="Dev">Dev</option>
+								<option <?php echo $contact->role_dropdown === 'Director'?'selected':''; ?> value="Director">Director</option>
+								<option <?php echo $contact->role_dropdown === 'Finance Director'?'selected':''; ?> value="Finance Director">Finance Director</option>
+								<option <?php echo $contact->role_dropdown === 'Inbound Marketing'?'selected':''; ?> value="Inbound Marketing">Inbound Marketing</option>
+								<option <?php echo $contact->role_dropdown === 'Manager'?'selected':''; ?> value="Manager">Manager</option>
+								<option <?php echo $contact->role_dropdown === 'Marketing Manager'?'selected':''; ?> value="Marketing Manager">Marketing Manager</option>
+								<option <?php echo $contact->role_dropdown === 'Operations Manager'?'selected':''; ?> value="Operations Manager">Operations Manager</option>
+								<option <?php echo $contact->role_dropdown === 'PM'?'selected':''; ?> value="PM">PM</option>
+								<option <?php echo $contact->role_dropdown === 'Risk and Compliance Officer'?'selected':''; ?> value="Risk and Compliance Officer">Risk and Compliance Officer</option>
+								<option <?php echo $contact->role_dropdown === 'Senior Consultant'?'selected':''; ?> value="Senior Consultant">Senior Consultant</option>
+								<option <?php echo $contact->role_dropdown === 'Tester'?'selected':''; ?> value="Tester">Tester</option>
+							</select>
+						</div>
+					</div>
+					<?php if (isset($contact->role) && $contact->role): ?>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="role" class="control-label">Historic role data:</label>                            
+								<input type="text" name="role" value="<?php echo isset($contact->role)?$contact->role:''; ?>" maxlength="50" class="form-control" disabled="true">
+							</div>
+						</div>
+					<?php endif; ?>
+	                <div class="col-md-<?php echo isset($contact->role)?'6':'12'; ?>">
 	                    <div class="form-group">
 	                        <label for="email" class="control-label">Email</label>                            
 	                        <input type="text" name="email" value="<?php echo isset($contact->email)?$contact->email:''; ?>" maxlength="50" class="form-control">

@@ -200,7 +200,55 @@
                     </div>
                 </div>
             </div>
-                <div class="col-md-12 target_sectors">
+        
+        
+        
+        <?php
+     //echo count($bespokeArr) ;   
+       
+ 
+    if(  $current_user['permission'] == 'admin' && $current_user['department'] !='sales' ||$current_user['department'] == 'support' && $current_user['department'] !='sales'  ){   ?> 
+
+        <div class="col-md-12 target_sectors" style="margin-top:10px;">
+            <label for="sectors" class="control-label">Bespoke</label>
+                <div class="tag-holder">  
+              <?php  foreach ($bespoke_target_sectors_list as $key => $value): 
+        
+        if(array_key_exists($key,$company['sectors'])) array_push($bespokeArr, 1); 
+        ?>
+
+        <span class="button-checkbox bespoke_checkbox">
+            <button type="button" id="bespoke_checkbox" class="btn btn-checkbox checkbox_bespoke" data-color="primary" >&nbsp;<?php echo $value; ?></button>
+            <input type="checkbox" name="add_sectors[]" value="<?php echo $key; ?>" class="hidden" <?php echo (isset($company['sectors']) and array_key_exists($key,$company['sectors']))? 'checked': '' ; ?>  />
+        </span>
+
+    <?php endforeach ?>
+                </div>
+        </div>
+        <input type="hidden" id="bespokeEval" value="<?php echo $current_user['department']; ?>" >
+    <?php   }  ?> 
+
+        
+        
+        
+        <?php  
+        $sectorEval = '';
+       // $sectorEval = 'sectorEval';
+    if($current_user['department'] == 'support'  ){ 
+        
+        $sectorEval = 'sectorEval';
+    }
+
+ //} ?>
+        
+        
+        
+        
+        
+        
+        
+        
+                <div class="col-md-12 target_sectors <?php echo $sectorEval; ?>">
                     <label for="sectors" class="control-label">Target Sectors</label>
                     <div class="tag-holder">
                     <?php   
@@ -216,7 +264,7 @@
             </div>
     
          <div class="row">
-            <div class="col-md-12 other_sectors" style="margin-top:10px;">
+            <div class="col-md-12 other_sectors <?php echo $sectorEval; ?>" style="margin-top:10px;">
                 <label for="sectors" class="control-label">Other Sectors</label>
                 <div class="tag-holder">
                 <?php   
@@ -234,8 +282,8 @@
         </div>
     </div>
             
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-sm btn-warning btn-block ladda-button submit_btn disable_no_source disable_no_si" edit-btn="editbtn<?php echo $company['id']; ?>" loading-display="loading-display-<?php echo $company['id']; ?>" data-style="expand-right" data-size="1" >
+            <div class="modal-footer bespoke_submit_btn">
+                <button type="submit" class="btn btn-sm btn-warning btn-block ladda-button  submit_btn disable_no_source disable_no_si" edit-btn="editbtn<?php echo $company['id']; ?>" loading-display="loading-display-<?php echo $company['id']; ?>" data-style="expand-right" data-size="1" >
                     <span class="ladda-label">Save</span>
                 </button>
             </div>

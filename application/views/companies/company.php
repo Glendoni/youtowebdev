@@ -417,6 +417,9 @@ if ($your_date < $now){;
             
         </div>
             
+
+<?php if($current_user['department'] =='sales' ){ ?>
+
               <div class="col-md-3" >
 				<label>Lead Source</label>
 				<p style="
@@ -425,6 +428,26 @@ if ($your_date < $now){;
                  <strong><?php echo  $company_sources[$company['source']]  ? ''  : '';?></strong> <span class="leadSourceSubText"><?php echo $company['source_explanation'] ? $company['source_explanation'] : ''; ?></span></p>
 			 
 		</div>
+    
+    <?php }else{ ?>
+        <div class="col-md-3" >
+				<label>Bespoke</label>
+			<?php
+                     echo '<div class="sectorsPlainText">';
+                
+              foreach($bespokeSelected as $bsk => $bsv){
+                  
+                  echo '<span  class="issector" style="color: #2a48ad;  "> '.$bsv['name'].' </span><br><span class="bespoke_date">Created at: '.date("l jS F Y", strtotime($bsv['created_at'])).'</span><br>' ; 
+                  
+              }
+                  
+                  echo '</div>';
+                  ?>
+			 
+		</div>
+    
+    
+    <?php } ?>
                 
 		<!-- EMPLOYEES -->
 		<div class="col-xs-4 col-sm-3">
@@ -442,8 +465,7 @@ if ($your_date < $now){;
 			if(isset($company['sectors'])){
 	 
             echo '<div class="sectorsPlainText">';
-                
-                
+              
              //print_r($not_target_sectors_list);
             foreach (array_reverse($company['sectors']) as $key => $name)
 				{
@@ -452,6 +474,9 @@ if ($your_date < $now){;
               if(in_array($name,$not_target_sectors_list)){
                   
                $notinsec[] = '<span class="notsector" style=" "> '.$name.'</span> <br>'  ;  
+              }elseif( in_array($name,$bespoke_target_sectors_list)){
+                  
+                  //$insec[] =  '<span  class="issector" style="color: red;  "> '.$name.' </span><br>' ;   
               }else{
                   
                 $insec[] =  '<span  class="issector" style="color: green;  "> '.$name.' </span><br>' ;   
@@ -768,9 +793,13 @@ endif;
 	        </tr>
 	      </thead>
 	      <tbody>
-	      	<?php foreach ($campaigns as $campaign): ?>
+	      	<?php foreach ($campaigns as $campaign): 
+              
+            $evergreeneval =   $campaign->evergreen_id ? '&evegreen='.$campaign->evergreen_id : '';
+              
+              ?>
 	      	<tr>
-				<td class="col-md-6"><a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $campaign->id;?>"><?php echo $campaign->campaign_name;?></a></td>
+				<td class="col-md-6"><a href="<?php echo site_url();?>campaigns/display_campaign/?id=<?php echo $campaign->id.$evergreeneval ;?>"><?php echo $campaign->campaign_name;?></a></td>
 				<td class="col-md-3"><?php echo $campaign->name;?></td>
 				<td class="col-md-2"><?php echo date("d/m/y",strtotime($campaign->created_at));?></td>
 				<td  class="col-md-3">
@@ -794,9 +823,6 @@ endif;
 
 		<div class="panel-heading" id="contacts">
 		Contacts
-            
-            <?php echo ' This is a system variable'. getenv(DATABASE_URL); ?>
-
 		<div class="pull-right">
 		<div class="btn-group">
 		<button  class="btn btn-primary edit-btn btn-xs" data-toggle="modal" id="create_contact_<?php echo $company['id']; ?>"  data-target="#create_contact_<?php echo $company['id']; ?>" >
@@ -823,28 +849,40 @@ endif;
 
 	        </tr>
 	      </thead>
-	      <tbody>
-<?php foreach ($contacts as $contact): ?>
-	      	<tr>
-				<td class="col-md-2 companyDetailsContacts">
-				<?php echo ucfirst($contact->first_name).' '.ucfirst($contact->last_name); ?>
-				</td>
-				<td class="col-md-2"><?php echo ucfirst($contact->role); ?></td>
-				<td class="col-md-3"><?php echo $contact->email; ?>&nbsp;
-	<?php if (!empty($contact->email_opt_out_date)): ?>
-		<span class="label label-danger contact-opt-out">Email Marketing Opt-Out</span>
-	<?php endif;?></td>
-				<td  class="col-md-2"><?php echo $contact->phone; ?></td>
-								<td  class="col-md-3"><div class="pull-right mobile-left actionsactionscontact-options">
-				<?php if ($company['pipeline']=='Blacklisted'): ?>
-				<?php else: ?>
-	            <?php $this->load->view('companies/action_box_contacts.php',array('contact'=>$contact)); ?>
-	        	<?php endif; ?>
-	            </div></td>
-
-        	</tr>
-			<?php endforeach; ?>  
-	      </tbody>
+            <tbody>
+                <?php foreach ($contacts as $contact): ?>
+                    <tr>
+                        <td class="col-md-2 companyDetailsContacts">
+                            <?php echo ucfirst($contact->first_name).' '.ucfirst($contact->last_name); ?>
+                        </td>
+                        <td class="col-md-2">
+                            <?php if($contact->role_dropdown): ?>
+                                <?php echo $contact->role_dropdown; ?>
+                            <?php endif; ?>
+                            <?php if($contact->role_dropdown and $contact->role): ?>
+                                / 
+                            <?php endif; ?>
+                            <?php echo ucfirst($contact->role); ?>
+                            
+                        </td>
+                        <td class="col-md-3">
+                            <?php echo $contact->email; ?>&nbsp;
+                            <?php if (!empty($contact->email_opt_out_date)): ?>
+                                <span class="label label-danger contact-opt-out">Email Marketing Opt-Out</span>
+                            <?php endif;?>
+                        </td>
+                        <td class="col-md-2"><?php echo $contact->phone; ?></td>
+                        <td class="col-md-3">
+                            <div class="pull-right mobile-left actionsactionscontact-options">
+                                <?php if ($company['pipeline']=='Blacklisted'): ?>
+                                <?php else: ?>
+                                <?php $this->load->view('companies/action_box_contacts.php',array('contact'=>$contact)); ?>
+                                <?php endif; ?>
+                            </div>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>  
+            </tbody>
 	    </table>
 
 	    <?php else: ?>
