@@ -391,9 +391,18 @@ if ($your_date < $now){;
 		<?php $this->load->view('companies/actions_box.php',array('company'=>$company)); ?>
 
 		<!-- LINKS AND BTN -->
-			<?php if (isset($company['sonovate_id'])): ?>
+			<?php 
+            
+            
+            
+            if ($company['sonovate_id'] == true && ENVIRONMENT == 'production' ){ ?>
 			<a class="btn  btn-info btn-sm btn-block sonovate" href="https://members.sonovate.com/agency-admin/<?php echo $company['sonovate_id'] ?>/profile"  target="_blank">Sonovate 3.0</a>
-			<?php endif; ?>
+			<?php }else{ ?>
+             
+			<a class="btn  btn-info btn-sm btn-block sonovate" href="https://invoicing-dev.sonovate.com/agency-admin/<?php echo $company['sonovate_id'] ?>/profile"  target="_blank">Sonovate 3.0</a>
+			<?php } ?>
+            
+            
 	<?php if (($current_user['department']) =='support' && isset($company['zendesk_id'])): ?>
 			<a class="btn  btn-info btn-sm btn-block zendesk" href="https://sonovate.zendesk.com/agent/organizations/<?php echo $company['zendesk_id'] ?>"  target="_blank">ZenDesk</a>
 			<?php endif; ?>
