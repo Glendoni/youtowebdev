@@ -54,7 +54,7 @@
                 </div>
                 <div class="modal-footer">
             	    <button type="submit" class="btn btn-sm btn-primary btn-block ladda-button submit_btn addcontact" edit-btn="editbtn<?php echo $company['id']; ?>" loading-display="loading-display-<?php echo $company['id']; ?>" data-style="expand-right" data-size="1">
-		        	    <span class="ladda-label">Add Contact </span>
+		        	    <span class="ladda-label">Save </span>
 		    	    </button>                
                 </div>
             <?php echo form_close(); ?>
