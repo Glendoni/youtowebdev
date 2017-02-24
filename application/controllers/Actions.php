@@ -136,10 +136,9 @@ foreach($userfilename as $key => $value){
                                     }
                                 }
 
-
                                 foreach($locationName as $key => $value){
-
-                                            $filename_encrypted  = sha1($value.date('YmdHis'));
+ 
+                                            $filename_encrypted  = sha1($value . date('YmdHis'));
                                             $file_action_post = array(
                                             'action_id' => $result,
                                             'name' => $userfilename[$key],
