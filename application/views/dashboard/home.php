@@ -858,7 +858,7 @@
 
 <div class="col-xs-6 col-sm-2 col-md-2"><a href="<?php echo site_url();?>companies/company?id=<?php echo $marketing->company_id;?>#contacts"><?php echo ucfirst($marketing->first_name).' '.ucfirst($marketing->last_name); ?></a></div>
 <div class="col-xs-6 col-sm-3 col-md-3 align-right ">
-<?php if (isset($marketing->sent_id)) {?><a href="http://www.sonovate.com/?p=<?php echo $marketing->sent_id;?>" style="padding-right:5px;" target="_blank"><i class="fa fa-eye"></i></a><?php;}?> 
+<?php if (isset($marketing->sent_id)):?><a href="http://www.sonovate.com/?p=<?php echo $marketing->sent_id;?>" style="padding-right:5px;" target="_blank"><i class="fa fa-eye"></i></a><?php endif; ?> 
 
   <?php if (($marketing->email_action_type)=='2'): ?>
     <span class="label label-primary">Opened</span>
