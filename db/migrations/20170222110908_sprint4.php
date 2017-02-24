@@ -29,11 +29,11 @@ class Sprint4 extends AbstractMigration
         $table = $this->table('companies');
         $table->addColumn('confidential_flag', 'boolean', [
             'default' => false
-        ]);
+        ])->update();
     }
 
     public function down() {
         $table = $this->table('companies');
-        $table->removeColumn('confidential_flag');
+        $table->removeColumn('confidential_flag')->update();
     }
 }
