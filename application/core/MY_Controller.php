@@ -11,13 +11,12 @@ class MY_Controller extends CI_Controller {
 
 		parent::__construct();
         
-        
-        
-        
-        
-        
-        
-        
+        try {
+			$url = getHttpsUrl($_SERVER['HTTPS'], current_url());
+			redirect($url, 'location');
+		} catch (Exception $e) {
+			// Do nothing
+		}
         
 		set_time_limit(6000); 
 		ini_set("memory_limit", -1);
