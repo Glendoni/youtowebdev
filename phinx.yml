@@ -23,11 +23,11 @@ environments:
         port: 5432
         charset: utf8
 
-    testing:
-        adapter: mysql
+    staging:
+        adapter: pgsql
         host: localhost
-        name: testing_db
-        user: root
-        pass: ''
+        name: d1bna94a8j95ip
+        user: mhcpgrefocjdtf
+        pass: 'CZbMFlzImraARQeWme1UM3VFOm'
         port: 3306
         charset: utf8
