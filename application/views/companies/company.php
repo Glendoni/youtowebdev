@@ -572,7 +572,7 @@ if ($your_date < $now){;
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading" id="bespoke" >
-               Service Level 
+               Service Overview 
                 
                 <div class="pull-right">
                 <div class="btn-group">
@@ -595,7 +595,10 @@ if ($your_date < $now){;
                 </thead>
                     <?php }else{
         
-        echo '<p style="text-align:center;">No Services </p>';
+        echo '<div class="alert alert-info">
+<p style="text-align:center;">No Services Applicable </p>
+</div>'
+;
         
     } ?>
                     
@@ -1275,7 +1278,7 @@ endif;
 
                  <?php endif; ?>
                 
-                        <div class="col-sm-12 col-md-12">
+                        <div class="">
                             <div class="form-group addActionOutcome">
                                  
                                 <label>Comment<span class="actionEvalPipeline"style=" color: red;">*</span></label>
