@@ -299,13 +299,8 @@ WHERE u.active=true
 AND  u.id=$id
 order by u.name, u.department
 
- ";
-       
-        
+ ";  
          $query = $this->db->query($sql);
-   
-        
-        
         return $query->row_array();
         
         

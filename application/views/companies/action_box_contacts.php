@@ -148,8 +148,6 @@
                     
                     
                     <?php 
-                   
-                    
                     $oldcontact  = '';
 $historicalRole = '';
                     $showHideSaveEval = '';
