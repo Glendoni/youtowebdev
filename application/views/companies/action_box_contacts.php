@@ -149,7 +149,7 @@
                     
                     <?php 
                     $oldcontact  = '';
-$historicalRole = '';
+                    $historicalRole = '';
                     $showHideSaveEval = '';
                     if(!in_array($contact->role, $cont_roleArray)){
                         
