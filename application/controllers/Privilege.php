@@ -107,7 +107,8 @@ class Privilege extends MY_Controller {
     
     
      function getuser($id = 0){
- 
+         
+      
         $contact_info = $this->input->post();
          
        //echo   json_encode($contact_info);
