@@ -86,8 +86,7 @@ function get_contacts_s($company_id)
 		$report_timesheets_processed,
 		$report_sales_ledger,
 		$report_commision,
-		$report_age_debtor,
-		$role_dropdown
+		$report_age_debtor
 	) {
         $role = rtrim($role," "); // removes empty space on rightside of string ltrim removes empty space on the left before string
 		$contact->title = !empty(trim($title))?trim($title):NULL;
@@ -98,7 +97,7 @@ function get_contacts_s($company_id)
         $contact->role =  ltrim($role);
         $contact->company_id = $company_id;
         $contact->created_by = $created_by;
-		$contact->role_dropdown = $role_dropdown;
+		 
 		$reports = [];
 		if ($report_extensions) {
 			$reports[] = $report_extensions;
