@@ -946,13 +946,8 @@ endif;
                             <?php echo ucfirst($contact->first_name).' '.ucfirst($contact->last_name); ?>
                         </td>
                         <td class="col-md-2">
-                            <?php if($contact->role_dropdown): ?>
-                                <?php echo $contact->role_dropdown; ?>
-                            <?php endif; ?>
-                            <?php if($contact->role_dropdown and $contact->role): ?>
-                                / 
-                            <?php endif; ?>
-                            <?php echo ucfirst($contact->role); ?>
+                            
+                            <?php echo $contact->role ? ucfirst($contact->role) : ucfirst($contact->role_dropdown); ?>
                             
                         </td>
                         <td class="col-md-3">

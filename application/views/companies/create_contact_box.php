@@ -49,7 +49,7 @@
                         <div class="col-md-6">
                             <div class=" form-group ">
                                 <label for="type">Select role:</label>
-                                <select class="form-control" id="type" name="role_dropdown">
+                                <select class="form-control" id="type" name="role">
                                <option value=""></option>
                                     
                                     <?php 
