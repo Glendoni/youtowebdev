@@ -22,14 +22,14 @@
                         <div class=" form-group ">
                             <label for="phone" class="control-label">Funding Type</label> 
                             <span class="button-checkbox">
-                                <button type="button"  class="btn    btn-default enterpriseBoxBtn" data-color="success"><i class="state-icon undefined"></i> &nbsp;CONFIDENTIAL</button>
+                                <button type="button"  class="btn    btn-default enterpriseBoxBtn" data-color="success"><i class="state-icon undefined"></i> &nbsp;ENTERPRISE</button>
                                 <input type="checkbox" name="confidential_flag" value="1" class="hidden" <?php echo $company['confidential_flag']?  'checked=\"checked\"' : "" ; ?>
                             </span>
                         </div>
                     </div>
 
         <div class="col-md-12 target_sectors" style="margin-top:10px;">
-            <label for="sectors" class="control-label">Service Level </label>
+            <label for="sectors" class="control-label">Service Overview </label>
             <div class="tag-holder">  
                 <?php  
                     $confidential_flag = '';
@@ -40,7 +40,7 @@
                 ?>
 
                     <span class="button-checkbox bespoke_checkbox">
-                    <button type="button" id="bespoke_checkbox" class="btn btn-checkbox checkbox_bespoke" data-color="success" >&nbsp;<?php echo $value; ?></button>
+                    <button type="button" id="bespoke_checkbox" class="btn btn-checkbox checkbox_bespoke" data-color="success" >&nbsp;<?php echo ucwords(strtolower($value)); ?></button>
                     <input type="checkbox" name="add_sectors[]" value="<?php echo $key; ?>" class="hidden" <?php echo (isset($company['sectors']) and array_key_exists($key,$company['sectors']))? 'checked': '' ; ?>  />
                     </span>
 
@@ -54,7 +54,7 @@
                 </div>
                 <div class="modal-footer">
             	    <button type="submit" class="btn btn-sm btn-primary btn-block ladda-button submit_btn addcontact" edit-btn="editbtn<?php echo $company['id']; ?>" loading-display="loading-display-<?php echo $company['id']; ?>" data-style="expand-right" data-size="1">
-		        	    <span class="ladda-label">Add Contact </span>
+		        	    <span class="ladda-label">Save </span>
 		    	    </button>                
                 </div>
             <?php echo form_close(); ?>

@@ -303,6 +303,8 @@ function get_users_info(refresh = true){
 
                     var uniqueVals = [];  
                     var department = [];
+                    
+
                     $.each(testkey, function(i, el){
                     if($.inArray(el, uniqueVals) === -1){
 

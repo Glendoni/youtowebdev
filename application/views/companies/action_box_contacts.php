@@ -148,15 +148,13 @@
                     
                     
                     <?php 
-                   
-                    
                     $oldcontact  = '';
-$historicalRole = '';
+                    $historicalRole = '';
                     $showHideSaveEval = '';
                     if(!in_array($contact->role, $cont_roleArray)){
                         
                         $oldcontact = $contact->role;
-                        $historicalRole = ' <span class="historic_'.$contact->id.'">(Depricated  Role Type ) Please change in order to save form </span>';
+                        $historicalRole = ' <span class="historic_'.$contact->id.'">(Depricated  Role Type ) Please change in order to save form <span style="color:red">*</span></span>';
 $showHideSaveEval = 'disabled="disabled"';
 //Historic
                     }

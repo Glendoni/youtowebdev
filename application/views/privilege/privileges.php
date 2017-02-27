@@ -28,6 +28,7 @@
                   <label for="sel1">Role *</label>
                   <select class="form-control " name="role" required="required" id="role" >
                    <option value="">Please Select</option>
+       
                   </select>
                 </div> 
                      
@@ -55,6 +56,7 @@
                   <label for="sel1">Department *</label>
                   <select class="form-control" name="department" required="required" id="department" >
                    <option value="">Please Select</option>
+                                     
                   </select>
                 </div>  
                  
