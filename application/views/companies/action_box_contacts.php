@@ -154,7 +154,8 @@
                     if(!in_array($contact->role, $cont_roleArray)){
                         
                         $oldcontact = $contact->role;
-                        $historicalRole = ' <span class="historic_'.$contact->id.'">(Depricated  Role Type ) Please change in order to save form <span style="color:red">*</span></span>';
+                        $historicalRole = ' <span class="historic_'.$contact->id.'" style="font-size: 12px;
+    font-weight: 500;"><br>Choose a new role type from the list below (this replaces the old role type currently selected)<span style="color:red; font-size: 19px;">*</span></span>';
 $showHideSaveEval = 'disabled="disabled"';
 //Historic
                     }
