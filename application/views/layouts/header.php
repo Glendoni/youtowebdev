@@ -17,7 +17,7 @@
     <?php
 } else {?>
 
-    <link rel="icon" type="image/jpg" href="<?php echo asset_url();?>images/favicon.jpg">
+    <link rel="icon" type="image/jpg" href="<?php echo asset_url();?>images/favicon.png">
 <?php
 }; ?>
 
