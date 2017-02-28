@@ -386,6 +386,8 @@ if($this->input->post('edit_company'))
 		{
   
 			$post = $this->input->post();
+            
+            //print_r($post);
 			// We need to clean the post and validate the post fields *pending*
 			$result = $this->Companies_model->update_details($this->input->post(),$this->data['current_user']['id']);
             
@@ -405,7 +407,7 @@ if($this->input->post('edit_company'))
                         $post = $this->input->post();
                         // We need to clean the post and validate the post fields *pending*
                         $result = $this->Companies_model->add_Services_Level($this->input->post(),$this->data['current_user']['id']);
- exit();
+ 
                        //  $this->Companies_model->cronPipeline(0,$post['company_id']);
 
                         $this->refresh_search_results();
