@@ -806,12 +806,12 @@ where id in(
 select o.id from operates o 
 LEFT JOIN sectors s
 ON o.sector_id = s.id
-WHERE active=true and company_id=".$id." 
-and s.sector_group!=1
+WHERE o.active=true and o.company_id=".$id." 
+and s.sector_group is null
 
 )";
 
-
+ 
 
  $query = $this->db->query($sql);
         	return $this->db->affected_rows();
