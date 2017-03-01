@@ -1,7 +1,7 @@
 <?php
 
 function getHttpsUrl($serverHttps, $url, $env) {
-    if ($env === 'development') {
+    if ($env !== 'production') {
         throw new Exception('No ssl needed in development');
     }
 
