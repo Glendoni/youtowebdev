@@ -11,6 +11,9 @@ class StackTest extends TestCase
         $this->assertEquals($url, 'https://blah.com');
     }
 
+    /**
+     * @expectedException Exception
+     */
     public function test_gets_https_url_from_http_url_when_https_null()
     {
         $url = getHttpsUrl(null, 'http://blah.com', 'staging');
