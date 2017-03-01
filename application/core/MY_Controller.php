@@ -12,8 +12,8 @@ class MY_Controller extends CI_Controller {
 		parent::__construct();
         
         try {
-		//	$url = getHttpsUrl($_SERVER['HTTPS'], current_url(), ENVIRONMENT);
-			//redirect($url, 'location');
+		 	$url = getHttpsUrl($_SERVER['HTTPS'], current_url(), ENVIRONMENT);
+			 redirect($url, 'location');
 		} catch (Exception $e) {
 			// Do nothing
 		}
