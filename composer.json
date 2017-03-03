@@ -5,6 +5,7 @@
     "license": "MIT",
     "require": {
         "compwright/codeigniter-installers": "*",
+       "ext-mcrypt": "*",
         "ext-memcached": "*",
         "shlikhota/postgresdb-php":"*",
         "robmorgan/phinx": "^0.7.0",
