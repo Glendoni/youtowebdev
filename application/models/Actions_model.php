@@ -647,7 +647,7 @@ function get_user_placements($period)
 }
 }
 
-function dates($period)
+function dates($period = false)
 {
     if ($period==='search') {
         if (!empty($_GET['start_date'])) {
