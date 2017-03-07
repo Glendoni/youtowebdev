@@ -11,7 +11,7 @@ class MY_Controller extends CI_Controller {
 
 		parent::__construct();
         
-    try {
+    	try {
 			$url = getHttpsUrl($_SERVER['HTTP_X_FORWARDED_PROTO'], current_url());
 			redirect($url, 'location');
 		} catch (Exception $e) {
