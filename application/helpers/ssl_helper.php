@@ -1,7 +1,6 @@
 <?php
 
-function getHttpsUrl($herokuForwardedProto, $url, $env) {
-    
+function getHttpsUrl($herokuForwardedProto, $url) {
     if (! isset($herokuForwardedProto)) {
         throw new Exception('No http on local environment.');
     }
