@@ -13,6 +13,7 @@ class MY_Controller extends CI_Controller {
         
         try {
 			$url = getHttpsUrl($_SERVER['HTTPS'], current_url(), ENVIRONMENT);
+			dd($url);
 			//redirect($url, 'location');
 		} catch (Exception $e) {
 			// Do nothing
