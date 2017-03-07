@@ -21,13 +21,50 @@ endif;
                     <div class="row top-info-holder">
                     <div class="col-md-9 piplineUdate" style="    padding-left: 31px;height: 20px;margin-top: 6px;">
                                 <!-- <breadcrumbscroll> -->
+                        
+                        
+                      
     <h2 class="company-header" id="logo">
-                <?php $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' ); echo html_entity_decode (str_replace($words, ' ',$company['name'])); ?></h2>
-    <?php if (isset($company['trading_name'])): ?>
-        <h5 class="trading-header">
-        <small><b>T/A</b></small>  <?php echo $company['trading_name'];?>
-        </h5>
-    <?php endif; ?>
+                <?php $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' ); echo html_entity_decode (str_replace($words, ' ',$company['name'])); ?> 
+        
+        
+                             
+        
+        
+                             </h2>
+                        
+                        
+               
+   
+            <div>
+
+                <?php if (isset($company['confidential_flag'])): ?>
+                    <h5 class="trading-header" style="margin-top: 9px; margin-left: 2px;">
+                    <?php if($company['confidential_flag']): ?>
+                        <span class="label confidential_status" style="">
+                            <b>Enterprise</b> 
+                        </span>
+                    <?php endif; ?>
+
+                <?php endif; ?>
+
+
+                </h5>
+                <?php if (isset($company['trading_name'])): ?>
+                <div class="spacer" style="clear: both;"></div>
+                <br> <p id="comapny_header_trading_name">
+                    <small><b>T/A</b></small> 
+                    <?php echo $company['trading_name'];?>
+                </p>
+                <?php endif; ?>
+
+            </div>
+                            
+                       
+                        
+                        <div>
+  
+                        </div>
     <div class="spacer" style="clear: both;"></div>
 
 
@@ -42,6 +79,7 @@ endif;
     <span class="label" style="background-color: #01A4A4; color:#fff; margin-left: 5px;"><b>Account Manager:</b> <?php echo $company['account_manager']?></span>
     <?php endif; ?>
                         
+                      
                         
                         
   
@@ -94,12 +132,6 @@ endif;
                                         Cancelled:  <?php echo date('d/m/Y',strtotime($company['customer_to'])); ?>
                                         </span>
                         
-                        
-                        
-                       
-                        
-                        
-                        
                                         <?php } ?>
 
                                         <?php if(isset($company['assigned_to_name'])): ?>
@@ -113,7 +145,7 @@ endif;
                                         <?php endif; ?>
 
        
-                        
+                    
                    
                         
                         
@@ -223,10 +255,11 @@ endif;
 <!-- POPUP BOXES -->
 	<?php $this->load->view('companies/edit_box.php',array('company'=>$company)); ?>
 	<?php $this->load->view('companies/create_contact_box.php',array('company'=>$company)); ?>
+    <?php $this->load->view('companies/service_offering_box.php',array('company'=>$company)); ?>
 	<?php $this->load->view('companies/create_address_box.php',array('company'=>$company)); ?>
    
 <div class="panel panel-primary">
-	<div class="panel-body" style="padding-top:40px;">
+	<div class="panel-body" style="padding-top:40px;     margin-bottom: 5px;">
     	<div class="row"><!--FINISHED AT THE END OF PANEL-->
 		<div class="col-sm-9">
 		<div class="row">
@@ -358,9 +391,25 @@ if ($your_date < $now){;
 		<?php $this->load->view('companies/actions_box.php',array('company'=>$company)); ?>
 
 		<!-- LINKS AND BTN -->
-			<?php if (isset($company['sonovate_id'])): ?>
+			<?php 
+            
+            
+            
+            if (($company['sonovate_id']) && ENVIRONMENT == 'production' ){ ?>
 			<a class="btn  btn-info btn-sm btn-block sonovate" href="https://members.sonovate.com/agency-admin/<?php echo $company['sonovate_id'] ?>/profile"  target="_blank">Sonovate 3.0</a>
-			<?php endif; ?>
+			<?php } ?>
+             
+            
+            <?php if (($company['sonovate_id']) && ENVIRONMENT == 'staging' ){ ?>
+			<a class="btn  btn-info btn-sm btn-block sonovate" href="https://invoicing-dev.sonovate.com/agency-admin/<?php echo $company['sonovate_id'] ?>/profile"  target="_blank">Sonovate 3.0</a>
+			<?php } ?>
+            
+            
+             <?php if (($company['sonovate_id']) && ENVIRONMENT == 'development' ){ ?>
+			<a class="btn  btn-info btn-sm btn-block sonovate" href="https://invoicing-dev.sonovate.com/agency-admin/<?php echo $company['sonovate_id'] ?>/profile"  target="_blank">Sonovate 3.0</a>
+			<?php } ?>
+            
+            
 	<?php if (($current_user['department']) =='support' && isset($company['zendesk_id'])): ?>
 			<a class="btn  btn-info btn-sm btn-block zendesk" href="https://sonovate.zendesk.com/agent/organizations/<?php echo $company['zendesk_id'] ?>"  target="_blank">ZenDesk</a>
 			<?php endif; ?>
@@ -418,7 +467,7 @@ if ($your_date < $now){;
         </div>
             
 
-<?php if($current_user['department'] =='sales' ){ ?>
+
 
               <div class="col-md-3" >
 				<label>Lead Source</label>
@@ -429,25 +478,8 @@ if ($your_date < $now){;
 			 
 		</div>
     
-    <?php }else{ ?>
-        <div class="col-md-3" >
-				<label>Bespoke</label>
-			<?php
-                     echo '<div class="sectorsPlainText">';
-                
-              foreach($bespokeSelected as $bsk => $bsv){
-                  
-                  echo '<span  class="issector" style="color: #2a48ad;  "> '.$bsv['name'].' </span><br><span class="bespoke_date">Created at: '.date("l jS F Y", strtotime($bsv['created_at'])).'</span><br>' ; 
-                  
-              }
-                  
-                  echo '</div>';
-                  ?>
-			 
-		</div>
     
-    
-    <?php } ?>
+      
                 
 		<!-- EMPLOYEES -->
 		<div class="col-xs-4 col-sm-3">
@@ -527,9 +559,67 @@ if ($your_date < $now){;
 		<div class="col-md-12">
 			<hr>
 		</div>
-
+    </div>
 		
-       
+       		<!--CONTACTS-->
+      
+        <?php
+
+    $exclude_from_view = array('sales','data');
+        if(!in_array($current_user['department'],$exclude_from_view)){ 
+    
+    ?>
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading" id="bespoke" >
+               Service Overview 
+                
+                <div class="pull-right">
+                <div class="btn-group">
+                <button class="btn btn-primary edit-btn btn-xs" data-toggle="modal"  data-target="#serviceoffering">
+                <span class="ladda-label"><?php echo count($bespokeSelected) ? 'Edit Services' : 'Add Service'; ?>  </span>
+                </button>
+                </div>
+                </div>
+            </div>
+        <!-- /.panel-heading -->
+            <div class="panel-body">
+                <table class="table">
+                
+                    <?php if(count($bespokeSelected)){ ?>
+                    <thead>
+                <tr>
+                <th class="col-md-6">Services</th>
+                <th class="col-md-6">Date Created</th>
+                </tr>
+                </thead>
+                    <?php }else{
+        
+        echo '<div class="alert alert-info">
+<p style="text-align:center;">No Services Applicable </p>
+</div>'
+;
+        
+    } ?>
+                    
+                <tbody>
+                <?php 
+                foreach($bespokeSelected as $bsk => $bsv){ ?>
+                    <tr>
+                        <td class="col-md-6"><?php echo $bsv['name']; ?> </td>
+                        <td class="col-md-6"> <?php echo date("l jS F Y", strtotime($bsv['created_at'])); ?></td>
+                    </tr>
+                <?php    }   //echo '<span  class="issector" style="color: #2a48ad;  "> '.$bsv['name'].' </span><br><span class="bespoke_date">Created at: '.date("l jS F Y", strtotime($bsv['created_at'])).'</span><br>' ; ?>  
+
+                </tbody>
+                </table>
+
+            </div>
+        <!-- /.panel-body -->
+        </div>
+
+    </div>
+<?php } ?>
 		<!-- MORTGAGES -->
 	<div class="col-md-12">
 		<div class="panel panel-default">
@@ -673,11 +763,12 @@ if ($your_date < $now){;
 
 <!--ADDRESSES-->
             
+      
          
 
 
-
-		<div class="col-md-12">
+      
+		 <div class="col-md-12">
 		<div class="panel panel-default">
 		<div class="panel-heading" id="addresses">
 		Locations
@@ -772,12 +863,12 @@ endif;
 		</div>
 		<!-- /.panel-body -->
 		</div>
-		</div>
-
+	 
+        </div>
  
 		<!--CAMPAIGNS-->
 		<?php if(isset($campaigns) and !empty($campaigns)) : ?>
-		<div class="col-md-12">
+		 <div class="col-md-12">
 		<div class="panel panel-default">
 		<div class="panel-heading" id="campaigns">
 		Campaigns
@@ -813,26 +904,27 @@ endif;
 		</div>
 		<!-- /.panel-body -->
 		</div>
-		</div>
+        </div>
 		<?php endif; ?>
 
 
 		<!--CONTACTS-->
-		<div class="col-md-12">
+		 <div class="col-md-12">
 		<div class="panel panel-default">
 
-		<div class="panel-heading" id="contacts">
-		Contacts
-		<div class="pull-right">
-		<div class="btn-group">
-		<button  class="btn btn-primary edit-btn btn-xs" data-toggle="modal" id="create_contact_<?php echo $company['id']; ?>"  data-target="#create_contact_<?php echo $company['id']; ?>" >
-        <span class="ladda-label"> Add Contact </span>
-		</button>
-		</div>
-		</div>
-               
+	 
 
+		<div class="panel-heading" id="contacts">
+                Contacts
+                <div class="pull-right">
+                <div class="btn-group">
+                <button  class="btn btn-primary edit-btn btn-xs" data-toggle="modal" id="create_contact_<?php echo $company['id']; ?>"  data-target="#create_contact_<?php echo $company['id']; ?>" >
+                <span class="ladda-label"> Add Contact </span>
+                </button>
+                </div>
+                </div>
 		</div>
+            
 		<!-- /.panel-heading -->
 		<div class="panel-body">
 		<?php if(isset($contacts) and !empty($contacts)) : ?>
@@ -845,8 +937,6 @@ endif;
 	          	<th class="col-md-3">Email</th>
 				<th class="col-md-2">Phone</th>
 				<th class="col-md-3"></th>
-
-
 	        </tr>
 	      </thead>
             <tbody>
@@ -856,13 +946,8 @@ endif;
                             <?php echo ucfirst($contact->first_name).' '.ucfirst($contact->last_name); ?>
                         </td>
                         <td class="col-md-2">
-                            <?php if($contact->role_dropdown): ?>
-                                <?php echo $contact->role_dropdown; ?>
-                            <?php endif; ?>
-                            <?php if($contact->role_dropdown and $contact->role): ?>
-                                / 
-                            <?php endif; ?>
-                            <?php echo ucfirst($contact->role); ?>
+                            
+                            <?php echo $contact->role ? ucfirst($contact->role) : ucfirst($contact->role_dropdown); ?>
                             
                         </td>
                         <td class="col-md-3">
@@ -892,7 +977,7 @@ endif;
 		</div>
 		<!-- /.panel-body -->
 		</div>
-		</div>
+		 
         
         <!-- TAGGING  START-->
         
@@ -1007,10 +1092,10 @@ endif;
   </div>
         
         <!--TAGGING END -->
-
-
+        </div>
+  <div class="col-md-12">
 		<!--ACTIONS-->
-		<div class="col-md-12" id="add_action">
+		<div   id="add_action">
 		<div class="panel panel-default ">
 		  <div class="panel-heading">Add Action</div>
 		  <div class="panel-body">
@@ -1188,23 +1273,9 @@ endif;
 
                  <?php endif; ?>
                 
-                
-                
-                
-                
-                
-                
-                        <div class="col-sm-12 col-md-12">
+                        <div class="">
                             <div class="form-group addActionOutcome">
                                  
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
                                 <label>Comment<span class="actionEvalPipeline"style=" color: red;">*</span></label>
                                 
                                 
@@ -1290,8 +1361,8 @@ endif;
 		  </div>
 		</div>
 		</div>
-        
-          <div class="col-md-12 child" id="stickMenu" >
+       
+          <div class="col-md-12 child" id="stickMenu" ><div>
     
     
     
@@ -1402,8 +1473,9 @@ endif;
             
 
      </div>        
- 
+        </div>
 <div class="row" id="parent">
+    
 
 </div>
 </div>

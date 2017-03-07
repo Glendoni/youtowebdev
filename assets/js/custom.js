@@ -11,12 +11,20 @@ function dateRequired()     {
 
   
 $( document ).ready(function() {
+    
+$('.comp_details_edit_btn').click(function(){
+ 
+ confidentialHandler();
+
+})
+    
+    
     if((/users\/profile/.test(window.location.href))) {
     $('#userupdatepassword').click(function(){
 
 $('.updatepassword').toggle(function(){
     
-   console.log($(this).css('display')); 
+  // console.log($(this).css('display')); 
     var displayPasswordStatus  = $(this).css('display');
     if(displayPasswordStatus == 'block'){
         
@@ -213,7 +221,23 @@ $('#debenturemortgage').change(function() {
       
     }
 });
+function confidentialHandler(){
+  
+        $('.enterpriseBoxBtn').on('click', function(){
 
+    if($(this).hasClass('active')){		
+    $('.enterpriseBox').show();
+    $('.enterpriseBox strong').text('( Enterprise )');
+    }else{
+
+    $('.enterpriseBox').hide();
+    $('.enterpriseBox strong').text('');
+    }
+
+    })
+    
+    
+}
 function gettagscampList_(param){
     
    
@@ -661,23 +685,45 @@ $(".pipeline-validation-check").change(function() {
          
         
         $(document).ready(function($){
+            
+            $('.contact_role').change(function(){
+
+var roleAllowSubmitEval = $(this).val();
+var contactRoleId = $(this).attr('data');
+//console.log(roleAllowSubmitEval)
+
+if(roleAllowSubmitEval == 1){
+
+$('.contact_sumit_'+contactRoleId).prop("disabled",true);
+$('.historic_'+contactRoleId).show();
+
+}else{
+
+$('.contact_sumit_'+contactRoleId).prop("disabled",false);
+$('.historic_'+contactRoleId).hide();
+
+}
+
+                                          })
+            
 
                 if($('#bespokeEval').val() == 'support'){ //evaluates support services
 
 
                     $('.checkbox_bespoke').click(function(){
 
-                        if($('.bespoke_checkbox  .active').length){
-                                $('.submit_btn').prop("disabled",false);
+                        if($('#serviceoffering .bespoke_checkbox  .active').length){
+                                $('#serviceoffering .submit_btn').prop("disabled",false);
                         }else{
-                                $('.submit_btn').prop("disabled",true);
+                                $('#serviceoffering .submit_btn').prop("disabled",true);
                         }
                     })
 
-                    if($('.bespoke_checkbox  .active').length >0){
-                        $('.btn-checkbox').attr("disabled", true);  
+                    if($('#serviceoffering .bespoke_checkbox  .active').length >0){
+                        $('#serviceoffering .btn-checkbox').attr("disabled", true);  
+                         //$('#serviceoffering .submit_btn').prop("disabled",true);  
                     }else{
-                        $('.submit_btn').prop("disabled",true);  
+                       // $('#serviceoffering .submit_btn').prop("disabled",true);  
 
                     }
 
@@ -1462,7 +1508,7 @@ $('#copymainaddr').click(function(){
 if($(this).prop("checked")){ $('.popUpAddress').val($('.mainAddress').text()) }else{ $('.popUpAddress').val('') }
 })
 function triggerOpenEditbox(){
-    
+         console.log('I am legend'); 
     $('.mainedit').trigger('click');
     
     

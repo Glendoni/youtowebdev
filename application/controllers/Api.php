@@ -37,10 +37,11 @@ class Api extends CI_Controller {
         if($headers['HTTP_TOKEN'] === "764f427e0f687d987f6a0f5c5324cdbd"){
            $data_insert_res = $this->Api_model->logAgent($data); //save data
             if($data_insert_res){
-             $res =  $data; //return resonse '('.json_encode($data).')';
+             
+                $res =  []; //return resonse '('.json_encode($data).')';
                 
                 header('Content-Type: application/json');
-        echo $_GET['callback'] . json_encode($res);
+                echo $_GET['callback'] . json_encode($res);
             }else{
                 
                 header($_SERVER['SERVER_PROTOCOL'] . ' 401 Unauthorized', true, 401);

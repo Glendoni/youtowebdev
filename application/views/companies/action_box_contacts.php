@@ -144,48 +144,51 @@
 	                        <input type="text" name="last_name" value="<?php echo isset($contact->last_name)?$contact->last_name:''; ?>" maxlength="50" class="form-control">
 	                    </div>
 	                </div>
+                    
+                    
+                    
+                    <?php 
+                    $oldcontact  = '';
+                    $historicalRole = '';
+                    $showHideSaveEval = '';
+                    if(!in_array($contact->role, $cont_roleArray)){
+                        
+                        $oldcontact = $contact->role;
+                        $historicalRole = ' <span class="historic_'.$contact->id.'" style="font-size: 12px;
+    font-weight: 500;"><br>Choose a new role type from the list below (this replaces the old role type currently selected)<span style="color:red; font-size: 19px;">*</span></span>';
+$showHideSaveEval = 'disabled="disabled"';
+//Historic
+                    }
+                    
+                    ?>
 					<div class="col-md-6">
 						<div class="form-group ">
-							<label for="type">Select role:</label>
-							<select class="form-control" id="type" name="role_dropdown">
-							    <option value=""></option>
-								<option <?php echo $contact->role_dropdown === 'Account Director'?'selected':''; ?> value="Account Director">Account Director</option>
-								<option <?php echo $contact->role_dropdown === 'Account Manager'?'selected':''; ?> value="Account Manager">Account Manager</option>
-								<option <?php echo $contact->role_dropdown === 'Accountant'?'selected':''; ?> value="Accountant">Accountant</option>
-								<option <?php echo $contact->role_dropdown === 'Admin'?'selected':''; ?> value="Admin">Admin</option>
-								<option <?php echo $contact->role_dropdown === 'Administrator'?'selected':''; ?> value="Administrator">Administrator</option>
-								<option <?php echo $contact->role_dropdown === 'Assistant'?'selected':''; ?> value="Assistant">Assistant</option>
-								<option <?php echo $contact->role_dropdown === 'Board Bod'?'selected':''; ?> value="Board Bod">Board Bod</option>
-								<option <?php echo $contact->role_dropdown === 'Business Development'?'selected':''; ?> value="Business Development">Business Development</option>
-								<option <?php echo $contact->role_dropdown === 'Business Development Manager'?'selected':''; ?> value="Business Development Manager">Business Development Manager</option>
-								<option <?php echo $contact->role_dropdown === 'CEO'?'selected':''; ?> value="CEO">CEO</option>
-								<option <?php echo $contact->role_dropdown === 'Commercial Sales Manager'?'selected':''; ?> value="Commercial Sales Manager">Commercial Sales Manager</option>
-								<option <?php echo $contact->role_dropdown === 'Consultant'?'selected':''; ?> value="Consultant">Consultant</option>
-								<option <?php echo $contact->role_dropdown === 'CTO'?'selected':''; ?> value="CTO">CTO</option>
-								<option <?php echo $contact->role_dropdown === 'Data Entry'?'selected':''; ?> value="Data Entry">Data Entry</option>
-								<option <?php echo $contact->role_dropdown === 'Data Entry Administrator'?'selected':''; ?> value="Data Entry Administrator">Data Entry Administrator</option>
-								<option <?php echo $contact->role_dropdown === 'Dev'?'selected':''; ?> value="Dev">Dev</option>
-								<option <?php echo $contact->role_dropdown === 'Director'?'selected':''; ?> value="Director">Director</option>
-								<option <?php echo $contact->role_dropdown === 'Finance Director'?'selected':''; ?> value="Finance Director">Finance Director</option>
-								<option <?php echo $contact->role_dropdown === 'Inbound Marketing'?'selected':''; ?> value="Inbound Marketing">Inbound Marketing</option>
-								<option <?php echo $contact->role_dropdown === 'Manager'?'selected':''; ?> value="Manager">Manager</option>
-								<option <?php echo $contact->role_dropdown === 'Marketing Manager'?'selected':''; ?> value="Marketing Manager">Marketing Manager</option>
-								<option <?php echo $contact->role_dropdown === 'Operations Manager'?'selected':''; ?> value="Operations Manager">Operations Manager</option>
-								<option <?php echo $contact->role_dropdown === 'PM'?'selected':''; ?> value="PM">PM</option>
-								<option <?php echo $contact->role_dropdown === 'Risk and Compliance Officer'?'selected':''; ?> value="Risk and Compliance Officer">Risk and Compliance Officer</option>
-								<option <?php echo $contact->role_dropdown === 'Senior Consultant'?'selected':''; ?> value="Senior Consultant">Senior Consultant</option>
-								<option <?php echo $contact->role_dropdown === 'Tester'?'selected':''; ?> value="Tester">Tester</option>
+							<label for="type">Select role:<?php echo $historicalRole; ?></label>
+							<select class="form-control contact_role" id="type" data="<?php echo $contact->id; ?>"name="role_dropdown">
+							    <option value="1"><?php echo $oldcontact; ?></option>
+								<option <?php echo $contact->role === 'Account Director'?'selected':''; ?> value="Account Director">Account Director</option>
+								<option <?php echo $contact->role === 'Account Manager'?'selected':''; ?> value="Account Manager">Account Manager</option>
+								<option <?php echo $contact->role  === 'Accountant'?'selected':''; ?> value="Accountant">Accountant</option>
+							 
+								<option <?php echo $contact->role  === 'Administrator'?'selected':''; ?> value="Administrator">Administrator</option>
+							 
+								<option <?php echo $contact->role  === 'Business Development Manager'?'selected':''; ?> value="Business Development Manager">Business Development Manager</option>
+								<option <?php echo $contact->role === 'CEO'?'selected':''; ?> value="CEO">CEO</option>
+								 
+								<option <?php echo $contact->role === 'Consultant'?'selected':''; ?> value="Consultant">Consultant</option>
+								<option <?php echo $contact->role === 'CFO'?'selected':''; ?> value="CTO">CFO</option>
+                                <option <?php echo $contact->role === 'CTO'?'selected':''; ?> value="CTO">CTO</option>
+				 
+								<option <?php echo $contact->role === 'Director'?'selected':''; ?> value="Director">Director</option>
+								<option <?php echo $contact->role === 'Finance Director'?'selected':''; ?> value="Finance Director">Finance Director</option>
+							 
+								<option <?php echo $contact->role === 'Manager'?'selected':''; ?> value="Manager">Manager</option>
+								<option <?php echo $contact->role === 'Marketing Manager'?'selected':''; ?> value="Marketing Manager">Marketing Manager</option>	<option <?php echo $contact->role_dropdown === 'Non Exec Director'?'selected':''; ?> value="Marketing Manager">Non Exec Director</option>
+								<option <?php echo $contact->role === 'Operations Manager'?'selected':''; ?> value="Operations Manager">Operations Manager</option>
 							</select>
 						</div>
 					</div>
-					<?php if (isset($contact->role) && $contact->role): ?>
-						<div class="col-md-6">
-							<div class="form-group">
-								<label for="role" class="control-label">Historic role data:</label>                            
-								<input type="text" name="role" value="<?php echo isset($contact->role)?$contact->role:''; ?>" maxlength="50" class="form-control" disabled="true">
-							</div>
-						</div>
-					<?php endif; ?>
+					
 	                <div class="col-md-<?php echo isset($contact->role)?'6':'12'; ?>">
 	                    <div class="form-group">
 	                        <label for="email" class="control-label">Email</label>                            
@@ -237,16 +240,14 @@
 									>
 									Extensions
 								</label>
-							</div>
-							<div class="reports">
+						 
 								<label>
 									<input type="checkbox" name="report_timesheets_storage" value="report_timesheets_storage"
 										<?php if($reports && in_array("report_timesheets_storage", $reports)) { echo "checked"; } ?>
 									>
 									Timesheets Charger
 								</label>
-							</div>
-							<div class="reports">
+							 
 								<label>
 									<input type="checkbox" name="report_timesheets_processed" value="report_timesheets_processed"
 										<?php if($reports && in_array("report_timesheets_processed", $reports)) { echo "checked"; } ?>
@@ -261,16 +262,14 @@
 									>
 									Sales Ledger
 								</label>
-							</div>
-							<div class="reports">
+						 
 								<label>
 									<input type="checkbox" name="report_commision" value="report_commision"
 										<?php if($reports && in_array("report_commision", $reports)) { echo "checked"; } ?>
 									>
 									Commission
 								</label>
-							</div>
-							<div class="reports">
+							 
 								<label>
 									<input type="checkbox" name="report_age_debtor" value="report_age_debt_ledger"
 										<?php if($reports && in_array("report_age_debt_ledger", $reports)) { echo "checked"; } ?>
@@ -283,7 +282,7 @@
 				</div>
 	      	</div>
 	      	<div class="modal-footer">
-	        	<button type="submit" class="btn btn-sm btn-warning btn-block">Save</button>
+	        	<button type="submit" class="btn btn-sm btn-warning btn-block updateComContact contact_sumit_<?php echo $contact->id; ?>" <?php echo $showHideSaveEval; ?>>Save</button>
 	      	</div>
             <div class="modal-footer">   
         		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">

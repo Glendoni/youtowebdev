@@ -220,14 +220,7 @@
 
      
 </div><!--END TAB-->
-    
-    
-    
-    
-    
-    
-    
-    
+  
     <div role="tabpanel" class="tab-pane active" id="calls"><div class="panel panel-default">
               <div class="panel-heading">
               <h3 class="panel-title">Schedule<span class="badge pull-right"><?php echo count($pending_actions); ?></span></h3>

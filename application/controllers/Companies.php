@@ -327,6 +327,24 @@ class Companies extends MY_Controller {
 				$option_contacts[$contact->id] = $contact->first_name.' '.$contact->last_name;
 			}
  
+             $this->data['cont_roleArray'] = array('Account Director' => 'Account Director',
+'Account Manager' => 'Account Manager',
+'Accountant' => 'Accountant',
+'Administrator' => 'Administrator',
+'Business Development Manager' => 'Business Development Manager',
+'CEO' => 'CEO',
+'Consultant' => 'Consultant',
+'Managing Director' => 'Managing Director',
+'CFO' => 'CFO',
+'CTO' => 'CTO',
+'Director' => 'Director',
+'Financial Controller' =>'Financial Controller',
+'Manager' => 'Manager',
+'Marketing Manager' => 'Marketing Manager',
+'Non Exec Director' => 'Non Exec Director',
+'Operations Manager' => 'Operations Manager');
+            
+            
             $this->data['deals_pipeline_months'] = $monthArr;
             $this->data['deals_pipeline_status'] = $deals_pipeline_statusArr;
             $this->data['option_contacts'] = $option_contacts;
@@ -362,10 +380,14 @@ class Companies extends MY_Controller {
     
 	public function edit()
 	{
-		if($this->input->post('edit_company'))
+		
+
+if($this->input->post('edit_company'))
 		{
   
 			$post = $this->input->post();
+            
+            //print_r($post);
 			// We need to clean the post and validate the post fields *pending*
 			$result = $this->Companies_model->update_details($this->input->post(),$this->data['current_user']['id']);
             
@@ -377,6 +399,28 @@ class Companies extends MY_Controller {
 			return True;
 		
 		}
+        
+        
+           if($this->input->post('edit_service_level'))
+                    {
+
+                        $post = $this->input->post();
+                        // We need to clean the post and validate the post fields *pending*
+                        $result = $this->Companies_model->add_Services_Level($this->input->post(),$this->data['current_user']['id']);
+ 
+                       //  $this->Companies_model->cronPipeline(0,$post['company_id']);
+
+                        $this->refresh_search_results();
+                        $this->set_message_success('Company Updated');
+                        redirect('/companies','refresh');
+                        return True;
+
+                    }
+
+        
+        
+        
+        
 	}
 
     public function create_address()

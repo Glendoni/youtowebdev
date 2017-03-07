@@ -17,7 +17,7 @@
     <?php
 } else {?>
 
-    <link rel="icon" type="image/jpg" href="<?php echo asset_url();?>images/favicon.jpg">
+    <link rel="icon" type="image/jpg" href="<?php echo asset_url();?>images/favicon.png">
 <?php
 }; ?>
 
@@ -106,7 +106,7 @@
 <?php
 } ?>
      
-     Version 5.1.2</div>
+     Version S4</div>
     </a>
     
         <?php 

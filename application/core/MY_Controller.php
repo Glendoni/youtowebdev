@@ -11,7 +11,7 @@ class MY_Controller extends CI_Controller {
 
 		parent::__construct();
         
-        try {
+    try {
 			$url = getHttpsUrl($_SERVER['HTTP_X_FORWARDED_PROTO'], current_url());
 			redirect($url, 'location');
 		} catch (Exception $e) {
@@ -30,12 +30,7 @@ class MY_Controller extends CI_Controller {
 		        $this->output->enable_profiler(FALSE);  
 		break;
 		case 'production':
-				$this->output->enable_profiler(FALSE);
-                
-                
-                
-                
-                
+				$this->output->enable_profiler(FALSE);  
 		break;
 
 		default:
@@ -527,7 +522,7 @@ class MY_Controller extends CI_Controller {
             if($company->company->f1->f44)$mapped_companies_array['initial_rate'] = $company->company->f1->f44;
             if($company->company->f1->f45)$mapped_companies_array['customer_to'] = $company->company->f1->f45;
             if($company->company->f1->f46)$mapped_companies_array['account_manager'] = $company->company->f1->f46;
-
+            if($company->company->f1->f47)$mapped_companies_array['confidential_flag'] = $company->company->f1->f47;
 			// sectors
 
 			if(!empty($company->company->f1->f22)){

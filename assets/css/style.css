@@ -3470,7 +3470,39 @@ border-bottom: none;
  display:none;   
     
 }
+.reports label{
+padding: 3px 5px;
+}
+.reports label input{
+margin-right: 3px;
+}   
+.enterpriseBoxBtn{
+    
+  height:33px;  
+    
+}
+#comapny_header_trading_name{
+    
+    margin-top: -37px !important;
+    
+}
 
+.enterpriseBox{
+    
+    margin-left: 46%; margin-top: -20px;
+    
+}
+
+
+.confidential_status{ 
+    background-color: #439b43; color:#fff;float:left;font-size: 1.5em !important;
+}
+
+#bespoke{
+    
+  margin-top:15px;  
+    
+}
 /*! Hint.css - v2.2.1 - 2016-03-26 //#2b4461
 * http://kushagragour.in/lab/hint/
 * Copyright (c) 2016 Kushagra Gour; Licensed  */

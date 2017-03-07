@@ -6,10 +6,8 @@
     "require": {
         "compwright/codeigniter-installers": "*",
         "ext-memcached": "*",
-        "shlikhota/postgresdb-php":"*"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^5.7",
-        "php-mock/php-mock": "^2.0"
+        "shlikhota/postgresdb-php":"*",
+        "robmorgan/phinx": "^0.7.0",
+        "microsoft/windowsazure": "^0.4"
     }
 }
