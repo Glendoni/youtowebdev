@@ -9,6 +9,7 @@
         "shlikhota/postgresdb-php":"*",
         "robmorgan/phinx": "^0.7.0",
         "microsoft/windowsazure": "^0.4",
-        "mcrypt": "*"
+        "ext-mcrypt": "*",
+        "php": "^7.1.2"
     }
 }
