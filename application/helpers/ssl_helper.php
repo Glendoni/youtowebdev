@@ -1,11 +1,11 @@
 <?php
 
-function getHttpsUrl($serverHttps, $url, $env) {
-    if ($env !== 'staging') {
-        throw new Exception('No ssl needed in development');
+function getHttpsUrl($herokuForwardedProto, $url) {
+    if (! isset($herokuForwardedProto)) {
+        throw new Exception('No http on local environment.');
     }
 
-    if (!empty($serverHttps) && $serverHttps !== 'off') {
+    if (isset($herokuForwardedProto) && $herokuForwardedProto == "https") {
         throw new Exception('Https already enabled');
     }
     return str_replace('http', 'https', $url);
