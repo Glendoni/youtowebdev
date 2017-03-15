@@ -4,7 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "e7e1bc61551ae9188ffced44c0e1cff8",
+    "hash": "47c251a0e5b1624f1468bf987c1404a3",
+    "content-hash": "45d5d29fac06384d3456b7feb0a72e30",
     "packages": [
         {
             "name": "compwright/codeigniter-installers",
@@ -58,7 +59,7 @@
                 "spark",
                 "sparks"
             ],
-            "time": "2012-11-12T16:11:38+00:00"
+            "time": "2012-11-12 16:11:38"
         },
         {
             "name": "firebase/php-jwt",
@@ -101,7 +102,7 @@
             ],
             "description": "A simple library to encode and decode JSON Web Tokens (JWT) in PHP. Should conform to the current spec.",
             "homepage": "https://github.com/firebase/php-jwt",
-            "time": "2016-07-18T04:51:16+00:00"
+            "time": "2016-07-18 04:51:16"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -163,7 +164,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2017-02-28T22:50:30+00:00"
+            "time": "2017-02-28 22:50:30"
         },
         {
             "name": "guzzlehttp/promises",
@@ -214,7 +215,7 @@
             "keywords": [
                 "promise"
             ],
-            "time": "2016-12-20T10:07:11+00:00"
+            "time": "2016-12-20 10:07:11"
         },
         {
             "name": "guzzlehttp/psr7",
@@ -279,7 +280,7 @@
                 "uri",
                 "url"
             ],
-            "time": "2017-02-27T10:51:17+00:00"
+            "time": "2017-02-27 10:51:17"
         },
         {
             "name": "microsoft/azure-storage",
@@ -337,7 +338,7 @@
                 "sdk",
                 "storage"
             ],
-            "time": "2016-08-19T08:32:57+00:00"
+            "time": "2016-08-19 08:32:57"
         },
         {
             "name": "microsoft/windowsazure",
@@ -401,7 +402,7 @@
                 "php",
                 "sdk"
             ],
-            "time": "2016-09-26T21:33:08+00:00"
+            "time": "2016-09-26 21:33:08"
         },
         {
             "name": "pear/console_getopt",
@@ -448,7 +449,7 @@
                 }
             ],
             "description": "More info available on: http://pear.php.net/package/Console_Getopt",
-            "time": "2015-07-20T20:28:12+00:00"
+            "time": "2015-07-20 20:28:12"
         },
         {
             "name": "pear/http_request2",
@@ -507,7 +508,7 @@
                 "http",
                 "request"
             ],
-            "time": "2016-02-13T20:20:39+00:00"
+            "time": "2016-02-13 20:20:39"
         },
         {
             "name": "pear/mail_mime",
@@ -553,7 +554,7 @@
             ],
             "description": "Mail_Mime provides classes to create MIME messages",
             "homepage": "http://pear.php.net/package/Mail_Mime",
-            "time": "2015-09-13T12:42:41+00:00"
+            "time": "2015-09-13 12:42:41"
         },
         {
             "name": "pear/mail_mime-decode",
@@ -601,7 +602,7 @@
                 }
             ],
             "description": "More info available on: http://pear.php.net/package/Mail_mimeDecode",
-            "time": "2014-04-15T19:29:16+00:00"
+            "time": "2014-04-15 19:29:16"
         },
         {
             "name": "pear/net_url2",
@@ -662,7 +663,7 @@
                 "uri",
                 "url"
             ],
-            "time": "2016-04-18T22:24:01+00:00"
+            "time": "2016-04-18 22:24:01"
         },
         {
             "name": "pear/pear-core-minimal",
@@ -706,7 +707,7 @@
                 }
             ],
             "description": "Minimal set of PEAR core files to be used as composer dependency",
-            "time": "2017-02-28T16:46:11+00:00"
+            "time": "2017-02-28 16:46:11"
         },
         {
             "name": "pear/pear_exception",
@@ -761,7 +762,7 @@
             "keywords": [
                 "exception"
             ],
-            "time": "2015-02-10T20:07:52+00:00"
+            "time": "2015-02-10 20:07:52"
         },
         {
             "name": "psr/http-message",
@@ -811,7 +812,7 @@
                 "request",
                 "response"
             ],
-            "time": "2016-08-06T14:39:51+00:00"
+            "time": "2016-08-06 14:39:51"
         },
         {
             "name": "psr/log",
@@ -858,7 +859,7 @@
                 "psr",
                 "psr-3"
             ],
-            "time": "2016-10-10T12:19:37+00:00"
+            "time": "2016-10-10 12:19:37"
         },
         {
             "name": "robmorgan/phinx",
@@ -924,7 +925,7 @@
                 "migrations",
                 "phinx"
             ],
-            "time": "2017-02-28T11:19:21+00:00"
+            "time": "2017-02-28 11:19:21"
         },
         {
             "name": "shlikhota/postgresdb-php",
@@ -974,20 +975,20 @@
                 "postgresql",
                 "psql"
             ],
-            "time": "2016-02-07T13:33:07+00:00"
+            "time": "2016-02-07 13:33:07"
         },
         {
             "name": "symfony/config",
-            "version": "v3.2.4",
+            "version": "v3.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/config.git",
-                "reference": "9f99453e77771e629af8a25eeb0a6c4ed1e19da2"
+                "reference": "741d6d4cd1414d67d48eb71aba6072b46ba740c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/config/zipball/9f99453e77771e629af8a25eeb0a6c4ed1e19da2",
-                "reference": "9f99453e77771e629af8a25eeb0a6c4ed1e19da2",
+                "url": "https://api.github.com/repos/symfony/config/zipball/741d6d4cd1414d67d48eb71aba6072b46ba740c2",
+                "reference": "741d6d4cd1414d67d48eb71aba6072b46ba740c2",
                 "shasum": ""
             },
             "require": {
@@ -1030,20 +1031,20 @@
             ],
             "description": "Symfony Config Component",
             "homepage": "https://symfony.com",
-            "time": "2017-02-14T16:27:43+00:00"
+            "time": "2017-03-01 18:18:25"
         },
         {
             "name": "symfony/console",
-            "version": "v3.2.4",
+            "version": "v3.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "0e5e6899f82230fcb1153bcaf0e106ffaa44b870"
+                "reference": "28fb243a2b5727774ca309ec2d92da240f1af0dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/0e5e6899f82230fcb1153bcaf0e106ffaa44b870",
-                "reference": "0e5e6899f82230fcb1153bcaf0e106ffaa44b870",
+                "url": "https://api.github.com/repos/symfony/console/zipball/28fb243a2b5727774ca309ec2d92da240f1af0dd",
+                "reference": "28fb243a2b5727774ca309ec2d92da240f1af0dd",
                 "shasum": ""
             },
             "require": {
@@ -1093,20 +1094,20 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2017-02-16T14:07:22+00:00"
+            "time": "2017-03-06 19:30:27"
         },
         {
             "name": "symfony/debug",
-            "version": "v3.2.4",
+            "version": "v3.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/debug.git",
-                "reference": "9b98854cb45bc59d100b7d4cc4cf9e05f21026b9"
+                "reference": "b90c9f91ad8ac37d9f114e369042d3226b34dc1a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/debug/zipball/9b98854cb45bc59d100b7d4cc4cf9e05f21026b9",
-                "reference": "9b98854cb45bc59d100b7d4cc4cf9e05f21026b9",
+                "url": "https://api.github.com/repos/symfony/debug/zipball/b90c9f91ad8ac37d9f114e369042d3226b34dc1a",
+                "reference": "b90c9f91ad8ac37d9f114e369042d3226b34dc1a",
                 "shasum": ""
             },
             "require": {
@@ -1150,20 +1151,20 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
-            "time": "2017-02-16T16:34:18+00:00"
+            "time": "2017-02-18 17:28:00"
         },
         {
             "name": "symfony/filesystem",
-            "version": "v3.2.4",
+            "version": "v3.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
-                "reference": "a0c6ef2dc78d33b58d91d3a49f49797a184d06f4"
+                "reference": "bc0f17bed914df2cceb989972c3b996043c4da4a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/filesystem/zipball/a0c6ef2dc78d33b58d91d3a49f49797a184d06f4",
-                "reference": "a0c6ef2dc78d33b58d91d3a49f49797a184d06f4",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/bc0f17bed914df2cceb989972c3b996043c4da4a",
+                "reference": "bc0f17bed914df2cceb989972c3b996043c4da4a",
                 "shasum": ""
             },
             "require": {
@@ -1199,7 +1200,7 @@
             ],
             "description": "Symfony Filesystem Component",
             "homepage": "https://symfony.com",
-            "time": "2017-01-08T20:47:33+00:00"
+            "time": "2017-03-06 19:30:27"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -1258,20 +1259,20 @@
                 "portable",
                 "shim"
             ],
-            "time": "2016-11-14T01:06:16+00:00"
+            "time": "2016-11-14 01:06:16"
         },
         {
             "name": "symfony/yaml",
-            "version": "v3.2.4",
+            "version": "v3.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "9724c684646fcb5387d579b4bfaa63ee0b0c64c8"
+                "reference": "093e416ad096355149e265ea2e4cc1f9ee40ab1a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/9724c684646fcb5387d579b4bfaa63ee0b0c64c8",
-                "reference": "9724c684646fcb5387d579b4bfaa63ee0b0c64c8",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/093e416ad096355149e265ea2e4cc1f9ee40ab1a",
+                "reference": "093e416ad096355149e265ea2e4cc1f9ee40ab1a",
                 "shasum": ""
             },
             "require": {
@@ -1313,7 +1314,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2017-02-16T22:46:52+00:00"
+            "time": "2017-03-07 16:47:02"
         }
     ],
     "packages-dev": [],
@@ -1323,8 +1324,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "ext-mcrypt": "*",
-        "ext-memcached": "*"
+        "ext-mcrypt": "*"
     },
     "platform-dev": []
 }
