@@ -36,14 +36,50 @@ endif;
                         
                
    
-            <div>
+            <div id="product_options">
 
                 <?php if (isset($company['confidential_flag'])): ?>
                     <h5 class="trading-header" style="margin-top: 9px; margin-left: 2px;">
                     <?php if($company['confidential_flag']): ?>
                         <span class="label confidential_status" style="">
-                            <b>Enterprise</b> 
+                             Enterprise  
                         </span>
+                    
+                    <?php endif; ?>
+
+                <?php endif; ?>
+                        
+                        
+                <?php if (isset($company['permanent_perm'])): ?>
+                    <h5 class="trading-header" style="margin-top: 9px; margin-left: 2px;">
+                    <?php if($company['permanent_perm']): ?>
+                        <span class="label permanent_perm" style="">
+                           Permanent/Perm 
+                        </span>
+                    
+                    <?php endif; ?>
+
+                <?php endif; ?>
+                        
+                        
+                <?php if (isset($company['staff_payroll'])): ?>
+                    <h5 class="trading-header" style="margin-top: 9px; margin-left: 2px;">
+                    <?php if($company['staff_payroll']): ?>
+                        <span class="label staff_payroll" style="">
+                           Staff Payroll  
+                        </span>
+                    <?php endif; ?>
+                <?php endif; ?>
+                        
+                        
+                        
+                        <?php if (isset($company['management_accounts'])): ?>
+                    <h5 class="trading-header" style="margin-top: 9px; margin-left: 2px;">
+                    <?php if($company['management_accounts']): ?>
+                        <span class="label management_accounts" style="">
+                           Management Accounts 
+                        </span>
+                    
                     <?php endif; ?>
 
                 <?php endif; ?>

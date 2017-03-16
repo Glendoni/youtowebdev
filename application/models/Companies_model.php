@@ -457,7 +457,10 @@ and ACTIONS_SUB.company_id is null
                C.initial_rate, --f44
                C.customer_to,--f45
                AM.name, --f46
-			   C.confidential_flag -- f47,
+			   C.confidential_flag, -- f47
+               C.permanent_perm, -- f48
+               C.staff_payroll, -- f49
+               C.management_accounts -- f50
                
 			   )) "JSON output" 
 			   
@@ -629,10 +632,12 @@ from (select * from COMPANIES ' ;
 		group by C.id,
 		         C.name,
                  C.confidential_flag,
+                 C.permanent_perm, 
+                 C.staff_payroll, 
+                 C.management_accounts,
 		         C.url,
 			     C.eff_from,
 			     C.linkedin_id,
-			    
 			     C.active,
 			     C.created_at,
 			     C.updated_at,
@@ -999,9 +1004,15 @@ return $this->db->affected_rows();
 
         
            $confidential  = $post['confidential_flag']? $post['confidential_flag'] : FALSE;
-             $company = array( 
-              'confidential_flag' =>  $confidential
-             
+           $permanent_perm  = $post['permanent_perm']? $post['permanent_perm'] : FALSE;
+           $staff_payroll = $post['staff_payroll']? $post['staff_payroll'] : FALSE;
+           $management_accounts  = $post['management_accounts']? $post['management_accounts'] : FALSE;
+          
+            $company = array( 
+              'confidential_flag' =>  $confidential,
+                'permanent_perm' =>  $permanent_perm,
+                'staff_payroll' =>  $staff_payroll,
+                'management_accounts' =>  $management_accounts
              ) ;  
                 
              $this->db->where('id', $post['company_id']);
