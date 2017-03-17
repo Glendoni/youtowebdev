@@ -12,6 +12,33 @@ function dateRequired()     {
   
 $( document ).ready(function() {
     
+    ////EVERGREENS
+    
+    evergreen_read();
+evergreen_cancel();
+add_evergreen_user();
+//evergreen_save();
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    ////////EVERGREENS  END
+    
+    
+    
+    
 $('.comp_details_edit_btn').click(function(){
  
  confidentialHandler();
@@ -1268,6 +1295,249 @@ if(!$(this).hasClass('requested') && $(this).attr('aria-controls') ==  'emailega
 
 
 
+
+
+
+function add_evergreen_user(){
+    
+    //evg_add_user_save
+    $('.add_evg_user').click(function(){
+        
+        
+        $('#get_evegreen_results, .get_evegreen_results').hide();
+    $('#get_evegreen_results_users,.get_evegreen_results_users').hide(); 
+        $('#add_evegreen_results_detail').show();
+        
+    })
+    
+    
+    
+}
+
+
+
+function evergreen_cancel(){
+    
+        $('.evg_cancel').on('click', function(){
+evergreen_read()
+            event.preventDefault();
+            $('#get_evegreen_results,.get_evegreen_results').show();
+            $('#get_evegreen_results_users').html("");
+            $('#get_evegreen_results_users,.get_evegreen_results_users').hide();
+            $('#get_evegreen_results_detail').hide();
+             $('#add_evegreen_results_detail').hide();
+    
+        })
+    
+    
+}
+
+
+ function evergreen_save(){
+    
+        $('#evg_save').click(function(){
+            
+          event.preventDefault();
+
+        var para = $('#evegreen_form').serialize();
+            
+     // alert();
+         
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            data: para,
+            url: "evergreen/update_evergreens",
+        success: function(data) {
+            
+           //console.log(data);
+
+alert('saved'); 
+            
+            
+            
+        }
+            
+        });
+            
+            
+    
+})
+    
+    
+}
+
+
+function evergreen_read(){
+
+     
+        $.ajax({
+        type: "GET",
+            dataType: "json",
+        url: "evergreen/read_evergreens",
+        success: function(data) {
+            var action;
+            var items = [];
+            var description_dropdown = [];
+             var idfk;
+ var updated = true;
+            $.each( data, function( key, val ) {
+              //    idfk = val.company_id;
+            //if(val.action == "4"){ action =  'Un-subscribed'; }else if(val.action == "2"){ action =  'Clicked'; }else{action  = 'Opened';}  
+              
+                if (val.updated_at ==  val.created_at) {updated = false};
+               items.push( '<div class="row record-holder"><div class="col-xs-8 col-sm-4 col-md-3"> '+val.description+' </div><div class="col-xs-8 col-sm-4 col-md-2">'+formattDate(val.created_at)+'</div><div class="col-xs-4 col-sm-1 col-md-1 text-left"><span class=" ">'+(val.number_of_users? val.number_of_users : 0 )+'</span></div><div class="col-xs-6 col-sm-2 col-md-2"> '+(updated ? formattDate(val.updated_at)  : '' )+'</div><div class="col-xs-6 col-sm-3 col-md-2 align-right "> <span class="label label-primary"></span></div><div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"><button class="btn btn-sm btn-primary btn-block evergreen_users" data="'+val.id+'">Users</button></div><div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"><button class="btn btn-sm btn-warning btn-block evergreen_edit" data="'+val.id+'">Edit</button></div></div>' );
+
+
+
+description_dropdown.push('<option value="'+val.id+'">'+val.description+'</option>');
+
+          
+              updated = true;
+            });
+               
+            $('#get_evegreen_results').html(items.join( "" ));
+            $('#description_dropdown').html(description_dropdown.join( "" ));
+            //$('.eventcount').html(items.length); //update engagement counter
+           
+            
+           
+      $('.evg_description, evg_max_allowed').val("");
+            evergreen_edit();
+        }
+
+    });
+ 
+ }
+
+
+
+
+
+
+function evergreen_edit(){
+
+
+
+$('.evergreen_edit').on('click', function(){
+    
+    
+    //$('#get_evegreen_results').html("");
+   
+    $('#get_evegreen_results, .get_evegreen_results').hide();
+    $('#get_evegreen_results_users,.get_evegreen_results_users').hide();
+    $('#get_evegreen_results_detail').show();
+    
+   
+ $('.evg_description').val("");
+              $('.evg_max_allowed').val("");
+              $('#evg_sql').val("");
+    
+      $('#add_evegreen_results_detail').hide();
+    
+    var evergreen_id = $(this).attr('data');
+    
+      var action;
+            var items = [];
+             var idfk;
+    
+      var para = {'evergreen_id':evergreen_id};
+    $.ajax({
+        type: "POST",
+            dataType: "json",
+        data: para,
+        url: "evergreen/get_evergreens",
+        success: function(data) {
+            
+          $.each( data, function( key, val ) {
+               // console.log(val.id);
+
+                $('.evg_description').val(val.description);
+              $('.evg_max_allowed').val(val.max_allowed);
+              $('#evg_sql').val(val.sql);
+              $('#evg_id').val(val.id);
+  //evergreen_save() ;
+//items.push( '<div class="row record-holder"><div class="col-xs-8 col-sm-4 col-md-3"><a href="companies/company?id='+idfk+'">'+val.description+'</a></div><div class="col-xs-8 col-sm-4 col-md-2">'+val.created_at+'</div><div class="col-xs-4 col-sm-1 col-md-1 text-right"><span class="label pipeline label-Prospect">'+val.created_by+'</span></div><div class="col-xs-6 col-sm-2 col-md-2"><a href="companies/company?id='+idfk+'#contacts">'+val.username+'</a></div><div class="col-xs-6 col-sm-3 col-md-2 align-right "> <span class="label label-primary"></span></div><div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"><button class="btn btn-sm btn-warning btn-block evergreen_edit" data="'+val.id+'">Edit</button></div></div>' );
+          
+              
+            });
+               
+           // $('#get_evegreen_results').html(items.join( "" ));
+            //$('.eventcount').html(items.length); //update engagement counter
+            
+           // evergreen_edit();
+
+            
+             evergreen_save() ;
+          }
+        
+          
+        });
+     
+ //console.log($(this).attr('data'));
+
+})
+ 
+
+
+$('.evergreen_users').on('click', function(){
+    
+    
+    //$('#get_evegreen_results').html("");
+    $('#get_evegreen_results,.get_evegreen_results').hide();
+    $('#get_evegreen_results_detail').hide();
+     $('#get_evegreen_results_users, .get_evegreen_results_users').show();
+    
+   
+              $('.evg_description').val("");
+              $('.evg_max_allowed').val("");
+              $('#evg_sql').val("");
+    
+    var evergreen_id = $(this).attr('data');
+ 
+      var action;
+            var items = [];
+             var idfk;
+    
+      var para = {'evergreen_id':evergreen_id};
+    $.ajax({
+        type: "POST",
+            dataType: "json",
+        data: para,
+        url: "evergreen/get_evergreens_users",
+        success: function(data) {
+            
+          $.each( data, function( key, val ) {
+               // console.log(val.id);
+
+                //$('.evg_description').val(val.description);
+              //$('.evg_max_allowed').val(val.max_allowed);
+              //$('#evg_sql').val(val.sql);
+
+items.push( '<div class="row record-holder"><div class="col-xs-8 col-sm-4 col-md-3">'+val.name+'</div><div class="col-xs-8 col-sm-4 col-md-2">'+val.campaign_description+'</div><div class="col-md-2"><span class="label pipeline label-Prospect">'+val.created_at+'</span></div><div class="col-xs-6 col-sm-2 col-md-2"><a href="companies/company?id='+idfk+'#contacts"></a></div><div class="col-xs-6 col-sm-3 col-md-2 align-right "> <span class="label label-primary"></span></div><div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"> <button id="button2id" name="button2id" class="btn btn-danger evg_cancel">Remove</button></div></div>' );
+          
+              
+            });
+               items.push( '<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"> <button id="button2id" name="button2id" class="btn btn-danger evg_cancel">Cancel</button></div>')
+            $('#get_evegreen_results_users').html(items.join( "" ));
+            //$('.eventcount').html(items.length); //update engagement counter
+            
+           // evergreen_edit();
+            
+            evergreen_cancel();
+
+          }
+            
+        });
+     
+ //console.log($(this).attr('data'));
+
+})
+
+
+
+
+}
  function addActionMultipleFileFields(){
     
     

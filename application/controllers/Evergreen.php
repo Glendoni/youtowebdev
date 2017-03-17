@@ -15,7 +15,7 @@ class Evergreen extends MY_Controller {
     public function index()
     {
         // allow only Ajax request 
-        $this->data['main_content'] = 'evergreen/evergreen';
+        $this->data['main_content'] = 'evergreens/evergreen';
 		$this->data['full_container'] = True;
 		$this->load->view('layouts/default_layout', $this->data);
         
@@ -25,7 +25,7 @@ class Evergreen extends MY_Controller {
     {
         // allow only Ajax request    
      
-        $this->data['main_content'] = 'evergreen/evergreen_edit';
+        $this->data['main_content'] = 'evergreens/evergreen';
 		$this->data['full_container'] = True;
 		$this->load->view('layouts/default_layout', $this->data);
         
@@ -70,8 +70,8 @@ class Evergreen extends MY_Controller {
     function test(){
        
         $out  = $this->Evergreen_model->evergreenHeaderInfo(1,4);
- if(!$out[0]['remaining']){
-echo 'YEss';
+            if(!$out[0]['remaining']){
+                    echo 'YEss';
 }
         
     }
@@ -87,8 +87,74 @@ echo 'YEss';
     
     
     
+function read_evergreens(){
+
+    
+   $output =  $this->Evergreen_model->read_evergreens();
+    
+   // echo '<pre>'; print_r($output); echo '</pre>';
+    
+      echo  json_encode($output);
+
+}
+   
     
     
+function get_evergreens(){
+
+    
+    
+     $evergreen_id = $this->input->post('evergreen_id');
+    
+    $output =  $this->Evergreen_model->get_evergreens($evergreen_id);
+    
+   // echo '<pre>'; print_r($output); echo '</pre>';
+    
+      echo  json_encode($output);
+
+}    
+    
+    
+    function get_evergreens_users(){
+
+    
+    
+     $evergreen_id = $this->input->post('evergreen_id');
+    
+    $output =  $this->Evergreen_model->get_evergreens_users($evergreen_id);
+    
+   // echo '<pre>'; print_r($output); echo '</pre>';
+    
+      echo  json_encode($output);
+
+} 
+    
+    
+    
+function update_evergreens(){
+$post = $this->input->post(); 
+    
+   //echo $this->data['current_user']['id'];
+      $output =  $this->Evergreen_model->update_evergreens($post, $this->data['current_user']['id']);
+    
+  echo  json_encode($output);
+//echo '<pre>'; print_r($post); echo '</pre>';
+    
+    
+
+} 
+   
+    
+    function test_evergreens(){
+
+    
+   $output =  $this->Evergreen_model->read_evergreens();
+    
+    echo '<pre>'; print_r($output[5]['sql']); echo '</pre>';
+    
+      // echo  json_encode($this->Evegreen_model->read_evergreens());
+
+} 
     
     
     

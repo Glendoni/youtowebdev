@@ -3503,6 +3503,12 @@ margin-right: 3px;
   margin-top:15px;  
     
 }
+
+#get_evegreen_results_detail, .get_evegreen_results_users, #add_evegreen_results_detail{
+    
+    display: none;
+    
+}
 /*! Hint.css - v2.2.1 - 2016-03-26 //#2b4461
 * http://kushagragour.in/lab/hint/
 * Copyright (c) 2016 Kushagra Gour; Licensed  */

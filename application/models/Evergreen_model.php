@@ -1,5 +1,87 @@
 <?php
 class Evergreen_model extends MY_Model {
+    
+    
+   
+    
+    
+    
+function read_evergreens(){
+
+    $query = $this->db->query("SELECT distinct T1.number_of_users, eg.* 
+
+FROM evergreens eg
+
+LEFT JOIN 
+( SELECT evergreen_id,count(evergreen_id) as number_of_users from campaigns WHERE evergreen_id is not null group by 1) T1
+ON eg.id = T1.evergreen_id");
+             $output =   $query->result_array();
+    
+           return $output;
+
+} 
+   
+    
+    
+function get_evergreens($id){
+   
+    $query = $this->db->query("SELECT * FROM evergreens WHERE id=".$id);
+             $output =   $query->result_array();
+    
+           return $output;
+
+}    
+    
+    
+    
+function update_evergreens($post,$user_id){
+
+     $data = array(
+        'description' => $post['description'] ,
+        'updated_at' => date('Y-m-d H:i:s'),
+        'updated_by' => $user_id,
+        'sql' => $post['sql']
+     );
+     $this->db->where('id', $post['id']);
+     $this->db->update('evergreens', $data);
+     
+
+
+} 
+    
+    
+ function get_evergreens_users($id){
+     
+     
+       $query = $this->db->query("SELECT distinct T1.name,T1.number_of_users,   eg.* , eg.description as campaign_description
+
+FROM evergreens eg
+
+LEFT JOIN 
+( SELECT cc.evergreen_id,   cu.name,count(cc.evergreen_id) as number_of_users 
+from campaigns cc 
+LEFT JOIN users cu
+on cc.created_by = cu.id
+WHERE cc.evergreen_id 
+is not null
+
+ group by 1,2) T1
+ON eg.id = T1.evergreen_id
+
+WHERE eg.id=".$id);
+             $output =   $query->result_array();
+    
+           return $output;
+     
+
+     
+
+}    
+    
+    
+ 
+    
+    
 	
 public function campaigncountChecker(){
 
