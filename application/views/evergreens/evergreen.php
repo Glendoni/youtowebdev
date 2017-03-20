@@ -93,7 +93,7 @@
 <div id="get_evegreen_results_users"></div>
 
 <div id="add_evegreen_results_detail">
-<form action="javascript:;" method="post" class="form-horizontal" id="">
+<form action="javascript:;" method="post" class="form-horizontal" id="add_user_to_campaign">
 <fieldset>
 
 <!-- Form Name -->
@@ -101,25 +101,30 @@
 
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     
+        
+
+        
+        
+        
 <!-- Text input-->
 <div class="form-group">
   <label class="col-md-4 control-label" for="textinput">Description</label>  
   <div class="col-md-4">
- <select id="description_dropdown"></select>
+ <select id="description_dropdown" class="form-control"></select>
     
   </div>
 </div>
 
+        
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="max_allowed">Max Allowed</label>  
+  <label class="col-md-4 control-label" for="max_allowed">User</label>  
   <div class="col-md-4">
-  <input id="max_allowed" name="max_allowed" type="text" placeholder="eg: 1000" class="form-control input-md evg_max_allowed" required="">
-        <input   name="id" type="hidden"  value="" id="evg_id" class="form-control input-md evg_id" required>
+  <select   class="form-control" value="" name="user_evergreen_dropdown_id" id="user_evergreen_dropdown"></select>
+        <input   name="id" type="hidden"  value="" id="evg_id_ropdown" class="form-control input-md evg_id" required>
     
   </div>
 </div>
-
  
 <!-- Button (Double) -->
 <div class="form-group">

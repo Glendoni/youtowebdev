@@ -145,6 +145,39 @@ $post = $this->input->post();
 } 
    
     
+    function user_dropdown(){
+        
+       // echo json_encode(array('user_dropdown' => 'Glendon Small'));
+        
+        
+            $post = $this->input->post('user_dropdown'); 
+              //$output =  $this->Evergreen_model->get_evergreens_users_dropdown($post, $this->data['current_user']['id']);
+    $output =  $this->Evergreen_model->get_evergreens_users_dropdown($post);
+  echo  json_encode($output);
+        
+    }
+    
+    
+    function add_user_to_campaign(){
+        $post = $this->input->post(); 
+           $output =  $this->Evergreen_model->add_new_user_to_evergreen_campaign($post);
+      echo '<pre>'; print_r($post); echo '</pre>';
+        //echo $post;
+
+        
+        
+    }
+    
+     function remove_user_from_campaign(){
+        
+        
+        
+        
+        
+    }
+    
+    
+    
     function test_evergreens(){
 
     

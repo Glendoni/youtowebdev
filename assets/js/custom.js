@@ -16,7 +16,7 @@ $( document ).ready(function() {
     
     evergreen_read();
 evergreen_cancel();
-add_evergreen_user();
+add_evergreen_user_interface();
 //evergreen_save();
 
 
@@ -24,7 +24,20 @@ add_evergreen_user();
     
     
     
-    
+    $('#description_dropdown').change(function(){
+
+
+      
+             
+          var user_dropdown = $(this).val();
+        $('#evg_id_ropdown').val(user_dropdown);
+        
+          set_dropdown_user_evergreens(user_dropdown)
+      
+
+
+
+})
     
     
     
@@ -1296,9 +1309,67 @@ if(!$(this).hasClass('requested') && $(this).attr('aria-controls') ==  'emailega
 
 
 
+function set_dropdown_user_evergreens(user_dropdown){
+    
+    
+      
+        
+    var    param  = {'user_dropdown': user_dropdown};
+      
+                $.ajax({
+                type: "POST",
+                    dataType: "json",
+                    data: param,
+                url: "Evergreen/user_dropdown",
+                success: function(data) {
+                    var action;
+                    var items = [];
+                     var idfk;
+        
+                    $.each( data, function( key, val ) {
+                   // console.log(val);
+                        items.push( '<option value="'+val.id+'">'+val.name+'</option>' );
+                    });
+                      $('#user_evergreen_dropdown').html(""); 
+                    $('#user_evergreen_dropdown').append(items.join( "" ));
+                    //$('.eventcount').html(items.length); //update engagement counter
+                }
+        
+            });
+    
+}
+function add_user_to_campaign(){
+    
+     $('.evg_add_user_save').click(function(){
+        event.preventDefault();
 
+        var para = $('#add_user_to_campaign').serialize();
+            
+     // alert();
+         
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            data: para,
+            url: "evergreen/add_user_to_campaign",
+        success: function(data) {
+            
+           //console.log(data);
 
-function add_evergreen_user(){
+alert('saved'); 
+            
+            
+            
+        }
+            
+        }); 
+         
+         
+     });
+    
+    
+}
+function add_evergreen_user_interface(){
     
     //evg_add_user_save
     $('.add_evg_user').click(function(){
@@ -1307,6 +1378,12 @@ function add_evergreen_user(){
         $('#get_evegreen_results, .get_evegreen_results').hide();
     $('#get_evegreen_results_users,.get_evegreen_results_users').hide(); 
         $('#add_evegreen_results_detail').show();
+        var description_dropdown_id   = $("#description_dropdown option:first").val()
+          set_dropdown_user_evergreens(description_dropdown_id);
+        
+         $('.evg_id').val(description_dropdown_id);
+        
+        add_user_to_campaign();
         
     })
     
@@ -1394,6 +1471,8 @@ description_dropdown.push('<option value="'+val.id+'">'+val.description+'</optio
 
           
               updated = true;
+                
+               
             });
                
             $('#get_evegreen_results').html(items.join( "" ));
@@ -1455,7 +1534,7 @@ $('.evergreen_edit').on('click', function(){
                 $('.evg_description').val(val.description);
               $('.evg_max_allowed').val(val.max_allowed);
               $('#evg_sql').val(val.sql);
-              $('#evg_id').val(val.id);
+              $('.evg_id').val(val.id);
   //evergreen_save() ;
 //items.push( '<div class="row record-holder"><div class="col-xs-8 col-sm-4 col-md-3"><a href="companies/company?id='+idfk+'">'+val.description+'</a></div><div class="col-xs-8 col-sm-4 col-md-2">'+val.created_at+'</div><div class="col-xs-4 col-sm-1 col-md-1 text-right"><span class="label pipeline label-Prospect">'+val.created_by+'</span></div><div class="col-xs-6 col-sm-2 col-md-2"><a href="companies/company?id='+idfk+'#contacts">'+val.username+'</a></div><div class="col-xs-6 col-sm-3 col-md-2 align-right "> <span class="label label-primary"></span></div><div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"><button class="btn btn-sm btn-warning btn-block evergreen_edit" data="'+val.id+'">Edit</button></div></div>' );
           
@@ -1467,7 +1546,7 @@ $('.evergreen_edit').on('click', function(){
             
            // evergreen_edit();
 
-            
+            $('#evg_save').unbind('click');
              evergreen_save() ;
           }
         

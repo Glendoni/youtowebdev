@@ -40,6 +40,7 @@ function update_evergreens($post,$user_id){
         'description' => $post['description'] ,
         'updated_at' => date('Y-m-d H:i:s'),
         'updated_by' => $user_id,
+          'max_allowed' => $post['max_allowed'],
         'sql' => $post['sql']
      );
      $this->db->where('id', $post['id']);
@@ -76,7 +77,96 @@ WHERE eg.id=".$id);
 
      
 
+}  function get_evergreens_users_dropdown($id=0){
+     
+     
+       $query = $this->db->query("SELECT DISTINCT u.id,  u.name
+FROM campaigns c
+LEFT JOIN users u 
+on c.user_id = u.id
+
+WHERE c.evergreen_id is not null
+AND u.id in (select  u.id WHERE  u.market in ('uf','np') or u.role ='Data Entry Administrator' )
+
+                                    AND u.id not in  (select u.id from users u LEFT JOIN campaigns c on u.id = c.user_id where c.evergreen_id=".$id." GROUP BY u.id)
+                                    AND c.eff_to IS null
+                                    ");
+                                 $output =   $query->result_array();
+
+                               return $output;
 }    
+    
+    
+    
+    
+    function add_new_user_to_evergreen_campaign($post){
+        
+      
+                                 $query = $this->db->query("SELECT e.description FROM evergreens e WHERE e.id =".$post['id']);
+                                 $evergreen =   $query->result_array();
+
+        $query = $this->db->query("SELECT max(id) FROM campaigns");
+                                 $result =   $query->result_array();
+        
+       $maxid =  ($result[0]['max'] + 1) ;
+
+                             
+                               
+                               
+                              
+        
+         $query = $this->db->query("SELECT u.name FROM users u WHERE u.id =".$post['user_evergreen_dropdown_id']);
+        
+        
+        
+        $query = $this->db->query("SELECT u.name, t1.evergreen_id FROM users u 
+LEFT JOIN ( select c.user_id, c.evergreen_id FROM campaigns c WHERE c.evergreen_id=".$post['id'].") t1
+on u.id = t1.user_id
+
+WHERE u.id =".$post['user_evergreen_dropdown_id']);
+        
+        
+        
+        
+                                 $output =   $query->result_array();
+echo $output[0]['evergreen_id'];
+             $cancatName =  $output[0]['name'] . ' - ( ' . $evergreen[0]['description']. ' )' ;
+        
+        
+        
+        
+            $data = array(
+                'id' => $maxid,
+                'user_id' => $post['user_evergreen_dropdown_id'],
+                'campaign_user_id' => $post['user_evergreen_dropdown_id'],
+                'status' => 'search',
+                'name' => $cancatName,
+                'shared' => false,
+                'eff_to' => null,
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d'),
+                'created_by' => $post['user_evergreen_dropdown_id'],
+                'evergreen_id' => $post['id']
+            );
+        if($output[0]['evergreen_id'] == null){
+                    $this->db->insert('campaigns', $data);
+            
+        }else{
+            
+            
+            return 401;
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    }
     
     
  
