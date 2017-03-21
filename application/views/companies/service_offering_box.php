@@ -17,15 +17,57 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="alert alert-danger" id="error_box" style="display:none;" role="alert"></div>
+                          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                               <label for="phone" class="control-label">Product Options</label> 
+
+</div>
+
+                    
+                               <div class="col-sm-4 col-md-12 prod_opt">
+                                   
+                                   
+                                   
+                         <div class="form-inline">
+                             
+                             
+                              <div class=" form-group ">
                       
-                           <div class="col-sm-6 col-md-2">
-                        <div class=" form-group ">
-                            <label for="phone" class="control-label">Funding Type</label> 
                             <span class="button-checkbox">
-                                <button type="button"  class="btn    btn-default enterpriseBoxBtn" data-color="success"><i class="state-icon undefined"></i> &nbsp;ENTERPRISE</button>
+                                <button type="button"  class="btn btn-default enterpriseBoxBtn" data-color="success"><i class="state-icon undefined"></i> &nbsp;Enterprise</button>
                                 <input type="checkbox" name="confidential_flag" value="1" class="hidden" <?php echo $company['confidential_flag']?  'checked=\"checked\"' : "" ; ?>
                             </span>
+                                
                         </div>
+                             
+                                <div class=" form-group ">
+                      
+                            <span class="button-checkbox">
+                                <button type="button"  class="btn btn-default enterpriseBoxBtn" data-color="success"><i class="state-icon undefined"></i> &nbsp;Permanent/ Perm</button>
+                                <input type="checkbox" name="permanent_perm" value="1" class="hidden" <?php echo $company['permanent_perm']?  'checked=\"checked\"' : "" ; ?>
+                            </span>
+                                
+                        </div>
+                             
+                             
+                        <div class=" form-group ">
+                      
+                            <span class="button-checkbox">
+                                <button type="button"  class="btn btn-default enterpriseBoxBtn" data-color="success"><i class="state-icon undefined"></i> &nbsp;Staff Payroll</button>
+                                <input type="checkbox" name="staff_payroll" value="1" class="hidden" <?php echo $company['staff_payroll']?  'checked=\"checked\"' : "" ; ?>
+                            </span>
+                                
+                        </div>
+                   
+                         
+                        <div class=" form-group">
+                            <span class="button-checkbox">
+                                <button type="button"  class="btn btn-default enterpriseBoxBtn" data-color="success"><i class="state-icon undefined"></i> &nbsp;Management Accounts</button>
+                                <input type="checkbox" name="management_accounts" value="1" class="hidden" <?php echo $company['management_accounts']?  'checked=\"checked\"' : "" ; ?>
+                            </span>
+                                
+                        </div>
+                            
+                            </div>
                     </div>
 
         <div class="col-md-12 target_sectors" style="margin-top:10px;">

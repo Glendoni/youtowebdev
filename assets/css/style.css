@@ -3494,9 +3494,18 @@ margin-right: 3px;
 }
 
 
-.confidential_status{ 
-    background-color: #439b43; color:#fff;float:left;font-size: 1.5em !important;
+.confidential_status,.permanent_perm, .staff_payroll, .management_accounts{ 
+    background-color: #439b43; color:#fff;float:left; font-weight: 300; font-size: 1.3em !important;
 }
+
+ 
+
+#product_options h4 span{
+    
+    font-weight: 100 !important;
+    
+}
+ 
 
 #bespoke{
     
