@@ -972,6 +972,25 @@ return $this->db->affected_rows();
 	}
 
 
+    function add_services_level_notes($post, $user_id)
+    {
+        
+         $company = array( 
+              'note' =>  $post['notes'],
+             'updated_at' => date('Y-m-d H:i:s'),
+             'updated_by' => $user_id
+             
+             ) ;  
+                
+             $this->db->where('id', $post['noteid']);
+		      $this->db->update('operates', $company);
+        
+        
+    }
+    
+    
+    
+    
     function add_Services_Level($post)
     {
         

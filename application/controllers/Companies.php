@@ -1291,5 +1291,19 @@ foreach($bsp as $ky=>$value){
 		return 	$bespokeArr;
 	}
     
+    
+    
+    function sector_note_update(){
+        $output = $this->input->post(); // need to clean with validation
+        
+     $this->Companies_model->add_services_level_notes($output,$this->get_current_user_id());
+        
+       // echo $this->get_current_user_id();
+       // echo '<pre>'; print_r($output); echo '</pre>';
+        
+        
+        echo json_encode(array('id' => $output['noteid']));
+    }
+    
 }
  
