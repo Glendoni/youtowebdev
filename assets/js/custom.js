@@ -15,45 +15,6 @@ function dateRequired()     {
            //////////NOTES///////////////////////////////////////////////
     // Configure/customize these variables.
 
- 
-    /*
-        var showChar = 100;  // How many characters are shown by default
-    var ellipsestext = "...";
-    var moretext = "Show more >";
-    var lesstext = "Show less ";
-    
-
-    $('.more').each(function() {
-        var content = $(this).html();
- var attr_data = $(this).attr('data');
-        if(content.length > showChar) {
- 
-            var c = content.substr(0, showChar);
-            var h = content.substr(showChar, content.length - showChar);
- 
-            var html = c + '<span class="moreellipses">' + ellipsestext+ '&nbsp;</span><span class="morecontent morecontent'+attr_data+'"><span class="fullcontent'+attr_data+'">' + h + '</span>&nbsp;&nbsp;<a href="javascript:;" class="morelink morelink'+attr_data+'" data="'+attr_data+'">' + moretext + '</a></span>';
- 
-            $(this).html(html);
-        }
- 
-    });
- 
-    $(".morelink").click(function(){
-        
-         var attr_data = $(this).attr('data');
-        if($('.morelink'+attr_data).hasClass("less")) {
-            $('.morelink'+attr_data).removeClass("less");
-            $('.morelink'+attr_data).html(moretext);
-        } else {
-            $('.morelink'+attr_data).addClass("less");
-            $('.morelink'+attr_data).html(lesstext);
-        }
-        $('.morelink'+attr_data).parent().prev().toggle();
-        $('.morelink'+attr_data).prev().toggle();
-        return false;
-    });
-
- */
     
                 $(".noteinput").keyup(function(){
                     // $(".morelink").unbind('click');
@@ -82,11 +43,7 @@ $("#noteoutput"+attr).html($(this).html()+'<br><button type="button" class="btn 
                 $('.noteform').submit(function(){ //Get 
                     var noteid = $(this).attr('data');
 var outbound_content   = $('.noteinput'+noteid).html() ;
-
-                
-                    
-                 
-                  
+         
                         //JS JASON WITH POST PARAMETER
                          var para = {'notes':outbound_content, 'noteid': noteid};
                           $.ajax({
@@ -147,48 +104,7 @@ var outbound_content   = $('.noteinput'+noteid).html() ;
     
       $('.action_submit'+noteid).remove();
 
-                    
-    
-             /*       
-                    
-           var showChar = 100;  // How many characters are shown by default
-    var ellipsestext = "...";
-    var moretext = "Show more >";
-    var lesstext = "Show less ";
-    
 
-    $('.noteoutput'+noteid).each(function() {
-        var content = $('.highlighter128598').html();
- var attr_data = $(this).attr('data');
-        
-      
-        if(content.length > showChar) {
-   $('<a href="javascript:;" class="morelink morelink128598 less" data="128598">Show less </a>').appendTo('.noteoutput128598');
-            var c = content.substr(0, showChar);
-            var h = content.substr(showChar, content.length - showChar);
- 
-            var html = c + '<span class="moreellipses">' + ellipsestext+ '&nbsp;</span><span class="morecontent morecontent'+attr_data+'"><span class="fullcontent'+attr_data+'">' + h + '</span>&nbsp;&nbsp;<a href="javascript:;" class="morelink morelink'+attr_data+'" data="'+attr_data+'">' + moretext + '</a></span>';
- 
-           // $(this).html(html);
-        }
- 
-    });
- 
-    $(".morelink").click(function(){
-        
-         var attr_data = $(this).attr('data');
-        if($('.morelink'+attr_data).hasClass("less")) {
-            $('.morelink'+attr_data).removeClass("less");
-            $('.morelink'+attr_data).html(moretext);
-        } else {
-            $('.morelink'+attr_data).addClass("less");
-            $('.morelink'+attr_data).html(lesstext);
-        }
-        $('.morelink'+attr_data).parent().prev().toggle();
-        $('.morelink'+attr_data).prev().toggle();
-        return false;
-    });
-*/
                 });
 
 
@@ -1629,11 +1545,11 @@ alert('saved');
     
     
 }
-
+ 
 
 function evergreen_read(){
 
-     
+      if((/evergreen/.test(window.location.href))){
         $.ajax({
         type: "GET",
             dataType: "json",
@@ -1676,7 +1592,7 @@ description_dropdown.push('<option value="'+val.id+'">'+val.description+'</optio
  }
 
 
-
+}
 
 
 
