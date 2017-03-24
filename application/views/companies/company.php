@@ -619,15 +619,26 @@ font-size: 1em;
                   
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
  <?php //echo $bsv['note'] ? $bsv['note'] : '    
-                    $latin = ' Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
+                    $latin_ = ' Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
 
                     ?>
 
 
 
                 <?php 
-                foreach($bespokeSelected as $bsk => $bsv){ ?>
+                foreach($bespokeSelected as $bsk => $bsv){ 
+                    
+                    
+                    
+                    
+                           $latin = $bsv['note'];
+                    
+                    ?>
           
+                    
+                    
+                    
+                    
                     <div class="row list-group-item  delayed " style="font-size:14px;">
                              <div class="col-md-6">
                     <div class="col-md-6"> 
@@ -707,7 +718,9 @@ font-size: 1em;
                         <input type="text" data-edit="inserttext" id="voiceBtn" x-webkit-speech="">
                     </div>
 
-                    <div class="editor editorAction noteinput noteinput<?php echo $bsv['id'];?>" note="<?php echo $bsv['id'];?>">  <?php echo $bsv['note'] ? $bsv['note'] : $latin; ?> </div>
+                    <div class="editor editorAction noteinput noteinput<?php echo $bsv['id'];?>" note="<?php echo $bsv['id'];?>">  <?php echo $bsv['note'] ; ?> </div>
+            
+          
            
 		</div>
 
@@ -731,7 +744,7 @@ font-size: 1em;
 
                     <div class="col-md-6">
                         <div class="highlighter<?php echo $bsv['id'];?>"><span class="more noteoutput<?php echo $bsv['id'];?>" id="noteoutput<?php echo $bsv['id'];?>" data="<?php echo $bsv['id'];?>">
-                            <?php echo $bsv['note'] ? $bsv['note'] : $latin; ?> 
+                            <?php echo $bsv['note']; ?> 
                             </span>
         <a href="javascript:;" class="btn btn-warning note_edit note_edit<?php echo $bsv['id']; ?> " data="<?php echo $bsv['id']; ?>">EDIT</a>
                         </div>

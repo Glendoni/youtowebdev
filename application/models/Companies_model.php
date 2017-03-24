@@ -818,23 +818,47 @@ and s.sector_group is null
 	}
 
 
-    function clear_company_sectors_services($id,$user_id){
+    function clear_company_sectors_services($removable_sectors_id,$user_id,$company_id){
 				 
 
+ 
+$sql = "update operates 
+set active=false, 
+updated_at = now(),
+updated_by=".$user_id."
 
-$sql = "update operates set active=false,  updated_by=".$user_id."
-where id in(
-select o.id from operates o 
-LEFT JOIN sectors s
-ON o.sector_id = s.id
-WHERE active=true and company_id=".$id." 
-and s.sector_group=1
+WHERE sector_id=".$removable_sectors_id."
 
-)";
+AND company_id =".$company_id;
 
 
 
  $query = $this->db->query($sql);
+return $this->db->affected_rows();
+
+
+	}
+    
+    
+function clear_all_company_sectors_services($user_id,$company_id){
+				 
+
+ $sql = "update operates set active=false,  updated_by=".$user_id."
+where id in(
+select o.id from operates o 
+LEFT JOIN sectors s
+ON o.sector_id = s.id
+WHERE active=true 
+and company_id=".$company_id." 
+and s.sector_group=1)";
+ 
+    
+     $query = $this->db->query($sql);
+return $this->db->affected_rows();
+
+  
+    
+    
 return $this->db->affected_rows();
 
 
@@ -993,41 +1017,79 @@ return $this->db->affected_rows();
     
     function add_Services_Level($post)
     {
+        $i = 0;   
         
+        $sql = "
+        select o.sector_id 
+        from operates o
+        LEFT JOIN sectors s
+        on o.sector_id = s.id
+        WHERE o.company_id = ".$post['company_id']." 
+        AND s.sector_group=1 
+        AND o.active= true 
+        ORDER BY o.id 
+        ";
         
+        $query = $this->db->query($sql);
+        
+        $a = array(0);
+        $sectorArr = $post['add_sectors'];
+        
+    foreach ($query->result_array() as $row)
+    {
+        $a[] = $row['sector_id']; //build database array
+    }
+
+    if (isset($post['add_sectors']) and !empty($post['add_sectors']))
+    { 
+        
+        foreach($post['add_sectors'] as $sector_id) 
+        {
+            //file_put_contents('glenppp.txt','sectors: '.$sector_id,FILE_APPEND);
+            if(!in_array($sector_id,$a))
+            { // in array ignore and do not insert anything
+
+                $this->db->set('company_id', $post['company_id']);
+                $this->db->set('sector_id', $sector_id);
+                $this->db->set('created_by', $post['user_id']);  
+                $this->db->set('created_at', date('Y-m-d H:i:s')); 
+                $this->db->insert('operates'); 
+                 unset($a[$i]);
+            }    
+            $i= $i+1; 
+        }
+    
+        foreach($a as $removable_sectors_id)
+        {
+            if(isset($post['add_sectors']))
+            {
+                if(!in_array($removable_sectors_id,$sectorArr ))
+                {
+                    //file_put_contents('glenppp.txt','remove a sector: '.$removable_sectors_id,FILE_APPEND);
+                    $this->clear_company_sectors_services($removable_sectors_id, $post['user_id'], $post['company_id']); 
+                }
+            //$this->clear_company_sectors_services($removable_sectors_id, $post['user_id'], $post['company_id']); 
+            }
+        }
+    }
+ 
+             //$this->clear_company_sectors($post['user_id'], $post['company_id']);  
+        
+            $confidential  = $post['confidential_flag']? $post['confidential_flag'] : FALSE;
+            $company = array( 
+                'confidential_flag' =>  $confidential
+            );  
+
+            $this->db->where('id', $post['company_id']);
+            $this->db->update('companies', $company);
         
       
-        
-            $result = $this->clear_company_sectors_services($post['company_id'], $post['user_id']);
-
-            if (isset($post['add_sectors']) and !empty($post['add_sectors']))
-            {
-                foreach ($post['add_sectors'] as $sector_id) {
-                    $this->db->set('company_id', $post['company_id']);
-                    $this->db->set('sector_id', $sector_id);
-                    $this->db->set('created_by', $post['user_id']);  
-                    $this->db->set('created_at', date('Y-m-d H:i:s')); 
-                    $this->db->insert('operates'); 
-                }
-                
-                 
-                 //$this->db->set('confidential_flag', $post['confidential_flag']); 
-              
-                //$sectors_status = $this->db->affected_rows();
-            }
-
-        
-           $confidential  = $post['confidential_flag']? $post['confidential_flag'] : FALSE;
-             $company = array( 
-              'confidential_flag' =>  $confidential
-             
-             ) ;  
-                
-             $this->db->where('id', $post['company_id']);
-		      $this->db->update('companies', $company);
-                
-        
-            return true;     
+        if($i == 0){
+            
+           //file_put_contents('glenxxx.txt','passsn',FILE_APPEND);
+           $this->clear_all_company_sectors_services($post['user_id'], $post['company_id']);  
+        }
+        return true;     
 
     }
 

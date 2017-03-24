@@ -97,7 +97,7 @@ var outbound_content   = $('.noteinput'+noteid).html() ;
                             success: function(data) {
                                 
                                     noteid = data['id']; 
-                                    console.log(outbound_content);
+                                    //console.log(outbound_content);
 
                                     $('.noteoutputcopy'+noteid).html('');
                                     $('.noteoutputcopy'+noteid).html(outbound_content);
@@ -116,13 +116,12 @@ var outbound_content   = $('.noteinput'+noteid).html() ;
     
                 $('.note_edit').click(function(){
 
-                    var noteid = $(this).attr('data');
+                   var noteid = $(this).attr('data');
                     
-                   
-                   var output  =  $('.noteoutput'+noteid).html();
+                     $('.noteoutputcopy'+noteid).remove();
+                   var output  =  $('#noteoutput'+noteid).html();
+                    //alert(output);
                     $('.noteinput'+noteid).append('<div class="noteoutputcopy'+noteid+' hidden">'+output+'</div>')
-                    
-                    
                     $('#noteinput'+noteid).show();
                     $(this).hide();
                     $('.highlighter'+noteid).addClass('notehiglighter'); 
@@ -136,15 +135,15 @@ var outbound_content   = $('.noteinput'+noteid).html() ;
                     
                     var n_copy = $('.noteoutputcopy'+noteid).html();
                     
+                    //console.log('+++++'+n_copy);
                     
-                    console.log(n_copy);
-                     $('.noteoutput'+noteid+', .noteinput'+noteid).html(n_copy);
+                    $('.noteoutput'+noteid+', .noteinput'+noteid).html(n_copy);
                     $('#noteinput'+noteid).hide();
                     $('.note_edit'+noteid).show();
                   
                      $('.highlighter'+noteid).removeClass('notehiglighter'); 
 
- $('.noteoutputcopy'+noteid).remove();
+
     
       $('.action_submit'+noteid).remove();
 

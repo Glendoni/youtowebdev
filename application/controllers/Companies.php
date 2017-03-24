@@ -381,7 +381,7 @@ class Companies extends MY_Controller {
 	public function edit()
 	{
 		
-
+ 
 if($this->input->post('edit_company'))
 		{
   
@@ -404,7 +404,10 @@ if($this->input->post('edit_company'))
            if($this->input->post('edit_service_level'))
                     {
 
+               
+               
                         $post = $this->input->post();
+               
                         // We need to clean the post and validate the post fields *pending*
                         $result = $this->Companies_model->add_Services_Level($this->input->post(),$this->data['current_user']['id']);
  
@@ -1303,6 +1306,59 @@ foreach($bsp as $ky=>$value){
         
         
         echo json_encode(array('id' => $output['noteid']));
+    }
+    
+    
+    function sector_test(){
+        
+        
+        $output =  array
+(
+    'company_id' => 154537,
+    'user_id' => 31,
+    'edit_service_level' => 1,
+    'class_check' => 'Using Finance',
+    'pipeline_check' => 'Suspect',
+    'add_sectors' => array
+        (
+            0 => 64,
+            1 => 65,
+            2 => 61
+        )
+
+);
+        
+        
+$sql = "
+     select o.sector_id 
+    from operates o
+    LEFT JOIN sectors s
+    on o.sector_id = s.id
+    WHERE o.company_id = 154537 
+    AND s.sector_group=1 
+    AND o.active= true 
+    ORDER BY o.id 
+";
+
+
+$query = $this->db->query($sql);
+$i = 0 ;
+foreach ($query->result_array() as $row)
+{
+    $a[] = $row['sector_id'];
+ 
+    unset($a[$i++]);
+       echo in_array(64,$a) ? 'YES' : 'No';
+
+}
+     echo '<pre>'; print_r($output); echo '</pre>';
+
+ echo in_array(64,$a) ? 'YES' : 'No';
+      
+unset($a[0]);
+        
+  echo in_array(64,$a) ? 'YES' : 'No';      
+        
     }
     
 }
