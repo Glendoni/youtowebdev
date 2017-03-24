@@ -458,9 +458,11 @@ and ACTIONS_SUB.company_id is null
                C.customer_to,--f45
                AM.name, --f46
 			   C.confidential_flag, -- f47
-               C.permanent_perm, -- f48
+               C.permanent_funding, -- f48
                C.staff_payroll, -- f49
-               C.management_accounts -- f50
+               C.management_accounts, -- f50
+               C.paye, -- f51
+               C.permanent_invoicing -- f52
                
 			   )) "JSON output" 
 			   
@@ -632,9 +634,11 @@ from (select * from COMPANIES ' ;
 		group by C.id,
 		         C.name,
                  C.confidential_flag,
-                 C.permanent_perm, 
+                 C.permanent_funding, 
                  C.staff_payroll, 
                  C.management_accounts,
+                 C.paye, 
+                 C.permanent_invoicing, 
 		         C.url,
 			     C.eff_from,
 			     C.linkedin_id,
@@ -1080,25 +1084,25 @@ return $this->db->affected_rows();
  
              //$this->clear_company_sectors($post['user_id'], $post['company_id']);  
         
-
-           $confidential  = $post['confidential_flag']? $post['confidential_flag'] : FALSE;
-           $permanent_perm  = $post['permanent_perm']? $post['permanent_perm'] : FALSE;
-           $staff_payroll = $post['staff_payroll']? $post['staff_payroll'] : FALSE;
-           $management_accounts  = $post['management_accounts']? $post['management_accounts'] : FALSE;
-          
-            $company = array( 
-              'confidential_flag' =>  $confidential,
-                'permanent_perm' =>  $permanent_perm,
-                'staff_payroll' =>  $staff_payroll,
-                'management_accounts' =>  $management_accounts
+            $staff_payroll = $post['staff_payroll']? $post['staff_payroll'] : FALSE;
+            $confidential  = $post['confidential_flag']? $post['confidential_flag'] : FALSE;
+            $management_accounts  = $post['management_accounts']? $post['management_accounts'] : FALSE;
+            $paye = $post['paye']? $post['paye'] : FALSE;
+            $permanent_funding  = $post['permanent_funding']? $post['permanent_funding'] : FALSE;
+            $permanent_invoicing  = $post['permanent_invoicing']? $post['permanent_invoicing'] : FALSE;
+       
+            $company = array ( 
+                'staff_payroll' => $staff_payroll,
+                'confidential_flag' => $confidential,
+                'management_accounts' =>  $management_accounts,
+                'paye' => $paye,
+                'permanent_funding' => $permanent_funding,
+                'permanent_invoicing' => $permanent_invoicing
              ) ;  
                 
-             $this->db->where('id', $post['company_id']);
-		      $this->db->update('companies', $company);
+        $this->db->where('id', $post['company_id']);
+        $this->db->update('companies', $company);
                 
-
-        
-      
         if($i == 0){
             
            //file_put_contents('glenxxx.txt','passsn',FILE_APPEND);

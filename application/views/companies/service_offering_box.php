@@ -29,7 +29,14 @@
                                    
                          <div class="form-inline">
                              
-                             
+                              <div class=" form-group ">
+                      
+                            <span class="button-checkbox">
+                                <button type="button"  class="btn btn-default enterpriseBoxBtn" data-color="success"><i class="state-icon undefined"></i> &nbsp;Agency Staff Payroll</button>
+                                <input type="checkbox" name="staff_payroll" value="1" class="hidden" <?php echo $company['staff_payroll']?  'checked=\"checked\"' : "" ; ?>
+                            </span>
+                                
+                        </div>
                               <div class=" form-group ">
                       
                             <span class="button-checkbox">
@@ -39,33 +46,40 @@
                                 
                         </div>
                              
-                                <div class=" form-group ">
-                      
-                            <span class="button-checkbox">
-                                <button type="button"  class="btn btn-default enterpriseBoxBtn" data-color="success"><i class="state-icon undefined"></i> &nbsp;Permanent/ Perm</button>
-                                <input type="checkbox" name="permanent_perm" value="1" class="hidden" <?php echo $company['permanent_perm']?  'checked=\"checked\"' : "" ; ?>
-                            </span>
-                                
-                        </div>
-                             
-                             
-                        <div class=" form-group ">
-                      
-                            <span class="button-checkbox">
-                                <button type="button"  class="btn btn-default enterpriseBoxBtn" data-color="success"><i class="state-icon undefined"></i> &nbsp;Staff Payroll</button>
-                                <input type="checkbox" name="staff_payroll" value="1" class="hidden" <?php echo $company['staff_payroll']?  'checked=\"checked\"' : "" ; ?>
-                            </span>
-                                
-                        </div>
-                   
-                         
-                        <div class=" form-group">
+                                  
+                                  <div class=" form-group">
                             <span class="button-checkbox">
                                 <button type="button"  class="btn btn-default enterpriseBoxBtn" data-color="success"><i class="state-icon undefined"></i> &nbsp;Management Accounts</button>
                                 <input type="checkbox" name="management_accounts" value="1" class="hidden" <?php echo $company['management_accounts']?  'checked=\"checked\"' : "" ; ?>
                             </span>
                                 
                         </div>
+                                      <div class=" form-group">
+                            <span class="button-checkbox">
+                                <button type="button"  class="btn btn-default enterpriseBoxBtn" data-color="success"><i class="state-icon undefined"></i> &nbsp;PAYE</button>
+                                <input type="checkbox" name="paye" value="1" class="hidden" <?php echo $company['paye']?  'checked=\"checked\"' : "" ; ?>
+                            </span>
+                                
+                        </div>
+                        <div class=" form-group ">
+                            <span class="button-checkbox">
+                                <button type="button"  class="btn btn-default enterpriseBoxBtn" data-color="success"><i class="state-icon undefined"></i> &nbsp;Perm Funding</button>
+                                <input type="checkbox" name="permanent_funding" value="1" class="hidden" <?php echo $company['permanent_funding']?  'checked=\"checked\"' : "" ; ?>
+                            </span>
+                                
+                        </div>
+                             
+                        <div class=" form-group ">
+                            <span class="button-checkbox">
+                                <button type="button"  class="btn btn-default enterpriseBoxBtn" data-color="success"><i class="state-icon undefined"></i> &nbsp;Perm Invoicing</button>
+                                <input type="checkbox" name="permanent_invoicing" value="1" class="hidden" <?php echo $company['permanent_invoicing']?  'checked=\"checked\"' : "" ; ?>
+                            </span>
+                                
+                        </div>
+                       
+                   
+                         
+                        
                             
                             </div>
                     </div>

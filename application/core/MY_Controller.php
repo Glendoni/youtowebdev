@@ -523,9 +523,11 @@ class MY_Controller extends CI_Controller {
             if($company->company->f1->f45)$mapped_companies_array['customer_to'] = $company->company->f1->f45;
             if($company->company->f1->f46)$mapped_companies_array['account_manager'] = $company->company->f1->f46;
             if($company->company->f1->f47)$mapped_companies_array['confidential_flag'] = $company->company->f1->f47;
-             if($company->company->f1->f48)$mapped_companies_array['permanent_perm'] = $company->company->f1->f48;
+             if($company->company->f1->f48)$mapped_companies_array['permanent_funding'] = $company->company->f1->f48;
              if($company->company->f1->f49)$mapped_companies_array['staff_payroll'] = $company->company->f1->f49;
              if($company->company->f1->f50)$mapped_companies_array['management_accounts'] = $company->company->f1->f50;
+            if($company->company->f1->f51)$mapped_companies_array['paye'] = $company->company->f1->f51; 
+            if($company->company->f1->f52)$mapped_companies_array['permanent_invoicing'] = $company->company->f1->f52;
 			// sectors
 
 			if(!empty($company->company->f1->f22)){

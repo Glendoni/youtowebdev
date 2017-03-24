@@ -3494,7 +3494,7 @@ margin-right: 3px;
 }
 
 
-.confidential_status,.permanent_perm, .staff_payroll, .management_accounts{ 
+.confidential_status,.permanent_funding, .paye, .permanent_invoicing, .staff_payroll, .management_accounts{ 
     background-color: #439b43; color:#fff;float:left; font-weight: 300; font-size: 1.3em !important;
 }
 

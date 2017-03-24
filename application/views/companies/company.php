@@ -50,11 +50,11 @@ endif;
                 <?php endif; ?>
                         
                         
-                <?php if (isset($company['permanent_perm'])): ?>
+                <?php if (isset($company['permanent_funding'])): ?>
                     <h5 class="trading-header" style="margin-top: 9px; margin-left: 2px;">
-                    <?php if($company['permanent_perm']): ?>
-                        <span class="label permanent_perm" style="">
-                           Permanent/Perm 
+                    <?php if($company['permanent_funding']): ?>
+                        <span class="label permanent_funding" style="">
+                           Perm Funding 
                         </span>
                     
                     <?php endif; ?>
@@ -78,6 +78,27 @@ endif;
                     <?php if($company['management_accounts']): ?>
                         <span class="label management_accounts" style="">
                            Management Accounts 
+                        </span>
+                    
+                    <?php endif; ?>
+
+                <?php endif; ?>
+                        <?php if (isset($company['paye'])): ?>
+                    <h5 class="trading-header" style="margin-top: 9px; margin-left: 2px;">
+                    <?php if($company['paye']): ?>
+                        <span class="label paye" style="">
+                           PAYE 
+                        </span>
+                    
+                    <?php endif; ?>
+
+                <?php endif; ?>    
+                        
+                <?php if (isset($company['permanent_invoicing'])): ?>
+                    <h5 class="trading-header" style="margin-top: 9px; margin-left: 2px;">
+                    <?php if($company['permanent_invoicing']): ?>
+                        <span class="label permanent_invoicing" style="">
+                           Perm Invoicing 
                         </span>
                     
                     <?php endif; ?>
