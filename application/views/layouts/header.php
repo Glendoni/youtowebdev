@@ -106,7 +106,7 @@
 <?php
 } ?>
      
-     Version S5</div>
+     Version S6</div>
     </a>
     
         <?php 
@@ -216,6 +216,9 @@
                                         </li>
                                     <li>
                                             <a href="<?php echo base_url(); ?>evergreen" ><i class="fa fa-plus-circle"></i> Evergreen Maintenance</a>
+                                        </li>
+                                    <li>
+                                            <a href="<?php echo base_url(); ?>companies/pipeline" ><i class="fa fa-plus-circle"></i> Pipeline</a>
                                         </li>
                                     <li class="divider"></li>
                                     <?php endif; ?>

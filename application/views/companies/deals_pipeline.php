@@ -31,7 +31,7 @@ function  dragg(str){
   </div>
   <div class="col-sm-9 col-sm-push-3"></div>
 </div>-->
-<div  class="mainboxs " style="overflow: hidden; margin-top: -20px;">
+<div  class="mainboxs " style="overflow: hidden; margin-top: 0px;">
 <div  class="column delete" placement="delete" aria-hidden="true"></div>
 
     <!--<div class="row ">

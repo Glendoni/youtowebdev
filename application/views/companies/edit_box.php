@@ -108,7 +108,7 @@
     <div class="row">
             
                   
-                   <?php /* ?>
+                  
                        <!-- Recruitment Type -->
             <!--
                                 <div class="col-sm-6 col-md-4" style="display:none">
@@ -139,15 +139,9 @@
 
 
                                             <div class="col-xs-6 col-sm-6 col-md-8" style="right: 14px;">
-                                                <label for="pipeline_text">Pipeline Status</label>
-                                                <p style="font-size: 12px;"><?php echo ucfirst($deals_pipeline_status[$deals_pipline->status]).' $data = array(
-                                                   'title' => 'My title' ,
-                                                   'name' => 'My Name' ,
-                                                   'date' => 'My date'
-                                                );
-                                                
-                                                $this->db->insert('mytable', $data);
-                                                
+                                                <label for="pipeline_text">Pipeline Status (Drag &amp; Drop)</label>
+                                               
+                                                <?php echo $company['pipeline']; ?>
                                             </div>
                                             <div class="col-xs-6 col-sm-6 col-md-4" >
                                                 <label for="exampleSelect1">Delete</label>
@@ -173,7 +167,7 @@
 
                                 <?php } ?>
                                 
-                                <?php */ ?>
+                                
              <?php /*
         if (isset($company['emp_count']) && $company['emp_count'] = false ):?>
                         <div class="col-sm-6 col-md-4">

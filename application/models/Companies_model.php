@@ -1512,7 +1512,7 @@ $q = '
                                 'company_id' => $post['company_id'],
                                 'created_by' => $user_id,
                                 'status' => $post['pipeline_status'],
-                                    'user_id' => $user_id,
+                                'user_id' => $user_id,
                                 'eff_from' => $post['pipeline_month']
                                 );
                             $this->db->insert('deals_pipeline', $pipeline);
@@ -1545,7 +1545,7 @@ $q = '
          SELECT company_id
          FROM deals_pipeline
         WHERE company_id=".$id."
-        AND status LIKE '".$pipeline_status."'
+        AND status = ".$pipeline_status."
         AND eff_to IS NULL
         LIMIT 1
         ";
