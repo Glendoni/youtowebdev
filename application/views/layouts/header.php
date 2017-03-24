@@ -200,8 +200,12 @@
                                     
                                     <?php } ?>
                                     
-                                    
+                                       <li>
+                                            <a href="<?php echo base_url(); ?>companies/pipeline" ><i class="fa fa-plus-circle"></i> Pipeline</a>
+                                        </li>
                                     <?php 
+                                    
+                                    
                                   
                                     if ($current_user['department'] == 'development'  || $current_user['department'] ==  'board'): ?>
                                          <li>
@@ -217,9 +221,7 @@
                                     <li>
                                             <a href="<?php echo base_url(); ?>evergreen" ><i class="fa fa-plus-circle"></i> Evergreen Maintenance</a>
                                         </li>
-                                    <li>
-                                            <a href="<?php echo base_url(); ?>companies/pipeline" ><i class="fa fa-plus-circle"></i> Pipeline</a>
-                                        </li>
+                                 
                                     <li class="divider"></li>
                                     <?php endif; ?>
                                             <li>
