@@ -9,8 +9,194 @@ function dateRequired()     {
 }
 
 
-  
-$( document ).ready(function() {
+    $(document).ready(function() {
+        
+        
+           //////////NOTES///////////////////////////////////////////////
+    // Configure/customize these variables.
+
+ 
+    /*
+        var showChar = 100;  // How many characters are shown by default
+    var ellipsestext = "...";
+    var moretext = "Show more >";
+    var lesstext = "Show less ";
+    
+
+    $('.more').each(function() {
+        var content = $(this).html();
+ var attr_data = $(this).attr('data');
+        if(content.length > showChar) {
+ 
+            var c = content.substr(0, showChar);
+            var h = content.substr(showChar, content.length - showChar);
+ 
+            var html = c + '<span class="moreellipses">' + ellipsestext+ '&nbsp;</span><span class="morecontent morecontent'+attr_data+'"><span class="fullcontent'+attr_data+'">' + h + '</span>&nbsp;&nbsp;<a href="javascript:;" class="morelink morelink'+attr_data+'" data="'+attr_data+'">' + moretext + '</a></span>';
+ 
+            $(this).html(html);
+        }
+ 
+    });
+ 
+    $(".morelink").click(function(){
+        
+         var attr_data = $(this).attr('data');
+        if($('.morelink'+attr_data).hasClass("less")) {
+            $('.morelink'+attr_data).removeClass("less");
+            $('.morelink'+attr_data).html(moretext);
+        } else {
+            $('.morelink'+attr_data).addClass("less");
+            $('.morelink'+attr_data).html(lesstext);
+        }
+        $('.morelink'+attr_data).parent().prev().toggle();
+        $('.morelink'+attr_data).prev().toggle();
+        return false;
+    });
+
+ */
+    
+                $(".noteinput").keyup(function(){
+                    // $(".morelink").unbind('click');
+                            var attr = $(this).attr('note');
+                            // For some browsers, `attr` is undefined; for others,
+                            // `attr` is false.  Check for both.
+                            if (typeof attr !== typeof undefined && attr !== false) {
+                                // ...
+$("#noteoutput"+attr).html($(this).html()+'<br><button type="button" class="btn btn-primary action_submit action_submit'+attr+' " data="'+attr+'">Save & Update</button>');
+                                
+     
+  $('.action_submit').click(function(){
+//alert();
+                    var noteid = $(this).attr('data');
+                    $('.submit'+noteid).trigger('click');
+                 
+    
+                     
+      
+  })
+                                
+                                
+                            }
+                });
+    
+                $('.noteform').submit(function(){ //Get 
+                    var noteid = $(this).attr('data');
+var outbound_content   = $('.noteinput'+noteid).html() ;
+
+                
+                    
+                 
+                  
+                        //JS JASON WITH POST PARAMETER
+                         var para = {'notes':outbound_content, 'noteid': noteid};
+                          $.ajax({
+                            type: "POST",
+                              data: para,
+                                dataType: "json",
+                            url: "sector_note_update",
+                            success: function(data) {
+                                
+                                    noteid = data['id']; 
+                                    //console.log(outbound_content);
+
+                                    $('.noteoutputcopy'+noteid).html('');
+                                    $('.noteoutputcopy'+noteid).html(outbound_content);
+
+                                    $('.note_cancel'+noteid).trigger('click');
+                                    $('.action_submit'+noteid).remove();
+                                
+                               // console.log(outbound_content);
+                            }
+                            });
+     
+                    
+                });
+    
+    
+    
+                $('.note_edit').click(function(){
+
+                   var noteid = $(this).attr('data');
+                    
+                     $('.noteoutputcopy'+noteid).remove();
+                   var output  =  $('#noteoutput'+noteid).html();
+                    //alert(output);
+                    $('.noteinput'+noteid).append('<div class="noteoutputcopy'+noteid+' hidden">'+output+'</div>')
+                    $('#noteinput'+noteid).show();
+                    $(this).hide();
+                    $('.highlighter'+noteid).addClass('notehiglighter'); 
+ 
+                });
+    
+    
+                $('.note_cancel').click(function(){
+
+                    var noteid = $(this).attr('data');
+                    
+                    var n_copy = $('.noteoutputcopy'+noteid).html();
+                    
+                    //console.log('+++++'+n_copy);
+                    
+                    $('.noteoutput'+noteid+', .noteinput'+noteid).html(n_copy);
+                    $('#noteinput'+noteid).hide();
+                    $('.note_edit'+noteid).show();
+                  
+                     $('.highlighter'+noteid).removeClass('notehiglighter'); 
+
+
+    
+      $('.action_submit'+noteid).remove();
+
+                    
+    
+             /*       
+                    
+           var showChar = 100;  // How many characters are shown by default
+    var ellipsestext = "...";
+    var moretext = "Show more >";
+    var lesstext = "Show less ";
+    
+
+    $('.noteoutput'+noteid).each(function() {
+        var content = $('.highlighter128598').html();
+ var attr_data = $(this).attr('data');
+        
+      
+        if(content.length > showChar) {
+   $('<a href="javascript:;" class="morelink morelink128598 less" data="128598">Show less </a>').appendTo('.noteoutput128598');
+            var c = content.substr(0, showChar);
+            var h = content.substr(showChar, content.length - showChar);
+ 
+            var html = c + '<span class="moreellipses">' + ellipsestext+ '&nbsp;</span><span class="morecontent morecontent'+attr_data+'"><span class="fullcontent'+attr_data+'">' + h + '</span>&nbsp;&nbsp;<a href="javascript:;" class="morelink morelink'+attr_data+'" data="'+attr_data+'">' + moretext + '</a></span>';
+ 
+           // $(this).html(html);
+        }
+ 
+    });
+ 
+    $(".morelink").click(function(){
+        
+         var attr_data = $(this).attr('data');
+        if($('.morelink'+attr_data).hasClass("less")) {
+            $('.morelink'+attr_data).removeClass("less");
+            $('.morelink'+attr_data).html(moretext);
+        } else {
+            $('.morelink'+attr_data).addClass("less");
+            $('.morelink'+attr_data).html(lesstext);
+        }
+        $('.morelink'+attr_data).parent().prev().toggle();
+        $('.morelink'+attr_data).prev().toggle();
+        return false;
+    });
+*/
+                });
+
+
+    
+    ////////////NOTES END ///////////////////////////////////////////
+    
+    
+    
     
     ////EVERGREENS
     

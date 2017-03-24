@@ -3513,11 +3513,58 @@ margin-right: 3px;
     
 }
 
+
 #get_evegreen_results_detail, .get_evegreen_results_users, #add_evegreen_results_detail{
     
     display: none;
     
 }
+
+.morecontent span {
+    display: none;
+}
+.morelink {
+    display: block;
+}
+
+.noteform{
+    
+    display:none;
+    
+}
+
+
+.notehiglighter{
+    
+background : rgba(255, 0, 0, 0.12);
+    padding:5px 5px 22px 5px ;
+    border-radius: 5px;
+    box-shadow: 1px 5px 5px #ccc;
+    margin-top: 20px;
+    
+}
+.note_edit,.action_submit{
+    
+    float:right;
+    padding: 0px 3px;
+    font-size: 10px;
+    
+}
+.note_cancel{
+    padding: 4px;
+    font-size: 10px;
+    float: right;
+    margin-right: -2px;
+    
+}
+
+.noteinput{
+    
+    
+    height:200px;
+    
+}
+
 /*! Hint.css - v2.2.1 - 2016-03-26 //#2b4461
 * http://kushagragour.in/lab/hint/
 * Copyright (c) 2016 Kushagra Gour; Licensed  */

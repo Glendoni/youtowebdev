@@ -620,15 +620,13 @@ if ($your_date < $now){;
             </div>
         <!-- /.panel-heading -->
             <div class="panel-body">
-                <table class="table">
+               
                 
                     <?php if(count($bespokeSelected)){ ?>
-                    <thead>
-                <tr>
-                <th class="col-md-6">Services</th>
-                <th class="col-md-6">Date Created</th>
-                </tr>
-                </thead>
+                 
+                  
+                
+                
                     <?php }else{
         
         echo '<div class="alert alert-info">
@@ -637,19 +635,164 @@ if ($your_date < $now){;
 ;
         
     } ?>
-                    
-                <tbody>
+      
+                
+                
+<div class="col-md-12">
+ 
+<div clas="list-group">
+
+<div class="row record-holder-header mobile-hide" style="
+font-size: 1em;
+">
+<div class="col-md-3" ><strong>Date Created</strong></div>
+<div class="col-md-3"><strong>Service</strong></div>
+ <div class="col-md-6"><strong>Note</strong></div>
+</div>
+
+
+    
+                  
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+ <?php //echo $bsv['note'] ? $bsv['note'] : '    
+                    $latin_ = ' Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
+
+                    ?>
+
+
+
                 <?php 
-                foreach($bespokeSelected as $bsk => $bsv){ ?>
-                    <tr>
-                        <td class="col-md-6"><?php echo $bsv['name']; ?> </td>
-                        <td class="col-md-6"> <?php echo date("l jS F Y", strtotime($bsv['created_at'])); ?></td>
-                    </tr>
-                <?php    }   //echo '<span  class="issector" style="color: #2a48ad;  "> '.$bsv['name'].' </span><br><span class="bespoke_date">Created at: '.date("l jS F Y", strtotime($bsv['created_at'])).'</span><br>' ; ?>  
+                foreach($bespokeSelected as $bsk => $bsv){ 
+                    
+                    
+                    
+                    
+                           $latin = $bsv['note'];
+                    
+                    ?>
+          
+                    
+                    
+                    
+                    
+                    <div class="row list-group-item  delayed " style="font-size:14px;">
+                             <div class="col-md-6">
+                    <div class="col-md-6"> 
+                    <?php echo date("l jS F Y", strtotime($bsv['created_at'])); ?>
+                    </div>
+                    <div class="col-md-6">
+                    <div><?php echo $bsv['name']; ?></div>
+                    </div>
+                                 
+                         <div class="col-md-12">
+    <form action="javascript:;" method="POST" class="form-horizontal noteform" data="<?php echo $bsv['id'];?>" role="form" id="noteinput<?php echo $bsv['id'];?>">
+		<div class="form-group">
+		  <textarea class="form-control completed-details" name="note" rows="3"  id="noteinput<?php echo $bsv['id'];?>"></textarea>
 
-                </tbody>
-                </table>
+                                <!---
+                            Please read this before copying the toolbar:
 
+                            * One of the best things about this widget is that it does not impose any styling on you, and that it allows you 
+                            * to create a custom toolbar with the options and functions that are good for your particular use. This toolbar
+                            * is just an example - don't just copy it and force yourself to use the demo styling. Create your own. Read 
+                            * this page to understand how to customise it:
+                            * https://github.com/mindmup/bootstrap-wysiwyg/blob/master/README.md#customising-
+                            --->
+                   
+                    <div class="btn-toolbar btn-toolbarAction" data-role="editor-toolbar" data-target="#editor">
+                        <div class="btn-group">
+                            <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font"><i class="icon-font"></i><b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                            </ul>
+                        </div>
+                        <div class="btn-group">
+                            <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font Size"><i class="icon-text-height"></i>&nbsp;<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a data-edit="fontSize 5"><font size="5">Huge</font></a>
+                                </li>
+                                <li><a data-edit="fontSize 3"><font size="2">Normal</font></a>
+                                </li>
+                                <li><a data-edit="fontSize 1"><font size="1">Small</font></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="btn-group">
+                            <a class="btn" data-edit="bold" title="Bold (Ctrl/Cmd+B)"><i class="icon-bold"></i></a>
+                            <a class="btn" data-edit="italic" title="Italic (Ctrl/Cmd+I)"><i class="icon-italic"></i></a>
+                            <a class="btn" data-edit="strikethrough" title="Strikethrough"><i class="icon-strikethrough"></i></a>
+                            <a class="btn" data-edit="underline" title="Underline (Ctrl/Cmd+U)"><i class="icon-underline"></i></a>
+                        </div>
+                        <div class="btn-group">
+                            <a class="btn" data-edit="insertunorderedlist" title="Bullet list"><i class="icon-list-ul"></i></a>
+                            <a class="btn" data-edit="insertorderedlist" title="Number list"><i class="icon-list-ol"></i></a>
+                            <a class="btn" data-edit="outdent" title="Reduce indent (Shift+Tab)"><i class="icon-indent-left"></i></a>
+                            <a class="btn" data-edit="indent" title="Indent (Tab)"><i class="icon-indent-right"></i></a>
+                        </div>
+                        <div class="btn-group">
+                            <a class="btn" data-edit="justifyleft" title="Align Left (Ctrl/Cmd+L)"><i class="icon-align-left"></i></a>
+                            <a class="btn" data-edit="justifycenter" title="Center (Ctrl/Cmd+E)"><i class="icon-align-center"></i></a>
+                            <a class="btn" data-edit="justifyright" title="Align Right (Ctrl/Cmd+R)"><i class="icon-align-right"></i></a>
+                            <a class="btn" data-edit="justifyfull" title="Justify (Ctrl/Cmd+J)"><i class="icon-align-justify"></i></a>
+                        </div>
+                        <div class="btn-group">
+                            <a class="btn dropdown-toggle" data-toggle="dropdown" title="Hyperlink"><i class="icon-link"></i></a>
+                            <div class="dropdown-menu input-append">
+                                <input class="span2" placeholder="URL" type="text" data-edit="createLink" />
+                                <button class="btn" type="button">Add</button>
+                            </div>
+                            <a class="btn" data-edit="unlink" title="Remove Hyperlink"><i class="icon-cut"></i></a>
+
+                        </div>
+                        <div class="btn-group">
+                            <a class="btn" title="Insert picture (or just drag & drop)" id="pictureBtn"><i class="icon-picture"></i></a>
+                            <input type="file" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage" />
+                        </div>
+                        <div class="btn-group">
+                            <a class="btn" data-edit="undo" title="Undo (Ctrl/Cmd+Z)"><i class="icon-undo"></i></a>
+                            <a class="btn" data-edit="redo" title="Redo (Ctrl/Cmd+Y)"><i class="icon-repeat"></i></a>
+                        </div>
+                        <input type="text" data-edit="inserttext" id="voiceBtn" x-webkit-speech="">
+                    </div>
+
+                    <div class="editor editorAction noteinput noteinput<?php echo $bsv['id'];?>" note="<?php echo $bsv['id'];?>">  <?php echo $bsv['note'] ; ?> </div>
+            
+          
+           
+		</div>
+
+ <div><button type="button" class="btn btn-danger note_cancel note_cancel<?php echo $bsv['id'];?>"  data="<?php echo $bsv['id'];?>">Cancel</button></div>
+
+		<div class="form-group">
+			<div class="col-sm-10">
+				<button type="submit" class="btn btn-primary hidden submit<?php echo $bsv['id'];?>" data="<?php echo $bsv['id'];?>">Save</button>
+                <button type="submit" class="btn btn-primary hidden" data="<?php echo $bsv['id'];?>">Save and Close</button>
+                
+			</div>
+		</div>
+</form>
+
+                 
+                    </div>         
+                                 
+                        </div>
+                        
+                   
+
+                    <div class="col-md-6">
+                        <div class="highlighter<?php echo $bsv['id'];?>"><span class="more noteoutput<?php echo $bsv['id'];?>" id="noteoutput<?php echo $bsv['id'];?>" data="<?php echo $bsv['id'];?>">
+                            <?php echo $bsv['note']; ?> 
+                            </span>
+        <a href="javascript:;" class="btn btn-warning note_edit note_edit<?php echo $bsv['id']; ?> " data="<?php echo $bsv['id']; ?>">EDIT</a>
+                        </div>
+                        </div>
+                    </div>
+
+            <?php } // end of loop?>
+                    
+            </div>
+            </div>
+            </div>
+    
             </div>
         <!-- /.panel-body -->
         </div>
