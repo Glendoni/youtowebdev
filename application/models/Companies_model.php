@@ -779,8 +779,9 @@ from (select * from COMPANIES ' ;
 		//nl2br($sql);
 		//print_r($sql);
 		$query = $this->db->query($sql);
-
+if(is_array($query)){
 		return $query->result_array();
+}
 	}
 	
 
