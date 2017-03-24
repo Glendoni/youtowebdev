@@ -1294,7 +1294,14 @@ foreach($bsp as $ky=>$value){
 	'Commission Report'  => 'Commission Report',
 	'Debt Management Report'  => 'Debt Management Report',
 	'Advances on demand'  => 'Advances on demand',
-	'CONSTRUCTION INDUSTRY?'  => 'CONSTRUCTION INDUSTRY?'
+            'Candidate Communication'  => 'Candidate Communication',
+            'Client Communication'  => 'Client Communication',
+            'Candidate contact'  => 'Candidate contact',
+            'Client contact'  => 'Client contact',
+            'Timesheets'  => 'Timesheets',
+            'Invoicing'  => 'Invoicing',
+            'Payments'  => 'Payments',
+	'Construction (CIS)'  => 'Construction (CIS)'
 );
 
 		return 	$bespokeArr;
