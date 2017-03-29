@@ -200,9 +200,7 @@
                                     
                                     <?php } ?>
                                     
-                                       <li>
-                                            <a href="<?php echo base_url(); ?>companies/pipeline" ><i class="fa fa-plus-circle"></i> Pipeline</a>
-                                        </li>
+                                     
                                     <?php 
                                     
                                     
