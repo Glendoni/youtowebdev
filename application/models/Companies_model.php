@@ -1775,38 +1775,38 @@ $q = '
         if($comp) $comp = 'and C.id='.$comp; 
 
  
-        $query = $this->db->query("select C.id,C.turnover,
-       CASE when T.company_id is not null and (C.turnover < 25000000 or C.turnover is null)
-            then 'Prospect'
-            else 'Suspect'
-	   END \"pipeline_value\"										   											      
+                $query = $this->db->query("select C.id,C.turnover,
+                CASE when T.company_id is not null and (C.turnover < 25000000 or C.turnover is null)
+                    then 'Prospect'
+                    else 'Suspect'
+                END \"pipeline_value\"										   											      
 
-from COMPANIES C
+                from COMPANIES C
 
-LEFT JOIN 
-(
-select distinct O.company_id
-  
-from OPERATES O
+                LEFT JOIN 
+                (
+                select distinct O.company_id
 
-JOIN SECTORS S
-ON S.id = O.sector_id
-  
-where O.active = 't'
-and S.target = 't'
-) T
-ON C.id = T.company_id
+                from OPERATES O
 
-where pipeline is null
-or pipeline not in ('Customer','Proposal','Intent','Lost','Unsuitable','Blacklisted') 
+                JOIN SECTORS S
+                ON S.id = O.sector_id
 
-and C.active = 't' 
+                where O.active = 't'
+                and S.target = 't'
+                ) T
+                ON C.id = T.company_id
 
-".$comp."
+                where pipeline is null
+                or pipeline not in ('Customer','Proposal','Intent','Lost','Unsuitable','Blacklisted') 
 
-LIMIT 1
-	 "                              
-);
+                and C.active = 't' 
+
+                ".$comp."
+
+                LIMIT 1
+                "                              
+                );
 
                      if ($query->num_rows() > 0)
                         {
@@ -1824,11 +1824,6 @@ LIMIT 1
                         // echo '</table>';
                      }
             }   
-    
- 
-    
-    
-    
      function cronpipelineUpdater($id,$pipeline){ 
         
         
@@ -1939,19 +1934,14 @@ LIMIT 1
     
     ////////////////////////////////////amend below to manage a single company//////////////////////////////////////////////////////////////
     
-function  checkClassDateUpdatert($id){
+    function  checkClassDateUpdatert($id){
         
         $sql= 'select  C.id 
+        from companies C
+        LEFT JOIN MORTGAGES M
+        ON C.id = M.company_id
+        where C.customer_from between M.eff_from and (CASE when M.eff_to is not null then M.eff_to else \'2100-01-01\'::date END) and M.provider_id <> 28935 and C.id='.$id.' or M.stage <> \'Satisfied\'  and M.provider_id <> 28935  and C.id='.$id.''; 
 
-from companies C
-
-LEFT JOIN MORTGAGES M
-ON C.id = M.company_id
-
-
-where C.customer_from between M.eff_from and (CASE when M.eff_to is not null then M.eff_to else \'2100-01-01\'::date END) and M.provider_id <> 28935 and C.id='.$id.' or M.stage <> \'Satisfied\'  and M.provider_id <> 28935  and C.id='.$id.''; 
-        
-        
           $query = $this->db->query($sql) ; 
         
                echo '<table width="400">';
@@ -1959,26 +1949,18 @@ where C.customer_from between M.eff_from and (CASE when M.eff_to is not null the
                     {         
                             echo '<tr><td align="left" class="glen">'.$row->id.'</td><td align="left" class="glen">'.$row->id.'</td>';
                                 //$this->cronpipelineUpdater($row->id,'Using Finance');  } 
-                      $this->cronpipelineUpdaternewt($row->id,'Using Finance');
-                            
+                      $this->cronpipelineUpdaternewt($row->id,'Using Finance');       
                     }
-        
-        
           echo '</table>';
-        
-        
     }
-    
     
     function  checkClassDateUpdaterSonovatet($id){
         
         $sql= 'select  C.id 
-
-from companies C
-
-LEFT JOIN MORTGAGES M
-ON C.id = M.company_id
-where M.provider_id = 2893  and C.id='.$id.' '; 
+        from companies C
+        LEFT JOIN MORTGAGES M
+        ON C.id = M.company_id
+        where M.provider_id = 2893  and C.id='.$id.' '; 
         
         
           $query = $this->db->query($sql) ; 
@@ -1991,25 +1973,12 @@ where M.provider_id = 2893  and C.id='.$id.' ';
                       //$this->cronpipelineUpdaternew($row->id,'FF');
                             
                     }
-        
-        
           echo '</table>';
-        
-        
     }
     
-    
-    
-    
-    
-    
-    
-    
-        function cronpipelineUpdaternewt($id,$pipeline){ 
-     
-         //Updates company table pipeline based on conditions in crontogo function 
-            
-            
+        function cronpipelineUpdaternewt($id,$pipeline)
+        { 
+         //Updates company table pipeline based on conditions in crontogo function       
                   $data = array(
                                 'class' => $pipeline,
                                 'updated_at' => date("Y-m-d H:i:s")      
@@ -2017,9 +1986,40 @@ where M.provider_id = 2893  and C.id='.$id.' ';
         
                 $this->db->where('id', $id);
                 $this->db->update('companies', $data);
-    }    
+      }    
     
+    function get_company_by_registration_zendesk($id)
+    {    
+                $sql = "select c.id,c.name,c.registration, c.zendesk_id, c.name , ct.email
+                from companies c
+                left join contacts ct
+                on c.id = ct.company_id
+                where c.id ='".$id."'";
+                //$query = $this->db->query($sql);
+                $stack = array();
+                $query = $this->db->query($sql);
+                $query = $query->result_array();
+                $output['id']  =  $query[0]['id'];
+                $output['registration']  = $query[0]['registration'];
+                $output['name']  = $query[0]['name'];
+        $output['zendesk_id']  = $query[0]['zendesk_id'];
+                // print_r($query);
+                foreach($query as $row){
+                    $res =  explode('@',$row['email']);
+                    array_push($stack,$res[1]);
+                }
+                $output['email']  = join($stack, " ");
+                return $output;
+                // print_r($stack);
+    }
     
-    
+    function update_company_with_zendesk_id($company_id,$zendesk_id)
+    {
+        $data = array(
+            'zendesk_id' => $zendesk_id      
+        );
+        $this->db->where('id', $company_id);
+        $this->db->update('companies', $data);
+    }
     
 }

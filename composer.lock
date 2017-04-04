@@ -4,8 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "47c251a0e5b1624f1468bf987c1404a3",
-    "content-hash": "45d5d29fac06384d3456b7feb0a72e30",
+    "content-hash": "93a75ad515d86836683d4e47b84d155c",
     "packages": [
         {
             "name": "compwright/codeigniter-installers",
@@ -59,7 +58,7 @@
                 "spark",
                 "sparks"
             ],
-            "time": "2012-11-12 16:11:38"
+            "time": "2012-11-12T16:11:38+00:00"
         },
         {
             "name": "firebase/php-jwt",
@@ -102,7 +101,7 @@
             ],
             "description": "A simple library to encode and decode JSON Web Tokens (JWT) in PHP. Should conform to the current spec.",
             "homepage": "https://github.com/firebase/php-jwt",
-            "time": "2016-07-18 04:51:16"
+            "time": "2016-07-18T04:51:16+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -164,7 +163,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2017-02-28 22:50:30"
+            "time": "2017-02-28T22:50:30+00:00"
         },
         {
             "name": "guzzlehttp/promises",
@@ -215,20 +214,20 @@
             "keywords": [
                 "promise"
             ],
-            "time": "2016-12-20 10:07:11"
+            "time": "2016-12-20T10:07:11+00:00"
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "1.4.1",
+            "version": "1.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "0d6c7ca039329247e4f0f8f8f6506810e8248855"
+                "reference": "f5b8a8512e2b58b0071a7280e39f14f72e05d87c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/0d6c7ca039329247e4f0f8f8f6506810e8248855",
-                "reference": "0d6c7ca039329247e4f0f8f8f6506810e8248855",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/f5b8a8512e2b58b0071a7280e39f14f72e05d87c",
+                "reference": "f5b8a8512e2b58b0071a7280e39f14f72e05d87c",
                 "shasum": ""
             },
             "require": {
@@ -280,7 +279,7 @@
                 "uri",
                 "url"
             ],
-            "time": "2017-02-27 10:51:17"
+            "time": "2017-03-20T17:10:46+00:00"
         },
         {
             "name": "microsoft/azure-storage",
@@ -338,7 +337,7 @@
                 "sdk",
                 "storage"
             ],
-            "time": "2016-08-19 08:32:57"
+            "time": "2016-08-19T08:32:57+00:00"
         },
         {
             "name": "microsoft/windowsazure",
@@ -402,7 +401,57 @@
                 "php",
                 "sdk"
             ],
-            "time": "2016-09-26 21:33:08"
+            "time": "2016-09-26T21:33:08+00:00"
+        },
+        {
+            "name": "mmucklo/inflect",
+            "version": "v0.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mmucklo/inflect.git",
+                "reference": "b665bcd3d4c23b6aa1990b6405ff96dd437689e9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mmucklo/inflect/zipball/b665bcd3d4c23b6aa1990b6405ff96dd437689e9",
+                "reference": "b665bcd3d4c23b6aa1990b6405ff96dd437689e9",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.17"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Inflect": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sho Kuwamoto",
+                    "email": "sho@kuwamoto.org"
+                },
+                {
+                    "name": "Matthew J. Mucklo",
+                    "email": "mmucklo@gmail.com"
+                }
+            ],
+            "description": "inflect - a memoizing inflector for php",
+            "keywords": [
+                "inflect",
+                "inflector",
+                "pluralize",
+                "singularize",
+                "urlify"
+            ],
+            "time": "2015-05-16T04:16:08+00:00"
         },
         {
             "name": "pear/console_getopt",
@@ -449,7 +498,7 @@
                 }
             ],
             "description": "More info available on: http://pear.php.net/package/Console_Getopt",
-            "time": "2015-07-20 20:28:12"
+            "time": "2015-07-20T20:28:12+00:00"
         },
         {
             "name": "pear/http_request2",
@@ -508,7 +557,7 @@
                 "http",
                 "request"
             ],
-            "time": "2016-02-13 20:20:39"
+            "time": "2016-02-13T20:20:39+00:00"
         },
         {
             "name": "pear/mail_mime",
@@ -554,7 +603,7 @@
             ],
             "description": "Mail_Mime provides classes to create MIME messages",
             "homepage": "http://pear.php.net/package/Mail_Mime",
-            "time": "2015-09-13 12:42:41"
+            "time": "2015-09-13T12:42:41+00:00"
         },
         {
             "name": "pear/mail_mime-decode",
@@ -602,7 +651,7 @@
                 }
             ],
             "description": "More info available on: http://pear.php.net/package/Mail_mimeDecode",
-            "time": "2014-04-15 19:29:16"
+            "time": "2014-04-15T19:29:16+00:00"
         },
         {
             "name": "pear/net_url2",
@@ -663,7 +712,7 @@
                 "uri",
                 "url"
             ],
-            "time": "2016-04-18 22:24:01"
+            "time": "2016-04-18T22:24:01+00:00"
         },
         {
             "name": "pear/pear-core-minimal",
@@ -707,7 +756,7 @@
                 }
             ],
             "description": "Minimal set of PEAR core files to be used as composer dependency",
-            "time": "2017-02-28 16:46:11"
+            "time": "2017-02-28T16:46:11+00:00"
         },
         {
             "name": "pear/pear_exception",
@@ -762,7 +811,7 @@
             "keywords": [
                 "exception"
             ],
-            "time": "2015-02-10 20:07:52"
+            "time": "2015-02-10T20:07:52+00:00"
         },
         {
             "name": "psr/http-message",
@@ -812,7 +861,7 @@
                 "request",
                 "response"
             ],
-            "time": "2016-08-06 14:39:51"
+            "time": "2016-08-06T14:39:51+00:00"
         },
         {
             "name": "psr/log",
@@ -859,7 +908,7 @@
                 "psr",
                 "psr-3"
             ],
-            "time": "2016-10-10 12:19:37"
+            "time": "2016-10-10T12:19:37+00:00"
         },
         {
             "name": "robmorgan/phinx",
@@ -925,7 +974,7 @@
                 "migrations",
                 "phinx"
             ],
-            "time": "2017-02-28 11:19:21"
+            "time": "2017-02-28T11:19:21+00:00"
         },
         {
             "name": "shlikhota/postgresdb-php",
@@ -975,11 +1024,11 @@
                 "postgresql",
                 "psql"
             ],
-            "time": "2016-02-07 13:33:07"
+            "time": "2016-02-07T13:33:07+00:00"
         },
         {
             "name": "symfony/config",
-            "version": "v3.2.5",
+            "version": "v3.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/config.git",
@@ -1031,11 +1080,11 @@
             ],
             "description": "Symfony Config Component",
             "homepage": "https://symfony.com",
-            "time": "2017-03-01 18:18:25"
+            "time": "2017-03-01T18:18:25+00:00"
         },
         {
             "name": "symfony/console",
-            "version": "v3.2.5",
+            "version": "v3.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
@@ -1094,11 +1143,11 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2017-03-06 19:30:27"
+            "time": "2017-03-06T19:30:27+00:00"
         },
         {
             "name": "symfony/debug",
-            "version": "v3.2.5",
+            "version": "v3.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/debug.git",
@@ -1151,11 +1200,11 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
-            "time": "2017-02-18 17:28:00"
+            "time": "2017-02-18T17:28:00+00:00"
         },
         {
             "name": "symfony/filesystem",
-            "version": "v3.2.5",
+            "version": "v3.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
@@ -1200,7 +1249,7 @@
             ],
             "description": "Symfony Filesystem Component",
             "homepage": "https://symfony.com",
-            "time": "2017-03-06 19:30:27"
+            "time": "2017-03-06T19:30:27+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -1259,11 +1308,11 @@
                 "portable",
                 "shim"
             ],
-            "time": "2016-11-14 01:06:16"
+            "time": "2016-11-14T01:06:16+00:00"
         },
         {
             "name": "symfony/yaml",
-            "version": "v3.2.5",
+            "version": "v3.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
@@ -1314,7 +1363,46 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2017-03-07 16:47:02"
+            "time": "2017-03-07T16:47:02+00:00"
+        },
+        {
+            "name": "zendesk/zendesk_api_client_php",
+            "version": "v2.1.9",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendesk/zendesk_api_client_php.git",
+                "reference": "58d718afb3e80343fdebf33e4d3d34975b2830bd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zendesk/zendesk_api_client_php/zipball/58d718afb3e80343fdebf33e4d3d34975b2830bd",
+                "reference": "58d718afb3e80343fdebf33e4d3d34975b2830bd",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^6.0",
+                "mmucklo/inflect": "0.3.*",
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "fzaninotto/faker": ">=1.5.0",
+                "phpmd/phpmd": "@stable",
+                "phpunit/phpunit": "4.5.*",
+                "squizlabs/php_codesniffer": "2.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Zendesk\\API\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache License Version 2.0"
+            ],
+            "description": "PHP Client for Zendesk REST API. See http://developer.zendesk.com/api-docs",
+            "homepage": "https://github.com/zendesk/zendesk_api_client_php",
+            "time": "2017-03-27T03:34:04+00:00"
         }
     ],
     "packages-dev": [],

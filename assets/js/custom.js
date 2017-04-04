@@ -1349,8 +1349,23 @@ if(!$(this).hasClass('requested') && $(this).attr('aria-controls') ==  'emailega
     $(".show_si_box").slideDown(600);
     }
     $('#action_type_completed').on('change',function(){
-
+       
+ 
         if($('#action_type_completed').val() == 16 || $('#action_type_completed').val() == 8  && $('.initialfee').length !=1){
+            
+          
+             
+            if( $('#action_type_completed').val() == 8){
+                
+                 $('.domain').show();
+            $('.domain input').attr('required', 'required');
+                
+            }else{
+                
+                  $('.domain').hide();
+            $('.domain input').removeAttr('required');
+                
+            }
             
             
      
@@ -1400,6 +1415,9 @@ if(!$(this).hasClass('requested') && $(this).attr('aria-controls') ==  'emailega
          
             $('.actionContact').show();
              $('.onwhocontacthide').show();
+            
+                $('.domain').hide();
+        $('.domain input').removeAttr('required');
         }
 
     })

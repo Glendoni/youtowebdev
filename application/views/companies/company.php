@@ -1473,6 +1473,18 @@ endif;
             </div>
         </div>
     </div>
+              
+              
+                       <div class="col-sm-4 domain">
+        <div class="form-group ">
+            <label>Enter Domain<span class="actionrqd">*</span></label>
+            <div class="input-group">   <div class="input-group-addon">Domain</div>
+                <input type="text"   name="domain" placeholder="e.g sonovate.com"   class="form-control" id="domain" >
+             
+            </div>
+        </div>
+    </div>
+
 
                  <?php endif; ?>
                 
