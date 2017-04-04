@@ -1,4 +1,4 @@
-<?php header( 'X-Frame-Options: DENY' );
+<?php header( 'X-Frame-Options: SAMEORIGIN' );
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class MY_Controller extends CI_Controller {
