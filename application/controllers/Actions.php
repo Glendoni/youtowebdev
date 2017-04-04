@@ -26,9 +26,6 @@ class Actions extends MY_Controller {
 	}
 	public function create()
     {
-        
-        
-        
       // echo  $this->input->post('domain');
         
         //exit();
@@ -50,9 +47,6 @@ foreach($userfilename as $key => $value){
      echo $userfilename[$key] .''.$uploadedfilename[$key];
     
 }
-
-       
-     
         echo 'Yes Glen';
         exit();
         */
@@ -268,17 +262,7 @@ if($this->input->post('domain')){
                             }
                             else
                             {
-                                
-                                
-                       
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
+                          
                                 $this->set_message_success('Action successfully inserted');
                                 redirect('companies/company?id='.$this->input->post('company_id').$campaign_redirect,'location');
                             }
@@ -505,7 +489,7 @@ if($this->input->post('domain')){
     
     //////////////ZENDESK////
     
- function zendesk($company_id = 354262,$domain = 'aol.com'){
+ private function zendesk($company_id = 354262,$domain = 'aol.com'){
         /*
         Array from company based on registration id
 (
