@@ -1,10 +1,8 @@
-<?php
-// load Composer
-require 'vendor/autoload.php';
+<?php require 'vendor/autoload.php';
 
 use Zendesk\API\HttpClient as ZendeskAPI;
 
-
+if ( ! defined('BASEPATH')) exit('No direct script access allowed'); 	
 function sonovate_zendesk($output, $action='', $domain = false){
      //echo '<pre>' ; print_r($destination); echo '</pre>'; 
    // return $output[0]->registration;
