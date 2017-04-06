@@ -20,7 +20,7 @@ $client->setAuth('basic', ['username' => $username, 'token' => $token]);
                     $newOrganzation = $client->organizations()->create(array(
                
                    'domain' => $domain,
-                         'name' =>  $output['name'],
+                    'name' =>  $output['name'],
                     'external_id' => $output['registration'],
                     'domain_names' => $domain ? $domain : $output['email'],
                     'organization_fields'  => [

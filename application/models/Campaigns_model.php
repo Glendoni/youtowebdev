@@ -828,7 +828,7 @@ $sql = 'select json_agg(results)
 			   UU.name, --f43
                C.initial_rate, --f44
              C.customer_to,--f45
-               AM.name, --f46
+               C.name, --f46
 			   C.confidential_flag, -- f47
                C.permanent_funding, -- f48
                C.staff_payroll, -- f49

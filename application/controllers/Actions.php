@@ -27,8 +27,9 @@ class Actions extends MY_Controller {
 	public function create()
     {
       // echo  $this->input->post('domain');
+      
         
-        //exit();
+    
         
         
         
@@ -537,18 +538,33 @@ if($this->input->post('domain')){
 )
         
         */
+     //FILETER
+        $domain = trim($domain);
         
+        $at_sign = '@';
+        $wordArray = substr($domain, 0, 4) ;
+        
+        $at_sign = strpos($domain, $at_sign);
+         
+        if($at_sign){
+            $domain =  explode('@',$domain);
+            $domain =  $mystring[1];
+        }elseif($wordArray == 'www.'){
+           
+            $domain =  explode($wordArray,$domain);
+            $domain =  $domain[1];
+        }
+        ////FILTER
+     
+     
+        //echo $domain; 
          $output  =   $this->Companies_model->get_company_by_registration_zendesk($company_id, $domain);
-        
             //echo '<pre>' ; print_r($output); echo '</pre>'; 
            //echo $output['zend_id'];
            //exit();
         if(!$output['zendesk_id']) {
-           
-          
-            $response  = sonovate_zendesk($output,'create_a_new_organisation');
-            
-            
+
+            $response  = sonovate_zendesk($output,'create_a_new_organisation');            
           //  echo '<pre>' ; print_r($response); echo '</pre>'; 
             $this->Companies_model->update_company_with_zendesk_id($company_id,$response->organization->id);
          
