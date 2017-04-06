@@ -7,9 +7,9 @@ class Actions extends MY_Controller {
 		parent::__construct();
         
         $this->load->model('Files_model');
-        $this->load->helper(array('form', 'url'));
+        $this->load->helper(array('form', 'url','zendeskv3'));
         $this->load->helper('MY_azurefile');
-        $this->load->helper('MY_zendeskv2');
+       
 		
 	}
 
