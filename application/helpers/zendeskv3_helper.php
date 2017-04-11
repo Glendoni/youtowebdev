@@ -22,7 +22,7 @@ $client->setAuth('basic', ['username' => $username, 'token' => $token]);
                    'domain' => $domain,
                     'name' =>  $output['name'],
                     'external_id' => $output['registration'],
-                    'domain_names' => $output['email'],
+                    'domain_names' => $domain,
                     'organization_fields'  => [
                     'company_registration' => $output['registration'],
                          'baselist_id' => $output['id'],
