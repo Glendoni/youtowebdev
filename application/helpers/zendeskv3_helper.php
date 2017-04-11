@@ -3,7 +3,7 @@
 use Zendesk\API\HttpClient as ZendeskAPI;
 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed'); 	
-function sonovate_zendesk($output, $action='', $domain = false){
+function sonovate_zendesk($company_id,$output, $action='', $domain = false){
      //echo '<pre>' ; print_r($destination); echo '</pre>'; 
    // return $output[0]->registration;
    //exit();
@@ -19,8 +19,8 @@ $client->setAuth('basic', ['username' => $username, 'token' => $token]);
             try { 
                     $newOrganzation = $client->organizations()->create(array(
                
-                   'domain' => $domain,
-                    'name' =>  $output['name'],
+                   'domain' => $output['domain'],
+                    'name' => $domain,
                     'external_id' => $output['registration'],
                     'domain_names' => $domain,
                     'organization_fields'  => [

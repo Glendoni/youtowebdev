@@ -490,7 +490,9 @@ if($this->input->post('domain')){
     
     //////////////ZENDESK////
     
- private function zendesk($company_id = 354262,$domain = 'aol.com'){
+  function zendesk($company_id = 354262,$domain = 'aol.com'){
+     
+      
         /*
         Array from company based on registration id
 (
@@ -553,18 +555,22 @@ if($this->input->post('domain')){
            
             $domain =  explode($wordArray,$domain);
             $domain =  $domain[1];
+        }else{
+            
+              $domain =   $domain;
+            
         }
         ////FILTER
      
      
         //echo $domain; 
-         $output  =   $this->Companies_model->get_company_by_registration_zendesk($company_id, $domain);
-            //echo '<pre>' ; print_r($output); echo '</pre>'; 
-           //echo $output['zend_id'];
+         $output  =   $this->Companies_model->get_company_by_registration_zendesk($company_id);
+          //echo '<pre>' ; print_r($output); echo '</pre>'; 
+          //echo $output['zend_id'] . $domain;
            //exit();
         if(!$output['zendesk_id']) {
 
-            $response  = sonovate_zendesk($output,'create_a_new_organisation');            
+            $response  = sonovate_zendesk($company_id, $output,'create_a_new_organisation',$domain);            
           //  echo '<pre>' ; print_r($response); echo '</pre>'; 
             $this->Companies_model->update_company_with_zendesk_id($company_id,$response->organization->id);
          

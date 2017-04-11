@@ -1990,7 +1990,7 @@ $q = '
     
     function get_company_by_registration_zendesk($id)
     {    
-                $sql = "select c.id,c.name,c.registration, c.zendesk_id, c.name , ct.email
+                $sql = "select c.id,c.name,c.registration, c.zendesk_id, c.name 
                 from companies c
                 left join contacts ct
                 on c.id = ct.company_id
@@ -2008,7 +2008,7 @@ $q = '
                     $res =  explode('@',$row['email']);
                     array_push($stack,$res[1]);
                 }
-                $output['email']  = join($stack, " ");
+               // $output['email']  = join($stack, " ");
                 return $output;
                 // print_r($stack);
     }
