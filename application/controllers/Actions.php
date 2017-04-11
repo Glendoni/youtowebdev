@@ -569,6 +569,11 @@ if($this->input->post('domain')){
           //echo $output['zend_id'] . $domain;
            //exit();
         if(!$output['zendesk_id']) {
+            
+           // $wordArray = array('-', '*','/',)
+            $domain = htmlspecialchars($domain);
+            
+            
 
             $response  = sonovate_zendesk($company_id, $output,'create_a_new_organisation',$domain);            
           //  echo '<pre>' ; print_r($response); echo '</pre>'; 
