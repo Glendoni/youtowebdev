@@ -499,7 +499,14 @@ TAGS."has DQ tag",
 			   UC.name, --f42
 			   UU.name, --f43
                C.initial_rate, --f44
-                C.customer_to --f45
+                C.customer_to,--f45
+               AM.name, --f46
+			   C.confidential_flag, -- f47
+               C.permanent_funding, -- f48
+               C.staff_payroll, -- f49
+               C.management_accounts, -- f50
+               C.paye, -- f51
+               C.permanent_invoicing -- f52
 			   )) "JSON output" 
 			  
 
@@ -828,7 +835,7 @@ $sql = 'select json_agg(results)
 			   UU.name, --f43
                C.initial_rate, --f44
              C.customer_to,--f45
-               AM.name, --f46
+               C.name, --f46
 			   C.confidential_flag, -- f47
                C.permanent_funding, -- f48
                C.staff_payroll, -- f49
