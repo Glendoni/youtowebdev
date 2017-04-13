@@ -1489,5 +1489,14 @@ AND ct.tag_id in (200,201,202)
 
     }
     
+    function proposal_set_checker($company_id){
+        
+        $sql = "select count(id) from actions where company_id = ".$company_id." and action_type_id in (8)";
+           $query = $this->db->query($sql);
+           return $query->result_array() ;
+        
+        
+    }
+    
     
 }

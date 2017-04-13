@@ -12,7 +12,7 @@ endif;
 ?>
 
  <?php if (isset($company['active'])): ?>
-
+ <?php if(!$proposal_set_check[0]['count']) unset($action_types_done[17]); ?>
 
             <?php //hide core page content if no company is found ?>
                 <?php if (isset($company['id'])): ?>
@@ -26,10 +26,6 @@ endif;
                       
     <h2 class="company-header" id="logo">
                 <?php $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' ); echo html_entity_decode (str_replace($words, ' ',$company['name'])); ?> 
-        
-        
-                             
-        
         
                              </h2>
                         
@@ -1318,6 +1314,9 @@ endif;
                         <div class="col-sm-4 col-md-4">
                             <div class="form-group ">
                                 <label>New Action</label>
+
+
+
                                 
                                 <select id="action_type_completed" name="action_type_completed" class="form-control" >
                                     <option value="">--- Select an Action ---</option>

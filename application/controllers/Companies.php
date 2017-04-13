@@ -307,6 +307,7 @@ class Companies extends MY_Controller {
             $company = $this->process_search_result($raw_search_results);
             $this->data['companieshack'] = $this->Companies_model->hackmorgages($this->input->get('id'));
 			$this->data['contacts'] = $this->Contacts_model->get_contacts_s($this->input->get('id'));
+$this->data['proposal_set_check'] = $this->Actions_model->proposal_set_checker($this->input->get('id'));
            // $this->data['bespoke'] = $this->Companies_model->bespoke_array();
             $address = $this->Companies_model->get_addresses($this->input->get('id'));
             
@@ -359,6 +360,8 @@ class Companies extends MY_Controller {
 			//$this->data['get_actions'] = $this->Actions_model->get_actions($this->input->get('id'));
 			//$this->data['comments'] = $this->Actions_model->get_comments($this->input->get('id'));
 			$this->data['page_title'] = $company[0]['name'];
+            
+            
 			$this->data['companies'] = $company;
 			$this->data['hide_side_nav'] = True;
 			$this->data['main_content'] = 'companies/company';
