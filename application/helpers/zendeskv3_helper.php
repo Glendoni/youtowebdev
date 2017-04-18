@@ -3,7 +3,7 @@
 use Zendesk\API\HttpClient as ZendeskAPI;
 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed'); 	
-function sonovate_zendesk($company_id,$output, $action='', $domain = false){
+function sonovate_zendesk($company_id = false,$output =false, $action='', $domain = false){
      //echo '<pre>' ; print_r($destination); echo '</pre>'; 
    // return $output[0]->registration;
    //exit();
@@ -96,6 +96,8 @@ $client->setAuth('basic', ['username' => $username, 'token' => $token]);
             break; 
             
             case  "get_all_tickets_regarding_a_user":
+            
+            return 'Glken';
                 try {
                         $tickets = $client->users()->requests()->findAll();
                         echo '<pre>' ;
@@ -112,7 +114,7 @@ $client->setAuth('basic', ['username' => $username, 'token' => $token]);
 
              // Get all tickets regarding a specific user.
                 try {
-                        $tickets = $client->users(1420889283)->requests()->findAll();
+                        $tickets = $client->users(5122633586)->requests()->findAll();
                         echo '<pre>' ;
                         print_r($tickets); 
                         echo '</pre>'; 
