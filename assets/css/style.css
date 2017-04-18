@@ -1452,7 +1452,7 @@ h2.company-header{
     color:#ffffff;
      border-color: #50A07A;
 }
-.initialfee{
+.initialfee, .domain{
  display:none;
     
 }

@@ -8,6 +8,8 @@
         "shlikhota/postgresdb-php":"*",
         "robmorgan/phinx": "^0.7.0",
         "microsoft/windowsazure": "^0.4",
-        "ext-mcrypt": "*"
+        "ext-mcrypt": "*",
+        "zendesk/zendesk_api_client_php": "^2.1",
+        "google/apiclient": "^2.0"
     }
 }

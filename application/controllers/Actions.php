@@ -6,9 +6,10 @@ class Actions extends MY_Controller {
 	{
 		parent::__construct();
         
-         $this->load->model('Files_model');
-        $this->load->helper(array('form', 'url'));
-         $this->load->helper('MY_azurefile');
+        $this->load->model('Files_model');
+        $this->load->helper(array('form', 'url','zendeskv3'));
+        $this->load->helper('MY_azurefile');
+       
 		
 	}
 
@@ -25,6 +26,12 @@ class Actions extends MY_Controller {
 	}
 	public function create()
     {
+      // echo  $this->input->post('domain');
+      
+        
+    
+        
+        
         
         /*
         
@@ -41,9 +48,6 @@ foreach($userfilename as $key => $value){
      echo $userfilename[$key] .''.$uploadedfilename[$key];
     
 }
-
-       
-     
         echo 'Yes Glen';
         exit();
         */
@@ -74,6 +78,7 @@ foreach($userfilename as $key => $value){
                     $this->form_validation->set_rules('company_id', 'company_id', 'xss_clean|required');
                     $this->form_validation->set_rules('user_id', 'user_id', 'xss_clean|required');
                     $this->form_validation->set_rules('contact_id', 'contact_id', 'xss_clean');
+                    $this->form_validation->set_rules('domain', 'domain', 'xss_clean');
                     if($this->form_validation->run())
                     {	$post = $this->input->post();
 
@@ -171,7 +176,9 @@ foreach($userfilename as $key => $value){
                                 else{
                                     // actions models, register the update of a company to customer status 
                                     $result = $this->Actions_model->company_updated_to_customer($post);
-                                    $result1 = $this->Actions_model->add_to_zendesk($post);
+    // $result1 = $this->Actions_model->add_to_zendesk($post);
+                                    
+
                                     if(empty($result)) $this->set_message_warning('Error while updating action for the company.');
                                 }
 
@@ -181,13 +188,17 @@ foreach($userfilename as $key => $value){
                                  if($this->Companies_model->company_select($company_id)){ //prevents proposal being updated if company is a customer
                                 
                                         $result = $this->Companies_model->update_company_to_proposal($company_id);
+if($this->input->post('domain')){
+    $this->zendesk($company_id,$this->input->post('domain'));
+}
+
                                  }
                                 //if(empty($result)){
                                   //  $this->set_message_warning('Error while updating company.');
                                 //}else{
                                     // action model, update register an action for the proposal
                                     $result = $this->Actions_model->company_updated_to_proposal($post); 
-                                    $result1 = $this->Actions_model->add_to_zendesk($post); 
+//$result1 = $this->Actions_model->add_to_zendesk($post); 
                                     if(empty($result)) $this->set_message_warning('Error while updating action for the company.');
                                 
                                 //}
@@ -252,17 +263,7 @@ foreach($userfilename as $key => $value){
                             }
                             else
                             {
-                                
-                                
-                       
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
+                          
                                 $this->set_message_success('Action successfully inserted');
                                 redirect('companies/company?id='.$this->input->post('company_id').$campaign_redirect,'location');
                             }
@@ -487,17 +488,120 @@ foreach($userfilename as $key => $value){
     }
 
     
-    //////////////AZURE////
+    //////////////ZENDESK////
     
-     public function azure_list_files_tester (){
- 
-    // $this->load->library('Azure');
-   
-      //list_files();
+  function zendesk($company_id = 354262,$domain = 'aol.com'){
      
-     //force_download('$nme',  getfile());
+      
+        /*
+        Array from company based on registration id
+(
+    [0] => stdClass Object
+        (
+            [id] => 154537
+            [user_id] => 
+            [linkedin_id] => 
+            [registration] => 07500445
+            [name] => Sonovate Limited
+            [url] => www.sonovate.com/
+            [active] => t
+            [eff_from] => 2011-01-20
+            [eff_to] => 
+            [customer_from] => 
+            [created_at] => 2014-09-21 13:04:18.243605
+            [updated_at] => 2017-03-29 15:11:11
+            [created_by] => 1
+            [updated_by] => 31
+            [class] => Using Finance
+            [phone] => 0207 112 4949
+            [assign_date] => 
+            [pipeline] => Suspect
+            [no_active_at_old] => 
+            [parent_registration] => 
+            [zendesk_id] => 
+            [sonovate_id] => 
+            [trading_name] => Sonovate Recruitment Finance
+            [source_date] => 2015-11-10 14:31:15
+            [lead_source_id] => 8
+            [source_explanation] => test
+            [customer_to] => 
+            [initial_rate] => 
+            [turnover] => 26472939
+            [employees] => 
+            [class_old] => UsingFinance
+            [confidential_flag] => f
+            [permanent_funding] => f
+            [staff_payroll] => f
+            [management_accounts] => f
+            [paye] => f
+            [permanent_invoicing] => f
+        )
+
+)
+        
+        */
+     //FILETER
+        $domain = trim($domain);
+        
+        $at_sign = '@';
+        $wordArray = substr($domain, 0, 4) ;
+        
+        $at_sign = strpos($domain, $at_sign);
+         
+        if($at_sign){
+            $domain =  explode('@',$domain);
+            $domain =  $mystring[1];
+        }elseif($wordArray == 'www.'){
+           
+            $domain =  explode($wordArray,$domain);
+            $domain =  $domain[1];
+        }else{
+            
+              $domain =   $domain;
+            
+        }
+        ////FILTER
      
- }
+     
+        //echo $domain; 
+         $output  =   $this->Companies_model->get_company_by_registration_zendesk($company_id);
+          //echo '<pre>' ; print_r($output); echo '</pre>'; 
+          //echo $output['zend_id'] . $domain;
+           //exit();
+        if(!$output['zendesk_id']) {
+            
+           // $wordArray = array('-', '*','/',)
+            $domain = htmlspecialchars($domain);
+            
+            
+
+            $response  = sonovate_zendesk($company_id, $output,'create_a_new_organisation',$domain);            
+          //  echo '<pre>' ; print_r($response); echo '</pre>'; 
+            $this->Companies_model->update_company_with_zendesk_id($company_id,$response->organization->id);
+         
+        }
+       
+        /*
+        
+            $subdomain = "sonovate1482226651";
+            $username  = "gsmall@sonovate.com"; // replace this with your registered email
+            $token     = "iTGNBMsgFEoz9OzofuRTSYgWbdpebOjbrZkg6moK"; // replace this with your token
+
+            $request = array('action' => 'get_all_tickets_regarding_a_user',
+                 'baselist_id' => 154537,
+                 'registration' => ,
+                 'company_name' => ,
+                 'domain' => ,
+
+
+                );
+      
+        
+         */
+        
+        
+        
+    }
     
     /////////////=END///////////////////
  

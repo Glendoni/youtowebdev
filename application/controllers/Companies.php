@@ -380,13 +380,7 @@ class Companies extends MY_Controller {
     
 	public function edit()
 	{
-        
-        
-        
-       
-		
- 
-if($this->input->post('edit_company'))
+        if($this->input->post('edit_company'))
 		{
   
 			$post = $this->input->post();
@@ -1378,6 +1372,8 @@ unset($a[0]);
   echo in_array(64,$a) ? 'YES' : 'No';      
         
     }
+    
+   
     
 }
  
