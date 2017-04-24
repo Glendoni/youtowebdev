@@ -911,10 +911,10 @@ $(".pipeline-validation-check").change(function() {
                                 if(val.status !="close" && val.status != "solved"){
                                     
                                     
-                                    //console.log(val.status);
+                                    console.log(val.status);
                                     
                                     if(val.status == 'open')          open++;
-                                    if(val.status == 'solved')      solved++;
+                                  
                                     if(val.status == 'New')         newist++;
                                     if(val.status == 'pending')    pending++;
                                     if(val.status == 'On Hold')    on_hold++;
@@ -951,7 +951,7 @@ $(".pipeline-validation-check").change(function() {
                                     if(s  <= 11){
     
                                         
-                                        
+                                          if(val.status == 'solved')      solved++;
                                         /*
                                         itemsClosed.push('<tr><td  class="col-md-2">'+formattDate(val.created_at)+
                                         '</td><td  class="col-md-2">'+raised_by+'</td><td  class="col-md-1 "><span class="zd_status zd_status_'+val.status+
