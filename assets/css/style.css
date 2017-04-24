@@ -3575,12 +3575,12 @@ background : rgba(255, 0, 0, 0.12);
 }
 .zd_status_pending{
     
-    background:red;
+    background:#f0ad4e;
    
 }
 .zd_status_open{
     
-    background:green;
+    background:#d9534f;
     
 }
 .zd_status_new{
@@ -3590,7 +3590,7 @@ background : rgba(255, 0, 0, 0.12);
 }
 .zd_status_solved{
     
-    background:#000;
+    background:#999;
 }
 .view_zd_ticket{
     

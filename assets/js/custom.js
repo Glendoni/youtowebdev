@@ -915,14 +915,14 @@ $(".pipeline-validation-check").change(function() {
                                     
                                     if(val.status == 'open')          open++;
                                   
-                                    if(val.status == 'New')         newist++;
+                                    if(val.status == 'new')         newist++;
                                     if(val.status == 'pending')    pending++;
                                     if(val.status == 'On Hold')    on_hold++;
                                    
                                     
                                     if(i  <= 5){
                                         
-                                        if(val.status == 'open' ){
+                                        if(val.status == 'open' || val.status == 'new' ){
                                     $.each( val.custom_fields, function(item , custom_val){
                                         //console.log(custom_val.value);
                                         if(custom_val.value) {
