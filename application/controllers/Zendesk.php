@@ -33,8 +33,8 @@ class Zendesk extends MY_Controller {
     
     
       function get_tickets(){
-        //$zd_id = $this->input->post('zd_id'); 
-          $zd_id = 3168131466;
+        $zd_id = $this->input->post('zd_id'); 
+          //$zd_id = 3168131466;
            
       //     $output =  $this->Evergreen_model->add_new_user_to_evergreen_campaign($post);
     //  echo '<pre>'; print_r($post); echo '</pre>';

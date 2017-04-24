@@ -658,17 +658,17 @@ if ($your_date < $now){;
 
 <?php } ?>
 <?php 
-    $placement_access = array( 'support', "client services", "Client Services", 'finance','development');
+    $placement_access = array( 'sales','support', "client services", "Client Services", 'finance','development');
     if(in_array($current_user['department'], $placement_access) && ($company['zendesk_id'])){ ?>
 <div class="panel panel-default">
         <div class="panel-heading" id="placements">
         Zendesk Tickets  <span class="ticket_count"></span>  
             
-            <span class="zd_totals zd_new_count">new</span><span class="new_count">2</span>
-            <span class="zd_totals zd_open_count">open</span><span class="open_count">3</span>
-            <span class="zd_totals zd_solved_count">solved</span><span class="solved_count">4</span>
-            <span class="zd_totals zd_pending_count">pendding</span> <span class="pending_count">5</span>
-            <span class="zd_totals zd_on_hold_count">on hold</span><span class="on_hold_count">6</span>
+            <span class="zd_totals zd_new_count">new</span><span class="new_count">-</span>
+            <span class="zd_totals zd_open_count">open</span><span class="open_count">-</span>
+            <span class="zd_totals zd_solved_count">solved</span><span class="solved_count">-</span>
+            <span class="zd_totals zd_pending_count">pendding</span> <span class="pending_count">-</span>
+            <span class="zd_totals zd_on_hold_count">on hold</span><span class="on_hold_count">-</span>
             
             
         <div class="pull-right">
