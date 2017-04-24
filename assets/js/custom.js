@@ -911,7 +911,7 @@ $(".pipeline-validation-check").change(function() {
                                 if(val.status !="close" && val.status != "solved"){
                                     
                                     
-                                    console.log(val.status);
+                                    //console.log(val.status);
                                     
                                     if(val.status == 'open')          open++;
                                     if(val.status == 'solved')      solved++;
@@ -967,7 +967,7 @@ $(".pipeline-validation-check").change(function() {
                             });
 
   
-                                console.log('This the amount '+pending);
+                               // console.log('This the amount '+pending);
                             
                              $('.new_count').text(newist);
                              $('.open_count').text(open);

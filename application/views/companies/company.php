@@ -625,9 +625,11 @@ if ($your_date < $now){;
     <div id="zdesk_id" data="<?php echo $company['zendesk_id']? $company['zendesk_id'] : ''; ?>"></div>
     
     <?php 
-    
+   
     $placement_access = array('sales','admin','development');
-    if(in_array($current_user['department'], $placement_access) && ($company['pipeline'] == 'Intent')){
+   // if(in_array($current_user['department'], $placement_access) && ($company['pipeline'] == 'Intent')){
+    if(in_array($current_user['department'], $placement_access) && ($company['pipeline'] == 'Intent' || $company['pipeline'] == 'Proposal')){
+   
     ?>
     <div class="panel panel-default">
         
