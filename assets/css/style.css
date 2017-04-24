@@ -3616,6 +3616,29 @@ background : rgba(255, 0, 0, 0.12);
     
     display:none; 
 }
+.zd_new_count, .zd_open_count, .zd_solved_count, .zd_pending_count, .zd_on_hold_count{ 
+ 
+    padding: 3px;
+    font-size: 11px;
+    font-weight: 100;
+}
+.zd_totals{
+    
+       border-radius: 5px;
+    background: green;
+    margin-left: 30px;
+    margin-right: 5px;
+ 
+}
+.zd_new_count{ background: #f0ad4e;}
+.zd_open_count{background:#d9534f ;}
+.zd_solved_count{background:#999 ;}
+.zd_pending_count{background:#45ae7c ;}
+.zd_on_hold_count{background: #333;}
+
+
+
+
 /*! Hint.css - v2.2.1 - 2016-03-26 //#2b4461
 * http://kushagragour.in/lab/hint/
 * Copyright (c) 2016 Kushagra Gour; Licensed  */

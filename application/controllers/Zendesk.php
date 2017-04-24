@@ -33,14 +33,42 @@ class Zendesk extends MY_Controller {
     
     
       function get_tickets(){
-        $zd_id = $this->input->post('zd_id'); 
-          
+        //$zd_id = $this->input->post('zd_id'); 
+          $zd_id = 3168131466;
            
       //     $output =  $this->Evergreen_model->add_new_user_to_evergreen_campaign($post);
     //  echo '<pre>'; print_r($post); echo '</pre>';
         //echo $post;   1434885626
-        echo $response  = sonovate_zendesk($zd_id, false, false,'get_all_tickets_regarding_a_specific_user');  
-       //echo json_encode($response);
+         echo $response  = sonovate_zendesk($zd_id, false, false,'get_all_tickets_regarding_a_specific_user');  
+         //echo json_encode($response);
+          
+          
+          /*
+          $response   =  json_decode($response);
+         
+          
+          
+          echo '<br><br>';
+              foreach($response->tickets as $item => $value){
+//echo $item->custom_fields;
+                        foreach($value->custom_fields  as $key => $val){
+ 
+                           echo $val->id.'<br>'; 
+                            
+                        };
+
+
+}
+          
+      echo '<pre>'; print_r($response); echo '</pre>';
+          
+              
+       */ 
+
+          
+          
+          
+          
     }
     
     function get_company_placements()

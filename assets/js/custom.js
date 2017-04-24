@@ -882,44 +882,110 @@ $(".pipeline-validation-check").change(function() {
                             var idfk;
                             var ticket_count    = data.count;
                             var itemsClosed = [];
-
+                            var custvalue;
                             $('.ticket_count').text('('+ticket_count+')');
 
                             var i=0;
                             var open =0;
-                            var close =0;
+                           
+                            var pending=0;
+        
+                            var newist  =0;
+                            var solved = 0;
+                            var pending = 0; 
+                            var on_hold = 0;
+                           
+                            
+                            
+                            
                             var s=0;
                             var raised_by;
-                        
+                            //25018706
+                            var pending=[]
+                         
                             $.each( data.tickets, function( key, val ) {
+                     
+                                
+                                
+                                
                                 if(val.status !="close" && val.status != "solved"){
-                                    if(i  <= 11){
+                                    
+                                    
+                                    console.log(val.status);
+                                    
+                                    if(val.status == 'open')          open++;
+                                    if(val.status == 'solved')      solved++;
+                                    if(val.status == 'New')         newist++;
+                                    if(val.status == 'pending')    pending++;
+                                    if(val.status == 'On Hold')    on_hold++;
+                                   
+                                    
+                                    if(i  <= 5){
+                                        
+                                        if(val.status == 'open' ){
+                                    $.each( val.custom_fields, function(item , custom_val){
+                                        //console.log(custom_val.value);
+                                        if(custom_val.value) {
+                                            custvalue = custom_val.value;
+                                        }                                   
+
+                                    })
+                                
+                                        
                                     raised_by  =     val.via.source.from.name ? val.via.source.from.name : val.via.source.from.address;
                                         
                                         items.push('<tr><td  class="col-md-2">'+formattDate(val.created_at)+
                                         '</td><td  class="col-md-2">'+raised_by+
                                         '</td><td  class="col-md-1 "><span class="zd_status zd_status_'+val.status+
                                         '">'+val.status+
-                                        '</span></td><td  class="col-md-2">'+val.subject+
-                                        '</td><td  class="col-md-1"><a href="'+val.url.replace('/api/v2/tickets/', '/agent/tickets/' ).replace('.json', '')+'" target="_blank" class="btn btn-primary view_zd_ticket">View Ticket</a></td></tr>');
+                                        '</span></td><td  class="col-md-2">'+val.id+
+                                                   '<td  class="col-md-2">'+val.subject+
+                                                   '<td  class="col-md-2">'+custvalue+'</td><td  class="col-md-1"><a href="'+val.url.replace('/api/v2/tickets/', '/agent/tickets/' ).replace('.json', '')+'" target="_blank" class="btn btn-primary view_zd_ticket">View Ticket</a></td></tr>');
                                         
-                                        open = 1;
+                                    
+                                        custvalue ='';
                                     }
                                     i++;
+                                    }
                                 }else{
                                     if(s  <= 11){
+    
+                                        
+                                        
+                                        /*
                                         itemsClosed.push('<tr><td  class="col-md-2">'+formattDate(val.created_at)+
                                         '</td><td  class="col-md-2">'+raised_by+'</td><td  class="col-md-1 "><span class="zd_status zd_status_'+val.status+
                                         '">'+val.status+
                                         '</span></td><td  class="col-md-2">'+val.subject+
                                         '</td><td  class="col-md-1"><a href="'+val.url.replace('/api/v2/tickets/', '/agent/tickets/' ).replace('.json', '')+'" target="_blank" class="btn btn-primary view_zd_ticket">View Ticket</a></td></tr>');  
                                         close =1;
+                                        
+                                        */
                                     }
                                     s++;
                                 }
                             });
 
   
+                                console.log('This the amount '+pending);
+                            
+                             $('.new_count').text(newist);
+                             $('.open_count').text(open);
+                             $('.solved_count').text(solved);
+                             $('.pending_count').text(pending);
+                             $('.on_hold_count').text(on_hold);
+                            
+                            
+                            /*
+                            if(val.status == 'open')          open++;
+                                    if(val.status == 'solved')      solved++;
+                                    if(val.status == 'New')         newist++;
+                                    if(val.status == 'pending')    pending++;
+                                    if(val.status == 'On Hold')    on_hold++;
+                            console.log(open);
+                            */
+                            
+                            
                         if(i == 0) $('.zendesk_loading_info-alert_open p').removeClass("loadingZendeskText");
                         if(i == 0) $('.zendesk_loading_info-alert_open p').text('No Tickets Found');                              
                         if(i >=1)  $('.zendesk_tickets_display .zendesk_loading_info-alert_open').remove();              

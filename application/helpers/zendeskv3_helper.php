@@ -126,7 +126,8 @@ $client->setAuth('basic', ['username' => $username, 'token' => $token]);
             case  "get_all_tickets_regarding_a_specific_user":
                 
             $sorter = array('sort_by' => 'created_at',
-                            'sort_order' => 'asc'
+                            'sort_order' => 'asc',
+                            'status'=> 'open'
                            );
              // Get all tickets regarding a specific user.
                 try {

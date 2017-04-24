@@ -641,7 +641,7 @@ if ($your_date < $now){;
 
             
      <div class="row">
-  <div class="col-sm-3 text-center placement_span selected_placements"><span class="spin">-</span><br>Selected Placements</div>
+  <div class="col-sm-3 text-center placement_span selected_placements"><span class="spin">-</span><br>Submitted Placements</div>
   <div class="col-sm-3 text-center placement_span live_placements"><span class="">-</span><br>Live Placements</div>
   <div class="col-sm-3 text-center placement_span pending_placements"><span class="">-</span><br>Pending Placements</div>
   <div class="col-sm-3 text-center placement_span days_since_last_placement_submitted"><span class="">-</span><br>Days Since Last Placement Submitted</div>
@@ -660,7 +660,15 @@ if ($your_date < $now){;
     if(in_array($current_user['department'], $placement_access) && ($company['zendesk_id'])){ ?>
 <div class="panel panel-default">
         <div class="panel-heading" id="placements">
-        Zendesk Tickets  <span class="ticket_count"></span> 
+        Zendesk Tickets  <span class="ticket_count"></span>  
+            
+            <span class="zd_totals zd_new_count">new</span><span class="new_count">2</span>
+            <span class="zd_totals zd_open_count">open</span><span class="open_count">3</span>
+            <span class="zd_totals zd_solved_count">solved</span><span class="solved_count">4</span>
+            <span class="zd_totals zd_pending_count">pendding</span> <span class="pending_count">5</span>
+            <span class="zd_totals zd_on_hold_count">on hold</span><span class="on_hold_count">6</span>
+            
+            
         <div class="pull-right">
             
         <div class="btn-group">
@@ -712,10 +720,13 @@ View Company on Zendesk
         <table class="table table-fixed openzdmenu">
             <thead>
                 <tr>
-                    <th class="col-md-2">Date</th>
+                    <th class="col-md-2">Date Raised</th>
                     <th class="col-md-2">Raised By</th>
                     <th class="col-md-1">Status</th>
-                    <th class="col-md-6">Subject</th>
+                     <th class="col-md-2">Ticket No.</th>
+                    <th class="col-md-3">Subject</th>
+                     <th class="col-md-1">Category</th>
+                   
                     <th class="col-md-1"> </th>
                 </tr>
             </thead>
@@ -733,10 +744,11 @@ View Company on Zendesk
         <table class="table table-fixed closedzdmenu">
             <thead>
                 <tr>
-                    <th class="col-md-2">Date</th>
+                     <th class="col-md-2">Date Raised</th>
                     <th class="col-md-2">Raised By</th>
                     <th class="col-md-1">Status</th>
-                    <th class="col-md-6">Subject</th>
+                      <th class="col-md-4">Subject</th>
+                    <th class="col-md-2">Ticket No.</th>
                     <th class="col-md-1"> </th>
                 </tr>
             </thead>
