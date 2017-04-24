@@ -21,17 +21,45 @@ class Zendesk extends MY_Controller {
 		//$this->load->view('layouts/default_layout', $this->data);
         
     }   
-    function add_user_to_campaign(){
+    function add_user_to_campaign_test(){
         //$post = $this->input->post(); 
       //     $output =  $this->Evergreen_model->add_new_user_to_evergreen_campaign($post);
     //  echo '<pre>'; print_r($post); echo '</pre>';
         //echo $post;  
          $response  = sonovate_zendesk(false, false,'get_all_tickets_regarding_a_specific_user');  
-       
+       echo $response;
+    }
+    
+    
+    
+      function get_tickets(){
+        $zd_id = $this->input->post('zd_id'); 
+          
+           
+      //     $output =  $this->Evergreen_model->add_new_user_to_evergreen_campaign($post);
+    //  echo '<pre>'; print_r($post); echo '</pre>';
+        //echo $post;   1434885626
+        echo $response  = sonovate_zendesk($zd_id, false, false,'get_all_tickets_regarding_a_specific_user');  
+       //echo json_encode($response);
+    }
+    
+    function get_company_placements()
+    {
+        $department = array('support', 'development');
+        if(in_array($this->data['current_user']['department'],$department ) && ( $this->input->post('zd_id'))) {
+          $zd_id = $this->input->post('zd_id');
+        }
+         $response  = sonovate_zendesk($zd_id, false, false,'get_all_tickets_placements');  
+        echo json_encode($response);
     }
  
     
-    function get_placement(){
+    
+    
+    
+    
+    
+    function _get_placement(){
         
         
         

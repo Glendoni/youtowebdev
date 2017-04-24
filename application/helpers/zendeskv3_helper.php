@@ -3,7 +3,7 @@
 use Zendesk\API\HttpClient as ZendeskAPI;
 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed'); 	
-function sonovate_zendesk($company_id = false,$output =false, $action='', $domain = false){
+function sonovate_zendesk($zd_id,$company_id = false,$output =false, $action='', $domain = false){
      //echo '<pre>' ; print_r($destination); echo '</pre>'; 
    // return $output[0]->registration;
    //exit();
@@ -19,8 +19,8 @@ $client->setAuth('basic', ['username' => $username, 'token' => $token]);
             try { 
                     $newOrganzation = $client->organizations()->create(array(
                
-                   'domain' => $output['domain'],
-                    'name' => $domain,
+                   'domain' => $domain,
+                    'name' => $output['name'],
                     'external_id' => $output['registration'],
                     'domain_names' => $domain,
                     'organization_fields'  => [
@@ -97,7 +97,6 @@ $client->setAuth('basic', ['username' => $username, 'token' => $token]);
             
             case  "get_all_tickets_regarding_a_user":
             
-            return 'Glken';
                 try {
                         $tickets = $client->users()->requests()->findAll();
                         echo '<pre>' ;
@@ -110,31 +109,46 @@ $client->setAuth('basic', ['username' => $username, 'token' => $token]);
                     }
             break;
             
-            case  "get_all_tickets_regarding_a_specific_user":
+            case  "get_all_tickets_regarding_a_specific_user_test":
 
              // Get all tickets regarding a specific user.
                 try {
                         $tickets = $client->users(5122633586)->requests()->findAll();
-                        echo '<pre>' ;
-                        print_r($tickets); 
-                        echo '</pre>'; 
+                        //echo '<pre>' ;
+                        return json_encode($tickets); 
+                        //echo '</pre>'; 
                     } catch (Exception $e) {
-                        echo 'Caught exception: ',  $e->getMessage(), "\n";
+                        //echo 'Caught exception: ',  $e->getMessage(), "\n";
                     } finally {
-                        echo "First finally.\n";
+                        //echo "First finally.\n";
                     }
             break;
-            
-            case "update_a_ticket":
-
-                $client->tickets()->update(24,[
-                    'priority' => 'high'
-                ]); 
+            case  "get_all_tickets_regarding_a_specific_user":
+                
+            $sorter = array('sort_by' => 'created_at',
+                            'sort_order' => 'asc'
+                           );
+             // Get all tickets regarding a specific user.
+                try {
+                        $tickets = $client->organizations($zd_id)
+                            ->tickets()
+                            ->findAll($sorter);
+                    
+                    //
+                        return json_encode($tickets); 
+                        //echo '</pre>'; 
+                    } catch (Exception $e) {
+                        return json_encode($e->getMessage());
+                    } finally {
+                        //echo "First finally.\n";
+                    }
+            break;
+        case  "get_all_tickets_placements":
+                
+      return $response  = array('success' => 'ok');
             break;
             
-            case "delete_a_ticket":
-                $client->tickets()->delete(123);
-            break;
+            
         } //end of switch
 }
 

@@ -3565,6 +3565,57 @@ background : rgba(255, 0, 0, 0.12);
     
 }
 
+.zd_status_pending,.zd_status_open, .zd_status_new,.zd_status_solved{
+    
+    padding:0px 4px;
+    border-radius:5px;
+    color:#fff;  
+    font-size: 11px;
+    
+}
+.zd_status_pending{
+    
+    background:red;
+   
+}
+.zd_status_open{
+    
+    background:green;
+    
+}
+.zd_status_new{
+
+    background:#f0ad4e;
+
+}
+.zd_status_solved{
+    
+    background:#000;
+}
+.view_zd_ticket{
+    
+    padding:0px 4px;
+    font-size: 11px;
+}
+.selected_placements, .live_placements, .pending_placements,.days_since_last_placement_submitted{
+ 
+}
+.selected_placements span, .live_placements span, .pending_placements span,.days_since_last_placement_submitted span{
+    font-size:34px;
+    font-weight: 100;
+}
+.selected_placements{ color:#333;} 
+.live_placements{color:#5cb85c;}  
+.pending_placements{color:#f0ad4e;}
+.days_since_last_placement_submitted{color:#5cb85c;}
+.zendesk_tickets_display{
+    
+    display:none;
+}
+.closedzdmenu,.openzdmenu{
+    
+    display:none; 
+}
 /*! Hint.css - v2.2.1 - 2016-03-26 //#2b4461
 * http://kushagragour.in/lab/hint/
 * Copyright (c) 2016 Kushagra Gour; Licensed  */

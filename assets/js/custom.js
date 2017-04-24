@@ -827,22 +827,138 @@ $(".pipeline-validation-check").change(function() {
          
         
         $(document).ready(function($){
+                var zd_id = $('#zdesk_id').attr('data');
+
+            if(zd_id){ 
+                var i  = 0;
+                var originalText = $(".zendesk_loading_info_alert_open .loadingZendeskText").text();
+                setInterval(function() {
+                    $(".zendesk_loading_info-alert_open .loadingZendeskText").append(".");
+                    i++;
+                    if(i == 4)
+                    {
+                        $(".loadingZendeskText").html(originalText);
+                        i = 0;
+                    }
+                }, 500);
+
+            i  = 0;  
+            var originalText = $(".zendesk_loading_info_alert_close .loadingZendeskTextClose").text();
+            setInterval(function() {
+                $(".zendesk_loading_info-alert_close .loadingZendeskTextClose").append(".");
+                i++;
+                if(i == 4)
+                {
+                    $(".loadingZendeskTextClose").html(originalText);
+                    i = 0;
+                }
+            }, 500);
+                
+                var param = { 'zd_id' : zd_id};
+                 $.ajax({
+                        type: "POST",
+                        data:param,
+                        dataType: "json",
+                        url: "../Zendesk/get_company_placements",
+                        success: function(data) {
+                            
+                                $('.selected_placements span').text(20);
+                                $('.live_placements span').text(21);
+                                $('.pending_placements span').text(22);
+                                $('.days_since_last_placement_submitted span').text(23); 
+                            }
+                            
+                        });
+                
+                  $.ajax({
+                        type: "POST",
+                        data:param,
+                        dataType: "json",
+                        url: "../Zendesk/get_tickets",
+                        success: function(data) {
+                             
+                            var action;
+                            var items = [];
+                            var idfk;
+                            var ticket_count    = data.count;
+                            var itemsClosed = [];
+
+                            $('.ticket_count').text('('+ticket_count+')');
+
+                            var i=0;
+                            var open =0;
+                            var close =0;
+                            var s=0;
+                            var raised_by;
+                        
+                            $.each( data.tickets, function( key, val ) {
+                                if(val.status !="close" && val.status != "solved"){
+                                    if(i  <= 11){
+                                    raised_by  =     val.via.source.from.name ? val.via.source.from.name : val.via.source.from.address;
+                                        
+                                        items.push('<tr><td  class="col-md-2">'+formattDate(val.created_at)+
+                                        '</td><td  class="col-md-2">'+raised_by+
+                                        '</td><td  class="col-md-1 "><span class="zd_status zd_status_'+val.status+
+                                        '">'+val.status+
+                                        '</span></td><td  class="col-md-2">'+val.subject+
+                                        '</td><td  class="col-md-1"><a href="'+val.url.replace('/api/v2/tickets/', '/agent/tickets/' ).replace('.json', '')+'" target="_blank" class="btn btn-primary view_zd_ticket">View Ticket</a></td></tr>');
+                                        
+                                        open = 1;
+                                    }
+                                    i++;
+                                }else{
+                                    if(s  <= 11){
+                                        itemsClosed.push('<tr><td  class="col-md-2">'+formattDate(val.created_at)+
+                                        '</td><td  class="col-md-2">'+raised_by+'</td><td  class="col-md-1 "><span class="zd_status zd_status_'+val.status+
+                                        '">'+val.status+
+                                        '</span></td><td  class="col-md-2">'+val.subject+
+                                        '</td><td  class="col-md-1"><a href="'+val.url.replace('/api/v2/tickets/', '/agent/tickets/' ).replace('.json', '')+'" target="_blank" class="btn btn-primary view_zd_ticket">View Ticket</a></td></tr>');  
+                                        close =1;
+                                    }
+                                    s++;
+                                }
+                            });
+
+  
+                        if(i == 0) $('.zendesk_loading_info-alert_open p').removeClass("loadingZendeskText");
+                        if(i == 0) $('.zendesk_loading_info-alert_open p').text('No Tickets Found');                              
+                        if(i >=1)  $('.zendesk_tickets_display .zendesk_loading_info-alert_open').remove();              
+                        if(i >=1)  $('.zendesk_tickets_display').show();
+                        if(i  >= 1) $('.openzdmenu').show();
+                            
+                        $('#zd_open').html(items.join( "" ));
+
+                        if(s == 0) $('.zendesk_loading_info_alert_close p').removeClass("loadingZendeskTextClose");
+                        if(s == 0) $('.zendesk_loading_info_alert_close p').text('No Closed Tickets Found');                     
+                        if(s >=1)  $('.closedzdmenu').show();    
+                        if(s >=1)  $('.zendesk_loading_info_alert_close').hide();
+                       
+                        
+                           
+                        $('#zd_closed').html(itemsClosed.join( "" ));
+                            //items = items.reverse();
+                            //itemsClosed = itemsClosed.reverse();  
+                            //$('.eventcount').html(items.length); //update engagement counter
+                        }
+                });
+            }
+            
             
             $('.contact_role').change(function(){
 
-var roleAllowSubmitEval = $(this).val();
-var contactRoleId = $(this).attr('data');
-//console.log(roleAllowSubmitEval)
+                var roleAllowSubmitEval = $(this).val();
+                var contactRoleId = $(this).attr('data');
+                //console.log(roleAllowSubmitEval)
 
-if(roleAllowSubmitEval == 1){
+                if(roleAllowSubmitEval == 1){
 
-$('.contact_sumit_'+contactRoleId).prop("disabled",true);
-$('.historic_'+contactRoleId).show();
+                $('.contact_sumit_'+contactRoleId).prop("disabled",true);
+                $('.historic_'+contactRoleId).show();
 
-}else{
+                }else{
 
-$('.contact_sumit_'+contactRoleId).prop("disabled",false);
-$('.historic_'+contactRoleId).hide();
+                $('.contact_sumit_'+contactRoleId).prop("disabled",false);
+                $('.historic_'+contactRoleId).hide();
 
 }
 

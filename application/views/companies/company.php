@@ -468,7 +468,7 @@ if ($your_date < $now){;
             
             
 	<?php if (($current_user['department']) =='support' && isset($company['zendesk_id'])): ?>
-			<a class="btn  btn-info btn-sm btn-block zendesk" href="https://sonovate.zendesk.com/agent/organizations/<?php echo $company['zendesk_id'] ?>"  target="_blank">ZenDesk</a>
+			<a class="btn  btn-info btn-sm btn-block zendesk" href="https://sonovate.zendesk.com/agent/organizations/<?php echo $company['zendesk_id'] ?>" data="<?php echo $company['zendesk_id'] ?>"  target="_blank">ZenDesk</a>
 			<?php endif; ?>
              <?php if (isset($company['url'])): ?>
 		<a class="btn btn-default btn-sm btn-block btn-url" href="<?php $parsed = parse_url($company['url']); if (empty($parsed['scheme'])) { echo 'http://' . ltrim($company['url'], '/'); }else{ echo $company['url']; } ?>" target="_blank">
@@ -618,6 +618,165 @@ if ($your_date < $now){;
 		</div>
     </div>
 		
+<!--  PLACEMENT   -->
+
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div id="zdesk_id" data="<?php echo $company['zendesk_id']? $company['zendesk_id'] : ''; ?>"></div>
+    
+    <?php 
+    
+    $placement_access = array('sales','admin','development');
+    if(in_array($current_user['department'], $placement_access) && ($company['pipeline'] == 'Intent')){
+    ?>
+    <div class="panel panel-default">
+        
+    
+        <div class="panel-heading">
+        Placements  
+        </div>
+        <!-- /.panel-heading -->
+ 
+        <div class="panel-body">
+
+            
+     <div class="row">
+  <div class="col-sm-3 text-center placement_span selected_placements"><span class="spin">-</span><br>Selected Placements</div>
+  <div class="col-sm-3 text-center placement_span live_placements"><span class="">-</span><br>Live Placements</div>
+  <div class="col-sm-3 text-center placement_span pending_placements"><span class="">-</span><br>Pending Placements</div>
+  <div class="col-sm-3 text-center placement_span days_since_last_placement_submitted"><span class="">-</span><br>Days Since Last Placement Submitted</div>
+         
+</div>
+        
+            
+            
+       <!-- There are currently no placements for this agency.  -->      </div>
+        </div>
+
+
+<?php } ?>
+<?php 
+    $placement_access = array( 'support', "client services", "Client Services", 'finance','development');
+    if(in_array($current_user['department'], $placement_access) && ($company['zendesk_id'])){ ?>
+<div class="panel panel-default">
+        <div class="panel-heading" id="placements">
+        Zendesk Tickets  <span class="ticket_count"></span> 
+        <div class="pull-right">
+            
+        <div class="btn-group">
+            
+            <?php
+            switch (ENVIRONMENT){
+            	case "development":
+            		$zd_url   = 	"https://sonovate1482226651.zendesk.com/agent/organizations/".$company['zendesk_id']; 
+            		break;
+            	case "staging":
+            		$zd_url   = 	"https://sonovate1482226651.zendesk.com/agent/organizations/".$company['zendesk_id']; 
+            		break;	
+            	case "production":
+            	$zd_url   = 	"https://sonovate.zendesk.com/agent/organizations/".$company['zendesk_id']; 
+            break; 	
+            }
+            
+            ?>
+            
+            
+            <a href="<?php echo $zd_url; ?>" class="btn btn-primary btn-xs zendesk" target="_blank">
+View Company on Zendesk
+</a>
+
+
+        </div>
+            
+        </div>
+        </div>
+        <!-- /.panel-heading -->
+        <div class="panel-body">
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs zendesk_tickets_display" role="tablist">
+    <li role="presentation" class="active"><a href="#zd_placements" aria-controls="zd_placements" role="tab" data-toggle="tab">Open</a></li>
+    <li role="presentation"><a href="#zd_tickets" aria-controls="zd_tickets" role="tab" data-toggle="tab">Closed</a></li>
+  </ul>
+
+<style type="text/css">
+    .table-fixed tbody {
+  height: 230px;
+  overflow-y: auto;
+  width: 100%;
+}
+</style>
+  <!-- Tab panes -->
+  <div class="tab-content ">
+    <div role="tabpanel" class="zendesk_tickets_display tab-pane active" id="zd_placements">
+        <table class="table table-fixed openzdmenu">
+            <thead>
+                <tr>
+                    <th class="col-md-2">Date</th>
+                    <th class="col-md-2">Raised By</th>
+                    <th class="col-md-1">Status</th>
+                    <th class="col-md-6">Subject</th>
+                    <th class="col-md-1"> </th>
+                </tr>
+            </thead>
+            <tbody id="zd_open">
+  <div class="alert alert-info zendesk_loading_info-alert_open">
+<p style="width: auto; padding-left: 45%;" class="loadingZendeskText">Finding Tickets.</p>
+</div>
+       
+</tbody>
+</table>
+    </div>
+      
+    <div role="tabpanel" class="zendesk_tickets_display_close tab-pane" id="zd_tickets">
+
+        <table class="table table-fixed closedzdmenu">
+            <thead>
+                <tr>
+                    <th class="col-md-2">Date</th>
+                    <th class="col-md-2">Raised By</th>
+                    <th class="col-md-1">Status</th>
+                    <th class="col-md-6">Subject</th>
+                    <th class="col-md-1"> </th>
+                </tr>
+            </thead>
+            <tbody id="zd_closed">
+ 
+ <div class="alert alert-info zendesk_loading_info_alert_close">
+<p style="width: auto; padding-left: 45%;" class="loadingZendeskTextClose">Finding Closed Tickets.</p>
+</div>
+                
+                
+                
+</tbody>
+</table>
+</div>
+      
+      
+      
+</div>
+
+
+
+
+
+
+        </div>
+        <!-- /.panel-body -->
+        </div>
+
+
+</div>
+
+<?php } ?>
+    
+   
+<!-- PLACEMENT END-->
+    
+    
+    
+    
+    
        		<!--CONTACTS-->
       
         <?php
@@ -1468,7 +1627,7 @@ endif;
         <div class="form-group ">
             <label>Projected Annual Contract Turnover<span class="actionrqd">*</span></label>
             <div class="input-group">   <div class="input-group-addon">£</div>
-                <input type="number" step="0.01" name="turnover" placeholder="0.00" min="0.01" max="25000000"  class="form-control" id="turnover" >
+                <input type="number" step="0.01" name="turnover" placeholder="e.g 25000" min="0.01" max="25000000"  class="form-control" id="turnover" >
              
             </div>
         </div>
