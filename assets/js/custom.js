@@ -868,7 +868,7 @@ $(".pipeline-validation-check").change(function() {
                         url: "../Zendesk/get_company_placements",
                         success: function(data) {
                             
-                                $('.selected_placements span').text(data.data.submittedPlacements);
+                                $('.selected_placements span').text((data.data.livePlacements + data.data.pendingPlacements));
                                 $('.live_placements span').text(data.data.livePlacements);
                                 $('.pending_placements span').text(data.data.pendingPlacements);
                                 $('.days_since_last_placement_submitted span').text(data.data.daysSinceLastPlacement); 

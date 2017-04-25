@@ -2,8 +2,45 @@
 
 use Zendesk\API\HttpClient as ZendeskAPI;
 
-if ( ! defined('BASEPATH')) exit('No direct script access allowed'); 	
-function sonovate_zendesk($zd_id,$company_id = false,$output =false, $action='', $domain = false){
+if ( ! defined('BASEPATH')) exit('No direct script access allowed'); 
+
+
+
+function create_zd_user($contact_id,$contact_name, $zendesk_id, $contact_email){
+    
+    
+    $subdomain = "sonovate1482226651";
+$username  = "gsmall@sonovate.com"; // replace this with your registered email
+$token     = "iTGNBMsgFEoz9OzofuRTSYgWbdpebOjbrZkg6moK"; // replace this with your token
+
+$client = new ZendeskAPI($subdomain);
+$client->setAuth('basic', ['username' => $username, 'token' => $token]);
+    
+               try {
+                                $query = $client->users()->create(
+                                    [
+                                    'id' => $contact_id,
+                                    'name' => $contact_name,
+                                    'organization_id' => $zendesk_id,
+                                    'email' => $contact_email,
+                                    'role'  => 'end-user',
+                                    'user_type' => 'agency',
+                                    ]
+                                );
+                                echo "<pre>";
+                                print_r($query);
+                                echo "</pre>";
+                            } catch (\Zendesk\API\Exceptions\ApiResponseException $e) {
+                                echo 'Please check your credentials. Make sure to change the $subdomain, $username, and $token variables in this file.';
+                            }
+    
+}
+
+
+
+
+
+function sonovate_zendesk($zd_id,$company_id = false,$output =false, $action='', $domain = false, $new_user_array = ''){
      //echo '<pre>' ; print_r($destination); echo '</pre>'; 
    // return $output[0]->registration;
    //exit();
@@ -75,6 +112,34 @@ $client->setAuth('basic', ['username' => $username, 'token' => $token]);
                    echo 'Caught exception: ',  $e->getMessage(), "\n";
             }
           break;
+            
+            
+            
+            
+        case "create_new_user":
+
+                                        try {
+                                $query = $client->users()->create(
+                                    [
+                                    'name' => 'API Demo',
+                                    'email' => 'demo@example.com',
+                                    'phone' => '+1-954-704-6031',
+                                    'role'  => 'end-user',
+                                    'details' => 'This user has been created with the API.'
+                                    ]
+                                );
+                                echo "<pre>";
+                                print_r($query);
+                                echo "</pre>";
+                            } catch (\Zendesk\API\Exceptions\ApiResponseException $e) {
+                                echo 'Please check your credentials. Make sure to change the $subdomain, $username, and $token variables in this file.';
+                            }
+            
+            
+            
+            
+            break;
+            
             
           case "create_a_new_ticket":
                 try { 
@@ -152,4 +217,6 @@ $client->setAuth('basic', ['username' => $username, 'token' => $token]);
             
         } //end of switch
 }
+
+
 
