@@ -11,6 +11,7 @@ class Zendesk extends MY_Controller {
         $this->load->library('form_validation');
         $this->load->model('Zendesk_model');
          $this->load->helper(array('form', 'url','zendeskv3'));
+        
 	}
 
     public function index()
@@ -74,11 +75,14 @@ class Zendesk extends MY_Controller {
     function get_company_placements()
     {
         $department = array('support', 'development');
-        if(in_array($this->data['current_user']['department'],$department ) && ( $this->input->post('zd_id'))) {
-          $zd_id = $this->input->post('zd_id');
+        if($this->input->post('zd_id')) {
+          $comp_reg_num = $this->input->post('comp_reg_num');
         }
-         $response  = sonovate_zendesk($zd_id, false, false,'get_all_tickets_placements');  
-        echo json_encode($response);
+         //$response  = sonovate_zendesk($zd_id, false, false,'get_all_tickets_placements');  
+        
+       $response =  $this->Zendesk_model->get_placement_data($comp_reg_num);
+        echo  $response;
+       
     }
  
     

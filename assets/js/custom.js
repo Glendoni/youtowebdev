@@ -828,6 +828,7 @@ $(".pipeline-validation-check").change(function() {
         
         $(document).ready(function($){
                 var zd_id = $('#zdesk_id').attr('data');
+                var comp_reg_num = $('.comp_registration_num').text();
 
             if(zd_id){ 
                 var i  = 0;
@@ -854,7 +855,12 @@ $(".pipeline-validation-check").change(function() {
                 }
             }, 500);
                 
-                var param = { 'zd_id' : zd_id};
+                
+                
+                
+                 var param = { 'zd_id' : zd_id, 'compRegNum' : comp_reg_num };
+                if(comp_reg_num){
+               
                  $.ajax({
                         type: "POST",
                         data:param,
@@ -862,13 +868,17 @@ $(".pipeline-validation-check").change(function() {
                         url: "../Zendesk/get_company_placements",
                         success: function(data) {
                             
-                                $('.selected_placements span').text(20);
-                                $('.live_placements span').text(21);
-                                $('.pending_placements span').text(22);
-                                $('.days_since_last_placement_submitted span').text(23); 
+                                $('.selected_placements span').text(data.data.submittedPlacements);
+                                $('.live_placements span').text(data.data.livePlacements);
+                                $('.pending_placements span').text(data.data.pendingPlacements);
+                                $('.days_since_last_placement_submitted span').text(data.data.daysSinceLastPlacement); 
                             }
                             
                         });
+                
+                
+                }
+                
                 
                   $.ajax({
                         type: "POST",
@@ -940,7 +950,7 @@ $(".pipeline-validation-check").change(function() {
                                         '">'+val.status+
                                         '</span></td><td  class="col-md-2">'+val.id+
                                                    '<td  class="col-md-2">'+val.subject+
-                                                   '<td  class="col-md-2">'+custvalue+'</td><td  class="col-md-1"><a href="'+val.url.replace('/api/v2/tickets/', '/agent/tickets/' ).replace('.json', '')+'" target="_blank" class="btn btn-primary view_zd_ticket">View Ticket</a></td></tr>');
+                                                   '<td  class="col-md-2"><span class="zdCatValue">'+custvalue+'</span></td><td  class="col-md-1"><a href="'+val.url.replace('/api/v2/tickets/', '/agent/tickets/' ).replace('.json', '')+'" target="_blank" class="btn btn-primary view_zd_ticket">View Ticket</a></td></tr>');
                                         
                                     
                                         custvalue ='';

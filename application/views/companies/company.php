@@ -412,7 +412,7 @@ if ($your_date < $now){;
 			<p>	
 			 <!--COMPANY NUMBER IF APPLICABLE-->
                 <?php echo isset($company['name'])?$company['name']:''; ?><br>
-			<?php echo isset($company['registration'])?$company['registration']:''; ?>
+			<?php echo isset($company['registration'])? '<span class="comp_registration_num">'.$company['registration'].'</span>':''; ?>
          	</p>
         	</div>
 
@@ -667,7 +667,7 @@ if ($your_date < $now){;
             <span class="zd_totals zd_new_count">new</span><span class="new_count">-</span>
             <span class="zd_totals zd_open_count">open</span><span class="open_count">-</span>
             <span class="zd_totals zd_solved_count">solved</span><span class="solved_count">-</span>
-            <span class="zd_totals zd_pending_count">pendding</span> <span class="pending_count">-</span>
+            <span class="zd_totals zd_pending_count">pending</span> <span class="pending_count">-</span>
             <span class="zd_totals zd_on_hold_count">on hold</span><span class="on_hold_count">-</span>
             
             

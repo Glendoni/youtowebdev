@@ -3636,7 +3636,9 @@ background : rgba(255, 0, 0, 0.12);
 .zd_pending_count{background:#45ae7c ;}
 .zd_on_hold_count{background: #333;}
 
-
+.zdCatValue{
+ text-transform:capitalize;
+}
 
 
 /*! Hint.css - v2.2.1 - 2016-03-26 //#2b4461
