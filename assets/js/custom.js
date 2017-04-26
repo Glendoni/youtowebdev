@@ -867,8 +867,8 @@ $(".pipeline-validation-check").change(function() {
                         dataType: "json",
                         url: "../Zendesk/get_company_placements",
                         success: function(data) {
-                            
-                                $('.selected_placements span').text((data.data.livePlacements + data.data.pendingPlacements) ? (data.data.livePlacements + data.data.pendingPlacements): 0);
+                            console.log(data);
+                                $('.selected_placements span').text(data.data.submittedPlacements ? data.data.submittedPlacements :  0);
                                 $('.live_placements span').text(data.data.livePlacements? data.data.livePlacements : 0 );
                                 $('.pending_placements span').text(data.data.pendingPlacements ? data.data.pendingPlacements : 0);
                                 $('.days_since_last_placement_submitted span').text(data.data.daysSinceLastPlacement ? data.data.daysSinceLastPlacement : 0); 

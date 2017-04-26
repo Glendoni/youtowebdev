@@ -620,8 +620,8 @@ if ($your_date < $now){;
     <?php 
    
     $placement_access = array('sales','admin','development');
-   // if(in_array($current_user['department'], $placement_access) && ($company['pipeline'] == 'Intent')){
-    if(in_array($current_user['department'], $placement_access) && ($company['pipeline'] == 'Intent' || $company['pipeline'] == 'Proposal')){
+ 
+    if(in_array($current_user['department'], $placement_access) && ($company['pipeline'] == 'Customer' || $company['pipeline'] == 'Proposal')){
    
     ?>
     <div class="panel panel-default">
@@ -652,7 +652,7 @@ if ($your_date < $now){;
 <?php } ?>
 <?php 
     $placement_access = array( 'sales','support', "client services", "Client Services", 'finance','development');
-    if(in_array($current_user['department'], $placement_access) && ($company['zendesk_id'])){ ?>
+    if(in_array($current_user['department'], $placement_access) && ($company['zendesk_id']) && ($company['pipeline'] == 'Customer' || $company['pipeline'] == 'Proposal')){ ?>
 <div class="panel panel-default">
         <div class="panel-heading" id="placements">
         Zendesk Tickets  <span class="ticket_count"></span>  
