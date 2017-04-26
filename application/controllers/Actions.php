@@ -486,137 +486,36 @@ if($this->input->post('domain')){
     
     //////////////ZENDESK////
     
-  function zendesk($company_id = 253560,$domain = 'highergroup.co.uk'){
+  function zendesk($company_id = 253560,$domain = 'highergroup.co.uk')
+  {
      
       
-        /*
-        Array from company based on registration id
-(
-    [0] => stdClass Object
-        (
-            [id] => 154537
-            [user_id] => 
-            [linkedin_id] => 
-            [registration] => 07500445
-            [name] => Sonovate Limited
-            [url] => www.sonovate.com/
-            [active] => t
-            [eff_from] => 2011-01-20
-            [eff_to] => 
-            [customer_from] => 
-            [created_at] => 2014-09-21 13:04:18.243605
-            [updated_at] => 2017-03-29 15:11:11
-            [created_by] => 1
-            [updated_by] => 31
-            [class] => Using Finance
-            [phone] => 0207 112 4949
-            [assign_date] => 
-            [pipeline] => Suspect
-            [no_active_at_old] => 
-            [parent_registration] => 
-            [zendesk_id] => 
-            [sonovate_id] => 
-            [trading_name] => Sonovate Recruitment Finance
-            [source_date] => 2015-11-10 14:31:15
-            [lead_source_id] => 8
-            [source_explanation] => test
-            [customer_to] => 
-            [initial_rate] => 
-            [turnover] => 26472939
-            [employees] => 
-            [class_old] => UsingFinance
-            [confidential_flag] => f
-            [permanent_funding] => f
-            [staff_payroll] => f
-            [management_accounts] => f
-            [paye] => f
-            [permanent_invoicing] => f
-        )
-
-)
-        
-        */
-     //FILETER
-       
-        ////FILTER
-     
-     
-        //echo $domain; 
-         $output  =   $this->Companies_model->get_company_by_registration_zendesk($company_id);
-      
-      
-         
-      
-      
-         // echo '<pre>' ; print_r($output); echo '</pre>'; 
-          //echo $output['zend_id'] . $domain;
-           //exit();
+        $output  =   $this->Companies_model->get_company_by_registration_zendesk($company_id);
         if(!$output['zendesk_id']) {
-            
-             $domain = trim($domain);
-        
-        $at_sign = '@';
-        $wordArray = substr($domain, 0, 4) ;
-        
-        $at_sign = strpos($domain, $at_sign);
-         
-        if($at_sign){
-            $domain =  explode('@',$domain);
-            $domain =  $mystring[1];
-        }elseif($wordArray == 'www.'){
-           
-            $domain =  explode($wordArray,$domain);
-            $domain =  $domain[1];
-        }else{
-            
-              $domain =   $domain;
-            
-        }
-            
-           // $wordArray = array('-', '*','/',)
+            $domain = trim($domain);
+            $at_sign = '@';
+            $wordArray = substr($domain, 0, 4) ;
+            $at_sign = strpos($domain, $at_sign);
+            if($at_sign){
+                $domain =  explode('@',$domain);
+                $domain =  $mystring[1];
+            }elseif($wordArray == 'www.'){
+                $domain =  explode($wordArray,$domain);
+                $domain =  $domain[1];
+            }else{
+                $domain =   $domain;
+            }
             $domain = htmlspecialchars($domain);
-            
-            
-
             $response  = sonovate_zendesk(false,$company_id, $output,'create_a_new_organisation',$domain);  
-            
-          
-            
-             foreach($output['result'] as $key =>$row ){
+            foreach($output['result'] as $key =>$row ){
                  if($row['contact_id'] == true && $row['not_active']==null &&  $row['email'] != null){
                   create_zd_user($row['contact_id'], $row['first_name']. ' '.$row['last_name'], $response->organization->id,  $row['email'])  ;
                  }
-                    //array_push($stack,$res[1]);
-                }
-            
-          //  echo '<pre>' ; print_r($response); echo '</pre>'; 
+
+            }
             $this->Companies_model->update_company_with_zendesk_id($company_id,$response->organization->id);
-         
-        }
-       
-        /*
-        
-            $subdomain = "sonovate1482226651";
-            $username  = "gsmall@sonovate.com"; // replace this with your registered email
-            $token     = "iTGNBMsgFEoz9OzofuRTSYgWbdpebOjbrZkg6moK"; // replace this with your token
-
-            $request = array('action' => 'get_all_tickets_regarding_a_user',
-                 'baselist_id' => 154537,
-                 'registration' => ,
-                 'company_name' => ,
-                 'domain' => ,
-
-
-                );
-      
-        
-         */
-        
-        
-        
+        }   
     }
     
     /////////////=END///////////////////
- 
-    
 }

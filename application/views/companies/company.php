@@ -27,15 +27,8 @@ endif;
     <h2 class="company-header" id="logo">
                 <?php $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' ); echo html_entity_decode (str_replace($words, ' ',$company['name'])); ?> 
         
-        
-                             
-        
-        
                              </h2>
                         
-                        
-               
-   
             <div id="product_options">
 
                 <?php if (isset($company['confidential_flag'])): ?>
@@ -689,13 +682,7 @@ if ($your_date < $now){;
             }
             
             ?>
-            
-            
-            <a href="<?php echo $zd_url; ?>" class="btn btn-primary btn-xs zendesk" target="_blank">
-View Company on Zendesk
-</a>
-
-
+            <a href="<?php echo $zd_url; ?>" class="btn btn-primary btn-xs zendesk" target="_blank">View Company on Zendesk</a>
         </div>
             
         </div>
@@ -705,8 +692,8 @@ View Company on Zendesk
 
   <!-- Nav tabs -->
   <ul class="nav nav-tabs zendesk_tickets_display" role="tablist">
-    <li role="presentation" class="active"><a href="#zd_placements" aria-controls="zd_placements" role="tab" data-toggle="tab">Open</a></li>
-    <li role="presentation"><a href="#zd_tickets" aria-controls="zd_tickets" role="tab" data-toggle="tab">Closed</a></li>
+    <li role="presentation" class="active"><a href="javascript:;" aria-controls="zd_placements" role="tab" data-toggle="tab">Open</a></li>
+    <!--<li role="presentation"><a href="#zd_tickets" aria-controls="zd_tickets" role="tab" data-toggle="tab">Closed</a></li> -->
   </ul>
 
 <style type="text/css">

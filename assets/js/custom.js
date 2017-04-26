@@ -868,10 +868,10 @@ $(".pipeline-validation-check").change(function() {
                         url: "../Zendesk/get_company_placements",
                         success: function(data) {
                             
-                                $('.selected_placements span').text((data.data.livePlacements + data.data.pendingPlacements));
-                                $('.live_placements span').text(data.data.livePlacements);
-                                $('.pending_placements span').text(data.data.pendingPlacements);
-                                $('.days_since_last_placement_submitted span').text(data.data.daysSinceLastPlacement); 
+                                $('.selected_placements span').text((data.data.livePlacements + data.data.pendingPlacements) ? (data.data.livePlacements + data.data.pendingPlacements): 0);
+                                $('.live_placements span').text(data.data.livePlacements? data.data.livePlacements : 0 );
+                                $('.pending_placements span').text(data.data.pendingPlacements ? data.data.pendingPlacements : 0);
+                                $('.days_since_last_placement_submitted span').text(data.data.daysSinceLastPlacement ? data.data.daysSinceLastPlacement : 0); 
                             }
                             
                         });
@@ -911,17 +911,17 @@ $(".pipeline-validation-check").change(function() {
                             var s=0;
                             var raised_by;
                             //25018706
-                            var pending=[]
+                            //var pending=[]
                          
                             $.each( data.tickets, function( key, val ) {
                      
                                 
-                                
+                                 
                                 
                                 if(val.status !="close" && val.status != "solved"){
                                     
                                     
-                                    console.log(val.status);
+                                   
                                     
                                     if(val.status == 'open')          open++;
                                   
@@ -958,7 +958,7 @@ $(".pipeline-validation-check").change(function() {
                                     i++;
                                     }
                                 }else{
-                                    if(s  <= 11){
+                                    if(s  <= 5){
     
                                         
                                           if(val.status == 'solved')      solved++;
@@ -968,7 +968,7 @@ $(".pipeline-validation-check").change(function() {
                                         '">'+val.status+
                                         '</span></td><td  class="col-md-2">'+val.subject+
                                         '</td><td  class="col-md-1"><a href="'+val.url.replace('/api/v2/tickets/', '/agent/tickets/' ).replace('.json', '')+'" target="_blank" class="btn btn-primary view_zd_ticket">View Ticket</a></td></tr>');  
-                                        close =1;
+                                        
                                         
                                         */
                                     }

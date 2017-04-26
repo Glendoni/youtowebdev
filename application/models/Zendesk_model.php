@@ -7,7 +7,7 @@ class Zendesk_model extends MY_Model {
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-          CURLOPT_URL => "https://invoicing-api-dev.sonovate.com/api/agencyStats/?companyRegNumber=12345",
+          CURLOPT_URL => "https://invoicing-api-dev.sonovate.com/api/agencyStats/?companyRegNumber=".$comp_reg_num,
           CURLOPT_RETURNTRANSFER => true,
           CURLOPT_ENCODING => "",
           CURLOPT_MAXREDIRS => 10,
