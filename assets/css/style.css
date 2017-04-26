@@ -3637,7 +3637,7 @@ background : rgba(255, 0, 0, 0.12);
 .zd_on_hold_count{background: #333;}
 
 .zdCatValue{
- text-transform:capitalize;
+ text-transform:uppercase;
 }
 
 .blink_me {
