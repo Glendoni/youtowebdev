@@ -26,11 +26,7 @@ class Actions extends MY_Controller {
 	}
 	public function create()
     {
-      // echo  $this->input->post('domain');
-      
-        
-    
-        
+       
         
         
         /*
@@ -587,7 +583,7 @@ if($this->input->post('domain')){
           
             
              foreach($output['result'] as $key =>$row ){
-                 if($row['contact_id']){
+                 if($row['contact_id'] == true && $row['not_active']==null &&  $row['email'] != null){
                   create_zd_user($row['contact_id'], $row['first_name']. ' '.$row['last_name'], $response->organization->id,  $row['email'])  ;
                  }
                     //array_push($stack,$res[1]);

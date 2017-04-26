@@ -27,9 +27,9 @@ $client->setAuth('basic', ['username' => $username, 'token' => $token]);
                                     'user_type' => 'agency',
                                     ]
                                 );
-                                echo "<pre>";
-                                print_r($query);
-                                echo "</pre>";
+                                //echo "<pre>";
+                                //print_r($query);
+                                //echo "</pre>";
                             } catch (\Zendesk\API\Exceptions\ApiResponseException $e) {
                                 echo 'Please check your credentials. Make sure to change the $subdomain, $username, and $token variables in this file.';
                             }
@@ -59,7 +59,7 @@ $client->setAuth('basic', ['username' => $username, 'token' => $token]);
                    'domain' => $domain,
                     'name' => $output['name'],
                     'external_id' => $output['registration'],
-                    'domain_names' => $domain,
+                    'domain_names' => [$domain],
                     'organization_fields'  => [
                     'company_registration' => $output['registration'],
                          'baselist_id' => $output['id'],

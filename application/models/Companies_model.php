@@ -1990,11 +1990,12 @@ $q = '
     
     function get_company_by_registration_zendesk($id)
     {    
-                $sql = "select c.id,c.name,c.registration, c.zendesk_id, c.name ,ct.email , ct.first_name, ct.last_name, ct.id as contact_id
+                $sql = "select c.id,c.name,c.registration, c.zendesk_id, c.name ,ct.email , ct.first_name, ct.last_name, ct.id as contact_id, ct.eff_to as not_active
                 from companies c
                 left join contacts ct
                 on c.id = ct.company_id
-                where c.id ='".$id."'";
+                where c.id ='".$id."'
+                ";
                 //$query = $this->db->query($sql);
                 $stack = array();
                 $query = $this->db->query($sql);
