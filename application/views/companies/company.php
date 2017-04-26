@@ -636,10 +636,10 @@ if ($your_date < $now){;
 
             
      <div class="row">
-  <div class="col-sm-3 text-center placement_span selected_placements"><span class="spin">-</span><br>Submitted Placements</div>
-  <div class="col-sm-3 text-center placement_span live_placements"><span class="">-</span><br>Live Placements</div>
-  <div class="col-sm-3 text-center placement_span pending_placements"><span class="">-</span><br>Pending Placements</div>
-  <div class="col-sm-3 text-center placement_span days_since_last_placement_submitted"><span class="">-</span><br>Days Since Last Placement Submitted</div>
+  <div class="col-sm-3 text-center placement_span selected_placements"><span class="blink_me">-</span><br>Submitted Placements</div>
+  <div class="col-sm-3 text-center placement_span live_placements"><span class="blink_me">-</span><br>Live Placements</div>
+  <div class="col-sm-3 text-center placement_span pending_placements"><span class="blink_me">-</span><br>Pending Placements</div>
+  <div class="col-sm-3 text-center placement_span days_since_last_placement_submitted"><span class="blink_me">-</span><br>Days Since Last Placement Submitted</div>
          
 </div>
         

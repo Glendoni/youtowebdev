@@ -3640,7 +3640,13 @@ background : rgba(255, 0, 0, 0.12);
  text-transform:capitalize;
 }
 
+.blink_me {
+  animation: blinker 3s linear infinite;
+}
 
+@keyframes blinker {  
+  25% { opacity: 0; }
+}
 /*! Hint.css - v2.2.1 - 2016-03-26 //#2b4461
 * http://kushagragour.in/lab/hint/
 * Copyright (c) 2016 Kushagra Gour; Licensed  */
