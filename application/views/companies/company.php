@@ -460,7 +460,9 @@ if ($your_date < $now){;
 			<?php } ?>
             
             
-	<?php if (($current_user['department']) =='support' && isset($company['zendesk_id'])): ?>
+	<?php 
+            $placement_access_btn_main = array( 'support', 'risk', 'Risk', "client services", "Client Services", 'finance','development');
+            if (in_array($current_user['department'],$placement_access_btn_main) && isset($company['zendesk_id'])): ?>
 			<a class="btn  btn-info btn-sm btn-block zendesk" href="https://sonovate.zendesk.com/agent/organizations/<?php echo $company['zendesk_id'] ?>" data="<?php echo $company['zendesk_id'] ?>"  target="_blank">ZenDesk</a>
 			<?php endif; ?>
              <?php if (isset($company['url'])): ?>
@@ -651,7 +653,7 @@ if ($your_date < $now){;
 
 <?php } ?>
 <?php 
-    $placement_access = array( 'sales','support', "client services", "Client Services", 'finance','development');
+    $placement_access = array( 'support', "client services", "Client Services", 'finance','development');
     if(in_array($current_user['department'], $placement_access) && ($company['zendesk_id']) && ($company['pipeline'] == 'Customer' || $company['pipeline'] == 'Proposal')){ ?>
 <div class="panel panel-default">
         <div class="panel-heading" id="placements">
@@ -682,7 +684,13 @@ if ($your_date < $now){;
             }
             
             ?>
+            
+            <?php 
+             $placement_access_btn = array( 'support', 'risk', 'Risk', "client services", "Client Services", 'finance','development');
+            if(in_array($current_user['department'],$placement_access_btn)){
+            ?>
             <a href="<?php echo $zd_url; ?>" class="btn btn-primary btn-xs zendesk" target="_blank">View Company on Zendesk</a>
+            <?php } ?>
         </div>
             
         </div>
