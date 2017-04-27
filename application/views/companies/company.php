@@ -13,7 +13,7 @@ endif;
 
  <?php if (isset($company['active'])): ?>
 
-
+ <?php if(!$proposal_set_check[0]['count']) unset($action_types_done[17]); ?>
             <?php //hide core page content if no company is found ?>
                 <?php if (isset($company['id'])): ?>
                     <div class="page-results-list" id="parent" style="padding-top: 116px;">
