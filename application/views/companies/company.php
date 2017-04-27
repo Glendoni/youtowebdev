@@ -1495,7 +1495,11 @@ endif;
                         <div class="col-sm-4 col-md-4">
                             <div class="form-group ">
                                 <label>New Action</label>
+                           <?php
+                             echo   $proposal_set_check[0]['count'] ? 'There is a proposal set'.$proposal_set_check[0]['count'] : 'There is no proposal set'. $proposal_set_check[0]['count'] ;
+                                 unset($action_types_done[17]);
                                 
+                                ?>
                                 <select id="action_type_completed" name="action_type_completed" class="form-control" >
                                     <option value="">--- Select an Action ---</option>
                                 <?php if(!$proposal_set_check[0]['count']) unset($action_types_done[17]); ?>
