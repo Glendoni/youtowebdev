@@ -15,12 +15,12 @@ endif;
 
  <?php 
 
-  echo '<pre>'; print_r($action_types_done); echo '</pre>';
+  //echo '<pre>'; print_r($action_types_done); echo '</pre>';
  
-unset($action_types_done[16]);
+//unset($action_types_done[16]);
 
 
- echo '<br><br><pre>'; print_r($action_types_done); echo '</pre>';
+ //echo '<br><br><pre>'; print_r($action_types_done); echo '</pre>';
 
 ?>
             <?php //hide core page content if no company is found ?>
@@ -1498,7 +1498,7 @@ endif;
                                 
                                 <select id="action_type_completed" name="action_type_completed" class="form-control" >
                                     <option value="">--- Select an Action ---</option>
-                                  
+                                <?php if(!$proposal_set_check[0]['count']) unset($action_types_done[17]); ?>
                                     <?php foreach($action_types_done as $action ): 
 
                                     if($action->id == 16 && $company['pipeline'] == 'Customer'|| $action->id == 31 && $company['pipeline'] == 'Customer' || $action->id == 32 && $company['pipeline'] == 'Customer' || $action->id == 33  && $company['pipeline'] == 'Customer'|| $action->id == 34 && $company['pipeline'] == 'Customer' ){ }else{ ?>
