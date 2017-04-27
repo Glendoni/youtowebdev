@@ -1373,9 +1373,9 @@ unset($a[0]);
         
     }
     
-   function smart(){
+   function smart($id){
        
-       $output = $this->Actions_model->proposal_set_checker(154537);
+       $output = $this->Actions_model->proposal_set_checker($id);
        echo '<pre>'; print_r($output); echo '</pre>';
    }
     
