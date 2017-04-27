@@ -1497,19 +1497,19 @@ endif;
                                 <label>New Action</label>
                            <?php
                              echo   $proposal_set_check[0]['count'] ? 'There is a proposal set'.$proposal_set_check[0]['count'] : 'There is no proposal set'. $proposal_set_check[0]['count'] ;
-                                 unset($action_types_done[17]);
+                                
                                 
                                 ?>
                                 <select id="action_type_completed" name="action_type_completed" class="form-control" >
                                     <option value="">--- Select an Action ---</option>
-                                <?php if(!$proposal_set_check[0]['count']) unset($action_types_done[17]); ?>
+                               
                                     <?php foreach($action_types_done as $action ): 
 
                                     if($action->id == 16 && $company['pipeline'] == 'Customer'|| $action->id == 31 && $company['pipeline'] == 'Customer' || $action->id == 32 && $company['pipeline'] == 'Customer' || $action->id == 33  && $company['pipeline'] == 'Customer'|| $action->id == 34 && $company['pipeline'] == 'Customer' ){ }else{ ?>
                                    
-                                
+                                <?php if($proposal_set_check[0]['count'] < 1 && $action->id == 16 ){ }else{ ?>
                                       <option value="<?php echo $action->id; ?>"><?php echo $action->name; ?></option>
-                                
+                                <?php } ?>
                                     <?php 
                                     } endforeach; ?>
                                 </select>
