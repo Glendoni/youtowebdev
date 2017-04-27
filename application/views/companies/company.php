@@ -14,7 +14,13 @@ endif;
  <?php if (isset($company['active'])): ?>
 
  <?php 
+
+  echo '<pre>'; print_r($action_types_done); echo '</pre>';
+ 
 unset($action_types_done[17]);
+
+
+ echo '<br><br><pre>'; print_r($action_types_done); echo '</pre>';
 
 if(!$proposal_set_check[0]['count']) unset($action_types_done[17]); ?>
             <?php //hide core page content if no company is found ?>
