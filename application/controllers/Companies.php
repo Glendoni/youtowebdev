@@ -1373,9 +1373,11 @@ unset($a[0]);
         
     }
     
-   function smart($id){
+   function smart($id=344971){
        
        $output = $this->Actions_model->proposal_set_checker($id);
+       if(!$output[0]['count']) echo 'Yes please';
+       
        echo '<pre>'; print_r($output); echo '</pre>';
    }
     

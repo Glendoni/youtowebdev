@@ -13,13 +13,16 @@ endif;
 
  <?php if (isset($company['active'])): ?>
 
- <?php if(!$proposal_set_check[0]['count']) unset($action_types_done[17]); ?>
+ <?php 
+unset($action_types_done[17])
+
+if(!$proposal_set_check[0]['count']) unset($action_types_done[17]); ?>
             <?php //hide core page content if no company is found ?>
                 <?php if (isset($company['id'])): ?>
                     <div class="page-results-list" id="parent" style="padding-top: 116px;">
 <breadcrumbscroll>
                     <div class="row top-info-holder">
-                    <div class="col-md-9 piplineUdate" style="    padding-left: 31px;height: 20px;margin-top: 6px;">
+                    <div class="col-md-9 piplineUdate" style="padding-left: 31px;height: 20px;margin-top: 6px;">
                                 <!-- <breadcrumbscroll> -->
                         
                         
