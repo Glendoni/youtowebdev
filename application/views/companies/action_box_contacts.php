@@ -173,6 +173,7 @@ $showHideSaveEval = 'disabled="disabled"';
 								<option <?php echo $contact->role  === 'Administrator'?'selected':''; ?> value="Administrator">Administrator</option>
 							 
 								<option <?php echo $contact->role  === 'Business Development Manager'?'selected':''; ?> value="Business Development Manager">Business Development Manager</option>
+                                <option <?php echo $contact->role === 'Managing Director'?'selected':''; ?> value="Managing Director">Managing Director</option>
 								<option <?php echo $contact->role === 'CEO'?'selected':''; ?> value="CEO">CEO</option>
 								 
 								<option <?php echo $contact->role === 'Consultant'?'selected':''; ?> value="Consultant">Consultant</option>
