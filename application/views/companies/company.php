@@ -22,7 +22,7 @@ unset($action_types_done[16]);
 
  echo '<br><br><pre>'; print_r($action_types_done); echo '</pre>';
 
-
+?>
             <?php //hide core page content if no company is found ?>
                 <?php if (isset($company['id'])): ?>
                     <div class="page-results-list" id="parent" style="padding-top: 116px;">
