@@ -14,7 +14,7 @@ endif;
  <?php if (isset($company['active'])): ?>
 
  <?php 
-unset($action_types_done[17])
+unset($action_types_done[17]);
 
 if(!$proposal_set_check[0]['count']) unset($action_types_done[17]); ?>
             <?php //hide core page content if no company is found ?>
