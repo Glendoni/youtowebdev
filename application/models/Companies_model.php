@@ -946,8 +946,8 @@ return $this->db->affected_rows();
 //'pipeline'=>(!empty($post['company_pipeline'])?$post['company_pipeline']:NULL),
  
 				//'pipeline'=>(!empty($post['company_pipeline'])?$post['company_pipeline']:NULL),
-                'turnover' => !empty($post['turnover'])?$post['turnover']:NULL,
-                'employees' =>   $post['employees_m'],
+                'turnover' => !empty($post['turnover'])?$post['turnover']: 0,
+                'employees' =>  !empty($post['employees_m'])?$post['employees_m']:0, 
 				'updated_by'=>$post['user_id'],
 				//'pipeline'=>!empty($post['company_pipeline'])?$post['company_pipeline']:NULL,
 				'updated_at' => date('Y-m-d H:i:s'),
