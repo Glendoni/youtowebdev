@@ -1651,8 +1651,8 @@ endif;
         </div>
     </div>
               
-              
-                       <div class="col-sm-4 domain">
+              <?php if(!$company['zendesk_id']){ ?>
+    <div class="col-sm-4 domain">
         <div class="form-group ">
             <label>Enter Domain<span class="actionrqd">*</span></label>
             <div class="input-group">   <div class="input-group-addon">Domain</div>
@@ -1661,11 +1661,11 @@ endif;
             </div>
         </div>
     </div>
-
+<?php } ?>
 
                  <?php endif; ?>
                 
-                        <div class="">
+                        <div class="col-sm-12">
                             <div class="form-group addActionOutcome">
                                  
                                 <label>Comment<span class="actionEvalPipeline"style=" color: red;">*</span></label>
