@@ -11,6 +11,10 @@ class Email_templates extends MY_Controller {
 		parent::__construct();
 		$this->load->model('Email_templates_model');
         
+         $this->load->library('form_validation');
+         
+        $this->load->helper(array('form', 'url','sendgrid'));
+        
             // $usrid =   $this->accessArr('access'); //user id array list
         
        
@@ -172,6 +176,8 @@ class Email_templates extends MY_Controller {
 			    	);
 			    $email = $this->load->view('email_templates/base', $data, TRUE);
 
+                $sendgrid_response =  send_me($contact->email,$subject,$email,$this->data['current_user']['gmail_account']);
+  
 			 	// template attachment
 			 	if(!empty($template->attachments)){
 				 	foreach (json_decode($template->attachments) as $attachment) {
@@ -184,8 +190,11 @@ class Email_templates extends MY_Controller {
 				 		$this->email->attach($attachment);
 				 	}
 				}
-			    $this->email->message($email);
-			    if (!$this->email->send()){
+			  //  $this->email->message($email);
+                
+    //send_me($contact->email,$subject,$email,$this->data['current_user']['gmail_account']);
+                
+			    if ($sendgrid_response != 202){
 				    $this->set_message_error($this->email->print_debugger());
 				    
 			    }
@@ -211,6 +220,7 @@ class Email_templates extends MY_Controller {
 			$this->set_message_error('Email not send, information missing on form.');
 			redirect('/companies/company?id='.$this->input->post('company_id'));
 		}
+
 	}
 
 	public function update()
@@ -274,6 +284,18 @@ class Email_templates extends MY_Controller {
 			}
 		}
 	}
+    
+    
+    function emailTest(){
+//echo 'Glen';
+
+
+
+
+send_me();
+
+
+}
 
 	
 }

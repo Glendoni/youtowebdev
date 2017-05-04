@@ -10,6 +10,7 @@
         "microsoft/windowsazure": "^0.4",
         "ext-mcrypt": "*",
         "zendesk/zendesk_api_client_php": "^2.1",
-        "google/apiclient": "^2.0"
+        "google/apiclient": "^2.0",
+        "sendgrid/sendgrid": "~5.4"
     }
 }
