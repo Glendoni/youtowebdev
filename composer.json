@@ -8,6 +8,7 @@
         "shlikhota/postgresdb-php":"*",
         "robmorgan/phinx": "^0.7.0",
         "microsoft/windowsazure": "^0.4",
-        "ext-mcrypt": "*"
+        "ext-mcrypt": "*",
+        "sendgrid/sendgrid": "~5.4"
     }
 }
