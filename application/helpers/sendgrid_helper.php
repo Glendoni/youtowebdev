@@ -1,8 +1,8 @@
 <?php require 'vendor/autoload.php';
 
-function send_me($contact_email =  "gsmall@sonovate.com", $subject ="Who you looking at you mook", $email_body = "<p>Test message</p>", $sender_email = "gsmall@sonovate.com",$apiKey){
+function send_me($contact_email =  "gsmall@sonovate.com", $subject ="Who you looking at you mook", $email_body = "<p>Test message</p>", $sender_email = "gsmall@sonovate.com"){
      
-    
+    $apiKey =  $apiKey = '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';
 $from = new SendGrid\Email(null, $sender_email);
 $subject = $subject;
 $to = new SendGrid\Email(null, $contact_email );
