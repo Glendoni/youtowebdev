@@ -29,12 +29,3 @@ return $response->statusCode();
 //echo $response->body();
     
 }
-
-
--Added server environmental variable to read API key.
-Sonovate/BaseList: Pull Request 31 - send_grid_pure
-
-- Enables a user to add number of employee(s) and estimated company turnover to a company. Information added is then presented on the associated company details page.
-Sonovate/BaseList: Pull Request 29 - emp_turnover_v1
-
-- Sonovate/BaseList: Pull Request 30 -
