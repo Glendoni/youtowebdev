@@ -179,7 +179,7 @@ class Email_templates extends MY_Controller {
                  if(ENVIRONMENT == 'development'){
       $apiKey = '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';
                     }else{
-      $apiKey = SEND_GRID_API_KEY;
+      $apiKey = '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';
     }
                 
 
