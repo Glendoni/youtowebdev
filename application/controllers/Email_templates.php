@@ -175,8 +175,15 @@ class Email_templates extends MY_Controller {
 			    	'sender_role' => $this->data['current_user']['role'],
 			    	);
 			    $email = $this->load->view('email_templates/base', $data, TRUE);
+                
+                 if(ENVIRONMENT == 'development'){
+      $apiKey = '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';
+                    }else{
+      $apiKey = SEND_GRID_API_KEY;
+    }
+                
 
-                $sendgrid_response =  send_me($contact->email,$subject,$email,$this->data['current_user']['gmail_account']);
+                $sendgrid_response =  send_me($contact->email,$subject,$email,$this->data['current_user']['gmail_account'],$apiKey);
   
 			 	// template attachment
 			 	if(!empty($template->attachments)){

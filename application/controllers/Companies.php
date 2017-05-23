@@ -271,17 +271,7 @@ class Companies extends MY_Controller {
 	
 	public function company()
 	{
-        
-        
-         if(ENVIRONMENT == 'development'){
-      //$apiKey = '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';
-               echo $apiKey = 'This is not the api key'. SEND_GRID_API_KEY;
-    }else{
-      echo $apiKey = 'This is the api key'. SEND_GRID_API_KEY;
-    }
     
-        
-        exit();
       $getallusers =   $this->data['getallusers'] =  $this->Users_model->get_all_users($this->data['current_user']['id']);
        $this->data['currentuserid']   = $this->data['current_user']['id'];
       
