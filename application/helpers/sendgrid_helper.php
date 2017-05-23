@@ -9,10 +9,11 @@ $to = new SendGrid\Email(null, $contact_email );
 $content = new SendGrid\Content("text/html", $email_body);
 $mail = new SendGrid\Mail($from, $subject, $to, $content);
     
+    
     if(ENVIRONMENT == 'development'){
       $apiKey = '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';
     }else{
-      $apiKey = getenv('SEND_GRID_API_KEY');
+      $apiKey = SEND_GRID_API_KEY;
     }
     
 $sg = new \SendGrid($apiKey);
@@ -28,3 +29,12 @@ return $response->statusCode();
 //echo $response->body();
     
 }
+
+
+-Added server environmental variable to read API key.
+Sonovate/BaseList: Pull Request 31 - send_grid_pure
+
+- Enables a user to add number of employee(s) and estimated company turnover to a company. Information added is then presented on the associated company details page.
+Sonovate/BaseList: Pull Request 29 - emp_turnover_v1
+
+- Sonovate/BaseList: Pull Request 30 -

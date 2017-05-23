@@ -46,6 +46,7 @@ date_default_timezone_set("Europe/London");
 
 if(getenv('ENVIRONMENT')){
 	define('ENVIRONMENT', getenv('ENVIRONMENT'));
+    define('SEND_GRID_API_KEY', getenv('SEND_GRID_API_KEY'));
 }else{
 	define('ENVIRONMENT', 'development');
 }
