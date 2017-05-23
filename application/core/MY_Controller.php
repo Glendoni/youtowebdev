@@ -529,6 +529,8 @@ class MY_Controller extends CI_Controller {
              if($company->company->f1->f50)$mapped_companies_array['management_accounts'] = $company->company->f1->f50;
             if($company->company->f1->f51)$mapped_companies_array['paye'] = $company->company->f1->f51; 
             if($company->company->f1->f52)$mapped_companies_array['permanent_invoicing'] = $company->company->f1->f52;
+            if($company->company->f1->f53)$mapped_companies_array['turnover'] = $company->company->f1->f53;
+            if($company->company->f1->f54)$mapped_companies_array['employees'] = $company->company->f1->f54;
 			// sectors
 
 			if(!empty($company->company->f1->f22)){

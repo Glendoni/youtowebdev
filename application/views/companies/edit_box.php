@@ -178,7 +178,7 @@
                         </div>
                         <?php endif;  */?>
                
-                    <div class="col-md-6">
+                    <div class="col-md-5">
                             <div class=" form-group ">
                                 <label for="trading_name" class="control-label">Trading Name</label>                            
                                 <input type="text" name="trading_name" value="<?php echo isset($company['trading_name'])?$company['trading_name']:''; ?>" id="trading_name" class="form-control">
@@ -186,13 +186,31 @@
                             </div>
                         <div class="row"> </div>
                     </div>
-                    <div class="col-sm-6 col-md-4">
+                    <div class="col-sm-6 col-md-3">
                         <div class=" form-group ">
                             <label for="phone" class="control-label">Phone</label>                            
                             <input type="text" name="phone" value="<?php echo isset($company['phone'])?$company['phone']:''; ?>" id="phone" maxlength="50" class="form-control">
                             
                         </div>
                     </div>
+        
+                 <div class="col-sm-6 col-md-2">
+                        <div class=" form-group ">
+                            <label for="phone" class="control-label">Number of Employees</label>                            
+                            <input type="number" name="employees_m" value="<?php echo isset($company['employees'])?$company['employees']:''; ?>" id="employees" maxlength="50" class="form-control">
+                            
+                        </div>
+                    </div>
+        
+        
+         <div class="col-sm-6 col-md-2">
+                        <div class=" form-group ">
+                            <label for="phone" class="control-label">Estimated Turnover</label>                            
+                            <input type="number" name="turnover" value="<?php echo isset($company['turnover'])?$company['turnover']:''; ?>" id="turnover" maxlength="50" class="form-control">
+                            
+                        </div>
+                    </div>
+
                    
           <!--HIDDEN UNLESS SPECIAL INSIGHT-->
                     <div class="col-sm-12">
