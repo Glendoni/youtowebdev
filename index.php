@@ -46,7 +46,7 @@ date_default_timezone_set("Europe/London");
 
 if(getenv('ENVIRONMENT')){
 	define('ENVIRONMENT', getenv('ENVIRONMENT'));
-    define('SEND_GRID_API_KEY', getenv('SEND_GRID_API_KEY'));
+   
 }else{
 	define('ENVIRONMENT', 'development');
 }
@@ -68,6 +68,7 @@ switch (ENVIRONMENT)
 	case 'staging':
 		// error_reporting(E_ALL);
 		error_reporting(E_ALL ^ (E_NOTICE | E_WARNING));
+        define('SEND_GRID_API_KEY', getenv('SEND_GRID_API_KEY'));
 	break;
 	
 	case 'production':
