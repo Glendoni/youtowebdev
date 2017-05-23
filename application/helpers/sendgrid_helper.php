@@ -9,12 +9,10 @@ $to = new SendGrid\Email(null, $contact_email );
 $content = new SendGrid\Content("text/html", $email_body);
 $mail = new SendGrid\Mail($from, $subject, $to, $content);
     
-    if(ENVIRONMENT = 'development'){
-$apiKey = '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';
+    if(ENVIRONMENT == 'development'){
+      $apiKey = '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';
     }else{
-        
-      $apiKey = SEND_GRID_API_KEY;  
-        
+      $apiKey = SEND_GRID_API_KEY;
     }
     
 $sg = new \SendGrid($apiKey);
