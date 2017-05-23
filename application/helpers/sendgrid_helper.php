@@ -3,23 +3,18 @@
 function send_me($contact_email =  "gsmall@sonovate.com", $subject ="Who you looking at you mook", $email_body = "<p>Test message</p>", $sender_email = "gsmall@sonovate.com"){
      
     $apiKey =  $apiKey = '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';
-$from = new SendGrid\Email(null, $sender_email);
-$subject = $subject;
-$to = new SendGrid\Email(null, $contact_email );
-$content = new SendGrid\Content("text/html", $email_body);
+$from = new SendGrid\Email("Example User", "test@example.com");
+$subject = "Sending with SendGrid is Fun";
+$to = new SendGrid\Email("Example User", "test@example.com");
+$content = new SendGrid\Content("text/plain", "and easy to do anywhere, even with PHP");
 $mail = new SendGrid\Mail($from, $subject, $to, $content);
- 
-    
+
+$apiKey = getenv('SENDGRID_API_KEY');
 $sg = new \SendGrid($apiKey);
 
-try {
-    $response = $sg->client->mail()->send()->post($mail);
-} catch (Exception $e) {
-    echo 'Caught exception: ',  $e->getMessage(), "\n";
-}
-
-return $response->statusCode();
-//echo $response->headers();
-//echo $response->body();
+$response = $sg->client->mail()->send()->post($mail);
+echo $response->statusCode();
+print_r($response->headers());
+echo $response->body();
     
 }
