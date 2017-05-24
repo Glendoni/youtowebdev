@@ -1,3 +1,9 @@
+<?php phpinfo();
+
+exit();
+
+?>
+
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Email_templates extends MY_Controller {
