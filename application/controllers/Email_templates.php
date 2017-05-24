@@ -1,9 +1,3 @@
-<?php phpinfo();
-
-exit();
-
-?>
-
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Email_templates extends MY_Controller {
@@ -19,7 +13,7 @@ class Email_templates extends MY_Controller {
         
          $this->load->library('form_validation');
          
-        $this->load->helper(array('form', 'url','sendgrid'));
+        $this->load->helper(array('form', 'url'));
         
             // $usrid =   $this->accessArr('access'); //user id array list
         
@@ -295,8 +289,7 @@ echo SEND_GRID_API_KEY;
     
     function emailTest(){
 //echo 'Glen';
-
-
+ $this->load->helper(array('sendgrid'));
 
 
 send_me();
