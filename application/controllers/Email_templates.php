@@ -175,8 +175,10 @@ class Email_templates extends MY_Controller {
 			    	'sender_role' => $this->data['current_user']['role'],
 			    	);
 			    $email = $this->load->view('email_templates/base', $data, TRUE);
-$emailed =   nl2br($message);
-              
+$emailed =    preg_replace("/\r\n|\r|\n/", ' ', "".nl2br($message).""); ;
+            //  echo $emailed;
+                
+              //  exit();
                 $sendgrid_response =  send_me($contact->email,$subject,$emailed,$this->data['current_user']['gmail_account']);
   
 			 	// template attachment
