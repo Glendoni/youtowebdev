@@ -13,7 +13,7 @@ class Email_templates extends MY_Controller {
         
          $this->load->library('form_validation');
          
-        $this->load->helper(array('form', 'url'));
+        $this->load->helper(array('form', 'url','sendgrid'));
         
             // $usrid =   $this->accessArr('access'); //user id array list
         
@@ -175,9 +175,9 @@ class Email_templates extends MY_Controller {
 			    	'sender_role' => $this->data['current_user']['role'],
 			    	);
 			    $email = $this->load->view('email_templates/base', $data, TRUE);
+$emailed =   nl2br($message);
               
-echo SEND_GRID_API_KEY;
-    $sendgrid_response =  send_me($contact->email,$subject,$email,$this->data['current_user']['gmail_account']);
+                $sendgrid_response =  send_me($contact->email,$subject,$emailed,$this->data['current_user']['gmail_account']);
   
 			 	// template attachment
 			 	if(!empty($template->attachments)){
@@ -289,7 +289,8 @@ echo SEND_GRID_API_KEY;
     
     function emailTest(){
 //echo 'Glen';
- $this->load->helper(array('sendgrid'));
+
+
 
 
 send_me();
