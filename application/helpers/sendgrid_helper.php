@@ -2,19 +2,35 @@
 
 function send_me(){
      
-    $apiKey = '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';
-$from = new SendGrid\Email("Example User","gsmall@sonovate.com");
-$subject = "Sending with SendGrid is Fun";
-$to = new SendGrid\Email("Example User", "gsmall@sonovate.com");
-$content = new SendGrid\Content("text/plain", "and easy to do anywhere, even with PHP");
-$mail = new SendGrid\Mail($from, $subject, $to, $content);
+ 
+$curl = curl_init();
 
-//$apiKey = getenv('SENDGRID_API_KEY');
-$sg = new \SendGrid($apiKey);
+curl_setopt_array($curl, array(
+  CURLOPT_URL => "https://api.sendgrid.com/v3/mail/send",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "POST",
+  CURLOPT_POSTFIELDS => "{\"personalizations\": [{\"to\": [{\"email\": \"gsmall@sonovate.com\"}]}],\"from\": {\"email\": \"gsmall@sonovate.com\"},\"subject\": \"Hello, World!\",\"content\": [{\"type\": \"text/plain\", \"value\": \"Heya!\"}]}",
+  CURLOPT_HTTPHEADER => array(
+    "authorization: Bearer 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",
+    "cache-control: no-cache",
+    "content-type: application/json",
+    "postman-token: aace37d3-78f2-5145-6ca7-1281f1de206b"
+  ),
+));
 
-$response = $sg->client->mail()->send()->post($mail);
-echo $response->statusCode();
-print_r($response->headers());
-echo $response->body();
+$response = curl_exec($curl);
+$err = curl_error($curl);
+
+curl_close($curl);
+
+if ($err) {
+  echo "cURL Error #:" . $err;
+} else {
+  echo $response;
+}
     
 }
