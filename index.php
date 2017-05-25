@@ -46,6 +46,7 @@ date_default_timezone_set("Europe/London");
 
 if(getenv('ENVIRONMENT')){
 	define('ENVIRONMENT', getenv('ENVIRONMENT'));
+    define('SENDGRID_API_KEY',getenv('SENDGRID_API_KEY'));
    
 }else{
 	define('ENVIRONMENT', 'development');

@@ -175,11 +175,8 @@ class Email_templates extends MY_Controller {
 			    	'sender_role' => $this->data['current_user']['role'],
 			    	);
 			    $email = $this->load->view('email_templates/base', $data, TRUE);
-$emailed =     preg_replace("/\r\n|\r|\n/", ' ', nl2br(trim($message))); 
-             // echo   $emailed;
-                
-               //exit();
-                $sendgrid_response =  send_me($contact->email,$subject,$emailed,$this->data['current_user']['gmail_account']);
+            $emailed =     preg_replace("/\r\n|\r|\n/", ' ', nl2br(trim($message))); 
+            $sendgrid_response =  send_grid_mailer($contact->email,$subject,$emailed,$this->data['current_user']['gmail_account']);
   
 			 	// template attachment
 			 	if(!empty($template->attachments)){
@@ -289,16 +286,7 @@ $emailed =     preg_replace("/\r\n|\r|\n/", ' ', nl2br(trim($message)));
 	}
     
     
-    function emailTest(){
-//echo 'Glen';
-
-
-
-
-send_me();
-
-
-}
+    function send_grid_tester($a,$b,$c){send_grid_mailer();}
 
 	
 }
