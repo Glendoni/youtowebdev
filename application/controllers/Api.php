@@ -54,4 +54,16 @@ class Api extends CI_Controller {
        
     }
     
+    function get_company_placements()
+    {
+        $department = array('support', 'development');
+        if($this->input->post('zd_id')) {
+          $comp_reg_num = $this->input->post('comp_reg_num');
+        }
+         //$response  = sonovate_zendesk($zd_id, false, false,'get_all_tickets_placements');  
+       $response =  $this->Api_model->get_placement_data($comp_reg_num);
+       echo  $response;
+       
+    }
+    
 }

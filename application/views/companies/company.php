@@ -412,7 +412,7 @@ if ($your_date < $now){;
 			<p>	
 			 <!--COMPANY NUMBER IF APPLICABLE-->
                 <?php echo isset($company['name'])?$company['name']:''; ?><br>
-			<?php echo isset($company['registration'])?$company['registration']:''; ?>
+			<?php echo isset($company['registration'])? '<span class="comp_registration_num">'.$company['registration'].'</span>':''; ?>
          	</p>
         	</div>
 
@@ -626,7 +626,49 @@ if ($your_date < $now){;
         if(!in_array($current_user['department'],$exclude_from_view)){ 
     
     ?>
+    
+    
+    
     <div class="col-md-12">
+        
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div id="zdesk_id" data="<?php echo $company['zendesk_id']? $company['zendesk_id'] : ''; ?>"></div>
+    
+    <?php 
+   
+    $placement_access = array('sales','admin','development');
+   // if(in_array($current_user['department'], $placement_access) && ($company['pipeline'] == 'Intent')){
+    if(in_array($current_user['department'], $placement_access) && ($company['pipeline'] == 'Intent' || $company['pipeline'] == 'Proposal')){
+   
+    ?>
+    <div class="panel panel-default">
+        
+    
+        <div class="panel-heading">
+        Placements  
+        </div>
+        <!-- /.panel-heading -->
+ 
+        <div class="panel-body">
+
+            
+     <div class="row">
+  <div class="col-sm-3 text-center placement_span selected_placements"><span class="">-</span><br>Submitted Placements</div>
+  <div class="col-sm-3 text-center placement_span live_placements"><span class="">-</span><br>Live Placements</div>
+  <div class="col-sm-3 text-center placement_span pending_placements"><span class="">-</span><br>Pending Placements</div>
+  <div class="col-sm-3 text-center placement_span days_since_last_placement_submitted"><span class="">-</span><br>Days Since Last Placement Submitted</div>
+         
+</div>
+        
+            
+            
+       <!-- There are currently no placements for this agency.  -->      </div>
+        </div>
+
+
+<?php } ?>
+    </div>
+        <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading" id="bespoke" >
                Service Overview 
