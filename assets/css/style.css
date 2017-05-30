@@ -3564,6 +3564,9 @@ background : rgba(255, 0, 0, 0.12);
     height:200px;
     
 }
+.domain { 
+display:none;
+}
 
 /*! Hint.css - v2.2.1 - 2016-03-26 //#2b4461
 * http://kushagragour.in/lab/hint/
