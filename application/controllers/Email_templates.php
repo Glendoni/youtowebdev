@@ -100,12 +100,14 @@ class Email_templates extends MY_Controller {
         }
 	}
 	private function process_upload(){
+        
+        
 		if (!empty($_FILES['files']['name'][0])) {
 			$config['upload_path'] = realpath(APPPATH.'../assets/email_attachments/');
 			$config["overwrite"] = TRUE;
 			$config["remove_spaces"] = TRUE;
-			$config["allowed_types"] = "txt|pdf|doc|docx|jpg|zip|png";
-			$config["max_size"] = 2000;
+			$config["allowed_types"] = "txt|pdf|doc|docx|jpg|zip|png|plain";
+			$config["max_size"] = 20000000; 
 			$count = 0;
 			$attachments = array();
 			foreach ($_FILES as $key => $value)   //fieldname is the form field name
@@ -127,7 +129,7 @@ class Email_templates extends MY_Controller {
 			        {
 			            $data = $this->upload->get_multi_upload_data();
 			            foreach ($data as $key => $value) {
-			             	array_push($attachments, $value['full_path']);
+			             	array_push($attachments, $value);
 			            }			             
 			        }
 			    }
@@ -138,7 +140,66 @@ class Email_templates extends MY_Controller {
 	}
 
 	public function send_email(){
+        
+        
+        
 		
+         //$a["content"]  =  base64_encode(file_get_contents($path['full_path']));
+ 
+        
+        
+        /*
+        
+        example of file info
+        [{
+	"file_name": "not_for_invoices.txt",
+	"file_type": "text\/plain",
+	"file_path": "\/Users\/glendon\/Sites\/baselist\/assets\/email_attachments\/",
+	"full_path": "\/Users\/glendon\/Sites\/baselist\/assets\/email_attachments\/not_for_invoices.txt",
+	"raw_name": "not_for_invoices",
+	"orig_name": "not_for_invoices.txt",
+	"client_name": "not for invoices.txt",
+	"file_ext": ".txt",
+	"file_size": 2,
+	"is_image": false,
+	"image_width": "",
+	"image_height": "",
+	"image_type": "",
+	"image_size_str": ""
+}]
+        
+        */
+     /*   
+     $attachments = $this->process_upload();	
+     $a[] = '{
+	"asm": {
+		"group_id": 1,
+		"groups_to_display": [
+			1,
+			2,
+			3
+		]
+	},
+	"attachments": [';
+
+  foreach($attachments as $key => $file_info){
+   $b[] =  '{
+   "content" : "'.base64_encode(file_get_contents($file_info['full_path'])).'",
+    "content_id": "'.$file_info['raw_name'].'_'.date('Y-m-d').'",    
+    "disposition": "inline", 
+    "filename": "'.$file_info['file_name'].'", 
+    "name": "'.$file_info['orig_name'].'",
+    "type": "'.$file_info['file_ext'].'"
+        } ';
+}
+        
+$a[] = join($b,",");
+
+$a[] =']}'; 
+        
+   echo join($a);      
+exit();
+*/
 		$template_selector = $this->input->post('template_selector');
 		$template_message = $this->input->post('message_'.$template_selector);
 		$template_subject = $this->input->post('subject_'.$template_selector);
@@ -176,7 +237,7 @@ class Email_templates extends MY_Controller {
 			    	);
 			    $email = $this->load->view('email_templates/base', $data, TRUE);
             $emailed =     preg_replace("/\r\n|\r|\n/", ' ', nl2br(trim($message))); 
-            $sendgrid_response =  send_grid_mailer($contact->email,$subject,$emailed,$this->data['current_user']['gmail_account']);
+            $sendgrid_response =  send_grid_mailer($contact->email,$subject,$emailed,$this->data['current_user']['gmail_account'],$attachments);
   
 			 	// template attachment
 			 	if(!empty($template->attachments)){
