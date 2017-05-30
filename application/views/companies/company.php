@@ -12,7 +12,7 @@ endif;
 ?>
 
  <?php if (isset($company['active'])): ?>
- <?php if(!$proposal_set_check[0]['count']) unset($action_types_done[17]); ?>
+
 
             <?php //hide core page content if no company is found ?>
                 <?php if (isset($company['id'])): ?>
@@ -1298,7 +1298,9 @@ endif;
 		<div class="panel panel-default ">
 		  <div class="panel-heading">Add Action</div>
 		  <div class="panel-body">
+              
 		   <?php $hidden = array('company_id' => $company['id'] , 'user_id' => $current_user['id'],'done'=>'1','campaign_id' => $campaign_id, 'class_check' => $companies_classes[$company['class']],'source_check' => $company['source'],'sector_check' => count($company['sectors']),);
+            
 			echo form_open_multipart(site_url().'actions/create', 'name="create" class="form" role="form"',$hidden); ?>
 			<!--THE BELOW PASSES THE CLASS FIELD ACROSS PURELY FOR VALIDATION - IF THERE IS A BETTER WAY OF DOING THIS THEN IT NEEDS TO BE HERE-->
 			
@@ -1315,21 +1317,19 @@ endif;
                             <div class="form-group ">
                                 <label>New Action</label>
 
-
-
-                                
                                 <select id="action_type_completed" name="action_type_completed" class="form-control" >
                                     <option value="">--- Select an Action ---</option>
                                   
                                     <?php foreach($action_types_done as $action ): 
 
-                                    if($action->id == 16 && $company['pipeline'] == 'Customer'|| $action->id == 31 && $company['pipeline'] == 'Customer' || $action->id == 32 && $company['pipeline'] == 'Customer' || $action->id == 33  && $company['pipeline'] == 'Customer'|| $action->id == 34 && $company['pipeline'] == 'Customer' ){ }else{ ?>
-                                   
-                                
-                                      <option value="<?php echo $action->id; ?>"><?php echo $action->name; ?></option>
-                                
-                                    <?php 
-                                    } endforeach; ?>
+                                     if($action->id == 16 && $company['pipeline'] == 'Customer'|| $action->id == 31 && $company['pipeline'] == 'Customer' || $action->id == 32 && $company['pipeline'] == 'Customer' || $action->id == 33  && $company['pipeline'] == 'Customer'|| $action->id == 34 && $company['pipeline'] == 'Customer' ){ }else{ 
+                                    
+                                        if( $proposal_set_check[0]['count'] == 0 &&  $action->id == 16){ }else{ ?>
+                                          <option value="<?php echo $action->id; ?>"><?php echo $action->name; ?></option>
+                                        <?php 
+                                        } 
+                                    } 
+                                    endforeach; ?>
                                 </select>
                                 
                                 
