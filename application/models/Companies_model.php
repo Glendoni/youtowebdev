@@ -462,7 +462,9 @@ and ACTIONS_SUB.company_id is null
                C.staff_payroll, -- f49
                C.management_accounts, -- f50
                C.paye, -- f51
-               C.permanent_invoicing -- f52
+               C.permanent_invoicing, -- f52
+               C.turnover, -- f53
+               C.employees -- f53
                
 			   )) "JSON output" 
 			   
@@ -680,7 +682,9 @@ from (select * from COMPANIES ' ;
 			     UU.name,
                  C.initial_rate,   
                  C.customer_to,
-                 AM.name
+                 AM.name,
+                 C.turnover,
+                 C.employees
 
 		order by C.id 
 
@@ -944,7 +948,9 @@ return $this->db->affected_rows();
 //'pipeline'=>(!empty($post['company_pipeline'])?$post['company_pipeline']:NULL),
  
 				//'pipeline'=>(!empty($post['company_pipeline'])?$post['company_pipeline']:NULL),
- 
+                 'turnover' => !empty($post['turnover'])?$post['turnover']:NULL,
+                'employees' =>   $post['employees_m'],
+
 				'updated_by'=>$post['user_id'],
 				//'pipeline'=>!empty($post['company_pipeline'])?$post['company_pipeline']:NULL,
 				'updated_at' => date('Y-m-d H:i:s'),

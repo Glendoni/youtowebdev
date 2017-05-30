@@ -541,8 +541,8 @@ if ($your_date < $now){;
 		<!-- EMPLOYEES -->
 		<div class="col-xs-4 col-sm-3">
 			<strong>Employees</strong><br>
-			<?php if (isset($company['emp_count'])): ?>
-			<p class="details"><?php echo $company['emp_count'];?> </p>
+			<?php if (isset($company['emp_count']) || isset($company['employees'])): ?>
+			<p class="details"><?php echo $company['emp_count'] ? $company['emp_count']  : $company['employees'] ;?> </p>
 			<?php else: ?>
             <p class="details"></p>
 			<?php endif; ?>
