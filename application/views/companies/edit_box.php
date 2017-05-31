@@ -196,8 +196,8 @@
         
                  <div class="col-sm-6 col-md-2">
                         <div class=" form-group ">
-                            <label for="phone" class="control-label">Number of Employees</label>                            
-                            <input type="number" name="employees_m" value="<?php echo isset($company['employees'])?$company['employees']:''; ?>" id="employees" maxlength="50" class="form-control">
+                            <label for="numEmployees" class="control-label">Number of Employees</label>                            
+                            <input type="text" name="employees_m" value="<?php echo isset($company['employees'])?$company['employees']:''; ?>" id="employees" maxlength="50" class="form-control" onkeypress='return event.charCode >= 48 && event.charCode <= 57' >
                             
                         </div>
                     </div>
@@ -205,8 +205,8 @@
         
          <div class="col-sm-6 col-md-2">
                         <div class=" form-group ">
-                            <label for="phone" class="control-label">Estimated Turnover</label>                            
-                            <input type="number" name="turnover" value="<?php echo isset($company['turnover'])?$company['turnover']:''; ?>" id="turnover" maxlength="50" class="form-control">
+                            <label for="empturnover" class="control-label">Estimated Turnover</label>                            
+                            <input type="text" name="turnover" value="<?php echo isset($company['turnover'])?$company['turnover']:''; ?>" id="turnover" maxlength="50" class="form-control" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
                             
                         </div>
                     </div>
