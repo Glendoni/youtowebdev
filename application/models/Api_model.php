@@ -23,12 +23,12 @@ class Api_model extends MY_Model {
         }
     }
     
-    public function get_placement_data($comp_reg_num){
-       
+    public function get_placement_data($comp_reg_num)
+    {
+        $agency_stats =  getenv(PLACEMENT_AGENCY_STATS);   
         $curl = curl_init();
-
         curl_setopt_array($curl, array(
-          CURLOPT_URL => "https://invoicing-api-dev.sonovate.com/api/agencyStats/?companyRegNumber=".$comp_reg_num,
+          CURLOPT_URL => $agency_stats.'/?companyRegNumber='.$comp_reg_num,
           CURLOPT_RETURNTRANSFER => true,
           CURLOPT_ENCODING => "",
           CURLOPT_MAXREDIRS => 10,
@@ -37,8 +37,7 @@ class Api_model extends MY_Model {
           CURLOPT_CUSTOMREQUEST => "GET",
           CURLOPT_HTTPHEADER => array(
             "authorization: Basic YmFzZWxpc3Q6ck5tbGdNYUE4bnBPV1dNcWR1Nk0xMlVaN0RNaEF6X0lnSFQyRnNyNXFYcGlFSkVpVk5uOHhZSUlFQjlmOUJaTms4SHBaYlVZSGpUYVJXOEVrRU4yTk1CZEFBQQ==",
-            "cache-control: no-cache",
-            "postman-token: 8cfb28f3-1649-9397-261f-85382773e6cd"
+            "cache-control: no-cache"
           ),
         ));
 

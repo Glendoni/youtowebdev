@@ -23,7 +23,7 @@ function dateRequired()     {
                 if(comp_reg_num){
                
                  $.ajax({
-                        type: "POST",
+                        type: "GET",
                         data:param,
                         dataType: "json",
                         url: "../Api/get_company_placements",
@@ -46,12 +46,6 @@ function dateRequired()     {
                 
                 }
         
-        
-        
-        
-        
-
-    
                 $(".noteinput").keyup(function(){
                     // $(".morelink").unbind('click');
                             var attr = $(this).attr('note');
