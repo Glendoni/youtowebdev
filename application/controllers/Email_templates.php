@@ -14,14 +14,6 @@ class Email_templates extends MY_Controller {
          $this->load->library('form_validation');
          
         $this->load->helper(array('form', 'url','sendgrid'));
-        
-            // $usrid =   $this->accessArr('access'); //user id array list
-        
-       
-       // echo in_array($this->data['current_user']['id'],$usrid);
-      //  echo $this->data['current_user']['role']  == 'Admin';
-         
-      
           $this->access = true;
           $this->edit =  in_array($this->data['current_user']['id'],$this->accessArr('edit_template'));
           $this->delete = in_array($this->data['current_user']['id'],$this->accessArr('delete_email_template'));
@@ -30,17 +22,13 @@ class Email_templates extends MY_Controller {
 
 	public function index()
 	{
-        
-        
+    
 		 if(!$this->edit){
          
         redirect('/dashboard','location');
         exit();
          }
         
-        
-     //  $this->data['current_user']['department'];
-    
         if($this->access){
             
            $this->data['edit'] = $this->edit;
@@ -139,67 +127,9 @@ class Email_templates extends MY_Controller {
 		return array();
 	}
 
-	public function send_email(){
-        
-        
-        
-		
-         //$a["content"]  =  base64_encode(file_get_contents($path['full_path']));
- 
-        
-        
-        /*
-        
-        example of file info
-        [{
-	"file_name": "not_for_invoices.txt",
-	"file_type": "text\/plain",
-	"file_path": "\/Users\/glendon\/Sites\/baselist\/assets\/email_attachments\/",
-	"full_path": "\/Users\/glendon\/Sites\/baselist\/assets\/email_attachments\/not_for_invoices.txt",
-	"raw_name": "not_for_invoices",
-	"orig_name": "not_for_invoices.txt",
-	"client_name": "not for invoices.txt",
-	"file_ext": ".txt",
-	"file_size": 2,
-	"is_image": false,
-	"image_width": "",
-	"image_height": "",
-	"image_type": "",
-	"image_size_str": ""
-}]
-        
-        */
-     /*   
-     $attachments = $this->process_upload();	
-     $a[] = '{
-	"asm": {
-		"group_id": 1,
-		"groups_to_display": [
-			1,
-			2,
-			3
-		]
-	},
-	"attachments": [';
+	public function send_email()
+    {
 
-  foreach($attachments as $key => $file_info){
-   $b[] =  '{
-   "content" : "'.base64_encode(file_get_contents($file_info['full_path'])).'",
-    "content_id": "'.$file_info['raw_name'].'_'.date('Y-m-d').'",    
-    "disposition": "inline", 
-    "filename": "'.$file_info['file_name'].'", 
-    "name": "'.$file_info['orig_name'].'",
-    "type": "'.$file_info['file_ext'].'"
-        } ';
-}
-        
-$a[] = join($b,",");
-
-$a[] =']}'; 
-        
-   echo join($a);      
-exit();
-*/
 		$template_selector = $this->input->post('template_selector');
 		$template_message = $this->input->post('message_'.$template_selector);
 		$template_subject = $this->input->post('subject_'.$template_selector);
@@ -239,7 +169,6 @@ exit();
             $emailed =     preg_replace("/\r\n|\r|\n/", ' ', nl2br(trim($message))); 
             $sendgrid_response =  send_grid_mailer($contact->email,$subject,$emailed,$this->data['current_user']['gmail_account'],$attachments);
   
-			 	// template attachment
 			 	if(!empty($template->attachments)){
 				 	foreach (json_decode($template->attachments) as $attachment) {
 				 		$this->email->attach($attachment);
@@ -251,9 +180,6 @@ exit();
 				 		$this->email->attach($attachment);
 				 	}
 				}
-			  //  $this->email->message($email);
-                
-    //send_me($contact->email,$subject,$email,$this->data['current_user']['gmail_account']);
                 
 			    if ($sendgrid_response != 202){
 				    $this->set_message_error($this->email->print_debugger());
@@ -345,9 +271,5 @@ exit();
 			}
 		}
 	}
-    
-    
-    function send_grid_tester($a,$b,$c){send_grid_mailer();}
-
-	
+ 
 }
