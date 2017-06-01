@@ -98,6 +98,137 @@ $("#noteoutput"+attr).html($(this).html()+'<br><button type="button" class="btn 
                                 
                             }
                 });
+        
+        
+                     var zd_id = $('#zdesk_id').attr('data');
+                var comp_reg_num = $('.comp_registration_num').text();
+
+            if(zd_id){ 
+                var i  = 0;
+                var originalText = $(".zendesk_loading_info_alert_open .loadingZendeskText").text();
+                setInterval(function() {
+                    $(".zendesk_loading_info-alert_open .loadingZendeskText").append(".");
+                    i++;
+                    if(i == 4)
+                    {
+                        $(".loadingZendeskText").html(originalText);
+                        i = 0;
+                    }
+                }, 500);
+
+            i  = 0;  
+            var originalText = $(".zendesk_loading_info_alert_close .loadingZendeskTextClose").text();
+            setInterval(function() {
+                $(".zendesk_loading_info-alert_close .loadingZendeskTextClose").append(".");
+                i++;
+                if(i == 4)
+                {
+                    $(".loadingZendeskTextClose").html(originalText);
+                    i = 0;
+                }
+            }, 500);
+                
+                 var param = { 'zd_id' : zd_id, 'compRegNum' : comp_reg_num };
+                
+                
+                  $.ajax({
+                        type: "GET",
+                        data:param,
+                        dataType: "json",
+                        url: "../Zendesk/get_tickets",
+                        success: function(data) {
+                             
+                            var action;
+                            var items = [];
+                            var idfk;
+                            var ticket_count    = data.count;
+                            var itemsClosed = [];
+                            var custvalue;
+                            
+                            $('.ticket_count').text('('+ticket_count+')');
+
+                            var i=0;
+                            var open =0;
+                            var newist  =0;
+                            var solved = 0;
+                            var pending = 0; 
+                            var on_hold = 0;
+                            var closed = 0;
+                            var s=0;
+                            var raised_by;
+                         
+                            $.each( data.tickets, function( key, val ) {
+                     
+                                if(val.status != "solved"){
+                                
+                                   // console.log(val.status);
+                                    if(val.status == 'closed')   closed++;
+                                    if(val.status == 'open')      open++;
+                                    if(val.status == 'new')       newist++;
+                                    if(val.status == 'pending')   pending++;
+                                    if(val.status == 'On Hold')   on_hold++;
+                                   
+                                    
+                                    if(i  <= 5){
+                                        
+                                        if(val.status == 'open' || val.status == 'new' ){
+                                    $.each( val.custom_fields, function(item , custom_val){
+                                        //console.log(custom_val.value);
+                                        if(custom_val.value) {
+                                            custvalue = custom_val.value;
+                                        }                                   
+
+                                    })
+                                   
+                                    raised_by  =     val.via.source.from.name ? (val.via.source.from.name? val.via.source.from.name : val.via.source.from.address) : '<span style="padding-left: 3.2%">-</span>';
+                                        
+                                        items.push('<tr><td  class="col-md-2">'+formattDate(val.created_at)+
+                                        '</td><td  class="col-md-2">'+raised_by+
+                                        '</td><td  class="col-md-1 "><span class="zd_status zd_status_'+val.status+
+                                        '">'+val.status+
+                                        '</span></td><td  class="col-md-2">'+val.id+
+                                                   '<td  class="col-md-2">'+val.subject+
+                                                   '<td  class="col-md-2"><span class="zdCatValue">'+custvalue+'</span></td><td  class="col-md-1"><a href="'+val.url.replace('/api/v2/tickets/', '/agent/tickets/' ).replace('.json', '')+'" target="_blank" class="btn btn-primary view_zd_ticket">View Ticket</a></td></tr>');
+                                        custvalue ='';
+                                    }
+                                    i++;
+                                    }
+                                }else{
+                                    if(s  <= 11){
+                                          if(val.status == 'solved')      solved++;
+                                    }
+                                    s++;
+                                }
+                            });
+                            
+                             $('.new_count').text(newist);
+                             $('.open_count').text(open);
+                             $('.solved_count').text(solved);
+                             $('.on_pending_count').text(pending);
+                             $('.on_hold_count').text(on_hold);
+                             $('.on_closed_count').text(closed);
+                            if(i == 0) $('.zendesk_loading_info-alert_open p').removeClass("loadingZendeskText");
+                            if(i == 0) $('.zendesk_loading_info-alert_open p').text('No Tickets Found');                              
+                            if(i >=1)  $('.zendesk_tickets_display .zendesk_loading_info-alert_open').remove();              
+                            if(i >=1)  $('.zendesk_tickets_display').show();
+                            if(i  >= 1) $('.openzdmenu').show();
+
+                            $('#zd_open').html(items.join( "" ));
+
+                            if(s == 0) $('.zendesk_loading_info_alert_close p').removeClass("loadingZendeskTextClose");
+                            if(s == 0) $('.zendesk_loading_info_alert_close p').text('No Closed Tickets Found');                     
+                            if(s >=1)  $('.closedzdmenu').show();    
+                            if(s >=1)  $('.zendesk_loading_info_alert_close').hide();
+
+                            $('#zd_closed').html(itemsClosed.join( "" ));
+                        }
+                });
+            }
+            
+            
+        
+        
+        
     
                 $('.noteform').submit(function(){ //Get 
                     var noteid = $(this).attr('data');
