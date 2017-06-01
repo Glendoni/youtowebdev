@@ -11,7 +11,36 @@ function dateRequired()     {
 
     $(document).ready(function() {
         
-        
+        $('.uploadMultipleFiles').change(function(){
+            var fp = $(this);
+            var lg = fp[0].files.length; // get length
+            var items = fp[0].files;
+            var fileSize = 0;
+            var imgType;
+            var test;
+            var fileext = [];
+            if (lg > 0) {
+                for (var i = 0; i < lg; i++) {
+                    imgType =   items[i].type.split('/');  
+                    Array.prototype.inArray = function( img_ext ){
+                        return Array(this).join(",").indexOf(img_ext) >-1;
+                    }
+                    fileext = ["txt", "pdf", "doc", "docx", "jpg", "zip",  "png", "plain"];
+                    test = fileext.inArray(imgType[1]);
+                    if(!test){
+                        alert('File type '+imgType[1]+ ' is not prmitted');
+                        $(this).val('');    
+                    }  
+                    fileSize = fileSize+items[i].size; // get file size
+                }
+                if(fileSize > 20000000) {
+                    alert('File size must not be more than 20 MB');
+                    $(this).val('');
+                    
+                }
+            }
+        });
+
            //////////NOTES///////////////////////////////////////////////
     // Configure/customize these variables.
         

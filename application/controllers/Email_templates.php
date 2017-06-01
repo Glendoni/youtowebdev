@@ -11,13 +11,9 @@ class Email_templates extends MY_Controller {
 		parent::__construct();
 		$this->load->model('Email_templates_model');
         
-            // $usrid =   $this->accessArr('access'); //user id array list
-        
-       
-       // echo in_array($this->data['current_user']['id'],$usrid);
-      //  echo $this->data['current_user']['role']  == 'Admin';
+         $this->load->library('form_validation');
          
-      
+        $this->load->helper(array('form', 'url','sendgrid'));
           $this->access = true;
           $this->edit =  in_array($this->data['current_user']['id'],$this->accessArr('edit_template'));
           $this->delete = in_array($this->data['current_user']['id'],$this->accessArr('delete_email_template'));
@@ -26,17 +22,13 @@ class Email_templates extends MY_Controller {
 
 	public function index()
 	{
-        
-        
+    
 		 if(!$this->edit){
          
         redirect('/dashboard','location');
         exit();
          }
         
-        
-     //  $this->data['current_user']['department'];
-    
         if($this->access){
             
            $this->data['edit'] = $this->edit;
@@ -96,12 +88,14 @@ class Email_templates extends MY_Controller {
         }
 	}
 	private function process_upload(){
+        
+        
 		if (!empty($_FILES['files']['name'][0])) {
 			$config['upload_path'] = realpath(APPPATH.'../assets/email_attachments/');
 			$config["overwrite"] = TRUE;
 			$config["remove_spaces"] = TRUE;
-			$config["allowed_types"] = "txt|pdf|doc|docx|jpg|zip|png";
-			$config["max_size"] = 2000;
+			$config["allowed_types"] = "txt|pdf|doc|docx|jpg|zip|png|plain";
+			$config["max_size"] = 20000000; 
 			$count = 0;
 			$attachments = array();
 			foreach ($_FILES as $key => $value)   //fieldname is the form field name
@@ -123,7 +117,7 @@ class Email_templates extends MY_Controller {
 			        {
 			            $data = $this->upload->get_multi_upload_data();
 			            foreach ($data as $key => $value) {
-			             	array_push($attachments, $value['full_path']);
+			             	array_push($attachments, $value);
 			            }			             
 			        }
 			    }
@@ -133,8 +127,9 @@ class Email_templates extends MY_Controller {
 		return array();
 	}
 
-	public function send_email(){
-		
+	public function send_email()
+    {
+
 		$template_selector = $this->input->post('template_selector');
 		$template_message = $this->input->post('message_'.$template_selector);
 		$template_subject = $this->input->post('subject_'.$template_selector);
@@ -171,8 +166,9 @@ class Email_templates extends MY_Controller {
 			    	'sender_role' => $this->data['current_user']['role'],
 			    	);
 			    $email = $this->load->view('email_templates/base', $data, TRUE);
-
-			 	// template attachment
+            $emailed =     preg_replace("/\r\n|\r|\n/", ' ', nl2br(trim($message))); 
+            $sendgrid_response =  send_grid_mailer($contact->email,$subject,$emailed,$this->data['current_user']['gmail_account'],$attachments);
+  
 			 	if(!empty($template->attachments)){
 				 	foreach (json_decode($template->attachments) as $attachment) {
 				 		$this->email->attach($attachment);
@@ -184,8 +180,8 @@ class Email_templates extends MY_Controller {
 				 		$this->email->attach($attachment);
 				 	}
 				}
-			    $this->email->message($email);
-			    if (!$this->email->send()){
+                
+			    if ($sendgrid_response != 202){
 				    $this->set_message_error($this->email->print_debugger());
 				    
 			    }
@@ -211,6 +207,7 @@ class Email_templates extends MY_Controller {
 			$this->set_message_error('Email not send, information missing on form.');
 			redirect('/companies/company?id='.$this->input->post('company_id'));
 		}
+
 	}
 
 	public function update()
@@ -274,6 +271,5 @@ class Email_templates extends MY_Controller {
 			}
 		}
 	}
-
-	
+ 
 }

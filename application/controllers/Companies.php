@@ -271,6 +271,7 @@ class Companies extends MY_Controller {
 	
 	public function company()
 	{
+    
       $getallusers =   $this->data['getallusers'] =  $this->Users_model->get_all_users($this->data['current_user']['id']);
        $this->data['currentuserid']   = $this->data['current_user']['id'];
       

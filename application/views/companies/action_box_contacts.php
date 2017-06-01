@@ -74,8 +74,28 @@
 	                </div>
 	                <div class="col-md-12">
 	                    <div class="form-group">
-	                        <label for="email" class="control-label">Extra Attachments</label>                            
-	                        <input type="file" name="files[]" multiple>
+                            
+                            <?php
+                                                                            $mystring = $_SERVER['HTTP_USER_AGENT'];
+$findme   = 'Macintosh';
+$pos = strpos($mystring, $findme);
+
+// Note our use of ===.  Simply == would not work as expected
+// because the position of 'a' was the 0th (first) character.
+if ($pos === false) {
+  $piplelineStapLine  = '<span class="piplineverbiagekeayboard"> Hold ctrl key to select multiples</span>';
+} else {
+    $piplelineStapLine  = '<span class="piplineverbiagekeayboard"> Hold cmd &#8984; key to select multiples </span>';
+}
+                            
+                            ?>
+	                        <label for="email" class="control-label">Extra Attachments (<?php echo $piplelineStapLine; ?>)</label>                            
+	                        <input type="file" name="files[]" class="uploadMultipleFiles" multiple>
+                          
+                            
+                            
+                            
+                            
 	                    </div>
 	                </div>
 				 </div>
