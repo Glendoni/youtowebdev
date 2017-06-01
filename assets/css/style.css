@@ -3568,6 +3568,15 @@ background : rgba(255, 0, 0, 0.12);
 display:none;
 }
 
+.selected_placements span, .live_placements span, .pending_placements span,.days_since_last_placement_submitted span{
+    font-size:34px;
+    font-weight: 100;
+}
+.selected_placements{ color:#333;} 
+.live_placements{color:#5cb85c;}  
+.pending_placements{color:#f0ad4e;}
+.days_since_last_placement_submitted{color:#5cb85c;}
+
 /*! Hint.css - v2.2.1 - 2016-03-26 //#2b4461
 * http://kushagragour.in/lab/hint/
 * Copyright (c) 2016 Kushagra Gour; Licensed  */

@@ -54,4 +54,15 @@ class Api extends CI_Controller {
        
     }
     
+    function get_company_placements()
+    {
+        $department = array('support', 'development');
+        if($this->input->get('zd_id')) {
+          $comp_reg_num = $this->input->get('comp_reg_num');
+        } 
+       $response =  $this->Api_model->get_placement_data($comp_reg_num);
+       echo  $response;
+       
+    }
+    
 }

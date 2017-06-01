@@ -14,8 +14,38 @@ function dateRequired()     {
         
            //////////NOTES///////////////////////////////////////////////
     // Configure/customize these variables.
-
-    
+        
+        var zd_id = $('#zdesk_id').attr('data');
+                var comp_reg_num = $('.comp_registration_num').text();
+        
+        
+        var param = { 'zd_id' : zd_id, 'comp_reg_num' : comp_reg_num };
+                if(comp_reg_num){
+               
+                 $.ajax({
+                        type: "GET",
+                        data:param,
+                        dataType: "json",
+                        url: "../Api/get_company_placements",
+                        success: function(data) {
+                            
+                             $('.selected_placements span').text(0);
+                                $('.live_placements span').text(0);
+                                $('.pending_placements span').text(0);
+                                $('.days_since_last_placement_submitted span').text(0);
+                            
+                            
+                                $('.selected_placements span').text(data.data.submittedPlacements);
+                                $('.live_placements span').text(data.data.livePlacements);
+                                $('.pending_placements span').text(data.data.pendingPlacements);
+                                $('.days_since_last_placement_submitted span').text(data.data.daysSinceLastPlacement); 
+                            }
+                            
+                        });
+                
+                
+                }
+        
                 $(".noteinput").keyup(function(){
                     // $(".morelink").unbind('click');
                             var attr = $(this).attr('note');
