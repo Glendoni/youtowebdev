@@ -307,7 +307,7 @@ class Companies extends MY_Controller {
             $company = $this->process_search_result($raw_search_results);
             $this->data['companieshack'] = $this->Companies_model->hackmorgages($this->input->get('id'));
 			$this->data['contacts'] = $this->Contacts_model->get_contacts_s($this->input->get('id'));
-           // $this->data['bespoke'] = $this->Companies_model->bespoke_array();
+            $this->data['proposal_set_check'] = $this->Actions_model->proposal_set_checker($this->input->get('id'));
             $address = $this->Companies_model->get_addresses($this->input->get('id'));
             
             foreach ($address as $row)
@@ -351,14 +351,9 @@ class Companies extends MY_Controller {
 			$this->data['action_types_done'] = $this->Actions_model->get_action_types_done();
 			$this->data['action_types_planned'] = $this->Actions_model->get_action_types_planned();
             $this->data['last_pipeline_created_at'] = $this->Actions_model->actiondata($this->input->get('id'));
-			//$this->data['action_types_array'] = $this->Actions_model->get_action_types_array();
-			//$this->data['actions_outstanding'] = $this->Actions_model->get_actions_outstanding($this->input->get('id'));
-			//$this->data['actions_completed'] = $this->Actions_model->get_actions_completed($this->input->get('id'));
-			//$this->data['actions_cancelled'] = $this->Actions_model->get_actions_cancelled($this->input->get('id'));
-			//$this->data['actions_marketing'] = $this->Actions_model->get_actions_marketing($this->input->get('id'));
-			//$this->data['get_actions'] = $this->Actions_model->get_actions($this->input->get('id'));
-			//$this->data['comments'] = $this->Actions_model->get_comments($this->input->get('id'));
 			$this->data['page_title'] = $company[0]['name'];
+            
+            
 			$this->data['companies'] = $company;
 			$this->data['hide_side_nav'] = True;
 			$this->data['main_content'] = 'companies/company';
@@ -417,7 +412,7 @@ if($this->input->post('edit_company'))
                         // We need to clean the post and validate the post fields *pending*
                         $result = $this->Companies_model->add_Services_Level($this->input->post(),$this->data['current_user']['id']);
  
-                       //  $this->Companies_model->cronPipeline(0,$post['company_id']);
+                     
 
                         $this->refresh_search_results();
                         $this->set_message_success('Company Updated');
@@ -492,7 +487,6 @@ if($this->input->post('edit_company'))
 				{
 					$this->set_message_success('Address has been updated.');
 					redirect('/companies/company?id='.$this->input->post('company_id'));
-					// $this->refresh_search_results();
 				}
 				else
 				{
@@ -606,13 +600,10 @@ else {
                      exit();
                     }
                     
-                       // file_put_contents('apitext.txt', 'Initial stage two'.PHP_EOL, FILE_APPEND);            
+                               
                         $chargesResponse = $this->getCompanyHouseCharges($this->input->post('registration'));
-
-                        //file_put_contents('apitext.txt', 'This has ran retured a $chargesResponse condition bbb:'.$rows_affected, FILE_APPEND); 
-
                         if($chargesResponse){      
-                         //   file_put_contents('apitext.txt', 'Initial stage three'.PHP_EOL, FILE_APPEND); 
+                      
                             $this->Companies_model->insert_charges_CH($chargesResponse,$rows_affected,$this->data['current_user']['id']);  
 
     
@@ -704,7 +695,7 @@ else {
    function _index()
 {
       $call_taggin_js_file =    asset_url().'js/tagging.js';
-   //echo file_exists(base_url().'assets/tagging.js');
+ 
        $this->data['test'] =   $call_taggin_js_file ;
        $this->data['jq'] = $this->jqScript;
        $this->data['so'] =  $this->Tagging_model->add_category();
