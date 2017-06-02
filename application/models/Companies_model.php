@@ -949,7 +949,7 @@ return $this->db->affected_rows();
  
 				//'pipeline'=>(!empty($post['company_pipeline'])?$post['company_pipeline']:NULL),
                  'turnover' => !empty($post['turnover'])?$post['turnover']:NULL,
-                'employees' =>   $post['employees_m'],
+                'employees' => !empty($post['employees'])?$post['employees']:NULL,
 
 				'updated_by'=>$post['user_id'],
 				//'pipeline'=>!empty($post['company_pipeline'])?$post['company_pipeline']:NULL,
@@ -2025,7 +2025,40 @@ where M.provider_id = 2893  and C.id='.$id.' ';
                 $this->db->update('companies', $data);
     }    
     
+        function get_company_by_registration_zendesk($id)
+    {    
+                $sql = "select c.id,c.name,c.registration, c.zendesk_id, c.name ,ct.email , ct.first_name, ct.last_name, ct.id as contact_id, ct.eff_to as not_active
+                from companies c
+                left join contacts ct
+                on c.id = ct.company_id
+                where c.id ='".$id."'";
+                //$query = $this->db->query($sql);
+                $stack = array();
+                $query = $this->db->query($sql);
+                $query = $query->result_array();
+                $output['id']  =  $query[0]['id'];
+                $output['registration']  = $query[0]['registration'];
+                $output['name']  = $query[0]['name'];
+        $output['zendesk_id']  = $query[0]['zendesk_id'];
+                $output ['result'] = $query;
+              unset($output ['result']['name']);
+                foreach($query as $row){
+                    $res =  explode('@',$row['email']);
+                    array_push($stack,$res[1]);
+                }
+              
+                return $output;
+                 
+    }
     
+    function update_company_with_zendesk_id($company_id,$zendesk_id)
+    {
+        $data = array(
+            'zendesk_id' => $zendesk_id      
+        );
+        $this->db->where('id', $company_id);
+        $this->db->update('companies', $data);
+    }
     
     
 }
