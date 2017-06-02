@@ -3564,6 +3564,84 @@ background : rgba(255, 0, 0, 0.12);
     height:200px;
     
 }
+
+
+.zd_status_pending,.zd_status_open, .zd_status_new,.zd_status_solved{
+    
+    padding:0px 4px;
+    border-radius:5px;
+    color:#fff;  
+    font-size: 11px;
+    
+}
+.zd_status_pending{
+    
+    background:#f0ad4e;
+   
+}
+.zd_status_open{
+    
+    background:#d9534f;
+    
+}
+.zd_status_new{
+
+    background:#f0ad4e;
+
+}
+.zd_status_solved{
+    
+    background:#999;
+}
+.view_zd_ticket{
+    
+    padding:0px 4px;
+    font-size: 11px;
+}
+.selected_placements, .live_placements, .pending_placements,.days_since_last_placement_submitted{
+ 
+}
+.selected_placements span, .live_placements span, .pending_placements span,.days_since_last_placement_submitted span{
+    font-size:34px;
+    font-weight: 100;
+}
+.selected_placements{ color:#333;} 
+.live_placements{color:#5cb85c;}  
+.pending_placements{color:#f0ad4e;}
+.days_since_last_placement_submitted{color:#5cb85c;}
+.zendesk_tickets_display{
+    
+    display:none;
+}
+.closedzdmenu,.openzdmenu{
+    
+    display:none; 
+}
+.zd_new_count, .zd_open_count, .zd_solved_count, .zd_pending_count, .zd_on_hold_count, .zd_on_closed_count{ 
+ 
+    padding: 3px;
+    font-size: 11px;
+    font-weight: 100;
+}
+.zd_totals{
+    
+       border-radius: 5px;
+    background: green;
+    margin-left: 30px;
+    margin-right: 5px;
+ 
+}
+.zd_new_count{ background: #f0ad4e;}
+.zd_open_count{background:#d9534f ;}
+.zd_solved_count{background:#999 ;}
+.zd_pending_count{background:#45ae7c ;}
+.zd_on_hold_count{background: #333;}
+.zd_on_closed_count{background: #ad6a68;}
+
+.zdCatValue{
+ text-transform:capitalize;
+}
+
 .domain { 
 display:none;
 }
