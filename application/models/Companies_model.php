@@ -942,17 +942,9 @@ return $this->db->affected_rows();
 				'phone' => !empty($post['phone'])?$post['phone']:NULL,
 				'linkedin_id' => (isset($post['linkedin_id']) and !empty($post['linkedin_id']))?$post['linkedin_id']:NULL,
 				'url' => !empty($post['url'])?str_replace('http://', '',$post['url']):NULL,
-           
-				//'class'=>!empty($post['company_class'])?$post['company_class']:NULL,
- 
-//'pipeline'=>(!empty($post['company_pipeline'])?$post['company_pipeline']:NULL),
- 
-				//'pipeline'=>(!empty($post['company_pipeline'])?$post['company_pipeline']:NULL),
-                 'turnover' => !empty($post['turnover'])?$post['turnover']:NULL,
-                'employees' =>   $post['employees_m'],
-
+                'turnover' => !empty($post['turnover'])?$post['turnover']:NULL,
+                'employees' => !empty($post['employees'])?$post['employees']:NULL,
 				'updated_by'=>$post['user_id'],
-				//'pipeline'=>!empty($post['company_pipeline'])?$post['company_pipeline']:NULL,
 				'updated_at' => date('Y-m-d H:i:s'),
 				'lead_source_id'=>$source,
 				'source_explanation'=>!empty($post['source_explanation'])?$post['source_explanation']:NULL,
@@ -2025,7 +2017,39 @@ where M.provider_id = 2893  and C.id='.$id.' ';
                 $this->db->update('companies', $data);
     }    
     
+        function get_company_by_registration_zendesk($id)
+    {    
+                $sql = "select c.id,c.name,c.registration, c.zendesk_id, c.name ,ct.email , ct.first_name, ct.last_name, ct.id as contact_id, ct.eff_to as not_active
+                from companies c
+                left join contacts ct
+                on c.id = ct.company_id
+                where c.id ='".$id."'";
+                $stack = array();
+                $query = $this->db->query($sql);
+                $query = $query->result_array();
+                $output['id']  =  $query[0]['id'];
+                $output['registration']  = $query[0]['registration'];
+                $output['name']  = $query[0]['name'];
+        $output['zendesk_id']  = $query[0]['zendesk_id'];
+                $output ['result'] = $query;
+              unset($output ['result']['name']);
+                foreach($query as $row){
+                    $res =  explode('@',$row['email']);
+                    array_push($stack,$res[1]);
+                }
+              
+                return $output;
+                 
+    }
     
+    function update_company_with_zendesk_id($company_id,$zendesk_id)
+    {
+        $data = array(
+            'zendesk_id' => $zendesk_id      
+        );
+        $this->db->where('id', $company_id);
+        $this->db->update('companies', $data);
+    }
     
     
 }

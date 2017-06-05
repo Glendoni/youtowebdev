@@ -7,7 +7,7 @@ class Actions extends MY_Controller {
 		parent::__construct();
         
          $this->load->model('Files_model');
-        $this->load->helper(array('form', 'url'));
+        $this->load->helper(array('form', 'url','zendeskv3'));
          $this->load->helper('MY_azurefile');
 		
 	}
@@ -74,6 +74,7 @@ foreach($userfilename as $key => $value){
                     $this->form_validation->set_rules('company_id', 'company_id', 'xss_clean|required');
                     $this->form_validation->set_rules('user_id', 'user_id', 'xss_clean|required');
                     $this->form_validation->set_rules('contact_id', 'contact_id', 'xss_clean');
+                    $this->form_validation->set_rules('domain', 'domain', 'xss_clean');
                     if($this->form_validation->run())
                     {	$post = $this->input->post();
 
@@ -181,11 +182,11 @@ foreach($userfilename as $key => $value){
                                  if($this->Companies_model->company_select($company_id)){ //prevents proposal being updated if company is a customer
                                 
                                         $result = $this->Companies_model->update_company_to_proposal($company_id);
+                                     
+                                        if($this->input->post('domain')){
+                                            $this->zendesk($company_id,$this->input->post('domain'));
+                                        }                 
                                  }
-                                //if(empty($result)){
-                                  //  $this->set_message_warning('Error while updating company.');
-                                //}else{
-                                    // action model, update register an action for the proposal
                                     $result = $this->Actions_model->company_updated_to_proposal($post); 
                                     $result1 = $this->Actions_model->add_to_zendesk($post); 
                                     if(empty($result)) $this->set_message_warning('Error while updating action for the company.');
@@ -487,19 +488,43 @@ foreach($userfilename as $key => $value){
     }
 
     
-    //////////////AZURE////
-    
-     public function azure_list_files_tester (){
- 
-    // $this->load->library('Azure');
-   
-      //list_files();
-     
-     //force_download('$nme',  getfile());
-     
- }
-    
-    /////////////=END///////////////////
+function zendesk($company_id = 354262,$domain = 'Sonovate.com')
+  {
+         $output  =   $this->Companies_model->get_company_by_registration_zendesk($company_id);
+        if(!$output['zendesk_id']) {
+            
+             $domain = trim($domain);
+        
+        $at_sign = '@';
+        $wordArray = substr($domain, 0, 4) ;
+        
+        $at_sign = strpos($domain, $at_sign);
+         
+        if($at_sign){
+            $domain =  explode('@',$domain);
+            $domain =  $mystring[1];
+        }elseif($wordArray == 'www.'){
+           
+            $domain =  explode($wordArray,$domain);
+            $domain =  $domain[1];
+        }else{
+            
+              $domain =   $domain;
+            
+        }
+            $domain = htmlspecialchars($domain);
+            
+            $response  = sonovate_zendesk(false,$company_id, $output,'create_a_new_organisation',$domain);  
+
+            foreach($output['result'] as $key =>$row ){
+                 if($row['contact_id'] == true && $row['not_active']==null &&  $row['email'] != null){
+                  create_zd_user($row['contact_id'], $row['first_name']. ' '.$row['last_name'], $response->organization->id,  $row['email'])  ;
+                 }
+            }
+            $this->Companies_model->update_company_with_zendesk_id($company_id,$response->organization->id);
+         
+        }        
+    }
  
     
 }
