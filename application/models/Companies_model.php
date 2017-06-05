@@ -2024,7 +2024,6 @@ where M.provider_id = 2893  and C.id='.$id.' ';
                 left join contacts ct
                 on c.id = ct.company_id
                 where c.id ='".$id."'";
-                //$query = $this->db->query($sql);
                 $stack = array();
                 $query = $this->db->query($sql);
                 $query = $query->result_array();
