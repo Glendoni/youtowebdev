@@ -942,17 +942,9 @@ return $this->db->affected_rows();
 				'phone' => !empty($post['phone'])?$post['phone']:NULL,
 				'linkedin_id' => (isset($post['linkedin_id']) and !empty($post['linkedin_id']))?$post['linkedin_id']:NULL,
 				'url' => !empty($post['url'])?str_replace('http://', '',$post['url']):NULL,
-           
-				//'class'=>!empty($post['company_class'])?$post['company_class']:NULL,
- 
-//'pipeline'=>(!empty($post['company_pipeline'])?$post['company_pipeline']:NULL),
- 
-				//'pipeline'=>(!empty($post['company_pipeline'])?$post['company_pipeline']:NULL),
-                 'turnover' => !empty($post['turnover'])?$post['turnover']:NULL,
+                'turnover' => !empty($post['turnover'])?$post['turnover']:NULL,
                 'employees' => !empty($post['employees'])?$post['employees']:NULL,
-
 				'updated_by'=>$post['user_id'],
-				//'pipeline'=>!empty($post['company_pipeline'])?$post['company_pipeline']:NULL,
 				'updated_at' => date('Y-m-d H:i:s'),
 				'lead_source_id'=>$source,
 				'source_explanation'=>!empty($post['source_explanation'])?$post['source_explanation']:NULL,

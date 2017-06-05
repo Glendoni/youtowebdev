@@ -187,10 +187,6 @@ foreach($userfilename as $key => $value){
                                             $this->zendesk($company_id,$this->input->post('domain'));
                                         }                 
                                  }
-                                //if(empty($result)){
-                                  //  $this->set_message_warning('Error while updating company.');
-                                //}else{
-                                    // action model, update register an action for the proposal
                                     $result = $this->Actions_model->company_updated_to_proposal($post); 
                                     $result1 = $this->Actions_model->add_to_zendesk($post); 
                                     if(empty($result)) $this->set_message_warning('Error while updating action for the company.');
