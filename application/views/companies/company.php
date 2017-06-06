@@ -616,19 +616,14 @@ if ($your_date < $now){;
 		
        		<!--CONTACTS-->
       
-        <?php
-
-    $exclude_from_view = array('data');
-        if(!in_array($current_user['department'],$exclude_from_view)){ 
-    
-    ?>
-    
+     
     
     
     <div class="col-md-12">
         
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-    <div id="zdesk_id" data="<?php echo $company['zendesk_id']? $company['zendesk_id'] : ''; ?>"></div>
+    <div id="placement_id" data="<?php echo $company['zendesk_id']? $company['zendesk_id'] : ''; ?>"></div>
+            
     
     <?php 
  
@@ -660,23 +655,40 @@ if ($your_date < $now){;
             
        <!-- There are currently no placements for this agency.  -->      </div>
         </div>
-
+    
 <!--  PLACEMENT  621  -->
-
+    </div>
             <?php 
         
         }
             
+        
+    
+     
+
+    $exclude_from_view = array('sales','data');
+        if(!in_array($current_user['department'],$exclude_from_view)){ 
+  
+            
+            
+            
+            
+            
               $zendesk_access = array('sales','admin','development');
             
             if(in_array($current_user['department'], $zendesk_access) && ($company['pipeline'] == 'Intent' || $company['pipeline'] == 'Proposal')){
+                
+                
         ?>
 
+        
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-    <div id="zdesk_id" data="<?php echo $company['zendesk_id']? $company['zendesk_id'] : ''; ?>"></div>
+ 
 <?php 
     $placement_access = array('support', "client services", "Client Services", 'finance','development');
     if(in_array($current_user['department'], $placement_access) && ($company['zendesk_id'])){ ?>
+    
+       <div id="zdesk_id" data="<?php echo $company['zendesk_id']? $company['zendesk_id'] : ''; ?>"></div>
 <div class="panel panel-default">
         <div class="panel-heading" id="placements">
         Zendesk Tickets  <span class="ticket_count"></span>  
@@ -794,7 +806,8 @@ if ($your_date < $now){;
     
    
 <!-- PLACEMENT END-->
-<?php } ?>
+<?php }
+        ?>
     </div>
         <div class="col-md-12">
         <div class="panel panel-default">
