@@ -621,20 +621,17 @@ if ($your_date < $now){;
     
     <div class="col-md-12">
         
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        
     <div id="placement_id" data="<?php echo $company['zendesk_id']? $company['zendesk_id'] : ''; ?>"></div>
             
     
     <?php 
  
     $placement_access = array('sales','admin','development');
-   // if(in_array($current_user['department'], $placement_access) && ($company['pipeline'] == 'Intent')){
-    if(in_array($current_user['department'], $placement_access) && ($company['pipeline'] == 'Intent' || $company['pipeline'] == 'Proposal')){
+    if(in_array($current_user['department'], $placement_access) && ($company['pipeline'] == 'Proposal')){
    
     ?>
     <div class="panel panel-default">
-        
-    
         <div class="panel-heading">
         Placements  
         </div>
@@ -654,35 +651,23 @@ if ($your_date < $now){;
             
             
        <!-- There are currently no placements for this agency.  -->      </div>
-        </div>
+   
     
 <!--  PLACEMENT  621  -->
-    </div>
-            <?php 
-        
-        }
-            
-        
     
-     
+            <?php } ?>
+        
+             </div>
+    <?php 
 
-    $exclude_from_view = array('sales','data');
+        $exclude_from_view = array('sales','data');
         if(!in_array($current_user['department'],$exclude_from_view)){ 
   
-            
-            
-            
-            
-            
               $zendesk_access = array('sales','admin','development');
             
-            if(in_array($current_user['department'], $zendesk_access) && ($company['pipeline'] == 'Intent' || $company['pipeline'] == 'Proposal')){
-                
-                
+            if(in_array($current_user['department'], $zendesk_access) && ($company['pipeline'] == 'Intent' || $company['pipeline'] == 'Proposal')){   
         ?>
-
-        
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<div class="">
  
 <?php 
     $placement_access = array('support', "client services", "Client Services", 'finance','development');
@@ -800,15 +785,15 @@ if ($your_date < $now){;
         </div>
 
 
-</div>
+
 
 <?php } ?>
-    
+ </div>   
    
 <!-- PLACEMENT END-->
 <?php }
         ?>
-    </div>
+   
         <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading" id="bespoke" >
