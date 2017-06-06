@@ -667,6 +667,7 @@ if ($your_date < $now){;
         <?php 
                
             $placement_access = array('support', "client services", "Client Services", 'finance','development');
+         $placement_access_btn = array("client services", "Client Services",  "risk", "Risk", 'finance','development');
             if(in_array($current_user['department'], $placement_access) && ($company['zendesk_id'])){ ?>
 
                <div id="zdesk_id" data="<?php echo $company['zendesk_id']? $company['zendesk_id'] : ''; ?>"></div>
@@ -699,7 +700,14 @@ if ($your_date < $now){;
                     }
 
                     ?>
+                    <?php   if(in_array($current_user['department'], $placement_access_btn) && ($company['zendesk_id'])){ ?>
+                    
                     <a href="<?php echo $zd_url; ?>" class="btn btn-primary btn-xs zendesk" target="_blank">View Company on Zendesk</a>
+                    
+                    
+                    <?php } ?>
+                    
+                    
                 </div>
 
                 </div>
