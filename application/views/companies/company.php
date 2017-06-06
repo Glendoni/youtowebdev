@@ -618,7 +618,7 @@ if ($your_date < $now){;
       
         <?php
 
-    $exclude_from_view = array('sales','data');
+    $exclude_from_view = array('data');
         if(!in_array($current_user['department'],$exclude_from_view)){ 
     
     ?>
@@ -631,7 +631,7 @@ if ($your_date < $now){;
     <div id="zdesk_id" data="<?php echo $company['zendesk_id']? $company['zendesk_id'] : ''; ?>"></div>
     
     <?php 
-   
+ 
     $placement_access = array('sales','admin','development');
    // if(in_array($current_user['department'], $placement_access) && ($company['pipeline'] == 'Intent')){
     if(in_array($current_user['department'], $placement_access) && ($company['pipeline'] == 'Intent' || $company['pipeline'] == 'Proposal')){
@@ -663,11 +663,19 @@ if ($your_date < $now){;
 
 <!--  PLACEMENT  621  -->
 
+            <?php 
+        
+        }
+            
+              $zendesk_access = array('sales','admin','development');
+            
+            if(in_array($current_user['department'], $zendesk_access) && ($company['pipeline'] == 'Intent' || $company['pipeline'] == 'Proposal')){
+        ?>
 
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <div id="zdesk_id" data="<?php echo $company['zendesk_id']? $company['zendesk_id'] : ''; ?>"></div>
 <?php 
-    $placement_access = array( 'sales','support', "client services", "Client Services", 'finance','development');
+    $placement_access = array('support', "client services", "Client Services", 'finance','development');
     if(in_array($current_user['department'], $placement_access) && ($company['zendesk_id'])){ ?>
 <div class="panel panel-default">
         <div class="panel-heading" id="placements">
