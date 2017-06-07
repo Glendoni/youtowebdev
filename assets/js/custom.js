@@ -44,13 +44,14 @@ function dateRequired()     {
            //////////NOTES///////////////////////////////////////////////
     // Configure/customize these variables.
         
+        var placement_id = $('#placement_id').attr('data');
         var zd_id = $('#zdesk_id').attr('data');
                 var comp_reg_num = $('.comp_registration_num').text();
+      
         
-        
-        var param = { 'zd_id' : zd_id, 'comp_reg_num' : comp_reg_num };
-                if(comp_reg_num){
-               
+        var param = { 'zd_id' : placement_id, 'comp_reg_num' : comp_reg_num };
+                if(placement_id){
+             
                  $.ajax({
                         type: "GET",
                         data:param,
@@ -130,7 +131,7 @@ $("#noteoutput"+attr).html($(this).html()+'<br><button type="button" class="btn 
                 
                  var param = { 'zd_id' : zd_id, 'compRegNum' : comp_reg_num };
                 
-                
+               
                   $.ajax({
                         type: "GET",
                         data:param,

@@ -616,30 +616,24 @@ if ($your_date < $now){;
 		
        		<!--CONTACTS-->
       
-        <?php
-
-    $exclude_from_view = array('sales','data');
-        if(!in_array($current_user['department'],$exclude_from_view)){ 
+     
     
-    ?>
+     <div class="col-md-12">
     
-    
-    
-    <div class="col-md-12">
         
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-    <div id="zdesk_id" data="<?php echo $company['zendesk_id']? $company['zendesk_id'] : ''; ?>"></div>
-    
+        
+   
     <?php 
-   
+ 
     $placement_access = array('sales','admin','development');
-   // if(in_array($current_user['department'], $placement_access) && ($company['pipeline'] == 'Intent')){
-    if(in_array($current_user['department'], $placement_access) && ($company['pipeline'] == 'Intent' || $company['pipeline'] == 'Proposal')){
+    if(in_array($current_user['department'], $placement_access) && ($company['pipeline'] == 'Proposal')){
    
     ?>
-    <div class="panel panel-default">
-        
     
+     <div id="placement_id" data="<?php echo $company['zendesk_id']? $company['zendesk_id'] : ''; ?>"></div>
+            
+   
+    <div class="panel panel-default">
         <div class="panel-heading">
         Placements  
         </div>
@@ -653,142 +647,155 @@ if ($your_date < $now){;
   <div class="col-sm-3 text-center placement_span live_placements"><span class="">-</span><br>Live Placements</div>
   <div class="col-sm-3 text-center placement_span pending_placements"><span class="">-</span><br>Pending Placements</div>
   <div class="col-sm-3 text-center placement_span days_since_last_placement_submitted"><span class="">-</span><br>Days Since Last Placement Submitted</div>
-         
+   
 </div>
         
             
             
        <!-- There are currently no placements for this agency.  -->      </div>
-        </div>
-
-<!--  PLACEMENT  621  -->
-
-
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-    <div id="zdesk_id" data="<?php echo $company['zendesk_id']? $company['zendesk_id'] : ''; ?>"></div>
-<?php 
-    $placement_access = array( 'sales','support', "client services", "Client Services", 'finance','development');
-    if(in_array($current_user['department'], $placement_access) && ($company['zendesk_id'])){ ?>
-<div class="panel panel-default">
-        <div class="panel-heading" id="placements">
-        Zendesk Tickets  <span class="ticket_count"></span>  
-            
-            <span class="zd_totals zd_new_count">new</span><span class="new_count">-</span>
-            <span class="zd_totals zd_open_count">open</span><span class="open_count">-</span>
-            <span class="zd_totals zd_solved_count">solved</span><span class="solved_count">-</span>
-            <span class="zd_totals zd_pending_count">pending</span> <span class="on_pending_count">-</span>
-            <span class="zd_totals zd_on_hold_count">on hold</span><span class="on_hold_count">-</span>
-             <span class="zd_totals zd_on_closed_count">closed</span><span class="on_closed_count">-</span>
-            
-        <div class="pull-right">
-            
-        <div class="btn-group">
-            
-            <?php
-            switch (ENVIRONMENT){
-            	case "development":
-            		$zd_url   = 	"https://sonovate1482226651.zendesk.com/agent/organizations/".$company['zendesk_id']; 
-            		break;
-            	case "staging":
-            		$zd_url   = 	"https://sonovate1482226651.zendesk.com/agent/organizations/".$company['zendesk_id']; 
-            		break;	
-            	case "production":
-            	$zd_url   = 	"https://sonovate.zendesk.com/agent/organizations/".$company['zendesk_id']; 
-            break; 	
-            }
-            
-            ?>
-            <a href="<?php echo $zd_url; ?>" class="btn btn-primary btn-xs zendesk" target="_blank">View Company on Zendesk</a>
-        </div>
-            
-        </div>
-        </div>
-        <!-- /.panel-heading -->
-        <div class="panel-body">
-
-  <!-- Nav tabs -->
-  
-
-<style type="text/css">
-    .table-fixed tbody {
-  height: 230px;
-  overflow-y: auto;
-  width: 100%;
-}
-</style>
-  <!-- Tab panes -->
-  <div class="tab-content ">
-    <div role="tabpanel" class="zendesk_tickets_display tab-pane active" id="zd_placements">
-        <table class="table table-fixed openzdmenu">
-            <thead>
-                <tr>
-                    <th class="col-md-2">Date Raised</th>
-                    <th class="col-md-2">Raised By</th>
-                    <th class="col-md-1">Status</th>
-                     <th class="col-md-2">Ticket No.</th>
-                    <th class="col-md-3">Subject</th>
-                     <th class="col-md-1">Category</th>
-                   
-                    <th class="col-md-1"> </th>
-                </tr>
-            </thead>
-            <tbody id="zd_open">
-  <div class="alert alert-info zendesk_loading_info-alert_open">
-<p style="width: auto; padding-left: 45%;" class="loadingZendeskText">Finding Tickets.</p>
-</div>
-       
-</tbody>
-</table>
-    </div>
-      
-    <div role="tabpanel" class="zendesk_tickets_display_close tab-pane" id="zd_tickets">
-
-        <table class="table table-fixed closedzdmenu">
-            <thead>
-                <tr>
-                     <th class="col-md-2">Date Raised</th>
-                    <th class="col-md-2">Raised By</th>
-                    <th class="col-md-1">Status</th>
-                      <th class="col-md-4">Subject</th>
-                    <th class="col-md-2">Ticket No.</th>
-                    <th class="col-md-1"> </th>
-                </tr>
-            </thead>
-            <tbody id="zd_closed">
- 
- <div class="alert alert-info zendesk_loading_info_alert_close">
-<p style="width: auto; padding-left: 45%;" class="loadingZendeskTextClose">Finding Closed Tickets.</p>
-</div>
-                
-                
-                
-</tbody>
-</table>
-</div>
-      
-      
-      
-</div>
-
-
-
-
-
-
-        </div>
-        <!-- /.panel-body -->
-        </div>
-
-
-</div>
-
-<?php } ?>
+   
     
+<!--  PLACEMENT  621  -->
+         </div>
+        
+   
+            <?php } ?>
+        
+        
+    
+
+        <?php 
+               
+            $placement_access = array('support', "client services", "Client Services", 'finance','development');
+         $placement_access_btn = array("client services", "Client Services",  "risk", "Risk", 'finance','development');
+            if(in_array($current_user['department'], $placement_access) && ($company['zendesk_id'])){ ?>
+
+               <div id="zdesk_id" data="<?php echo $company['zendesk_id']? $company['zendesk_id'] : ''; ?>"></div>
+        <div class="panel panel-default">
+                <div class="panel-heading" id="placements">
+                Zendesk Tickets  <span class="ticket_count"></span>  
+
+                    <span class="zd_totals zd_new_count">new</span><span class="new_count">-</span>
+                    <span class="zd_totals zd_open_count">open</span><span class="open_count">-</span>
+                    <span class="zd_totals zd_solved_count">solved</span><span class="solved_count">-</span>
+                    <span class="zd_totals zd_pending_count">pending</span> <span class="on_pending_count">-</span>
+                    <span class="zd_totals zd_on_hold_count">on hold</span><span class="on_hold_count">-</span>
+                     <span class="zd_totals zd_on_closed_count">closed</span><span class="on_closed_count">-</span>
+
+                <div class="pull-right">
+
+                <div class="btn-group">
+
+                    <?php
+                    switch (ENVIRONMENT){
+                        case "development":
+                            $zd_url   = 	"https://sonovate1482226651.zendesk.com/agent/organizations/".$company['zendesk_id']; 
+                            break;
+                        case "staging":
+                            $zd_url   = 	"https://sonovate1482226651.zendesk.com/agent/organizations/".$company['zendesk_id']; 
+                            break;	
+                        case "production":
+                        $zd_url   = 	"https://sonovate.zendesk.com/agent/organizations/".$company['zendesk_id']; 
+                    break; 	
+                    }
+
+                    ?>
+                    <?php   if(in_array($current_user['department'], $placement_access_btn) && ($company['zendesk_id'])){ ?>
+                    
+                    <a href="<?php echo $zd_url; ?>" class="btn btn-primary btn-xs zendesk" target="_blank">View Company on Zendesk</a>
+                    
+                    
+                    <?php } ?>
+                    
+                    
+                </div>
+
+                </div>
+                </div>
+    </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+
+          <!-- Nav tabs -->
+
+
+                                    <style type="text/css">
+                                        .table-fixed tbody {
+                                      height: 230px;
+                                      overflow-y: auto;
+                                      width: 100%;
+                                    }
+                                    </style>
+          <!-- Tab panes -->
+                            <div class="tab-content ">
+            <div role="tabpanel" class="zendesk_tickets_display tab-pane active" id="zd_placements">
+                <table class="table table-fixed openzdmenu">
+                    <thead>
+                        <tr>
+                            <th class="col-md-2">Date Raised</th>
+                            <th class="col-md-2">Raised By</th>
+                            <th class="col-md-1">Status</th>
+                             <th class="col-md-2">Ticket No.</th>
+                            <th class="col-md-3">Subject</th>
+                             <th class="col-md-1">Category</th>
+
+                            <th class="col-md-1"> </th>
+                        </tr>
+                    </thead>
+                    <tbody id="zd_open">
+          <div class="alert alert-info zendesk_loading_info-alert_open">
+        <p style="width: auto; padding-left: 45%;" class="loadingZendeskText">Finding Tickets.</p>
+        </div>
+
+        </tbody>
+        </table>
+            </div>
+
+            <div role="tabpanel" class="zendesk_tickets_display_close tab-pane" id="zd_tickets">
+
+                <table class="table table-fixed closedzdmenu">
+                    <thead>
+                        <tr>
+                             <th class="col-md-2">Date Raised</th>
+                            <th class="col-md-2">Raised By</th>
+                            <th class="col-md-1">Status</th>
+                              <th class="col-md-4">Subject</th>
+                            <th class="col-md-2">Ticket No.</th>
+                            <th class="col-md-1"> </th>
+                        </tr>
+                    </thead>
+                    <tbody id="zd_closed">
+
+         <div class="alert alert-info zendesk_loading_info_alert_close">
+        <p style="width: auto; padding-left: 45%;" class="loadingZendeskTextClose">Finding Closed Tickets.</p>
+        </div>
+
+
+
+        </tbody>
+        </table>
+        </div>
+
+
+
+        </div>
+
+                        </div>
+                <!-- /.panel-body -->
+               
+
+        <?php } 
+            
+            
+               if(true){
+            ?>
+    
+  
    
 <!-- PLACEMENT END-->
-<?php } ?>
-    </div>
-        <div class="col-md-12">
+ 
+   
+        <div class="">
         <div class="panel panel-default">
             <div class="panel-heading" id="bespoke" >
                Service Overview 
