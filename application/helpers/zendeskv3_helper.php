@@ -23,7 +23,7 @@ function create_zd_user($contact_id,$contact_name, $zendesk_id, $contact_email)
                         'organization_id' => $zendesk_id,
                         'email' => $contact_email,
                         'role'  => 'end-user',
-                        'user_type' => 'agency',
+                        'user_fields' => ['user_type' => 'Agency'],
                         ]
                     );
                     
