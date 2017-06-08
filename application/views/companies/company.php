@@ -976,14 +976,11 @@ font-size: 1em;
             </div>
                 
                 
-                              <?php }else{
-        
-        echo '<div class="alert alert-info">
-<p style="text-align:center;">No Services Applicable </p>
-</div>'
-;
-        
-    } ?>
+              <?php }else{
+
+                    echo '<div class="alert alert-info noServiceApplicable"><p style="text-align:center;">No Services Applicable </p></div>';
+
+                } ?>
       
     
             </div>
