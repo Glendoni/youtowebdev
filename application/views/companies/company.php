@@ -625,7 +625,7 @@ if ($your_date < $now){;
    
     <?php 
  
-    $placement_access = array('sales','admin','development');
+    $placement_access = array('data','support','sales','admin','development');
     if(in_array($current_user['department'], $placement_access) && ($company['pipeline'] == 'Customer')){
    
     ?>
