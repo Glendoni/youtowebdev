@@ -3654,6 +3654,8 @@ display:none;
 .live_placements{color:#5cb85c;}  
 .pending_placements{color:#f0ad4e;}
 .days_since_last_placement_submitted{color:#5cb85c;}
+.noServiceApplicable{margin-top:15px;}
+
 
 /*! Hint.css - v2.2.1 - 2016-03-26 //#2b4461
 * http://kushagragour.in/lab/hint/
