@@ -106,7 +106,7 @@
 <?php
 } ?>
      
-     Version S7</div>
+     Version S3</div>
     </a>
     
         <?php 
