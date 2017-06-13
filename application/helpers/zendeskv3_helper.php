@@ -11,6 +11,10 @@ function create_zd_user($contact_id,$contact_name, $zendesk_id, $contact_email)
     $subdomain = getenv('ZENDESK_API_SUBDOMAIN');
     $username  = getenv('ZENDESK_API_USERNAME'); // replace this with your registered email
     $token     = getenv('ZENDESK_API_KEY');
+    
+    $subdomain = 'sonovate';
+    $username  = 'spande@sonovate.com'; 
+    $token     = 'vh4lw3ChmknMmtiGzdsW4PjqtwDUXLMyO3gpltOC'; 
 
     $client = new ZendeskAPI($subdomain);
     $client->setAuth('basic', ['username' => $username, 'token' => $token]);
@@ -40,6 +44,11 @@ function sonovate_zendesk($zd_id,$company_id = false,$output =false, $action='',
     $subdomain = getenv('ZENDESK_API_SUBDOMAIN');
     $username  = getenv('ZENDESK_API_USERNAME'); 
     $token     = getenv('ZENDESK_API_KEY'); 
+
+    $subdomain = 'sonovate';
+    $username  = 'spande@sonovate.com'; 
+    $token     = 'vh4lw3ChmknMmtiGzdsW4PjqtwDUXLMyO3gpltOC'; 
+
  
     $client = new ZendeskAPI($subdomain);
     $client->setAuth('basic', ['username' => $username, 'token' => $token]);
