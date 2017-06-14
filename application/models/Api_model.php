@@ -28,7 +28,7 @@ class Api_model extends MY_Model {
         $agency_stats =  getenv(PLACEMENT_AGENCY_STATS);   
         $curl = curl_init();
         curl_setopt_array($curl, array(
-          CURLOPT_URL => "https://invoicing-api.sonovate.com/api/agencyStats/?companyRegNumber=12345",
+          CURLOPT_URL => "https://invoicing-api.sonovate.com/api/agencyStats/?companyRegNumber=".$comp_reg_num,
           CURLOPT_RETURNTRANSFER => true,
           CURLOPT_ENCODING => "",
           CURLOPT_MAXREDIRS => 10,
