@@ -11,7 +11,7 @@ function asset_upload(){
 
 //$connectionString = "DefaultEndpointsProtocol=[http|https];AccountName=[yourAccount];AccountKey=[yourKey]";
 // Create blob REST proxy.
-return  ServicesBuilder::getInstance()->createBlobService('DefaultEndpointsProtocol=https;AccountName=baselisttemp;AccountKey=7p3u0ud8nI/OSevWqMQtCoiM9+mXjq/sFMhHO+zc/CyBjrV3aMmw6IhdspKjWWGcK0+6A6/TLmKFSqoF2warXg==;');
+return  ServicesBuilder::getInstance()->createBlobService(getenv('FILE_UPLOAD_STORAGE_AZURE'));
 
 
 }
@@ -23,7 +23,7 @@ function uploadBlob($blob, $blob_name = "test"){
 
 try    {
     //Upload blob
-    $blobRestProxy->createBlockBlob("baselisttemp", $blob_name, $content);
+    $blobRestProxy->createBlockBlob("baselist", $blob_name, $content);
 }
 catch(ServiceException $e){
     // Handle exception based on error codes and messages.
@@ -41,7 +41,7 @@ function getfile($fileToGet){
     $blobRestProxy  = asset_upload();
     try    {
     // Get blob.
-    $blob = $blobRestProxy->getBlob("baselisttemp", $fileToGet);
+    $blob = $blobRestProxy->getBlob("baselist", $fileToGet);
     return $blob->getContentStream();
 }
 catch(ServiceException $e){
@@ -60,7 +60,7 @@ function list_files(){
 $blobRestProxy  = asset_upload();
     try    {
         // List blobs.
-        $blob_list = $blobRestProxy->listBlobs("baselisttemp");
+        $blob_list = $blobRestProxy->listBlobs("baselist");
         $blobs = $blob_list->getBlobs();
 
         foreach($blobs as $blob)

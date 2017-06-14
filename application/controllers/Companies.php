@@ -1214,13 +1214,11 @@ echo $this->Tagging_model->$route($post);
         $encyption_file_name  = $this->Files_model->getfile_($sha);
         $fileExt    =   explode('.',$encyption_file_name[0]['file_location']);
         $nme =  str_replace(' ','_', trim($encyption_file_name[0]['name'].'.'.$fileExt[1]));
-        $src  =  file_get_contents('https://baselisttemp.blob.core.windows.net/baselisttemp/'.$encyption_file_name[0]['file_location']);
+        $src  =  file_get_contents('https://baselistprodblobstorage.blob.core.windows.net/baselist/'.$encyption_file_name[0]['file_location']);
 
         force_download($nme, $src);  
      
     }
-    
-    
     
     function filetester($id = 352533){
         //line 158
@@ -1369,6 +1367,12 @@ unset($a[0]);
         
   echo in_array(64,$a) ? 'YES' : 'No';      
         
+    }
+    
+    function listfilesetz(){
+        
+         $this->load->helper('MY_azurefile');
+    list_files();
     }
     
 }
