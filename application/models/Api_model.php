@@ -28,7 +28,7 @@ class Api_model extends MY_Model {
         $agency_stats =  getenv(PLACEMENT_AGENCY_STATS);   
         $curl = curl_init();
         curl_setopt_array($curl, array(
-          CURLOPT_URL => $agency_stats.'/?companyRegNumber='.$comp_reg_num,
+          CURLOPT_URL => "https://invoicing-api.sonovate.com/api/agencyStats/?companyRegNumber=12345",
           CURLOPT_RETURNTRANSFER => true,
           CURLOPT_ENCODING => "",
           CURLOPT_MAXREDIRS => 10,
@@ -36,7 +36,7 @@ class Api_model extends MY_Model {
           CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
           CURLOPT_CUSTOMREQUEST => "GET",
           CURLOPT_HTTPHEADER => array(
-            "authorization: Basic YmFzZWxpc3Q6ck5tbGdNYUE4bnBPV1dNcWR1Nk0xMlVaN0RNaEF6X0lnSFQyRnNyNXFYcGlFSkVpVk5uOHhZSUlFQjlmOUJaTms4SHBaYlVZSGpUYVJXOEVrRU4yTk1CZEFBQQ==",
+            "authorization: Basic U29ub3ZhdGU0OnJObWxnTWFBOG5wT1dXTXFkdTZNMTJVWjdETWhBel9JZ0hUMkZzcjVxWHBpRUpFaVZObjh4WUlJRUI5ZjlCWk5rOEhwWmJVWUhqVGFSVzhFa0VOMk5NQmRBQUE=",
             "cache-control: no-cache"
           ),
         ));
