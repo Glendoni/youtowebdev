@@ -1368,12 +1368,5 @@ unset($a[0]);
   echo in_array(64,$a) ? 'YES' : 'No';      
         
     }
-    
-    function listfilesetz(){
-        
-         $this->load->helper('MY_azurefile');
-    list_files();
-    }
-    
 }
  
