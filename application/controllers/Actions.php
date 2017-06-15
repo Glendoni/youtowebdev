@@ -53,8 +53,8 @@ foreach($userfilename as $key => $value){
 			if (!empty($post['campaign_id'])) {
 			 $campaign_redirect ='&campaign_id='.$post['campaign_id'];
 			}
-             // print_r('<pre>');print_r($this->input->post());print_r('</pre>');
-            $post = $this->input->post();
+        
+    $post = $this->input->post();
             if ((empty($post['action_type_completed'])) && (empty($post['action_type_planned']))) {
                 $this->set_message_action_error('Please select either a new or follow up action.');
                 $message = $post['comment'];
