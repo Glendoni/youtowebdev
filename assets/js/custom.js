@@ -145,9 +145,6 @@ $("#noteoutput"+attr).html($(this).html()+'<br><button type="button" class="btn 
                             var ticket_count    = data.count;
                             var itemsClosed = [];
                             var custvalue;
-                            
-                            $('.ticket_count').text('('+ticket_count+')');
-
                             var i=0;
                             var open =0;
                             var newist  =0;
@@ -156,23 +153,27 @@ $("#noteoutput"+attr).html($(this).html()+'<br><button type="button" class="btn 
                             var on_hold = 0;
                             var closed = 0;
                             var s=0;
+                            var d=0;
                             var raised_by;
                          
                             $.each( data.tickets, function( key, val ) {
-                     
+                       
                                 if(val.status != "solved"){
                                 
-                                   // console.log(val.status);
+                                    
+                                    
                                     if(val.status == 'closed')   closed++;
                                     if(val.status == 'open')      open++;
                                     if(val.status == 'new')       newist++;
                                     if(val.status == 'pending')   pending++;
-                                    if(val.status == 'On Hold')   on_hold++;
+                                    if(val.status == 'hold')   on_hold++;
                                    
                                     
-                                    if(i  <= 5){
+                                    if(i  <= 500){
                                         
                                         if(val.status == 'open' || val.status == 'new' ){
+                                            
+                                          if(d  <= 4){    
                                     $.each( val.custom_fields, function(item , custom_val){
                                         //console.log(custom_val.value);
                                         if(custom_val.value) {
@@ -183,7 +184,7 @@ $("#noteoutput"+attr).html($(this).html()+'<br><button type="button" class="btn 
                                    
                                     raised_by  =     val.via.source.from.name ? (val.via.source.from.name? val.via.source.from.name : val.via.source.from.address) : '<span style="padding-left: 3.2%">-</span>';
                                         
-                                        items.push('<tr><td  class="col-md-2">'+formattDate(val.created_at)+
+                                        $('#zd_open').append('<tr><td  class="col-md-2">'+formattDate(val.created_at)+
                                         '</td><td  class="col-md-2">'+raised_by+
                                         '</td><td  class="col-md-1 "><span class="zd_status zd_status_'+val.status+
                                         '">'+val.status+
@@ -191,8 +192,12 @@ $("#noteoutput"+attr).html($(this).html()+'<br><button type="button" class="btn 
                                                    '<td  class="col-md-2">'+val.subject+
                                                    '<td  class="col-md-2"><span class="zdCatValue">'+custvalue+'</span></td><td  class="col-md-1"><a href="'+val.url.replace('/api/v2/tickets/', '/agent/tickets/' ).replace('.json', '')+'" target="_blank" class="btn btn-primary view_zd_ticket">View Ticket</a></td></tr>');
                                         custvalue ='';
+                                            
+                                         d++;   
                                     }
+                                        }
                                     i++;
+                                        d=d;
                                     }
                                 }else{
                                     if(s  <= 11){
@@ -208,13 +213,19 @@ $("#noteoutput"+attr).html($(this).html()+'<br><button type="button" class="btn 
                              $('.on_pending_count').text(pending);
                              $('.on_hold_count').text(on_hold);
                              $('.on_closed_count').text(closed);
+                            
+                              ticket_count = (open+newist+ solved +pending +on_hold + closed);
+ 
+                            
+                              $('.ticket_count').text('('+ticket_count+')');
+                            
                             if(i == 0) $('.zendesk_loading_info-alert_open p').removeClass("loadingZendeskText");
                             if(i == 0) $('.zendesk_loading_info-alert_open p').text('No Tickets Found');                              
                             if(i >=1)  $('.zendesk_tickets_display .zendesk_loading_info-alert_open').remove();              
                             if(i >=1)  $('.zendesk_tickets_display').show();
-                            if(i  >= 1) $('.openzdmenu').show();
+                            if((open+newist) >= 1) $('.openzdmenu').show();
 
-                            $('#zd_open').html(items.join( "" ));
+                            //$('#zd_open').html(items.join( "" ));
 
                             if(s == 0) $('.zendesk_loading_info_alert_close p').removeClass("loadingZendeskTextClose");
                             if(s == 0) $('.zendesk_loading_info_alert_close p').text('No Closed Tickets Found');                     
@@ -222,6 +233,7 @@ $("#noteoutput"+attr).html($(this).html()+'<br><button type="button" class="btn 
                             if(s >=1)  $('.zendesk_loading_info_alert_close').hide();
 
                             $('#zd_closed').html(itemsClosed.join( "" ));
+
                         }
                 });
             }
