@@ -480,7 +480,7 @@ if ($your_date < $now){;
 		<?php $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' );
 		$name_no_ltd = str_replace($words, '',$company['name']); ?>
 
-              <a class="btn  btn-primary btn-sm btn-block" href="https://www.linkedin.com/vsearch/f?type=all&keywords=<?php echo  urlencode($name_no_ltd) ?>"  target="_blank">LinkedIn <i class="fa fa-search" aria-hidden="true"></i> </a>
+              <a class="btn  btn-primary btn-sm btn-block" href="https://www.linkedin.com/search/results/index/?keywords=<?php echo  urlencode($name_no_ltd) ?>"  target="_blank">LinkedIn <i class="fa fa-search" aria-hidden="true"></i> </a>
             <?php endif; ?>
 					
 			
