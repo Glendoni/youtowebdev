@@ -625,7 +625,7 @@ if ($your_date < $now){;
    
     <?php 
  
-    $placement_access = array('data','support','sales','admin','development');
+    $placement_access = array('data','support','sales','admin','development','board', "risk", "Risk");
     if(in_array($current_user['department'], $placement_access) && ($company['pipeline'] == 'Customer')){
    
     ?>
@@ -666,8 +666,8 @@ if ($your_date < $now){;
 
         <?php 
                
-            $placement_access = array('support', "client services", "Client Services", 'finance','development');
-         $placement_access_btn = array('support',"client services", "Client Services",  "risk", "Risk", 'finance','development');
+            $placement_access = array('support', "client services", "Client Services","risk", "Risk", 'finance','development', 'board');
+         $placement_access_btn = array('support',"client services", "Client Services",  "risk", "Risk", 'finance','development','board');
             if(in_array($current_user['department'], $placement_access) && ($company['zendesk_id'])){ ?>
 
                <div id="zdesk_id" data="<?php echo $company['zendesk_id']? $company['zendesk_id'] : ''; ?>"></div>
