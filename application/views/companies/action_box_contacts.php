@@ -249,11 +249,17 @@ $showHideSaveEval = 'disabled="disabled"';
                         	</select>
 						</div>
 	                </div>
-					<div class="col-md-12">
+                    <div class="row"></div>
+					<div class="col-md-6">
 						<div class="form-group">
-							<label for="reports" class="control-label">Reports needed</label>   
+							<label for="reports" class="control-label">Reports Needed</label>   
 							<?php $reports = json_decode($contact->reports); ?>
 							<div class="reports">
+                                
+                               
+
+
+
 								<label>
 									<input type="checkbox" name="report_extensions" value="report_extensions"
 										<?php if($reports && in_array("report_extensions", $reports)) { echo "checked"; } ?>
@@ -274,8 +280,7 @@ $showHideSaveEval = 'disabled="disabled"';
 									>
 									Timesheets Processed
 								</label>
-							</div>
-							<div class="reports">
+						 
 								<label>
 									<input type="checkbox" name="report_sales_ledger" value="report_sales_ledger"
 										<?php if($reports && in_array("report_sales_ledger", $reports)) { echo "checked"; } ?>
@@ -295,6 +300,38 @@ $showHideSaveEval = 'disabled="disabled"';
 										<?php if($reports && in_array("report_age_debt_ledger", $reports)) { echo "checked"; } ?>
 									>
 									Age Debt Ledger
+								</label>
+                                
+                                
+                                
+							</div>
+						</div>
+					</div>
+                    
+                    
+                    
+                    <div class="col-md-6">
+						<div class="form-group">
+							<label for="reports" class="control-label">Report Level</label>   
+							<?php $reports = json_decode($contact->reports); ?>
+							<div class="reports">
+                                	<label>
+									<input type="checkbox" name="report_owner" value="report_owner"
+										<?php if($reports && in_array("report_owner", $reports)) { echo "checked"; } ?>
+									>
+									Owner Reports
+								</label><br>
+                                	<label>
+									<input type="checkbox" name="report_system" value="report_system"
+										<?php if($reports && in_array("report_system", $reports)) { echo "checked"; } ?>
+									>
+									System Reports
+								</label><br>
+                                	<label>
+									<input type="checkbox" name="report_administrator" value="report_administrator"
+										<?php if($reports && in_array("report_administrator", $reports)) { echo "checked"; } ?>
+									>
+									Administrator Reports
 								</label>
 							</div>
 						</div>
