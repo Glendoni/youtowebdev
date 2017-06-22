@@ -44,7 +44,15 @@ class Contacts extends MY_Controller {
 			$this->form_validation->set_rules('report_sales_ledger', 'report_sales_ledger', 'xss_clean');
 			$this->form_validation->set_rules('report_commision', 'report_commision', 'xss_clean');
 			$this->form_validation->set_rules('report_age_debtor', 'report_age_debtor', 'xss_clean');
+            $this->form_validation->set_rules('report_owner', 'report_owner', 'xss_clean');
+			$this->form_validation->set_rules('report_system', 'report_system', 'xss_clean');
+			$this->form_validation->set_rules('report_administrator', 'report_administrator', 'xss_clean');
+            $this->form_validation->set_rules('report_owner', 'report_owner', 'xss_clean');
+			$this->form_validation->set_rules('report_system', 'report_system', 'xss_clean');
+			$this->form_validation->set_rules('report_administrator', 'report_administrator', 'xss_clean');
 			$this->form_validation->set_rules('role', 'role', 'xss_clean|required');
+         
+
 
 			if($this->form_validation->run())
 			{
@@ -63,7 +71,13 @@ class Contacts extends MY_Controller {
 					$this->input->post('report_timesheets_processed'),
 					$this->input->post('report_sales_ledger'),
 					$this->input->post('report_commision'),
-					$this->input->post('report_age_debtor')
+					$this->input->post('report_age_debtor'),
+                    $this->input->post('report_owner'),
+                    $this->input->post('report_system'),
+                    $this->input->post('report_administrator'),
+                    $this->input->post('report_owner'),
+                    $this->input->post('report_system'),
+                    $this->input->post('report_administrator')
 					//$this->input->post('role_dropdown')
 				);
 				if($rows_affected  > 0)
@@ -113,6 +127,13 @@ class Contacts extends MY_Controller {
 			$this->form_validation->set_rules('report_sales_ledger', 'report_sales_ledger', 'xss_clean');
 			$this->form_validation->set_rules('report_commision', 'report_commision', 'xss_clean');
 			$this->form_validation->set_rules('report_age_debtor', 'report_age_debtor', 'xss_clean');
+            $this->form_validation->set_rules('report_owner', 'report_owner', 'xss_clean');
+			$this->form_validation->set_rules('report_system', 'report_system', 'xss_clean');
+			$this->form_validation->set_rules('report_administrator', 'report_administrator', 'xss_clean');
+            $this->form_validation->set_rules('report_owner', 'report_owner', 'xss_clean');
+			$this->form_validation->set_rules('report_system', 'report_system', 'xss_clean');
+			$this->form_validation->set_rules('report_administrator', 'report_administrator', 'xss_clean');
+
 			$this->form_validation->set_rules('role_dropdown', 'role', 'xss_clean|required');
 
 			if($this->form_validation->run())

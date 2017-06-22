@@ -86,7 +86,12 @@ function get_contacts_s($company_id)
 		$report_timesheets_processed,
 		$report_sales_ledger,
 		$report_commision,
-		$report_age_debtor
+		$report_age_debtor,
+        $report_owner,
+        $report_system,
+        $report_administrator
+        
+        
 	) {
         $role = rtrim($role," "); // removes empty space on rightside of string ltrim removes empty space on the left before string
 		$contact->title = !empty(trim($title))?trim($title):NULL;
@@ -116,6 +121,15 @@ function get_contacts_s($company_id)
 		}
 		if ($report_age_debtor) {
 			$reports[] = $report_age_debtor;
+		}
+        if ($report_owner) {
+			$reports[] = $report_owner;
+		}
+        if ($report_system) {
+			$reports[] = $report_system;
+		}
+        if ($report_administrator) {
+			$reports[] = $report_administrator;
 		}
 		$contact->reports = json_encode($reports);
         $parts = explode("?",$linkedin_id); 
@@ -184,6 +198,16 @@ function get_contacts_s($company_id)
 		if ($post['report_age_debtor']) {
 			$reports[] = $post['report_age_debtor'];
 		}
+        if ($post['report_owner']) {
+			$reports[] = $post['report_owner'];
+		}
+        if ($post['report_system']) {
+			$reports[] = $post['report_system'];
+		}
+        if ($post['report_administrator']) {
+			$reports[] = $post['report_administrator'];
+		}
+        
         
 		$contact->reports = json_encode($reports);
         $this->db->where('id', $post['contact_id']);
