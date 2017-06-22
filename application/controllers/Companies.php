@@ -1214,13 +1214,11 @@ echo $this->Tagging_model->$route($post);
         $encyption_file_name  = $this->Files_model->getfile_($sha);
         $fileExt    =   explode('.',$encyption_file_name[0]['file_location']);
         $nme =  str_replace(' ','_', trim($encyption_file_name[0]['name'].'.'.$fileExt[1]));
-        $src  =  file_get_contents('https://baselisttemp.blob.core.windows.net/baselisttemp/'.$encyption_file_name[0]['file_location']);
+        $src  =  file_get_contents('https://baselistprodblobstorage.blob.core.windows.net/baselist/'.$encyption_file_name[0]['file_location']);
 
         force_download($nme, $src);  
      
     }
-    
-    
     
     function filetester($id = 352533){
         //line 158
@@ -1317,70 +1315,6 @@ foreach($bsp as $ky=>$value){
            echo json_encode(array('id' => $output['noteid']));
         }
     }
-    
-    
-    function sector_test(){ //remove whenever
-        
-        
-        $output =  array
-(
-    'company_id' => 154537,
-    'user_id' => 31,
-    'edit_service_level' => 1,
-    'class_check' => 'Using Finance',
-    'pipeline_check' => 'Suspect',
-    'add_sectors' => array
-        (
-            0 => 64,
-            1 => 65,
-            2 => 61
-        )
-
-);
-        
-        
-$sql = "
-     select o.sector_id 
-    from operates o
-    LEFT JOIN sectors s
-    on o.sector_id = s.id
-    WHERE o.company_id = 154537 
-    AND s.sector_group=1 
-    AND o.active= true 
-    ORDER BY o.id 
-";
-
-
-$query = $this->db->query($sql);
-$i = 0 ;
-foreach ($query->result_array() as $row)
-{
-    $a[] = $row['sector_id'];
- 
-    unset($a[$i++]);
-       echo in_array(64,$a) ? 'YES' : 'No';
-
-}
-     echo '<pre>'; print_r($output); echo '</pre>';
-
- echo in_array(64,$a) ? 'YES' : 'No';
       
-unset($a[0]);
-        
-  echo in_array(64,$a) ? 'YES' : 'No';      
-        
-    }
-    
-    
-    function blast($id = 'missy2010'){
-    
-    
-    	$this->load->library('encrypt');
-       
-		 
-			echo  $this->encrypt->encode($id);
-}
-    
-    
 }
  
