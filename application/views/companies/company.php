@@ -480,7 +480,7 @@ if ($your_date < $now){;
 		<?php $words = array( ' Limited', ' LIMITED', ' LTD',' ltd',' Ltd' );
 		$name_no_ltd = str_replace($words, '',$company['name']); ?>
 
-              <a class="btn  btn-primary btn-sm btn-block" href="https://www.linkedin.com/vsearch/f?type=all&keywords=<?php echo  urlencode($name_no_ltd) ?>"  target="_blank">LinkedIn <i class="fa fa-search" aria-hidden="true"></i> </a>
+              <a class="btn  btn-primary btn-sm btn-block" href="https://www.linkedin.com/search/results/index/?keywords=<?php echo  urlencode($name_no_ltd) ?>"  target="_blank">LinkedIn <i class="fa fa-search" aria-hidden="true"></i> </a>
             <?php endif; ?>
 					
 			
@@ -625,7 +625,7 @@ if ($your_date < $now){;
    
     <?php 
  
-    $placement_access = array('data','support','sales','admin','development');
+    $placement_access = array('data','support','sales','admin','development','board', "risk", "Risk");
     if(in_array($current_user['department'], $placement_access) && ($company['pipeline'] == 'Customer')){
    
     ?>
@@ -666,8 +666,8 @@ if ($your_date < $now){;
 
         <?php 
                
-            $placement_access = array('support', "client services", "Client Services", 'finance','development');
-         $placement_access_btn = array('support',"client services", "Client Services",  "risk", "Risk", 'finance','development');
+            $placement_access = array('support', "client services", "Client Services","risk", "Risk", 'finance','development', 'board');
+         $placement_access_btn = array('support',"client services", "Client Services",  "risk", "Risk", 'finance','development','board');
             if(in_array($current_user['department'], $placement_access) && ($company['zendesk_id'])){ ?>
 
                <div id="zdesk_id" data="<?php echo $company['zendesk_id']? $company['zendesk_id'] : ''; ?>"></div>
