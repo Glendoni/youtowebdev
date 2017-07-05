@@ -249,7 +249,7 @@ $showHideSaveEval = 'disabled="disabled"';
                         	</select>
 						</div>
 	                </div>
-                    <div class="col-md-12"></div>
+                    <div class="row"></div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label for="reports" class="control-label">Reports Needed</label>   
@@ -307,6 +307,9 @@ $showHideSaveEval = 'disabled="disabled"';
 							</div>
 						</div>
 					</div>
+                    
+                    
+                    
                     <div class="col-md-6">
 						<div class="form-group">
 							<label for="reports" class="control-label">Report Level</label>   

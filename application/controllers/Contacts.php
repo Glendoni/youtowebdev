@@ -47,12 +47,7 @@ class Contacts extends MY_Controller {
             $this->form_validation->set_rules('report_owner', 'report_owner', 'xss_clean');
 			$this->form_validation->set_rules('report_system', 'report_system', 'xss_clean');
 			$this->form_validation->set_rules('report_administrator', 'report_administrator', 'xss_clean');
-            $this->form_validation->set_rules('report_owner', 'report_owner', 'xss_clean');
-			$this->form_validation->set_rules('report_system', 'report_system', 'xss_clean');
-			$this->form_validation->set_rules('report_administrator', 'report_administrator', 'xss_clean');
 			$this->form_validation->set_rules('role', 'role', 'xss_clean|required');
-         
-
 
 			if($this->form_validation->run())
 			{
@@ -72,9 +67,6 @@ class Contacts extends MY_Controller {
 					$this->input->post('report_sales_ledger'),
 					$this->input->post('report_commision'),
 					$this->input->post('report_age_debtor'),
-                    $this->input->post('report_owner'),
-                    $this->input->post('report_system'),
-                    $this->input->post('report_administrator'),
                     $this->input->post('report_owner'),
                     $this->input->post('report_system'),
                     $this->input->post('report_administrator')
@@ -130,10 +122,6 @@ class Contacts extends MY_Controller {
             $this->form_validation->set_rules('report_owner', 'report_owner', 'xss_clean');
 			$this->form_validation->set_rules('report_system', 'report_system', 'xss_clean');
 			$this->form_validation->set_rules('report_administrator', 'report_administrator', 'xss_clean');
-            $this->form_validation->set_rules('report_owner', 'report_owner', 'xss_clean');
-			$this->form_validation->set_rules('report_system', 'report_system', 'xss_clean');
-			$this->form_validation->set_rules('report_administrator', 'report_administrator', 'xss_clean');
-
 			$this->form_validation->set_rules('role_dropdown', 'role', 'xss_clean|required');
 
 			if($this->form_validation->run())
