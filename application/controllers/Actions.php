@@ -187,8 +187,7 @@ foreach($userfilename as $key => $value){
                                             $this->zendesk($company_id,$this->input->post('domain'));
                                         }                 
                                  }
-                                    $result = $this->Actions_model->company_updated_to_proposal($post); 
-                                    $result1 = $this->Actions_model->add_to_zendesk($post); 
+                                    $result = $this->Actions_model->company_updated_to_proposal($post);
                                     if(empty($result)) $this->set_message_warning('Error while updating action for the company.');
                                 
                                 //}
