@@ -172,7 +172,6 @@ foreach($userfilename as $key => $value){
                                 else{
                                     // actions models, register the update of a company to customer status 
                                     $result = $this->Actions_model->company_updated_to_customer($post);
-                                    $result1 = $this->Actions_model->add_to_zendesk($post);
                                     if(empty($result)) $this->set_message_warning('Error while updating action for the company.');
                                 }
 
