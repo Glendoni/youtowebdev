@@ -1027,7 +1027,7 @@ function company_updated_to_action($post,$actionName)
 
 }    
     
-function add_to_zendesk($post)
+function _add_to_zendesk($post)
 {
         $company_id = $post['company_id'];
         $this->db->where('id', $company_id);
