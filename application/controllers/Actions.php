@@ -188,8 +188,7 @@ foreach($userfilename as $key => $value){
                                  }
                                     $result = $this->Actions_model->company_updated_to_proposal($post);
                                     if(empty($result)) $this->set_message_warning('Error while updating action for the company.');
-                                
-                                //}
+                              
                             }else if($post['action_type_completed']=='31' || $post['action_type_completed']=='32' || $post['action_type_completed']=='33' || $post['action_type_completed']=='34'|| $post['action_type_completed']=='35'){
                                 // proposal sent to company 
                                 
@@ -206,16 +205,9 @@ foreach($userfilename as $key => $value){
                                       if($actionName)  $result = $this->Actions_model->company_updated_to_action($post,$actionName);//update action
                                             if($result)  $result = $this->Companies_model->update_company_to_action($company_id,$actionName); //update pipeline
                                         }
-                                //if(empty($result)){
-                                  //  $this->set_message_warning('Error while updating company.');
-                                //}else{
-                                    // action model, update register an action for the proposal
-                                    //$result = $this->Actions_model->company_updated_to_proposal($post); 
-                                
-                                
-                                  //$result1 = $this->Actions_model->add_to_zendesk($post); 
+                              
                                     if(empty($result)) $this->set_message_warning('Error while updating action for the company.');
-                                //}
+                                
                             }
                             
                             
