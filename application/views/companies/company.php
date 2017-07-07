@@ -1637,7 +1637,7 @@ endif;
         <div class="form-group ">
             <label>Projected Annual Contract Turnover<span class="actionrqd">*</span></label>
             <div class="input-group">   <div class="input-group-addon">£</div>
-                <input type="number" step="0.01" name="turnover" placeholder="0.00" min="0.01" max="25000000"  class="form-control" id="turnover" >
+                <input type="number" step="0.01" name="turnover" placeholder="e.g 123450" min="0.01" max="25000000"  class="form-control" id="turnover" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
              
             </div>
         </div>
