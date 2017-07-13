@@ -156,8 +156,10 @@ $("#noteoutput"+attr).html($(this).html()+'<br><button type="button" class="btn 
                             var d=0;
                             var raised_by;
                          
-                            $.each( data.tickets, function( key, val ) {
-                       
+                            $.each( data.tickets, function(k, v){
+                            
+                            $.each( v, function( key, val ) {
+   
                                 if(val.status != "solved"){
                                 
                                     
@@ -169,7 +171,7 @@ $("#noteoutput"+attr).html($(this).html()+'<br><button type="button" class="btn 
                                     if(val.status == 'hold')   on_hold++;
                                    
                                     
-                                    if(i  <= 500){
+                                    if(i  <= 100000){
                                         
                                         if(val.status == 'open' || val.status == 'new' ){
                                             
@@ -205,6 +207,9 @@ $("#noteoutput"+attr).html($(this).html()+'<br><button type="button" class="btn 
                                     }
                                     s++;
                                 }
+                             
+                            });
+
                             });
                             
                              $('.new_count').text(newist);
@@ -235,7 +240,8 @@ $("#noteoutput"+attr).html($(this).html()+'<br><button type="button" class="btn 
                             $('#zd_closed').html(itemsClosed.join( "" ));
 
                         }
-                });
+                        
+                            })
             }
             
             
