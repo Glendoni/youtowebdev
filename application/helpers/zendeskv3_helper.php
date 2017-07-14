@@ -8,11 +8,10 @@ function create_zd_user($contact_id,$contact_name, $zendesk_id, $contact_email)
 {
     
     
-    $subdomain = getenv('ZENDESK_API_SUBDOMAIN');
-    $username  = getenv('ZENDESK_API_USERNAME'); // replace this with your registered email
-    $token     = getenv('ZENDESK_API_KEY');
+   $subdomain = getenv('ZENDESK_API_SUBDOMAIN');
+   $username  = getenv('ZENDESK_API_USERNAME'); // replace this with your registered email
+   $token     = getenv('ZENDESK_API_KEY');
     
-
     $client = new ZendeskAPI($subdomain);
     $client->setAuth('basic', ['username' => $username, 'token' => $token]);
     
@@ -35,14 +34,12 @@ function create_zd_user($contact_id,$contact_name, $zendesk_id, $contact_email)
 }
 
 
-function sonovate_zendesk($zd_id,$company_id = false,$output =false, $action='', $domain = false)
+function sonovate_zendesk($zd_id,$company_id = false,$output =false, $action='', $domain = false, $page_id =0)
 {
    
     $subdomain = getenv('ZENDESK_API_SUBDOMAIN');
     $username  = getenv('ZENDESK_API_USERNAME'); 
     $token     = getenv('ZENDESK_API_KEY'); 
-
-
  
     $client = new ZendeskAPI($subdomain);
     $client->setAuth('basic', ['username' => $username, 'token' => $token]);
@@ -71,8 +68,8 @@ function sonovate_zendesk($zd_id,$company_id = false,$output =false, $action='',
                     case  "get_all_tickets_regarding_a_specific_user":
                 
                                 $sorter = array('sort_by' => 'created_at',
-                            'sort_order' => 'asc',
-                            'status'=> 'open'
+                            'sort_order' => 'desc',
+                                                'page' => $page_id
                            );
                 try {
                         $tickets = $client->organizations($zd_id)
